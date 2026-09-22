@@ -1,0 +1,10 @@
+{
+  "description": "This online supermarket assistant enhances shopping experiences by providing personalized guidance through a compact, interactive interface.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
