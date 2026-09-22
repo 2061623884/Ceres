@@ -23,6 +23,27 @@ function CeresMascot({ size = 36, mood = 'happy', animated = false }: { size?: n
   )
 }
 
+function ToastMascot({ mood, animated = false }: { mood: CeresMood; animated?: boolean }) {
+  const motionClass = animated ? `toast-motion toast-motion-${mood}` : ''
+  const face = {
+    angry: <><path d="M246 279l42 12m137-3-42 14" stroke="#303040" strokeWidth="12" strokeLinecap="round"/><ellipse cx="278" cy="310" rx="12" ry="16" fill="#303040"/><ellipse cx="391" cy="310" rx="12" ry="16" fill="#303040"/><path d="M296 367q41-25 82 0" fill="none" stroke="#303040" strokeWidth="10" strokeLinecap="round"/></>,
+    sad: <><path d="M246 296q28-18 55 1m67 1q28-18 55 1" fill="none" stroke="#303040" strokeWidth="10" strokeLinecap="round"/><ellipse cx="278" cy="311" rx="10" ry="13" fill="#303040"/><ellipse cx="391" cy="311" rx="10" ry="13" fill="#303040"/><path d="M296 373q41-25 82 0" fill="none" stroke="#303040" strokeWidth="9" strokeLinecap="round"/><path className="toast-tear" d="M407 329c10 15 5 27-5 27s-15-12 5-27Z" fill="#79cbe8"/></>,
+    calm: <><path d="M244 310q29 20 58 0m64 0q29 20 58 0" fill="none" stroke="#303040" strokeWidth="10" strokeLinecap="round"/><path d="M300 367h74" stroke="#303040" strokeWidth="9" strokeLinecap="round"/></>,
+    pleased: <><path d="M244 309q29 22 58 0m64 0q29 22 58 0" fill="none" stroke="#303040" strokeWidth="10" strokeLinecap="round"/><path d="M298 359q40 47 80 0" fill="none" stroke="#303040" strokeWidth="10" strokeLinecap="round"/><ellipse cx="239" cy="349" rx="22" ry="12" fill="#f39aad" opacity=".75"/><ellipse cx="430" cy="349" rx="22" ry="12" fill="#f39aad" opacity=".75"/></>,
+    happy: <><path d="M243 303q30 27 60 0m63 0q30 27 60 0" fill="none" stroke="#303040" strokeWidth="11" strokeLinecap="round"/><path d="M295 354q42 55 85 0" fill="#303040" stroke="#303040" strokeWidth="8" strokeLinecap="round"/><path d="M314 372q23 12 46 0" stroke="white" strokeWidth="8" strokeLinecap="round"/><ellipse cx="238" cy="347" rx="24" ry="13" fill="#f39aad" opacity=".8"/><ellipse cx="432" cy="347" rx="24" ry="13" fill="#f39aad" opacity=".8"/></>,
+  }[mood]
+
+  return (
+    <div className={`toast-mascot relative block h-[218px] w-[205px] brightness-[1.06] saturate-[1.04] contrast-[1.01] ${motionClass}`}>
+      <img src="/assets/a49bc.svg" alt="吐司吉祥物" className="block h-full w-full" width="205" height="218" />
+      <svg aria-hidden="true" className="pointer-events-none absolute inset-0 h-full w-full -translate-y-[6px] scale-[1.12]" viewBox="0 0 676 720" fill="none">
+        <path d="M210 236C256 205 337 204 401 236C432 251 444 279 434 318L415 394C374 420 278 411 221 375C203 332 197 277 210 236Z" fill="#E0D080" />
+        {face}
+      </svg>
+    </div>
+  )
+}
+
 // ── Keke Avatar ───────────────────────────────────────────────
 function KekeAvatar({ size = 28, animated = false }: { size?: number; animated?: boolean }) {
   return (
@@ -257,25 +278,6 @@ const MOODS: { id: CeresMood; label: string; emoji: string }[] = [
   { id: 'angry', label: '烦躁', emoji: '😡' }, { id: 'sad', label: '低气压', emoji: '😕' }, { id: 'calm', label: '平静', emoji: '😐' }, { id: 'pleased', label: '不错', emoji: '🙂' }, { id: 'happy', label: '超开心', emoji: '😍' },
 ]
 
-function SunburstSticker() {
-  return (
-    <svg aria-hidden="true" className="home-vector-sticker home-vector-sun" viewBox="0 0 100 100">
-      <polygon points="50,4 58,29 76,11 74,35 97,27 79,45 99,54 75,61 88,84 65,72 61,97 50,75 38,97 35,72 12,84 25,61 1,54 21,45 3,27 26,35 24,11 42,29" fill="#f7c94f" stroke="#fffdf8" strokeWidth="12" strokeLinejoin="round" paintOrder="stroke fill" />
-      <circle cx="50" cy="51" r="21" fill="#ee6755" />
-      <path d="M39 42c5-6 14-8 21-4" fill="none" stroke="#ff9b80" strokeWidth="3" strokeLinecap="round" opacity=".7" />
-    </svg>
-  )
-}
-
-function StarburstSticker() {
-  return (
-    <svg aria-hidden="true" className="home-vector-sticker home-vector-star" viewBox="0 0 100 100">
-      <polygon points="50,3 56,32 76,10 70,38 97,29 73,47 100,54 72,59 91,84 65,69 67,97 52,71 39,97 38,68 12,87 29,61 2,62 27,48 4,31 33,39 27,11 45,32" fill="#3155c6" stroke="#fffdf8" strokeWidth="12" strokeLinejoin="round" paintOrder="stroke fill" />
-      <polygon points="50,19 55,41 70,27 64,47 84,47 65,55 78,70 59,64 58,84 48,65 34,79 40,59 19,62 38,50 22,37 44,42" fill="#4168e3" opacity=".7" />
-    </svg>
-  )
-}
-
 function LandingScreen({ onGoShelf }: { onGoShelf: () => void }) {
   const [activeMood, setActiveMood] = useState<CeresMood>('happy')
   const [moodMotion, setMoodMotion] = useState(0)
@@ -283,21 +285,21 @@ function LandingScreen({ onGoShelf }: { onGoShelf: () => void }) {
   return (
     <div className="home-atmosphere h-full overflow-y-auto scrollbar-hide">
       <div className="flex min-h-full flex-col justify-end">
-      <section className="home-hero-rose relative h-[326px] shrink-0 overflow-hidden px-6 pt-8">
-        <div aria-hidden="true" className="home-paper-wash absolute inset-x-0 bottom-0 h-[154px]" />
-        <svg aria-hidden="true" className="home-journey-line absolute inset-0 z-0 h-full w-full" viewBox="0 0 412 332" preserveAspectRatio="none">
-          <path d="M-16 229C32 204 54 230 88 204c31-24 24-76 65-79 39-3 32 57 61 56 31-1 12-92 71-91 55 1 20 90 69 89 30 0 39-33 74-23" />
-        </svg>
-        <SunburstSticker />
-        <StarburstSticker />
-        <div className="absolute left-7 top-7 z-10 whitespace-nowrap text-[38px] font-normal leading-[1.17] tracking-[-0.05em] text-[#18251d]" style={{ fontFamily: "'ZCOOL KuaiLe', 'Noto Sans SC', sans-serif" }}>哈喽，<br/>Ceres的朋友!</div>
-        <div className="absolute right-5 top-[82px] z-10 rotate-[8deg] drop-shadow-[0_14px_12px_rgba(57,93,40,0.15)]"><CeresMascot key={`${activeMood}-${moodMotion}`} size={174} mood={activeMood} animated /></div>
-        <svg aria-hidden="true" className="absolute bottom-[90px] right-[43px] z-[1] h-11 w-9 rotate-[16deg]" viewBox="0 0 36 44"><path d="M17 4c9 7 11 19 2 34C9 34 7 20 17 4Z" fill="#4a9b68"/><path d="M17 9c1 9 0 17-3 24" stroke="#82c99a" strokeWidth="1.4" strokeLinecap="round"/></svg>
+      <section className="relative h-[326px] shrink-0 overflow-hidden px-5 pt-8">
+        <div aria-hidden="true" className="absolute -left-16 bottom-14 h-36 w-56 rounded-[50%] bg-[#dfe8ff]" />
+        <div aria-hidden="true" className="absolute -left-8 bottom-10 h-20 w-56 rounded-[50%] bg-[#385af2]" />
+        <div aria-hidden="true" className="absolute right-[-22px] top-12 h-20 w-20 rounded-full bg-[#ffb18c]" />
+        <div aria-hidden="true" className="absolute bottom-12 right-3 h-28 w-28 rounded-full bg-[#b8dd82]" />
+        <div aria-hidden="true" className="absolute bottom-[82px] left-8 h-2.5 w-2.5 rounded-full bg-[#e97255] shadow-[13px_-13px_0_#e97255]" />
+        <div className="absolute left-7 top-4 z-10 whitespace-nowrap text-[40px] font-normal leading-[1.16] tracking-[-0.035em] text-[#18251d]" style={{ fontFamily: "'ZCOOL KuaiLe', 'Noto Sans SC', sans-serif" }}>哈喽，<br/>Ceres的朋友!</div>
+        <svg aria-hidden="true" className="absolute left-[226px] top-[106px] z-10" width="38" height="28" viewBox="0 0 38 28" fill="none"><path d="M2 4C8 2 15 6 16 13C17 20 25 23 35 20" stroke="#18251D" strokeWidth="2.5" strokeLinecap="round" strokeDasharray="4 5" /></svg>
+        <div className="absolute right-5 top-[82px] z-10 rotate-[8deg] drop-shadow-[0_13px_5px_rgba(57,93,40,0.18)]"><CeresMascot key={`${activeMood}-${moodMotion}`} size={174} mood={activeMood} animated /></div>
+        <div aria-hidden="true" className="absolute bottom-[92px] right-[48px] h-8 w-4 rotate-[16deg] rounded-full bg-[#3d9a61]" />
       </section>
 
-      <section className="home-mood-surface shrink-0 px-6 pb-7 pt-6">
-        <h2 className="mb-3 text-[17px] font-bold tracking-[-0.05em] text-[#34463a]">今日心情</h2>
-        <div className="home-glass flex items-center justify-between rounded-[28px] px-2 py-2">
+      <section className="shrink-0 px-6 pb-5">
+        <h2 className="mb-3 text-[18px] font-bold tracking-[-0.04em] text-[#34463a]">今日心情</h2>
+        <div className="flex items-center justify-between">
           {MOODS.map(mood => {
             const selected = activeMood === mood.id
             return <button key={mood.id} aria-label={mood.label} onClick={() => { setActiveMood(mood.id); setMoodMotion(n => n + 1) }} className="grid h-[55px] w-[55px] place-items-center bg-transparent text-[43px] leading-none transition-transform active:scale-90" style={{ transform: selected ? 'translateY(-4px) scale(1.12)' : undefined, filter: selected ? 'drop-shadow(0 5px 5px rgba(49,86,60,0.24))' : 'drop-shadow(0 2px 3px rgba(67,75,57,0.10))' }}>{mood.emoji}</button>
@@ -308,8 +310,8 @@ function LandingScreen({ onGoShelf }: { onGoShelf: () => void }) {
       <section className="shrink-0 px-5 pb-8 pt-3">
         <div className="mb-3 flex items-center justify-between"><h2 className="flex items-center gap-2 text-[15px] font-semibold tracking-[-0.02em] text-[#26372c]"><span className="h-2 w-2 rounded-full bg-[#d6bded]"/>为你准备</h2><button className="text-[11px] font-semibold text-[#477950]">查看全部 ↗</button></div>
         <div className="grid grid-cols-2 gap-3">
-          <button onClick={onGoShelf} className="activity-card relative h-[178px] overflow-hidden rounded-[30px] bg-[#55d582] p-4 text-left shadow-[0_12px_24px_rgba(62,157,91,0.13)] transition-transform duration-200 hover:-translate-y-0.5 active:translate-y-1 active:shadow-none"><div aria-hidden="true" className="absolute -left-7 bottom-5 h-14 w-20 rotate-[-24deg] rounded-[45%] bg-[#f8db76]"/><div aria-hidden="true" className="absolute bottom-[-12px] left-7 h-11 w-11 rounded-full bg-[#ddc5f6]/80"/><span className="relative inline-flex rounded-full bg-white/34 px-2 py-1 text-[9px] font-bold text-[#145b32]">轻盈计划</span><span aria-hidden="true" className="absolute right-3 top-3 grid h-7 w-7 place-items-center rounded-full bg-white/60 text-sm font-medium text-[#145b32]">↗</span><p className="relative mt-2 text-lg font-bold leading-none tracking-[-0.04em] text-[#123f28]">减脂餐</p><p className="relative mt-1 max-w-[92px] text-[10px] font-semibold leading-snug text-[#276145]">健康轻食食材推荐</p><div className="absolute -bottom-5 right-[-4px] scale-[0.87]"><DietBowlSVG /></div></button>
-          <button onClick={onGoShelf} className="activity-card relative h-[178px] overflow-hidden rounded-[30px] bg-[#cbb3ed] p-4 text-left shadow-[0_12px_24px_rgba(122,91,159,0.13)] transition-transform duration-200 hover:-translate-y-0.5 active:translate-y-1 active:shadow-none"><div aria-hidden="true" className="absolute -left-4 -top-7 h-20 w-20 rounded-[42%] bg-[#dfffa3]/78"/><div aria-hidden="true" className="absolute left-3 bottom-[-13px] h-16 w-8 rotate-[38deg] rounded-full bg-[#f5c9dd]/60"/><span className="relative inline-flex rounded-full bg-white/35 px-2 py-1 text-[9px] font-bold text-[#4e3574]">当季鲜选</span><span aria-hidden="true" className="absolute right-3 top-3 grid h-7 w-7 place-items-center rounded-full bg-white/60 text-sm font-medium text-[#4e3574]">↗</span><p className="relative mt-2 text-lg font-bold leading-none tracking-[-0.04em] text-[#39275a]">生鲜采买</p><p className="relative mt-1 max-w-[95px] text-[10px] font-semibold leading-snug text-[#58447b]">当季食材一键备货</p><div className="absolute -bottom-5 right-[-4px] scale-[0.86]"><BasketSVG /></div></button>
+          <button onClick={onGoShelf} className="relative h-[178px] overflow-hidden rounded-[25px] border-2 border-white bg-[#f3b18e] p-4 text-left shadow-[0_5px_0_#d7876c] transition-transform active:translate-y-1 active:shadow-none"><div aria-hidden="true" className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-[#f9e58d]"/><div aria-hidden="true" className="absolute -left-8 bottom-4 h-12 w-16 rotate-[-25deg] rounded-full bg-[#cf92e8]/60"/><span className="relative text-[10px] font-semibold text-[#7f3328]">轻盈计划</span><p className="relative mt-1 text-lg font-bold leading-none tracking-[-0.04em] text-[#522d27]">减脂餐</p><p className="relative mt-1 max-w-[95px] text-[10px] font-medium leading-snug text-[#794f45]">健康轻食食材推荐</p><div className="absolute -bottom-5 right-[-3px] scale-[0.86]"><DietBowlSVG /></div></button>
+          <button onClick={onGoShelf} className="relative h-[178px] overflow-hidden rounded-[25px] border-2 border-white bg-[#c3e493] p-4 text-left shadow-[0_5px_0_#90b567] transition-transform active:translate-y-1 active:shadow-none"><div aria-hidden="true" className="absolute -left-5 -top-5 h-20 w-20 rounded-full bg-[#f7e666]"/><div aria-hidden="true" className="absolute right-4 top-12 h-12 w-5 rotate-[35deg] rounded-full bg-[#bca8ec]/70"/><span className="relative text-[10px] font-semibold text-[#356234]">当季鲜选</span><p className="relative mt-1 text-lg font-bold leading-none tracking-[-0.04em] text-[#244c2c]">生鲜采买</p><p className="relative mt-1 max-w-[95px] text-[10px] font-medium leading-snug text-[#527151]">当季食材一键备货</p><div className="absolute -bottom-5 right-[-4px] scale-[0.86]"><BasketSVG /></div></button>
         </div>
       </section>
       </div>

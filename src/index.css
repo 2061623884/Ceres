@@ -20,14 +20,12 @@ body {
 :root {
   --green: #22c55e;
   --green-dark: #16a34a;
-  --grok-ground: #f7f8f8;
-  --grok-surface: rgba(255, 255, 255, 0.76);
-  --grok-ink: #19201c;
-  --grok-muted: #858b88;
-  --grok-cream: #fff4cf;
-  --grok-orange: #d87a50;
-  --home-warm: #fff5d8;
-  --home-cool: #f6fafb;
+  --grok-ground: #f8f7f3;
+  --grok-surface: #fdfcf9;
+  --grok-ink: #171816;
+  --grok-muted: #8a8d85;
+  --grok-cream: #fff1c7;
+  --grok-orange: #dd794d;
 }
 
 .scrollbar-hide::-webkit-scrollbar { display: none; }
@@ -43,74 +41,7 @@ body {
 }
 
 .home-atmosphere {
-  position: relative;
-  background: linear-gradient(180deg, #fffdf7 0%, #fffdf9 48%, #f9fbf7 100%);
-}
-
-.home-atmosphere::before {
-  content: '';
-  position: absolute;
-  inset: 0 0 auto;
-  height: 5rem;
-  background: linear-gradient(145deg, #ffc5d6 0%, #f9b2c9 47%, #f4a9c3 100%);
-  pointer-events: none;
-}
-
-.home-hero-rose {
-  background:
-    radial-gradient(circle at 87% 18%, rgba(255, 255, 255, .32) 0 8%, transparent 8.4%),
-    radial-gradient(ellipse at 5% 88%, rgba(255, 255, 255, .23) 0 16%, transparent 16.5%),
-    linear-gradient(145deg, #ffc5d6 0%, #f9b2c9 47%, #f4a9c3 100%);
-  border-radius: 0 0 42px 42px;
-  box-shadow: 0 12px 24px rgba(138, 71, 98, .08);
-}
-
-.home-hero-rose::after {
-  content: '';
-  position: absolute;
-  right: -2.4rem;
-  bottom: 2.25rem;
-  width: 9.5rem;
-  height: 9.5rem;
-  border: 1px solid rgba(255, 255, 255, .34);
-  border-radius: 50%;
-  pointer-events: none;
-}
-
-.home-mood-surface {
-  background: #fffdf9;
-}
-
-.home-paper-wash {
-  background: linear-gradient(102deg, rgba(255, 236, 242, .32), rgba(255, 246, 221, .22) 52%, rgba(255,255,255,0));
-  clip-path: polygon(0 17%, 24% 5%, 52% 20%, 74% 0, 100% 13%, 100% 100%, 0 100%);
-}
-
-.home-vector-sticker {
-  position: absolute;
-  z-index: 1;
-  filter: drop-shadow(0 7px 7px rgba(57, 67, 51, .16));
-  pointer-events: none;
-}
-.home-vector-sun {
-  right: 8px;
-  top: 9px;
-  width: 76px;
-  transform: rotate(8deg);
-}
-.home-vector-star {
-  left: 0;
-  bottom: 18px;
-  width: 87px;
-  transform: rotate(-9deg);
-}
-
-.home-journey-line path {
-  fill: none;
-  stroke: #c4dc95;
-  stroke-linecap: round;
-  stroke-width: 1.6;
-  opacity: .88;
+  background: #fbfaf7;
 }
 
 .home-glass {
@@ -119,17 +50,6 @@ body {
   backdrop-filter: blur(18px);
 }
 
-.activity-card::after {
-  content: '';
-  position: absolute;
-  width: 5.75rem;
-  height: 5.75rem;
-  border: 8px solid rgba(255, 255, 255, .34);
-  border-radius: 42% 58% 62% 38%;
-  right: -2.8rem;
-  top: -2.7rem;
-  transform: rotate(-22deg);
-}
 .chat-panel-enter {
   animation: chatIn 0.22s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
@@ -196,3 +116,21 @@ body {
   45% { transform: translateY(-2px) rotate(-2deg); }
   68% { transform: translateY(-1px) rotate(1.5deg); }
 }
+
+@media (prefers-reduced-motion: no-preference) {
+  .toast-motion { transform-origin: 50% 74%; }
+  .toast-motion-happy { animation: toastHappy 0.82s cubic-bezier(.2,.9,.3,1.2), toastBreathe 3.6s ease-in-out .82s infinite; }
+  .toast-motion-pleased { animation: toastNod .76s cubic-bezier(.2,.82,.3,1.12), toastBreathe 3.8s ease-in-out .76s infinite; }
+  .toast-motion-calm { animation: toastFloat 3.8s ease-in-out infinite; }
+  .toast-motion-sad { animation: toastSad 1s ease-in-out, toastBreathe 4.2s ease-in-out 1s infinite; }
+  .toast-motion-angry { animation: toastAngry .58s ease-in-out, toastBreathe 3.5s ease-in-out .58s infinite; }
+  .toast-motion-sad .toast-tear { transform-box: fill-box; transform-origin: center; animation: toastTear .85s ease-in .12s; }
+}
+
+@keyframes toastBreathe { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-3px) scale(1.018); } }
+@keyframes toastHappy { 0% { transform: translateY(10px) scale(.83) rotate(-7deg); } 45% { transform: translateY(-11px) scale(1.1) rotate(6deg); } 75% { transform: translateY(2px) scale(.97) rotate(-2deg); } 100% { transform: translateY(0) scale(1) rotate(0); } }
+@keyframes toastNod { 0%, 100% { transform: translateY(0) rotate(0); } 38% { transform: translateY(8px) rotate(3deg); } 72% { transform: translateY(-3px) rotate(-1.5deg); } }
+@keyframes toastFloat { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-7px) rotate(1.5deg); } }
+@keyframes toastSad { 0%, 100% { transform: translateX(0) rotate(0); } 36% { transform: translateX(-5px) rotate(-3deg); } 70% { transform: translateX(3px) rotate(2deg); } }
+@keyframes toastAngry { 0%, 100% { transform: translateX(0) rotate(0); } 20% { transform: translateX(-5px) rotate(-4deg); } 40% { transform: translateX(5px) rotate(4deg); } 60% { transform: translateX(-4px) rotate(-3deg); } 80% { transform: translateX(3px) rotate(2deg); } }
+@keyframes toastTear { 0% { opacity: 0; transform: translateY(-3px) scale(.7); } 30% { opacity: 1; } 100% { opacity: 0; transform: translateY(19px) scale(1); } }
