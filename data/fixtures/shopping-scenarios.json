@@ -1,0 +1,124 @@
+{
+  "version": "v1",
+  "comment": "演示用开放采购场景。按 components/common_tags 配通用食材；具体的火锅风格是独立菜品，不在这里区分配货。",
+  "scenarios": [
+    {
+      "scenario_id": "hotpot",
+      "name": "火锅",
+      "aliases": [
+        "打火锅",
+        "涮火锅",
+        "火锅食材",
+        "吃火锅",
+        "火锅局",
+        "买个火锅"
+      ],
+      "base_people": 4,
+      "common_tags": [
+        "火锅"
+      ],
+      "components": [
+        {
+          "component_id": "pot-base",
+          "name": "锅底",
+          "role": "optional",
+          "default_selected": true,
+          "any_tags": [
+            "火锅锅底"
+          ],
+          "ingredient_ids": [
+            "hotpot_base"
+          ],
+          "package_quantity": 1
+        },
+        {
+          "component_id": "sliced-meat",
+          "name": "涮肉（肥牛/吊龙/羊肉）",
+          "role": "optional",
+          "default_selected": true,
+          "any_tags": [
+            "火锅肥牛"
+          ],
+          "per_people_g": 150
+        },
+        {
+          "component_id": "vegetable",
+          "name": "涮菜（卷心菜/白蘑菇）",
+          "role": "optional",
+          "default_selected": true,
+          "any_tags": [
+            "火锅素菜"
+          ],
+          "per_people_g": 180
+        },
+        {
+          "component_id": "staple",
+          "name": "主食（土豆/挂面）",
+          "role": "optional",
+          "default_selected": true,
+          "any_tags": [
+            "火锅素菜",
+            "主食"
+          ],
+          "ingredient_ids": [
+            "potato",
+            "noodle"
+          ],
+          "per_people_g": 120
+        },
+        {
+          "component_id": "beef-neck",
+          "name": "吊龙牛肉",
+          "role": "optional",
+          "default_selected": false,
+          "any_tags": [
+            "火锅肥牛"
+          ],
+          "ingredient_ids": [
+            "beef_neck"
+          ],
+          "per_people_g": 120
+        },
+        {
+          "component_id": "tripe",
+          "name": "毛肚",
+          "role": "optional",
+          "default_selected": false,
+          "any_tags": [
+            "火锅荤菜"
+          ],
+          "ingredient_ids": [
+            "tripe"
+          ],
+          "per_people_g": 100
+        },
+        {
+          "component_id": "shrimp-paste",
+          "name": "虾滑",
+          "role": "optional",
+          "default_selected": false,
+          "any_tags": [
+            "火锅荤菜"
+          ],
+          "ingredient_ids": [
+            "shrimp_paste"
+          ],
+          "per_people_g": 80
+        },
+        {
+          "component_id": "dip",
+          "name": "蘸料（芝麻香油）",
+          "role": "optional",
+          "default_selected": false,
+          "any_tags": [
+            "火锅蘸料"
+          ],
+          "ingredient_ids": [
+            "sesame_oil"
+          ],
+          "per_people_ml": 30
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{"case_id": "strong-001", "split": "regression", "turns": [{"message": "我想吃番茄炒蛋"}], "expected_actions": ["has_plan", {"type": "status_is", "value": "awaiting_confirmation"}, {"type": "allow_sku", "sku_id": "demo:tomato-fresh-500g"}]}
+{"case_id": "strong-002", "split": "regression", "turns": [{"message": "今晚想做顿简单的饭"}, {"message": "两个人，清淡一点，预算五十元以内"}], "expected_actions": [{"type": "status_is", "value": "awaiting_confirmation"}, "has_plan"]}
+{"case_id": "strong-003", "split": "regression", "entry_context": {"page": "category", "category_id": "baking", "store_id": "store-demo-01", "delivery_zone_id": "zone-default"}, "turns": [{"message": "蛋糕面粉，小包装"}], "expected_actions": ["has_plan", {"type": "forbid_sku", "sku_id": "demo:baking-powder-100g"}]}
+{"case_id": "strong-004", "split": "regression", "turns": [{"message": "我想吃西湖醋鱼"}], "expected_actions": [{"type": "status_is", "value": "degraded"}, {"type": "message_contains", "text": "暂未收录"}]}
+{"case_id": "strong-005", "split": "regression", "turns": [{"message": "你会做什么菜"}], "expected_actions": [{"type": "message_contains", "text": "家常菜"}]}
+{"case_id": "strong-006", "split": "regression", "turns": [{"message": "你好"}], "expected_actions": [{"type": "status_is", "value": "clarifying"}]}
+{"case_id": "strong-007", "split": "regression", "entry_context": {"page": "category", "category_id": "baking", "store_id": "store-demo-01", "delivery_zone_id": "zone-default"}, "turns": [{"message": "想做蛋糕，面粉小包装，20元以内"}], "expected_actions": ["has_plan"]}
+{"case_id": "strong-008", "split": "regression", "turns": [{"message": "我想吃番茄炒蛋"}], "expected_actions": [{"type": "forbid_sku", "sku_id": "demo:baking-powder-100g"}]}
+{"case_id": "strong-009", "split": "regression", "turns": [{"message": "今晚想做顿简单的饭"}], "expected_actions": [{"type": "status_is", "value": "clarifying"}]}
+{"case_id": "strong-010", "split": "regression", "turns": [{"message": "我想吃番茄炒蛋"}], "expected_actions": [{"type": "allow_sku", "sku_id": "demo:eggs-fresh-6pack"}]}
+{"case_id": "strong-011", "split": "regression", "entry_context": {"page": "category", "category_id": "baking", "store_id": "store-demo-01", "delivery_zone_id": "zone-default"}, "turns": [{"message": "帮我选蛋糕面粉"}], "expected_actions": [{"type": "status_is", "value": "awaiting_confirmation"}]}
+{"case_id": "strong-012", "split": "regression", "turns": [{"message": "两个人清淡50元"}], "expected_actions": [{"type": "status_is", "value": "awaiting_confirmation"}, "has_plan"]}
+{"case_id": "strong-013", "split": "regression", "turns": [{"message": "我想吃西湖醋鱼"}], "expected_actions": [{"type": "message_contains", "text": "暂未收录"}]}
+{"case_id": "strong-014", "split": "regression", "turns": [{"message": "有什么菜"}], "expected_actions": [{"type": "message_contains", "text": "包括"}]}
+{"case_id": "strong-015", "split": "regression", "entry_context": {"page": "category", "category_id": "baking", "store_id": "store-demo-01", "delivery_zone_id": "zone-default"}, "turns": [{"message": "面粉"}], "expected_actions": [{"type": "status_is", "value": "clarifying"}]}
+{"case_id": "strong-016", "split": "regression", "turns": [{"message": "我想吃番茄炒蛋"}], "confirm_plan": true, "check_cart": true, "expected_actions": [{"type": "cart_has_sku", "sku_id": "demo:tomato-fresh-500g"}]}
+{"case_id": "strong-017", "split": "regression", "turns": [{"message": "我想吃番茄炒蛋"}, {"message": "改成4个人"}], "expected_actions": [{"type": "status_is", "value": "awaiting_confirmation"}, {"type": "allow_sku", "sku_id": "demo:tomato-fresh-500g"}, {"type": "forbid_sku", "sku_id": "demo:baking-powder-100g"}]}
+{"case_id": "strong-018", "split": "regression", "turns": [{"message": "我想吃番茄炒蛋，不要鸡蛋"}], "expected_actions": [{"type": "status_is", "value": "degraded"}]}
+{"case_id": "strong-019", "split": "regression", "turns": [{"message": "我想吃番茄炒蛋，10分钟内送到"}], "expected_actions": [{"type": "status_is", "value": "degraded"}]}

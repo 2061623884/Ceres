@@ -1,0 +1,9 @@
+{
+  "version": "v1",
+  "total_cases": 60,
+  "splits": {
+    "dev": 22,
+    "regression": 28,
+    "holdout": 10
+  }
+}

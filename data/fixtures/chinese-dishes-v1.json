@@ -1,0 +1,2397 @@
+{
+  "version": "v1",
+  "dishes": [
+    {
+      "dish_id": "dish-fanqie-chao-dan",
+      "name": "番茄炒蛋",
+      "aliases": [
+        "西红柿炒鸡蛋",
+        "番茄鸡蛋"
+      ],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "tomato",
+          "quantity_g": 300
+        },
+        {
+          "ingredient_id": "egg",
+          "quantity_pc": 3
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "sugar"
+      ]
+    },
+    {
+      "dish_id": "dish-dan-chao-fan",
+      "name": "蛋炒饭",
+      "aliases": [
+        "鸡蛋炒饭",
+        "炒饭"
+      ],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "rice",
+          "quantity_g": 300
+        },
+        {
+          "ingredient_id": "egg",
+          "quantity_pc": 2
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "scallion"
+      ]
+    },
+    {
+      "dish_id": "dish-yangzhou-chao-fan",
+      "name": "扬州炒饭",
+      "aliases": [
+        "什锦炒饭"
+      ],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "rice",
+          "quantity_g": 350
+        },
+        {
+          "ingredient_id": "egg",
+          "quantity_pc": 2
+        },
+        {
+          "ingredient_id": "shrimp",
+          "quantity_g": 80
+        },
+        {
+          "ingredient_id": "green_pea",
+          "quantity_g": 50
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt"
+      ]
+    },
+    {
+      "dish_id": "dish-qingjiao-rousi",
+      "name": "青椒肉丝",
+      "aliases": [
+        "尖椒肉丝"
+      ],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "pork",
+          "quantity_g": 200
+        },
+        {
+          "ingredient_id": "bell_pepper",
+          "quantity_g": 200
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "soy_sauce"
+      ]
+    },
+    {
+      "dish_id": "dish-yuxiang-rousi",
+      "name": "鱼香肉丝",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "pork",
+          "quantity_g": 200
+        },
+        {
+          "ingredient_id": "wood_ear",
+          "quantity_g": 30
+        },
+        {
+          "ingredient_id": "carrot",
+          "quantity_g": 80
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "soy_sauce",
+        "vinegar",
+        "sugar"
+      ]
+    },
+    {
+      "dish_id": "dish-gongbao-jiding",
+      "name": "宫保鸡丁",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "chicken_breast",
+          "quantity_g": 250
+        },
+        {
+          "ingredient_id": "peanut",
+          "quantity_g": 50
+        },
+        {
+          "ingredient_id": "bell_pepper",
+          "quantity_g": 100
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "soy_sauce",
+        "vinegar"
+      ]
+    },
+    {
+      "dish_id": "dish-mapo-doufu",
+      "name": "麻婆豆腐",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "tofu",
+          "quantity_g": 400
+        },
+        {
+          "ingredient_id": "ground_beef",
+          "quantity_g": 80
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "soy_sauce",
+        "chili_sauce"
+      ]
+    },
+    {
+      "dish_id": "dish-hongshao-rou",
+      "name": "红烧肉",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "pork",
+          "quantity_g": 500
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "soy_sauce",
+        "sugar"
+      ]
+    },
+    {
+      "dish_id": "dish-tangcu-paigu",
+      "name": "糖醋排骨",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "pork_ribs",
+          "quantity_g": 400
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "vinegar",
+        "sugar"
+      ]
+    },
+    {
+      "dish_id": "dish-kele-jichi",
+      "name": "可乐鸡翅",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "chicken_wing",
+          "quantity_g": 400
+        },
+        {
+          "ingredient_id": "cola",
+          "quantity_ml": 330
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "salt",
+        "soy_sauce"
+      ]
+    },
+    {
+      "dish_id": "dish-suanni-xilanhua",
+      "name": "蒜蓉西兰花",
+      "aliases": [
+        "清炒西兰花"
+      ],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "broccoli",
+          "quantity_g": 350
+        },
+        {
+          "ingredient_id": "garlic",
+          "quantity_g": 20
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt"
+      ]
+    },
+    {
+      "dish_id": "dish-fanqie-dan-tang",
+      "name": "番茄蛋汤",
+      "aliases": [
+        "西红柿蛋汤"
+      ],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "tomato",
+          "quantity_g": 250
+        },
+        {
+          "ingredient_id": "egg",
+          "quantity_pc": 2
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "salt",
+        "scallion"
+      ]
+    },
+    {
+      "dish_id": "dish-suanla-tudousi",
+      "name": "酸辣土豆丝",
+      "aliases": [
+        "醋溜土豆丝"
+      ],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "potato",
+          "quantity_g": 350
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "vinegar",
+        "chili_sauce"
+      ]
+    },
+    {
+      "dish_id": "dish-disanxian",
+      "name": "地三鲜",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "potato",
+          "quantity_g": 200
+        },
+        {
+          "ingredient_id": "eggplant",
+          "quantity_g": 200
+        },
+        {
+          "ingredient_id": "bell_pepper",
+          "quantity_g": 150
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "soy_sauce"
+      ]
+    },
+    {
+      "dish_id": "dish-hongshao-paigu",
+      "name": "红烧排骨",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "pork",
+          "quantity_g": 450
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "soy_sauce",
+        "sugar"
+      ]
+    },
+    {
+      "dish_id": "dish-koushui-ji",
+      "name": "口水鸡",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "chicken_breast",
+          "quantity_g": 350
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "salt",
+        "soy_sauce",
+        "vinegar",
+        "chili_sauce"
+      ]
+    },
+    {
+      "dish_id": "dish-baiqie-ji",
+      "name": "白切鸡",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "chicken_breast",
+          "quantity_g": 400
+        },
+        {
+          "ingredient_id": "ginger",
+          "quantity_g": 20
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "salt"
+      ]
+    },
+    {
+      "dish_id": "dish-zhajiang-mian",
+      "name": "炸酱面",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "noodle",
+          "quantity_g": 250
+        },
+        {
+          "ingredient_id": "ground_beef",
+          "quantity_g": 150
+        },
+        {
+          "ingredient_id": "cucumber",
+          "quantity_g": 100
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "soy_sauce",
+        "salt"
+      ]
+    },
+    {
+      "dish_id": "dish-mayi-shangshu",
+      "name": "蚂蚁上树",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "ground_beef",
+          "quantity_g": 120
+        },
+        {
+          "ingredient_id": "noodle",
+          "quantity_g": 200
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "soy_sauce"
+      ]
+    },
+    {
+      "dish_id": "dish-roumo-qiezi",
+      "name": "肉末茄子",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "eggplant",
+          "quantity_g": 350
+        },
+        {
+          "ingredient_id": "ground_beef",
+          "quantity_g": 100
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "soy_sauce"
+      ]
+    },
+    {
+      "dish_id": "dish-qingchao-bocai",
+      "name": "清炒菠菜",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "spinach",
+          "quantity_g": 300
+        },
+        {
+          "ingredient_id": "garlic",
+          "quantity_g": 15
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt"
+      ]
+    },
+    {
+      "dish_id": "dish-haoyou-shengcai",
+      "name": "蚝油生菜",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "lettuce",
+          "quantity_g": 300
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "oyster_sauce"
+      ]
+    },
+    {
+      "dish_id": "dish-shousi-baocai",
+      "name": "手撕包菜",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "cabbage",
+          "quantity_g": 350
+        },
+        {
+          "ingredient_id": "garlic",
+          "quantity_g": 15
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "vinegar"
+      ]
+    },
+    {
+      "dish_id": "dish-culiu-baicai",
+      "name": "醋溜白菜",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "cabbage",
+          "quantity_g": 350
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "vinegar"
+      ]
+    },
+    {
+      "dish_id": "dish-liangban-huanggua",
+      "name": "凉拌黄瓜",
+      "aliases": [
+        "拍黄瓜"
+      ],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "cucumber",
+          "quantity_g": 300
+        },
+        {
+          "ingredient_id": "garlic",
+          "quantity_g": 10
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "salt",
+        "vinegar"
+      ]
+    },
+    {
+      "dish_id": "dish-jingjiang-rousi",
+      "name": "京酱肉丝",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "pork",
+          "quantity_g": 250
+        },
+        {
+          "ingredient_id": "cucumber",
+          "quantity_g": 100
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "soy_sauce",
+        "salt",
+        "sugar"
+      ]
+    },
+    {
+      "dish_id": "dish-muxu-rou",
+      "name": "木须肉",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "pork",
+          "quantity_g": 150
+        },
+        {
+          "ingredient_id": "egg",
+          "quantity_pc": 2
+        },
+        {
+          "ingredient_id": "cucumber",
+          "quantity_g": 80
+        },
+        {
+          "ingredient_id": "wood_ear",
+          "quantity_g": 30
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "soy_sauce"
+      ]
+    },
+    {
+      "dish_id": "dish-huiguo-rou",
+      "name": "回锅肉",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "pork",
+          "quantity_g": 300
+        },
+        {
+          "ingredient_id": "bell_pepper",
+          "quantity_g": 100
+        },
+        {
+          "ingredient_id": "cabbage",
+          "quantity_g": 100
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "soy_sauce"
+      ]
+    },
+    {
+      "dish_id": "dish-suancai-yurou",
+      "name": "酸菜鱼",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "fish_fillet",
+          "quantity_g": 350
+        },
+        {
+          "ingredient_id": "pickled_cabbage",
+          "quantity_g": 200
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "chili_sauce"
+      ]
+    },
+    {
+      "dish_id": "dish-shui-zhurou",
+      "name": "水煮肉片",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "pork",
+          "quantity_g": 300
+        },
+        {
+          "ingredient_id": "lettuce",
+          "quantity_g": 150
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "chili_sauce",
+        "soy_sauce"
+      ]
+    },
+    {
+      "dish_id": "dish-suantang-feiniu",
+      "name": "酸汤肥牛",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "beef_slice",
+          "quantity_g": 250
+        },
+        {
+          "ingredient_id": "enoki_mushroom",
+          "quantity_g": 150
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "salt",
+        "vinegar",
+        "chili_sauce"
+      ]
+    },
+    {
+      "dish_id": "dish-tudou-dun-niurou",
+      "name": "土豆炖牛肉",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "beef_steak",
+          "quantity_g": 300
+        },
+        {
+          "ingredient_id": "potato",
+          "quantity_g": 250
+        },
+        {
+          "ingredient_id": "carrot",
+          "quantity_g": 100
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "soy_sauce"
+      ]
+    },
+    {
+      "dish_id": "dish-fanqie-dun-niunan",
+      "name": "番茄炖牛腩",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "beef_brisket",
+          "quantity_g": 350
+        },
+        {
+          "ingredient_id": "tomato",
+          "quantity_g": 300
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "sugar"
+      ]
+    },
+    {
+      "dish_id": "dish-galijiding",
+      "name": "咖喱鸡丁",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "chicken_breast",
+          "quantity_g": 300
+        },
+        {
+          "ingredient_id": "potato",
+          "quantity_g": 150
+        },
+        {
+          "ingredient_id": "carrot",
+          "quantity_g": 100
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt"
+      ]
+    },
+    {
+      "dish_id": "dish-zhaoji-ji",
+      "name": "照烧鸡腿",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "chicken_thigh",
+          "quantity_g": 350
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "soy_sauce",
+        "sugar"
+      ]
+    },
+    {
+      "dish_id": "dish-laziji",
+      "name": "辣子鸡",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "chicken_breast",
+          "quantity_g": 350
+        },
+        {
+          "ingredient_id": "dried_chili",
+          "quantity_g": 20
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "soy_sauce"
+      ]
+    },
+    {
+      "dish_id": "dish-jiaoyan-paigu",
+      "name": "椒盐排骨",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "pork",
+          "quantity_g": 400
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "salt",
+        "oil"
+      ]
+    },
+    {
+      "dish_id": "dish-suanxiang-paigu",
+      "name": "蒜香排骨",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "pork",
+          "quantity_g": 400
+        },
+        {
+          "ingredient_id": "garlic",
+          "quantity_g": 30
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt"
+      ]
+    },
+    {
+      "dish_id": "dish-qingzheng-luyu",
+      "name": "清蒸鲈鱼",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "sea_bass",
+          "quantity_g": 400
+        },
+        {
+          "ingredient_id": "ginger",
+          "quantity_g": 20
+        },
+        {
+          "ingredient_id": "scallion",
+          "quantity_g": 30
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "salt",
+        "soy_sauce"
+      ]
+    },
+    {
+      "dish_id": "dish-hongshao-daiyu",
+      "name": "红烧带鱼",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "hairtail",
+          "quantity_g": 350
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "soy_sauce",
+        "sugar",
+        "vinegar"
+      ]
+    },
+    {
+      "dish_id": "dish-tangcu-liji",
+      "name": "糖醋里脊",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "pork",
+          "quantity_g": 300
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "vinegar",
+        "sugar"
+      ]
+    },
+    {
+      "dish_id": "dish-guobao-rou",
+      "name": "锅包肉",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "pork",
+          "quantity_g": 300
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "vinegar",
+        "sugar"
+      ]
+    },
+    {
+      "dish_id": "dish-nongjia-xiaochaorou",
+      "name": "农家小炒肉",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "pork",
+          "quantity_g": 250
+        },
+        {
+          "ingredient_id": "bell_pepper",
+          "quantity_g": 150
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "soy_sauce"
+      ]
+    },
+    {
+      "dish_id": "dish-jiajiao-chaodan",
+      "name": "尖椒炒蛋",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "bell_pepper",
+          "quantity_g": 200
+        },
+        {
+          "ingredient_id": "egg",
+          "quantity_pc": 3
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt"
+      ]
+    },
+    {
+      "dish_id": "dish-jiucai-chaodan",
+      "name": "韭菜炒蛋",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "chive",
+          "quantity_g": 150
+        },
+        {
+          "ingredient_id": "egg",
+          "quantity_pc": 3
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt"
+      ]
+    },
+    {
+      "dish_id": "dish-xiaren-huadan",
+      "name": "虾仁滑蛋",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "shrimp",
+          "quantity_g": 200
+        },
+        {
+          "ingredient_id": "egg",
+          "quantity_pc": 3
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt"
+      ]
+    },
+    {
+      "dish_id": "dish-fanqie-dun-doufu",
+      "name": "西红柿炖豆腐",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "tomato",
+          "quantity_g": 250
+        },
+        {
+          "ingredient_id": "tofu",
+          "quantity_g": 350
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "sugar"
+      ]
+    },
+    {
+      "dish_id": "dish-jiachang-doufu",
+      "name": "家常豆腐",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "tofu",
+          "quantity_g": 400
+        },
+        {
+          "ingredient_id": "pork",
+          "quantity_g": 80
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "soy_sauce"
+      ]
+    },
+    {
+      "dish_id": "dish-pidan-doufu",
+      "name": "皮蛋豆腐",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "tofu",
+          "quantity_g": 350
+        },
+        {
+          "ingredient_id": "preserved_egg",
+          "quantity_pc": 2
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "salt",
+        "vinegar",
+        "soy_sauce"
+      ]
+    },
+    {
+      "dish_id": "dish-suanla-tang",
+      "name": "酸辣汤",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "tofu",
+          "quantity_g": 100
+        },
+        {
+          "ingredient_id": "wood_ear",
+          "quantity_g": 30
+        },
+        {
+          "ingredient_id": "egg",
+          "quantity_pc": 1
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "salt",
+        "vinegar",
+        "soy_sauce"
+      ]
+    },
+    {
+      "dish_id": "dish-yumi-paigu-tang",
+      "name": "玉米排骨汤",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "pork",
+          "quantity_g": 300
+        },
+        {
+          "ingredient_id": "corn",
+          "quantity_g": 200
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "salt",
+        "ginger"
+      ]
+    },
+    {
+      "dish_id": "dish-donggua-paigu-tang",
+      "name": "冬瓜排骨汤",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "pork",
+          "quantity_g": 300
+        },
+        {
+          "ingredient_id": "winter_melon",
+          "quantity_g": 300
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "salt",
+        "ginger"
+      ]
+    },
+    {
+      "dish_id": "dish-luobo-paigu-tang",
+      "name": "萝卜排骨汤",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "pork",
+          "quantity_g": 300
+        },
+        {
+          "ingredient_id": "radish",
+          "quantity_g": 250
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "salt",
+        "ginger"
+      ]
+    },
+    {
+      "dish_id": "dish-zhenshui-dan",
+      "name": "蒸水蛋",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "egg",
+          "quantity_pc": 3
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "salt",
+        "scallion"
+      ]
+    },
+    {
+      "dish_id": "dish-jian-dan",
+      "name": "煎蛋",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "egg",
+          "quantity_pc": 2
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt"
+      ]
+    },
+    {
+      "dish_id": "dish-tudousi-chaorou",
+      "name": "土豆丝炒肉",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "potato",
+          "quantity_g": 300
+        },
+        {
+          "ingredient_id": "pork",
+          "quantity_g": 150
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "soy_sauce"
+      ]
+    },
+    {
+      "dish_id": "dish-xianggu-qingcai",
+      "name": "香菇青菜",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "shiitake",
+          "quantity_g": 100
+        },
+        {
+          "ingredient_id": "bok_choy",
+          "quantity_g": 300
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt"
+      ]
+    },
+    {
+      "dish_id": "dish-xianggu-jikuai",
+      "name": "香菇鸡块",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "chicken_breast",
+          "quantity_g": 300
+        },
+        {
+          "ingredient_id": "shiitake",
+          "quantity_g": 120
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "soy_sauce"
+      ]
+    },
+    {
+      "dish_id": "dish-huangmenji",
+      "name": "黄焖鸡",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "chicken_thigh",
+          "quantity_g": 400
+        },
+        {
+          "ingredient_id": "shiitake",
+          "quantity_g": 80
+        },
+        {
+          "ingredient_id": "bell_pepper",
+          "quantity_g": 100
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "soy_sauce"
+      ]
+    },
+    {
+      "dish_id": "dish-sanbei-ji",
+      "name": "三杯鸡",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "chicken_thigh",
+          "quantity_g": 400
+        },
+        {
+          "ingredient_id": "basil",
+          "quantity_g": 20
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "soy_sauce",
+        "sugar"
+      ]
+    },
+    {
+      "dish_id": "dish-baizhuo-xia",
+      "name": "白灼虾",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "shrimp",
+          "quantity_g": 400
+        },
+        {
+          "ingredient_id": "ginger",
+          "quantity_g": 15
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "salt",
+        "soy_sauce"
+      ]
+    },
+    {
+      "dish_id": "dish-youmen-daxia",
+      "name": "油焖大虾",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "shrimp",
+          "quantity_g": 400
+        },
+        {
+          "ingredient_id": "scallion",
+          "quantity_g": 30
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "sugar"
+      ]
+    },
+    {
+      "dish_id": "dish-suanni-fensi-zhengxia",
+      "name": "蒜蓉粉丝蒸虾",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "shrimp",
+          "quantity_g": 350
+        },
+        {
+          "ingredient_id": "garlic",
+          "quantity_g": 25
+        },
+        {
+          "ingredient_id": "vermicelli",
+          "quantity_g": 80
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "salt",
+        "soy_sauce"
+      ]
+    },
+    {
+      "dish_id": "dish-hongshao-doufu",
+      "name": "红烧豆腐",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "tofu",
+          "quantity_g": 400
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "soy_sauce",
+        "sugar"
+      ]
+    },
+    {
+      "dish_id": "dish-yuxiang-qiezi",
+      "name": "鱼香茄子",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "eggplant",
+          "quantity_g": 400
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "soy_sauce",
+        "vinegar",
+        "sugar"
+      ]
+    },
+    {
+      "dish_id": "dish-suanni-qiezi",
+      "name": "蒜泥茄子",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "eggplant",
+          "quantity_g": 400
+        },
+        {
+          "ingredient_id": "garlic",
+          "quantity_g": 25
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "vinegar"
+      ]
+    },
+    {
+      "dish_id": "dish-ganbian-doujiao",
+      "name": "干煸豆角",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "green_bean",
+          "quantity_g": 350
+        },
+        {
+          "ingredient_id": "pork",
+          "quantity_g": 80
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "soy_sauce"
+      ]
+    },
+    {
+      "dish_id": "dish-qingjiao-tudousi",
+      "name": "青椒土豆丝",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "potato",
+          "quantity_g": 300
+        },
+        {
+          "ingredient_id": "bell_pepper",
+          "quantity_g": 120
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "vinegar"
+      ]
+    },
+    {
+      "dish_id": "dish-congbao-yangrou",
+      "name": "葱爆羊肉",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "lamb",
+          "quantity_g": 300
+        },
+        {
+          "ingredient_id": "scallion",
+          "quantity_g": 80
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "soy_sauce"
+      ]
+    },
+    {
+      "dish_id": "dish-qingchao-kongxincai",
+      "name": "清炒空心菜",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "water_spinach",
+          "quantity_g": 300
+        },
+        {
+          "ingredient_id": "garlic",
+          "quantity_g": 15
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt"
+      ]
+    },
+    {
+      "dish_id": "dish-ganjuo-huacai",
+      "name": "干锅花菜",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "cauliflower",
+          "quantity_g": 350
+        },
+        {
+          "ingredient_id": "pork",
+          "quantity_g": 80
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "chili_sauce"
+      ]
+    },
+    {
+      "dish_id": "dish-shangtang-wawacai",
+      "name": "上汤娃娃菜",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "baby_cabbage",
+          "quantity_g": 350
+        },
+        {
+          "ingredient_id": "ham",
+          "quantity_g": 50
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "salt",
+        "oil"
+      ]
+    },
+    {
+      "dish_id": "dish-laohucai",
+      "name": "老虎菜",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "cucumber",
+          "quantity_g": 150
+        },
+        {
+          "ingredient_id": "bell_pepper",
+          "quantity_g": 100
+        },
+        {
+          "ingredient_id": "tomato",
+          "quantity_g": 100
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "salt",
+        "vinegar"
+      ]
+    },
+    {
+      "dish_id": "dish-congyou-banmian",
+      "name": "葱油拌面",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "noodle",
+          "quantity_g": 250
+        },
+        {
+          "ingredient_id": "scallion",
+          "quantity_g": 50
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "soy_sauce"
+      ]
+    },
+    {
+      "dish_id": "dish-niurou-mian",
+      "name": "牛肉面",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "noodle",
+          "quantity_g": 250
+        },
+        {
+          "ingredient_id": "beef_slice",
+          "quantity_g": 150
+        },
+        {
+          "ingredient_id": "bok_choy",
+          "quantity_g": 100
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "salt",
+        "soy_sauce"
+      ]
+    },
+    {
+      "dish_id": "dish-fanqie-jidan-mian",
+      "name": "西红柿鸡蛋面",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "noodle",
+          "quantity_g": 250
+        },
+        {
+          "ingredient_id": "tomato",
+          "quantity_g": 200
+        },
+        {
+          "ingredient_id": "egg",
+          "quantity_pc": 2
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt"
+      ]
+    },
+    {
+      "dish_id": "dish-suanrong-fensi-baicai",
+      "name": "蒜蓉粉丝白菜",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "cabbage",
+          "quantity_g": 300
+        },
+        {
+          "ingredient_id": "vermicelli",
+          "quantity_g": 80
+        },
+        {
+          "ingredient_id": "garlic",
+          "quantity_g": 20
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt"
+      ]
+    },
+    {
+      "dish_id": "dish-qingzhen-xilanhua",
+      "name": "清蒸西兰花",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "broccoli",
+          "quantity_g": 350
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "salt",
+        "oil"
+      ]
+    },
+    {
+      "dish_id": "dish-hongshao-qiezi",
+      "name": "红烧茄子",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "eggplant",
+          "quantity_g": 400
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "soy_sauce",
+        "sugar"
+      ]
+    },
+    {
+      "dish_id": "dish-qingjiao-chaodoufu",
+      "name": "青椒炒豆腐",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "tofu",
+          "quantity_g": 350
+        },
+        {
+          "ingredient_id": "bell_pepper",
+          "quantity_g": 150
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "soy_sauce"
+      ]
+    },
+    {
+      "dish_id": "dish-doujiang-you-tiao",
+      "name": "豆浆油条",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "soy_milk",
+          "quantity_ml": 500
+        },
+        {
+          "ingredient_id": "youtiao",
+          "quantity_pc": 2
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "salt"
+      ]
+    },
+    {
+      "dish_id": "dish-baozi-rou",
+      "name": "猪肉包子",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "flour",
+          "quantity_g": 300
+        },
+        {
+          "ingredient_id": "ground_beef",
+          "quantity_g": 200
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "salt",
+        "soy_sauce"
+      ]
+    },
+    {
+      "dish_id": "dish-jiaozi-sancai",
+      "name": "三鲜饺子",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "flour",
+          "quantity_g": 300
+        },
+        {
+          "ingredient_id": "shrimp",
+          "quantity_g": 100
+        },
+        {
+          "ingredient_id": "egg",
+          "quantity_pc": 2
+        },
+        {
+          "ingredient_id": "cabbage",
+          "quantity_g": 150
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "salt",
+        "soy_sauce"
+      ]
+    },
+    {
+      "dish_id": "dish-chaomian",
+      "name": "炒面",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "noodle",
+          "quantity_g": 250
+        },
+        {
+          "ingredient_id": "cabbage",
+          "quantity_g": 100
+        },
+        {
+          "ingredient_id": "carrot",
+          "quantity_g": 80
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "soy_sauce"
+      ]
+    },
+    {
+      "dish_id": "dish-chaofan-shengcai",
+      "name": "生菜炒饭",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "rice",
+          "quantity_g": 300
+        },
+        {
+          "ingredient_id": "lettuce",
+          "quantity_g": 150
+        },
+        {
+          "ingredient_id": "egg",
+          "quantity_pc": 1
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt"
+      ]
+    },
+    {
+      "dish_id": "dish-xihongshi-niurou",
+      "name": "西红柿牛肉",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "tomato",
+          "quantity_g": 250
+        },
+        {
+          "ingredient_id": "beef_slice",
+          "quantity_g": 200
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "sugar"
+      ]
+    },
+    {
+      "dish_id": "dish-qingjiao-niurou",
+      "name": "青椒牛肉",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "beef_slice",
+          "quantity_g": 250
+        },
+        {
+          "ingredient_id": "bell_pepper",
+          "quantity_g": 200
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "soy_sauce"
+      ]
+    },
+    {
+      "dish_id": "dish-suanrong-xia",
+      "name": "蒜蓉虾",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "shrimp",
+          "quantity_g": 400
+        },
+        {
+          "ingredient_id": "garlic",
+          "quantity_g": 30
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt"
+      ]
+    },
+    {
+      "dish_id": "dish-hongshao-shizitou",
+      "name": "红烧狮子头",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "ground_beef",
+          "quantity_g": 400
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "soy_sauce",
+        "sugar"
+      ]
+    },
+    {
+      "dish_id": "dish-ganguo-tudoupian",
+      "name": "干锅土豆片",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "potato",
+          "quantity_g": 350
+        },
+        {
+          "ingredient_id": "pork",
+          "quantity_g": 80
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "chili_sauce"
+      ]
+    },
+    {
+      "dish_id": "dish-qingzhen-daiyu",
+      "name": "清蒸带鱼",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "hairtail",
+          "quantity_g": 350
+        },
+        {
+          "ingredient_id": "ginger",
+          "quantity_g": 15
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "salt",
+        "soy_sauce"
+      ]
+    },
+    {
+      "dish_id": "dish-cong-you-dan",
+      "name": "葱油蛋",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "egg",
+          "quantity_pc": 3
+        },
+        {
+          "ingredient_id": "scallion",
+          "quantity_g": 40
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt"
+      ]
+    },
+    {
+      "dish_id": "dish-doupi-rousi",
+      "name": "豆皮肉丝",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "tofu_skin",
+          "quantity_g": 150
+        },
+        {
+          "ingredient_id": "pork",
+          "quantity_g": 150
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "soy_sauce"
+      ]
+    },
+    {
+      "dish_id": "dish-qingchao-douya",
+      "name": "清炒豆芽",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "bean_sprout",
+          "quantity_g": 300
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "vinegar"
+      ]
+    },
+    {
+      "dish_id": "dish-suancai-chaofen",
+      "name": "酸菜炒粉",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "pickled_cabbage",
+          "quantity_g": 200
+        },
+        {
+          "ingredient_id": "vermicelli",
+          "quantity_g": 150
+        },
+        {
+          "ingredient_id": "pork",
+          "quantity_g": 80
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt"
+      ]
+    },
+    {
+      "dish_id": "dish-hongshao-niurou",
+      "name": "红烧牛肉",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "beef_brisket",
+          "quantity_g": 400
+        },
+        {
+          "ingredient_id": "carrot",
+          "quantity_g": 100
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "soy_sauce",
+        "sugar"
+      ]
+    },
+    {
+      "dish_id": "dish-qingzhen-jichi",
+      "name": "清蒸鸡翅",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "chicken_wing",
+          "quantity_g": 400
+        },
+        {
+          "ingredient_id": "ginger",
+          "quantity_g": 15
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "salt",
+        "soy_sauce"
+      ]
+    },
+    {
+      "dish_id": "dish-mala-xia",
+      "name": "麻辣虾",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "shrimp",
+          "quantity_g": 400
+        },
+        {
+          "ingredient_id": "dried_chili",
+          "quantity_g": 15
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt",
+        "chili_sauce"
+      ]
+    },
+    {
+      "dish_id": "dish-qingjiao-tudoukuai",
+      "name": "青椒土豆块",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "potato",
+          "quantity_g": 300
+        },
+        {
+          "ingredient_id": "bell_pepper",
+          "quantity_g": 150
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "oil",
+        "salt"
+      ]
+    },
+    {
+      "dish_id": "dish-xihongshi-niurou-mian",
+      "name": "番茄牛肉面",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "noodle",
+          "quantity_g": 250
+        },
+        {
+          "ingredient_id": "tomato",
+          "quantity_g": 200
+        },
+        {
+          "ingredient_id": "beef_slice",
+          "quantity_g": 120
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "salt",
+        "soy_sauce"
+      ]
+    },
+    {
+      "dish_id": "dish-qingzhen-shrimp-dumpling",
+      "name": "虾饺",
+      "aliases": [],
+      "base_people": 2,
+      "required_items": [
+        {
+          "ingredient_id": "shrimp",
+          "quantity_g": 200
+        },
+        {
+          "ingredient_id": "flour",
+          "quantity_g": 150
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "salt",
+        "oil"
+      ]
+    },
+    {
+      "dish_id": "dish-chuanyu-huoguo",
+      "name": "川渝火锅",
+      "aliases": [
+        "川渝麻辣火锅",
+        "麻辣火锅",
+        "川渝",
+        "四川火锅",
+        "重庆火锅"
+      ],
+      "base_people": 4,
+      "required_items": [
+        {
+          "ingredient_id": "hotpot_base",
+          "quantity_g": 200
+        },
+        {
+          "ingredient_id": "hotpot_beef_roll",
+          "quantity_g": 300
+        },
+        {
+          "ingredient_id": "tripe",
+          "quantity_g": 200
+        },
+        {
+          "ingredient_id": "cabbage",
+          "quantity_g": 300
+        },
+        {
+          "ingredient_id": "potato",
+          "quantity_g": 300
+        },
+        {
+          "ingredient_id": "sesame_oil",
+          "quantity_ml": 60
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "salt"
+      ]
+    },
+    {
+      "dish_id": "dish-chaoshan-niurou-huoguo",
+      "name": "潮汕牛肉火锅",
+      "aliases": [
+        "潮汕火锅",
+        "潮汕牛肉锅",
+        "牛肉火锅",
+        "潮汕",
+        "潮汕牛肉"
+      ],
+      "base_people": 4,
+      "required_items": [
+        {
+          "ingredient_id": "clear_soup_base",
+          "quantity_g": 200
+        },
+        {
+          "ingredient_id": "beef_neck",
+          "quantity_g": 300
+        },
+        {
+          "ingredient_id": "hotpot_beef_roll",
+          "quantity_g": 300
+        },
+        {
+          "ingredient_id": "cabbage",
+          "quantity_g": 300
+        },
+        {
+          "ingredient_id": "mushroom",
+          "quantity_g": 200
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "salt"
+      ]
+    },
+    {
+      "dish_id": "dish-qingtang-huoguo",
+      "name": "清汤火锅",
+      "aliases": [
+        "清汤锅",
+        "清汤"
+      ],
+      "base_people": 4,
+      "required_items": [
+        {
+          "ingredient_id": "clear_soup_base",
+          "quantity_g": 200
+        },
+        {
+          "ingredient_id": "hotpot_beef_roll",
+          "quantity_g": 300
+        },
+        {
+          "ingredient_id": "cabbage",
+          "quantity_g": 300
+        },
+        {
+          "ingredient_id": "mushroom",
+          "quantity_g": 200
+        },
+        {
+          "ingredient_id": "potato",
+          "quantity_g": 300
+        },
+        {
+          "ingredient_id": "noodle",
+          "quantity_g": 200
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "salt"
+      ]
+    },
+    {
+      "dish_id": "dish-guizhou-suansoup-huoguo",
+      "name": "贵州酸汤火锅",
+      "aliases": [
+        "酸汤火锅",
+        "酸汤锅",
+        "贵州酸汤",
+        "凯里酸汤",
+        "酸汤"
+      ],
+      "base_people": 4,
+      "required_items": [
+        {
+          "ingredient_id": "sour_soup_base",
+          "quantity_g": 200
+        },
+        {
+          "ingredient_id": "hotpot_beef_roll",
+          "quantity_g": 300
+        },
+        {
+          "ingredient_id": "tripe",
+          "quantity_g": 200
+        },
+        {
+          "ingredient_id": "cabbage",
+          "quantity_g": 300
+        },
+        {
+          "ingredient_id": "potato",
+          "quantity_g": 300
+        }
+      ],
+      "optional_items": [],
+      "pantry_items": [
+        "salt"
+      ]
+    }
+  ]
+}

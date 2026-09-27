@@ -1,0 +1,77 @@
+{
+  "version": "v1",
+  "templates": [
+    {
+      "template_id": "tpl-simple-dinner-2",
+      "scenario": "两人简单清淡晚餐",
+      "base_people": 2,
+      "required_items": [
+        {"ingredient_id": "chicken_breast", "quantity_g": 300},
+        {"ingredient_id": "broccoli", "quantity_g": 200},
+        {"ingredient_id": "rice", "quantity_g": 300}
+      ],
+      "optional_items": [],
+      "pantry_items": ["salt", "oil"]
+    },
+    {
+      "template_id": "tpl-veggie-dinner-2",
+      "scenario": "两人素食清淡晚餐",
+      "base_people": 2,
+      "required_items": [
+        {"ingredient_id": "tofu", "quantity_g": 300},
+        {"ingredient_id": "spinach", "quantity_g": 200}
+      ],
+      "optional_items": [],
+      "pantry_items": ["salt"]
+    },
+    {
+      "template_id": "tpl-cake-basic",
+      "scenario": "基础蛋糕材料",
+      "base_people": 4,
+      "required_items": [
+        {"ingredient_id": "flour", "quantity_g": 250},
+        {"ingredient_id": "butter", "quantity_g": 100},
+        {"ingredient_id": "sugar", "quantity_g": 150},
+        {"ingredient_id": "egg", "quantity_pc": 3},
+        {"ingredient_id": "milk", "quantity_ml": 100}
+      ],
+      "optional_items": [{"ingredient_id": "vanilla", "quantity_ml": 5}],
+      "pantry_items": []
+    },
+    {
+      "template_id": "tpl-bread-basic",
+      "scenario": "基础面包材料",
+      "base_people": 4,
+      "required_items": [
+        {"ingredient_id": "flour", "quantity_g": 500},
+        {"ingredient_id": "yeast", "quantity_g": 7},
+        {"ingredient_id": "sugar", "quantity_g": 30}
+      ],
+      "optional_items": [],
+      "pantry_items": ["salt"]
+    },
+    {
+      "template_id": "tpl-stir-fry-2",
+      "scenario": "两人快手炒菜",
+      "base_people": 2,
+      "required_items": [
+        {"ingredient_id": "chicken_breast", "quantity_g": 250},
+        {"ingredient_id": "bell_pepper", "quantity_g": 150},
+        {"ingredient_id": "onion", "quantity_g": 100}
+      ],
+      "optional_items": [],
+      "pantry_items": ["soy_sauce"]
+    },
+    {
+      "template_id": "tpl-seafood-dinner-2",
+      "scenario": "两人海鲜晚餐",
+      "base_people": 2,
+      "required_items": [
+        {"ingredient_id": "shrimp", "quantity_g": 300},
+        {"ingredient_id": "garlic", "quantity_g": 20}
+      ],
+      "optional_items": [],
+      "pantry_items": ["salt", "oil"]
+    }
+  ]
+}

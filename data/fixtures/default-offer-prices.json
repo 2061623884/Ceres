@@ -1,0 +1,16 @@
+{
+  "version": "v1",
+  "default_price_fen": 1500,
+  "default_available_qty": 20,
+  "sku_prices": {
+    "demo:hotpot-base-200g": 1280,
+    "demo:beef-roll-300g": 2980,
+    "demo:lamb-roll-300g": 3280,
+    "demo:beef-neck-300g": 3880,
+    "demo:tripe-250g": 2680,
+    "demo:shrimp-paste-200g": 1980,
+    "demo:cola-330ml": 350,
+    "demo:water-550ml": 200,
+    "demo:sour-soup-base-200g": 1480
+  }
+}

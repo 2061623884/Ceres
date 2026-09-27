@@ -1,0 +1,30 @@
+---
+config:
+  flowchart:
+    curve: linear
+---
+graph TD;
+	__start__(["开始"]):::first
+	load_context["加载上下文"]
+	understand["语义理解"]
+	parse_validate["解析校验"]
+	decide_turn["决定路由"]
+	retrieve["只读检索"]
+	mutation["清单变更"]
+	answer["生成回答"]
+	respond["提交并响应"]
+	__end__(["结束"]):::last
+	__start__ --> load_context;
+	load_context --> understand;
+	understand --> parse_validate;
+	parse_validate --> decide_turn;
+	decide_turn -.->|只读检索| retrieve;
+	decide_turn -.->|清单变更| mutation;
+	decide_turn -.->|闲聊、回答、澄清、拒绝| answer;
+	retrieve --> answer;
+	mutation --> answer;
+	answer --> respond;
+	respond --> __end__;
+	classDef default fill:#f2f0ff,line-height:1.2
+	classDef first fill-opacity:0
+	classDef last fill:#bfb6fc

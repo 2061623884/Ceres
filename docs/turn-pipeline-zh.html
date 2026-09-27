@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>一轮请求节点说明书（教学版）</title>
+  <style>
+    :root {
+      --bg: #f4f2ed;
+      --card: #fff;
+      --text: #1c1c1c;
+      --muted: #555;
+      --accent: #3d52a0;
+      --border: #ddd8ce;
+      --code-bg: #eceae4;
+      --lesson: #fff9e8;
+      --lesson-border: #d4a017;
+      --fail: #fef2f2;
+      --fail-border: #c53030;
+      --ok: #f0fdf4;
+      --ok-border: #2f855a;
+      --lit: #dde3fa;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 2rem 1.25rem 5rem;
+      font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", sans-serif;
+      font-size: 17px;
+      line-height: 1.75;
+      color: var(--text);
+      background: var(--bg);
+    }
+    .wrap { max-width: 780px; margin: 0 auto; }
+    h1 { font-size: 1.8rem; margin: 0 0 0.4rem; line-height: 1.3; }
+    .subtitle { color: var(--muted); font-size: 0.95rem; margin-bottom: 2rem; }
+    nav.toc {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2rem;
+    }
+    nav.toc h2 { font-size: 0.8rem; color: var(--muted); margin: 0 0 0.6rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    nav.toc ol { margin: 0; padding-left: 1.2rem; }
+    nav.toc li { margin: 0.3rem 0; }
+    nav.toc a { color: var(--accent); text-decoration: none; }
+    nav.toc a:hover { text-decoration: underline; }
+    section.chapter { margin-bottom: 2.5rem; }
+    section.chapter > h2 {
+      font-size: 1.35rem;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 0.4rem;
+      margin: 0 0 1rem;
+    }
+    article.node {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.4rem 1.6rem;
+      margin-bottom: 1.5rem;
+      scroll-margin-top: 1rem;
+    }
+    article.node h3 {
+      font-size: 1.15rem;
+      margin: 0 0 0.15rem;
+    }
+    article.node .node-id {
+      font-family: Consolas, "Cascadia Code", monospace;
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+    article.node h4 {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      margin: 1.1rem 0 0.35rem;
+      font-weight: 700;
+    }
+    article.node h4:first-of-type { margin-top: 0; }
+    article.node p, article.node ul { margin: 0.35rem 0; }
+    article.node ul { padding-left: 1.2rem; }
+    article.node li { margin: 0.25rem 0; }
+    .box {
+      border-radius: 8px;
+      padding: 1rem 1.15rem;
+      margin: 1rem 0;
+      font-size: 0.96rem;
+    }
+    .box.lesson { background: var(--lesson); border-left: 4px solid var(--lesson-border); }
+    .box.fail { background: var(--fail); border-left: 4px solid var(--fail-border); }
+    .box.ok { background: var(--ok); border-left: 4px solid var(--ok-border); }
+    .box > strong:first-child { display: block; margin-bottom: 0.35rem; }
+    pre.flow, pre.code {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.9rem 1.1rem;
+      font-family: Consolas, "Cascadia Code", monospace;
+      font-size: 0.82rem;
+      line-height: 1.55;
+      overflow-x: auto;
+      margin: 0.75rem 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+      margin: 0.75rem 0;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 0.45rem 0.65rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { background: var(--code-bg); font-weight: 600; }
+    code {
+      font-family: Consolas, "Cascadia Code", monospace;
+      font-size: 0.88em;
+      background: var(--code-bg);
+      padding: 0.08em 0.32em;
+      border-radius: 3px;
+    }
+    .grid2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin: 0.75rem 0;
+    }
+    @media (max-width: 600px) { .grid2 { grid-template-columns: 1fr; } }
+    .mini-card {
+      background: var(--code-bg);
+      border-radius: 8px;
+      padding: 0.75rem 0.9rem;
+      font-size: 0.92rem;
+    }
+    .mini-card em { color: var(--muted); font-style: normal; font-size: 0.88rem; }
+    footer { margin-top: 3rem; font-size: 0.85rem; color: var(--muted); }
+    a { color: var(--accent); }
+    section.chapter h3 { font-size: 1.05rem; margin: 1.6rem 0 0.4rem; }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 780px) 360px;
+      gap: 2rem;
+      justify-content: center;
+      align-items: start;
+    }
+    .graph-panel {
+      position: sticky;
+      top: 1rem;
+      max-height: calc(100vh - 2rem);
+      overflow-y: auto;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.9rem 1rem 1rem;
+      font-size: 0.85rem;
+    }
+    .graph-head {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      width: 100%;
+      padding: 0;
+      border: 0;
+      background: none;
+      font: inherit;
+      color: inherit;
+      text-align: left;
+    }
+    .graph-title { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; color: var(--accent); }
+    .graph-current { font-weight: 600; line-height: 1.45; }
+    .graph-canvas { margin: 0.6rem 0 0.4rem; color: var(--muted); }
+    .graph-canvas svg { display: block; margin: 0 auto; height: auto; }
+    .graph-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem 0.9rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    .graph-legend li::before {
+      content: "";
+      display: inline-block;
+      width: 0.8em;
+      height: 0.8em;
+      margin-right: 0.3em;
+      vertical-align: -0.1em;
+      border: 2px solid var(--accent);
+      border-radius: 3px;
+    }
+    .graph-legend .lg-current::before { background: var(--accent); }
+    .graph-legend .lg-lit::before { background: var(--lit); }
+    .graph-legend .lg-issue::before { background: var(--fail); border-color: var(--fail-border); }
+    .graph-hint { margin: 0.5rem 0 0; font-size: 0.78rem; line-height: 1.55; color: var(--muted); }
+    #graph-canvas .node { transition: opacity 0.2s; }
+    #graph-canvas .node.is-link { cursor: pointer; }
+    #graph-canvas .node.is-link:focus { outline: none; }
+    #graph-canvas .node.is-link:hover > rect,
+    #graph-canvas .node.is-link:focus-visible > rect { stroke: var(--accent) !important; stroke-width: 2.5px !important; }
+    #graph-canvas .node.is-lit > rect { fill: var(--lit) !important; stroke: var(--accent) !important; stroke-width: 2px !important; }
+    #graph-canvas .node.is-current > rect { fill: var(--accent) !important; stroke: #26336b !important; stroke-width: 2.5px !important; }
+    #graph-canvas .node.is-current .nodeLabel { color: #fff !important; font-weight: 700; }
+    #graph-canvas .node.is-issue > rect { fill: var(--fail) !important; stroke: var(--fail-border) !important; stroke-width: 2.5px !important; }
+    #graph-canvas .node.is-dim { opacity: 0.55; }
+    #graph-canvas .flowchart-link { transition: opacity 0.2s; }
+    #graph-canvas .flowchart-link.is-on { stroke: var(--accent) !important; stroke-width: 2.5px !important; }
+    #graph-canvas .flowchart-link.is-dim { opacity: 0.35; }
+    tr[data-graph-path]:hover > td,
+    tr[data-graph-lit]:hover > td { background: #f5f6fc; }
+    .box[data-graph-path]:hover { outline: 2px solid var(--ok-border); outline-offset: 2px; }
+    @media (max-width: 1179px) {
+      .layout { display: block; }
+      .graph-panel {
+        position: fixed;
+        top: auto;
+        right: 0.75rem;
+        bottom: 0.75rem;
+        z-index: 20;
+        max-width: min(360px, calc(100vw - 1.5rem));
+        max-height: 75vh;
+        padding: 0.6rem 0.9rem;
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+      }
+      .graph-panel.is-open { width: min(360px, calc(100vw - 1.5rem)); }
+      .graph-panel:not(.is-open) .graph-body { display: none; }
+      .graph-head { position: relative; padding-right: 2.6rem; cursor: pointer; }
+      .graph-head::after { content: "展开"; position: absolute; top: 0; right: 0; font-size: 0.75rem; color: var(--accent); }
+      .graph-panel.is-open .graph-head::after { content: "收起"; }
+    }
+  </style>
+</head>
+<body>
+<div class="layout">
+<div class="wrap">
+
+<h1>一轮请求节点说明书</h1>
+<p class="subtitle">教学版 · 对照 Graph（请求处理流程图），逐个说明每个节点的作用、输入和输出，并标出各节点常见的出错位置。源码：<code>backend/app/agent/graph/</code> · 图示：<code>docs/graph-zh.mmd</code></p>
+
+<nav class="toc">
+  <h2>目录</h2>
+  <ol>
+    <li><a href="#preface">先建立三个概念</a></li>
+    <li><a href="#flow">这张图在说什么</a></li>
+    <li><a href="#objects">Proposal 与 Decision</a></li>
+    <li><a href="#fields">changes.set 与 style_ref 分别写在哪里</a></li>
+    <li><a href="#fail-layers">三层失败：先确定问题停在哪一层</a></li>
+    <li><a href="#node-1">节点 1 · 加载上下文</a></li>
+    <li><a href="#node-2">节点 2 · 语义理解</a></li>
+    <li><a href="#node-3">节点 3 · 解析校验</a></li>
+    <li><a href="#node-4">节点 4 · 决定路由</a></li>
+    <li><a href="#node-5">节点 5 · 只读检索</a></li>
+    <li><a href="#node-6">节点 6 · 清单变更</a></li>
+    <li><a href="#node-7">节点 7 · 生成回答</a></li>
+    <li><a href="#node-8">节点 8 · 提交并响应</a></li>
+    <li><a href="#case-study">例题 · 沿流程图排查最近的会话</a></li>
+    <li><a href="#debug-checklist">沿流程图排查 bug 的步骤</a></li>
+    <li><a href="#state">附录 · state 里有哪些变量</a></li>
+  </ol>
+</nav>
+
+<!-- ========== 开篇 ========== -->
+<section class="chapter" id="preface">
+  <h2>先建立三个概念</h2>
+  <p>逐个介绍节点之前，先建立三个贯穿全文的概念：模型和服务端如何分工、一轮请求如何流转、什么时候写入数据库。后面的每个节点，都可以用这三点来理解。</p>
+
+  <div class="box lesson">
+    <strong>1. 模型只负责理解，不会边推理边调用工具</strong>
+    「语义理解」节点只产出一份 JSON，称为 Proposal（模型生成的「理解结果」，表示模型认为用户想表达什么）。模型接口声明了 <code>supports_tools=False</code>（不支持工具调用），所以模型不会自己查数据库，也不会自己修改清单（用户的购物清单，代码中称为 plan）。<br>
+    模型可以在 Proposal 里提出请求，例如「请帮我查牛奶」或「请帮我加购」。前者写在 <code>lookups</code>（查询请求：请服务端查找商品、菜谱等真实数据）中，后者写在 <code>mutations</code>（变更操作：对购物清单进行增加、修改、删除的请求）中。真正执行这些请求的，是后面的服务端节点。<br>
+    因此，排查 bug 时先判断：<strong>是 Proposal 写错了，还是服务端执行错了？</strong>
+  </div>
+
+  <div class="box lesson">
+    <strong>2. 一轮请求是一条单向流水线</strong>
+    一轮（turn）指用户发出一句话后，系统完成的一次完整处理，对应一次 HTTP 请求。每一轮都从图的「开始」走到「结束」，中间不暂停，也不会回到前面的节点。<br>
+    用户的下一句话是<strong>新的一轮</strong>。新一轮会重新读取上一轮写入数据库的内容：清单、待确认问题（pending：需要用户在下一轮补充或确认的信息）和短历史（最近几条对话）。<br>
+    Prompt（提示词）要求模型始终回答<strong>最后一条用户消息</strong>，历史消息只作参考。
+  </div>
+
+  <div class="box lesson">
+    <strong>3. 只有「提交并响应」会写库</strong>
+    前面的节点只做准备工作：理解用户的话、决定路由、准备检索结果、准备清单补丁、组织给用户的回复。<br>
+    清单、待确认问题和消息记录，都在最后一个节点一次性写入数据库。
+  </div>
+</section>
+
+<section class="chapter" id="flow">
+  <h2>这张图在说什么</h2>
+  <p>有了上面三个概念，再来看整张图。Graph 是用 LangGraph 编排的处理流程：图中每个名称是一个节点（node，对应代码中的一个函数），箭头表示执行顺序。</p>
+  <pre class="flow">加载上下文 → 语义理解 → 解析校验 → 决定路由
+                                      ├─ 只读检索 ─┐
+                                      ├─ 清单变更 ─┤
+                                      └─ 闲聊/回答/澄清/拒绝 ─┐
+                                                             ▼
+                                                          生成回答
+                                                             ▼
+                                                        提交并响应</pre>
+  <p>前四步负责<strong>理解和决策</strong>。其中只有「语义理解」会调用模型；「决定路由」完全由服务端规则完成。</p>
+  <p>后四步负责<strong>执行、回答和写库</strong>。三条分支最后都汇入「生成回答」，但只有「清单变更」这条分支会准备修改清单。</p>
+  <p>走检索分支时，系统会<strong>再调用一次模型</strong>。这次调用只能根据已查到的结果组织回复，不能提出新的查询，也不能修改清单。</p>
+</section>
+
+<section class="chapter" id="objects" data-graph-related="understand decide_turn">
+  <h2>Proposal 与 Decision</h2>
+  <p>前四步会产生两个核心对象：「语义理解」产出 Proposal，「决定路由」产出 Decision。后续节点主要依据这两个对象工作。简单地说，Proposal 表达「模型认为用户想要什么」，Decision 规定「系统这一轮允许做什么」。</p>
+  <div class="grid2">
+    <div class="mini-card">
+      <strong>Proposal（模型生成的「理解结果」）</strong>
+      <em>表示模型认为用户这句话想表达什么</em>
+      <ul style="margin:0.5rem 0 0; padding-left:1rem; font-size:0.9rem;">
+        <li><code>understanding</code>：用户这句话的意图，以结构化字段表示</li>
+        <li><code>lookups/queries</code>：查询请求，请服务端去查</li>
+        <li><code>mutations</code>：对清单加、改、删的提议</li>
+        <li><code>uncertainties</code>：不确定项，即模型想向用户确认的问题</li>
+        <li><code>reply</code>：给用户的回复草稿</li>
+      </ul>
+      <p style="margin:0.5rem 0 0;font-size:0.88rem;color:var(--muted)">Proposal 不能决定路由，也不能填写价格、库存、版本号或 task_id</p>
+    </div>
+    <div class="mini-card">
+      <strong>Decision（服务端生成的「执行决定」）</strong>
+      <em>表示这一轮允许系统走哪条流程</em>
+      <ul style="margin:0.5rem 0 0; padding-left:1rem; font-size:0.9rem;">
+        <li><code>route</code>：路由，决定当前请求进入哪条处理分支（即图上的分支）</li>
+        <li><code>mutation_action</code>：「清单变更」节点内部的执行方式</li>
+        <li><code>write_blocked</code>：是否禁止写清单</li>
+        <li><code>missing_slots</code>：还缺哪些必要信息（每一项称为一个槽位，即 slot）</li>
+        <li><code>candidate</code>：候选目标，即还没有正式加入清单、等待确认的目标</li>
+      </ul>
+      <p style="margin:0.5rem 0 0;font-size:0.88rem;color:var(--muted)">Decision 写出后，Graph 只根据 <code>route</code> 选择分支，不再重新解释 Proposal</p>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="fields" data-graph-related="parse_validate mutation">
+  <h2>changes.set 与 style_ref 分别写在哪里</h2>
+  <p>了解 Proposal 的结构后，再看其中最容易写错的地方：字段应该写在哪个位置。最近几次报错，大多是因为模型把字段写到了错误的位置。</p>
+  <table>
+    <thead><tr><th>字段</th><th>所属位置</th><th>表示什么</th><th>示例场景</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><code>changes.set</code></td>
+        <td>Proposal → <code>understanding</code></td>
+        <td>要修改的目标属性：人数、预算、自己做还是买成品、用餐时间、忌口</td>
+        <td>用户回答「自己做，三个人」</td>
+      </tr>
+      <tr>
+        <td><code>style_ref</code></td>
+        <td>Proposal → <code>mutations[]</code> 里的一次 <code>add</code></td>
+        <td>风格引用：火锅这类场景选<strong>哪一种风格</strong>（决定配哪一组商品）</td>
+        <td>用户点「川渝火锅」</td>
+      </tr>
+      <tr>
+        <td><code>pending</code> 里 <code>slot=scenario_style</code></td>
+        <td>由服务端提出，写入会话上下文</td>
+        <td>火锅还没选风格，暂时不能配货（配货：为目标搭配具体商品）</td>
+        <td>用户说「吃火锅」后，系统追问风格</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="box fail">
+    <strong>常见错误</strong>
+    把 <code>style_ref</code> 写进 <code>changes.set</code>：「解析校验」会直接报 <code>MALFORMED_UNDERSTANDING</code>，请求走不到「决定路由」的规则判断。<br>
+    把风格按钮当成新目标去 <code>add</code>：「清单变更」的授权检查（确认每个改动是否被 Decision 允许）会报 <code>CANDIDATE_GOAL_CONFLICT</code>。
+  </div>
+  <div class="box ok">
+    <strong>回答火锅风格问题时，Proposal 的正确结构</strong>
+    需要同时包含以下四项：<br>
+    <code>speech_act=answer_clarification</code>：speech_act（话语类型）表示这句话在做什么，这里是在回答澄清问题。<br>
+    <code>goal_relation=amend</code>：goal_relation（目标关系）表示这句话和已有目标的关系，这里是修正同一个目标。<br>
+    <code>focus_ref</code>（目标引用：指向当前正在讨论的对象）指向那份火锅。<br>
+    <code>mutations: [{ verb:add, candidate_ref:火锅, style_ref:川渝选项 }]</code>：对那份火锅执行 add，并用 style_ref 带上所选风格。
+  </div>
+</section>
+
+<section class="chapter" id="fail-layers" data-graph-related="parse_validate decide_turn mutation">
+  <h2>三层失败：先确定问题停在哪一层</h2>
+  <p>上一节的两个常见错误，分别停在「解析校验」和「清单变更」。更一般地说，一轮请求失败时，可能停在下表中的三层之一。排查时先确定停在哪一层，再去对应节点找原因，不要笼统地归结为「模型能力不够」。</p>
+  <table>
+    <thead><tr><th>失败所在层</th><th>现象</th><th>典型错误码 / route</th><th>清单是否变化</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>解析校验</strong></td>
+        <td>提示「没能理解清楚」，或出现 MALFORMED_* 错误</td>
+        <td><code>MALFORMED_UNDERSTANDING</code>、<code>MALFORMED_PROPOSAL</code></td>
+        <td>没有变化，<code>decide_turn</code> 不会进行路由判断</td>
+      </tr>
+      <tr>
+        <td><strong>决定路由</strong></td>
+        <td>追问澄清问题、拒绝，或只给出只读回答</td>
+        <td><code>route=clarify/refuse/chat/answer</code></td>
+        <td>没有变化，还没进入清单变更</td>
+      </tr>
+      <tr>
+        <td><strong>清单变更</strong></td>
+        <td>提示「多个目标改动」或「互相矛盾」</td>
+        <td><code>CANDIDATE_GOAL_CONFLICT</code>、<code>MIXED_GOAL_CHANGES</code></td>
+        <td>没有变化，授权检查拒绝了整批改动</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>了解整体流程和失败分层后，下面按图的顺序逐个说明八个节点。每个节点都按「作用、输入、输出、规则」四部分说明。节点标题下方的等宽文字是它在代码中的名称；如果带有箭头，箭头后面是该节点调用的主要函数。</p>
+</section>
+
+<!-- ========== 八个节点 ========== -->
+
+<article class="node" id="node-1" data-graph-node="load_context">
+  <h3>节点 1 · 加载上下文</h3>
+  <p class="node-id">load_context</p>
+
+  <h4>作用</h4>
+  <p>从数据库读出<strong>这一轮需要的全部事实</strong>，填入状态（state：本轮请求在各节点之间传递的内存数据），供后面的模型和服务端规则使用。这是每轮请求的第一步，也是唯一负责读库准备的步骤（节点 8 的最终写库不计在内）。</p>
+  <p><strong>读取的内容不只是聊天记录。</strong>模型实际只能看到最近约 6 条对话。完整历史保存在数据库中，但不会全部发给模型。</p>
+
+  <h4>输入</h4>
+  <ul>
+    <li>HTTP 请求携带的 <code>session_id</code></li>
+    <li>用户本轮说的话（已存入 <code>turn.user_input</code>）</li>
+    <li>入口页、浏览上下文（<code>view_context</code>）</li>
+  </ul>
+
+  <h4>输出</h4>
+  <p>以下内容写入状态，供后续节点读取。字段名中点号前的部分（如 session、candidate）表示它属于状态中的哪个分区，全部分区和字段见<a href="#state">附录</a>。</p>
+  <ul>
+    <li><code>session.turn_mode</code>：本轮所处的任务阶段，分为无任务 / 进行中 / 已完成</li>
+    <li><code>authoritative</code>（权威事实：从数据库读出、以服务端为准的业务数据）：task_id、plan 版本、state_version、当前目标、requirements（用户明确提出的要求，如人数、预算、忌口）</li>
+    <li><code>candidate.focus_refs</code>：模型可以直接引用的对象（清单行、待确认目标等）。每个对象用一个 ref（服务端分配的引用编号）表示</li>
+    <li><code>candidate.goal_candidate</code>（待确认目标）：已经提出、但还没形成清单的目标，例如待确认的火锅</li>
+    <li><code>candidate.displayed_candidates</code>：上一轮实际展示给用户的候选项</li>
+    <li>组装给模型的请求（<code>build_request</code>）：当前清单、pending、候选列表（本轮允许模型引用的商品、菜谱等）、协议 schema（Proposal 必须遵守的 JSON 格式）等</li>
+  </ul>
+
+  <h4>规则</h4>
+  <ul>
+    <li><strong>不调用模型</strong>，不改清单，也不做任何业务决策。</li>
+    <li>上一轮留下的待确认问题（<code>pending_clarifications</code>）在这里读出。用户本轮的回答会和这些问题一起进入语义理解。</li>
+    <li>如果上一轮留下了 <code>goal_candidate</code>（例如火锅还没选风格），这里会一并加载。</li>
+  </ul>
+</article>
+
+<article class="node" id="node-2" data-graph-node="understand">
+  <h3>节点 2 · 语义理解</h3>
+  <p class="node-id">understand → propose_round</p>
+
+  <h4>作用</h4>
+  <p>上下文准备好后，本节点调用<strong>一次</strong>大模型，把返回的原始 JSON 存入 <code>turn.proposal</code>。</p>
+  <p>模型只负责回答一个问题：<strong>「用户这句话在语义上是什么意思？」</strong></p>
+  <p>模型不负责以下四件事：<strong>选择路由</strong>、<strong>查数据库</strong>、<strong>写清单</strong>、<strong>调用工具</strong>（<code>supports_tools=False</code>）。</p>
+
+  <h4>输入</h4>
+  <ul>
+    <li>上一节点准备好的上下文（清单、pending、focus_refs、短历史、协议 schema）</li>
+    <li>最后一条用户消息</li>
+  </ul>
+
+  <h4>输出</h4>
+  <p>原始 <strong>Proposal</strong>（JSON），常见内容如下：</p>
+  <ul>
+    <li><code>understanding.speech_act</code>：这句话在做什么，如问事实（<code>ask_fact</code>）、要买（<code>request_action</code>）、闲聊（<code>chat</code>）、回答澄清（<code>answer_clarification</code>）、纠正（<code>correct</code>）</li>
+    <li><code>understanding.goal_relation</code> + <code>new_goal</code> 或 <code>changes</code>：goal_relation 表示这句话和已有目标的关系，常见取值为 new（新建）、append（追加）、switch（替换当前未确认的清单）、amend（修正同一目标）。new_goal 是新目标，changes 是对已有目标的修改。</li>
+    <li><code>lookups</code> / <code>queries</code>：只是一张<strong>请求单</strong>，意思是「请服务端去查」，并不是查询结果</li>
+    <li><code>mutations</code>：加、改、删的<strong>提议</strong>，还不是执行结果</li>
+    <li><code>reply</code>：回复草稿。此时它还不能代表「已经加购成功」</li>
+  </ul>
+  <p>写入状态：<code>turn.proposal</code>、<code>turn.model_calls</code>（本轮已调用模型的次数）</p>
+
+  <h4>规则</h4>
+  <ul>
+    <li>理解阶段默认<strong>只调用一次</strong>模型。检索分支的第二次调用发生在「生成回答」节点，并且只允许写 <code>reply</code>。</li>
+    <li>Proposal 里写了 <code>lookups/queries</code>，不等于已经查到。查询在节点 5 执行。</li>
+    <li>Proposal 里写了 <code>mutations</code>，不等于已经改了清单。修改在节点 6 准备，在节点 8 写入。</li>
+    <li>口头推荐（例如「您可以试试番茄炒蛋」）如果只出现在 <code>reply</code> 里，<strong>不会</strong>自动变成待确认目标或清单项。例外是 Proposal 里另外写了 <code>new_goal</code> 或 <code>mutations</code>。</li>
+  </ul>
+
+  <div class="box lesson">
+    <strong>与最近 bug 的关系</strong>
+    用户说「我都可以」，被理解成 <code>ask_fact</code> 加推荐检索。模型在第二次调用中根据检索结果说出了番茄炒蛋。问题出在<strong>理解阶段决定查什么</strong>，以及<strong>回答阶段如何复述</strong>；decide_turn 并没有参与选菜。<br>
+    用户说「可以」，被理解成 <code>add</code> 火锅。问题出在<strong>理解阶段</strong>：模型没有接上上一句的口头推荐，直接新建了一个目标。
+  </div>
+</article>
+
+<article class="node" id="node-3" data-graph-node="parse_validate">
+  <h3>节点 3 · 解析校验</h3>
+  <p class="node-id">parse_validate → parse_proposal</p>
+
+  <h4>作用</h4>
+  <p>模型返回 JSON 后，本节点检查它的<strong>结构是否符合协议</strong>。它相当于协议的守门员：结构不对就记为失败，<strong>不修补，也不猜测</strong>。</p>
+  <p>注意：这一步只检查「JSON 是否符合协议」，不判断「模型是否理解了用户」。</p>
+
+  <h4>输入</h4>
+  <p><code>turn.proposal</code>（原始 JSON）</p>
+
+  <h4>输出</h4>
+  <ul>
+    <li>成功：写入 <code>turn.parsed_proposal</code>（解析后的结构化对象）和 <code>turn.understanding</code></li>
+    <li>失败：写入 <code>turn.halt=failed</code>（halt 是本轮的终止标记）和 <code>turn.error</code>（例如 <code>MALFORMED_UNDERSTANDING</code>）</li>
+  </ul>
+
+  <h4>规则</h4>
+  <p>出现以下任一情况，都会直接判定为失败：</p>
+  <ul>
+    <li>不是 JSON 对象，或包含协议之外的顶层字段</li>
+    <li>模型写了禁止由它填写的字段：<code>price</code>、<code>stock</code>、<code>task_id</code>、<code>plan_version</code> 等</li>
+    <li><code>new_goal</code> 与 <code>changes</code> 同时出现</li>
+    <li><code>changes.set</code> 里出现未知字段，<strong>包括 <code>style_ref</code></strong></li>
+    <li>mutation 或 lookup 的数量超过上限，或 verb（操作类型，如 add / change / remove）不合法</li>
+    <li>Proposal 为空（没有任何内容）</li>
+  </ul>
+
+  <div class="box fail">
+    <strong>最近实例</strong>
+    用户点了「川渝火锅」，模型却把 <code>style_ref</code> 写进了 <code>changes.set</code>。本节点直接报 <code>MALFORMED_UNDERSTANDING</code>。后续节点不会再处理这份 Proposal，本轮以拒绝结束。
+  </div>
+</article>
+
+<article class="node" id="node-4" data-graph-node="decide_turn">
+  <h3>节点 4 · 决定路由</h3>
+  <p class="node-id">decide_turn → evaluate_gate</p>
+
+  <h4>作用</h4>
+  <p>Proposal 通过校验后，本节点把<strong>已校验的语义</strong>和<strong>服务端掌握的事实</strong>放在一起判断，写出 <strong>Decision</strong>。这套判断规则也称为门控（gate），对应代码中的 <code>evaluate_gate</code>。</p>
+  <p>这是整张图中<strong>唯一做业务判断的分岔口</strong>。之后的分支只看 <code>route</code>，不会回头重新解释 Proposal。</p>
+  <p><code>mutation_action</code>（<code>prepare</code> / <code>apply_mutation</code>）只影响「清单变更」节点内部的执行方式，<strong>不会在图上多出一条分支</strong>。</p>
+
+  <h4>输入</h4>
+  <ul>
+    <li><code>parsed_proposal</code>：speech_act、goal_relation、focus、mutations，以及是否带有 lookups/queries、是否带有 uncertainties</li>
+    <li>服务端事实（<code>GateFacts</code>）：是否有活跃清单、是否有 <code>goal_candidate</code>、是否有 pending 问题、focus_ref 能否对上、plan 上的分组引用</li>
+  </ul>
+
+  <h4>输出</h4>
+  <p>写入 <code>turn.decision</code>，其中最核心的是 <code>route</code>：</p>
+  <table>
+    <thead><tr><th>route</th><th>进入的节点</th><th>含义</th></tr></thead>
+    <tbody>
+      <tr><td><code>retrieve</code></td><td>只读检索</td><td>用户在问店内事实或要推荐，并且 Proposal 里带了 lookup/query</td></tr>
+      <tr><td><code>mutation</code></td><td>清单变更</td><td>允许准备加购、修改或删除（此时还不写库）</td></tr>
+      <tr><td><code>chat</code></td><td>生成回答</td><td>闲聊，不写清单</td></tr>
+      <tr><td><code>answer</code></td><td>生成回答</td><td>只读回答，没有检索请求</td></tr>
+      <tr><td><code>clarify</code></td><td>生成回答</td><td>缺信息或指代不清，需要向用户追问</td></tr>
+      <tr><td><code>refuse</code></td><td>生成回答</td><td>请求不受支持，或协议校验失败</td></tr>
+    </tbody>
+  </table>
+
+  <h4>规则</h4>
+  <p>下面按判断顺序列出主要规则，用于帮助理解，并非完整的代码逻辑：</p>
+  <ul>
+    <li><code>speech_act=chat</code> 时走 <code>route=chat</code>，<strong>一律禁止写清单</strong>（即使带了 mutations 也不授权）</li>
+    <li><code>speech_act=ask_fact</code> 时，有 lookup/query 就走 <code>retrieve</code>，否则走 <code>answer</code></li>
+    <li><code>speech_act=unspecified</code> 时走 <code>clarify</code></li>
+    <li><code>focus_ref</code> 已填写，但与服务端的对象对不上时，走 <code>clarify</code></li>
+    <li><code>goal_relation=new/append/switch</code> 且带有 <code>new_goal</code> 时，先看目标是否 ready（信息已齐全，可以开始准备清单）：ready 就走 <code>mutation</code> + <code>prepare</code>；否则走 <code>clarify</code>，并带上 <code>candidate</code></li>
+    <li><code>goal_relation=amend</code> 时，修改当前目标或清单行；如果是在回答 pending 问题，focus 必须对得上</li>
+    <li>指代清楚的 <code>change</code> / <code>remove</code>，走 <code>mutation</code> + <code>apply_mutation</code></li>
+    <li>目标关系不明确，但带有 mutations 或已有清单/候选时，走 <code>clarify</code>（追问「换掉还是加上？」）</li>
+  </ul>
+
+  <div class="box lesson">
+    <strong>关于人数</strong>
+    在当前实现中，目标类型为 <code>meal_plan</code>（用餐方案）且 <code>fulfillment_mode=unspecified</code>（用户没说明自己做还是买成品）时，<strong>人数不是阻塞槽</strong>（阻塞槽：缺了就不能继续准备的信息）。只要目标里有菜名，就可以进入 <code>mutation/prepare</code>。人数会影响份量，但不妨碍先形成方案。
+  </div>
+
+  <div class="box lesson">
+    <strong>与最近 bug 的关系</strong>
+    如果「可以」被理解成 <code>request_action</code>（要求执行操作）加 <code>add</code> 火锅，并且 ref 对得上，<strong>decide_turn 就会放行 mutation</strong>。门控里没有这样一条规则：「上一句只是口头推荐，这一句不算加购授权」。所以问题出在 Proposal，这个节点并没有判错路由。
+  </div>
+</article>
+
+<article class="node" id="node-5" data-graph-node="retrieve">
+  <h3>节点 5 · 只读检索</h3>
+  <p class="node-id">retrieve</p>
+
+  <h4>作用</h4>
+  <p>当 route 为 retrieve 时，本节点执行 Proposal 里的 <code>lookups</code> / <code>queries</code>，查询店里的真实候选（商品、菜谱、推荐列表等）。</p>
+  <p>它<strong>不改清单</strong>，不写购物车，也不改会话里的 pending。</p>
+
+  <h4>输入</h4>
+  <ul>
+    <li><code>parsed_proposal.lookups</code> / <code>queries</code></li>
+    <li>检索预算（每轮 lookup 的数量上限）</li>
+  </ul>
+
+  <h4>输出</h4>
+  <p>写入 <code>turn.read_results</code>：真实的匹配结果列表，包含 ref、名称、match_kind（匹配方式，如精确命中或相似命中）等</p>
+  <p>之后<strong>一定</strong>进入「生成回答」，并可能触发第二次模型调用。</p>
+
+  <h4>规则</h4>
+  <ul>
+    <li>检索结果写入状态后有两种用途：供 answer 组织回复文案，或供 mutation 绑定用户点名的那个对象的真实 id。</li>
+    <li>相似候选（fuzzy：与查询相似、但不是精确命中的匹配结果）可以展示，也可以放进澄清选项。但在用户确认之前，<strong>不能</strong>直接把它当作用户点名的目标来建清单。</li>
+    <li>第二次调用模型时 <code>read_only=true</code>（只读模式）：模型只能写 <code>reply</code>，不能再写 lookups 或 mutations。</li>
+  </ul>
+
+  <div class="box lesson">
+    <strong>与最近 bug 的关系</strong>
+    「想吃点甜的」和「我都可以」都走了这条分支。回复里出现番茄炒蛋，是因为<strong>检索和回答阶段</strong>根据查到的结果组织了回复；decide_turn 并没有把番茄炒蛋选为目标。
+  </div>
+</article>
+
+<article class="node" id="node-6" data-graph-node="mutation">
+  <h3>节点 6 · 清单变更</h3>
+  <p class="node-id">mutation</p>
+
+  <h4>作用</h4>
+  <p>当 <code>route=mutation</code> 时，本节点把「模型提议的改动」转换成「已准备好、但还没写入的清单补丁」。</p>
+  <p>处理分三步：先<strong>授权</strong>，检查 Proposal 里的 mutations 是否被 Decision 允许；再<strong>编译</strong>，把 Decision 转换成对应的具体清单操作；最后<strong>准备</strong>，由 PlanChangeExecutor（清单变更执行器）生成待写入的变更。</p>
+  <p><strong>此时还不写库。</strong>真正写入发生在节点 8。</p>
+
+  <h4>输入</h4>
+  <ul>
+    <li><code>turn.decision</code>（含 route、mutation_action、candidate）</li>
+    <li><code>turn.parsed_proposal</code>（重点是 mutations 和 understanding）</li>
+    <li>必要时读取 <code>turn.read_results</code>，用来绑定用户点名的真实商品或菜谱</li>
+  </ul>
+
+  <h4>输出</h4>
+  <p>结果写入 staged（暂存区：已准备好、但还没写入数据库的结果）：</p>
+  <ul>
+    <li><code>staged.plan_patch</code> / <code>plan_result</code>：准备写入的清单变化</li>
+    <li><code>staged.pending</code>：本轮新产生的待确认问题</li>
+    <li><code>staged.context_plan</code>：待写入会话的计划，说明 goal_candidate 和 pending 如何合并</li>
+    <li>或者 <code>staged.error</code>：授权或配货失败的原因</li>
+  </ul>
+
+  <h4>规则</h4>
+  <ul>
+    <li><strong>授权</strong>：每个 mutation 都必须被 Decision 允许，而且 ref 必须能对上 focus、candidate 或清单行。</li>
+    <li><strong>冲突时整批拒绝</strong>：一轮里如果有多个互不兼容的目标改动，会报 <code>MIXED_GOAL_CHANGES</code> 或 <code>CANDIDATE_GOAL_CONFLICT</code>。整批都不执行，<strong>不会只做一半</strong>。</li>
+    <li><strong>火锅风格</strong>：<code>add</code> 火锅场景时，如果缺少 <code>style_ref</code>，配货器会返回 <code>needs_clarification</code>（需要澄清），并生成 <code>slot=scenario_style</code> 的问题和选项。</li>
+    <li><strong>风格答案</strong>：用户点选项后，应该对<strong>那份火锅</strong>再次 <code>add</code>，并带上 <code>style_ref</code>。不能把风格按钮的 ref 当成新目标去 <code>add</code>。</li>
+    <li>相似候选还没被用户确认时，发起澄清，询问「你要的是这个吗？」，不直接建清单。</li>
+  </ul>
+
+  <div class="box fail">
+    <strong>最近实例</strong>
+    用户点「川渝火锅」时，如果模型 <code>add</code> 的是风格按钮自己的 ref，而待确认目标是火锅本身，就会报 <code>CANDIDATE_GOAL_CONFLICT</code>。界面上会显示「多个目标改动 / 互相矛盾」。
+  </div>
+</article>
+
+<article class="node" id="node-7" data-graph-node="answer">
+  <h3>节点 7 · 生成回答</h3>
+  <p class="node-id">answer</p>
+
+  <h4>作用</h4>
+  <p>三条分支最后都汇入本节点。它负责组织好<strong>给用户看的回复</strong>，并准备好要一并提交的上下文计划（pending、goal_candidate）。</p>
+  <p>本节点<strong>仍然不写库</strong>。</p>
+
+  <h4>输入</h4>
+  <ul>
+    <li><code>route</code>：决定本节点走哪条子路径</li>
+    <li><code>retrieve</code> 分支：基于 <code>read_results</code>，可能再调用一次模型，得到 <code>answer_reply</code>（检索分支的回复文案）</li>
+    <li><code>mutation</code> 分支：<code>staged</code> 里已准备好的变更和 pending</li>
+    <li><code>clarify/refuse/chat/answer</code> 分支：Proposal 中的 <code>reply</code>、<code>uncertainties</code>，以及错误信息</li>
+  </ul>
+
+  <h4>输出</h4>
+  <ul>
+    <li><code>staged.message</code>：用户可见的最终回复文案</li>
+    <li><code>staged.context_plan</code>：待确认问题、待确认目标、展示候选等，交给节点 8 写入</li>
+    <li><code>staged.kind</code>：本轮结果的类型，取值为 <code>answer</code> / <code>clarify</code> / <code>mutation</code> / <code>refuse</code></li>
+  </ul>
+
+  <h4>规则</h4>
+  <ul>
+    <li>检索分支第二次调用模型时，模型<strong>只能根据 query_results（已查到的检索结果）组织回复</strong>，不能再提出 lookups 或 mutations。</li>
+    <li>走 <code>clarify</code> 时，会把模型或门控产生的 pending 问题拼接到回复消息中，包括选项列表。</li>
+    <li>即使模型的 <code>reply</code> 里声称「已经加购成功」，这段文字<strong>在提交前也不会推送给用户</strong>。SSE 要等提交（commit）完成后才发送最终文案。</li>
+    <li>mutation 分支<strong>不再修改 Decision</strong>；要准备什么，mutation 节点已经决定好了。</li>
+  </ul>
+</article>
+
+<article class="node" id="node-8" data-graph-node="respond">
+  <h3>节点 8 · 提交并响应</h3>
+  <p class="node-id">respond → commit_graph_turn</p>
+
+  <h4>作用</h4>
+  <p>这是整轮请求中<strong>唯一写库</strong>的地方。以下操作都在同一个事务里完成：</p>
+  <ul>
+    <li>校验版本，防止并发请求互相覆盖</li>
+    <li>写入清单变更（如果有）</li>
+    <li>写入 pending、goal_candidate、展示候选</li>
+    <li>写入用户消息和助手消息</li>
+    <li>写入回执（receipt：本轮最终结果的记录，用于幂等处理和 SSE 最终 payload）</li>
+  </ul>
+
+  <h4>输入</h4>
+  <p><code>staged</code> 中的全部准备结果，以及本轮的 preconditions（前置条件：session、task 和版本号）</p>
+
+  <h4>输出</h4>
+  <ul>
+    <li><code>message</code>：用户最终看到的回复</li>
+    <li><code>plan_effect</code>：清单是否变化。<code>keep</code> 表示清单没变，<code>replace</code> 表示清单已更新</li>
+    <li><code>pending_clarifications</code>：待确认问题，下一轮的 load_context 会重新读取</li>
+    <li><code>action_results</code>：本轮执行结果的记录，例如只读完成、澄清、拒绝、提交等</li>
+  </ul>
+
+  <h4>规则</h4>
+  <ul>
+    <li>校验失败时，业务改动和成功回执都不会提交，只提交一条「拒绝」回执。</li>
+    <li>澄清也是一次正常的提交：pending 会保存到数据库。用户的下一句话会开始新的一轮，并从这里保存的内容接着读取。</li>
+    <li>在界面上点右上角的「+」，前端会清掉 session_id 并新建 session。<strong>旧会话仍保存在数据库里</strong>，只是当前页面不再连接它。</li>
+  </ul>
+</article>
+
+<!-- ========== 例题 ========== -->
+<section class="chapter" id="case-study">
+  <h2>例题 · 沿流程图排查最近的会话</h2>
+  <p>看完八个节点后，用一个真实会话练习如何沿流程图定位问题。会话 <code>sess-cbf915f0c2aa</code> 中连续出现了几个问题，按节点拆开如下：</p>
+
+  <table>
+    <thead>
+      <tr><th>用户输入</th><th>经过的节点</th><th>问题所在及原因</th></tr>
+    </thead>
+    <tbody>
+      <tr data-graph-label="例题「想吃点甜的」" data-graph-path="__start__ load_context understand parse_validate decide_turn retrieve answer respond __end__">
+        <td>想吃点甜的</td>
+        <td>1→2→3→4(<code>retrieve</code>)→5→7→8</td>
+        <td>只读检索加回答，<code>plan_effect=keep</code>。这一轮没有问题，只是口头建议了食材。</td>
+      </tr>
+      <tr data-graph-label="例题「我都可以」" data-graph-path="__start__ load_context understand parse_validate decide_turn retrieve answer respond __end__" data-graph-issue="understand">
+        <td>我都可以</td>
+        <td>同上</td>
+        <td>仍然是 <code>ask_fact</code>，走检索，再由第二次模型调用生成回复。回复里出现番茄炒蛋，是<strong>回答阶段按检索结果复述</strong>的结果，番茄炒蛋并没有成为清单目标。问题出在理解阶段和提示词锚定，与 decide_turn 无关。</td>
+      </tr>
+      <tr data-graph-label="例题「可以」" data-graph-path="__start__ load_context understand parse_validate decide_turn mutation answer respond __end__" data-graph-issue="understand">
+        <td>可以</td>
+        <td>1→2→3→4(<code>mutation</code>)→6→7→8</td>
+        <td>Proposal 写成了 <code>add</code> 火锅，decide_turn 放行。由于缺少风格，生成了 pending <code>scenario_style</code>。<strong>问题出在节点 2</strong>：模型没有接上上一句对番茄炒蛋的口头推荐，直接新建了火锅目标。</td>
+      </tr>
+      <tr data-graph-label="例题「川渝火锅」" data-graph-path="__start__ load_context understand parse_validate decide_turn mutation" data-graph-issue="parse_validate mutation">
+        <td>川渝火锅</td>
+        <td>停在节点 3 或节点 6</td>
+        <td>如果写成 <code>changes.set.style_ref</code>，会在<strong>节点 3</strong> 解析失败。<br>如果 <code>add</code> 了风格按钮，会在<strong>节点 6</strong> 报 <code>CANDIDATE_GOAL_CONFLICT</code>。</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="box ok" data-graph-label="「可以」按设计应走的路径" data-graph-path="__start__ load_context understand parse_validate decide_turn mutation answer respond __end__">
+    <strong>如果「可以」按设计工作，流程应该是怎样的？</strong>
+    上一句助手口头推荐了番茄炒蛋，用户表示同意。此时：<br>
+    节点 2 应产出 <code>request_action</code> + <code>new_goal/meal_plan/番茄炒蛋</code> + lookup，或者产出一个明确指向检索到的菜的 add；<br>
+    节点 4 给出 <code>mutation</code>；<br>
+    节点 6 绑定真实 id，并准备清单。<br>
+    在没有清单、也没有待确认目标时，不应该突然 <code>add</code> 火锅。
+  </div>
+</section>
+
+<section class="chapter" id="debug-checklist" data-graph-related="parse_validate decide_turn mutation">
+  <h2>沿流程图排查 bug 的步骤</h2>
+  <p>最后，把全文内容整理成一份排查顺序。拿到一轮异常请求的 trace 或界面表现时，按下面的顺序逐项确认：</p>
+  <ol>
+    <li><strong>清单变了吗？</strong> 看 <code>plan_effect</code> 是 <code>keep</code> 还是 <code>replace</code>。</li>
+    <li><strong>停在哪一层？</strong>
+      <ul>
+        <li>报 <code>MALFORMED_*</code>：看节点 3，检查 Proposal 的 JSON 结构（尤其是 <code>changes.set</code> 里有没有非法字段）</li>
+        <li><code>route=clarify/refuse/chat/answer</code>，且没有 mutation：看节点 4，检查 speech_act、focus 和 goal_relation</li>
+        <li>出现 <code>mutation_refused</code>（变更被拒绝的执行记录）或「互相矛盾」一类的文案：看节点 6，检查 mutations 是否和 candidate 对得上</li>
+      </ul>
+    </li>
+    <li><strong>模型调用了几次？</strong> <code>model_calls=1</code> 通常表示只做了理解；等于 <code>2</code> 说明走了检索分支，回答阶段又调用了一次。</li>
+    <li><strong>pending 里有什么？</strong> 有 <code>scenario_style</code>，说明火锅缺风格；有 <code>mixed_goal_changes</code>，说明上一轮的变更授权发生了冲突。</li>
+    <li><strong>口头推荐算不算目标？</strong> 如果推荐只出现在 <code>reply</code> 里，没有对应的 <code>goal_candidate</code> 或 mutations，用户下一句说「可以」时，<strong>不会自动</strong>关联到那道菜。这是当前的产品行为，也是最近 bug 的根源之一。</li>
+  </ol>
+</section>
+
+<!-- ========== 附录 ========== -->
+<section class="chapter" id="state">
+  <h2>附录 · state 里有哪些变量</h2>
+  <p>前面各节经常出现 <code>turn.proposal</code>、<code>staged.message</code> 这样的字段，它们都存放在 state 中。state 是本轮请求在各节点之间传递的内存数据，定义在 <code>backend/app/agent/graph/state.py</code>。本节列出其中的全部变量及其含义，供排查时查阅。</p>
+  <p>每个 HTTP 请求都会新建一份 state。新建时只填入会话和本轮的 ID，以及用户这句话，其余内容由「加载上下文」从数据库读出。请求结束后，state 随即丢弃，不会保存。多轮对话之所以能接上，靠的是「提交并响应」写入数据库的业务数据，下一轮再由「加载上下文」读回。</p>
+  <p>state 分成六个分区，每个分区只由固定的节点写入。把鼠标移到下表的某一行上，右侧流程图会高亮写入该分区的节点。</p>
+  <table>
+    <thead><tr><th>分区</th><th>保存什么</th><th>写入它的节点</th></tr></thead>
+    <tbody>
+      <tr data-graph-label="session 分区：高亮的是写入它的节点" data-graph-lit="__start__ load_context">
+        <td><code>session</code></td>
+        <td>这次请求的身份信息，以及本轮所处的任务阶段</td>
+        <td>新建 state 时填入各项 ID；加载上下文补上 <code>turn_mode</code></td>
+      </tr>
+      <tr data-graph-label="authoritative 分区：高亮的是写入它的节点" data-graph-lit="load_context">
+        <td><code>authoritative</code></td>
+        <td>从数据库读出、以服务端为准的业务事实</td>
+        <td>加载上下文</td>
+      </tr>
+      <tr data-graph-label="candidate 分区：高亮的是写入它的节点" data-graph-lit="load_context">
+        <td><code>candidate</code></td>
+        <td>模型可以引用的对象、正在讨论的目标，以及上一轮展示过的候选</td>
+        <td>加载上下文</td>
+      </tr>
+      <tr data-graph-label="turn 分区：高亮的是写入它的节点" data-graph-lit="understand parse_validate decide_turn retrieve mutation">
+        <td><code>turn</code></td>
+        <td>本轮的推理过程：用户输入、Proposal、Decision、检索结果和终止标记</td>
+        <td>语义理解、解析校验、决定路由、只读检索；清单变更也会写入它自己查到的检索结果</td>
+      </tr>
+      <tr data-graph-label="staged 分区：高亮的是写入它的节点" data-graph-lit="mutation answer">
+        <td><code>staged</code></td>
+        <td>已准备好、但还没写入数据库的结果</td>
+        <td>清单变更、生成回答</td>
+      </tr>
+      <tr data-graph-label="result 分区：高亮的是写入它的节点" data-graph-lit="respond">
+        <td><code>result</code></td>
+        <td>提交事务的结果</td>
+        <td>提交并响应</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>还有一些数据不放在 state 里，而是挂在 runtime（TurnRuntime：本轮的运行环境，持有数据库会话、模型接口等）上，例如候选集合、发给模型的上下文快照，以及返回给前端的完整响应。在 state 里找不到这些内容时，可以去 runtime 上找。</p>
+
+  <h3>session：请求身份</h3>
+  <table>
+    <thead><tr><th>字段</th><th>含义</th></tr></thead>
+    <tbody>
+      <tr><td><code>session_id</code></td><td>会话 ID，由 HTTP 请求带来</td></tr>
+      <tr><td><code>owner_id</code></td><td>会话所属的用户。加载上下文用它校验会话归属，不匹配时报 <code>SESSION_FORBIDDEN</code></td></tr>
+      <tr><td><code>turn_id</code></td><td>本轮的 ID，格式为 <code>turn-{request_id}</code>。request_id 是这次请求的编号：同一个 request_id 重复提交时，已完成的请求会直接返回原来的回执，不会重新执行</td></tr>
+      <tr><td><code>turn_mode</code></td><td>本轮所处的任务阶段：<code>taskless</code>（无任务）、<code>active</code>（进行中）、<code>completed</code>（任务已完成、已取消或已被替换）。由加载上下文根据数据库里的任务状态得出</td></tr>
+    </tbody>
+  </table>
+
+  <h3>authoritative：数据库里的业务事实</h3>
+  <table>
+    <thead><tr><th>字段</th><th>含义</th></tr></thead>
+    <tbody>
+      <tr><td><code>task_id</code></td><td>会话当前的任务 ID；没有任务时为空</td></tr>
+      <tr><td><code>plan_id</code>、<code>plan_version</code></td><td>当前清单的 ID 和版本号，取自任务中保存的清单</td></tr>
+      <tr><td><code>state_version</code></td><td>任务状态的版本号。清单每次写入都会更新它，节点 8 用它防止并发请求互相覆盖</td></tr>
+      <tr><td><code>session_version</code></td><td>会话的版本号，同样用于防止并发覆盖</td></tr>
+      <tr><td><code>pending</code></td><td>会话中仍在等待用户回答的问题</td></tr>
+      <tr><td><code>target_kind</code>、<code>target_id</code>、<code>target_name</code></td><td>会话当前围绕的真实目标（例如某道菜或某个商品）的类型、ID 和名称。用户说「补人数」这类追问时，可以直接对应到这个对象，不必重新查找</td></tr>
+      <tr><td><code>requirements</code></td><td>用户明确提出的要求，例如人数、预算、忌口</td></tr>
+    </tbody>
+  </table>
+
+  <h3>candidate：可引用的对象和待确认目标</h3>
+  <table>
+    <thead><tr><th>字段</th><th>含义</th></tr></thead>
+    <tbody>
+      <tr><td><code>focus_refs</code></td><td>模型可以直接引用的对象，例如清单行、待确认目标。每一项都带有服务端给定的类型</td></tr>
+      <tr><td><code>goal_candidate</code></td><td>待确认目标：已经提出、但还没形成清单的目标。它绑定了当时的任务和清单版本，版本变化后就会失效，不能再用来补充信息或建清单</td></tr>
+      <tr><td><code>displayed_candidates</code></td><td>上一轮实际展示给用户的候选，从会话上下文中恢复</td></tr>
+    </tbody>
+  </table>
+
+  <h3>turn：本轮的推理过程</h3>
+  <table>
+    <thead><tr><th>字段</th><th>含义</th></tr></thead>
+    <tbody>
+      <tr><td><code>user_input</code></td><td>用户本轮说的话</td></tr>
+      <tr><td><code>proposal</code></td><td>模型返回的原始 JSON，尚未校验</td></tr>
+      <tr><td><code>parsed_proposal</code></td><td>通过解析校验的 Proposal 对象。后续节点都从这里读取 Proposal，但只有决定路由会据此选择分支</td></tr>
+      <tr><td><code>understanding</code></td><td>Proposal 中 understanding 部分的 JSON 形式</td></tr>
+      <tr><td><code>decision</code></td><td>Decision 的内容，主要包括 route、mutation_action、write_blocked、missing_slots、candidate，以及内部诊断码 reason_code。解析失败时，这里是 <code>route=refuse</code>，reason_code 就是对应的错误码</td></tr>
+      <tr><td><code>read_results</code></td><td>检索结果列表，由只读检索或清单变更节点写入</td></tr>
+      <tr><td><code>model_calls</code></td><td>已调用模型的次数，语义理解之后为 1。检索分支的第二次调用发生在生成回答节点内部，不会回写这个值。要确认是否有第二次调用，请看 trace 中的 model_call 事件（call_number 为 2）；「排查步骤」第 3 条说的调用次数，指的也是 trace 中记录的次数</td></tr>
+      <tr><td><code>answer_reply</code></td><td>检索分支第二次调用得到的回复。它只在生成回答节点内部使用，最终组织进 <code>staged.message</code>，不会写回 state</td></tr>
+      <tr><td><code>halt</code></td><td>提前终止的标记：<code>stopped</code>（用户停止）、<code>timed_out</code>（超时）、<code>failed</code>（模型调用失败、Proposal 校验失败等）。正常情况下为空</td></tr>
+      <tr><td><code>error</code></td><td>提前终止时的错误信息，包括 code、message、retryable；理解类失败还会带上 understanding 标记</td></tr>
+    </tbody>
+  </table>
+
+  <h3>staged：准备好、但还没写库的结果</h3>
+  <table>
+    <thead><tr><th>字段</th><th>含义</th></tr></thead>
+    <tbody>
+      <tr><td><code>kind</code></td><td>本轮结果的类型：<code>mutation</code>（准备改清单）、<code>clarify</code>（追问）、<code>answer</code>（回答）、<code>refuse</code>（拒绝）</td></tr>
+      <tr><td><code>message</code></td><td>给用户的回复文案，由生成回答节点组织。节点 8 写入清单改动后，可能会在后面附上清单摘要</td></tr>
+      <tr><td><code>pending</code></td><td>本轮新产生的待确认问题</td></tr>
+      <tr><td><code>context_plan</code></td><td>要写入会话上下文的计划，说明待确认问题、展示过的候选、待确认目标分别如何更新</td></tr>
+      <tr><td><code>preconditions</code></td><td>本轮开始时记录的 session_id、task_id、state_version 和 session_version。节点 8 在事务中把数据库里的最新值和它比对，不一致就报 <code>STALE_STATE</code>，本轮改动不写入</td></tr>
+      <tr><td><code>error</code></td><td>准备阶段的失败原因。授权冲突时带 conflict 标记，理解类失败时带 understanding 标记</td></tr>
+      <tr><td><code>mutations</code></td><td>通过授权的 mutation 列表，包括服务端编译补出的操作</td></tr>
+      <tr><td><code>batch</code></td><td>准备好的全部变更步骤，节点 8 按顺序逐步执行</td></tr>
+    </tbody>
+  </table>
+  <p>下面这些字段记录第一步变更的明细，内容和 <code>batch</code> 的第一项相同：</p>
+  <table>
+    <thead><tr><th>字段</th><th>含义</th></tr></thead>
+    <tbody>
+      <tr><td><code>verb</code></td><td>这一步的操作：add、change 或 remove。修改人数也按 add 处理</td></tr>
+      <tr><td><code>target_kind</code>、<code>target_id</code></td><td>add 时要加入的真实目标的类型和 ID</td></tr>
+      <tr><td><code>operation</code></td><td>add 与现有清单的关系：<code>replace</code>（整份替换）、<code>append</code>（追加一组）、<code>resize</code>（按新人数调整已有的一组）</td></tr>
+      <tr><td><code>switching</code></td><td>是否换掉当前清单。为 true 时，节点 8 会新开一个任务</td></tr>
+      <tr><td><code>plan_result</code></td><td>add 时准备好的配货结果，节点 8 用它合并进清单</td></tr>
+      <tr><td><code>args</code></td><td>add 时交给配货服务的内部参数，例如目标、人数、预算、忌口</td></tr>
+      <tr><td><code>plan_patch</code></td><td>change 或 remove 时准备好的完整新清单，节点 8 直接用它替换旧清单</td></tr>
+      <tr><td><code>group_id</code></td><td>这一步涉及的清单分组</td></tr>
+      <tr><td><code>sku_id</code>、<code>quantity</code></td><td>修改件数时的商品 SKU 和目标件数</td></tr>
+    </tbody>
+  </table>
+
+  <h3>result：提交结果</h3>
+  <table>
+    <thead><tr><th>字段</th><th>含义</th></tr></thead>
+    <tbody>
+      <tr><td><code>plan_effect</code></td><td>清单是否变化：<code>keep</code>（没变）或 <code>replace</code>（已更新）</td></tr>
+      <tr><td><code>committed</code></td><td>本轮是否真的保存了清单改动</td></tr>
+      <tr><td><code>receipt</code></td><td>本轮回执的标识：request_id、assistant_message_id、message_sequence、task_id、status</td></tr>
+      <tr><td><code>action_results</code></td><td>分区里定义了这个字段，但提交并响应节点不会回写它，所以它在 state 中一直是空列表。本轮的执行记录要看返回给前端的响应中的 action_results</td></tr>
+      <tr><td><code>response</code></td><td>在 state 中始终为空，完整的响应体保存在 runtime 上</td></tr>
+    </tbody>
+  </table>
+
+  <div class="box lesson">
+    <strong>排查时先看这几个字段</strong>
+    本轮有没有提前结束：看 <code>turn.halt</code> 和 <code>turn.error</code>。生成回答节点内部的失败只会体现在 <code>staged.error</code> 里。<br>
+    走了哪条分支、为什么：看 <code>turn.decision</code> 里的 route 和 reason_code。<br>
+    准备出了什么结果：看 <code>staged.kind</code> 和 <code>staged.error</code>。<br>
+    准备好了却没写入：常见原因是节点 8 发现数据库里的版本和 <code>staged.preconditions</code> 不一致（<code>STALE_STATE</code>）。<br>
+    清单最后有没有变：看 <code>result.plan_effect</code> 和 <code>result.committed</code>。
+  </div>
+</section>
+
+<footer>
+  对照源码：<code>backend/app/agent/graph/graph.py</code> · <code>goal_router.py</code> · <code>protocol.py</code><br>
+  图示：<code>docs/graph-zh.mmd</code>
+</footer>
+
+</div>
+
+<aside class="graph-panel" id="graph-panel" aria-label="流程图导航">
+  <button type="button" class="graph-head" id="graph-head" aria-controls="graph-body">
+    <span class="graph-title">流程图导航</span>
+    <span class="graph-current" id="graph-current">正在阅读：目录</span>
+  </button>
+  <div class="graph-body" id="graph-body">
+    <div class="graph-canvas" id="graph-canvas">流程图加载中…</div>
+    <ul class="graph-legend">
+      <li class="lg-current">正在阅读</li>
+      <li class="lg-lit">相关 / 经过的节点</li>
+      <li class="lg-issue">问题所在</li>
+    </ul>
+    <p class="graph-hint">点击节点可跳到对应说明。把鼠标移到「例题」或「附录」表格的某一行上，可以看到对应的路径或节点。</p>
+  </div>
+</aside>
+</div>
+
+<!-- 与 docs/graph-zh.mmd 保持一致 -->
+<script type="text/plain" id="graph-source">
+---
+config:
+  flowchart:
+    curve: linear
+---
+graph TD;
+	__start__(["开始"]):::first
+	load_context["加载上下文"]
+	understand["语义理解"]
+	parse_validate["解析校验"]
+	decide_turn["决定路由"]
+	retrieve["只读检索"]
+	mutation["清单变更"]
+	answer["生成回答"]
+	respond["提交并响应"]
+	__end__(["结束"]):::last
+	__start__ --> load_context;
+	load_context --> understand;
+	understand --> parse_validate;
+	parse_validate --> decide_turn;
+	decide_turn -.->|只读检索| retrieve;
+	decide_turn -.->|清单变更| mutation;
+	decide_turn -.->|闲聊、回答、澄清、拒绝| answer;
+	retrieve --> answer;
+	mutation --> answer;
+	answer --> respond;
+	respond --> __end__;
+	classDef default fill:#f2f0ff,line-height:1.2
+	classDef first fill-opacity:0
+	classDef last fill:#bfb6fc
+</script>
+<script type="module">
+const MERMAID_URL = 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';
+const panel = document.getElementById('graph-panel');
+const head = document.getElementById('graph-head');
+const caption = document.getElementById('graph-current');
+const canvas = document.getElementById('graph-canvas');
+const source = document.getElementById('graph-source').textContent.trim();
+const narrow = window.matchMedia('(max-width: 1179px)');
+
+const ids = (value) => (value || '').split(/\s+/).filter(Boolean);
+const titleOf = (el) => el.querySelector('h2, h3').textContent.trim();
+const units = [...document.querySelectorAll('section.chapter[id], article.node[id]')];
+const articles = new Map([...document.querySelectorAll('article[data-graph-node]')].map((a) => [a.dataset.graphNode, a]));
+const labels = new Map([...source.matchAll(/^\s*(\w+)\s*\(?\["([^"]+)"\]/gm)].map(([, id, text]) => [id, text]));
+const edges = [...source.matchAll(/^\s*(\w+)\s*-\.?->\s*(?:\|[^|]*\|\s*)?(\w+)\s*;?\s*$/gm)]
+  .map(([, from, to], index) => ({ from, to, id: `L_${from}_${to}_${index}`, el: null }));
+const nodes = new Map();
+let hovered = null;
+
+function paint({ current = null, lit = [], issues = [], path = [] } = {}) {
+  const litSet = new Set(lit);
+  const steps = new Set(path.slice(1).map((to, i) => `${path[i]}>${to}`));
+  const isOn = (e) => (current ? e.from === current || e.to === current : steps.has(`${e.from}>${e.to}`));
+  const focused = Boolean(current) || litSet.size > 0 || issues.length > 0;
+  for (const [id, g] of nodes) {
+    const issue = issues.includes(id);
+    g.classList.toggle('is-current', id === current);
+    g.classList.toggle('is-issue', issue);
+    g.classList.toggle('is-lit', !issue && id !== current && litSet.has(id));
+    g.classList.toggle('is-dim', focused && !issue && id !== current && !litSet.has(id));
+  }
+  const anyOn = edges.some(isOn);
+  for (const e of edges) {
+    e.el?.classList.toggle('is-on', isOn(e));
+    e.el?.classList.toggle('is-dim', anyOn && !isOn(e));
+  }
+}
+
+function readingUnit() {
+  if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2) return units.at(-1);
+  const line = window.innerHeight * 0.3;
+  let found = null;
+  for (const el of units) {
+    if (el.getBoundingClientRect().top > line) break;
+    found = el;
+  }
+  return found;
+}
+
+function refresh() {
+  if (hovered?.dataset.graphLit) {
+    paint({ lit: ids(hovered.dataset.graphLit) });
+    caption.textContent = hovered.dataset.graphLabel;
+    return;
+  }
+  if (hovered) {
+    const path = ids(hovered.dataset.graphPath);
+    const issues = ids(hovered.dataset.graphIssue);
+    paint({ lit: path, issues, path });
+    caption.textContent = hovered.dataset.graphLabel + (issues.length
+      ? `：红色为问题所在（${issues.map((id) => labels.get(id)).join('、')}）`
+      : '：沿高亮路径正常完成');
+    return;
+  }
+  const unit = readingUnit();
+  caption.textContent = `正在阅读：${unit ? titleOf(unit) : '目录'}`;
+  paint(unit?.dataset.graphNode ? { current: unit.dataset.graphNode } : { lit: ids(unit?.dataset.graphRelated) });
+}
+
+let queued = false;
+function schedule() {
+  if (queued) return;
+  queued = true;
+  requestAnimationFrame(() => {
+    queued = false;
+    refresh();
+  });
+}
+
+function syncExpanded() {
+  head.setAttribute('aria-expanded', String(!narrow.matches || panel.classList.contains('is-open')));
+}
+
+async function renderGraph() {
+  try {
+    const { default: mermaid } = await import(MERMAID_URL);
+    mermaid.initialize({
+      startOnLoad: false,
+      themeVariables: { fontSize: '14px', fontFamily: '"Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", sans-serif' },
+      flowchart: { nodeSpacing: 24, rankSpacing: 30, padding: 10 },
+    });
+    canvas.innerHTML = (await mermaid.render('turn-graph', source)).svg;
+  } catch (error) {
+    console.error(error);
+    canvas.textContent = '流程图没有加载出来：它需要联网加载 Mermaid。离线时可以参考「这张图在说什么」一节的文字版流程图。';
+    return;
+  }
+  for (const g of canvas.querySelectorAll('g.node')) {
+    const id = /^flowchart-(.+)-\d+$/.exec(g.id)?.[1];
+    if (!id) continue;
+    nodes.set(id, g);
+    const article = articles.get(id);
+    if (!article) continue;
+    const go = () => {
+      article.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (narrow.matches) {
+        panel.classList.remove('is-open');
+        syncExpanded();
+      }
+    };
+    const tip = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+    tip.textContent = `跳到「${titleOf(article)}」`;
+    g.prepend(tip);
+    // classDef 的填充色是带 !important 的内联样式，不去掉就无法用 CSS 高亮。
+    g.querySelector(':scope > rect')?.style.removeProperty('fill');
+    g.classList.add('is-link');
+    g.setAttribute('tabindex', '0');
+    g.setAttribute('role', 'link');
+    g.setAttribute('aria-label', tip.textContent);
+    g.addEventListener('click', go);
+    g.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        go();
+      }
+    });
+  }
+  for (const e of edges) e.el = canvas.querySelector(`#${CSS.escape(e.id)}`);
+  refresh();
+}
+
+for (const el of document.querySelectorAll('[data-graph-path], [data-graph-lit]')) {
+  el.addEventListener('mouseenter', () => {
+    hovered = el;
+    refresh();
+  });
+  el.addEventListener('mouseleave', () => {
+    hovered = null;
+    refresh();
+  });
+}
+head.addEventListener('click', () => {
+  if (!narrow.matches) return;
+  panel.classList.toggle('is-open');
+  syncExpanded();
+});
+narrow.addEventListener('change', syncExpanded);
+window.addEventListener('scroll', schedule, { passive: true });
+window.addEventListener('resize', schedule);
+syncExpanded();
+refresh();
+renderGraph();
+</script>
+</body>
+</html>

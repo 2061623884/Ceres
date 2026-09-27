@@ -1,0 +1,1 @@
+"""Graph adapter test suite."""

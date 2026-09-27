@@ -1,0 +1,7 @@
+{
+  "max_products_per_ingredient": 5,
+  "max_recipes": 2000,
+  "ingredient_count": 52,
+  "product_count": 259,
+  "recipe_count": 2000
+}

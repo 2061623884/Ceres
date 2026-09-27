@@ -1,0 +1,226 @@
+{
+  "version": "v1",
+  "store": {
+    "store_id": "store-demo-01",
+    "name": "演示超市（模拟数据）",
+    "is_demo": true,
+    "delivery_zone_id": "zone-default"
+  },
+  "delivery": {
+    "zone_id": "zone-default",
+    "reachable": true,
+    "eta_minutes": 45
+  },
+  "offers": [
+    {
+      "sku_id": "demo:flour-all-purpose-500g",
+      "price_fen": 890,
+      "available_qty": 50
+    },
+    {
+      "sku_id": "demo:cake-flour-250g",
+      "price_fen": 680,
+      "available_qty": 30
+    },
+    {
+      "sku_id": "demo:butter-200g",
+      "price_fen": 1580,
+      "available_qty": 40
+    },
+    {
+      "sku_id": "demo:sugar-white-500g",
+      "price_fen": 650,
+      "available_qty": 60
+    },
+    {
+      "sku_id": "demo:eggs-10pack",
+      "price_fen": 1280,
+      "available_qty": 25
+    },
+    {
+      "sku_id": "demo:milk-1l",
+      "price_fen": 980,
+      "available_qty": 35
+    },
+    {
+      "sku_id": "demo:yeast-dry-7g",
+      "price_fen": 350,
+      "available_qty": 80
+    },
+    {
+      "sku_id": "demo:baking-powder-100g",
+      "price_fen": 480,
+      "available_qty": 45
+    },
+    {
+      "sku_id": "demo:cream-cheese-200g",
+      "price_fen": 1680,
+      "available_qty": 20
+    },
+    {
+      "sku_id": "demo:vanilla-extract-30ml",
+      "price_fen": 1280,
+      "available_qty": 15
+    },
+    {
+      "sku_id": "demo:pork-500g",
+      "price_fen": 1980,
+      "available_qty": 35
+    },
+    {
+      "sku_id": "demo:bell-pepper-300g",
+      "price_fen": 580,
+      "available_qty": 40
+    },
+    {
+      "sku_id": "demo:salt-500g",
+      "price_fen": 320,
+      "available_qty": 80
+    },
+    {
+      "sku_id": "demo:soy-sauce-500ml",
+      "price_fen": 890,
+      "available_qty": 50
+    },
+    {
+      "sku_id": "demo:chicken-breast-500g",
+      "price_fen": 1800,
+      "available_qty": 30
+    },
+    {
+      "sku_id": "demo:tofu-firm-400g",
+      "price_fen": 680,
+      "available_qty": 40
+    },
+    {
+      "sku_id": "demo:tomato-fresh-500g",
+      "price_fen": 680,
+      "available_qty": 45
+    },
+    {
+      "sku_id": "demo:eggs-fresh-6pack",
+      "price_fen": 980,
+      "available_qty": 40
+    },
+    {
+      "sku_id": "demo:rice-2kg",
+      "price_fen": 2280,
+      "available_qty": 35
+    },
+    {
+      "sku_id": "demo:scallion-200g",
+      "price_fen": 380,
+      "available_qty": 50
+    },
+    {
+      "sku_id": "demo:cooking-oil-500ml",
+      "price_fen": 1280,
+      "available_qty": 40
+    },
+    {
+      "sku_id": "demo:noodles-500g",
+      "price_fen": 680,
+      "available_qty": 50
+    },
+    {
+      "sku_id": "demo:soy-milk-1l",
+      "price_fen": 880,
+      "available_qty": 30
+    },
+    {
+      "sku_id": "demo:sparkling-water-500ml",
+      "price_fen": 450,
+      "available_qty": 60
+    },
+    {
+      "sku_id": "demo:green-tea-500ml",
+      "price_fen": 520,
+      "available_qty": 55
+    },
+    {
+      "sku_id": "demo:peanut-200g",
+      "price_fen": 680,
+      "available_qty": 50
+    },
+    {
+      "sku_id": "demo:mushroom-white-200g",
+      "price_fen": 880,
+      "available_qty": 40
+    },
+    {
+      "sku_id": "demo:cabbage-500g",
+      "price_fen": 580,
+      "available_qty": 40
+    },
+    {
+      "sku_id": "demo:potato-500g",
+      "price_fen": 580,
+      "available_qty": 60
+    },
+    {
+      "sku_id": "demo:sesame-oil-200ml",
+      "price_fen": 1280,
+      "available_qty": 30
+    },
+    {
+      "sku_id": "demo:wood-ear-150g",
+      "price_fen": 880,
+      "available_qty": 40
+    },
+    {
+      "sku_id": "demo:chicken-wing-500g",
+      "price_fen": 2280,
+      "available_qty": 30
+    },
+    {
+      "sku_id": "demo:ginger-200g",
+      "price_fen": 480,
+      "available_qty": 50
+    },
+    {
+      "sku_id": "demo:carrot-500g",
+      "price_fen": 580,
+      "available_qty": 45
+    },
+    {
+      "sku_id": "demo:vinegar-500ml",
+      "price_fen": 680,
+      "available_qty": 40
+    },
+    {
+      "sku_id": "demo:oyster-sauce-500g",
+      "price_fen": 980,
+      "available_qty": 35
+    },
+    {
+      "sku_id": "demo:green-pea-300g",
+      "price_fen": 680,
+      "available_qty": 40
+    },
+    {
+      "sku_id": "demo:shiitake-200g",
+      "price_fen": 980,
+      "available_qty": 35
+    },
+    {
+      "sku_id": "demo:beef-slice-300g",
+      "price_fen": 2880,
+      "available_qty": 25
+    },
+    {
+      "sku_id": "demo:pork-ribs-500g",
+      "price_fen": 2680,
+      "available_qty": 30
+    },
+    {
+      "sku_id": "demo:garlic-200g",
+      "price_fen": 480,
+      "available_qty": 50
+    },
+    {
+      "sku_id": "demo:cola-330ml",
+      "price_fen": 450,
+      "available_qty": 60
+    }
+  ]
+}
