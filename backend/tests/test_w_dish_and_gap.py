@@ -125,52 +125,34 @@ def test_w09_xiaochaorou_not_qingjiao_rousi(client):
 
 
 def test_w09_typo_and_ambiguous_via_turns(client, semantic_provider):
-    """W09: a typo still resolves to the real dish; an ambiguous name asks.
+    """W09: a typo resolves to the real dish once confirmed; an ambiguous name asks.
 
-    Both turns retrieve for real. The typo turn adds the row the lookup really
-    returned; the ambiguous turn offers the rows the lookup really returned as
-    the options of one question, instead of guessing one of them.
+    The model names what it heard and the server binds only an exact hit. A
+    typo is offered its real similar dishes instead of being guessed; picking
+    one plans it. An ambiguous name against a live plan offers the rows its
+    lookup really returned as one question, instead of guessing one of them.
     """
-    from support.semantic_agent import (
-        Continuation,
-        lookup_matches,
-        lookup_then_add_id,
-    )
+    from support.semantic_agent import add_named, lookup_then_add
 
-    semantic_provider(
-        lookup_then_add_id("dish", "蕃茄炒蛋", "dish-fanqie-chao-dan", people=2)
-    )
+    semantic_provider([*lookup_then_add("dish", "蕃茄炒蛋"), add_named("dish", "番茄炒蛋", people=2)])
     sid = session(client)
 
     typo = turn(client, sid, "我想吃蕃茄炒蛋")
-    assert typo.get("plan"), typo
-    assert typo["status"] == "awaiting_confirmation", typo
-    assert typo["plan"]["targets"][0]["target_id"] == "dish-fanqie-chao-dan", typo
+    assert not typo.get("plan"), typo
+    offered = [c.get("name") for c in (typo.get("pending_clarification") or {}).get("candidates") or []]
+    assert "番茄炒蛋" in offered, offered
 
-    def ask(request):
-        rows = lookup_matches(request, "dish")
-        assert len(rows) >= 2, rows
-        return {
-            "uncertainties": [
-                {
-                    "slot": "dish_choice",
-                    "question": "你说的是哪一道？",
-                    "options": [{"candidate_ref": r["ref"]} for r in rows],
-                }
-            ]
-        }
+    picked = turn(client, sid, "对，番茄炒蛋", typo)
+    assert picked.get("plan"), picked
+    assert picked["status"] == "awaiting_confirmation", picked
+    assert picked["plan"]["targets"][0]["target_id"] == "dish-fanqie-chao-dan", picked
 
-    semantic_provider(
-        [{"lookups": [{"kind": "dish", "query": "蛋"}]}, Continuation(ask)]
-    )
-    # "蛋" is a real query the offline index answers with several egg dishes, so
-    # the question's options are rows the lookup really returned (a query the
-    # index cannot answer would leave the question with nothing to offer).
-    ambiguous = turn(client, sid, "我想吃炒蛋", typo)
+    # "炒蛋" names no dish exactly; the offline (lexical) index answers the query
+    # "蛋" with several egg dishes, which become the options of the one question.
+    semantic_provider([*lookup_then_add("dish", "蛋", "炒蛋", relation="append")])
+    ambiguous = turn(client, sid, "再来个炒蛋", picked)
     # The plan already on screen stays pending confirmation — the turn asks, it
-    # does not replace what the shopper was looking at. (The retired chain
-    # reported "clarifying" here; a question against a live plan reports the
-    # plan's own step.)
+    # does not replace what the shopper was looking at.
     assert ambiguous["status"] == "awaiting_confirmation", ambiguous
     assert ambiguous["plan_effect"] == "keep", ambiguous
     assert ambiguous.get("plan") is None, ambiguous
@@ -181,45 +163,33 @@ def test_w09_typo_and_ambiguous_via_turns(client, semantic_provider):
 
 
 def test_w10_vague_meal_offers_dish_candidates(client, semantic_provider):
-    """W10: 随便吃点 clarifies with dishes this store can build, not raw ingredients.
+    """W10: 随便吃点 answers with dishes this store can build, not raw ingredients.
 
-    The options are the rows a real open recommendation returned, and answering
-    with one of those names retrieves and plans that dish.
+    The answer is drawn from the rows a real open recommendation returned, and
+    naming one of those dishes retrieves and plans it.
     """
     from support.semantic_agent import lookup_then_add, recommend_then, topic_rows
 
-    def ask(request):
+    shown: list[str] = []
+
+    def answer(request):
         rows = topic_rows(request)
         assert len(rows) >= 2, rows
-        return {
-            "uncertainties": [
-                {
-                    "slot": "dish_choice",
-                    "question": "想吃哪一道？",
-                    "options": [{"candidate_ref": r["ref"]} for r in rows],
-                }
-            ]
-        }
+        shown.extend(str(r.get("name") or "") for r in rows)
+        return {"reply": "可以做这些：" + "、".join(shown)}
 
-    semantic_provider(recommend_then(None, ask))
+    semantic_provider(recommend_then(None, answer))
     sid = session(client)
     vague = turn(client, sid, "今晚随便吃点")
-    # A question before any purchase is not a task step, so the turn reports
-    # "understanding"; what makes it a question is the single pending question
-    # below. (The retired chain reported "clarifying" here.)
+    # An answer before any purchase is not a task step.
     assert vague["status"] == "understanding", vague
     assert vague["plan_effect"] == "keep", vague
     assert not vague.get("plan")
-    assert len(vague["pending_clarifications"]) == 1, vague["pending_clarifications"]
-    pending = vague.get("pending_clarification") or {}
-    assert pending.get("slot") == "dish_choice"
-    candidates = pending.get("candidates") or []
-    assert len(candidates) >= 2
+    assert shown[0] and shown[0] in vague["message"], vague["message"]
 
-    chosen = candidates[0]
-    assert chosen.get("name"), chosen
-    semantic_provider(lookup_then_add("dish", chosen["name"], chosen["name"], people=2))
-    picked = turn(client, sid, chosen["name"], vague)
+    chosen = shown[0]
+    semantic_provider(lookup_then_add("dish", chosen, people=2))
+    picked = turn(client, sid, chosen, vague)
     assert picked.get("plan"), picked
     assert picked["status"] == "awaiting_confirmation", picked
 

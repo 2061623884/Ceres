@@ -92,7 +92,7 @@ def test_s05_post_confirm_readonly_purchase_question(client, semantic_provider):
 
     semantic_provider(
         [
-            {"queries": [{"kind": "cart"}]},
+            {"reads": [{"kind": "cart"}]},
             Continuation(answer_from_the_real_cart),
         ]
     )
@@ -138,17 +138,9 @@ def test_s06_mixed_explain_and_budget_updates_plan(client, semantic_provider):
         group = request["current_plan"]["groups"][0]
         return {
             "reply": "这些菜是按两人份和当时说好的预算挑的。",
-            "purchase_requested": True,
-            "understanding": request_amend(focus=group["ref"]),
-            "mutations": [
-                {
-                    "verb": "change",
-                    "target_ref": group["ref"],
-                    "name": group["name"],
-                    "field": "constraints",
-                    "constraints": {"budget_yuan": 10},
-                }
-            ],
+            **request_amend(
+                focus=group["ref"], name=group["name"], changes={"set": {"budget_yuan": 10}}
+            ),
         }
 
     semantic_provider(
@@ -198,6 +190,7 @@ def test_s06_mixed_explain_and_budget_updates_plan(client, semantic_provider):
         }
         assert codes & {
             "UNSUPPORTED_OPERATION",
+            "UNSUPPORTED_CHANGE_FIELD",
             "BUDGET_EXCEEDED",
             "GOAL_CHANGE_CONFLICT",
         }, body["action_results"]

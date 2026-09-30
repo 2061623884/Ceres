@@ -80,7 +80,7 @@ def named_product(request, name):
         "牛奶": "全脂牛奶 1升",
     }.get(name, name)
     return {
-        "understanding": request_new(
+        **request_new(
             "product", name,
             relation="append" if request.get("current_plan") else "new",
         ),
@@ -249,18 +249,10 @@ def test_a_same_task_turn_cannot_change_a_row_and_add_another(
         item_ref = first_item_ref(request)
         item = request["current_plan"]["items"][0]
         return {
-            "understanding": request_new("product", "全脂牛奶 1升", relation="append"),
+            **request_new("product", "全脂牛奶 1升", relation="append"),
             "lookups": [{"kind": "product", "query": "全脂牛奶 1升"}],
-            "mutations": [
-                {
-                    "verb": "change",
-                    "target_ref": item_ref,
-                    "name": item["name"],
-                    "field": "quantity",
-                    "quantity": {"mode": "delta", "value": 1},
-                },
-                {"verb": "add", "name": "全脂牛奶 1升"},
-            ],
+            "focus": {"ref": item_ref, "name": item["name"]},
+            "edit": {"op": "adjust_quantity", "quantity": 1},
         }
 
     semantic_provider([change_then_add])

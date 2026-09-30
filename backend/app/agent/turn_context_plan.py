@@ -153,6 +153,17 @@ def plan_context_writes(
                 activated or question.get("slot") in answered_slots
             ):
                 resolved.add(question["question_id"])
+    if activated:
+        # "Which one do you mean?" asked without a candidate to bind to: the gate
+        # had none to offer, so the question carries ``candidate_ref = None`` and
+        # the match above can never close it — no candidate ref equals None, and
+        # the candidate-changed purge below keeps exactly the unbound items. An
+        # add committed this turn decides the focus, so the question is answered
+        # however the shopper phrased it; left open it outlives its own answer
+        # and hangs under the success receipt as a stale chip.
+        for question in context.get("pending_clarifications", []):
+            if question.get("candidate_ref") is None and question.get("slot") == SLOT_FOCUS:
+                resolved.add(question["question_id"])
     base_pending = [] if task_switched else list(context.get("pending_clarifications", []))
     new_pending.extend(business_pending or [])
     new_pending.extend(gate_pending_items or [])

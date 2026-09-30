@@ -1,240 +1,268 @@
 /**
- * MercuryChat - 墨墨售后客服聊天界面
- * 完全复制 ChatScreen 的交互模式
+ * 墨墨售后 — 与 ChatScreen 同结构的奶油色 Grok 面板
  */
 
-import { useState, useEffect, useRef } from 'react'
-import { MercuryMascot, MercuryAvatar } from './components/MercuryMascot'
+import { useState, useEffect, useRef, useCallback } from 'react'
+import { MomoAvatar, MomoToastHero } from './components/MomoToast'
 import { createMercurySession, sendMercuryTurn } from './lib/mercury'
 
 interface MercuryMsg {
   id: string
   role: 'user' | 'ai'
   text: string
+  suggestions?: string[]
 }
 
 const WELCOME_MSG: MercuryMsg = {
   id: 'welcome',
   role: 'ai',
-  text: '您好!我是墨墨,您的专属售后客服 🍞\n订单、物流、退款、退货问题都可以问我~'
+  text: '您好！我是墨墨 🍞\n订单、物流、退款、退货问题都可以问我～',
+  suggestions: ['我想查看我的订单', '帮我查询物流信息', '我想申请退款', '我想申请退货'],
 }
 
-const QUICK_ACTIONS = [
-  { id: 'orders', label: '📦 查看订单', prompt: '我想查看我的订单' },
-  { id: 'delivery', label: '🚚 查询物流', prompt: '帮我查询物流信息' },
-  { id: 'refund', label: '💰 申请退款', prompt: '我想申请退款' },
-  { id: 'return', label: '🔄 申请退货', prompt: '我想申请退货' }
-]
+const QUICK_LABELS = ['📦 查订单', '🚚 查物流', '💰 退款', '🔄 退货']
+
+function formatText(text: string) {
+  return text.split('\n').map((line, i, arr) => (
+    <span key={i}>
+      {line}
+      {i < arr.length - 1 && <br />}
+    </span>
+  ))
+}
 
 interface MercuryChatProps {
   prefilledOrder?: string
+  visible?: boolean
 }
 
-export function MercuryChat({ prefilledOrder }: MercuryChatProps) {
+export function MercuryChat({ prefilledOrder, visible = true }: MercuryChatProps) {
   const [sessionId, setSessionId] = useState<string | null>(null)
   const [msgs, setMsgs] = useState<MercuryMsg[]>([WELCOME_MSG])
   const [input, setInput] = useState('')
   const [typing, setTyping] = useState(false)
-  const [mood, setMood] = useState<'cheerful' | 'attentive' | 'helpful' | 'apologetic'>('cheerful')
-  const scrollRef = useRef<HTMLDivElement>(null)
+  const [restoring, setRestoring] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+  const bottomRef = useRef<HTMLDivElement>(null)
+  const prefilledSentRef = useRef(false)
 
-  // 初始化会话
   useEffect(() => {
-    const initSession = async () => {
-      try {
-        const sid = await createMercurySession()
-        setSessionId(sid)
-      } catch (error) {
-        console.error('Failed to create Mercury session:', error)
-      }
+    if (visible) {
+      bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
     }
-    initSession()
+  }, [msgs, typing, visible])
+
+  const initSession = useCallback(async () => {
+    setRestoring(true)
+    setError(null)
+    try {
+      const sid = await createMercurySession()
+      setSessionId(sid)
+    } catch {
+      setSessionId(null)
+      setError('会话连接失败，请稍后再试')
+    } finally {
+      setRestoring(false)
+    }
   }, [])
 
-  // 预填订单号自动发送
   useEffect(() => {
-    if (prefilledOrder && sessionId && msgs.length === 1) {
-      handleSend(`关于订单 ${prefilledOrder} 我想咨询...`)
-    }
-  }, [prefilledOrder, sessionId])
+    initSession()
+  }, [initSession])
 
-  // 自动滚动到底部
+  const send = useCallback(
+    async (text: string) => {
+      if (!text.trim() || !sessionId || typing || restoring) return
+      const trimmed = text.trim()
+      setMsgs((p) => [...p, { id: `u-${Date.now()}`, role: 'user', text: trimmed }])
+      setInput('')
+      setTyping(true)
+      setError(null)
+
+      const assistantId = `a-${Date.now()}`
+      let assistantText = ''
+      setMsgs((p) => [...p, { id: assistantId, role: 'ai', text: '' }])
+
+      try {
+        await sendMercuryTurn(sessionId, trimmed, {
+          onAnswerDelta: (chunk) => {
+            assistantText += chunk
+            setMsgs((p) => p.map((m) => (m.id === assistantId ? { ...m, text: assistantText } : m)))
+          },
+          onCompleted: (finalText) => {
+            setMsgs((p) =>
+              p.map((m) => (m.id === assistantId ? { ...m, text: finalText || assistantText } : m)),
+            )
+          },
+          onError: (err) => {
+            setError(err)
+            setMsgs((p) =>
+              p.map((m) =>
+                m.id === assistantId
+                  ? {
+                      ...m,
+                      text: m.text.trim()
+                        ? m.text
+                        : '抱歉，没有收到回复，请稍后再试。',
+                    }
+                  : m,
+              ),
+            )
+          },
+        })
+      } catch (e) {
+        const message = e instanceof Error ? e.message : '发送失败'
+        setError(message)
+        setMsgs((p) =>
+          p.map((m) =>
+            m.id === assistantId
+              ? {
+                  ...m,
+                  text: m.text.trim()
+                    ? m.text
+                    : '抱歉，没有收到回复，请稍后再试。',
+                }
+              : m,
+          ),
+        )
+      } finally {
+        setTyping(false)
+      }
+    },
+    [sessionId, typing, restoring],
+  )
+
   useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight
-    }
-  }, [msgs, typing])
+    if (!prefilledOrder || prefilledSentRef.current || restoring || !sessionId || !visible) return
+    prefilledSentRef.current = true
+    send(`关于订单 ${prefilledOrder} 我想咨询…`)
+  }, [prefilledOrder, restoring, sessionId, visible, send])
 
-  const handleSend = async (text?: string) => {
-    const message = text || input.trim()
-    if (!message || !sessionId) return
-
-    // 添加用户消息
-    const userMsg: MercuryMsg = {
-      id: `u_${Date.now()}`,
-      role: 'user',
-      text: message
-    }
-    setMsgs(prev => [...prev, userMsg])
-    setInput('')
-    setTyping(true)
-    setMood('attentive')
-
-    // 准备 AI 消息
-    const aiMsgId = `a_${Date.now()}`
-    let aiText = ''
-
-    try {
-      await sendMercuryTurn(sessionId, message, {
-        onAnswerDelta: (chunk) => {
-          aiText += chunk
-          setMsgs(prev => {
-            const existing = prev.find(m => m.id === aiMsgId)
-            if (existing) {
-              return prev.map(m => m.id === aiMsgId ? { ...m, text: aiText } : m)
-            } else {
-              return [...prev, { id: aiMsgId, role: 'ai', text: aiText }]
-            }
-          })
-        },
-        onCompleted: (finalText) => {
-          setTyping(false)
-          setMood('helpful')
-          setMsgs(prev =>
-            prev.map(m => m.id === aiMsgId ? { ...m, text: finalText } : m)
-          )
-        },
-        onError: (err) => {
-          console.error('Mercury error:', err)
-          setTyping(false)
-          setMood('apologetic')
-          setMsgs(prev => [...prev, {
-            id: aiMsgId,
-            role: 'ai',
-            text: '抱歉,服务暂时不可用,请稍后再试。'
-          }])
-        }
-      })
-    } catch (error) {
-      console.error('Failed to send message:', error)
-      setTyping(false)
-      setMood('apologetic')
-      setMsgs(prev => [...prev, {
-        id: aiMsgId,
-        role: 'ai',
-        text: '抱歉,服务暂时不可用,请稍后再试。'
-      }])
-    }
+  async function handleNewChat() {
+    setMsgs([WELCOME_MSG])
+    setSessionId(null)
+    prefilledSentRef.current = false
+    await initSession()
   }
 
+  if (!visible) return null
+
+  const welcomeSuggestions = WELCOME_MSG.suggestions ?? []
+  const showWelcomeHero = msgs.length === 1 && msgs[0].id === 'welcome'
+
   return (
-    <div
-      className="mercury-chat fixed inset-x-0 bottom-0 z-40 flex flex-col bg-[#f8f9fc] rounded-t-[38px] shadow-[0_-20px_60px_rgba(67,56,202,0.15)]"
-      style={{ height: 'min(71vh, 650px)', minHeight: '500px' }}
+    <section
+      className="chat-panel-enter relative flex h-[min(71vh,650px)] min-h-[500px] flex-col overflow-hidden rounded-t-[38px] bg-[#fcfbf8] font-sans shadow-[0_-20px_60px_rgba(40,36,29,0.12)]"
     >
-      {/* Header */}
-      <div className="flex items-center justify-between px-6 py-4 bg-[#f1f3f9] rounded-t-[38px] border-b border-indigo-100">
-        <div className="flex items-center gap-3">
-          <MercuryAvatar size={36} animated />
-          <div>
-            <div className="text-[15px] font-semibold text-gray-900">墨墨</div>
-            {typing && (
-              <div className="text-[10px] text-indigo-600">墨墨正在思考...</div>
-            )}
-          </div>
+      <div className="flex justify-center bg-[#f7f5f0] pt-3 pb-1.5" aria-hidden="true">
+        <span className="h-1 w-10 rounded-full bg-black/[.12]" />
+      </div>
+      <div className="flex flex-shrink-0 items-center gap-3 bg-[#f7f5f0] px-6 pt-2 pb-5">
+        <MomoAvatar size={40} animated />
+        <div>
+          <p className="text-[15px] font-semibold tracking-[-0.04em] text-[#191817]">墨墨</p>
+          {typing && <p className="text-[10px] text-black/40">墨墨正在输入…</p>}
         </div>
         <button
-          className="text-2xl text-gray-400 hover:text-gray-600 transition"
-          onClick={() => {
-            setMsgs([WELCOME_MSG])
-            setMood('cheerful')
-          }}
-          title="清空对话"
+          type="button"
+          onClick={handleNewChat}
+          className="ml-auto grid h-9 w-9 place-items-center rounded-full bg-white/70 text-black/48 transition hover:bg-white active:scale-95"
+          aria-label="发起新对话"
         >
-          +
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
+            <path d="M12 5v14M5 12h14" />
+          </svg>
         </button>
       </div>
 
-      {/* Messages */}
-      <div ref={scrollRef} className="flex-1 overflow-y-auto px-5 py-6 space-y-4">
-        {/* Welcome with mascot */}
-        <div className="flex flex-col items-center gap-4 pb-6">
-          <MercuryMascot size={180} mood={mood} animated />
-          <div className="text-center">
-            <div className="text-base font-medium text-gray-900 mb-2 whitespace-pre-line">
-              {WELCOME_MSG.text}
-            </div>
-            <div className="flex flex-wrap gap-2 justify-center mt-4">
-              {QUICK_ACTIONS.map(action => (
-                <button
-                  key={action.id}
-                  onClick={() => handleSend(action.prompt)}
-                  disabled={typing}
-                  className="px-4 py-2 text-xs font-medium text-indigo-700 bg-indigo-50 hover:bg-indigo-100 rounded-full transition disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {action.label}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
+      <div className="scrollbar-hide flex-1 space-y-5 overflow-y-auto px-6 py-5">
+        {restoring && <p className="text-center text-sm text-black/40">正在连接墨墨…</p>}
+        {error && <p className="text-center text-xs text-red-600">{error}</p>}
 
-        {/* Message list */}
-        {msgs.slice(1).map(msg => (
-          <div key={msg.id} className={`flex gap-3 ${msg.role === 'user' ? 'justify-end' : ''}`}>
-            {msg.role === 'ai' && <MercuryAvatar size={32} />}
-            <div
-              className={`max-w-[70%] px-4 py-3 text-[13px] font-medium leading-[1.7] tracking-[-0.015em] whitespace-pre-line ${
-                msg.role === 'user'
-                  ? 'bg-[#171716] text-white rounded-[24px_24px_8px_24px]'
-                  : 'bg-[#eef2ff] text-gray-900 rounded-[24px_24px_24px_8px]'
-              }`}
-            >
-              {msg.text}
+        {showWelcomeHero && (
+          <div className="flex flex-col items-center gap-3 pb-2">
+            <MomoToastHero size={120} mood="happy" animated />
+          </div>
+        )}
+
+        {msgs.map((msg) => (
+          <div key={msg.id} className={`flex items-end gap-2.5 ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}>
+            {msg.role === 'ai' && <MomoAvatar size={26} />}
+            <div className={`flex max-w-[82%] flex-col gap-2.5 ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
+              {msg.text ? (
+                <div
+                  className="px-4 py-3 text-[13px] font-medium leading-[1.7] tracking-[-0.015em]"
+                  style={{
+                    borderRadius: msg.role === 'user' ? '24px 24px 8px 24px' : '24px 24px 24px 8px',
+                    background: msg.role === 'user' ? '#171716' : '#f2f1ed',
+                    color: msg.role === 'user' ? '#fff' : '#292825',
+                  }}
+                >
+                  {formatText(msg.text)}
+                </div>
+              ) : msg.role === 'ai' && typing ? (
+                <div
+                  className="ai-loading-bubble px-4 py-3 text-[13px] font-medium leading-[1.7] tracking-[-0.015em]"
+                  style={{
+                    borderRadius: '24px 24px 24px 8px',
+                    background: '#f2f1ed',
+                    color: '#292825',
+                  }}
+                >
+                  <span className="ai-loading-ellipsis" aria-label="墨墨正在输入">
+                    <span className="ai-loading-ellipsis__dot" aria-hidden="true">.</span>
+                    <span className="ai-loading-ellipsis__dot" aria-hidden="true">.</span>
+                    <span className="ai-loading-ellipsis__dot" aria-hidden="true">.</span>
+                  </span>
+                </div>
+              ) : null}
+              {msg.suggestions && msg.role === 'ai' && !typing && (
+                <div className="flex w-full flex-col gap-1.5">
+                  {msg.suggestions.map((s, i) => (
+                    <button
+                      key={i}
+                      type="button"
+                      onClick={() => send(s)}
+                      className="rounded-full bg-[#f5f4f0] px-4 py-2.5 text-left text-[12px] font-medium text-black/55 transition hover:bg-[#eceae4] active:scale-[.98]"
+                    >
+                      <span className="mr-2 text-[10px] font-semibold text-[#d79b58]">✦</span>
+                      {QUICK_LABELS[i] ?? s}
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         ))}
-
-        {/* Typing indicator */}
-        {typing && (
-          <div className="flex gap-3">
-            <MercuryAvatar size={32} />
-            <div className="px-4 py-3 bg-[#eef2ff] rounded-[24px_24px_24px_8px]">
-              <div className="flex gap-1">
-                <span className="w-2 h-2 bg-indigo-400 rounded-full animate-pulse" style={{ animationDelay: '0s' }}></span>
-                <span className="w-2 h-2 bg-indigo-400 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></span>
-                <span className="w-2 h-2 bg-indigo-400 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></span>
-              </div>
-            </div>
-          </div>
-        )}
+        <div ref={bottomRef} />
       </div>
 
-      {/* Input */}
-      <div className="px-5 pb-6 pt-4">
-        <div className="flex items-center gap-3 px-5 py-3 bg-white/90 backdrop-blur-sm rounded-full border border-indigo-100">
+      <div className="relative flex-shrink-0 bg-[#f7f5f0]/75 px-5 pb-4 pt-2">
+        <div className="flex items-center gap-2 rounded-[28px] bg-white/85 px-4 py-2.5 backdrop-blur-sm">
           <input
-            type="text"
             value={input}
-            onChange={e => setInput(e.target.value)}
-            onKeyPress={e => e.key === 'Enter' && !e.shiftKey && handleSend()}
-            placeholder="问问墨墨吧..."
-            disabled={typing}
-            className="flex-1 bg-transparent text-[13px] font-medium text-gray-900 placeholder-gray-400 outline-none disabled:opacity-50"
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') send(input)
+            }}
+            placeholder="问问墨墨吧…"
+            disabled={restoring}
+            className="min-w-0 flex-1 bg-transparent text-[13px] font-medium text-[#1d1c1a] outline-none placeholder:text-black/30"
           />
           <button
-            onClick={() => handleSend()}
-            disabled={!input.trim() || typing}
-            className={`w-8 h-8 rounded-full flex items-center justify-center transition ${
-              input.trim() && !typing
-                ? 'bg-indigo-600 text-white hover:bg-indigo-700'
-                : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+            type="button"
+            onClick={() => send(input)}
+            disabled={!input.trim() || !sessionId || typing || restoring}
+            className={`flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full transition-all active:scale-90 ${
+              input.trim() && !typing && !restoring ? 'bg-[#171716]' : 'bg-[#eeece7]'
             }`}
           >
-            ↑
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="white">
+              <path d="M2 21L23 12 2 3v7l15 2-15 2z" />
+            </svg>
           </button>
         </div>
       </div>
-    </div>
+    </section>
   )
 }

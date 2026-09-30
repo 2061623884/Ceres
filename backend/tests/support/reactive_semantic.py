@@ -1,25 +1,22 @@
 """Test-only model stand-in for the one semantic decision chain.
 
-This replaces the retired tool-call scripted provider. It is **not** a product
-route and it proves nothing about model quality: it is a deterministic stand-in
-so the *server* side — loop → read port → executor → business services → API/SSE
-— can be exercised end to end with no network and no credentials.
+It is **not** a product route and proves nothing about model quality: it is a
+deterministic stand-in so the *server* side — gate → read port → executor →
+business services → API/SSE — can be exercised end to end with no network and
+no credentials.
 
-What it does, in the real protocol:
+What it does, in the real one-pass protocol:
 
-* model call 1 — ask for a real dish lookup, using the raw message as the query,
-  and declare purchase intent;
-* model call 2 — with the *real* retrieval results in hand, add the row the
-  lookup actually returned, or answer when it returned nothing usable.
+* a stated headcount on a plan already on screen → ``focus`` on its first group
+  plus ``constraints.people``;
+* a purchase phrasing → the dish the message names as a *buy* target, with a
+  lookup of that name; the server binds the exact hit the lookup returns;
+* anything else that names a dish → look it up and answer from the result;
+* the answer stage (``query_results`` present) → a plain reply.
 
-The one piece of language it reads is a stated headcount, so that a
-constraint-only follow-up on a plan already on screen can be expressed as a real
-``change … field=people``. That reading is the *test double standing in for the
-model*, never a server-side rule: nothing in the runtime parses the sentence.
-
-A test that needs an exact shape — a specific refusal, a clarification, a
-particular product, an error — must script the proposals explicitly through the
-``semantic_provider`` fixture. This provider is only the generic default.
+The language it reads (a headcount, a replacement phrase, a dish name) is the
+*test double standing in for the model*, never a server-side rule. A test that
+needs an exact shape scripts it through the ``semantic_provider`` fixture.
 """
 
 from __future__ import annotations
@@ -29,35 +26,32 @@ from typing import Any
 
 from app.llm.errors import LLMProviderError
 
-#: The headcount this stand-in states when the message does not name one. It is
-#: the *test double* saying a number, standing in for the model: the server may not
-#: invent one, so a fixture that wants a dish plan has to state it.
+#: The headcount this stand-in states when the message does not name one — the
+#: *test double* saying a number, standing in for the model.
 DEFAULT_PEOPLE = 2
 
-_CN_NUM = {
-    "一": 1,
-    "二": 2,
-    "两": 2,
-    "三": 3,
-    "四": 4,
-    "五": 5,
-    "六": 6,
-    "七": 7,
-    "八": 8,
-    "九": 9,
-    "十": 10,
-}
+_CN_NUM = {"一": 1, "二": 2, "两": 2, "三": 3, "四": 4, "五": 5, "六": 6, "七": 7, "八": 8, "九": 9, "十": 10}
 
 #: A headcount the shopper stated ("2人", "两个人", "四人份").
-_PEOPLE = re.compile(r"([一二两三四五六七八九十0-9]+)\s*(?:人|个人|人份|人吃)")
+_PEOPLE = re.compile(r"([一二两三四五六七八九十0-9]+)\s*(?:人份|人吃|个人|人)")
 
-#: An explicit replacement of the target on screen ("改做…", "换成…").
-#: The runtime refuses a whole-plan replacement that was not declared as a
-#: ``switch``, so a stand-in that means "replace" must say so; it may not leave
-#: that reading to the server. Only a *named replacement* counts: a bare
-#: cancellation or negation ("取消", "不做番茄炒蛋了") has no new target and must
-#: never be turned into one — the stand-in answers instead of switching.
+#: An explicit replacement of the target on screen ("改做…", "换成…"). Only a
+#: *named* replacement counts; a bare cancellation never becomes a new target.
 _SWITCH = re.compile(r"改做|换成|改为|换个")
+
+#: A phrasing that asks for a list, as opposed to only asking about a dish.
+_BUY = re.compile(r"想|要|买|做|吃|准备|来一|帮我|给我|改为|换")
+#: A question about a dish ("番茄炒蛋怎么做"): it is looked up, never bought.
+_ASK = re.compile(r"怎么|如何|有没有|吗[？?]?$")
+
+#: Words around a dish name in the phrasings the suites use. Longer words first.
+_FILLER = re.compile(
+    r"我想|想要|我要|帮我|给我|今晚|今天|准备|来一份|来个|做一份|做个|改做|换成|改为|换个"
+    r"|的食材|的材料|食材|材料|一下|吃|买|做"
+)
+_CLAUSE = re.compile(r"[，,。.!！?？；;、\s]+")
+#: A clause that is a condition or a cancellation, never a dish name.
+_NOT_A_NAME = re.compile(r"(不|别|预算|取消|算了|[0-9一二两三四五六七八九十]+\s*(?:元|块))")
 
 
 def stated_people(message: str) -> int | None:
@@ -66,9 +60,20 @@ def stated_people(message: str) -> int | None:
     if not match:
         return None
     token = match.group(1)
-    if token.isdigit():
-        return int(token)
-    return _CN_NUM.get(token)
+    return int(token) if token.isdigit() else _CN_NUM.get(token)
+
+
+def dish_name(message: str) -> str:
+    """The dish the message names, for the test double only (``""`` when none)."""
+    for clause in _CLAUSE.split(message or ""):
+        asked = next((part for part in _ASK.split(clause) if part.strip()), "")
+        clause = _PEOPLE.sub("", asked).strip()
+        if not clause or _NOT_A_NAME.match(clause):
+            continue
+        name = _FILLER.sub("", clause).strip("了的 ")
+        if name:
+            return name
+    return ""
 
 
 def provider_error(code: str = "MODEL_TIMEOUT", retryable: bool = True) -> LLMProviderError:
@@ -77,9 +82,9 @@ def provider_error(code: str = "MODEL_TIMEOUT", retryable: bool = True) -> LLMPr
 
 
 class ReactiveSemanticProvider:
-    """Retrieve for real, then use what really came back. Or answer."""
+    """Name what the message asks for and let the server find it. Or answer."""
 
-    def __init__(self, *, answer: str = "好的，我来看看。", default_people: int = 2):
+    def __init__(self, *, answer: str = "好的，我来看看。", default_people: int = DEFAULT_PEOPLE):
         self.answer = answer
         self.default_people = default_people
         #: Every request the loop really sent, in order.
@@ -105,126 +110,51 @@ class ReactiveSemanticProvider:
         if reset_stream and on_reply_delta is not None:
             on_reply_delta("", False, True)
         self.requests.append(request)
-        results = [
-            result
-            for result in request.get("query_results") or []
-            if result.get("status") == "completed"
-        ]
-        change = self._plan_change(request)
-        if results:
-            result = self._after_retrieval(request, results)
-        elif change is not None:
-            result = change
+        if request.get("query_results"):
+            # The answer stage only puts the real facts into words.
+            result: dict[str, Any] = {"reply": self.answer}
         else:
-            result = self._retrieve(request)
-        if on_reply_delta is not None and isinstance(result, dict):
-            reply = result.get("reply")
-            if isinstance(reply, str) and reply:
-                on_reply_delta(reply, False, False)
+            result = self._plan_change(request) or self._understand(request)
+        if on_reply_delta is not None and result.get("reply"):
+            on_reply_delta(result["reply"], False, False)
         return result
 
-    # ------------------------------------------------------------- model calls
-
-    def _retrieve(self, request: dict[str, Any]) -> dict[str, Any]:
-        """Ask for real dish candidates and declare purchase intent."""
+    def _understand(self, request: dict[str, Any]) -> dict[str, Any]:
         message = str(request.get("user_message") or "")
-        return {
-            "lookups": [{"kind": "dish", "query": message}],
-            "purchase_requested": True,
-            # The stand-in declares what it is doing: a request for action. The
-            # real goal (with the ref the lookup returns) follows on the second
-            # call; the server derives permission from this, not from the flag.
-            "understanding": {"speech_act": "request_action"},
-        }
-
-    def _after_retrieval(
-        self, request: dict[str, Any], results: list[dict[str, Any]]
-    ) -> dict[str, Any]:
-        """Add the dish the lookup really returned, or answer honestly."""
-        message = str(request.get("user_message") or "")
-        plan_on_screen = bool(request.get("current_plan"))
-        if plan_on_screen and _SWITCH.search(message):
-            relation = "switch"
-        else:
-            relation = "append" if plan_on_screen else "new"
-        rows: list[dict[str, Any]] = []
-        for result in results:
-            if result.get("kind") == "lookup" and result.get("lookup_kind") == "dish":
-                rows = list(result.get("matches") or [])
-        picked = self._pick(rows, message)
-        if picked is None:
+        name = dish_name(message)
+        if not name:
             return {"reply": self.answer}
-        mutation: dict[str, Any] = {
-            "verb": "add",
-            "candidate_ref": picked["ref"],
-            "name": picked["name"],
-        }
-        people = stated_people(message) or self.default_people
-        mutation["people"] = people
+        lookups = [{"kind": "dish", "query": name}]
+        if _ASK.search(message) or not (_BUY.search(message) or stated_people(message)):
+            return {"target": {"kind": "meal", "name": name, "intent": "explore"}, "lookups": lookups}
+        on_screen = bool(request.get("current_plan"))
+        if on_screen and _SWITCH.search(message):
+            relation = "replace"
+        else:
+            relation = "add" if on_screen else "unstated"
         return {
-            "understanding": {
-                "speech_act": "request_action",
-                "goal_relation": relation,
-                "new_goal": {
-                    "kind": "meal_plan",
-                    "fulfillment_mode": "self_cook",
-                    "target_name": str(picked["name"]),
-                    "constraints": {"people": people},
-                },
+            "target": {"kind": "meal", "name": name, "intent": "buy", "relation": relation},
+            "constraints": {
+                "people": stated_people(message) or self.default_people,
+                "fulfillment_mode": "self_cook",
             },
-            "mutations": [mutation],
-        }
-
-    def _plan_change(self, request: dict[str, Any]) -> dict[str, Any] | None:
-        """A stated headcount on a plan already on screen rescales its group."""
-        plan = request.get("current_plan") or {}
-        groups = list(plan.get("groups") or [])
-        if not groups:
-            return None
-        message = str(request.get("user_message") or "")
-        people = stated_people(message)
-        if people is None:
-            return None
-        requirements = request.get("requirements") or {}
-        if people == requirements.get("people"):
-            return None
-        group = groups[0]
-        return {
-            "purchase_requested": True,
-            "understanding": {
-                "speech_act": "correct",
-                "goal_relation": "amend",
-                "focus_ref": group["ref"],
-                "changes": {"set": {"people": people}},
-            },
-            "mutations": [
-                {
-                    "verb": "change",
-                    "target_ref": group["ref"],
-                    "name": str(group.get("name") or ""),
-                    "field": "people",
-                    "people": people,
-                }
-            ],
+            "lookups": lookups,
         }
 
     @staticmethod
-    def _pick(rows: list[dict[str, Any]], message: str) -> dict[str, Any] | None:
-        """The row the shopper actually named — never "the closest one".
-
-        A single retrieval hit is unambiguous. Several hits are only usable when
-        the message really contains one of the names; otherwise the turn answers
-        instead of guessing, exactly as the product must.
-        """
-        if not rows:
+    def _plan_change(request: dict[str, Any]) -> dict[str, Any] | None:
+        """A new headcount on a plan already on screen rescales its first group."""
+        groups = list((request.get("current_plan") or {}).get("groups") or [])
+        people = stated_people(str(request.get("user_message") or ""))
+        if not groups or people is None:
             return None
-        if len(rows) == 1:
-            return rows[0]
-        for row in rows:
-            name = str(row.get("name") or "")
-            if name and name in message:
-                return row
-        return None
+        if people == (request.get("requirements") or {}).get("people"):
+            return None
+        group = groups[0]
+        return {
+            "focus": {"ref": group["ref"], "name": str(group.get("name") or "")},
+            "constraints": {"people": people},
+        }
 
 
-__all__ = ["ReactiveSemanticProvider", "provider_error", "stated_people"]
+__all__ = ["DEFAULT_PEOPLE", "ReactiveSemanticProvider", "dish_name", "provider_error", "stated_people"]

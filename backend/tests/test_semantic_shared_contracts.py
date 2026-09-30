@@ -30,22 +30,17 @@ import pytest
 from sqlalchemy import text
 
 from support import create_session, parse_sse_events, send_turn
-from support.semantic_agent import first_item_ref
+from support.semantic_agent import first_item_ref, request_amend, request_new
 
 
 # --------------------------------------------------------------------- helpers
 
 
-def lookup_then_add(kind, query, _fragment):
+def lookup_then_add(kind, query, _fragment, *, relation="new"):
     """The one-pass Proposal resolves a named target during mutation execution."""
     name = "鲜鸡蛋 10枚装" if query == "鸡蛋" else "全脂牛奶 1升"
-    return [{
-        "understanding": {
-            "speech_act": "request_action", "goal_relation": "new",
-            "new_goal": {"kind": "product_purchase", "target_name": name, "items": [name]},
-        },
-        "lookups": [{"kind": kind, "query": name}],
-    }]
+    return [{**request_new(kind, name, relation=relation),
+             "lookups": [{"kind": kind, "query": name}]}]
 
 
 def _body(sid, message, request_id, previous=None):
@@ -119,13 +114,9 @@ def test_a_stop_while_the_model_runs_ends_the_run_as_stopped(client, semantic_pr
         started.set()
         release.wait(timeout=5)
         item = request["current_plan"]["items"][0]
-        return {"mutations": [{
-            "verb": "change",
-            "target_ref": first_item_ref(request),
-            "name": item["name"],
-            "field": "quantity",
-            "quantity": {"mode": "delta", "value": 1},
-        }]}
+        return request_amend(
+            focus=first_item_ref(request), name=item["name"], op="adjust_quantity", quantity=1
+        )
 
     provider = semantic_provider([blocked_change])
     request_id = str(uuid.uuid4())
@@ -283,7 +274,7 @@ def test_row_add_refresh_and_confirm_buy_only_what_is_outstanding(
     sid = create_session(client)
     first = _turn_ok(client, sid, "买点鸡蛋")
 
-    semantic_provider([*lookup_then_add("product", "牛奶", "牛奶")])
+    semantic_provider([*lookup_then_add("product", "牛奶", "牛奶", relation="append")])
     body = _turn_ok(client, sid, "再来一盒牛奶", first)
     rows = [i for i in body["plan"]["items"] if i.get("selected", True)]
     assert len(rows) >= 2, rows

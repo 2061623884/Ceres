@@ -108,23 +108,12 @@ class LiveSemanticProvider:
         user_message = str(request.get("user_message") or "")
         if history and history[-1] == {"role": "user", "content": user_message}:
             history = history[:-1]
-        protocol = dict(request.get("protocol") or {})
-        system = SYSTEM_PROMPT
-        if request.get("query_results"):
-            properties = dict(protocol.get("properties") or {})
-            properties.pop("lookups", None)
-            properties.pop("queries", None)
-            properties.pop("purchase_requested", None)
-            if request.get("read_only"):
-                properties.pop("mutations", None)
-            protocol["properties"] = properties
-            system += RETRIEVAL_COMPLETE_PROMPT
+        # ``build_request`` already staged the protocol: the proposal schema while
+        # understanding, the reply-only schema once retrieval ran.
+        protocol = request.get("protocol") or {}
         answering = bool(request.get("query_results"))
-        examples = [
-            (example_request, answer) for example_request, answer in PROPOSAL_EXAMPLES
-            if bool(example_request.get("query_results")) == answering
-            and not (request.get("read_only") and answer.get("mutations"))
-        ]
+        system = SYSTEM_PROMPT + (RETRIEVAL_COMPLETE_PROMPT if answering else "")
+        examples = [] if answering else PROPOSAL_EXAMPLES
         return {
             "model": self.settings.llm_model,
             "messages": [

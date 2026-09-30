@@ -28,7 +28,7 @@ def snapshot(client, sid):
 
 
 def question():
-    return {"uncertainties": [{
+    return {"questions": [{
         "slot": "product_choice", "question": "你想要哪一种？",
     }]}
 
@@ -36,19 +36,21 @@ def question():
 def named_purchase(name="鸡蛋", *, relation="new"):
     """A single Proposal: decide the purchase before its real lookup runs."""
     exact = {"鸡蛋": "鲜鸡蛋 10枚装", "可乐": "可乐 330毫升"}.get(name, name)
-    return {"understanding": request_new("product", exact, relation=relation),
+    return {**request_new("product", exact, relation=relation),
             "lookups": [{"kind": "product", "query": exact}]}
 
 
-def test_plan_and_question_are_both_returned(client, semantic_provider):
+def test_a_question_alongside_a_write_clarifies_and_writes_nothing(client, semantic_provider):
+    # Rule 3: questions + any write -> clarify MODEL_QUESTION, nothing written.
     semantic_provider([{**named_purchase(), **question()}])
     sid = create_session(client)
     body = send(client, sid, "买这个，另外一种你问我一下")
-    assert body["plan_effect"] == "replace", (body["route"], body["action_results"], body["message"])
-    assert body["plan"] and body["plan"]["items"], body
+    assert body["route"] == "clarify", (body["route"], body["action_results"], body["message"])
+    assert body["plan_effect"] == "keep", body
+    assert body["plan"] is None, body
     assert body["pending_clarifications"], body
     restored = snapshot(client, sid)
-    assert restored["plan"]["plan_id"] == body["plan"]["plan_id"]
+    assert restored["plan"] is None, restored
     assert restored["pending_clarifications"], restored
 
 
@@ -69,8 +71,8 @@ def test_taskless_question_survives_restore_and_next_turn(client, semantic_provi
 
 
 def test_unknown_uncertainty_ref_is_not_silently_dropped(client, semantic_provider):
-    invalid = {"uncertainties": [{"slot": "choice", "question": "选一个？",
-               "options": [{"candidate_ref": "made-up-ref"}]}]}
+    invalid = {"questions": [{"slot": "choice", "question": "选一个？",
+               "options": ["made-up-ref"]}]}
     semantic_provider([invalid])
     sid = create_session(client)
     body = send(client, sid, "要哪个？")
@@ -82,8 +84,7 @@ def test_unknown_uncertainty_ref_is_not_silently_dropped(client, semantic_provid
 def test_failed_mutation_cannot_claim_success_in_reply(client, semantic_provider):
     semantic_provider([named_purchase(), {
         "reply": "已经把不存在的商品加进清单了。",
-        "understanding": request_new("product", "不存在的商品", relation="append"),
-        "mutations": [{"verb": "add", "candidate_ref": "made-up-ref", "name": "不存在的商品"}],
+        **request_new("product", "不存在的商品", relation="append", ref="made-up-ref"),
     }])
     sid = create_session(client)
     first = send(client, sid, "买一件")
@@ -114,10 +115,9 @@ def test_sse_committed_plan_is_explicit_replace(client, semantic_provider):
 
 def test_change_target_cannot_point_outside_active_plan(client, semantic_provider):
     semantic_provider([named_purchase(), {
-        "understanding": request_amend(focus="unissued-dish"),
+        **request_amend(focus="unissued-dish", name="番茄炒蛋",
+                         changes={"set": {"people": 4}}),
         "lookups": [{"kind": "dish", "query": "番茄炒蛋"}],
-        "mutations": [{"verb": "change", "field": "people", "people": 4,
-                       "target_ref": "unissued-dish", "name": "番茄炒蛋"}],
     }])
     sid = create_session(client)
     first = send(client, sid, "买一件")
@@ -132,11 +132,12 @@ def test_change_target_cannot_point_outside_active_plan(client, semantic_provide
 @pytest.mark.parametrize("extra", [
     {"people": 4}, {"constraints": {"budget_yuan": 20}}, {"unknown_field": "x"},
 ])
-def test_quantity_change_rejects_other_typed_fields(extra):
+def test_quantity_edit_rejects_other_typed_fields(extra):
     from app.agent.protocol import SemanticProtocolError, parse_proposal
-    with pytest.raises(SemanticProtocolError):
-        parse_proposal({"mutations": [{"verb": "change", "target_ref": "i1",
-            "field": "quantity", "quantity": {"mode": "set", "value": 2}, **extra}]})
+    with pytest.raises(SemanticProtocolError) as error:
+        parse_proposal({"focus": {"ref": "i1"},
+                        "edit": {"op": "set_quantity", "quantity": 2, **extra}})
+    assert error.value.code == "MALFORMED_PROPOSAL"
 
 
 def test_reference_identity_is_stable_for_same_catalog_target():
@@ -210,14 +211,30 @@ def test_declared_purchase_survives_retrieval(client, semantic_provider):
     assert [row["sku_id"] for row in body["plan"]["items"]] == ["demo:cola-330ml"]
 
 
-@pytest.mark.parametrize("value", [None, "true", 1, {"value": True}, []])
-def test_purchase_requested_must_be_a_boolean(value):
+@pytest.mark.parametrize("payload", [
+    {"target": {"kind": "dish"}},
+    {"target": {"kind": "meal", "intent": "order"}},
+    {"target": {"kind": "meal", "relation": "new"}},
+    {"constraints": {"fulfillment_mode": "delivery"}},
+    {"plan_act": "cancel"},
+    {"focus": {"ref": "g1"}, "edit": {"op": "set_quantity", "quantity": 0}},
+    {"focus": {"ref": "g1"}, "edit": {"op": "adjust_quantity", "quantity": 0}},
+    {"focus": {"ref": "g1"}, "edit": {"op": "set_quantity", "quantity": "2"}},
+    {"reads": [{"kind": "recommend", "topic": "菜" * 201}]},
+])
+def test_an_out_of_vocabulary_value_is_refused_not_guessed(payload):
+    assert proposal_error(payload).code == "MALFORMED_PROPOSAL"
+
+
+def test_legacy_purchase_requested_key_is_rejected_not_silently_dropped():
+    # purchase_requested is gone (target.intent=buy carries this now); an old
+    # proposal that still sends it is an unknown top-level key, not a silently
+    # ignored field.
     from app.agent.protocol import SemanticProtocolError, parse_proposal
 
-    with pytest.raises(SemanticProtocolError):
-        parse_proposal({"reply": "好", "purchase_requested": value})
-    assert parse_proposal({"reply": "好"}).purchase_requested is False
-    assert parse_proposal({"reply": "好", "purchase_requested": True}).purchase_requested is True
+    with pytest.raises(SemanticProtocolError) as error:
+        parse_proposal({"reply": "好", "purchase_requested": True})
+    assert error.value.code == "MALFORMED_PROPOSAL"
 
 
 def proposal_error(payload):
@@ -227,35 +244,30 @@ def proposal_error(payload):
     return error.value
 
 
-def added(index):
-    return {"verb": "add", "candidate_ref": f"p{index}", "name": f"商品{index}"}
-
-
 def uncertainty(index):
     return {"slot": f"s{index}", "question": f"问题{index}"}
 
 
 def test_proposal_accepts_every_documented_size():
+    # Limits: lookups+reads <= 4, questions <= 3 (display_refs/resolved_questions
+    # are shape-checked separately at <= 12; see test_unusable_reference_list_is_refused).
     from app.agent.protocol import parse_proposal
     proposal = parse_proposal({
-        "mutations": [added(i) for i in range(8)],
-        "uncertainties": [uncertainty(i) for i in range(3)],
+        "questions": [uncertainty(i) for i in range(3)],
         "lookups": [{"kind": "product", "query": "可乐"}],
-        "queries": [{"kind": "recommend"}, {"kind": "cart"}, {"kind": "catalog"}],
+        "reads": [{"kind": "recommend"}, {"kind": "cart"}, {"kind": "catalog"}],
         "display_refs": [f"r{i}" for i in range(12)],
         "resolved_questions": [f"q{i}" for i in range(12)],
     })
-    assert len(proposal.mutations) == 8
     assert len(proposal.uncertainties) == 3
     assert len(proposal.lookups) + len(proposal.queries) == 4
     assert parse_proposal({"reply": "好", "display_refs": [], "resolved_questions": []}).reply == "好"
 
 
 @pytest.mark.parametrize("payload", [
-    {"mutations": [added(i) for i in range(9)]},
-    {"uncertainties": [uncertainty(i) for i in range(4)]},
+    {"questions": [uncertainty(i) for i in range(4)]},
     {"lookups": [{"kind": "product", "query": "可乐"}] * 3,
-     "queries": [{"kind": "cart"}] * 2},
+     "reads": [{"kind": "cart"}] * 2},
 ])
 def test_oversized_proposal_is_refused_with_the_limit_code(payload):
     assert proposal_error(payload).code == "PROPOSAL_LIMIT_EXCEEDED"
@@ -275,13 +287,14 @@ def test_unusable_reference_list_is_refused(key, values):
 
 
 def test_lookup_phase_does_not_precommit_an_independent_add(client, semantic_provider):
-    # An invalid purchase statement alongside reads cannot pre-commit anything.
+    # A buy intent that names no target, alongside reads, cannot pre-commit
+    # anything: without a target there is no goal, so the reads only look.
     semantic_provider(
         [
-            {"understanding": {"speech_act": "request_action"},
-             "purchase_requested": True,
-             "queries": [{"kind": "recommend", "query": "家常菜"}],
+            {"target": {"intent": "buy"},
+             "reads": [{"kind": "recommend", "topic": "家常菜"}],
              "lookups": [{"kind": "product", "query": "鸡蛋"}]},
+            reply_only("这些是找到的候选。"),
         ]
     )
     sid = create_session(client)
@@ -296,7 +309,7 @@ def test_displayed_order_is_persisted_not_replaced_by_catalog_order(client, sema
         rows = request["current_plan"]["items"]
         assert len(rows) >= 2
         # The shopper sees the inverse of stored plan order.
-        return {"reply": "给你两个选择。", "understanding": {"speech_act": "chat"},
+        return {"reply": "给你两个选择。",
                 "display_refs": [rows[-1]["ref"], rows[0]["ref"]]}
     provider = semantic_provider([
         named_purchase(), named_purchase("可乐", relation="append"), display,
@@ -317,13 +330,9 @@ def test_displayed_order_is_persisted_not_replaced_by_catalog_order(client, sema
 def test_scenario_builds_directly_without_a_pending_question(client, semantic_provider):
     def request_scenario(request):
         scenario = request["candidates"]["scenarios"][0]
-        return {
-            "understanding": request_new(
-                "scenario", scenario["name"], relation="new", people=4
-            ),
-            "mutations": [{"verb": "add", "candidate_ref": scenario["ref"],
-                           "name": scenario["name"], "people": 4}],
-        }
+        return request_new(
+            "scenario", scenario["name"], relation="new", people=4, ref=scenario["ref"]
+        )
 
     semantic_provider([request_scenario])
     sid = create_session(client)
@@ -338,11 +347,9 @@ def test_compound_remove_and_add_is_not_executed_partially(client, semantic_prov
     def compound(request):
         group = request["current_plan"]["groups"][0]
         return {
-            "understanding": request_amend(focus=group["ref"]),
-            "mutations": [
-                {"verb": "remove", "target_ref": group["ref"], "name": group["name"]},
-                {"verb": "add", "candidate_ref": "missing-new-target"},
-            ],
+            **request_new("product", "另一个", relation="switch", ref="missing-new-target"),
+            "focus": {"ref": group["ref"], "name": group["name"]},
+            "edit": {"op": "remove"},
         }
     semantic_provider([named_purchase(), compound])
     sid = create_session(client)
@@ -373,8 +380,8 @@ def test_repeated_same_target_does_not_regenerate_plan(client, semantic_provider
 
 
 def test_echoed_completed_read_is_not_reexecuted(client, semantic_provider):
-    provider = semantic_provider([{"queries": [{"kind": "recommend"}]},
-        {"queries": [{"kind": "recommend"}], "reply": "这几个是真实候选，可以慢慢挑。"}])
+    provider = semantic_provider([{"reads": [{"kind": "recommend"}]},
+        {"reads": [{"kind": "recommend"}], "reply": "这几个是真实候选，可以慢慢挑。"}])
     sid = create_session(client)
     result = send(client, sid, "推荐一下")
     assert result["plan_effect"] == "keep"
@@ -388,12 +395,10 @@ def test_valid_ref_with_wrong_product_name_is_not_executed(client, semantic_prov
         # A ref that really came back from this turn's retrieval, paired with a
         # different product's name: identity must still be refused.
         rows = request["candidates"]["products"]
-        # The goal itself describes the ref it points at; the *mutation* then pairs
-        # that ref with another product's name, which the identity check must refuse.
+        # The goal names one product, the ref points at another: the identity
+        # check must refuse rather than build whichever the ref resolves to.
         return {"reply": "可乐已经加入购物车了！",
-                "understanding": request_new("product", rows[0]["name"], relation="append"),
-                "mutations": [{
-                    "verb": "add", "candidate_ref": rows[0]["ref"], "name": "可乐 330毫升"}]}
+                **request_new("product", "可乐 330毫升", relation="append", ref=rows[0]["ref"])}
     semantic_provider([named_purchase(), wrong_name])
     sid = create_session(client)
     first = send(client, sid, "买一件")
@@ -401,15 +406,20 @@ def test_valid_ref_with_wrong_product_name_is_not_executed(client, semantic_prov
     cart = client.get("/api/v1/cart").json()
     second = send(client, sid, "再加一瓶可乐", first)
     assert second["plan_effect"] == "keep"
-    assert any(r.get("code") == "TARGET_NAME_MISMATCH" for r in second["action_results"])
+    # The gate asks which goal was meant (GOAL_TARGET_MISMATCH) instead of building it.
+    assert any(
+        r.get("slot") == "goal" and r.get("status") == "needs_clarification"
+        for r in second["action_results"]
+    ), second["action_results"]
     assert "可乐已经加入购物车了" not in second["message"]
     assert snapshot(client, sid)["plan"] == before
     assert client.get("/api/v1/cart").json()["items"] == cart["items"]
 
 
-def test_ref_without_name_cannot_bypass_identity_check(client, semantic_provider):
-    semantic_provider([{"understanding": request_new("product", "鲜鸡蛋 10枚装"),
-                        "mutations": [{"verb": "add", "candidate_ref": "p1"}]}])
+def test_unresolved_target_ref_cannot_bypass_identity_check(client, semantic_provider):
+    # A ref the server never issued cannot be adopted just because a name came
+    # along with it: identity is still checked against the real candidate set.
+    semantic_provider([request_new("product", "鲜鸡蛋 10枚装", ref="p1")])
     sid = create_session(client)
     result = send(client, sid, "买一件")
     assert result["plan_effect"] == "keep"
@@ -430,7 +440,7 @@ def test_even_successful_mutation_uses_real_receipt_not_model_success_claim(clie
 
 
 def test_named_recipe_query_and_general_advice_are_read_only(client, semantic_provider):
-    provider = semantic_provider([{"queries": [{"kind": "recipe", "query": "番茄炒蛋"}]},
+    provider = semantic_provider([{"reads": [{"kind": "recipe", "topic": "番茄炒蛋"}]},
         reply_only("一般做法：鸡蛋炒到刚凝固就盛出。")])
     sid = create_session(client)
     result = send(client, sid, "番茄炒蛋怎么做才嫩？")
@@ -441,25 +451,22 @@ def test_named_recipe_query_and_general_advice_are_read_only(client, semantic_pr
     assert result["message"].startswith("一般做法")
 
 
-def test_protocol_schema_does_not_advertise_invalid_note_or_constraints_change():
+def test_protocol_schema_advertises_only_the_independent_dimensions():
     from app.agent.protocol import proposal_schema
     schema = proposal_schema()
     assert schema["additionalProperties"] is False
     props = schema["properties"]
-    assert set(props["lookups"]["items"]["properties"]) == {"kind", "query", "constraints"}
-    # RAG read-only exclusions are not a mutation or an internal money field.
-    assert set(props["lookups"]["items"]["properties"]["constraints"]["properties"]) == {
-        "excluded_ingredients", "budget_yuan"
-    }
-    for form in props["mutations"]["items"]["oneOf"]:
-        assert "name" in form["required"]
-        assert form["properties"].get("field", {}).get("const") != "constraints"
+    # No whole-turn label and no low-level mutation list: the gate owns the route.
+    assert not {"understanding", "speech_act", "mutations", "queries"} & set(props)
+    # A read names only what to look for; the stated exclusions/budget are copied
+    # onto it by the server from ``constraints``, which speaks yuan only.
+    assert set(props["lookups"]["items"]["properties"]) == {"kind", "query"}
+    assert "budget_fen" not in props["constraints"]["properties"]
 
 
 def test_completed_read_without_answer_reports_failed_reply_not_success(client, semantic_provider):
-    semantic_provider([{"understanding": {"speech_act": "ask_fact"},
-                        "queries": [{"kind": "recommend"}]},
-                       {"queries": [{"kind": "recommend"}]}])
+    semantic_provider([{"reads": [{"kind": "recommend"}]},
+                       {"reads": [{"kind": "recommend"}]}])
     sid = create_session(client)
     result = send(client, sid, "推荐一下")
     assert result["plan_effect"] == "keep"
@@ -483,13 +490,15 @@ def confirm_current(client, sid):
 
 def test_confirm_closes_old_questions_but_post_confirm_chat_can_ask_new_ones(client, semantic_provider):
     semantic_provider(
-        [{**named_purchase(), **question()},
+        [named_purchase(),
+         {**question(), "reply": "另一个口味你想要哪一种？"},
          {**question(), "reply": "下次你想买哪一种？"},
          reply_only("可以，先保留这个问题。")]
     )
     sid = create_session(client)
-    first = send(client, sid, "先买一件，另一个口味再问我")
-    old_id = first["pending_clarifications"][0]["question_id"]
+    first = send(client, sid, "先买一件")
+    asked = send(client, sid, "另一个口味再问我", first)
+    old_id = asked["pending_clarifications"][0]["question_id"]
     confirmed = confirm_current(client, sid)
     assert confirmed["pending_clarifications"] == []
     assert confirmed["plan_read_only"] is True
@@ -528,18 +537,15 @@ def test_new_task_drops_previous_task_pending_and_displayed_candidates(client, s
 
 
 def test_product_group_quantity_compiles_to_its_one_item(client, semantic_provider):
-    def change(mode, value):
+    def change(op, quantity):
         def propose(request):
             group = request["current_plan"]["groups"][0]
-            return {"understanding": request_amend(focus=group["ref"]),
-                    "mutations": [{"verb": "change", "target_ref": group["ref"],
-                                   "name": group["name"], "field": "quantity",
-                                   "quantity": {"mode": mode, "value": value}}]}
+            return request_amend(focus=group["ref"], name=group["name"], op=op, quantity=quantity)
         return propose
     semantic_provider(
         [named_purchase(),
          named_purchase("可乐", relation="append"),
-         change("set", 2), change("delta", -1)]
+         change("set_quantity", 2), change("adjust_quantity", -1)]
     )
     sid = create_session(client)
     first = send(client, sid, "买一件")

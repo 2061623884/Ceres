@@ -23,7 +23,6 @@ import pytest
 
 from support import create_session, post_turn
 from support.semantic_agent import (
-    Continuation,
     lookup_then_add,
     request_amend,
 )
@@ -108,7 +107,7 @@ def test_a_model_that_outlives_the_budget_writes_nothing(
     def slow_round(request):
         turn_clock.now += turn_budget * 2
         return {
-            "purchase_requested": True,
+            "target": {"kind": "product", "name": "牛奶", "intent": "buy"},
             "lookups": [{"kind": "product", "query": "牛奶"}],
         }
 
@@ -140,12 +139,7 @@ def test_a_read_that_outlives_the_budget_writes_nothing(
 
     monkeypatch.setattr(read_module.ReadTools, "_lookup", slow_lookup)
 
-    semantic_provider([
-        {"understanding": {"speech_act": "request_action"},
-         "purchase_requested": True,
-         "lookups": [{"kind": "product", "query": "牛奶"}]},
-        {"mutations": [{"verb": "add", "candidate_ref": "pMILK", "name": "全脂牛奶 1升"}]},
-    ])
+    semantic_provider([*lookup_then_add("product", "全脂牛奶 1升")])
     sid = create_session(client)
 
     response = send(client, sid, "买一盒牛奶")
@@ -215,21 +209,11 @@ def test_a_mutation_committed_before_the_budget_runs_out_is_reported_as_saved(
     monkeypatch.setattr(NoOpTurnProgressSink, "on_phase", on_phase)
 
     def two_people_changes(request):
-        """Two supplements of the same goal: four people, then three."""
+        """A headcount supplement of the goal on screen (four people)."""
         group = request["current_plan"]["groups"][0]
-        return {
-            "understanding": request_amend(focus=group["ref"]),
-            "mutations": [
-                {
-                    "verb": "change",
-                    "target_ref": group["ref"],
-                    "name": group["name"],
-                    "field": "people",
-                    "people": people,
-                }
-                for people in (4, 3)
-            ],
-        }
+        return request_amend(
+            focus=group["ref"], name=group["name"], changes={"set": {"people": 4}}
+        )
 
     sid = create_session(client)
     semantic_provider([*lookup_then_add("dish", "番茄炒蛋", "番茄", people=2)])
@@ -285,7 +269,7 @@ def test_a_stop_that_arrives_during_the_build_writes_no_plan(
         NoOpTurnProgressSink, "should_stop", lambda self: stopped["value"]
     )
 
-    semantic_provider([*lookup_then_add("product", "牛奶", "牛奶")])
+    semantic_provider([*lookup_then_add("product", "全脂牛奶 1升")])
     sid = create_session(client)
     request_id = str(uuid.uuid4())
 
@@ -342,7 +326,7 @@ def test_a_read_port_serves_the_first_read_and_skips_the_rest_once_time_is_up():
             {"kind": "product", "query": "牛奶"},
             {"kind": "product", "query": "可乐"},
         ],
-        "queries": [{"kind": "recommend"}],
+        "reads": [{"kind": "recommend"}],
     })
 
     results = reads.serve(proposal, CandidateSet(), lookup_limit=2)
@@ -365,7 +349,7 @@ def test_a_read_port_out_of_time_serves_nothing_and_reports_every_request():
             {"kind": "product", "query": "牛奶"},
             {"kind": "product", "query": "可乐"},
         ],
-        "queries": [{"kind": "recommend"}],
+        "reads": [{"kind": "recommend"}],
     })
     # ``db`` is never touched: the budget is checked before the first read.
     reads = ReadTools(

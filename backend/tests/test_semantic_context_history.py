@@ -35,7 +35,7 @@ def _assert_snapshot(sid, body):
 
 def test_first_and_post_terminal_purchases_have_immutable_snapshots(client, semantic_provider):
     semantic_provider([{
-        "understanding": request_new("product", "鲜鸡蛋 10枚装"),
+        **request_new("product", "鲜鸡蛋 10枚装"),
         "lookups": [{"kind": "product", "query": "鲜鸡蛋 10枚装"}],
     }])
     sid = create_session(client)
@@ -51,7 +51,7 @@ def test_first_and_post_terminal_purchases_have_immutable_snapshots(client, sema
     assert cancelled.status_code == 200, cancelled.text
     previous = client.get(f"/api/v1/guide/sessions/{sid}").json()
     semantic_provider([{
-        "understanding": request_new("product", "可乐 330毫升"),
+        **request_new("product", "可乐 330毫升"),
         "lookups": [{"kind": "product", "query": "可乐 330毫升"}],
     }])
     second = _turn(client, sid, "另买可乐", previous)

@@ -26,7 +26,7 @@ def turn(client, session_id: str, message: str, previous: dict | None = None):
 
 def _plan(client, sid: str, semantic_provider) -> dict:
     semantic_provider([{
-        "understanding": request_new("dish", TOMATO, people=2),
+        **request_new("dish", TOMATO, people=2),
         "lookups": [{"kind": "dish", "query": TOMATO}],
     }])
     body = turn(client, sid, "我想吃番茄炒蛋，两个人").json()

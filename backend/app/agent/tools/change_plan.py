@@ -552,7 +552,7 @@ class PlanChangeExecutor:
             and pending.target_ref == candidate.ref
         ):
             return str(getattr(pending, "relation", None) or "append")
-        if self.decision is not None and not self.decision.legacy_protocol:
+        if self.decision is not None:
             return str(self.decision.relation)
         return None
 

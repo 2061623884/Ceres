@@ -20,11 +20,7 @@ import json
 import uuid
 
 from support import create_session, post_turn
-from support.semantic_agent import (
-    Continuation,
-    lookup_matches,
-    lookup_then_add,
-)
+from support.semantic_agent import lookup_then_add
 
 BAKING = {"page": "category", "category_id": "baking"}
 
@@ -43,23 +39,23 @@ def _db(client):
 def test_the_category_page_retrieves_real_products_then_asks(
     client, semantic_provider
 ):
-    """A real product lookup on the browsed category, and a question from it."""
+    """A real product lookup on the browsed category, and a question from it.
 
-    def ask(request):
-        rows = lookup_matches(request, "product")
-        assert rows, "the baking category must retrieve real products"
-        return {
-            "uncertainties": [
-                {
-                    "slot": "product_choice",
-                    "question": "这几种面粉你要哪一种？",
-                    "options": [{"candidate_ref": r["ref"]} for r in rows[:3]],
-                }
-            ]
-        }
-
+    One pass (spec rule 1): the target and its lookup are the same model call.
+    "面粉" only names the SKU by substring, never its exact name ("低筋面粉
+    250克（小包装）"), so the mutation node's own resolution
+    (``_resolve_named_target`` in ``app/agent/graph/nodes/mutation.py``) finds no
+    exact/alias hit and turns the real lookup hits into a clarify question
+    (spec rule 1: "a similar hit becomes a question, never a build") — the
+    model never authors the question or its options itself.
+    """
     semantic_provider(
-        [{"lookups": [{"kind": "product", "query": "面粉"}]}, Continuation(ask)]
+        [
+            {
+                "target": {"kind": "product", "name": "面粉", "intent": "buy"},
+                "lookups": [{"kind": "product", "query": "面粉"}],
+            }
+        ]
     )
     sid = create_session(client, page="category", category_id="baking")
     body = turn(client, sid, "想做蛋糕，面粉小包装，20元以内").json()
@@ -75,7 +71,11 @@ def test_the_category_page_retrieves_real_products_then_asks(
 def test_a_category_turn_can_plan_a_real_product_but_writes_no_cart(
     client, semantic_provider
 ):
-    provider = semantic_provider(lookup_then_add("product", "面粉", "面粉"))
+    # The exact SKU name ("低筋面粉 250克（小包装）") gets an exact retrieval hit,
+    # which the mutation node binds without a question (spec rule 1); a mere
+    # substring like "面粉" is ambiguous and would clarify instead (see the test
+    # above).
+    semantic_provider(lookup_then_add("product", "低筋面粉 250克（小包装）"))
     sid = create_session(client, page="category", category_id="baking")
     body = turn(client, sid, "帮我配齐做蛋糕的材料").json()
 
@@ -83,13 +83,17 @@ def test_a_category_turn_can_plan_a_real_product_but_writes_no_cart(
     target = body["plan"]["targets"][0]
     assert target["kind"] == "product", target
     assert body["task_id"]
-    # The retrieval really happened and really returned sellable rows.
-    product_results = [
-        r
-        for r in provider.requests[-1]["query_results"]
-        if r.get("lookup_kind") == "product"
-    ]
-    assert product_results and product_results[0]["matches"], product_results
+    # The retrieval really happened and really returned a sellable row: the
+    # built plan's own line carries the real SKU, price and stock evidence, and
+    # the turn's lookup receipt reports a completed retrieval (there is no
+    # second model call to inspect query_results on — spec rule 1, one pass).
+    lookup_receipt = next(
+        r for r in body["action_results"] if r.get("kind") == "lookup"
+    )
+    assert lookup_receipt["status"] == "completed", lookup_receipt
+    assert lookup_receipt["retrieval_status"] == "ok", lookup_receipt
+    line = body["plan"]["items"][0]
+    assert line["sku_id"] and line["evidence"]["stock_verified"], line
     assert client.get("/api/v1/cart").json()["items"] == [], "a plan is not a purchase"
 
 
@@ -121,7 +125,7 @@ def test_an_existing_category_selection_task_runs_the_same_chain(
     finally:
         db.close()
 
-    semantic_provider(lookup_then_add("product", "面粉", "面粉"))
+    semantic_provider(lookup_then_add("product", "低筋面粉 250克（小包装）"))
     resp = turn(
         client,
         sid,

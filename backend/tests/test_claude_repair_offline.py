@@ -25,8 +25,7 @@ from sqlalchemy import text
 
 from support import create_session, post_turn, post_turn
 from support.semantic_agent import (
-    Continuation,
-    lookup_matches,
+    lookup_then_add,
     lookup_then_add_id,
     lookup_then_reply,
     reply_only,
@@ -75,7 +74,7 @@ def count_rows(client, table: str) -> int:
 def test_a_verified_target_is_retrieved_and_committed_in_one_turn(
     client, semantic_provider
 ):
-    """Retrieve for real, then add the row the retrieval returned."""
+    """Name the target and look it up in one call; the server binds the exact hit."""
     provider = semantic_provider(
         lookup_then_add_id("dish", "番茄炒蛋", TOMATO, people=2)
     )
@@ -90,11 +89,9 @@ def test_a_verified_target_is_retrieved_and_committed_in_one_turn(
     assert body["plan"]["targets"][0]["target_id"] == TOMATO
     assert body["task_id"], "a task is created lazily when a real plan exists"
 
-    # Two model calls: the retrieval round, then the round that compiles the
-    # mutation from what really came back. No third call is asked for.
-    assert len(provider.requests) == 2, provider.requests
+    # One model call: the write never waits for a second model round.
+    assert len(provider.requests) == 1, provider.requests
     assert provider.requests[0].get("query_results") in (None, [])
-    assert provider.requests[1]["query_results"], "the second call must carry real facts"
 
 
 def test_the_api_plan_surface_keeps_every_declared_field(client, semantic_provider):
@@ -137,20 +134,8 @@ def test_an_open_question_and_its_real_options_survive_a_reload(
 ):
     """The question and the refs it offered are stored, not kept in memory."""
 
-    def ask(request):
-        rows = lookup_matches(request, "dish")
-        assert len(rows) >= 2, rows
-        return {
-            "uncertainties": [
-                {
-                    "slot": "dish_choice",
-                    "question": "你想吃哪一道？",
-                    "options": [{"candidate_ref": r["ref"]} for r in rows[:3]],
-                }
-            ]
-        }
-
-    semantic_provider([{"lookups": [{"kind": "dish", "query": "青椒"}]}, Continuation(ask)])
+    # 「青椒」 names no dish exactly: the server offers the similar real dishes.
+    semantic_provider(lookup_then_add("dish", "青椒"))
     sid = create_session(client)
     body = turn(client, sid, "我想做个青椒的菜").json()
 
@@ -166,7 +151,7 @@ def test_an_open_question_and_its_real_options_survive_a_reload(
     assert session["task_id"] is None
     stored = session["pending_clarifications"]
     assert stored, "the question must be durable, not turn-local"
-    assert stored[0]["question"] == "你想吃哪一道？"
+    assert stored[0]["question"] == pending[0]["question"]
 
 
 def test_choosing_a_dish_after_the_question_creates_the_purchase_task(
@@ -190,30 +175,20 @@ def test_choosing_a_dish_after_the_question_creates_the_purchase_task(
 def test_a_ref_this_turn_never_issued_cannot_be_prepared(client, semantic_provider):
     """A ref the server did not issue this turn is refused, not guessed at.
 
-    The proposal is otherwise valid — a declared request_action goal with the
-    user's own headcount — so the auth path is reached and it is the *forged
-    reference* that is refused (UNKNOWN_CANDIDATE_REF), with zero write.
+    The proposal is otherwise valid — a declared buy target with the user's own
+    headcount — so the auth path is reached and it is the *forged reference*
+    that is refused (UNKNOWN_CANDIDATE_REF), with zero write.
     """
     semantic_provider(
         [
             {
-                "understanding": {
-                    "speech_act": "request_action",
-                    "goal_relation": "new",
-                    "new_goal": {
-                        "kind": "meal_plan",
-                        "fulfillment_mode": "self_cook",
-                        "target_name": "青椒肉丝",
-                        "constraints": {"people": 2},
-                    },
+                "target": {
+                    "kind": "meal",
+                    "name": "青椒肉丝",
+                    "intent": "buy",
+                    "ref": "d0000000000forged",
                 },
-                "mutations": [
-                    {
-                        "verb": "add",
-                        "candidate_ref": "d0000000000forged",
-                        "name": "青椒肉丝",
-                    }
-                ],
+                "constraints": {"people": 2, "fulfillment_mode": "self_cook"},
             }
         ]
     )

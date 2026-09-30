@@ -1,18 +1,16 @@
 """Constrained goal parsing: the model proposes, the server normalizes.
 
 This module turns a bounded, structured goal proposal into a validated
-``Goal``, and a bounded, structured *semantic* proposal into an
-``Understanding``. It never reads the raw user message, never calls a model, and
-never touches the database, a plan or the cart: the understanding layer is a pure
-function over what the model already extracted.
+``Goal`` and merges the goal under discussion with later answers. It never reads
+the raw user message, never calls a model, and never touches the database, a
+plan or the cart: the understanding layer is a pure function over what the
+model already extracted.
 
 Strictness is the point. An unknown top-level or constraint key, a server-owned
 field (``plan_id``, ``price_fen``, ``route`` ...) or a wrongly shaped value is a
 ``GoalParseError`` rather than a silently ignored field, because "the model tried
 to set a price" and "the model said nothing about price" must not look the same.
-The same holds for the semantic contract: an unknown key, a ``set`` and ``clear``
-of one field, or a ``new_goal`` *and* a patch in one proposal is an error, not a
-field to drop.
+The per-turn ``Understanding`` is built by ``app.agent.protocol.parse_proposal``.
 
 See ``docs/plans/2026-09-19-purchase-intent-p1-implementation.md``.
 """
@@ -26,20 +24,16 @@ from typing import Any
 from pydantic import ValidationError
 
 from app.schemas.goal import (
-    CHANGE_FIELDS,
     FORBIDDEN_GOAL_KEYS,
     Goal,
     GoalCandidate,
-    GoalChangeSet,
     GoalChanges,
     GoalConstraints,
     IntentState,
     Understanding,
     normalize_fulfillment_mode,
     normalize_goal_kind,
-    normalize_goal_relation,
     normalize_meal_time,
-    normalize_speech_act,
 )
 
 
@@ -195,109 +189,6 @@ def parse_intent_state(raw: Goal | Any, *, source_turn_id: str | None = None) ->
     )
 
 
-#: Keys ``understanding`` may carry. Anything else is a protocol error.
-UNDERSTANDING_KEYS = frozenset(
-    {"speech_act", "focus_ref", "goal_relation", "new_goal", "changes", "notes"}
-)
-CHANGES_KEYS = frozenset({"set", "clear"})
-
-
-def _parse_change_set(raw: Any) -> GoalChangeSet:
-    if not isinstance(raw, Mapping):
-        raise GoalParseError("MALFORMED_UNDERSTANDING", "changes.set 必须是对象")
-    _reject_unknown(
-        raw, set(GoalChangeSet.model_fields), "changes.set", code="MALFORMED_UNDERSTANDING"
-    )
-    stated: dict[str, Any] = {}
-    if raw.get("people") is not None:
-        stated["people"] = _positive_int(raw.get("people"), "changes.set.people")
-    if raw.get("budget_yuan") is not None:
-        stated["budget_yuan"] = _budget_yuan(raw.get("budget_yuan"))
-    if raw.get("fulfillment_mode") is not None:
-        # An unknown mode becomes ``unspecified`` (ask, never assume), which the
-        # router then treats as a missing slot rather than as self-cook.
-        stated["fulfillment_mode"] = normalize_fulfillment_mode(raw.get("fulfillment_mode"))
-    if raw.get("meal_time") is not None:
-        stated["meal_time"] = normalize_meal_time(raw.get("meal_time"))
-    if raw.get("dietary") is not None:
-        stated["dietary"] = _str_list(raw.get("dietary"), "changes.set.dietary")
-    if raw.get("excluded_ingredients") is not None:
-        stated["excluded_ingredients"] = _str_list(
-            raw.get("excluded_ingredients"), "changes.set.excluded_ingredients"
-        )
-    try:
-        return GoalChangeSet(**stated)
-    except ValidationError as exc:  # pragma: no cover - guarded above
-        raise GoalParseError("MALFORMED_UNDERSTANDING", _validation_message(exc)) from exc
-
-
-def _parse_changes(raw: Any) -> GoalChanges:
-    if not isinstance(raw, Mapping):
-        raise GoalParseError("MALFORMED_UNDERSTANDING", "changes 必须是对象")
-    _reject_unknown(raw, CHANGES_KEYS, "changes", code="MALFORMED_UNDERSTANDING")
-    clear = _str_list(raw.get("clear"), "changes.clear")
-    unknown_clear = sorted(set(clear) - set(CHANGE_FIELDS))
-    if unknown_clear:
-        raise GoalParseError(
-            "MALFORMED_UNDERSTANDING",
-            f"changes.clear 含未知字段: {', '.join(unknown_clear)}",
-        )
-    try:
-        return GoalChanges(set=_parse_change_set(raw.get("set") or {}), clear=clear)
-    except ValidationError as exc:
-        raise GoalParseError(
-            "MALFORMED_UNDERSTANDING", _validation_message(exc)
-        ) from exc
-
-
-def parse_understanding(raw: Understanding | Any) -> Understanding:
-    """Normalize one semantic proposal into an ``Understanding``.
-
-    Normalization only turns *out-of-vocabulary* enum values into their
-    conservative defaults. A structurally illegal proposal — an unknown key, a
-    ``set``/``clear`` conflict, ``new_goal`` together with ``changes``, or a
-    relation that contradicts its payload — is refused instead, because the
-    honest answer to "I cannot tell what you meant" is to ask, not to guess.
-    """
-    if isinstance(raw, Understanding):
-        return raw
-    if not isinstance(raw, Mapping):
-        raise GoalParseError("MALFORMED_UNDERSTANDING", "understanding 必须是 JSON 对象")
-    forbidden = sorted(key for key in (str(k) for k in raw) if key in FORBIDDEN_GOAL_KEYS)
-    if forbidden:
-        raise GoalParseError(
-            "FORBIDDEN_FIELD",
-            f"understanding 不允许出现由服务端决定的字段: {', '.join(forbidden)}",
-        )
-    _reject_unknown(
-        raw, UNDERSTANDING_KEYS, "understanding", code="MALFORMED_UNDERSTANDING"
-    )
-
-    new_goal = raw.get("new_goal")
-    changes = raw.get("changes")
-    if new_goal is not None and changes is not None:
-        raise GoalParseError("MALFORMED_UNDERSTANDING", "new_goal 与 changes 只能二选一")
-    goal = parse_goal(new_goal) if new_goal is not None else None
-    parsed_changes = _parse_changes(changes) if changes is not None else None
-    declared_relation = str(raw.get("goal_relation") or "").strip()
-    try:
-        return Understanding(
-            speech_act=normalize_speech_act(raw.get("speech_act")),
-            focus_ref=_text(raw.get("focus_ref")),
-            goal_relation=normalize_goal_relation(raw.get("goal_relation")),
-            # Any non-empty value counts as a statement, whether or not it is in
-            # the vocabulary: an *invented* relation normalizes conservatively and
-            # must never be read as "nothing was said" either, or a typo would
-            # become permission to start a new goal.
-            relation_declared=bool(declared_relation),
-            new_goal=goal,
-            changes=parsed_changes,
-            notes=_str_list(raw.get("notes"), "understanding.notes"),
-        )
-    except ValidationError as exc:
-        raise GoalParseError("MALFORMED_UNDERSTANDING", _validation_message(exc)) from exc
-
-
 # ----------------------------------------------------------------- goal merging
 
 
@@ -372,14 +263,26 @@ def merge_goal_candidate(
     )
 
 
+def answer_goal_candidate(candidate: GoalCandidate, answer: Goal) -> Goal:
+    """The goal under discussion, completed by a named answer to its question.
+
+    What the answer states wins; what it leaves out keeps the candidate's value,
+    so "番茄炒蛋" after "两个人，想吃什么？" still carries the two people.
+    """
+    stated = answer.constraints.model_dump(exclude_defaults=True)
+    constraints = candidate.goal.constraints.model_copy(update=stated)
+    mode = answer.fulfillment_mode
+    if mode == "unspecified":
+        mode = candidate.goal.fulfillment_mode
+    return answer.model_copy(update={"constraints": constraints, "fulfillment_mode": mode})
+
+
 __all__ = [
-    "CHANGES_KEYS",
     "GoalParseError",
-    "UNDERSTANDING_KEYS",
+    "answer_goal_candidate",
     "apply_goal_changes",
     "candidate_ref_for",
     "merge_goal_candidate",
     "parse_goal",
     "parse_intent_state",
-    "parse_understanding",
 ]

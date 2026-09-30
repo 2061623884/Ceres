@@ -27,7 +27,7 @@ def test_timeout_identifies_the_exact_call_and_stage(client, semantic_provider, 
             other.rollback()
         if count == fail_on:
             raise LLMProviderError("MODEL_TIMEOUT", "private upstream detail", retryable=True)
-        return {"purchase_requested": True,
+        return {"target": {"kind": "meal", "name": "可乐鸡翅", "intent": "explore"},
                 "lookups": [{"kind": "dish", "query": "可乐鸡翅"}]}
 
     semantic_provider([propose, propose])

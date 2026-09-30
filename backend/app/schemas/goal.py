@@ -52,19 +52,13 @@ GoalRoute = Literal[
     "refuse_unsupported",
 ]
 
-#: What the sentence is *doing*, as opposed to what it is about. The two
-#: dimensions are orthogonal on purpose: a correction can switch the goal or
-#: amend the same one, and a read-only question can mention a goal without
-#: replacing the main one. ``unspecified`` is a real value ("the model did not
-#: say") and is always resolved conservatively — it never authorizes a write.
-SpeechAct = Literal[
-    "ask_fact",
-    "request_action",
-    "correct",
-    "answer_clarification",
-    "chat",
-    "unspecified",
-]
+#: How strongly the shopper wants the thing they named: only look at it, or get
+#: a list that can be bought. ``none`` means nothing was named.
+Intent = Literal["none", "explore", "buy"]
+
+#: What the shopper said about the whole plan on screen. It never authorizes a
+#: cart write by itself: the server checks every precondition.
+PlanAct = Literal["none", "confirm", "abandon"]
 
 #: How this turn's goal stands to the goal already on screen / in discussion.
 #: ``switch`` replaces the unconfirmed plan, ``append`` adds one more target,
@@ -132,14 +126,6 @@ GOAL_ROUTES: tuple[str, ...] = (
     "refuse_unsupported",
 )
 MEAL_TIMES: tuple[str, ...] = ("breakfast", "lunch", "dinner", "late_night", "snack")
-SPEECH_ACTS: tuple[str, ...] = (
-    "ask_fact",
-    "request_action",
-    "correct",
-    "answer_clarification",
-    "chat",
-    "unspecified",
-)
 GOAL_RELATIONS: tuple[str, ...] = ("new", "append", "switch", "amend", "unspecified")
 TURN_ROUTES: tuple[str, ...] = (
     "chat",
@@ -224,22 +210,6 @@ def normalize_meal_time(value: Any) -> MealTime | None:
     """A known meal time, or ``None``; an invented one is not kept."""
     text = _text(value)
     return text if text in MEAL_TIMES else None  # type: ignore[return-value]
-
-
-def normalize_speech_act(value: Any) -> SpeechAct:
-    """An unrecognised speech act stays ``unspecified``: no write is derived."""
-    text = _text(value)
-    return text if text in SPEECH_ACTS else "unspecified"  # type: ignore[return-value]
-
-
-def normalize_goal_relation(value: Any) -> GoalRelation:
-    """An unrecognised relation is undecided, which the gate resolves safely.
-
-    It is never mapped onto ``append``/``switch``: that would let a malformed
-    proposal replace or extend a real plan on the strength of a typo.
-    """
-    text = _text(value)
-    return text if text in GOAL_RELATIONS else "unspecified"  # type: ignore[return-value]
 
 
 class GoalConstraints(BaseModel):
@@ -357,31 +327,30 @@ class GoalChanges(BaseModel):
 
 
 class Understanding(BaseModel):
-    """The semantic proposal for one turn: meaning only, never authority.
+    """The server's reading of one proposal: meaning only, never authority.
 
-    It carries no route, readiness, version, price or stock — those are computed
-    on the server from this object plus the server's own snapshot. A new goal
-    and a field patch are mutually exclusive: a proposal cannot restate a whole
-    goal *and* patch it.
+    Built by ``app.agent.protocol.parse_proposal`` from the model's independent
+    dimensions. It carries no route, readiness, version, price or stock — the
+    gate computes those from this object plus the server's own snapshot. A new
+    goal and a field patch are mutually exclusive.
     """
 
     model_config = ConfigDict(extra="forbid")
 
-    speech_act: SpeechAct = "unspecified"
-    #: A ref the server itself issued this turn (active goal / pending goal /
-    #: pending question / plan target). The model chooses one, never invents one.
+    intent: Intent = "none"
+    plan_act: PlanAct = "none"
+    #: A ref the server itself issued (active goal / pending goal / pending
+    #: question / plan target). The model chooses one, never invents one.
     focus_ref: str | None = None
+    #: Derived by the parser: ``append`` / ``switch`` only when the shopper said
+    #: "add" / "replace"; ``amend`` for a patch or a row edit; otherwise
+    #: ``unspecified``, which the gate resolves against the server's state.
     goal_relation: GoalRelation = "unspecified"
-    #: Server-side bookkeeping, never model-authored: did the proposal carry a
-    #: relation at all? An *omitted* relation may be inferred when there is nothing
-    #: to relate to; one that was stated but is out of vocabulary (``unspecified``
-    #: after normalization) never may.
-    relation_declared: bool = False
     new_goal: Goal | None = None
     changes: GoalChanges | None = None
-    #: Honest remarks about the reading itself. Never a fact and never shown as
-    #: a promise.
-    notes: list[str] = Field(default_factory=list)
+    #: Conditions the shopper stated that nothing can apply yet, verbatim. They
+    #: never filter anything; the reply says they were not applied.
+    unsupported: list[str] = Field(default_factory=list)
 
     @model_validator(mode="after")
     def _new_goal_xor_patch(self) -> "Understanding":
@@ -449,7 +418,6 @@ class TurnDecision(BaseModel):
     write_blocked: bool
     reason_code: str
     relation: GoalRelation = "unspecified"
-    speech_act: SpeechAct = "unspecified"
     focus_ref: str | None = None
     focus_kind: FocusKind = "none"
     #: The goal the decision is about (the merged candidate for an amendment).
@@ -458,9 +426,6 @@ class TurnDecision(BaseModel):
     changed_fields: list[str] = Field(default_factory=list)
     #: The candidate to persist for later turns, when the goal is not ready yet.
     candidate: GoalCandidate | None = None
-    #: No semantic statement was made this turn (legacy proposal). The caller's
-    #: explicit compatibility policy decides what the server does with it.
-    legacy_protocol: bool = False
 
 
 class RouteDecision(BaseModel):
@@ -509,7 +474,6 @@ __all__ = [
     "GOAL_ROUTES",
     "MEAL_TIMES",
     "READINESS_STATES",
-    "SPEECH_ACTS",
     "TURN_ROUTES",
     "FocusKind",
     "FulfillmentMode",
@@ -521,19 +485,18 @@ __all__ = [
     "GoalKind",
     "GoalRelation",
     "GoalRoute",
+    "Intent",
     "IntentState",
     "MealTime",
+    "PlanAct",
     "Readiness",
     "RouteDecision",
-    "SpeechAct",
     "TurnDecision",
     "TurnRoute",
     "Understanding",
     "normalize_fulfillment_mode",
     "normalize_goal_kind",
-    "normalize_goal_relation",
     "normalize_meal_time",
     "normalize_readiness",
     "normalize_route",
-    "normalize_speech_act",
 ]

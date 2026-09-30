@@ -23,8 +23,8 @@ and ``docs/plans/2026-09-20-p1-planner-decision-layer-review.md``):
   empty ``missing_slots``;
 * the gate never reads the raw sentence and never calls a model: it checks
   structure, references and capability only;
-* a read-only or chat speech act blocks every write, while the turn may
-  still save focus and questions;
+* a turn with no goal and no edit only reads: it may answer, retrieve or ask,
+  but it never writes;
 * a goal under discussion is a *candidate*, kept apart from the plan on screen;
   filling its slots keeps its original switch/append intent.
 
@@ -57,7 +57,7 @@ SLOT_GOAL_RELATION = "goal_relation"
 SLOT_GOAL = "goal"
 SLOT_MIXED = "mixed_goal_changes"
 SLOT_PEOPLE = "people"
-SLOT_UNDERSTANDING = "understanding"
+SLOT_PARTIAL_REPLACE = "partial_replace"
 
 #: Goal-level fields an amend may patch on the plan already on screen.
 _PATCHABLE_PLAN_FIELDS = frozenset({"people"})
@@ -75,7 +75,7 @@ SLOT_QUESTIONS: dict[str, str] = {
     SLOT_GOAL: "想换成什么目标？",
     SLOT_MIXED: "这一轮里有多个目标改动，先处理哪一个？",
     SLOT_PEOPLE: "几个人吃？",
-    SLOT_UNDERSTANDING: "这一句是想买/想改清单吗？请说明要买什么或改什么。",
+    SLOT_PARTIAL_REPLACE: "现在还不能一步只换掉清单里的一项。可以先说删掉哪一项，再说要加什么。",
 }
 
 #: Refusal reasons that mean "this write contradicts the validated decision"
@@ -86,7 +86,6 @@ CONFLICT_REASONS = frozenset(
         "GOAL_CHANGE_CONFLICT",
         "MIXED_GOAL_CHANGES",
         "CANDIDATE_GOAL_CONFLICT",
-        "SWITCH_REQUIRES_UNDERSTANDING",
         #: A goal that cannot be built from its own declared target, and a
         #: ready-made meal expressed as a raw-material build, are contradictions
         #: rather than bad references: they abort the batch.
@@ -97,14 +96,16 @@ CONFLICT_REASONS = frozenset(
 )
 
 #: Why a turn was decided the way it was. Internal diagnostics, never user copy.
-REASON_LEGACY = "LEGACY_UNSTATED_SEMANTICS"
-REASON_MISSING_UNDERSTANDING = "MISSING_UNDERSTANDING"
-REASON_UNSPECIFIED_SPEECH = "UNSPECIFIED_SPEECH_ACT"
 REASON_NO_PEOPLE = "PEOPLE_REQUIRED"
 REASON_TARGET_MISMATCH = "GOAL_TARGET_MISMATCH"
 REASON_READY_MADE = "READY_MADE_NOT_RAW"
 REASON_CHAT = "CHAT_ONLY"
-REASON_READ_ONLY = "READ_ONLY_SPEECH_ACT"
+REASON_READ_ONLY = "READ_ONLY"
+REASON_MODEL_QUESTION = "MODEL_QUESTION"
+REASON_PLAN_CONFIRM = "PLAN_CONFIRM_IN_CHAT"
+REASON_PLAN_ABANDON = "PLAN_ABANDON_IN_CHAT"
+REASON_PLAN_NOTHING = "PLAN_ACT_WITHOUT_PLAN"
+REASON_PARTIAL_REPLACE = "PARTIAL_REPLACE"
 REASON_UNRESOLVED_FOCUS = "UNRESOLVED_FOCUS"
 REASON_UNDECIDED_RELATION = "UNDECIDED_GOAL_RELATION"
 REASON_MISSING_GOAL = "MISSING_GOAL_STATEMENT"
@@ -117,8 +118,15 @@ REASON_CANDIDATE_MISSING = "CANDIDATE_NOT_FOUND"
 REASON_ACTIVE_AMEND = "ACTIVE_GOAL_AMEND"
 REASON_LOCATED_ACTION = "LOCATED_ACTION"
 REASON_UNLOCATED = "UNLOCATED_CORRECTION"
-REASON_NO_GOAL = "NO_GOAL_STATED"
 REASON_MIXED = "MIXED_GOAL_CHANGES"
+
+#: Server-owned wording for a plan act chat cannot carry out yet. The model's own
+#: reply is never used for these: it could claim a purchase that did not happen.
+PLAN_ACT_REPLIES: dict[str, str] = {
+    REASON_PLAN_CONFIRM: "聊天里还不能直接加购。清单没问题的话，点清单上的确认就会加入购物车。",
+    REASON_PLAN_ABANDON: "这份清单还没有加购，不确认就不会买。只想去掉其中一项的话，告诉我是哪一项。",
+    REASON_PLAN_NOTHING: "现在还没有清单。想买什么可以直接告诉我。",
+}
 
 
 @dataclass(frozen=True)
@@ -138,7 +146,6 @@ class MutationView:
     #: named, not merely a ref the model happened to emit.
     ref_target_id: str = ""
     ref_name: str = ""
-    switch_goal: bool = False
 
 
 @dataclass(frozen=True)
@@ -330,14 +337,12 @@ def _blocked(
     readiness: str,
     reason_code: str,
     missing_slots: Iterable[str] = (),
-    understanding: Understanding | None = None,
     goal: Goal | None = None,
     relation: str = "unspecified",
     focus_ref: str | None = None,
     focus_kind: str = "none",
     changed_fields: Iterable[str] = (),
     candidate: GoalCandidate | None = None,
-    legacy_protocol: bool = False,
 ) -> TurnDecision:
     return TurnDecision(
         route=route,  # type: ignore[arg-type]
@@ -346,13 +351,11 @@ def _blocked(
         write_blocked=True,
         reason_code=reason_code,
         relation=relation,  # type: ignore[arg-type]
-        speech_act=(understanding.speech_act if understanding else "unspecified"),
         focus_ref=focus_ref,
         focus_kind=focus_kind,  # type: ignore[arg-type]
         goal=goal,
         changed_fields=list(changed_fields),
         candidate=candidate,
-        legacy_protocol=legacy_protocol,
     )
 
 
@@ -360,7 +363,6 @@ def _unblocked(
     *,
     route: str,
     reason_code: str,
-    understanding: Understanding,
     goal: Goal | None,
     relation: str,
     focus_ref: str | None,
@@ -377,7 +379,6 @@ def _unblocked(
         write_blocked=False,
         reason_code=reason_code,
         relation=relation,  # type: ignore[arg-type]
-        speech_act=understanding.speech_act,
         focus_ref=focus_ref,
         focus_kind=focus_kind,  # type: ignore[arg-type]
         goal=goal,
@@ -407,46 +408,37 @@ def _resolve_focus(
     return "none", None, None
 
 
-def _legacy_decision(
-    *, mutations: Sequence[MutationView], has_read_requests: bool, has_questions: bool = False
+def _read_only(
+    understanding: Understanding,
+    facts: GateFacts,
+    *,
+    has_read_requests: bool,
+    has_questions: bool,
 ) -> TurnDecision:
-    """No semantic statement at all.
+    """A turn that states no goal and no edit: it answers, reads or asks, never writes."""
 
-    The explicit compatibility policy is: the old protocol still *parses* — a
-    read-only answer, a chat reply, a lookup and an uncertainty all keep working —
-    but a turn that never said what it *meant* may not change a plan. There is no
-    flag, no reference and no structural check that can make up for a missing
-    understanding, so a write here is refused (``write_blocked``) and the caller
-    reports it as ``MISSING_UNDERSTANDING`` instead of guessing.
-    """
-    if mutations:
-        return _blocked(
-            route="clarify",
-            readiness="needs_clarification",
-            reason_code=REASON_MISSING_UNDERSTANDING,
-            missing_slots=(SLOT_UNDERSTANDING,),
-            legacy_protocol=True,
-        )
-    if has_read_requests:
-        return _blocked(
-            route="retrieve",
-            readiness="information",
-            reason_code=REASON_LEGACY,
-            legacy_protocol=True,
-        )
+    def blocked(route: str, reason_code: str, readiness: str = "information") -> TurnDecision:
+        return _blocked(route=route, readiness=readiness, reason_code=reason_code)
+
+    if understanding.plan_act != "none":
+        # Chat cannot confirm or drop a plan yet; the server says so in its own
+        # words, so the reply can never claim a purchase that did not happen.
+        if not facts.has_active_plan:
+            return blocked("answer", REASON_PLAN_NOTHING)
+        if understanding.plan_act == "confirm":
+            return blocked("answer", REASON_PLAN_CONFIRM)
+        return blocked("answer", REASON_PLAN_ABANDON)
     if has_questions:
-        return _blocked(
-            route="clarify",
-            readiness="needs_clarification",
-            reason_code=REASON_LEGACY,
-            legacy_protocol=True,
-        )
-    return _blocked(route="chat", readiness="information", reason_code=REASON_LEGACY,
-                    legacy_protocol=True)
+        return blocked("clarify", REASON_MODEL_QUESTION, "needs_clarification")
+    if has_read_requests:
+        return blocked("retrieve", REASON_READ_ONLY)
+    if understanding.intent == "explore":
+        return blocked("answer", REASON_READ_ONLY)
+    return blocked("chat", REASON_CHAT)
 
 
 def decide_turn(
-    understanding: Understanding | None,
+    understanding: Understanding,
     facts: GateFacts,
     *,
     mutations: Sequence[MutationView] = (),
@@ -455,39 +447,29 @@ def decide_turn(
 ) -> TurnDecision:
     """The one next step for this turn, plus what blocks it and why.
 
-    ``understanding`` is what the model said the sentence *meant*; ``facts`` is
-    what the server knows. Neither alone decides anything: the decision is the
-    deterministic join of the two, and it is the only thing that authorizes a
-    plan or cart write for the turn.
+    ``understanding`` is the parser's reading of the model's independent
+    dimensions; ``facts`` is what the server knows. No rule branches on a label
+    the model chose for the whole turn: each checks whether a dimension is filled,
+    joined with the server's facts. The decision is the only thing that
+    authorizes a plan or cart write for the turn.
     """
-    if understanding is None:
-        return _legacy_decision(
-            mutations=mutations,
-            has_read_requests=has_read_requests,
-            has_questions=has_questions,
+    goal = understanding.new_goal
+    relation = understanding.goal_relation
+    if goal is None and relation != "amend":
+        return _read_only(
+            understanding, facts, has_read_requests=has_read_requests, has_questions=has_questions
         )
-
-    speech_act = understanding.speech_act
-    if speech_act == "chat":
-        return _blocked(route="chat", readiness="information", reason_code=REASON_CHAT,
-                        understanding=understanding)
-    if speech_act == "ask_fact":
-        return _blocked(route="retrieve" if has_read_requests else "answer", readiness="information", reason_code=REASON_READ_ONLY,
-                        understanding=understanding)
-    if speech_act == "unspecified":
-        # The reading itself is unknown, so nothing may be derived from it: the
-        # goal, the relation and the reference are all still unstated.
+    if has_questions:
+        # The model met an ambiguity it cannot resolve: nothing is written.
         return _blocked(
-            route="clarify",
-            readiness="needs_clarification",
-            reason_code=REASON_UNSPECIFIED_SPEECH,
-            missing_slots=(SLOT_UNDERSTANDING,),
-            understanding=understanding,
+            route="clarify", readiness="needs_clarification", reason_code=REASON_MODEL_QUESTION
+        )
+    if goal is not None and goal.kind == "unsupported":
+        return _blocked(
+            route="refuse", readiness="unsupported", reason_code=REASON_UNSUPPORTED, goal=goal
         )
 
-    focus_kind, focus_ref, focus_candidate = _resolve_focus(
-        facts, understanding.focus_ref
-    )
+    focus_kind, focus_ref, focus_candidate = _resolve_focus(facts, understanding.focus_ref)
     if understanding.focus_ref and focus_kind == "none":
         # R7/R8: a reference the server never issued cannot be repaired by
         # guessing which goal or row the shopper meant.
@@ -496,33 +478,50 @@ def decide_turn(
             readiness="needs_clarification",
             reason_code=REASON_UNRESOLVED_FOCUS,
             missing_slots=(SLOT_FOCUS,),
-            understanding=understanding,
         )
 
     changes = understanding.changes
     changed_fields = changes.changed_fields() if changes is not None else []
-    relation = understanding.goal_relation
-    if (
-        relation == "unspecified"
-        and understanding.new_goal is not None
-        and not understanding.relation_declared
-    ):
-        # With nothing to relate to, an *omitted* relation is trivially ``new``;
-        # only an existing plan or candidate makes "how does this relate?" a real
-        # question (R7). A relation the model *did* state but that is not in the
-        # vocabulary is never inferred from: it stays undecided and blocks.
-        if not facts.has_active_plan and facts.candidate is None:
+    if relation == "unspecified" and goal is not None:
+        candidate = facts.candidate
+        if (
+            candidate is not None
+            and facts.has_pending_question
+            and candidate.relation in ("new", "append", "switch")
+        ):
+            # A named answer to the question about the goal under discussion
+            # completes that goal and keeps its own switch/append intent.
+            from app.agent.goal import answer_goal_candidate
+
+            relation = candidate.relation
+            goal = answer_goal_candidate(candidate, goal)
+        elif (not facts.has_active_plan or facts.task_terminal) and candidate is None:
+            # With nothing to relate to, an unstated relation is trivially ``new``;
+            # only an editable plan or a candidate makes "how does this relate?" a
+            # question. A finished or cancelled list can be neither added to nor
+            # replaced, so a new purchase after it simply starts its own list.
             relation = "new"
 
+    if relation == "switch" and focus_kind == "plan_target" and len(facts.plan_target_refs) > 1:
+        # Replacing one entry of a multi-entry list would silently drop the rest.
+        return _blocked(
+            route="clarify",
+            readiness="needs_clarification",
+            reason_code=REASON_PARTIAL_REPLACE,
+            missing_slots=(SLOT_PARTIAL_REPLACE,),
+            goal=goal,
+            relation=relation,
+            focus_ref=focus_ref,
+            focus_kind=focus_kind,
+        )
+
     if relation in ("new", "append", "switch"):
-        goal = understanding.new_goal
         if goal is None:  # guarded by the contract; kept total
             return _blocked(
                 route="clarify",
                 readiness="needs_clarification",
                 reason_code=REASON_MISSING_GOAL,
                 missing_slots=(SLOT_GOAL,),
-                understanding=understanding,
                 relation=relation,
                 focus_ref=focus_ref,
                 focus_kind=focus_kind,
@@ -537,7 +536,6 @@ def decide_turn(
                 readiness="needs_clarification",
                 reason_code=REASON_TARGET_MISMATCH,
                 missing_slots=(SLOT_GOAL,),
-                understanding=understanding,
                 goal=goal,
                 relation=relation,
                 focus_ref=focus_ref,
@@ -555,7 +553,6 @@ def decide_turn(
                 route="clarify",
                 readiness="needs_clarification",
                 reason_code=REASON_READY_MADE,
-                understanding=understanding,
                 goal=goal,
                 relation=relation,
                 focus_ref=focus_ref,
@@ -584,7 +581,6 @@ def decide_turn(
                 route="mutation",
                 mutation_action="prepare",
                 reason_code=REASON_GOAL_READY,
-                understanding=understanding,
                 goal=goal,
                 relation=relation,
                 focus_ref=focus_ref,
@@ -598,7 +594,6 @@ def decide_turn(
                 readiness="unsupported",
                 reason_code=REASON_UNSUPPORTED,
                 missing_slots=goal_decision.missing_slots,
-                understanding=understanding,
                 goal=goal,
                 relation=relation,
                 focus_ref=focus_ref,
@@ -610,7 +605,6 @@ def decide_turn(
             readiness="needs_clarification",
             reason_code=REASON_GOAL_NOT_READY,
             missing_slots=goal_decision.missing_slots,
-            understanding=understanding,
             goal=goal,
             relation=relation,
             focus_ref=focus_ref,
@@ -627,7 +621,7 @@ def decide_turn(
             return _blocked(
                 route="clarify", readiness="needs_clarification",
                 reason_code=REASON_CANDIDATE_MISSING, missing_slots=(SLOT_FOCUS,),
-                understanding=understanding, relation=relation,
+                relation=relation,
                 focus_ref=focus_ref, focus_kind=focus_kind,
             )
         if changes is not None and not changes.is_empty():
@@ -648,7 +642,6 @@ def decide_turn(
                     readiness="needs_clarification",
                     reason_code=REASON_CANDIDATE_MISSING,
                     missing_slots=(SLOT_FOCUS,),
-                    understanding=understanding,
                     relation=relation,
                     focus_ref=focus_ref,
                     focus_kind=focus_kind,
@@ -675,7 +668,6 @@ def decide_turn(
                         route="mutation",
                         mutation_action="prepare",
                         reason_code=REASON_CANDIDATE_READY,
-                        understanding=understanding,
                         goal=updated.goal,
                         relation=relation,
                         focus_ref=focus_ref,
@@ -688,7 +680,6 @@ def decide_turn(
                     readiness="needs_clarification",
                     reason_code=REASON_CANDIDATE_SLOT,
                     missing_slots=missing,
-                    understanding=understanding,
                     goal=updated.goal,
                     relation=relation,
                     focus_ref=focus_ref,
@@ -704,7 +695,6 @@ def decide_turn(
                     route="mutation",
                     mutation_action="apply_mutation",
                     reason_code=REASON_ACTIVE_AMEND,
-                    understanding=understanding,
                     goal=None,
                     relation=relation,
                     focus_ref=focus_ref,
@@ -723,7 +713,6 @@ def decide_turn(
                     route="mutation",
                     mutation_action="apply_mutation",
                     reason_code=REASON_ACTIVE_AMEND,
-                    understanding=understanding,
                     goal=None,
                     relation=relation,
                     focus_ref="active-goal-1",
@@ -735,7 +724,6 @@ def decide_turn(
                 readiness="needs_clarification",
                 reason_code=REASON_CANDIDATE_MISSING,
                 missing_slots=(SLOT_FOCUS,),
-                understanding=understanding,
                 relation=relation,
                 focus_ref=focus_ref,
                 focus_kind=focus_kind,
@@ -749,7 +737,7 @@ def decide_turn(
                     return _blocked(
                         route="clarify", readiness="needs_clarification",
                         reason_code=REASON_CANDIDATE_SLOT, missing_slots=missing,
-                        understanding=understanding, relation=relation,
+                        relation=relation,
                         focus_ref=focus_ref, focus_kind=focus_kind,
                         candidate=candidate, goal=candidate.goal,
                     )
@@ -761,7 +749,6 @@ def decide_turn(
                 route="mutation",
                 mutation_action="apply_mutation",
                 reason_code=REASON_LOCATED_ACTION,
-                understanding=understanding,
                 goal=None,
                 relation=relation,
                 focus_ref=focus_ref,
@@ -772,48 +759,24 @@ def decide_turn(
         return _blocked(
             route="clarify",
             readiness="needs_clarification",
-            reason_code=REASON_UNLOCATED
-            if speech_act == "correct"
-            else REASON_CANDIDATE_MISSING,
+            reason_code=(
+                REASON_UNLOCATED if facts.candidate is None else REASON_CANDIDATE_MISSING
+            ),
             missing_slots=(SLOT_FOCUS,),
-            understanding=understanding,
             relation=relation,
             focus_ref=focus_ref,
             focus_kind=focus_kind,
         )
 
-    # relation == "unspecified": the model did not say how this turn relates to
-    # what is on screen. Only a row-level operation on an *existing* target is
-    # unambiguous enough to resolve implicitly; anything that could add or
-    # replace a goal has to be asked about.
-    located = focus_kind in ("plan_target", "active_goal", "pending_question", "pending_goal")
-    if mutations and located and all(m.verb in ("change", "remove") for m in mutations):
-        return _unblocked(
-            route="mutation",
-            mutation_action="apply_mutation",
-            reason_code=REASON_LOCATED_ACTION,
-            understanding=understanding,
-            goal=None,
-            relation="amend",
-            focus_ref=focus_ref,
-            focus_kind=focus_kind,
-            changed_fields=changed_fields,
-        )
-    if mutations or facts.has_active_plan or facts.candidate is not None:
-        return _blocked(
-            route="clarify",
-            readiness="needs_clarification",
-            reason_code=REASON_UNDECIDED_RELATION,
-            missing_slots=(SLOT_GOAL_RELATION,),
-            understanding=understanding,
-            focus_ref=focus_ref,
-            focus_kind=focus_kind,
-        )
+    # A named goal whose relation to the plan or candidate on screen was not
+    # stated: it could add or replace, so asking is the only safe answer.
     return _blocked(
-        route="retrieve" if has_read_requests else "chat",
-        readiness="information",
-        reason_code=REASON_NO_GOAL,
-        understanding=understanding,
+        route="clarify",
+        readiness="needs_clarification",
+        reason_code=REASON_UNDECIDED_RELATION,
+        missing_slots=(SLOT_GOAL_RELATION,),
+        focus_ref=focus_ref,
+        focus_kind=focus_kind,
     )
 
 
@@ -882,7 +845,6 @@ def mutation_refusal(
     field: str | None = None,
     ref: str | None = None,
     ref_kind: str = "",
-    switch_goal: bool = False,
 ) -> str | None:
     """Whether this mutation is authorized by the turn's decision.
 
@@ -890,17 +852,12 @@ def mutation_refusal(
     structural: relation against verb, goal field against the patch the turn
     declared, and the candidate's own target. It never re-reads the sentence.
     """
-    if switch_goal and (decision is None or decision.relation not in ("new", "switch")):
-        # A whole-plan replacement must be derived from a validated relation.
-        return "SWITCH_REQUIRES_UNDERSTANDING"
     if decision is None:
         # No understanding, no authority. This is not a compatibility switch: a
         # proposal that never said what it meant cannot change a plan.
         return "MISSING_UNDERSTANDING"
     if decision.write_blocked:
         return "WRITE_BLOCKED"
-    if decision.legacy_protocol:
-        return "MISSING_UNDERSTANDING"
 
     goal = decision.goal
     if (
@@ -961,6 +918,7 @@ def mutation_refusal(
 
 __all__ = [
     "CONFLICT_REASONS",
+    "PLAN_ACT_REPLIES",
     "GateFacts",
     "MutationView",
     "SLOT_CATEGORY",

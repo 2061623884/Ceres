@@ -12,9 +12,10 @@ They cover the behaviours the iteration was asked for:
   components/common_tags
 * only explicit clicks mutate the cart, and a per-row add is never bought twice
 
-Every turn is scripted in the **proposal** protocol (``semantic_provider``):
-two model calls when the turn needs real retrieval (``lookup_then`` /
-``lookup_then_add_id``), one when it does not. The retired tool-call protocol is
+Every turn is scripted in the one-pass **proposal** protocol
+(``semantic_provider``): a write names its target and the lookup it needs in one
+model call; only an answer drawn from real results takes a second
+(``lookup_then``). The retired tool-call protocol is
 gone, and with it every server-side reading of the sentence — so a test that
 used to rely on the server refusing, resolving or replacing something now states
 explicitly which proposal is being made. Assertions tied to the retired chain
@@ -32,13 +33,12 @@ from sqlalchemy import text
 
 from support import create_session, post_turn
 from support.semantic_agent import (
-    continued,
-    lookup_matches,
-    lookup_then,
+    lookup_then_add,
     lookup_then_add_id,
+    pick,
     reply_only,
     request_amend,
-    with_understanding,
+    request_new,
 )
 
 TOMATO = "dish-fanqie-chao-dan"
@@ -133,15 +133,14 @@ def add_row(client, body, sku_id: str, quantity: int = 1, key: str | None = None
     )
 
 
-def plan_for(client, semantic_provider, *, message="我想吃番茄炒蛋，2人", dish=TOMATO):
+def plan_for(client, semantic_provider, *, message="我想吃番茄炒蛋，2人", name="番茄炒蛋", dish=TOMATO):
     """A real retrieve → add turn producing a real plan.
 
-    The script is two model calls in the proposal protocol: ask for a real dish
-    lookup, then add the row that lookup really returned — addressed by its
-    business id, so the plan on screen is the dish this test names, built by the
-    real services.
+    One model call names the dish and looks it up; the server binds the exact
+    hit, so the plan on screen is the dish this test names, built by the real
+    services.
     """
-    semantic_provider([*lookup_then_add_id("dish", message, dish, people=2)])
+    semantic_provider([*lookup_then_add_id("dish", name, dish, people=2)])
     sid = create_session(client)
     return turn(client, sid, message).json()
 
@@ -151,33 +150,9 @@ def add_scenario(*, people: int = 4):
 
     def build(request):
         scenario = request["candidates"]["scenarios"][0]
-        mutation = {
-            "verb": "add",
-            "candidate_ref": scenario["ref"],
-            "name": scenario["name"],
-            "people": people,
-        }
-        return with_understanding(
-            {"purchase_requested": True, "mutations": [mutation]}, request=request
-        )
+        return pick("scenario", scenario, request=request, people=people)
 
     return build
-
-
-def ask_which_dish(request):
-    """A question whose options are the dishes this turn's lookup really returned."""
-    rows = lookup_matches(request, "dish")
-    assert rows, f"检索没有返回任何候选：{request.get('query_results')}"
-    return {
-        "reply": "这几个是店里能做的：",
-        "uncertainties": [
-            {
-                "slot": "dish_choice",
-                "question": "你想吃哪一道？",
-                "options": [{"candidate_ref": row["ref"]} for row in rows],
-            }
-        ],
-    }
 
 
 # ---------------------------------------------------------------- card first
@@ -185,20 +160,14 @@ def ask_which_dish(request):
 
 def test_verified_dish_is_committed_before_any_answer_text(client, semantic_provider):
     """The model only promises; the server still lands a panel — and lands it first."""
-
-    def promise_and_add(request):
-        row = next(
-            r for r in lookup_matches(request, "dish") if r["target_id"] == TOMATO
-        )
-        return with_understanding({
-            "reply": "已准备好清单。",
-            "mutations": [
-                {"verb": "add", "candidate_ref": row["ref"], "name": row["name"]}
-            ],
-        }, request=request)
-
     semantic_provider(
-        [*lookup_then("dish", "我想吃番茄炒蛋", promise_and_add, purchase=True)]
+        [
+            {
+                "reply": "已准备好清单。",
+                **request_new("dish", "番茄炒蛋", people=2),
+                "lookups": [{"kind": "dish", "query": "番茄炒蛋"}],
+            }
+        ]
     )
     sid = create_session(client)
     events = stream_turn(client, sid, "我想吃番茄炒蛋，2人")
@@ -227,7 +196,7 @@ def test_undeclared_headcount_builds_plan_without_user_attribution(
     client, semantic_provider
 ):
     """Recipe basis may drive quantities, but it is never reported as user input."""
-    semantic_provider([*lookup_then_add_id("dish", "我想吃番茄炒蛋", TOMATO)])
+    semantic_provider([*lookup_then_add_id("dish", "番茄炒蛋", TOMATO)])
     sid = create_session(client)
     body = turn(client, sid, "我想吃番茄炒蛋").json()
 
@@ -247,15 +216,8 @@ def test_missing_headcount_builds_first_then_amend_applies_user_count(
 ):
     semantic_provider(
         [
-            *lookup_then_add_id("dish", "我想吃番茄炒蛋", TOMATO),
-            lambda request: {
-                "reply": "按两个人份调整。",
-                "understanding": {
-                    "speech_act": "request_action",
-                    "goal_relation": "amend",
-                    "changes": {"set": {"people": 2}},
-                },
-            },
+            *lookup_then_add_id("dish", "番茄炒蛋", TOMATO),
+            {"reply": "按两个人份调整。", **request_amend(changes={"set": {"people": 2}})},
         ]
     )
     sid = create_session(client)
@@ -269,33 +231,31 @@ def test_missing_headcount_builds_first_then_amend_applies_user_count(
     assert built["plan"]["targets"][0]["people_source"] == "user", built["plan"]["targets"]
 
 
-def test_model_clarifying_about_people_does_not_hide_a_chosen_dish(client, semantic_provider):
-    def dish_and_a_question(request):
-        row = next(
-            r for r in lookup_matches(request, "dish") if r["target_id"] == TOMATO
-        )
-        return with_understanding({
-            "mutations": [
-                {"verb": "add", "candidate_ref": row["ref"], "name": row["name"]}
-            ],
-            # A headcount question has no candidate options: the model asks it in
-            # words and the server persists it beside the plan.
-            "uncertainties": [
-                {"slot": "people", "question": "你们几个人吃？", "options": []}
-            ],
-        }, request=request)
+def test_a_model_question_holds_the_dish_until_answered(client, semantic_provider):
+    """A question the model still has outranks the write it proposed.
 
+    A headcount question has no candidate options: the model asks it in words,
+    the server persists it, and nothing is built until it is answered.
+    """
     semantic_provider(
-        [*lookup_then("dish", "我想吃番茄炒蛋", dish_and_a_question, purchase=True)]
+        [
+            {
+                **request_new("dish", "番茄炒蛋"),
+                "lookups": [{"kind": "dish", "query": "番茄炒蛋"}],
+                "questions": [
+                    {"slot": "people", "question": "你们几个人吃？", "options": []}
+                ],
+            }
+        ]
     )
     sid = create_session(client)
-    body = turn(client, sid, "我想吃番茄炒蛋，2人").json()
+    body = turn(client, sid, "我想吃番茄炒蛋").json()
 
-    assert body["plan"], body
-    assert body["plan"]["items"]
+    assert body["plan"] is None, body
     assert [p["question"] for p in body["pending_clarifications"]] == [
         "你们几个人吃？"
     ]
+    assert client.get("/api/v1/cart").json()["items"] == []
 
 
 # ------------------------------------------------- negatives and information
@@ -343,7 +303,8 @@ def test_a_negated_dish_is_refused_by_the_model_not_by_a_server_guard(
     support for one is simulated here. This gap can only be closed by
     real-model acceptance.
     """
-    semantic_provider([*lookup_then_add_id("dish", "不要番茄炒蛋", TOMATO, people=2)])
+    # A model that (wrongly) proposes the purchase names the bare dish.
+    semantic_provider([*lookup_then_add_id("dish", "番茄炒蛋", TOMATO, people=2)])
     sid = create_session(client)
     body = turn(client, sid, "不要番茄炒蛋，2人").json()
 
@@ -358,14 +319,10 @@ def test_typo_asks_with_real_candidates_instead_of_ordering(client, semantic_pro
 
     The acceptance matrix puts "菜名错别字" under "不误建单": offer the real
     similar dishes and let the user confirm — never claim the dish does not
-    exist and never order on their behalf.
+    exist and never order on their behalf. The model names what it heard; the
+    server binds only an exact hit and asks about the similar ones.
     """
-    semantic_provider(
-        [
-            {"lookups": [{"kind": "dish", "query": "我想吃蕃茄炒蛋"}]},
-            continued(ask_which_dish),
-        ]
-    )
+    semantic_provider([*lookup_then_add("dish", "蕃茄炒蛋")])
     sid = create_session(client)
     body = turn(client, sid, "我想吃蕃茄炒蛋").json()
 
@@ -386,8 +343,8 @@ def test_plan_ready_always_carries_the_merged_persisted_plan(client, semantic_pr
     """
     semantic_provider(
         [
-            *lookup_then_add_id("dish", "我想吃番茄炒蛋", TOMATO, people=2),
-            *lookup_then_add_id("dish", "还想吃番茄蛋汤", TOMATO_SOUP),
+            *lookup_then_add_id("dish", "番茄炒蛋", TOMATO, people=2),
+            *lookup_then_add_id("dish", "番茄蛋汤", TOMATO_SOUP, relation="append"),
         ]
     )
     sid = create_session(client)
@@ -420,24 +377,14 @@ def test_partial_shorthand_resolves_against_the_shown_candidates(client, semanti
     def pick_the_shown_dish(request):
         for row in request["candidates"]["dishes"]:
             if "青椒肉丝" in str(row.get("name") or ""):
-                return with_understanding({
-                    "mutations": [
-                        {"verb": "add", "candidate_ref": row["ref"], "name": row["name"]}
-                    ]
-                }, request=request)
+                return pick("dish", row, request=request)
         raise AssertionError(
             f"候选里没有被展示过的青椒肉丝：{request['candidates']['dishes']}"
         )
 
-    provider = semantic_provider(
-        [
-            {"lookups": [{"kind": "dish", "query": "青椒肉丝"}]},
-            continued(ask_which_dish),
-            pick_the_shown_dish,
-        ]
-    )
+    provider = semantic_provider([*lookup_then_add("dish", "青椒炒肉"), pick_the_shown_dish])
     sid = create_session(client)
-    first = turn(client, sid, "我想做个青椒的菜").json()
+    first = turn(client, sid, "我想做个青椒炒肉").json()
     assert first["plan"] is None, first
     names = [c["name"] for c in first["pending_clarifications"][0]["candidates"]]
     assert "青椒肉丝" in names, names
@@ -457,8 +404,8 @@ def test_partial_shorthand_resolves_against_the_shown_candidates(client, semanti
 def test_append_keeps_selection_and_hand_edited_quantity(client, semantic_provider):
     semantic_provider(
         [
-            *lookup_then_add_id("dish", "我想吃番茄炒蛋", TOMATO, people=2),
-            *lookup_then_add_id("dish", "还想吃番茄蛋汤", TOMATO_SOUP),
+            *lookup_then_add_id("dish", "番茄炒蛋", TOMATO, people=2),
+            *lookup_then_add_id("dish", "番茄蛋汤", TOMATO_SOUP, relation="append"),
         ]
     )
     sid = create_session(client)
@@ -511,8 +458,8 @@ def test_append_keeps_selection_and_hand_edited_quantity(client, semantic_provid
 def test_direct_product_append_keeps_the_dish_and_counts_in_pieces(client, semantic_provider):
     semantic_provider(
         [
-            *lookup_then_add_id("dish", "我想吃番茄炒蛋", TOMATO, people=2),
-            *lookup_then_add_id("product", "可乐", COLA_SKU),
+            *lookup_then_add_id("dish", "番茄炒蛋", TOMATO, people=2),
+            *lookup_then_add_id("product", "可乐 330毫升", COLA_SKU, relation="append"),
         ]
     )
     sid = create_session(client)
@@ -529,33 +476,29 @@ def test_direct_product_append_keeps_the_dish_and_counts_in_pieces(client, seman
 
 
 def test_redoing_a_target_is_refused_and_a_new_dish_appends(client, semantic_provider):
-    """「不做番茄炒蛋了，改做番茄蛋汤」 is a remove *and* an add in one turn.
+    """「不做番茄炒蛋了，改做番茄蛋汤」 proposed as a replace *plus* a row remove.
 
-    The chain has no "replace the whole target" operation, and a compound
-    remove+add is refused outright instead of being half-executed: the plan on
-    screen stays exactly what it was. Dropping a dish is its own explicit turn;
-    adding another one appends to what is still there. The retired chain replaced
-    the target instead.
+    A replace must not also edit the plan it replaces, so the compound proposal
+    is refused outright instead of being half-executed: the plan on screen stays
+    exactly what it was. Adding the dish on its own then appends to what is
+    still there.
     """
 
     def redo_the_target(request):
         groups = (request.get("current_plan") or {}).get("groups") or []
         assert groups, request.get("current_plan")
-        row = next(
-            r for r in lookup_matches(request, "dish") if r["target_id"] == TOMATO_SOUP
-        )
         return {
-            "mutations": [
-                {"verb": "remove", "target_ref": groups[0]["ref"], "name": groups[0]["name"]},
-                {"verb": "add", "candidate_ref": row["ref"], "name": row["name"]},
-            ]
+            **request_new("dish", "番茄蛋汤", relation="switch"),
+            "lookups": [{"kind": "dish", "query": "番茄蛋汤"}],
+            "focus": {"ref": groups[0]["ref"], "name": groups[0]["name"]},
+            "edit": {"op": "remove"},
         }
 
     semantic_provider(
         [
-            *lookup_then_add_id("dish", "我想吃番茄炒蛋", TOMATO, people=2),
-            *lookup_then("dish", "番茄蛋汤", redo_the_target, purchase=True),
-            *lookup_then_add_id("dish", "那就来一份番茄蛋汤", TOMATO_SOUP),
+            *lookup_then_add_id("dish", "番茄炒蛋", TOMATO, people=2),
+            redo_the_target,
+            *lookup_then_add_id("dish", "番茄蛋汤", TOMATO_SOUP, relation="append"),
         ]
     )
     sid = create_session(client)
@@ -565,15 +508,13 @@ def test_redoing_a_target_is_refused_and_a_new_dish_appends(client, semantic_pro
     assert refused["plan_effect"] == "keep", refused
     # The compound batch is really refused: no partial write, no success claim.
     # The safety-equivalent refusal may be the executor's UNSUPPORTED_OPERATION or
-    # the gate's own refusal (WRITE_BLOCKED / GOAL_CHANGE_CONFLICT / missing
-    # understanding); every one of them means "nothing was written".
+    # the gate's own refusal (WRITE_BLOCKED / GOAL_CHANGE_CONFLICT); every one of
+    # them means "nothing was written".
     refused_codes = {r.get("code") for r in refused["action_results"]}
     assert refused_codes & {
         "UNSUPPORTED_OPERATION",
         "WRITE_BLOCKED",
         "GOAL_CHANGE_CONFLICT",
-        "MISSING_UNDERSTANDING",
-        "LEGACY_UNSTATED_SEMANTICS",
     }, refused["action_results"]
     assert not any(r.get("status") == "committed" for r in refused["action_results"]), refused["action_results"]
     assert client.get("/api/v1/cart").json()["items"] == []
@@ -599,24 +540,15 @@ def test_headcount_change_rescales_only_the_recipe(client, semantic_provider):
         )
         return {
             "reply": "好，按新人数重新配。",
-            "understanding": request_amend(
-                focus=group["ref"], changes={"set": {"people": 4}}
+            **request_amend(
+                focus=group["ref"], name=group["name"], changes={"set": {"people": 4}}
             ),
-            "mutations": [
-                {
-                    "verb": "change",
-                    "target_ref": group["ref"],
-                    "name": group["name"],
-                    "field": "people",
-                    "people": 4,
-                }
-            ]
         }
 
     semantic_provider(
         [
-            *lookup_then_add_id("dish", "我想吃番茄炒蛋", TOMATO, people=2),
-            *lookup_then_add_id("product", "可乐", COLA_SKU),
+            *lookup_then_add_id("dish", "番茄炒蛋", TOMATO, people=2),
+            *lookup_then_add_id("product", "可乐 330毫升", COLA_SKU, relation="append"),
             resize_the_dish,
         ]
     )
@@ -655,8 +587,8 @@ def test_second_dish_without_stock_appends_a_partial_group_and_keeps_the_first(
     """
     semantic_provider(
         [
-            *lookup_then_add_id("dish", "我想吃番茄炒蛋", TOMATO, people=2),
-            *lookup_then_add_id("dish", "还想吃番茄蛋汤", TOMATO_SOUP),
+            *lookup_then_add_id("dish", "番茄炒蛋", TOMATO, people=2),
+            *lookup_then_add_id("dish", "番茄蛋汤", TOMATO_SOUP, relation="append"),
         ]
     )
     sid = create_session(client)
@@ -1008,18 +940,9 @@ def test_completed_task_history_is_never_rewritten(client, semantic_provider):
         )
         return {
             "reply": "好，按新人数重新配。",
-            "understanding": request_amend(
-                focus=group["ref"], changes={"set": {"people": 4}}
+            **request_amend(
+                focus=group["ref"], name=group["name"], changes={"set": {"people": 4}}
             ),
-            "mutations": [
-                {
-                    "verb": "change",
-                    "target_ref": group["ref"],
-                    "name": group["name"],
-                    "field": "people",
-                    "people": 4,
-                }
-            ]
         }
 
     semantic_provider([resize_the_completed_dish])
@@ -1063,7 +986,7 @@ def test_adding_after_purchase_never_rebuys_the_purchased_items(
 
     # The completed task is still the session's current task, so the follow-up
     # turn addresses it with the versions the confirmation reported.
-    semantic_provider([*lookup_then_add_id("product", "可乐", COLA_SKU)])
+    semantic_provider([*lookup_then_add_id("product", "可乐 330毫升", COLA_SKU)])
     response = turn(
         client,
         body["session_id"],
@@ -1384,8 +1307,8 @@ def test_summary_is_short_and_does_not_re_ask_people_for_a_drink(
     """
     semantic_provider(
         [
-            *lookup_then_add_id("dish", "我想吃番茄炒蛋", TOMATO, people=2),
-            *lookup_then_add_id("product", "可乐", COLA_SKU),
+            *lookup_then_add_id("dish", "番茄炒蛋", TOMATO, people=2),
+            *lookup_then_add_id("product", "可乐 330毫升", COLA_SKU, relation="append"),
         ]
     )
     sid = create_session(client)

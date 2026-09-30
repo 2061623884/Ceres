@@ -59,42 +59,62 @@ def test_build_requires_explicit_lexical_mode_when_credentials_are_missing(monke
     assert _embedding_provider(SimpleNamespace(no_embed=True, env_file=None)) is None
 
 
-def _example_pair(message: str):
-    """The retrieving round and the post-retrieval round of one example topic."""
-    initial = next(
+def _example_for(message: str):
+    """The one-pass example for this user message (spec rule 10: one call, not two)."""
+    return next(
         answer
         for request, answer in PROPOSAL_EXAMPLES
-        if request.get('user_message') == message and not request.get('query_results')
+        if request.get('user_message') == message
     )
-    final = next(
-        answer
-        for request, answer in PROPOSAL_EXAMPLES
-        if request.get('user_message') == message and request.get('query_results')
-    )
-    return initial, final
 
 
-def test_purchase_examples_declare_intent_before_not_after_retrieval():
-    """Purchase intent belongs to the retrieving round, never to the round after.
+def test_purchase_examples_declare_intent_and_lookup_in_the_same_pass():
+    """Purchase intent and the lookup it needs are one proposal, not two rounds.
 
-    The post-retrieval round then either carries the mutation (a product the
-    shopper named) or asks the one slot that is still missing (self-cook vs
-    ready-made); either way the flag is not restated.
+    There is no longer a retrieving round followed by a separate round that
+    restates the intent (spec rule 1): the target and its lookups are the same
+    model call.
     """
-    dish_initial, dish_final = _example_pair('我想吃番茄炒蛋')
-    assert dish_initial.get('purchase_requested') is True
-    # Never restated after the retrieval round.
-    assert 'purchase_requested' not in dish_final
-    # The dish example's post-retrieval round is the fulfillment-mode question,
-    # so it deliberately holds no mutation.
-    assert not dish_final.get('mutations')
-    assert dish_final['understanding']['new_goal']['fulfillment_mode'] == 'unspecified'
-    assert '自己做' in dish_final['reply'] and '现成' in dish_final['reply']
+    dish = _example_for('我想吃番茄炒蛋')
+    assert dish['target']['intent'] == 'buy'
+    assert dish['target']['name'] == '番茄炒蛋'
+    assert any(lookup['kind'] == 'dish' for lookup in dish['lookups'])
 
-    milk_initial, milk_final = _example_pair('买一盒牛奶')
-    # The product example declares the same intent through typed understanding
-    # (not the legacy flag), and its post-retrieval round carries the mutation.
-    assert milk_initial.get('understanding', {}).get('speech_act') == 'request_action'
-    assert 'purchase_requested' not in milk_initial
-    assert milk_final.get('mutations')
-    assert 'purchase_requested' not in milk_final
+    milk = _example_for('买一盒牛奶')
+    assert milk['target']['intent'] == 'buy'
+    assert milk['target']['name'] == '牛奶'
+    assert any(lookup['kind'] == 'product' for lookup in milk['lookups'])
+
+
+def test_answer_stage_gets_no_examples_and_answer_schema(monkeypatch):
+    """Once retrieval ran, the live payload drops the examples and narrows the
+    schema to ``answer_schema`` (spec rule 10)."""
+    from app.core.config import Settings
+    from app.llm.live_semantic_provider import LiveSemanticProvider
+    from app.agent.protocol import answer_schema, proposal_schema
+
+    settings = Settings(_env_file=None)
+    provider = LiveSemanticProvider(settings)
+
+    understanding_payload = provider._build_payload(
+        {"user_message": "我想吃番茄炒蛋", "protocol": proposal_schema()}
+    )
+    answer_payload = provider._build_payload(
+        {
+            "user_message": "我想吃番茄炒蛋",
+            "query_results": [{"kind": "lookup", "status": "completed"}],
+            "protocol": answer_schema(),
+        }
+    )
+
+    system_messages = [m for m in understanding_payload['messages'] if m['role'] == 'system']
+    assert len(understanding_payload['messages']) > len(system_messages)
+    example_pairs = (len(understanding_payload['messages']) - len(system_messages)
+                      - 2)  # server_context + user_message, no history
+    assert example_pairs > 0
+
+    answer_system_messages = [m for m in answer_payload['messages'] if m['role'] == 'system']
+    # No example turns at all once retrieval has run.
+    assert len(answer_payload['messages']) - len(answer_system_messages) == 2
+    assert '本轮检索已经结束' in answer_payload['messages'][0]['content']
+    assert '本轮检索已经结束' not in understanding_payload['messages'][0]['content']

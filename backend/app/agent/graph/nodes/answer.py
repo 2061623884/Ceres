@@ -17,6 +17,7 @@ from __future__ import annotations
 
 from typing import Any
 
+from app.agent.goal_router import PLAN_ACT_REPLIES
 from app.agent.graph.nodes.staging import base, plan_context
 from app.agent.graph.nodes.understand import (
     Halt,
@@ -64,6 +65,7 @@ def _compose_message(
     which owns the really persisted plan.
     """
     kind = str(staged.get("kind") or "answer")
+    decision = state["turn"].get("decision") or {}
     proposal = state["turn"].get("proposal") or {}
     context_plan = staged.get("context_plan") or {}
     displayed = list(context_plan.get("displayed") or [])
@@ -79,8 +81,10 @@ def _compose_message(
         )
     message = prepare_graph_message(
         kind=kind,
+        # A plan act chat cannot carry out is answered in the server's words.
         model_reply=(
-            str(state["turn"].get("answer_reply") or proposal.get("reply") or "")
+            PLAN_ACT_REPLIES.get(str(decision.get("reason_code") or ""))
+            or str(state["turn"].get("answer_reply") or proposal.get("reply") or "")
             if kind == "answer" else ""
         ),
         plan=None,
@@ -90,8 +94,20 @@ def _compose_message(
         displayed=displayed,
         refusal_message=refusal,
     )
+    note = _unsupported_note(state)
+    if note:
+        message = f"{message}\n{note}" if message else note
     staged["message"] = message
     return message
+
+
+def _unsupported_note(state: GraphState) -> str:
+    """Name the stated conditions nothing could apply, instead of dropping them."""
+    proposal = state["turn"].get("parsed_proposal")
+    unsupported = getattr(getattr(proposal, "understanding", None), "unsupported", None) or []
+    if not unsupported:
+        return ""
+    return f"说明：「{'、'.join(unsupported)}」暂时没法按条件筛选，这次没有用上。"
 
 
 def _grounded_answer(state: GraphState, runtime: TurnRuntime) -> GraphState:

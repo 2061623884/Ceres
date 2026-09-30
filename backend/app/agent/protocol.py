@@ -5,11 +5,16 @@ list of *server-owned candidates* (real dishes, real sellable SKUs, real open
 scenarios, plus the groups and rows of the plan already on screen) and may
 answer with:
 
-* ``reply``         — user-visible text,
-* ``mutations``     — typed ``add`` / ``change`` / ``remove`` intents,
-* ``lookups``       — read-only retrieval requests,
-* ``queries``       — read-only answer requests,
-* ``uncertainties`` — one question whose options are real candidates.
+* ``reply``       — user-visible text when there is no business result,
+* ``target``      — what the shopper named; look or buy; add or replace,
+* ``constraints`` — the conditions they stated (one place for each fact),
+* ``focus`` / ``edit`` — which row on screen, and what to do with it,
+* ``plan_act``    — "add to cart" / "drop the whole plan", said out loud,
+* ``lookups`` / ``reads`` — read-only retrieval and answer requests,
+* ``questions``   — one question whose options are real candidates.
+
+``parse_proposal`` turns these independent dimensions into the internal
+``Understanding`` + ``Mutation`` shape; the gate alone decides the route.
 
 Nothing in this module reads the raw user message for meaning. Every string the
 model is allowed to reference is an opaque ref allocated here, and every ref is
@@ -32,14 +37,12 @@ from dataclasses import dataclass, field as dc_field
 from decimal import Decimal, InvalidOperation, ROUND_HALF_UP
 from typing import Any
 
-from app.agent.goal import GoalParseError, parse_understanding
-from app.schemas.goal import Understanding
+from pydantic import ValidationError
+
+from app.schemas.goal import Goal, GoalChanges, GoalChangeSet, GoalConstraints, Understanding
 
 PROPOSAL_VERSION = 1
 
-MUTATION_VERBS = ("add", "change", "remove")
-CHANGE_FIELDS = ("quantity", "people", "constraints")
-QUANTITY_MODES = ("set", "delta")
 LOOKUP_KINDS = ("dish", "product")
 QUERY_KINDS = ("recommend", "recipe", "cart", "catalog")
 
@@ -82,14 +85,16 @@ FORBIDDEN_KEYS = frozenset(
 PROPOSAL_TOP_KEYS = frozenset(
     {
         "reply",
-        "understanding",
-        "mutations",
+        "target",
+        "constraints",
+        "focus",
+        "edit",
+        "plan_act",
         "lookups",
-        "queries",
-        "uncertainties",
+        "reads",
+        "questions",
         "display_refs",
         "resolved_questions",
-        "purchase_requested",
     }
 )
 
@@ -287,22 +292,16 @@ class Mutation:
     people: int | None = None
     excluded_ingredients: list[str] = dc_field(default_factory=list)
     budget_fen: int | None = None
-    #: Deprecated: a whole-plan replacement used to be granted by this boolean
-    #: alone. It is still accepted so an older proposal parses, but it no longer
-    #: authorizes anything by itself: the turn's validated ``goal_relation``
-    #: decides, and a switch without that relation is refused.
-    switch_goal: bool = False
 
 
 @dataclass
 class Lookup:
     kind: str
     query: str
-    #: Constraints stated in *this* turn, for *this* read only. They are parsed
-    #: by the same ``_parse_constraints`` the mutation path uses, so an exclusion
-    #: is a structured filter here too — never something the vector route is
-    #: asked to understand. They are merged with the saved requirements by union,
-    #: so a read can add an exclusion but can never silently drop one.
+    #: The turn's stated exclusions/budget when the turn only reads. A structured
+    #: filter — never something the vector route is asked to understand — merged
+    #: with the saved requirements by union, so a read can add an exclusion but
+    #: can never silently drop one.
     excluded_ingredients: list[str] = dc_field(default_factory=list)
     budget_fen: int | None = None
 
@@ -311,12 +310,7 @@ class Lookup:
 class Query:
     kind: str
     query: str | None = None
-    #: The same read-only constraints a lookup may carry, parsed by the same
-    #: ``_parse_constraints``. Without them a first-turn "不要花生" could only be
-    #: expressed on a lookup, so a recommendation or a recipe would have to be
-    #: retrieved with no exclusion at all. They are merged with the saved
-    #: requirements by union, so a query can add an exclusion and can never
-    #: silently lift one that is already saved.
+    #: The same read-only filter a lookup carries (``recommend`` / ``recipe`` only).
     excluded_ingredients: list[str] = dc_field(default_factory=list)
     budget_fen: int | None = None
 
@@ -331,16 +325,9 @@ class Uncertainty:
 @dataclass
 class SemanticProposal:
     reply: str = ""
-    #: What the sentence meant, in the constrained understanding vocabulary. The
-    #: model proposes it and may not turn it into authority: route, readiness and
-    #: write permission are derived from it by the server gate.
-    understanding: Understanding | None = None
-    #: The shopper's purchase intent for this turn, recognised by the model
-    #: *before* any retrieval. It is the only thing that lets a proposal which
-    #: starts with lookups/queries still compile a mutation afterwards; it is
-    #: never a server-side reading of the raw sentence, and it can never be
-    #: acquired after the read-only phase has begun.
-    purchase_requested: bool = False
+    #: The server's reading of the model's dimensions. The gate derives route,
+    #: readiness and write permission from it plus its own facts.
+    understanding: Understanding = dc_field(default_factory=Understanding)
     mutations: list[Mutation] = dc_field(default_factory=list)
     lookups: list[Lookup] = dc_field(default_factory=list)
     queries: list[Query] = dc_field(default_factory=list)
@@ -352,7 +339,7 @@ class SemanticProposal:
     def is_empty(self) -> bool:
         return not (
             self.reply.strip()
-            or self.understanding
+            or self.understanding != Understanding()
             or self.mutations
             or self.lookups
             or self.queries
@@ -380,197 +367,257 @@ def _as_list(value: Any, where: str) -> list[Any]:
     return value
 
 
+#: The model-facing vocabulary. The first value of each tuple is the "nothing
+#: said" sentinel, so an omitted key and an explicit sentinel mean the same.
+TARGET_KINDS = ("none", "meal", "product", "category", "unsupported")
+INTENTS = ("none", "explore", "buy")
+RELATIONS = ("unstated", "add", "replace")
+FULFILLMENT = ("unstated", "self_cook", "ready_made", "mixed")
+EDIT_OPS = ("none", "remove", "set_quantity", "adjust_quantity")
+PLAN_ACTS = ("none", "confirm", "abandon")
+#: Conditions a shopper may revoke; the same names as ``GoalChangeSet``.
+CLEARABLE = ("people", "budget_yuan", "fulfillment_mode", "excluded_ingredients")
+
+TARGET_KEYS = frozenset({"kind", "name", "ref", "items", "intent", "relation", "quantity"})
+CONSTRAINT_KEYS = frozenset(
+    {"people", "budget_yuan", "fulfillment_mode", "excluded_ingredients", "clear", "unsupported"}
+)
+FOCUS_KEYS = frozenset({"ref", "name"})
+EDIT_KEYS = frozenset({"op", "quantity"})
+LOOKUP_KEYS = frozenset({"kind", "query"})
+READ_KEYS = frozenset({"kind", "topic"})
+QUESTION_KEYS = frozenset({"slot", "question", "options"})
+
+#: A stated relation in the internal vocabulary; ``unstated`` is left to the gate.
+_RELATION = {"unstated": "unspecified", "add": "append", "replace": "switch"}
+_GOAL_KIND = {"product": "product_purchase", "category": "category_purchase"}
+
+
 def parse_proposal(raw: Any) -> SemanticProposal:
-    """Strictly parse the model's proposal. Anything unexpected is an error."""
-    if not isinstance(raw, dict):
-        raise SemanticProtocolError("MALFORMED_PROPOSAL", "proposal 必须是 JSON 对象")
-    _reject_forbidden(raw, "proposal")
-    unknown = sorted(set(raw) - PROPOSAL_TOP_KEYS)
-    if unknown:
-        raise SemanticProtocolError(
-            "MALFORMED_PROPOSAL", f"proposal 含未知字段: {', '.join(unknown)}"
+    """Strictly parse the model's proposal into the server's internal shape.
+
+    Every key is optional and an omitted one means "not said". An unknown key, a
+    server-owned field or a wrongly typed value is a protocol error, never a
+    silently dropped field. Nothing here reads server state: what a constraint
+    attaches to, and what the turn may do, is decided by the gate.
+    """
+    top = _wire(raw, PROPOSAL_TOP_KEYS, "proposal", allow_none=False)
+    try:
+        proposal = SemanticProposal(
+            reply=_text(top.get("reply"), "reply") or "",
+            lookups=[_parse_lookup(e) for e in _as_list(top.get("lookups"), "lookups")],
+            queries=[_parse_read(e) for e in _as_list(top.get("reads"), "reads")],
+            uncertainties=[
+                _parse_question(e) for e in _as_list(top.get("questions"), "questions")
+            ],
+            display_refs=_refs(top.get("display_refs"), "display_refs"),
+            resolved_questions=_refs(top.get("resolved_questions"), "resolved_questions"),
         )
-
-    reply = raw.get("reply")
-    if reply is not None and not isinstance(reply, str):
-        raise SemanticProtocolError("MALFORMED_PROPOSAL", "reply 必须是字符串")
-
-    purchase_requested = raw.get("purchase_requested", False)
-    if not isinstance(purchase_requested, bool):
-        raise SemanticProtocolError("MALFORMED_PROPOSAL", "purchase_requested 必须是 true/false")
-
-    proposal = SemanticProposal(
-        reply=(reply or "").strip(),
-        purchase_requested=bool(purchase_requested),
-    )
-    if raw.get("understanding") is not None:
-        try:
-            # The semantic contract is parsed by its own module; the protocol
-            # only carries it. A contract violation is a protocol violation.
-            proposal.understanding = parse_understanding(raw["understanding"])
-        except GoalParseError as exc:
-            raise SemanticProtocolError(exc.code, exc.message) from exc
-    for entry in _as_list(raw.get("mutations"), "mutations"):
-        proposal.mutations.append(_parse_mutation(entry))
-    for entry in _as_list(raw.get("lookups"), "lookups"):
-        proposal.lookups.append(_parse_lookup(entry))
-    for entry in _as_list(raw.get("queries"), "queries"):
-        proposal.queries.append(_parse_query(entry))
-    for entry in _as_list(raw.get("uncertainties"), "uncertainties"):
-        proposal.uncertainties.append(_parse_uncertainty(entry))
-    if len(proposal.mutations) > 8 or len(proposal.uncertainties) > 3:
-        raise SemanticProtocolError("PROPOSAL_LIMIT_EXCEEDED", "单轮最多 8 个修改与 3 个待澄清问题")
-    if len(proposal.lookups) + len(proposal.queries) > 4:
-        raise SemanticProtocolError("PROPOSAL_LIMIT_EXCEEDED", "单轮最多 4 个只读请求")
-    for key in ("display_refs", "resolved_questions"):
-        values = _as_list(raw.get(key), key)
-        if len(values) > 12 or any(not isinstance(v, str) or not v for v in values):
-            raise SemanticProtocolError("MALFORMED_PROPOSAL", f"{key} 必须是至多 12 个非空引用")
-        setattr(proposal, key, list(dict.fromkeys(values)))
+        if len(proposal.lookups) + len(proposal.queries) > 4:
+            raise SemanticProtocolError("PROPOSAL_LIMIT_EXCEEDED", "单轮最多 4 个只读请求")
+        if len(proposal.uncertainties) > 3:
+            raise SemanticProtocolError("PROPOSAL_LIMIT_EXCEEDED", "单轮最多 3 个待澄清问题")
+        _attach_understanding(proposal, top)
+    except ValidationError as exc:
+        detail = "; ".join(str(e.get("msg") or "") for e in exc.errors()[:3])
+        raise SemanticProtocolError("MALFORMED_PROPOSAL", detail or "proposal 结构不合法") from exc
     return proposal
 
 
-def _parse_mutation(entry: Any) -> Mutation:
-    if not isinstance(entry, dict):
-        raise SemanticProtocolError("MALFORMED_PROPOSAL", "mutation 必须是对象")
-    _reject_forbidden(entry, "mutation")
-    verb = entry.get("verb")
-    if verb not in MUTATION_VERBS:
-        raise SemanticProtocolError(
-            "MALFORMED_PROPOSAL", f"verb 必须是 {', '.join(MUTATION_VERBS)} 之一"
-        )
-    allowed = {
-        "verb",
-        "name",
-        "candidate_ref",
-        "target_ref",
-        "field",
-        "quantity",
-        "people",
-        "constraints",
-        "switch_goal",
-    }
-    unknown = sorted(set(entry) - allowed)
-    if unknown:
-        raise SemanticProtocolError(
-            "MALFORMED_PROPOSAL", f"mutation 含未知字段: {', '.join(unknown)}"
-        )
+def _attach_understanding(proposal: SemanticProposal, top: dict[str, Any]) -> None:
+    """Derive the internal ``Understanding`` and row mutations from the dimensions."""
+    target = _wire(top.get("target"), TARGET_KEYS, "target")
+    focus = _wire(top.get("focus"), FOCUS_KEYS, "focus")
+    edit = _wire(top.get("edit"), EDIT_KEYS, "edit")
+    kind = _choice(target.get("kind"), TARGET_KINDS, "target.kind")
+    intent = _choice(target.get("intent"), INTENTS, "target.intent")
+    relation = _choice(target.get("relation"), RELATIONS, "target.relation")
+    op = _choice(edit.get("op"), EDIT_OPS, "edit.op")
+    stated, clear, unsupported = _constraints(top.get("constraints"))
+    focus_ref = _text(focus.get("ref"), "focus.ref")
 
-    candidate_ref = entry.get("candidate_ref")
-    target_ref = entry.get("target_ref")
-    name = entry.get("name", "")
-    if not isinstance(name, str) or ("name" in entry and not name.strip()):
-        raise SemanticProtocolError("MALFORMED_PROPOSAL", "name 必须是目标清单中的完整名称")
-    if candidate_ref is not None and target_ref is not None:
-        raise SemanticProtocolError(
-            "REF_KIND_CONFLICT", "candidate_ref 与 target_ref 不能同时出现"
-        )
+    goal = _goal(kind, intent, target, stated)
+    if goal is not None and _text(target.get("ref"), "target.ref"):
+        proposal.mutations.append(_add(target, goal, stated))
+    row_edit = _edit(op, edit.get("quantity"), focus_ref, _text(focus.get("name"), "focus.name"))
+    if row_edit is not None:
+        proposal.mutations.append(row_edit)
 
-    if verb == "add":
-        if not isinstance(candidate_ref, str) or not candidate_ref:
-            raise SemanticProtocolError("MALFORMED_PROPOSAL", "add 必须给出 candidate_ref")
-        if entry.get("field") is not None:
-            raise SemanticProtocolError("UNSUPPORTED_OPERATION", "add 不接受 field")
-        mutation = Mutation(verb="add", candidate_ref=candidate_ref, name=name.strip())
-        switch_goal = entry.get("switch_goal", False)
-        if not isinstance(switch_goal, bool):
-            raise SemanticProtocolError("MALFORMED_PROPOSAL", "switch_goal 必须是 true/false")
-        mutation.switch_goal = switch_goal
-        # A shopper-stated pack count / headcount / constraint travels with the
-        # add: it is something the user said, so it must be expressible.
-        _apply_stated_modifiers(entry, mutation)
-        return mutation
+    changes = None
+    reading = intent == "explore" or kind != "none" or proposal.lookups or proposal.queries
+    if goal is None and op == "none" and reading:
+        # Only reading: the stated conditions filter the reads and nothing else.
+        _filter_reads(proposal, stated)
+    elif goal is None and (stated or clear):
+        changes = GoalChanges(set=GoalChangeSet(**stated), clear=clear)
 
-    if verb == "remove":
-        if not isinstance(target_ref, str) or not target_ref:
-            raise SemanticProtocolError("MALFORMED_PROPOSAL", "remove 必须给出 target_ref")
-        if any(
-            entry.get(k) is not None
-            for k in ("field", "quantity", "people", "constraints")
-        ):
-            raise SemanticProtocolError("UNSUPPORTED_OPERATION", "remove 不接受字段修饰")
-        return Mutation(verb="remove", target_ref=target_ref, name=name.strip())
-
-    # change
-    if entry.get("field") == "constraints":
-        excluded, budget = _parse_constraints(entry.get("constraints"))
-        return Mutation(verb="change", field="constraints", target_ref=target_ref, name=name.strip(),
-                        excluded_ingredients=excluded, budget_fen=budget)
-    if not isinstance(target_ref, str) or not target_ref:
-        raise SemanticProtocolError("MALFORMED_PROPOSAL", "change 必须给出 target_ref")
-    field_name = entry.get("field")
-    if field_name not in CHANGE_FIELDS:
-        raise SemanticProtocolError(
-            "MALFORMED_PROPOSAL", f"field 必须是 {', '.join(CHANGE_FIELDS)} 之一"
-        )
-    mutation = Mutation(verb="change", target_ref=target_ref, field=field_name, name=name.strip())
-    extra_modifiers = {"quantity", "people", "constraints"} - {field_name}
-    if any(k in entry for k in extra_modifiers):
-        raise SemanticProtocolError("MALFORMED_PROPOSAL", "change 只能携带所选 field 的值")
-
-    if field_name == "quantity":
-        mode, value = _parse_quantity(entry.get("quantity"), require_mode=True)
-        mutation.quantity_mode = mode
-        mutation.quantity_value = value
-    elif field_name == "people":
-        mutation.people = _parse_people(entry.get("people"))
+    if goal is not None:
+        goal_relation = _RELATION[relation]
+    elif changes is not None or op != "none":
+        goal_relation = "amend"
     else:
-        excluded, budget = _parse_constraints(entry.get("constraints"))
-        mutation.excluded_ingredients = excluded
-        mutation.budget_fen = budget
-    return mutation
+        goal_relation = "unspecified"
+    proposal.understanding = Understanding(
+        intent=intent,
+        plan_act=_choice(top.get("plan_act"), PLAN_ACTS, "plan_act"),
+        focus_ref=focus_ref,
+        goal_relation=goal_relation,
+        new_goal=goal,
+        changes=changes,
+        unsupported=unsupported,
+    )
 
 
-def _parse_quantity(spec: Any, *, require_mode: bool) -> tuple[str, int]:
-    """``{"mode": "set|delta", "value": n}``. A bare integer means ``set``.
+def _constraints(raw: Any) -> tuple[dict[str, Any], list[str], list[str]]:
+    """What the shopper stated, what they revoked, and what cannot be applied.
 
-    The two modes have deliberately different domains: ``set`` is an absolute
-    pack count and must be a positive integer, while ``delta`` is a *change* and
-    may be negative ("少一件"). Refusing a negative delta would make "减一件"
-    inexpressible.
+    ``0``, ``"unstated"`` and ``[]`` all mean "not said", so a sentinel is never
+    read back as a value.
     """
-    if isinstance(spec, int) and not isinstance(spec, bool):
-        if require_mode:
-            raise SemanticProtocolError(
-                "MALFORMED_PROPOSAL", "quantity 需要 {mode, value} 对象"
-            )
-        spec = {"mode": "set", "value": spec}
-    if not isinstance(spec, dict):
-        raise SemanticProtocolError("MALFORMED_PROPOSAL", "quantity 需要 {mode, value} 对象")
-    unknown = sorted(set(spec) - {"mode", "value"})
+    spec = _wire(raw, CONSTRAINT_KEYS, "constraints")
+    stated: dict[str, Any] = {}
+    if people := _count(spec.get("people"), "constraints.people"):
+        stated["people"] = people
+    budget = spec.get("budget_yuan")
+    if budget not in (None, 0):
+        stated["budget_yuan"] = yuan_to_fen(budget) / 100
+    mode = _choice(spec.get("fulfillment_mode"), FULFILLMENT, "constraints.fulfillment_mode")
+    if mode != "unstated":
+        stated["fulfillment_mode"] = mode
+    excluded = _strings(spec.get("excluded_ingredients"), "constraints.excluded_ingredients")
+    if excluded:
+        stated["excluded_ingredients"] = excluded
+    clear = _strings(spec.get("clear"), "constraints.clear")
+    unknown = sorted(set(clear) - set(CLEARABLE))
     if unknown:
         raise SemanticProtocolError(
-            "MALFORMED_PROPOSAL", f"quantity 含未知字段: {', '.join(unknown)}"
+            "MALFORMED_PROPOSAL", f"constraints.clear 含未知字段: {', '.join(unknown)}"
         )
-    mode = spec.get("mode")
-    value = spec.get("value")
-    if mode not in QUANTITY_MODES:
-        raise SemanticProtocolError(
-            "MALFORMED_PROPOSAL", f"quantity.mode 必须是 {', '.join(QUANTITY_MODES)} 之一"
-        )
-    if not isinstance(value, int) or isinstance(value, bool):
-        raise SemanticProtocolError("MALFORMED_PROPOSAL", "quantity.value 必须是整数")
-    if mode == "set":
-        if value < 1:
+    return stated, clear, _strings(spec.get("unsupported"), "constraints.unsupported")
+
+
+def _goal(kind: str, intent: str, target: dict[str, Any], stated: dict[str, Any]) -> Goal | None:
+    """The goal a *buy* target states. Only looking at something states none."""
+    if kind == "unsupported":
+        return Goal(kind="unsupported")
+    if kind == "none" or intent != "buy":
+        return None
+    name = _text(target.get("name"), "target.name")
+    items = _strings(target.get("items"), "target.items")
+    if kind == "meal":
+        goal_kind = "meal_plan" if name or items else "meal_decision"
+    else:
+        goal_kind = _GOAL_KIND[kind]
+    if kind == "product" and name and not items:
+        items = [name]
+    conditions = {key: value for key, value in stated.items() if key != "fulfillment_mode"}
+    return Goal(
+        kind=goal_kind,
+        fulfillment_mode=stated.get("fulfillment_mode", "unspecified"),
+        target_name=name,
+        category_name=name if kind == "category" else None,
+        items=items,
+        constraints=GoalConstraints(**conditions),
+    )
+
+
+def _add(target: dict[str, Any], goal: Goal, stated: dict[str, Any]) -> Mutation:
+    """An ``add`` of the exact server candidate the shopper picked."""
+    quantity = _count(target.get("quantity"), "target.quantity")
+    budget = stated.get("budget_yuan")
+    return Mutation(
+        verb="add",
+        candidate_ref=_text(target.get("ref"), "target.ref"),
+        name=goal.target_name or "",
+        quantity_mode="set" if quantity else None,
+        quantity_value=quantity,
+        people=stated.get("people"),
+        excluded_ingredients=list(stated.get("excluded_ingredients") or []),
+        budget_fen=None if budget is None else yuan_to_fen(budget),
+    )
+
+
+def _edit(op: str, quantity: Any, ref: str | None, name: str | None) -> Mutation | None:
+    """A row edit on the focused plan entry.
+
+    Without a focus the edit stays unlocated: the gate asks which row instead of
+    guessing one.
+    """
+    value = 0
+    if op in ("set_quantity", "adjust_quantity"):
+        if isinstance(quantity, bool) or not isinstance(quantity, int):
+            raise SemanticProtocolError("MALFORMED_PROPOSAL", "edit.quantity 必须是整数")
+        value = quantity
+        if op == "set_quantity" and value < 1:
             raise SemanticProtocolError(
-                "MALFORMED_PROPOSAL",
-                "quantity.value 在 set 模式下必须是正整数；要减少件数请用 mode=delta 和负值",
+                "MALFORMED_PROPOSAL", "set_quantity 需要正整数；要减少件数请用 adjust_quantity 和负值"
             )
-    elif value == 0:
-        raise SemanticProtocolError("MALFORMED_PROPOSAL", "quantity.value 在 delta 模式下不能为 0")
-    return str(mode), int(value)
+        if op == "adjust_quantity" and value == 0:
+            raise SemanticProtocolError("MALFORMED_PROPOSAL", "adjust_quantity 不能为 0")
+    if op == "none" or not ref:
+        return None
+    if op == "remove":
+        return Mutation(verb="remove", target_ref=ref, name=name or "")
+    return Mutation(
+        verb="change",
+        target_ref=ref,
+        name=name or "",
+        field="quantity",
+        quantity_mode="set" if op == "set_quantity" else "delta",
+        quantity_value=value,
+    )
 
 
-def _parse_people(value: Any) -> int:
-    if not isinstance(value, int) or isinstance(value, bool) or value < 1:
-        raise SemanticProtocolError("MALFORMED_PROPOSAL", "people 必须是正整数")
-    return int(value)
+def _filter_reads(proposal: SemanticProposal, stated: dict[str, Any]) -> None:
+    """A read-only turn's stated exclusions/budget filter the reads that can use them."""
+    excluded = list(stated.get("excluded_ingredients") or [])
+    budget = stated.get("budget_yuan")
+    budget_fen = None if budget is None else yuan_to_fen(budget)
+    reads = [*proposal.lookups, *(q for q in proposal.queries if q.kind in ("recipe", "recommend"))]
+    for read in reads:
+        read.excluded_ingredients = list(excluded)
+        read.budget_fen = budget_fen
 
 
-#: The only money field a model may author. It is denominated in yuan, and the
-#: server converts it to the internal minor unit itself — the model is never
-#: asked to do money arithmetic, and can never hand over a fen amount.
-CONSTRAINT_KEYS = frozenset({"excluded_ingredients", "budget_yuan"})
+def _parse_lookup(entry: Any) -> Lookup:
+    spec = _wire(entry, LOOKUP_KEYS, "lookup", allow_none=False)
+    query = _text(spec.get("query"), "lookup.query")
+    if not query:
+        raise SemanticProtocolError("MALFORMED_PROPOSAL", "lookup.query 不能为空")
+    return Lookup(kind=_choice(spec.get("kind"), LOOKUP_KINDS, "lookup.kind"), query=query)
+
+
+def _parse_read(entry: Any) -> Query:
+    spec = _wire(entry, READ_KEYS, "read", allow_none=False)
+    kind = _choice(spec.get("kind"), QUERY_KINDS, "read.kind")
+    topic = _text(spec.get("topic"), "read.topic")
+    if topic and len(topic) > 200:
+        raise SemanticProtocolError("MALFORMED_PROPOSAL", "read.topic 最多 200 字")
+    if topic and kind not in ("recipe", "recommend"):
+        # cart / catalog describe the session itself; a product name is a lookup.
+        raise SemanticProtocolError(
+            "UNSUPPORTED_OPERATION", "只有 recipe 与 recommend 支持主题；商品名使用 lookups"
+        )
+    return Query(kind=kind, query=topic)
+
+
+def _parse_question(entry: Any) -> Uncertainty:
+    spec = _wire(entry, QUESTION_KEYS, "question", allow_none=False)
+    slot = _text(spec.get("slot"), "question.slot")
+    question = _text(spec.get("question"), "question.question")
+    if not slot or not question:
+        raise SemanticProtocolError("MALFORMED_PROPOSAL", "question 需要 slot 和 question")
+    return Uncertainty(
+        slot=slot, question=question, option_refs=_refs(spec.get("options"), "question.options")
+    )
+
+
+def _refs(value: Any, where: str) -> list[str]:
+    """At most 12 distinct, non-empty server refs."""
+    values = _as_list(value, where)
+    if len(values) > 12 or any(not isinstance(v, str) or not v.strip() for v in values):
+        raise SemanticProtocolError("MALFORMED_PROPOSAL", f"{where} 必须是至多 12 个非空引用")
+    return list(dict.fromkeys(v.strip() for v in values))
 
 
 def yuan_to_fen(value: Any) -> int:
@@ -587,258 +634,115 @@ def yuan_to_fen(value: Any) -> int:
     return int(fen)
 
 
-def _parse_constraints(spec: Any) -> tuple[list[str], int | None]:
-    if not isinstance(spec, dict):
-        raise SemanticProtocolError("MALFORMED_PROPOSAL", "constraints 需要对象")
-    _reject_forbidden(spec, "constraints")
-    unknown = sorted(set(spec) - CONSTRAINT_KEYS)
+def _wire(
+    value: Any, allowed: frozenset[str], where: str, *, allow_none: bool = True
+) -> dict[str, Any]:
+    """One wire object: omitted is empty; otherwise only known, model-owned keys."""
+    if value is None and allow_none:
+        return {}
+    if not isinstance(value, dict):
+        raise SemanticProtocolError("MALFORMED_PROPOSAL", f"{where} 必须是 JSON 对象")
+    _reject_forbidden(value, where)
+    unknown = sorted(set(value) - allowed)
     if unknown:
-        raise SemanticProtocolError(
-            "MALFORMED_PROPOSAL", f"constraints 含未知字段: {', '.join(unknown)}"
-        )
-    excluded = spec.get("excluded_ingredients") or []
-    if not isinstance(excluded, list) or any(not isinstance(x, str) for x in excluded):
-        raise SemanticProtocolError(
-            "MALFORMED_PROPOSAL", "excluded_ingredients 必须是字符串数组"
-        )
-    budget = spec.get("budget_yuan")
-    budget_fen = None if budget is None else yuan_to_fen(budget)
-    return [x for x in excluded if x.strip()], budget_fen
+        raise SemanticProtocolError("MALFORMED_PROPOSAL", f"{where} 含未知字段: {', '.join(unknown)}")
+    return value
 
 
-def _apply_stated_modifiers(entry: dict[str, Any], mutation: Mutation) -> None:
-    """Carry the constraints the user actually stated on an ``add``."""
-    if entry.get("quantity") is not None:
-        mode, value = _parse_quantity(entry.get("quantity"), require_mode=False)
-        mutation.quantity_mode = mode
-        mutation.quantity_value = value
-    if entry.get("people") is not None:
-        mutation.people = _parse_people(entry.get("people"))
-    if entry.get("constraints") is not None:
-        excluded, budget = _parse_constraints(entry.get("constraints"))
-        mutation.excluded_ingredients = excluded
-        mutation.budget_fen = budget
+def _choice(value: Any, allowed: tuple[str, ...], where: str) -> str:
+    """An enum value; omitted means the first ("nothing said") one."""
+    if value is None or value == "":
+        return allowed[0]
+    if value not in allowed:
+        raise SemanticProtocolError("MALFORMED_PROPOSAL", f"{where} 必须是 {', '.join(allowed)} 之一")
+    return str(value)
 
 
-def _parse_lookup(entry: Any) -> Lookup:
-    if not isinstance(entry, dict):
-        raise SemanticProtocolError("MALFORMED_PROPOSAL", "lookup 必须是对象")
-    unknown = sorted(set(entry) - {"kind", "query", "constraints"})
-    if unknown:
-        raise SemanticProtocolError("MALFORMED_PROPOSAL", f"lookup 含未知字段: {', '.join(unknown)}")
-    kind = entry.get("kind")
-    query = entry.get("query")
-    if kind not in LOOKUP_KINDS:
-        raise SemanticProtocolError("MALFORMED_PROPOSAL", f"lookup.kind 必须是 {', '.join(LOOKUP_KINDS)} 之一")
-    if not isinstance(query, str) or not query.strip():
-        raise SemanticProtocolError("MALFORMED_PROPOSAL", "lookup.query 不能为空")
-    excluded: list[str] = []
-    budget_fen: int | None = None
-    if entry.get("constraints") is not None:
-        excluded, budget_fen = _parse_constraints(entry.get("constraints"))
-    return Lookup(
-        kind=kind,
-        query=query.strip(),
-        excluded_ingredients=excluded,
-        budget_fen=budget_fen,
-    )
+def _text(value: Any, where: str) -> str | None:
+    """A trimmed string, or ``None`` when omitted or blank."""
+    if value is None:
+        return None
+    if not isinstance(value, str):
+        raise SemanticProtocolError("MALFORMED_PROPOSAL", f"{where} 必须是字符串")
+    return value.strip() or None
 
 
-def _parse_query(entry: Any) -> Query:
-    if not isinstance(entry, dict):
-        raise SemanticProtocolError("MALFORMED_PROPOSAL", "query 必须是对象")
-    unknown = sorted(set(entry) - {"kind", "query", "constraints"})
-    if unknown:
-        raise SemanticProtocolError("MALFORMED_PROPOSAL", f"query 含未知字段: {', '.join(unknown)}")
-    kind = entry.get("kind")
-    if kind not in QUERY_KINDS:
-        raise SemanticProtocolError("MALFORMED_PROPOSAL", f"query.kind 必须是 {', '.join(QUERY_KINDS)} 之一")
-    text = entry.get("query")
-    if text is not None and (not isinstance(text, str) or not text.strip() or len(text) > 200):
-        raise SemanticProtocolError("MALFORMED_PROPOSAL", "query.query 必须是 1 到 200 字的查询主题")
-    #: ``recommend`` may carry the topic the shopper actually asked about, so the
-    #: retrieval answers *that* instead of returning whatever happens to be first.
-    #: ``cart``/``catalog`` describe the session itself and take no topic.
-    if text is not None and kind not in ("recipe", "recommend"):
-        raise SemanticProtocolError(
-            "UNSUPPORTED_OPERATION", "只有 recipe 与 recommend 查询支持指定主题；商品名使用 lookups"
-        )
-    excluded: list[str] = []
-    budget_fen: int | None = None
-    if entry.get("constraints") is not None:
-        # Same rule as the topic: only the two retrieving kinds can apply a
-        # constraint, because only they run a retrieval that could honour one.
-        if kind not in ("recipe", "recommend"):
-            raise SemanticProtocolError(
-                "UNSUPPORTED_OPERATION", "只有 recipe 与 recommend 查询支持忌口/预算约束"
-            )
-        excluded, budget_fen = _parse_constraints(entry.get("constraints"))
-    return Query(
-        kind=kind,
-        query=text.strip() if text else None,
-        excluded_ingredients=excluded,
-        budget_fen=budget_fen,
-    )
+def _strings(value: Any, where: str) -> list[str]:
+    """Distinct, non-empty strings in their original order."""
+    values = _as_list(value, where)
+    if any(not isinstance(v, str) for v in values):
+        raise SemanticProtocolError("MALFORMED_PROPOSAL", f"{where} 必须是字符串数组")
+    return list(dict.fromkeys(v.strip() for v in values if v.strip()))
 
 
-def _parse_uncertainty(entry: Any) -> Uncertainty:
-    if not isinstance(entry, dict):
-        raise SemanticProtocolError("MALFORMED_PROPOSAL", "uncertainty 必须是对象")
-    unknown = sorted(set(entry) - {"slot", "question", "options"})
-    if unknown:
-        raise SemanticProtocolError(
-            "MALFORMED_PROPOSAL", f"uncertainty 含未知字段: {', '.join(unknown)}"
-        )
-    slot = entry.get("slot")
-    question = entry.get("question")
-    if not isinstance(slot, str) or not slot.strip():
-        raise SemanticProtocolError("MALFORMED_PROPOSAL", "uncertainty.slot 不能为空")
-    if not isinstance(question, str) or not question.strip():
-        raise SemanticProtocolError("MALFORMED_PROPOSAL", "uncertainty.question 不能为空")
-    option_refs: list[str] = []
-    for option in _as_list(entry.get("options"), "uncertainty.options"):
-        if not isinstance(option, dict):
-            raise SemanticProtocolError("MALFORMED_PROPOSAL", "uncertainty option 必须是对象")
-        unknown = sorted(set(option) - {"candidate_ref"})
-        if unknown:
-            raise SemanticProtocolError(
-                "MALFORMED_PROPOSAL", f"uncertainty option 含未知字段: {', '.join(unknown)}"
-            )
-        ref = option.get("candidate_ref")
-        if not isinstance(ref, str) or not ref:
-            raise SemanticProtocolError("MALFORMED_PROPOSAL", "uncertainty option 缺少 candidate_ref")
-        option_refs.append(ref)
-    return Uncertainty(slot=slot.strip(), question=question.strip(), option_refs=option_refs)
+def _count(value: Any, where: str) -> int | None:
+    """A non-negative integer; ``0`` or omitted means "not said"."""
+    if value is None:
+        return None
+    if isinstance(value, bool) or not isinstance(value, int) or value < 0:
+        raise SemanticProtocolError("MALFORMED_PROPOSAL", f"{where} 必须是非负整数")
+    return value or None
 
 
 def proposal_schema() -> dict[str, Any]:
-    """Output JSON Schema, not a pseudo-proposal with illegal example keys.
+    """Guidance schema for the understanding stage.
 
-    The server parser and reference/business checks remain authoritative.
+    Every key is optional and the parser stays authoritative: an omitted key
+    means "not said", so the model writes only what the shopper actually said.
     """
-    def obj(properties: dict[str, Any], required: list[str] | None = None) -> dict[str, Any]:
-        return {"type": "object", "properties": properties,
-                "required": required or [], "additionalProperties": False}
+    def obj(properties: dict[str, Any]) -> dict[str, Any]:
+        return {"type": "object", "properties": properties, "additionalProperties": False}
 
-    def array(items: dict[str, Any], maximum: int) -> dict[str, Any]:
-        return {"type": "array", "items": items, "maxItems": maximum}
+    def enum(values: tuple[str, ...], description: str = "") -> dict[str, Any]:
+        return {"enum": list(values), **({"description": description} if description else {})}
 
-    text = {"type": "string", "minLength": 1}
-    positive = {"type": "integer", "minimum": 1}
-    ref_name = {"name": {**text, "description": "与引用同一行的完整名称，必须一致"}}
-    quantity = {"oneOf": [
-        obj({"mode": {"const": "set"}, "value": positive}, ["mode", "value"]),
-        obj({"mode": {"const": "delta"}, "value": {"type": "integer", "not": {"const": 0}}}, ["mode", "value"]),
-    ]}
-    constraints = obj({"excluded_ingredients": array(text, 20),
-                       "budget_yuan": {"type": "number", "minimum": 0}})
-    #: The semantic statement. It is the only thing that authorizes a plan write,
-    #: so the schema describes exactly the two mutually exclusive shapes: a new
-    #: goal, or a patch of the goal under discussion.
-    goal = obj({
-        "kind": {"enum": ["meal_decision", "meal_plan", "product_purchase",
-                          "category_purchase", "replenishment", "information_only",
-                          "unsupported"]},
-        "fulfillment_mode": {"enum": ["self_cook", "ready_made", "mixed",
-                                      "unspecified", "none"],
-                             "description": "用户没说就不要猜；未说明用 unspecified"},
-        "description": {"type": "string"},
-        "target_name": {**text},
-        "category_id": {**text},
-        "category_name": {**text},
-        "items": array(text, 20),
-        "constraints": obj({"people": positive, "budget_yuan": {"type": "number", "minimum": 0},
-                            "dietary": array(text, 20), "excluded_ingredients": array(text, 20),
-                            "meal_time": {"enum": ["breakfast", "lunch", "dinner",
-                                                    "late_night", "snack"]}}),
-        "notes": array(text, 5),
-        "assumptions": array(text, 5),
-    }, ["kind"])
-    change_set = obj({"people": positive,
-                      "budget_yuan": {"type": "number", "minimum": 0},
-                      "fulfillment_mode": {"enum": ["self_cook", "ready_made", "mixed",
-                                                     "unspecified", "none"]},
-                      "meal_time": {"enum": ["breakfast", "lunch", "dinner",
-                                              "late_night", "snack"]},
-                      "dietary": array(text, 20),
-                      "excluded_ingredients": array(text, 20)})
-    understanding = obj({
-        "speech_act": {"enum": ["ask_fact", "request_action", "correct",
-                                 "answer_clarification", "chat", "unspecified"],
-                       "description": "这句话在做什么，不是要你执行的动作"},
-        "focus_ref": {**text, "description": "focus_refs 里的一个引用；不确定就不要填"},
-        "goal_relation": {"enum": ["new", "append", "switch", "amend", "unspecified"],
-                          "description": ("与快照中已有目标的关系：new=新建，append=再加一个，"
-                                          "switch=换掉现在这份未确认清单，amend=修正同一目标")},
-        "new_goal": {**goal, "description": "new/append/switch 时给出；不是对服务端状态的复述"},
-        "changes": {**obj({
-            "set": change_set,
-            "clear": array({"enum": ["people", "budget_yuan", "fulfillment_mode",
-                                      "meal_time", "dietary", "excluded_ingredients"]}, 6),
-        }), "description": "amend 时给出；省略的字段保持不变，null 不代表撤销"},
-        "notes": array(text, 5),
-    })
-
-    mutation = {"oneOf": [
-        obj({"verb": {"const": "add"}, "candidate_ref": text, **ref_name,
-             "quantity": positive, "people": positive, "constraints": constraints},
-            ["verb", "candidate_ref", "name"]),
-        obj({"verb": {"const": "change"},
-             "target_ref": {**text, "description": (
-                 "current_plan 的一行商品；只有单件商品的 groups 行（该分组仅含这一个 SKU）也可以"
-             )}, **ref_name,
-             "field": {"const": "quantity"}, "quantity": quantity},
-            ["verb", "target_ref", "name", "field", "quantity"]),
-        obj({"verb": {"const": "change"}, "target_ref": text, **ref_name,
-             "field": {"const": "people"}, "people": positive},
-            ["verb", "target_ref", "name", "field", "people"]),
-        obj({"verb": {"const": "remove"}, "target_ref": text, **ref_name},
-            ["verb", "target_ref", "name"]),
-    ]}
+    text = {"type": "string"}
+    texts = {"type": "array", "items": text, "maxItems": 12}
+    count = {"type": "integer", "minimum": 0}
     return obj({
-        "reply": {"type": "string", "description": "自然语言回答，不提前宣称执行成功"},
-        "understanding": {**understanding, "description": (
-            "这一句的语义：做什么（speech_act）、和已有目标什么关系（goal_relation）、"
-            "新目标或要改的字段。一次给出即可；服务端据此执行，不需要等检索结果后再补一轮提案。"
-            "只聊天或只提问时不要编造目标。"
-        )},
-        "purchase_requested": {"type": "boolean", "description": (
-            "仅兼容旧格式，不授予写入权限；是否允许准备清单由 understanding 与服务端决定。"
-        )},
-        "mutations": array(mutation, 8),
-        "lookups": array(obj({
-            "kind": {"enum": ["dish", "product"]},
-            "query": {**text, "description": (
-                "只填要检索的名称/主题，不要带否定词。“不要花生”里的花生要放进 constraints，"
-                "query 只留菜名或主题。"
-            )},
-            "constraints": {**constraints, "description": (
-                "本轮用户说出的忌口/预算，只作用于这次检索；" +
-                "它只会与已保存的忌口合并，不会解除已保存的忌口。"
-            )},
-        }, ["kind", "query"]), 2),
-        "queries": array({"oneOf": [
-            obj({"kind": {"const": "recommend"},
-                 "query": {**text, "maxLength": 200, "description": (
-                     "用户想找的东西（如“番茄炒蛋”“不辣的家常菜”）。"
-                     "给了主题就必须按它检索；没有主题才是开放式探索。"
-                 )},
-                 "constraints": {**constraints, "description": (
-                     "本轮用户说出的忌口/预算，只作用于这次检索；"
-                     "它只会与已保存的忌口合并，不会解除已保存的忌口。"
-                 )}}, ["kind"]),
-            obj({"kind": {"enum": ["cart", "catalog"]}}, ["kind"]),
-            obj({"kind": {"const": "recipe"}, "query": {**text, "maxLength": 200},
-                 "constraints": {**constraints, "description": (
-                     "本轮用户说出的忌口/预算，只作用于这次检索；"
-                     "它只会与已保存的忌口合并，不会解除已保存的忌口。"
-                 )}}, ["kind"]),
-        ]}, 4),
-        "display_refs": array(text, 12),
-        "resolved_questions": array(text, 12),
-        "uncertainties": array(obj({"slot": text, "question": text,
-            "options": array(obj({"candidate_ref": text}, ["candidate_ref"]), 12)}, ["slot", "question"]), 3),
+        "reply": {**text, "description": "只在没有业务结果时说的话；不要声称已加购、改单或检索成功"},
+        "target": obj({
+            "kind": enum(TARGET_KINDS, "用户提到的东西：一餐 / 商品 / 品类；做不到的写 unsupported"),
+            "name": {**text, "description": "用户说的名字；「今晚这顿」这类没有名字就不填"},
+            "ref": {**text, "description": "用户选了服务端给出的某个候选时填它的 ref"},
+            "items": texts,
+            "intent": enum(INTENTS, "explore=只是看看/问问；buy=要一份能买的清单（「帮我选」也是 buy）"),
+            "relation": enum(RELATIONS, "只有用户明说「再加」=add、「换成 / 不是X是Y」=replace 才填"),
+            "quantity": {**count, "description": "用户说的件数，没说不填"},
+        }),
+        "constraints": obj({
+            "people": count,
+            "budget_yuan": {"type": "number", "minimum": 0},
+            "fulfillment_mode": enum(FULFILLMENT, "只有用户说了自己做 / 买现成才填"),
+            "excluded_ingredients": texts,
+            "clear": {"type": "array", "items": enum(CLEARABLE)},
+            "unsupported": {**texts, "description": "用户说了、上面没有字段的条件原话，如「清淡」「10分钟送到」"},
+        }),
+        "focus": obj({"ref": {**text, "description": "focus_refs 里的一个引用；指代不清就不填"},
+                      "name": text}),
+        "edit": obj({"op": enum(EDIT_OPS, "对 focus 那一项做什么"), "quantity": {"type": "integer"}}),
+        "plan_act": enum(PLAN_ACTS, "只有明说「加入购物车 / 下单」=confirm、「不买了」=abandon；「好的」不算"),
+        "lookups": {"type": "array", "maxItems": 2, "items": obj({
+            "kind": enum(LOOKUP_KINDS), "query": {**text, "description": "只填名称，不带否定词"}})},
+        "reads": {"type": "array", "maxItems": 4, "items": obj({
+            "kind": enum(QUERY_KINDS), "topic": {**text, "description": "recommend / recipe 的主题"}})},
+        "questions": {"type": "array", "maxItems": 3, "items": obj({
+            "slot": text, "question": text, "options": texts})},
+        "display_refs": texts,
+        "resolved_questions": {**texts, "description": "这句话已经回答或不再需要的 pending_clarifications 的 question_id"},
     })
+
+
+def answer_schema() -> dict[str, Any]:
+    """The answer stage: retrieval is done, only the words remain."""
+    return {
+        "type": "object",
+        "properties": {
+            "reply": {"type": "string", "description": "只根据 query_results 回答"},
+        },
+        "required": ["reply"],
+        "additionalProperties": False,
+    }
 
 
 __all__ = [
@@ -852,6 +756,7 @@ __all__ = [
     "SemanticProtocolError",
     "Uncertainty",
     "add_lookup_candidates",
+    "answer_schema",
     "parse_proposal",
     "proposal_schema",
     "yuan_to_fen",

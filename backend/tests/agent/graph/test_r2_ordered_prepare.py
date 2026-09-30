@@ -160,7 +160,7 @@ def _decision(
 
 def _proposal(mutations: list[Mutation], decision: TurnDecision) -> SemanticProposal:
     return SemanticProposal(
-        understanding=Understanding(speech_act="request_action", goal_relation="amend", changes=GoalChanges()),
+        understanding=Understanding(goal_relation="amend", changes=GoalChanges()),
         mutations=mutations,
     )
 

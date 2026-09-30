@@ -6,6 +6,8 @@ import pytest
 
 from support import create_session, post_turn
 
+TOMATO = "番茄炒蛋"
+
 
 def _turn(client, session_id, message, previous=None):
     response = post_turn(client, session_id, message, previous)
@@ -13,12 +15,8 @@ def _turn(client, session_id, message, previous=None):
     return response.json()
 
 
-def test_chat_with_mutation_preserves_reply_and_never_writes(client, semantic_provider):
-    provider = semantic_provider([{
-        "reply": "好的，聊聊火锅。",
-        "understanding": {"speech_act": "chat"},
-        "mutations": [{"verb": "add", "candidate_ref": "unknown", "name": "火锅"}],
-    }])
+def test_chat_reply_is_preserved_and_never_writes(client, semantic_provider):
+    provider = semantic_provider([{"reply": "好的，聊聊火锅。"}])
     sid = create_session(client)
     body = _turn(client, sid, "火锅是什么？")
 
@@ -28,6 +26,18 @@ def test_chat_with_mutation_preserves_reply_and_never_writes(client, semantic_pr
     assert not any(row.get("code") == "WRITE_BLOCKED" for row in body["action_results"])
     assert not any(row.get("type") in ("mutation", "mutation_refused", "read_only") for row in body["action_results"])
     assert len(provider.requests) == 1
+
+
+def test_a_buy_target_with_an_unissued_ref_is_refused_and_plan_kept(client, semantic_provider):
+    semantic_provider([{
+        "target": {"kind": "meal", "name": TOMATO, "intent": "buy", "ref": "unknown"},
+    }])
+    sid = create_session(client)
+    body = _turn(client, sid, "我想吃番茄炒蛋")
+    assert body["plan_effect"] == "keep" and body["plan"] is None
+    assert not any(row.get("saved") for row in body["action_results"])
+    assert any(row.get("code") == "UNKNOWN_CANDIDATE_REF" for row in body["action_results"])
+    assert client.get(f"/api/v1/guide/sessions/{sid}").json()["plan"] is None
 
 
 def test_retrieve_second_call_only_supplies_reply(client, semantic_provider, monkeypatch):
@@ -43,8 +53,10 @@ def test_retrieve_second_call_only_supplies_reply(client, semantic_provider, mon
 
     monkeypatch.setattr(understand, "evaluate_gate", counted)
     provider = semantic_provider([
-        {"understanding": {"speech_act": "ask_fact"}, "queries": [{"kind": "recommend"}]},
-        {"reply": "检索结果里有番茄炒蛋。", "mutations": [{"verb": "invented"}]},
+        {"reads": [{"kind": "recommend"}]},
+        # The answer stage only reads ``reply``: an extraneous key is never
+        # re-parsed into a write, so this proves rule 1's answer_schema cut.
+        {"reply": "检索结果里有番茄炒蛋。", "target": {"kind": "meal", "name": "invented", "intent": "buy"}},
     ])
     sid = create_session(client)
     body = _turn(client, sid, "有什么推荐？")
@@ -70,12 +82,8 @@ def test_named_purchase_with_lookup_uses_mutation_route(client, semantic_provide
 
     monkeypatch.setattr(understand, "evaluate_gate", counted)
     provider = semantic_provider([{
-        "understanding": {
-            "speech_act": "request_action",
-            "goal_relation": "new",
-            "new_goal": {"kind": "meal_plan", "target_name": "番茄炒蛋"},
-        },
-        "lookups": [{"kind": "dish", "query": "番茄炒蛋"}],
+        "target": {"kind": "meal", "name": TOMATO, "intent": "buy"},
+        "lookups": [{"kind": "dish", "query": TOMATO}],
     }])
     sid = create_session(client)
     body = _turn(client, sid, "我想吃番茄炒蛋")
@@ -86,20 +94,13 @@ def test_named_purchase_with_lookup_uses_mutation_route(client, semantic_provide
     assert len(provider.requests) == 1
 
 
-def test_chat_after_a_plan_does_not_consume_its_mutation(client, semantic_provider):
+def test_chat_after_a_plan_does_not_disturb_it(client, semantic_provider):
     provider = semantic_provider([
         {
-            "understanding": {
-                "speech_act": "request_action", "goal_relation": "new",
-                "new_goal": {"kind": "meal_plan", "target_name": "番茄炒蛋"},
-            },
-            "lookups": [{"kind": "dish", "query": "番茄炒蛋"}],
+            "target": {"kind": "meal", "name": TOMATO, "intent": "buy"},
+            "lookups": [{"kind": "dish", "query": TOMATO}],
         },
-        {
-            "reply": "好的，清单还在。",
-            "understanding": {"speech_act": "chat"},
-            "mutations": [{"verb": "add", "candidate_ref": "unknown", "name": "火锅"}],
-        },
+        {"reply": "好的，清单还在。"},
     ])
     sid = create_session(client)
     first = _turn(client, sid, "我想吃番茄炒蛋")
@@ -116,31 +117,10 @@ def test_chat_after_a_plan_does_not_consume_its_mutation(client, semantic_provid
     assert len(provider.requests) == 2
 
 
-def test_mutation_with_an_unissued_ref_cannot_write(client, semantic_provider):
-    semantic_provider([{
-        "understanding": {
-            "speech_act": "request_action", "goal_relation": "new",
-            "new_goal": {"kind": "meal_plan", "target_name": "番茄炒蛋"},
-        },
-        "mutations": [{"verb": "add", "candidate_ref": "unknown", "name": "番茄炒蛋"}],
-    }])
-    sid = create_session(client)
-    body = _turn(client, sid, "我想吃番茄炒蛋")
-    assert body["plan_effect"] == "keep" and body["plan"] is None
-    assert not any(row.get("saved") for row in body["action_results"])
-    assert client.get(f"/api/v1/guide/sessions/{sid}").json()["plan"] is None
-
-
 @pytest.mark.parametrize("route,proposal", [
-    ("answer", {"reply": "锅热后再下油。", "understanding": {"speech_act": "ask_fact"}}),
-    ("clarify", {"reply": "想吃什么菜？", "understanding": {
-        "speech_act": "request_action", "goal_relation": "new",
-        "new_goal": {"kind": "meal_decision"},
-    }}),
-    ("refuse", {"reply": "这件事做不了。", "understanding": {
-        "speech_act": "request_action", "goal_relation": "new",
-        "new_goal": {"kind": "unsupported"},
-    }}),
+    ("answer", {"reply": "锅热后再下油。", "target": {"kind": "none", "intent": "explore"}}),
+    ("clarify", {"reply": "想吃什么菜？", "target": {"kind": "meal", "intent": "buy"}}),
+    ("refuse", {"reply": "这件事做不了。", "target": {"kind": "unsupported", "intent": "buy"}}),
 ])
 def test_non_mutation_decisions_finish_through_answer_respond(
     client, semantic_provider, monkeypatch, route, proposal

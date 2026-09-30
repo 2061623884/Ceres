@@ -24,13 +24,9 @@ import uuid
 from support import create_session, post_turn
 from support.semantic_agent import (
     continued,
-    lookup_matches,
-    lookup_then,
     lookup_then_add,
-    recommend_then,
+    pick,
     reply_only,
-    topic_rows,
-    with_understanding,
 )
 
 
@@ -91,28 +87,20 @@ def test_a_recommend_dishes_then_choose_one_that_was_not_offered(client, semanti
             "display_refs": [row["ref"] for row in rows],
         }
 
-    def name_the_dish(request):
-        # 「番茄炒蛋」 was not one of the two offered dishes: it is looked up.
-        rows = lookup_matches(request, "dish")
-        row = next(r for r in rows if "番茄" in r["name"])
-        return with_understanding(
-            {"mutations": [{"verb": "add", "candidate_ref": row["ref"], "name": row["name"]}]},
-            request=request,
-        )
-
     provider = semantic_provider(
         [
             # 1. two real lookups in the turn's single read round, then the answer
             {
-                "queries": [],
+                "target": {"kind": "meal", "intent": "explore"},
                 "lookups": [
                     {"kind": "dish", "query": "蒜蓉西兰花"},
                     {"kind": "dish", "query": "蛋炒饭"},
                 ],
             },
             continued(show_the_real_dishes),
-            # 2. the shopper names a dish; it is retrieved for real, then planned
-            *lookup_then("dish", "番茄炒蛋", name_the_dish, purchase=True),
+            # 2. the shopper names a dish not offered; one pass looks it up and
+            # binds the exact hit the lookup returns (rule 1).
+            *lookup_then_add("dish", "番茄炒蛋", people=2),
             # 3. ordinary chat afterwards
             reply_only("这份清单可以随时改。"),
         ]
@@ -173,15 +161,7 @@ def add_scenario(*, people: int = 4):
 
     def build(request):
         scenario = request["candidates"]["scenarios"][0]
-        mutation = {
-            "verb": "add",
-            "candidate_ref": scenario["ref"],
-            "name": scenario["name"],
-            "people": people,
-        }
-        return with_understanding(
-            {"purchase_requested": True, "mutations": [mutation]}, request=request
-        )
+        return pick("scenario", scenario, people=people)
 
     return build
 
@@ -239,7 +219,7 @@ def test_b_a_manual_edit_survives_a_later_add(client, semantic_provider):
     provider = semantic_provider(
         [
             add_scenario(),
-            *lookup_then_add("product", "可乐"),
+            *lookup_then_add("product", "可乐 330毫升", relation="append"),
         ]
     )
     sid = create_session(client)
@@ -274,34 +254,30 @@ def test_b_a_manual_edit_survives_a_later_add(client, semantic_provider):
 # ===================================================================== C
 
 
-def ask_about_real_dishes(request):
-    """One question whose options are dishes the retrieval really returned."""
-    rows = topic_rows(request)
-    assert len(rows) >= 2, rows
-    return {
-        "reply": "先问一句：今晚想清淡一点还是下饭一点？",
-        "uncertainties": [{
-            "slot": "direction",
-            "question": "今晚想清淡一点还是下饭一点？",
-            "options": [{"candidate_ref": rows[0]["ref"]}, {"candidate_ref": rows[1]["ref"]}],
-        }],
-    }
+#: One useful question, asked in the understanding pass itself: a question is
+#: never raised after retrieval (the answer stage only puts results into words).
+ASK_DIRECTION = {
+    "reply": "先问一句：今晚想清淡一点还是下饭一点？",
+    "questions": [{"slot": "direction", "question": "今晚想清淡一点还是下饭一点？"}],
+}
+
+
+def name_a_dish_instead(request):
+    """Name a dish outside the question, and say which open question it answers."""
+    (build,) = lookup_then_add("dish", "番茄炒蛋", people=2)
+    answered = [q["question_id"] for q in request.get("pending_clarifications") or []]
+    return {**build(request), "resolved_questions": answered}
 
 
 def test_c_a_vague_request_asks_one_question_and_stays_open(client, semantic_provider):
     """模糊需求 → 每轮一个问题 → pending 承接 → 用户可改方向。"""
     provider = semantic_provider(
         [
-            # 1. vague: retrieve, then ask exactly one useful question
-            *recommend_then(None, ask_about_real_dishes),
-            # 2. the shopper changes direction and names a dish outside the options
-            *lookup_then("dish", "番茄炒蛋", lambda request: with_understanding({
-                "mutations": [{
-                    "verb": "add",
-                    "candidate_ref": lookup_matches(request, "dish")[0]["ref"],
-                    "name": lookup_matches(request, "dish")[0]["name"],
-                }]
-            }, request=request), purchase=True),
+            # 1. vague: ask exactly one useful question
+            ASK_DIRECTION,
+            # 2. the shopper changes direction and names a dish; one pass looks
+            # it up, binds the exact hit (rule 1) and closes the open question.
+            name_a_dish_instead,
             reply_only("好，就照这份清单来。"),
         ]
     )
@@ -313,9 +289,6 @@ def test_c_a_vague_request_asks_one_question_and_stays_open(client, semantic_pro
     assert len(first["pending_clarifications"]) == 1
     asked = first["pending_clarifications"][0]
     assert asked["slot"] == "direction"
-    # The options are real dishes the store can actually build.
-    assert len(asked["options"]) == 2
-    assert all(option["label"] for option in asked["options"])
 
     # The next turn really carries the open question forward.
     second = send(client, sid, "我想吃番茄炒蛋，2人", first)
@@ -330,12 +303,7 @@ def test_c_a_vague_request_asks_one_question_and_stays_open(client, semantic_pro
 
 def test_c_the_pending_question_is_carried_into_the_next_request(client, semantic_provider):
     """The model is told what it asked; the session owns that, not the prose."""
-    provider = semantic_provider(
-        [
-            *recommend_then(None, ask_about_real_dishes),
-            reply_only("不急，想好了再说。"),
-        ]
-    )
+    provider = semantic_provider([ASK_DIRECTION, reply_only("不急，想好了再说。")])
     sid = create_session(client)
     first = send(client, sid, "随便推荐点吧")
     send(client, sid, "等一下", first)
@@ -390,7 +358,7 @@ def test_no_product_or_dish_is_offered_before_it_was_retrieved(client, semantic_
 
     def look(request):
         seen.append(list(request["candidates"]["products"]))
-        return {"queries": [{"kind": "recommend", "query": "可乐"}]}
+        return {"reads": [{"kind": "recommend", "topic": "可乐"}]}
 
     provider = semantic_provider([look, reply_only("好。")])
     send(client, sid, "有可乐吗")

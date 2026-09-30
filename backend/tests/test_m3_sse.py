@@ -87,32 +87,18 @@ def test_sse_terminal_payload_has_stable_fields(client):
 
 def test_clarification_supplement_continues_same_session(client, semantic_provider):
     """After a clarify turn, the next request continues on the same session."""
-    from support.semantic_agent import Continuation
+    from support.semantic_agent import lookup_then_add
 
-    def ask_which(request):
-        rows = request["candidates"]["dishes"]
-        assert rows, "the lookup really returned dishes"
-        return {
-            "reply": "你想吃哪一道？",
-            "uncertainties": [
-                {
-                    "slot": "dish_choice",
-                    "question": "你想吃哪一道？",
-                    "options": [{"candidate_ref": r["ref"]} for r in rows[:2]],
-                }
-            ],
-        }
+    # 「番茄」 names no dish exactly: the server asks with the real similar dishes.
+    (ask_which,) = lookup_then_add("dish", "番茄")
 
     def pick_one(request):
-        ref = request["candidates"]["dishes"][0]["ref"]
-        return {
-            "reply": "就这个",
-            "mutations": [{"verb": "add", "candidate_ref": ref, "name": "番茄炒蛋"}],
-        }
+        from support.semantic_agent import pick
 
-    provider = semantic_provider(
-        [{"lookups": [{"kind": "dish", "query": "番茄"}]}, Continuation(ask_which), Continuation(pick_one)]
-    )
+        row = request["pending_clarifications"][0]["candidates"][0]
+        return {"reply": "就这个", **pick("dish", row, request=request, people=2)}
+
+    provider = semantic_provider([ask_which, pick_one])
     sid = _create_session(client)
     first = _stream_turn(client, sid, "我想吃个菜")
     first_payload = next(e["payload"] for e in first if e["type"] == "turn.completed")
@@ -267,25 +253,12 @@ def test_turn_stream_clarification_never_advertises_a_plan(client, semantic_prov
     persisted. A turn that only asks which dish to cook has nothing committed and
     must deliver the question (before completion) without inventing a plan.
     """
-    from support.semantic_agent import Continuation
+    from support.semantic_agent import lookup_then_add
 
-    def ask_which(request):
-        rows = request["candidates"]["dishes"]
-        assert rows, "the lookup really returned dishes"
-        return {
-            "reply": "你想吃哪一道？",
-            "uncertainties": [
-                {
-                    "slot": "dish_choice",
-                    "question": "你想吃哪一道？",
-                    "options": [{"candidate_ref": r["ref"]} for r in rows[:2]],
-                }
-            ],
-        }
+    # 「番茄」 names no dish exactly: the server asks with the real similar dishes.
+    (ask_which,) = lookup_then_add("dish", "番茄")
 
-    semantic_provider(
-        [{"lookups": [{"kind": "dish", "query": "番茄"}]}, Continuation(ask_which)]
-    )
+    semantic_provider([ask_which])
 
     sid = _create_session(client)
     events = _stream_turn(client, sid, "我想吃个菜")

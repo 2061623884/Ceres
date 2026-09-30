@@ -21,26 +21,18 @@ from __future__ import annotations
 import uuid
 
 from support import create_session, post_turn, post_turn
-from support.semantic_agent import lookup_matches
+from support.semantic_agent import request_new
 
 #: A real dish and a real scenario, both seeded by ``scripts/seed_runtime.py``.
 WINGS = "dish-kele-jichi"
 
 
-def lookup_then_add_id(kind, query, target_id, *, people=None):
+def lookup_then_add_id(kind, query, target_id, *, people=None, relation="new"):
     """One-pass named goal: the mutation node binds an exact retrieved target."""
     name = "可乐 330毫升" if target_id == "demo:cola-330ml" else query
-    goal = (
-        {"kind": "product_purchase", "target_name": name, "items": [name]}
-        if kind == "product"
-        else {"kind": "meal_plan", "target_name": name}
-    )
-    if people:
-        goal["constraints"] = {"people": people}
-    return [{
-        "understanding": {"speech_act": "request_action", "goal_relation": "new", "new_goal": goal},
-        "lookups": [{"kind": kind, "query": name}],
-    }]
+    proposal = request_new(kind, name, relation=relation, people=people)
+    proposal["lookups"] = [{"kind": kind, "query": name}]
+    return [proposal]
 
 
 def send(client, sid, text, previous=None, *, headers=None):
@@ -78,20 +70,10 @@ def committed_mutations(body):
 # --------------------------------------------------------------------- scripts
 
 
-def hotpot_goal(*, people=None, with_mode=False):
-    goal = {"kind": "meal_plan", "target_name": "火锅"}
-    if with_mode:
-        goal["fulfillment_mode"] = "self_cook"
-    goal["constraints"] = {"people": people or 2}
-    return goal
-
-
 def switch_to_hotpot(
     *,
     people=None,
     relation="switch",
-    focus="active-goal-1",
-    changes=None,
     with_mode=False,
     reply="好，换成火锅。",
 ):
@@ -102,26 +84,15 @@ def switch_to_hotpot(
             (s for s in request["candidates"]["scenarios"] if s["name"] == "火锅"), None
         )
         assert scenario, request["candidates"]["scenarios"]
-        mutation = {
-            "verb": "add",
-            "candidate_ref": scenario["ref"],
-            "name": scenario["name"],
-        }
-        if people:
-            mutation["people"] = people
-        understanding = {
-            "speech_act": "correct" if relation == "switch" else "request_action",
-            "goal_relation": relation,
-        }
-        if focus is not None:
-            # Only ever a ref the server issued this turn; a new goal with nothing
-            # to relate to does not name one.
-            understanding["focus_ref"] = focus
-        if changes is not None:
-            understanding["changes"] = changes
-        else:
-            understanding["new_goal"] = hotpot_goal(people=people, with_mode=with_mode)
-        return {"reply": reply, "understanding": understanding, "mutations": [mutation]}
+        constraints = {"people": people or 2}
+        if with_mode:
+            constraints["fulfillment_mode"] = "self_cook"
+        proposal = request_new(
+            "scenario", scenario["name"], relation=relation, ref=scenario["ref"],
+            constraints=constraints,
+        )
+        proposal["reply"] = reply
+        return proposal
 
     return build
 
@@ -135,41 +106,37 @@ def answer_pending_goal(**changes):
             None,
         )
         assert ref, f"没有待确认目标候选: {request.get('focus_refs')}"
-        return {
-            "reply": "好，自己煮。",
-            "understanding": {
-                "speech_act": "answer_clarification",
-                "goal_relation": "amend",
-                "focus_ref": ref,
-                "changes": {"set": changes},
-            },
-        }
+        return {"reply": "好，自己煮。", "focus": {"ref": ref}, "constraints": changes}
 
     return build
 
 
-def resize_people(people, *, focus="active-goal-1", declared=None):
-    """A headcount correction on the plan on screen."""
+def resize_people(people):
+    """A headcount correction on the plan on screen.
+
+    The wire protocol carries no explicit low-level "change people" mutation any
+    more: the server compiles it itself from ``constraints.people`` once the
+    amend is authorized (``app.agent.authorization.compile_decision``).
+    """
+
+    def build(request):
+        return {"reply": "好，按新人数重新配。", "constraints": {"people": people}}
+
+    return build
+
+
+def resize_people_with_conflicting_edit(people, *, quantity):
+    """A headcount patch declared alongside an unrelated row edit on the same
+    focus: the two changed fields disagree, so the turn is refused rather than
+    silently doing one and dropping the other (``GOAL_CHANGE_CONFLICT``)."""
 
     def build(request):
         group = (request["current_plan"] or {}).get("groups", [])[0]
         return {
             "reply": "好，按新人数重新配。",
-            "understanding": {
-                "speech_act": "correct",
-                "goal_relation": "amend",
-                "focus_ref": group["ref"] if focus is None else focus,
-                "changes": {"set": {"people": people if declared is None else declared}},
-            },
-            "mutations": [
-                {
-                    "verb": "change",
-                    "target_ref": group["ref"],
-                    "name": group["name"],
-                    "field": "people",
-                    "people": people,
-                }
-            ],
+            "focus": {"ref": group["ref"], "name": group.get("name") or ""},
+            "constraints": {"people": people},
+            "edit": {"op": "set_quantity", "quantity": quantity},
         }
 
     return build
@@ -233,16 +200,8 @@ def test_a_switch_refuses_to_edit_the_plan_it_replaces(client, semantic_provider
     def conflicting_switch(request):
         group = (request["current_plan"] or {}).get("groups", [])[0]
         proposal = switch_to_hotpot(with_mode=True, people=3)(request)
-        proposal["understanding"]["focus_ref"] = group["ref"]
-        proposal["mutations"].append(
-            {
-                "verb": "change",
-                "target_ref": group["ref"],
-                "name": group["name"],
-                "field": "people",
-                "people": 3,
-            }
-        )
+        proposal["focus"] = {"ref": group["ref"], "name": group["name"]}
+        proposal["edit"] = {"op": "set_quantity", "quantity": 3}
         return proposal
 
     then(provider, conflicting_switch)
@@ -282,7 +241,7 @@ def test_an_undeclared_value_never_overrides_the_declared_patch(client, semantic
     )
     sid = create_session(client)
     first = send(client, sid, "我想吃可乐鸡翅，2人")
-    then(provider, resize_people(4, declared=2))
+    then(provider, resize_people_with_conflicting_edit(4, quantity=3))
     second = send(client, sid, "改成三个人", first)
     assert second["plan_effect"] == "keep", second
     assert snapshot(client, sid)["plan"]["targets"][0]["people"] == 2
@@ -302,10 +261,7 @@ def test_a_read_only_turn_writes_nothing_and_keeps_the_candidate(
         [
             *lookup_then_add_id("dish", "可乐鸡翅", WINGS, people=2),
             switch_to_hotpot(),
-            lambda _r: {
-                "reply": "有的，店里也有熟食。",
-                "understanding": {"speech_act": "ask_fact"},
-            },
+            {"reply": "有的，店里也有熟食。"},
         ]
     )
     sid = create_session(client)
@@ -321,32 +277,20 @@ def test_a_read_only_turn_writes_nothing_and_keeps_the_candidate(
     assert snapshot(client, sid)["plan"]["targets"][0]["kind"] == "scenario"
 
 
-def test_a_chat_turn_with_a_mutation_writes_nothing(client, semantic_provider):
-    """§10.1: chat is not a purchase, whatever else the proposal carries."""
-    provider = semantic_provider([{
-        "understanding": {
-            "speech_act": "request_action", "goal_relation": "new",
-            "new_goal": {"kind": "meal_plan", "target_name": "可乐鸡翅",
-                         "constraints": {"people": 2}},
-        },
-        "lookups": [{"kind": "dish", "query": "可乐鸡翅"}],
-    }])
+def test_a_chat_turn_with_a_located_target_writes_nothing(client, semantic_provider):
+    """§10.1: a target the shopper only talks about is not a purchase, even with a ref."""
+    provider = semantic_provider([*lookup_then_add_id("dish", "可乐鸡翅", WINGS, people=2)])
     sid = create_session(client)
     first = send(client, sid, "我想吃可乐鸡翅，2人")
 
-    def chat_with_mutation(request):
-        row = lookup_matches(request, "dish")[0] if request.get("query_results") else None
-        assert row is None or row
+    def chat_about_a_scenario(request):
         scenario = request["candidates"]["scenarios"][0]
         return {
             "reply": "火锅是川渝一带很常见的吃法。",
-            "understanding": {"speech_act": "chat"},
-            "mutations": [
-                {"verb": "add", "candidate_ref": scenario["ref"], "name": scenario["name"]}
-            ],
+            "target": {"kind": "meal", "name": scenario["name"], "ref": scenario["ref"]},
         }
 
-    then(provider, chat_with_mutation)
+    then(provider, chat_about_a_scenario)
     second = send(client, sid, "火锅是什么", first)
     assert second["plan_effect"] == "keep", second
     assert snapshot(client, sid)["plan"]["plan_id"] == first["plan"]["plan_id"]
@@ -364,14 +308,7 @@ def test_an_unlocated_correction_asks_instead_of_touching_the_plan(
     """§9 B: nothing was established, so nothing may be created."""
     semantic_provider(
         [
-            {
-                "reply": "请问你是说哪一份清单？",
-                "understanding": {
-                    "speech_act": "correct",
-                    "goal_relation": "amend",
-                    "changes": {"set": {"people": 3}},
-                },
-            }
+            {"reply": "请问你是说哪一份清单？", "constraints": {"people": 3}}
         ]
     )
     sid = create_session(client)
@@ -390,9 +327,7 @@ def test_a_ready_goal_is_built_by_the_business_services(client, semantic_provide
     """§9 E: one semantic statement, one compiled plan, one goal change."""
     semantic_provider(
         [
-            switch_to_hotpot(
-                people=3, with_mode=True, relation="new", focus=None
-            )
+            switch_to_hotpot(people=3, with_mode=True, relation="new")
         ]
     )
     sid = create_session(client)
@@ -436,16 +371,9 @@ def test_an_unbuildable_goal_keeps_the_plan_it_could_not_replace(
     def switch_to_nothing(request):
         return {
             "reply": "好，换成那个。",
-            "understanding": {
-                "speech_act": "correct",
-                "goal_relation": "switch",
-                "new_goal": {
-                    "kind": "meal_plan",
-                    "fulfillment_mode": "self_cook",
-                    "target_name": "并不存在的菜",
-                    "constraints": {"people": 2},
-                },
-            },
+            **request_new(
+                "dish", "并不存在的菜", relation="switch", people=2, mode="self_cook"
+            ),
         }
 
     then(provider, switch_to_nothing)
@@ -459,33 +387,20 @@ def test_an_unbuildable_goal_keeps_the_plan_it_could_not_replace(
 
 
 def test_a_mixed_goal_change_is_refused_whole(client, semantic_provider):
-    """§10.7: one goal-level change per turn; a mixed batch writes nothing."""
+    """§10.7: one goal-level change per turn; an add plus a row edit writes nothing."""
     provider = semantic_provider([*lookup_then_add_id("dish", "可乐鸡翅", WINGS, people=2)])
     sid = create_session(client)
     first = send(client, sid, "我想吃可乐鸡翅，2人")
 
-    def two_goals(request):
-        scenarios = request["candidates"]["scenarios"]
-        return {
-            "reply": "两个都加上。",
-            "understanding": {
-                "speech_act": "request_action",
-                "goal_relation": "append",
-                "new_goal": {
-                    "kind": "meal_plan",
-                    "fulfillment_mode": "self_cook",
-                    "target_name": scenarios[0]["name"],
-                    "constraints": {"people": 2},
-                },
-            },
-            "mutations": [
-                {"verb": "add", "candidate_ref": s["ref"], "name": s["name"]}
-                for s in [*scenarios[:1], *request["candidates"]["dishes"][:1]]
-            ],
-        }
+    def add_and_edit(request):
+        proposal = switch_to_hotpot(relation="append", with_mode=True, reply="两个都改好了。")(request)
+        group = (request["current_plan"] or {}).get("groups", [])[0]
+        proposal["focus"] = {"ref": group["ref"], "name": group["name"]}
+        proposal["edit"] = {"op": "set_quantity", "quantity": 3}
+        return proposal
 
-    then(provider, two_goals)
-    second = send(client, sid, "再加两样", first)
+    then(provider, add_and_edit)
+    second = send(client, sid, "加个火锅，鸡翅改成 3 份", first)
     assert second["plan_effect"] == "keep", second
     assert snapshot(client, sid)["plan"]["plan_id"] == first["plan"]["plan_id"]
     assert any(
@@ -510,20 +425,8 @@ def test_a_restricted_product_delta_is_applied_exactly_once(client, semantic_pro
         item = (request["current_plan"] or {}).get("items", [])[0]
         return {
             "reply": "好，再加 4 瓶。",
-            "understanding": {
-                "speech_act": "request_action",
-                "goal_relation": "amend",
-                "focus_ref": item["ref"],
-            },
-            "mutations": [
-                {
-                    "verb": "change",
-                    "target_ref": item["ref"],
-                    "name": item["name"],
-                    "field": "quantity",
-                    "quantity": {"mode": "delta", "value": 4},
-                }
-            ],
+            "focus": {"ref": item["ref"], "name": item["name"]},
+            "edit": {"op": "adjust_quantity", "quantity": 4},
         }
 
     then(provider, add_four)
@@ -575,68 +478,27 @@ def test_a_switch_leaves_the_cart_and_the_confirmation_history_alone(
     assert second["task_id"] != first["task_id"]
 
 
-def test_a_legacy_proposal_keeps_its_structural_path_but_cannot_switch(
-    client, semantic_provider
-):
-    """The compatibility policy: old proposals parse, but they never write."""
-    provider = semantic_provider(
-        [
-            *lookup_then_add_id("dish", "可乐鸡翅", WINGS, people=2),
-        ]
-    )
+def test_a_retired_mutation_list_is_rejected_and_writes_nothing(client, semantic_provider):
+    """The retired wire shape is not a fallback: it is malformed, and nothing runs."""
+    provider = semantic_provider([*lookup_then_add_id("dish", "可乐鸡翅", WINGS, people=2)])
     sid = create_session(client)
     first = send(client, sid, "我想吃可乐鸡翅，2人")
     plan_id = snapshot(client, sid)["plan"]["plan_id"]
 
-    def legacy_add(request):
+    def retired_switch(request):
         scenario = request["candidates"]["scenarios"][0]
         return {
             "reply": "已经换成火锅了。",
             "mutations": [
-                {"verb": "add", "candidate_ref": scenario["ref"], "name": scenario["name"]}
+                {"verb": "add", "candidate_ref": scenario["ref"], "switch_goal": True}
             ],
         }
 
-    then(provider, legacy_add)
+    then(provider, retired_switch)
     second = send(client, sid, "换成火锅", first)
-    # No understanding, no write: the old proposal still parses, and nothing of it
-    # is executed — not even the prose that claimed it was.
+    assert second["plan_effect"] == "keep", second
     assert snapshot(client, sid)["plan"]["plan_id"] == plan_id
-    assert snapshot(client, sid)["plan"]["targets"][0]["target_id"] == WINGS
     assert not any(
         r.get("status") == "committed" for r in second["action_results"]
     ), second["action_results"]
-    assert (
-        any(
-            r.get("reason_code") == "MISSING_UNDERSTANDING"
-            for r in second.get("action_results") or []
-        )
-        or "understanding" in (second.get("missing_slots") or [])
-        or any(
-            q.get("slot") == "understanding"
-            for q in second.get("pending_clarifications") or []
-        )
-    ), second
     assert "已经换成火锅了" not in second["message"]
-
-    def legacy_switch(request):
-        scenario = request["candidates"]["scenarios"][0]
-        return {
-            "reply": "换掉了。",
-            "mutations": [
-                {
-                    "verb": "add",
-                    "candidate_ref": scenario["ref"],
-                    "name": scenario["name"],
-                    "switch_goal": True,
-                }
-            ],
-        }
-
-    then(provider, legacy_switch)
-    third = send(client, sid, "换成火锅", second)
-    assert third["plan_effect"] == "keep", third
-    assert snapshot(client, sid)["plan"]["plan_id"] == plan_id
-    assert not any(
-        r.get("status") == "committed" for r in third["action_results"]
-    ), third["action_results"]

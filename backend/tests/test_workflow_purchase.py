@@ -24,31 +24,32 @@ def _turn(client, session_id, message, task_id=None, version=0, request_id=None)
 def test_purchase_task_flow(client, semantic_provider):
     """A vague dinner request asks one question; the answer builds a real plan.
 
-    Two model calls per turn, both scripted, both retrieving for real: the vague
-    turn asks once with dishes this store can build, and the constraint turn adds
-    the dish the second lookup really returned.
+    Two model calls total, both scripted, both retrieving for real: the vague
+    turn recommends from a real topic search and asks about what it really
+    found, and the second turn adds the dish the shopper actually named.
 
-    One assertion of the original probe cannot survive as written. It required
-    ``data2["task_id"] == task_id`` to hold across the two turns, which encoded
-    "the question belonged to a task". A question is not a purchase: in the one
-    chain no task exists until the first mutation, so the task is opened by the
-    second turn rather than continued from the first. The continuity it was
-    protecting — the second turn is accepted rather than rejected as stale, and
-    it lands on a real task — is asserted directly below.
+    Two assertions of the original probe cannot survive as written.
+    ``data2["task_id"] == task_id`` required the question to belong to a task;
+    a question is not a purchase (spec rule 1/2), so no task exists until the
+    first mutation and the task is opened by the second turn instead of
+    continued from the first. And a recommend-then-ask turn no longer produces
+    ``pending_clarifications`` with server-built candidate options — the
+    question is now the model's own reply, grounded in the real
+    ``query_results`` (spec rule 1: the answer stage only has ``reply`` /
+    ``display_refs``); ``uncertainties``/``pending_clarifications`` remain only
+    for a question raised in the understanding pass itself. The continuity the
+    first assertion protected — the second turn is accepted rather than
+    rejected as stale, and it lands on a real task — is asserted directly below.
     """
     from support.semantic_agent import lookup_then_add, recommend_then, topic_rows
 
     def ask(request):
         rows = topic_rows(request)
-        assert rows, rows
+        assert len(rows) >= 2, rows
+        names = [r["name"] for r in rows[:2]]
         return {
-            "uncertainties": [
-                {
-                    "slot": "dish_choice",
-                    "question": "今晚想吃哪一道？",
-                    "options": [{"candidate_ref": r["ref"]} for r in rows[:2]],
-                }
-            ]
+            "reply": f"今晚想吃{names[0]}还是{names[1]}？",
+            "display_refs": [r["ref"] for r in rows[:2]],
         }
 
     semantic_provider(recommend_then(None, ask))
@@ -57,23 +58,23 @@ def test_purchase_task_flow(client, semantic_provider):
     assert r1.status_code == 200
     data = r1.json()
     # A question before any purchase is not a task step, so this turn reports
-    # "understanding" rather than a plan state; the question itself is what the
-    # assertions below pin down. (The retired chain reported "clarifying" here.)
+    # "understanding" rather than a plan state. (The retired chain reported
+    # "clarifying" here.)
     assert data["status"] == "understanding", data
     assert data["plan_effect"] == "keep", data
     assert data["plan"] is None
-    pending = data.get("pending_clarifications") or []
-    assert len(pending) == 1, "one useful question, not an interrogation"
+    assert not data.get("pending_clarifications")
+    # The real recommend retrieval ran and the question is grounded in it.
+    lookup_receipt = next(r for r in data["action_results"] if r.get("kind") == "recommend")
+    assert lookup_receipt["status"] == "completed", lookup_receipt
+    assert "番茄炒蛋" in data["message"] or "蛋炒饭" in data["message"], data["message"]
     task_id = data["task_id"]
     version = data["state_version"]
 
-    chosen = (pending[0].get("candidates") or [])[0]
-    assert chosen.get("name"), chosen
     semantic_provider(
         lookup_then_add(
             "dish",
-            chosen["name"],
-            chosen["name"],
+            "番茄炒蛋",
             people=2,
             constraints={"budget_yuan": 50},
         )

@@ -73,7 +73,6 @@ def authorize_mutations(
             ref_kind=getattr(
                 candidates.resolve(mutation.candidate_ref or mutation.target_ref), "kind", ""
             ),
-            switch_goal=bool(mutation.switch_goal),
         )
         if code is None:
             authorized.append(mutation)
@@ -84,7 +83,7 @@ def authorize_mutations(
         # A contradictory write is not a partial success. Ask instead.
         conflict = next(code for code in refusals if code in CONFLICT_REASONS)
     understanding = getattr(proposal, "understanding", None)
-    if decision is not None and not decision.legacy_protocol:
+    if decision is not None:
         goal_adds = [m for m in authorized if m.verb == "add"]
         goal = getattr(decision.candidate, "goal", None)
         if goal is not None and any(

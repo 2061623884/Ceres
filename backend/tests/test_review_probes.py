@@ -270,7 +270,7 @@ def test_review_completed_people_change_requires_scope_clarification(client, sem
     def ask_scope(request):
         return {
             "reply": "这份清单已经确认过了，我先确认一下你要怎么改。",
-            "uncertainties": [
+            "questions": [
                 {
                     "slot": "gap_fill_scope",
                     "question": "是在已购清单上追加，还是另做一份新清单？",
@@ -384,17 +384,11 @@ def test_review_combined_people_and_budget_does_not_drop_budget(client, semantic
         group = request["current_plan"]["groups"][0]
         return {
             "reply": "人数和预算我记下了。",
-            "purchase_requested": True,
-            "understanding": request_amend(focus=group["ref"]),
-            "mutations": [
-                {
-                    "verb": "change",
-                    "target_ref": group["ref"],
-                    "name": group["name"],
-                    "field": "constraints",
-                    "constraints": {"budget_yuan": 10},
-                }
-            ],
+            **request_amend(
+                focus=group["ref"],
+                name=group["name"],
+                changes={"set": {"people": 2, "budget_yuan": 10}},
+            ),
         }
 
     semantic_provider(
@@ -429,6 +423,7 @@ def test_review_combined_people_and_budget_does_not_drop_budget(client, semantic
         }
         assert codes & {
             "UNSUPPORTED_OPERATION",
+            "UNSUPPORTED_CHANGE_FIELD",
             "BUDGET_EXCEEDED",
             "GOAL_CHANGE_CONFLICT",
         }, following["action_results"]

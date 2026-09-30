@@ -56,7 +56,7 @@ def _counts(session_id: str) -> tuple[int, int, int]:
 def test_amending_a_settled_task_is_refused_not_rebuilt(client, semantic_provider):
     sid = create_session(client)
     semantic_provider([{
-        "understanding": request_new("dish", TOMATO, people=2),
+        **request_new("dish", TOMATO, people=2),
         "lookups": [{"kind": "dish", "query": TOMATO}],
     }])
     first = _turn(client, sid, "我想吃番茄炒蛋，两个人").json()
@@ -81,16 +81,7 @@ def test_amending_a_settled_task_is_refused_not_rebuilt(client, semantic_provide
         group = request["current_plan"]["groups"][0]
         return {
             "reply": "改成三个人的份量。",
-            "understanding": request_amend(focus=group["ref"]),
-            "mutations": [
-                {
-                    "verb": "change",
-                    "target_ref": group["ref"],
-                    "name": group["name"],
-                    "field": "people",
-                    "people": 3,
-                }
-            ],
+            **request_amend(focus=group["ref"], name=group["name"], changes={"set": {"people": 3}}),
         }
 
     semantic_provider([amend])

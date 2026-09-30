@@ -46,15 +46,17 @@ def test_latest_utterance_is_last_not_buried_before_history_or_protocol():
 
 
 def test_answer_phase_does_not_advertise_more_reads_or_mutations():
-    from app.agent.protocol import proposal_schema
+    # Rule 10: the live provider no longer narrows the schema itself; the caller
+    # (``build_request``) sends ``answer_schema`` once query_results are present.
+    from app.agent.protocol import answer_schema
     received = []
     def handler(request):
         received.append(json.loads(request.content))
         return httpx.Response(200, json={"choices": [{"message": {"content": '{"reply":"hello"}'}}]})
-    provider(handler).propose({"user_message": "推荐一下", "protocol": proposal_schema(),
+    provider(handler).propose({"user_message": "推荐一下", "protocol": answer_schema(),
         "read_only": True, "query_results": [{"kind": "recommend", "status": "completed"}]})
     schema = json.loads(received[0]["messages"][0]["content"].split("\nprotocol:\n")[1])
-    assert not {"lookups", "queries", "mutations"}.intersection(schema["properties"])
+    assert not {"lookups", "reads", "questions", "target", "edit"}.intersection(schema["properties"])
 
 
 @pytest.mark.parametrize("content,code", [

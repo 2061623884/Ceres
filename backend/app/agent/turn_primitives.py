@@ -19,6 +19,7 @@ from app.agent.protocol import (
     CandidateSet,
     SemanticProposal,
     SemanticProtocolError,
+    answer_schema,
     proposal_schema,
 )
 
@@ -166,7 +167,8 @@ def build_request(
             if previous_error
             else None
         ),
-        "protocol": proposal_schema(),
+        # Once retrieval ran, the model only puts the real facts into words.
+        "protocol": answer_schema() if query_results else proposal_schema(),
     }
 
 
@@ -188,6 +190,7 @@ def gate_facts(snapshot: TurnSnapshot) -> GateFacts:
     groups = [str(g.get("ref")) for g in (plan.get("groups") or []) if g.get("ref")]
     return GateFacts(
         has_active_plan=bool(plan.get("items")),
+        task_terminal=snapshot.turn_mode == "completed",
         candidate=candidate,
         focus_refs=tuple(snapshot.focus_refs or ()),
         plan_target_refs=tuple(groups),
@@ -218,7 +221,6 @@ def evaluate_gate(
                 ref_kind=(resolved.kind if resolved is not None else ""),
                 ref_target_id=(resolved.target_id if resolved is not None else ""),
                 ref_name=(resolved.name if resolved is not None else ""),
-                switch_goal=bool(mutation.switch_goal),
             )
         )
     return decide_turn(

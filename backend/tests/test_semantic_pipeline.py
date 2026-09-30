@@ -35,27 +35,29 @@ from support.semantic_agent import (
 
 
 def lookup_then_add(kind, query, name_fragment=None, *, purchase=True, **modifiers):
-    """One-pass purchase proposal: the server resolves the named exact hit."""
+    """One-pass purchase proposal: the server resolves the named exact hit.
+
+    ``name_fragment`` is accepted for call-site compatibility but the real name
+    used for both the lookup query and the target is resolved from ``query``,
+    matching the fixture's seeded rows.
+    """
     name = (
         "鲜鸡蛋 10枚装" if kind == "product" and query == "鸡蛋"
         else "可乐 330毫升" if kind == "product" and query == "可乐"
         else query
     )
-    goal = (
-        {"kind": "product_purchase", "target_name": name, "items": [name]}
-        if kind == "product" else {"kind": "meal_plan", "target_name": name}
+    if not purchase:
+        wire_kind = "meal" if kind == "dish" else kind
+        target = {"kind": wire_kind, "name": name, "intent": "explore"}
+        return [{"target": target, "lookups": [{"kind": kind, "query": name}]}]
+    proposal = request_new(
+        kind, name,
+        relation=modifiers.get("relation", "new"),
+        people=modifiers.get("people"),
+        constraints=modifiers.get("constraints"),
+        ref=modifiers.get("ref"),
     )
-    constraints = dict(modifiers.get("constraints") or {})
-    if modifiers.get("people"):
-        constraints["people"] = modifiers["people"]
-    if constraints:
-        goal["constraints"] = constraints
-    proposal = {"lookups": [{"kind": kind, "query": name}]}
-    if purchase:
-        proposal["understanding"] = {
-            "speech_act": "request_action", "goal_relation": "new",
-            "new_goal": goal,
-        }
+    proposal["lookups"] = [{"kind": kind, "query": name}]
     return [proposal]
 
 
@@ -157,7 +159,7 @@ def test_recommendation_query_never_writes_a_plan(client, semantic_provider):
     """The server fetches real facts; the *model* writes the answer."""
     answer = "现在能配齐的是番茄炒蛋，想直接买的话鸡蛋也有。"
     provider = semantic_provider(
-        [{"queries": [{"kind": "recommend"}]}, reply_only(answer)]
+        [{"reads": [{"kind": "recommend"}]}, reply_only(answer)]
     )
     sid = create_session(client)
     body = turn_ok(client, sid, "还有什么推荐的呢")
@@ -237,7 +239,10 @@ def test_empty_model_response_is_reported_not_faked(client, semantic_provider):
 
 
 def test_add_product_keeps_the_existing_dish_group(client, semantic_provider):
-    semantic_provider([*lookup_then_add("dish", "番茄炒蛋", "番茄", people=2), *lookup_then_add("product", "鸡蛋")])
+    semantic_provider(
+        [*lookup_then_add("dish", "番茄炒蛋", "番茄", people=2),
+         *lookup_then_add("product", "鸡蛋", relation="append")]
+    )
     sid = create_session(client)
     first = turn_ok(client, sid, "我想吃番茄炒蛋")
     assert first["plan"]["targets"], first
@@ -256,8 +261,8 @@ def test_query_and_add_in_the_same_turn(client, semantic_provider):
     # Both reads and the named goal are declared before retrieval. The mutation
     # node resolves the exact target; no second route/decision call is made.
     semantic_provider([{
-        "understanding": request_new("product", "鲜鸡蛋 10枚装", relation="new"),
-        "queries": [{"kind": "recommend", "query": "家常菜"}],
+        **request_new("product", "鲜鸡蛋 10枚装", relation="new"),
+        "reads": [{"kind": "recommend", "topic": "家常菜"}],
         "lookups": [{"kind": "product", "query": "鲜鸡蛋 10枚装"}],
     }])
     sid = create_session(client)
@@ -276,10 +281,7 @@ def test_unknown_candidate_ref_is_rejected_and_plan_is_kept(client, semantic_pro
     semantic_provider(
         [
             *lookup_then_add("product", "鸡蛋"),
-            {
-                "understanding": request_new("product", "不存在的东西", relation="append"),
-                "mutations": [{"verb": "add", "candidate_ref": "zz9"}],
-            },
+            request_new("product", "不存在的东西", relation="append", ref="zz9"),
         ]
     )
     sid = create_session(client)
@@ -296,15 +298,14 @@ def test_unknown_candidate_ref_is_rejected_and_plan_is_kept(client, semantic_pro
 
 def test_typed_quantity_change_and_out_of_range_refusal(client, semantic_provider):
     def change(mode, value):
+        op = "set_quantity" if mode == "set" else "adjust_quantity"
+
         def propose(request):
             ref = first_item_ref(request)
-            return {
-                "understanding": request_amend(focus=ref),
-                "mutations": [{"verb": "change",
-                    "target_ref": ref, "field": "quantity",
-                    "name": request["current_plan"]["items"][0]["name"],
-                    "quantity": {"mode": mode, "value": value}}],
-            }
+            return request_amend(
+                focus=ref, name=request["current_plan"]["items"][0]["name"],
+                op=op, quantity=value,
+            )
         return propose
     semantic_provider(
         [
@@ -349,21 +350,14 @@ def test_quantity_change_accepts_a_single_sku_product_group(client, semantic_pro
     """「这件商品改成两件」 may address the group: one group, one real row."""
 
     def change_group(mode, value):
+        op = "set_quantity" if mode == "set" else "adjust_quantity"
+
         def build(request):
             group = next(
                 g for g in request["current_plan"]["groups"] if g.get("target_kind") == "product"
             )
             ref = plan_group_ref(request, group["group_id"])
-            return {
-                "understanding": request_amend(focus=ref),
-                "mutations": [{
-                    "verb": "change",
-                    "target_ref": ref,
-                    "name": group["name"],
-                    "field": "quantity",
-                    "quantity": {"mode": mode, "value": value},
-                }],
-            }
+            return request_amend(focus=ref, name=group["name"], op=op, quantity=value)
         return build
 
     semantic_provider(
@@ -371,7 +365,7 @@ def test_quantity_change_accepts_a_single_sku_product_group(client, semantic_pro
             *lookup_then_add("dish", "番茄炒蛋", "番茄", people=2),
             # A drink, not an ingredient: the dish already owns the egg row, so
             # adding eggs would merge into it instead of forming its own group.
-            *lookup_then_add("product", "可乐"),
+            *lookup_then_add("product", "可乐", relation="append"),
             change_group("set", 2),
             change_group("delta", -1),
         ]
@@ -418,16 +412,9 @@ def test_quantity_change_refuses_a_multi_ingredient_group(client, semantic_provi
         group = next(
             g for g in request["current_plan"]["groups"] if g.get("target_kind") == "dish"
         )
-        return {
-            "understanding": request_amend(focus=group["ref"]),
-            "mutations": [{
-                "verb": "change",
-                "target_ref": group["ref"],
-                "name": group["name"],
-                "field": "quantity",
-                "quantity": {"mode": "set", "value": 2},
-            }],
-        }
+        return request_amend(
+            focus=group["ref"], name=group["name"], op="set_quantity", quantity=2
+        )
 
     semantic_provider([*lookup_then_add("dish", "番茄炒蛋", "番茄", people=2), change_dish_group])
     sid = create_session(client)
@@ -443,31 +430,22 @@ def test_quantity_change_refuses_a_multi_ingredient_group(client, semantic_provi
 
 
 def test_quantity_set_and_delta_have_different_domains():
-    """set is an absolute count (positive); delta is a change (may be negative)."""
+    """set_quantity is an absolute count (positive); adjust_quantity may be negative."""
     from app.agent.protocol import SemanticProtocolError, parse_proposal
 
-    def proposal(spec):
-        return {
-            "mutations": [
-                {
-                    "verb": "change",
-                    "target_ref": "i1",
-                    "field": "quantity",
-                    "quantity": spec,
-                }
-            ]
-        }
+    def proposal(op, value):
+        return {"focus": {"ref": "i1"}, "edit": {"op": op, "quantity": value}}
 
-    parsed = parse_proposal(proposal({"mode": "delta", "value": -1}))
+    parsed = parse_proposal(proposal("adjust_quantity", -1))
     assert parsed.mutations[0].quantity_mode == "delta"
     assert parsed.mutations[0].quantity_value == -1
 
-    for spec in ({"mode": "set", "value": -1}, {"mode": "set", "value": 0}):
+    for value in (-1, 0):
         with pytest.raises(SemanticProtocolError):
-            parse_proposal(proposal(spec))
+            parse_proposal(proposal("set_quantity", value))
 
     with pytest.raises(SemanticProtocolError):
-        parse_proposal(proposal({"mode": "delta", "value": 0}))
+        parse_proposal(proposal("adjust_quantity", 0))
 
 
 def test_budget_is_authored_in_yuan_only():
@@ -475,15 +453,15 @@ def test_budget_is_authored_in_yuan_only():
     from app.agent.protocol import SemanticProtocolError, parse_proposal
 
     parsed = parse_proposal(
-        {"reply": "好", "mutations": [{"verb": "add", "candidate_ref": "p1",
-                                       "constraints": {"budget_yuan": 19.99}}]}
+        {"target": {"kind": "product", "name": "p", "ref": "p1", "intent": "buy"},
+         "constraints": {"budget_yuan": 19.99}}
     )
     assert parsed.mutations[0].budget_fen == 1999
 
     with pytest.raises(SemanticProtocolError) as exc:
         parse_proposal(
-            {"mutations": [{"verb": "add", "candidate_ref": "p1",
-                            "constraints": {"budget_fen": 1999}}]}
+            {"target": {"kind": "product", "name": "p", "ref": "p1", "intent": "buy"},
+             "constraints": {"budget_fen": 1999}}
         )
     assert exc.value.code == "FORBIDDEN_FIELD"
 
@@ -494,18 +472,10 @@ def test_rewriting_constraints_on_an_existing_plan_is_refused(
     """Storing a constraint the plan no longer satisfies would sell a wrong list."""
     def change_budget(request):
         group = request["current_plan"]["groups"][0]
-        return {
-            "understanding": request_amend(focus=group["ref"]),
-            "mutations": [
-                {
-                    "verb": "change",
-                    "target_ref": group["ref"],
-                    "name": group["name"],
-                    "field": "constraints",
-                    "constraints": {"budget_yuan": 10},
-                }
-            ],
-        }
+        return request_amend(
+            focus=group["ref"], name=group["name"],
+            changes={"set": {"budget_yuan": 10}},
+        )
 
     semantic_provider([*lookup_then_add("product", "鸡蛋"), change_budget])
     sid = create_session(client)
@@ -515,7 +485,7 @@ def test_rewriting_constraints_on_an_existing_plan_is_refused(
     second = turn_ok(client, sid, "预算改成 10 元", first)
     assert second["plan_effect"] == "keep"
     assert any(
-        r.get("code") == "UNSUPPORTED_OPERATION" for r in second["action_results"]
+        r.get("code") == "UNSUPPORTED_CHANGE_FIELD" for r in second["action_results"]
     ), second["action_results"]
 
     after = snapshot(client, sid)
@@ -526,41 +496,30 @@ def test_rewriting_constraints_on_an_existing_plan_is_refused(
 def test_failed_action_is_visible_and_no_success_claim_is_reused(
     client, semantic_provider
 ):
-    """Partial success is reported as partial; the model's claim is dropped."""
+    """A reply that claims success is dropped when the one edit it names fails.
+
+    The wire protocol carries at most one row edit per turn (rule 1: writes come
+    from a single ``focus``/``edit`` pair), so the out-of-range edit itself is
+    what fails here — there is no second, independently-failing mutation to
+    batch it with any more.
+    """
 
     def proposal(request):
-        # Two edits of the *same* row: the second one is impossible, so the turn is
-        # a partial success and the model's claim about it is dropped.
         ref = first_item_ref(request)
         row = request["current_plan"]["items"][0]
-        return {
-            "reply": "已经帮你加好了。",
-            "understanding": request_amend(focus=ref),
-            "mutations": [
-                {
-                    "verb": "change", "target_ref": ref, "name": row["name"],
-                    "field": "quantity", "quantity": {"mode": "set", "value": 2},
-                },
-                {
-                    "verb": "change", "target_ref": ref, "name": row["name"],
-                    "field": "quantity", "quantity": {"mode": "set", "value": 99},
-                },
-            ],
-        }
+        return request_amend(
+            focus=ref, name=row["name"], op="set_quantity", quantity=99,
+        ) | {"reply": "已经帮你加好了。"}
 
     semantic_provider(
         [*lookup_then_add("product", "鸡蛋"), proposal]
     )
     sid = create_session(client)
     first = turn_ok(client, sid, "买一件")
-    body = turn_ok(client, sid, "改成两件，再来很多件", first)
+    body = turn_ok(client, sid, "再来很多件", first)
 
-    # The Graph's accepted contract refuses a compound edit *whole*: a later
-    # step's business failure rejects the batch, so nothing is half-applied. That
-    # is stricter than the loop's partial write (see
-    # tests/agent/graph/test_r2_ordered_prepare.py::test_prepare_many_rolls_back_whole_batch_on_later_failure),
-    # and the safety intent here is preserved: the model's success claim is never
-    # reused and the failed edit is visible in the receipts.
+    # The model's claim of success is never reused once the edit it describes
+    # is refused, and the refusal is visible in the receipts.
     assert "已经帮你加好了" not in body["message"]
     assert body["message"]
     assert body["plan_effect"] == "keep"
@@ -578,11 +537,11 @@ def test_uncertainty_with_unknown_ref_is_reported(client, semantic_provider):
     semantic_provider(
         [
             {
-                "uncertainties": [
+                "questions": [
                     {
                         "slot": "dish_choice",
                         "question": "你想吃哪一道？",
-                        "options": [{"candidate_ref": "zz9"}],
+                        "options": ["zz9"],
                     }
                 ]
             }
@@ -619,15 +578,11 @@ def test_remove_drops_one_group_and_keeps_the_others(client, semantic_provider):
     def remove_first_group(request):
         groups = (request.get("current_plan") or {}).get("groups") or []
         assert len(groups) >= 2, groups
-        return {
-            "understanding": request_amend(focus=groups[0]["ref"]),
-            "mutations": [
-                {"verb": "remove", "target_ref": groups[0]["ref"], "name": groups[0]["name"]}
-            ],
-        }
+        return request_amend(focus=groups[0]["ref"], name=groups[0]["name"], op="remove")
 
     semantic_provider(
-        [*lookup_then_add("dish", "番茄炒蛋", "番茄", people=2), *lookup_then_add("product", "鸡蛋"), remove_first_group]
+        [*lookup_then_add("dish", "番茄炒蛋", "番茄", people=2),
+         *lookup_then_add("product", "鸡蛋", relation="append"), remove_first_group]
     )
     sid = create_session(client)
     first = turn_ok(client, sid, "我想吃番茄炒蛋")
@@ -722,10 +677,10 @@ def open_question(text: str, slot: str, *, display: bool = False):
     def build(request):
         row = request["current_plan"]["items"][0]
         proposal: dict = {
-            "uncertainties": [{
+            "questions": [{
                 "slot": slot,
                 "question": text,
-                "options": [{"candidate_ref": row["ref"]}],
+                "options": [row["ref"]],
             }]
         }
         if display:
@@ -789,7 +744,11 @@ def test_confirming_ends_the_question_that_belonged_to_that_task(client, semanti
 def test_new_purchase_does_not_inherit_the_previous_tasks_refs(client, semantic_provider):
     """A fresh plan starts clean: no old question, no old displayed refs."""
     def purchase_after_question(request):
-        proposal = lookup_then_add("product", "鸡蛋")[0]
+        # The previous task is already confirmed and read-only, but its plan is
+        # still "on screen" for the gate's own bookkeeping, so an unstated
+        # relation would ask rather than assume (rule 5). The shopper is
+        # starting a fresh purchase, not editing the finished one.
+        proposal = lookup_then_add("product", "鸡蛋", relation="switch")[0]
         proposal["resolved_questions"] = [
             item["question_id"] for item in request.get("pending_clarifications") or []
         ]

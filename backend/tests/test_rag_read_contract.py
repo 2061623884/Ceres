@@ -54,58 +54,47 @@ def names_of(rows):
     return [row.get("name") for row in rows]
 
 
-# ------------------------------------------------------- the protocol: queries
+# --------------------------------------------------------- the protocol: reads
 
 
-def test_a_query_carries_the_same_read_only_constraints_a_lookup_does():
+def test_a_read_only_turn_filters_its_reads_with_the_stated_constraints():
     proposal = parse_proposal(
         {
-            "queries": [
-                {
-                    "kind": "recipe",
-                    "query": "番茄炒蛋",
-                    "constraints": {"excluded_ingredients": ["peanut"], "budget_yuan": 30},
-                }
-            ]
+            "reads": [{"kind": "recipe", "topic": "番茄炒蛋"}],
+            "lookups": [{"kind": "dish", "query": "番茄炒蛋"}],
+            "constraints": {"excluded_ingredients": ["peanut"], "budget_yuan": 30},
         }
     )
-    query = proposal.queries[0]
-    assert query.excluded_ingredients == ["peanut"]
-    # Yuan in, fen out. The model never authors a minor-unit amount.
-    assert query.budget_fen == 3000
+    for read in (proposal.queries[0], proposal.lookups[0]):
+        assert read.excluded_ingredients == ["peanut"]
+        # Yuan in, fen out. The model never authors a minor-unit amount.
+        assert read.budget_fen == 3000
+    # A read-only turn's conditions filter the reads; they are not a plan patch.
+    assert proposal.understanding.changes is None
 
 
-def test_a_query_cannot_hand_over_a_fen_amount():
+def test_a_read_cannot_hand_over_a_fen_amount():
     with pytest.raises(SemanticProtocolError) as excinfo:
-        parse_proposal(
-            {"queries": [{"kind": "recommend", "constraints": {"budget_fen": 3000}}]}
-        )
+        parse_proposal({"reads": [{"kind": "recommend"}], "constraints": {"budget_fen": 3000}})
     assert excinfo.value.code == "FORBIDDEN_FIELD"
 
 
-def test_a_session_query_takes_no_constraints_to_apply_them_to():
+def test_a_session_read_takes_no_constraints_to_apply_them_to():
+    proposal = parse_proposal(
+        {"reads": [{"kind": "cart"}], "constraints": {"excluded_ingredients": ["peanut"]}}
+    )
+    assert proposal.queries[0].excluded_ingredients == []
     with pytest.raises(SemanticProtocolError) as excinfo:
-        parse_proposal(
-            {
-                "queries": [
-                    {"kind": "cart", "constraints": {"excluded_ingredients": ["peanut"]}}
-                ]
-            }
-        )
+        parse_proposal({"reads": [{"kind": "cart", "topic": "番茄炒蛋"}]})
     assert excinfo.value.code == "UNSUPPORTED_OPERATION"
 
 
-def test_the_schema_advertises_constraints_on_the_retrieving_queries():
-    forms = {
-        form["properties"]["kind"].get("const") or "session": form["properties"]
-        for form in proposal_schema()["properties"]["queries"]["items"]["oneOf"]
-    }
-    assert "constraints" in forms["recommend"]
-    assert "constraints" in forms["recipe"]
-    assert "constraints" not in forms["session"]
-    # Same field, same yuan-only rule as a lookup's constraints.
-    assert "budget_yuan" in forms["recommend"]["constraints"]["properties"]
-    assert "budget_fen" not in str(forms["recommend"]["constraints"])
+def test_the_schema_states_constraints_once_in_yuan():
+    props = proposal_schema()["properties"]
+    # Reads name only what to read; the turn's constraints are stated once.
+    assert set(props["reads"]["items"]["properties"]) == {"kind", "topic"}
+    assert "budget_yuan" in props["constraints"]["properties"]
+    assert "budget_fen" not in str(props["constraints"])
 
 
 # ------------------------------------------- three entries, one hard exclusion

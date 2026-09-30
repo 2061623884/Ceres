@@ -10,11 +10,15 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
-from fastapi import APIRouter, Depends
+from contextlib import closing
+
+from fastapi import APIRouter, Depends, Request, Response
 from pydantic import BaseModel
+from sqlalchemy.orm import Session
 from sse_starlette import EventSourceResponse
 
-from app.api.bootstrap import _owner
+from app.core.database import get_db
+from app.core.identity import get_or_create_owner
 
 # 添加 Mercury 到 Python 路径
 mercury_path = Path(__file__).resolve().parents[4] / "Mercury"
@@ -22,6 +26,27 @@ if str(mercury_path) not in sys.path:
     sys.path.insert(0, str(mercury_path))
 
 from mercury.agent import run_mercury
+from mercury.db import connect
+
+DEMO_MERCURY_USER = "test_user_001"
+
+
+def _owner(request: Request, response: Response, db: Session = Depends(get_db)) -> str:
+    return get_or_create_owner(request, response, db)
+
+
+def resolve_mercury_user_id(ceres_owner_id: str) -> str:
+    """Ceres owner 与 Mercury 演示库用户对齐。"""
+    with closing(connect()) as conn:
+        if conn.execute(
+            "SELECT 1 FROM users WHERE user_id = ?", (ceres_owner_id,)
+        ).fetchone():
+            return ceres_owner_id
+        if conn.execute(
+            "SELECT 1 FROM users WHERE user_id = ?", (DEMO_MERCURY_USER,)
+        ).fetchone():
+            return DEMO_MERCURY_USER
+    return ceres_owner_id
 
 router = APIRouter(prefix="/api/v1/mercury", tags=["mercury"])
 
@@ -67,16 +92,29 @@ async def mercury_turn_stream(
         try:
             # 2. 调用 Mercury (同步调用)
             # 在生产环境中,应该使用 asyncio.to_thread 或异步包装
-            response_text = run_mercury(user_id=owner_id, message=message)
+            mercury_uid = resolve_mercury_user_id(owner_id)
+            response_text = await asyncio.to_thread(
+                run_mercury, mercury_uid, message
+            )
 
-            # 3. 分块发送以模拟流式输出(打字机效果)
-            words = response_text.split()
-            for word in words:
+            # 3. 分块发送以模拟流式输出（中文按字符，英文尽量按词）
+            chunk_size = 2
+            i = 0
+            text = response_text
+            while i < len(text):
+                end = i + chunk_size
+                if end < len(text) and text[end - 1].isascii() and text[end].isascii():
+                    while end < len(text) and end - i < 12 and text[end - 1].isascii() and text[end] != " ":
+                        end += 1
+                    while end < len(text) and text[end] == " ":
+                        end += 1
+                piece = text[i:end]
                 yield {
                     "event": "answer.delta",
-                    "data": json.dumps({"text": word + " "})
+                    "data": json.dumps({"text": piece}),
                 }
-                await asyncio.sleep(0.03)  # 30ms 延迟营造打字机效果
+                await asyncio.sleep(0.03)
+                i = end
 
             # 4. 发送完成事件
             yield {

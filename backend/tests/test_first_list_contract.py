@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from app.agent.goal_router import SLOT_FULFILLMENT_MODE, decide_turn
+from app.schemas.goal import Goal
 from support import create_session, post_turn
 
 from tests.test_goal_decision_gate import add, facts, understanding
@@ -15,9 +16,8 @@ def turn(client, session_id, message, previous=None):
 def test_named_dish_without_fulfillment_mode_prepares_instead_of_clarifying() -> None:
     decision = decide_turn(
         understanding(
-            speech_act="request_action",
-            goal_relation="new",
-            new_goal={"kind": "meal_plan", "target_name": "清蒸鲈鱼"},
+            goal_relation="unspecified",
+            new_goal=Goal(kind="meal_plan", target_name="清蒸鲈鱼"),
         ),
         facts(),
         mutations=[add("d1", "dish")],
@@ -33,13 +33,12 @@ def test_named_dish_without_fulfillment_mode_prepares_instead_of_clarifying() ->
 def test_named_dish_without_people_prepares_instead_of_clarifying() -> None:
     decision = decide_turn(
         understanding(
-            speech_act="request_action",
-            goal_relation="new",
-            new_goal={
-                "kind": "meal_plan",
-                "target_name": "番茄炒蛋",
-                "fulfillment_mode": "unspecified",
-            },
+            goal_relation="unspecified",
+            new_goal=Goal(
+                kind="meal_plan",
+                target_name="番茄炒蛋",
+                fulfillment_mode="unspecified",
+            ),
         ),
         facts(),
         mutations=[add("d1", "dish")],
@@ -54,19 +53,12 @@ def test_amend_people_only_on_active_plan_applies_without_focus(client, semantic
     semantic_provider(
         [
             {
-                "understanding": {
-                    "speech_act": "request_action", "goal_relation": "new",
-                    "new_goal": {"kind": "meal_plan", "target_name": "番茄炒蛋"},
-                },
+                "target": {"kind": "meal", "name": "番茄炒蛋", "intent": "buy"},
                 "lookups": [{"kind": "dish", "query": "番茄炒蛋"}],
             },
             lambda request: {
                 "reply": "按两个人份调整。",
-                "understanding": {
-                    "speech_act": "request_action",
-                    "goal_relation": "amend",
-                    "changes": {"set": {"people": 2}},
-                },
+                "constraints": {"people": 2},
             },
         ]
     )
@@ -85,7 +77,7 @@ def test_amend_people_only_on_active_plan_applies_without_focus(client, semantic
 
 
 def test_chat_does_not_build_a_plan(client, semantic_provider):
-    semantic_provider([{"reply": "哈哈，今天想吃点什么呢？", "understanding": {"speech_act": "chat"}}])
+    semantic_provider([{"reply": "哈哈，今天想吃点什么呢？"}])
     sid = create_session(client)
     body = turn(client, sid, "哈哈哈哈").json()
     assert body["plan"] is None, body

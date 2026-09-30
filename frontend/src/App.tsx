@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from 'react'
 import { MercuryChat } from './MercuryChat'
+import { MomoAvatar } from './components/MomoToast'
 import {
   ApiError,
   addCartItem,
@@ -1632,16 +1633,18 @@ function BottomNav({ view, onTap }: { view: ViewState; onTap: (id: string) => vo
   const onShelfCtx = view === 'shelf' || view === 'keke'
   const onOrdersCtx = view === 'orders' || view === 'momo'
 
-  const tab2: NavItem = onOrdersCtx
-    ? { id: 'momo',  label: view === 'momo' ? '我再逛逛' : '问问墨墨', isMomo: true,  icon: () => <span className="text-lg">🍞</span> }
-    : onShelfCtx
+  const tab2: NavItem = onShelfCtx
     ? { id: 'keke',  label: view === 'keke' ? '自己逛逛' : '问问可可', isKeke: true,  icon: () => <KekeAvatar size={20} /> }
     : { id: 'shelf', label: '商品',     isKeke: false, icon: (a) => <IconGrid filled={a} /> }
+
+  const tab3: NavItem = onOrdersCtx
+    ? { id: 'momo',  label: view === 'momo' ? '我再逛逛' : '问问墨墨', isMomo: true,  icon: () => <MomoAvatar size={20} /> }
+    : { id: 'orders', label: '订单', icon: (a) => <IconOrders filled={a} /> }
 
   const tabs: NavItem[] = [
     { id: 'home',    label: '主页',   icon: (a) => <IconHome filled={a} /> },
     tab2,
-    { id: 'orders',  label: '订单',   icon: (a) => <IconOrders filled={a} /> },
+    tab3,
     { id: 'profile', label: '个人中心', icon: (a) => <IconUser filled={a} /> },
   ]
 
@@ -1672,16 +1675,16 @@ function BottomNav({ view, onTap }: { view: ViewState; onTap: (id: string) => vo
                 gap: expanded ? 6 : 0,
                 padding: expanded ? (isKeke || isMomo ? '7px 14px 7px 9px' : '7px 14px') : '9px',
                 background: isMomo
-                  ? (active ? '#6366F1' : '#E0E7FF')
+                  ? (active ? '#E9C96F' : '#FFF3C9')
                   : isKeke
                   ? (active ? '#E9C96F' : '#FFF3C9')
                   : (active ? '#39714B' : 'transparent'),
                 color: active
-                  ? (isMomo ? 'white' : isKeke ? '#4E3D12' : 'white')
-                  : (isMomo ? '#4338CA' : isKeke ? '#9D7B22' : '#91A097'),
-                boxShadow: isMomo
-                  ? (active ? '0 4px 10px rgba(99,102,241,0.24)' : 'inset 0 0 0 1px rgba(129,140,248,0.22)')
-                  : isKeke ? (active ? '0 4px 10px rgba(191,151,52,0.24)' : 'inset 0 0 0 1px rgba(220,185,75,0.22)') : 'none',
+                  ? (isMomo || isKeke ? '#4E3D12' : 'white')
+                  : (isMomo || isKeke ? '#9D7B22' : '#91A097'),
+                boxShadow: isMomo || isKeke
+                  ? (active ? '0 4px 10px rgba(191,151,52,0.24)' : 'inset 0 0 0 1px rgba(220,185,75,0.22)')
+                  : 'none',
               }}>
               {tab.icon(active && !isKeke && !isMomo)}
               <span className="text-xs font-extrabold whitespace-nowrap overflow-hidden transition-all duration-300"
@@ -1760,7 +1763,7 @@ export default function App() {
               onSearchChange={setShelfSearch}
             />
           )}
-          {view === 'orders'  && <OrdersScreen />}
+          {(view === 'orders' || view === 'momo') && <OrdersScreen />}
           {view === 'profile' && <ProfileScreen />}
         </div>
 
@@ -1778,9 +1781,16 @@ export default function App() {
             />
           </div>
         )}
-        {view === 'momo' && (
-          <div className="absolute inset-x-0 bottom-[82px] top-0 z-10 flex flex-col justify-end bg-[#18261b]/20 backdrop-blur-[1px]">
-            <MercuryChat />
+        {(view === 'orders' || view === 'momo') && (
+          <div
+            className={
+              view === 'momo'
+                ? 'absolute inset-x-0 bottom-[82px] top-0 z-10 flex flex-col justify-end bg-[#18261b]/20 backdrop-blur-[1px]'
+                : 'pointer-events-none absolute h-0 w-0 overflow-hidden opacity-0'
+            }
+            aria-hidden={view !== 'momo'}
+          >
+            <MercuryChat visible={view === 'momo'} />
           </div>
         )}
       </div>
