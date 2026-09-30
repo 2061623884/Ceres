@@ -1,6 +1,6 @@
 # Ceres
 
-超市智能导购：Vite + React 界面（`frontend/`）与 FastAPI + LangGraph 后端（`backend/`）。
+超市智能导购：Vite + React 界面（`frontend/`）与 FastAPI + LangGraph 后端（`backend/`）。售后客服 Agent 在同仓库的 `Mercury/`，独立运行，不读导购数据库。
 
 ## 启动（PowerShell）
 

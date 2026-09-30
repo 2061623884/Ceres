@@ -1,0 +1,27 @@
+[project]
+name = "mercury"
+version = "0.1.0"
+description = "Mercury（墨墨）售后客服 Agent 第一版"
+requires-python = ">=3.11"
+dependencies = [
+    "openai==3.19.2",
+    "python-dotenv==1.2.3",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest==9.1.1",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["mercury"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "live: 调用真实 LLM，需要 MERCURY_LIVE=1",
+]
