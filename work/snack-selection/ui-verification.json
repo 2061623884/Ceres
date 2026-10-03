@@ -1,0 +1,171 @@
+{
+  "session_id": "sess-03408ca4f09c",
+  "owner_id": "owner-a84616799ac54620",
+  "confirmation_id": "conf-ae8b8337",
+  "cart": [
+    {
+      "sku_id": "demo:snack-soda-crackers-100g-box",
+      "quantity": 1,
+      "unit_price_fen": 690
+    }
+  ],
+  "messages": [
+    {
+      "role": "user",
+      "content": "来点零食",
+      "request_id": "req-1791047656718-t49h8zx",
+      "created_at": "2026-10-03 17:14:23.263093"
+    },
+    {
+      "role": "assistant",
+      "content": "好的，为您推荐两款零食：苏打饼干100克盒装和原味薯片70克袋装。您可以看看哪款更合心意？\n1. 苏打饼干100克盒装\n2. 原味薯片70克袋装",
+      "request_id": "req-1791047656718-t49h8zx",
+      "created_at": "2026-10-03 17:14:23.264117"
+    },
+    {
+      "role": "user",
+      "content": "就第一个",
+      "request_id": "req-1791047738677-wzc659j",
+      "created_at": "2026-10-03 17:16:23.995662"
+    },
+    {
+      "role": "assistant",
+      "content": "抱歉，这次响应超时了，请稍后重试。",
+      "request_id": "req-1791047738677-wzc659j",
+      "created_at": "2026-10-03 17:16:23.996171"
+    },
+    {
+      "role": "user",
+      "content": "就第一个",
+      "request_id": "req-1791047943748-zq6w8e9",
+      "created_at": "2026-10-03 17:19:36.026131"
+    },
+    {
+      "role": "assistant",
+      "content": "采购清单已加入「苏打饼干100克盒装」\n已整理 1 件商品，选中合计 ¥6.90（演示价格）。包含：苏打饼干100克盒装。",
+      "request_id": "req-1791047943748-zq6w8e9",
+      "created_at": "2026-10-03 17:19:36.030438"
+    },
+    {
+      "role": "assistant",
+      "content": "已加入购物车：1件 demo:snack-soda-crackers-100g-box（购物车版本 4）",
+      "request_id": "req-1791048036237-7y587e2",
+      "created_at": "2026-10-03 17:20:36.255439"
+    }
+  ],
+  "traces": [
+    {
+      "phase": "understanding",
+      "request_id": "req-1791047656718-t49h8zx",
+      "duration_ms": null,
+      "error": null,
+      "output_summary": null
+    },
+    {
+      "phase": "model_call_started",
+      "request_id": "req-1791047656718-t49h8zx",
+      "duration_ms": null,
+      "error": null,
+      "output_summary": "{\"call_number\": 1, \"stage\": \"understanding\", \"repair\": false, \"read_result_count\": 0, \"remaining_budget_s\": 90.0, \"status\": \"started\"}"
+    },
+    {
+      "phase": "model_call_completed",
+      "request_id": "req-1791047656718-t49h8zx",
+      "duration_ms": 2562,
+      "error": null,
+      "output_summary": "{\"call_number\": 1, \"stage\": \"understanding\", \"repair\": false, \"read_result_count\": 0, \"remaining_budget_s\": 90.0, \"status\": \"completed\", \"duration_ms\": 2562}"
+    },
+    {
+      "phase": "retrieve",
+      "request_id": "req-1791047656718-t49h8zx",
+      "duration_ms": null,
+      "error": null,
+      "output_summary": null
+    },
+    {
+      "phase": "model_call_started",
+      "request_id": "req-1791047656718-t49h8zx",
+      "duration_ms": null,
+      "error": null,
+      "output_summary": "{\"call_number\": 2, \"stage\": \"answer\", \"repair\": false, \"read_result_count\": 1, \"remaining_budget_s\": 87.391, \"status\": \"started\"}"
+    },
+    {
+      "phase": "model_call_completed",
+      "request_id": "req-1791047656718-t49h8zx",
+      "duration_ms": 3905,
+      "error": null,
+      "output_summary": "{\"call_number\": 2, \"stage\": \"answer\", \"repair\": false, \"read_result_count\": 1, \"remaining_budget_s\": 87.391, \"status\": \"completed\", \"duration_ms\": 3905}"
+    },
+    {
+      "phase": "turn_result",
+      "request_id": "req-1791047656718-t49h8zx",
+      "duration_ms": null,
+      "error": null,
+      "output_summary": "{\"status\": \"understanding\", \"plan_effect\": \"keep\", \"actions\": [{\"type\": \"read_only\", \"status\": \"completed\"}]}"
+    },
+    {
+      "phase": "understanding",
+      "request_id": "req-1791047738677-wzc659j",
+      "duration_ms": null,
+      "error": null,
+      "output_summary": null
+    },
+    {
+      "phase": "model_call_started",
+      "request_id": "req-1791047738677-wzc659j",
+      "duration_ms": null,
+      "error": null,
+      "output_summary": "{\"call_number\": 1, \"stage\": \"understanding\", \"repair\": false, \"read_result_count\": 0, \"remaining_budget_s\": 89.984, \"status\": \"started\"}"
+    },
+    {
+      "phase": "model_call_failed",
+      "request_id": "req-1791047738677-wzc659j",
+      "duration_ms": 45280,
+      "error": "MODEL_TIMEOUT",
+      "output_summary": "{\"call_number\": 1, \"stage\": \"understanding\", \"repair\": false, \"read_result_count\": 0, \"remaining_budget_s\": 89.984, \"status\": \"failed\", \"duration_ms\": 45280, \"code\": \"MODEL_TIMEOUT\"}"
+    },
+    {
+      "phase": "turn_result",
+      "request_id": "req-1791047738677-wzc659j",
+      "duration_ms": null,
+      "error": null,
+      "output_summary": "{\"status\": \"understanding\", \"plan_effect\": \"keep\", \"actions\": [{\"type\": \"understanding_failed\", \"status\": \"failed\", \"code\": \"MODEL_TIMEOUT\"}]}"
+    },
+    {
+      "phase": "understanding",
+      "request_id": "req-1791047943748-zq6w8e9",
+      "duration_ms": null,
+      "error": null,
+      "output_summary": null
+    },
+    {
+      "phase": "model_call_started",
+      "request_id": "req-1791047943748-zq6w8e9",
+      "duration_ms": null,
+      "error": null,
+      "output_summary": "{\"call_number\": 1, \"stage\": \"understanding\", \"repair\": false, \"read_result_count\": 0, \"remaining_budget_s\": 89.984, \"status\": \"started\"}"
+    },
+    {
+      "phase": "model_call_completed",
+      "request_id": "req-1791047943748-zq6w8e9",
+      "duration_ms": 32233,
+      "error": null,
+      "output_summary": "{\"call_number\": 1, \"stage\": \"understanding\", \"repair\": false, \"read_result_count\": 0, \"remaining_budget_s\": 89.984, \"status\": \"completed\", \"duration_ms\": 32233}"
+    },
+    {
+      "phase": "validate",
+      "request_id": "req-1791047943748-zq6w8e9",
+      "duration_ms": null,
+      "error": null,
+      "output_summary": null
+    },
+    {
+      "phase": "turn_result",
+      "request_id": "req-1791047943748-zq6w8e9",
+      "duration_ms": null,
+      "error": null,
+      "output_summary": "{\"status\": \"awaiting_confirmation\", \"plan_effect\": \"replace\", \"actions\": [{\"type\": \"mutation\", \"status\": \"committed\"}]}"
+    }
+  ],
+  "note": "UI selection encountered a MODEL_TIMEOUT, then a new manual selection turn succeeded; this is a resumed UI verification, not an uninterrupted repetition."
+}

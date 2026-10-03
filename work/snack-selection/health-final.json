@@ -1,0 +1,20 @@
+{
+  "status": "ok",
+  "database": "connected",
+  "llm_mode": "live",
+  "llm_configured": true,
+  "retrieval": {
+    "status": "degraded",
+    "mode": "hybrid",
+    "index_version": "idx-03d6c43d4eb25aff",
+    "embedding_model": null,
+    "remote_checked": false,
+    "reason": "VECTOR_INDEX_MISSING",
+    "counts": {
+      "dishes": 105,
+      "docs": 426,
+      "skus": 321
+    }
+  },
+  "business_data_mode": "demo"
+}

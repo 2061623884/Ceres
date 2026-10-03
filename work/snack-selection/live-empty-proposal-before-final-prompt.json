@@ -1,0 +1,1112 @@
+{
+  "repeat": 1,
+  "model": "Qwen/Qwen3-VL-30B-A3B-Instruct",
+  "index": {
+    "index_version": "idx-03d6c43d4eb25aff"
+  },
+  "inputs": [
+    "来点零食",
+    "就第一个",
+    "好的",
+    "来点冰淇淋",
+    "来点冰淇淋"
+  ],
+  "turns": [
+    {
+      "input": "来点零食",
+      "request_id": "9b0f573c-feb3-422c-b77f-a33e2b97de32",
+      "elapsed_ms": 6993,
+      "first_chunk_ms": 3,
+      "events": [
+        {
+          "protocol_version": 1,
+          "run_id": "run-749053d034aa",
+          "sequence": 0,
+          "type": "accepted",
+          "session_id": "sess-b00911bce4fa",
+          "target_task_id": null,
+          "message_id": null,
+          "payload": {}
+        },
+        {
+          "protocol_version": 1,
+          "run_id": "run-749053d034aa",
+          "sequence": 1,
+          "type": "progress",
+          "session_id": "sess-b00911bce4fa",
+          "target_task_id": null,
+          "message_id": null,
+          "payload": {
+            "phase": "understanding"
+          }
+        },
+        {
+          "protocol_version": 1,
+          "run_id": "run-749053d034aa",
+          "sequence": 2,
+          "type": "progress",
+          "session_id": "sess-b00911bce4fa",
+          "target_task_id": null,
+          "message_id": null,
+          "payload": {
+            "phase": "retrieve"
+          }
+        },
+        {
+          "protocol_version": 1,
+          "run_id": "run-749053d034aa",
+          "sequence": 3,
+          "type": "answer.delta",
+          "session_id": "sess-b00911bce4fa",
+          "target_task_id": null,
+          "message_id": null,
+          "payload": {
+            "delta": "好的，为您推荐以下零食：苏打饼干100克盒装和原味薯片70克袋装。\n1. 苏打饼干100克盒装\n2. 原味薯片70克袋装",
+            "final": true,
+            "replace": false
+          }
+        },
+        {
+          "protocol_version": 1,
+          "run_id": "run-749053d034aa",
+          "sequence": 4,
+          "type": "turn.completed",
+          "session_id": "sess-b00911bce4fa",
+          "target_task_id": null,
+          "message_id": "msg-408c5200da76",
+          "payload": {
+            "session_id": "sess-b00911bce4fa",
+            "task_id": null,
+            "state_version": 0,
+            "status": "understanding",
+            "answer_status": "accepted",
+            "purchase_step": "none",
+            "message": "好的，为您推荐以下零食：苏打饼干100克盒装和原味薯片70克袋装。\n1. 苏打饼干100克盒装\n2. 原味薯片70克袋装",
+            "clarification": null,
+            "plan": null,
+            "plan_effect": "keep",
+            "pending_clarification": null,
+            "missing_constraints": [],
+            "route": "answer",
+            "readiness": "information",
+            "missing_slots": [],
+            "request_id": "9b0f573c-feb3-422c-b77f-a33e2b97de32",
+            "session_version": 1,
+            "committed": false,
+            "allowed": true,
+            "guard_code": null,
+            "pending_clarifications": [],
+            "action_results": [
+              {
+                "type": "read_only",
+                "kind": "lookup",
+                "status": "completed",
+                "saved": false,
+                "reply_ok": true,
+                "retrieval_status": "degraded",
+                "retrieval_mode": "lexical",
+                "fallback_reason": "vector_index_missing",
+                "index_version": "idx-03d6c43d4eb25aff",
+                "action_id": "a1"
+              }
+            ],
+            "available_actions": [
+              "send_message"
+            ],
+            "user_message_id": "msg-d1d05d1d74e0",
+            "assistant_message_id": "msg-408c5200da76",
+            "message_sequence": 2,
+            "trace_id": "trace-b9596b2bad51",
+            "model_mode": "live",
+            "business_data_mode": "demo",
+            "current_editable_task_id": null
+          }
+        }
+      ],
+      "cart": {
+        "store_id": "store-demo-01",
+        "version": 1,
+        "items": [],
+        "total_price_fen": 0,
+        "business_data_mode": "demo"
+      },
+      "session": {
+        "session_id": "sess-b00911bce4fa",
+        "task_id": null,
+        "state_version": 0,
+        "session_version": 1,
+        "current_step": null,
+        "task_status": null,
+        "entry_context": {
+          "page": "home",
+          "category_id": null,
+          "store_id": "store-demo-01",
+          "delivery_zone_id": "zone-default"
+        },
+        "plan": null,
+        "plan_read_only": false,
+        "pending_clarifications": [],
+        "confirmation_result": null,
+        "message": null,
+        "available_actions": [
+          "send_message"
+        ],
+        "constraints_summary": {},
+        "cart_version": null,
+        "confirmation_id": null,
+        "history_status": "complete",
+        "messages": null
+      },
+      "semantic_context": {
+        "displayed_candidates": [
+          {
+            "group_id": null,
+            "kind": "product",
+            "name": "苏打饼干100克盒装",
+            "ref": "p55434eb702c5cb7d",
+            "scope": "",
+            "target_id": "demo:snack-soda-crackers-100g-box",
+            "target_kind": "product"
+          },
+          {
+            "group_id": null,
+            "kind": "product",
+            "name": "原味薯片70克袋装",
+            "ref": "pfdf9e5ee3ecebb0a",
+            "scope": "",
+            "target_id": "demo:snack-original-potato-chips-70g-bag",
+            "target_kind": "product"
+          }
+        ],
+        "pending_clarifications": [],
+        "task_id": null,
+        "task_status": null
+      },
+      "traces": [
+        {
+          "phase": "understanding",
+          "model_mode": "live",
+          "duration_ms": null,
+          "output_summary": null,
+          "error": null
+        },
+        {
+          "phase": "model_call_started",
+          "model_mode": "live",
+          "duration_ms": null,
+          "output_summary": "{\"call_number\": 1, \"stage\": \"understanding\", \"repair\": false, \"read_result_count\": 0, \"remaining_budget_s\": 89.985, \"status\": \"started\"}",
+          "error": null
+        },
+        {
+          "phase": "model_call_completed",
+          "model_mode": "live",
+          "duration_ms": 3031,
+          "output_summary": "{\"call_number\": 1, \"stage\": \"understanding\", \"repair\": false, \"read_result_count\": 0, \"remaining_budget_s\": 89.985, \"status\": \"completed\", \"duration_ms\": 3031}",
+          "error": null
+        },
+        {
+          "phase": "retrieve",
+          "model_mode": "live",
+          "duration_ms": null,
+          "output_summary": null,
+          "error": null
+        },
+        {
+          "phase": "model_call_started",
+          "model_mode": "live",
+          "duration_ms": null,
+          "output_summary": "{\"call_number\": 2, \"stage\": \"answer\", \"repair\": false, \"read_result_count\": 1, \"remaining_budget_s\": 86.86, \"status\": \"started\"}",
+          "error": null
+        },
+        {
+          "phase": "model_call_completed",
+          "model_mode": "live",
+          "duration_ms": 3828,
+          "output_summary": "{\"call_number\": 2, \"stage\": \"answer\", \"repair\": false, \"read_result_count\": 1, \"remaining_budget_s\": 86.86, \"status\": \"completed\", \"duration_ms\": 3828}",
+          "error": null
+        },
+        {
+          "phase": "turn_result",
+          "model_mode": "live",
+          "duration_ms": null,
+          "output_summary": "{\"status\": \"understanding\", \"plan_effect\": \"keep\", \"actions\": [{\"type\": \"read_only\", \"status\": \"completed\"}]}",
+          "error": null
+        }
+      ]
+    },
+    {
+      "input": "就第一个",
+      "request_id": "343f6055-1d2a-4e54-ad02-0df57c9d4a2b",
+      "elapsed_ms": 3360,
+      "first_chunk_ms": 3,
+      "events": [
+        {
+          "protocol_version": 1,
+          "run_id": "run-34d68f8a1b1c",
+          "sequence": 0,
+          "type": "accepted",
+          "session_id": "sess-b00911bce4fa",
+          "target_task_id": null,
+          "message_id": null,
+          "payload": {}
+        },
+        {
+          "protocol_version": 1,
+          "run_id": "run-34d68f8a1b1c",
+          "sequence": 1,
+          "type": "progress",
+          "session_id": "sess-b00911bce4fa",
+          "target_task_id": null,
+          "message_id": null,
+          "payload": {
+            "phase": "understanding"
+          }
+        },
+        {
+          "protocol_version": 1,
+          "run_id": "run-34d68f8a1b1c",
+          "sequence": 2,
+          "type": "progress",
+          "session_id": "sess-b00911bce4fa",
+          "target_task_id": null,
+          "message_id": null,
+          "payload": {
+            "phase": "validate"
+          }
+        },
+        {
+          "protocol_version": 1,
+          "run_id": "run-34d68f8a1b1c",
+          "sequence": 3,
+          "type": "plan.ready",
+          "session_id": "sess-b00911bce4fa",
+          "target_task_id": null,
+          "message_id": null,
+          "payload": {
+            "plan": {
+              "plan_effect": "replace",
+              "plan_id": "plan-6c7de1edb09e",
+              "plan_version": 1,
+              "task_id": "task-f5f3f1a8f37b",
+              "state_version": 2,
+              "session_version": 3,
+              "mode": "bundle",
+              "items": [
+                {
+                  "sku_id": "demo:snack-soda-crackers-100g-box",
+                  "name": "苏打饼干100克盒装",
+                  "quantity": 1,
+                  "recommended_quantity": 1,
+                  "quantity_source": "recommended",
+                  "unit_price_fen": 690,
+                  "line_total_fen": 690,
+                  "image_path": null,
+                  "image_kind": "placeholder",
+                  "image_kind_legacy": "placeholder",
+                  "role": "required",
+                  "selected": true,
+                  "ingredient_ids": [
+                    "flour"
+                  ],
+                  "spec_quantity": 100.0,
+                  "spec_unit": "g",
+                  "sell_unit": "件",
+                  "max_addable_quantity": 20,
+                  "group_id": "product:demo:snack-soda-crackers-100g-box",
+                  "target_kind": "product",
+                  "target_id": "demo:snack-soda-crackers-100g-box",
+                  "required_item_id": "product:demo:snack-soda-crackers-100g-box#demo:snack-soda-crackers-100g-box",
+                  "requirement": {
+                    "required_item_id": "product:demo:snack-soda-crackers-100g-box#demo:snack-soda-crackers-100g-box",
+                    "name": "苏打饼干100克盒装",
+                    "ingredient_id": null,
+                    "component_id": null,
+                    "quantity": 1,
+                    "unit": "件",
+                    "quantity_known": true,
+                    "requiredness": "core",
+                    "source": {
+                      "kind": "user",
+                      "ref": "苏打饼干100克盒装"
+                    }
+                  },
+                  "availability": "available",
+                  "evidence": {
+                    "sku_source": "store_offer",
+                    "quoted_at": "2026-10-03T17:10:09+00:00",
+                    "stock_verified": true,
+                    "data_mode": "demo",
+                    "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                    "unknown_constraints": []
+                  },
+                  "pack_source": "catalog_spec",
+                  "shortfall_quantity": 0,
+                  "user_quantity": null,
+                  "added_quantity": 0,
+                  "remaining_quantity": 1,
+                  "contributions": [
+                    {
+                      "group_id": "product:demo:snack-soda-crackers-100g-box",
+                      "quantity": 1,
+                      "selected": true,
+                      "added_quantity": 0,
+                      "required_item_id": "product:demo:snack-soda-crackers-100g-box#demo:snack-soda-crackers-100g-box",
+                      "requirement": {
+                        "required_item_id": "product:demo:snack-soda-crackers-100g-box#demo:snack-soda-crackers-100g-box",
+                        "name": "苏打饼干100克盒装",
+                        "ingredient_id": null,
+                        "component_id": null,
+                        "quantity": 1,
+                        "unit": "件",
+                        "quantity_known": true,
+                        "requiredness": "core",
+                        "source": {
+                          "kind": "user",
+                          "ref": "苏打饼干100克盒装"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "total_price_fen": 690,
+              "selected_total_fen": 690,
+              "outstanding_total_fen": 690,
+              "expires_at": "2026-10-03T17:15:09.901064+00:00",
+              "validation_status": "passed",
+              "coverage_mode": "full",
+              "coverage_intent": "partial_ok",
+              "uncovered_items": [],
+              "gaps": [],
+              "can_confirm": true,
+              "targets": [
+                {
+                  "group_id": "product:demo:snack-soda-crackers-100g-box",
+                  "kind": "product",
+                  "target_id": "demo:snack-soda-crackers-100g-box",
+                  "name": "苏打饼干100克盒装",
+                  "people": null,
+                  "people_source": "default"
+                }
+              ],
+              "merged_sku_contributions": []
+            },
+            "plan_effect": "replace"
+          }
+        },
+        {
+          "protocol_version": 1,
+          "run_id": "run-34d68f8a1b1c",
+          "sequence": 4,
+          "type": "answer.delta",
+          "session_id": "sess-b00911bce4fa",
+          "target_task_id": null,
+          "message_id": null,
+          "payload": {
+            "delta": "采购清单已加入「苏打饼干100克盒装」\n已整理 1 件商品，选中合计 ¥6.90（演示价格）。包含：苏打饼干100克盒装。",
+            "final": true,
+            "replace": false
+          }
+        },
+        {
+          "protocol_version": 1,
+          "run_id": "run-34d68f8a1b1c",
+          "sequence": 5,
+          "type": "turn.completed",
+          "session_id": "sess-b00911bce4fa",
+          "target_task_id": "task-f5f3f1a8f37b",
+          "message_id": "msg-d7c117ac756b",
+          "payload": {
+            "session_id": "sess-b00911bce4fa",
+            "task_id": "task-f5f3f1a8f37b",
+            "state_version": 2,
+            "status": "awaiting_confirmation",
+            "answer_status": "awaiting_confirmation",
+            "purchase_step": "awaiting_confirmation",
+            "message": "采购清单已加入「苏打饼干100克盒装」\n已整理 1 件商品，选中合计 ¥6.90（演示价格）。包含：苏打饼干100克盒装。",
+            "clarification": null,
+            "plan": {
+              "plan_id": "plan-6c7de1edb09e",
+              "plan_version": 1,
+              "mode": "bundle",
+              "items": [
+                {
+                  "sku_id": "demo:snack-soda-crackers-100g-box",
+                  "name": "苏打饼干100克盒装",
+                  "quantity": 1,
+                  "recommended_quantity": 1,
+                  "quantity_source": "recommended",
+                  "unit_price_fen": 690,
+                  "line_total_fen": 690,
+                  "image_path": null,
+                  "image_kind": "placeholder",
+                  "image_kind_legacy": "placeholder",
+                  "role": "required",
+                  "selected": true,
+                  "ingredient_ids": [
+                    "flour"
+                  ],
+                  "spec_quantity": 100.0,
+                  "spec_unit": "g",
+                  "sell_unit": "件",
+                  "max_addable_quantity": 20,
+                  "group_id": "product:demo:snack-soda-crackers-100g-box",
+                  "target_kind": "product",
+                  "target_id": "demo:snack-soda-crackers-100g-box",
+                  "required_item_id": "product:demo:snack-soda-crackers-100g-box#demo:snack-soda-crackers-100g-box",
+                  "requirement": {
+                    "required_item_id": "product:demo:snack-soda-crackers-100g-box#demo:snack-soda-crackers-100g-box",
+                    "name": "苏打饼干100克盒装",
+                    "ingredient_id": null,
+                    "component_id": null,
+                    "quantity": 1,
+                    "unit": "件",
+                    "quantity_known": true,
+                    "requiredness": "core",
+                    "source": {
+                      "kind": "user",
+                      "ref": "苏打饼干100克盒装"
+                    }
+                  },
+                  "availability": "available",
+                  "evidence": {
+                    "sku_source": "store_offer",
+                    "quoted_at": "2026-10-03T17:10:09+00:00",
+                    "stock_verified": true,
+                    "data_mode": "demo",
+                    "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                    "unknown_constraints": []
+                  },
+                  "pack_source": "catalog_spec",
+                  "shortfall_quantity": 0,
+                  "user_quantity": null,
+                  "added_quantity": 0,
+                  "remaining_quantity": 1,
+                  "contributions": [
+                    {
+                      "group_id": "product:demo:snack-soda-crackers-100g-box",
+                      "quantity": 1,
+                      "selected": true,
+                      "added_quantity": 0,
+                      "required_item_id": "product:demo:snack-soda-crackers-100g-box#demo:snack-soda-crackers-100g-box",
+                      "requirement": {
+                        "required_item_id": "product:demo:snack-soda-crackers-100g-box#demo:snack-soda-crackers-100g-box",
+                        "name": "苏打饼干100克盒装",
+                        "ingredient_id": null,
+                        "component_id": null,
+                        "quantity": 1,
+                        "unit": "件",
+                        "quantity_known": true,
+                        "requiredness": "core",
+                        "source": {
+                          "kind": "user",
+                          "ref": "苏打饼干100克盒装"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "total_price_fen": 690,
+              "selected_total_fen": 690,
+              "outstanding_total_fen": 690,
+              "expires_at": "2026-10-03T17:15:09.901064+00:00",
+              "validation_status": "passed",
+              "coverage_mode": "full",
+              "coverage_intent": "partial_ok",
+              "uncovered_items": [],
+              "gaps": [],
+              "can_confirm": true,
+              "targets": [
+                {
+                  "group_id": "product:demo:snack-soda-crackers-100g-box",
+                  "kind": "product",
+                  "target_id": "demo:snack-soda-crackers-100g-box",
+                  "name": "苏打饼干100克盒装",
+                  "people": null,
+                  "people_source": "default"
+                }
+              ],
+              "merged_sku_contributions": []
+            },
+            "plan_effect": "replace",
+            "pending_clarification": null,
+            "missing_constraints": [],
+            "route": "prepare",
+            "readiness": "ready",
+            "missing_slots": [],
+            "request_id": "343f6055-1d2a-4e54-ad02-0df57c9d4a2b",
+            "session_version": 3,
+            "committed": true,
+            "allowed": true,
+            "guard_code": null,
+            "pending_clarifications": [],
+            "action_results": [
+              {
+                "type": "mutation",
+                "verb": "add",
+                "group_id": "product:demo:snack-soda-crackers-100g-box",
+                "status": "committed",
+                "saved": true,
+                "reply_ok": true,
+                "plan_effect": "replace",
+                "message": "采购清单已加入「苏打饼干100克盒装」",
+                "candidate_ref": "p55434eb702c5cb7d",
+                "action_id": "a1"
+              }
+            ],
+            "available_actions": [
+              "confirm",
+              "cancel",
+              "modify",
+              "send_message"
+            ],
+            "user_message_id": "msg-6028b8ee68da",
+            "assistant_message_id": "msg-d7c117ac756b",
+            "message_sequence": 4,
+            "trace_id": "trace-7285700f9e77",
+            "model_mode": "live",
+            "business_data_mode": "demo",
+            "current_editable_task_id": "task-f5f3f1a8f37b"
+          }
+        }
+      ],
+      "cart": {
+        "store_id": "store-demo-01",
+        "version": 1,
+        "items": [],
+        "total_price_fen": 0,
+        "business_data_mode": "demo"
+      },
+      "session": {
+        "session_id": "sess-b00911bce4fa",
+        "task_id": "task-f5f3f1a8f37b",
+        "state_version": 2,
+        "session_version": 3,
+        "current_step": "awaiting_confirmation",
+        "task_status": "active",
+        "entry_context": {
+          "page": "home",
+          "category_id": null,
+          "store_id": "store-demo-01",
+          "delivery_zone_id": "zone-default"
+        },
+        "plan": {
+          "plan_id": "plan-6c7de1edb09e",
+          "plan_version": 1,
+          "mode": "bundle",
+          "items": [
+            {
+              "sku_id": "demo:snack-soda-crackers-100g-box",
+              "name": "苏打饼干100克盒装",
+              "quantity": 1,
+              "unit_price_fen": 690,
+              "line_total_fen": 690,
+              "image_path": null,
+              "image_kind": "placeholder",
+              "image_kind_legacy": "placeholder",
+              "role": "required",
+              "selected": true,
+              "recommended_quantity": 1,
+              "max_addable_quantity": 20,
+              "spec_quantity": 100,
+              "spec_unit": "g",
+              "sell_unit": "件",
+              "quantity_source": "recommended",
+              "group_id": "product:demo:snack-soda-crackers-100g-box",
+              "target_kind": "product",
+              "target_id": "demo:snack-soda-crackers-100g-box",
+              "component_name": null,
+              "contributions": [
+                {
+                  "group_id": "product:demo:snack-soda-crackers-100g-box",
+                  "quantity": 1,
+                  "selected": true,
+                  "added_quantity": 0,
+                  "required_item_id": "product:demo:snack-soda-crackers-100g-box#demo:snack-soda-crackers-100g-box",
+                  "requirement": {
+                    "required_item_id": "product:demo:snack-soda-crackers-100g-box#demo:snack-soda-crackers-100g-box",
+                    "name": "苏打饼干100克盒装",
+                    "ingredient_id": null,
+                    "component_id": null,
+                    "quantity": 1,
+                    "unit": "件",
+                    "quantity_known": true,
+                    "requiredness": "core",
+                    "source": {
+                      "kind": "user",
+                      "ref": "苏打饼干100克盒装"
+                    }
+                  }
+                }
+              ],
+              "added_quantity": 0,
+              "remaining_quantity": 1,
+              "required_item_id": "product:demo:snack-soda-crackers-100g-box#demo:snack-soda-crackers-100g-box",
+              "requirement": {
+                "required_item_id": "product:demo:snack-soda-crackers-100g-box#demo:snack-soda-crackers-100g-box",
+                "name": "苏打饼干100克盒装",
+                "ingredient_id": null,
+                "component_id": null,
+                "quantity": 1,
+                "unit": "件",
+                "quantity_known": true,
+                "requiredness": "core",
+                "source": {
+                  "kind": "user",
+                  "ref": "苏打饼干100克盒装"
+                }
+              },
+              "availability": "available",
+              "evidence": {
+                "sku_source": "store_offer",
+                "quoted_at": "2026-10-03T17:10:09+00:00",
+                "stock_verified": true,
+                "data_mode": "demo",
+                "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                "unknown_constraints": []
+              },
+              "pack_source": "catalog_spec",
+              "shortfall_quantity": 0
+            }
+          ],
+          "total_price_fen": 690,
+          "selected_total_fen": 690,
+          "expires_at": "2026-10-03T17:15:09.901064+00:00",
+          "validation_status": "passed",
+          "coverage_mode": "full",
+          "coverage_intent": "partial_ok",
+          "uncovered_items": [],
+          "gaps": [],
+          "can_confirm": true,
+          "gap_fill": null,
+          "targets": [
+            {
+              "group_id": "product:demo:snack-soda-crackers-100g-box",
+              "kind": "product",
+              "target_id": "demo:snack-soda-crackers-100g-box",
+              "name": "苏打饼干100克盒装",
+              "meal_name": null,
+              "fulfillment_mode": null,
+              "people": null,
+              "people_source": "default",
+              "notes": []
+            }
+          ],
+          "merged_sku_contributions": [],
+          "outstanding_total_fen": 690
+        },
+        "plan_read_only": false,
+        "pending_clarifications": [],
+        "confirmation_result": null,
+        "message": "已恢复待确认方案",
+        "available_actions": [
+          "confirm",
+          "cancel",
+          "modify",
+          "send_message"
+        ],
+        "constraints_summary": {
+          "goal": "苏打饼干100克盒装",
+          "people": null,
+          "budget_fen": null,
+          "excluded_ingredients": []
+        },
+        "cart_version": null,
+        "confirmation_id": null,
+        "history_status": "complete",
+        "messages": null
+      },
+      "semantic_context": {
+        "goal_candidate": {
+          "goal": {
+            "assumptions": [],
+            "category_id": null,
+            "category_name": null,
+            "constraints": {
+              "budget_yuan": null,
+              "dietary": [],
+              "excluded_ingredients": [],
+              "meal_time": null,
+              "people": null,
+              "specification": {}
+            },
+            "description": "",
+            "fulfillment_mode": "unspecified",
+            "items": [
+              "苏打饼干100克盒装"
+            ],
+            "kind": "product_purchase",
+            "notes": [],
+            "target_name": "苏打饼干100克盒装"
+          },
+          "missing_slots": [],
+          "plan_version": null,
+          "ref": "goal-03f09be72ef3",
+          "relation": "new",
+          "target_id": "demo:snack-soda-crackers-100g-box",
+          "target_kind": "product",
+          "target_name": "苏打饼干100克盒装",
+          "target_ref": "p55434eb702c5cb7d",
+          "task_id": null
+        },
+        "pending_clarifications": [],
+        "task_id": "task-f5f3f1a8f37b",
+        "task_status": "active"
+      },
+      "traces": [
+        {
+          "phase": "understanding",
+          "model_mode": "live",
+          "duration_ms": null,
+          "output_summary": null,
+          "error": null
+        },
+        {
+          "phase": "model_call_started",
+          "model_mode": "live",
+          "duration_ms": null,
+          "output_summary": "{\"call_number\": 1, \"stage\": \"understanding\", \"repair\": false, \"read_result_count\": 0, \"remaining_budget_s\": 89.985, \"status\": \"started\"}",
+          "error": null
+        },
+        {
+          "phase": "model_call_completed",
+          "model_mode": "live",
+          "duration_ms": 3297,
+          "output_summary": "{\"call_number\": 1, \"stage\": \"understanding\", \"repair\": false, \"read_result_count\": 0, \"remaining_budget_s\": 89.985, \"status\": \"completed\", \"duration_ms\": 3297}",
+          "error": null
+        },
+        {
+          "phase": "validate",
+          "model_mode": "live",
+          "duration_ms": null,
+          "output_summary": null,
+          "error": null
+        },
+        {
+          "phase": "turn_result",
+          "model_mode": "live",
+          "duration_ms": null,
+          "output_summary": "{\"status\": \"awaiting_confirmation\", \"plan_effect\": \"replace\", \"actions\": [{\"type\": \"mutation\", \"status\": \"committed\"}]}",
+          "error": null
+        }
+      ]
+    },
+    {
+      "input": "好的",
+      "request_id": "92b3d5f8-081c-46a6-83ba-d48963b2a841",
+      "elapsed_ms": 1921,
+      "first_chunk_ms": 3,
+      "events": [
+        {
+          "protocol_version": 1,
+          "run_id": "run-b3c42eb138f2",
+          "sequence": 0,
+          "type": "accepted",
+          "session_id": "sess-b00911bce4fa",
+          "target_task_id": null,
+          "message_id": null,
+          "payload": {}
+        },
+        {
+          "protocol_version": 1,
+          "run_id": "run-b3c42eb138f2",
+          "sequence": 1,
+          "type": "progress",
+          "session_id": "sess-b00911bce4fa",
+          "target_task_id": "task-f5f3f1a8f37b",
+          "message_id": null,
+          "payload": {
+            "phase": "understanding"
+          }
+        },
+        {
+          "protocol_version": 1,
+          "run_id": "run-b3c42eb138f2",
+          "sequence": 2,
+          "type": "answer.delta",
+          "session_id": "sess-b00911bce4fa",
+          "target_task_id": "task-f5f3f1a8f37b",
+          "message_id": null,
+          "payload": {
+            "delta": "抱歉，这一轮我没能理解清楚（EMPTY_PROPOSAL）：模型没有给出任何可执行内容 请换个说法，或直接说想吃什么、想买什么。",
+            "final": true,
+            "replace": false
+          }
+        },
+        {
+          "protocol_version": 1,
+          "run_id": "run-b3c42eb138f2",
+          "sequence": 3,
+          "type": "turn.completed",
+          "session_id": "sess-b00911bce4fa",
+          "target_task_id": "task-f5f3f1a8f37b",
+          "message_id": "msg-0664c92985c5",
+          "payload": {
+            "session_id": "sess-b00911bce4fa",
+            "task_id": "task-f5f3f1a8f37b",
+            "state_version": 2,
+            "status": "awaiting_confirmation",
+            "answer_status": "awaiting_confirmation",
+            "purchase_step": "awaiting_confirmation",
+            "message": "抱歉，这一轮我没能理解清楚（EMPTY_PROPOSAL）：模型没有给出任何可执行内容 请换个说法，或直接说想吃什么、想买什么。",
+            "clarification": null,
+            "plan": null,
+            "plan_effect": "keep",
+            "pending_clarification": null,
+            "missing_constraints": [],
+            "route": "refuse",
+            "readiness": "unsupported",
+            "missing_slots": [],
+            "request_id": "92b3d5f8-081c-46a6-83ba-d48963b2a841",
+            "session_version": 3,
+            "committed": false,
+            "allowed": true,
+            "guard_code": null,
+            "pending_clarifications": [],
+            "action_results": [
+              {
+                "type": "understanding_failed",
+                "status": "failed",
+                "saved": false,
+                "reply_ok": false,
+                "code": "EMPTY_PROPOSAL",
+                "message": "模型没有给出任何可执行内容",
+                "retryable": true,
+                "action_id": "a1"
+              }
+            ],
+            "available_actions": [
+              "confirm",
+              "cancel",
+              "modify",
+              "send_message"
+            ],
+            "user_message_id": "msg-9db7bc6e0e99",
+            "assistant_message_id": "msg-0664c92985c5",
+            "message_sequence": 6,
+            "trace_id": "trace-968d4f8efc83",
+            "model_mode": "live",
+            "business_data_mode": "demo",
+            "current_editable_task_id": "task-f5f3f1a8f37b"
+          }
+        }
+      ],
+      "cart": {
+        "store_id": "store-demo-01",
+        "version": 1,
+        "items": [],
+        "total_price_fen": 0,
+        "business_data_mode": "demo"
+      },
+      "session": {
+        "session_id": "sess-b00911bce4fa",
+        "task_id": "task-f5f3f1a8f37b",
+        "state_version": 2,
+        "session_version": 3,
+        "current_step": "awaiting_confirmation",
+        "task_status": "active",
+        "entry_context": {
+          "page": "home",
+          "category_id": null,
+          "store_id": "store-demo-01",
+          "delivery_zone_id": "zone-default"
+        },
+        "plan": {
+          "plan_id": "plan-6c7de1edb09e",
+          "plan_version": 1,
+          "mode": "bundle",
+          "items": [
+            {
+              "sku_id": "demo:snack-soda-crackers-100g-box",
+              "name": "苏打饼干100克盒装",
+              "quantity": 1,
+              "unit_price_fen": 690,
+              "line_total_fen": 690,
+              "image_path": null,
+              "image_kind": "placeholder",
+              "image_kind_legacy": "placeholder",
+              "role": "required",
+              "selected": true,
+              "recommended_quantity": 1,
+              "max_addable_quantity": 20,
+              "spec_quantity": 100,
+              "spec_unit": "g",
+              "sell_unit": "件",
+              "quantity_source": "recommended",
+              "group_id": "product:demo:snack-soda-crackers-100g-box",
+              "target_kind": "product",
+              "target_id": "demo:snack-soda-crackers-100g-box",
+              "component_name": null,
+              "contributions": [
+                {
+                  "group_id": "product:demo:snack-soda-crackers-100g-box",
+                  "quantity": 1,
+                  "selected": true,
+                  "added_quantity": 0,
+                  "required_item_id": "product:demo:snack-soda-crackers-100g-box#demo:snack-soda-crackers-100g-box",
+                  "requirement": {
+                    "required_item_id": "product:demo:snack-soda-crackers-100g-box#demo:snack-soda-crackers-100g-box",
+                    "name": "苏打饼干100克盒装",
+                    "ingredient_id": null,
+                    "component_id": null,
+                    "quantity": 1,
+                    "unit": "件",
+                    "quantity_known": true,
+                    "requiredness": "core",
+                    "source": {
+                      "kind": "user",
+                      "ref": "苏打饼干100克盒装"
+                    }
+                  }
+                }
+              ],
+              "added_quantity": 0,
+              "remaining_quantity": 1,
+              "required_item_id": "product:demo:snack-soda-crackers-100g-box#demo:snack-soda-crackers-100g-box",
+              "requirement": {
+                "required_item_id": "product:demo:snack-soda-crackers-100g-box#demo:snack-soda-crackers-100g-box",
+                "name": "苏打饼干100克盒装",
+                "ingredient_id": null,
+                "component_id": null,
+                "quantity": 1,
+                "unit": "件",
+                "quantity_known": true,
+                "requiredness": "core",
+                "source": {
+                  "kind": "user",
+                  "ref": "苏打饼干100克盒装"
+                }
+              },
+              "availability": "available",
+              "evidence": {
+                "sku_source": "store_offer",
+                "quoted_at": "2026-10-03T17:10:09+00:00",
+                "stock_verified": true,
+                "data_mode": "demo",
+                "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                "unknown_constraints": []
+              },
+              "pack_source": "catalog_spec",
+              "shortfall_quantity": 0
+            }
+          ],
+          "total_price_fen": 690,
+          "selected_total_fen": 690,
+          "expires_at": "2026-10-03T17:15:09.901064+00:00",
+          "validation_status": "passed",
+          "coverage_mode": "full",
+          "coverage_intent": "partial_ok",
+          "uncovered_items": [],
+          "gaps": [],
+          "can_confirm": true,
+          "gap_fill": null,
+          "targets": [
+            {
+              "group_id": "product:demo:snack-soda-crackers-100g-box",
+              "kind": "product",
+              "target_id": "demo:snack-soda-crackers-100g-box",
+              "name": "苏打饼干100克盒装",
+              "meal_name": null,
+              "fulfillment_mode": null,
+              "people": null,
+              "people_source": "default",
+              "notes": []
+            }
+          ],
+          "merged_sku_contributions": [],
+          "outstanding_total_fen": 690
+        },
+        "plan_read_only": false,
+        "pending_clarifications": [],
+        "confirmation_result": null,
+        "message": "已恢复待确认方案",
+        "available_actions": [
+          "confirm",
+          "cancel",
+          "modify",
+          "send_message"
+        ],
+        "constraints_summary": {
+          "goal": "苏打饼干100克盒装",
+          "people": null,
+          "budget_fen": null,
+          "excluded_ingredients": []
+        },
+        "cart_version": null,
+        "confirmation_id": null,
+        "history_status": "complete",
+        "messages": null
+      },
+      "semantic_context": {
+        "goal_candidate": {
+          "goal": {
+            "assumptions": [],
+            "category_id": null,
+            "category_name": null,
+            "constraints": {
+              "budget_yuan": null,
+              "dietary": [],
+              "excluded_ingredients": [],
+              "meal_time": null,
+              "people": null,
+              "specification": {}
+            },
+            "description": "",
+            "fulfillment_mode": "unspecified",
+            "items": [
+              "苏打饼干100克盒装"
+            ],
+            "kind": "product_purchase",
+            "notes": [],
+            "target_name": "苏打饼干100克盒装"
+          },
+          "missing_slots": [],
+          "plan_version": null,
+          "ref": "goal-03f09be72ef3",
+          "relation": "new",
+          "target_id": "demo:snack-soda-crackers-100g-box",
+          "target_kind": "product",
+          "target_name": "苏打饼干100克盒装",
+          "target_ref": "p55434eb702c5cb7d",
+          "task_id": null
+        },
+        "pending_clarifications": [],
+        "task_id": "task-f5f3f1a8f37b",
+        "task_status": "active"
+      },
+      "traces": [
+        {
+          "phase": "understanding",
+          "model_mode": "live",
+          "duration_ms": null,
+          "output_summary": null,
+          "error": null
+        },
+        {
+          "phase": "model_call_started",
+          "model_mode": "live",
+          "duration_ms": null,
+          "output_summary": "{\"call_number\": 1, \"stage\": \"understanding\", \"repair\": false, \"read_result_count\": 0, \"remaining_budget_s\": 89.985, \"status\": \"started\"}",
+          "error": null
+        },
+        {
+          "phase": "model_call_completed",
+          "model_mode": "live",
+          "duration_ms": 1860,
+          "output_summary": "{\"call_number\": 1, \"stage\": \"understanding\", \"repair\": false, \"read_result_count\": 0, \"remaining_budget_s\": 89.985, \"status\": \"completed\", \"duration_ms\": 1860}",
+          "error": null
+        },
+        {
+          "phase": "turn_result",
+          "model_mode": "live",
+          "duration_ms": null,
+          "output_summary": "{\"status\": \"awaiting_confirmation\", \"plan_effect\": \"keep\", \"actions\": [{\"type\": \"understanding_failed\", \"status\": \"failed\", \"code\": \"EMPTY_PROPOSAL\"}]}",
+          "error": null
+        }
+      ]
+    }
+  ],
+  "session_id": "sess-b00911bce4fa",
+  "owner_id": "owner-1fe92f3bcd304f3d"
+}

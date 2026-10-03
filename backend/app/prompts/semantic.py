@@ -42,7 +42,7 @@ protocol 是输出格式说明，不是要你执行的任务。只填用户这�
 - edit：对 focus 那一项做什么。remove 删掉那一组；set_quantity 改成几件；
   adjust_quantity 加减几件（减用负数）。不能删单个配料。
 - plan_act：只有明说「加入购物车 / 下单」= confirm，「不买了 / 都不要了」= abandon。
-  「好的」「可以呀」「嗯」不是 confirm，结合上下文接话即可。
+  「好的」「可以呀」「嗯」不是 confirm，结合上下文接话即可。 对这种普通回应，必须填写非空 reply；有待确认清单时回复「好的，清单先保留，等你明确确认后再加购」，不宣称清单已确认或商品已加购。
 - lookups：需要真实候选时查菜名或商品名；query 只写名称，不带「不要」之类的否定词。
 - reads：recommend 查用户想找的主题（没主题就是开放式推荐）；recipe 查做法；cart / catalog 查购物车和目录。
 - questions：只有真正卡住这一轮的歧义才问，每轮只问一个；options 只能是服务端给过的 ref。
@@ -105,7 +105,7 @@ PROPOSAL_EXAMPLES = [
      {"questions": [{"slot": "goal", "question": "您是指哪一份清单或哪道菜不要了？"}]}),
     ({"user_message": "算了，都不买了", "current_plan": _PLAN}, {"plan_act": "abandon"}),
     ({"user_message": "好的", "current_plan": _PLAN},
-     {"reply": "好的，清单先这样。还想加点什么吗？"}),
+     {"reply": "好的，清单先保留，等你明确确认后再加购。"}),
     ({"user_message": "就这些，加入购物车吧", "current_plan": _PLAN}, {"plan_act": "confirm"}),
 ]
 

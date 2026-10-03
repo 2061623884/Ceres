@@ -1072,35 +1072,326 @@
       ]
     },
     {
-      "sku_id": "demo:snack-original-potato-chips-70g-bag",
-      "name": "Demo Original Potato Chips 70g Bag",
-      "name_zh": "原味薯片70克袋装",
-      "category_id": "snack",
+      "sku_id": "demo:cn-coke-original-330ml-can",
+      "name": "Coca-Cola Original 330ml Can",
+      "name_zh": "可口可乐经典原味汽水330ml罐装",
+      "category_id": "beverage",
       "ingredient_ids": [
-        "potato"
+        "cola"
       ],
-      "brand": "演示品牌",
+      "brand": "可口可乐",
       "image_path": null,
       "image_status": "placeholder",
       "source": "demo",
       "review_status": "approved",
-      "spec_quantity": 70,
-      "spec_unit": "g",
-      "product_type": "potato_chips",
+      "spec_quantity": 330,
+      "spec_unit": "ml",
       "usage_tags": [
-        "零食",
-        "薯片",
+        "饮料",
+        "可乐",
+        "汽水",
         "原味",
-        "即食",
-        "袋装"
+        "罐装"
       ],
       "metadata": {
-        "catalog_batch": "snack-selection-v1",
-        "family_id": "potato_chips",
-        "item_quantity": 70,
-        "item_unit": "g",
+        "catalog_batch": "catalog-expansion-v2",
+        "family_id": "cola",
+        "item_quantity": 330,
+        "item_unit": "ml",
         "pack_count": 1,
-        "packaging": "bag",
+        "packaging": "can",
+        "simulation": {
+          "price": true,
+          "inventory": true,
+          "product_combination": true
+        },
+        "sugar_type": "original"
+      }
+    },
+    {
+      "sku_id": "demo:cn-coke-original-500ml-bottle",
+      "name": "Coca-Cola Original 500ml Bottle",
+      "name_zh": "可口可乐经典原味汽水500ml瓶装",
+      "category_id": "beverage",
+      "ingredient_ids": [
+        "cola"
+      ],
+      "brand": "可口可乐",
+      "image_path": null,
+      "image_status": "placeholder",
+      "source": "demo",
+      "review_status": "approved",
+      "spec_quantity": 500,
+      "spec_unit": "ml",
+      "usage_tags": [
+        "饮料",
+        "可乐",
+        "汽水",
+        "原味",
+        "瓶装"
+      ],
+      "metadata": {
+        "catalog_batch": "catalog-expansion-v2",
+        "family_id": "cola",
+        "item_quantity": 500,
+        "item_unit": "ml",
+        "pack_count": 1,
+        "packaging": "bottle",
+        "simulation": {
+          "price": true,
+          "inventory": true,
+          "product_combination": true
+        },
+        "sugar_type": "original"
+      }
+    },
+    {
+      "sku_id": "demo:cn-coke-zero-500ml-bottle",
+      "name": "Coca-Cola Zero Sugar 500ml Bottle",
+      "name_zh": "可口可乐零度无糖汽水500ml瓶装",
+      "category_id": "beverage",
+      "ingredient_ids": [
+        "cola"
+      ],
+      "brand": "可口可乐",
+      "image_path": null,
+      "image_status": "placeholder",
+      "source": "demo",
+      "review_status": "approved",
+      "spec_quantity": 500,
+      "spec_unit": "ml",
+      "usage_tags": [
+        "饮料",
+        "可乐",
+        "汽水",
+        "无糖",
+        "瓶装"
+      ],
+      "metadata": {
+        "catalog_batch": "catalog-expansion-v2",
+        "family_id": "cola",
+        "item_quantity": 500,
+        "item_unit": "ml",
+        "pack_count": 1,
+        "packaging": "bottle",
+        "simulation": {
+          "price": true,
+          "inventory": true,
+          "product_combination": true
+        },
+        "sugar_type": "zero"
+      }
+    },
+    {
+      "sku_id": "demo:cn-pepsi-original-330ml-can",
+      "name": "Pepsi Original 330ml Can",
+      "name_zh": "百事可乐原味汽水330ml罐装",
+      "category_id": "beverage",
+      "ingredient_ids": [
+        "cola"
+      ],
+      "brand": "百事可乐",
+      "image_path": null,
+      "image_status": "placeholder",
+      "source": "demo",
+      "review_status": "approved",
+      "spec_quantity": 330,
+      "spec_unit": "ml",
+      "usage_tags": [
+        "饮料",
+        "可乐",
+        "汽水",
+        "原味",
+        "罐装"
+      ],
+      "metadata": {
+        "catalog_batch": "catalog-expansion-v2",
+        "family_id": "cola",
+        "item_quantity": 330,
+        "item_unit": "ml",
+        "pack_count": 1,
+        "packaging": "can",
+        "simulation": {
+          "price": true,
+          "inventory": true,
+          "product_combination": true
+        },
+        "sugar_type": "original"
+      }
+    },
+    {
+      "sku_id": "demo:cn-coke-original-330ml-6can",
+      "name": "Coca-Cola Original 330ml x 6 Cans",
+      "name_zh": "可口可乐经典原味汽水330ml×6罐",
+      "category_id": "beverage",
+      "ingredient_ids": [
+        "cola"
+      ],
+      "brand": "可口可乐",
+      "image_path": null,
+      "image_status": "placeholder",
+      "source": "demo",
+      "review_status": "approved",
+      "spec_quantity": 1980,
+      "spec_unit": "ml",
+      "usage_tags": [
+        "饮料",
+        "可乐",
+        "汽水",
+        "原味",
+        "罐装",
+        "多件装"
+      ],
+      "metadata": {
+        "catalog_batch": "catalog-expansion-v2",
+        "family_id": "cola",
+        "item_quantity": 330,
+        "item_unit": "ml",
+        "pack_count": 6,
+        "packaging": "can",
+        "simulation": {
+          "price": true,
+          "inventory": true,
+          "product_combination": true
+        },
+        "sugar_type": "original"
+      }
+    },
+    {
+      "sku_id": "demo:cn-yili-whole-250ml-carton",
+      "name": "Yili Whole Milk 250ml Carton",
+      "name_zh": "伊利全脂纯牛奶250ml盒装",
+      "category_id": "dairy",
+      "ingredient_ids": [
+        "milk"
+      ],
+      "brand": "伊利",
+      "image_path": null,
+      "image_status": "placeholder",
+      "source": "demo",
+      "review_status": "approved",
+      "spec_quantity": 250,
+      "spec_unit": "ml",
+      "usage_tags": [
+        "牛奶",
+        "早餐",
+        "全脂",
+        "盒装"
+      ],
+      "metadata": {
+        "catalog_batch": "catalog-expansion-v2",
+        "family_id": "milk",
+        "item_quantity": 250,
+        "item_unit": "ml",
+        "pack_count": 1,
+        "packaging": "carton",
+        "simulation": {
+          "price": true,
+          "inventory": true,
+          "product_combination": true
+        },
+        "fat_type": "whole"
+      }
+    },
+    {
+      "sku_id": "demo:cn-yili-whole-250ml-12carton",
+      "name": "Yili Whole Milk 250ml x 12 Cartons",
+      "name_zh": "伊利全脂纯牛奶250ml×12盒",
+      "category_id": "dairy",
+      "ingredient_ids": [
+        "milk"
+      ],
+      "brand": "伊利",
+      "image_path": null,
+      "image_status": "placeholder",
+      "source": "demo",
+      "review_status": "approved",
+      "spec_quantity": 3000,
+      "spec_unit": "ml",
+      "usage_tags": [
+        "牛奶",
+        "早餐",
+        "全脂",
+        "盒装",
+        "多件装"
+      ],
+      "metadata": {
+        "catalog_batch": "catalog-expansion-v2",
+        "family_id": "milk",
+        "item_quantity": 250,
+        "item_unit": "ml",
+        "pack_count": 12,
+        "packaging": "carton",
+        "simulation": {
+          "price": true,
+          "inventory": true,
+          "product_combination": true
+        },
+        "fat_type": "whole"
+      }
+    },
+    {
+      "sku_id": "demo:cn-mengniu-lowfat-250ml-carton",
+      "name": "Mengniu Low Fat Milk 250ml Carton",
+      "name_zh": "蒙牛低脂牛奶250ml盒装",
+      "category_id": "dairy",
+      "ingredient_ids": [
+        "milk"
+      ],
+      "brand": "蒙牛",
+      "image_path": null,
+      "image_status": "placeholder",
+      "source": "demo",
+      "review_status": "approved",
+      "spec_quantity": 250,
+      "spec_unit": "ml",
+      "usage_tags": [
+        "牛奶",
+        "早餐",
+        "低脂",
+        "盒装"
+      ],
+      "metadata": {
+        "catalog_batch": "catalog-expansion-v2",
+        "family_id": "milk",
+        "item_quantity": 250,
+        "item_unit": "ml",
+        "pack_count": 1,
+        "packaging": "carton",
+        "simulation": {
+          "price": true,
+          "inventory": true,
+          "product_combination": true
+        },
+        "fat_type": "lowfat"
+      }
+    },
+    {
+      "sku_id": "demo:cn-nongfu-water-550ml-bottle",
+      "name": "Nongfu Spring Natural Drinking Water 550ml Bottle",
+      "name_zh": "农夫山泉饮用天然水550ml瓶装",
+      "category_id": "beverage",
+      "ingredient_ids": [],
+      "brand": "农夫山泉",
+      "image_path": null,
+      "image_status": "placeholder",
+      "source": "demo",
+      "review_status": "approved",
+      "spec_quantity": 550,
+      "spec_unit": "ml",
+      "usage_tags": [
+        "饮料",
+        "饮用水",
+        "天然水",
+        "瓶装"
+      ],
+      "metadata": {
+        "catalog_batch": "catalog-expansion-v2",
+        "family_id": "water",
+        "item_quantity": 550,
+        "item_unit": "ml",
+        "pack_count": 1,
+        "packaging": "bottle",
         "simulation": {
           "price": true,
           "inventory": true,
@@ -1109,35 +1400,65 @@
       }
     },
     {
-      "sku_id": "demo:snack-soda-crackers-100g-box",
-      "name": "Demo Soda Crackers 100g Box",
-      "name_zh": "苏打饼干100克盒装",
-      "category_id": "snack",
-      "ingredient_ids": [
-        "flour"
-      ],
-      "brand": "演示品牌",
+      "sku_id": "demo:cn-cestbon-water-555ml-bottle",
+      "name": "Cestbon Purified Drinking Water 555ml Bottle",
+      "name_zh": "怡宝饮用纯净水555ml瓶装",
+      "category_id": "beverage",
+      "ingredient_ids": [],
+      "brand": "怡宝",
       "image_path": null,
       "image_status": "placeholder",
       "source": "demo",
       "review_status": "approved",
-      "spec_quantity": 100,
-      "spec_unit": "g",
-      "product_type": "soda_crackers",
+      "spec_quantity": 555,
+      "spec_unit": "ml",
       "usage_tags": [
-        "零食",
-        "饼干",
-        "苏打饼干",
-        "即食",
-        "盒装"
+        "饮料",
+        "饮用水",
+        "纯净水",
+        "瓶装"
       ],
       "metadata": {
-        "catalog_batch": "snack-selection-v1",
-        "family_id": "soda_crackers",
-        "item_quantity": 100,
-        "item_unit": "g",
+        "catalog_batch": "catalog-expansion-v2",
+        "family_id": "water",
+        "item_quantity": 555,
+        "item_unit": "ml",
         "pack_count": 1,
-        "packaging": "box",
+        "packaging": "bottle",
+        "simulation": {
+          "price": true,
+          "inventory": true,
+          "product_combination": true
+        }
+      }
+    },
+    {
+      "sku_id": "demo:cn-nongfu-water-550ml-12bottle",
+      "name": "Nongfu Spring Natural Drinking Water 550ml x 12 Bottles",
+      "name_zh": "农夫山泉饮用天然水550ml×12瓶",
+      "category_id": "beverage",
+      "ingredient_ids": [],
+      "brand": "农夫山泉",
+      "image_path": null,
+      "image_status": "placeholder",
+      "source": "demo",
+      "review_status": "approved",
+      "spec_quantity": 6600,
+      "spec_unit": "ml",
+      "usage_tags": [
+        "饮料",
+        "饮用水",
+        "天然水",
+        "瓶装",
+        "多件装"
+      ],
+      "metadata": {
+        "catalog_batch": "catalog-expansion-v2",
+        "family_id": "water",
+        "item_quantity": 550,
+        "item_unit": "ml",
+        "pack_count": 12,
+        "packaging": "bottle",
         "simulation": {
           "price": true,
           "inventory": true,

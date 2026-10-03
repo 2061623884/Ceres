@@ -223,14 +223,68 @@
       "available_qty": 60
     },
     {
-      "sku_id": "demo:snack-original-potato-chips-70g-bag",
-      "price_fen": 590,
+      "sku_id": "demo:cn-coke-original-330ml-can",
+      "price_fen": 350,
+      "available_qty": 48,
+      "is_demo": true
+    },
+    {
+      "sku_id": "demo:cn-coke-original-500ml-bottle",
+      "price_fen": 400,
+      "available_qty": 36,
+      "is_demo": true
+    },
+    {
+      "sku_id": "demo:cn-coke-zero-500ml-bottle",
+      "price_fen": 400,
       "available_qty": 30,
       "is_demo": true
     },
     {
-      "sku_id": "demo:snack-soda-crackers-100g-box",
-      "price_fen": 690,
+      "sku_id": "demo:cn-pepsi-original-330ml-can",
+      "price_fen": 300,
+      "available_qty": 36,
+      "is_demo": true
+    },
+    {
+      "sku_id": "demo:cn-coke-original-330ml-6can",
+      "price_fen": 1800,
+      "available_qty": 18,
+      "is_demo": true
+    },
+    {
+      "sku_id": "demo:cn-yili-whole-250ml-carton",
+      "price_fen": 350,
+      "available_qty": 48,
+      "is_demo": true
+    },
+    {
+      "sku_id": "demo:cn-yili-whole-250ml-12carton",
+      "price_fen": 3780,
+      "available_qty": 16,
+      "is_demo": true
+    },
+    {
+      "sku_id": "demo:cn-mengniu-lowfat-250ml-carton",
+      "price_fen": 400,
+      "available_qty": 30,
+      "is_demo": true
+    },
+    {
+      "sku_id": "demo:cn-nongfu-water-550ml-bottle",
+      "price_fen": 200,
+      "available_qty": 72,
+      "is_demo": true
+    },
+    {
+      "sku_id": "demo:cn-cestbon-water-555ml-bottle",
+      "price_fen": 220,
+      "available_qty": 60,
+      "is_demo": true
+    },
+    {
+      "sku_id": "demo:cn-nongfu-water-550ml-12bottle",
+      "price_fen": 2160,
       "available_qty": 20,
       "is_demo": true
     }

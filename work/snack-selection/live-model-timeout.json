@@ -1,0 +1,53 @@
+{
+  "note": "Actual upstream read timeouts retained; failed attempts are not counted as passed repetitions.",
+  "failures": [
+    {
+      "event_id": "evt-60ea63f3fb9d",
+      "trace_id": "trace-5b4df1222afc",
+      "request_id": "9bc5f057-eec1-479a-b425-7d0608471896",
+      "session_id": "sess-681275ac4674",
+      "task_id": null,
+      "owner_id": "owner-d59b2f03fc3649e9",
+      "phase": "model_call_failed",
+      "model_mode": "live",
+      "workflow_version": "v1",
+      "input_summary": null,
+      "output_summary": "{\"call_number\": 1, \"stage\": \"understanding\", \"repair\": false, \"read_result_count\": 0, \"remaining_budget_s\": 89.969, \"status\": \"failed\", \"duration_ms\": 45327, \"code\": \"MODEL_TIMEOUT\"}",
+      "error": "MODEL_TIMEOUT",
+      "duration_ms": 45327,
+      "created_at": "2026-10-03 17:07:16.372237"
+    },
+    {
+      "event_id": "evt-c3897ae927bc",
+      "trace_id": "trace-4aacf6477a50",
+      "request_id": "req-1791047243405-0g2bnml",
+      "session_id": "sess-bb1ab50d681a",
+      "task_id": null,
+      "owner_id": "owner-a84616799ac54620",
+      "phase": "model_call_failed",
+      "model_mode": "live",
+      "workflow_version": "v1",
+      "input_summary": null,
+      "output_summary": "{\"call_number\": 1, \"stage\": \"understanding\", \"repair\": false, \"read_result_count\": 0, \"remaining_budget_s\": 90.0, \"status\": \"failed\", \"duration_ms\": 45266, \"code\": \"MODEL_TIMEOUT\"}",
+      "error": "MODEL_TIMEOUT",
+      "duration_ms": 45266,
+      "created_at": "2026-10-03 17:08:08.709107"
+    },
+    {
+      "event_id": "evt-f410a2cb0b36",
+      "trace_id": "trace-76fd7b0cbe42",
+      "request_id": "req-1791047738677-wzc659j",
+      "session_id": "sess-03408ca4f09c",
+      "task_id": null,
+      "owner_id": "owner-a84616799ac54620",
+      "phase": "model_call_failed",
+      "model_mode": "live",
+      "workflow_version": "v1",
+      "input_summary": null,
+      "output_summary": "{\"call_number\": 1, \"stage\": \"understanding\", \"repair\": false, \"read_result_count\": 0, \"remaining_budget_s\": 89.984, \"status\": \"failed\", \"duration_ms\": 45280, \"code\": \"MODEL_TIMEOUT\"}",
+      "error": "MODEL_TIMEOUT",
+      "duration_ms": 45280,
+      "created_at": "2026-10-03 17:16:23.990545"
+    }
+  ]
+}

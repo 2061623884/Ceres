@@ -1,0 +1,134 @@
+--- a/data/fixtures/demo-products.json
++++ b/data/fixtures/demo-products.json
+@@ -1070,6 +1070,80 @@
+         "炒菜",
+         "调味"
+       ]
++    },
++    {
++      "sku_id": "demo:snack-original-potato-chips-70g-bag",
++      "name": "Demo Original Potato Chips 70g Bag",
++      "name_zh": "原味薯片70克袋装",
++      "category_id": "snack",
++      "ingredient_ids": [
++        "potato"
++      ],
++      "brand": "演示品牌",
++      "image_path": null,
++      "image_status": "placeholder",
++      "source": "demo",
++      "review_status": "approved",
++      "spec_quantity": 70,
++      "spec_unit": "g",
++      "product_type": "potato_chips",
++      "usage_tags": [
++        "零食",
++        "薯片",
++        "原味",
++        "即食",
++        "袋装"
++      ],
++      "metadata": {
++        "catalog_batch": "snack-selection-v1",
++        "family_id": "potato_chips",
++        "item_quantity": 70,
++        "item_unit": "g",
++        "pack_count": 1,
++        "packaging": "bag",
++        "simulation": {
++          "price": true,
++          "inventory": true,
++          "product_combination": true
++        }
++      }
++    },
++    {
++      "sku_id": "demo:snack-soda-crackers-100g-box",
++      "name": "Demo Soda Crackers 100g Box",
++      "name_zh": "苏打饼干100克盒装",
++      "category_id": "snack",
++      "ingredient_ids": [
++        "flour"
++      ],
++      "brand": "演示品牌",
++      "image_path": null,
++      "image_status": "placeholder",
++      "source": "demo",
++      "review_status": "approved",
++      "spec_quantity": 100,
++      "spec_unit": "g",
++      "product_type": "soda_crackers",
++      "usage_tags": [
++        "零食",
++        "饼干",
++        "苏打饼干",
++        "即食",
++        "盒装"
++      ],
++      "metadata": {
++        "catalog_batch": "snack-selection-v1",
++        "family_id": "soda_crackers",
++        "item_quantity": 100,
++        "item_unit": "g",
++        "pack_count": 1,
++        "packaging": "box",
++        "simulation": {
++          "price": true,
++          "inventory": true,
++          "product_combination": true
++        }
++      }
+     }
+   ]
+ }
+--- a/data/fixtures/store-offers.json
++++ b/data/fixtures/store-offers.json
+@@ -221,6 +221,18 @@
+       "sku_id": "demo:cola-330ml",
+       "price_fen": 450,
+       "available_qty": 60
++    },
++    {
++      "sku_id": "demo:snack-original-potato-chips-70g-bag",
++      "price_fen": 590,
++      "available_qty": 30,
++      "is_demo": true
++    },
++    {
++      "sku_id": "demo:snack-soda-crackers-100g-box",
++      "price_fen": 690,
++      "available_qty": 20,
++      "is_demo": true
+     }
+   ]
+ }
+--- a/backend/app/services/catalog_service.py
++++ b/backend/app/services/catalog_service.py
+@@ -80,6 +80,7 @@
+             "baking": ("烘焙原料", "Baking"),
+             "staple": ("粮油米面", "Staples"),
+             "dairy": ("乳品", "Dairy"),
++            "snack": ("零食", "Snacks"),
+             "beverage": ("饮料", "Beverages"),
+         }
+         result = []
+--- a/backend/app/prompts/semantic.py
++++ b/backend/app/prompts/semantic.py
+@@ -42,7 +42,7 @@
+ - edit：对 focus 那一项做什么。remove 删掉那一组；set_quantity 改成几件；
+   adjust_quantity 加减几件（减用负数）。不能删单个配料。
+ - plan_act：只有明说「加入购物车 / 下单」= confirm，「不买了 / 都不要了」= abandon。
+-  「好的」「可以呀」「嗯」不是 confirm，结合上下文接话即可。
++  「好的」「可以呀」「嗯」不是 confirm，结合上下文接话即可。 对这种普通回应，必须填写非空 reply；有待确认清单时回复「好的，清单先保留，等你明确确认后再加购」，不宣称清单已确认或商品已加购。
+ - lookups：需要真实候选时查菜名或商品名；query 只写名称，不带「不要」之类的否定词。
+ - reads：recommend 查用户想找的主题（没主题就是开放式推荐）；recipe 查做法；cart / catalog 查购物车和目录。
+ - questions：只有真正卡住这一轮的歧义才问，每轮只问一个；options 只能是服务端给过的 ref。
+@@ -105,7 +105,7 @@
+      {"questions": [{"slot": "goal", "question": "您是指哪一份清单或哪道菜不要了？"}]}),
+     ({"user_message": "算了，都不买了", "current_plan": _PLAN}, {"plan_act": "abandon"}),
+     ({"user_message": "好的", "current_plan": _PLAN},
+-     {"reply": "好的，清单先这样。还想加点什么吗？"}),
++     {"reply": "好的，清单先保留，等你明确确认后再加购。"}),
+     ({"user_message": "就这些，加入购物车吧", "current_plan": _PLAN}, {"plan_act": "confirm"}),
+ ]
+ 

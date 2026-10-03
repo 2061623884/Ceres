@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="21" time="33.789" timestamp="2026-10-04T00:59:45.419777+08:00" hostname="Diablo‘s_dark"><testcase classname="tests.test_snack_selection" name="test_snack_selection_requires_confirmation_and_preserves_cart_on_no_match[0-\u5c31\u7b2c\u4e00\u4e2a]" time="2.889"><failure message="AssertionError: SSE error AssertionError: assert [{'ref': 'pfd... '原味薯片70克袋装'}] == []&#10;  &#10;  Left contains one more item: {'ref': 'pfdf9e5ee3ecebb0a', 'name': '原味薯片70克袋装'}&#10;  Use -v to get more diff">client = &lt;starlette.testclient.TestClient object at 0x000001D7974D9D90&gt;
+semantic_provider = &lt;function semantic_provider.&lt;locals&gt;._install at 0x000001D797A22E80&gt;
+tmp_path = WindowsPath('C:/Users/20616/Desktop/Agent/Agent产品/Ceres/pytest-of-20616/pytest-18/test_snack_selection_requires_0')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x000001D7952689E0&gt;
+index = 0, message = '就第一个'
+
+    @pytest.mark.parametrize("index,message", [(0, "就第一个"), (1, "就第二个")])
+    def test_snack_selection_requires_confirmation_and_preserves_cart_on_no_match(
+        client, semantic_provider, tmp_path, monkeypatch, index, message
+    ):
+        settings = get_settings()
+        index_root = tmp_path / "retrieval-index"
+        subprocess.run(
+            [sys.executable, str(ROOT / "scripts/build_retrieval_index.py"),
+             "--index-root", str(index_root), "build", "--candidate-db",
+             str(settings.runtime_db_path), "--no-embed"],
+            check=True, capture_output=True, text=True,
+        )
+        monkeypatch.setattr(settings, "retrieval_index_dir", str(index_root))
+        shown = []
+    
+        def display(request):
+            rows = request["candidates"]["products"]
+            assert {row["target_id"] for row in request["query_results"][0]["matches"]} == {CHIPS, CRACKERS}
+            # Display order differs from lookup order, so an ordinal must use refs.
+            shown.extend(reversed(rows))
+            return {"reply": "可选这两款零食。", "display_refs": [row["ref"] for row in shown]}
+    
+        def select(request):
+            displayed = request["displayed_candidates"]
+            assert [row["ref"] for row in displayed] == [row["ref"] for row in shown]
+            return pick("product", displayed[index], quantity=1)
+    
+        def no_match(request):
+            assert request["candidates"]["products"] == []
+            assert request["query_results"][0]["status"] == "completed"
+            assert request["query_results"][0]["empty"] is True
+            return {"reply": "没有找到匹配的冰淇淋商品。", "display_refs": []}
+    
+        provider = semantic_provider([
+            {"target": {"kind": "category", "name": "零食", "intent": "explore"},
+             "lookups": [{"kind": "product", "query": "零食"}]},
+            display, select, {"plan_act": "ack", "reply": "清单已准备好，等待确认。"},
+            {"target": {"kind": "category", "name": "冰淇淋", "intent": "explore"},
+             "lookups": [{"kind": "product", "query": "冰淇淋"}]},
+            no_match,
+            {"target": {"kind": "category", "name": "冰淇淋", "intent": "explore"},
+             "lookups": [{"kind": "product", "query": "冰淇淋"}]},
+            no_match,
+        ])
+        sid = create_session(client)
+        baseline = client.get("/api/v1/cart").json()
+        first = send_turn(client, sid, "来点零食")
+        assert first["plan"] is None and first["plan_effect"] == "keep"
+        assert client.get("/api/v1/cart").json() == baseline
+        second = send_turn(client, sid, message, first)
+        plan = second["plan"]
+        assert len(plan["items"]) == 1 and plan["can_confirm"]
+        item = plan["items"][0]
+        assert item["name"] == shown[index]["name"]
+        assert item["quantity"] == 1
+        assert item["unit_price_fen"] == {CHIPS: 590, CRACKERS: 690}[item["sku_id"]]
+        assert client.get("/api/v1/cart").json() == baseline
+        ack = send_turn(client, sid, "好的", second)
+        assert ack["plan_effect"] == "keep"
+        assert client.get("/api/v1/cart").json() == baseline
+        pending_plan = client.get(f"/api/v1/guide/sessions/{sid}").json()["plan"]
+&gt;       empty_pending = send_turn(client, sid, "来点冰淇淋", ack)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend\tests\test_snack_selection.py:80: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+client = &lt;starlette.testclient.TestClient object at 0x000001D7974D9D90&gt;
+session_id = 'sess-36de694ac46a', message = '来点冰淇淋'
+previous = {'session_id': 'sess-36de694ac46a', 'task_id': 'task-551f2375f81f', 'state_version': 2, 'status': 'awaiting_confirmation', ...}
+request_id = None, headers = None, extra = {}
+
+    def send_turn(
+        client,
+        session_id: str,
+        message: str,
+        previous: dict[str, Any] | None = None,
+        *,
+        request_id: str | None = None,
+        headers: dict[str, str] | None = None,
+        **extra: Any,
+    ) -&gt; dict[str, Any]:
+        """One SSE turn; returns turn.completed payload or raises on error/stop."""
+        response = post_turn(
+            client,
+            session_id,
+            message,
+            previous,
+            request_id=request_id,
+            headers=headers,
+            **extra,
+        )
+        if response.status_code &gt;= 400:
+            err = response.json()["error"]
+&gt;           raise AssertionError(
+                f"SSE error {err.get('code')}: {err.get('message')}"
+            )
+E           AssertionError: SSE error AssertionError: assert [{'ref': 'pfd... '原味薯片70克袋装'}] == []
+E             
+E             Left contains one more item: {'ref': 'pfdf9e5ee3ecebb0a', 'name': '原味薯片70克袋装'}
+E             Use -v to get more diff
+
+backend\tests\support\__init__.py:160: AssertionError</failure></testcase><testcase classname="tests.test_snack_selection" name="test_snack_selection_requires_confirmation_and_preserves_cart_on_no_match[1-\u5c31\u7b2c\u4e8c\u4e2a]" time="1.447"><failure message="AssertionError: SSE error AssertionError: assert [{'ref': 'p55...'苏打饼干100克盒装'}] == []&#10;  &#10;  Left contains one more item: {'ref': 'p55434eb702c5cb7d', 'name': '苏打饼干100克盒装'}&#10;  Use -v to get more diff">client = &lt;starlette.testclient.TestClient object at 0x000001D7978321B0&gt;
+semantic_provider = &lt;function semantic_provider.&lt;locals&gt;._install at 0x000001D797F14AE0&gt;
+tmp_path = WindowsPath('C:/Users/20616/Desktop/Agent/Agent产品/Ceres/pytest-of-20616/pytest-18/test_snack_selection_requires_1')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x000001D797969100&gt;
+index = 1, message = '就第二个'
+
+    @pytest.mark.parametrize("index,message", [(0, "就第一个"), (1, "就第二个")])
+    def test_snack_selection_requires_confirmation_and_preserves_cart_on_no_match(
+        client, semantic_provider, tmp_path, monkeypatch, index, message
+    ):
+        settings = get_settings()
+        index_root = tmp_path / "retrieval-index"
+        subprocess.run(
+            [sys.executable, str(ROOT / "scripts/build_retrieval_index.py"),
+             "--index-root", str(index_root), "build", "--candidate-db",
+             str(settings.runtime_db_path), "--no-embed"],
+            check=True, capture_output=True, text=True,
+        )
+        monkeypatch.setattr(settings, "retrieval_index_dir", str(index_root))
+        shown = []
+    
+        def display(request):
+            rows = request["candidates"]["products"]
+            assert {row["target_id"] for row in request["query_results"][0]["matches"]} == {CHIPS, CRACKERS}
+            # Display order differs from lookup order, so an ordinal must use refs.
+            shown.extend(reversed(rows))
+            return {"reply": "可选这两款零食。", "display_refs": [row["ref"] for row in shown]}
+    
+        def select(request):
+            displayed = request["displayed_candidates"]
+            assert [row["ref"] for row in displayed] == [row["ref"] for row in shown]
+            return pick("product", displayed[index], quantity=1)
+    
+        def no_match(request):
+            assert request["candidates"]["products"] == []
+            assert request["query_results"][0]["status"] == "completed"
+            assert request["query_results"][0]["empty"] is True
+            return {"reply": "没有找到匹配的冰淇淋商品。", "display_refs": []}
+    
+        provider = semantic_provider([
+            {"target": {"kind": "category", "name": "零食", "intent": "explore"},
+             "lookups": [{"kind": "product", "query": "零食"}]},
+            display, select, {"plan_act": "ack", "reply": "清单已准备好，等待确认。"},
+            {"target": {"kind": "category", "name": "冰淇淋", "intent": "explore"},
+             "lookups": [{"kind": "product", "query": "冰淇淋"}]},
+            no_match,
+            {"target": {"kind": "category", "name": "冰淇淋", "intent": "explore"},
+             "lookups": [{"kind": "product", "query": "冰淇淋"}]},
+            no_match,
+        ])
+        sid = create_session(client)
+        baseline = client.get("/api/v1/cart").json()
+        first = send_turn(client, sid, "来点零食")
+        assert first["plan"] is None and first["plan_effect"] == "keep"
+        assert client.get("/api/v1/cart").json() == baseline
+        second = send_turn(client, sid, message, first)
+        plan = second["plan"]
+        assert len(plan["items"]) == 1 and plan["can_confirm"]
+        item = plan["items"][0]
+        assert item["name"] == shown[index]["name"]
+        assert item["quantity"] == 1
+        assert item["unit_price_fen"] == {CHIPS: 590, CRACKERS: 690}[item["sku_id"]]
+        assert client.get("/api/v1/cart").json() == baseline
+        ack = send_turn(client, sid, "好的", second)
+        assert ack["plan_effect"] == "keep"
+        assert client.get("/api/v1/cart").json() == baseline
+        pending_plan = client.get(f"/api/v1/guide/sessions/{sid}").json()["plan"]
+&gt;       empty_pending = send_turn(client, sid, "来点冰淇淋", ack)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+backend\tests\test_snack_selection.py:80: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+client = &lt;starlette.testclient.TestClient object at 0x000001D7978321B0&gt;
+session_id = 'sess-3d626a6f763b', message = '来点冰淇淋'
+previous = {'session_id': 'sess-3d626a6f763b', 'task_id': 'task-b8969aaf268c', 'state_version': 2, 'status': 'awaiting_confirmation', ...}
+request_id = None, headers = None, extra = {}
+
+    def send_turn(
+        client,
+        session_id: str,
+        message: str,
+        previous: dict[str, Any] | None = None,
+        *,
+        request_id: str | None = None,
+        headers: dict[str, str] | None = None,
+        **extra: Any,
+    ) -&gt; dict[str, Any]:
+        """One SSE turn; returns turn.completed payload or raises on error/stop."""
+        response = post_turn(
+            client,
+            session_id,
+            message,
+            previous,
+            request_id=request_id,
+            headers=headers,
+            **extra,
+        )
+        if response.status_code &gt;= 400:
+            err = response.json()["error"]
+&gt;           raise AssertionError(
+                f"SSE error {err.get('code')}: {err.get('message')}"
+            )
+E           AssertionError: SSE error AssertionError: assert [{'ref': 'p55...'苏打饼干100克盒装'}] == []
+E             
+E             Left contains one more item: {'ref': 'p55434eb702c5cb7d', 'name': '苏打饼干100克盒装'}
+E             Use -v to get more diff
+
+backend\tests\support\__init__.py:160: AssertionError</failure></testcase><testcase classname="tests.test_phase2b_chat_confirmation" name="test_ack_is_read_only_then_chat_confirm_buys_only_current_outstanding_rows_and_replays" time="1.742" /><testcase classname="tests.test_phase2b_chat_confirmation" name="test_matching_runtime_selection_is_not_given_to_model_or_saved_as_context" time="1.515" /><testcase classname="tests.test_phase2b_chat_confirmation" name="test_explicit_nonmatching_selection_is_rejected_without_partial_cart_write[selected0]" time="1.683" /><testcase classname="tests.test_phase2b_chat_confirmation" name="test_explicit_nonmatching_selection_is_rejected_without_partial_cart_write[subset]" time="1.469" /><testcase classname="tests.test_phase2b_chat_confirmation" name="test_stale_runtime_selection_is_refused_without_using_the_current_plan[plan_id]" time="1.520" /><testcase classname="tests.test_phase2b_chat_confirmation" name="test_stale_runtime_selection_is_refused_without_using_the_current_plan[plan_version]" time="1.492" /><testcase classname="tests.test_phase2b_chat_confirmation" name="test_questions_block_a_chat_confirmation" time="1.632" /><testcase classname="tests.test_phase2b_chat_confirmation" name="test_edit_and_confirm_turn_only_revises_the_plan" time="1.458" /><testcase classname="tests.test_phase2b_chat_confirmation" name="test_buying_a_displayed_ref_and_confirm_in_one_turn_only_builds_the_plan" time="1.549" /><testcase classname="tests.test_phase2b_chat_confirmation" name="test_confirm_without_a_plan_answers_honestly_and_does_not_create_a_task" time="0.842" /><testcase classname="tests.test_phase2b_chat_confirmation" name="test_a_nonconfirmable_active_plan_is_not_sent_to_the_confirmation_core" time="1.548" /><testcase classname="tests.test_phase2b_chat_confirmation" name="test_button_confirmation_then_chat_confirmation_does_not_add_twice" time="1.501" /><testcase classname="tests.test_phase2b_chat_confirmation" name="test_stale_client_task_version_is_rejected_before_chat_confirmation" time="1.538" /><testcase classname="tests.test_phase2b_chat_confirmation" name="test_a_plan_revision_while_confirmation_model_runs_is_not_overwritten" time="1.549" /><testcase classname="tests.test_phase2b_chat_confirmation" name="test_chat_confirmation_keeps_existing_supply_and_budget_guards[price-PRICE_CHANGED]" time="1.477" /><testcase classname="tests.test_phase2b_chat_confirmation" name="test_chat_confirmation_keeps_existing_supply_and_budget_guards[stock-PRODUCT_UNAVAILABLE]" time="1.721" /><testcase classname="tests.test_phase2b_chat_confirmation" name="test_chat_confirmation_keeps_existing_supply_and_budget_guards[expired-PLAN_EXPIRED]" time="1.552" /><testcase classname="tests.test_phase2b_chat_confirmation" name="test_chat_confirmation_keeps_existing_supply_and_budget_guards[budget-CONSTRAINT_UNSATISFIED]" time="1.489" /><testcase classname="tests.test_phase2b_chat_confirmation" name="test_chat_confirmation_keeps_existing_supply_and_budget_guards[delivery-CONSTRAINT_UNSATISFIED]" time="1.584" /></testsuite></testsuites>

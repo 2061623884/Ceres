@@ -1,0 +1,244 @@
+--- before/backend/app/services/catalog_service.py
++++ after/backend/app/services/catalog_service.py
+@@ -81,6 +81,7 @@
+             "staple": ("粮油米面", "Staples"),
+             "dairy": ("乳品", "Dairy"),
+             "beverage": ("饮料", "Beverages"),
++            "snack": ("零食", "Snacks"),
+         }
+         result = []
+         for cat_id, count in sorted(counts.items()):
+--- before/backend/app/prompts/semantic.py
++++ after/backend/app/prompts/semantic.py
+@@ -51,7 +51,7 @@
+ - edit：对 focus 那一项做什么。remove 删掉那一组；set_quantity 改成几件；
+   adjust_quantity 加减几件（减用负数）。不能删单个配料。
+ - plan_act：只有明说「加入购物车 / 下单」= confirm，「不买了 / 都不要了」= abandon。
+-  用户只说「好的」「可以呀」「嗯」「行」时，plan_act 必须为 none 或省略，不能填 confirm 或 abandon。即使上一轮在推荐菜、问要不要准备或加入购物车，也不能把助手的话当成用户本轮明说的加购或放弃。
++  用户只说「好的」「可以呀」「嗯」「行」时，plan_act 必须为 none 或省略，不能填 confirm 或 abandon。即使上一轮在推荐菜、问要不要准备或加入购物车，也不能把助手的话当成用户本轮明说的加购或放弃。 对这种普通回应，必须填写非空 reply；有待确认清单时回复「好的，清单先保留，等你明确确认后再加购」，不宣称清单已确认或商品已加购。
+   有唯一的待答候选时可以填 target.ref 表示选择、准备清单；选择候选和确认加购是两件事。
+ - lookups：需要真实候选时查菜名或商品名；query 保留用户点名商品的完整名称及规格，不带「不要」之类的否定词。只读查某个商品也用 product lookup，target.intent=explore；小包装条件单独填写 constraints.specification，不放进 query 或 reads.topic。
+   用户说「只读查一下」表示这轮不购买，不表示必须填写 reads。只读查询面粉等具体商品时仍填 product lookup、target.intent=explore；用户明确的小包装等条件仍必须填写 constraints。
+@@ -124,7 +124,7 @@
+      {"questions": [{"slot": "goal", "question": "您是指哪一份清单或哪道菜不要了？"}]}),
+     ({"user_message": "算了，都不买了", "current_plan": _PLAN}, {"plan_act": "abandon"}),
+     ({"user_message": "好的", "current_plan": _PLAN},
+-     {"reply": "好的，清单先这样。还想加点什么吗？"}),
++     {"reply": "好的，清单先保留，等你明确确认后再加购。"}),
+     ({"user_message": "可以呀", "current_plan": None,
+       "displayed_candidates": [{"position": 1, "ref": "example_tomato_choice", "kind": "dish", "name": "番茄炒蛋"}],
+       "recent_messages": [{"role": "assistant", "content": "推荐番茄炒蛋，要帮你准备吗？"}]},
+--- before/data/fixtures/demo-products.json
++++ after/data/fixtures/demo-products.json
+@@ -1465,6 +1465,80 @@
+           "product_combination": true
+         }
+       }
++    },
++    {
++      "sku_id": "demo:snack-original-potato-chips-70g-bag",
++      "name": "Demo Original Potato Chips 70g Bag",
++      "name_zh": "原味薯片70克袋装",
++      "category_id": "snack",
++      "ingredient_ids": [
++        "potato"
++      ],
++      "brand": "演示品牌",
++      "image_path": null,
++      "image_status": "placeholder",
++      "source": "demo",
++      "review_status": "approved",
++      "spec_quantity": 70,
++      "spec_unit": "g",
++      "product_type": "potato_chips",
++      "usage_tags": [
++        "零食",
++        "薯片",
++        "原味",
++        "即食",
++        "袋装"
++      ],
++      "metadata": {
++        "catalog_batch": "snack-selection-v1",
++        "family_id": "potato_chips",
++        "item_quantity": 70,
++        "item_unit": "g",
++        "pack_count": 1,
++        "packaging": "bag",
++        "simulation": {
++          "price": true,
++          "inventory": true,
++          "product_combination": true
++        }
++      }
++    },
++    {
++      "sku_id": "demo:snack-soda-crackers-100g-box",
++      "name": "Demo Soda Crackers 100g Box",
++      "name_zh": "苏打饼干100克盒装",
++      "category_id": "snack",
++      "ingredient_ids": [
++        "flour"
++      ],
++      "brand": "演示品牌",
++      "image_path": null,
++      "image_status": "placeholder",
++      "source": "demo",
++      "review_status": "approved",
++      "spec_quantity": 100,
++      "spec_unit": "g",
++      "product_type": "soda_crackers",
++      "usage_tags": [
++        "零食",
++        "饼干",
++        "苏打饼干",
++        "即食",
++        "盒装"
++      ],
++      "metadata": {
++        "catalog_batch": "snack-selection-v1",
++        "family_id": "soda_crackers",
++        "item_quantity": 100,
++        "item_unit": "g",
++        "pack_count": 1,
++        "packaging": "box",
++        "simulation": {
++          "price": true,
++          "inventory": true,
++          "product_combination": true
++        }
++      }
+     }
+   ]
+ }
+--- before/data/fixtures/store-offers.json
++++ after/data/fixtures/store-offers.json
+@@ -287,6 +287,18 @@
+       "price_fen": 2160,
+       "available_qty": 20,
+       "is_demo": true
++    },
++    {
++      "sku_id": "demo:snack-original-potato-chips-70g-bag",
++      "price_fen": 590,
++      "available_qty": 30,
++      "is_demo": true
++    },
++    {
++      "sku_id": "demo:snack-soda-crackers-100g-box",
++      "price_fen": 690,
++      "available_qty": 20,
++      "is_demo": true
+     }
+   ]
+ }
+--- /dev/null
++++ after/backend/tests/test_snack_selection.py
+@@ -0,0 +1,107 @@
++"""Snack category reads, displayed selection and explicit cart confirmation."""
++
++import subprocess
++import sys
++import uuid
++from pathlib import Path
++
++import pytest
++
++from app.core.config import get_settings
++from support import create_session, send_turn
++from support.semantic_agent import pick
++
++ROOT = Path(__file__).resolve().parents[2]
++CHIPS = "demo:snack-original-potato-chips-70g-bag"
++CRACKERS = "demo:snack-soda-crackers-100g-box"
++
++
++@pytest.mark.parametrize("index,message", [(0, "就第一个"), (1, "就第二个")])
++def test_snack_selection_requires_confirmation_and_preserves_cart_on_no_match(
++    client, semantic_provider, tmp_path, monkeypatch, index, message
++):
++    settings = get_settings()
++    index_root = tmp_path / "retrieval-index"
++    subprocess.run(
++        [sys.executable, str(ROOT / "scripts/build_retrieval_index.py"),
++         "--index-root", str(index_root), "build", "--candidate-db",
++         str(settings.runtime_db_path), "--no-embed"],
++        check=True, capture_output=True, text=True,
++    )
++    monkeypatch.setattr(settings, "retrieval_index_dir", str(index_root))
++    shown = []
++
++    def display(request):
++        rows = request["candidates"]["products"]
++        assert {row["target_id"] for row in request["query_results"][0]["matches"]} == {CHIPS, CRACKERS}
++        # Display order differs from lookup order, so an ordinal must use refs.
++        shown.extend(reversed(rows))
++        return {"reply": "可选这两款零食。", "display_refs": [row["ref"] for row in shown]}
++
++    def select(request):
++        displayed = request["displayed_candidates"]
++        assert [row["ref"] for row in displayed] == [row["ref"] for row in shown]
++        return pick("product", displayed[index], quantity=1)
++
++    def no_match(request):
++        assert request["query_results"][0]["matches"] == []
++        assert request["query_results"][0]["status"] == "completed"
++        assert request["query_results"][0]["empty"] is True
++        return {"reply": "没有找到匹配的冰淇淋商品。", "display_refs": []}
++
++    provider = semantic_provider([
++        {"target": {"kind": "category", "name": "零食", "intent": "explore"},
++         "lookups": [{"kind": "product", "query": "零食"}]},
++        display, select, {"plan_act": "none", "reply": "清单已准备好，等待确认。"},
++        {"target": {"kind": "category", "name": "冰淇淋", "intent": "explore"},
++         "lookups": [{"kind": "product", "query": "冰淇淋"}]},
++        no_match,
++        {"target": {"kind": "category", "name": "冰淇淋", "intent": "explore"},
++         "lookups": [{"kind": "product", "query": "冰淇淋"}]},
++        no_match,
++    ])
++    sid = create_session(client)
++    baseline = client.get("/api/v1/cart").json()
++    first = send_turn(client, sid, "来点零食")
++    assert first["plan"] is None and first["plan_effect"] == "keep"
++    assert client.get("/api/v1/cart").json() == baseline
++    second = send_turn(client, sid, message, first)
++    plan = second["plan"]
++    assert len(plan["items"]) == 1 and plan["can_confirm"]
++    item = plan["items"][0]
++    assert item["name"] == shown[index]["name"]
++    assert item["quantity"] == 1
++    assert item["unit_price_fen"] == {CHIPS: 590, CRACKERS: 690}[item["sku_id"]]
++    assert client.get("/api/v1/cart").json() == baseline
++    ack = send_turn(client, sid, "好的", second)
++    assert ack["plan_effect"] == "keep"
++    assert all(row["status"] != "failed" for row in ack["action_results"])
++    assert "已确认" not in ack["message"] and "已加购" not in ack["message"]
++    assert client.get("/api/v1/cart").json() == baseline
++    pending_plan = client.get(f"/api/v1/guide/sessions/{sid}").json()["plan"]
++    empty_pending = send_turn(client, sid, "来点冰淇淋", ack)
++    assert empty_pending["plan_effect"] == "keep"
++    assert client.get(f"/api/v1/guide/sessions/{sid}").json()["plan"] == pending_plan
++    assert client.get("/api/v1/cart").json() == baseline
++
++    confirmed = client.post(
++        f"/api/v1/guide/tasks/{ack['task_id']}/confirm",
++        headers={"Idempotency-Key": str(uuid.uuid4())},
++        json={"plan_id": plan["plan_id"], "plan_version": plan["plan_version"],
++              "expected_state_version": empty_pending["state_version"],
++              "expected_session_version": empty_pending["session_version"],
++              "selected_items": [{"sku_id": item["sku_id"], "quantity": 1}]},
++    )
++    assert confirmed.status_code == 200, confirmed.text
++    cart = client.get("/api/v1/cart").json()
++    assert [(row["sku_id"], row["quantity"], row["unit_price_fen"])
++            for row in cart["items"]] == [(item["sku_id"], 1, item["unit_price_fen"])]
++
++    completed = client.get(f"/api/v1/guide/sessions/{sid}").json()
++    before_plan = completed["plan"]
++    empty = send_turn(client, sid, "来点冰淇淋", completed)
++    assert empty["plan_effect"] == "keep"
++    assert "薯片" not in empty["message"] and "饼干" not in empty["message"]
++    assert client.get(f"/api/v1/guide/sessions/{sid}").json()["plan"] == before_plan
++    assert client.get("/api/v1/cart").json() == cart
++    assert provider.remaining() == 0

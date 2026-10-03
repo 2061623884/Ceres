@@ -1,0 +1,409 @@
+{
+  "checked_at_utc": "2026-10-03T17:03:18.087078+00:00",
+  "purpose": "Read-only data verification after adding two snack SKUs and publishing a lexical-only index.",
+  "scope": {
+    "runtime_tables_compared": [
+      "catalog_products",
+      "offers",
+      "catalog_reviews",
+      "purchase_templates",
+      "stores"
+    ],
+    "fixtures_compared": [
+      "data/fixtures/demo-products.json",
+      "data/fixtures/store-offers.json"
+    ],
+    "index_root": "data/retrieval_index-langgraph",
+    "dynamic_tables_excluded": [
+      "carts",
+      "cart_items",
+      "cart_operations",
+      "guide_sessions",
+      "guide_tasks",
+      "guide_messages",
+      "orders"
+    ]
+  },
+  "passed": true,
+  "checks": [
+    {
+      "name": "fixture_products_append_only",
+      "passed": true,
+      "detail": {
+        "before_count": 62,
+        "current_count": 64,
+        "old_prefix_identical": true,
+        "added_ids": [
+          "demo:snack-original-potato-chips-70g-bag",
+          "demo:snack-soda-crackers-100g-box"
+        ],
+        "duplicate_ids": 0
+      }
+    },
+    {
+      "name": "fixture_offers_append_only",
+      "passed": true,
+      "detail": {
+        "before_count": 53,
+        "current_count": 55,
+        "old_prefix_identical": true,
+        "header_unchanged": true,
+        "added_ids": [
+          "demo:snack-original-potato-chips-70g-bag",
+          "demo:snack-soda-crackers-100g-box"
+        ],
+        "duplicate_ids": 0
+      }
+    },
+    {
+      "name": "runtime_table_catalog_products",
+      "passed": true,
+      "detail": {
+        "before_rows": 319,
+        "current_rows": 321,
+        "unchanged_old_rows": 319,
+        "changed_old_rows": 0,
+        "removed_old_rows": 0,
+        "added_rows": 2,
+        "added_identities": [
+          "demo:snack-original-potato-chips-70g-bag",
+          "demo:snack-soda-crackers-100g-box"
+        ],
+        "changed_or_missing_sample": []
+      }
+    },
+    {
+      "name": "runtime_table_offers",
+      "passed": true,
+      "detail": {
+        "before_rows": 319,
+        "current_rows": 321,
+        "unchanged_old_rows": 319,
+        "changed_old_rows": 0,
+        "removed_old_rows": 0,
+        "added_rows": 2,
+        "added_identities": [
+          "demo:snack-original-potato-chips-70g-bag",
+          "demo:snack-soda-crackers-100g-box"
+        ],
+        "changed_or_missing_sample": []
+      }
+    },
+    {
+      "name": "runtime_table_catalog_reviews",
+      "passed": true,
+      "detail": {
+        "before_rows": 2,
+        "current_rows": 2,
+        "unchanged_old_rows": 2,
+        "changed_old_rows": 0,
+        "removed_old_rows": 0,
+        "added_rows": 0,
+        "added_identities": [],
+        "changed_or_missing_sample": []
+      }
+    },
+    {
+      "name": "runtime_table_purchase_templates",
+      "passed": true,
+      "detail": {
+        "before_rows": 111,
+        "current_rows": 111,
+        "unchanged_old_rows": 111,
+        "changed_old_rows": 0,
+        "removed_old_rows": 0,
+        "added_rows": 0,
+        "added_identities": [],
+        "changed_or_missing_sample": []
+      }
+    },
+    {
+      "name": "runtime_table_stores",
+      "passed": true,
+      "detail": {
+        "before_rows": 1,
+        "current_rows": 1,
+        "unchanged_old_rows": 1,
+        "changed_old_rows": 0,
+        "removed_old_rows": 0,
+        "added_rows": 0,
+        "added_identities": [],
+        "changed_or_missing_sample": []
+      }
+    },
+    {
+      "name": "new_catalog_rows_match_fixture_normalization",
+      "passed": true,
+      "detail": {
+        "snack_count": 2,
+        "fixture_ids": [
+          "demo:snack-original-potato-chips-70g-bag",
+          "demo:snack-soda-crackers-100g-box"
+        ],
+        "matched_fields": [
+          "source_barcode",
+          "name",
+          "name_zh",
+          "category_id",
+          "ingredient_ids",
+          "brand",
+          "image_path",
+          "source",
+          "review_status",
+          "spec_quantity",
+          "spec_unit",
+          "usage_tags",
+          "product_type",
+          "metadata_json"
+        ]
+      }
+    },
+    {
+      "name": "new_offers_match_fixture_and_sellable",
+      "passed": true,
+      "detail": [
+        {
+          "sku_id": "demo:snack-original-potato-chips-70g-bag",
+          "store_id": "store-demo-01",
+          "matching_rows": 1,
+          "db_offer_id": 320,
+          "price_fen": 590,
+          "available_qty": 30,
+          "sellable": true,
+          "offer_version": 1,
+          "is_demo": true,
+          "matches_fixture": true
+        },
+        {
+          "sku_id": "demo:snack-soda-crackers-100g-box",
+          "store_id": "store-demo-01",
+          "matching_rows": 1,
+          "db_offer_id": 321,
+          "price_fen": 690,
+          "available_qty": 20,
+          "sellable": true,
+          "offer_version": 1,
+          "is_demo": true,
+          "matches_fixture": true
+        }
+      ]
+    },
+    {
+      "name": "import_receipts_first_and_repeat",
+      "passed": true,
+      "detail": {
+        "first": {
+          "batch_size": 2,
+          "catalog_added": 2,
+          "offers_added": 2
+        },
+        "repeat": {
+          "batch_size": 2,
+          "catalog_added": 0,
+          "offers_added": 0
+        }
+      }
+    },
+    {
+      "name": "published_index_matches_current_db_projection",
+      "passed": true,
+      "detail": {
+        "version": "idx-03d6c43d4eb25aff",
+        "projection_snapshot_hash_matches": true,
+        "manifest_doc_hashes_match_projection": true,
+        "index_doc_hashes_match_projection": true,
+        "fts_token_stream_mismatches": 0,
+        "missing_fts_docs": 0,
+        "extra_fts_docs": 0,
+        "mismatch_samples": [],
+        "manifest_counts": {
+          "dishes": 105,
+          "docs": 426,
+          "skus": 321
+        },
+        "projection_counts": {
+          "dishes": 105,
+          "skus": 321,
+          "docs": 426
+        }
+      }
+    },
+    {
+      "name": "published_index_lexical_only_structure",
+      "passed": true,
+      "detail": {
+        "docs": 426,
+        "fts": 426,
+        "vectors": 0,
+        "embedding": null
+      }
+    },
+    {
+      "name": "lexical_fts_contains_both_snacks_for_term",
+      "passed": true,
+      "detail": {
+        "term": "零食",
+        "matching_snack_doc_ids": [
+          "sku:demo:snack-original-potato-chips-70g-bag",
+          "sku:demo:snack-soda-crackers-100g-box"
+        ],
+        "all_term_hit_count": 2
+      }
+    },
+    {
+      "name": "runtime_table_delivery_quotes",
+      "passed": true,
+      "detail": {
+        "before_rows": 1,
+        "current_rows": 1,
+        "unchanged_old_rows": 1
+      }
+    }
+  ],
+  "runtime_supply": {
+    "table_results": {
+      "catalog_products": {
+        "before_rows": 319,
+        "current_rows": 321,
+        "unchanged_old_rows": 319,
+        "changed_old_rows": 0,
+        "removed_old_rows": 0,
+        "added_rows": 2,
+        "added_identities": [
+          "demo:snack-original-potato-chips-70g-bag",
+          "demo:snack-soda-crackers-100g-box"
+        ],
+        "changed_or_missing_sample": []
+      },
+      "offers": {
+        "before_rows": 319,
+        "current_rows": 321,
+        "unchanged_old_rows": 319,
+        "changed_old_rows": 0,
+        "removed_old_rows": 0,
+        "added_rows": 2,
+        "added_identities": [
+          "demo:snack-original-potato-chips-70g-bag",
+          "demo:snack-soda-crackers-100g-box"
+        ],
+        "changed_or_missing_sample": []
+      },
+      "catalog_reviews": {
+        "before_rows": 2,
+        "current_rows": 2,
+        "unchanged_old_rows": 2,
+        "changed_old_rows": 0,
+        "removed_old_rows": 0,
+        "added_rows": 0,
+        "added_identities": [],
+        "changed_or_missing_sample": []
+      },
+      "purchase_templates": {
+        "before_rows": 111,
+        "current_rows": 111,
+        "unchanged_old_rows": 111,
+        "changed_old_rows": 0,
+        "removed_old_rows": 0,
+        "added_rows": 0,
+        "added_identities": [],
+        "changed_or_missing_sample": []
+      },
+      "stores": {
+        "before_rows": 1,
+        "current_rows": 1,
+        "unchanged_old_rows": 1,
+        "changed_old_rows": 0,
+        "removed_old_rows": 0,
+        "added_rows": 0,
+        "added_identities": [],
+        "changed_or_missing_sample": []
+      }
+    },
+    "new_products": [
+      {
+        "sku_id": "demo:snack-original-potato-chips-70g-bag",
+        "name_zh": "原味薯片70克袋装",
+        "category_id": "snack",
+        "product_type": "potato_chips"
+      },
+      {
+        "sku_id": "demo:snack-soda-crackers-100g-box",
+        "name_zh": "苏打饼干100克盒装",
+        "category_id": "snack",
+        "product_type": "soda_crackers"
+      }
+    ],
+    "new_offers": [
+      {
+        "sku_id": "demo:snack-original-potato-chips-70g-bag",
+        "store_id": "store-demo-01",
+        "matching_rows": 1,
+        "db_offer_id": 320,
+        "price_fen": 590,
+        "available_qty": 30,
+        "sellable": true,
+        "offer_version": 1,
+        "is_demo": true,
+        "matches_fixture": true
+      },
+      {
+        "sku_id": "demo:snack-soda-crackers-100g-box",
+        "store_id": "store-demo-01",
+        "matching_rows": 1,
+        "db_offer_id": 321,
+        "price_fen": 690,
+        "available_qty": 20,
+        "sellable": true,
+        "offer_version": 1,
+        "is_demo": true,
+        "matches_fixture": true
+      }
+    ]
+  },
+  "fixtures": {
+    "products_before": 62,
+    "products_current": 64,
+    "offers_before": 53,
+    "offers_current": 55,
+    "added_ids": [
+      "demo:snack-original-potato-chips-70g-bag",
+      "demo:snack-soda-crackers-100g-box"
+    ],
+    "old_products_prefix_identical": true,
+    "old_offers_prefix_identical": true,
+    "store_and_delivery_header_unchanged": true
+  },
+  "import_receipts": {
+    "first": {
+      "batch_size": 2,
+      "catalog_added": 2,
+      "offers_added": 2
+    },
+    "repeat": {
+      "batch_size": 2,
+      "catalog_added": 0,
+      "offers_added": 0
+    }
+  },
+  "index": {
+    "version": "idx-03d6c43d4eb25aff",
+    "projection_snapshot_hash_matches_current_db": true,
+    "doc_hashes_match_current_db_projection": true,
+    "fts_token_stream_matches_current_db_projection": true,
+    "docs": 426,
+    "fts_docs": 426,
+    "vectors": 0,
+    "embedding": null,
+    "lexical_term": "零食",
+    "snack_docs_found": [
+      "sku:demo:snack-original-potato-chips-70g-bag",
+      "sku:demo:snack-soda-crackers-100g-box"
+    ]
+  },
+  "limitations": [
+    "This checks fixture/SQLite supply and the published static projection/index only.",
+    "FTS term hits establish token/document presence, not end-to-end query routing, ranking, or shopping-flow acceptance.",
+    "The published index is lexical-only (0 vectors; embedding is null); semantic/vector retrieval is not evidenced.",
+    "Dynamic cart/session/order tables and live API behavior were excluded."
+  ]
+}
