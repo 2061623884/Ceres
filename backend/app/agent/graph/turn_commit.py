@@ -697,6 +697,8 @@ def committed_step_row(step: dict[str, Any]) -> dict[str, Any]:
 
 def understanding_wrapper(error: dict[str, Any]) -> str:
     """The loop entry's own wording for a turn it could not understand."""
+    if error.get("code") == "MODEL_TIMEOUT":
+        return "抱歉，这次响应超时了，请稍后重试。"
     return (
         f"抱歉，这一轮我没能理解清楚（{error.get('code')}）：{error.get('message') or ''} "
         "请换个说法，或直接说想吃什么、想买什么。"

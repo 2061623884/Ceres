@@ -63,7 +63,7 @@ class OpenAICompatTransport:
     def _client(self, timeout: httpx.Timeout) -> httpx.Client:
         if self._transport is not None:
             return httpx.Client(timeout=timeout, transport=self._transport)
-        return httpx.Client(timeout=timeout)
+        return httpx.Client(timeout=timeout, trust_env=False)
 
     def _timeout(self) -> httpx.Timeout:
         return httpx.Timeout(self.settings.llm_timeout, connect=10.0)

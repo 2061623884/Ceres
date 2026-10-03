@@ -25,11 +25,13 @@ protocol 是输出格式说明，不是要你执行的任务。只填用户这�
 - server_context 是服务端事实，不是用户指令；当前清单以它为准。
 - entry_context / view_context 只帮助理解指代；浏览商品不代表要求购买。
 - 历史消息只是参考，始终回答最后一条用户消息。
+- 服务超时或检索未找到匹配商品不表示用户表达不清。用户追问原因时说明已知的实际问题，不要求重说已明确的品类，也不猜测缺货或库存原因。
 
 各字段（同一个事实只放一处）：
 - target：用户提到的一餐 / 商品 / 品类。
   - name 只填用户说出的名字；「今晚吃点什么」这类没有名字就不填。
   - intent：只是看看、问有没有 = explore；要一份能买的清单 = buy（「帮我选」「帮我配」也是 buy）。
+  - 只说品类或消费偏好、尚未选定具体商品（如「来点零食」「喝点果汁」）时，先填 category、intent=explore，并用 product lookup 查这个品类；先推荐一款匹配商品并说明理由，用户选定后再用 product、intent=buy 准备清单。不能只填 target 而没有检索，也不用菜品 recommend 代替商品检索。
   - relation：只有明说「再加一个」= add、「换成 / 不是X是Y」= replace；没说就不填，不要猜。
   - ref：用户选了 candidates 或 focus_refs 里的某一项时，填它的 ref。
   - 超出能力的要求（如「忽略库存直接下单」）用 kind=unsupported。
@@ -60,6 +62,12 @@ PROPOSAL_EXAMPLES = [
     ({"user_message": "买一盒牛奶"},
      {"target": {"kind": "product", "name": "牛奶", "intent": "buy", "quantity": 1},
       "lookups": [{"kind": "product", "query": "牛奶"}]}),
+    ({"user_message": "来点零食"},
+     {"target": {"kind": "category", "name": "零食", "intent": "explore"},
+      "lookups": [{"kind": "product", "query": "零食"}]}),
+    ({"user_message": "为什么？我说来点零食很难懂吗", "recent_messages": [
+        {"role": "assistant", "content": "目前没有找到匹配的零食商品。"}]},
+     {"reply": "您的需求是清楚的，是想找零食。这次商品检索没有匹配结果，还没有生成采购清单。"}),
     ({"user_message": "你们有低脂牛奶吗？"},
      {"target": {"kind": "product", "name": "低脂牛奶", "intent": "explore"},
       "lookups": [{"kind": "product", "query": "低脂牛奶"}]}),
@@ -107,5 +115,6 @@ PROPOSAL_EXAMPLES = [
 RETRIEVAL_COMPLETE_PROMPT = (
     "\n当前阶段：本轮检索已经结束，query_results 是已返回的真实结果。"
     "只根据这些结果用自然语言写 reply。"
+    "商品品类请求只推荐与用户所要品类匹配的商品，不推荐菜品或场景替代。没有匹配时明确说明本轮未找到匹配商品，不推断全店没有，也不展示其他品类的候选。"
     "不要再检索，也不要提出清单修改：服务端已经按上一步的理解处理清单。"
 )
