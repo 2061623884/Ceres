@@ -1,0 +1,259 @@
+--- a/frontend/src/App.tsx
++++ b/frontend/src/App.tsx
+@@ -26,12 +26,13 @@
+   patchCartItem,
+   progressPhaseLabel,
+   productImageUrl,
++  remainingQuantity,
++  revisePlan,
+   sendTurnStream,
+   yuan,
+   type Cart,
+   type Category,
+   type LocalOrder,
+-  type PlanItem,
+   type PlanResponse,
+   type Product,
+   type SessionResponse,
+@@ -768,12 +769,13 @@
+   )
+ }
+ 
+-function PlanRowCheckbox({ checked, onToggle }: { checked: boolean; onToggle: () => void }) {
++function PlanRowCheckbox({ checked, disabled, onToggle }: { checked: boolean; disabled: boolean; onToggle: () => void }) {
+   return (
+     <button
+       type="button"
+       role="checkbox"
+       aria-checked={checked}
++      disabled={disabled}
+       onClick={onToggle}
+       className={`grid h-5 w-5 shrink-0 place-items-center rounded-full transition ${
+         checked ? 'bg-[#171716] text-white' : 'bg-white/80 ring-1 ring-black/12'
+@@ -786,19 +788,6 @@
+   )
+ }
+ 
+-function planItemsWithSelection(items: PlanItem[], selection: Record<string, boolean>): PlanItem[] {
+-  return items.map((item) => ({
+-    ...item,
+-    selected: selection[item.sku_id] ?? item.selected !== false,
+-  }))
+-}
+-
+-function selectedPlanTotalFen(items: PlanItem[], selection: Record<string, boolean>): number {
+-  return planItemsWithSelection(items, selection)
+-    .filter((item) => item.selected !== false)
+-    .reduce((sum, item) => sum + item.line_total_fen, 0)
+-}
+-
+ function ActivitySheetContent() {
+   return (
+     <div className="flex min-h-[120px] items-center justify-center px-6 py-10">
+@@ -825,7 +814,6 @@
+ 
+ function PlanSheetContent({
+   plan,
+-  selection,
+   onToggleItem,
+   confirming,
+   canConfirm,
+@@ -833,7 +821,6 @@
+   onConfirm,
+ }: {
+   plan: PlanResponse
+-  selection: Record<string, boolean>
+   onToggleItem: (skuId: string) => void
+   confirming: boolean
+   canConfirm: boolean
+@@ -841,15 +828,16 @@
+   onConfirm: () => void
+ }) {
+   const gaps = plan.gaps?.filter(g => g.message) ?? []
+-  const mergedItems = planItemsWithSelection(plan.items, selection)
+-  const total = selectedPlanTotalFen(plan.items, selection)
+-  const hasConfirmable = confirmableItems(mergedItems).length > 0
++  const total = plan.items
++    .filter((item) => item.selected !== false)
++    .reduce((sum, item) => sum + remainingQuantity(item) * item.unit_price_fen, 0)
++  const hasConfirmable = confirmableItems(plan.items).length > 0
+   return (
+     <div className="flex flex-col pt-4">
+       <p className="px-5 pb-2 text-[12px] font-semibold tracking-[-0.02em] text-[#1d1c1a]">采购清单</p>
+       <GuideSheetItemList itemCount={plan.items.length}>
+         {plan.items.map((item) => {
+-          const checked = selection[item.sku_id] ?? item.selected !== false
++          const checked = item.selected !== false
+           return (
+             <div
+               key={item.sku_id}
+@@ -857,17 +845,20 @@
+                 checked ? 'bg-white/70' : 'bg-white/40 opacity-70'
+               }`}
+             >
+-              <PlanRowCheckbox checked={checked} onToggle={() => onToggleItem(item.sku_id)} />
++              <PlanRowCheckbox checked={checked} disabled={confirming || typing} onToggle={() => onToggleItem(item.sku_id)} />
+               <img src={productImageUrl(item.image_path)} alt="" className="h-11 w-11 shrink-0 rounded-xl bg-black/[0.04] object-cover" />
+               <div className="min-w-0 flex-1">
+                 <p className="truncate text-[12px] font-medium text-[#1d1c1a]">{item.name || item.sku_id}</p>
+-                <p className="mt-0.5 text-[10px] text-black/38">× {item.quantity}</p>
++                <p className="mt-0.5 text-[10px] text-black/38">× {remainingQuantity(item)}</p>
+               </div>
+-              <span className="shrink-0 text-[12px] font-medium text-black/55">{yuan(item.line_total_fen)}</span>
++              <span className="shrink-0 text-[12px] font-medium text-black/55">{yuan(checked ? remainingQuantity(item) * item.unit_price_fen : 0)}</span>
+             </div>
+           )
+         })}
+       </GuideSheetItemList>
++      {plan.items.some(item => item.role === 'required' && item.selected === false) && (
++        <p className="px-5 pb-1 text-[10px] leading-snug text-black/45">未选的必需食材不会加购；当前仅采购勾选部分。</p>
++      )}
+       {gaps.map((g) => (
+         <p key={g.gap_id} className="px-5 pb-1 text-[10px] leading-snug text-black/45">{g.message}</p>
+       ))}
+@@ -879,7 +870,7 @@
+           onClick={onConfirm}
+           className="rounded-full bg-[#171716] px-4 py-2 text-[11px] font-semibold text-white disabled:opacity-50"
+         >
+-          {confirming ? '确认中…' : '确认加购'}
++          {confirming ? '处理中…' : '确认加购'}
+         </button>
+       </div>
+     </div>
+@@ -1068,22 +1059,11 @@
+   const [checkoutError, setCheckoutError] = useState<string | null>(null)
+   const [placedOrder, setPlacedOrder] = useState<LocalOrder | null>(null)
+   const [openSheet, setOpenSheet] = useState<GuideSheet | null>(null)
+-  const [planSelection, setPlanSelection] = useState<Record<string, boolean>>({})
+   const bottomRef = useRef<HTMLDivElement>(null)
+   const streamRef = useRef<AbortController | null>(null)
+   const autoSentRef = useRef(false)
+ 
+   useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: 'smooth' }) }, [msgs, typing, plan, progressText, openSheet])
+-
+-  useEffect(() => {
+-    if (!plan) {
+-      setPlanSelection({})
+-      return
+-    }
+-    setPlanSelection(
+-      Object.fromEntries(plan.items.map((item) => [item.sku_id, item.selected !== false])),
+-    )
+-  }, [plan?.plan_id, plan?.plan_version])
+ 
+   const applyAuthoritativeSnapshot = useCallback((snapshot: Pick<
+     SessionResponse,
+@@ -1093,8 +1073,8 @@
+     setStateVersion(snapshot.state_version)
+     setSessionVersion(snapshot.session_version)
+     const canConfirmNow = snapshot.available_actions?.includes('confirm') ?? false
+-    setCanConfirm(canConfirmNow)
+-    setPlan(canConfirmNow ? (snapshot.plan ?? null) : null)
++    setCanConfirm(canConfirmNow && snapshot.plan?.can_confirm !== false)
++    setPlan(snapshot.available_actions?.includes('modify') ? (snapshot.plan ?? null) : null)
+   }, [])
+ 
+   const applyTurnTerminalState = useCallback((turn: TurnResponse) => {
+@@ -1111,8 +1091,8 @@
+       ? turn.available_actions.includes('confirm')
+       : turn.plan?.can_confirm !== false
+     if (turn.available_actions != null) {
+-      setCanConfirm(canConfirmNow)
+-      if (!canConfirmNow) {
++      setCanConfirm(current => canConfirmNow && (planEffect === 'keep' ? current : turn.plan?.can_confirm !== false))
++      if (!turn.available_actions.includes('modify')) {
+         setPlan(null)
+       }
+     }
+@@ -1306,7 +1286,7 @@
+         plan.plan_version,
+         stateVersion,
+         sessionVersion,
+-        confirmableItems(planItemsWithSelection(plan.items, planSelection)),
++        confirmableItems(plan.items),
+         newRequestId(),
+       )
+       setStateVersion(result.state_version)
+@@ -1332,7 +1312,35 @@
+     }
+   }
+ 
+-  const hasPlan = !!plan && canConfirm
++  async function handleTogglePlanItem(skuId: string) {
++    if (!plan || !taskId || confirming || typing) return
++    setConfirming(true)
++    setError(null)
++    try {
++      const revision = await revisePlan(
++        taskId,
++        plan,
++        stateVersion,
++        sessionVersion,
++        plan.items.map(item => ({
++          sku_id: item.sku_id,
++          quantity: item.quantity,
++          selected: item.sku_id === skuId ? item.selected === false : item.selected !== false,
++        })),
++      )
++      const { state_version, session_version, ...revisedPlan } = revision
++      setPlan({ ...plan, ...revisedPlan })
++      setStateVersion(state_version)
++      setSessionVersion(session_version)
++      setCanConfirm(revision.can_confirm)
++    } catch (e) {
++      setError(e instanceof Error ? e.message : '清单修改失败')
++    } finally {
++      setConfirming(false)
++    }
++  }
++
++  const hasPlan = !!plan
+   const cartCount = checkoutPhase === 'success' ? 0 : cartItemCount(cart)
+   const planItemCount = hasPlan ? plan.items.length : 0
+ 
+@@ -1409,13 +1417,7 @@
+                 ? (
+                   <PlanSheetContent
+                     plan={plan}
+-                    selection={planSelection}
+-                    onToggleItem={(skuId) => {
+-                      setPlanSelection((prev) => ({
+-                        ...prev,
+-                        [skuId]: !(prev[skuId] ?? plan.items.find(i => i.sku_id === skuId)?.selected !== false),
+-                      }))
+-                    }}
++                    onToggleItem={handleTogglePlanItem}
+                     confirming={confirming}
+                     canConfirm={canConfirm}
+                     typing={typing}
+--- a/frontend/src/lib/saleGuide.ts
++++ b/frontend/src/lib/saleGuide.ts
+@@ -683,3 +683,28 @@
+     }),
+   });
+ }
++
++export async function revisePlan(
++  taskId: string,
++  plan: PlanResponse,
++  stateVersion: number,
++  sessionVersion: number,
++  items: Array<{ sku_id: string; quantity: number; selected: boolean }>,
++): Promise<Pick<PlanResponse, 'plan_id' | 'plan_version' | 'items' | 'total_price_fen' | 'selected_total_fen' | 'gaps'> & {
++  can_confirm: boolean;
++  state_version: number;
++  session_version: number;
++}> {
++  return fetchApi(`/api/v1/guide/tasks/${taskId}/plan-revisions`, {
++    method: 'POST',
++    body: JSON.stringify({
++      request_id: crypto.randomUUID(),
++      expected_state_version: stateVersion,
++      expected_session_version: sessionVersion,
++      base_plan_id: plan.plan_id,
++      base_plan_version: plan.plan_version,
++      coverage_intent: 'partial_ok',
++      items,
++    }),
++  });
++}

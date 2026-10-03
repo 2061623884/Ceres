@@ -1,0 +1,206 @@
+[
+  {
+    "session_id": "sess-eda4445e8c4b",
+    "messages": [
+      [
+        "user",
+        "我想做番茄炒蛋"
+      ],
+      [
+        "assistant",
+        "抱歉，这次响应超时了，请稍后重试。"
+      ]
+    ],
+    "traces": [
+      {
+        "request_id": "req-1791050164975-fmyf6w5",
+        "phase": "understanding",
+        "duration_ms": null,
+        "error": null
+      },
+      {
+        "request_id": "req-1791050164975-fmyf6w5",
+        "phase": "model_call_started",
+        "duration_ms": null,
+        "error": null
+      },
+      {
+        "request_id": "req-1791050164975-fmyf6w5",
+        "phase": "model_call_failed",
+        "duration_ms": 45296,
+        "error": "MODEL_TIMEOUT"
+      },
+      {
+        "request_id": "req-1791050164975-fmyf6w5",
+        "phase": "turn_result",
+        "duration_ms": null,
+        "error": null
+      }
+    ]
+  },
+  {
+    "session_id": "sess-d70f1f8c9f80",
+    "messages": [
+      [
+        "user",
+        "我想做番茄炒蛋"
+      ],
+      [
+        "assistant",
+        "抱歉，这次响应超时了，请稍后重试。"
+      ]
+    ],
+    "traces": [
+      {
+        "request_id": "req-1791050329131-xc6dx69",
+        "phase": "understanding",
+        "duration_ms": null,
+        "error": null
+      },
+      {
+        "request_id": "req-1791050329131-xc6dx69",
+        "phase": "model_call_started",
+        "duration_ms": null,
+        "error": null
+      },
+      {
+        "request_id": "req-1791050329131-xc6dx69",
+        "phase": "model_call_failed",
+        "duration_ms": 45311,
+        "error": "MODEL_TIMEOUT"
+      },
+      {
+        "request_id": "req-1791050329131-xc6dx69",
+        "phase": "turn_result",
+        "duration_ms": null,
+        "error": null
+      }
+    ]
+  },
+  {
+    "session_id": "sess-b510597e5d1c",
+    "messages": [
+      [
+        "user",
+        "今晚自己做一道菜，预算30元，没有忌口，你帮我推荐一道菜"
+      ],
+      [
+        "assistant",
+        "抱歉，这次响应超时了，请稍后重试。"
+      ]
+    ],
+    "traces": [
+      {
+        "request_id": "3b2fec23-1a57-41b3-a18b-2bae476a18ff",
+        "phase": "understanding",
+        "duration_ms": null,
+        "error": null
+      },
+      {
+        "request_id": "3b2fec23-1a57-41b3-a18b-2bae476a18ff",
+        "phase": "model_call_started",
+        "duration_ms": null,
+        "error": null
+      },
+      {
+        "request_id": "3b2fec23-1a57-41b3-a18b-2bae476a18ff",
+        "phase": "model_call_failed",
+        "duration_ms": 45312,
+        "error": "MODEL_TIMEOUT"
+      },
+      {
+        "request_id": "3b2fec23-1a57-41b3-a18b-2bae476a18ff",
+        "phase": "turn_result",
+        "duration_ms": null,
+        "error": null
+      }
+    ]
+  },
+  {
+    "session_id": "sess-9e339f155c86",
+    "messages": [
+      [
+        "user",
+        "今晚自己做一道菜，预算30元，没有忌口，你帮我推荐一道菜"
+      ],
+      [
+        "assistant",
+        "1. 蛋炒饭\n2. 扬州炒饭\n主推「番茄炒蛋」：必需食材已匹配当前门店可售商品，已选合计 ¥16.60（演示价格），在 30 元预算内。想换菜可以说换一个。\n已整理 5 件商品，选中合计 ¥16.60（演示价格）。包含：番茄炒蛋。"
+      ],
+      [
+        "user",
+        "好的"
+      ],
+      [
+        "assistant",
+        "抱歉，这次响应超时了，请稍后重试。"
+      ],
+      [
+        "assistant",
+        "已加入购物车：1件 demo:tomato-fresh-500g, 1件 demo:eggs-fresh-6pack, 1件 demo:cooking-oil-500ml（购物车版本 2）"
+      ]
+    ],
+    "traces": [
+      {
+        "request_id": "req-1791051972128-03wwk0a",
+        "phase": "understanding",
+        "duration_ms": null,
+        "error": null
+      },
+      {
+        "request_id": "req-1791051972128-03wwk0a",
+        "phase": "model_call_started",
+        "duration_ms": null,
+        "error": null
+      },
+      {
+        "request_id": "req-1791051972128-03wwk0a",
+        "phase": "model_call_completed",
+        "duration_ms": 2436,
+        "error": null
+      },
+      {
+        "request_id": "req-1791051972128-03wwk0a",
+        "phase": "retrieve",
+        "duration_ms": null,
+        "error": null
+      },
+      {
+        "request_id": "req-1791051972128-03wwk0a",
+        "phase": "validate",
+        "duration_ms": null,
+        "error": null
+      },
+      {
+        "request_id": "req-1791051972128-03wwk0a",
+        "phase": "turn_result",
+        "duration_ms": null,
+        "error": null
+      },
+      {
+        "request_id": "req-1791052030632-59qf4uu",
+        "phase": "understanding",
+        "duration_ms": null,
+        "error": null
+      },
+      {
+        "request_id": "req-1791052030632-59qf4uu",
+        "phase": "model_call_started",
+        "duration_ms": null,
+        "error": null
+      },
+      {
+        "request_id": "req-1791052030632-59qf4uu",
+        "phase": "model_call_failed",
+        "duration_ms": 45296,
+        "error": "MODEL_TIMEOUT"
+      },
+      {
+        "request_id": "req-1791052030632-59qf4uu",
+        "phase": "turn_result",
+        "duration_ms": null,
+        "error": null
+      }
+    ]
+  }
+]

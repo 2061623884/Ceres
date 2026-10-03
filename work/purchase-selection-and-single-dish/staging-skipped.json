@@ -1,0 +1,12 @@
+[
+  {
+    "file": "frontend/src/App.tsx",
+    "old": "  }, [sessionId, taskId, stateVersion, sessionVersion, typing, confirming, restoring, viewContext, plan, planSelection, applyTurnTerminalState])\n",
+    "new": "  }, [sessionId, taskId, stateVersion, sessionVersion, typing, confirming, restoring, viewContext, plan, applyTurnTerminalState])\n"
+  },
+  {
+    "file": "frontend/src/App.tsx",
+    "old": "          selected_items: confirmableItems(planItemsWithSelection(plan.items, planSelection)),\n",
+    "new": "          selected_items: confirmableItems(plan.items),\n"
+  }
+]

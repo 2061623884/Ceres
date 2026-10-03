@@ -1,0 +1,14 @@
+[
+  {
+    "path": "work/purchase-selection-and-single-dish/before/working-tree.patch",
+    "sha256": "a575562b11430c968ff66f8191ece833bee869d2011aa0b64c462fdf0a77b3df",
+    "bytes": 1823581,
+    "storage": "local only"
+  },
+  {
+    "path": "work/purchase-selection-and-single-dish/tested-working-tree.patch",
+    "sha256": "cc3ec97fbc36300411fbd2f48bcbab74b449446b74e94df77b27d582536f22dc",
+    "bytes": 1654286,
+    "storage": "local only"
+  }
+]

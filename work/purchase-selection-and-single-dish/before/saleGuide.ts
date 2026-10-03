@@ -358,6 +358,12 @@ export function clarificationChipLabels(clarifications: PendingClarification[]):
   return labels;
 }
 
+export interface PlanSelection {
+  plan_id: string;
+  plan_version: number;
+  selected_items: Array<{ sku_id: string; quantity: number }>;
+}
+
 export interface TurnResponse {
   request_id: string;
   session_id: string;
@@ -366,6 +372,8 @@ export interface TurnResponse {
   session_version: number;
   status: string;
   message: string;
+  route: string | null;
+  committed: boolean;
   plan?: PlanResponse | null;
   plan_effect?: 'keep' | 'replace' | 'clear';
   pending_clarification?: Record<string, unknown> | null;
@@ -522,6 +530,7 @@ function buildTurnRequestBody(
     category_id?: string | null;
     product_id?: string | null;
   },
+  planSelection?: PlanSelection,
 ) {
   return {
     request_id: requestId,
@@ -530,6 +539,7 @@ function buildTurnRequestBody(
     expected_state_version: expectedStateVersion,
     expected_session_version: expectedSessionVersion ?? undefined,
     view_context: viewContext,
+    plan_selection: planSelection,
   };
 }
 
@@ -596,6 +606,7 @@ export async function sendTurnStream(
     product_id?: string | null;
   },
   callbacks?: TurnStreamCallbacks,
+  planSelection?: PlanSelection,
 ): Promise<TurnResponse> {
   await ensureIdentity();
 
@@ -612,6 +623,7 @@ export async function sendTurnStream(
         requestId,
         expectedSessionVersion,
         viewContext,
+        planSelection,
       ),
     ),
   });
@@ -680,31 +692,6 @@ export async function confirmPlan(
       expected_state_version: stateVersion,
       expected_session_version: sessionVersion,
       selected_items: selectedItems,
-    }),
-  });
-}
-
-export async function revisePlan(
-  taskId: string,
-  plan: PlanResponse,
-  stateVersion: number,
-  sessionVersion: number,
-  items: Array<{ sku_id: string; quantity: number; selected: boolean }>,
-): Promise<Pick<PlanResponse, 'plan_id' | 'plan_version' | 'items' | 'total_price_fen' | 'selected_total_fen' | 'gaps'> & {
-  can_confirm: boolean;
-  state_version: number;
-  session_version: number;
-}> {
-  return fetchApi(`/api/v1/guide/tasks/${taskId}/plan-revisions`, {
-    method: 'POST',
-    body: JSON.stringify({
-      request_id: crypto.randomUUID(),
-      expected_state_version: stateVersion,
-      expected_session_version: sessionVersion,
-      base_plan_id: plan.plan_id,
-      base_plan_version: plan.plan_version,
-      coverage_intent: 'partial_ok',
-      items,
     }),
   });
 }

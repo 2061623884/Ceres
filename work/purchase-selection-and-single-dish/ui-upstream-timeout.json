@@ -1,0 +1,36 @@
+{
+  "session_id": "sess-eda4445e8c4b",
+  "owner_id": "owner-37c582bf5c8a44f3",
+  "messages": [
+    [
+      "user",
+      "我想做番茄炒蛋"
+    ],
+    [
+      "assistant",
+      "抱歉，这次响应超时了，请稍后重试。"
+    ]
+  ],
+  "traces": [
+    [
+      "understanding",
+      null,
+      null
+    ],
+    [
+      "model_call_started",
+      null,
+      null
+    ],
+    [
+      "model_call_failed",
+      45296,
+      "MODEL_TIMEOUT"
+    ],
+    [
+      "turn_result",
+      null,
+      null
+    ]
+  ]
+}

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="2" time="4.784" timestamp="2026-10-04T02:18:14.360721+08:00" hostname="Diablo‘s_dark"><testcase classname="tests.test_recommended_dish_purchase" name="test_recommended_dish_reason_and_purchase[1]" time="2.631"><failure message="AssertionError: assert '主推「番茄炒蛋」' in '1. 蛋炒饭\n2. 扬州炒饭\n已按你的条件先配「番茄炒蛋」。想换菜可以说换一个。\n已整理 5 件商品，选中合计 ¥16.60（演示价格）。包含：番茄炒蛋。'">indexed_client = &lt;starlette.testclient.TestClient object at 0x0000022349AA9FD0&gt;
+semantic_provider = &lt;function semantic_provider.&lt;locals&gt;._install at 0x0000022352176660&gt;
+run = 1
+
+    @pytest.mark.parametrize("run", [1, 2])
+    def test_recommended_dish_reason_and_purchase(indexed_client, semantic_provider, run):
+        semantic_provider([
+            request_new("dish", "", constraints={"budget_yuan": 30}),
+            {"reply": "好的，清单先保留，等你明确确认后再加购。"},
+        ])
+        client = indexed_client
+        sid = create_session(client)
+        turn = send_turn(client, sid, "今晚自己做一道菜，预算30元，没有忌口，你帮我推荐一道菜")
+        plan = turn["plan"]
+        assert len(plan["targets"]) == 1
+&gt;       assert f"主推「{plan['targets'][0]['name']}」" in turn["message"]
+E       AssertionError: assert '主推「番茄炒蛋」' in '1. 蛋炒饭\n2. 扬州炒饭\n已按你的条件先配「番茄炒蛋」。想换菜可以说换一个。\n已整理 5 件商品，选中合计 ¥16.60（演示价格）。包含：番茄炒蛋。'
+
+tests\test_recommended_dish_purchase.py:22: AssertionError</failure></testcase><testcase classname="tests.test_recommended_dish_purchase" name="test_recommended_dish_reason_and_purchase[2]" time="1.497"><failure message="AssertionError: assert '主推「番茄炒蛋」' in '1. 蛋炒饭\n2. 扬州炒饭\n已按你的条件先配「番茄炒蛋」。想换菜可以说换一个。\n已整理 5 件商品，选中合计 ¥16.60（演示价格）。包含：番茄炒蛋。'">indexed_client = &lt;starlette.testclient.TestClient object at 0x00000223521DC470&gt;
+semantic_provider = &lt;function semantic_provider.&lt;locals&gt;._install at 0x000002235251FEC0&gt;
+run = 2
+
+    @pytest.mark.parametrize("run", [1, 2])
+    def test_recommended_dish_reason_and_purchase(indexed_client, semantic_provider, run):
+        semantic_provider([
+            request_new("dish", "", constraints={"budget_yuan": 30}),
+            {"reply": "好的，清单先保留，等你明确确认后再加购。"},
+        ])
+        client = indexed_client
+        sid = create_session(client)
+        turn = send_turn(client, sid, "今晚自己做一道菜，预算30元，没有忌口，你帮我推荐一道菜")
+        plan = turn["plan"]
+        assert len(plan["targets"]) == 1
+&gt;       assert f"主推「{plan['targets'][0]['name']}」" in turn["message"]
+E       AssertionError: assert '主推「番茄炒蛋」' in '1. 蛋炒饭\n2. 扬州炒饭\n已按你的条件先配「番茄炒蛋」。想换菜可以说换一个。\n已整理 5 件商品，选中合计 ¥16.60（演示价格）。包含：番茄炒蛋。'
+
+tests\test_recommended_dish_purchase.py:22: AssertionError</failure></testcase></testsuite></testsuites>

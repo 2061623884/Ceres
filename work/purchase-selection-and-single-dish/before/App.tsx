@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from 'react'
+import { useState, useRef, useEffect, useLayoutEffect, useCallback } from 'react'
 import { MercuryChat } from './MercuryChat'
 import { MomoAvatar } from './components/MomoToast'
 import {
@@ -26,13 +26,12 @@ import {
   patchCartItem,
   progressPhaseLabel,
   productImageUrl,
-  remainingQuantity,
-  revisePlan,
   sendTurnStream,
   yuan,
   type Cart,
   type Category,
   type LocalOrder,
+  type PlanItem,
   type PlanResponse,
   type Product,
   type SessionResponse,
@@ -418,7 +417,7 @@ function ProductCard({ p, onAdd, adding }: { p: Product; onAdd: (skuId: string) 
   const unitLabel = p.spec_unit ? `/${p.spec_unit}` : ''
   return (
     <article className="group flex flex-col overflow-hidden rounded-[22px] border border-black/[0.06] bg-white transition-colors duration-200 hover:border-black/[0.13]">
-      <div className="relative aspect-[1/0.91] overflow-hidden bg-[#f2f2f4]">
+      <div className="relative aspect-[1/0.91] overflow-hidden bg-[#f2f1ed]">
         <img src={productImageUrl(p.image_path)} alt={displayName} className="h-full w-full object-cover" loading="lazy" />
         <span className="absolute left-3 top-3 rounded-md bg-white/95 px-2 py-1 text-[9px] font-medium tracking-[0.02em] text-[#5f655f]">产地可溯源</span>
         <button onClick={() => setLiked(v => !v)} aria-label={liked ? `取消收藏${displayName}` : `收藏${displayName}`} className="absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-full bg-white/95 text-[15px] text-[#4c554c] transition active:scale-90">
@@ -584,13 +583,13 @@ function ShelfScreen({
   }
 
   return (
-    <div className="relative flex h-full flex-col overflow-hidden bg-[#f5f5f7]">
-      <header className="z-10 flex-shrink-0 border-b border-black/[0.05] bg-[#f5f5f7] px-5 pb-3 pt-5">
+    <div className="relative flex h-full flex-col overflow-hidden bg-[#fcfbf8]">
+      <header className="z-10 flex-shrink-0 border-b border-black/[0.05] bg-[#fcfbf8] px-5 pb-3 pt-5">
         <div className="mb-4 flex items-center justify-between">
           <button className="flex items-center gap-1 text-[18px] font-extrabold tracking-[-0.07em] text-[#22231f]">静安区 <span className="mt-0.5 text-[11px] font-semibold text-black/35">⌄</span></button>
           <div className="flex items-center gap-2">
             <button aria-label="通知" className="grid h-9 w-9 place-items-center rounded-full bg-white text-[#626560] transition active:scale-90"><IconBell /></button>
-            <button aria-label="购物车" onClick={() => setCartOpen(true)} className="relative grid h-9 w-9 place-items-center rounded-full bg-[#1d1d1f] text-white transition active:scale-90">
+            <button aria-label="购物车" onClick={() => setCartOpen(true)} className="relative grid h-9 w-9 place-items-center rounded-full bg-[#171716] text-white transition active:scale-90">
               <IconCart />
               {cartCount > 0 && (
                 <span className="absolute -top-1 -right-1 flex h-[17px] min-w-[17px] items-center justify-center rounded-full bg-[#df7f51] px-1 text-[9px] font-extrabold text-white">
@@ -618,7 +617,7 @@ function ShelfScreen({
                 aria-pressed={isActive}
                 className={`group relative flex w-[68px] flex-shrink-0 flex-col items-center gap-2 bg-transparent pb-1 outline-none transition duration-200 ease-out active:scale-[0.98] ${isActive ? '-translate-y-0.5' : 'hover:-translate-y-px'}`}
               >
-                <span className={`grid h-[58px] w-[58px] place-items-center rounded-[20px] bg-[#f5f5f7] transition-all duration-200 ${isActive ? 'shadow-[0_5px_10px_rgba(29,29,31,0.12),0_1px_2px_rgba(29,29,31,0.06)]' : 'shadow-[0_0_0_1px_rgba(245,245,247,0.6)] group-hover:shadow-[0_3px_7px_rgba(29,29,31,0.05)]'}`}>
+                <span className={`grid h-[58px] w-[58px] place-items-center rounded-[20px] bg-[#f7f6f2] transition-all duration-200 ${isActive ? 'shadow-[0_5px_10px_rgba(25,24,23,0.12),0_1px_2px_rgba(25,24,23,0.06)]' : 'shadow-[0_0_0_1px_rgba(247,246,242,0.9)] group-hover:shadow-[0_3px_7px_rgba(25,24,23,0.05)]'}`}>
                   <span className={`text-[30px] leading-none transition-transform duration-200 ${isActive ? 'scale-[1.04]' : 'grayscale-[0.08] group-hover:scale-[1.02]'}`}>{emoji}</span>
                 </span>
                 <span className={`relative w-full truncate text-center text-[12px] font-semibold tracking-[-0.05em] transition-colors duration-200 ${isActive ? 'text-[#252622]' : 'text-[#8c8d87] group-hover:text-[#596158]'}`}>
@@ -635,7 +634,7 @@ function ShelfScreen({
         {!search && (
           <section className="mb-6">
             <div className="mb-3 flex items-center justify-between">
-              <h2 className="flex items-center gap-2 text-[19px] font-semibold tracking-[-0.06em] text-[#202124]">今日精选 <DemoBadge /></h2>
+              <h2 className="flex items-center gap-2 text-[19px] font-semibold tracking-[-0.06em] text-[#191817]">今日精选 <DemoBadge /></h2>
             </div>
             <div className="grid grid-cols-2 gap-3">
               {PROMO_CARDS.map((card) => (
@@ -665,10 +664,10 @@ function ShelfScreen({
         )}
         <div ref={productsRef} className="mb-3 flex items-end justify-between">
           <div>
-            <h2 className="text-[19px] font-semibold tracking-[-0.06em] text-[#202124]">{search ? '搜索结果' : '人气鲜品'}</h2>
-            <p className="mt-0.5 text-[10px] font-medium tracking-[0.02em] text-[#7c7c80]">最快 30 分钟送达</p>
+            <h2 className="text-[19px] font-semibold tracking-[-0.06em] text-[#191817]">{search ? '搜索结果' : '人气鲜品'}</h2>
+            <p className="mt-0.5 text-[10px] font-medium tracking-[0.02em] text-black/40">最快 30 分钟送达</p>
           </div>
-          <button className="flex items-center gap-1 rounded-full border border-black/[0.08] bg-transparent px-3.5 py-2 text-[10px] font-medium text-[#505055] transition active:scale-95">综合排序⌄ <DemoBadge /></button>
+          <button className="flex items-center gap-1 rounded-full border border-black/[0.08] bg-transparent px-3.5 py-2 text-[10px] font-medium text-black/40 transition active:scale-95">综合排序⌄ <DemoBadge /></button>
         </div>
         {error && (
           <div className="mb-4 rounded-2xl bg-red-50 px-4 py-3 text-center">
@@ -705,10 +704,37 @@ function SheetCloseButton({ onClose }: { onClose: () => void }) {
   )
 }
 
-function ChatFloatingSheet({ children, onClose }: { children: React.ReactNode; onClose: () => void }) {
+function ChatFloatingSheet({
+  children,
+  onClose,
+  panelRef,
+  morphOrigin,
+  closing,
+  onMorphEnd,
+  sheetKey,
+}: {
+  children: React.ReactNode
+  onClose: () => void
+  panelRef: React.RefObject<HTMLDivElement | null>
+  morphOrigin: string
+  closing: boolean
+  onMorphEnd: () => void
+  sheetKey: GuideSheet
+}) {
   return (
-    <div className="guide-sheet-enter absolute inset-x-0 bottom-full z-10 mb-2 px-4">
-      <div className="relative flex flex-col overflow-hidden rounded-[24px] bg-[#fcfbf8]">
+    <div className="absolute inset-x-0 bottom-full z-10 mb-2 px-4">
+      <div
+        ref={panelRef}
+        key={sheetKey}
+        className={`guide-glass-surface relative flex flex-col overflow-hidden rounded-[24px] ${
+          closing ? 'guide-sheet-morph-out' : 'guide-sheet-morph-in'
+        }`}
+        style={{ transformOrigin: morphOrigin }}
+        onAnimationEnd={(e) => {
+          if (e.target !== e.currentTarget || !closing) return
+          onMorphEnd()
+        }}
+      >
         <SheetCloseButton onClose={onClose} />
         {children}
       </div>
@@ -734,15 +760,19 @@ function ChatGuideCapsules({
   onToggle,
   planCount,
   cartCount,
+  capsuleRefs,
 }: {
   openSheet: GuideSheet | null
   onToggle: (sheet: GuideSheet) => void
   planCount: number
   cartCount: number
+  capsuleRefs: Record<GuideSheet, React.RefObject<HTMLButtonElement | null>>
 }) {
   const capsuleClass = (active: boolean) =>
     `inline-flex shrink-0 items-center gap-1.5 rounded-full px-4 py-2.5 text-[13px] font-medium tracking-[-0.01em] transition-colors ${
-      active ? 'bg-white/92 text-[#1d1c1a]' : 'bg-white/45 text-black/42'
+      active
+        ? 'guide-glass-surface text-[#1d1c1a]'
+        : 'guide-glass-chip text-black/42'
     }`
 
   const countBadge = (count: number) =>
@@ -754,14 +784,14 @@ function ChatGuideCapsules({
 
   return (
     <div className="scrollbar-hide mb-2.5 flex gap-2.5 overflow-x-auto">
-      <button type="button" onClick={() => onToggle('activity')} className={capsuleClass(openSheet === 'activity')}>
+      <button type="button" ref={capsuleRefs.activity} onClick={() => onToggle('activity')} className={capsuleClass(openSheet === 'activity')}>
         今日活动
       </button>
-      <button type="button" onClick={() => onToggle('plan')} className={capsuleClass(openSheet === 'plan')} aria-label={planCount > 0 ? `采购清单 ${planCount} 件` : '采购清单'}>
+      <button type="button" ref={capsuleRefs.plan} onClick={() => onToggle('plan')} className={capsuleClass(openSheet === 'plan')} aria-label={planCount > 0 ? `采购清单 ${planCount} 件` : '采购清单'}>
         采购清单
         {countBadge(planCount)}
       </button>
-      <button type="button" onClick={() => onToggle('cart')} className={capsuleClass(openSheet === 'cart')} aria-label={cartCount > 0 ? `购物车 ${cartCount} 件` : '购物车'}>
+      <button type="button" ref={capsuleRefs.cart} onClick={() => onToggle('cart')} className={capsuleClass(openSheet === 'cart')} aria-label={cartCount > 0 ? `购物车 ${cartCount} 件` : '购物车'}>
         购物车
         {countBadge(cartCount)}
       </button>
@@ -769,13 +799,12 @@ function ChatGuideCapsules({
   )
 }
 
-function PlanRowCheckbox({ checked, disabled, onToggle }: { checked: boolean; disabled: boolean; onToggle: () => void }) {
+function PlanRowCheckbox({ checked, onToggle }: { checked: boolean; onToggle: () => void }) {
   return (
     <button
       type="button"
       role="checkbox"
       aria-checked={checked}
-      disabled={disabled}
       onClick={onToggle}
       className={`grid h-5 w-5 shrink-0 place-items-center rounded-full transition ${
         checked ? 'bg-[#171716] text-white' : 'bg-white/80 ring-1 ring-black/12'
@@ -786,6 +815,19 @@ function PlanRowCheckbox({ checked, disabled, onToggle }: { checked: boolean; di
       )}
     </button>
   )
+}
+
+function planItemsWithSelection(items: PlanItem[], selection: Record<string, boolean>): PlanItem[] {
+  return items.map((item) => ({
+    ...item,
+    selected: selection[item.sku_id] ?? item.selected !== false,
+  }))
+}
+
+function selectedPlanTotalFen(items: PlanItem[], selection: Record<string, boolean>): number {
+  return planItemsWithSelection(items, selection)
+    .filter((item) => item.selected !== false)
+    .reduce((sum, item) => sum + item.line_total_fen, 0)
 }
 
 function ActivitySheetContent() {
@@ -814,6 +856,7 @@ function CartEmptySheetContent() {
 
 function PlanSheetContent({
   plan,
+  selection,
   onToggleItem,
   confirming,
   canConfirm,
@@ -821,6 +864,7 @@ function PlanSheetContent({
   onConfirm,
 }: {
   plan: PlanResponse
+  selection: Record<string, boolean>
   onToggleItem: (skuId: string) => void
   confirming: boolean
   canConfirm: boolean
@@ -828,16 +872,15 @@ function PlanSheetContent({
   onConfirm: () => void
 }) {
   const gaps = plan.gaps?.filter(g => g.message) ?? []
-  const total = plan.items
-    .filter((item) => item.selected !== false)
-    .reduce((sum, item) => sum + remainingQuantity(item) * item.unit_price_fen, 0)
-  const hasConfirmable = confirmableItems(plan.items).length > 0
+  const mergedItems = planItemsWithSelection(plan.items, selection)
+  const total = selectedPlanTotalFen(plan.items, selection)
+  const hasConfirmable = confirmableItems(mergedItems).length > 0
   return (
     <div className="flex flex-col pt-4">
       <p className="px-5 pb-2 text-[12px] font-semibold tracking-[-0.02em] text-[#1d1c1a]">采购清单</p>
       <GuideSheetItemList itemCount={plan.items.length}>
         {plan.items.map((item) => {
-          const checked = item.selected !== false
+          const checked = selection[item.sku_id] ?? item.selected !== false
           return (
             <div
               key={item.sku_id}
@@ -845,20 +888,17 @@ function PlanSheetContent({
                 checked ? 'bg-white/70' : 'bg-white/40 opacity-70'
               }`}
             >
-              <PlanRowCheckbox checked={checked} disabled={confirming || typing} onToggle={() => onToggleItem(item.sku_id)} />
+              <PlanRowCheckbox checked={checked} onToggle={() => onToggleItem(item.sku_id)} />
               <img src={productImageUrl(item.image_path)} alt="" className="h-11 w-11 shrink-0 rounded-xl bg-black/[0.04] object-cover" />
               <div className="min-w-0 flex-1">
                 <p className="truncate text-[12px] font-medium text-[#1d1c1a]">{item.name || item.sku_id}</p>
-                <p className="mt-0.5 text-[10px] text-black/38">× {remainingQuantity(item)}</p>
+                <p className="mt-0.5 text-[10px] text-black/38">× {item.quantity}</p>
               </div>
-              <span className="shrink-0 text-[12px] font-medium text-black/55">{yuan(checked ? remainingQuantity(item) * item.unit_price_fen : 0)}</span>
+              <span className="shrink-0 text-[12px] font-medium text-black/55">{yuan(item.line_total_fen)}</span>
             </div>
           )
         })}
       </GuideSheetItemList>
-      {plan.items.some(item => item.role === 'required' && item.selected === false) && (
-        <p className="px-5 pb-1 text-[10px] leading-snug text-black/45">未选的必需食材不会加购；当前仅采购勾选部分。</p>
-      )}
       {gaps.map((g) => (
         <p key={g.gap_id} className="px-5 pb-1 text-[10px] leading-snug text-black/45">{g.message}</p>
       ))}
@@ -870,7 +910,7 @@ function PlanSheetContent({
           onClick={onConfirm}
           className="rounded-full bg-[#171716] px-4 py-2 text-[11px] font-semibold text-white disabled:opacity-50"
         >
-          {confirming ? '处理中…' : '确认加购'}
+          {confirming ? '确认中…' : '确认加购'}
         </button>
       </div>
     </div>
@@ -1059,11 +1099,72 @@ function ChatScreen({
   const [checkoutError, setCheckoutError] = useState<string | null>(null)
   const [placedOrder, setPlacedOrder] = useState<LocalOrder | null>(null)
   const [openSheet, setOpenSheet] = useState<GuideSheet | null>(null)
+  const [sheetClosing, setSheetClosing] = useState(false)
+  const [sheetMorphOrigin, setSheetMorphOrigin] = useState('50% 100%')
+  const [planSelection, setPlanSelection] = useState<Record<string, boolean>>({})
   const bottomRef = useRef<HTMLDivElement>(null)
+  const guideCapsuleActivityRef = useRef<HTMLButtonElement>(null)
+  const guideCapsulePlanRef = useRef<HTMLButtonElement>(null)
+  const guideCapsuleCartRef = useRef<HTMLButtonElement>(null)
+  const guideSheetPanelRef = useRef<HTMLDivElement>(null)
   const streamRef = useRef<AbortController | null>(null)
   const autoSentRef = useRef(false)
 
   useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: 'smooth' }) }, [msgs, typing, plan, progressText, openSheet])
+
+  const measureGuideSheetOrigin = useCallback((sheet: GuideSheet) => {
+    const capsule = sheet === 'activity'
+      ? guideCapsuleActivityRef.current
+      : sheet === 'plan'
+        ? guideCapsulePlanRef.current
+        : guideCapsuleCartRef.current
+    const panel = guideSheetPanelRef.current
+    if (!capsule || !panel) return
+    const cap = capsule.getBoundingClientRect()
+    const pan = panel.getBoundingClientRect()
+    const x = cap.left + cap.width / 2 - pan.left
+    const y = cap.top + cap.height / 2 - pan.top
+    setSheetMorphOrigin(`${x}px ${y}px`)
+  }, [])
+
+  useLayoutEffect(() => {
+    if (!openSheet || sheetClosing) return
+    measureGuideSheetOrigin(openSheet)
+  }, [openSheet, sheetClosing, measureGuideSheetOrigin])
+
+  const closeGuideSheet = useCallback(() => {
+    if (!openSheet) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setOpenSheet(null)
+      setSheetClosing(false)
+      return
+    }
+    setSheetClosing(true)
+  }, [openSheet])
+
+  const handleGuideSheetMorphEnd = useCallback(() => {
+    setOpenSheet(null)
+    setSheetClosing(false)
+  }, [])
+
+  const toggleGuideSheet = useCallback((sheet: GuideSheet) => {
+    if (openSheet === sheet && !sheetClosing) {
+      closeGuideSheet()
+      return
+    }
+    setSheetClosing(false)
+    setOpenSheet(sheet)
+  }, [openSheet, sheetClosing, closeGuideSheet])
+
+  useEffect(() => {
+    if (!plan) {
+      setPlanSelection({})
+      return
+    }
+    setPlanSelection(
+      Object.fromEntries(plan.items.map((item) => [item.sku_id, item.selected !== false])),
+    )
+  }, [plan?.plan_id, plan?.plan_version])
 
   const applyAuthoritativeSnapshot = useCallback((snapshot: Pick<
     SessionResponse,
@@ -1073,8 +1174,8 @@ function ChatScreen({
     setStateVersion(snapshot.state_version)
     setSessionVersion(snapshot.session_version)
     const canConfirmNow = snapshot.available_actions?.includes('confirm') ?? false
-    setCanConfirm(canConfirmNow && snapshot.plan?.can_confirm !== false)
-    setPlan(snapshot.available_actions?.includes('modify') ? (snapshot.plan ?? null) : null)
+    setCanConfirm(canConfirmNow)
+    setPlan(canConfirmNow ? (snapshot.plan ?? null) : null)
   }, [])
 
   const applyTurnTerminalState = useCallback((turn: TurnResponse) => {
@@ -1091,8 +1192,8 @@ function ChatScreen({
       ? turn.available_actions.includes('confirm')
       : turn.plan?.can_confirm !== false
     if (turn.available_actions != null) {
-      setCanConfirm(current => canConfirmNow && (planEffect === 'keep' ? current : turn.plan?.can_confirm !== false))
-      if (!turn.available_actions.includes('modify')) {
+      setCanConfirm(canConfirmNow)
+      if (!canConfirmNow) {
         setPlan(null)
       }
     }
@@ -1104,7 +1205,10 @@ function ChatScreen({
     ) {
       setOpenSheet('plan')
     }
-  }, [])
+    if (turn.route === 'confirm_plan' && turn.committed) {
+      onCartRefresh()
+    }
+  }, [onCartRefresh])
 
   const initSession = useCallback(async () => {
     setRestoring(true)
@@ -1200,6 +1304,11 @@ function ChatScreen({
             setMsgs(p => p.map(m => m.id === assistantId ? { ...m, text: assistantText } : m))
           },
         },
+        plan ? {
+          plan_id: plan.plan_id,
+          plan_version: plan.plan_version,
+          selected_items: confirmableItems(planItemsWithSelection(plan.items, planSelection)),
+        } : undefined,
       )
       const finalText = turn.message || assistantText
       const clarifications = normalizePendingClarifications(
@@ -1221,7 +1330,7 @@ function ChatScreen({
       setTyping(false)
       setProgressText(null)
     }
-  }, [sessionId, taskId, stateVersion, sessionVersion, typing, confirming, restoring, viewContext, applyTurnTerminalState])
+  }, [sessionId, taskId, stateVersion, sessionVersion, typing, confirming, restoring, viewContext, plan, planSelection, applyTurnTerminalState])
 
   useEffect(() => {
     if (!autoSend || autoSentRef.current || restoring || !sessionId) return
@@ -1286,7 +1395,7 @@ function ChatScreen({
         plan.plan_version,
         stateVersion,
         sessionVersion,
-        confirmableItems(plan.items),
+        confirmableItems(planItemsWithSelection(plan.items, planSelection)),
         newRequestId(),
       )
       setStateVersion(result.state_version)
@@ -1312,56 +1421,17 @@ function ChatScreen({
     }
   }
 
-  async function handleTogglePlanItem(skuId: string) {
-    if (!plan || !taskId || confirming || typing) return
-    setConfirming(true)
-    setError(null)
-    try {
-      const revision = await revisePlan(
-        taskId,
-        plan,
-        stateVersion,
-        sessionVersion,
-        plan.items.map(item => ({
-          sku_id: item.sku_id,
-          quantity: item.quantity,
-          selected: item.sku_id === skuId ? item.selected === false : item.selected !== false,
-        })),
-      )
-      const { state_version, session_version, ...revisedPlan } = revision
-      setPlan({ ...plan, ...revisedPlan })
-      setStateVersion(state_version)
-      setSessionVersion(session_version)
-      setCanConfirm(revision.can_confirm)
-    } catch (e) {
-      setError(e instanceof Error ? e.message : '清单修改失败')
-    } finally {
-      setConfirming(false)
-    }
-  }
-
-  const hasPlan = !!plan
+  const hasPlan = !!plan && canConfirm
   const cartCount = checkoutPhase === 'success' ? 0 : cartItemCount(cart)
   const planItemCount = hasPlan ? plan.items.length : 0
 
   return (
-    <section className="chat-panel-enter relative flex h-[min(71vh,650px)] min-h-[500px] flex-col overflow-hidden rounded-t-[38px] bg-[#fcfbf8] font-sans shadow-[0_-20px_60px_rgba(40,36,29,0.12)]">
-      <div className="flex justify-center bg-[#f7f5f0] pt-3 pb-1.5" aria-hidden="true"><span className="h-1 w-10 rounded-full bg-black/[.12]" /></div>
-      <div className="flex flex-shrink-0 items-center gap-3 bg-[#f7f5f0] px-6 pt-2 pb-5">
-        <KekeAvatar size={40} animated />
-        <div>
-          <p className="text-[15px] font-semibold tracking-[-0.04em] text-[#191817]">可可</p>
-          {progressText && <p className="text-[10px] text-black/40">{progressText}</p>}
-        </div>
-        <button
-          onClick={handleNewChat}
-          className="ml-auto grid h-9 w-9 place-items-center rounded-full bg-white/70 text-black/48 transition hover:bg-white active:scale-95"
-          aria-label="发起新对话">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M12 5v14M5 12h14" /></svg>
-        </button>
-      </div>
-
-      <div className="scrollbar-hide flex-1 space-y-5 overflow-y-auto px-6 py-5">
+    <section className="guide-chat-panel chat-panel-enter relative flex h-[min(71vh,650px)] min-h-[500px] flex-col overflow-hidden rounded-t-[38px] font-sans">
+      <div
+        className={`guide-chat-scroll scrollbar-hide relative z-0 min-h-0 flex-1 space-y-5 overflow-y-auto px-6 pb-5 ${
+          progressText ? 'pt-[7.75rem]' : 'pt-[6.75rem]'
+        }`}
+      >
         {restoring && <p className="text-center text-sm text-black/40">正在连接可可…</p>}
         {error && <p className="text-center text-xs text-red-600">{error}</p>}
         {msgs.map(msg => (
@@ -1369,20 +1439,22 @@ function ChatScreen({
             {msg.role === 'ai' && <KekeAvatar size={26} />}
             <div className={`flex max-w-[82%] flex-col gap-2.5 ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
               {msg.text ? (
-                <div className="px-4 py-3 text-[13px] font-medium leading-[1.7] tracking-[-0.015em]"
+                <div
+                  className={`px-4 py-3 text-[13px] font-medium leading-[1.7] tracking-[-0.015em] ${
+                    msg.role === 'ai' ? 'guide-glass-bubble' : ''
+                  }`}
                   style={{
                     borderRadius: msg.role === 'user' ? '24px 24px 8px 24px' : '24px 24px 24px 8px',
-                    background: msg.role === 'user' ? '#171716' : '#f2f1ed',
+                    background: msg.role === 'user' ? '#171716' : undefined,
                     color: msg.role === 'user' ? '#fff' : '#292825',
                   }}>
                   {formatText(stripDuplicateClarificationOptions(msg.text, msg.suggestions))}
                 </div>
               ) : msg.role === 'ai' && typing ? (
                 <div
-                  className="ai-loading-bubble px-4 py-3 text-[13px] font-medium leading-[1.7] tracking-[-0.015em]"
+                  className="guide-glass-bubble ai-loading-bubble px-4 py-3 text-[13px] font-medium leading-[1.7] tracking-[-0.015em]"
                   style={{
                     borderRadius: '24px 24px 24px 8px',
-                    background: '#f2f1ed',
                     color: '#292825',
                   }}>
                   <span className="ai-loading-ellipsis" aria-label="可可正在输入">
@@ -1395,7 +1467,7 @@ function ChatScreen({
               {msg.suggestions && msg.role === 'ai' && !typing && !confirming && (
                 <div className="flex w-full flex-col gap-1.5">
                   {msg.suggestions.map((s, i) => (
-                    <button key={i} onClick={() => send(s)} className="rounded-full bg-[#f5f4f0] px-4 py-2.5 text-left text-[12px] font-medium text-black/55 transition hover:bg-[#eceae4] active:scale-[.98]">
+                    <button key={i} onClick={() => send(s)} className="guide-glass-chip rounded-full px-4 py-2.5 text-left text-[12px] font-medium text-black/55 transition active:scale-[.98]">
                       <span className="mr-2 text-[10px] font-semibold text-[#d79b58]">✦</span>
                       {s}
                     </button>
@@ -1408,16 +1480,51 @@ function ChatScreen({
         <div ref={bottomRef} />
       </div>
 
-      <div className="relative flex-shrink-0 bg-[#f7f5f0]/75 px-5 pb-4 pt-2">
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-20 px-6 pt-3 pb-3">
+        <div className="flex justify-center" aria-hidden="true">
+          <span className="h-1 w-10 rounded-full bg-black/[.12]" />
+        </div>
+        <div className="relative mt-2 flex min-h-[44px] items-center justify-center">
+          <button
+            type="button"
+            onClick={handleNewChat}
+            className="guide-glass-icon-btn pointer-events-auto absolute right-5 top-1/2 z-10 grid h-9 w-9 -translate-y-1/2 place-items-center rounded-full text-black/45 transition hover:bg-white/70 active:scale-95"
+            aria-label="发起新对话">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M12 5v14M5 12h14" /></svg>
+          </button>
+          <div className="guide-glass-header-pill pointer-events-auto relative z-10 inline-flex items-center gap-2.5 rounded-full py-2 pl-2 pr-5">
+            <KekeAvatar size={36} animated />
+            <p className="text-[15px] font-semibold tracking-[-0.04em] text-[#191817]">可可</p>
+          </div>
+        </div>
+        {progressText && (
+          <p className="mt-1 text-center text-[10px] text-black/40">{progressText}</p>
+        )}
+      </div>
+
+      <div className="relative z-10 flex-shrink-0 px-5 pb-4 pt-2">
         {openSheet && !checkoutPhase && (
-          <ChatFloatingSheet onClose={() => setOpenSheet(null)}>
+          <ChatFloatingSheet
+            sheetKey={openSheet}
+            panelRef={guideSheetPanelRef}
+            morphOrigin={sheetMorphOrigin}
+            closing={sheetClosing}
+            onMorphEnd={handleGuideSheetMorphEnd}
+            onClose={closeGuideSheet}
+          >
             {openSheet === 'activity' && <ActivitySheetContent />}
             {openSheet === 'plan' && (
               hasPlan
                 ? (
                   <PlanSheetContent
                     plan={plan}
-                    onToggleItem={handleTogglePlanItem}
+                    selection={planSelection}
+                    onToggleItem={(skuId) => {
+                      setPlanSelection((prev) => ({
+                        ...prev,
+                        [skuId]: !(prev[skuId] ?? plan.items.find(i => i.sku_id === skuId)?.selected !== false),
+                      }))
+                    }}
                     confirming={confirming}
                     canConfirm={canConfirm}
                     typing={typing}
@@ -1464,11 +1571,16 @@ function ChatScreen({
         )}
         <ChatGuideCapsules
           openSheet={openSheet}
-          onToggle={(sheet) => setOpenSheet(prev => (prev === sheet ? null : sheet))}
+          onToggle={toggleGuideSheet}
           planCount={planItemCount}
           cartCount={cartCount}
+          capsuleRefs={{
+            activity: guideCapsuleActivityRef,
+            plan: guideCapsulePlanRef,
+            cart: guideCapsuleCartRef,
+          }}
         />
-        <div className="flex items-center gap-2 rounded-[28px] bg-white/85 px-4 py-2.5 backdrop-blur-sm">
+        <div className="guide-glass-surface flex items-center gap-2 rounded-[28px] px-4 py-2.5">
           <input
             value={input}
             onChange={e => setInput(e.target.value)}

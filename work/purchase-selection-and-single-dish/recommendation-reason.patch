@@ -1,0 +1,18 @@
+--- a/backend/app/agent/graph/nodes/mutation.py
++++ b/backend/app/agent/graph/nodes/mutation.py
+@@ -593,7 +593,14 @@
+         if (staged["status"] == "staged" and staged["plan_result"]["can_confirm"]
+                 and staged["plan_result"]["coverage_mode"] == "full"):
+             staged["plan_result"]["target"]["selection_goal"] = goal.model_dump()
+-            staged["message"] = f"已按你的条件先配「{candidate.name}」。想换菜可以说换一个。"
++            total_yuan = staged["plan_result"]["total_price_fen"] / 100
++            staged["message"] = (
++                f"主推「{candidate.name}」：必需食材已匹配当前门店可售商品，"
++                f"已选合计 ¥{total_yuan:.2f}（演示价格）"
++            )
++            if requirements.budget_fen is not None:
++                staged["message"] += f"，在 {requirements.budget_fen / 100:g} 元预算内"
++            staged["message"] += "。想换菜可以说换一个。"
+             displayed = [row["ref"] for row in options if row["ref"] != ref]
+             proposal = replace(proposal, display_refs=displayed)
+             result = _stage_prepared(state, runtime, proposal, decision, [staged], [mutation])

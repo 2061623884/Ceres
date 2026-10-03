@@ -1,0 +1,920 @@
+{
+  "session_id": "sess-0f9d019c7d95",
+  "owner_id": "owner-a84616799ac54620",
+  "before": {
+    "session": {
+      "session_id": "sess-0f9d019c7d95",
+      "task_id": "task-bc3f408e675b",
+      "state_version": 4,
+      "session_version": 4,
+      "current_step": "awaiting_confirmation",
+      "task_status": "active",
+      "entry_context": {
+        "page": "category",
+        "category_id": "snack",
+        "store_id": "store-demo-01",
+        "delivery_zone_id": "zone-default"
+      },
+      "plan": {
+        "plan_id": "plan-94183547f2b9",
+        "plan_version": 3,
+        "mode": "bundle",
+        "items": [
+          {
+            "sku_id": "demo:tomato-fresh-500g",
+            "name": "新鲜番茄 500克",
+            "quantity": 1,
+            "unit_price_fen": 680,
+            "line_total_fen": 0,
+            "image_path": "data/images/demo-tomato-fresh-500g.jpg",
+            "image_kind": "photo",
+            "image_kind_legacy": "demo_photo",
+            "role": "required",
+            "selected": false,
+            "recommended_quantity": 1,
+            "max_addable_quantity": 45,
+            "spec_quantity": 500,
+            "spec_unit": "g",
+            "sell_unit": "件",
+            "quantity_source": "recommended",
+            "group_id": "dish:dish-fanqie-chao-dan",
+            "target_kind": "dish",
+            "target_id": "dish-fanqie-chao-dan",
+            "component_name": null,
+            "contributions": [
+              {
+                "group_id": "dish:dish-fanqie-chao-dan",
+                "quantity": 1,
+                "selected": true,
+                "added_quantity": 0,
+                "required_item_id": "dish:dish-fanqie-chao-dan#tomato",
+                "requirement": {
+                  "required_item_id": "dish:dish-fanqie-chao-dan#tomato",
+                  "name": "番茄",
+                  "ingredient_id": "tomato",
+                  "component_id": null,
+                  "quantity": 300.0,
+                  "unit": "g",
+                  "quantity_known": true,
+                  "requiredness": "core",
+                  "source": {
+                    "kind": "local_recipe",
+                    "ref": "dish-fanqie-chao-dan"
+                  }
+                }
+              }
+            ],
+            "added_quantity": 0,
+            "remaining_quantity": 1,
+            "required_item_id": "dish:dish-fanqie-chao-dan#tomato",
+            "requirement": {
+              "required_item_id": "dish:dish-fanqie-chao-dan#tomato",
+              "name": "番茄",
+              "ingredient_id": "tomato",
+              "component_id": null,
+              "quantity": 300.0,
+              "unit": "g",
+              "quantity_known": true,
+              "requiredness": "core",
+              "source": {
+                "kind": "local_recipe",
+                "ref": "dish-fanqie-chao-dan"
+              }
+            },
+            "availability": "available",
+            "evidence": {
+              "sku_source": "store_offer",
+              "quoted_at": "2026-10-03T17:52:04+00:00",
+              "stock_verified": true,
+              "data_mode": "demo",
+              "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+              "unknown_constraints": []
+            },
+            "pack_source": "catalog_spec",
+            "shortfall_quantity": 0
+          },
+          {
+            "sku_id": "demo:eggs-fresh-6pack",
+            "name": "鲜鸡蛋 6枚装",
+            "quantity": 1,
+            "unit_price_fen": 980,
+            "line_total_fen": 980,
+            "image_path": "data/images/demo-eggs-fresh-6pack.jpg",
+            "image_kind": "photo",
+            "image_kind_legacy": "demo_photo",
+            "role": "required",
+            "selected": true,
+            "recommended_quantity": 1,
+            "max_addable_quantity": 40,
+            "spec_quantity": 6,
+            "spec_unit": "pc",
+            "sell_unit": "件",
+            "quantity_source": "recommended",
+            "group_id": "dish:dish-fanqie-chao-dan",
+            "target_kind": "dish",
+            "target_id": "dish-fanqie-chao-dan",
+            "component_name": null,
+            "contributions": [
+              {
+                "group_id": "dish:dish-fanqie-chao-dan",
+                "quantity": 1,
+                "selected": true,
+                "added_quantity": 0,
+                "required_item_id": "dish:dish-fanqie-chao-dan#egg",
+                "requirement": {
+                  "required_item_id": "dish:dish-fanqie-chao-dan#egg",
+                  "name": "鸡蛋",
+                  "ingredient_id": "egg",
+                  "component_id": null,
+                  "quantity": 3.0,
+                  "unit": "pc",
+                  "quantity_known": true,
+                  "requiredness": "core",
+                  "source": {
+                    "kind": "local_recipe",
+                    "ref": "dish-fanqie-chao-dan"
+                  }
+                }
+              }
+            ],
+            "added_quantity": 0,
+            "remaining_quantity": 1,
+            "required_item_id": "dish:dish-fanqie-chao-dan#egg",
+            "requirement": {
+              "required_item_id": "dish:dish-fanqie-chao-dan#egg",
+              "name": "鸡蛋",
+              "ingredient_id": "egg",
+              "component_id": null,
+              "quantity": 3.0,
+              "unit": "pc",
+              "quantity_known": true,
+              "requiredness": "core",
+              "source": {
+                "kind": "local_recipe",
+                "ref": "dish-fanqie-chao-dan"
+              }
+            },
+            "availability": "available",
+            "evidence": {
+              "sku_source": "store_offer",
+              "quoted_at": "2026-10-03T17:52:04+00:00",
+              "stock_verified": true,
+              "data_mode": "demo",
+              "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+              "unknown_constraints": []
+            },
+            "pack_source": "catalog_spec",
+            "shortfall_quantity": 0
+          },
+          {
+            "sku_id": "demo:cooking-oil-500ml",
+            "name": "食用油 500毫升",
+            "quantity": 1,
+            "unit_price_fen": 1280,
+            "line_total_fen": 1280,
+            "image_path": "data/images/demo-cooking-oil-500ml.jpg",
+            "image_kind": "photo",
+            "image_kind_legacy": "demo_photo",
+            "role": "pantry",
+            "selected": true,
+            "recommended_quantity": 1,
+            "max_addable_quantity": 40,
+            "spec_quantity": 500,
+            "spec_unit": "ml",
+            "sell_unit": "件",
+            "quantity_source": "recommended",
+            "group_id": "dish:dish-fanqie-chao-dan",
+            "target_kind": "dish",
+            "target_id": "dish-fanqie-chao-dan",
+            "component_name": null,
+            "contributions": [
+              {
+                "group_id": "dish:dish-fanqie-chao-dan",
+                "quantity": 1,
+                "selected": false,
+                "added_quantity": 0,
+                "required_item_id": "dish:dish-fanqie-chao-dan#oil",
+                "requirement": {
+                  "required_item_id": "dish:dish-fanqie-chao-dan#oil",
+                  "name": "食用油",
+                  "ingredient_id": "oil",
+                  "component_id": null,
+                  "quantity": 30.0,
+                  "unit": "ml",
+                  "quantity_known": true,
+                  "requiredness": "optional",
+                  "source": {
+                    "kind": "local_recipe",
+                    "ref": "dish-fanqie-chao-dan"
+                  }
+                }
+              }
+            ],
+            "added_quantity": 0,
+            "remaining_quantity": 1,
+            "required_item_id": "dish:dish-fanqie-chao-dan#oil",
+            "requirement": {
+              "required_item_id": "dish:dish-fanqie-chao-dan#oil",
+              "name": "食用油",
+              "ingredient_id": "oil",
+              "component_id": null,
+              "quantity": 30.0,
+              "unit": "ml",
+              "quantity_known": true,
+              "requiredness": "optional",
+              "source": {
+                "kind": "local_recipe",
+                "ref": "dish-fanqie-chao-dan"
+              }
+            },
+            "availability": "available",
+            "evidence": {
+              "sku_source": "store_offer",
+              "quoted_at": "2026-10-03T17:52:04+00:00",
+              "stock_verified": true,
+              "data_mode": "demo",
+              "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+              "unknown_constraints": []
+            },
+            "pack_source": "catalog_spec",
+            "shortfall_quantity": 0
+          },
+          {
+            "sku_id": "demo:salt-500g",
+            "name": "食用盐 500克",
+            "quantity": 1,
+            "unit_price_fen": 320,
+            "line_total_fen": 0,
+            "image_path": "data/images/demo-salt-500g.jpg",
+            "image_kind": "photo",
+            "image_kind_legacy": "demo_photo",
+            "role": "pantry",
+            "selected": false,
+            "recommended_quantity": 1,
+            "max_addable_quantity": 80,
+            "spec_quantity": 500,
+            "spec_unit": "g",
+            "sell_unit": "件",
+            "quantity_source": "recommended",
+            "group_id": "dish:dish-fanqie-chao-dan",
+            "target_kind": "dish",
+            "target_id": "dish-fanqie-chao-dan",
+            "component_name": null,
+            "contributions": [
+              {
+                "group_id": "dish:dish-fanqie-chao-dan",
+                "quantity": 1,
+                "selected": false,
+                "added_quantity": 0,
+                "required_item_id": "dish:dish-fanqie-chao-dan#salt",
+                "requirement": {
+                  "required_item_id": "dish:dish-fanqie-chao-dan#salt",
+                  "name": "盐",
+                  "ingredient_id": "salt",
+                  "component_id": null,
+                  "quantity": 50.0,
+                  "unit": "g",
+                  "quantity_known": true,
+                  "requiredness": "optional",
+                  "source": {
+                    "kind": "local_recipe",
+                    "ref": "dish-fanqie-chao-dan"
+                  }
+                }
+              }
+            ],
+            "added_quantity": 0,
+            "remaining_quantity": 1,
+            "required_item_id": "dish:dish-fanqie-chao-dan#salt",
+            "requirement": {
+              "required_item_id": "dish:dish-fanqie-chao-dan#salt",
+              "name": "盐",
+              "ingredient_id": "salt",
+              "component_id": null,
+              "quantity": 50.0,
+              "unit": "g",
+              "quantity_known": true,
+              "requiredness": "optional",
+              "source": {
+                "kind": "local_recipe",
+                "ref": "dish-fanqie-chao-dan"
+              }
+            },
+            "availability": "available",
+            "evidence": {
+              "sku_source": "store_offer",
+              "quoted_at": "2026-10-03T17:52:04+00:00",
+              "stock_verified": true,
+              "data_mode": "demo",
+              "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+              "unknown_constraints": []
+            },
+            "pack_source": "catalog_spec",
+            "shortfall_quantity": 0
+          },
+          {
+            "sku_id": "demo:sugar-white-500g",
+            "name": "白砂糖 500克",
+            "quantity": 1,
+            "unit_price_fen": 650,
+            "line_total_fen": 0,
+            "image_path": "data/images/demo-sugar-white-500g.jpg",
+            "image_kind": "photo",
+            "image_kind_legacy": "demo_photo",
+            "role": "pantry",
+            "selected": false,
+            "recommended_quantity": 1,
+            "max_addable_quantity": 60,
+            "spec_quantity": 500,
+            "spec_unit": "g",
+            "sell_unit": "件",
+            "quantity_source": "recommended",
+            "group_id": "dish:dish-fanqie-chao-dan",
+            "target_kind": "dish",
+            "target_id": "dish-fanqie-chao-dan",
+            "component_name": null,
+            "contributions": [
+              {
+                "group_id": "dish:dish-fanqie-chao-dan",
+                "quantity": 1,
+                "selected": false,
+                "added_quantity": 0,
+                "required_item_id": "dish:dish-fanqie-chao-dan#sugar",
+                "requirement": {
+                  "required_item_id": "dish:dish-fanqie-chao-dan#sugar",
+                  "name": "糖",
+                  "ingredient_id": "sugar",
+                  "component_id": null,
+                  "quantity": 50.0,
+                  "unit": "g",
+                  "quantity_known": true,
+                  "requiredness": "optional",
+                  "source": {
+                    "kind": "local_recipe",
+                    "ref": "dish-fanqie-chao-dan"
+                  }
+                }
+              }
+            ],
+            "added_quantity": 0,
+            "remaining_quantity": 1,
+            "required_item_id": "dish:dish-fanqie-chao-dan#sugar",
+            "requirement": {
+              "required_item_id": "dish:dish-fanqie-chao-dan#sugar",
+              "name": "糖",
+              "ingredient_id": "sugar",
+              "component_id": null,
+              "quantity": 50.0,
+              "unit": "g",
+              "quantity_known": true,
+              "requiredness": "optional",
+              "source": {
+                "kind": "local_recipe",
+                "ref": "dish-fanqie-chao-dan"
+              }
+            },
+            "availability": "available",
+            "evidence": {
+              "sku_source": "store_offer",
+              "quoted_at": "2026-10-03T17:52:04+00:00",
+              "stock_verified": true,
+              "data_mode": "demo",
+              "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+              "unknown_constraints": []
+            },
+            "pack_source": "catalog_spec",
+            "shortfall_quantity": 0
+          }
+        ],
+        "total_price_fen": 2260,
+        "selected_total_fen": 2260,
+        "expires_at": "2026-10-03T17:50:01.783936+00:00",
+        "validation_status": "passed",
+        "coverage_mode": "partial",
+        "coverage_intent": "partial_ok",
+        "uncovered_items": [
+          {
+            "sku_id": "demo:tomato-fresh-500g",
+            "ingredient_ids": [
+              "tomato"
+            ],
+            "required_item_id": "dish:dish-fanqie-chao-dan#tomato"
+          }
+        ],
+        "gaps": [],
+        "can_confirm": true,
+        "gap_fill": null,
+        "targets": [
+          {
+            "group_id": "dish:dish-fanqie-chao-dan",
+            "kind": "dish",
+            "target_id": "dish-fanqie-chao-dan",
+            "name": "番茄炒蛋",
+            "meal_name": "番茄炒蛋",
+            "fulfillment_mode": "unspecified",
+            "people": 2,
+            "people_source": "default",
+            "notes": []
+          }
+        ],
+        "merged_sku_contributions": [],
+        "outstanding_total_fen": 2260
+      },
+      "plan_read_only": false,
+      "pending_clarifications": [],
+      "confirmation_result": null,
+      "message": "已恢复待确认方案",
+      "available_actions": [
+        "confirm",
+        "cancel",
+        "modify",
+        "send_message"
+      ],
+      "constraints_summary": {
+        "goal": "番茄炒蛋",
+        "people": null,
+        "budget_fen": null,
+        "excluded_ingredients": []
+      },
+      "cart_version": null,
+      "confirmation_id": null,
+      "history_status": "complete",
+      "messages": null
+    },
+    "cart": {
+      "store_id": "store-demo-01",
+      "version": 4,
+      "items": [
+        {
+          "sku_id": "demo:snack-soda-crackers-100g-box",
+          "name": "苏打饼干100克盒装",
+          "quantity": 1,
+          "unit_price_fen": 690,
+          "line_total_fen": 690,
+          "image_path": null,
+          "sellable": true
+        }
+      ],
+      "total_price_fen": 690,
+      "business_data_mode": "demo"
+    }
+  },
+  "restored": {
+    "session": {
+      "session_id": "sess-0f9d019c7d95",
+      "task_id": "task-bc3f408e675b",
+      "state_version": 4,
+      "session_version": 4,
+      "current_step": "awaiting_confirmation",
+      "task_status": "active",
+      "entry_context": {
+        "page": "category",
+        "category_id": "snack",
+        "store_id": "store-demo-01",
+        "delivery_zone_id": "zone-default"
+      },
+      "plan": {
+        "plan_id": "plan-94183547f2b9",
+        "plan_version": 3,
+        "mode": "bundle",
+        "items": [
+          {
+            "sku_id": "demo:tomato-fresh-500g",
+            "name": "新鲜番茄 500克",
+            "quantity": 1,
+            "unit_price_fen": 680,
+            "line_total_fen": 0,
+            "image_path": "data/images/demo-tomato-fresh-500g.jpg",
+            "image_kind": "photo",
+            "image_kind_legacy": "demo_photo",
+            "role": "required",
+            "selected": false,
+            "recommended_quantity": 1,
+            "max_addable_quantity": 45,
+            "spec_quantity": 500,
+            "spec_unit": "g",
+            "sell_unit": "件",
+            "quantity_source": "recommended",
+            "group_id": "dish:dish-fanqie-chao-dan",
+            "target_kind": "dish",
+            "target_id": "dish-fanqie-chao-dan",
+            "component_name": null,
+            "contributions": [
+              {
+                "group_id": "dish:dish-fanqie-chao-dan",
+                "quantity": 1,
+                "selected": true,
+                "added_quantity": 0,
+                "required_item_id": "dish:dish-fanqie-chao-dan#tomato",
+                "requirement": {
+                  "required_item_id": "dish:dish-fanqie-chao-dan#tomato",
+                  "name": "番茄",
+                  "ingredient_id": "tomato",
+                  "component_id": null,
+                  "quantity": 300.0,
+                  "unit": "g",
+                  "quantity_known": true,
+                  "requiredness": "core",
+                  "source": {
+                    "kind": "local_recipe",
+                    "ref": "dish-fanqie-chao-dan"
+                  }
+                }
+              }
+            ],
+            "added_quantity": 0,
+            "remaining_quantity": 1,
+            "required_item_id": "dish:dish-fanqie-chao-dan#tomato",
+            "requirement": {
+              "required_item_id": "dish:dish-fanqie-chao-dan#tomato",
+              "name": "番茄",
+              "ingredient_id": "tomato",
+              "component_id": null,
+              "quantity": 300.0,
+              "unit": "g",
+              "quantity_known": true,
+              "requiredness": "core",
+              "source": {
+                "kind": "local_recipe",
+                "ref": "dish-fanqie-chao-dan"
+              }
+            },
+            "availability": "available",
+            "evidence": {
+              "sku_source": "store_offer",
+              "quoted_at": "2026-10-03T17:52:04+00:00",
+              "stock_verified": true,
+              "data_mode": "demo",
+              "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+              "unknown_constraints": []
+            },
+            "pack_source": "catalog_spec",
+            "shortfall_quantity": 0
+          },
+          {
+            "sku_id": "demo:eggs-fresh-6pack",
+            "name": "鲜鸡蛋 6枚装",
+            "quantity": 1,
+            "unit_price_fen": 980,
+            "line_total_fen": 980,
+            "image_path": "data/images/demo-eggs-fresh-6pack.jpg",
+            "image_kind": "photo",
+            "image_kind_legacy": "demo_photo",
+            "role": "required",
+            "selected": true,
+            "recommended_quantity": 1,
+            "max_addable_quantity": 40,
+            "spec_quantity": 6,
+            "spec_unit": "pc",
+            "sell_unit": "件",
+            "quantity_source": "recommended",
+            "group_id": "dish:dish-fanqie-chao-dan",
+            "target_kind": "dish",
+            "target_id": "dish-fanqie-chao-dan",
+            "component_name": null,
+            "contributions": [
+              {
+                "group_id": "dish:dish-fanqie-chao-dan",
+                "quantity": 1,
+                "selected": true,
+                "added_quantity": 0,
+                "required_item_id": "dish:dish-fanqie-chao-dan#egg",
+                "requirement": {
+                  "required_item_id": "dish:dish-fanqie-chao-dan#egg",
+                  "name": "鸡蛋",
+                  "ingredient_id": "egg",
+                  "component_id": null,
+                  "quantity": 3.0,
+                  "unit": "pc",
+                  "quantity_known": true,
+                  "requiredness": "core",
+                  "source": {
+                    "kind": "local_recipe",
+                    "ref": "dish-fanqie-chao-dan"
+                  }
+                }
+              }
+            ],
+            "added_quantity": 0,
+            "remaining_quantity": 1,
+            "required_item_id": "dish:dish-fanqie-chao-dan#egg",
+            "requirement": {
+              "required_item_id": "dish:dish-fanqie-chao-dan#egg",
+              "name": "鸡蛋",
+              "ingredient_id": "egg",
+              "component_id": null,
+              "quantity": 3.0,
+              "unit": "pc",
+              "quantity_known": true,
+              "requiredness": "core",
+              "source": {
+                "kind": "local_recipe",
+                "ref": "dish-fanqie-chao-dan"
+              }
+            },
+            "availability": "available",
+            "evidence": {
+              "sku_source": "store_offer",
+              "quoted_at": "2026-10-03T17:52:04+00:00",
+              "stock_verified": true,
+              "data_mode": "demo",
+              "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+              "unknown_constraints": []
+            },
+            "pack_source": "catalog_spec",
+            "shortfall_quantity": 0
+          },
+          {
+            "sku_id": "demo:cooking-oil-500ml",
+            "name": "食用油 500毫升",
+            "quantity": 1,
+            "unit_price_fen": 1280,
+            "line_total_fen": 1280,
+            "image_path": "data/images/demo-cooking-oil-500ml.jpg",
+            "image_kind": "photo",
+            "image_kind_legacy": "demo_photo",
+            "role": "pantry",
+            "selected": true,
+            "recommended_quantity": 1,
+            "max_addable_quantity": 40,
+            "spec_quantity": 500,
+            "spec_unit": "ml",
+            "sell_unit": "件",
+            "quantity_source": "recommended",
+            "group_id": "dish:dish-fanqie-chao-dan",
+            "target_kind": "dish",
+            "target_id": "dish-fanqie-chao-dan",
+            "component_name": null,
+            "contributions": [
+              {
+                "group_id": "dish:dish-fanqie-chao-dan",
+                "quantity": 1,
+                "selected": false,
+                "added_quantity": 0,
+                "required_item_id": "dish:dish-fanqie-chao-dan#oil",
+                "requirement": {
+                  "required_item_id": "dish:dish-fanqie-chao-dan#oil",
+                  "name": "食用油",
+                  "ingredient_id": "oil",
+                  "component_id": null,
+                  "quantity": 30.0,
+                  "unit": "ml",
+                  "quantity_known": true,
+                  "requiredness": "optional",
+                  "source": {
+                    "kind": "local_recipe",
+                    "ref": "dish-fanqie-chao-dan"
+                  }
+                }
+              }
+            ],
+            "added_quantity": 0,
+            "remaining_quantity": 1,
+            "required_item_id": "dish:dish-fanqie-chao-dan#oil",
+            "requirement": {
+              "required_item_id": "dish:dish-fanqie-chao-dan#oil",
+              "name": "食用油",
+              "ingredient_id": "oil",
+              "component_id": null,
+              "quantity": 30.0,
+              "unit": "ml",
+              "quantity_known": true,
+              "requiredness": "optional",
+              "source": {
+                "kind": "local_recipe",
+                "ref": "dish-fanqie-chao-dan"
+              }
+            },
+            "availability": "available",
+            "evidence": {
+              "sku_source": "store_offer",
+              "quoted_at": "2026-10-03T17:52:04+00:00",
+              "stock_verified": true,
+              "data_mode": "demo",
+              "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+              "unknown_constraints": []
+            },
+            "pack_source": "catalog_spec",
+            "shortfall_quantity": 0
+          },
+          {
+            "sku_id": "demo:salt-500g",
+            "name": "食用盐 500克",
+            "quantity": 1,
+            "unit_price_fen": 320,
+            "line_total_fen": 0,
+            "image_path": "data/images/demo-salt-500g.jpg",
+            "image_kind": "photo",
+            "image_kind_legacy": "demo_photo",
+            "role": "pantry",
+            "selected": false,
+            "recommended_quantity": 1,
+            "max_addable_quantity": 80,
+            "spec_quantity": 500,
+            "spec_unit": "g",
+            "sell_unit": "件",
+            "quantity_source": "recommended",
+            "group_id": "dish:dish-fanqie-chao-dan",
+            "target_kind": "dish",
+            "target_id": "dish-fanqie-chao-dan",
+            "component_name": null,
+            "contributions": [
+              {
+                "group_id": "dish:dish-fanqie-chao-dan",
+                "quantity": 1,
+                "selected": false,
+                "added_quantity": 0,
+                "required_item_id": "dish:dish-fanqie-chao-dan#salt",
+                "requirement": {
+                  "required_item_id": "dish:dish-fanqie-chao-dan#salt",
+                  "name": "盐",
+                  "ingredient_id": "salt",
+                  "component_id": null,
+                  "quantity": 50.0,
+                  "unit": "g",
+                  "quantity_known": true,
+                  "requiredness": "optional",
+                  "source": {
+                    "kind": "local_recipe",
+                    "ref": "dish-fanqie-chao-dan"
+                  }
+                }
+              }
+            ],
+            "added_quantity": 0,
+            "remaining_quantity": 1,
+            "required_item_id": "dish:dish-fanqie-chao-dan#salt",
+            "requirement": {
+              "required_item_id": "dish:dish-fanqie-chao-dan#salt",
+              "name": "盐",
+              "ingredient_id": "salt",
+              "component_id": null,
+              "quantity": 50.0,
+              "unit": "g",
+              "quantity_known": true,
+              "requiredness": "optional",
+              "source": {
+                "kind": "local_recipe",
+                "ref": "dish-fanqie-chao-dan"
+              }
+            },
+            "availability": "available",
+            "evidence": {
+              "sku_source": "store_offer",
+              "quoted_at": "2026-10-03T17:52:04+00:00",
+              "stock_verified": true,
+              "data_mode": "demo",
+              "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+              "unknown_constraints": []
+            },
+            "pack_source": "catalog_spec",
+            "shortfall_quantity": 0
+          },
+          {
+            "sku_id": "demo:sugar-white-500g",
+            "name": "白砂糖 500克",
+            "quantity": 1,
+            "unit_price_fen": 650,
+            "line_total_fen": 0,
+            "image_path": "data/images/demo-sugar-white-500g.jpg",
+            "image_kind": "photo",
+            "image_kind_legacy": "demo_photo",
+            "role": "pantry",
+            "selected": false,
+            "recommended_quantity": 1,
+            "max_addable_quantity": 60,
+            "spec_quantity": 500,
+            "spec_unit": "g",
+            "sell_unit": "件",
+            "quantity_source": "recommended",
+            "group_id": "dish:dish-fanqie-chao-dan",
+            "target_kind": "dish",
+            "target_id": "dish-fanqie-chao-dan",
+            "component_name": null,
+            "contributions": [
+              {
+                "group_id": "dish:dish-fanqie-chao-dan",
+                "quantity": 1,
+                "selected": false,
+                "added_quantity": 0,
+                "required_item_id": "dish:dish-fanqie-chao-dan#sugar",
+                "requirement": {
+                  "required_item_id": "dish:dish-fanqie-chao-dan#sugar",
+                  "name": "糖",
+                  "ingredient_id": "sugar",
+                  "component_id": null,
+                  "quantity": 50.0,
+                  "unit": "g",
+                  "quantity_known": true,
+                  "requiredness": "optional",
+                  "source": {
+                    "kind": "local_recipe",
+                    "ref": "dish-fanqie-chao-dan"
+                  }
+                }
+              }
+            ],
+            "added_quantity": 0,
+            "remaining_quantity": 1,
+            "required_item_id": "dish:dish-fanqie-chao-dan#sugar",
+            "requirement": {
+              "required_item_id": "dish:dish-fanqie-chao-dan#sugar",
+              "name": "糖",
+              "ingredient_id": "sugar",
+              "component_id": null,
+              "quantity": 50.0,
+              "unit": "g",
+              "quantity_known": true,
+              "requiredness": "optional",
+              "source": {
+                "kind": "local_recipe",
+                "ref": "dish-fanqie-chao-dan"
+              }
+            },
+            "availability": "available",
+            "evidence": {
+              "sku_source": "store_offer",
+              "quoted_at": "2026-10-03T17:52:04+00:00",
+              "stock_verified": true,
+              "data_mode": "demo",
+              "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+              "unknown_constraints": []
+            },
+            "pack_source": "catalog_spec",
+            "shortfall_quantity": 0
+          }
+        ],
+        "total_price_fen": 2260,
+        "selected_total_fen": 2260,
+        "expires_at": "2026-10-03T17:50:01.783936+00:00",
+        "validation_status": "passed",
+        "coverage_mode": "partial",
+        "coverage_intent": "partial_ok",
+        "uncovered_items": [
+          {
+            "sku_id": "demo:tomato-fresh-500g",
+            "ingredient_ids": [
+              "tomato"
+            ],
+            "required_item_id": "dish:dish-fanqie-chao-dan#tomato"
+          }
+        ],
+        "gaps": [],
+        "can_confirm": true,
+        "gap_fill": null,
+        "targets": [
+          {
+            "group_id": "dish:dish-fanqie-chao-dan",
+            "kind": "dish",
+            "target_id": "dish-fanqie-chao-dan",
+            "name": "番茄炒蛋",
+            "meal_name": "番茄炒蛋",
+            "fulfillment_mode": "unspecified",
+            "people": 2,
+            "people_source": "default",
+            "notes": []
+          }
+        ],
+        "merged_sku_contributions": [],
+        "outstanding_total_fen": 2260
+      },
+      "plan_read_only": false,
+      "pending_clarifications": [],
+      "confirmation_result": null,
+      "message": "已恢复待确认方案",
+      "available_actions": [
+        "confirm",
+        "cancel",
+        "modify",
+        "send_message"
+      ],
+      "constraints_summary": {
+        "goal": "番茄炒蛋",
+        "people": null,
+        "budget_fen": null,
+        "excluded_ingredients": []
+      },
+      "cart_version": null,
+      "confirmation_id": null,
+      "history_status": "complete",
+      "messages": null
+    },
+    "cart": {
+      "store_id": "store-demo-01",
+      "version": 4,
+      "items": [
+        {
+          "sku_id": "demo:snack-soda-crackers-100g-box",
+          "name": "苏打饼干100克盒装",
+          "quantity": 1,
+          "unit_price_fen": 690,
+          "line_total_fen": 690,
+          "image_path": null,
+          "sellable": true
+        }
+      ],
+      "total_price_fen": 690,
+      "business_data_mode": "demo"
+    }
+  }
+}

@@ -1,0 +1,138 @@
+{
+  "repeat": 2,
+  "turns": [
+    {
+      "input": "今晚自己做一道菜，预算30元，没有忌口，你帮我推荐一道菜",
+      "elapsed_ms": 45362,
+      "first_chunk_ms": 2,
+      "events": [
+        {
+          "protocol_version": 1,
+          "run_id": "run-7efd770ecd6d",
+          "sequence": 0,
+          "type": "accepted",
+          "session_id": "sess-b510597e5d1c",
+          "target_task_id": null,
+          "message_id": null,
+          "payload": {}
+        },
+        {
+          "protocol_version": 1,
+          "run_id": "run-7efd770ecd6d",
+          "sequence": 1,
+          "type": "progress",
+          "session_id": "sess-b510597e5d1c",
+          "target_task_id": null,
+          "message_id": null,
+          "payload": {
+            "phase": "understanding"
+          }
+        },
+        {
+          "protocol_version": 1,
+          "run_id": "run-7efd770ecd6d",
+          "sequence": 2,
+          "type": "answer.delta",
+          "session_id": "sess-b510597e5d1c",
+          "target_task_id": null,
+          "message_id": null,
+          "payload": {
+            "delta": "抱歉，这次响应超时了，请稍后重试。",
+            "final": true,
+            "replace": false
+          }
+        },
+        {
+          "protocol_version": 1,
+          "run_id": "run-7efd770ecd6d",
+          "sequence": 3,
+          "type": "turn.completed",
+          "session_id": "sess-b510597e5d1c",
+          "target_task_id": null,
+          "message_id": "msg-ab2ff005e145",
+          "payload": {
+            "session_id": "sess-b510597e5d1c",
+            "task_id": null,
+            "state_version": 0,
+            "status": "understanding",
+            "answer_status": "accepted",
+            "purchase_step": "none",
+            "message": "抱歉，这次响应超时了，请稍后重试。",
+            "clarification": null,
+            "plan": null,
+            "plan_effect": "keep",
+            "pending_clarification": null,
+            "missing_constraints": [],
+            "route": "refuse",
+            "readiness": "unsupported",
+            "missing_slots": [],
+            "request_id": "3b2fec23-1a57-41b3-a18b-2bae476a18ff",
+            "session_version": 0,
+            "committed": false,
+            "allowed": true,
+            "guard_code": null,
+            "pending_clarifications": [],
+            "action_results": [
+              {
+                "type": "understanding_failed",
+                "status": "failed",
+                "saved": false,
+                "reply_ok": false,
+                "code": "MODEL_TIMEOUT",
+                "message": "Model request timed out",
+                "retryable": true,
+                "action_id": "a1"
+              }
+            ],
+            "available_actions": [
+              "send_message"
+            ],
+            "user_message_id": "msg-691b00f2bfb5",
+            "assistant_message_id": "msg-ab2ff005e145",
+            "message_sequence": 2,
+            "trace_id": "trace-93f207b5cc7e",
+            "model_mode": "live",
+            "business_data_mode": "demo",
+            "current_editable_task_id": null
+          }
+        }
+      ],
+      "session": {
+        "session_id": "sess-b510597e5d1c",
+        "task_id": null,
+        "state_version": 0,
+        "session_version": 0,
+        "current_step": null,
+        "task_status": null,
+        "entry_context": {
+          "page": "home",
+          "category_id": null,
+          "store_id": "store-demo-01",
+          "delivery_zone_id": "zone-default"
+        },
+        "plan": null,
+        "plan_read_only": false,
+        "pending_clarifications": [],
+        "confirmation_result": null,
+        "message": null,
+        "available_actions": [
+          "send_message"
+        ],
+        "constraints_summary": {},
+        "cart_version": null,
+        "confirmation_id": null,
+        "history_status": "complete",
+        "messages": null
+      },
+      "cart": {
+        "store_id": "store-demo-01",
+        "version": 1,
+        "items": [],
+        "total_price_fen": 0,
+        "business_data_mode": "demo"
+      }
+    }
+  ],
+  "session_id": "sess-b510597e5d1c",
+  "owner_id": "owner-89462958b2fb4c8c"
+}
