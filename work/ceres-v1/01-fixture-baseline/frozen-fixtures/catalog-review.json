@@ -1,0 +1,21 @@
+{
+  "review_version": "v1",
+  "items": [
+    {
+      "source_barcode": "00000231",
+      "status": "quarantined",
+      "corrected_category": "condiment",
+      "ingredient_ids": [],
+      "reason": "Peanut butter mislabeled as butter",
+      "evidence": "name_en contains Peanut Butter"
+    },
+    {
+      "source_barcode": "00000622",
+      "status": "quarantined",
+      "corrected_category": "fruit",
+      "ingredient_ids": [],
+      "reason": "Banana chips mislabeled as fresh banana",
+      "evidence": "name_en Chips de banane"
+    }
+  ]
+}

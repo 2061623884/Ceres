@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import argparse
 import json
 import re
 import sqlite3
@@ -649,7 +650,7 @@ def seed_chinese_dish_templates(db: Session) -> int:
     return count
 
 
-def main() -> None:
+def main(fixture_only: bool = False) -> None:
     settings = get_settings()
     scenario_errors = validate_scenario_fixture()
     if scenario_errors:
@@ -664,7 +665,9 @@ def main() -> None:
     ensure_runtime_schema(engine)
     db = SessionLocal()
     try:
-        source_count = seed_from_source(db, settings)
+        source_count = 0
+        if not fixture_only:
+            source_count = seed_from_source(db, settings)
         demo_count = seed_demo_products(db)
         seed_reviews(db)
         seed_store_offers(db)
@@ -681,4 +684,10 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description="Seed the Ceres runtime database.")
+    parser.add_argument(
+        "--fixture-only",
+        action="store_true",
+        help="Skip importing products from the external source database.",
+    )
+    main(fixture_only=parser.parse_args().fixture_only)

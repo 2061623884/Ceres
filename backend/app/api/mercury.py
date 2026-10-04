@@ -21,7 +21,7 @@ from app.core.database import get_db
 from app.core.identity import get_or_create_owner
 
 # 添加 Mercury 到 Python 路径
-mercury_path = Path(__file__).resolve().parents[4] / "Mercury"
+mercury_path = Path(__file__).resolve().parents[3] / "Mercury"
 if str(mercury_path) not in sys.path:
     sys.path.insert(0, str(mercury_path))
 

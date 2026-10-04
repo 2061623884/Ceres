@@ -1,0 +1,17 @@
+{
+  "llm_mode": "live",
+  "business_data_mode": "demo",
+  "llm_model": "Qwen/Qwen3-VL-30B-A3B-Instruct",
+  "llm_timeout": 45.0,
+  "llm_max_output_tokens": 1536,
+  "semantic_max_steps": 2,
+  "semantic_lookup_budget": 2,
+  "semantic_turn_timeout_seconds": 90.0,
+  "retrieval_mode": "hybrid",
+  "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+  "embedding_revision": "",
+  "embedding_dimension": 1024,
+  "embedding_query_instruction": "Instruct: Given a shopping request, retrieve relevant Chinese dishes or supermarket products.\nQuery: ",
+  "embedding_document_instruction": "",
+  "embedding_timeout": 30.0
+}

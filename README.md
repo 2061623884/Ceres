@@ -1,6 +1,10 @@
 # Ceres
 
-超市智能导购：Vite + React 界面（`frontend/`）与 FastAPI + LangGraph 后端（`backend/`）。售后客服 Agent 在同仓库的 `Mercury/`，独立运行，不读导购数据库。
+超市智能导购：Vite + React 界面（`frontend/`）与 FastAPI + LangGraph 后端（`backend/`）。Mercury（墨墨）是同仓独立售后模块，当前由 Ceres 后端导入并提供 API，使用独立演示订单库，也可单独运行 CLI。
+
+## 项目与任务入口
+
+- [Ceres v1 TASK](tasks/ceres-v1.md) / [本机重建](docs/ceres-v1-local.md)：64 fixture 基础与最少果汁补齐，按已确认六任务编排实现；向量和业务验收分别记录。
 
 ## 启动（PowerShell）
 
