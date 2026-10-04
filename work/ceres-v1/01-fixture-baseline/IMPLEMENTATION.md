@@ -16,6 +16,8 @@
 - 两份商品、Offer 和投影的逻辑指纹均为 `538bf9d280861afd0934f04eb995bf2638f2ab9b704bf80556730dc407538e48`；原始记录见 [cold-start-1](cold-start-1.json)、[cold-start-2](cold-start-2.json)。独立数据随后复制到 `data/runtime-v1-fixture/sale_guide.sqlite3`，65 商品／65 Offer；旧开发库只读查询仍为 321 商品，旧索引未改。
 - 前端 `npx tsc --noEmit` 与 `npm run build` 通过；这是原型源码基线的编译检查，不是页面业务验收。
 
+实现提交为 `7a8d7f9e65dd5bdb63e9d745b6e0ff534ec19fd9`，基线为 `956bd5148696217aab9d1cc16ed4e2cfcb518f63`。两轴审查及文档修正见 [REVIEW](REVIEW.md)，提交与验证口径见 [commit-receipt](commit-receipt.json)。服务地址、模型与 embedding 参数见 [不含凭据的配置记录](settings-sanitized.json)。
+
 验证命令：
 
 ```powershell

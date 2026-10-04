@@ -1,0 +1,45 @@
+{
+  "task": "ceres-v1-01-fixture-baseline",
+  "date": "2026-10-04",
+  "branch": "main",
+  "base_commit": "956bd5148696217aab9d1cc16ed4e2cfcb518f63",
+  "implementation_commit": "7a8d7f9e65dd5bdb63e9d745b6e0ff534ec19fd9",
+  "task_status": "待验收",
+  "supply": {
+    "original_fixture_products": 64,
+    "added_products": 1,
+    "products": 65,
+    "explicit_offers": 56,
+    "generated_offers": 9,
+    "offers": 65,
+    "dishes": 105,
+    "templates": 111,
+    "projection_documents": 170,
+    "source_products_imported": 0
+  },
+  "verification": {
+    "related_tests_passed": 7,
+    "independent_cold_starts_passed": 2,
+    "normalized_runtime_source_files": 137,
+    "logical_fingerprint": "538bf9d280861afd0934f04eb995bf2638f2ab9b704bf80556730dc407538e48",
+    "frontend_typecheck": "passed",
+    "frontend_build": "passed",
+    "additional_legacy_s1_tests": {
+      "passed": 9,
+      "failed": 1,
+      "failure": "test_cola_chicken_wing_plan_includes_cola expects the old demo:cola-330ml SKU"
+    }
+  },
+  "existing_development_products": 321,
+  "existing_index_modified": false,
+  "existing_services_switched": false,
+  "model_or_embedding_calls": 0,
+  "historical_full_semantic_ab": "stopped",
+  "not_verified_in_task_01": [
+    "remote Git LFS retrieval",
+    "fresh dependency installation",
+    "real vector retrieval",
+    "client final response within 15 seconds",
+    "nine business categories through the real frontend"
+  ]
+}

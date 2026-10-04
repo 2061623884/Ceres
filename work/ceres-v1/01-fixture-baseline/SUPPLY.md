@@ -6,7 +6,7 @@
 
 - 商品：美汁源汁汁桃桃桃汁饮料；类目 `beverage`，类型 `juice_drink`。这是果汁饮料，不标成 100% 果汁。
 - [可口可乐中国品牌页](https://www.coca-cola.com/cn/zh/brands/minute-maid) 明确列出该桃汁饮料，口味描述为“甜而不腻”；据此记录甜味相关标签，不依据 original／zero 或糖含量推断。
-- [中国食品 2025 中期报告](https://www.cofco.com/zljt/1/files/2025/0923/17586089059691089.pdf) PDF 页索引 9–10（英文／中文业务段落）说明非橙口味的 420ml → 450ml 规格升级，并列汁汁桃桃。[品牌官方包装图](https://www.coca-cola.com/content/dam/onexp/cn/zh/minute-maid-orange/peachset.png) 并列两种规格，核实 450ml 瓶装；未下载或作为本地商品图片使用。
+- [中国食品 2025 中期报告](https://www.cofco.com/zljt/1/files/2025/0923/17586089059691089.pdf) 管理层论析中非橙口味规格升级段落，含“420ML转切450ML”及“汁汁桃桃”，说明 420ml → 450ml 的升级。[品牌官方包装图](https://www.coca-cola.com/content/dam/onexp/cn/zh/minute-maid-orange/peachset.png) 并列两种规格，核实 450ml 瓶装；未下载或作为本地商品图片使用。
 - 名称、品牌及果汁／桃汁／甜味标签进入现有 `project_sku_row` 的检索文本。两次投影核对均含果汁及“甜而不腻”，不新增口味 schema。
 
 ## 模拟与未知

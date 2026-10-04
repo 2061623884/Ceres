@@ -13,5 +13,19 @@
   "embedding_dimension": 1024,
   "embedding_query_instruction": "Instruct: Given a shopping request, retrieve relevant Chinese dishes or supermarket products.\nQuery: ",
   "embedding_document_instruction": "",
-  "embedding_timeout": 30.0
+  "embedding_timeout": 30.0,
+  "endpoints_without_credentials": {
+    "chat": {
+      "scheme": "https",
+      "host": "api.siliconflow.cn",
+      "port": null,
+      "path": "/v1"
+    },
+    "embedding": {
+      "scheme": "https",
+      "host": "api.siliconflow.cn",
+      "port": null,
+      "path": "/v1"
+    }
+  }
 }
