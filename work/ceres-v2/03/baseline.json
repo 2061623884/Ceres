@@ -1,0 +1,39 @@
+{
+  "head": "aaffbf8629d4305860ff0bc4d5cfe80402166043",
+  "before_paths": [
+    "backend/app/services/template_plan_service.py",
+    "backend/app/services/shopping_plan_service.py",
+    "backend/app/services/plan_contract.py",
+    "backend/app/services/plan_revision_service.py",
+    "backend/app/services/plan_validator.py",
+    "backend/app/services/validation_context.py",
+    "backend/app/schemas/guide.py",
+    "backend/app/agent/tools/change_plan.py",
+    "frontend/src/App.tsx",
+    "frontend/src/lib/saleGuide.ts",
+    "backend/app/services/plan_commit_service.py",
+    "backend/app/services/cart_service.py",
+    "backend/app/agent/graph/nodes/mutation.py",
+    "backend/tests/test_shopping_workflow.py",
+    "backend/tests/test_p0_gap_integrity.py"
+  ],
+  "sha256": {
+    "backend/app/services/template_plan_service.py": "b77d3ba9ffacf7d1de16b3050bd8a2d769622b5e6a76b9a3da960572fee4e0f1",
+    "backend/app/services/shopping_plan_service.py": "90b50bc0ef5fabe22cf72ebbf42839400e92753ce2543b53262bd2e612d42f7f",
+    "backend/app/services/plan_contract.py": "f318c402c3729c8dc517ff3cc18e3dcb2bde4100596577c2a720849ca9c34ff0",
+    "backend/app/services/plan_revision_service.py": "438f6a0e530a88d60a1be25139437cfd658c5cdb522950632876dc7875a56c9a",
+    "backend/app/services/plan_validator.py": "128af763b564b97eb8542dd18d80a9aa9c112b92451a3d3fbee4d9c8ee4fb635",
+    "backend/app/services/validation_context.py": "4a36813affcd926812b0417a616b56d2b2d627be695af8bcd58e135fd66d2179",
+    "backend/app/schemas/guide.py": "b716a75873e9d39a47372fec9555237885a81c9d18f4e1c1d1637c3ef81e7f88",
+    "backend/app/agent/tools/change_plan.py": "8a6cd8b74d183d9854981053737adf72599b5d3f62a6e00e235ba7adbc7d927d",
+    "frontend/src/App.tsx": "76c87ecbe6ed9022d72251ae0fef673ad9823e171dfda6c334f3c141f24570c2",
+    "frontend/src/lib/saleGuide.ts": "9e9727be996ecc8f4cbf7e3eb5ae906a50fe005b232e392b720f074cab494e60",
+    "backend/app/services/plan_commit_service.py": "2d79e14b794274cb2e5b9fe3fad304095e12087d6a00fb834a06f08b2c532085",
+    "backend/app/services/cart_service.py": "5d39f108e2e2340edf32eff96ccaeb9d879c46b90210f11c463d5d48b70123bb",
+    "backend/app/agent/graph/nodes/mutation.py": "1d9d75baae5ef81fc480e9180c818a83e18ddaf1f7147fb2a4ac3bc0ea234a35",
+    "backend/tests/test_shopping_workflow.py": "c7343c826d9a82c375aa0302e63f43918e3536b26ea169a37d2bfcdadd76cd12",
+    "backend/tests/test_p0_gap_integrity.py": "270611964b9557a4ba0d2e9d11065d26aea1a483eb6d1dd2591216735c81a53d"
+  },
+  "dependency": "01/02 technical verified/committed/dual reviewed; real model and personal pending09",
+  "inherited_input": "../00-baseline/baseline.json"
+}

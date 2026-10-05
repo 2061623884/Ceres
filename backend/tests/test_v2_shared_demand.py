@@ -73,7 +73,7 @@ def test_scoped_people_remove_and_direct_pack_remain_separate(indexed_client, se
     assert {t["target_id"]: t["people"] for t in resized["plan"]["targets"]} == {
         "dish-fanqie-chao-dan": 4, "dish-fanqie-dan-tang": 1,
     }
-    assert resized["plan"]["selected_total_fen"] == 3320
+    assert resized["plan"]["selected_total_fen"] == 2640
     removed = send_turn(indexed_client, sid, "不做番茄蛋汤了，移除这道菜", resized)
     assert removed["plan"] is not None, removed
     assert len(removed["plan"]["targets"]) == 1

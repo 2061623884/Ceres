@@ -865,6 +865,11 @@ function PlanSheetContent({
                     需求 {requirementQuantity}{unitLabel}{packageUnit === 'pc' && needed !== requirementQuantity ? `（整枚 ${needed}）` : ''} · 采购覆盖 {purchased}{unitLabel} · {difference >= 0 ? '包装余量' : '本次未覆盖'} {Math.abs(difference)}{unitLabel}
                   </p>
                 )}
+                {requirements.filter(r => r?.source?.original_quantity != null).map((r, index) => (
+                  <p key={index} className="mt-0.5 text-[10px] leading-snug text-black/38">
+                    菜谱原需 {r!.source!.original_quantity}{r!.source!.original_unit === 'pc' ? '枚' : r!.source!.original_unit}，本规格分担 {r!.quantity}{unitLabel}
+                  </p>
+                ))}
                 {(item.contributions?.length ?? 0) > 1 && item.contributions!.map(c => (
                   <p key={c.group_id} className="mt-0.5 text-[10px] leading-snug text-black/38">
                     {plan.targets?.find(t => t.group_id === c.group_id)?.name ?? c.group_id}：{c.requirement?.quantity ?? '用量未明确'}{c.requirement?.unit === 'pc' ? '枚' : c.requirement?.unit}

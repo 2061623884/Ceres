@@ -24,10 +24,11 @@ from typing import Any
 
 from sqlalchemy.orm import Session
 
-from app.agent.state import TaskState
+from app.agent.state import Requirements, TaskState
 from app.models.session import GuideSession, GuideTask
 
 from app.services.cart_service import CartService
+from app.services.validation_context import ValidationContext
 from app.services.shopping_plan_service import ShoppingPlanService, group_id_for
 from app.services.task_lifecycle_service import TaskLifecycleService
 from app.services.template_matcher import dish_display_name, get_template_by_id
@@ -115,12 +116,11 @@ class PlanCommitService:
             operation=operation,
             # Stock headroom must account for this owner's cart across the *whole*
             # merged plan, not just the rows the new target brought along.
-            cart_quantities=CartService(self.db, self.owner_id, store_id).quantities_for(
-                [str(item.get("sku_id")) for item in plan_result.get("items") or []]
-                + [
-                    str(item.get("sku_id"))
-                    for item in (base_plan or {}).get("items") or []
-                ]
+            cart_quantities=CartService(self.db, self.owner_id, store_id).quantities_for(None),
+            ctx=ValidationContext.from_requirements(
+                Requirements(specification=args["specification"],
+                             excluded_ingredients=args.get("exclude_ingredients", [])),
+                store_id=store_id, delivery_zone_id=delivery_zone_id,
             ),
         )
         # Build first; a failed/stale/stopped build must not supersede anything.

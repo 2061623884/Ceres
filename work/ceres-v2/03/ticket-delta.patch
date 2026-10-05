@@ -1,0 +1,694 @@
+--- a/backend/app/services/template_plan_service.py
++++ b/backend/app/services/template_plan_service.py
+@@ -3,6 +3,7 @@
+ from __future__ import annotations
+ 
+ import math
++from itertools import combinations
+ from typing import Any
+ 
+ from sqlalchemy.orm import Session
+@@ -155,6 +156,7 @@
+         candidates: list[dict[str, Any]],
+         *,
+         product_type: str | None = None,
++        needed: dict[str, Any] | None = None,
+     ) -> dict[str, Any] | None:
+         pool = [c for c in candidates if c.get("sellable")]
+         if product_type:
+@@ -163,6 +165,9 @@
+                 pool = typed
+             elif product_type == "flour":
+                 pool = [c for c in pool if c.get("product_type") != "leavening"]
++        purchase = self._pick_packs(pool, needed)
++        if purchase:
++            return purchase[0][0]
+         root = get_settings().root_dir
+         in_stock = [c for c in pool if int(c.get("available_qty") or 0) > 0]
+         if in_stock:
+@@ -191,6 +196,47 @@
+             key=lambda c: (c.get("price_fen") is None, c.get("price_fen") or 999999),
+         )
+ 
++    def _pick_packs(
++        self, candidates: list[dict[str, Any]], needed: dict[str, Any] | None,
++    ) -> list[tuple[dict[str, Any], int]]:
++        """Compare one SKU and two-SKU combinations for one ingredient."""
++        amount, unit = contract.amount_from_needed(needed)
++        if amount is None:
++            return []
++        required_amount = math.ceil(amount) if unit == "pc" else amount
++        packable = []
++        options = []
++        for sku in sorted(candidates, key=lambda item: item["sku_id"]):
++            spec_unit = sku.get("spec_unit")
++            if (not sku["sellable"] or sku.get("spec_quantity") is None
++                    or sku.get("price_fen") is None
++                    or {"kg": "g", "l": "ml"}.get(spec_unit, spec_unit) != unit):
++                continue
++            pack_amount = sku["spec_quantity"] * UNIT_TO_GRAMS[spec_unit]
++            stock = min(99, int(sku.get("available_qty") or 0))
++            quantity = math.ceil(required_amount / pack_amount)
++            packable.append((sku, pack_amount, stock))
++            if quantity <= stock:
++                options.append((sku["price_fen"] * quantity,
++                                pack_amount * quantity - required_amount, [(sku, quantity)]))
++        for (first, first_amount, first_stock), (second, second_amount, second_stock) in combinations(packable, 2):
++            for first_qty in range(1, min(first_stock, math.ceil(required_amount / first_amount)) + 1):
++                remaining = required_amount - first_qty * first_amount
++                if remaining <= 0:
++                    continue
++                second_qty = math.ceil(remaining / second_amount)
++                if second_qty <= second_stock:
++                    options.append((first["price_fen"] * first_qty + second["price_fen"] * second_qty,
++                                    first_amount * first_qty + second_amount * second_qty - required_amount,
++                                    [(first, first_qty), (second, second_qty)]))
++        if not options:
++            return []
++        cheapest = min(price for price, _, _ in options)
++        near = [option for option in options if option[0] * 100 <= cheapest * 105]
++        return min(near, key=lambda option: (
++            option[1], option[0], tuple((sku["sku_id"], qty) for sku, qty in option[2]),
++        ))[2]
++
+     def _pack_qty(self, sku: dict[str, Any], needed: dict[str, Any]) -> int | None:
+         spec_qty = sku.get("spec_quantity")
+         spec_unit = sku.get("spec_unit")
+@@ -221,16 +267,10 @@
+         needed: dict[str, Any] | None = None,
+         product_type: str | None = None,
+     ) -> dict[str, Any] | None:
+-        for alias in self._resolve_ids(ingredient_id):
+-            candidates = self.catalog.get_candidates(
+-                ingredient_ids=[alias],
+-                product_type=product_type,
+-                max_results=50,
+-            )
+-            sku = self._pick_sku(candidates, product_type=product_type)
+-            if sku:
+-                return sku
+-        return None
++        candidates = self.catalog.get_candidates(
++            ingredient_ids=self._resolve_ids(ingredient_id), product_type=product_type, max_results=50,
++        )
++        return self._pick_sku(candidates, product_type=product_type, needed=needed)
+ 
+     def _append_item(
+         self,
+@@ -244,6 +284,7 @@
+         target_kind: str,
+         target_id: str,
+         source_kind: str = "local_recipe",
++        ctx: ValidationContext | None = None,
+     ) -> str:
+         """Append one requirement's SKU; report why it could not be appended.
+ 
+@@ -258,47 +299,53 @@
+         stays explainable.
+         """
+         ptype = "flour" if ingredient_id == "flour" else None
+-        sku = self.resolve_sku_for_ingredient(ingredient_id, needed=needed, product_type=ptype)
+-        if not sku:
+-            return "missing"
+-        qty = self._pack_qty(sku, needed)
+-        if qty is None:
+-            return "unknown"
+-        if sku["sku_id"] in seen_skus:
+-            # Another requirement already needed this exact SKU: the row exists.
+-            return "added"
+-        spec_qty = sku.get("spec_quantity")
+-        spec_unit = sku.get("spec_unit")
++        candidates = self.catalog.get_candidates(
++            ingredient_ids=self._resolve_ids(ingredient_id), product_type=ptype, max_results=50,
++        )
++        allowed = candidates if ctx is None else [c for c in candidates if ctx.product_allowed(c)]
++        purchase = self._pick_packs(allowed, needed)
++        if not purchase:
++            # If none satisfy the condition, existing validation explains the refusal.
++            sku = self._pick_sku(allowed or candidates, product_type=ptype)
++            if not sku:
++                return "missing"
++            qty = self._pack_qty(sku, needed)
++            if qty is None:
++                return "unknown"
++            # Keep the existing honest partial/unknown supply path.
++            purchase = [(sku, qty)]
+         amount, unit = contract.amount_from_needed(needed)
+-        requirement = contract.make_requirement(
+-            target_kind=target_kind,
+-            target_id=target_id,
+-            key=ingredient_id,
+-            role=role,
+-            name=ingredient_name_zh(ingredient_id),
+-            ingredient_id=ingredient_id,
+-            quantity=amount,
+-            unit=unit,
+-            source={"kind": source_kind, "ref": target_id},
+-        )
+-        seen_skus.add(sku["sku_id"])
+-        candidate_ids.append(sku["sku_id"])
+-        plan_items.append(
+-            {
++        remaining = amount
++        for sku, qty in purchase:
++            if sku["sku_id"] in seen_skus:
++                continue
++            source = {"kind": source_kind, "ref": target_id}
++            allocation = amount
++            if len(purchase) > 1:
++                allocation = min(remaining, qty * sku["spec_quantity"] * UNIT_TO_GRAMS[sku["spec_unit"]])
++                remaining -= allocation
++                source.update(original_quantity=amount, original_unit=unit)
++            requirement = contract.make_requirement(
++                target_kind=target_kind, target_id=target_id, key=ingredient_id,
++                role=role, name=ingredient_name_zh(ingredient_id), ingredient_id=ingredient_id,
++                quantity=allocation, unit=unit, source=source,
++            )
++            seen_skus.add(sku["sku_id"])
++            candidate_ids.append(sku["sku_id"])
++            plan_items.append({
+                 "sku_id": sku["sku_id"],
+                 "quantity": qty,
+                 "role": role,
+                 "required_item_id": requirement["required_item_id"],
+                 "requirement": requirement,
+                 "pack_source": "catalog_spec"
+-                if spec_qty is not None and spec_unit
++                if sku.get("spec_quantity") is not None and sku.get("spec_unit")
+                 else "assumed_one",
+-            }
+-        )
++            })
+         return "added"
+ 
+     def build_plan(
+-        self, dish: dict[str, Any], people: int
++        self, dish: dict[str, Any], people: int, ctx: ValidationContext | None = None,
+     ) -> tuple[list[dict[str, Any]], list[str], list[dict[str, Any]]]:
+         """Build the resolvable rows plus the requirements this store could not serve.
+ 
+@@ -356,6 +403,7 @@
+                 role="required",
+                 target_kind="dish",
+                 target_id=dish_id,
++                ctx=ctx,
+             )
+             if status != "added":
+                 note_missing(item, status)
+@@ -371,6 +419,7 @@
+                 role="pantry",
+                 target_kind="dish",
+                 target_id=dish_id,
++                ctx=ctx,
+             )
+ 
+         for raw in dish.get("pantry_items") or []:
+@@ -387,6 +436,7 @@
+                 role="pantry",
+                 target_kind="dish",
+                 target_id=dish_id,
++                ctx=ctx,
+             )
+ 
+         return plan_items, candidate_ids, missing
+@@ -473,7 +523,6 @@
+         ctx: ValidationContext | None = None,
+     ) -> dict[str, Any]:
+         dish_id = str(dish.get("dish_id") or dish.get("template_id") or "")
+-        plan_items, candidate_ids, missing_required = self.build_plan(dish, people)
+         if ctx is None:
+             from app.agent.state import Requirements
+ 
+@@ -483,6 +532,7 @@
+                 delivery_zone_id=self.delivery_zone_id,
+                 active_template_id=dish.get("dish_id"),
+             )
++        plan_items, candidate_ids, missing_required = self.build_plan(dish, people, ctx)
+         # A missing ingredient is a *gap*, not a reason to throw the whole dish
+         # away: D2/D3 keep the resolvable rows and report what cannot be served.
+         return self.validator.validate_plan(
+--- a/backend/app/services/shopping_plan_service.py
++++ b/backend/app/services/shopping_plan_service.py
+@@ -597,6 +597,7 @@
+         group_id: str,
+         operation: str,
+         cart_quantities: dict[str, int] | None = None,
++        ctx: ValidationContext | None = None,
+     ) -> dict[str, Any]:
+         """Merge ``new_plan`` into ``base_plan`` without losing the user's edits.
+ 
+@@ -709,8 +710,9 @@
+             plan_id = base.get("plan_id") or new_plan.get("plan_id")
+             version = int(base.get("plan_version") or 1) + 1
+ 
++        rows = self._reprice_recipe_rows(kept_rows + new_rows, base if not replacing else {}, ctx, cart_quantities or {})
+         items = self._collapse(
+-            kept_rows + new_rows,
++            rows,
+             cart_quantities=cart_quantities,
+             preserved_overrides=preserved_overrides,
+             preserved_added_quantities={
+@@ -914,6 +916,140 @@
+     def content_signature(plan: dict[str, Any] | None) -> str:
+         """Public alias: has the plan's *content* actually changed?"""
+         return ShoppingPlanService._content_signature(plan or {})
++
++    def _reprice_recipe_rows(
++        self, rows: list[dict[str, Any]], base: dict[str, Any], ctx: ValidationContext | None,
++        cart_quantities: dict[str, int],
++    ) -> list[dict[str, Any]]:
++        """Choose packages against the whole compatible recipe demand."""
++        from app.services.template_plan_service import TemplatePlanService, UNIT_TO_GRAMS
++
++        demands: dict[tuple[str, str], dict[str, Any]] = {}
++        fixed: dict[tuple[str, str], list[dict[str, Any]]] = {}
++        bought: dict[tuple[str, str], dict[str, dict[str, Any]]] = {}
++        for row in base.get("items") or []:
++            for contribution in self._row_contributions(row).values():
++                requirement = contribution.get("requirement") or {}
++                if (requirement.get("source") or {}).get("kind") != "local_recipe":
++                    continue
++                key = (requirement["ingredient_id"], requirement["unit"])
++                if row.get("quantity_source") == "user" or not row["selected"]:
++                    fixed.setdefault(key, []).append(row)
++                if row.get("added_quantity"):
++                    bought.setdefault(key, {})[row["sku_id"]] = row
++        for row in rows:
++            for contribution in self._row_contributions(row).values():
++                requirement = contribution.get("requirement") or {}
++                if ((requirement.get("source") or {}).get("kind") != "local_recipe"
++                        or requirement.get("quantity") is None):
++                    continue
++                key = (requirement["ingredient_id"], requirement["unit"])
++                demand = demands.setdefault(key, {"requests": {}})
++                request_key = (contribution["group_id"], requirement["required_item_id"])
++                request = demand["requests"].setdefault(request_key, {
++                    "row": row, "contribution": contribution, "amount": 0,
++                })
++                request["amount"] += requirement["quantity"]
++
++        if not demands:
++            return rows
++        planner = TemplatePlanService(self.db, self.store_id, self.delivery_zone_id)
++        result = list(rows)
++        for (ingredient, unit), demand in demands.items():
++            amount = sum(request["amount"] for request in demand["requests"].values())
++            needed = {"ingredient_id": ingredient, "quantity_" + unit: amount}
++            fixed_rows = {row["sku_id"]: row for row in fixed.get((ingredient, unit), [])}
++            if len(fixed_rows) > 1:
++                # Several explicitly edited specs remain the shopper's allocation.
++                continue
++            if fixed_rows:
++                previous = next(iter(fixed_rows.values()))
++                sku = self.catalog.get_product(previous["sku_id"])
++                quantity = planner._pack_qty(sku, needed)
++                if sku["spec_quantity"] is None or {"kg": "g", "l": "ml"}.get(sku["spec_unit"], sku["spec_unit"]) != unit or quantity is None:
++                    continue
++                purchase = [(sku, quantity)]
++            else:
++                bought_rows = bought.get((ingredient, unit), {})
++                purchased = [(self.catalog.get_product(sku_id), row["added_quantity"])
++                             for sku_id, row in bought_rows.items()]
++                if any(sku["spec_quantity"] is None
++                       or {"kg": "g", "l": "ml"}.get(sku["spec_unit"], sku["spec_unit"]) != unit
++                       for sku, _ in purchased):
++                    continue
++                covered = sum(sku["spec_quantity"] * UNIT_TO_GRAMS[sku["spec_unit"]] * qty
++                              for sku, qty in purchased)
++                remaining = amount - covered
++                additional = []
++                if remaining > 0:
++                    candidates = self.catalog.get_candidates(
++                        ingredient_ids=planner._resolve_ids(ingredient),
++                        product_type="flour" if ingredient == "flour" else None, max_results=50,
++                    )
++                    if ctx is not None:
++                        candidates = [candidate for candidate in candidates if ctx.product_allowed(candidate)]
++                    candidates = [{**candidate, "available_qty": max(
++                        0, candidate["available_qty"] - cart_quantities.get(candidate["sku_id"], 0),
++                    )} for candidate in candidates]
++                    additional = planner._pick_packs(candidates, {**needed, "quantity_" + unit: remaining})
++                    if not additional:
++                        continue
++                purchase_by_sku = {sku["sku_id"]: [sku, qty] for sku, qty in purchased}
++                for sku, qty in additional:
++                    entry = purchase_by_sku.setdefault(sku["sku_id"], [sku, 0])
++                    entry[1] += qty
++                purchase = list(purchase_by_sku.values())
++            if not purchase:
++                continue
++            capacities = [[sku, qty * sku["spec_quantity"] * UNIT_TO_GRAMS[sku["spec_unit"]]]
++                          for sku, qty in purchase]
++            raw_rows = []
++            for request in demand["requests"].values():
++                remaining = request["amount"]
++                original = request["contribution"]["requirement"]
++                for capacity in capacities:
++                    sku = capacity[0]
++                    allocated = min(remaining, capacity[1])
++                    if allocated <= 0:
++                        continue
++                    requirement = {**original, "quantity": allocated, "source": dict(original["source"])}
++                    requirement["source"].pop("original_quantity", None)
++                    requirement["source"].pop("original_unit", None)
++                    if len(purchase) > 1:
++                        requirement["source"].update(original_quantity=request["amount"], original_unit=unit)
++                    previous = fixed_rows.get(sku["sku_id"])
++                    raw_rows.append({
++                        "sku_id": sku["sku_id"], "quantity": previous["quantity"]
++                        if previous and previous.get("quantity_source") == "user"
++                        else math.ceil(allocated / (sku["spec_quantity"] * UNIT_TO_GRAMS[sku["spec_unit"]])),
++                        "quantity_source": previous.get("quantity_source") if previous else "recommended",
++                        "selected": previous["selected"] if previous else request["row"]["selected"],
++                        "role": request["row"]["role"], "group_id": request["contribution"]["group_id"],
++                        "target_kind": "dish", "target_id": original["source"]["ref"],
++                        "required_item_id": requirement["required_item_id"], "requirement": requirement,
++                        "pack_source": "catalog_spec",
++                    })
++                    remaining -= allocated
++                    capacity[1] -= allocated
++                    if remaining <= 0:
++                        break
++            validated = self.validator.validate_plan(
++                raw_rows, [sku["sku_id"] for sku, _ in purchase], ctx=ctx,
++                coverage_intent=contract.GENERATION_INTENT,
++            )
++            if validated["errors"] or validated["gaps"]:
++                # The existing rows retain their honest unknown/shortfall facts.
++                continue
++            retained = []
++            for row in result:
++                contributions = [c for c in self._row_contributions(row).values()
++                                 if not ((c.get("requirement") or {}).get("ingredient_id") == ingredient
++                                         and (c.get("requirement") or {}).get("unit") == unit
++                                         and ((c.get("requirement") or {}).get("source") or {}).get("kind") == "local_recipe")]
++                if contributions:
++                    retained.append({**row, "contributions": contributions})
++            result = retained + validated["items"]
++        return result
+ 
+     def _strip_group(self, row: dict[str, Any], group_id: str) -> dict[str, Any] | None:
+         """Remove one target's contribution from a stored row.
+@@ -1108,6 +1244,7 @@
+ 
+             user_quantity = bucket["user_quantity"] or preserved_overrides.get(sku_id)
+             if unverified_reason is not None:
++                selected = False
+                 # Keep the row (a previously ticked line is never silently deleted)
+                 # but make it non-executable and let the derived gap explain it.
+                 quantity = max(
+@@ -1149,10 +1286,14 @@
+                 # would claim to have bought less than it did.
+                 capacity = added_total + max_addable
+                 quantity = max(added_total, min(wanted, capacity))
++                shortfall = max(0, wanted - quantity)
+                 if quantity < 1:
++                    # Keep the requirement visible without offering an unbuyable pack.
+                     quantity = 1
+-                shortfall = max(0, wanted - quantity)
+-                availability = "insufficient_stock" if shortfall > 0 else "available"
++                    selected = False
++                    availability = "out_of_stock"
++                else:
++                    availability = "insufficient_stock" if shortfall > 0 else "available"
+ 
+             entry = dict(base)
+             entry["sku_id"] = sku_id
+--- a/backend/app/agent/tools/change_plan.py
++++ b/backend/app/agent/tools/change_plan.py
+@@ -38,6 +38,7 @@
+ from app.agent.tools.schemas import PREPARE_PURCHASE_PLAN_INPUT_SCHEMA
+ from app.agent.tools.validation import validate_json_object
+ from app.services.cart_service import CartService
++from app.services.validation_context import ValidationContext
+ from app.services.shopping_plan_service import (
+     ShoppingPlanService,
+     group_id_for,
+@@ -92,7 +93,7 @@
+         self.decision: Any = None
+         self.goal_candidate: Any = None
+ 
+-    def cart_quantities_for(self, sku_ids: list[str], *, store_id: str) -> dict[str, int]:
++    def cart_quantities_for(self, sku_ids: list[str] | None, *, store_id: str) -> dict[str, int]:
+         """The already-bought ledger, owner- and store-scoped.
+ 
+         One implementation, in ``CartService``; the workflow delegates to the
+@@ -268,14 +269,17 @@
+         target_kind = str(result.get("target_kind") or plan_result.get("target_kind") or "")
+         target_id = str(result.get("target_id") or plan_result.get("target_id") or "")
+         group_id = str(plan_result.get("group_id") or group_id_for(target_kind, target_id))
+-        sku_ids = [str(item.get("sku_id")) for item in plan_result.get("items") or []]
+-        sku_ids += [str(item.get("sku_id")) for item in (base_plan or {}).get("items") or []]
+         return ShoppingPlanService(self.db, store, zone).merge_plan(
+             base_plan,
+             plan_result,
+             group_id=group_id,
+             operation=operation,
+-            cart_quantities=self.cart_quantities_for(sku_ids, store_id=store),
++            cart_quantities=self.cart_quantities_for(None, store_id=store),
++            ctx=ValidationContext.from_requirements(
++                Requirements(specification=result["args"]["specification"],
++                             excluded_ingredients=result["args"].get("exclude_ingredients", [])),
++                store_id=store, delivery_zone_id=zone,
++            ),
+         )
+ 
+     def _project_state(
+@@ -393,28 +397,28 @@
+         if goal is not None and goal.kind in ("meal_plan", "meal_decision"):
+             result["target"]["meal_name"] = goal.target_name or candidate.name
+             result["target"]["fulfillment_mode"] = goal.fulfillment_mode
+-        if active_plan:
+-            preview = ShoppingPlanService(self.db, store, zone).merge_plan(
+-                active_plan,
+-                result,
+-                group_id=result["group_id"],
+-                operation=operation,
+-                cart_quantities=self.cart_quantities_for(
+-                    [i["sku_id"] for i in active_plan["items"] + result["items"]],
+-                    store_id=store,
+-                ),
+-            )
+-            if constraints.budget_fen is not None and preview["selected_total_fen"] > constraints.budget_fen:
+-                raise SemanticProtocolError(
+-                    "BUDGET_EXCEEDED", "合并后的清单超出当前预算，原方案保持不变。"
+-                )
+-            if ShoppingPlanService.content_signature(preview) == self._signature(state):
+-                return {
+-                    "status": "noop",
+-                    "verb": "add",
+-                    "candidate_ref": candidate.ref,
+-                    "message": "该目标已在清单中，未重复生成；增加件数请明确说要增加多少。",
+-                }
++        preview = ShoppingPlanService(self.db, store, zone).merge_plan(
++            active_plan,
++            result,
++            group_id=result["group_id"],
++            operation=operation,
++            cart_quantities=self.cart_quantities_for(
++                None,
++                store_id=store,
++            ),
++            ctx=ValidationContext.from_requirements(constraints, store_id=store, delivery_zone_id=zone),
++        )
++        if constraints.budget_fen is not None and preview["selected_total_fen"] > constraints.budget_fen:
++            raise SemanticProtocolError(
++                "BUDGET_EXCEEDED", "合并后的清单超出当前预算，原方案保持不变。"
++            )
++        if active_plan and ShoppingPlanService.content_signature(preview) == self._signature(state):
++            return {
++                "status": "noop",
++                "verb": "add",
++                "candidate_ref": candidate.ref,
++                "message": "该目标已在清单中，未重复生成；增加件数请明确说要增加多少。",
++            }
+         return {
+             "status": "staged",
+             "verb": "add",
+@@ -423,6 +427,7 @@
+             "operation": operation,
+             "switching": switching,
+             "plan_result": result,
++            "plan_after": preview,
+             "args": args,
+             "candidate_ref": candidate.ref,
+             "message": f"采购清单已加入「{candidate.name or candidate.target_id}」"
+@@ -457,8 +462,9 @@
+             group_id=candidate.group_id,
+             operation="remove",
+             cart_quantities=self.cart_quantities_for(
+-                [str(i.get("sku_id")) for i in plan.get("items") or []], store_id=store
++                None, store_id=store
+             ),
++            ctx=ValidationContext.from_requirements(state.requirements, store_id=store, delivery_zone_id=zone),
+         )
+         return {
+             "status": "staged",
+--- a/frontend/src/App.tsx
++++ b/frontend/src/App.tsx
+@@ -896,6 +896,11 @@
+                     需求 {requirementQuantity}{unitLabel}{packageUnit === 'pc' && needed !== requirementQuantity ? `（整枚 ${needed}）` : ''} · 采购覆盖 {purchased}{unitLabel} · {difference >= 0 ? '包装余量' : '本次未覆盖'} {Math.abs(difference)}{unitLabel}
+                   </p>
+                 )}
++                {requirements.filter(r => r?.source?.original_quantity != null).map((r, index) => (
++                  <p key={index} className="mt-0.5 text-[10px] leading-snug text-black/38">
++                    菜谱原需 {r!.source!.original_quantity}{r!.source!.original_unit === 'pc' ? '枚' : r!.source!.original_unit}，本规格分担 {r!.quantity}{unitLabel}
++                  </p>
++                ))}
+                 {(item.contributions?.length ?? 0) > 1 && item.contributions!.map(c => (
+                   <p key={c.group_id} className="mt-0.5 text-[10px] leading-snug text-black/38">
+                     {plan.targets?.find(t => t.group_id === c.group_id)?.name ?? c.group_id}：{c.requirement?.quantity ?? '用量未明确'}{c.requirement?.unit === 'pc' ? '枚' : c.requirement?.unit}
+--- a/frontend/src/lib/saleGuide.ts
++++ b/frontend/src/lib/saleGuide.ts
+@@ -277,7 +277,7 @@
+   remaining_quantity?: number;
+   spec_quantity?: number | null;
+   spec_unit?: string | null;
+-  requirement?: { quantity: number | null; unit: string | null } | null;
++  requirement?: { quantity: number | null; unit: string | null; source?: { original_quantity?: number; original_unit?: string } } | null;
+   contributions?: { group_id: string; quantity: number; requirement?: PlanItem['requirement'] }[] | null;
+ }
+ 
+--- a/backend/app/services/plan_commit_service.py
++++ b/backend/app/services/plan_commit_service.py
+@@ -24,10 +24,11 @@
+ 
+ from sqlalchemy.orm import Session
+ 
+-from app.agent.state import TaskState
++from app.agent.state import Requirements, TaskState
+ from app.models.session import GuideSession, GuideTask
+ 
+ from app.services.cart_service import CartService
++from app.services.validation_context import ValidationContext
+ from app.services.shopping_plan_service import ShoppingPlanService, group_id_for
+ from app.services.task_lifecycle_service import TaskLifecycleService
+ from app.services.template_matcher import dish_display_name, get_template_by_id
+@@ -115,12 +116,11 @@
+             operation=operation,
+             # Stock headroom must account for this owner's cart across the *whole*
+             # merged plan, not just the rows the new target brought along.
+-            cart_quantities=CartService(self.db, self.owner_id, store_id).quantities_for(
+-                [str(item.get("sku_id")) for item in plan_result.get("items") or []]
+-                + [
+-                    str(item.get("sku_id"))
+-                    for item in (base_plan or {}).get("items") or []
+-                ]
++            cart_quantities=CartService(self.db, self.owner_id, store_id).quantities_for(None),
++            ctx=ValidationContext.from_requirements(
++                Requirements(specification=args["specification"],
++                             excluded_ingredients=args.get("exclude_ingredients", [])),
++                store_id=store_id, delivery_zone_id=delivery_zone_id,
+             ),
+         )
+         # Build first; a failed/stale/stopped build must not supersede anything.
+--- a/backend/app/services/cart_service.py
++++ b/backend/app/services/cart_service.py
+@@ -44,24 +44,24 @@
+         item = self.db.query(CartItem).filter_by(cart_id=cart_id, sku_id=sku_id).first()
+         return item.quantity if item else 0
+ 
+-    def quantities_for(self, sku_ids: list[str]) -> dict[str, int]:
++    def quantities_for(self, sku_ids: list[str] | None) -> dict[str, int]:
+         """How many of each SKU this owner already has in *their own* cart.
+ 
+         Read-only: it never creates a cart. Scoped by owner (and store) through
+         the cart row, because summing ``CartItem`` by SKU alone would let another
+         owner's cart reduce this shopper's stock headroom.
+         """
+-        wanted = {sku for sku in sku_ids if sku}
+-        if not wanted:
++        if sku_ids == []:
+             return {}
+         rows = (
+             self.db.query(CartItem.sku_id, func.sum(CartItem.quantity))
+             .join(Cart, Cart.id == CartItem.cart_id)
+             .filter(
+                 Cart.owner_id == self.owner_id,
+-                CartItem.sku_id.in_(wanted),
+-            )
+-        )
++            )
++        )
++        if sku_ids is not None:
++            rows = rows.filter(CartItem.sku_id.in_(sku_ids))
+         if self.store_id:
+             rows = rows.filter(Cart.store_id == self.store_id)
+         return {sku_id: int(total or 0) for sku_id, total in rows.group_by(CartItem.sku_id).all()}
+--- a/backend/app/agent/graph/nodes/mutation.py
++++ b/backend/app/agent/graph/nodes/mutation.py
+@@ -646,10 +646,10 @@
+                 raise
+             failures.append({"ref": ref, "code": exc.code, "message": exc.message})
+             continue
+-        if (staged["status"] == "staged" and staged["plan_result"]["can_confirm"]
+-                and staged["plan_result"]["coverage_mode"] == "full"):
++        if (staged["status"] == "staged" and staged["plan_after"]["can_confirm"]
++                and staged["plan_after"]["coverage_mode"] == "full"):
+             staged["plan_result"]["target"]["selection_goal"] = goal.model_dump()
+-            total_yuan = staged["plan_result"]["total_price_fen"] / 100
++            total_yuan = staged["plan_after"]["total_price_fen"] / 100
+             staged["message"] = (
+                 f"主推「{candidate.name}」：必需食材已匹配当前门店可售商品，"
+                 f"已选合计 ¥{total_yuan:.2f}（演示价格）"
+@@ -714,9 +714,10 @@
+ 
+     if staged.get("verb") == "add":
+         plan_result = staged["plan_result"]
++        supply_plan = staged["plan_after"]
+         supply_gaps = [
+             gap
+-            for gap in plan_result["gaps"]
++            for gap in supply_plan["gaps"]
+             if gap["requiredness"] == "core"
+             and (
+                 gap["kind"] in ("not_found", "out_of_stock", "insufficient_stock")
+@@ -733,7 +734,7 @@
+             )
+             rows = [
+                 row
+-                for row in plan_result["items"]
++                for row in supply_plan["items"]
+                 if row["availability"] in ("available", "insufficient_stock")
+             ]
+             target_name = str(plan_result["target"]["name"])
+--- a/backend/tests/test_shopping_workflow.py
++++ b/backend/tests/test_shopping_workflow.py
+@@ -1482,7 +1482,7 @@
+                 name_zh=sku_id,
+                 category_id="demo",
+                 review_status="approved",
+-                ingredient_ids='["merge_thing"]',
++                ingredient_ids=json.dumps([sku_id]),
+                 spec_quantity=500,
+                 spec_unit="g",
+             )
+@@ -1501,7 +1501,7 @@
+     target_id = group_id.split(":", 1)[1]
+     requirement = {
+         "required_item_id": f"{group_id}#main",
+-        "ingredient_id": "merge_thing",
++        "ingredient_id": sku_id,
+         "component_id": None,
+         "name": "merge_thing",
+         "quantity": 500.0,
+--- a/backend/tests/test_p0_gap_integrity.py
++++ b/backend/tests/test_p0_gap_integrity.py
+@@ -337,7 +337,7 @@
+             required_item_id=required_item_id,
+             ingredient_id="shared_thing",
+             name="共用原料",
+-            quantity=500.0,
++            quantity=1000.0,
+             unit="g",
+         )
+         return {
+@@ -392,7 +392,7 @@
+     assert set(gaps) == {"dish:a#shared_thing", "dish:b#shared_thing"}, merged["gaps"]
+     for gap in gaps.values():
+         assert gap["kind"] == "insufficient_stock", gap
+-        assert gap["required_quantity"] == 500.0 and gap["unit"] == "g", gap
++        assert gap["required_quantity"] == 1000.0 and gap["unit"] == "g", gap
+         assert set(gap["required_item_ids"]) == {"dish:a#shared_thing", "dish:b#shared_thing"}
+         assert "共用" in gap["message"], gap
+ 

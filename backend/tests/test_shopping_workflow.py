@@ -1349,7 +1349,7 @@ def _merge_target(db, group_id: str, sku_id: str, *, price_fen: int = 100, gaps=
                 name_zh=sku_id,
                 category_id="demo",
                 review_status="approved",
-                ingredient_ids='["merge_thing"]',
+                ingredient_ids=json.dumps([sku_id]),
                 spec_quantity=500,
                 spec_unit="g",
             )
@@ -1368,7 +1368,7 @@ def _merge_target(db, group_id: str, sku_id: str, *, price_fen: int = 100, gaps=
     target_id = group_id.split(":", 1)[1]
     requirement = {
         "required_item_id": f"{group_id}#main",
-        "ingredient_id": "merge_thing",
+        "ingredient_id": sku_id,
         "component_id": None,
         "name": "merge_thing",
         "quantity": 500.0,

@@ -569,6 +569,7 @@ class ShoppingPlanService:
         group_id: str,
         operation: str,
         cart_quantities: dict[str, int] | None = None,
+        ctx: ValidationContext | None = None,
     ) -> dict[str, Any]:
         """Merge ``new_plan`` into ``base_plan`` without losing the user's edits.
 
@@ -681,8 +682,9 @@ class ShoppingPlanService:
             plan_id = base.get("plan_id") or new_plan.get("plan_id")
             version = int(base.get("plan_version") or 1) + 1
 
+        rows = self._reprice_recipe_rows(kept_rows + new_rows, base if not replacing else {}, ctx, cart_quantities or {})
         items = self._collapse(
-            kept_rows + new_rows,
+            rows,
             cart_quantities=cart_quantities,
             preserved_overrides=preserved_overrides,
             preserved_added_quantities={
@@ -887,6 +889,140 @@ class ShoppingPlanService:
         """Public alias: has the plan's *content* actually changed?"""
         return ShoppingPlanService._content_signature(plan or {})
 
+    def _reprice_recipe_rows(
+        self, rows: list[dict[str, Any]], base: dict[str, Any], ctx: ValidationContext | None,
+        cart_quantities: dict[str, int],
+    ) -> list[dict[str, Any]]:
+        """Choose packages against the whole compatible recipe demand."""
+        from app.services.template_plan_service import TemplatePlanService, UNIT_TO_GRAMS
+
+        demands: dict[tuple[str, str], dict[str, Any]] = {}
+        fixed: dict[tuple[str, str], list[dict[str, Any]]] = {}
+        bought: dict[tuple[str, str], dict[str, dict[str, Any]]] = {}
+        for row in base.get("items") or []:
+            for contribution in self._row_contributions(row).values():
+                requirement = contribution.get("requirement") or {}
+                if (requirement.get("source") or {}).get("kind") != "local_recipe":
+                    continue
+                key = (requirement["ingredient_id"], requirement["unit"])
+                if row.get("quantity_source") == "user" or not row["selected"]:
+                    fixed.setdefault(key, []).append(row)
+                if row.get("added_quantity"):
+                    bought.setdefault(key, {})[row["sku_id"]] = row
+        for row in rows:
+            for contribution in self._row_contributions(row).values():
+                requirement = contribution.get("requirement") or {}
+                if ((requirement.get("source") or {}).get("kind") != "local_recipe"
+                        or requirement.get("quantity") is None):
+                    continue
+                key = (requirement["ingredient_id"], requirement["unit"])
+                demand = demands.setdefault(key, {"requests": {}})
+                request_key = (contribution["group_id"], requirement["required_item_id"])
+                request = demand["requests"].setdefault(request_key, {
+                    "row": row, "contribution": contribution, "amount": 0,
+                })
+                request["amount"] += requirement["quantity"]
+
+        if not demands:
+            return rows
+        planner = TemplatePlanService(self.db, self.store_id, self.delivery_zone_id)
+        result = list(rows)
+        for (ingredient, unit), demand in demands.items():
+            amount = sum(request["amount"] for request in demand["requests"].values())
+            needed = {"ingredient_id": ingredient, "quantity_" + unit: amount}
+            fixed_rows = {row["sku_id"]: row for row in fixed.get((ingredient, unit), [])}
+            if len(fixed_rows) > 1:
+                # Several explicitly edited specs remain the shopper's allocation.
+                continue
+            if fixed_rows:
+                previous = next(iter(fixed_rows.values()))
+                sku = self.catalog.get_product(previous["sku_id"])
+                quantity = planner._pack_qty(sku, needed)
+                if sku["spec_quantity"] is None or {"kg": "g", "l": "ml"}.get(sku["spec_unit"], sku["spec_unit"]) != unit or quantity is None:
+                    continue
+                purchase = [(sku, quantity)]
+            else:
+                bought_rows = bought.get((ingredient, unit), {})
+                purchased = [(self.catalog.get_product(sku_id), row["added_quantity"])
+                             for sku_id, row in bought_rows.items()]
+                if any(sku["spec_quantity"] is None
+                       or {"kg": "g", "l": "ml"}.get(sku["spec_unit"], sku["spec_unit"]) != unit
+                       for sku, _ in purchased):
+                    continue
+                covered = sum(sku["spec_quantity"] * UNIT_TO_GRAMS[sku["spec_unit"]] * qty
+                              for sku, qty in purchased)
+                remaining = amount - covered
+                additional = []
+                if remaining > 0:
+                    candidates = self.catalog.get_candidates(
+                        ingredient_ids=planner._resolve_ids(ingredient),
+                        product_type="flour" if ingredient == "flour" else None, max_results=50,
+                    )
+                    if ctx is not None:
+                        candidates = [candidate for candidate in candidates if ctx.product_allowed(candidate)]
+                    candidates = [{**candidate, "available_qty": max(
+                        0, candidate["available_qty"] - cart_quantities.get(candidate["sku_id"], 0),
+                    )} for candidate in candidates]
+                    additional = planner._pick_packs(candidates, {**needed, "quantity_" + unit: remaining})
+                    if not additional:
+                        continue
+                purchase_by_sku = {sku["sku_id"]: [sku, qty] for sku, qty in purchased}
+                for sku, qty in additional:
+                    entry = purchase_by_sku.setdefault(sku["sku_id"], [sku, 0])
+                    entry[1] += qty
+                purchase = list(purchase_by_sku.values())
+            if not purchase:
+                continue
+            capacities = [[sku, qty * sku["spec_quantity"] * UNIT_TO_GRAMS[sku["spec_unit"]]]
+                          for sku, qty in purchase]
+            raw_rows = []
+            for request in demand["requests"].values():
+                remaining = request["amount"]
+                original = request["contribution"]["requirement"]
+                for capacity in capacities:
+                    sku = capacity[0]
+                    allocated = min(remaining, capacity[1])
+                    if allocated <= 0:
+                        continue
+                    requirement = {**original, "quantity": allocated, "source": dict(original["source"])}
+                    requirement["source"].pop("original_quantity", None)
+                    requirement["source"].pop("original_unit", None)
+                    if len(purchase) > 1:
+                        requirement["source"].update(original_quantity=request["amount"], original_unit=unit)
+                    previous = fixed_rows.get(sku["sku_id"])
+                    raw_rows.append({
+                        "sku_id": sku["sku_id"], "quantity": previous["quantity"]
+                        if previous and previous.get("quantity_source") == "user"
+                        else math.ceil(allocated / (sku["spec_quantity"] * UNIT_TO_GRAMS[sku["spec_unit"]])),
+                        "quantity_source": previous.get("quantity_source") if previous else "recommended",
+                        "selected": previous["selected"] if previous else request["row"]["selected"],
+                        "role": request["row"]["role"], "group_id": request["contribution"]["group_id"],
+                        "target_kind": "dish", "target_id": original["source"]["ref"],
+                        "required_item_id": requirement["required_item_id"], "requirement": requirement,
+                        "pack_source": "catalog_spec",
+                    })
+                    remaining -= allocated
+                    capacity[1] -= allocated
+                    if remaining <= 0:
+                        break
+            validated = self.validator.validate_plan(
+                raw_rows, [sku["sku_id"] for sku, _ in purchase], ctx=ctx,
+                coverage_intent=contract.GENERATION_INTENT,
+            )
+            if validated["errors"] or validated["gaps"]:
+                # The existing rows retain their honest unknown/shortfall facts.
+                continue
+            retained = []
+            for row in result:
+                contributions = [c for c in self._row_contributions(row).values()
+                                 if not ((c.get("requirement") or {}).get("ingredient_id") == ingredient
+                                         and (c.get("requirement") or {}).get("unit") == unit
+                                         and ((c.get("requirement") or {}).get("source") or {}).get("kind") == "local_recipe")]
+                if contributions:
+                    retained.append({**row, "contributions": contributions})
+            result = retained + validated["items"]
+        return result
+
     def _strip_group(self, row: dict[str, Any], group_id: str) -> dict[str, Any] | None:
         """Remove one target's contribution from a stored row.
 
@@ -1080,6 +1216,7 @@ class ShoppingPlanService:
 
             user_quantity = bucket["user_quantity"] or preserved_overrides.get(sku_id)
             if unverified_reason is not None:
+                selected = False
                 # Keep the row (a previously ticked line is never silently deleted)
                 # but make it non-executable and let the derived gap explain it.
                 quantity = max(
@@ -1121,10 +1258,14 @@ class ShoppingPlanService:
                 # would claim to have bought less than it did.
                 capacity = added_total + max_addable
                 quantity = max(added_total, min(wanted, capacity))
-                if quantity < 1:
-                    quantity = 1
                 shortfall = max(0, wanted - quantity)
-                availability = "insufficient_stock" if shortfall > 0 else "available"
+                if quantity < 1:
+                    # Keep the requirement visible without offering an unbuyable pack.
+                    quantity = 1
+                    selected = False
+                    availability = "out_of_stock"
+                else:
+                    availability = "insufficient_stock" if shortfall > 0 else "available"
 
             entry = dict(base)
             entry["sku_id"] = sku_id

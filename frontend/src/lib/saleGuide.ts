@@ -277,7 +277,7 @@ export interface PlanItem {
   remaining_quantity?: number;
   spec_quantity?: number | null;
   spec_unit?: string | null;
-  requirement?: { quantity: number | null; unit: string | null } | null;
+  requirement?: { quantity: number | null; unit: string | null; source?: { original_quantity?: number; original_unit?: string } } | null;
   contributions?: { group_id: string; quantity: number; requirement?: PlanItem['requirement'] }[] | null;
 }
 

@@ -337,7 +337,7 @@ def test_shared_sku_keeps_every_target_identity(db_session):
             required_item_id=required_item_id,
             ingredient_id="shared_thing",
             name="共用原料",
-            quantity=500.0,
+            quantity=1000.0,
             unit="g",
         )
         return {
@@ -392,7 +392,7 @@ def test_shared_sku_keeps_every_target_identity(db_session):
     assert set(gaps) == {"dish:a#shared_thing", "dish:b#shared_thing"}, merged["gaps"]
     for gap in gaps.values():
         assert gap["kind"] == "insufficient_stock", gap
-        assert gap["required_quantity"] == 500.0 and gap["unit"] == "g", gap
+        assert gap["required_quantity"] == 1000.0 and gap["unit"] == "g", gap
         assert set(gap["required_item_ids"]) == {"dish:a#shared_thing", "dish:b#shared_thing"}
         assert "共用" in gap["message"], gap
 

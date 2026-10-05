@@ -36,6 +36,7 @@ from app.agent.tools.prepare_purchase_plan import guarded_prepare_purchase_plan
 from app.agent.tools.schemas import PREPARE_PURCHASE_PLAN_INPUT_SCHEMA
 from app.agent.tools.validation import validate_json_object
 from app.services.cart_service import CartService
+from app.services.validation_context import ValidationContext
 from app.services.shopping_plan_service import (
     ShoppingPlanService,
     group_id_for,
@@ -90,7 +91,7 @@ class PlanChangeExecutor:
         self.decision: Any = None
         self.goal_candidate: Any = None
 
-    def cart_quantities_for(self, sku_ids: list[str], *, store_id: str) -> dict[str, int]:
+    def cart_quantities_for(self, sku_ids: list[str] | None, *, store_id: str) -> dict[str, int]:
         """The already-bought ledger, owner- and store-scoped.
 
         One implementation, in ``CartService``; the workflow delegates to the
@@ -241,14 +242,17 @@ class PlanChangeExecutor:
         target_kind = str(result.get("target_kind") or plan_result.get("target_kind") or "")
         target_id = str(result.get("target_id") or plan_result.get("target_id") or "")
         group_id = str(plan_result.get("group_id") or group_id_for(target_kind, target_id))
-        sku_ids = [str(item.get("sku_id")) for item in plan_result.get("items") or []]
-        sku_ids += [str(item.get("sku_id")) for item in (base_plan or {}).get("items") or []]
         return ShoppingPlanService(self.db, store, zone).merge_plan(
             base_plan,
             plan_result,
             group_id=group_id,
             operation=operation,
-            cart_quantities=self.cart_quantities_for(sku_ids, store_id=store),
+            cart_quantities=self.cart_quantities_for(None, store_id=store),
+            ctx=ValidationContext.from_requirements(
+                Requirements(specification=result["args"]["specification"],
+                             excluded_ingredients=result["args"].get("exclude_ingredients", [])),
+                store_id=store, delivery_zone_id=zone,
+            ),
         )
 
     def _project_state(
@@ -351,28 +355,28 @@ class PlanChangeExecutor:
                 "code": result.get("code"),
                 "message": result.get("message"),
             }
-        if active_plan:
-            preview = ShoppingPlanService(self.db, store, zone).merge_plan(
-                active_plan,
-                result,
-                group_id=result["group_id"],
-                operation=operation,
-                cart_quantities=self.cart_quantities_for(
-                    [i["sku_id"] for i in active_plan["items"] + result["items"]],
-                    store_id=store,
-                ),
+        preview = ShoppingPlanService(self.db, store, zone).merge_plan(
+            active_plan,
+            result,
+            group_id=result["group_id"],
+            operation=operation,
+            cart_quantities=self.cart_quantities_for(
+                None,
+                store_id=store,
+            ),
+            ctx=ValidationContext.from_requirements(constraints, store_id=store, delivery_zone_id=zone),
+        )
+        if constraints.budget_fen is not None and preview["selected_total_fen"] > constraints.budget_fen:
+            raise SemanticProtocolError(
+                "BUDGET_EXCEEDED", "合并后的清单超出当前预算，原方案保持不变。"
             )
-            if constraints.budget_fen is not None and preview["selected_total_fen"] > constraints.budget_fen:
-                raise SemanticProtocolError(
-                    "BUDGET_EXCEEDED", "合并后的清单超出当前预算，原方案保持不变。"
-                )
-            if ShoppingPlanService.content_signature(preview) == self._signature(state):
-                return {
-                    "status": "noop",
-                    "verb": "add",
-                    "candidate_ref": candidate.ref,
-                    "message": "该目标已在清单中，未重复生成；增加件数请明确说要增加多少。",
-                }
+        if active_plan and ShoppingPlanService.content_signature(preview) == self._signature(state):
+            return {
+                "status": "noop",
+                "verb": "add",
+                "candidate_ref": candidate.ref,
+                "message": "该目标已在清单中，未重复生成；增加件数请明确说要增加多少。",
+            }
         return {
             "status": "staged",
             "verb": "add",
@@ -381,6 +385,7 @@ class PlanChangeExecutor:
             "operation": operation,
             "switching": switching,
             "plan_result": result,
+            "plan_after": preview,
             "args": args,
             "candidate_ref": candidate.ref,
             "message": f"采购清单已加入「{candidate.name or candidate.target_id}」"
@@ -415,8 +420,9 @@ class PlanChangeExecutor:
             group_id=candidate.group_id,
             operation="remove",
             cart_quantities=self.cart_quantities_for(
-                [str(i.get("sku_id")) for i in plan.get("items") or []], store_id=store
+                None, store_id=store
             ),
+            ctx=ValidationContext.from_requirements(state.requirements, store_id=store, delivery_zone_id=zone),
         )
         return {
             "status": "staged",

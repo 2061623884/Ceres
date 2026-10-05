@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import math
+from itertools import combinations
 from typing import Any
 
 from sqlalchemy.orm import Session
@@ -150,6 +151,7 @@ class TemplatePlanService:
         candidates: list[dict[str, Any]],
         *,
         product_type: str | None = None,
+        needed: dict[str, Any] | None = None,
     ) -> dict[str, Any] | None:
         pool = [c for c in candidates if c.get("sellable")]
         if product_type:
@@ -158,6 +160,9 @@ class TemplatePlanService:
                 pool = typed
             elif product_type == "flour":
                 pool = [c for c in pool if c.get("product_type") != "leavening"]
+        purchase = self._pick_packs(pool, needed)
+        if purchase:
+            return purchase[0][0]
         root = get_settings().root_dir
         in_stock = [c for c in pool if int(c.get("available_qty") or 0) > 0]
         if in_stock:
@@ -185,6 +190,47 @@ class TemplatePlanService:
             pool,
             key=lambda c: (c.get("price_fen") is None, c.get("price_fen") or 999999),
         )
+
+    def _pick_packs(
+        self, candidates: list[dict[str, Any]], needed: dict[str, Any] | None,
+    ) -> list[tuple[dict[str, Any], int]]:
+        """Compare one SKU and two-SKU combinations for one ingredient."""
+        amount, unit = contract.amount_from_needed(needed)
+        if amount is None:
+            return []
+        required_amount = math.ceil(amount) if unit == "pc" else amount
+        packable = []
+        options = []
+        for sku in sorted(candidates, key=lambda item: item["sku_id"]):
+            spec_unit = sku.get("spec_unit")
+            if (not sku["sellable"] or sku.get("spec_quantity") is None
+                    or sku.get("price_fen") is None
+                    or {"kg": "g", "l": "ml"}.get(spec_unit, spec_unit) != unit):
+                continue
+            pack_amount = sku["spec_quantity"] * UNIT_TO_GRAMS[spec_unit]
+            stock = min(99, int(sku.get("available_qty") or 0))
+            quantity = math.ceil(required_amount / pack_amount)
+            packable.append((sku, pack_amount, stock))
+            if quantity <= stock:
+                options.append((sku["price_fen"] * quantity,
+                                pack_amount * quantity - required_amount, [(sku, quantity)]))
+        for (first, first_amount, first_stock), (second, second_amount, second_stock) in combinations(packable, 2):
+            for first_qty in range(1, min(first_stock, math.ceil(required_amount / first_amount)) + 1):
+                remaining = required_amount - first_qty * first_amount
+                if remaining <= 0:
+                    continue
+                second_qty = math.ceil(remaining / second_amount)
+                if second_qty <= second_stock:
+                    options.append((first["price_fen"] * first_qty + second["price_fen"] * second_qty,
+                                    first_amount * first_qty + second_amount * second_qty - required_amount,
+                                    [(first, first_qty), (second, second_qty)]))
+        if not options:
+            return []
+        cheapest = min(price for price, _, _ in options)
+        near = [option for option in options if option[0] * 100 <= cheapest * 105]
+        return min(near, key=lambda option: (
+            option[1], option[0], tuple((sku["sku_id"], qty) for sku, qty in option[2]),
+        ))[2]
 
     def _pack_qty(self, sku: dict[str, Any], needed: dict[str, Any]) -> int | None:
         spec_qty = sku.get("spec_quantity")
@@ -216,16 +262,10 @@ class TemplatePlanService:
         needed: dict[str, Any] | None = None,
         product_type: str | None = None,
     ) -> dict[str, Any] | None:
-        for alias in self._resolve_ids(ingredient_id):
-            candidates = self.catalog.get_candidates(
-                ingredient_ids=[alias],
-                product_type=product_type,
-                max_results=50,
-            )
-            sku = self._pick_sku(candidates, product_type=product_type)
-            if sku:
-                return sku
-        return None
+        candidates = self.catalog.get_candidates(
+            ingredient_ids=self._resolve_ids(ingredient_id), product_type=product_type, max_results=50,
+        )
+        return self._pick_sku(candidates, product_type=product_type, needed=needed)
 
     def _append_item(
         self,
@@ -239,6 +279,7 @@ class TemplatePlanService:
         target_kind: str,
         target_id: str,
         source_kind: str = "local_recipe",
+        ctx: ValidationContext | None = None,
     ) -> str:
         """Append one requirement's SKU; report why it could not be appended.
 
@@ -253,47 +294,53 @@ class TemplatePlanService:
         stays explainable.
         """
         ptype = "flour" if ingredient_id == "flour" else None
-        sku = self.resolve_sku_for_ingredient(ingredient_id, needed=needed, product_type=ptype)
-        if not sku:
-            return "missing"
-        qty = self._pack_qty(sku, needed)
-        if qty is None:
-            return "unknown"
-        if sku["sku_id"] in seen_skus:
-            # Another requirement already needed this exact SKU: the row exists.
-            return "added"
-        spec_qty = sku.get("spec_quantity")
-        spec_unit = sku.get("spec_unit")
-        amount, unit = contract.amount_from_needed(needed)
-        requirement = contract.make_requirement(
-            target_kind=target_kind,
-            target_id=target_id,
-            key=ingredient_id,
-            role=role,
-            name=ingredient_name_zh(ingredient_id),
-            ingredient_id=ingredient_id,
-            quantity=amount,
-            unit=unit,
-            source={"kind": source_kind, "ref": target_id},
+        candidates = self.catalog.get_candidates(
+            ingredient_ids=self._resolve_ids(ingredient_id), product_type=ptype, max_results=50,
         )
-        seen_skus.add(sku["sku_id"])
-        candidate_ids.append(sku["sku_id"])
-        plan_items.append(
-            {
+        allowed = candidates if ctx is None else [c for c in candidates if ctx.product_allowed(c)]
+        purchase = self._pick_packs(allowed, needed)
+        if not purchase:
+            # If none satisfy the condition, existing validation explains the refusal.
+            sku = self._pick_sku(allowed or candidates, product_type=ptype)
+            if not sku:
+                return "missing"
+            qty = self._pack_qty(sku, needed)
+            if qty is None:
+                return "unknown"
+            # Keep the existing honest partial/unknown supply path.
+            purchase = [(sku, qty)]
+        amount, unit = contract.amount_from_needed(needed)
+        remaining = amount
+        for sku, qty in purchase:
+            if sku["sku_id"] in seen_skus:
+                continue
+            source = {"kind": source_kind, "ref": target_id}
+            allocation = amount
+            if len(purchase) > 1:
+                allocation = min(remaining, qty * sku["spec_quantity"] * UNIT_TO_GRAMS[sku["spec_unit"]])
+                remaining -= allocation
+                source.update(original_quantity=amount, original_unit=unit)
+            requirement = contract.make_requirement(
+                target_kind=target_kind, target_id=target_id, key=ingredient_id,
+                role=role, name=ingredient_name_zh(ingredient_id), ingredient_id=ingredient_id,
+                quantity=allocation, unit=unit, source=source,
+            )
+            seen_skus.add(sku["sku_id"])
+            candidate_ids.append(sku["sku_id"])
+            plan_items.append({
                 "sku_id": sku["sku_id"],
                 "quantity": qty,
                 "role": role,
                 "required_item_id": requirement["required_item_id"],
                 "requirement": requirement,
                 "pack_source": "catalog_spec"
-                if spec_qty is not None and spec_unit
+                if sku.get("spec_quantity") is not None and sku.get("spec_unit")
                 else "assumed_one",
-            }
-        )
+            })
         return "added"
 
     def build_plan(
-        self, dish: dict[str, Any], people: int
+        self, dish: dict[str, Any], people: int, ctx: ValidationContext | None = None,
     ) -> tuple[list[dict[str, Any]], list[str], list[dict[str, Any]]]:
         """Build the resolvable rows plus the requirements this store could not serve.
 
@@ -351,6 +398,7 @@ class TemplatePlanService:
                 role="required",
                 target_kind="dish",
                 target_id=dish_id,
+                ctx=ctx,
             )
             if status != "added":
                 note_missing(item, status)
@@ -366,6 +414,7 @@ class TemplatePlanService:
                 role="pantry",
                 target_kind="dish",
                 target_id=dish_id,
+                ctx=ctx,
             )
 
         for raw in dish.get("pantry_items") or []:
@@ -382,6 +431,7 @@ class TemplatePlanService:
                 role="pantry",
                 target_kind="dish",
                 target_id=dish_id,
+                ctx=ctx,
             )
 
         return plan_items, candidate_ids, missing
@@ -465,7 +515,6 @@ class TemplatePlanService:
         ctx: ValidationContext | None = None,
     ) -> dict[str, Any]:
         dish_id = str(dish.get("dish_id") or dish.get("template_id") or "")
-        plan_items, candidate_ids, missing_required = self.build_plan(dish, people)
         if ctx is None:
             from app.agent.state import Requirements
 
@@ -475,6 +524,7 @@ class TemplatePlanService:
                 delivery_zone_id=self.delivery_zone_id,
                 active_template_id=dish.get("dish_id"),
             )
+        plan_items, candidate_ids, missing_required = self.build_plan(dish, people, ctx)
         # A missing ingredient is a *gap*, not a reason to throw the whole dish
         # away: D2/D3 keep the resolvable rows and report what cannot be served.
         return self.validator.validate_plan(

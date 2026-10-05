@@ -1,0 +1,19 @@
+{
+  "baseline_head": "aaffbf8629d4305860ff0bc4d5cfe80402166043",
+  "source_staged": [
+    "backend/app/services/template_plan_service.py",
+    "backend/app/services/shopping_plan_service.py",
+    "frontend/src/App.tsx",
+    "frontend/src/lib/saleGuide.ts",
+    "backend/app/services/plan_commit_service.py",
+    "backend/app/services/cart_service.py",
+    "backend/tests/test_shopping_workflow.py",
+    "backend/tests/test_p0_gap_integrity.py",
+    "backend/app/agent/tools/change_plan.py"
+  ],
+  "artifact_only": [
+    "backend/app/agent/graph/nodes/mutation.py"
+  ],
+  "complete_delta": "ticket-delta.patch",
+  "note": "Inherited uncommitted mutation.py functions are absent from HEAD. Own edits committed as exact before-current patch;09 freezes full tested overlay. No inherited body staged. Initial zero-context staging rejected after inspection, index restored before staging current source patches."
+}

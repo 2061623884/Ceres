@@ -44,24 +44,24 @@ class CartService:
         item = self.db.query(CartItem).filter_by(cart_id=cart_id, sku_id=sku_id).first()
         return item.quantity if item else 0
 
-    def quantities_for(self, sku_ids: list[str]) -> dict[str, int]:
+    def quantities_for(self, sku_ids: list[str] | None) -> dict[str, int]:
         """How many of each SKU this owner already has in *their own* cart.
 
         Read-only: it never creates a cart. Scoped by owner (and store) through
         the cart row, because summing ``CartItem`` by SKU alone would let another
         owner's cart reduce this shopper's stock headroom.
         """
-        wanted = {sku for sku in sku_ids if sku}
-        if not wanted:
+        if sku_ids == []:
             return {}
         rows = (
             self.db.query(CartItem.sku_id, func.sum(CartItem.quantity))
             .join(Cart, Cart.id == CartItem.cart_id)
             .filter(
                 Cart.owner_id == self.owner_id,
-                CartItem.sku_id.in_(wanted),
             )
         )
+        if sku_ids is not None:
+            rows = rows.filter(CartItem.sku_id.in_(sku_ids))
         if self.store_id:
             rows = rows.filter(Cart.store_id == self.store_id)
         return {sku_id: int(total or 0) for sku_id, total in rows.group_by(CartItem.sku_id).all()}
