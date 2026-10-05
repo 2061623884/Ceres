@@ -1,0 +1,11 @@
+vite v8.0.5 building client environment for production...
+[2K
+transforming...✓ 20 modules transformed.
+rendering chunks...
+computing gzip size...
+../../cold-2-frontend-dist/robots.txt                   0.02 kB │ gzip:  0.04 kB
+../../cold-2-frontend-dist/index.html                   0.91 kB │ gzip:  0.42 kB
+../../cold-2-frontend-dist/assets/index-DxfSbifi.css   52.84 kB │ gzip: 10.11 kB
+../../cold-2-frontend-dist/assets/index-BYyLdFhN.js   273.73 kB │ gzip: 82.71 kB
+
+✓ built in 236ms

@@ -1,0 +1,27 @@
+﻿{
+    "startUtc":  "2026-10-05T13:38:49.7654260Z",
+    "endUtc":  "2026-10-05T13:38:50.3744653Z",
+    "archiveSha256":  "c1c286f30f029040e199dcb2d8caf670b671aaa82ee1e41fc605f49c3d522eab",
+    "expectedSha256":  "c1c286f30f029040e199dcb2d8caf670b671aaa82ee1e41fc605f49c3d522eab",
+    "archiveFiles":  412,
+    "oldArchiveFiles":  411,
+    "manifestFiles":  412,
+    "added":  [
+                  "frontend/.figma/make/site.json"
+              ],
+    "removed":  [
+
+                ],
+    "changed":  [
+
+                ],
+    "onlySiteJsonAdded":  true,
+    "manifestMissing":  [
+
+                        ],
+    "manifestHashMismatch":  [
+
+                             ],
+    "siteJsonSha256":  "615feb04700d9081ddea7294d2b713ea42b4485ff7522e151242d49c474ec032",
+    "pass":  true
+}

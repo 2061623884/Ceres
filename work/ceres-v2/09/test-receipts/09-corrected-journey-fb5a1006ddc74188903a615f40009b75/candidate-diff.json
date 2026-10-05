@@ -1,0 +1,25 @@
+{
+  "startUtc": "2026-10-05T14:03:49.4341622Z",
+  "endUtc": "2026-10-05T14:03:52.0899955Z",
+  "archiveSha256": "ae73702e64cf902d0da45b5276e0d8f9cd048f2fd0c73d6369d25aee6d1db03e",
+  "expectedSha256": "ae73702e64cf902d0da45b5276e0d8f9cd048f2fd0c73d6369d25aee6d1db03e",
+  "archiveCount": 412,
+  "manifestCount": 412,
+  "added": [],
+  "removed": [],
+  "changed": [
+    "PROJECT.md",
+    "backend/tests/test_v2_integrated_demo_live.py"
+  ],
+  "changesMatchExpected": true,
+  "manifestMissing": [],
+  "manifestMismatch": [],
+  "clone": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-corrected-journey-fb5a1006ddc74188903a615f40009b75\\cold-journey",
+  "cloneMissing": [],
+  "cloneMismatch": [],
+  "siteJsonHash": "615feb04700d9081ddea7294d2b713ea42b4485ff7522e151242d49c474ec032",
+  "liveTestHash": "6d8291ab1c420901809f084336d84c98fa5615d32363ba6f3a8554ad61313909",
+  "projectHash": "575d30e320aa3c2cd4177acbe5b8d404d31e2926a6750e300d398aaf0f85dcbc",
+  "envCopied": true,
+  "pass": true
+}

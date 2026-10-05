@@ -1,0 +1,33 @@
+﻿{
+    "startUtc":  "2026-10-05T13:40:30.6442968Z",
+    "endUtc":  "2026-10-05T13:40:31.7562145Z",
+    "executable":  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+    "argv":  [
+                 "-X",
+                 "utf8",
+                 "scripts/seed_runtime.py",
+                 "--fixture-only"
+             ],
+    "cwd":  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-83f1c39408e649a495c633c23a4bbe4c\\cold-2",
+    "env":  {
+                "MERCURY_DB_PATH":  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-83f1c39408e649a495c633c23a4bbe4c\\isolated-databases\\cold-2-mercury.sqlite3",
+                "RETRIEVAL_INDEX_DIR":  "",
+                "PYTHONDONTWRITEBYTECODE":  "1",
+                "LLM_MODEL":  "",
+                "CERES_LIVE_V2_DEMO":  "",
+                "OPENAI_API_KEY":  "",
+                "CERES_LIVE_MEMORY_ACCEPTANCE":  "",
+                "DATABASE_URL":  "sqlite:///C:/Users/20616/Desktop/Agent/Agent产品/work/ceres-v2-test-env/09-final-candidate-83f1c39408e649a495c633c23a4bbe4c/isolated-databases/cold-2-runtime.sqlite3",
+                "MEMORY_MODEL":  "",
+                "SOURCE_DATABASE_PATH":  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-83f1c39408e649a495c633c23a4bbe4c\\isolated-databases\\cold-2-no-source.sqlite3",
+                "LLM_MODE":  "offline",
+                "PYTHONUTF8":  "1",
+                "EMBEDDING_API_KEY":  ""
+            },
+    "database":  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-83f1c39408e649a495c633c23a4bbe4c\\isolated-databases\\cold-2-runtime.sqlite3",
+    "mercuryDb":  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-83f1c39408e649a495c633c23a4bbe4c\\isolated-databases\\cold-2-mercury.sqlite3",
+    "sourceDb":  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-83f1c39408e649a495c633c23a4bbe4c\\isolated-databases\\cold-2-no-source.sqlite3",
+    "exit":  0,
+    "stdoutFile":  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-83f1c39408e649a495c633c23a4bbe4c\\cold-2-seed.stdout.txt",
+    "stderrFile":  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-83f1c39408e649a495c633c23a4bbe4c\\cold-2-seed.stderr.txt"
+}

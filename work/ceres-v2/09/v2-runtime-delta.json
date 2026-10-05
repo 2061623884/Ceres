@@ -1,6 +1,6 @@
 {
   "review_fixed_point": "f41c5821e8764a0ae03653d161c566dfd4b6415e",
-  "candidate_sha256": "c1c286f30f029040e199dcb2d8caf670b671aaa82ee1e41fc605f49c3d522eab",
+  "candidate_sha256": "ae73702e64cf902d0da45b5276e0d8f9cd048f2fd0c73d6369d25aee6d1db03e",
   "note": "Full effective V2 increments since actual dirty takeover; unchanged inherited source excluded. New files and repairs included.",
   "paths": [
     {
@@ -281,7 +281,7 @@
     {
       "path": "backend/tests/test_v2_integrated_demo_live.py",
       "before_source": "new file",
-      "sha256": "81bb3ab9c1af62ceb2bb618bf95d59aa989cacc9165908acbf6d1c9ed52c9d3e"
+      "sha256": "6d8291ab1c420901809f084336d84c98fa5615d32363ba6f3a8554ad61313909"
     },
     {
       "path": "backend/tests/test_v2_order_mercury.py",

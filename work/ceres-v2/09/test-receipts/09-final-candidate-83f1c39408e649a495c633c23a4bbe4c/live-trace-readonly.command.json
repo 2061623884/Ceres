@@ -1,0 +1,22 @@
+{
+  "startUtc": "2026-10-05T14:01:29.5998076Z",
+  "endUtc": "2026-10-05T14:01:29.7142329Z",
+  "executable": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+  "argv": [
+    "-X",
+    "utf8",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-83f1c39408e649a495c633c23a4bbe4c\\readonly-live-trace.py",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-83f1c39408e649a495c633c23a4bbe4c"
+  ],
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品",
+  "mode": "SQLite URI mode=ro; PRAGMA query_only=ON",
+  "databasePaths": [
+    "pytest-temp/live-memory/test_real_reply_and_background0/test.sqlite3",
+    "pytest-temp/live-memory/test_real_reply_and_background5/test.sqlite3"
+  ],
+  "exit": 0,
+  "stdoutFile": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-83f1c39408e649a495c633c23a4bbe4c\\live-trace-readonly.stdout.txt",
+  "stderrFile": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-83f1c39408e649a495c633c23a4bbe4c\\live-trace-readonly.stderr.txt",
+  "report": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-83f1c39408e649a495c633c23a4bbe4c\\live-trace-readonly.json"
+}

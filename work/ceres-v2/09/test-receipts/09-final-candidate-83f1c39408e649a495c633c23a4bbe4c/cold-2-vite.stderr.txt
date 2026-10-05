@@ -1,0 +1,4 @@
+
+(!) outDir C:\Users\20616\Desktop\Agent\Agent产品\work\ceres-v2-test-env\09-final-candidate-83f1c39408e649a495c633c23a4bbe4c\cold-2-frontend-dist is not inside project root and will not be emptied.
+Use --emptyOutDir to override.
+

@@ -1,0 +1,166 @@
+[
+  {
+    "db": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-83f1c39408e649a495c633c23a4bbe4c\\isolated-databases\\cold-1-runtime.sqlite3",
+    "tables": [
+      "badcases",
+      "business_events",
+      "cart_items",
+      "cart_operations",
+      "carts",
+      "catalog_products",
+      "catalog_reviews",
+      "deliveries",
+      "delivery_quotes",
+      "guide_messages",
+      "guide_operations",
+      "guide_semantic_contexts",
+      "guide_sessions",
+      "guide_tasks",
+      "mercury_sessions",
+      "offers",
+      "order_items",
+      "orders",
+      "owners",
+      "plan_snapshots",
+      "policies",
+      "purchase_templates",
+      "refunds",
+      "returns",
+      "shopping_memories",
+      "stores",
+      "trace_events",
+      "turn_request_records"
+    ],
+    "catalog_products": {
+      "count": 65,
+      "columns": [
+        "sku_id",
+        "source_barcode",
+        "name",
+        "name_zh",
+        "category_id",
+        "ingredient_ids",
+        "brand",
+        "image_path",
+        "source",
+        "review_status",
+        "spec_quantity",
+        "spec_unit",
+        "usage_tags",
+        "product_type",
+        "metadata_json",
+        "created_at"
+      ]
+    },
+    "offers": {
+      "count": 65,
+      "columns": [
+        "id",
+        "store_id",
+        "sku_id",
+        "price_fen",
+        "available_qty",
+        "sellable",
+        "offer_version",
+        "is_demo",
+        "updated_at"
+      ]
+    },
+    "purchase_templates": {
+      "count": 111,
+      "columns": [
+        "template_id",
+        "scenario",
+        "aliases_json",
+        "base_people",
+        "required_items",
+        "optional_items",
+        "pantry_items",
+        "metadata_json",
+        "source"
+      ]
+    }
+  },
+  {
+    "db": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-83f1c39408e649a495c633c23a4bbe4c\\isolated-databases\\cold-2-runtime.sqlite3",
+    "tables": [
+      "badcases",
+      "business_events",
+      "cart_items",
+      "cart_operations",
+      "carts",
+      "catalog_products",
+      "catalog_reviews",
+      "deliveries",
+      "delivery_quotes",
+      "guide_messages",
+      "guide_operations",
+      "guide_semantic_contexts",
+      "guide_sessions",
+      "guide_tasks",
+      "mercury_sessions",
+      "offers",
+      "order_items",
+      "orders",
+      "owners",
+      "plan_snapshots",
+      "policies",
+      "purchase_templates",
+      "refunds",
+      "returns",
+      "shopping_memories",
+      "stores",
+      "trace_events",
+      "turn_request_records"
+    ],
+    "catalog_products": {
+      "count": 65,
+      "columns": [
+        "sku_id",
+        "source_barcode",
+        "name",
+        "name_zh",
+        "category_id",
+        "ingredient_ids",
+        "brand",
+        "image_path",
+        "source",
+        "review_status",
+        "spec_quantity",
+        "spec_unit",
+        "usage_tags",
+        "product_type",
+        "metadata_json",
+        "created_at"
+      ]
+    },
+    "offers": {
+      "count": 65,
+      "columns": [
+        "id",
+        "store_id",
+        "sku_id",
+        "price_fen",
+        "available_qty",
+        "sellable",
+        "offer_version",
+        "is_demo",
+        "updated_at"
+      ]
+    },
+    "purchase_templates": {
+      "count": 111,
+      "columns": [
+        "template_id",
+        "scenario",
+        "aliases_json",
+        "base_people",
+        "required_items",
+        "optional_items",
+        "pantry_items",
+        "metadata_json",
+        "source"
+      ]
+    }
+  }
+]

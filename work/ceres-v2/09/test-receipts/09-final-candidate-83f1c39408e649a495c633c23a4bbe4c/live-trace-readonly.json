@@ -1,0 +1,368 @@
+[
+  {
+    "label": "stable-1",
+    "database": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-83f1c39408e649a495c633c23a4bbe4c\\pytest-temp\\live-memory\\test_real_reply_and_background0\\test.sqlite3",
+    "readonly": true,
+    "query_only": true,
+    "tableColumns": [
+      "event_id",
+      "trace_id",
+      "request_id",
+      "session_id",
+      "task_id",
+      "owner_id",
+      "phase",
+      "model_mode",
+      "workflow_version",
+      "input_summary",
+      "output_summary",
+      "error",
+      "duration_ms",
+      "created_at"
+    ],
+    "eventCount": 6,
+    "phases": [
+      "understanding",
+      "model_call_started",
+      "model_call_completed",
+      "turn_result",
+      "memory_extract_started",
+      "memory_extract_completed"
+    ],
+    "events": [
+      {
+        "event_id": "evt-f423031c8a23",
+        "trace_id": "trace-44e911f1aeea",
+        "request_id": "live-memory-stable-1",
+        "session_id": "sess-ab7cf00b169c",
+        "task_id": null,
+        "owner_id": "owner-8db19bfe22834940",
+        "phase": "understanding",
+        "model_mode": "live",
+        "workflow_version": "v1",
+        "duration_ms": null,
+        "created_at": "2026-10-05 13:55:37.599535",
+        "summaries": {},
+        "error": null
+      },
+      {
+        "event_id": "evt-35f0c3330445",
+        "trace_id": "trace-44e911f1aeea",
+        "request_id": "live-memory-stable-1",
+        "session_id": "sess-ab7cf00b169c",
+        "task_id": null,
+        "owner_id": "owner-8db19bfe22834940",
+        "phase": "model_call_started",
+        "model_mode": "live",
+        "workflow_version": "v1",
+        "duration_ms": null,
+        "created_at": "2026-10-05 13:55:37.608040",
+        "summaries": {
+          "output_summary": {
+            "keys": [
+              "call_number",
+              "read_result_count",
+              "remaining_budget_s",
+              "repair",
+              "stage",
+              "status"
+            ],
+            "safe": {
+              "status": "started"
+            }
+          }
+        },
+        "error": null
+      },
+      {
+        "event_id": "evt-d3ee54f2192d",
+        "trace_id": "trace-44e911f1aeea",
+        "request_id": "live-memory-stable-1",
+        "session_id": "sess-ab7cf00b169c",
+        "task_id": null,
+        "owner_id": "owner-8db19bfe22834940",
+        "phase": "model_call_completed",
+        "model_mode": "live",
+        "workflow_version": "v1",
+        "duration_ms": 22281,
+        "created_at": "2026-10-05 13:55:59.905480",
+        "summaries": {
+          "output_summary": {
+            "keys": [
+              "call_number",
+              "duration_ms",
+              "read_result_count",
+              "remaining_budget_s",
+              "repair",
+              "stage",
+              "status"
+            ],
+            "safe": {
+              "status": "completed",
+              "duration_ms": 22281
+            }
+          }
+        },
+        "error": null
+      },
+      {
+        "event_id": "evt-57d964abdf29",
+        "trace_id": "trace-44e911f1aeea",
+        "request_id": "live-memory-stable-1",
+        "session_id": "sess-ab7cf00b169c",
+        "task_id": null,
+        "owner_id": "owner-8db19bfe22834940",
+        "phase": "turn_result",
+        "model_mode": "live",
+        "workflow_version": "v1",
+        "duration_ms": null,
+        "created_at": "2026-10-05 13:55:59.929025",
+        "summaries": {
+          "output_summary": {
+            "keys": [
+              "actions",
+              "plan_effect",
+              "status"
+            ],
+            "safe": {
+              "status": "understanding"
+            }
+          }
+        },
+        "error": null
+      },
+      {
+        "event_id": "evt-5f983a106cd7",
+        "trace_id": "trace-44e911f1aeea",
+        "request_id": "live-memory-stable-1",
+        "session_id": "sess-ab7cf00b169c",
+        "task_id": null,
+        "owner_id": "owner-8db19bfe22834940",
+        "phase": "memory_extract_started",
+        "model_mode": "live",
+        "workflow_version": "v1",
+        "duration_ms": null,
+        "created_at": "2026-10-05 13:55:59.942303",
+        "summaries": {
+          "output_summary": {
+            "keys": [
+              "model"
+            ],
+            "safe": {
+              "model": "qwen3.8-27b"
+            }
+          }
+        },
+        "error": null
+      },
+      {
+        "event_id": "evt-90fa84640bfe",
+        "trace_id": "trace-44e911f1aeea",
+        "request_id": "live-memory-stable-1",
+        "session_id": "sess-ab7cf00b169c",
+        "task_id": null,
+        "owner_id": "owner-8db19bfe22834940",
+        "phase": "memory_extract_completed",
+        "model_mode": "live",
+        "workflow_version": "v1",
+        "duration_ms": null,
+        "created_at": "2026-10-05 13:56:03.129274",
+        "summaries": {
+          "output_summary": {
+            "keys": [
+              "model",
+              "saved"
+            ],
+            "safe": {
+              "model": "qwen3.8-27b"
+            }
+          }
+        },
+        "error": null
+      }
+    ]
+  },
+  {
+    "label": "explicit-conflict-2",
+    "database": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-83f1c39408e649a495c633c23a4bbe4c\\pytest-temp\\live-memory\\test_real_reply_and_background5\\test.sqlite3",
+    "readonly": true,
+    "query_only": true,
+    "tableColumns": [
+      "event_id",
+      "trace_id",
+      "request_id",
+      "session_id",
+      "task_id",
+      "owner_id",
+      "phase",
+      "model_mode",
+      "workflow_version",
+      "input_summary",
+      "output_summary",
+      "error",
+      "duration_ms",
+      "created_at"
+    ],
+    "eventCount": 6,
+    "phases": [
+      "understanding",
+      "model_call_started",
+      "model_call_completed",
+      "turn_result",
+      "memory_extract_started",
+      "memory_extract_completed"
+    ],
+    "events": [
+      {
+        "event_id": "evt-aaf080266e05",
+        "trace_id": "trace-60bc23784d31",
+        "request_id": "live-memory-explicit-conflict-2",
+        "session_id": "sess-19740edd4d4a",
+        "task_id": null,
+        "owner_id": "owner-9b81f20326164dd1",
+        "phase": "understanding",
+        "model_mode": "live",
+        "workflow_version": "v1",
+        "duration_ms": null,
+        "created_at": "2026-10-05 13:56:34.969453",
+        "summaries": {},
+        "error": null
+      },
+      {
+        "event_id": "evt-49d91adf6e64",
+        "trace_id": "trace-60bc23784d31",
+        "request_id": "live-memory-explicit-conflict-2",
+        "session_id": "sess-19740edd4d4a",
+        "task_id": null,
+        "owner_id": "owner-9b81f20326164dd1",
+        "phase": "model_call_started",
+        "model_mode": "live",
+        "workflow_version": "v1",
+        "duration_ms": null,
+        "created_at": "2026-10-05 13:56:34.977988",
+        "summaries": {
+          "output_summary": {
+            "keys": [
+              "call_number",
+              "read_result_count",
+              "remaining_budget_s",
+              "repair",
+              "stage",
+              "status"
+            ],
+            "safe": {
+              "status": "started"
+            }
+          }
+        },
+        "error": null
+      },
+      {
+        "event_id": "evt-81c2652d5aef",
+        "trace_id": "trace-60bc23784d31",
+        "request_id": "live-memory-explicit-conflict-2",
+        "session_id": "sess-19740edd4d4a",
+        "task_id": null,
+        "owner_id": "owner-9b81f20326164dd1",
+        "phase": "model_call_completed",
+        "model_mode": "live",
+        "workflow_version": "v1",
+        "duration_ms": 16359,
+        "created_at": "2026-10-05 13:56:51.351507",
+        "summaries": {
+          "output_summary": {
+            "keys": [
+              "call_number",
+              "duration_ms",
+              "read_result_count",
+              "remaining_budget_s",
+              "repair",
+              "stage",
+              "status"
+            ],
+            "safe": {
+              "status": "completed",
+              "duration_ms": 16359
+            }
+          }
+        },
+        "error": null
+      },
+      {
+        "event_id": "evt-f348760040e8",
+        "trace_id": "trace-60bc23784d31",
+        "request_id": "live-memory-explicit-conflict-2",
+        "session_id": "sess-19740edd4d4a",
+        "task_id": null,
+        "owner_id": "owner-9b81f20326164dd1",
+        "phase": "turn_result",
+        "model_mode": "live",
+        "workflow_version": "v1",
+        "duration_ms": null,
+        "created_at": "2026-10-05 13:56:51.373779",
+        "summaries": {
+          "output_summary": {
+            "keys": [
+              "actions",
+              "plan_effect",
+              "status"
+            ],
+            "safe": {
+              "status": "understanding"
+            }
+          }
+        },
+        "error": null
+      },
+      {
+        "event_id": "evt-26139fd6dcfb",
+        "trace_id": "trace-60bc23784d31",
+        "request_id": "live-memory-explicit-conflict-2",
+        "session_id": "sess-19740edd4d4a",
+        "task_id": null,
+        "owner_id": "owner-9b81f20326164dd1",
+        "phase": "memory_extract_started",
+        "model_mode": "live",
+        "workflow_version": "v1",
+        "duration_ms": null,
+        "created_at": "2026-10-05 13:56:51.382671",
+        "summaries": {
+          "output_summary": {
+            "keys": [
+              "model"
+            ],
+            "safe": {
+              "model": "qwen3.8-27b"
+            }
+          }
+        },
+        "error": null
+      },
+      {
+        "event_id": "evt-8f3b42313c78",
+        "trace_id": "trace-60bc23784d31",
+        "request_id": "live-memory-explicit-conflict-2",
+        "session_id": "sess-19740edd4d4a",
+        "task_id": null,
+        "owner_id": "owner-9b81f20326164dd1",
+        "phase": "memory_extract_completed",
+        "model_mode": "live",
+        "workflow_version": "v1",
+        "duration_ms": null,
+        "created_at": "2026-10-05 13:56:57.113740",
+        "summaries": {
+          "output_summary": {
+            "keys": [
+              "model",
+              "saved"
+            ],
+            "safe": {
+              "model": "qwen3.8-27b"
+            }
+          }
+        },
+        "error": null
+      }
+    ]
+  }
+]

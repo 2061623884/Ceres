@@ -1,0 +1,12 @@
+{
+  "parent": "d920b07656703926f541d925f0da2e3361a50052",
+  "source_staged": [
+    "backend/tests/test_v2_integrated_demo_live.py"
+  ],
+  "reason": "The published task response contract returns actual purchase step awaiting_confirmation for a new pending plan; accepted is taskless. Correct two erroneous test assertions, with production source and 15 second limit unchanged.",
+  "working_sha256": {
+    "backend/tests/test_v2_integrated_demo_live.py": "6d8291ab1c420901809f084336d84c98fa5615d32363ba6f3a8554ad61313909"
+  },
+  "candidate_sha256": "ae73702e64cf902d0da45b5276e0d8f9cd048f2fd0c73d6369d25aee6d1db03e",
+  "reuse": "06 batch, cold rebuild and regression are retained with proof of unchanged runtime; only journey reruns after assertion correction."
+}

@@ -1,0 +1,40 @@
+Traceback (most recent call last):
+  File "C:\Users\20616\Desktop\Agent\Agent产品\work\ceres-v2-test-env\09-final-candidate-83f1c39408e649a495c633c23a4bbe4c\inspect-live-settings.py", line 3, in <module>
+    s=get_settings()
+      ^^^^^^^^^^^^^^
+  File "C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\app\core\config.py", line 109, in get_settings
+    return Settings()
+           ^^^^^^^^^^
+  File "C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Lib\site-packages\pydantic_settings\main.py", line 262, in __init__
+    super().__init__(**__pydantic_self__.__class__._settings_build_values(sources, init_kwargs))
+  File "C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Lib\site-packages\pydantic\main.py", line 263, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pydantic_core._pydantic_core.ValidationError: 9 validation errors for Settings
+LLM_MAX_OUTPUT_TOKENS
+  Input should be a valid integer, unable to parse string as an integer [type=int_parsing, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/int_parsing
+SEMANTIC_MAX_STEPS
+  Input should be a valid integer, unable to parse string as an integer [type=int_parsing, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/int_parsing
+SEMANTIC_LOOKUP_BUDGET
+  Input should be a valid integer, unable to parse string as an integer [type=int_parsing, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/int_parsing
+EMBEDDING_DIMENSION
+  Input should be a valid integer, unable to parse string as an integer [type=int_parsing, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/int_parsing
+EMBEDDING_TIMEOUT
+  Input should be a valid number, unable to parse string as a number [type=float_parsing, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/float_parsing
+BACKEND_PORT
+  Input should be a valid integer, unable to parse string as an integer [type=int_parsing, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/int_parsing
+FRONTEND_PORT
+  Input should be a valid integer, unable to parse string as an integer [type=int_parsing, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/int_parsing
+INTERNAL_ENABLED
+  Input should be a valid boolean, unable to interpret input [type=bool_parsing, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/bool_parsing
+TRACE_RETENTION_DAYS
+  Input should be a valid integer, unable to parse string as an integer [type=int_parsing, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/int_parsing

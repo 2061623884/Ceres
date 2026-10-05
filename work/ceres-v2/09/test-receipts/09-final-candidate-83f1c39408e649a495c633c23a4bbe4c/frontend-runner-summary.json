@@ -1,0 +1,19 @@
+{
+  "runs": [
+    {
+      "name": "cold-1-vite",
+      "exit": 0,
+      "record": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-83f1c39408e649a495c633c23a4bbe4c\\cold-1-vite.runner-record.json"
+    },
+    {
+      "name": "cold-2-tsc",
+      "exit": 0,
+      "record": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-83f1c39408e649a495c633c23a4bbe4c\\cold-2-tsc.runner-record.json"
+    },
+    {
+      "name": "cold-2-vite",
+      "exit": 0,
+      "record": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-83f1c39408e649a495c633c23a4bbe4c\\cold-2-vite.runner-record.json"
+    }
+  ]
+}

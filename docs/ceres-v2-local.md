@@ -1,6 +1,6 @@
 # Ceres V2 本机候选与人工验收
 
-此交付是现有 Ceres 工作树的候选，包含有效的继承源码；它不是干净 Git checkout，也未通过全部演示门槛。01–05、07–08 的技术结果见各 TASK。06 在两批真实样本中分别出现 18.109 秒、22.11 秒主回复，均超过 15 秒，因此 06 与 09 的最终验收保持阻塞。人工体验仍待用户本人确认。
+此交付是现有 Ceres 工作树的候选，包含有效的继承源码；它不是干净 Git checkout，也未通过全部演示门槛。01–05、07–08 的技术结果见各 TASK。06 旧批次18.109/22.11秒、最新批次22.391/16.468秒，以及09第二条旅程历史查询16.953秒均超过15秒。用户已决定保留qwen3.8、速度问题留待工程讨论，06与09仍阻塞，不再增加模型采样。人工体验待用户本人确认。
 
 ## 固定输入与重建
 
@@ -15,7 +15,7 @@
 ```powershell
 $taskDemoRoot = 'C:\Users\20616\Desktop\Agent\Agent产品\work\ceres-v2-demo'
 $taskPython = 'C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe'
-Expand-Archive -LiteralPath 'C:\Users\20616\Desktop\Agent\Agent产品\work\ceres-v2-release-e290536e49c64bc2a9ffde4352869893\source-inputs.zip' -DestinationPath $taskDemoRoot
+Expand-Archive -LiteralPath 'C:\Users\20616\Desktop\Agent\Agent产品\work\ceres-v2-release-739065ef470a4decbcda311998e5c08c\source-inputs.zip' -DestinationPath $taskDemoRoot
 Copy-Item -LiteralPath 'C:\Users\20616\Desktop\Agent\Agent产品\Ceres\.env' -Destination (Join-Path $taskDemoRoot '.env')
 Set-Location -LiteralPath $taskDemoRoot
 ```

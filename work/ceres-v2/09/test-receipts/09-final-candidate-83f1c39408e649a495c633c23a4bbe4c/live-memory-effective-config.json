@@ -1,0 +1,23 @@
+{
+  "suite": "06-live-memory-effective-batch",
+  "python": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-83f1c39408e649a495c633c23a4bbe4c\\cold-1\\backend",
+  "clone": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-83f1c39408e649a495c633c23a4bbe4c\\cold-1",
+  "dotenv": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-83f1c39408e649a495c633c23a4bbe4c\\cold-1\\.env",
+  "database_url": "sqlite:///C:/Users/20616/Desktop/Agent/Agent产品/work/ceres-v2-test-env/09-final-candidate-83f1c39408e649a495c633c23a4bbe4c/isolated-databases/live-memory-effective-runtime.sqlite3",
+  "mercury_db": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-83f1c39408e649a495c633c23a4bbe4c\\isolated-databases\\live-memory-effective-mercury.sqlite3",
+  "source_db": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-83f1c39408e649a495c633c23a4bbe4c\\isolated-databases\\live-memory-effective-no-source.sqlite3",
+  "retrieval_index": "",
+  "pytest_basetemp": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-83f1c39408e649a495c633c23a4bbe4c\\pytest-temp\\live-memory",
+  "test_path": "tests/test_v2_automatic_memory_live.py",
+  "env_overrides": {
+    "PYTHONUTF8": "1",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "CERES_LIVE_MEMORY_ACCEPTANCE": "1",
+    "RETRIEVAL_INDEX_DIR": "",
+    "DATABASE_URL": "sqlite:///C:/Users/20616/Desktop/Agent/Agent产品/work/ceres-v2-test-env/09-final-candidate-83f1c39408e649a495c633c23a4bbe4c/isolated-databases/live-memory-effective-runtime.sqlite3",
+    "MERCURY_DB_PATH": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-83f1c39408e649a495c633c23a4bbe4c\\isolated-databases\\live-memory-effective-mercury.sqlite3",
+    "SOURCE_DATABASE_PATH": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-83f1c39408e649a495c633c23a4bbe4c\\isolated-databases\\live-memory-effective-no-source.sqlite3",
+    "PYTHONPATH": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-83f1c39408e649a495c633c23a4bbe4c\\cold-1\\backend"
+  }
+}

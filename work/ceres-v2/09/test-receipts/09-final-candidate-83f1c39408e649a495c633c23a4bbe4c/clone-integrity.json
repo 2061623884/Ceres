@@ -1,0 +1,38 @@
+﻿{
+    "startUtc":  "2026-10-05T13:39:35.8699025Z",
+    "endUtc":  "2026-10-05T13:39:37.2025019Z",
+    "manifestFiles":  412,
+    "clones":  [
+                   {
+                       "clone":  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-83f1c39408e649a495c633c23a4bbe4c\\cold-1",
+                       "manifestCount":  412,
+                       "missingCount":  0,
+                       "mismatchCount":  0,
+                       "missing":  [
+
+                                   ],
+                       "mismatch":  [
+
+                                    ],
+                       "siteJsonPresent":  true,
+                       "rootEnvCopied":  true,
+                       "frontendNodeModulesTarget":  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\frontend\\node_modules"
+                   },
+                   {
+                       "clone":  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-83f1c39408e649a495c633c23a4bbe4c\\cold-2",
+                       "manifestCount":  412,
+                       "missingCount":  0,
+                       "mismatchCount":  0,
+                       "missing":  [
+
+                                   ],
+                       "mismatch":  [
+
+                                    ],
+                       "siteJsonPresent":  true,
+                       "rootEnvCopied":  true,
+                       "frontendNodeModulesTarget":  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\frontend\\node_modules"
+                   }
+               ],
+    "pass":  true
+}

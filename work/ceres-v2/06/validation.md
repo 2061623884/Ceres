@@ -72,3 +72,7 @@ cba8cb5e8e2d463b847583d51899ecd3：后台全套完整退出1，856pass/20fail/21
 用户已恢复原计划。live-memory-final-59d75e570d3b43cf92879a50ce5c32b8仅一次正式8项，UTC12:48:31.863–12:50:06.274，7pass/1fail、exit1。稳定3.172/5.860秒，临时3.547/22.110秒，冲突3.469/2.797秒；Dream后台10.391/14.438秒。temporary-2无采购需求却询问清单focus，不能只凭记忆不提取断言当作语义通过。只读Trace唯一主provider22015ms，后台在turn_result后7.555ms启动；原提案未留存，不能推测其字段。environment-correction.txt纠正原记录器错误的backend/.env路径，实际Settings使用项目根.env；原文件未覆盖。
 
 09补充临时讨论且不采购/不改单/不放弃时省略业务字段的Prompt指令，live用例增加无业务动作断言。旧失败记录保留，新源码仅允许一次正式复验；真实结果见[09验证](../09/validation.md)，未执行或未过门槛时仍阻塞。
+
+语义修复后正式有效批次09-final-candidate-83f1c39408e649a495c633c23a4bbe4c：UTC13:55:34.174–13:57:18.800、8项6pass/2fail、exit1，pytest102.89秒。stable-1=22.391、stable-2=3.703；temporary=2.265/2.172；explicit-conflict=3.047/16.468；两Dream完成且保留explicit/清过期。主回复均accepted、无actions，临时条件未存。两超15秒失败分别保留，不刷样本。前一basetemp父目录未建导致8setup ERROR，零用例/模型请求；补外部环境后这批才是有效采样，不将setup错误当模型重试。
+
+只读Trace各一次主call22281/16359ms；后台turn_result后13/9ms启，约3.187/5.731秒，不拖主回复。usage/finish_reason未留存。conflict-2只说“这次”理解当前陈述，未宣称更新长期记忆，existing explicit未变。生产不因09旅程状态断言修正而改变，06此批按相同生产哈希复用，不在新的测试归档上重发。原始完整回执见09/test-receipts及外部UUID run。

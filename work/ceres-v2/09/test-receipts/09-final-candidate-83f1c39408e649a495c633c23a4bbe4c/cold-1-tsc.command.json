@@ -1,0 +1,31 @@
+﻿{
+    "startUtc":  "2026-10-05T13:45:49.2014710Z",
+    "endUtc":  "2026-10-05T13:45:50.9037284Z",
+    "executable":  "C:\\Program Files\\nodejs\\node.exe",
+    "argv":  [
+                 "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\frontend\\node_modules\\typescript\\bin\\tsc",
+                 "--noEmit",
+                 "--project",
+                 "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-83f1c39408e649a495c633c23a4bbe4c\\cold-1\\frontend\\tsconfig.json",
+                 "--pretty",
+                 "false"
+             ],
+    "cwd":  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-83f1c39408e649a495c633c23a4bbe4c\\cold-1\\frontend",
+    "env":  {
+                "unset":  [
+                              "NODE_ENV",
+                              "OPENAI_API_KEY",
+                              "EMBEDDING_API_KEY",
+                              "INTERNAL_ADMIN_TOKEN",
+                              "FIGMA_PUBLIC_URL"
+                          ],
+                "unsetPrefix":  "VITE_",
+                "FIGMA_PUBLIC_URL":  "",
+                "CERES_FRONTEND_DIR":  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-83f1c39408e649a495c633c23a4bbe4c\\cold-1\\frontend",
+                "nodeVersion":  "v24.14.0",
+                "nodeModules":  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\frontend\\node_modules via clone junction"
+            },
+    "exit":  0,
+    "stdoutFile":  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-83f1c39408e649a495c633c23a4bbe4c\\cold-1-tsc.stdout.txt",
+    "stderrFile":  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-83f1c39408e649a495c633c23a4bbe4c\\cold-1-tsc.stderr.txt"
+}

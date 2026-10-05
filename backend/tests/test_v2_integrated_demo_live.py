@@ -72,7 +72,7 @@ def test_live_v2_purchase_history_checkout_and_mercury_journey(client, run):
                                    "plan": first_plan["plan_version"], "session": first["session_version"],
                                    "state": first["state_version"]}}, ensure_ascii=False))
     assert elapsed <= 15
-    assert first["answer_status"] == "accepted"
+    assert first["answer_status"] == "awaiting_confirmation"
     assert first_plan["targets"][0]["name"] == "番茄炒蛋"
     assert first_plan["targets"][0]["people"] == 4
     required = [row for row in first_plan["items"] if row["role"] == "required"]
@@ -168,7 +168,7 @@ def test_live_v2_purchase_history_checkout_and_mercury_journey(client, run):
                                    "plan": second_plan["plan_version"], "session": rebuilt["session_version"],
                                    "state": rebuilt["state_version"]}}, ensure_ascii=False))
     assert elapsed <= 15
-    assert rebuilt["answer_status"] == "accepted"
+    assert rebuilt["answer_status"] == "awaiting_confirmation"
     assert rebuilt["task_id"] != first["task_id"]
     assert second_plan["plan_id"] != first_revision["plan_id"]
     assert second_plan["targets"][0]["people"] == 4
