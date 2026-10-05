@@ -1,0 +1,8 @@
+PYTHONUTF8=1
+PYTHONDONTWRITEBYTECODE=1
+LLM_MODE=live
+DATABASE_URL=sqlite:///C:/Users/20616/Desktop/Agent/Agent产品/work/ceres-v2-test-env/run-6b96350ffc80443db5302bca69bad648/ceres.sqlite3
+MERCURY_DB_PATH=C:\Users\20616\Desktop\Agent\Agent产品\work\ceres-v2-test-env\run-6b96350ffc80443db5302bca69bad648\mercury.sqlite3
+RETRIEVAL_INDEX_DIR=<empty>
+LLM_MODEL/MEMORY_MODEL/OPENAI_BASE_URL/OPENAI_API_KEY/LLM_TIMEOUT/LLM_MAX_OUTPUT_TOKENS process overrides removed; backend .env used
+Two calls only: original payload, then same payload with thinking flag moved into chat_template_kwargs; no retry/fallback

@@ -1,0 +1,8 @@
+PYTHONUTF8=1
+PYTHONDONTWRITEBYTECODE=1
+LLM_MODE=live
+DATABASE_URL=sqlite:///C:/Users/20616/Desktop/Agent/Agent产品/work/ceres-v2-test-env/run-606f34283a0a48df988be4e449d5a4ee/ceres.sqlite3
+MERCURY_DB_PATH=C:\Users\20616\Desktop\Agent\Agent产品\work\ceres-v2-test-env\run-606f34283a0a48df988be4e449d5a4ee\mercury.sqlite3
+RETRIEVAL_INDEX_DIR=<empty>
+LLM model/base/key/token overrides removed; backend .env used; prints safe model name and key presence only
+One network call: same A Dream payload/context/temp, max_tokens 4096; no retry/fallback

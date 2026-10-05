@@ -1,0 +1,11 @@
+PYTHONUTF8=1
+PYTHONDONTWRITEBYTECODE=1
+PYTHONUNBUFFERED=1
+CERES_LIVE_MEMORY_ACCEPTANCE=1
+LLM_MODE=live
+DATABASE_URL=sqlite:///C:/Users/20616/Desktop/Agent/Agent产品/work/ceres-v2-test-env/run-07865cc22bb0476d915f9db59f79acd1/ceres.sqlite3
+MERCURY_DB_PATH=C:\Users\20616\Desktop\Agent\Agent产品\work\ceres-v2-test-env\run-07865cc22bb0476d915f9db59f79acd1\mercury.sqlite3
+RETRIEVAL_INDEX_DIR=<empty>
+model/base/key/token process overrides removed; backend .env used; no key/header logged
+PYTEST_BASETEMP=C:\Users\20616\Desktop\Agent\Agent产品\work\ceres-v2-test-env\run-07865cc22bb0476d915f9db59f79acd1\pytest-tmp
+source fixture in pytest module; all DB/Mercury/tmp paths isolated

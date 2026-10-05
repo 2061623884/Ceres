@@ -61,6 +61,8 @@ cba8cb5e8e2d463b847583d51899ecd3：后台全套完整退出1，856pass/20fail/21
 
 5870630ffb9d44ee87b3275028c53b3a：run_pre06_regressions.py加载本票before的config、Prompt、stream源，在独立进程内存注入，不改活动源码；20个失败nodeids复测，19fail/1pass、exit1，09:28:17.4575174Z–09:29:00.1858057Z UTC。19项相同首个症状在06前仍存在，不扩范围修复；原始双日志保留。唯一差异是上述旧真实模型移除样本，两次外部采样一败一成，从未调用后台记忆/读取memory_model，不能据此归因为06代码回归。不再重发该旧样本，不恢复历史语义A/B。
 
-21个RAG setup error均需要只读verification/data-completion/candidate_runtime.sqlite3，当前文件无法打开；不伪造快照替代。全套仍未通过，这些记录供后续工程讨论。本票59项定向验证与真实模型样本、用户页面体验分别报告。
+21个RAG setup error均需要只读verification/data-completion/candidate_runtime.sqlite3，当前文件无法打开；不伪造快照替代。全套仍未通过，这些记录供后续工程讨论。审查修复后的最终67项相关定向验证与真实模型样本、用户页面体验分别报告。
 
 原始日志及直接退出码的可提交副本见test-receipts/，原始外部位置映射见receipts.json。全套日志已以实际配置key和Bearer模式检查，均未匹配；只提交无凭据证据。
+
+[执行索引](execution-index.md)汇总33个既有run及其实际留存的命令、环境、时间和退出文件；未留存字段明确标“未记录”，没有从文件时间或日志猜补。部分早期元数据不完整，因此不宣称所有历史实验都能独立复现。关键正式真实采样、最终受控GREEN、外壳RED、全套和06前对照的已留存元数据另复制到各test-receipts目录。索引链接保留本机外部原始位置，09干净源码/数据完整冻结未启动。

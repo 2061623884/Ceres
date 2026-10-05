@@ -1,0 +1,10 @@
+PYTHONUTF8=1
+PYTHONDONTWRITEBYTECODE=1
+MEMORY_MODEL=<empty>
+DATABASE_URL=sqlite:///C:/Users/20616/Desktop/Agent/Agent产品/work/ceres-v2-test-env/run-cba8cb5e8e2d463b847583d51899ecd3/ceres.sqlite3
+MERCURY_DB_PATH=C:\Users\20616\Desktop\Agent\Agent产品\work\ceres-v2-test-env\run-cba8cb5e8e2d463b847583d51899ecd3\mercury.sqlite3
+RETRIEVAL_INDEX_DIR=<empty>
+CERES_LIVE_MEMORY_ACCEPTANCE=<unset>
+PYTEST_BASETEMP=C:\Users\20616\Desktop\Agent\Agent产品\work\ceres-v2-test-env\run-cba8cb5e8e2d463b847583d51899ecd3\pytest-tmp
+pytest cache disabled; PytestUnhandledThreadExceptionWarning treated as error
+isolated external DB/Mercury/basetemp; no source DB writes identified

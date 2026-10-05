@@ -3,109 +3,248 @@
     "run": "ce93b2a50de24a1686d0bb057878ab50",
     "raw": "work/ceres-v2/06/test-receipts/ce93b2a50de24a1686d0bb057878ab50/v2-automatic-memory-pending-red.txt",
     "original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-ce93b2a50de24a1686d0bb057878ab50\\v2-automatic-memory-pending-red.txt",
-    "exit_code": "1"
+    "exit_code": "1",
+    "saved_metadata": {},
+    "metadata_not_recorded": [
+      "command.txt",
+      "command-argv.json",
+      "environment.txt",
+      "timing.txt"
+    ]
   },
   {
     "run": "8b51572eec8e4f5095d485a13122ada5",
     "raw": "work/ceres-v2/06/test-receipts/8b51572eec8e4f5095d485a13122ada5/v2-automatic-memory-pending-green.txt",
     "original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-8b51572eec8e4f5095d485a13122ada5\\v2-automatic-memory-pending-green.txt",
-    "exit_code": "0"
+    "exit_code": "0",
+    "saved_metadata": {},
+    "metadata_not_recorded": [
+      "command.txt",
+      "command-argv.json",
+      "environment.txt",
+      "timing.txt"
+    ]
   },
   {
     "run": "66f05db3604a491b9932071c3664713b",
     "raw": "work/ceres-v2/06/test-receipts/66f05db3604a491b9932071c3664713b/v2-automatic-memory-replay-red.txt",
     "original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-66f05db3604a491b9932071c3664713b\\v2-automatic-memory-replay-red.txt",
-    "exit_code": "1"
+    "exit_code": "1",
+    "saved_metadata": {},
+    "metadata_not_recorded": [
+      "command.txt",
+      "command-argv.json",
+      "environment.txt",
+      "timing.txt"
+    ]
   },
   {
     "run": "04c2e47a98a945af973e3ee4b240bf6b",
     "raw": "work/ceres-v2/06/test-receipts/04c2e47a98a945af973e3ee4b240bf6b/v2-automatic-memory-fourteen-green.txt",
     "original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-04c2e47a98a945af973e3ee4b240bf6b\\v2-automatic-memory-fourteen-green.txt",
-    "exit_code": "0"
+    "exit_code": "0",
+    "saved_metadata": {},
+    "metadata_not_recorded": [
+      "command.txt",
+      "command-argv.json",
+      "environment.txt",
+      "timing.txt"
+    ]
   },
   {
     "run": "1c449cff76124c5691ddb56f543f6cf1",
     "raw": "work/ceres-v2/06/test-receipts/1c449cff76124c5691ddb56f543f6cf1/v2-explicit-correction-red.txt",
     "original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-1c449cff76124c5691ddb56f543f6cf1\\v2-explicit-correction-red.txt",
-    "exit_code": "1"
+    "exit_code": "1",
+    "saved_metadata": {
+      "environment.txt": "work/ceres-v2/06/test-receipts/1c449cff76124c5691ddb56f543f6cf1/environment.txt",
+      "timing.txt": "work/ceres-v2/06/test-receipts/1c449cff76124c5691ddb56f543f6cf1/timing.txt"
+    },
+    "metadata_not_recorded": [
+      "command.txt",
+      "command-argv.json"
+    ]
   },
   {
     "run": "6ce5044cc64c4d40b738c2ef07660e49",
     "raw": "work/ceres-v2/06/test-receipts/6ce5044cc64c4d40b738c2ef07660e49/v2-explicit-correction-green.txt",
     "original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-6ce5044cc64c4d40b738c2ef07660e49\\v2-explicit-correction-green.txt",
-    "exit_code": "0"
+    "exit_code": "0",
+    "saved_metadata": {
+      "environment.txt": "work/ceres-v2/06/test-receipts/6ce5044cc64c4d40b738c2ef07660e49/environment.txt",
+      "timing.txt": "work/ceres-v2/06/test-receipts/6ce5044cc64c4d40b738c2ef07660e49/timing.txt"
+    },
+    "metadata_not_recorded": [
+      "command.txt",
+      "command-argv.json"
+    ]
   },
   {
     "run": "d83e5663921c47dbbc30e134e060e7d1",
     "raw": "work/ceres-v2/06/test-receipts/d83e5663921c47dbbc30e134e060e7d1/memory-provider-schema-red.txt",
     "original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-d83e5663921c47dbbc30e134e060e7d1\\memory-provider-schema-red.txt",
-    "exit_code": "1"
+    "exit_code": "1",
+    "saved_metadata": {
+      "environment.txt": "work/ceres-v2/06/test-receipts/d83e5663921c47dbbc30e134e060e7d1/environment.txt",
+      "timing.txt": "work/ceres-v2/06/test-receipts/d83e5663921c47dbbc30e134e060e7d1/timing.txt"
+    },
+    "metadata_not_recorded": [
+      "command.txt",
+      "command-argv.json"
+    ]
   },
   {
     "run": "6ee041d1d56a463cbcbf512f6c2e9946",
     "raw": "work/ceres-v2/06/test-receipts/6ee041d1d56a463cbcbf512f6c2e9946/v2-memory-related-regression.txt",
     "original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-6ee041d1d56a463cbcbf512f6c2e9946\\v2-memory-related-regression.txt",
-    "exit_code": "1"
+    "exit_code": "1",
+    "saved_metadata": {
+      "command.txt": "work/ceres-v2/06/test-receipts/6ee041d1d56a463cbcbf512f6c2e9946/command.txt",
+      "environment.txt": "work/ceres-v2/06/test-receipts/6ee041d1d56a463cbcbf512f6c2e9946/environment.txt",
+      "timing.txt": "work/ceres-v2/06/test-receipts/6ee041d1d56a463cbcbf512f6c2e9946/timing.txt"
+    },
+    "metadata_not_recorded": [
+      "command-argv.json"
+    ]
   },
   {
     "run": "3ebdf4747e474beeb46e687125f71f39",
     "raw": "work/ceres-v2/06/test-receipts/3ebdf4747e474beeb46e687125f71f39/fresh-env-memory-provider-preflight.txt",
     "original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-3ebdf4747e474beeb46e687125f71f39\\fresh-env-memory-provider-preflight.txt",
-    "exit_code": "0"
+    "exit_code": "0",
+    "saved_metadata": {},
+    "metadata_not_recorded": [
+      "command.txt",
+      "command-argv.json",
+      "environment.txt",
+      "timing.txt"
+    ]
   },
   {
     "run": "7a3a218b27bf4faca23759eb319128f3",
     "raw": "work/ceres-v2/06/test-receipts/7a3a218b27bf4faca23759eb319128f3/v2-automatic-memory-live-eight.txt",
     "original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-7a3a218b27bf4faca23759eb319128f3\\v2-automatic-memory-live-eight.txt",
-    "exit_code": "1"
+    "exit_code": "1",
+    "saved_metadata": {
+      "command.txt": "work/ceres-v2/06/test-receipts/7a3a218b27bf4faca23759eb319128f3/command.txt",
+      "environment.txt": "work/ceres-v2/06/test-receipts/7a3a218b27bf4faca23759eb319128f3/environment.txt",
+      "timing.txt": "work/ceres-v2/06/test-receipts/7a3a218b27bf4faca23759eb319128f3/timing.txt"
+    },
+    "metadata_not_recorded": [
+      "command-argv.json"
+    ]
   },
   {
     "run": "5bb72886b6fc4f58a4a4b11e9bc18c4a",
     "raw": "work/ceres-v2/06/test-receipts/5bb72886b6fc4f58a4a4b11e9bc18c4a/phase2a-single-regression-recheck.txt",
     "original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-5bb72886b6fc4f58a4a4b11e9bc18c4a\\phase2a-single-regression-recheck.txt",
-    "exit_code": "0"
+    "exit_code": "0",
+    "saved_metadata": {
+      "environment.txt": "work/ceres-v2/06/test-receipts/5bb72886b6fc4f58a4a4b11e9bc18c4a/environment.txt",
+      "timing.txt": "work/ceres-v2/06/test-receipts/5bb72886b6fc4f58a4a4b11e9bc18c4a/timing.txt"
+    },
+    "metadata_not_recorded": [
+      "command.txt",
+      "command-argv.json"
+    ]
   },
   {
     "run": "6b96350ffc80443db5302bca69bad648",
     "raw": "work/ceres-v2/06/test-receipts/6b96350ffc80443db5302bca69bad648/dream-thinking-placement-ab.txt",
     "original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-6b96350ffc80443db5302bca69bad648\\dream-thinking-placement-ab.txt",
-    "exit_code": "0"
+    "exit_code": "0",
+    "saved_metadata": {
+      "environment.txt": "work/ceres-v2/06/test-receipts/6b96350ffc80443db5302bca69bad648/environment.txt",
+      "timing.txt": "work/ceres-v2/06/test-receipts/6b96350ffc80443db5302bca69bad648/timing.txt"
+    },
+    "metadata_not_recorded": [
+      "command.txt",
+      "command-argv.json"
+    ]
   },
   {
     "run": "cba8cb5e8e2d463b847583d51899ecd3",
     "raw": "work/ceres-v2/06/test-receipts/cba8cb5e8e2d463b847583d51899ecd3/backend-offline-full-suite.txt",
     "original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-cba8cb5e8e2d463b847583d51899ecd3\\backend-offline-full-suite.txt",
-    "exit_code": "1"
+    "exit_code": "1",
+    "saved_metadata": {
+      "command.txt": "work/ceres-v2/06/test-receipts/cba8cb5e8e2d463b847583d51899ecd3/command.txt",
+      "environment.txt": "work/ceres-v2/06/test-receipts/cba8cb5e8e2d463b847583d51899ecd3/environment.txt",
+      "timing.txt": "work/ceres-v2/06/test-receipts/cba8cb5e8e2d463b847583d51899ecd3/timing.txt"
+    },
+    "metadata_not_recorded": [
+      "command-argv.json"
+    ]
   },
   {
     "run": "606f34283a0a48df988be4e449d5a4ee",
     "raw": "work/ceres-v2/06/test-receipts/606f34283a0a48df988be4e449d5a4ee/dream-output-capacity-4096.txt",
     "original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-606f34283a0a48df988be4e449d5a4ee\\dream-output-capacity-4096.txt",
-    "exit_code": "0"
+    "exit_code": "0",
+    "saved_metadata": {
+      "command.txt": "work/ceres-v2/06/test-receipts/606f34283a0a48df988be4e449d5a4ee/command.txt",
+      "environment.txt": "work/ceres-v2/06/test-receipts/606f34283a0a48df988be4e449d5a4ee/environment.txt",
+      "timing.txt": "work/ceres-v2/06/test-receipts/606f34283a0a48df988be4e449d5a4ee/timing.txt"
+    },
+    "metadata_not_recorded": [
+      "command-argv.json"
+    ]
   },
   {
     "run": "886827bec14f4e52a929009bdc3e75c8",
     "raw": "work/ceres-v2/06/test-receipts/886827bec14f4e52a929009bdc3e75c8/dream-threshold-ttl-red.txt",
     "original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-886827bec14f4e52a929009bdc3e75c8\\dream-threshold-ttl-red.txt",
-    "exit_code": "1"
+    "exit_code": "1",
+    "saved_metadata": {
+      "environment.txt": "work/ceres-v2/06/test-receipts/886827bec14f4e52a929009bdc3e75c8/environment.txt",
+      "timing.txt": "work/ceres-v2/06/test-receipts/886827bec14f4e52a929009bdc3e75c8/timing.txt"
+    },
+    "metadata_not_recorded": [
+      "command.txt",
+      "command-argv.json"
+    ]
   },
   {
     "run": "06a8b55e0f9d41179c37c559bb316acc",
     "raw": "work/ceres-v2/06/test-receipts/06a8b55e0f9d41179c37c559bb316acc/phase2a-single-regression.txt",
     "original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-06a8b55e0f9d41179c37c559bb316acc\\phase2a-single-regression.txt",
-    "exit_code": "1"
+    "exit_code": "1",
+    "saved_metadata": {
+      "environment.txt": "work/ceres-v2/06/test-receipts/06a8b55e0f9d41179c37c559bb316acc/environment.txt",
+      "timing.txt": "work/ceres-v2/06/test-receipts/06a8b55e0f9d41179c37c559bb316acc/timing.txt"
+    },
+    "metadata_not_recorded": [
+      "command.txt",
+      "command-argv.json"
+    ]
   },
   {
     "run": "b33385addd2d43fa968bf544f9708b11",
     "raw": "work/ceres-v2/06/test-receipts/b33385addd2d43fa968bf544f9708b11/06-final-related-regression.txt",
     "original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-b33385addd2d43fa968bf544f9708b11\\06-final-related-regression.txt",
-    "exit_code": "0"
+    "exit_code": "0",
+    "saved_metadata": {
+      "command.txt": "work/ceres-v2/06/test-receipts/b33385addd2d43fa968bf544f9708b11/command.txt",
+      "environment.txt": "work/ceres-v2/06/test-receipts/b33385addd2d43fa968bf544f9708b11/environment.txt",
+      "timing.txt": "work/ceres-v2/06/test-receipts/b33385addd2d43fa968bf544f9708b11/timing.txt"
+    },
+    "metadata_not_recorded": [
+      "command-argv.json"
+    ]
   },
   {
     "run": "5870630ffb9d44ee87b3275028c53b3a",
     "raw": "work/ceres-v2/06/test-receipts/5870630ffb9d44ee87b3275028c53b3a/pre06-twenty-regressions.txt",
     "original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-5870630ffb9d44ee87b3275028c53b3a\\pre06-twenty-regressions.txt",
-    "exit_code": "1"
+    "exit_code": "1",
+    "saved_metadata": {
+      "command.txt": "work/ceres-v2/06/test-receipts/5870630ffb9d44ee87b3275028c53b3a/command.txt",
+      "environment.txt": "work/ceres-v2/06/test-receipts/5870630ffb9d44ee87b3275028c53b3a/environment.txt",
+      "timing.txt": "work/ceres-v2/06/test-receipts/5870630ffb9d44ee87b3275028c53b3a/timing.txt"
+    },
+    "metadata_not_recorded": [
+      "command-argv.json"
+    ]
   },
   {
     "run": "07865cc22bb0476d915f9db59f79acd1",
@@ -117,7 +256,15 @@
       "original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-07865cc22bb0476d915f9db59f79acd1\\latency-trace-readonly.txt",
       "exit_code": 0,
       "additional_model_calls": 0
-    }
+    },
+    "saved_metadata": {
+      "command.txt": "work/ceres-v2/06/test-receipts/07865cc22bb0476d915f9db59f79acd1/command.txt",
+      "environment.txt": "work/ceres-v2/06/test-receipts/07865cc22bb0476d915f9db59f79acd1/environment.txt",
+      "timing.txt": "work/ceres-v2/06/test-receipts/07865cc22bb0476d915f9db59f79acd1/timing.txt"
+    },
+    "metadata_not_recorded": [
+      "command-argv.json"
+    ]
   },
   {
     "run": "a8c2d93a6e4947b1b06380ad16f392b0",
@@ -127,7 +274,14 @@
     "command": "work/ceres-v2/06/test-receipts/a8c2d93a6e4947b1b06380ad16f392b0/command.txt",
     "environment": "work/ceres-v2/06/test-receipts/a8c2d93a6e4947b1b06380ad16f392b0/environment.txt",
     "timing": "work/ceres-v2/06/test-receipts/a8c2d93a6e4947b1b06380ad16f392b0/timing.txt",
-    "note": "Root checked the exact configured OPENAI_API_KEY (67 chars): no actual key or Bearer pattern present. Preliminary tester scanner falsely matched 1536; use original safe log, not its numeric-redacted copy."
+    "note": "Root checked the exact configured OPENAI_API_KEY (67 chars): no actual key or Bearer pattern present. Preliminary tester scanner falsely matched 1536; use original safe log, not its numeric-redacted copy.",
+    "saved_metadata": {
+      "command.txt": "work/ceres-v2/06/test-receipts/a8c2d93a6e4947b1b06380ad16f392b0/command.txt",
+      "command-argv.json": "work/ceres-v2/06/test-receipts/a8c2d93a6e4947b1b06380ad16f392b0/command-argv.json",
+      "environment.txt": "work/ceres-v2/06/test-receipts/a8c2d93a6e4947b1b06380ad16f392b0/environment.txt",
+      "timing.txt": "work/ceres-v2/06/test-receipts/a8c2d93a6e4947b1b06380ad16f392b0/timing.txt"
+    },
+    "metadata_not_recorded": []
   },
   {
     "run": "fc958213e4524738a1b1a75bfb1a1f72",
@@ -136,6 +290,13 @@
     "exit_code": "0",
     "command_argv": "work/ceres-v2/06/test-receipts/fc958213e4524738a1b1a75bfb1a1f72/command-argv.json",
     "environment": "work/ceres-v2/06/test-receipts/fc958213e4524738a1b1a75bfb1a1f72/environment.txt",
-    "timing": "work/ceres-v2/06/test-receipts/fc958213e4524738a1b1a75bfb1a1f72/timing.txt"
+    "timing": "work/ceres-v2/06/test-receipts/fc958213e4524738a1b1a75bfb1a1f72/timing.txt",
+    "saved_metadata": {
+      "command.txt": "work/ceres-v2/06/test-receipts/fc958213e4524738a1b1a75bfb1a1f72/command.txt",
+      "command-argv.json": "work/ceres-v2/06/test-receipts/fc958213e4524738a1b1a75bfb1a1f72/command-argv.json",
+      "environment.txt": "work/ceres-v2/06/test-receipts/fc958213e4524738a1b1a75bfb1a1f72/environment.txt",
+      "timing.txt": "work/ceres-v2/06/test-receipts/fc958213e4524738a1b1a75bfb1a1f72/timing.txt"
+    },
+    "metadata_not_recorded": []
   }
 ]

@@ -1,0 +1,1 @@
+C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe -X utf8 C:\Users\20616\Desktop\Agent\Agent产品\work\ceres-v2-test-env\run-606f34283a0a48df988be4e449d5a4ee\diagnostic.py

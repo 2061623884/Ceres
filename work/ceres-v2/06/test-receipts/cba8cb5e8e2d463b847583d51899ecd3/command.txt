@@ -1,0 +1,1 @@
+C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe -X utf8 -m pytest -q -p no:cacheprovider -W error::pytest.PytestUnhandledThreadExceptionWarning tests --basetemp C:\Users\20616\Desktop\Agent\Agent产品\work\ceres-v2-test-env\run-cba8cb5e8e2d463b847583d51899ecd3\pytest-tmp

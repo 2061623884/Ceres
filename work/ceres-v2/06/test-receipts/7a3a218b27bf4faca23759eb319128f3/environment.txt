@@ -1,0 +1,10 @@
+PYTHONUTF8=1
+PYTHONDONTWRITEBYTECODE=1
+CERES_LIVE_MEMORY_ACCEPTANCE=1
+LLM_MODE=live
+DATABASE_URL=sqlite:///C:/Users/20616/Desktop/Agent/Agent产品/work/ceres-v2-test-env/run-7a3a218b27bf4faca23759eb319128f3/ceres.sqlite3
+MERCURY_DB_PATH=C:\Users\20616\Desktop\Agent\Agent产品\work\ceres-v2-test-env\run-7a3a218b27bf4faca23759eb319128f3\mercury.sqlite3
+RETRIEVAL_INDEX_DIR=<empty>
+LLM_MODEL/MEMORY_MODEL/OPENAI_BASE_URL/OPENAI_API_KEY/LLM_TIMEOUT: process overrides removed; loaded from backend .env
+pytest cache disabled; PytestUnhandledThreadExceptionWarning treated as error
+source fixture supplied by tests/support/v2_fixture.py; pytest basetemp external

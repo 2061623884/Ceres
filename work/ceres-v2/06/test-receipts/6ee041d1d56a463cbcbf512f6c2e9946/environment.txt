@@ -1,0 +1,8 @@
+PYTHONUTF8=1
+PYTHONDONTWRITEBYTECODE=1
+DATABASE_URL=sqlite:///C:/Users/20616/Desktop/Agent/Agent产品/work/ceres-v2-test-env/run-6ee041d1d56a463cbcbf512f6c2e9946/ceres.sqlite3
+MERCURY_DB_PATH=C:\Users\20616\Desktop\Agent\Agent产品\work\ceres-v2-test-env\run-6ee041d1d56a463cbcbf512f6c2e9946\mercury.sqlite3
+RETRIEVAL_INDEX_DIR=<empty>
+MEMORY_MODEL=<empty>
+PYTEST_BASETEMP=C:\Users\20616\Desktop\Agent\Agent产品\work\ceres-v2-test-env\run-6ee041d1d56a463cbcbf512f6c2e9946\pytest-tmp
+pytest cache disabled; PytestUnhandledThreadExceptionWarning treated as error

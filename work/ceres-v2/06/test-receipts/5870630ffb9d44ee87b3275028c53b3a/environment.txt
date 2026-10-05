@@ -1,0 +1,10 @@
+PYTHONUTF8=1
+PYTHONDONTWRITEBYTECODE=1
+MEMORY_MODEL=<empty>
+DATABASE_URL=sqlite:///C:/Users/20616/Desktop/Agent/Agent产品/work/ceres-v2-test-env/run-5870630ffb9d44ee87b3275028c53b3a/ceres.sqlite3
+MERCURY_DB_PATH=C:\Users\20616\Desktop\Agent\Agent产品\work\ceres-v2-test-env\run-5870630ffb9d44ee87b3275028c53b3a\mercury.sqlite3
+RETRIEVAL_INDEX_DIR=<empty>
+CERES_LIVE_MEMORY_ACCEPTANCE=<unset>
+PYTEST_BASETEMP=C:\Users\20616\Desktop\Agent\Agent产品\work\ceres-v2-test-env\run-5870630ffb9d44ee87b3275028c53b3a\pytest-tmp
+pre06 baseline runner loads only archived config/semantic/turn_stream_service modules in memory
+raw output redirected to external file; no raw echo before secret scan
