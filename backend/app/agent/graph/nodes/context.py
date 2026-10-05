@@ -26,6 +26,7 @@ from app.agent.graph.runtime import TurnRuntime, context_of
 from app.core.errors import AppError
 from app.models.session import GuideSession, GuideTask
 from app.services.session_actions import effective_status
+from app.services.memory_service import MemoryService
 from app.services.template_matcher import dish_display_name, get_template_by_id
 
 #: Terminal task statuses. A turn on one of these still enters the graph (it is
@@ -171,6 +172,7 @@ def build_turn_inputs(
         focus_refs=focus_refs,
         goal_candidate=(goal_candidate.model_dump() if goal_candidate else None),
     )
+    snapshot = replace(snapshot, memories=MemoryService(db, owner_id).recall(message))
     session_constraints = dict(context.get("session_constraints") or {})
     if session_constraints:
         snapshot = replace(

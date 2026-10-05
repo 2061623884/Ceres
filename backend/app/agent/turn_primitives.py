@@ -69,6 +69,7 @@ class TurnSnapshot:
     pending_clarifications: list[dict[str, Any]] = field(default_factory=list)
     displayed_candidates: list[dict[str, Any]] = field(default_factory=list)
     recent_messages: list[dict[str, Any]] = field(default_factory=list)
+    memories: list[dict[str, Any]] = field(default_factory=list)
     #: The refs the model may name as ``focus_ref`` this turn (server-issued).
     focus_refs: list[dict[str, Any]] = field(default_factory=list)
     #: The goal under discussion, when the session holds one that is still bound
@@ -144,6 +145,7 @@ def build_request(
         "read_only": read_only,
         "user_message": snapshot.message,
         "requirements": deepcopy(snapshot.requirements or {}),
+        "memories": deepcopy(snapshot.memories),
         "entry_context": deepcopy(snapshot.entry_context or {}),
         "view_context": deepcopy(snapshot.view_context or {}),
         "current_plan": deepcopy(snapshot.current_plan),

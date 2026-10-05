@@ -1,0 +1,38 @@
+{
+  "git_head": "0d38ae1090f32e3f451050a6f1b515a8a80d2a53",
+  "scope": "05 explicit owner memory",
+  "paths": [
+    {
+      "path": "backend/app/models/__init__.py",
+      "sha256": "50710c6afb663c28d071da8cc5001063173788d020b8ddddd40f0a1c1892b9d3"
+    },
+    {
+      "path": "backend/app/core/database.py",
+      "sha256": "e81d6840bb4d172d989fa400fa6544c073ee83b71737f8606908565a9685b023"
+    },
+    {
+      "path": "backend/app/agent/protocol.py",
+      "sha256": "aa7456e1d80b4b05806d73d24dfddc629b61511aaf351ad37efab4be8be9631c"
+    },
+    {
+      "path": "backend/app/agent/turn_primitives.py",
+      "sha256": "566263b035d885f85c05f228d783ca0284805943cbb7dacc923332415f983726"
+    },
+    {
+      "path": "backend/app/agent/graph/nodes/context.py",
+      "sha256": "102cba7e5f7f70893d8f534402ebcf78019d57a68d7698ae24e2d8fb57f6c71a"
+    },
+    {
+      "path": "backend/app/agent/graph/nodes/answer.py",
+      "sha256": "f21f08893f2aed1235e045252631906909867a0d0e7562f9165cb584fd93e32a"
+    },
+    {
+      "path": "backend/app/agent/graph/turn_commit.py",
+      "sha256": "97aa3b67d85c3a283097afdd98a2be88f260c928e898037067122dcf835b17b4"
+    },
+    {
+      "path": "backend/app/prompts/semantic.py",
+      "sha256": "577192af144cbedb62c446bc0391858c9476f246498a7d26169169aab5576bb1"
+    }
+  ]
+}

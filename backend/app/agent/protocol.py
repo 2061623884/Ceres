@@ -95,6 +95,7 @@ PROPOSAL_TOP_KEYS = frozenset(
         "questions",
         "display_refs",
         "resolved_questions",
+        "memory",
     }
 )
 
@@ -322,6 +323,14 @@ class Uncertainty:
     option_refs: list[str] = dc_field(default_factory=list)
 
 
+@dataclass(frozen=True)
+class MemoryAction:
+    verb: str
+    category: str | None = None
+    content: str | None = None
+    ref: str | None = None
+
+
 @dataclass
 class SemanticProposal:
     reply: str = ""
@@ -334,6 +343,7 @@ class SemanticProposal:
     uncertainties: list[Uncertainty] = dc_field(default_factory=list)
     display_refs: list[str] = dc_field(default_factory=list)
     resolved_questions: list[str] = dc_field(default_factory=list)
+    memory: MemoryAction | None = None
 
     @property
     def is_empty(self) -> bool:
@@ -345,6 +355,7 @@ class SemanticProposal:
             or self.queries
             or self.uncertainties
             or self.display_refs
+            or self.memory
         )
 
 
@@ -412,16 +423,40 @@ def parse_proposal(raw: Any) -> SemanticProposal:
             ],
             display_refs=_refs(top.get("display_refs"), "display_refs"),
             resolved_questions=_refs(top.get("resolved_questions"), "resolved_questions"),
+            memory=_parse_memory(top.get("memory")),
         )
         if len(proposal.lookups) + len(proposal.queries) > 4:
             raise SemanticProtocolError("PROPOSAL_LIMIT_EXCEEDED", "单轮最多 4 个只读请求")
         if len(proposal.uncertainties) > 3:
             raise SemanticProtocolError("PROPOSAL_LIMIT_EXCEEDED", "单轮最多 3 个待澄清问题")
         _attach_understanding(proposal, top)
+        if proposal.memory and any(top.get(key) for key in (
+            "target", "constraints", "focus", "edit", "plan_act", "lookups", "reads", "questions",
+        )):
+            raise SemanticProtocolError("UNSUPPORTED_OPERATION", "记忆管理请单独提出，本轮没有修改记忆或清单。")
     except ValidationError as exc:
         detail = "; ".join(str(e.get("msg") or "") for e in exc.errors()[:3])
         raise SemanticProtocolError("MALFORMED_PROPOSAL", detail or "proposal 结构不合法") from exc
     return proposal
+
+
+def _parse_memory(raw: Any) -> MemoryAction | None:
+    if raw is None:
+        return None
+    data = _wire(raw, frozenset({"verb", "category", "content", "ref"}), "memory", allow_none=False)
+    verb = _text(data.get("verb"), "memory.verb")
+    if verb not in ("save", "list", "update", "delete"):
+        raise SemanticProtocolError("MALFORMED_PROPOSAL", "memory.verb 必须是 save/list/update/delete")
+    category = _text(data.get("category"), "memory.category")
+    if category is not None and category not in ("user", "feedback", "project", "reference"):
+        raise SemanticProtocolError("MALFORMED_PROPOSAL", "记忆类别必须是 user/feedback/project/reference")
+    content = _text(data.get("content"), "memory.content")
+    ref = _text(data.get("ref"), "memory.ref")
+    if (verb in ("save", "update") and content is None) or (verb == "save" and category is None):
+        raise SemanticProtocolError("MALFORMED_PROPOSAL", "保存/更正记忆必须给出内容；保存必须给出类别")
+    if verb in ("update", "delete") and ref is None:
+        raise SemanticProtocolError("MALFORMED_PROPOSAL", "更正/删除必须引用服务端给出的记忆 ref")
+    return MemoryAction(verb=verb, category=category, content=content, ref=ref)
 
 
 def _attach_understanding(proposal: SemanticProposal, top: dict[str, Any]) -> None:
@@ -730,6 +765,12 @@ def proposal_schema() -> dict[str, Any]:
             "slot": text, "question": text, "options": texts})},
         "display_refs": texts,
         "resolved_questions": {**texts, "description": "这句话已经回答或不再需要的 pending_clarifications 的 question_id"},
+        "memory": obj({
+            "verb": enum(("save", "list", "update", "delete"), "仅用户明确要求记住、查询、更正或删除；单独管理，不同时采购"),
+            "category": enum(("user", "feedback", "project", "reference")),
+            "content": text,
+            "ref": {**text, "description": "更正/删除必须用服务端给出的记忆 ref；不清楚先查询或问清楚"},
+        }),
     })
 
 

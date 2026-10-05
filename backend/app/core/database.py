@@ -233,7 +233,7 @@ def refresh_demo_product_images(bind=None) -> None:
 
 
 def init_db() -> None:
-    from app.models import cart, catalog, conversation, session as session_models, store, trace  # noqa: F401
+    from app.models import cart, catalog, conversation, memory, session as session_models, store, trace  # noqa: F401
 
     Base.metadata.create_all(bind=engine)
     ensure_runtime_schema()

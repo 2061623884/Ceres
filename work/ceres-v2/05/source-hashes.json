@@ -1,0 +1,13 @@
+{
+  "backend/app/models/__init__.py": "daf39c3d50d4d684878cdcc8a9ce2c26eefd002f3e96c8f53d91cca4cebfcec6",
+  "backend/app/core/database.py": "2960f483e2df3f48be7ce7c98ea3277aba28e858f879f53165e88fc2be7bd74d",
+  "backend/app/agent/protocol.py": "cc9e2d317539b077a6c944e4319736ce4f2f7b9917f823ee664069c6e21d788c",
+  "backend/app/agent/turn_primitives.py": "7eb04a78882eb758b1b96b99e6a0f48d4b4aa44f7da48b764ce281890acfd2d0",
+  "backend/app/agent/graph/nodes/context.py": "b4af09f510a459b797ad68715f9983d6a451d87a42c22a84ddc0c608bdda406e",
+  "backend/app/agent/graph/nodes/answer.py": "f756ee529036fd1295a759c68cfeef88f0e61b7b78e899ef00a7a490684c3a07",
+  "backend/app/agent/graph/turn_commit.py": "7342f701ae7703d7ef9529cbfae5a0cbe72e293b2641d7e67b45cf4242130633",
+  "backend/app/prompts/semantic.py": "c3802868b55bed5cfc592b0dd5cef710e407d5140cebea2a3c4b97171c93a87b",
+  "backend/app/models/memory.py": "e235775d67213cd7683a12e25bb28a48fb3238036d028eb4f3ca05aea80fa003",
+  "backend/app/services/memory_service.py": "5d1e5292188d5d34f919b032838d93b9aeb938d693fafa884000c60e91caecd7",
+  "backend/tests/test_v2_explicit_memory.py": "a8d4a52f5849a3147bdd3cccd02ff38e3c0e9da9c36486fa794664f66d05178a"
+}

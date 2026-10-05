@@ -28,7 +28,7 @@ from sqlalchemy import text
 from app.agent import context as turn_context
 from app.agent.graph.response_contract import build_graph_response, prepare_graph_message
 from app.agent.graph.runtime import TurnRuntime
-from app.agent.protocol import SemanticProtocolError
+from app.agent.protocol import MemoryAction, SemanticProtocolError
 from app.agent.turn_primitives import TIMEOUT_CODE
 from app.agent.state import TaskState
 from app.core.errors import AppError
@@ -206,6 +206,14 @@ def commit_graph_turn(state: dict[str, Any], runtime: TurnRuntime) -> dict[str, 
         if allowed and staged.get("kind") == "mutation":
             plan, action_results = _apply_batch(db, runtime, session, staged)
             committed = any(row.get("saved") for row in action_results)
+        if allowed and staged.get("kind") == "memory":
+            from app.services.memory_service import MemoryService
+
+            memory_result, memory_message = MemoryService(db, runtime.owner_id).execute(
+                MemoryAction(**staged["memory"]),
+            )
+            action_results.append(memory_result)
+            staged["message"] = memory_message
 
         context_plan = dict(staged.get("context_plan") or {})
         previous_task_id = (staged.get("preconditions") or {}).get("task_id")
