@@ -1,0 +1,1 @@
+Standards 初审与复审：未发现硬性规范违规。复审覆盖 aaffbf8629d4305860ff0bc4d5cfe80402166043...d777faf、全部已提交新文件及 ticket-delta.patch 的 mutation 精确增量。非阻断 Feature Envy：合并业务复用 TemplatePlanService 私有选包方法；不为纯风格建议扩大重构。审查只读，未执行测试。
