@@ -174,12 +174,7 @@ def match_dish(
 def scale_quantity(value: float, base_people: int, target_people: int) -> float | int:
     if base_people <= 0:
         return value
-    scaled = value * target_people / base_people
-    if isinstance(value, int) and float(value).is_integer():
-        return max(1, round(scaled))
-    if scaled >= 10:
-        return round(scaled)
-    return max(1, round(scaled, 1))
+    return value * target_people / base_people
 
 
 def scale_items(

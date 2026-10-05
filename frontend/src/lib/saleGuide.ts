@@ -275,6 +275,9 @@ export interface PlanItem {
   selected?: boolean;
   added_quantity?: number;
   remaining_quantity?: number;
+  spec_quantity?: number | null;
+  spec_unit?: string | null;
+  requirement?: { quantity: number | null; unit: string | null } | null;
 }
 
 export interface PlanGap {
