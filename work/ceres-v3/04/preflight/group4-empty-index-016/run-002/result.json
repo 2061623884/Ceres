@@ -1,0 +1,12 @@
+{
+  "run_id": "run-002",
+  "started_unix": 1791234212.7241747,
+  "finished_unix": 1791234311.2475333,
+  "duration_seconds": 98.523,
+  "exit_code": 0,
+  "summary": "30 passed in 96.32s (0:01:36)",
+  "stdout_sha256": "3ceb125fde1be7d9efbbf55675a389167bfe8cce66eb26d97b9a242cbf59cda4",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "source_hashes_stable": true,
+  "source_hash_mismatches": []
+}

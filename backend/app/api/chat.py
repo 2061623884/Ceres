@@ -12,14 +12,14 @@ from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 from sse_starlette import ServerSentEvent
 
-from app.api.guide import process_turn_stream
+from app.api.guide import process_guide_turn_stream
 from app.api.mercury import TurnRequest as MercuryTurnRequest, mercury_response
 from app.core.database import get_db
 from app.core.errors import AppError
 from app.core.identity import get_or_create_owner
 from app.llm.kev_provider import CRITERIA_VERSION, KevUnavailable, get_kev_provider
 from app.models.order import MercurySession
-from app.models.session import GuideSession
+from app.models.session import GuideSession, GuideTask
 from app.schemas.guide import TurnRequest
 from app.services.chat_opening_service import Handoff, Opening, chat_openings
 from app.agent.context_resolver import ContextResolver
@@ -42,7 +42,7 @@ def owner(request: Request, response: Response, db: Session = Depends(get_db)) -
 class OpenRequest(BaseModel):
     guide_session_id: str
     mercury_session_id: str
-    role: Literal["keke"] = "keke"
+    role: Literal["keke", "momo"] = "keke"
 
 
 class ChatTurnRequest(TurnRequest):
@@ -76,18 +76,28 @@ def open_chat(body: OpenRequest, owner_id: str = Depends(owner), db: Session = D
     momo = db.get(MercurySession, body.mercury_session_id)
     if guide is None or momo is None or guide.owner_id != owner_id or momo.owner_id != owner_id:
         raise AppError(403, "SESSION_FORBIDDEN", "会话不属于当前用户。")
-    return chat_openings.create(owner_id, guide.session_id, momo.session_id).view()
+    return chat_openings.create(owner_id, guide.session_id, momo.session_id, body.role).view()
 
 
 @router.get("/openings/{opening_id}")
 def get_chat(opening_id: str, owner_id: str = Depends(owner)):
-    return chat_openings.require(opening_id, owner_id).view()
+    opening = chat_openings.require(opening_id, owner_id)
+    with opening.lock:
+        opening.require_open()
+        return opening.view()
+
+
+@router.delete("/openings/{opening_id}", status_code=204)
+def close_chat(opening_id: str, owner_id: str = Depends(owner)):
+    chat_openings.close(opening_id, owner_id)
+    return Response(status_code=204)
 
 
 @router.post("/openings/{opening_id}/prompt-displayed")
 def displayed(opening_id: str, body: DisplayRequest, owner_id: str = Depends(owner)):
     opening = chat_openings.require(opening_id, owner_id)
     with opening.lock:
+        opening.require_open()
         if opening.pending is None or opening.pending.handoff_id != body.handoff_id:
             raise AppError(409, "HANDOFF_STALE", "这个切换建议已失效。")
         opening.prompt_displayed = True
@@ -126,7 +136,12 @@ async def business(opening: Opening, body: ChatTurnRequest, request: Request,
                    response: Response, db: Session, handoff: Handoff | None = None):
     if opening.role == "keke":
         guide_body = TurnRequest.model_validate(body.model_dump(exclude={"order_id"}))
-        result = await process_turn_stream(opening.guide_session_id, guide_body, request, response, db)
+        handoff_recent_messages = handoff.context["recent_dialogue"] if handoff else None
+        result = await process_guide_turn_stream(
+            opening.guide_session_id, guide_body, request, response, db,
+            owner_id=opening.owner_id,
+            handoff_recent_messages=handoff_recent_messages,
+        )
     else:
         if handoff or body.order_id is not None:
             order = OrderService(db, opening.owner_id).get_order(body.order_id) if body.order_id else None
@@ -162,6 +177,7 @@ async def chat_turn(opening_id: str, body: ChatTurnRequest, request: Request, re
     opening = chat_openings.require(opening_id, owner_id)
     digest = hashlib.sha256(body.model_dump_json().encode()).hexdigest()
     with opening.lock:
+        opening.require_open()
         existing = opening.requests.get(body.request_id)
         if existing:
             if existing["digest"] != digest:
@@ -209,7 +225,7 @@ async def chat_turn(opening_id: str, body: ChatTurnRequest, request: Request, re
             if route["decision"] in ("suggest_switch", "clarify"):
                 boundary = "订单业务由墨墨处理" if opening.role == "keke" else "选购业务由可可处理"
                 text = (boundary + ("，是否切换？" if route["prompt_mode"] == "automatic"
-                    else "，可用固定入口切换。")) if route["decision"] == "suggest_switch" else "你要取消的是采购清单项，还是已下单的订单？"
+                    else "，可用固定入口切换。")) if route["decision"] == "suggest_switch" else "你指的是正在选购的商品或采购清单项，还是已下单订单？"
                 opening.pending_question = text
                 chunk = packet(opening, "turn.completed", {"message": text, "business_not_run": True})
                 receipt["chunks"].append(chunk)
@@ -229,6 +245,7 @@ async def switch_chat(opening_id: str, body: SwitchRequest, request: Request, re
                       owner_id: str = Depends(owner), db: Session = Depends(get_db)):
     opening = chat_openings.require(opening_id, owner_id)
     with opening.lock:
+        opening.require_open()
         handoff = opening.pending
         if body.handoff_id is not None and (handoff is None or handoff.handoff_id != body.handoff_id or handoff.target_role != body.target_role):
             raise AppError(409, "HANDOFF_STALE", "这个交接已失效。")
@@ -241,6 +258,8 @@ async def switch_chat(opening_id: str, body: SwitchRequest, request: Request, re
                 yield packet(opening, "service.switch", {"status": "resumed", **opening.view()})
             return stream(restored())
         if not body.accept:
+            if handoff.status == "pending":
+                opening.pending_question = None
             async def rejected():
                 yield packet(opening, "service.switch", {"status": "rejected", "role": opening.role})
             return stream(rejected())
@@ -251,6 +270,7 @@ async def switch_chat(opening_id: str, body: SwitchRequest, request: Request, re
             return stream(replay())
         if opening.busy or handoff.status != "pending":
             raise AppError(409, "HANDOFF_IN_PROGRESS", "此交接尚未完成，不能再次处理。")
+        opening.pending_question = None
         opening.busy = True
         handoff.status = "processing"
         opening.role = body.target_role
@@ -258,6 +278,14 @@ async def switch_chat(opening_id: str, body: SwitchRequest, request: Request, re
         try:
             turn = ChatTurnRequest.model_validate(handoff.body)
             turn.request_id = "handoff_" + handoff.handoff_id
+            if body.target_role == "keke":
+                guide = db.get(GuideSession, opening.guide_session_id)
+                turn.expected_task_id = guide.current_task_id
+                turn.expected_state_version = (
+                    db.get(GuideTask, guide.current_task_id).state_version
+                    if guide.current_task_id else 0
+                )
+                turn.expected_session_version = guide.session_version
             failed = False
             async for chunk in business(opening, turn, request, response, db, handoff):
                 failed = failed or failed_chunk(chunk)

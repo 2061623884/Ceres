@@ -193,10 +193,21 @@ def test_two_run_v2_purchase_history_checkout_and_mercury_journey(
     assert indexed_client.get("/api/v1/orders").json()["items"] == [order]
     assert indexed_client.get(f"/api/v1/orders/{order['order_id']}").json() == order
 
-    def forbidden_openai(**_settings):
-        raise AssertionError("Mercury must return the owner's real order choices without a model call")
+    def answer_unselected_order_query(**kwargs):
+        assert {tool["function"]["name"] for tool in kwargs["tools"]} == {
+            "search_after_sales_policy"
+        }
+        return SimpleNamespace(choices=[SimpleNamespace(message=SimpleNamespace(
+            content="请选择订单后再查询。",
+            tool_calls=[],
+        ))])
 
-    monkeypatch.setattr("mercury.llm.OpenAI", forbidden_openai)
+    monkeypatch.setattr(
+        "mercury.llm.OpenAI",
+        lambda **_settings: SimpleNamespace(
+            chat=SimpleNamespace(completions=SimpleNamespace(create=answer_unselected_order_query))
+        ),
+    )
     mercury_session = indexed_client.post("/api/v1/mercury/sessions").json()
     mercury_id = mercury_session["session_id"]
     unselected = indexed_client.post(

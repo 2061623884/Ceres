@@ -1,0 +1,13 @@
+{
+  "Mercury/mercury/agent.py": "c14a2ce94825009c86fc405f56881e8d6bf5c644d6205b0d5ce4bf80227a6e51",
+  "Mercury/mercury/tools.py": "16b4bca179263889120123df071e8d18d206c86716838d0a65d2bdc11b93ed3e",
+  "Mercury/mercury/db.py": "374322d24edee19f1eb0f66bfb9f786947ed6bd75bbe0eab81576e99d9886d57",
+  "Mercury/mercury/seed.py": "4c7f9f2720b65e1fb33c61626afd3929497e4b79d2e2a60b99ea966fa78ab5ee",
+  "Mercury/mercury/policy.py": "58a71ac38f2d426aa842a450e6699fced6d3df7b6c396eff551c898376126c95",
+  "Mercury/tests/conftest.py": "49a6fb88212d7a933840171c276e7ac990df8df9b5c09ab34f8a5358130abe10",
+  "Mercury/tests/test_policy.py": "321c1421ff445a914649dabd43bff05fce7b87c037fec4469c39c90533033afb",
+  "Mercury/tests/test_agent_flows.py": "ff6bd83ea824aedf636c827f3c0db027cf5c3113136f7848448f8280977fd2bb",
+  "backend/app/services/policy_service.py": "d480ddc8d49a54a73c04597643ecaa74a7536f78ee84cf664dcbdeb4a0f77b20",
+  "backend/app/api/chat.py": "c336404a9ba3e865c703a1924d0c6fb6672c45038d0cf007798546cc0d2208e2",
+  "work/ceres-v3/04/api-contract.md": "b0214039e641d187f923e4deffb83dde5306146139688faf218aab069f428205"
+}

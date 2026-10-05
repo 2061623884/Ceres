@@ -1,0 +1,41 @@
+{
+  "run_id": "04-final-group-03-mercury-policy",
+  "python": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+  "python_version": "Python 3.12.10",
+  "pytest_version": "pytest 9.1.1",
+  "command": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe -X utf8 -m pytest -q --showlocals -p no:cacheprovider -W error::pytest.PytestUnhandledThreadExceptionWarning --basetemp=C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\final-regression-012\\group-03-mercury-policy\\pytest-tmp tests/test_policy.py tests/test_agent_flows.py::test_policy_flow",
+  "working_directory": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\Mercury",
+  "basetemp": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\final-regression-012\\group-03-mercury-policy\\pytest-tmp",
+  "temp": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\final-regression-012\\group-03-mercury-policy\\os-temp",
+  "environment": {
+    "TEMP": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\final-regression-012\\group-03-mercury-policy\\os-temp",
+    "TMP": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\final-regression-012\\group-03-mercury-policy\\os-temp",
+    "MEMORY_MODEL": "",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONUTF8": "1",
+    "MERCURY_DB_PATH": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\final-regression-012\\group-03-mercury-policy\\pytest-tmp\\mercury-fallback.sqlite3",
+    "cleared": [
+      "LLM_MODE",
+      "BUSINESS_DATA_MODE",
+      "DATABASE_URL",
+      "SOURCE_DATABASE_PATH",
+      "OPENAI_API_KEY",
+      "OPENAI_BASE_URL",
+      "KEV_BASE_URL"
+    ]
+  },
+  "source_scope": [
+    "Mercury/mercury/agent.py",
+    "Mercury/mercury/tools.py",
+    "Mercury/mercury/db.py",
+    "Mercury/mercury/seed.py",
+    "Mercury/mercury/policy.py",
+    "Mercury/tests/conftest.py",
+    "Mercury/tests/test_policy.py",
+    "Mercury/tests/test_agent_flows.py",
+    "backend/app/services/policy_service.py",
+    "backend/app/api/chat.py",
+    "work/ceres-v3/04/api-contract.md"
+  ],
+  "llm_scope": "Mercury tests use FakeLLM fixtures; no live provider sampling."
+}

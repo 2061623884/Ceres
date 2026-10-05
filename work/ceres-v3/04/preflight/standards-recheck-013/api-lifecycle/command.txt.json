@@ -1,0 +1,5 @@
+{
+  "original_path": "work/ceres-v3/04/preflight/standards-recheck-013/api-lifecycle/command.txt",
+  "sha256": "4d12ee19b6324ab2e7429bc8ec6f8287a53152a020730b4109edb4a9c74fba09",
+  "utf8_text": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe -X utf8 -m pytest -q --showlocals -p no:cacheprovider -W error::pytest.PytestUnhandledThreadExceptionWarning --basetemp=C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\standards-recheck-013\\api-lifecycle\\pytest-tmp tests/test_v3_switch_lifecycle.py::test_display_quota_survives_get_rejection_and_role_switch_until_explicit_close\n"
+}

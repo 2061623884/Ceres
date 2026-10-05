@@ -1,0 +1,13 @@
+{
+  "nodeid": "tests/test_v2_integrated_demo.py::test_two_run_v2_purchase_history_checkout_and_mercury_journey[1]",
+  "source_database_fixture": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\diagnostic-013\\current-integrated\\pytest-temp\\test_two_run_v2_purchase_histo0\\no-source.sqlite3",
+  "source_database_fixture_sha256": null,
+  "test_db_url_fixture": "sqlite:///C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\diagnostic-013\\current-integrated\\pytest-temp\\test_two_run_v2_purchase_histo0\\test.sqlite3",
+  "active_db_engine_url": "sqlite:///C%3A%5CUsers%5C20616%5CDesktop%5CAgent%5CAgent%E4%BA%A7%E5%93%81%5CCeres%5Cwork%5Cceres-v3%5C04%5Cpreflight%5Cdiagnostic-013%5Ccurrent-integrated%5Cpytest-temp%5Ctest_two_run_v2_purchase_histo0%5Ctest.sqlite3",
+  "settings_root_dir": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres",
+  "settings_source_db_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\diagnostic-013\\current-integrated\\pytest-temp\\test_two_run_v2_purchase_histo0\\no-source.sqlite3",
+  "settings_runtime_db_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\diagnostic-013\\current-integrated\\pytest-temp\\test_two_run_v2_purchase_histo0\\test.sqlite3",
+  "settings_retrieval_index_dir": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\diagnostic-013\\current-integrated\\pytest-temp\\test_two_run_v2_purchase_histo0\\index",
+  "semantic_provider_fixture_type": "builtins.function",
+  "pytest_exit_status": 1
+}

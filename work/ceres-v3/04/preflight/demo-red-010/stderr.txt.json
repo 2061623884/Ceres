@@ -1,0 +1,5 @@
+{
+  "original_path": "work/ceres-v3/04/preflight/demo-red-010/stderr.txt",
+  "sha256": "9f1f82283739af786ff199e16bffe5eaaf06441680eaf8c181456a0e43a49358",
+  "utf8_text": "AssertionError [ERR_ASSERTION]: refresh must GET the current Guide SessionResponse\n\nfalse !== true\n\n    at C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\demo-red-010\\demo-refresh-current-state.cjs:140:10\n"
+}

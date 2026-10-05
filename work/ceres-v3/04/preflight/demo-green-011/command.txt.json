@@ -1,0 +1,5 @@
+{
+  "original_path": "work/ceres-v3/04/preflight/demo-green-011/command.txt",
+  "sha256": "980be004393ddd1050a6355e86b4d2e2e0efa52f3965c84edef98b579164dd94",
+  "utf8_text": "& 'C:\\Program Files\\nodejs\\node.exe' 'C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\demo-green-011\\demo-refresh-current-state.cjs' 'C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\03\\demo.html'\nWorking directory: C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\demo-green-011\nNode: v24.14.0\n"
+}

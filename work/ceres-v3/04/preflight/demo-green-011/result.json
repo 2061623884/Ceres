@@ -1,0 +1,21 @@
+{
+  "run_id": "04-demo-green-011",
+  "exit_code": 1,
+  "started_utc": "2026-10-05T20:18:06.2106500Z",
+  "ended_utc": "2026-10-05T20:18:06.2946730Z",
+  "demo_sha256_before": "909cc255445baac938c30ea4a3f7b1541d4d806a0d020400f690b1ae10510242",
+  "demo_sha256_after": "909cc255445baac938c30ea4a3f7b1541d4d806a0d020400f690b1ae10510242",
+  "expected_demo_sha256": "909cc255445baac938c30ea4a3f7b1541d4d806a0d020400f690b1ae10510242",
+  "source_hash_unchanged": true,
+  "harness_sha256": "2d6fea89f00f9660ab646359b099a80bdc0bfee9bca5238558ccecb063a6cf7c",
+  "node_version": "v24.14.0",
+  "node_path": "C:\\Program Files\\nodejs\\node.exe",
+  "pid": null,
+  "stdout_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\demo-green-011\\stdout.txt",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_bytes": 0,
+  "stderr_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\demo-green-011\\stderr.txt",
+  "stderr_sha256": "95f86f205fc97f5bab7ef952ef7e1c8fb28eb8db836191e764ae8d862540f1ea",
+  "stderr_bytes": 1192,
+  "observation": null
+}

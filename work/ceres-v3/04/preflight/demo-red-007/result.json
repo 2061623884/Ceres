@@ -1,0 +1,40 @@
+{
+  "run_id": "04-demo-red-007-node-vm",
+  "method": "Controlled Node vm + minimal DOM; exact existing demo inline consumer; mocked opening GET; synthetic standard CRLF SSE route and turn.completed frames.",
+  "node_version": "v24.14.0",
+  "command": "& 'C:\\Program Files\\nodejs\\node.exe' 'C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\demo-red-007\\node-vm-diagnostic.cjs' 'C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\03\\demo.html'",
+  "working_directory": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\demo-red-007",
+  "exit_code": 0,
+  "pid": 24804,
+  "temporary_server_started": false,
+  "port": null,
+  "stdout_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\demo-red-007\\node-vm.stdout.txt",
+  "stdout_sha256": "fb0f9819c0b39f9812879d65cf1fad0a0db93d21fede5357cec441e29ffac2db",
+  "stderr_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\demo-red-007\\node-vm.stderr.txt",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_text": "{\"pid\":24804,\"port\":null,\"temporary_server_started\":false,\"route_seen\":true,\"turn_completed_seen\":true,\"rendered_history\":\"路由：clarify，12 ms\\n请补充说明\\n\",\"fetch_calls\":[{\"url\":\"/api/v1/chat/openings/demo-opening\",\"method\":\"GET\"}],\"source_sha256\":\"a89d73a74c324902d62e50bd4a917404b0c30891518319171fc34d182ea5f61d\",\"extracted_consumer_sha256\":\"3c027ff79c6f41682e6857ce927b2d31b313fadcbc353247a88fbaf523ef8d0c\",\"consume_source_line\":\"async function consume(r){let text=await r.text();for(let block of text.replaceAll('\\\\r\\\\n','\\\\n').split('\\\\n\\\\n')){let lines=block.split('\\\\n'),raw=lines.find(x=>x.startsWith('data: '));if(!raw)continue;let event=JSON.parse(raw.slice(6)),named=lines.find(x=>x.startsWith('event: ')),type=named?named.slice(7):event.type,payload=named?event:event.payload;\",\"consume_line_backslash_count\":6,\"mode\":\"Node vm with a minimal DOM and mocked opening GET; the exact existing consumer function was executed against a standard CRLF SSE response; no live backend/model/API.\"}\n",
+  "stderr_text": null,
+  "demo_sha256_after": "a89d73a74c324902d62e50bd4a917404b0c30891518319171fc34d182ea5f61d",
+  "node_script_sha256": "e96df9c390ed96ba78437046c5a73f07b1271217ccda4830d2e1d6aad4ecf5cd",
+  "node_result": {
+    "pid": 24804,
+    "port": null,
+    "temporary_server_started": false,
+    "route_seen": true,
+    "turn_completed_seen": true,
+    "rendered_history": "路由：clarify，12 ms\n请补充说明\n",
+    "fetch_calls": [
+      {
+        "url": "/api/v1/chat/openings/demo-opening",
+        "method": "GET"
+      }
+    ],
+    "source_sha256": "a89d73a74c324902d62e50bd4a917404b0c30891518319171fc34d182ea5f61d",
+    "extracted_consumer_sha256": "3c027ff79c6f41682e6857ce927b2d31b313fadcbc353247a88fbaf523ef8d0c",
+    "consume_source_line": "async function consume(r){let text=await r.text();for(let block of text.replaceAll('\\r\\n','\\n').split('\\n\\n')){let lines=block.split('\\n'),raw=lines.find(x=>x.startsWith('data: '));if(!raw)continue;let event=JSON.parse(raw.slice(6)),named=lines.find(x=>x.startsWith('event: ')),type=named?named.slice(7):event.type,payload=named?event:event.payload;",
+    "consume_line_backslash_count": 6,
+    "mode": "Node vm with a minimal DOM and mocked opening GET; the exact existing consumer function was executed against a standard CRLF SSE response; no live backend/model/API."
+  },
+  "browser_attempt": "See browser-attempt.json; Edge output capture failed, and no matching owned Edge process remained. It was not treated as a consumer result.",
+  "scope": "Controlled consumer diagnostic, not real browser E2E or live model/backend validation."
+}

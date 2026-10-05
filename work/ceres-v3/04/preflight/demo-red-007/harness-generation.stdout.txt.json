@@ -1,0 +1,5 @@
+{
+  "original_path": "work/ceres-v3/04/preflight/demo-red-007/harness-generation.stdout.txt",
+  "sha256": "6bbf33c4cb66a259a3bdf7a269bdac049788fa5bd86fdb1858b5b86256ca7e46",
+  "utf8_text": "{\"demo_sha256\":\"a89d73a74c324902d62e50bd4a917404b0c30891518319171fc34d182ea5f61d\",\"extracted_consumer_sha256\":\"3c027ff79c6f41682e6857ce927b2d31b313fadcbc353247a88fbaf523ef8d0c\",\"generated_harness_sha256\":\"300970be511adae396ae633c0a8bf738f8663c99d20e86eba1d5f55876a511df\",\"line9_literal_backslashes\":0,\"line12_literal_backslashes\":0}\n"
+}

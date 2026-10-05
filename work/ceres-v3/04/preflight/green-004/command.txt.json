@@ -1,0 +1,5 @@
+{
+  "original_path": "work/ceres-v3/04/preflight/green-004/command.txt",
+  "sha256": "a5c195d17e6cd3d5358e204199e355608b511438a8421b3f108ddf15d8f7cbf3",
+  "utf8_text": "Working directory: C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\nCommand: C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe -X utf8 -m pytest -q --showlocals -p no:cacheprovider -W error::pytest.PytestUnhandledThreadExceptionWarning --basetemp=C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\green-004\\pytest-tmp tests/test_v3_switch_lifecycle.py::test_momo_handoff_keeps_relevant_dialogue_and_resumes_existing_guide_state\n"
+}

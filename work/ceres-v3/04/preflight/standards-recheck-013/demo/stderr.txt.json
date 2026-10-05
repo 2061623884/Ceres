@@ -1,0 +1,5 @@
+{
+  "original_path": "work/ceres-v3/04/preflight/standards-recheck-013/demo/stderr.txt",
+  "sha256": "72e0bfb600f81532b17aa7f738fbe762fb5a129779a47d8e25c58b6a383d2229",
+  "utf8_text": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n'当前：可可' !== '当前：墨墨'\n\n    at main (C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\standards-recheck-013\\demo\\demo-lifecycle-harness.cjs:173:10)\n"
+}

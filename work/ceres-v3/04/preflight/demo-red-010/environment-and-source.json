@@ -1,0 +1,16 @@
+{
+  "run_id": "04-demo-red-010",
+  "source_demo": "work/ceres-v3/03/demo.html",
+  "expected_frozen_sha256": "a89d73a74c324902d62e50bd4a917404b0c30891518319171fc34d182ea5f61d",
+  "source_sha256_before": "a89d73a74c324902d62e50bd4a917404b0c30891518319171fc34d182ea5f61d",
+  "source_sha256_after": "a89d73a74c324902d62e50bd4a917404b0c30891518319171fc34d182ea5f61d",
+  "node_version": "v24.14.0",
+  "node_script_sha256": "2d6fea89f00f9660ab646359b099a80bdc0bfee9bca5238558ccecb063a6cf7c",
+  "command": "& 'C:\\Program Files\\nodejs\\node.exe' 'C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\demo-red-010\\demo-refresh-current-state.cjs' 'C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\03\\demo.html'",
+  "working_directory": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\demo-red-010",
+  "temp": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\demo-red-010\\os-temp",
+  "tmp": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\demo-red-010\\os-temp",
+  "network_scope": "Node vm replaces fetch completely with controlled public-API responses; no server, port, live backend, or model is started.",
+  "browser_scope": "Minimal DOM Node vm is a controlled consumer harness, not browser E2E.",
+  "source_scope": "Only exact current inline script was executed; no demo/task/source/index edits."
+}

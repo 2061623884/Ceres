@@ -1,0 +1,15 @@
+{
+  "run_id": "04-standards-recheck-013-api-lifecycle",
+  "pid": 75740,
+  "started_utc": "2026-10-05T21:19:36.336648+00:00",
+  "ended_utc": "2026-10-05T21:19:41.709977+00:00",
+  "exit_code": 0,
+  "stdout_bytes": 100,
+  "stderr_bytes": 0,
+  "stdout_sha256": "abffaa7886a5137dab1dba4e0c3068ab3dbfaf946ea6b5431572ca2abf30929d",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "source_hashes_unchanged": true,
+  "versions_exit_code": 0,
+  "raw_stdout": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\standards-recheck-013\\api-lifecycle\\stdout.txt",
+  "raw_stderr": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\standards-recheck-013\\api-lifecycle\\stderr.txt"
+}

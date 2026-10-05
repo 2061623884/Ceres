@@ -1,0 +1,29 @@
+{
+  "purpose": "Main read original commands/environment/results and independently checked raw receipt hashes; no application tests executed",
+  "checked": [
+    {
+      "path": "work\\ceres-v3\\04\\preflight\\standards-recheck-013\\api-lifecycle\\stdout.txt",
+      "matches": true
+    },
+    {
+      "path": "work\\ceres-v3\\04\\preflight\\standards-recheck-013\\api-lifecycle\\stderr.txt",
+      "matches": true
+    },
+    {
+      "path": "work\\ceres-v3\\04\\preflight\\standards-recheck-013\\demo\\stdout.txt",
+      "matches": true
+    },
+    {
+      "path": "work\\ceres-v3\\04\\preflight\\standards-recheck-013\\demo\\stderr.txt",
+      "matches": true
+    },
+    {
+      "path": "work\\ceres-v3\\04\\preflight\\standards-recheck-013\\demo-retry-002\\stdout.txt",
+      "matches": true
+    },
+    {
+      "path": "work\\ceres-v3\\04\\preflight\\standards-recheck-013\\demo-retry-002\\stderr.txt",
+      "matches": true
+    }
+  ]
+}

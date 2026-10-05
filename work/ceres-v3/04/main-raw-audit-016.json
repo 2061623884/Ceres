@@ -1,0 +1,20 @@
+{
+  "audited_at": "2026-10-06T05:19:04.913725+08:00",
+  "run": "preflight/group4-empty-index-016/run-002",
+  "command_read": "command.txt and environment-and-source.json argv",
+  "python": "3.12.10",
+  "pytest": "9.1.1",
+  "exit_code": 0,
+  "raw_summary": "30 passed in 96.32s (0:01:36)",
+  "source_before_equals_after": true,
+  "recorded_optional_missing_paths": [
+    "backend/scripts/seed_runtime.py"
+  ],
+  "raw_artifact_hash_mismatches": [],
+  "interpretation": "30 original nodes passed in a unique serial run, empty project-index override. Direct DB for ordinary client; fixture-matched lexical for indexed_client. Not real models or hybrid/vector. First run with repeat command is retained but not final proof.",
+  "later_review_changes": [
+    "same-lock redundant close guard removed",
+    "demo state restoration identifier renamed"
+  ],
+  "validation_executor": "dedicated subagent; root only audited raw evidence"
+}

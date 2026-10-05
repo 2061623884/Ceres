@@ -1,0 +1,7 @@
+{
+  "original_harness_sha256": "8c6270c5e6169afbe9b0e5c165fabe51a0840497dc567fc628aeccd101eca7af",
+  "copied_harness_sha256": "1eb7065c1c5bfc54776a0d34d434664ab820a172b1031fbc7f76a90b81620306",
+  "only_expected_demo_hash_pin_updated": true,
+  "old_pin_count": 1,
+  "new_pin_count": 1
+}

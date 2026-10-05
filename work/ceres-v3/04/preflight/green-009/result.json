@@ -1,0 +1,14 @@
+{
+  "run_id": "04-green-009",
+  "exit_code": 0,
+  "stdout_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\green-009\\stdout.txt",
+  "stdout_sha256": "75c95a17bfca43ec01b31bddcaa1d9014fb9a6a8f5fc9f297749347d8644f349",
+  "stdout_bytes": 100,
+  "stderr_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\green-009\\stderr.txt",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_bytes": 0,
+  "source_hashes_unchanged": true,
+  "changed_sources": [],
+  "stdout_text": "..                                                                       [100%]\r\n2 passed in 5.73s\r\n",
+  "stderr_text": null
+}

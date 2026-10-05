@@ -1,0 +1,5 @@
+{
+  "original_path": "work/ceres-v3/04/preflight/green-005/command.txt",
+  "sha256": "bf74a48c746414ad1d7131493a673b6ec2531615b42345e1b108ced3868a6eff",
+  "utf8_text": "Working directory: C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\nCommand: C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe -X utf8 -m pytest -q --showlocals -p no:cacheprovider -W error::pytest.PytestUnhandledThreadExceptionWarning --basetemp=C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\green-005\\pytest-tmp tests/test_v3_switch_lifecycle.py::test_display_quota_survives_get_rejection_and_role_switch_until_explicit_close\n"
+}

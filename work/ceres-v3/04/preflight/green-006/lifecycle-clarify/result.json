@@ -1,0 +1,14 @@
+{
+  "run_id": "04-green-006-lifecycle-clarify",
+  "exit_code": 0,
+  "stdout_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\green-006\\lifecycle-clarify\\stdout.txt",
+  "stdout_sha256": "613e6c908a4927af62e096c5fde74c6dd40cd3407513847790f42db2f700ce9b",
+  "stdout_bytes": 100,
+  "stderr_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\green-006\\lifecycle-clarify\\stderr.txt",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_bytes": 0,
+  "source_hashes_unchanged": true,
+  "changed_sources": [],
+  "stdout_text": ".                                                                        [100%]\r\n1 passed in 3.32s\r\n",
+  "stderr_text": null
+}

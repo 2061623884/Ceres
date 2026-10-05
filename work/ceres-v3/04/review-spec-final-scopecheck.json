@@ -1,0 +1,66 @@
+{
+  "captured_at_utc": "2026-10-05T21:24:55.162345+00:00",
+  "review_kind": "incremental Spec-axis review after the two Standards fixes; initial review is preserved separately",
+  "baseline_head": "fbd9d01875eaeab5ec01e9849f4ce2bc562d1837",
+  "commit_list": [],
+  "prior_review_zip_sha256": "f4489083318adbf671a465ae4e0a55124f8bcb32b5b5973b712fd1965b3c6049",
+  "prior_review_report_sha256": "4fdaaf4d686a2ce1a9ca8866a83c6886e1ab38bacd2ad3793f5e06b3c86cf80f",
+  "current_review_scope_sha256": "0484652fdd55e0eed26c4807703929fb9be9a66407196fd43ff1d3f3e11ed354",
+  "current_review_zip_expected_sha256": "53557616557f773d56020d956aceeb67a0bf5ddac97df6a0672b6b8b8f3657b1",
+  "current_review_zip_actual_sha256": "53557616557f773d56020d956aceeb67a0bf5ddac97df6a0672b6b8b8f3657b1",
+  "current_source_patch_sha256": "3292765bfadffc8d854bfb76168b3b0099af81192012040229ed757e898f9917",
+  "scoped_path_count": 13,
+  "scoped_path_hashes_match": true,
+  "current_path_sha256": {
+    "backend/app/api/chat.py": "c336404a9ba3e865c703a1924d0c6fb6672c45038d0cf007798546cc0d2208e2",
+    "backend/app/api/guide.py": "fbf92cacfe49044acd9e94fff16e1678f1bce85e0b934f08ca0f832b46221d86",
+    "backend/app/services/chat_opening_service.py": "386418b64509c760d12d0538c879354de67674fd71cc460e119f47cc9ee0ca3c",
+    "backend/app/services/turn_stream_service.py": "d2532e51a111bc80ac8972cd163fc016dd33c428289aa91afc33b1d51da8e6e9",
+    "backend/app/services/graph_turn_service.py": "d6facffd58bbb3f27bd5b37713cde79fe51debeefda6090e10e0f3613897686c",
+    "backend/app/agent/graph/coordinator.py": "0e440fc3bee451f6617d972787495f260205ac4830f386d3f5b5f8e8860f18ed",
+    "backend/app/agent/graph/runtime.py": "c7b873482a4bed7d456ca9d5475bfea2c6a9784ee95e0f9dad20b026a05e4da1",
+    "backend/app/agent/graph/nodes/context.py": "046c8ccb321654bb28f483b5f41306d7201127a5288944bb40d91d43c4a94df4",
+    "backend/tests/test_v3_switch_lifecycle.py": "4df325bdc7eb8de947f5e0a28978b7ebfab63a6a0e874cbb6a4bae6ff8292620",
+    "backend/tests/test_v3_routing_handoff.py": "d7aee21a925590451e6e6aa87bebb24e317a1b805dedeff2fde18c6ce2305d86",
+    "work/ceres-v3/03/demo.html": "b2c81bdb621249d72163c20b3b4cc6fcca77929c0a229b28b4512b260ba20026",
+    "work/ceres-v3/04/api-contract.md": "b0214039e641d187f923e4deffb83dde5306146139688faf218aab069f428205",
+    "backend/tests/test_v2_integrated_demo.py": "5eca377e935185697dc568d619d9d18bb5d9459a64620777271e10c0250fa4c6"
+  },
+  "standards_delta_normalization": {
+    "review_v1_zip_sha256": "f4489083318adbf671a465ae4e0a55124f8bcb32b5b5973b712fd1965b3c6049",
+    "old_chat_sha256": "c71e449e273fc19e2f96e6d095574529caf80a564c2b3ece93515fac5a08e335",
+    "current_chat_sha256": "386418b64509c760d12d0538c879354de67674fd71cc460e119f47cc9ee0ca3c",
+    "close_guard_removed_exactly_two_lines": true,
+    "chat_opening_service_normalizes_to_review_v1": true,
+    "old_demo_sha256": "909cc255445baac938c30ea4a3f7b1541d4d806a0d020400f690b1ae10510242",
+    "current_demo_sha256": "b2c81bdb621249d72163c20b3b4cc6fcca77929c0a229b28b4512b260ba20026",
+    "restore_name_occurrences": 5,
+    "demo_only_identifier_change": true
+  },
+  "focused_api_test": {
+    "run_id": "04-standards-recheck-013-api-lifecycle",
+    "exit_code": 0,
+    "stdout_sha256": "abffaa7886a5137dab1dba4e0c3068ab3dbfaf946ea6b5431572ca2abf30929d",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "source_hashes_unchanged": true
+  },
+  "node_first_harness_run": {
+    "exit_code": 1,
+    "stderr_sha256": "72e0bfb600f81532b17aa7f738fbe762fb5a129779a47d8e25c58b6a383d2229",
+    "failure": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n'当前：可可' !== '当前：墨墨'\n\n    at main (C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\standards-recheck-013\\demo\\demo-lifecycle-harness.cjs:173:10)\n",
+    "classification": "harness did not await event listener that returns void; preserved as original failure"
+  },
+  "node_retry_consumer": {
+    "exit_code": 0,
+    "syntax_check_exit_code": 0,
+    "stdout_sha256": "207e6a40754c4e85614defd7ddc61c1ded8ee00febed3dfaee7d58fe435cbc47",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "syntax_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "harness_assertions_preserved": true,
+    "browser_e2e": false,
+    "live_backend_or_model": false
+  },
+  "unresolved_spec_findings": 0,
+  "report_sha256": "fc7f81f2041058ade4a23135ee6666c763aa68af3ad6c74a6c8b3a4ab5edbcda",
+  "review_scope_fixed_point_inherited_v2_excluded": true
+}

@@ -1,0 +1,10 @@
+{
+  "mode": "current",
+  "nodeid": "test_phase2b_chat_confirmation.py::test_questions_block_a_chat_confirmation",
+  "exit_code": 0,
+  "finished_unix": 1791233400.8129578,
+  "stdout_sha256": "d3f56d9a3100718d430df74dd918afe5c079cc0cfb96eba9871c67cea0c57a32",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "bootstrap_sha256": "0b16676a56f174167bddb863af915600098d5912e1cefe76da23f9edf146c71a",
+  "fixture_observation_sha256": "354d43e626cbd249bbc67332a4d0bc74b72b24329fa38bd484a5038fffe125ba"
+}

@@ -120,7 +120,11 @@ def test_unknown_object_clarifies_without_role_business_or_order_mutation(client
     chat = opening(client)
     result = events(send(client, chat, "取消一下", "r07"))
     assert result[0]["payload"]["decision"] == "clarify"
-    assert "取消" in result[-1]["payload"]["message"]
+    completion = result[-1]["payload"]
+    assert completion["business_not_run"] is True
+    assert "取消" not in completion["message"]
+    assert "采购清单项" in completion["message"] and "已下单订单" in completion["message"]
+    assert client.get(f"/api/v1/chat/openings/{chat['opening_id']}").json()["role"] == "keke"
     assert client.get("/api/v1/orders").json()["items"] == []
 
 

@@ -489,17 +489,18 @@ def stop_turn(
     return StopTurnResponse(**svc.request_stop(session_id, body.request_id))
 
 
-@router.post("/guide/sessions/{session_id}/turns/stream")
-async def process_turn_stream(
+async def process_guide_turn_stream(
     session_id: str,
     body: TurnRequest,
     request: Request,
     response: Response,
-    db: Session = Depends(get_db),
+    db: Session,
+    *,
+    owner_id: str,
+    handoff_recent_messages: list[dict[str, str]] | None = None,
 ):
     from fastapi.responses import StreamingResponse
 
-    owner_id = _owner(request, response, db)
     # Ownership must be rejected before the streaming response starts; an error
     # raised from inside the generator would arrive after the headers.
     session = db.get(GuideSession, session_id)
@@ -517,6 +518,7 @@ async def process_turn_stream(
             body.expected_state_version,
             body.expected_session_version,
             view_ctx,
+            handoff_recent_messages,
         ):
             yield f"data: {json.dumps(event, ensure_ascii=False)}\n\n"
 
@@ -531,4 +533,17 @@ async def process_turn_stream(
             "Cache-Control": "no-cache, no-transform",
             "X-Accel-Buffering": "no",
         },
+    )
+
+
+@router.post("/guide/sessions/{session_id}/turns/stream")
+async def process_turn_stream(
+    session_id: str,
+    body: TurnRequest,
+    request: Request,
+    response: Response,
+    db: Session = Depends(get_db),
+):
+    return await process_guide_turn_stream(
+        session_id, body, request, response, db, owner_id=_owner(request, response, db)
     )

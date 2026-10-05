@@ -1,0 +1,116 @@
+{
+  "recorded_at": "2026-10-06T05:07:26.7286533+08:00",
+  "review_axis": "Standards",
+  "fixed_point": {
+    "commit": "fbd9d01875eaeab5ec01e9849f4ce2bc562d1837",
+    "head_actual": "fbd9d01875eaeab5ec01e9849f4ce2bc562d1837",
+    "commit_list": [],
+    "baseline_zip_expected": "5e393ee8f99f3d976f62c55481f292013312ae688b0e504ed7a8577b3a3a5f73",
+    "baseline_zip_actual": "5e393ee8f99f3d976f62c55481f292013312ae688b0e504ed7a8577b3a3a5f73",
+    "baseline_zip_match": true
+  },
+  "review_scope": {
+    "scope_file": "work/ceres-v3/04/review-scope.json",
+    "scope_file_sha256": "7646b958850a4c437405d5f1e25e8b4f6df11ace1812585ae871092f88cff282",
+    "review_source_zip_expected": "f4489083318adbf671a465ae4e0a55124f8bcb32b5b5973b712fd1965b3c6049",
+    "review_source_zip_actual": "f4489083318adbf671a465ae4e0a55124f8bcb32b5b5973b712fd1965b3c6049",
+    "review_source_zip_match": true,
+    "source_patch_path": "work/ceres-v3/04/source.patch",
+    "source_patch_sha256": "9c1aaf85cfde682454cdadfee6ac5ca6f7c9e26af1bfb075554084685ee157ec",
+    "expected_file_count": 13,
+    "matching_file_count": 13,
+    "files": [
+      {
+        "path": "backend/app/api/chat.py",
+        "expected": "c336404a9ba3e865c703a1924d0c6fb6672c45038d0cf007798546cc0d2208e2",
+        "actual": "c336404a9ba3e865c703a1924d0c6fb6672c45038d0cf007798546cc0d2208e2",
+        "match": true
+      },
+      {
+        "path": "backend/app/api/guide.py",
+        "expected": "fbf92cacfe49044acd9e94fff16e1678f1bce85e0b934f08ca0f832b46221d86",
+        "actual": "fbf92cacfe49044acd9e94fff16e1678f1bce85e0b934f08ca0f832b46221d86",
+        "match": true
+      },
+      {
+        "path": "backend/app/services/chat_opening_service.py",
+        "expected": "c71e449e273fc19e2f96e6d095574529caf80a564c2b3ece93515fac5a08e335",
+        "actual": "c71e449e273fc19e2f96e6d095574529caf80a564c2b3ece93515fac5a08e335",
+        "match": true
+      },
+      {
+        "path": "backend/app/services/turn_stream_service.py",
+        "expected": "d2532e51a111bc80ac8972cd163fc016dd33c428289aa91afc33b1d51da8e6e9",
+        "actual": "d2532e51a111bc80ac8972cd163fc016dd33c428289aa91afc33b1d51da8e6e9",
+        "match": true
+      },
+      {
+        "path": "backend/app/services/graph_turn_service.py",
+        "expected": "d6facffd58bbb3f27bd5b37713cde79fe51debeefda6090e10e0f3613897686c",
+        "actual": "d6facffd58bbb3f27bd5b37713cde79fe51debeefda6090e10e0f3613897686c",
+        "match": true
+      },
+      {
+        "path": "backend/app/agent/graph/coordinator.py",
+        "expected": "0e440fc3bee451f6617d972787495f260205ac4830f386d3f5b5f8e8860f18ed",
+        "actual": "0e440fc3bee451f6617d972787495f260205ac4830f386d3f5b5f8e8860f18ed",
+        "match": true
+      },
+      {
+        "path": "backend/app/agent/graph/runtime.py",
+        "expected": "c7b873482a4bed7d456ca9d5475bfea2c6a9784ee95e0f9dad20b026a05e4da1",
+        "actual": "c7b873482a4bed7d456ca9d5475bfea2c6a9784ee95e0f9dad20b026a05e4da1",
+        "match": true
+      },
+      {
+        "path": "backend/app/agent/graph/nodes/context.py",
+        "expected": "046c8ccb321654bb28f483b5f41306d7201127a5288944bb40d91d43c4a94df4",
+        "actual": "046c8ccb321654bb28f483b5f41306d7201127a5288944bb40d91d43c4a94df4",
+        "match": true
+      },
+      {
+        "path": "backend/tests/test_v3_switch_lifecycle.py",
+        "expected": "4df325bdc7eb8de947f5e0a28978b7ebfab63a6a0e874cbb6a4bae6ff8292620",
+        "actual": "4df325bdc7eb8de947f5e0a28978b7ebfab63a6a0e874cbb6a4bae6ff8292620",
+        "match": true
+      },
+      {
+        "path": "backend/tests/test_v3_routing_handoff.py",
+        "expected": "d7aee21a925590451e6e6aa87bebb24e317a1b805dedeff2fde18c6ce2305d86",
+        "actual": "d7aee21a925590451e6e6aa87bebb24e317a1b805dedeff2fde18c6ce2305d86",
+        "match": true
+      },
+      {
+        "path": "work/ceres-v3/03/demo.html",
+        "expected": "909cc255445baac938c30ea4a3f7b1541d4d806a0d020400f690b1ae10510242",
+        "actual": "909cc255445baac938c30ea4a3f7b1541d4d806a0d020400f690b1ae10510242",
+        "match": true
+      },
+      {
+        "path": "work/ceres-v3/04/api-contract.md",
+        "expected": "b0214039e641d187f923e4deffb83dde5306146139688faf218aab069f428205",
+        "actual": "b0214039e641d187f923e4deffb83dde5306146139688faf218aab069f428205",
+        "match": true
+      },
+      {
+        "path": "backend/tests/test_v2_integrated_demo.py",
+        "expected": "5eca377e935185697dc568d619d9d18bb5d9459a64620777271e10c0250fa4c6",
+        "actual": "5eca377e935185697dc568d619d9d18bb5d9459a64620777271e10c0250fa4c6",
+        "match": true
+      }
+    ]
+  },
+  "verification_status": "verified",
+  "commands": [
+    "Get-FileHash -Algorithm SHA256 baseline/source.zip, review-source.zip, source.patch, review-scope.json, and each of 13 scope paths",
+    "git rev-parse HEAD",
+    "git log <baseline_head>..HEAD --oneline",
+    "Read work/ceres-v3/04/source.patch; no git diff was run"
+  ],
+  "not_run": [
+    "pytest",
+    "static-analysis",
+    "model",
+    "API/service"
+  ]
+}

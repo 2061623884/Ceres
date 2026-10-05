@@ -1,0 +1,5 @@
+{
+  "original_path": "work/ceres-v3/04/preflight/demo-red-007/node-vm-command.txt",
+  "sha256": "83f1386d7008a2b75dfd592c634717b555cc8d50b0cc60d49007e75ebd7ab38e",
+  "utf8_text": "Working directory: C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\demo-red-007\nCommand: & 'C:\\Program Files\\nodejs\\node.exe' 'C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\demo-red-007\\node-vm-diagnostic.cjs' 'C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\03\\demo.html'\nNode version: v24.14.0\nTemporary environment: TEMP/TMP=work/ceres-v3/04/preflight/demo-red-007/os-temp\nProcess PID: 24804 (exited with code 0)\nListening port: none; no server started\n"
+}

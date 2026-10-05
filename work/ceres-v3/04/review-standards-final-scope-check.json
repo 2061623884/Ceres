@@ -1,0 +1,106 @@
+{
+  "recorded_at": "2026-10-06T05:19:39.9840011+08:00",
+  "review": "04 Standards final incremental re-review; read-only; no tests, static analysis, model or API execution",
+  "baseline_head": "fbd9d01875eaeab5ec01e9849f4ce2bc562d1837",
+  "commit_list": [],
+  "baseline_zip_sha256": "5e393ee8f99f3d976f62c55481f292013312ae688b0e504ed7a8577b3a3a5f73",
+  "expected_baseline_zip_sha256": "5e393ee8f99f3d976f62c55481f292013312ae688b0e504ed7a8577b3a3a5f73",
+  "review_source_zip_sha256": "53557616557f773d56020d956aceeb67a0bf5ddac97df6a0672b6b8b8f3657b1",
+  "expected_review_source_zip_sha256": "53557616557f773d56020d956aceeb67a0bf5ddac97df6a0672b6b8b8f3657b1",
+  "source_patch_sha256": "3292765bfadffc8d854bfb76168b3b0099af81192012040229ed757e898f9917",
+  "review_scope_json_sha256": "0484652fdd55e0eed26c4807703929fb9be9a66407196fd43ff1d3f3e11ed354",
+  "scope_path_count": 13,
+  "matched_scope_path_count": 13,
+  "scope_mismatches": [],
+  "incremental_files_changed_from_first_review": [
+    "backend/app/services/chat_opening_service.py",
+    "work/ceres-v3/03/demo.html"
+  ],
+  "prior_close_guard_present": true,
+  "current_close_guard_present": false,
+  "prior_demo_sync_name_present": true,
+  "current_restore_chat_state_occurrences": 5,
+  "current_old_sync_identifier_occurrences": 0,
+  "active_standards_findings": 0,
+  "conclusion": "此前硬规范问题与低风险命名建议均已解除；增量复审未发现新硬规范问题或Fowler smell。",
+  "path_hashes": [
+    {
+      "path": "backend/app/api/chat.py",
+      "expected_sha256": "c336404a9ba3e865c703a1924d0c6fb6672c45038d0cf007798546cc0d2208e2",
+      "actual_sha256": "c336404a9ba3e865c703a1924d0c6fb6672c45038d0cf007798546cc0d2208e2",
+      "matches": true
+    },
+    {
+      "path": "backend/app/api/guide.py",
+      "expected_sha256": "fbf92cacfe49044acd9e94fff16e1678f1bce85e0b934f08ca0f832b46221d86",
+      "actual_sha256": "fbf92cacfe49044acd9e94fff16e1678f1bce85e0b934f08ca0f832b46221d86",
+      "matches": true
+    },
+    {
+      "path": "backend/app/services/chat_opening_service.py",
+      "expected_sha256": "386418b64509c760d12d0538c879354de67674fd71cc460e119f47cc9ee0ca3c",
+      "actual_sha256": "386418b64509c760d12d0538c879354de67674fd71cc460e119f47cc9ee0ca3c",
+      "matches": true
+    },
+    {
+      "path": "backend/app/services/turn_stream_service.py",
+      "expected_sha256": "d2532e51a111bc80ac8972cd163fc016dd33c428289aa91afc33b1d51da8e6e9",
+      "actual_sha256": "d2532e51a111bc80ac8972cd163fc016dd33c428289aa91afc33b1d51da8e6e9",
+      "matches": true
+    },
+    {
+      "path": "backend/app/services/graph_turn_service.py",
+      "expected_sha256": "d6facffd58bbb3f27bd5b37713cde79fe51debeefda6090e10e0f3613897686c",
+      "actual_sha256": "d6facffd58bbb3f27bd5b37713cde79fe51debeefda6090e10e0f3613897686c",
+      "matches": true
+    },
+    {
+      "path": "backend/app/agent/graph/coordinator.py",
+      "expected_sha256": "0e440fc3bee451f6617d972787495f260205ac4830f386d3f5b5f8e8860f18ed",
+      "actual_sha256": "0e440fc3bee451f6617d972787495f260205ac4830f386d3f5b5f8e8860f18ed",
+      "matches": true
+    },
+    {
+      "path": "backend/app/agent/graph/runtime.py",
+      "expected_sha256": "c7b873482a4bed7d456ca9d5475bfea2c6a9784ee95e0f9dad20b026a05e4da1",
+      "actual_sha256": "c7b873482a4bed7d456ca9d5475bfea2c6a9784ee95e0f9dad20b026a05e4da1",
+      "matches": true
+    },
+    {
+      "path": "backend/app/agent/graph/nodes/context.py",
+      "expected_sha256": "046c8ccb321654bb28f483b5f41306d7201127a5288944bb40d91d43c4a94df4",
+      "actual_sha256": "046c8ccb321654bb28f483b5f41306d7201127a5288944bb40d91d43c4a94df4",
+      "matches": true
+    },
+    {
+      "path": "backend/tests/test_v3_switch_lifecycle.py",
+      "expected_sha256": "4df325bdc7eb8de947f5e0a28978b7ebfab63a6a0e874cbb6a4bae6ff8292620",
+      "actual_sha256": "4df325bdc7eb8de947f5e0a28978b7ebfab63a6a0e874cbb6a4bae6ff8292620",
+      "matches": true
+    },
+    {
+      "path": "backend/tests/test_v3_routing_handoff.py",
+      "expected_sha256": "d7aee21a925590451e6e6aa87bebb24e317a1b805dedeff2fde18c6ce2305d86",
+      "actual_sha256": "d7aee21a925590451e6e6aa87bebb24e317a1b805dedeff2fde18c6ce2305d86",
+      "matches": true
+    },
+    {
+      "path": "work/ceres-v3/03/demo.html",
+      "expected_sha256": "b2c81bdb621249d72163c20b3b4cc6fcca77929c0a229b28b4512b260ba20026",
+      "actual_sha256": "b2c81bdb621249d72163c20b3b4cc6fcca77929c0a229b28b4512b260ba20026",
+      "matches": true
+    },
+    {
+      "path": "work/ceres-v3/04/api-contract.md",
+      "expected_sha256": "b0214039e641d187f923e4deffb83dde5306146139688faf218aab069f428205",
+      "actual_sha256": "b0214039e641d187f923e4deffb83dde5306146139688faf218aab069f428205",
+      "matches": true
+    },
+    {
+      "path": "backend/tests/test_v2_integrated_demo.py",
+      "expected_sha256": "5eca377e935185697dc568d619d9d18bb5d9459a64620777271e10c0250fa4c6",
+      "actual_sha256": "5eca377e935185697dc568d619d9d18bb5d9459a64620777271e10c0250fa4c6",
+      "matches": true
+    }
+  ]
+}

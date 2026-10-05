@@ -1,0 +1,47 @@
+{
+  "captured_at": "2026-10-06T05:16:59.723354+08:00",
+  "baseline_head": "fbd9d01875eaeab5ec01e9849f4ce2bc562d1837",
+  "baseline_zip_sha256": "5e393ee8f99f3d976f62c55481f292013312ae688b0e504ed7a8577b3a3a5f73",
+  "fixed_point": "04 pre-ticket working source baseline/source.zip; owned new files compared to empty",
+  "diff_command": "Read work/ceres-v3/04/source.patch generated from fixed working-source ZIP; not git diff HEAD inherited V2",
+  "commit_list": [],
+  "paths": [
+    "backend/app/api/chat.py",
+    "backend/app/api/guide.py",
+    "backend/app/services/chat_opening_service.py",
+    "backend/app/services/turn_stream_service.py",
+    "backend/app/services/graph_turn_service.py",
+    "backend/app/agent/graph/coordinator.py",
+    "backend/app/agent/graph/runtime.py",
+    "backend/app/agent/graph/nodes/context.py",
+    "backend/tests/test_v3_switch_lifecycle.py",
+    "backend/tests/test_v3_routing_handoff.py",
+    "work/ceres-v3/03/demo.html",
+    "work/ceres-v3/04/api-contract.md",
+    "backend/tests/test_v2_integrated_demo.py"
+  ],
+  "owned_new_paths": [
+    "backend/tests/test_v3_switch_lifecycle.py",
+    "work/ceres-v3/04/api-contract.md"
+  ],
+  "new_test_note": "Initial R08 red test was already in source.zip as preparation; entire untracked04 test file is a ticket addition absent at HEAD. It is intentionally reviewed in full.",
+  "excludes": "Inherited V2 dirty deltas and future05/07 draft artifacts; source ZIPs/DB/temp/cache/weights not committed",
+  "sha256": {
+    "backend/app/api/chat.py": "c336404a9ba3e865c703a1924d0c6fb6672c45038d0cf007798546cc0d2208e2",
+    "backend/app/api/guide.py": "fbf92cacfe49044acd9e94fff16e1678f1bce85e0b934f08ca0f832b46221d86",
+    "backend/app/services/chat_opening_service.py": "386418b64509c760d12d0538c879354de67674fd71cc460e119f47cc9ee0ca3c",
+    "backend/app/services/turn_stream_service.py": "d2532e51a111bc80ac8972cd163fc016dd33c428289aa91afc33b1d51da8e6e9",
+    "backend/app/services/graph_turn_service.py": "d6facffd58bbb3f27bd5b37713cde79fe51debeefda6090e10e0f3613897686c",
+    "backend/app/agent/graph/coordinator.py": "0e440fc3bee451f6617d972787495f260205ac4830f386d3f5b5f8e8860f18ed",
+    "backend/app/agent/graph/runtime.py": "c7b873482a4bed7d456ca9d5475bfea2c6a9784ee95e0f9dad20b026a05e4da1",
+    "backend/app/agent/graph/nodes/context.py": "046c8ccb321654bb28f483b5f41306d7201127a5288944bb40d91d43c4a94df4",
+    "backend/tests/test_v3_switch_lifecycle.py": "4df325bdc7eb8de947f5e0a28978b7ebfab63a6a0e874cbb6a4bae6ff8292620",
+    "backend/tests/test_v3_routing_handoff.py": "d7aee21a925590451e6e6aa87bebb24e317a1b805dedeff2fde18c6ce2305d86",
+    "work/ceres-v3/03/demo.html": "b2c81bdb621249d72163c20b3b4cc6fcca77929c0a229b28b4512b260ba20026",
+    "work/ceres-v3/04/api-contract.md": "b0214039e641d187f923e4deffb83dde5306146139688faf218aab069f428205",
+    "backend/tests/test_v2_integrated_demo.py": "5eca377e935185697dc568d619d9d18bb5d9459a64620777271e10c0250fa4c6"
+  },
+  "review_source_zip_sha256": "53557616557f773d56020d956aceeb67a0bf5ddac97df6a0672b6b8b8f3657b1",
+  "fixture_note": "Only inherited tracked integrated SDK stub adapted to approved02 policy-only contract. Inherited untracked Phase2b is unchanged; final isolated environment clears project index override.",
+  "revision_note": "Standards fix: remove redundant registry identity guard under same opening lock; rename demo restoration function only. First review preserved in review-v1."
+}

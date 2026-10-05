@@ -1,0 +1,13 @@
+{
+  "nodeid": "tests/test_phase2b_chat_confirmation.py::test_questions_block_a_chat_confirmation",
+  "source_database_fixture": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\data\\sale_guide.db",
+  "source_database_fixture_sha256": "772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10",
+  "test_db_url_fixture": "sqlite:///C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\diagnostic-013\\baseline-phase2b\\pytest-temp\\test_questions_block_a_chat_co0\\test.sqlite3",
+  "active_db_engine_url": "sqlite:///C%3A%5CUsers%5C20616%5CDesktop%5CAgent%5CAgent%E4%BA%A7%E5%93%81%5CCeres%5Cwork%5Cceres-v3%5C04%5Cpreflight%5Cdiagnostic-013%5Cbaseline-phase2b%5Cpytest-temp%5Ctest_questions_block_a_chat_co0%5Ctest.sqlite3",
+  "settings_root_dir": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\diagnostic-013\\baseline-overlay",
+  "settings_source_db_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\data\\sale_guide.db",
+  "settings_runtime_db_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\diagnostic-013\\baseline-phase2b\\pytest-temp\\test_questions_block_a_chat_co0\\test.sqlite3",
+  "settings_retrieval_index_dir": "",
+  "semantic_provider_fixture_type": "builtins.function",
+  "pytest_exit_status": 1
+}

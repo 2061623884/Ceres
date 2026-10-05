@@ -1,0 +1,12 @@
+{
+  "run_id": "04-green-002",
+  "started_at": "2026-10-06T03:01:24.4018025+08:00",
+  "finished_at": "2026-10-06T03:01:30.0195695+08:00",
+  "exit_code": 0,
+  "git_head": "fbd9d01875eaeab5ec01e9849f4ce2bc562d1837",
+  "source_hashes_unchanged": true,
+  "stdout_sha256": "7a6852e4e2324eae5cf06d82abdde3a0ea6cfc098c89b1ac07eadd734f127bdb",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_bytes": 100,
+  "stderr_bytes": 0
+}

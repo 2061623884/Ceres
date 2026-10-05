@@ -1,0 +1,73 @@
+{
+  "run_id": "04-green-001",
+  "test": "tests/test_v3_switch_lifecycle.py::test_momo_shopping_request_returns_to_keke_only_after_user_consent",
+  "database": {
+    "path": "work/ceres-v3/04/preflight/green-001/pytest-tmp/test_momo_shopping_request_ret0/test.sqlite3",
+    "size_bytes": 720896,
+    "access": "SQLite URI mode=ro",
+    "guide_session": {
+      "session_id": "sess-8c921fbd447b",
+      "current_task_id": null,
+      "session_version": 0,
+      "message_seq": 2
+    },
+    "guide_messages": [
+      {"role": "user", "content": "想买一盒新鲜鸡蛋", "request_id": "handoff_handoff_ee402ff8cd364bbb878cd11c1e7fb5b8"},
+      {"role": "assistant", "content": "我还不确定要准备哪一份清单，请再说一次目标名称。", "request_id": "handoff_handoff_ee402ff8cd364bbb878cd11c1e7fb5b8"}
+    ],
+    "catalog": {
+      "product_rows": 322,
+      "approved_product_rows": 322,
+      "target_sku": "demo:eggs-fresh-6pack",
+      "target_name_zh": "鲜鸡蛋 6枚装",
+      "target_review_status": "approved",
+      "target_offer_sellable": true,
+      "target_offer_price_fen": 980,
+      "target_offer_available_qty": 40
+    },
+    "trace_events": [
+      {"phase": "understanding"},
+      {"phase": "model_call_started", "output_summary": "{\"call_number\": 1, \"stage\": \"understanding\", \"repair\": false, \"read_result_count\": 0, \"remaining_budget_s\": 89.968, \"status\": \"started\"}"},
+      {"phase": "model_call_completed", "output_summary": "{\"call_number\": 1, \"stage\": \"understanding\", \"repair\": false, \"read_result_count\": 0, \"remaining_budget_s\": 89.968, \"status\": \"completed\", \"duration_ms\": 0}"},
+      {"phase": "retrieve"},
+      {"phase": "turn_result", "output_summary": "{\"status\": \"understanding\", \"plan_effect\": \"keep\", \"actions\": [{\"type\": \"mutation\", \"status\": \"failed\", \"code\": \"GOAL_TARGET_UNRESOLVED\"}]}"},
+      {"phase": "memory_extract_started"},
+      {"phase": "memory_extract_completed"}
+    ],
+    "trace_limit": "The saved trace_events rows have null input_summary; the table has no query_results column, so raw model input and retrieval match rows are not recoverable from this DB snapshot. The terminal turn_result/action code is recoverable."
+  },
+  "retrieval": {
+    "repo_env_lines": {
+      ".env:15": "RETRIEVAL_MODE=hybrid",
+      ".env:16": "RETRIEVAL_INDEX_DIR=data/retrieval_index-langgraph"
+    },
+    "current_index_version": "idx-03d6c43d4eb25aff",
+    "current_index_manifest_counts": {"skus": 321, "dishes": 105, "docs": 426},
+    "runtime_test_db_approved_skus": 322,
+    "source": "The run used the ordinary client fixture, which seeds the per-test DB; it did not use the indexed_client fixture that builds and publishes an index for that DB."
+  },
+  "finding": {
+    "cause": "The run's configured shared index describes 321 approved SKUs, while the isolated test DB has 322. ReadTools rejects an index that does not describe the runtime DB; the retrieval produced no bindable target, and trace_events records GOAL_TARGET_UNRESOLVED. This is a test-fixture/index pairing failure, not evidence of a broken reverse-handoff path or missing SKU.",
+    "code_evidence": [
+      "backend/app/agent/tools/read.py:281-294",
+      "backend/app/services/retrieval_service.py:400-429",
+      "backend/app/agent/authorization.py:149-166",
+      "backend/tests/test_semantic_phase1_purchase.py:16-34"
+    ],
+    "product_name_note": "The product data says 鲜鸡蛋 6枚装 (data/fixtures/demo-products.json:331-333), while the scripted lookup says 新鲜鸡蛋 6枚装. The first run's DB alone does not establish this as the cause; the subsequent indexed_client run passed with the same query and SKU expectation."
+  },
+  "source_run": {
+    "exit_code": 1,
+    "test_source_sha256": "2a0e371e92e391ddc4ce4037fc61e9b3e9f5b34b4eed514d1c35c52832f93aef",
+    "stdout_sha256": "b038affb98f0da12022a9b3d1cf254f4381e582a07a341590421099d87aedbe7"
+  },
+  "correction": "An earlier message claimed the temporary DB/trace had been cleared. That was incorrect: this preserved 720896-byte SQLite file was present and was opened read-only for this record.",
+  "comparison_run": {
+    "run_id": "04-green-002",
+    "result": "1 passed; exit 0",
+    "fixture": "indexed_client; lexical index built and published for that isolated temporary DB",
+    "same_original_message": true,
+    "same_lookup_name_and_expected_sku": true,
+    "evidence": "work/ceres-v3/04/preflight/green-002/report.md"
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "original_path": "work/ceres-v3/04/preflight/demo-red-010/command.txt",
+  "sha256": "4f5be2c39d4c96836a0d3a7f13da8eb5800590c68fe4b287ef110da511edc739",
+  "utf8_text": "Working directory: C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\demo-red-010\nCommand: & 'C:\\Program Files\\nodejs\\node.exe' 'C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\demo-red-010\\demo-refresh-current-state.cjs' 'C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\03\\demo.html'\nNode: v24.14.0\nPID: 37820\nTemporary server: none\nPort: none\nExpected demo SHA-256: a89d73a74c324902d62e50bd4a917404b0c30891518319171fc34d182ea5f61d\n"
+}

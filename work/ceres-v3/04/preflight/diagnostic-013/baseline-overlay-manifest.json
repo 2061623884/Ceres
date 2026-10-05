@@ -1,0 +1,628 @@
+{
+  "baseline_zip": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\baseline\\source.zip",
+  "baseline_zip_sha256": "5e393ee8f99f3d976f62c55481f292013312ae688b0e504ed7a8577b3a3a5f73",
+  "extracted_overlay": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\diagnostic-013\\baseline-overlay",
+  "extracted_scope": [
+    "backend/app/**",
+    "Mercury/mercury/**"
+  ],
+  "dotenv_files_extracted": 0,
+  "file_count": 123,
+  "files": [
+    {
+      "path": "backend/app/main.py",
+      "sha256": "4079b47013f643d440657ed990feba7ea31689339aa76495fe66dccca5441cb9",
+      "bytes": 2485
+    },
+    {
+      "path": "backend/app/__init__.py",
+      "sha256": "fdf6c24fba2e647a14381a0664d3cbd782c0504e7b523029496791548a450031",
+      "bytes": 27
+    },
+    {
+      "path": "backend/app/agent/authorization.py",
+      "sha256": "218ac53d6638bbd388ee331709297652661fa50084c3dcbb0cbe0ced53f150f9",
+      "bytes": 12720
+    },
+    {
+      "path": "backend/app/agent/clarification_state.py",
+      "sha256": "17fd2aee946da71a5fd60a0088c307a68a83772415f13dd283fe77092b4e2631",
+      "bytes": 3822
+    },
+    {
+      "path": "backend/app/agent/context.py",
+      "sha256": "d87351ee7416c4e15d545ad9b142e73dbb223d988705085d8feb5c1ab2663aa8",
+      "bytes": 18140
+    },
+    {
+      "path": "backend/app/agent/context_resolver.py",
+      "sha256": "1ef904e2ec1061afeb2a8979bdf9d1f52f7f346aaa14da2962b360ef7fd70ff9",
+      "bytes": 8057
+    },
+    {
+      "path": "backend/app/agent/goal.py",
+      "sha256": "9f8e4e4ddf33e3d8e71d8968e2854a8a4b2d7cd02c5ab5053ae6b9d303188793",
+      "bytes": 11022
+    },
+    {
+      "path": "backend/app/agent/goal_router.py",
+      "sha256": "84353ae771e6f046269a08c6c6a10b5f2a95dd15c0587a3beeb5c49844fec634",
+      "bytes": 58353
+    },
+    {
+      "path": "backend/app/agent/protocol.py",
+      "sha256": "4c60472cedf2274b3d5c3e9cb44566e0c9308e52ae65f70610351b51f2c61957",
+      "bytes": 38564
+    },
+    {
+      "path": "backend/app/agent/request_contract.py",
+      "sha256": "29468642c0e437020f07b2782b281c07209a19d413ae442e1f72cc14ae94dcd7",
+      "bytes": 3718
+    },
+    {
+      "path": "backend/app/agent/responses.py",
+      "sha256": "8dcf8ee8c4d6e4de627c7d885112842193d0bd65ec7655d6022ebb8b5bc68a2a",
+      "bytes": 10962
+    },
+    {
+      "path": "backend/app/agent/state.py",
+      "sha256": "d166548914a824806e715dc82029d5bd139660b464c5ada9acdf293337268609",
+      "bytes": 7974
+    },
+    {
+      "path": "backend/app/agent/turn_context_plan.py",
+      "sha256": "a67d8525997777be798ad4d7b4f7ae24560e784ab80da4e5a395631da56885c6",
+      "bytes": 13130
+    },
+    {
+      "path": "backend/app/agent/turn_primitives.py",
+      "sha256": "7eb04a78882eb758b1b96b99e6a0f48d4b4aa44f7da48b764ce281890acfd2d0",
+      "bytes": 13708
+    },
+    {
+      "path": "backend/app/agent/turn_progress.py",
+      "sha256": "dce9892a455076a6ca4b04aeab1878f2611297f92fad6c659f56af48c33afd6f",
+      "bytes": 3383
+    },
+    {
+      "path": "backend/app/api/bootstrap.py",
+      "sha256": "208833b6c6a05accd87960ea2252201d84bf5df70c2fe4b4fefe60655d5fe35c",
+      "bytes": 1542
+    },
+    {
+      "path": "backend/app/api/cart.py",
+      "sha256": "1a5fd43b10cdf62f848dbee48c0d67c09c17088be29e05176c7cd1c08652157b",
+      "bytes": 2912
+    },
+    {
+      "path": "backend/app/api/catalog.py",
+      "sha256": "d5825e056b491ce2250e77fa46bb576ab1a3f3a2d5b9e9b98cc9a8ca1899f724",
+      "bytes": 1540
+    },
+    {
+      "path": "backend/app/api/chat.py",
+      "sha256": "6f4b4ec58de49c1091948648cc5a493b4f5a3b75c398f38593129d36b625a05f",
+      "bytes": 13370
+    },
+    {
+      "path": "backend/app/api/events.py",
+      "sha256": "e51d9ca23bc642d31912575fa60861f524eae0acd79ba20a2e5a15edfed8d951",
+      "bytes": 2684
+    },
+    {
+      "path": "backend/app/api/guide.py",
+      "sha256": "9688d8c46da160eaf2cc4b72219c1edb8e0dd5950619142815b34a2c450aaaae",
+      "bytes": 20058
+    },
+    {
+      "path": "backend/app/api/internal.py",
+      "sha256": "407ed9f242e9e3a9ecacab3579eadb7860e78996c99e2da8a911e947cec9f4ff",
+      "bytes": 2308
+    },
+    {
+      "path": "backend/app/api/mercury.py",
+      "sha256": "ddc3e575bbbfebc6cf990be1de3eed60b200d454b76d70001fb5d1f5cae7ab67",
+      "bytes": 4865
+    },
+    {
+      "path": "backend/app/api/orders.py",
+      "sha256": "7d7cf2da45e6b06b2f9f4e66a2d67a345bcd4a80af6eca4ced642380d20bf4a5",
+      "bytes": 830
+    },
+    {
+      "path": "backend/app/api/__init__.py",
+      "sha256": "f8b1f99ba63298e91ae7763f25ab1667b4a2e46cb6cf28783c6d66b45bf739bb",
+      "bytes": 20
+    },
+    {
+      "path": "backend/app/core/config.py",
+      "sha256": "dfa3c3cd7b8864b6ed1a3f833c65db732358eecba59bfeec4627c07ef3013a60",
+      "bytes": 5215
+    },
+    {
+      "path": "backend/app/core/database.py",
+      "sha256": "2960f483e2df3f48be7ce7c98ea3277aba28e858f879f53165e88fc2be7bd74d",
+      "bytes": 9426
+    },
+    {
+      "path": "backend/app/core/errors.py",
+      "sha256": "271e49c24f0165f8d5a01eb0aac5e2b0d80c1a5243cff0aca6ef0f7031e66f2c",
+      "bytes": 598
+    },
+    {
+      "path": "backend/app/core/identity.py",
+      "sha256": "fc7038ce38d34fc55eba89d081628e382b1ada36905d438d97fb3fb46a315a86",
+      "bytes": 1310
+    },
+    {
+      "path": "backend/app/evaluation/runner.py",
+      "sha256": "621149205fe44e17dad5abde7779d47759b489944eb8acff87a638951e24e5c4",
+      "bytes": 19508
+    },
+    {
+      "path": "backend/app/evaluation/__init__.py",
+      "sha256": "17f286bfa085f44629931904a4216255561c655c93869b4cbcdec42aae598c96",
+      "bytes": 27
+    },
+    {
+      "path": "backend/app/llm/embedding.py",
+      "sha256": "5a4f0552f45ae2b06f49b797e4d0a45c372468d4cbbb6663958ac47110d476c0",
+      "bytes": 11356
+    },
+    {
+      "path": "backend/app/llm/errors.py",
+      "sha256": "3a83e487a4d1c76650660716315f886bda5462e7d19c28fd6b91842442237e82",
+      "bytes": 310
+    },
+    {
+      "path": "backend/app/llm/kev_provider.py",
+      "sha256": "dc3cfa00e8e161c9d84cade8a14c095e3e5b27ccb440e74cf2443e296ed15345",
+      "bytes": 3287
+    },
+    {
+      "path": "backend/app/llm/live_semantic_provider.py",
+      "sha256": "9f6a3a7a6349bf9aee41f2488b96d45fa190936271b396d556321ca2e9eb6dc6",
+      "bytes": 7721
+    },
+    {
+      "path": "backend/app/llm/memory_provider.py",
+      "sha256": "6de76480cc75a0151afbfeb8e0949274064894c69ae80b2ca338beb647bdc35a",
+      "bytes": 3247
+    },
+    {
+      "path": "backend/app/llm/openai_transport.py",
+      "sha256": "24d58ae2cfa7ba50781420125fc970a2c4686d2bbcef5d886a170649d9a88b8f",
+      "bytes": 7908
+    },
+    {
+      "path": "backend/app/llm/provider.py",
+      "sha256": "09ffa5db4df184e81952685e0993c224cc7fad4e9a94caebe64b4260d52a2b22",
+      "bytes": 1089
+    },
+    {
+      "path": "backend/app/llm/reply_stream.py",
+      "sha256": "a664e5efaeb3c2342061af5c330e5a50dcdb8d4105b81938f06cd8045e2e5681",
+      "bytes": 4022
+    },
+    {
+      "path": "backend/app/llm/structured_output.py",
+      "sha256": "cbed5c1e7778a2b22954f64b01f523561846ec82f8440d734a5d6a6564345f74",
+      "bytes": 1044
+    },
+    {
+      "path": "backend/app/models/cart.py",
+      "sha256": "349beca67a508ec22bb5bd65098a63b2e1efeabfb602c44d9a75aa4b89ea6ca1",
+      "bytes": 3581
+    },
+    {
+      "path": "backend/app/models/catalog.py",
+      "sha256": "fb5b3e5856da6092f6f8665d855a1595c6d2c86a11ec627420c105478563cb7b",
+      "bytes": 2912
+    },
+    {
+      "path": "backend/app/models/conversation.py",
+      "sha256": "f82d8102dd1412c25fc95d45daa4f3d20d007bc79568d043a5df5f1775eacc83",
+      "bytes": 3488
+    },
+    {
+      "path": "backend/app/models/memory.py",
+      "sha256": "e235775d67213cd7683a12e25bb28a48fb3238036d028eb4f3ca05aea80fa003",
+      "bytes": 1319
+    },
+    {
+      "path": "backend/app/models/order.py",
+      "sha256": "f10aa79be648ab7f132ce618c243208901a88ff63f2c065a1f6194b773243eb0",
+      "bytes": 3339
+    },
+    {
+      "path": "backend/app/models/session.py",
+      "sha256": "b6f41f193531ab241ae7adbb51c2281301079040d6b729b1b6a577ffcfddaf21",
+      "bytes": 4789
+    },
+    {
+      "path": "backend/app/models/store.py",
+      "sha256": "201bfdc78f5c7481342c747b7ead915f0702f623801345bcc117e78bec677427",
+      "bytes": 2015
+    },
+    {
+      "path": "backend/app/models/trace.py",
+      "sha256": "926aa7d5601711962fadfebcef58ff4978f72e9a8cf9bae65bb4e4df55bed68c",
+      "bytes": 3171
+    },
+    {
+      "path": "backend/app/models/__init__.py",
+      "sha256": "99a4c4e7585e574732d85496d1fc5adc6ce16189f83e2e6a54c3d03de0c32184",
+      "bytes": 985
+    },
+    {
+      "path": "backend/app/prompts/semantic.py",
+      "sha256": "55c3c6e158cf41e1ee7034e75e7f15dad5e704cc5f495e571e6ef5bb67b65d68",
+      "bytes": 28176
+    },
+    {
+      "path": "backend/app/schemas/cart.py",
+      "sha256": "1e141a25e7c98dafcc7ea86df362fca8b5962019a9546619d0fc2fff64632033",
+      "bytes": 1080
+    },
+    {
+      "path": "backend/app/schemas/catalog.py",
+      "sha256": "edd5a754b1bd9c1e6c5c73331398075ab454b999ec78bfb746fa49d78500c7f4",
+      "bytes": 1031
+    },
+    {
+      "path": "backend/app/schemas/common.py",
+      "sha256": "93e2b9298c5b169fe06d0483242fbc3ec5ce460fb16cbaff272654e34f2e43cd",
+      "bytes": 591
+    },
+    {
+      "path": "backend/app/schemas/goal.py",
+      "sha256": "aa9618630a26a136b81f959f719a9205baf9a85b960b6f88aae7d47a155f72dc",
+      "bytes": 19230
+    },
+    {
+      "path": "backend/app/schemas/guide.py",
+      "sha256": "369fadb7aef5845e5cfb353ff75f73e24fcf87b1ce69af02d911cad90c8955bd",
+      "bytes": 16764
+    },
+    {
+      "path": "backend/app/services/automatic_memory_service.py",
+      "sha256": "4e19c49f2787015dcad9bf6f8e45392ae7adb38ad28db55e32ecb4ae175ffc6b",
+      "bytes": 6362
+    },
+    {
+      "path": "backend/app/services/cart_service.py",
+      "sha256": "cee9e31006cba2b7965f686a298b9bba9a5b5b3a83ab5b5326309240cb4f6021",
+      "bytes": 12662
+    },
+    {
+      "path": "backend/app/services/catalog_service.py",
+      "sha256": "d5f5e2ee73d039301aeb771a755ec18cbdf23989ce073dbed186ff9f72ec9b20",
+      "bytes": 11190
+    },
+    {
+      "path": "backend/app/services/chat_opening_service.py",
+      "sha256": "49976cfe3d40b4e713f44f789e7c95dd384f7000f3fca79bafd5866b5c684ce4",
+      "bytes": 2068
+    },
+    {
+      "path": "backend/app/services/confirmation_service.py",
+      "sha256": "627f1a15c2b9f92a0f818bdd3c55e82e29caa7b059ce5ba0aeba9d87c44e015b",
+      "bytes": 18583
+    },
+    {
+      "path": "backend/app/services/conversation_service.py",
+      "sha256": "ce8e01f8937aa072b029bed0ce55700b5458a0d6131bda5d85d061071579ca71",
+      "bytes": 7526
+    },
+    {
+      "path": "backend/app/services/delivery_service.py",
+      "sha256": "189f55b535bdbeee1835ad19443e767627dfada3e4474342f353aca8962b3da0",
+      "bytes": 906
+    },
+    {
+      "path": "backend/app/services/entity_matcher.py",
+      "sha256": "e5c62eb001804d1235bc1b592a051d8250fc881e317d97d8bde1cd13bffb16e9",
+      "bytes": 6940
+    },
+    {
+      "path": "backend/app/services/graph_turn_service.py",
+      "sha256": "e773f9d65589b15703f795c4e2687861f4c0d05aff9a7a2f21b51a95f4804a7f",
+      "bytes": 15539
+    },
+    {
+      "path": "backend/app/services/image_assets.py",
+      "sha256": "5043c00cc5f994c298154f4e8eef3eab4c5a27fa64883f8c5eff45bc7b6bc165",
+      "bytes": 2275
+    },
+    {
+      "path": "backend/app/services/ingredient_catalog.py",
+      "sha256": "65e00c4b734c6d19a4d18b298d041b59ee2fcc2ccc58454776151bf622160af7",
+      "bytes": 1912
+    },
+    {
+      "path": "backend/app/services/memory_service.py",
+      "sha256": "5d1e5292188d5d34f919b032838d93b9aeb938d693fafa884000c60e91caecd7",
+      "bytes": 3521
+    },
+    {
+      "path": "backend/app/services/offer_service.py",
+      "sha256": "2870018ced7655c51d01b65a8f50e81e5c0b35b6608d587bcf41041ebc29dca9",
+      "bytes": 782
+    },
+    {
+      "path": "backend/app/services/operation_service.py",
+      "sha256": "7152696416fe7e22e92cf3546a4ed5f57524763a219fd21e2bdf12a6661fc4c7",
+      "bytes": 2565
+    },
+    {
+      "path": "backend/app/services/order_service.py",
+      "sha256": "81a1984f0c988fea1dd2788dd3492c6b7eba5136d937958e76c94bf20a31eed6",
+      "bytes": 1421
+    },
+    {
+      "path": "backend/app/services/plan_commit_service.py",
+      "sha256": "c2affd0968345eb5811da3eec5bb4b31f7b116f1ac3e17b0e647833a6328cbb2",
+      "bytes": 9569
+    },
+    {
+      "path": "backend/app/services/plan_contract.py",
+      "sha256": "f318c402c3729c8dc517ff3cc18e3dcb2bde4100596577c2a720849ca9c34ff0",
+      "bytes": 24435
+    },
+    {
+      "path": "backend/app/services/plan_item_service.py",
+      "sha256": "7becdd037f482be6ead55183a25f0d5175e7c83952cea427c1ffce644420c495",
+      "bytes": 15090
+    },
+    {
+      "path": "backend/app/services/plan_refresh_service.py",
+      "sha256": "c115ee840e5c1ea025048bb7e8edc461694af634f41a355de4c279ee39c7216e",
+      "bytes": 11441
+    },
+    {
+      "path": "backend/app/services/plan_revision_service.py",
+      "sha256": "438f6a0e530a88d60a1be25139437cfd658c5cdb522950632876dc7875a56c9a",
+      "bytes": 12343
+    },
+    {
+      "path": "backend/app/services/plan_validator.py",
+      "sha256": "e4db66b6aa1bef8559b52c5a08b90281fafd0cedd2bd0bb413f7ea4b7a03a8a6",
+      "bytes": 19794
+    },
+    {
+      "path": "backend/app/services/policy_service.py",
+      "sha256": "d480ddc8d49a54a73c04597643ecaa74a7536f78ee84cf664dcbdeb4a0f77b20",
+      "bytes": 1137
+    },
+    {
+      "path": "backend/app/services/retrieval_index.py",
+      "sha256": "a3f2ed842fd25233c50e8943f2b7d6094ca2e5da21366fdb8236a3e471a58a7f",
+      "bytes": 32273
+    },
+    {
+      "path": "backend/app/services/retrieval_projection.py",
+      "sha256": "e72564d68e62929e09061a86b251edd9b7b2ca675334576f7e1f3be38c0381e9",
+      "bytes": 22698
+    },
+    {
+      "path": "backend/app/services/retrieval_readiness.py",
+      "sha256": "5ce59dc55c151ddd5dff09403c74059aab937961ad3f306adcc1a94a5c313218",
+      "bytes": 1805
+    },
+    {
+      "path": "backend/app/services/retrieval_service.py",
+      "sha256": "728e0e725377faf7318d93ddaec89747087250710f5ec98ee81878e1ca8ee7d6",
+      "bytes": 50063
+    },
+    {
+      "path": "backend/app/services/session_actions.py",
+      "sha256": "54312c6ee8d945760065be0182f0afa28faaa8a4d2c41be7d9be98b9cec1a8b4",
+      "bytes": 1258
+    },
+    {
+      "path": "backend/app/services/shopping_plan_service.py",
+      "sha256": "82cbce0239760c3638aebbaa94047b5f456eac594e25575f3f3c8ee613ef06d5",
+      "bytes": 62206
+    },
+    {
+      "path": "backend/app/services/task_lifecycle_service.py",
+      "sha256": "1d62d27a6c1cdd1ba8b80d60b1cde55c3b8f306aa58bf15da4717143d1ef0d76",
+      "bytes": 19010
+    },
+    {
+      "path": "backend/app/services/template_matcher.py",
+      "sha256": "fbe86d4ac244bd504ce6fdebfabf9a9ae4b79f956457ba7608552be9cee31d5f",
+      "bytes": 9271
+    },
+    {
+      "path": "backend/app/services/template_plan_service.py",
+      "sha256": "22474df872a92ba011dc62fb9d6d9fccf7d95b262139dbb83274be881678192e",
+      "bytes": 23749
+    },
+    {
+      "path": "backend/app/services/trace_service.py",
+      "sha256": "e15064373af9663bbdcf381ff264e4576d58dbc481c855d1fb4cff2f535df405",
+      "bytes": 6234
+    },
+    {
+      "path": "backend/app/services/turn_receipt_service.py",
+      "sha256": "538f98e661e3f595b89ab54e5846101193cd4f5c95db5ebef6b68f1048b0b0c4",
+      "bytes": 20844
+    },
+    {
+      "path": "backend/app/services/turn_stream_service.py",
+      "sha256": "478beb5320f94a13def0444a6007860226e76d24a1525da52dacfb9095ea4a81",
+      "bytes": 18036
+    },
+    {
+      "path": "backend/app/services/validation_context.py",
+      "sha256": "5b268d0adc2ca9a2f1dba4699cf5ee4740308727c6cdb48f67909235b0f65505",
+      "bytes": 4428
+    },
+    {
+      "path": "backend/app/agent/graph/coordinator.py",
+      "sha256": "7d638ee863c1c2fb11948661a3f0f6136b97e948e0f9d9753044ff93d8d963ce",
+      "bytes": 6841
+    },
+    {
+      "path": "backend/app/agent/graph/graph.py",
+      "sha256": "d39cde6ab3b2ccccd519ae69c11c854ff2d09db03aa5820d490f96f11310b7d1",
+      "bytes": 3020
+    },
+    {
+      "path": "backend/app/agent/graph/response_contract.py",
+      "sha256": "92a444bfac2a56cef675f0f28d8d7c8bbc03bbbf36dc47c9e77e12b23988df70",
+      "bytes": 14768
+    },
+    {
+      "path": "backend/app/agent/graph/runtime.py",
+      "sha256": "7b8ab3a6d84ec7e05aaff185d7a01c928be192b5ca5d50e35b557dcebde23bd1",
+      "bytes": 4702
+    },
+    {
+      "path": "backend/app/agent/graph/state.py",
+      "sha256": "93a8bc0d45394acf799a4a9bf125430e6feee7f8112fa72ab1390abe0241f04c",
+      "bytes": 7976
+    },
+    {
+      "path": "backend/app/agent/graph/turn_commit.py",
+      "sha256": "7342f701ae7703d7ef9529cbfae5a0cbe72e293b2641d7e67b45cf4242130633",
+      "bytes": 38698
+    },
+    {
+      "path": "backend/app/agent/graph/__init__.py",
+      "sha256": "c630fe45d4ca7da4ea11c0e4c9ccf9ebaca49e0ee844695b22dbdfef16dcbde0",
+      "bytes": 315
+    },
+    {
+      "path": "backend/app/agent/tools/change_plan.py",
+      "sha256": "41e56ebdf4d198a5b86777af5962bae2be51cda1a78815fcea0ba11c6dd9c134",
+      "bytes": 32575
+    },
+    {
+      "path": "backend/app/agent/tools/prepare_purchase_plan.py",
+      "sha256": "f078b67a766c899af754f279febcad8096fa2cd3e473d60e50527d2e61e0fb04",
+      "bytes": 15411
+    },
+    {
+      "path": "backend/app/agent/tools/read.py",
+      "sha256": "c2c56bd96824b1ea1f2f9eb0aa2d46c7b153b4dbf543f9052299de935ea826c9",
+      "bytes": 47408
+    },
+    {
+      "path": "backend/app/agent/tools/schemas.py",
+      "sha256": "ddb566814c411297f37793b19c2ad7407cf4379e0da07f5c437cffd1a0ffc496",
+      "bytes": 1712
+    },
+    {
+      "path": "backend/app/agent/tools/search_dishes.py",
+      "sha256": "61f121b6c879def9d1c334dc863428dc4719a1ee5bf4fb0385b4fa63f4896353",
+      "bytes": 4501
+    },
+    {
+      "path": "backend/app/agent/tools/validation.py",
+      "sha256": "58fffa8ebadd3d7e151459814bb18054a4602425a6d86ade04f9299bfca7426c",
+      "bytes": 3093
+    },
+    {
+      "path": "backend/app/agent/tools/__init__.py",
+      "sha256": "93c230ed39cdfd2555f0ae67fbc32744f24066054aa8acc5d305254814c9e73a",
+      "bytes": 209
+    },
+    {
+      "path": "backend/app/agent/graph/nodes/answer.py",
+      "sha256": "f756ee529036fd1295a759c68cfeef88f0e61b7b78e899ef00a7a490684c3a07",
+      "bytes": 12633
+    },
+    {
+      "path": "backend/app/agent/graph/nodes/context.py",
+      "sha256": "b4af09f510a459b797ad68715f9983d6a451d87a42c22a84ddc0c608bdda406e",
+      "bytes": 10164
+    },
+    {
+      "path": "backend/app/agent/graph/nodes/mutation.py",
+      "sha256": "55dbed861da59a06037fb3d8826db9200a81dae0238679f557aa9d635a7adcd9",
+      "bytes": 36907
+    },
+    {
+      "path": "backend/app/agent/graph/nodes/respond.py",
+      "sha256": "981ff3ef8e9c57dd02a30060ecec1e86942626b64d0640cb7a43303c621905c1",
+      "bytes": 1680
+    },
+    {
+      "path": "backend/app/agent/graph/nodes/retrieve.py",
+      "sha256": "ce413846a4143ee03be685113b02cefc733d83031a8ee383571e4a44c608fba9",
+      "bytes": 1959
+    },
+    {
+      "path": "backend/app/agent/graph/nodes/staging.py",
+      "sha256": "e7c3dc785e7a9fbd261794a93cbcd97ed153a904a37621d79260da66f407d1f3",
+      "bytes": 6746
+    },
+    {
+      "path": "backend/app/agent/graph/nodes/understand.py",
+      "sha256": "847bff0705c33c5a477733b9df925955320bd00968ba6c338fb1887c49b6e986",
+      "bytes": 9147
+    },
+    {
+      "path": "backend/app/agent/graph/nodes/__init__.py",
+      "sha256": "6ed9e12f731be554fe3aeea668b8998c9f113a35c8cf31686e5ef7c8ca009efa",
+      "bytes": 273
+    },
+    {
+      "path": "Mercury/mercury/agent.py",
+      "sha256": "c14a2ce94825009c86fc405f56881e8d6bf5c644d6205b0d5ce4bf80227a6e51",
+      "bytes": 4705
+    },
+    {
+      "path": "Mercury/mercury/config.py",
+      "sha256": "60c83a0e4af2c50a0ae562687e868d9e1ae6ecc01f7cdb421cd18e27d25945d5",
+      "bytes": 833
+    },
+    {
+      "path": "Mercury/mercury/db.py",
+      "sha256": "374322d24edee19f1eb0f66bfb9f786947ed6bd75bbe0eab81576e99d9886d57",
+      "bytes": 2627
+    },
+    {
+      "path": "Mercury/mercury/llm.py",
+      "sha256": "b626c62dc07b925665e6e7099d85e144d8930ae3d2a31e9b73c3379b167ceeba",
+      "bytes": 1065
+    },
+    {
+      "path": "Mercury/mercury/policy.py",
+      "sha256": "58a71ac38f2d426aa842a450e6699fced6d3df7b6c396eff551c898376126c95",
+      "bytes": 1830
+    },
+    {
+      "path": "Mercury/mercury/prompt.py",
+      "sha256": "8ada529712fb281572f15bcb2ad19f15300cfc23d1db5cb6e7a3b98f2ff2f9c2",
+      "bytes": 1372
+    },
+    {
+      "path": "Mercury/mercury/seed.py",
+      "sha256": "4c7f9f2720b65e1fb33c61626afd3929497e4b79d2e2a60b99ea966fa78ab5ee",
+      "bytes": 4276
+    },
+    {
+      "path": "Mercury/mercury/services.py",
+      "sha256": "48f8cef43273459e67a4b6c43d689d0cd7694d18358ea6023f6306249bb1870a",
+      "bytes": 13317
+    },
+    {
+      "path": "Mercury/mercury/tools.py",
+      "sha256": "16b4bca179263889120123df071e8d18d206c86716838d0a65d2bdc11b93ed3e",
+      "bytes": 6809
+    },
+    {
+      "path": "Mercury/mercury/__init__.py",
+      "sha256": "0b4d241a9c897fb1db90dc3a9182cee835253ef4ae06f8a2c70c33f92c92103f",
+      "bytes": 47
+    },
+    {
+      "path": "Mercury/mercury/__main__.py",
+      "sha256": "9ad77b597beed5768f6f2f8ebfaffcd45ef5296bb3df1485f153872d80250faa",
+      "bytes": 709
+    }
+  ]
+}

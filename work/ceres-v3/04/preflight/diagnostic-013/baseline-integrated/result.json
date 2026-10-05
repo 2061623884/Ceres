@@ -1,0 +1,10 @@
+{
+  "mode": "baseline",
+  "nodeid": "test_v2_integrated_demo.py::test_two_run_v2_purchase_history_checkout_and_mercury_journey[1]",
+  "exit_code": 1,
+  "finished_unix": 1791233502.5086157,
+  "stdout_sha256": "e4c6e18fee94d58c63217bdd31ef9e3ecadd414fbcf806fbe4fa80b3bdb15a74",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "bootstrap_sha256": "c641cf91750e9cddb9284aab8a4aad84addd5480e8160d5ffa95aa865b48a7b2",
+  "fixture_observation_sha256": "e22d6a7139e212b6df38e0c173e67fa90593e3ef0400cbf4374dad742852575b"
+}

@@ -1,0 +1,100 @@
+{
+  "purpose": "Compare two representative current and frozen-baseline tests under a controlled process environment; this is diagnostic evidence, not a strict baseline attribution because frozen overlay ROOT_DIR lacks project data files.",
+  "source_zip": {
+    "path": "work/ceres-v3/04/baseline/source.zip",
+    "sha256": "5e393ee8f99f3d976f62c55481f292013312ae688b0e504ed7a8577b3a3a5f73",
+    "git_head": "fbd9d01875eaeab5ec01e9849f4ce2bc562d1837",
+    "overlay_manifest": "work/ceres-v3/04/preflight/diagnostic-013/baseline-overlay-manifest.json",
+    "overlay_file_count": 123,
+    "dotenv_extracted": false
+  },
+  "execution": {
+    "python": "backend/.venv/Scripts/python.exe",
+    "python_version": "3.12.10",
+    "pytest_version": "9.1.1",
+    "warning_policy": "-W error::pytest.PytestUnhandledThreadExceptionWarning",
+    "pytest_options": ["-q", "--showlocals", "-p no:cacheprovider", "--basetemp=<run-local>"],
+    "tests_and_fixtures": "Current checkout backend/tests; test/conftest hashes are recorded in each bootstrap.json and match frozen manifest.",
+    "external_model_boundary": "Semantic provider is test fixture controlled; integrated test monkeypatches mercury.llm.OpenAI to raise before any SDK call. Public dummy credentials only; OpenAI/embedding/Kev endpoints use loopback port 9. MEMORY_MODEL is empty. No live model call is claimed."
+  },
+  "controlled_environment": {
+    "LLM_MODE": "live",
+    "BUSINESS_DATA_MODE": "demo",
+    "OPENAI_BASE_URL": "http://127.0.0.1:9/v1",
+    "OPENAI_API_KEY": "set to public dummy literal; value intentionally omitted",
+    "LLM_MODEL": "codex-test-model",
+    "MEMORY_MODEL": "",
+    "KEV_BASE_URL": "http://127.0.0.1:9",
+    "RETRIEVAL_MODE": "hybrid",
+    "RETRIEVAL_INDEX_DIR": "empty at process bootstrap; indexed_client fixtures may replace it with their per-run paired temp index",
+    "EMBEDDING_BASE_URL": "http://127.0.0.1:9/v1",
+    "EMBEDDING_API_KEY": "set to public dummy literal; value intentionally omitted",
+    "EMBEDDING_MODEL": "codex-test-embedding",
+    "EMBEDDING_REVISION": "diagnostic-fixed",
+    "EMBEDDING_DIMENSION": 1024,
+    "SOURCE_DATABASE_PATH": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\data\\sale_guide.db at bootstrap; fixtures may override",
+    "DATABASE_URL": "unique diagnostic run path at bootstrap; fixture replaces it with that run's pytest basetemp SQLite file",
+    "MERCURY_DB_PATH": "unique diagnostic run-local path",
+    "PYTHONUTF8": "1"
+  },
+  "runs": [
+    {
+      "id": "current-phase2b",
+      "command": "backend/.venv/Scripts/python.exe -X utf8 work/ceres-v3/04/preflight/diagnostic-013/diagnostic_runner.py current test_phase2b_chat_confirmation.py::test_questions_block_a_chat_confirmation <run-dir> <basetemp>",
+      "nodeid": "tests/test_phase2b_chat_confirmation.py::test_questions_block_a_chat_confirmation",
+      "exit_code": 0,
+      "stdout_sha256": "d3f56d9a3100718d430df74dd918afe5c079cc0cfb96eba9871c67cea0c57a32",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bootstrap": "work/ceres-v3/04/preflight/diagnostic-013/current-phase2b/bootstrap.json",
+      "fixture_observation": "work/ceres-v3/04/preflight/diagnostic-013/current-phase2b/fixture-observation.json",
+      "stdout": "work/ceres-v3/04/preflight/diagnostic-013/current-phase2b/stdout.txt",
+      "stderr": "work/ceres-v3/04/preflight/diagnostic-013/current-phase2b/stderr.txt",
+      "observed": "1 passed; current app/config/Mercury imports; source DB fixture is the shared Ceres data/sale_guide.db (sha256 772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10); ordinary client runtime DB is run-local pytest temp. The task reached active/awaiting_confirmation for target 番茄炒蛋; assistant asked 需要确认这份清单吗？"
+    },
+    {
+      "id": "baseline-phase2b",
+      "command": "backend/.venv/Scripts/python.exe -X utf8 work/ceres-v3/04/preflight/diagnostic-013/diagnostic_runner.py baseline test_phase2b_chat_confirmation.py::test_questions_block_a_chat_confirmation <run-dir> <basetemp>",
+      "nodeid": "tests/test_phase2b_chat_confirmation.py::test_questions_block_a_chat_confirmation",
+      "exit_code": 1,
+      "stdout_sha256": "2a5125dec06a2f46a00905033962fe9ffa66deab752e10c757799ca62713bcc8",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bootstrap": "work/ceres-v3/04/preflight/diagnostic-013/baseline-phase2b/bootstrap.json",
+      "fixture_observation": "work/ceres-v3/04/preflight/diagnostic-013/baseline-phase2b/fixture-observation.json",
+      "stdout": "work/ceres-v3/04/preflight/diagnostic-013/baseline-phase2b/stdout.txt",
+      "stderr": "work/ceres-v3/04/preflight/diagnostic-013/baseline-phase2b/stderr.txt",
+      "observed": "1 failed before the target assertions: _new_plan received a terminal error. Read-only turn_request_records.response_json identifies FileNotFoundError for baseline-overlay/data/fixtures/shopping-scenarios.json (HTTP 400, retryable=false). Do not treat this as a baseline behavior result."
+    },
+    {
+      "id": "current-integrated",
+      "command": "backend/.venv/Scripts/python.exe -X utf8 work/ceres-v3/04/preflight/diagnostic-013/diagnostic_runner.py current test_v2_integrated_demo.py::test_two_run_v2_purchase_history_checkout_and_mercury_journey[1] <run-dir> <basetemp>",
+      "nodeid": "tests/test_v2_integrated_demo.py::test_two_run_v2_purchase_history_checkout_and_mercury_journey[1]",
+      "exit_code": 1,
+      "stdout_sha256": "41d116bd589f6dc96378c4ef07863d42917114626abe07a27540104db85842e4",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bootstrap": "work/ceres-v3/04/preflight/diagnostic-013/current-integrated/bootstrap.json",
+      "fixture_observation": "work/ceres-v3/04/preflight/diagnostic-013/current-integrated/fixture-observation.json",
+      "stdout": "work/ceres-v3/04/preflight/diagnostic-013/current-integrated/stdout.txt",
+      "stderr": "work/ceres-v3/04/preflight/diagnostic-013/current-integrated/stderr.txt",
+      "observed": "Checkout and order endpoints passed; the final unselected-order Mercury response lacked final_text. The test's OpenAI monkeypatch raised its explicit AssertionError guard, so this was a fixture boundary failure, not a live call. indexed_client used paired per-run temp index/runtime DB and no-source.sqlite3 source fixture."
+    },
+    {
+      "id": "baseline-integrated",
+      "command": "backend/.venv/Scripts/python.exe -X utf8 work/ceres-v3/04/preflight/diagnostic-013/diagnostic_runner.py baseline test_v2_integrated_demo.py::test_two_run_v2_purchase_history_checkout_and_mercury_journey[1] <run-dir> <basetemp>",
+      "nodeid": "tests/test_v2_integrated_demo.py::test_two_run_v2_purchase_history_checkout_and_mercury_journey[1]",
+      "exit_code": 1,
+      "stdout_sha256": "e4c6e18fee94d58c63217bdd31ef9e3ecadd414fbcf806fbe4fa80b3bdb15a74",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bootstrap": "work/ceres-v3/04/preflight/diagnostic-013/baseline-integrated/bootstrap.json",
+      "fixture_observation": "work/ceres-v3/04/preflight/diagnostic-013/baseline-integrated/fixture-observation.json",
+      "stdout": "work/ceres-v3/04/preflight/diagnostic-013/baseline-integrated/stdout.txt",
+      "stderr": "work/ceres-v3/04/preflight/diagnostic-013/baseline-integrated/stderr.txt",
+      "observed": "Pytest errored at fixture setup before test assertions: FileNotFoundError for baseline-overlay/data/fixtures/ingredient-catalog.json. Do not treat as baseline behavior or attempt to repair the frozen overlay."
+    }
+  ],
+  "comparability_limits": [
+    "Current Settings.ROOT_DIR resolves to the Ceres checkout; baseline overlay Settings.ROOT_DIR resolves to work/ceres-v3/04/preflight/diagnostic-013/baseline-overlay.",
+    "Both executions receive the same explicit non-secret settings and use the same current-checkout tests/fixtures. The Phase2b current fixture's source DB is the same absolute path and SHA in both bootstrap env; the baseline failed because a separate ROOT_DIR-relative JSON fixture is absent from the frozen overlay.",
+    "The integrated baseline cannot enter the test because its ROOT_DIR-relative ingredient-catalog fixture is absent. No baseline integrated behavioral comparison is available.",
+    "Therefore the four runs are useful for current behavior and failure localization only; they do not establish a strict current-vs-baseline causal comparison."
+  ]
+}

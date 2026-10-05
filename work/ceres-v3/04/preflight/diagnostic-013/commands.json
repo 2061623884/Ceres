@@ -1,0 +1,36 @@
+{
+  "working_directory": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres",
+  "python": "backend\\.venv\\Scripts\\python.exe",
+  "runner": "work\\ceres-v3\\04\\preflight\\diagnostic-013\\diagnostic_runner.py",
+  "commands": [
+    {
+      "run_id": "current-phase2b",
+      "command": "$run = 'work\\ceres-v3\\04\\preflight\\diagnostic-013\\current-phase2b'; $tmp = Join-Path $run 'pytest-temp'; & 'backend\\.venv\\Scripts\\python.exe' -X utf8 'work\\ceres-v3\\04\\preflight\\diagnostic-013\\diagnostic_runner.py' current 'test_phase2b_chat_confirmation.py::test_questions_block_a_chat_confirmation' $run $tmp; $code = $LASTEXITCODE; Write-Output \"RUNNER_EXIT=$code\"; exit $code",
+      "exit_code": 0,
+      "stdout": "current-phase2b/stdout.txt",
+      "stderr": "current-phase2b/stderr.txt"
+    },
+    {
+      "run_id": "current-integrated",
+      "command": "$run = 'work\\ceres-v3\\04\\preflight\\diagnostic-013\\current-integrated'; $tmp = Join-Path $run 'pytest-temp'; & 'backend\\.venv\\Scripts\\python.exe' -X utf8 'work\\ceres-v3\\04\\preflight\\diagnostic-013\\diagnostic_runner.py' current 'test_v2_integrated_demo.py::test_two_run_v2_purchase_history_checkout_and_mercury_journey[1]' $run $tmp; $code = $LASTEXITCODE; Write-Output \"RUNNER_EXIT=$code\"; exit $code",
+      "exit_code": 1,
+      "stdout": "current-integrated/stdout.txt",
+      "stderr": "current-integrated/stderr.txt"
+    },
+    {
+      "run_id": "baseline-phase2b",
+      "command": "$run = 'work\\ceres-v3\\04\\preflight\\diagnostic-013\\baseline-phase2b'; $tmp = Join-Path $run 'pytest-temp'; & 'backend\\.venv\\Scripts\\python.exe' -X utf8 'work\\ceres-v3\\04\\preflight\\diagnostic-013\\diagnostic_runner.py' baseline 'test_phase2b_chat_confirmation.py::test_questions_block_a_chat_confirmation' $run $tmp; $code = $LASTEXITCODE; Write-Output \"RUNNER_EXIT=$code\"; exit $code",
+      "exit_code": 1,
+      "stdout": "baseline-phase2b/stdout.txt",
+      "stderr": "baseline-phase2b/stderr.txt"
+    },
+    {
+      "run_id": "baseline-integrated",
+      "command": "$run = 'work\\ceres-v3\\04\\preflight\\diagnostic-013\\baseline-integrated'; $tmp = Join-Path $run 'pytest-temp'; & 'backend\\.venv\\Scripts\\python.exe' -X utf8 'work\\ceres-v3\\04\\preflight\\diagnostic-013\\diagnostic_runner.py' baseline 'test_v2_integrated_demo.py::test_two_run_v2_purchase_history_checkout_and_mercury_journey[1]' $run $tmp; $code = $LASTEXITCODE; Write-Output \"RUNNER_EXIT=$code\"; exit $code",
+      "exit_code": 1,
+      "stdout": "baseline-integrated/stdout.txt",
+      "stderr": "baseline-integrated/stderr.txt"
+    }
+  ],
+  "environment": "The runner sets all controlled environment variables before imports; see comparison-manifest.json. Pytest adds -q --showlocals -p no:cacheprovider -W error::pytest.PytestUnhandledThreadExceptionWarning and an independent --basetemp per run."
+}

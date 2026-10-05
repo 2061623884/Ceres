@@ -233,6 +233,11 @@ def load_context(state: dict[str, Any], runtime: TurnRuntime) -> dict[str, Any]:
     )
     runtime.candidates = inputs["candidates"]
     snapshot = inputs["snapshot"]
+    if runtime.handoff_recent_messages:
+        snapshot = replace(
+            snapshot,
+            recent_messages=[*snapshot.recent_messages, *runtime.handoff_recent_messages][-6:],
+        )
     if runtime.view_context is not None:
         # The request's view is a pure input for this run; it is persisted by the
         # commit transaction, never written to the session before the turn runs.

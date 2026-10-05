@@ -1,0 +1,95 @@
+{
+  "scope": "Final candidate content recorded before scoped staging; initial merge exits retained as historical evidence. Conflicts resolved in index-resolution.md; service/demo reflect reviewed final fixes.",
+  "results": [
+    {
+      "path": "backend/app/api/chat.py",
+      "merge_exit_code": 0,
+      "head_equals_working_baseline": true,
+      "candidate_path": "work/ceres-v3/04/index-candidates/backend__app__api__chat.py",
+      "candidate_sha256": "c336404a9ba3e865c703a1924d0c6fb6672c45038d0cf007798546cc0d2208e2",
+      "stderr": "",
+      "initial_candidate_sha256": "c336404a9ba3e865c703a1924d0c6fb6672c45038d0cf007798546cc0d2208e2"
+    },
+    {
+      "path": "backend/app/api/guide.py",
+      "merge_exit_code": 1,
+      "head_equals_working_baseline": false,
+      "candidate_path": "work/ceres-v3/04/index-candidates/backend__app__api__guide.py",
+      "candidate_sha256": "73733f555adce62a0e64c600fccd0b69b5da71cf046bd07c3d29b0e951f5759b",
+      "stderr": "",
+      "initial_candidate_sha256": "140965c7fcdf45350fbb3755967157da2a769cb2eb976b1538ab7ff796917691"
+    },
+    {
+      "path": "backend/app/services/chat_opening_service.py",
+      "merge_exit_code": 0,
+      "head_equals_working_baseline": true,
+      "candidate_path": "work/ceres-v3/04/index-candidates/backend__app__services__chat_opening_service.py",
+      "candidate_sha256": "386418b64509c760d12d0538c879354de67674fd71cc460e119f47cc9ee0ca3c",
+      "stderr": "",
+      "initial_candidate_sha256": "c71e449e273fc19e2f96e6d095574529caf80a564c2b3ece93515fac5a08e335"
+    },
+    {
+      "path": "backend/app/services/turn_stream_service.py",
+      "merge_exit_code": 4,
+      "head_equals_working_baseline": false,
+      "candidate_path": "work/ceres-v3/04/index-candidates/backend__app__services__turn_stream_service.py",
+      "candidate_sha256": "db9ce57d077bdd0ebe3f0d39fe3433d05034e0b3e6079bfa5e9205053944a753",
+      "stderr": "",
+      "initial_candidate_sha256": "293c5a0864db1c14031b7046cb4fef6cfcc16b08f3139bef1091e2390d03522e"
+    },
+    {
+      "path": "backend/app/services/graph_turn_service.py",
+      "merge_exit_code": 2,
+      "head_equals_working_baseline": false,
+      "candidate_path": "work/ceres-v3/04/index-candidates/backend__app__services__graph_turn_service.py",
+      "candidate_sha256": "d216f6f06155e9ded0d63ec9083d727a82b7bd48c393d9e1539f7baa8ab2b532",
+      "stderr": "",
+      "initial_candidate_sha256": "043e0176a4c861ee96c546bcf0ed65a88ebf7699292aa4ad5f72a93dc6e5694f"
+    },
+    {
+      "path": "backend/app/agent/graph/coordinator.py",
+      "merge_exit_code": 2,
+      "head_equals_working_baseline": false,
+      "candidate_path": "work/ceres-v3/04/index-candidates/backend__app__agent__graph__coordinator.py",
+      "candidate_sha256": "f8a221725956c9f7bd4b6b2b572b5613a00992a65a1917b6873476efae03c446",
+      "stderr": "",
+      "initial_candidate_sha256": "46081a441b0980b15ed4a083eb27f9d2dbf9e49ba03b32bcc6ffa3e2d86334c1"
+    },
+    {
+      "path": "backend/app/agent/graph/runtime.py",
+      "merge_exit_code": 1,
+      "head_equals_working_baseline": false,
+      "candidate_path": "work/ceres-v3/04/index-candidates/backend__app__agent__graph__runtime.py",
+      "candidate_sha256": "e2a305db6650a3df4f6ef6dbf3e8de7b440125421b7d869fbc43bd7b9ac1d99a",
+      "stderr": "",
+      "initial_candidate_sha256": "693d0910bd21d1364509c2c2283c709aa51d69101243ec288d00344678780f8a"
+    },
+    {
+      "path": "backend/app/agent/graph/nodes/context.py",
+      "merge_exit_code": 0,
+      "head_equals_working_baseline": false,
+      "candidate_path": "work/ceres-v3/04/index-candidates/backend__app__agent__graph__nodes__context.py",
+      "candidate_sha256": "bb1f3adcb22cfc241f5bcc14de2b6a4a1349843efc712727d0aa3a1601d108a5",
+      "stderr": "",
+      "initial_candidate_sha256": "bb1f3adcb22cfc241f5bcc14de2b6a4a1349843efc712727d0aa3a1601d108a5"
+    },
+    {
+      "path": "backend/tests/test_v3_routing_handoff.py",
+      "merge_exit_code": 0,
+      "head_equals_working_baseline": true,
+      "candidate_path": "work/ceres-v3/04/index-candidates/backend__tests__test_v3_routing_handoff.py",
+      "candidate_sha256": "d7aee21a925590451e6e6aa87bebb24e317a1b805dedeff2fde18c6ce2305d86",
+      "stderr": "",
+      "initial_candidate_sha256": "d7aee21a925590451e6e6aa87bebb24e317a1b805dedeff2fde18c6ce2305d86"
+    },
+    {
+      "path": "work/ceres-v3/03/demo.html",
+      "merge_exit_code": 0,
+      "head_equals_working_baseline": true,
+      "candidate_path": "work/ceres-v3/04/index-candidates/work__ceres-v3__03__demo.html",
+      "candidate_sha256": "b2c81bdb621249d72163c20b3b4cc6fcca77929c0a229b28b4512b260ba20026",
+      "stderr": "",
+      "initial_candidate_sha256": "dc0f262d5ca93974e060ef36c9f9591907aad6d445127e0165b1ecaea218e688"
+    }
+  ]
+}

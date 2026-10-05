@@ -1,0 +1,5 @@
+{
+  "original_path": "work/ceres-v3/04/preflight/red-001/command.txt",
+  "sha256": "8a09aae50a197b6c2c6b8b39dded7258cb6880bc18516e949576630dcadfe2ed",
+  "utf8_text": "Working directory: C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\nCommand: C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe -X utf8 -m pytest -q -p no:cacheprovider -W error::pytest.PytestUnhandledThreadExceptionWarning --basetemp=C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\red-001\\pytest-tmp tests/test_v3_switch_lifecycle.py::test_momo_shopping_request_returns_to_keke_only_after_user_consent\n"
+}

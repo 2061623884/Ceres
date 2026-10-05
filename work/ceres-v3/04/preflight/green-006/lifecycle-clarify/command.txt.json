@@ -1,0 +1,5 @@
+{
+  "original_path": "work/ceres-v3/04/preflight/green-006/lifecycle-clarify/command.txt",
+  "sha256": "a2119564f908146167f3b5a21c2dba449c10d784ca56ef6ee5d505330b8cc8b0",
+  "utf8_text": "Working directory: C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\nCommand: C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe -X utf8 -m pytest -q --showlocals -p no:cacheprovider -W error::pytest.PytestUnhandledThreadExceptionWarning --basetemp=C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\green-006\\lifecycle-clarify\\pytest-tmp tests/test_v3_switch_lifecycle.py::test_unclear_object_clarification_does_not_assume_cancellation\n"
+}

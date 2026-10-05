@@ -1,0 +1,12 @@
+{
+  "run_id": "04-red-003",
+  "started_at": "2026-10-06T03:19:33.4072418+08:00",
+  "finished_at": "2026-10-06T03:19:48.3940960+08:00",
+  "exit_code": 1,
+  "git_head": "fbd9d01875eaeab5ec01e9849f4ce2bc562d1837",
+  "source_hashes_unchanged": true,
+  "stdout_sha256": "961204139a1d76d9c20af86e49f04d94fe1b28e771a9b91daaa92ad1d0f39c73",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_bytes": 15053,
+  "stderr_bytes": 0
+}

@@ -67,6 +67,8 @@ class TurnRuntime:
     #: The client's view context for THIS request, a pure runtime input; the
     #: commit node persists it atomically inside the business transaction.
     view_context: dict[str, Any] | None = None
+    #: Bounded source-role dialogue for a one-turn service handoff; never persisted.
+    handoff_recent_messages: list[dict[str, Any]] | None = None
     store_id: str = "store-demo-01"
     delivery_zone_id: str = "zone-default"
     #: The completed HTTP response for this request. Never persisted state.

@@ -1,0 +1,5 @@
+{
+  "original_path": "work/ceres-v3/04/preflight/final-regression-012/group-02-policy-order-transport/command.txt",
+  "sha256": "69cfdac16fc9668e494dc7c36403225cd036f8ae2d158bd060524b32f1a3fa4f",
+  "utf8_text": "Working directory: C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\nCommand: C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe -X utf8 -m pytest -q --showlocals -p no:cacheprovider -W error::pytest.PytestUnhandledThreadExceptionWarning --basetemp=C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\final-regression-012\\group-02-policy-order-transport\\pytest-tmp tests/test_v3_policy_consultation.py tests/test_v2_order_mercury.py tests/test_semantic_transport.py\n"
+}

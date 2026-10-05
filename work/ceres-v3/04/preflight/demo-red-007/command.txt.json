@@ -1,0 +1,5 @@
+{
+  "original_path": "work/ceres-v3/04/preflight/demo-red-007/command.txt",
+  "sha256": "11ba88b08a15869cae60327a0708300d732bceeb8c0238b74d85f5d19194d1a7",
+  "utf8_text": "Node generator command: & 'C:\\Program Files\\nodejs\\node.exe' 'C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\demo-red-007\\prepare-demo-harness.cjs' 'C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\03\\demo.html' 'C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\demo-red-007\\consumer-harness.html'\nEdge command: & 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe' --headless --disable-gpu --no-first-run --no-default-browser-check --disable-background-networking --disable-sync --user-data-dir='C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\demo-red-007\\edge-profile' --virtual-time-budget=2500 --dump-dom 'file:///C:/Users/20616/Desktop/Agent/Agent%E4%BA%A7%E5%93%81/Ceres/work/ceres-v3/04/preflight/demo-red-007/consumer-harness.html'\n"
+}

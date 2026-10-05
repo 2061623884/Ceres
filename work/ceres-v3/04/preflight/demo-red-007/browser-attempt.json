@@ -1,0 +1,16 @@
+{
+  "status": "captured-output-unavailable",
+  "command": "Node generator command: & 'C:\\Program Files\\nodejs\\node.exe' 'C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\demo-red-007\\prepare-demo-harness.cjs' 'C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\03\\demo.html' 'C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\demo-red-007\\consumer-harness.html'\nEdge command: & 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe' --headless --disable-gpu --no-first-run --no-default-browser-check --disable-background-networking --disable-sync --user-data-dir='C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\demo-red-007\\edge-profile' --virtual-time-budget=2500 --dump-dom 'file:///C:/Users/20616/Desktop/Agent/Agent%E4%BA%A7%E5%93%81/Ceres/work/ceres-v3/04/preflight/demo-red-007/consumer-harness.html'\r\n",
+  "wrapper_exit_code": 1,
+  "native_edge_exit_code": "not captured; PowerShell failed while hashing a still-locked redirected stdout file",
+  "stdout_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\demo-red-007\\browser.stdout.txt",
+  "stdout_bytes": 0,
+  "stderr_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\demo-red-007\\browser.stderr.txt",
+  "stderr_bytes": 0,
+  "matching_edge_processes_after_attempt": [],
+  "temporary_server_started": false,
+  "port": null,
+  "note": "Do not infer test result from this attempt. No matching dedicated Edge process remained; existing user Edge processes were not stopped.",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

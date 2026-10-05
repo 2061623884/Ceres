@@ -1,0 +1,113 @@
+{
+  "mode": "current",
+  "nodeid": "test_phase2b_chat_confirmation.py::test_questions_block_a_chat_confirmation",
+  "started_unix": 1791233394.4958112,
+  "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+  "python_executable": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+  "pytest_version": "9.1.1",
+  "repo_root_for_tests": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres",
+  "app_module": {
+    "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\app\\__init__.py",
+    "sha256": "fdf6c24fba2e647a14381a0664d3cbd782c0504e7b523029496791548a450031"
+  },
+  "app_config_module": {
+    "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\app\\core\\config.py",
+    "sha256": "dfa3c3cd7b8864b6ed1a3f833c65db732358eecba59bfeec4627c07ef3013a60"
+  },
+  "mercury_module": {
+    "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\Mercury\\mercury\\__init__.py",
+    "sha256": "0b4d241a9c897fb1db90dc3a9182cee835253ef4ae06f8a2c70c33f92c92103f"
+  },
+  "source_modules": [
+    {
+      "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\app\\core\\config.py",
+      "sha256": "dfa3c3cd7b8864b6ed1a3f833c65db732358eecba59bfeec4627c07ef3013a60"
+    },
+    {
+      "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\app\\__init__.py",
+      "sha256": "fdf6c24fba2e647a14381a0664d3cbd782c0504e7b523029496791548a450031"
+    },
+    {
+      "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\Mercury\\mercury\\__init__.py",
+      "sha256": "0b4d241a9c897fb1db90dc3a9182cee835253ef4ae06f8a2c70c33f92c92103f"
+    },
+    {
+      "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\app\\api\\guide.py",
+      "sha256": "fbf92cacfe49044acd9e94fff16e1678f1bce85e0b934f08ca0f832b46221d86"
+    },
+    {
+      "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\Mercury\\mercury\\agent.py",
+      "sha256": "c14a2ce94825009c86fc405f56881e8d6bf5c644d6205b0d5ce4bf80227a6e51"
+    },
+    {
+      "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\Mercury\\mercury\\llm.py",
+      "sha256": "b626c62dc07b925665e6e7099d85e144d8930ae3d2a31e9b73c3379b167ceeba"
+    }
+  ],
+  "settings": {
+    "root_dir_constant": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres",
+    "root_dir_property": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres",
+    "llm_mode": "live",
+    "business_data_mode": "demo",
+    "openai_base_url": "http://127.0.0.1:9/v1",
+    "openai_api_key_is_controlled_dummy": true,
+    "llm_model": "codex-test-model",
+    "memory_model_empty": true,
+    "kev_base_url": "http://127.0.0.1:9",
+    "retrieval_mode": "hybrid",
+    "retrieval_index_dir": "",
+    "source_database_path_env": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\data\\sale_guide.db",
+    "source_db_path_before_fixture": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\data\\sale_guide.db",
+    "runtime_db_path_before_fixture": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\diagnostic-013\\current-phase2b\\runtime.sqlite3"
+  },
+  "source_database": {
+    "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\data\\sale_guide.db",
+    "sha256": "772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10"
+  },
+  "test_and_fixture_hashes": [
+    {
+      "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\tests\\conftest.py",
+      "sha256": "1a9a33ceb5e3a49845d1b66dacef7cd3e9429f9f09764776421fee2ae973f250"
+    },
+    {
+      "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\tests\\test_phase2b_chat_confirmation.py",
+      "sha256": "9b6f7b7a3b6b2481745d15c1099038bfe79b62cc9d743eb56af12b906d54cbd6"
+    },
+    {
+      "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\tests\\test_v2_integrated_demo.py",
+      "sha256": "cfb3eec2a4745ed6dbbe262f1f30f5eb9daa1b3b414c33b49bc73b941540ce5b"
+    },
+    {
+      "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\tests\\test_semantic_phase1_purchase.py",
+      "sha256": "4c2e61b15d5af60f1c04d0f4e7ca85b0381cb9cb0324f67789ad3af412d26172"
+    }
+  ],
+  "dotenv_copied": false,
+  "controlled_environment_names": [
+    "BUSINESS_DATA_MODE",
+    "DATABASE_URL",
+    "EMBEDDING_API_KEY",
+    "EMBEDDING_BASE_URL",
+    "EMBEDDING_DIMENSION",
+    "EMBEDDING_MODEL",
+    "EMBEDDING_REVISION",
+    "KEV_BASE_URL",
+    "LLM_MODE",
+    "LLM_MODEL",
+    "MEMORY_MODEL",
+    "MERCURY_DB_PATH",
+    "OPENAI_API_KEY",
+    "OPENAI_BASE_URL",
+    "PYTHONUTF8",
+    "RETRIEVAL_INDEX_DIR",
+    "RETRIEVAL_MODE",
+    "SOURCE_DATABASE_PATH"
+  ],
+  "external_provider_policy": {
+    "public_dummy_openai_key": true,
+    "openai_endpoint_is_loopback_unserved": true,
+    "memory_model_empty": true,
+    "test_semantic_provider_fixture_expected": true,
+    "mercury_model_guard_is_test_owned": false
+  }
+}

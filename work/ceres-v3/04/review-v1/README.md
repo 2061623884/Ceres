@@ -1,0 +1,1 @@
+04 first dual-axis review source freeze, before fixing redundant close guard and demo naming. Original scope ZIP f4489083318adbf671a465ae4e0a55124f8bcb32b5b5973b712fd1965b3c6049. Files are provenance, not additional application validation.

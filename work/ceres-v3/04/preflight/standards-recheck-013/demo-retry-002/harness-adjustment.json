@@ -1,0 +1,9 @@
+{
+  "source_harness_sha256": "1eb7065c1c5bfc54776a0d34d434664ab820a172b1031fbc7f76a90b81620306",
+  "retry_harness_sha256": "2e891123e596e64c2fcd32079565989b378ec7840d68a73cfb03ca3c30d54d21",
+  "harness_adjustment": "Added await settle() after each existing DOM onclick trigger because demo listeners intentionally do not return switchRole promises.",
+  "behavior_assertions_before": 34,
+  "behavior_assertions_after": 34,
+  "assertions_changed": false,
+  "no_production_source_changed": true
+}

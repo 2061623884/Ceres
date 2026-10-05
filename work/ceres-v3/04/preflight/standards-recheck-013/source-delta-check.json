@@ -1,0 +1,11 @@
+{
+  "review_v1_zip_sha256": "f4489083318adbf671a465ae4e0a55124f8bcb32b5b5973b712fd1965b3c6049",
+  "old_chat_sha256": "c71e449e273fc19e2f96e6d095574529caf80a564c2b3ece93515fac5a08e335",
+  "current_chat_sha256": "386418b64509c760d12d0538c879354de67674fd71cc460e119f47cc9ee0ca3c",
+  "close_guard_removed_exactly_two_lines": true,
+  "chat_opening_service_normalizes_to_review_v1": true,
+  "old_demo_sha256": "909cc255445baac938c30ea4a3f7b1541d4d806a0d020400f690b1ae10510242",
+  "current_demo_sha256": "b2c81bdb621249d72163c20b3b4cc6fcca77929c0a229b28b4512b260ba20026",
+  "restore_name_occurrences": 5,
+  "demo_only_identifier_change": true
+}

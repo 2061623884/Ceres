@@ -1,0 +1,9 @@
+{
+  "review_scope_sha256": "0484652fdd55e0eed26c4807703929fb9be9a66407196fd43ff1d3f3e11ed354",
+  "review_source_zip_sha256": "53557616557f773d56020d956aceeb67a0bf5ddac97df6a0672b6b8b8f3657b1",
+  "expected_review_zip_sha256": "53557616557f773d56020d956aceeb67a0bf5ddac97df6a0672b6b8b8f3657b1",
+  "demo_sha256": "b2c81bdb621249d72163c20b3b4cc6fcca77929c0a229b28b4512b260ba20026",
+  "expected_demo_sha256": "b2c81bdb621249d72163c20b3b4cc6fcca77929c0a229b28b4512b260ba20026",
+  "scope_hashes_match": true,
+  "harness_sha256": "1eb7065c1c5bfc54776a0d34d434664ab820a172b1031fbc7f76a90b81620306"
+}

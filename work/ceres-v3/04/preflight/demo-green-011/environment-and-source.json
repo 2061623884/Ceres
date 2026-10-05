@@ -1,0 +1,17 @@
+{
+  "run_id": "04-demo-green-011",
+  "demo_path": "work/ceres-v3/03/demo.html",
+  "expected_demo_sha256": "909cc255445baac938c30ea4a3f7b1541d4d806a0d020400f690b1ae10510242",
+  "source_sha256_before": "909cc255445baac938c30ea4a3f7b1541d4d806a0d020400f690b1ae10510242",
+  "source_sha256_after": "909cc255445baac938c30ea4a3f7b1541d4d806a0d020400f690b1ae10510242",
+  "node_version": "v24.14.0",
+  "node_path": "C:\\Program Files\\nodejs\\node.exe",
+  "harness_sha256": "2d6fea89f00f9660ab646359b099a80bdc0bfee9bca5238558ccecb063a6cf7c",
+  "command": "& 'C:\\Program Files\\nodejs\\node.exe' 'C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\demo-green-011\\demo-refresh-current-state.cjs' 'C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\03\\demo.html'",
+  "working_directory": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\demo-green-011",
+  "temp": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\demo-green-011\\os-temp",
+  "tmp": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\04\\preflight\\demo-green-011\\os-temp",
+  "network_scope": "Node vm replaces fetch with controlled public-API responses; no server, port, live backend, or model is started.",
+  "browser_scope": "Minimal DOM Node vm is a controlled consumer harness, not browser E2E.",
+  "source_scope": "Exact red-010 harness copied without edits; demo source/task/index untouched."
+}
