@@ -1,0 +1,70 @@
+{
+  "missing_document_links": [],
+  "trailing_whitespace": [],
+  "inherited_relevant_files_changed_excluding_project_v3": [],
+  "frozen_v2_source_sha256_matches": true,
+  "dependency_graph": {
+    "01": [],
+    "02": [],
+    "03": [
+      "01"
+    ],
+    "04": [
+      "03"
+    ],
+    "05": [
+      "02",
+      "04"
+    ],
+    "06": [
+      "05"
+    ],
+    "07": [
+      "06"
+    ],
+    "08": [
+      "04"
+    ]
+  },
+  "dependencies_acyclic": true,
+  "parent_and_ticket_dependencies_match": true,
+  "staged_scope_exact": true,
+  "scope_file_hashes_match": true,
+  "staged_files": [
+    "PROJECT-v3.md",
+    "docs/plans/ceres-v3-spec.md",
+    "tasks/ceres-v3-01-kev-service.md",
+    "tasks/ceres-v3-02-policy-consultation.md",
+    "tasks/ceres-v3-03-context-routing-handoff.md",
+    "tasks/ceres-v3-04-switch-lifecycle.md",
+    "tasks/ceres-v3-05-baseline-evaluation.md",
+    "tasks/ceres-v3-06-prompt-refinement.md",
+    "tasks/ceres-v3-07-final-acceptance.md",
+    "tasks/ceres-v3-08-sequential-exploration.md",
+    "tasks/ceres-v3.md",
+    "work/ceres-v3-discussion/evaluation-plan.md",
+    "work/ceres-v3-discussion/kev-local-probe/README.md",
+    "work/ceres-v3-discussion/kev-local-probe/amax-direct-download/README.md",
+    "work/ceres-v3-discussion/kev-local-probe/amax-direct-download/SHA256SUMS",
+    "work/ceres-v3-discussion/kev-local-probe/amax-direct-download/official-file-metadata.json",
+    "work/ceres-v3-discussion/kev-local-probe/amax-direct-download/offline-resolve.json",
+    "work/ceres-v3-discussion/kev-local-probe/amax-direct-download/verification.json",
+    "work/ceres-v3-discussion/kev-local-probe/amax-direct-download/weights-provenance.json",
+    "work/ceres-v3-discussion/service-routing-proposal.mmd",
+    "work/ceres-v3/00-preparation/baseline.json",
+    "work/ceres-v3/00-preparation/download-receipt-check.json",
+    "work/ceres-v3/00-preparation/review-scope.json",
+    "work/ceres-v3/00-preparation/reviews.md",
+    "work/ceres-v3/00-preparation/static-check.json",
+    "work/ceres-v3/00-preparation/validation.md"
+  ],
+  "git_diff_cached_check_exit": 0,
+  "business_tests_executed": false,
+  "kev_started": false,
+  "weight_download_receipt_verified": true,
+  "final_scope_rechecked_utc": "2026-10-05T17:10:03.423351+00:00",
+  "final_unresolved_review_findings": {
+    "Standards": 0,
+    "Spec": 0
+  }
+}

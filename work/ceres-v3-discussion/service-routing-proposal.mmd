@@ -1,0 +1,63 @@
+---
+config:
+  flowchart:
+    curve: linear
+---
+flowchart TD
+  input(["每条新用户发言"])
+  context["本轮原话＋当前角色＋指向对象＋近期相关对话<br/>新诉求优先于旧话题"]
+  classify{"Kev-4B：已选定的业务服务路由模型<br/>结合上下文，保守建议切换<br/>当前角色继续／建议切换／澄清"}
+  unavailable["Kev 暂不可用：提示自动路由不可用<br/>当前角色仅处理自身业务，保留手动入口<br/>本轮记录路由失败"]
+  same["当前角色可承接"]
+  cross["诉求明确且需要另一角色<br/>建议切换，不自动跳转"]
+  limit{"本次打开聊天<br/>是否已出现自动切换提示"}
+  clarify["上下文仍不足<br/>留在当前聊天，澄清对象或意图"]
+  sequence["探索项：跨服务顺序请求<br/>按用户表达顺序识别当前步骤"]
+  nextstep{"当前步骤结果"}
+  pause["探索项：本步骤失败<br/>暂停剩余步骤，说明原因，询问是否继续采购"]
+  proceed["用户明确选择继续采购<br/>保留前一步失败状态"]
+  choice{"用户是否接受切换"}
+  stay["留在当前服务<br/>说明能力边界，保留固定入口<br/>本次打开不再自动弹出切换提示"]
+  switch["切换角色／页面<br/>携原话、明确对象与必要相关对话<br/>目标角色重新读取业务事实并续接"]
+  pending{"是否有明确且尚未处理的<br/>目标角色业务诉求"}
+  resume["恢复目标角色会话与业务进度<br/>不重发已处理的旧消息<br/>不重置自动提示次数"]
+  guide["可可导购流程<br/>沿用现有 understand → decide_turn 等节点"]
+  service["墨墨售后流程<br/>查询事实与执行仍按已有业务边界"]
+  policy["当前角色查询共享政策来源<br/>回答一般政策与适用条件"]
+  finish(["请求处理结束"])
+  manual["用户主动切换入口<br/>气泡或页面入口"]
+  input --> context
+  context --> classify
+  classify -->|当前服务| same
+  classify -->|其他服务| cross
+  classify -->|不能确定| clarify
+  classify -->|调用不可用| unavailable
+  unavailable -->|当前角色自身业务| same
+  unavailable -->|用户选择另一角色| manual
+  clarify -->|用户补充说明| context
+  classify -.->|探索：包含顺序业务| sequence
+  sequence -->|当前角色可承接| same
+  sequence -->|需要另一角色| cross
+  cross --> limit
+  limit -->|未出现：计数并询问| choice
+  limit -->|已出现：不再弹窗| stay
+  choice -->|接受| switch
+  choice -->|拒绝| stay
+  manual --> pending
+  pending -->|有| switch
+  pending -->|单纯切换| resume
+  resume --> finish
+  same -->|导购| guide
+  same -->|售后| service
+  same -->|一般政策咨询| policy
+  switch -->|可可| guide
+  switch -->|墨墨| service
+  guide --> nextstep
+  service --> nextstep
+  policy --> nextstep
+  nextstep -.->|申请提交成功，尚有采购步骤| sequence
+  nextstep -->|无剩余步骤| finish
+  nextstep -.->|失败，尚有采购步骤| pause
+  pause -->|选择继续采购| proceed
+  proceed --> sequence
+  pause -->|选择停止| finish

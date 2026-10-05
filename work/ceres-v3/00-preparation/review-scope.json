@@ -1,0 +1,53 @@
+{
+  "baseline_git_head": "2bd5020894ba0177b059581937a518fe6aee40ef",
+  "scope": "V3 preparation documents and completed model-download metadata only; excludes inherited V2 changes, model weights and business implementation",
+  "files": {
+    "PROJECT-v3.md": "d1a9ede5204b610effdd6b5e87600b6bcf145e9557d0eca0130cee7badf287c2",
+    "docs/plans/ceres-v3-spec.md": "b5442d4d76ca6a6ecd302b8580f2fa6a78ecc8813fc611afc1bfc2e4741ffef5",
+    "tasks/ceres-v3.md": "bb84e2bace82a6938422ced9c97ebfe464ea34c37e0f493ecc730faa996f3960",
+    "tasks/ceres-v3-01-kev-service.md": "2ffbc8ce1507870e19f4d425b32e8a247cdf8cd866ad91a1208fda945fb1c95f",
+    "tasks/ceres-v3-02-policy-consultation.md": "285cab2ab46a5108dd362c592860286d5f521bf9fa90e5db4f78d69eefcf0858",
+    "tasks/ceres-v3-03-context-routing-handoff.md": "22b3aabfc146de5c56986645bb74f69f5bad8d26d3a0df4f5cf88217b14724a8",
+    "tasks/ceres-v3-04-switch-lifecycle.md": "dacce6c4009d402a3a331bd83977ec90b47ab9ea69d18099f4a65267a4a057fc",
+    "tasks/ceres-v3-05-baseline-evaluation.md": "0120517174984c08d11ad0af7df5e74b42ba5366eadf92126196cb2fd64b7f33",
+    "tasks/ceres-v3-06-prompt-refinement.md": "5083415a957d4fad0b5544954da8d20a3f3f2158cf619dac15ea83bbc36f9db1",
+    "tasks/ceres-v3-07-final-acceptance.md": "37e05220947f0cefaba6dc413705930dae09d6dfced0706b674ef0f09e9f6677",
+    "tasks/ceres-v3-08-sequential-exploration.md": "d351c00a19a2a5dfb0d494355a934a21d11d641d544d27ab6a369702f997e3dc",
+    "work/ceres-v3-discussion/evaluation-plan.md": "01887ee854f1b460e87c7391d6d28abb5a1612fc19ce3e378de3f8642b79fa76",
+    "work/ceres-v3-discussion/service-routing-proposal.mmd": "f72ed4ee8f5343c195db19eb78fe1b6928c69be7c4d11139968f21101e34e9d9",
+    "work/ceres-v3/00-preparation/baseline.json": "c9bef124b49a6d751b7eb8c4458048ceb93aac2f4619d3c6b294a5fbdf22d97c",
+    "work/ceres-v3/00-preparation/validation.md": "fbb075d1d0f79f82940d07c68b6382025a3fe1c741b01e1c1619e03ee3d20199",
+    "work/ceres-v3/00-preparation/reviews.md": "79607cc9dce7e5ff7b40c4092c676c5390f98d94198c83ec78b7a77a7cf3dc92",
+    "work/ceres-v3-discussion/kev-local-probe/README.md": "362ebc4c09204a2fa69bf5926364da93e400bde42b33f5cbd50eb6a7588b2a01",
+    "work/ceres-v3-discussion/kev-local-probe/amax-direct-download/README.md": "4aec5bdc9ea18beed89ffff7a938804814708afda66f6222408b1a350f330d00",
+    "work/ceres-v3-discussion/kev-local-probe/amax-direct-download/verification.json": "a02e3574037b09d5511f506fb7da1685170f95feb10de03d295fd847e3b3dff2",
+    "work/ceres-v3-discussion/kev-local-probe/amax-direct-download/offline-resolve.json": "a8c9810f082b8fb8a85daf69eb47a6521a3d5ecb0076803b4cbe661d7fb833ea",
+    "work/ceres-v3-discussion/kev-local-probe/amax-direct-download/weights-provenance.json": "d304738731258fd326965d6873b34a96bd979b5d7a8c43030e706a7f5dc159da",
+    "work/ceres-v3-discussion/kev-local-probe/amax-direct-download/official-file-metadata.json": "c920e956e3f28aaee68b27519a87142f4b41d7f3ead091895f7b25ae5b7a0781",
+    "work/ceres-v3-discussion/kev-local-probe/amax-direct-download/SHA256SUMS": "082a69c48345738aaa429fabe3ac884cf7745fd8611cba9bd837938df14751c7"
+  },
+  "reviewed_document_files": [
+    "PROJECT-v3.md",
+    "docs/plans/ceres-v3-spec.md",
+    "tasks/ceres-v3.md",
+    "tasks/ceres-v3-01-kev-service.md",
+    "tasks/ceres-v3-02-policy-consultation.md",
+    "tasks/ceres-v3-03-context-routing-handoff.md",
+    "tasks/ceres-v3-04-switch-lifecycle.md",
+    "tasks/ceres-v3-05-baseline-evaluation.md",
+    "tasks/ceres-v3-06-prompt-refinement.md",
+    "tasks/ceres-v3-07-final-acceptance.md",
+    "tasks/ceres-v3-08-sequential-exploration.md",
+    "work/ceres-v3-discussion/evaluation-plan.md",
+    "work/ceres-v3-discussion/service-routing-proposal.mmd",
+    "work/ceres-v3/00-preparation/validation.md"
+  ],
+  "preparation_evidence_files": [
+    "work/ceres-v3/00-preparation/static-check.json",
+    "work/ceres-v3/00-preparation/download-receipt-check.json"
+  ],
+  "local_only_raw_logs": [
+    "work/ceres-v3-discussion/kev-local-probe/amax-direct-download/commands.log",
+    "work/ceres-v3-discussion/kev-local-probe/amax-direct-download/download.log"
+  ]
+}

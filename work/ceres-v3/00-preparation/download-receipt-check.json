@@ -1,0 +1,17 @@
+{
+  "status": "verified",
+  "file_count": 23,
+  "sizes_sum": 9502510659,
+  "all_official_digests_match": true,
+  "unique_repo_revision_names": true,
+  "offline_status": "offline_resolved",
+  "offline_count": 23,
+  "offline_revisions_match": true,
+  "verification_fields": [
+    "status",
+    "repository_revisions",
+    "verified_file_count",
+    "verified_total_bytes",
+    "largest_file_bytes"
+  ]
+}
