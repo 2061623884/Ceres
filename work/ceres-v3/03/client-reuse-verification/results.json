@@ -1,0 +1,266 @@
+{
+  "event": "kev_v31_shared_client_previous_timeout_cases_once",
+  "status": "all_three_attempts_recorded",
+  "criteria_version": "ceres-service-v3.1",
+  "source_hashes": {
+    "backend\\app\\llm\\kev_provider.py": "dc3cfa00e8e161c9d84cade8a14c095e3e5b27ccb440e74cf2443e296ed15345",
+    "backend\\app\\api\\chat.py": "b635f4807ead6e4864b111f4f77e8581177e350d24218d7d21ad0d6cf75b8f86",
+    "backend\\app\\main.py": "4079b47013f643d440657ed990feba7ea31689339aa76495fe66dccca5441cb9"
+  },
+  "provider_source_sha256": "dc3cfa00e8e161c9d84cade8a14c095e3e5b27ccb440e74cf2443e296ed15345",
+  "cases_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3-discussion\\kev-local-probe\\chinese-pilot.json",
+  "cases_sha256": "0a92aa350431b752fd6fb4d37ce5b659ff4e6140a52a3077f1d98bfc28dd83d1",
+  "case_ids": [
+    "momo-new-shopping",
+    "cancel-without-object",
+    "cancel-shopping-list"
+  ],
+  "case_count_expected": 3,
+  "timeout_seconds": 3.0,
+  "endpoint": "http://127.0.0.1:18009/v1/systemone",
+  "runtime": {
+    "python": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+    "python_version": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+    "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend",
+    "environment_override": {
+      "KEV_BASE_URL": "http://127.0.0.1:18009"
+    },
+    "other_environment": "Inherited unchanged; not enumerated to avoid unrelated credentials.",
+    "provider_factory": "app.llm.kev_provider.get_kev_provider",
+    "factory_cache_before": {
+      "hits": 0,
+      "misses": 0,
+      "maxsize": 1,
+      "currsize": 0
+    },
+    "factory_provider_cache_reuse": true,
+    "client_instance_reused": true,
+    "provider_initialization_ms": 841.661,
+    "client_persistent_for_all_three_cases": true
+  },
+  "started_utc": "2026-10-05T18:23:57.555975+00:00",
+  "constants": {
+    "CRITERIA_VERSION": "ceres-service-v3.1",
+    "KEV_TIMEOUT_SECONDS": 3.0,
+    "INSTRUCTIONS": "Classify this turn using current_role, selected_object and recent_dialogue.\nKeke handles shopping, product comparison, purchase lists. Momo handles specific placed orders,\norder eligibility and after-sales actions. BOTH roles answer GENERAL store policies (returns,\nrefunds, delivery) and greetings. A product being considered is NOT a placed order.\nThe latest explicit new request overrides the old topic. Be conservative about switching.\nFor '取消一下': shopping-list context stays with Keke; placed-order context needs Momo;\nwith no resolvable object choose clarify. Questions about a general policy stay even when\nthey mention returns. Only classify; never act, invent an object or automatically switch.",
+    "CRITERIA": {
+      "stay_current": "Current role can handle it: shopping with Keke, specific orders with Momo, or GENERAL policies/greetings with either role.",
+      "suggest_switch": "Clearly requires the OTHER role: specific placed-order work from Keke, or a NEW shopping request from Momo. Not general policy or ambiguous cancellation.",
+      "clarify": "Intent/object is unresolved even with context, especially cancellation with no object. Ask in the current chat before choosing a service."
+    }
+  },
+  "requests": [
+    {
+      "case_id": "momo-new-shopping",
+      "expected_unchanged": "suggest_switch",
+      "payload": {
+        "state": {
+          "current_role": "墨墨售后",
+          "selected_object": "演示订单 DEMO-V3-01",
+          "recent_dialogue": [
+            "刚查询过订单状态"
+          ],
+          "utterance": "现在帮我挑两瓶无糖可乐"
+        },
+        "model": "kev-latest",
+        "questions": {
+          "service": {
+            "type": "choice",
+            "instructions": "Classify this turn using current_role, selected_object and recent_dialogue.\nKeke handles shopping, product comparison, purchase lists. Momo handles specific placed orders,\norder eligibility and after-sales actions. BOTH roles answer GENERAL store policies (returns,\nrefunds, delivery) and greetings. A product being considered is NOT a placed order.\nThe latest explicit new request overrides the old topic. Be conservative about switching.\nFor '取消一下': shopping-list context stays with Keke; placed-order context needs Momo;\nwith no resolvable object choose clarify. Questions about a general policy stay even when\nthey mention returns. Only classify; never act, invent an object or automatically switch.",
+            "criteria": {
+              "stay_current": "Current role can handle it: shopping with Keke, specific orders with Momo, or GENERAL policies/greetings with either role.",
+              "suggest_switch": "Clearly requires the OTHER role: specific placed-order work from Keke, or a NEW shopping request from Momo. Not general policy or ambiguous cancellation.",
+              "clarify": "Intent/object is unresolved even with context, especially cancellation with no object. Ask in the current chat before choosing a service."
+            }
+          }
+        }
+      },
+      "payload_sha256_compact_utf8": "7becaa8b967c03a18d4adf8dc678401239447ede8c9facef13d5df014887feaa"
+    },
+    {
+      "case_id": "cancel-without-object",
+      "expected_unchanged": "clarify",
+      "payload": {
+        "state": {
+          "current_role": "可可导购",
+          "selected_object": null,
+          "recent_dialogue": [],
+          "utterance": "取消一下"
+        },
+        "model": "kev-latest",
+        "questions": {
+          "service": {
+            "type": "choice",
+            "instructions": "Classify this turn using current_role, selected_object and recent_dialogue.\nKeke handles shopping, product comparison, purchase lists. Momo handles specific placed orders,\norder eligibility and after-sales actions. BOTH roles answer GENERAL store policies (returns,\nrefunds, delivery) and greetings. A product being considered is NOT a placed order.\nThe latest explicit new request overrides the old topic. Be conservative about switching.\nFor '取消一下': shopping-list context stays with Keke; placed-order context needs Momo;\nwith no resolvable object choose clarify. Questions about a general policy stay even when\nthey mention returns. Only classify; never act, invent an object or automatically switch.",
+            "criteria": {
+              "stay_current": "Current role can handle it: shopping with Keke, specific orders with Momo, or GENERAL policies/greetings with either role.",
+              "suggest_switch": "Clearly requires the OTHER role: specific placed-order work from Keke, or a NEW shopping request from Momo. Not general policy or ambiguous cancellation.",
+              "clarify": "Intent/object is unresolved even with context, especially cancellation with no object. Ask in the current chat before choosing a service."
+            }
+          }
+        }
+      },
+      "payload_sha256_compact_utf8": "ab8657a33c8e05be3929df9b462edc1c396c397901c4ac497c29b59a50af37f0"
+    },
+    {
+      "case_id": "cancel-shopping-list",
+      "expected_unchanged": "stay_current",
+      "payload": {
+        "state": {
+          "current_role": "可可导购",
+          "selected_object": "采购清单中的可乐项，尚未加购",
+          "recent_dialogue": [
+            "用户：清单里的可乐不要了",
+            "可可：你要把这项从采购清单移除吗？"
+          ],
+          "utterance": "取消一下"
+        },
+        "model": "kev-latest",
+        "questions": {
+          "service": {
+            "type": "choice",
+            "instructions": "Classify this turn using current_role, selected_object and recent_dialogue.\nKeke handles shopping, product comparison, purchase lists. Momo handles specific placed orders,\norder eligibility and after-sales actions. BOTH roles answer GENERAL store policies (returns,\nrefunds, delivery) and greetings. A product being considered is NOT a placed order.\nThe latest explicit new request overrides the old topic. Be conservative about switching.\nFor '取消一下': shopping-list context stays with Keke; placed-order context needs Momo;\nwith no resolvable object choose clarify. Questions about a general policy stay even when\nthey mention returns. Only classify; never act, invent an object or automatically switch.",
+            "criteria": {
+              "stay_current": "Current role can handle it: shopping with Keke, specific orders with Momo, or GENERAL policies/greetings with either role.",
+              "suggest_switch": "Clearly requires the OTHER role: specific placed-order work from Keke, or a NEW shopping request from Momo. Not general policy or ambiguous cancellation.",
+              "clarify": "Intent/object is unresolved even with context, especially cancellation with no object. Ask in the current chat before choosing a service."
+            }
+          }
+        }
+      },
+      "payload_sha256_compact_utf8": "a8aa3c3ecbf3f87871f9c202583a99a127c3c5e007f280578284cb617299d49d"
+    }
+  ],
+  "results": [
+    {
+      "case_id": "momo-new-shopping",
+      "expected_unchanged": "suggest_switch",
+      "status": "success",
+      "actual_choice": "suggest_switch",
+      "matches_original_expected": true,
+      "probabilities": {
+        "stay_current": 0.259,
+        "suggest_switch": 0.4556,
+        "clarify": 0.2854
+      },
+      "service_latency_ms": 321.0,
+      "usage": {
+        "input_tokens": 288,
+        "output_tokens": 66
+      },
+      "elapsed_ms": 755.898,
+      "started_utc": "2026-10-05T18:23:57.556978+00:00",
+      "raw_response": {
+        "model": "kev-latest",
+        "answers": {
+          "service": {
+            "type": "choice",
+            "choice": "suggest_switch",
+            "confidence": 0.1835,
+            "probabilities": {
+              "stay_current": 0.259,
+              "suggest_switch": 0.4556,
+              "clarify": 0.2854
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 288,
+          "output_tokens": 66
+        },
+        "latency_ms": 321.0
+      }
+    },
+    {
+      "case_id": "cancel-without-object",
+      "expected_unchanged": "clarify",
+      "status": "success",
+      "actual_choice": "clarify",
+      "matches_original_expected": true,
+      "probabilities": {
+        "stay_current": 0.1759,
+        "suggest_switch": 0.0783,
+        "clarify": 0.7459
+      },
+      "service_latency_ms": 263.4,
+      "usage": {
+        "input_tokens": 262,
+        "output_tokens": 67
+      },
+      "elapsed_ms": 415.961,
+      "started_utc": "2026-10-05T18:23:58.313489+00:00",
+      "raw_response": {
+        "model": "kev-latest",
+        "answers": {
+          "service": {
+            "type": "choice",
+            "choice": "clarify",
+            "confidence": 0.6188,
+            "probabilities": {
+              "stay_current": 0.1759,
+              "suggest_switch": 0.0783,
+              "clarify": 0.7459
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 262,
+          "output_tokens": 67
+        },
+        "latency_ms": 263.4
+      }
+    },
+    {
+      "case_id": "cancel-shopping-list",
+      "expected_unchanged": "stay_current",
+      "status": "success",
+      "actual_choice": "stay_current",
+      "matches_original_expected": true,
+      "probabilities": {
+        "stay_current": 0.6419,
+        "suggest_switch": 0.1798,
+        "clarify": 0.1782
+      },
+      "service_latency_ms": 279.6,
+      "usage": {
+        "input_tokens": 298,
+        "output_tokens": 67
+      },
+      "elapsed_ms": 424.135,
+      "started_utc": "2026-10-05T18:23:58.730084+00:00",
+      "raw_response": {
+        "model": "kev-latest",
+        "answers": {
+          "service": {
+            "type": "choice",
+            "choice": "stay_current",
+            "confidence": 0.4629,
+            "probabilities": {
+              "stay_current": 0.6419,
+              "suggest_switch": 0.1798,
+              "clarify": 0.1782
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 298,
+          "output_tokens": 67
+        },
+        "latency_ms": 279.6
+      }
+    }
+  ],
+  "client_close_ms": 0.085,
+  "factory_cache_cleared_after_close": true,
+  "finished_utc": "2026-10-05T18:23:59.155620+00:00",
+  "source_hashes_after": {
+    "backend\\app\\llm\\kev_provider.py": "dc3cfa00e8e161c9d84cade8a14c095e3e5b27ccb440e74cf2443e296ed15345",
+    "backend\\app\\api\\chat.py": "b635f4807ead6e4864b111f4f77e8581177e350d24218d7d21ad0d6cf75b8f86",
+    "backend\\app\\main.py": "4079b47013f643d440657ed990feba7ea31689339aa76495fe66dccca5441cb9"
+  },
+  "sources_unchanged_during_run": true,
+  "case_count_completed": 3,
+  "successful_count": 3,
+  "failed_count": 0,
+  "matches_original_expected_count": 3
+}

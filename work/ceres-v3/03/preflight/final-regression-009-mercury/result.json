@@ -1,0 +1,12 @@
+{
+  "run_id": "final-regression-009-mercury",
+  "started_at": "2026-10-06T02:40:12.4437404+08:00",
+  "finished_at": "2026-10-06T02:40:14.5165625+08:00",
+  "exit_code": 0,
+  "git_head": "288fb7cf7c8066520133f8dd4638ee5e20f132bd",
+  "source_hashes_unchanged": true,
+  "stdout_sha256": "120b8187d42b4d8b7381c33ec8444469c5ccc84d1d8a05f0b61dbce8111a0b4f",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_bytes": 100,
+  "stderr_bytes": 0
+}

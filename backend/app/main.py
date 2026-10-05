@@ -9,7 +9,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 
-from app.api import bootstrap, cart, catalog, events, guide, internal, mercury, orders
+from app.api import bootstrap, cart, catalog, chat, events, guide, internal, mercury, orders
 from app.core.database import init_db
 from app.core.errors import AppError
 
@@ -41,6 +41,7 @@ app.include_router(catalog.router)
 app.include_router(cart.router)
 app.include_router(orders.router)
 app.include_router(guide.router)
+app.include_router(chat.router)
 app.include_router(mercury.router)
 app.include_router(events.router)
 app.include_router(internal.router)
@@ -73,6 +74,15 @@ def on_startup():
 
     with database.SessionLocal.begin() as db:
         initialize_policies(db)
+    from app.llm.kev_provider import get_kev_provider
+    get_kev_provider()
+
+
+@app.on_event("shutdown")
+def on_shutdown():
+    from app.llm.kev_provider import get_kev_provider
+    get_kev_provider().client.close()
+    get_kev_provider.cache_clear()
 
 
 def create_app() -> FastAPI:

@@ -1,0 +1,10 @@
+{
+  "corrected_at": "2026-10-06T02:36:16.3185854+08:00",
+  "prior_statement": "Kev state still showed the previously selected object B",
+  "status": "withdrawn",
+  "reason": "The failure happened before the test assertion that examines the router state; that later assertion was not executed. Do not report an unobserved state assertion.",
+  "source_review_correction": "Router receives explicit order A; the business step still uses the old selected order B.",
+  "directly_observed_from_stdout": "The controlled Mercury prompt assertion requiring order A failed, producing an error event instead of turn.completed.",
+  "original_stdout_sha256": "e63f3bbbdf6ecc04fd2bdb86da840adee6ee5ef9beb5fd0fc175f6cd2e2a1afe",
+  "raw_stdout_modified": false
+}

@@ -1,0 +1,18 @@
+{
+  "event": "kev_service_v31_single_pass_calibration_execution",
+  "started_utc": "2026-10-05T18:10:11.7002433Z",
+  "finished_utc": "2026-10-05T18:10:32.7280376Z",
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres",
+  "command": "\"C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe\" \"C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\03\\calibration-v31\\run-calibration.py\"",
+  "argv": [
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\03\\calibration-v31\\run-calibration.py"
+  ],
+  "executable": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+  "environment_overrides": {
+    "KEV_BASE_URL": "http://127.0.0.1:18009"
+  },
+  "exit_code": 0,
+  "stdout_log": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\03\\calibration-v31\\stdout.log",
+  "stderr_log": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\03\\calibration-v31\\stderr.log"
+}

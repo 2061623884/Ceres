@@ -1,0 +1,10 @@
+{
+  "run_id": "03-red-001",
+  "exit_code": 1,
+  "process_id": 14772,
+  "started_utc": "2026-10-05T18:00:31.7917765Z",
+  "completed_utc": "2026-10-05T18:00:36.0864430Z",
+  "stdout": "stdout.txt",
+  "stderr": "stderr.txt",
+  "status": "failed"
+}

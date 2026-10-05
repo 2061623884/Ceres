@@ -1,0 +1,12 @@
+{
+  "run_id": "03-boundary-001",
+  "started_at": "2026-10-06T02:13:46.2764450+08:00",
+  "finished_at": "2026-10-06T02:13:57.4914440+08:00",
+  "exit_code": 0,
+  "git_head": "288fb7cf7c8066520133f8dd4638ee5e20f132bd",
+  "source_hashes_unchanged": true,
+  "stdout_sha256": "3a5ac9db2eba380d68ba601e080c81a2ca43d7d6c2974d7d44ffbfd7bbc45ccb",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_bytes": 100,
+  "stderr_bytes": 0
+}

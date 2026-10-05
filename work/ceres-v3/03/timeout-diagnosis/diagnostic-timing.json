@@ -1,0 +1,74 @@
+{
+  "event": "single_diagnostic_httpx_stage_timing_not_quality_case",
+  "criteria_version": "ceres-service-v3.1",
+  "source_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\app\\llm\\kev_provider.py",
+  "source_sha256": "dd1e58bd681668b8c007d2d10161f9b5eed3bdd81c7fe1179c96dd031b285259",
+  "request_sha256_compact_utf8": "0d62c650a15e3f8ec08db82f5e2b64f9b221907477209c3600f7ec99c46a6eef",
+  "state": {
+    "current_role": "可可导购",
+    "selected_object": null,
+    "recent_dialogue": [],
+    "utterance": "你好"
+  },
+  "endpoint": "http://127.0.0.1:18009/v1/systemone",
+  "timeout_seconds": 3.0,
+  "runtime": {
+    "python": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+    "python_version": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+    "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend",
+    "httpx_version": "0.28.1",
+    "client_trust_env": true,
+    "KEV_BASE_URL": "http://127.0.0.1:18009",
+    "proxy_values_not_recorded": true
+  },
+  "started_utc": "2026-10-05T18:19:06.059739+00:00",
+  "client_construct_ms": 798.876,
+  "http_post_roundtrip_ms": 984.975,
+  "http_status": 200,
+  "response_elapsed_seconds": 0.984733,
+  "safe_response_headers": {
+    "date": "Mon, 05 Oct 2026 18:19:07 GMT",
+    "server": "uvicorn",
+    "content-length": "254",
+    "content-type": "application/json",
+    "x-typesafe-request-id": "74e6e5fc1a674840a43a5629f349e247",
+    "server-timing": "app;dur=324.8"
+  },
+  "json_parse_ms": 0.035,
+  "pydantic_validation_ms": 0.064,
+  "raw_response": {
+    "model": "kev-latest",
+    "answers": {
+      "service": {
+        "type": "choice",
+        "choice": "stay_current",
+        "confidence": 0.9387,
+        "probabilities": {
+          "stay_current": 0.9592,
+          "suggest_switch": 0.0144,
+          "clarify": 0.0264
+        }
+      }
+    },
+    "usage": {
+      "input_tokens": 261,
+      "output_tokens": 67
+    },
+    "latency_ms": 317.2
+  },
+  "validated_choice": {
+    "type": "choice",
+    "choice": "stay_current",
+    "probabilities": {
+      "stay_current": 0.9592,
+      "suggest_switch": 0.0144,
+      "clarify": 0.0264
+    }
+  },
+  "service_latency_ms": 317.2,
+  "status": "response_received_and_parsed",
+  "client_close_ms": 0.078,
+  "finished_utc": "2026-10-05T18:19:07.844052+00:00",
+  "source_sha256_after": "dd1e58bd681668b8c007d2d10161f9b5eed3bdd81c7fe1179c96dd031b285259",
+  "source_unchanged_during_run": true
+}

@@ -1,0 +1,43 @@
+{
+  "event": "local_ssh_port_forward_start",
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres",
+  "started_utc": "2026-10-06T02:05:08.4762179+08:00",
+  "command": "ssh.exe -N -L 127.0.0.1:18009:127.0.0.1:8009 -o BatchMode=yes -o ExitOnForwardFailure=yes -o ConnectTimeout=12 amax",
+  "argv": [
+    "-N",
+    "-L",
+    "127.0.0.1:18009:127.0.0.1:8009",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ExitOnForwardFailure=yes",
+    "-o",
+    "ConnectTimeout=12",
+    "amax"
+  ],
+  "ssh_executable": "C:\\WINDOWS\\System32\\OpenSSH\\ssh.exe",
+  "target_alias": "amax",
+  "process_id": 25040,
+  "process_alive": true,
+  "local_listener": [
+    {
+      "local_address": "127.0.0.1",
+      "local_port": 18009,
+      "owning_process": 25040
+    }
+  ],
+  "port_before_check": {
+    "command": "Get-NetTCPConnection -State Listen -LocalPort 18009",
+    "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres",
+    "listener_count": 0,
+    "listeners": [],
+    "stdout": "",
+    "stderr": "",
+    "exit_code": 0
+  },
+  "stdout_log": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\03\\network\\tunnel.stdout.log",
+  "stderr_log": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\03\\network\\tunnel.stderr.log",
+  "stdout": "",
+  "stderr": "",
+  "sensitive_environment_read": false
+}

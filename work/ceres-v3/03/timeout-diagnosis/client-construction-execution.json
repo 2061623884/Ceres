@@ -1,0 +1,15 @@
+{
+  "event": "httpx_client_construction_only_execution",
+  "started_utc": "2026-10-05T18:20:35.8402044Z",
+  "finished_utc": "2026-10-05T18:20:38.4905067Z",
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend",
+  "command": "\"C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe\" \"C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\03\\timeout-diagnosis\\measure_client_construction.py\"",
+  "argv": [
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\03\\timeout-diagnosis\\measure_client_construction.py"
+  ],
+  "network_calls": 0,
+  "exit_code": 0,
+  "stdout_log": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\03\\timeout-diagnosis\\client-construction.stdout.log",
+  "stderr_log": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\03\\timeout-diagnosis\\client-construction.stderr.log"
+}

@@ -1,0 +1,17 @@
+{
+  "backend/tests/test_semantic_transport.py": "04b11123a70c017762fbed62ce8fe8434777a4ed5a14a02d86e23c49e01319f1",
+  "backend/tests/conftest.py": "1a9a33ceb5e3a49845d1b66dacef7cd3e9429f9f09764776421fee2ae973f250",
+  "backend/tests/support/v2_fixture.py": "87c284a1ff83063ec0a9b4761c1ec13fb283763d277b53653d7545e9b67b681d",
+  "backend/app/agent/protocol.py": "4c60472cedf2274b3d5c3e9cb44566e0c9308e52ae65f70610351b51f2c61957",
+  "backend/app/agent/tools/read.py": "c2c56bd96824b1ea1f2f9eb0aa2d46c7b153b4dbf543f9052299de935ea826c9",
+  "backend/app/agent/tools/schemas.py": "ddb566814c411297f37793b19c2ad7407cf4379e0da07f5c437cffd1a0ffc496",
+  "backend/app/llm/live_semantic_provider.py": "9f6a3a7a6349bf9aee41f2488b96d45fa190936271b396d556321ca2e9eb6dc6",
+  "backend/app/llm/openai_transport.py": "24d58ae2cfa7ba50781420125fc970a2c4686d2bbcef5d886a170649d9a88b8f",
+  "backend/app/llm/provider.py": "09ffa5db4df184e81952685e0993c224cc7fad4e9a94caebe64b4260d52a2b22",
+  "backend/app/core/config.py": "dfa3c3cd7b8864b6ed1a3f833c65db732358eecba59bfeec4627c07ef3013a60",
+  "backend/app/services/policy_service.py": "d480ddc8d49a54a73c04597643ecaa74a7536f78ee84cf664dcbdeb4a0f77b20",
+  "backend/app/services/automatic_memory_service.py": "4e19c49f2787015dcad9bf6f8e45392ae7adb38ad28db55e32ecb4ae175ffc6b",
+  "backend/app/services/trace_service.py": "e15064373af9663bbdcf381ff264e4576d58dbc481c855d1fb4cff2f535df405",
+  "backend/app/services/turn_stream_service.py": "478beb5320f94a13def0444a6007860226e76d24a1525da52dacfb9095ea4a81",
+  "backend/app/prompts/semantic.py": "55c3c6e158cf41e1ee7034e75e7f15dad5e704cc5f495e571e6ef5bb67b65d68"
+}

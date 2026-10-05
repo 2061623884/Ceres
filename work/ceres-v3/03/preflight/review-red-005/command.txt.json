@@ -1,0 +1,5 @@
+{
+  "original_path": "work/ceres-v3/03/preflight/review-red-005/command.txt",
+  "sha256": "3923f635e26b7f216d134e07dd8f2767dbaa1ef885410de755a7ac15a9399974",
+  "utf8_text": "Working directory: C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\r\nCommand: C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe -X utf8 -m pytest -q -p no:cacheprovider -W error::pytest.PytestUnhandledThreadExceptionWarning --basetemp=C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\03\\preflight\\review-red-005\\pytest-tmp tests/test_v3_routing_handoff.py::test_failed_handoff_replays_failure_without_reexecuting\r\n"
+}

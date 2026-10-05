@@ -1,0 +1,16 @@
+{
+  "command": "Get-Process -Id 25040; Get-NetTCPConnection -State Listen -LocalAddress 127.0.0.1 -LocalPort 18009",
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres",
+  "captured_utc": "2026-10-05T18:06:56.1668648+00:00",
+  "exit_code": 0,
+  "stdout": "process_id=25040 alive=True\nlistener=127.0.0.1:18009 pid=25040",
+  "stderr": "",
+  "process_alive": true,
+  "local_listener": [
+    {
+      "local_address": "127.0.0.1",
+      "local_port": 18009,
+      "owning_process": 25040
+    }
+  ]
+}

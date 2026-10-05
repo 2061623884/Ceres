@@ -1,0 +1,12 @@
+{
+  "run_id": "03-client-reuse-green-004",
+  "started_at": "2026-10-06T02:22:37.3229159+08:00",
+  "finished_at": "2026-10-06T02:22:55.4377630+08:00",
+  "exit_code": 0,
+  "git_head": "288fb7cf7c8066520133f8dd4638ee5e20f132bd",
+  "source_hashes_unchanged": true,
+  "stdout_sha256": "5e17d50a8d62dfc8608e610d290bcba17f0b10a9b33f8dd5d93d0d28bc48347c",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_bytes": 101,
+  "stderr_bytes": 0
+}

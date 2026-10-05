@@ -1,0 +1,28 @@
+{
+  "baseline_head": "d0588da40103ef8e27f69d226d9f7ba172342a54",
+  "paths": [
+    "backend/app/llm/kev_provider.py",
+    "backend/app/services/chat_opening_service.py",
+    "backend/app/api/chat.py",
+    "backend/app/api/mercury.py",
+    "backend/app/main.py",
+    "backend/app/core/config.py",
+    "Mercury/mercury/agent.py",
+    "backend/tests/test_v3_routing_handoff.py",
+    "backend/tests/test_v3_routing_context.py",
+    "work/ceres-v3/03/demo.html"
+  ],
+  "excludes": "02 changes and inherited V2 frozen in this working source ZIP; do not diff dirty HEAD",
+  "sha256": {
+    "backend/app/llm/kev_provider.py": "dc3cfa00e8e161c9d84cade8a14c095e3e5b27ccb440e74cf2443e296ed15345",
+    "backend/app/services/chat_opening_service.py": "49976cfe3d40b4e713f44f789e7c95dd384f7000f3fca79bafd5866b5c684ce4",
+    "backend/app/api/chat.py": "6f4b4ec58de49c1091948648cc5a493b4f5a3b75c398f38593129d36b625a05f",
+    "backend/app/api/mercury.py": "ddc3e575bbbfebc6cf990be1de3eed60b200d454b76d70001fb5d1f5cae7ab67",
+    "backend/app/main.py": "4079b47013f643d440657ed990feba7ea31689339aa76495fe66dccca5441cb9",
+    "backend/app/core/config.py": "dfa3c3cd7b8864b6ed1a3f833c65db732358eecba59bfeec4627c07ef3013a60",
+    "Mercury/mercury/agent.py": "c14a2ce94825009c86fc405f56881e8d6bf5c644d6205b0d5ce4bf80227a6e51",
+    "backend/tests/test_v3_routing_handoff.py": "c2ec7008e7abdf98f5b15511b2aeada21565934f182f6e72b14afb95358a00c4",
+    "backend/tests/test_v3_routing_context.py": "5f7bb6ee9bc05b75c993462f6510760dacbc30314500a8b17336aaf4fac6a810",
+    "work/ceres-v3/03/demo.html": "a89d73a74c324902d62e50bd4a917404b0c30891518319171fc34d182ea5f61d"
+  }
+}

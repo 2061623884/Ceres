@@ -1,0 +1,12 @@
+{
+  "run_id": "03-review-red-008",
+  "started_at": "2026-10-06T02:33:32.6129270+08:00",
+  "finished_at": "2026-10-06T02:33:38.2911943+08:00",
+  "exit_code": 1,
+  "git_head": "288fb7cf7c8066520133f8dd4638ee5e20f132bd",
+  "source_hashes_unchanged": true,
+  "stdout_sha256": "e63f3bbbdf6ecc04fd2bdb86da840adee6ee5ef9beb5fd0fc175f6cd2e2a1afe",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_bytes": 2351,
+  "stderr_bytes": 0
+}

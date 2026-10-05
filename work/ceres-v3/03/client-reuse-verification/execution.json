@@ -1,0 +1,18 @@
+{
+  "event": "kev_v31_shared_client_retry_cases_once_execution",
+  "started_utc": "2026-10-05T18:23:56.2419992Z",
+  "finished_utc": "2026-10-05T18:23:59.1971340Z",
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend",
+  "command": "\"C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe\" \"C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\03\\client-reuse-verification\\run-three-shared-provider.py\"",
+  "argv": [
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\03\\client-reuse-verification\\run-three-shared-provider.py"
+  ],
+  "executable": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+  "environment_override": {
+    "KEV_BASE_URL": "http://127.0.0.1:18009"
+  },
+  "exit_code": 0,
+  "stdout_log": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\03\\client-reuse-verification\\stdout.log",
+  "stderr_log": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\03\\client-reuse-verification\\stderr.log"
+}

@@ -1,0 +1,20 @@
+{
+  "event": "tunneled_readonly_models_get",
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres",
+  "started_utc": "2026-10-05T18:05:47.5308605+00:00",
+  "duration_ms": 399.1,
+  "command": "curl.exe --silent --show-error --include --max-time 30 http://127.0.0.1:18009/v1/models",
+  "argv": [
+    "--silent",
+    "--show-error",
+    "--include",
+    "--max-time",
+    "30",
+    "http://127.0.0.1:18009/v1/models"
+  ],
+  "curl_executable": "C:\\WINDOWS\\system32\\curl.exe",
+  "exit_code": 0,
+  "stdout": "HTTP/1.1 200 OK\ndate: Mon, 05 Oct 2026 18:05:47 GMT\nserver: uvicorn\ncontent-length: 1256\ncontent-type: application/json\nx-typesafe-request-id: 1c5cbaa5456247418cabe9c7649f1241\nserver-timing: app;dur=7.1\n\n{\"models\":[{\"name\":\"kev-latest\",\"description\":\"Kev pointer head on Qwen/Qwen3.5-4B-Base, serving jaredpalmer/kev-4b@139fdd94f1b6a6ad80cc15e08fcb99cac885a101 at temperature 2.41\",\"release_date\":\"2026-10-05\",\"run\":\"jaredpalmer/kev-4b@139fdd94f1b6a6ad80cc15e08fcb99cac885a101\",\"base\":\"Qwen/Qwen3.5-4B-Base\",\"lora\":16,\"device\":\"cuda\",\"backend\":\"torch\",\"dtype\":\"float32\",\"temperature\":2.406050072164233,\"max_state_tokens\":65536,\"truncate_states\":false,\"cuda_graphs\":null,\"prefix_cache\":{\"size\":0,\"min_state_tokens\":0,\"max_tokens\":65536,\"hits\":0,\"misses\":0,\"cached_states\":0,\"oom_retries\":0},\"batches\":{\"count\":8,\"requests\":8,\"queued\":0}},{\"name\":\"jev-latest\",\"description\":\"Kev pointer head on Qwen/Qwen3.5-4B-Base, serving jaredpalmer/kev-4b@139fdd94f1b6a6ad80cc15e08fcb99cac885a101 at temperature 2.41\",\"release_date\":\"2026-10-05\",\"run\":\"jaredpalmer/kev-4b@139fdd94f1b6a6ad80cc15e08fcb99cac885a101\",\"base\":\"Qwen/Qwen3.5-4B-Base\",\"lora\":16,\"device\":\"cuda\",\"backend\":\"torch\",\"dtype\":\"float32\",\"temperature\":2.406050072164233,\"max_state_tokens\":65536,\"truncate_states\":false,\"cuda_graphs\":null,\"prefix_cache\":{\"size\":0,\"min_state_tokens\":0,\"max_tokens\":65536,\"hits\":0,\"misses\":0,\"cached_states\":0,\"oom_retries\":0},\"batches\":{\"count\":8,\"requests\":8,\"queued\":0}}]}",
+  "stderr": "",
+  "stderr_log": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\03\\network\\models-get.stderr.log"
+}

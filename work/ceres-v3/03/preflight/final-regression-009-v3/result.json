@@ -1,0 +1,12 @@
+{
+  "run_id": "final-regression-009-v3",
+  "started_at": "2026-10-06T02:37:01.7388049+08:00",
+  "finished_at": "2026-10-06T02:37:25.8191371+08:00",
+  "exit_code": 0,
+  "git_head": "288fb7cf7c8066520133f8dd4638ee5e20f132bd",
+  "source_hashes_unchanged": true,
+  "stdout_sha256": "dca58af3c0d2a64794f8b27464e20135c41fab8e860bb575ac5ed9d916812cd4",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_bytes": 102,
+  "stderr_bytes": 0
+}

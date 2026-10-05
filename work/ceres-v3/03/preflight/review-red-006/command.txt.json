@@ -1,0 +1,5 @@
+{
+  "original_path": "work/ceres-v3/03/preflight/review-red-006/command.txt",
+  "sha256": "78c7ee4183b7023182d91406f2daf901e80df4ad149ff89e25163b8b5bfb479c",
+  "utf8_text": "Working directory: C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\r\nCommand: C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe -X utf8 -m pytest -q -p no:cacheprovider -W error::pytest.PytestUnhandledThreadExceptionWarning --basetemp=C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\03\\preflight\\review-red-006\\pytest-tmp tests/test_v3_routing_handoff.py::test_after_manual_switch_router_receives_actual_momo_role_and_order\r\n"
+}

@@ -1,0 +1,12 @@
+{
+  "run_id": "03-safety-green-003",
+  "started_at": "2026-10-06T02:17:46.8651656+08:00",
+  "finished_at": "2026-10-06T02:18:04.8997177+08:00",
+  "exit_code": 0,
+  "git_head": "288fb7cf7c8066520133f8dd4638ee5e20f132bd",
+  "source_hashes_unchanged": true,
+  "stdout_sha256": "3163545639e531e931221cf3d2db16fa836c4850a1a56104cc45ea1c691019d2",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_bytes": 101,
+  "stderr_bytes": 0
+}

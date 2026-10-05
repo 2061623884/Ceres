@@ -1,0 +1,51 @@
+{
+  "event": "proxy_environment_redacted_inspection",
+  "proxy_variables": {
+    "HTTP_PROXY": {
+      "set": true,
+      "scheme": "http",
+      "host": "127.0.0.1",
+      "port": 7897,
+      "credentials_present": false
+    },
+    "http_proxy": {
+      "set": true,
+      "scheme": "http",
+      "host": "127.0.0.1",
+      "port": 7897,
+      "credentials_present": false
+    },
+    "HTTPS_PROXY": {
+      "set": true,
+      "scheme": "http",
+      "host": "127.0.0.1",
+      "port": 7897,
+      "credentials_present": false
+    },
+    "https_proxy": {
+      "set": true,
+      "scheme": "http",
+      "host": "127.0.0.1",
+      "port": 7897,
+      "credentials_present": false
+    },
+    "ALL_PROXY": {
+      "set": true,
+      "scheme": "http",
+      "host": "127.0.0.1",
+      "port": 7897,
+      "credentials_present": false
+    },
+    "all_proxy": {
+      "set": true,
+      "scheme": "http",
+      "host": "127.0.0.1",
+      "port": 7897,
+      "credentials_present": false
+    }
+  },
+  "no_proxy_set": true,
+  "no_proxy_entry_count": 6,
+  "bypasses_127_0_0_1": true,
+  "raw_proxy_values_recorded": false
+}

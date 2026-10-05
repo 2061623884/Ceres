@@ -24,7 +24,7 @@ mercury_path = Path(__file__).resolve().parents[3] / "Mercury"
 if str(mercury_path) not in sys.path:
     sys.path.insert(0, str(mercury_path))
 
-from mercury.agent import run_mercury
+from mercury.agent import MercuryModelError, run_mercury
 from mercury.llm import OpenAIChatClient
 
 router = APIRouter(prefix="/api/v1/mercury", tags=["mercury"])
@@ -78,6 +78,11 @@ def select_order(session_id: str, body: SelectOrderRequest, owner_id: str = Depe
 @router.post("/sessions/{session_id}/turns/stream")
 def mercury_turn_stream(session_id: str, request: TurnRequest, owner_id: str = Depends(_owner),
                         db: Session = Depends(get_db)):
+    return mercury_response(session_id, request, owner_id, db)
+
+
+def mercury_response(session_id: str, request: TurnRequest, owner_id: str, db: Session,
+                     handoff_context: dict | None = None):
     session = _session(db, owner_id, session_id)
     selected_order_id = session.selected_order_id
     orders = OrderService(db, owner_id).list_orders() if selected_order_id is None else None
@@ -91,9 +96,15 @@ def mercury_turn_stream(session_id: str, request: TurnRequest, owner_id: str = D
         llm = OpenAIChatClient({"base_url": settings.openai_base_url, "api_key": settings.openai_api_key,
                                 "model": settings.llm_model, "timeout": settings.llm_timeout,
                                 "max_output_tokens": settings.llm_max_output_tokens})
-        response_text = await asyncio.to_thread(run_mercury, owner_id, request.message, llm,
-                                               database_path=database_path, session_id=session_id,
-                                               selected_order_id=selected_order_id)
+        try:
+            response_text = await asyncio.to_thread(run_mercury, owner_id, request.message, llm,
+                                                   database_path=database_path, session_id=session_id,
+                                                   selected_order_id=selected_order_id,
+                                                   handoff_context=handoff_context)
+        except MercuryModelError as exc:
+            yield {"event": "error", "data": json.dumps({"code": "MERCURY_MODEL_FAILED",
+                "message": "服务暂时不可用，本轮未完成。", "cause": str(exc)}, ensure_ascii=False)}
+            return
         yield {"event": "answer.delta", "data": json.dumps({"text": response_text}, ensure_ascii=False)}
         yield {"event": "turn.completed", "data": json.dumps({"session_id": session_id,
                                                                 "final_text": response_text}, ensure_ascii=False)}

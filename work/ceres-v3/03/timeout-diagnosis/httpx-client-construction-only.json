@@ -1,0 +1,28 @@
+{
+  "event": "httpx_client_local_construction_only_no_network",
+  "started_utc": "2026-10-05T18:20:38.461702+00:00",
+  "python": "C:\\Users\\20616\\Desktop\\Agent\\Agent\u4ea7\u54c1\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent\u4ea7\u54c1\\Ceres\\backend",
+  "httpx_version": "0.28.1",
+  "timeout_seconds": 3.0,
+  "trust_env": true,
+  "network_calls": 0,
+  "samples": [
+    {
+      "index": 1,
+      "construct_ms": 806.87,
+      "close_ms": 0.019
+    },
+    {
+      "index": 2,
+      "construct_ms": 797.881,
+      "close_ms": 0.019
+    },
+    {
+      "index": 3,
+      "construct_ms": 762.585,
+      "close_ms": 0.013
+    }
+  ],
+  "construct_median_ms": 797.881
+}

@@ -1,0 +1,5 @@
+{
+  "original_path": "work/ceres-v3/03/preflight/client-reuse-green-004/command.txt",
+  "sha256": "e905549b70f5e5429cd86c1fec34ed904df754d21c4a415cd5169dbb3949310b",
+  "utf8_text": "Working directory: C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\r\nCommand: C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe -X utf8 -m pytest -q -p no:cacheprovider -W error::pytest.PytestUnhandledThreadExceptionWarning --basetemp=C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\03\\preflight\\client-reuse-green-004\\pytest-tmp tests/test_v3_routing_handoff.py tests/test_v3_routing_context.py\r\n"
+}

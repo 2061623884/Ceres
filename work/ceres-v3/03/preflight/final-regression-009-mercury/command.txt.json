@@ -1,0 +1,5 @@
+{
+  "original_path": "work/ceres-v3/03/preflight/final-regression-009-mercury/command.txt",
+  "sha256": "7b1f4f5be651726ac9160ac0618e325152bd90f4edf6492dc4a7764fbb5cfb8b",
+  "utf8_text": "Working directory: C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\Mercury\r\nCommand: C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe -X utf8 -m pytest -q -p no:cacheprovider -W error::pytest.PytestUnhandledThreadExceptionWarning --basetemp=C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\03\\preflight\\final-regression-009-mercury\\pytest-tmp tests/test_policy.py tests/test_agent_flows.py::test_policy_flow\r\n"
+}

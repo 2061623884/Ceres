@@ -1,0 +1,152 @@
+{
+  "run_id": "03-red-001",
+  "checked_utc": "2026-10-05T18:00:36.1038591Z",
+  "all_unchanged": true,
+  "files": {
+    "backend/tests/test_v3_routing_handoff.py": {
+      "sha256_before": "f5538cf95906655a533e8bcfb8ecdb4613403d69977c3600d02181aabb6b68c0",
+      "sha256_after": "f5538cf95906655a533e8bcfb8ecdb4613403d69977c3600d02181aabb6b68c0",
+      "unchanged": true
+    },
+    "backend/tests/test_v3_policy_consultation.py": {
+      "sha256_before": "ba207cb516c616af9b359bcd1624244bc1453b5a16858cd6ca32e269c5487817",
+      "sha256_after": "ba207cb516c616af9b359bcd1624244bc1453b5a16858cd6ca32e269c5487817",
+      "unchanged": true
+    },
+    "backend/tests/conftest.py": {
+      "sha256_before": "1a9a33ceb5e3a49845d1b66dacef7cd3e9429f9f09764776421fee2ae973f250",
+      "sha256_after": "1a9a33ceb5e3a49845d1b66dacef7cd3e9429f9f09764776421fee2ae973f250",
+      "unchanged": true
+    },
+    "backend/tests/support/v2_fixture.py": {
+      "sha256_before": "87c284a1ff83063ec0a9b4761c1ec13fb283763d277b53653d7545e9b67b681d",
+      "sha256_after": "87c284a1ff83063ec0a9b4761c1ec13fb283763d277b53653d7545e9b67b681d",
+      "unchanged": true
+    },
+    "backend/tests/support/__init__.py": {
+      "sha256_before": "987517f9a0e59a90ebd4c657787e3d33bb0eefa54c4fda785a5ef2689e644966",
+      "sha256_after": "987517f9a0e59a90ebd4c657787e3d33bb0eefa54c4fda785a5ef2689e644966",
+      "unchanged": true
+    },
+    "backend/app/core/config.py": {
+      "sha256_before": "af10731e8ffb32ab0b1b43f3c96b7f86824148e89d627bb1cc9492ebc441e22b",
+      "sha256_after": "af10731e8ffb32ab0b1b43f3c96b7f86824148e89d627bb1cc9492ebc441e22b",
+      "unchanged": true
+    },
+    "backend/app/main.py": {
+      "sha256_before": "b73cccc5cff0101aecbe4cb8ab5e65bafc8f65cc0118624ffc94ccba90b65ff5",
+      "sha256_after": "b73cccc5cff0101aecbe4cb8ab5e65bafc8f65cc0118624ffc94ccba90b65ff5",
+      "unchanged": true
+    },
+    "backend/app/api/guide.py": {
+      "sha256_before": "9688d8c46da160eaf2cc4b72219c1edb8e0dd5950619142815b34a2c450aaaae",
+      "sha256_after": "9688d8c46da160eaf2cc4b72219c1edb8e0dd5950619142815b34a2c450aaaae",
+      "unchanged": true
+    },
+    "backend/app/api/mercury.py": {
+      "sha256_before": "c466ad07958c9c49d4a1a8ca094f4151dcc8b8d0e36fd8df6edb9635714b16f3",
+      "sha256_after": "c466ad07958c9c49d4a1a8ca094f4151dcc8b8d0e36fd8df6edb9635714b16f3",
+      "unchanged": true
+    },
+    "backend/app/agent/protocol.py": {
+      "sha256_before": "4c60472cedf2274b3d5c3e9cb44566e0c9308e52ae65f70610351b51f2c61957",
+      "sha256_after": "4c60472cedf2274b3d5c3e9cb44566e0c9308e52ae65f70610351b51f2c61957",
+      "unchanged": true
+    },
+    "backend/app/agent/tools/read.py": {
+      "sha256_before": "c2c56bd96824b1ea1f2f9eb0aa2d46c7b153b4dbf543f9052299de935ea826c9",
+      "sha256_after": "c2c56bd96824b1ea1f2f9eb0aa2d46c7b153b4dbf543f9052299de935ea826c9",
+      "unchanged": true
+    },
+    "backend/app/agent/tools/schemas.py": {
+      "sha256_before": "ddb566814c411297f37793b19c2ad7407cf4379e0da07f5c437cffd1a0ffc496",
+      "sha256_after": "ddb566814c411297f37793b19c2ad7407cf4379e0da07f5c437cffd1a0ffc496",
+      "unchanged": true
+    },
+    "backend/app/agent/turn_primitives.py": {
+      "sha256_before": "7eb04a78882eb758b1b96b99e6a0f48d4b4aa44f7da48b764ce281890acfd2d0",
+      "sha256_after": "7eb04a78882eb758b1b96b99e6a0f48d4b4aa44f7da48b764ce281890acfd2d0",
+      "unchanged": true
+    },
+    "backend/app/agent/graph/nodes/understand.py": {
+      "sha256_before": "847bff0705c33c5a477733b9df925955320bd00968ba6c338fb1887c49b6e986",
+      "sha256_after": "847bff0705c33c5a477733b9df925955320bd00968ba6c338fb1887c49b6e986",
+      "unchanged": true
+    },
+    "backend/app/agent/graph/nodes/answer.py": {
+      "sha256_before": "f756ee529036fd1295a759c68cfeef88f0e61b7b78e899ef00a7a490684c3a07",
+      "sha256_after": "f756ee529036fd1295a759c68cfeef88f0e61b7b78e899ef00a7a490684c3a07",
+      "unchanged": true
+    },
+    "backend/app/llm/live_semantic_provider.py": {
+      "sha256_before": "9f6a3a7a6349bf9aee41f2488b96d45fa190936271b396d556321ca2e9eb6dc6",
+      "sha256_after": "9f6a3a7a6349bf9aee41f2488b96d45fa190936271b396d556321ca2e9eb6dc6",
+      "unchanged": true
+    },
+    "backend/app/llm/openai_transport.py": {
+      "sha256_before": "24d58ae2cfa7ba50781420125fc970a2c4686d2bbcef5d886a170649d9a88b8f",
+      "sha256_after": "24d58ae2cfa7ba50781420125fc970a2c4686d2bbcef5d886a170649d9a88b8f",
+      "unchanged": true
+    },
+    "backend/app/llm/provider.py": {
+      "sha256_before": "09ffa5db4df184e81952685e0993c224cc7fad4e9a94caebe64b4260d52a2b22",
+      "sha256_after": "09ffa5db4df184e81952685e0993c224cc7fad4e9a94caebe64b4260d52a2b22",
+      "unchanged": true
+    },
+    "backend/app/llm/memory_provider.py": {
+      "sha256_before": "6de76480cc75a0151afbfeb8e0949274064894c69ae80b2ca338beb647bdc35a",
+      "sha256_after": "6de76480cc75a0151afbfeb8e0949274064894c69ae80b2ca338beb647bdc35a",
+      "unchanged": true
+    },
+    "backend/app/prompts/semantic.py": {
+      "sha256_before": "55c3c6e158cf41e1ee7034e75e7f15dad5e704cc5f495e571e6ef5bb67b65d68",
+      "sha256_after": "55c3c6e158cf41e1ee7034e75e7f15dad5e704cc5f495e571e6ef5bb67b65d68",
+      "unchanged": true
+    },
+    "backend/app/services/policy_service.py": {
+      "sha256_before": "d480ddc8d49a54a73c04597643ecaa74a7536f78ee84cf664dcbdeb4a0f77b20",
+      "sha256_after": "d480ddc8d49a54a73c04597643ecaa74a7536f78ee84cf664dcbdeb4a0f77b20",
+      "unchanged": true
+    },
+    "backend/app/services/automatic_memory_service.py": {
+      "sha256_before": "4e19c49f2787015dcad9bf6f8e45392ae7adb38ad28db55e32ecb4ae175ffc6b",
+      "sha256_after": "4e19c49f2787015dcad9bf6f8e45392ae7adb38ad28db55e32ecb4ae175ffc6b",
+      "unchanged": true
+    },
+    "backend/app/services/trace_service.py": {
+      "sha256_before": "e15064373af9663bbdcf381ff264e4576d58dbc481c855d1fb4cff2f535df405",
+      "sha256_after": "e15064373af9663bbdcf381ff264e4576d58dbc481c855d1fb4cff2f535df405",
+      "unchanged": true
+    },
+    "backend/app/services/turn_stream_service.py": {
+      "sha256_before": "478beb5320f94a13def0444a6007860226e76d24a1525da52dacfb9095ea4a81",
+      "sha256_after": "478beb5320f94a13def0444a6007860226e76d24a1525da52dacfb9095ea4a81",
+      "unchanged": true
+    },
+    "backend/app/models/order.py": {
+      "sha256_before": "f10aa79be648ab7f132ce618c243208901a88ff63f2c065a1f6194b773243eb0",
+      "sha256_after": "f10aa79be648ab7f132ce618c243208901a88ff63f2c065a1f6194b773243eb0",
+      "unchanged": true
+    },
+    "Mercury/mercury/agent.py": {
+      "sha256_before": "de6314650f422cc3c307d1fa47576cfd4fe57d632034e80e2539750268866a1a",
+      "sha256_after": "de6314650f422cc3c307d1fa47576cfd4fe57d632034e80e2539750268866a1a",
+      "unchanged": true
+    },
+    "Mercury/mercury/policy.py": {
+      "sha256_before": "58a71ac38f2d426aa842a450e6699fced6d3df7b6c396eff551c898376126c95",
+      "sha256_after": "58a71ac38f2d426aa842a450e6699fced6d3df7b6c396eff551c898376126c95",
+      "unchanged": true
+    },
+    "Mercury/mercury/seed.py": {
+      "sha256_before": "4c7f9f2720b65e1fb33c61626afd3929497e4b79d2e2a60b99ea966fa78ab5ee",
+      "sha256_after": "4c7f9f2720b65e1fb33c61626afd3929497e4b79d2e2a60b99ea966fa78ab5ee",
+      "unchanged": true
+    },
+    "Mercury/mercury/db.py": {
+      "sha256_before": "374322d24edee19f1eb0f66bfb9f786947ed6bd75bbe0eab81576e99d9886d57",
+      "sha256_after": "374322d24edee19f1eb0f66bfb9f786947ed6bd75bbe0eab81576e99d9886d57",
+      "unchanged": true
+    }
+  }
+}

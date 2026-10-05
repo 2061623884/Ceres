@@ -1,0 +1,25 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>Ceres V3 API demo</title>
+<style>body{font:16px system-ui;max-width:800px;margin:30px auto}button,input,select{font:inherit;margin:5px;padding:7px}pre{white-space:pre-wrap;background:#f5f5f5;padding:12px}#suggestion{border:1px solid #aaa;padding:12px}</style>
+<h2>Ceres V3 最小交互</h2><p>模拟门店。正式界面由 Cursor 接入。刷新恢复本次打开，明确结束再进入才建立新周期。</p>
+<button id="enter">进入聊天</button><button id="leave" disabled title="04接入退出周期">结束本次打开</button><b id="role"></b>
+<p><button data-role="keke" disabled title="04接入反向切换">可可</button><button data-role="momo">墨墨</button><select id="order"><option value="">未指定订单</option></select></p>
+<div id="suggestion" hidden></div><pre id="history"></pre><input id="message" size="48" placeholder="选购、一般政策或明确订单问题"><button id="send">发送</button>
+<script>
+let chat=null,guideState={},pending=null; const el=id=>document.getElementById(id);
+const log=text=>{el('history').textContent+=text+'\n';};
+async function api(path,body,method='POST'){let r=await fetch(path,{method,credentials:'include',headers:{'Content-Type':'application/json'},body:body===undefined?undefined:JSON.stringify(body)}); if(!r.ok)throw Error(await r.text());return r;}
+async function sync(){chat=await(await api('/api/v1/chat/openings/'+chat.opening_id,undefined,'GET')).json();el('role').textContent=chat.role==='keke'?'当前：可可':'当前：墨墨';}
+async function consume(r){let text=await r.text();for(let block of text.replaceAll('\r\n','\n').split('\n\n')){let lines=block.split('\n'),raw=lines.find(x=>x.startsWith('data: '));if(!raw)continue;let event=JSON.parse(raw.slice(6)),named=lines.find(x=>x.startsWith('event: ')),type=named?named.slice(7):event.type,payload=named?event:event.payload;
+ if(type==='service.route'){log('路由：'+(payload.decision||payload.status)+'，'+Math.round(payload.route_ms)+' ms');pending=payload.handoff_id||null;
+  if(payload.prompt_mode==='automatic'){el('suggestion').hidden=false;el('suggestion').replaceChildren(document.createTextNode('需要另一角色处理，是否切换？'));for(let [label,accept] of [['同意',true],['留在这里',false]]){let b=document.createElement('button');b.textContent=label;b.onclick=()=>switchRole(payload.target_role,pending,accept);el('suggestion').append(b);}await api('/api/v1/chat/openings/'+chat.opening_id+'/prompt-displayed',{handoff_id:pending});}
+  if(payload.status==='unavailable')log(payload.message);
+ }else if(type==='turn.completed'){log(payload.message||payload.final_text||'');if(!payload.business_not_run&&chat.role==='keke')guideState=payload;
+ }else if(type==='error')log('失败：'+payload.message);}
+ await sync();}
+async function switchRole(target,handoff,accept=true){try{let body={target_role:target,accept};if(handoff)body.handoff_id=handoff;await consume(await api('/api/v1/chat/openings/'+chat.opening_id+'/switches/stream',body));el('suggestion').hidden=true;}catch(e){log(e.message);}}
+el('enter').onclick=async()=>{try{if(chat){await sync();return;}let ids=JSON.parse(sessionStorage.getItem('ceres-v3-role-sessions')||'null');if(!ids){let guide=await(await api('/api/v1/guide/sessions',{entry_context:{page:'home'}})).json(),momo=await(await api('/api/v1/mercury/sessions',{})).json();ids={guide_session_id:guide.session_id,mercury_session_id:momo.session_id};sessionStorage.setItem('ceres-v3-role-sessions',JSON.stringify(ids));}chat=await(await api('/api/v1/chat/openings',{...ids,role:'keke'})).json();sessionStorage.setItem('ceres-v3-opening',chat.opening_id);await sync();let rows=await(await api('/api/v1/orders',undefined,'GET')).json();for(let order of rows.items){let option=document.createElement('option');option.value=order.order_id;option.textContent=order.order_id;el('order').append(option);}}catch(e){log(e.message);}};
+el('leave').onclick=async()=>{if(chat){try{await api('/api/v1/chat/openings/'+chat.opening_id,undefined,'DELETE');chat=null;sessionStorage.removeItem('ceres-v3-opening');el('role').textContent='已结束';el('suggestion').hidden=true;}catch(e){log(e.message);}}};
+document.querySelectorAll('[data-role]').forEach(b=>b.onclick=()=>{if(chat)switchRole(b.dataset.role,null);});
+el('send').onclick=async()=>{if(!chat)return log('先进入聊天。');el('send').disabled=true;try{let body={request_id:crypto.randomUUID(),message:el('message').value,expected_state_version:guideState.state_version||0,expected_session_version:guideState.session_version,expected_task_id:guideState.task_id};if(el('order').value)body.order_id=el('order').value;log('用户：'+body.message);await consume(await api('/api/v1/chat/openings/'+chat.opening_id+'/turns/stream',body));}catch(e){log(e.message);}finally{el('send').disabled=false;}};
+let saved=sessionStorage.getItem('ceres-v3-opening');if(saved){chat={opening_id:saved};sync().catch(e=>{chat=null;log(e.message);});}
+</script></html>
