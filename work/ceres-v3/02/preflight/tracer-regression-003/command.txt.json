@@ -1,0 +1,5 @@
+{
+  "original_path": "work/ceres-v3/02/preflight/tracer-regression-003/command.txt",
+  "sha256": "d7bd8346f9bf311e2bd9ca047ee043700a4efd60c07b741ad33a19a93f861022",
+  "utf8_text": "Working directory: C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\r\nCommand: C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe -X utf8 -m pytest -q -p no:cacheprovider --basetemp=C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\02\\preflight\\tracer-regression-003\\pytest-tmp tests/test_v3_policy_consultation.py\r\n\r\n"
+}

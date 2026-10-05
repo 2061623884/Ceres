@@ -1,0 +1,5 @@
+{
+  "original_path": "work/ceres-v3/02/preflight/fix-005-semantic/command.txt",
+  "sha256": "b20f60f5e6cafda0103fca511eb2b678a5db1ddbe629b85735948dc7075991a4",
+  "utf8_text": "Working directory: C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\r\nCommand: C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe -X utf8 -m pytest -q -p no:cacheprovider -W error::pytest.PytestUnhandledThreadExceptionWarning --basetemp=C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\02\\preflight\\fix-005-semantic\\pytest-tmp tests/test_semantic_transport.py\r\n\r\n"
+}

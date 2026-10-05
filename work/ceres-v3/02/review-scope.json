@@ -1,0 +1,36 @@
+{
+  "baseline_head": "a81a39d3a40f9f1bbb270961366cb5f6e930c664",
+  "paths": [
+    "backend/app/services/policy_service.py",
+    "backend/app/main.py",
+    "backend/app/api/mercury.py",
+    "backend/app/agent/protocol.py",
+    "backend/app/agent/tools/read.py",
+    "backend/app/prompts/semantic.py",
+    "backend/app/llm/live_semantic_provider.py",
+    "Mercury/mercury/agent.py",
+    "Mercury/mercury/tools.py",
+    "Mercury/mercury/prompt.py",
+    "Mercury/mercury/policy.py",
+    "Mercury/tests/conftest.py",
+    "backend/tests/test_v3_policy_consultation.py",
+    "backend/tests/test_v2_order_mercury.py"
+  ],
+  "excludes": "Inherited V2 changes; compare frozen working source ZIP rather than HEAD dirty files",
+  "sha256": {
+    "backend/app/services/policy_service.py": "d480ddc8d49a54a73c04597643ecaa74a7536f78ee84cf664dcbdeb4a0f77b20",
+    "backend/app/main.py": "b73cccc5cff0101aecbe4cb8ab5e65bafc8f65cc0118624ffc94ccba90b65ff5",
+    "backend/app/api/mercury.py": "c466ad07958c9c49d4a1a8ca094f4151dcc8b8d0e36fd8df6edb9635714b16f3",
+    "backend/app/agent/protocol.py": "4c60472cedf2274b3d5c3e9cb44566e0c9308e52ae65f70610351b51f2c61957",
+    "backend/app/agent/tools/read.py": "c2c56bd96824b1ea1f2f9eb0aa2d46c7b153b4dbf543f9052299de935ea826c9",
+    "backend/app/prompts/semantic.py": "55c3c6e158cf41e1ee7034e75e7f15dad5e704cc5f495e571e6ef5bb67b65d68",
+    "backend/app/llm/live_semantic_provider.py": "9f6a3a7a6349bf9aee41f2488b96d45fa190936271b396d556321ca2e9eb6dc6",
+    "Mercury/mercury/agent.py": "de6314650f422cc3c307d1fa47576cfd4fe57d632034e80e2539750268866a1a",
+    "Mercury/mercury/tools.py": "16b4bca179263889120123df071e8d18d206c86716838d0a65d2bdc11b93ed3e",
+    "Mercury/mercury/prompt.py": "8ada529712fb281572f15bcb2ad19f15300cfc23d1db5cb6e7a3b98f2ff2f9c2",
+    "Mercury/mercury/policy.py": "58a71ac38f2d426aa842a450e6699fced6d3df7b6c396eff551c898376126c95",
+    "Mercury/tests/conftest.py": "49a6fb88212d7a933840171c276e7ac990df8df9b5c09ab34f8a5358130abe10",
+    "backend/tests/test_v3_policy_consultation.py": "ba207cb516c616af9b359bcd1624244bc1453b5a16858cd6ca32e269c5487817",
+    "backend/tests/test_v2_order_mercury.py": "1caf0689d8b019625bcc97f0b3671d6dfedce8e9ef38e538d324c2057128686d"
+  }
+}

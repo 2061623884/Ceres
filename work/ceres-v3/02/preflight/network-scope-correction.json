@@ -1,0 +1,51 @@
+{
+  "correction_id": "network-scope-correction-004",
+  "recorded_utc": "2026-10-05T17:55:30.0465055Z",
+  "applies_to": [
+    "boundary-004-v3",
+    "boundary-004-v2",
+    "boundary-004-semantic",
+    "boundary-004-mercury"
+  ],
+  "supersedes_prior_network_claims": [
+    "no real model/API calls",
+    "no real network request",
+    "no real model/API"
+  ],
+  "prior_claims_status": "withdrawn_as_unverified_run_level_claims",
+  "evidence": [
+    {
+      "run": "boundary-004-v3",
+      "file": "stdout.txt",
+      "observation": "PytestUnhandledThreadExceptionWarning traceback shows _run_turn_worker, AutomaticMemoryService.process_turn, and a memory_extract_completed trace carrying model qwen3.8-27b."
+    },
+    {
+      "run": "boundary-004-v3",
+      "file": "environment-and-source.json",
+      "observation": "MEMORY_MODEL was not recorded; this run environment does not establish whether the independent background MemoryProvider used an external endpoint."
+    },
+    {
+      "run": "boundary-004-v2",
+      "file": "stdout.txt",
+      "observation": "No background-memory network instrumentation or complete outbound capture was recorded; controlled Mercury OpenAI mocks cover only those test call paths."
+    },
+    {
+      "run": "boundary-004-semantic",
+      "file": "stdout.txt",
+      "observation": "httpx.MockTransport controls the exercised LiveSemanticProvider request; no complete process-level outbound capture was recorded."
+    },
+    {
+      "run": "boundary-004-mercury",
+      "file": "stdout.txt",
+      "observation": "The selected policy flow uses FakeLLM and no live-marked tests were selected; no complete process-level outbound capture was recorded."
+    }
+  ],
+  "network_facts": {
+    "complete_packet_or_outbound_capture": false,
+    "actual_external_http_request_in_boundary_004_v3": "unknown",
+    "actual_external_http_request_in_other_boundary_004_runs": "not_recorded; cannot assert none",
+    "background_memory_provider_isolation": "not established in prior runs"
+  },
+  "corrected_conclusion": "The prior reports correctly describe controlled test doubles at specific call boundaries, but overclaimed zero external network/model activity for the whole process. Retract those run-level claims. The V3 stdout proves the independent memory worker ran a memory-extraction path and records model qwen3.8-27b; without outbound capture the actual external-request status is unknown. No complete packet/network evidence exists for any listed run.",
+  "next_run_controls": "Subsequent fix-005 runs explicitly set MEMORY_MODEL to the empty string and treat PytestUnhandledThreadExceptionWarning as an error. These controls are recorded for those runs and do not retroactively establish network status for boundary-004."
+}

@@ -1,0 +1,40 @@
+{
+  "run_id": "boundary-004-mercury",
+  "targets": [
+    "tests/test_policy.py",
+    "tests/test_agent_flows.py::test_policy_flow"
+  ],
+  "working_directory": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\Mercury",
+  "executable": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+  "executable_version": "Python 3.12.10",
+  "pytest_version": "pytest 9.1.1",
+  "powershell_version": "7.6.5",
+  "command": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe -X utf8 -m pytest -q -p no:cacheprovider -W error::pytest.PytestUnhandledThreadExceptionWarning --basetemp=C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\02\\preflight\\boundary-004-mercury\\pytest-tmp tests/test_policy.py tests/test_agent_flows.py::test_policy_flow",
+  "temp": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\02\\preflight\\boundary-004-mercury\\os-temp",
+  "tmp": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\02\\preflight\\boundary-004-mercury\\os-temp",
+  "pytest_basetemp": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\02\\preflight\\boundary-004-mercury\\pytest-tmp",
+  "python_dontwritebytecode": "1",
+  "pythonutf8": "1",
+  "pytest_cacheprovider": "disabled",
+  "warning_filter": "error::pytest.PytestUnhandledThreadExceptionWarning",
+  "database_isolation": "Mercury conftest db fixture uses tmp_path/mercury.db per test",
+  "network_boundary": "FakeLLM fixture for policy flow; no live test selected",
+  "live_tests_run": false,
+  "inherited_environment_flags": {
+    "MERCURY_LIVE": "unset",
+    "MERCURY_DB_PATH": "unset",
+    "OPENAI_API_KEY": "unset"
+  },
+  "sha256_before": {
+    "Mercury/tests/test_policy.py": "321c1421ff445a914649dabd43bff05fce7b87c037fec4469c39c90533033afb",
+    "Mercury/tests/test_agent_flows.py": "ff6bd83ea824aedf636c827f3c0db027cf5c3113136f7848448f8280977fd2bb",
+    "Mercury/tests/conftest.py": "15e3f93877d9656ea40e277c70bfcd6d08bc9060caf5d857a1f2530f15ab2f1f",
+    "Mercury/mercury/agent.py": "de6314650f422cc3c307d1fa47576cfd4fe57d632034e80e2539750268866a1a",
+    "Mercury/mercury/policy.py": "58a71ac38f2d426aa842a450e6699fced6d3df7b6c396eff551c898376126c95",
+    "Mercury/mercury/prompt.py": "8ada529712fb281572f15bcb2ad19f15300cfc23d1db5cb6e7a3b98f2ff2f9c2",
+    "Mercury/mercury/seed.py": "4c7f9f2720b65e1fb33c61626afd3929497e4b79d2e2a60b99ea966fa78ab5ee",
+    "Mercury/mercury/db.py": "374322d24edee19f1eb0f66bfb9f786947ed6bd75bbe0eab81576e99d9886d57",
+    "Mercury/mercury/tools.py": "16b4bca179263889120123df071e8d18d206c86716838d0a65d2bdc11b93ed3e",
+    "Mercury/mercury/llm.py": "b626c62dc07b925665e6e7099d85e144d8930ae3d2a31e9b73c3379b167ceeba"
+  }
+}

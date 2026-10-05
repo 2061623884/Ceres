@@ -147,15 +147,29 @@ def test_order_snapshot_and_existing_policy_survive_reinitialization(client, run
 
 
 @pytest.mark.parametrize("run", [1, 2])
-def test_no_selected_order_returns_real_id_options_without_model_or_write(client, monkeypatch, run):
+def test_no_selected_order_returns_real_id_options_without_order_tool_or_write(client, monkeypatch, run):
     cart = client.post("/api/v1/cart/items", json={"sku_id": "demo:eggs-fresh-6pack", "quantity": 2}).json()
     order = client.post("/api/v1/cart/checkout", json={"expected_cart_version": cart["version"]}).json()["order"]
     sid = client.post("/api/v1/mercury/sessions").json()["session_id"]
 
-    def forbidden_sdk(**kwargs):
-        raise AssertionError("An unselected order must not call the model")
+    monkeypatch.setenv("OPENAI_BASE_URL", "http://controlled-mercury.invalid/v1")
+    monkeypatch.setenv("OPENAI_API_KEY", "controlled-test-key")
+    monkeypatch.setenv("LLM_MODEL", "controlled-mercury")
+    get_settings.cache_clear()
 
-    monkeypatch.setattr("mercury.llm.OpenAI", forbidden_sdk)
+    def create(**kwargs):
+        messages = kwargs["messages"]
+        if messages[-1]["role"] != "tool":
+            message = SimpleNamespace(content="", tool_calls=[SimpleNamespace(id="unselected-order",
+                function=SimpleNamespace(name="get_order_details", arguments=json.dumps({"order_id": order["order_id"]})))])
+        else:
+            result = json.loads(messages[-1]["content"])
+            assert result["error"] == "ORDER_NOT_SELECTED"
+            message = SimpleNamespace(content="请选择要咨询的订单；一般政策无需选单。", tool_calls=[])
+        return SimpleNamespace(choices=[SimpleNamespace(message=message)])
+
+    monkeypatch.setattr("mercury.llm.OpenAI", lambda **settings:
+                        SimpleNamespace(chat=SimpleNamespace(completions=SimpleNamespace(create=create))))
     response = client.post(f"/api/v1/mercury/sessions/{sid}/turns/stream",
                            json={"message": "我想退款", "request_id": f"no-selection-{run}"})
     payloads = [json.loads(line[6:]) for line in response.text.splitlines() if line.startswith("data: ")]
@@ -169,7 +183,8 @@ def test_no_selected_order_returns_real_id_options_without_model_or_write(client
     response = client.post(f"/api/v1/mercury/sessions/{stranger_sid}/turns/stream",
                            json={"message": "看我的订单", "request_id": "new-owner"})
     assert order["order_id"] not in response.text and "O1001" not in response.text
-    assert "没有模拟订单" in response.text
+    payloads = [json.loads(line[6:]) for line in response.text.splitlines() if line.startswith("data: ")]
+    assert next(p["items"] for p in payloads if "items" in p) == []
 
 
 @pytest.mark.parametrize("run", [1, 2])

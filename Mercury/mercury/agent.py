@@ -33,6 +33,9 @@ def run_mercury(user_id: str, message: str, llm=None, *, database_path: str | No
         history_key = user_id if session_id is None else (user_id, session_id, selected_order_id)
         history = _HISTORY.get(history_key, [])[-HISTORY_TURNS * 2:]
         prompt = SYSTEM_PROMPT
+        policy_only = session_id is not None and selected_order_id is None
+        if policy_only:
+            prompt += "\n当前未选订单，只能咨询一般政策或普通问候。政策先检索、注明模拟门店来源policy_id/标题及条件；缺少依据就说明。具体订单查询、资格和申请须先选单，不能沿用历史订单或执行订单工具；需要时提示使用选单入口。"
         if selected_order_id is not None:
             prompt += f"\n本会话只咨询已选订单 {selected_order_id}。选单与查询不会申请售后；用户明确要求时才执行对应写工具。"
         messages = [{"role": "system", "content": prompt}, *history, {"role": "user", "content": message}]
@@ -40,7 +43,7 @@ def run_mercury(user_id: str, message: str, llm=None, *, database_path: str | No
         try:
             answer = None
             for _ in range(MAX_TOOL_ROUNDS):
-                msg = llm.chat(messages, tools=tools.openai_tools(selected_order_id))
+                msg = llm.chat(messages, tools=tools.openai_tools(selected_order_id, policy_only=policy_only))
                 if not msg.tool_calls:
                     answer = msg.content
                     break
@@ -54,7 +57,7 @@ def run_mercury(user_id: str, message: str, llm=None, *, database_path: str | No
                     ],
                 })
                 for tc in msg.tool_calls:
-                    result = tools.execute_tool(tc.function.name, tc.function.arguments, user_id=user_id, selected_order_id=selected_order_id)
+                    result = tools.execute_tool(tc.function.name, tc.function.arguments, user_id=user_id, selected_order_id=selected_order_id, policy_only=policy_only)
                     messages.append({"role": "tool", "tool_call_id": tc.id, "content": result})
             else:
                 # 5 轮 Tool 都执行完仍没有最终回答：不带 tools 再调用一次

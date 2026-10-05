@@ -1,0 +1,10 @@
+{
+  "run_id": "boundary-004-semantic",
+  "exit_code": 1,
+  "process_id": 67024,
+  "started_utc": "2026-10-05T17:47:09.8867485Z",
+  "completed_utc": "2026-10-05T17:47:11.7868427Z",
+  "stdout": "stdout.txt",
+  "stderr": "stderr.txt",
+  "status": "failed"
+}

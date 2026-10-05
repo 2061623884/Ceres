@@ -1,0 +1,41 @@
+{
+  "run_id": "green-002",
+  "test": "tests/test_v3_policy_consultation.py::test_momo_can_consult_policy_without_selecting_an_order",
+  "working_directory": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend",
+  "executable": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+  "executable_version": "Python 3.12.10",
+  "pytest_version": "pytest 9.1.1",
+  "powershell_version": "7.6.5",
+  "command": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe -X utf8 -m pytest -q -p no:cacheprovider --basetemp=C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\02\\preflight\\green-002\\pytest-tmp tests/test_v3_policy_consultation.py::test_momo_can_consult_policy_without_selecting_an_order",
+  "temp": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\02\\preflight\\green-002\\os-temp",
+  "tmp": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\02\\preflight\\green-002\\os-temp",
+  "pytest_basetemp": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\02\\preflight\\green-002\\pytest-tmp",
+  "python_dontwritebytecode": "1",
+  "pythonutf8": "1",
+  "inherited_environment_flags": {
+    "LLM_MODE": "unset",
+    "BUSINESS_DATA_MODE": "unset",
+    "DATABASE_URL": "unset",
+    "SOURCE_DATABASE_PATH": "unset",
+    "MERCURY_DB_PATH": "unset",
+    "OPENAI_API_KEY": "unset",
+    "OPENAI_BASE_URL": "unset"
+  },
+  "sha256_before": {
+    "backend/tests/test_v3_policy_consultation.py": "df1567cce0cd42f13245326d5a4c5f9364f77b96d4185720504034d75d2ac3db",
+    "backend/tests/conftest.py": "1a9a33ceb5e3a49845d1b66dacef7cd3e9429f9f09764776421fee2ae973f250",
+    "backend/tests/support/v2_fixture.py": "87c284a1ff83063ec0a9b4761c1ec13fb283763d277b53653d7545e9b67b681d",
+    "backend/tests/support/__init__.py": "987517f9a0e59a90ebd4c657787e3d33bb0eefa54c4fda785a5ef2689e644966",
+    "backend/app/agent/protocol.py": "c69885ecc5b2fe92ba04161ae3e2f77c18a5bb68c19707419b7ea1c4ad20fc6b",
+    "backend/app/agent/tools/read.py": "c2c56bd96824b1ea1f2f9eb0aa2d46c7b153b4dbf543f9052299de935ea826c9",
+    "backend/app/agent/tools/schemas.py": "ddb566814c411297f37793b19c2ad7407cf4379e0da07f5c437cffd1a0ffc496",
+    "backend/app/agent/graph/nodes/understand.py": "847bff0705c33c5a477733b9df925955320bd00968ba6c338fb1887c49b6e986",
+    "backend/app/agent/graph/nodes/answer.py": "f756ee529036fd1295a759c68cfeef88f0e61b7b78e899ef00a7a490684c3a07",
+    "backend/app/api/guide.py": "9688d8c46da160eaf2cc4b72219c1edb8e0dd5950619142815b34a2c450aaaae",
+    "backend/app/api/mercury.py": "98e0854ba02dd149e177663c6387831e80fef5ad27458aca4190dbfc75e0db4f",
+    "backend/app/models/order.py": "f10aa79be648ab7f132ce618c243208901a88ff63f2c065a1f6194b773243eb0",
+    "backend/app/services/policy_service.py": "1d5abdb2045f8747e40aaf6de30844d28bc4ed0a88de3d90946a08f87c56ee6f",
+    "Mercury/mercury/seed.py": "4c7f9f2720b65e1fb33c61626afd3929497e4b79d2e2a60b99ea966fa78ab5ee",
+    "Mercury/mercury/policy.py": "58a71ac38f2d426aa842a450e6699fced6d3df7b6c396eff551c898376126c95"
+  }
+}

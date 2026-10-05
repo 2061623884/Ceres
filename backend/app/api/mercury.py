@@ -10,7 +10,6 @@ from uuid import uuid4
 
 from fastapi import APIRouter, Depends, Request, Response
 from pydantic import BaseModel, Field
-from sqlalchemy.dialects.sqlite import insert
 from sqlalchemy.orm import Session
 from sse_starlette import EventSourceResponse
 
@@ -18,7 +17,7 @@ from app.core.config import get_settings
 from app.core.database import get_db
 from app.core.errors import AppError
 from app.core.identity import get_or_create_owner
-from app.models.order import AfterSalesPolicy, MercurySession
+from app.models.order import MercurySession
 from app.services.order_service import OrderService
 
 mercury_path = Path(__file__).resolve().parents[3] / "Mercury"
@@ -27,7 +26,6 @@ if str(mercury_path) not in sys.path:
 
 from mercury.agent import run_mercury
 from mercury.llm import OpenAIChatClient
-from mercury.seed import POLICIES
 
 router = APIRouter(prefix="/api/v1/mercury", tags=["mercury"])
 
@@ -60,11 +58,6 @@ class SelectOrderRequest(BaseModel):
 
 @router.post("/sessions", response_model=SessionResponse)
 def create_mercury_session(owner_id: str = Depends(_owner), db: Session = Depends(get_db)):
-    db.execute(insert(AfterSalesPolicy).values([
-        {"policy_id": policy_id, "category": category, "title": title,
-         "content": content, "keywords": keywords}
-        for policy_id, category, title, content, keywords in POLICIES
-    ]).on_conflict_do_nothing(index_elements=["policy_id"]))
     session = MercurySession(session_id=f"ms_{uuid4().hex[:12]}", owner_id=owner_id)
     db.add(session)
     db.commit()
@@ -95,14 +88,12 @@ def mercury_turn_stream(session_id: str, request: TurnRequest, owner_id: str = D
         yield {"event": "accepted", "data": json.dumps({"request_id": request.request_id})}
         if selected_order_id is None:
             yield {"event": "orders", "data": json.dumps({"items": orders}, ensure_ascii=False)}
-            response_text = "请选择要咨询的订单。" if orders else "你目前没有模拟订单，可先在购物车完成模拟结算。"
-        else:
-            llm = OpenAIChatClient({"base_url": settings.openai_base_url, "api_key": settings.openai_api_key,
-                                    "model": settings.llm_model, "timeout": settings.llm_timeout,
-                                    "max_output_tokens": settings.llm_max_output_tokens})
-            response_text = await asyncio.to_thread(run_mercury, owner_id, request.message, llm,
-                                                   database_path=database_path, session_id=session_id,
-                                                   selected_order_id=selected_order_id)
+        llm = OpenAIChatClient({"base_url": settings.openai_base_url, "api_key": settings.openai_api_key,
+                                "model": settings.llm_model, "timeout": settings.llm_timeout,
+                                "max_output_tokens": settings.llm_max_output_tokens})
+        response_text = await asyncio.to_thread(run_mercury, owner_id, request.message, llm,
+                                               database_path=database_path, session_id=session_id,
+                                               selected_order_id=selected_order_id)
         yield {"event": "answer.delta", "data": json.dumps({"text": response_text}, ensure_ascii=False)}
         yield {"event": "turn.completed", "data": json.dumps({"session_id": session_id,
                                                                 "final_text": response_text}, ensure_ascii=False)}

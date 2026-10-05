@@ -1,0 +1,17 @@
+[
+  {
+    "path": "backend/app/agent/protocol.py",
+    "blob": "fe9d7d1a044217f0915ff81d9aa413baf53ba645",
+    "method": "only policy delta transplanted onto HEAD; inherited V2 remains unstaged"
+  },
+  {
+    "path": "backend/app/agent/tools/read.py",
+    "blob": "f1419e4bfe205379b763943590bc0e12374ebd17",
+    "method": "only policy delta transplanted onto HEAD; inherited V2 remains unstaged"
+  },
+  {
+    "path": "backend/app/prompts/semantic.py",
+    "blob": "97fa7407959ef90d9e50923f9e66a407aa6058a6",
+    "method": "only policy delta transplanted onto HEAD; inherited V2 remains unstaged"
+  }
+]

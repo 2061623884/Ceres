@@ -1,0 +1,10 @@
+{
+  "run_id": "fix-005-v3",
+  "exit_code": 0,
+  "process_id": 79072,
+  "started_utc": "2026-10-05T17:56:31.8596119Z",
+  "completed_utc": "2026-10-05T17:56:41.1767494Z",
+  "stdout": "stdout.txt",
+  "stderr": "stderr.txt",
+  "status": "passed"
+}

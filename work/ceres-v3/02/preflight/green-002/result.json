@@ -1,0 +1,10 @@
+{
+  "run_id": "green-002",
+  "exit_code": 0,
+  "process_id": 47788,
+  "stdout": "stdout.txt",
+  "stderr": "stderr.txt",
+  "started_utc": "2026-10-05T17:31:20.4261024Z",
+  "completed_utc": "2026-10-05T17:31:23.9360630Z",
+  "status": "passed"
+}

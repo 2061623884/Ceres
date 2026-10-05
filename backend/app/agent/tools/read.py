@@ -509,6 +509,11 @@ class ReadTools:
         really excludes peanut from a recommendation or a recipe instead of being
         left to the retrieval route to "understand".
         """
+        if kind == "policy":
+            from app.services.policy_service import search_policies
+
+            return search_policies(self.db, query or "")
+
         if kind == "recommend":
             excluded, budget_fen = self._applied_constraints(extra_excluded, extra_budget_fen)
             if query is not None:

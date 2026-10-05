@@ -1,0 +1,5 @@
+{
+  "original_path": "work/ceres-v3/02/preflight/boundary-004-v2/command.txt",
+  "sha256": "937dd5b3956a7b84fc42717ed04d7c59945e16b2eaab781aa9cb68e5201a1523",
+  "utf8_text": "Working directory: C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\r\nCommand: C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe -X utf8 -m pytest -q -p no:cacheprovider --basetemp=C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\02\\preflight\\boundary-004-v2\\pytest-tmp tests/test_v2_order_mercury.py\r\n\r\n"
+}

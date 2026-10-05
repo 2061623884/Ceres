@@ -1,0 +1,40 @@
+{
+  "run_id": "red-001",
+  "test": "tests/test_v3_policy_consultation.py::test_keke_reads_return_policy_before_any_mercury_session",
+  "working_directory": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend",
+  "executable": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+  "executable_version": "Python 3.12.10 x64",
+  "pytest_version": "9.1.1",
+  "command": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe -X utf8 -m pytest -q -p no:cacheprovider --basetemp=C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\02\\preflight\\red-001\\pytest-tmp tests/test_v3_policy_consultation.py::test_keke_reads_return_policy_before_any_mercury_session",
+  "powershell_version": "7.6.5",
+  "temp": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\02\\preflight\\red-001\\os-temp",
+  "tmp": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\02\\preflight\\red-001\\os-temp",
+  "pytest_basetemp": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\02\\preflight\\red-001\\pytest-tmp",
+  "python_dontwritebytecode": "1",
+  "pythonutf8": "1",
+  "inherited_environment_flags": {
+    "LLM_MODE": "unset",
+    "BUSINESS_DATA_MODE": "unset",
+    "DATABASE_URL": "unset",
+    "SOURCE_DATABASE_PATH": "unset",
+    "MERCURY_DB_PATH": "unset",
+    "OPENAI_API_KEY": "unset",
+    "OPENAI_BASE_URL": "unset"
+  },
+  "sha256_before": {
+    "backend/tests/test_v3_policy_consultation.py": "01b7f5c492949cb4f8f7b4df9618359acce798cc5b7fc170f3b668c499b78973",
+    "backend/tests/conftest.py": "1a9a33ceb5e3a49845d1b66dacef7cd3e9429f9f09764776421fee2ae973f250",
+    "backend/tests/support/v2_fixture.py": "87c284a1ff83063ec0a9b4761c1ec13fb283763d277b53653d7545e9b67b681d",
+    "backend/tests/support/__init__.py": "987517f9a0e59a90ebd4c657787e3d33bb0eefa54c4fda785a5ef2689e644966",
+    "backend/app/agent/protocol.py": "34a9d20c972e1162a80bb3185dd5cb3bef5d2628c93e982befe06e5283882674",
+    "backend/app/agent/tools/read.py": "ee59b61e4845edea9a5e844eb7b52125820e01bcbb18aa249f53695e78d450a7",
+    "backend/app/agent/tools/schemas.py": "ddb566814c411297f37793b19c2ad7407cf4379e0da07f5c437cffd1a0ffc496",
+    "backend/app/agent/graph/nodes/understand.py": "847bff0705c33c5a477733b9df925955320bd00968ba6c338fb1887c49b6e986",
+    "backend/app/agent/graph/nodes/answer.py": "f756ee529036fd1295a759c68cfeef88f0e61b7b78e899ef00a7a490684c3a07",
+    "backend/app/api/guide.py": "9688d8c46da160eaf2cc4b72219c1edb8e0dd5950619142815b34a2c450aaaae",
+    "backend/app/api/mercury.py": "1e9b3e958bc106132cc57ddb4deff2e8f7902adf623fe186b6019d3bd7ae8056",
+    "backend/app/models/order.py": "f10aa79be648ab7f132ce618c243208901a88ff63f2c065a1f6194b773243eb0",
+    "Mercury/mercury/seed.py": "4c7f9f2720b65e1fb33c61626afd3929497e4b79d2e2a60b99ea966fa78ab5ee",
+    "Mercury/mercury/policy.py": "7580483d26323408647da6923cc773d9d1cdd97f4c16ade492ddc5f3dca5e5d2"
+  }
+}

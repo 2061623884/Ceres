@@ -1,0 +1,11 @@
+{
+  "run_id": "boundary-004-v3",
+  "exit_code": 0,
+  "process_id": 43128,
+  "started_utc": "2026-10-05T17:43:29.9944645Z",
+  "completed_utc": "2026-10-05T17:44:23.1117123Z",
+  "stdout": "stdout.txt",
+  "stderr": "stderr.txt",
+  "status": "not_passed_unhandled_thread_warning",
+  "acceptance_status": "not_passed"
+}

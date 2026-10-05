@@ -1,0 +1,10 @@
+{
+  "run_id": "boundary-004-mercury",
+  "exit_code": 1,
+  "process_id": 55648,
+  "started_utc": "2026-10-05T17:48:10.6668968Z",
+  "completed_utc": "2026-10-05T17:48:13.0277459Z",
+  "stdout": "stdout.txt",
+  "stderr": "stderr.txt",
+  "status": "failed"
+}

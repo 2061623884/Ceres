@@ -1,0 +1,10 @@
+{
+  "run_id": "boundary-004-v2",
+  "exit_code": 0,
+  "process_id": 49704,
+  "started_utc": "2026-10-05T17:45:56.8283367Z",
+  "completed_utc": "2026-10-05T17:46:11.5918689Z",
+  "stdout": "stdout.txt",
+  "stderr": "stderr.txt",
+  "status": "passed"
+}

@@ -68,6 +68,11 @@ async def unhandled_exception_handler(_request: Request, exc: Exception):
 @app.on_event("startup")
 def on_startup():
     init_db()
+    from app.core import database
+    from app.services.policy_service import initialize_policies
+
+    with database.SessionLocal.begin() as db:
+        initialize_policies(db)
 
 
 def create_app() -> FastAPI:

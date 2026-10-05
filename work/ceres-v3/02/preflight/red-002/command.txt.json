@@ -1,0 +1,5 @@
+{
+  "original_path": "work/ceres-v3/02/preflight/red-002/command.txt",
+  "sha256": "3daf82c8cb2ca6fb3632b9e3acfd3feb669ac94391c7bd7a743ff950c87af1a2",
+  "utf8_text": "Working directory: C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\r\nCommand: C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe -X utf8 -m pytest -q -p no:cacheprovider --basetemp=C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\02\\preflight\\red-002\\pytest-tmp tests/test_v3_policy_consultation.py::test_momo_can_consult_policy_without_selecting_an_order\r\n\r\n"
+}

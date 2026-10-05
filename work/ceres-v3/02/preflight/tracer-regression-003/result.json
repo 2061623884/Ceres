@@ -1,0 +1,10 @@
+{
+  "run_id": "tracer-regression-003",
+  "exit_code": 0,
+  "process_id": 43152,
+  "stdout": "stdout.txt",
+  "stderr": "stderr.txt",
+  "started_utc": "2026-10-05T17:37:21.3168054Z",
+  "completed_utc": "2026-10-05T17:37:48.4526746Z",
+  "status": "passed"
+}

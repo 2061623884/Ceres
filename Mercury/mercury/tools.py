@@ -75,19 +75,23 @@ TOOLS = [
 _BY_NAME = {t["schema"]["function"]["name"]: t for t in TOOLS}
 
 
-def openai_tools(selected_order_id: str | None = None) -> list:
+def openai_tools(selected_order_id: str | None = None, *, policy_only: bool = False) -> list:
     return [t["schema"] for t in TOOLS
-            if selected_order_id is None or t["schema"]["function"]["name"] != "list_orders"]
+            if (not policy_only or t["schema"]["function"]["name"] == "search_after_sales_policy")
+            and (selected_order_id is None or t["schema"]["function"]["name"] != "list_orders")]
 
 
 def _dump(result) -> str:
     return json.dumps(result, ensure_ascii=False)
 
 
-def execute_tool(name: str, arguments: str, user_id: str, selected_order_id: str | None = None) -> str:
+def execute_tool(name: str, arguments: str, user_id: str, selected_order_id: str | None = None,
+                 *, policy_only: bool = False) -> str:
     tool = _BY_NAME.get(name)
     if tool is None:
         return _dump({"ok": False, "error": "UNKNOWN_TOOL", "message": f"没有名为 {name} 的工具"})
+    if policy_only and name != "search_after_sales_policy":
+        return _dump({"ok": False, "error": "ORDER_NOT_SELECTED", "message": "具体订单业务请先使用选单入口选择订单"})
 
     try:
         raw = json.loads(arguments) if arguments and arguments.strip() else {}

@@ -44,7 +44,7 @@ from app.schemas.goal import Goal, GoalChanges, GoalChangeSet, GoalConstraints, 
 PROPOSAL_VERSION = 1
 
 LOOKUP_KINDS = ("dish", "product")
-QUERY_KINDS = ("recommend", "recipe", "cart", "catalog")
+QUERY_KINDS = ("recommend", "recipe", "cart", "catalog", "policy")
 
 CANDIDATE_KINDS = ("dish", "product", "scenario", "group", "item")
 
@@ -628,10 +628,10 @@ def _parse_read(entry: Any) -> Query:
     topic = _text(spec.get("topic"), "read.topic")
     if topic and len(topic) > 200:
         raise SemanticProtocolError("MALFORMED_PROPOSAL", "read.topic 最多 200 字")
-    if topic and kind not in ("recipe", "recommend"):
+    if topic and kind not in ("recipe", "recommend", "policy"):
         # cart / catalog describe the session itself; a product name is a lookup.
         raise SemanticProtocolError(
-            "UNSUPPORTED_OPERATION", "只有 recipe 与 recommend 支持主题；商品名使用 lookups"
+            "UNSUPPORTED_OPERATION", "只有 recipe、recommend 与 policy 支持主题；商品名使用 lookups"
         )
     return Query(kind=kind, query=topic)
 
@@ -760,7 +760,7 @@ def proposal_schema() -> dict[str, Any]:
         "lookups": {"type": "array", "maxItems": 2, "items": obj({
             "kind": enum(LOOKUP_KINDS), "query": {**text, "description": "只填名称，不带否定词"}})},
         "reads": {"type": "array", "maxItems": 4, "items": obj({
-            "kind": enum(QUERY_KINDS), "topic": {**text, "description": "recommend / recipe 的主题"}})},
+            "kind": enum(QUERY_KINDS, "policy=一般门店政策"), "topic": {**text, "description": "recommend / recipe 的主题；policy填写政策问题"}})},
         "questions": {"type": "array", "maxItems": 3, "items": obj({
             "slot": text, "question": text, "options": texts})},
         "display_refs": texts,

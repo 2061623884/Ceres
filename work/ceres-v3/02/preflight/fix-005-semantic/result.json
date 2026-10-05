@@ -1,0 +1,10 @@
+{
+  "run_id": "fix-005-semantic",
+  "exit_code": 0,
+  "process_id": 29944,
+  "started_utc": "2026-10-05T17:58:25.8602375Z",
+  "completed_utc": "2026-10-05T17:58:27.5004245Z",
+  "stdout": "stdout.txt",
+  "stderr": "stderr.txt",
+  "status": "passed"
+}
