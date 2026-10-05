@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/20261006T061123861-1a781ab3/run/data-before.json",
+  "original_sha256": "58e6621cb572586ec0ce58a8de998ebb30953b91a575acd639d4062bb2c1b9ae",
+  "utf8_text": "{\r\n  \"source_catalog_sha256\": \"772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10\",\r\n  \"root_catalog_sha256\": \"772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10\",\r\n  \"root_catalog_wal_exists\": true,\r\n  \"root_catalog_shm_exists\": true,\r\n  \"source_files\": 307\r\n}\r\n",
+  "original_utf8_bom": false
+}

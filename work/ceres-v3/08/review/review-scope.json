@@ -1,0 +1,20 @@
+{
+  "head": "5462e999d583a9bab6147d0b4141d98321f3cc92",
+  "fixed_point": "HEAD for TASK; owned new exploration files compare to empty; actual executed app source is08 evidence fixed ZIP",
+  "diff_command": "Read work/ceres-v3/08/review/source.patch",
+  "commit_list": [],
+  "paths": [
+    "work/ceres-v3/08/exploration_harness.py",
+    "work/ceres-v3/08/exploration-protocol.md",
+    "work/ceres-v3/08/exploration-report.md",
+    "tasks/ceres-v3-08-sequential-exploration.md"
+  ],
+  "sha256": {
+    "work/ceres-v3/08/exploration_harness.py": "c232e778ef5baec06f5fd98f7d44c8b0101268aa7463af9036db731051d5153a",
+    "work/ceres-v3/08/exploration-protocol.md": "26b605df30e592e6e460ba68b414ed05e4d4e9283911e1d4ef485fde937b6edb",
+    "work/ceres-v3/08/exploration-report.md": "b5b39142a62b726b6da5fe5b1c8b9ff59430ef95b0f1c5b0c587c788198659d5",
+    "tasks/ceres-v3-08-sequential-exploration.md": "23b81c308a91e9bc644c5f2b44b5804aa4ff00a73b8877e7b76e4c68a1a3304b"
+  },
+  "actual_execution_zip_sha256": "c6809991d5f36e5cb9d207641fb0f8ee3f26620d6d5fd39c24d447f49ff649b2",
+  "scope": "Bounded controlled attempt only; no production source changes, no automatic sequencing delivery"
+}

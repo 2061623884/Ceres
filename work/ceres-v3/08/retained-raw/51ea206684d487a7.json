@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/20261006T061123861-1a781ab3/run/junit.xml",
+  "original_sha256": "b23825a25bcef8d5d678f0a8cc892c9b29942526d1f3dd606702e9c5be5c5702",
+  "utf8_text": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"2\" time=\"4.241\" timestamp=\"2026-10-06T06:13:08.354319+08:00\" hostname=\"Diablo‘s_dark\"><testcase classname=\"work.ceres-v3.08.exploration_harness\" name=\"test_return_then_cola_uses_real_public_tools_and_explicit_next_step[delivered-return-requested]\" time=\"2.613\" /><testcase classname=\"work.ceres-v3.08.exploration_harness\" name=\"test_return_then_cola_uses_real_public_tools_and_explicit_next_step[paid-return-rejected-then-explicit-continue]\" time=\"1.578\" /></testsuite></testsuites>",
+  "original_utf8_bom": false
+}

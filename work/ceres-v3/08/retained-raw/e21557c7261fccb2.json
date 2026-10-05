@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/20261006T061123861-1a781ab3/run/command.json",
+  "original_sha256": "02fee67fe921d662b4b9af710178f7c01985832e03b2f4e3ead24ba5f548c1fe",
+  "utf8_text": "{\r\n  \"started_at\": \"2026-10-05T22:13:06.2876730Z\",\r\n  \"working_directory\": \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\",\r\n  \"argv\": [\r\n    \"-X\",\r\n    \"utf8\",\r\n    \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\08\\\\exploration_harness.py\",\r\n    \"-p\",\r\n    \"no:cacheprovider\",\r\n    \"-W\",\r\n    \"error::pytest.PytestUnhandledThreadExceptionWarning\",\r\n    \"--basetemp\",\r\n    \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\08\\\\evidence\\\\20261006T061123861-1a781ab3\\\\run\\\\tmp\\\\pytest-basetemp\",\r\n    \"--junitxml\",\r\n    \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\08\\\\evidence\\\\20261006T061123861-1a781ab3\\\\run\\\\junit.xml\"\r\n  ],\r\n  \"executable\": \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\backend\\\\.venv\\\\Scripts\\\\python.exe\",\r\n  \"finished_at_utc\": \"2026-10-05T22:18:43.452255+00:00\",\r\n  \"exit_code\": 0\r\n}\r\n",
+  "original_utf8_bom": false
+}

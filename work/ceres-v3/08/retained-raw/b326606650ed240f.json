@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "review/task-publication-spec.md",
+  "original_sha256": "f6fdbbfc95cdf3592f59831ff22f4e67bff507edb443c70e9eb7abe76c433c67",
+  "utf8_text": "# 08 TASK 发布后 Spec 快速复核\n\n当前 TASK 发布与原 Spec 审查记录一致：状态仍为“进行中”；第 14–17 行四项能力条件未勾选，第 18 行证据与审查条件已勾选。下一步明确自动步骤、暂停及续办能力未交付，并按有界探索保留结果，不扩大实现；与 `spec.md` 的 0 项实现 finding、TASK 全验收未满足判断相符。\n\n新增 Standards/Spec 最终链接均存在。TASK 明确这是审查后的状态与证据链接发布，不更改源码、原始记录或通过范围；没有把受控探索写成自动能力已完成。未发现发布字段与原 Spec 审查记录冲突。本次仅核对 TASK 字段、原 Spec 报告及链接存在性，未运行测试、模型或性能检查。\n",
+  "original_utf8_bom": false
+}

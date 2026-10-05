@@ -1,0 +1,110 @@
+{
+  "scope": "Original raw files remain locally. Lossless UTF-8 wrappers preserve raw bytes/BOM; no ZIP/database/temp staged. Bounded controlled attempt, not automatic sequencing delivery.",
+  "records": [
+    {
+      "original_relative_path": "baseline/baseline.json",
+      "original_sha256": "98496dfb5f1396f440791eb524611e4c878d7d9b3f49fc1bbf45027f09efbbc3",
+      "wrapper": "work/ceres-v3/08/retained-raw/ac9be3d4ab4e6cec.json"
+    },
+    {
+      "original_relative_path": "evidence/20261006T061123861-1a781ab3/baseline/baseline.json",
+      "original_sha256": "c76b6f2626225402dee77f607393225a5df8bca97014bb7e8312978a73b9a424",
+      "wrapper": "work/ceres-v3/08/retained-raw/282dca6c470ff312.json"
+    },
+    {
+      "original_relative_path": "evidence/20261006T061123861-1a781ab3/run/command.json",
+      "original_sha256": "02fee67fe921d662b4b9af710178f7c01985832e03b2f4e3ead24ba5f548c1fe",
+      "wrapper": "work/ceres-v3/08/retained-raw/e21557c7261fccb2.json"
+    },
+    {
+      "original_relative_path": "evidence/20261006T061123861-1a781ab3/run/data-after.json",
+      "original_sha256": "58e6621cb572586ec0ce58a8de998ebb30953b91a575acd639d4062bb2c1b9ae",
+      "wrapper": "work/ceres-v3/08/retained-raw/5dcf28dff3b1feb6.json"
+    },
+    {
+      "original_relative_path": "evidence/20261006T061123861-1a781ab3/run/data-before.json",
+      "original_sha256": "58e6621cb572586ec0ce58a8de998ebb30953b91a575acd639d4062bb2c1b9ae",
+      "wrapper": "work/ceres-v3/08/retained-raw/a6bfcc1d106faf1d.json"
+    },
+    {
+      "original_relative_path": "evidence/20261006T061123861-1a781ab3/run/environment.json",
+      "original_sha256": "ffb43933fd7f49891f64406e1545648743a34a76189a6902fe5be1929281f770",
+      "wrapper": "work/ceres-v3/08/retained-raw/30e22eb4130c6b86.json"
+    },
+    {
+      "original_relative_path": "evidence/20261006T061123861-1a781ab3/run/exit-code.txt",
+      "original_sha256": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+      "wrapper": "work/ceres-v3/08/retained-raw/e0cc493a6465f203.json"
+    },
+    {
+      "original_relative_path": "evidence/20261006T061123861-1a781ab3/run/junit.xml",
+      "original_sha256": "b23825a25bcef8d5d678f0a8cc892c9b29942526d1f3dd606702e9c5be5c5702",
+      "wrapper": "work/ceres-v3/08/retained-raw/51ea206684d487a7.json"
+    },
+    {
+      "original_relative_path": "evidence/20261006T061123861-1a781ab3/run/runtime-preflight.txt",
+      "original_sha256": "d10c03fd3f4c5c3fb420d2b4659c672470a07abc5bec80a8527afcf39747fa31",
+      "wrapper": "work/ceres-v3/08/retained-raw/4273e680b6907802.json"
+    },
+    {
+      "original_relative_path": "evidence/20261006T061123861-1a781ab3/run/source-hashes-after.json",
+      "original_sha256": "ee2ef6086df7ff5db91fb14bfbbf6acdcbe72c5c52a22fa8ffc84c9462308c35",
+      "wrapper": "work/ceres-v3/08/retained-raw/2cb4123d422fddf0.json"
+    },
+    {
+      "original_relative_path": "evidence/20261006T061123861-1a781ab3/run/source-hashes-before.json",
+      "original_sha256": "ee2ef6086df7ff5db91fb14bfbbf6acdcbe72c5c52a22fa8ffc84c9462308c35",
+      "wrapper": "work/ceres-v3/08/retained-raw/63b441013af26407.json"
+    },
+    {
+      "original_relative_path": "evidence/20261006T061123861-1a781ab3/run/source-snapshot-audit.json",
+      "original_sha256": "a17ef4488fc66a22937130a4ba71434b3d01baabd41931551f34faed545e803f",
+      "wrapper": "work/ceres-v3/08/retained-raw/5e3f99d749ebb491.json"
+    },
+    {
+      "original_relative_path": "evidence/20261006T061123861-1a781ab3/run/stderr.txt",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "wrapper": "work/ceres-v3/08/retained-raw/ebc833c892bba20b.json"
+    },
+    {
+      "original_relative_path": "evidence/20261006T061123861-1a781ab3/run/stdout.txt",
+      "original_sha256": "882f497d9f553820008888fa44f71db86e4f0f4cda3c8191344b24900005bf5f",
+      "wrapper": "work/ceres-v3/08/retained-raw/27ce9a6fbee2e98d.json"
+    },
+    {
+      "original_relative_path": "evidence/20261006T061123861-1a781ab3/run/summary.json",
+      "original_sha256": "517a5fa8be4e435b32b80067c5169529ed555c0fda8aa07505db9a55d2334de5",
+      "wrapper": "work/ceres-v3/08/retained-raw/72a1b83fb2769025.json"
+    },
+    {
+      "original_relative_path": "review/review-scope.json",
+      "original_sha256": "23b3540cd5f7137cce15cfb658086adb77bbf710d2c5e5b7ec4f596e1c28c08b",
+      "wrapper": "work/ceres-v3/08/retained-raw/c5953931c8339620.json"
+    },
+    {
+      "original_relative_path": "review/source.patch",
+      "original_sha256": "b5c14fb08d886ec9cce4eb29c88f9df5d6dac40f5807936518c04b255da191ed",
+      "wrapper": "work/ceres-v3/08/retained-raw/7b423dad220d4783.json"
+    },
+    {
+      "original_relative_path": "review/spec.md",
+      "original_sha256": "c40dad41d9a934771da0f0f4013237b7bb950a16f1b4d6342218fa6746978b1a",
+      "wrapper": "work/ceres-v3/08/retained-raw/f3377c76d6a6a58b.json"
+    },
+    {
+      "original_relative_path": "review/standards-final.md",
+      "original_sha256": "26670c23a9bb93ee18a70c2236a5862dbd1d33ba5427d7763133d91e56d88453",
+      "wrapper": "work/ceres-v3/08/retained-raw/6886de9bced88233.json"
+    },
+    {
+      "original_relative_path": "review/standards.md",
+      "original_sha256": "43f413643512a0ac60e763616843351f7e7c04ac7a478adf252696ec79d9badc",
+      "wrapper": "work/ceres-v3/08/retained-raw/d436be8dbf3b6857.json"
+    },
+    {
+      "original_relative_path": "review/task-publication-spec.md",
+      "original_sha256": "f6fdbbfc95cdf3592f59831ff22f4e67bff507edb443c70e9eb7abe76c433c67",
+      "wrapper": "work/ceres-v3/08/retained-raw/b326606650ed240f.json"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "captured_at": "2026-10-05T23:26:15.6270564Z",
+  "fixed_head": "5462e999d583a9bab6147d0b4141d98321f3cc92",
+  "actual_head": "5462e999d583a9bab6147d0b4141d98321f3cc92",
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres",
+  "argv": [
+    "diff",
+    "--cached",
+    "--check"
+  ],
+  "command": "git diff --cached --check",
+  "environment": {
+    "powershell_version": "7.6.5",
+    "git_index_file_override_present": false,
+    "git_dir_override_present": false,
+    "git_work_tree_override_present": false
+  },
+  "scope_path_count": 32,
+  "staged_path_count": 32,
+  "scope_paths_exact_match": true,
+  "missing_paths": [],
+  "unexpected_paths": [],
+  "forbidden_staged_paths": [],
+  "actual_exit_code": 0,
+  "stdout_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\08\\review\\precommit-check.stdout.txt",
+  "stderr_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\08\\review\\precommit-check.stderr.txt",
+  "stdout": null,
+  "stderr": null,
+  "index_paths_unchanged_during_check": true
+}
