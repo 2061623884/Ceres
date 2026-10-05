@@ -1,0 +1,3 @@
+Command is executed as PowerShell native argument array: & $py @args
+See command-argv.json for exact executable/argv/cwd.
+

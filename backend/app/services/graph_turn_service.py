@@ -130,6 +130,7 @@ class GraphTurnService:
             purchase_summary=getattr(ctx, "purchase_summary", None),
             deadline_expired=deadline_expired,
             requirements=requirements,
+            owner_id=self.owner_id,
         )
 
     def _requirements(self, session: GuideSession, state: TaskState | None) -> Any:

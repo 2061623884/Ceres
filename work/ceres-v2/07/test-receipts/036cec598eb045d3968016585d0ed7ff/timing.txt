@@ -1,0 +1,7 @@
+START_UTC=2026-10-05T11:25:09.9310661Z
+RUN_DIR=C:\Users\20616\Desktop\Agent\Agent产品\work\ceres-v2-test-env\run-036cec598eb045d3968016585d0ed7ff
+STDOUT=C:\Users\20616\Desktop\Agent\Agent产品\work\ceres-v2-test-env\run-036cec598eb045d3968016585d0ed7ff\stdout.txt
+STDERR=C:\Users\20616\Desktop\Agent\Agent产品\work\ceres-v2-test-env\run-036cec598eb045d3968016585d0ed7ff\stderr.txt
+
+PYTEST_EXIT_CODE=0
+END_UTC=2026-10-05T11:25:38.1621026Z

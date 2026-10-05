@@ -1,0 +1,126 @@
+FF                                                                       [100%]
+================================== FAILURES ===================================
+____________ test_named_history_lookup_finds_the_owned_snapshot[1] ____________
+
+indexed_client = <starlette.testclient.TestClient object at 0x000002C0B663DAF0>
+semantic_provider = <function semantic_provider.<locals>._install at 0x000002C0B926CB80>
+run = 1
+
+    @pytest.mark.parametrize("run", [1, 2])
+    def test_named_history_lookup_finds_the_owned_snapshot(indexed_client, semantic_provider, run):
+        semantic_provider([request_new("dish", "番茄炒蛋", people=2, mode="self_cook")])
+        sid = create_session(indexed_client)
+        source = send_turn(indexed_client, sid, "两人份番茄炒蛋")
+    
+        def answer(request):
+            row = request["query_results"][0]["plans"][0]
+            assert row["plan_id"] == source["plan"]["plan_id"]
+            return {"reply": f"找到了方案{row['plan_id']}，本次需重新配货。", "display_refs": []}
+    
+        semantic_provider([{"reads": [{"kind": "history", "topic": "番茄炒蛋"}]}, Continuation(answer)])
+        new_sid = create_session(indexed_client)
+>       found = send_turn(indexed_client, new_sid, "查我之前的番茄炒蛋方案")
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_v2_history_named_lookup.py:24: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+client = <starlette.testclient.TestClient object at 0x000002C0B663DAF0>
+session_id = 'sess-c609d4b358b6', message = '查我之前的番茄炒蛋方案', previous = None
+request_id = None, headers = None, extra = {}
+
+    def send_turn(
+        client,
+        session_id: str,
+        message: str,
+        previous: dict[str, Any] | None = None,
+        *,
+        request_id: str | None = None,
+        headers: dict[str, str] | None = None,
+        **extra: Any,
+    ) -> dict[str, Any]:
+        """One SSE turn; returns turn.completed payload or raises on error/stop."""
+        response = post_turn(
+            client,
+            session_id,
+            message,
+            previous,
+            request_id=request_id,
+            headers=headers,
+            **extra,
+        )
+        if response.status_code >= 400:
+            err = response.json()["error"]
+>           raise AssertionError(
+                f"SSE error {err.get('code')}: {err.get('message')}"
+            )
+E           AssertionError: SSE error IndexError: list index out of range
+
+tests\support\__init__.py:160: AssertionError
+____________ test_named_history_lookup_finds_the_owned_snapshot[2] ____________
+
+indexed_client = <starlette.testclient.TestClient object at 0x000002C0B92631A0>
+semantic_provider = <function semantic_provider.<locals>._install at 0x000002C0B9466340>
+run = 2
+
+    @pytest.mark.parametrize("run", [1, 2])
+    def test_named_history_lookup_finds_the_owned_snapshot(indexed_client, semantic_provider, run):
+        semantic_provider([request_new("dish", "番茄炒蛋", people=2, mode="self_cook")])
+        sid = create_session(indexed_client)
+        source = send_turn(indexed_client, sid, "两人份番茄炒蛋")
+    
+        def answer(request):
+            row = request["query_results"][0]["plans"][0]
+            assert row["plan_id"] == source["plan"]["plan_id"]
+            return {"reply": f"找到了方案{row['plan_id']}，本次需重新配货。", "display_refs": []}
+    
+        semantic_provider([{"reads": [{"kind": "history", "topic": "番茄炒蛋"}]}, Continuation(answer)])
+        new_sid = create_session(indexed_client)
+>       found = send_turn(indexed_client, new_sid, "查我之前的番茄炒蛋方案")
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_v2_history_named_lookup.py:24: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+client = <starlette.testclient.TestClient object at 0x000002C0B92631A0>
+session_id = 'sess-f5e8dc2d9b27', message = '查我之前的番茄炒蛋方案', previous = None
+request_id = None, headers = None, extra = {}
+
+    def send_turn(
+        client,
+        session_id: str,
+        message: str,
+        previous: dict[str, Any] | None = None,
+        *,
+        request_id: str | None = None,
+        headers: dict[str, str] | None = None,
+        **extra: Any,
+    ) -> dict[str, Any]:
+        """One SSE turn; returns turn.completed payload or raises on error/stop."""
+        response = post_turn(
+            client,
+            session_id,
+            message,
+            previous,
+            request_id=request_id,
+            headers=headers,
+            **extra,
+        )
+        if response.status_code >= 400:
+            err = response.json()["error"]
+>           raise AssertionError(
+                f"SSE error {err.get('code')}: {err.get('message')}"
+            )
+E           AssertionError: SSE error IndexError: list index out of range
+
+tests\support\__init__.py:160: AssertionError
+============================== warnings summary ===============================
+app\services\template_matcher.py:21
+  C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\app\services\template_matcher.py:21: SyntaxWarning: invalid escape sequence '\['
+    _PUNCT_PATTERN = re.compile(r"[\s\u3000，。！？、；：""''（）()\[\]【】\-—·…]+")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_v2_history_named_lookup.py::test_named_history_lookup_finds_the_owned_snapshot[1]
+FAILED tests/test_v2_history_named_lookup.py::test_named_history_lookup_finds_the_owned_snapshot[2]
+2 failed, 1 warning in 4.13s

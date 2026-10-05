@@ -1,0 +1,31 @@
+{
+  "base": "e24debf670db02a86cb79c40933b901827db8a55",
+  "source_staged": [
+    "backend/app/services/conversation_service.py",
+    "backend/app/services/graph_turn_service.py",
+    "backend/app/llm/live_semantic_provider.py"
+  ],
+  "artifact_only": [
+    {
+      "path": "backend/app/agent/tools/read.py",
+      "reason": "error: patch failed: backend/app/agent/tools/read.py:40\nerror: backend/app/agent/tools/read.py: patch does not apply"
+    },
+    {
+      "path": "backend/app/agent/protocol.py",
+      "reason": "error: patch failed: backend/app/agent/protocol.py:44\nerror: backend/app/agent/protocol.py: patch does not apply"
+    },
+    {
+      "path": "backend/app/prompts/semantic.py",
+      "reason": "error: patch failed: backend/app/prompts/semantic.py:64\nerror: backend/app/prompts/semantic.py: patch does not apply"
+    },
+    {
+      "path": "backend/app/agent/graph/nodes/mutation.py",
+      "reason": "error: patch failed: backend/app/agent/graph/nodes/mutation.py:501\nerror: backend/app/agent/graph/nodes/mutation.py: patch does not apply"
+    },
+    {
+      "path": "backend/app/agent/tools/prepare_purchase_plan.py",
+      "reason": "error: patch failed: backend/app/agent/tools/prepare_purchase_plan.py:21\nerror: backend/app/agent/tools/prepare_purchase_plan.py: patch does not apply"
+    }
+  ],
+  "note": "Only this ticket increment; inherited V1/V2 working overlays remain. Not a clean-checkout freeze."
+}

@@ -1,0 +1,3 @@
+PowerShell invocation: & $py @args
+Exact executable/argv/cwd: command-argv.json
+Correction: the earlier rg filter used forward slashes and missed the Windows-backslash path; test_read_tools.py does exist. See read-tools-path-check-correction.txt and later isolated test run.

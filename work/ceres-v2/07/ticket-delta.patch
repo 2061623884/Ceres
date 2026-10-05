@@ -1,0 +1,241 @@
+--- a/backend/app/services/conversation_service.py
++++ b/backend/app/services/conversation_service.py
+@@ -6,7 +6,7 @@
+ from typing import Any
+ from uuid import uuid4
+ 
+-from sqlalchemy import text
++from sqlalchemy import func, text
+ from sqlalchemy.orm import Session
+ 
+ from app.models.conversation import GuideMessage, PlanSnapshot
+@@ -109,6 +109,27 @@
+         if not snap:
+             return None
+         return json.loads(snap.plan_json)
++
++    def list_plan_history(self, query: str | None = None) -> list[dict[str, Any]]:
++        latest = (
++            self.db.query(PlanSnapshot.plan_id, func.max(PlanSnapshot.plan_version).label("version"))
++            .join(GuideSession, GuideSession.session_id == PlanSnapshot.session_id)
++            .filter(GuideSession.owner_id == self.owner_id)
++            .group_by(PlanSnapshot.plan_id)
++            .subquery()
++        )
++        snapshots = self.db.query(PlanSnapshot).join(
++            latest, (PlanSnapshot.plan_id == latest.c.plan_id)
++            & (PlanSnapshot.plan_version == latest.c.version),
++        ).order_by(PlanSnapshot.created_at.desc())
++        if query:
++            snapshots = snapshots.filter(
++                (PlanSnapshot.plan_id == query)
++                | PlanSnapshot.plan_json.contains(json.dumps(query)[1:-1], autoescape=True)
++            )
++        return [{"plan_id": row.plan_id, "plan_version": row.plan_version,
++                 "task_id": row.task_id, "created_at": row.created_at.isoformat(),
++                 "plan": json.loads(row.plan_json)} for row in snapshots.limit(5)]
+ 
+     def list_messages(
+         self,
+--- a/backend/app/services/graph_turn_service.py
++++ b/backend/app/services/graph_turn_service.py
+@@ -130,6 +130,7 @@
+             purchase_summary=getattr(ctx, "purchase_summary", None),
+             deadline_expired=deadline_expired,
+             requirements=requirements,
++            owner_id=self.owner_id,
+         )
+ 
+     def _requirements(self, session: GuideSession, state: TaskState | None) -> Any:
+--- a/backend/app/llm/live_semantic_provider.py
++++ b/backend/app/llm/live_semantic_provider.py
+@@ -25,6 +25,7 @@
+ # The outbound prompt text lives in ``app.prompts.semantic``; this module owns
+ # only the request shape, schema narrowing, transport and parsing.
+ from app.prompts.semantic import (
++    HISTORY_COMPLETE_PROMPT,
+     PROPOSAL_EXAMPLES,
+     RETRIEVAL_COMPLETE_PROMPT,
+     SYSTEM_PROMPT,
+@@ -112,7 +113,10 @@
+         # understanding, the reply-only schema once retrieval ran.
+         protocol = request.get("protocol") or {}
+         answering = bool(request.get("query_results"))
+-        system = SYSTEM_PROMPT + (RETRIEVAL_COMPLETE_PROMPT if answering else "")
++        answer_prompt = HISTORY_COMPLETE_PROMPT if any(
++            result.get("kind") == "history" for result in request.get("query_results", [])
++        ) else RETRIEVAL_COMPLETE_PROMPT
++        system = SYSTEM_PROMPT + (answer_prompt if answering else "")
+         examples = [] if answering else PROPOSAL_EXAMPLES
+         return {
+             "model": self.settings.llm_model,
+--- a/backend/app/agent/tools/read.py
++++ b/backend/app/agent/tools/read.py
+@@ -40,7 +40,8 @@
+ from app.services.retrieval_index import IndexUnavailable, read_pointer
+ from app.services.retrieval_service import RetrievalService
+ from app.services.catalog_service import CatalogService, comparison_card
+-from app.services.shopping_plan_service import ShoppingPlanService
++from app.services.conversation_service import ConversationService
++from app.services.shopping_plan_service import ShoppingPlanService, load_scenarios
+ from app.services.template_matcher import dish_display_name, load_templates
+ from app.services.template_plan_service import TemplatePlanService, expand_ingredient_terms
+ from app.services.validation_context import ValidationContext
+@@ -83,8 +84,10 @@
+         deadline_expired: Callable[[], bool] | None = None,
+         requirements: Any | None = None,
+         retrieval: RetrievalService | None = None,
++        owner_id: str | None = None,
+     ):
+         self.db = db
++        self.owner_id = owner_id
+         self.store_id = store_id
+         self.delivery_zone_id = delivery_zone_id
+         #: The turn's real user constraints. Hard filters come from here, not from
+@@ -495,6 +498,10 @@
+         for row in facts.get("candidates", []):
+             if row.get("dish_id"):
+                 row["ref"] = candidates.allocate("dish", str(row["dish_id"]), row["name"]).ref
++        for plan in facts.get("plans", []):
++            if plan["source_complete"]:
++                for target in plan["targets"]:
++                    target["ref"] = candidates.allocate(target["kind"], target["target_id"], target["name"]).ref
+         return facts
+ 
+     def _collect_query(
+@@ -516,6 +523,37 @@
+         really excludes peanut from a recommendation or a recipe instead of being
+         left to the retrieval route to "understand".
+         """
++        if kind == "history":
++            plans = []
++            catalog = CatalogService(self.db, self.store_id)
++            dishes = {row["template_id"]: row for row in load_templates(self.db)}
++            scenarios = {row["scenario_id"]: row for row in load_scenarios()}
++            for source in ConversationService(self.db, self.owner_id).list_plan_history(query):
++                plan = source.pop("plan")
++                targets = []
++                source_complete = bool(plan.get("targets"))
++                for target in plan.get("targets", []):
++                    target_kind, target_id = target["kind"], target["target_id"]
++                    if target_kind == "dish":
++                        current = dishes.get(target_id)
++                    elif target_kind == "product":
++                        current = catalog.get_product(target_id)
++                    else:
++                        current = scenarios.get(target_id)
++                    if current is None:
++                        source_complete = False
++                    targets.append({"kind": target_kind, "target_id": target_id, "name": target["name"],
++                                    "historical_people": target.get("people"),
++                                    "historical_items": [{"sku_id": item["sku_id"], "quantity": item["quantity"],
++                                                          "unit_price_fen": item["unit_price_fen"],
++                                                          "shared": len(item.get("contributions", [])) > 1}
++                                                         for item in plan["items"]
++                                                         if item["group_id"] == target["group_id"]
++                                                         or any(c["group_id"] == target["group_id"]
++                                                                for c in item.get("contributions", []))]})
++                plans.append({**source, "source_complete": source_complete, "targets": targets})
++            return {"kind": "history", "status": STATUS_COMPLETED, "empty": not plans,
++                    "plans": plans, "note": "历史信息仅供参考；当前价格库存及数量须重新核查，旧选择与加购授权不恢复。来源不完整先澄清，不猜SKU或数量。"}
+         if kind == "compare":
+             context = self._validation_context(
+                 extra_excluded=extra_excluded, extra_budget_fen=extra_budget_fen,
+--- a/backend/app/agent/protocol.py
++++ b/backend/app/agent/protocol.py
+@@ -44,7 +44,7 @@
+ PROPOSAL_VERSION = 1
+ 
+ LOOKUP_KINDS = ("dish", "product")
+-QUERY_KINDS = ("recommend", "recipe", "cart", "catalog", "compare")
++QUERY_KINDS = ("recommend", "recipe", "cart", "catalog", "compare", "history")
+ 
+ CANDIDATE_KINDS = ("dish", "product", "scenario", "group", "item")
+ 
+@@ -674,10 +674,10 @@
+         raise SemanticProtocolError("MALFORMED_PROPOSAL", "read.topic 最多 200 字")
+     if kind == "compare" and not topic:
+         raise SemanticProtocolError("MALFORMED_PROPOSAL", "compare 需要商品品类 topic")
+-    if topic and kind not in ("recipe", "recommend", "compare"):
++    if topic and kind not in ("recipe", "recommend", "compare", "history"):
+         # cart / catalog describe the session itself; a product name is a lookup.
+         raise SemanticProtocolError(
+-            "UNSUPPORTED_OPERATION", "只有 recipe、recommend 与 compare 支持主题；商品名使用 lookups"
++            "UNSUPPORTED_OPERATION", "只有 recipe、recommend、compare 与 history 支持主题；商品名使用 lookups"
+         )
+     return Query(kind=kind, query=topic)
+ 
+@@ -816,8 +816,8 @@
+         "lookups": {"type": "array", "maxItems": 2, "items": obj({
+             "kind": enum(LOOKUP_KINDS), "query": {**text, "description": "只填名称，不带否定词"}})},
+         "reads": {"type": "array", "maxItems": 4, "items": obj({
+-            "kind": enum(QUERY_KINDS, "compare=品类商品规格价格比较，recommend=推荐菜品，recipe=做法，cart=购物车，catalog=目录；具名商品用lookups"),
+-            "topic": {**text, "description": "compare必须填品类名（如可乐）；recommend / recipe可填主题；cart / catalog不填"}})},
++            "kind": enum(QUERY_KINDS, "history=本用户历史方案，compare=品类商品规格价格比较，recommend=推荐菜品，recipe=做法，cart=购物车，catalog=目录；具名商品用lookups"),
++            "topic": {**text, "description": "compare必须填品类名；history可填已核实方案ID或菜/商品名，不填则最近方案；recommend / recipe可填主题；cart / catalog不填"}})},
+         "questions": {"type": "array", "maxItems": 3, "items": obj({
+             "slot": text, "question": text, "options": texts})},
+         "display_refs": texts,
+--- a/backend/app/prompts/semantic.py
++++ b/backend/app/prompts/semantic.py
+@@ -64,6 +64,8 @@
+ - lookups：需要真实候选时查菜名或商品名；query 保留用户点名商品的完整名称及规格，不带「不要」之类的否定词。只读查某个商品也用 product lookup，target.intent=explore；小包装条件单独填写 constraints.specification，不放进 query 或 reads.topic。
+   用户说「只读查一下」表示这轮不购买，不表示必须填写 reads。只读查询面粉等具体商品时仍填 product lookup、target.intent=explore；用户明确的小包装等条件仍必须填写 constraints。
+ - reads：compare 用 topic=可乐查该品类规格与当前报价差异；recommend 查用户想找的主题（没主题就是开放式推荐）；recipe 查做法；cart / catalog 查购物车和目录，不能填 topic。查询具体具名商品使用 lookups，不用 catalog/topic。compare 回复只依据 sellable_products，展示不超过五个真实 ref；无匹配如实说明，不换其他品类。
++- 用户说「上次的方案」「再买上次的」时，先用 reads history 查询本用户真实快照；topic 只填已核实方案ID或用户点名菜/商品，不把“上次”当名称。来源不足或多个方案不清楚时必要澄清，不用记忆摘要猜SKU/件数。回答引用真实plan_id/task_id，历史价格、人数和件数标明为历史。展示完整来源的真实targets ref；选中后沿用target购买流程创建本次清单，当前明确人数/预算/排除优先，商品件数只依据结构化历史或本次明说；多目标沿用逐项选择、明确追加的已有流程，不在一轮自动重建整份方案。重新配货可能改变价格或规格，旧勾选和加购授权不恢复，最终仍须单独明确确认。
++  historical_items 的 quantity 是历史整行包数，shared=true 时包含其他目标贡献，不能当作该商品独立件数；此时询问本次要几件。没明确沿用历史人数时也不自行填人数，用当前条件或已有默认规则。
+ - questions：只有真正卡住这一轮的歧义才问，每轮只问一个；options 只能是服务端给过的 ref。
+   无名一餐的预算或忌口由服务端只问一次，不要在 questions 里另外追问人数、口味或菜名。
+ - 用户本轮明确回答 pending_clarifications 中的问题时，必须把该问题的真实 question_id 填入 resolved_questions，并在对应字段记录答案明确的目标、约束及追加或替换关系；未回答的问题不填。普通 ACK（如“好的”“嗯”）不算对澄清问题的回答，也不标记为 resolved。
+@@ -214,6 +216,15 @@
+ # Appended to SYSTEM_PROMPT only when the request already carries
+ # ``query_results``: retrieval is a completed phase, and the answer only puts the
+ # real facts into words — it neither reads again nor replans.
++HISTORY_COMPLETE_PROMPT = (
++    "\n当前阶段：history查询已完成，query_results的plans是本用户真实历史快照。"
++    "只据此回答并引用实际plan_id、plan_version和task_id；历史人数、件数、价格明确标为历史，不能声称当前有货或已生成清单。"
++    "source_complete=false或无来源时说明信息不足并必要澄清，不猜SKU/数量；display_refs=[]。"
++    "完整来源可以展示其中各targets的真实ref，多个方案不清楚时先问选哪份；多目标逐项选择及明确追加。"
++    "商品共享行的数量不是独立件数。只选历史方案不恢复选择或加购授权；本次仍重查供给并单独明确确认。"
++    "只输出reply及display_refs，不再检索、修改清单或加购。"
++)
++
+ RETRIEVAL_COMPLETE_PROMPT = (
+     "\n当前阶段：本轮检索已经结束，query_results 是已返回的真实结果。"
+     "只根据这些结果用自然语言写 reply。"
+--- a/backend/app/agent/graph/nodes/mutation.py
++++ b/backend/app/agent/graph/nodes/mutation.py
+@@ -501,9 +501,7 @@
+         if item.verb == "add":
+             if not item.specification and "specification" not in clear:
+                 item.specification = dict(saved.get("specification") or {})
+-        if (task_state is not None and task_state.plan is not None
+-                and any("selection_goal" in target for target in task_state.plan["targets"])):
+-            item.excluded_ingredients = sorted(expand_ingredient_terms(item.excluded_ingredients))
++        item.excluded_ingredients = sorted(expand_ingredient_terms(item.excluded_ingredients))
+ 
+     if not authorized:
+         return base(
+--- a/backend/app/agent/tools/prepare_purchase_plan.py
++++ b/backend/app/agent/tools/prepare_purchase_plan.py
+@@ -21,6 +21,7 @@
+ from app.services.template_matcher import get_template_by_id
+ from app.services.template_plan_service import TemplatePlanService
+ from app.services.catalog_service import CatalogService
++from app.services.ingredient_catalog import ingredient_name_zh
+ from app.services.validation_context import ValidationContext
+ 
+ TARGET_KINDS = ("dish", "product", "scenario")
+@@ -81,7 +82,11 @@
+     if "uncovered" in lowered or "覆盖" in joined:
+         return "UNCOVERED", f"「{dish_label}」还有主料没有勾选，勾选后才能确认。"
+     if "not in candidate set" in lowered or "violates constraints" in lowered:
+-        return "VALIDATION_FAILED", f"「{dish_label}」里有商品不满足当前条件，暂时无法配齐。"
++        message = f"「{dish_label}」里有商品不满足当前条件，暂时无法配齐。"
++        if ctx.excluded_ingredients:
++            names = dict.fromkeys(ingredient_name_zh(term) or term for term in ctx.excluded_ingredients)
++            message += f"本次排除条件：{'、'.join(names)}。"
++        return "VALIDATION_FAILED", message
+     return "VALIDATION_FAILED", f"暂时无法配齐「{dish_label}」：{joined}"
+ 
+ 

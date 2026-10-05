@@ -1,0 +1,2 @@
+PowerShell invocation: & $py @args
+Exact executable/argv/cwd: command-argv.json

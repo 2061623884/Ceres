@@ -1,0 +1,3 @@
+PowerShell invocation: & $py @argv
+Exact read-only Python argv/cwd/database paths: command-argv.json
+Each SQLite URI uses mode=ro; SQL sets PRAGMA query_only=ON.

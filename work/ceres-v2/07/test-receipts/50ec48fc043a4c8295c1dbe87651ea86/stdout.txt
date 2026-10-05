@@ -1,0 +1,98 @@
+............FF                                                           [100%]
+================================== FAILURES ===================================
+____ test_history_rebuild_obeys_current_supply_and_conditions[exclusion-1] ____
+
+indexed_client = <starlette.testclient.TestClient object at 0x0000028439D40D40>
+semantic_provider = <function semantic_provider.<locals>._install at 0x000002843A20D8A0>
+run = 1, condition = 'exclusion'
+
+    @pytest.mark.parametrize("run", [1, 2])
+    @pytest.mark.parametrize("condition", ["stock", "budget", "exclusion"])
+    def test_history_rebuild_obeys_current_supply_and_conditions(indexed_client, semantic_provider, run, condition):
+        semantic_provider([request_new("dish", "番茄炒蛋", people=2, mode="self_cook")])
+        old_sid = create_session(indexed_client)
+        original = send_turn(indexed_client, old_sid, "两人份番茄炒蛋")
+        source_id = original["plan"]["plan_id"]
+        if condition == "stock":
+            with db_module.SessionLocal() as db:
+                db.query(Offer).filter(Offer.sku_id.in_(["demo:eggs-fresh-6pack", "demo:eggs-10pack"])).update(
+                    {Offer.available_qty: 0}, synchronize_session=False,
+                )
+                db.commit()
+        conditions = {"budget_yuan": 1} if condition == "budget" else {"excluded_ingredients": ["鸡蛋"]} if condition == "exclusion" else {}
+    
+        def answer(request):
+            target = request["query_results"][0]["plans"][0]["targets"][0]
+            return {"reply": f"历史方案{source_id}是番茄炒蛋，请明确本次条件。", "display_refs": [target["ref"]]}
+    
+        semantic_provider([{"reads": [{"kind": "history", "topic": source_id}]}, Continuation(answer),
+                           request_new("dish", "番茄炒蛋", people=2, mode="self_cook", constraints=conditions)])
+        sid = create_session(indexed_client)
+        found = send_turn(indexed_client, sid, "查上次的番茄炒蛋")
+        attempt = send_turn(indexed_client, sid, "按上次的菜，本次条件已明确", found)
+        assert attempt["plan"] is None, attempt
+        assert indexed_client.get("/api/v1/cart").json()["items"] == []
+        if condition == "stock":
+            assert any(q["slot"] == "supply_gap_choice" and "鸡蛋" in q["question"]
+                       for q in attempt["pending_clarifications"]), attempt
+        elif condition == "budget":
+            assert "预算" in attempt["message"], attempt
+        else:
+>           assert "鸡蛋" in attempt["message"], attempt
+E           AssertionError: {'session_id': 'sess-8e42342d7554', 'task_id': None, 'state_version': 0, 'status': 'understanding', ...}
+E           assert '鸡蛋' in '「番茄炒蛋」里有商品不满足当前条件，暂时无法配齐。'
+
+tests\test_v2_historical_repurchase.py:235: AssertionError
+____ test_history_rebuild_obeys_current_supply_and_conditions[exclusion-2] ____
+
+indexed_client = <starlette.testclient.TestClient object at 0x0000028439D43320>
+semantic_provider = <function semantic_provider.<locals>._install at 0x000002843A43EDE0>
+run = 2, condition = 'exclusion'
+
+    @pytest.mark.parametrize("run", [1, 2])
+    @pytest.mark.parametrize("condition", ["stock", "budget", "exclusion"])
+    def test_history_rebuild_obeys_current_supply_and_conditions(indexed_client, semantic_provider, run, condition):
+        semantic_provider([request_new("dish", "番茄炒蛋", people=2, mode="self_cook")])
+        old_sid = create_session(indexed_client)
+        original = send_turn(indexed_client, old_sid, "两人份番茄炒蛋")
+        source_id = original["plan"]["plan_id"]
+        if condition == "stock":
+            with db_module.SessionLocal() as db:
+                db.query(Offer).filter(Offer.sku_id.in_(["demo:eggs-fresh-6pack", "demo:eggs-10pack"])).update(
+                    {Offer.available_qty: 0}, synchronize_session=False,
+                )
+                db.commit()
+        conditions = {"budget_yuan": 1} if condition == "budget" else {"excluded_ingredients": ["鸡蛋"]} if condition == "exclusion" else {}
+    
+        def answer(request):
+            target = request["query_results"][0]["plans"][0]["targets"][0]
+            return {"reply": f"历史方案{source_id}是番茄炒蛋，请明确本次条件。", "display_refs": [target["ref"]]}
+    
+        semantic_provider([{"reads": [{"kind": "history", "topic": source_id}]}, Continuation(answer),
+                           request_new("dish", "番茄炒蛋", people=2, mode="self_cook", constraints=conditions)])
+        sid = create_session(indexed_client)
+        found = send_turn(indexed_client, sid, "查上次的番茄炒蛋")
+        attempt = send_turn(indexed_client, sid, "按上次的菜，本次条件已明确", found)
+        assert attempt["plan"] is None, attempt
+        assert indexed_client.get("/api/v1/cart").json()["items"] == []
+        if condition == "stock":
+            assert any(q["slot"] == "supply_gap_choice" and "鸡蛋" in q["question"]
+                       for q in attempt["pending_clarifications"]), attempt
+        elif condition == "budget":
+            assert "预算" in attempt["message"], attempt
+        else:
+>           assert "鸡蛋" in attempt["message"], attempt
+E           AssertionError: {'session_id': 'sess-5b7ba6ebdfc3', 'task_id': None, 'state_version': 0, 'status': 'understanding', ...}
+E           assert '鸡蛋' in '「番茄炒蛋」里有商品不满足当前条件，暂时无法配齐。'
+
+tests\test_v2_historical_repurchase.py:235: AssertionError
+============================== warnings summary ===============================
+app\services\template_matcher.py:21
+  C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\app\services\template_matcher.py:21: SyntaxWarning: invalid escape sequence '\['
+    _PUNCT_PATTERN = re.compile(r"[\s\u3000，。！？、；：""''（）()\[\]【】\-—·…]+")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_v2_historical_repurchase.py::test_history_rebuild_obeys_current_supply_and_conditions[exclusion-1]
+FAILED tests/test_v2_historical_repurchase.py::test_history_rebuild_obeys_current_supply_and_conditions[exclusion-2]
+2 failed, 12 passed, 1 warning in 23.83s

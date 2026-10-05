@@ -1,0 +1,7 @@
+PYTHONUTF8=1
+PYTHONDONTWRITEBYTECODE=1
+DATABASE_URL=<not used>
+MERCURY_DB_PATH=<not used>
+LLM_MODEL=<not used>
+MEMORY_MODEL=<not used>
+No settings or credentials loaded.

@@ -25,6 +25,7 @@ from app.llm.structured_output import extract_json_object
 # The outbound prompt text lives in ``app.prompts.semantic``; this module owns
 # only the request shape, schema narrowing, transport and parsing.
 from app.prompts.semantic import (
+    HISTORY_COMPLETE_PROMPT,
     PROPOSAL_EXAMPLES,
     RETRIEVAL_COMPLETE_PROMPT,
     SYSTEM_PROMPT,
@@ -112,7 +113,10 @@ class LiveSemanticProvider:
         # understanding, the reply-only schema once retrieval ran.
         protocol = request.get("protocol") or {}
         answering = bool(request.get("query_results"))
-        system = SYSTEM_PROMPT + (RETRIEVAL_COMPLETE_PROMPT if answering else "")
+        answer_prompt = HISTORY_COMPLETE_PROMPT if any(
+            result.get("kind") == "history" for result in request.get("query_results", [])
+        ) else RETRIEVAL_COMPLETE_PROMPT
+        system = SYSTEM_PROMPT + (answer_prompt if answering else "")
         examples = [] if answering else PROPOSAL_EXAMPLES
         return {
             "model": self.settings.llm_model,

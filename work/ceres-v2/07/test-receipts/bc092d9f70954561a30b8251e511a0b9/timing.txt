@@ -1,0 +1,8 @@
+START_UTC=2026-10-05T11:26:24.1329567Z
+RUN_DIR=C:\Users\20616\Desktop\Agent\Agent产品\work\ceres-v2-test-env\run-bc092d9f70954561a30b8251e511a0b9
+STDOUT=C:\Users\20616\Desktop\Agent\Agent产品\work\ceres-v2-test-env\run-bc092d9f70954561a30b8251e511a0b9\stdout.txt
+STDERR=C:\Users\20616\Desktop\Agent\Agent产品\work\ceres-v2-test-env\run-bc092d9f70954561a30b8251e511a0b9\stderr.txt
+READ_TOOLS_RG_CHECK=not_found
+
+PYTEST_EXIT_CODE=0
+END_UTC=2026-10-05T11:27:48.5647252Z

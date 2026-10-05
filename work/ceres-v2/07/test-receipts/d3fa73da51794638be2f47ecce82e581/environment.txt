@@ -1,0 +1,10 @@
+PYTHONUTF8=1
+PYTHONDONTWRITEBYTECODE=1
+PYTHONUNBUFFERED=1
+LLM_MODEL=<empty>
+MEMORY_MODEL=<empty>
+RETRIEVAL_INDEX_DIR=<empty>
+DATABASE_URL=sqlite:///C:/Users/20616/Desktop/Agent/Agent产品/work/ceres-v2-test-env/run-d3fa73da51794638be2f47ecce82e581/ceres.sqlite3
+MERCURY_DB_PATH=C:\Users\20616\Desktop\Agent\Agent产品\work\ceres-v2-test-env\run-d3fa73da51794638be2f47ecce82e581\mercury.sqlite3
+PYTEST_BASETEMP=C:\Users\20616\Desktop\Agent\Agent产品\work\ceres-v2-test-env\run-d3fa73da51794638be2f47ecce82e581\pytest-tmp
+Test uses 65-item V2 fixture; no live acceptance opt-in; model/key values not logged

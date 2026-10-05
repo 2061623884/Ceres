@@ -6,7 +6,7 @@ import json
 from typing import Any
 from uuid import uuid4
 
-from sqlalchemy import text
+from sqlalchemy import func, text
 from sqlalchemy.orm import Session
 
 from app.models.conversation import GuideMessage, PlanSnapshot
@@ -109,6 +109,27 @@ class ConversationService:
         if not snap:
             return None
         return json.loads(snap.plan_json)
+
+    def list_plan_history(self, query: str | None = None) -> list[dict[str, Any]]:
+        latest = (
+            self.db.query(PlanSnapshot.plan_id, func.max(PlanSnapshot.plan_version).label("version"))
+            .join(GuideSession, GuideSession.session_id == PlanSnapshot.session_id)
+            .filter(GuideSession.owner_id == self.owner_id)
+            .group_by(PlanSnapshot.plan_id)
+            .subquery()
+        )
+        snapshots = self.db.query(PlanSnapshot).join(
+            latest, (PlanSnapshot.plan_id == latest.c.plan_id)
+            & (PlanSnapshot.plan_version == latest.c.version),
+        ).order_by(PlanSnapshot.created_at.desc())
+        if query:
+            snapshots = snapshots.filter(
+                (PlanSnapshot.plan_id == query)
+                | PlanSnapshot.plan_json.contains(json.dumps(query)[1:-1], autoescape=True)
+            )
+        return [{"plan_id": row.plan_id, "plan_version": row.plan_version,
+                 "task_id": row.task_id, "created_at": row.created_at.isoformat(),
+                 "plan": json.loads(row.plan_json)} for row in snapshots.limit(5)]
 
     def list_messages(
         self,

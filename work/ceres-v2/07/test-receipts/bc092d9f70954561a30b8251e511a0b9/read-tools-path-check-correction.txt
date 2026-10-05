@@ -1,0 +1,2 @@
+Correction dated 2026-10-05 UTC:
+The prior note that tests/test_read_tools.py was absent was incorrect. The check used `rg --files tests | rg '(^|/)test_read_tools\.py$'`; ripgrep emitted Windows backslashes, so the slash-only regex did not match. This was a path-filtering error, not evidence the file was missing. The parent verified `backend/tests/test_read_tools.py` exists. See the separate run `run-dc42d67ad7c24dc0963860d58f0075fa` for the actual test execution. The prior stdout/stderr and pytest command were not changed.

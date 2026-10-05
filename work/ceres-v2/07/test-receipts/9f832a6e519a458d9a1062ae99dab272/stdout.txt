@@ -1,0 +1,78 @@
+FF                                                                       [100%]
+================================== FAILURES ===================================
+____ test_history_in_new_session_has_real_source_and_rebuilds_new_plan[1] _____
+
+indexed_client = <starlette.testclient.TestClient object at 0x000002B2D96A39B0>
+semantic_provider = <function semantic_provider.<locals>._install at 0x000002B2D9750E00>
+run = 1
+
+    @pytest.mark.parametrize("run", [1, 2])
+    def test_history_in_new_session_has_real_source_and_rebuilds_new_plan(indexed_client, semantic_provider, run):
+        semantic_provider([request_new("dish", "番茄炒蛋", people=2, mode="self_cook")])
+        old_sid = create_session(indexed_client)
+        original = send_turn(indexed_client, old_sid, "两个人自己做番茄炒蛋")
+        source = original["plan"]
+    
+        def historical_answer(request):
+            history = next(row for row in request["query_results"] if row["kind"] == "history")
+            row = history["plans"][0]
+            assert row["plan_id"] == source["plan_id"]
+            assert row["task_id"] == original["task_id"]
+            assert row["source_complete"] is True
+            target = row["targets"][0]
+            assert target["name"] == "番茄炒蛋"
+            return {"reply": f"历史方案 {row['plan_id']} 是番茄炒蛋；本次需重新生成清单并确认。",
+                    "display_refs": [target["ref"]]}
+    
+        semantic_provider([{"reads": [{"kind": "history"}]}, Continuation(historical_answer),
+                           request_new("dish", "番茄炒蛋", people=4, mode="self_cook",
+                                       constraints={"budget_yuan": 50})])
+        sid = create_session(indexed_client)
+        found = send_turn(indexed_client, sid, "上次做的是什么？")
+>       assert source["plan_id"] in found["message"]
+E       AssertionError: assert 'plan-86549bab2371' in '抱歉，这一轮我没能理解清楚（MALFORMED_PROPOSAL）：read.kind 必须是 recommend, recipe, cart, catalog, compare 之一 请换个说法，或直接说想吃什么、想买什么。'
+
+tests\test_v2_historical_repurchase.py:34: AssertionError
+____ test_history_in_new_session_has_real_source_and_rebuilds_new_plan[2] _____
+
+indexed_client = <starlette.testclient.TestClient object at 0x000002B2D9952C30>
+semantic_provider = <function semantic_provider.<locals>._install at 0x000002B2D9A97E20>
+run = 2
+
+    @pytest.mark.parametrize("run", [1, 2])
+    def test_history_in_new_session_has_real_source_and_rebuilds_new_plan(indexed_client, semantic_provider, run):
+        semantic_provider([request_new("dish", "番茄炒蛋", people=2, mode="self_cook")])
+        old_sid = create_session(indexed_client)
+        original = send_turn(indexed_client, old_sid, "两个人自己做番茄炒蛋")
+        source = original["plan"]
+    
+        def historical_answer(request):
+            history = next(row for row in request["query_results"] if row["kind"] == "history")
+            row = history["plans"][0]
+            assert row["plan_id"] == source["plan_id"]
+            assert row["task_id"] == original["task_id"]
+            assert row["source_complete"] is True
+            target = row["targets"][0]
+            assert target["name"] == "番茄炒蛋"
+            return {"reply": f"历史方案 {row['plan_id']} 是番茄炒蛋；本次需重新生成清单并确认。",
+                    "display_refs": [target["ref"]]}
+    
+        semantic_provider([{"reads": [{"kind": "history"}]}, Continuation(historical_answer),
+                           request_new("dish", "番茄炒蛋", people=4, mode="self_cook",
+                                       constraints={"budget_yuan": 50})])
+        sid = create_session(indexed_client)
+        found = send_turn(indexed_client, sid, "上次做的是什么？")
+>       assert source["plan_id"] in found["message"]
+E       AssertionError: assert 'plan-99de5b26bcfd' in '抱歉，这一轮我没能理解清楚（MALFORMED_PROPOSAL）：read.kind 必须是 recommend, recipe, cart, catalog, compare 之一 请换个说法，或直接说想吃什么、想买什么。'
+
+tests\test_v2_historical_repurchase.py:34: AssertionError
+============================== warnings summary ===============================
+app\services\template_matcher.py:21
+  C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\app\services\template_matcher.py:21: SyntaxWarning: invalid escape sequence '\['
+    _PUNCT_PATTERN = re.compile(r"[\s\u3000，。！？、；：""''（）()\[\]【】\-—·…]+")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_v2_historical_repurchase.py::test_history_in_new_session_has_real_source_and_rebuilds_new_plan[1]
+FAILED tests/test_v2_historical_repurchase.py::test_history_in_new_session_has_real_source_and_rebuilds_new_plan[2]
+2 failed, 1 warning in 4.26s

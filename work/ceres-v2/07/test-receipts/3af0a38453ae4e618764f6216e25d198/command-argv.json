@@ -1,0 +1,18 @@
+{
+  "executable": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+  "argv": [
+    "-X",
+    "utf8",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\diagnosis-3af0a38453ae4e618764f6216e25d198\\diagnose_snapshot.py",
+    "--db",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-4984800776a34696a700b34ce53ecb16\\pytest-tmp\\test_named_history_lookup_find0\\test.sqlite3",
+    "--db",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-4984800776a34696a700b34ce53ecb16\\pytest-tmp\\test_named_history_lookup_find1\\test.sqlite3"
+  ],
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend",
+  "database_arguments": [
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-4984800776a34696a700b34ce53ecb16\\pytest-tmp\\test_named_history_lookup_find0\\test.sqlite3",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-4984800776a34696a700b34ce53ecb16\\pytest-tmp\\test_named_history_lookup_find1\\test.sqlite3"
+  ],
+  "script": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\diagnosis-3af0a38453ae4e618764f6216e25d198\\diagnose_snapshot.py"
+}

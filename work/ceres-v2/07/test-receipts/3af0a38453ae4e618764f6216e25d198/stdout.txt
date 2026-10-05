@@ -1,0 +1,11 @@
+dish=番茄炒蛋
+json_dumps_inner=\u756a\u8304\u7092\u86cb
+json_dumps_inner_repr='\\u756a\\u8304\\u7092\\u86cb'
+database=C:\Users\20616\Desktop\Agent\Agent产品\work\ceres-v2-test-env\run-4984800776a34696a700b34ce53ecb16\pytest-tmp\test_named_history_lookup_find0\test.sqlite3
+database_mode=ro query_only=1
+matching_snapshot_rows=1
+plan_id=plan-e9aab8d77c2a plan_version=1 literal_instr=0 escaped_instr=9641
+database=C:\Users\20616\Desktop\Agent\Agent产品\work\ceres-v2-test-env\run-4984800776a34696a700b34ce53ecb16\pytest-tmp\test_named_history_lookup_find1\test.sqlite3
+database_mode=ro query_only=1
+matching_snapshot_rows=1
+plan_id=plan-978c285c2e76 plan_version=1 literal_instr=0 escaped_instr=9641
