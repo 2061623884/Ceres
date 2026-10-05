@@ -339,3 +339,39 @@ def test_memory_provider_requires_explicit_memories(monkeypatch, run):
     with pytest.raises(LLMProviderError) as error:
         MemoryProvider().complete("extract", {"message": "今天预算60元", "reply": "好的。", "memories": []})
     assert error.value.code == "INVALID_MEMORY_OUTPUT"
+
+
+@pytest.mark.parametrize("run", [1, 2])
+@pytest.mark.parametrize("response", [
+    {"choices": []},
+    {"choices": [{}]},
+    {"choices": [{"message": {}}]},
+    {"choices": [{"message": {"content": None}}]},
+], ids=["empty-choices", "missing-message", "missing-content", "nontext-content"])
+def test_background_records_invalid_response_envelope(client, semantic_provider, monkeypatch, run, response):
+    from app.core.config import get_settings
+    from app.core.database import SessionLocal
+    from app.llm.openai_transport import OpenAICompatTransport
+    from app.models.trace import TraceEvent
+    from app.services.memory_service import MemoryService
+
+    monkeypatch.setenv("MEMORY_MODEL", "test-memory-model")
+    get_settings.cache_clear()
+    monkeypatch.setattr(OpenAICompatTransport, "post_json", lambda self, payload, **kwargs: response)
+    semantic_provider([{"reply": "好的，今天不采购。"}])
+    sid = create_session(client)
+    result = send_turn(client, sid, "今天不采购", request_id=f"invalid-envelope-{run}")
+    assert result["answer_status"] == "accepted" and result["message"] == "好的，今天不采购。"
+    owner = client.cookies.get("sg_owner_id")
+    deadline = time.monotonic() + 3
+    failure = None
+    while time.monotonic() < deadline:
+        with SessionLocal() as db:
+            failure = db.query(TraceEvent).filter_by(owner_id=owner, phase="memory_background_failed").first()
+            if failure is not None:
+                assert MemoryService(db, owner).list_valid() == []
+                assert db.query(TraceEvent).filter_by(owner_id=owner, phase="memory_extract_completed").count() == 0
+                break
+        time.sleep(0.02)
+    assert failure is not None and failure.error == "INVALID_MEMORY_OUTPUT"
+    assert failure.output_summary

@@ -1,0 +1,54 @@
+Purpose: read-only latency trace inspection of explicit-conflict-1; no model call and no DB write.
+Actual target DB: 
+C:\Users\20616\Desktop\Agent\Agent产品\work\ceres-v2-test-env\run-07865cc22bb0476d915f9db59f79acd1\pytest-tmp\test_real_reply_and_background4\test.sqlite3
+Command: python -X utf8 -c <inline sqlite3 mode=ro query> <test.sqlite3>
+Interpreter: 
+C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+CWD: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend
+
+utc_started=2026-10-05T09:44:37.629402+00:00
+database=C:\Users\20616\Desktop\Agent\Agent产品\work\ceres-v2-test-env\run-07865cc22bb0476d915f9db59f79acd1\pytest-tmp\test_real_reply_and_background4\test.sqlite3
+uri_mode=ro; query_only=1
+tables=badcases,business_events,cart_items,cart_operations,carts,catalog_products,catalog_reviews,delivery_quotes,guide_messages,guide_operations,guide_semantic_contexts,guide_sessions,guide_tasks,offers,owners,plan_snapshots,purchase_templates,shopping_memories,stores,trace_events,turn_request_records
+trace_columns=event_id,trace_id,request_id,session_id,task_id,owner_id,phase,model_mode,workflow_version,input_summary,output_summary,error,duration_ms,created_at
+event_count=6
+event={"event_id": "evt-fb0b94234f13", "trace_id": "trace-9a2efafc6774", "request_id": "live-memory-explicit-conflict-1", "session_id": "sess-0c59f601db6f", "task_id": null, "phase": "understanding", "model_mode": "live", "duration_ms": null, "created_at": "2026-10-05 09:34:59.225130", "error": null}
+event={"event_id": "evt-61fcf633fa5c", "trace_id": "trace-9a2efafc6774", "request_id": "live-memory-explicit-conflict-1", "session_id": "sess-0c59f601db6f", "task_id": null, "phase": "model_call_started", "model_mode": "live", "duration_ms": null, "created_at": "2026-10-05 09:34:59.232836", "error": null}
+output_summary_keys=call_number,read_result_count,remaining_budget_s,repair,stage,status
+output_summary_safe={"status": "started"}
+event={"event_id": "evt-d1a411629c0b", "trace_id": "trace-9a2efafc6774", "request_id": "live-memory-explicit-conflict-1", "session_id": "sess-0c59f601db6f", "task_id": null, "phase": "model_call_completed", "model_mode": "live", "duration_ms": 18000, "created_at": "2026-10-05 09:35:17.249155", "error": null}
+output_summary_keys=call_number,duration_ms,read_result_count,remaining_budget_s,repair,stage,status
+output_summary_safe={"duration_ms": 18000, "status": "completed"}
+event={"event_id": "evt-81737654e566", "trace_id": "trace-9a2efafc6774", "request_id": "live-memory-explicit-conflict-1", "session_id": "sess-0c59f601db6f", "task_id": null, "phase": "turn_result", "model_mode": "live", "duration_ms": null, "created_at": "2026-10-05 09:35:17.273091", "error": null}
+output_summary_keys=actions,plan_effect,status
+output_summary_safe={"status": "understanding"}
+event={"event_id": "evt-7926179220d1", "trace_id": "trace-9a2efafc6774", "request_id": "live-memory-explicit-conflict-1", "session_id": "sess-0c59f601db6f", "task_id": null, "phase": "memory_extract_started", "model_mode": "live", "duration_ms": null, "created_at": "2026-10-05 09:35:17.282381", "error": null}
+output_summary_keys=model
+output_summary_safe={"model": "qwen3.8-27b"}
+event={"event_id": "evt-a738eceae848", "trace_id": "trace-9a2efafc6774", "request_id": "live-memory-explicit-conflict-1", "session_id": "sess-0c59f601db6f", "task_id": null, "phase": "memory_extract_completed", "model_mode": "live", "duration_ms": null, "created_at": "2026-10-05 09:35:21.950562", "error": null}
+output_summary_keys=model,saved
+output_summary_safe={"model": "qwen3.8-27b"}
+utc_finished=2026-10-05T09:44:37.630408+00:00
+
+READONLY_QUERY_EXIT_CODE=0
+source_log_credential_scan=no_match
+send_turn_observation={"case": "explicit-conflict", "run": 1, "reply_seconds": 18.109}
+timeline={"phase": "understanding", "created_at_db_naive": "2026-10-05 09:34:59.225130", "duration_ms": null, "error": null}
+timeline={"phase": "model_call_started", "created_at_db_naive": "2026-10-05 09:34:59.232836", "duration_ms": null, "error": null, "output": {"call_number": 1, "stage": "understanding", "status": "started", "remaining_budget_s": 89.984}}
+timeline={"phase": "model_call_completed", "created_at_db_naive": "2026-10-05 09:35:17.249155", "duration_ms": 18000, "error": null, "output": {"call_number": 1, "stage": "understanding", "status": "completed", "duration_ms": 18000, "remaining_budget_s": 89.984}}
+timeline={"phase": "turn_result", "created_at_db_naive": "2026-10-05 09:35:17.273091", "duration_ms": null, "error": null, "output": {"status": "understanding"}}
+timeline={"phase": "memory_extract_started", "created_at_db_naive": "2026-10-05 09:35:17.282381", "duration_ms": null, "error": null, "output": {"model": "qwen3.8-27b"}}
+timeline={"phase": "memory_extract_completed", "created_at_db_naive": "2026-10-05 09:35:21.950562", "duration_ms": null, "error": null, "output": {"model": "qwen3.8-27b", "saved": 0}}
+readonly_connection_closed=yes
+append_utc=2026-10-05T09:46:12.827972+00:00
+APPEND_QUERY_EXIT_CODE=0
+
+READ-ONLY SQL / COMMAND DETAILS
+PowerShell invoked the backend venv interpreter with a piped inline Python script: `$code | & $py -X utf8 - $db`; no application or provider call was made. SQLite connection used `Path(test.sqlite3).resolve().as_uri() + '?mode=ro'`, then connection-local `PRAGMA query_only=ON`, and:
+`SELECT * FROM trace_events WHERE request_id=? ORDER BY created_at,event_id` with `live-memory-explicit-conflict-1`.
+The request-scoped pytest DB was `pytest-tmp\test_real_reply_and_background4\test.sqlite3` (the runner-wide ceres.sqlite3 path was not materialized; the live test uses per-case tmp_path DBs).
+
+TIMING INTERPRETATION
+The database `created_at` values are timezone-naive; only relative deltas are used. Main provider call began at 09:34:59.232836 and completed at 09:35:17.249155: 18.016319 s by event timestamps, with recorded `duration_ms=18000`. Its output summary says `call_number=1`, `stage=understanding`, `status=completed`; there is exactly one started/completed model_call pair. `understanding` is a phase marker before the provider call, not a second call. The implementation times `runtime.provider.propose(request)` with monotonic time (`app/agent/graph/nodes/understand.py`).
+Main `turn_result` followed 23.936 ms after model_call_completed. Background `memory_extract_started` followed turn_result by 9.290 ms; it completed 4.668181 s after it started (saved=0), or 4.701407 s after main model_call_completed. The captured public `send_turn` duration was 18.109 s. The record does not timestamp the final SSE/client return precisely, so exact overlap at the response boundary is unknown; however the main provider call accounts for almost all measured response time, and the background extraction completion occurs several seconds later. The data does not support background extraction as the source of the 18-second wait. Trace duration includes `provider.propose` runtime; the database does not split network transport from local serialization/parsing, so pure network latency is unknown.
+No secrets, credentials, bearer tokens, raw prompts, or hidden model output were included.

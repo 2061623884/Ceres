@@ -21,7 +21,7 @@
   },
   {
     "path": "backend/app/llm/memory_provider.py",
-    "sha256": "6ddc470626f394296f6277b2300beb5f4fb11549591d805c62b2fa7d3aca38a9"
+    "sha256": "6de76480cc75a0151afbfeb8e0949274064894c69ae80b2ca338beb647bdc35a"
   },
   {
     "path": "backend/app/services/automatic_memory_service.py",
@@ -29,7 +29,7 @@
   },
   {
     "path": "backend/tests/test_v2_automatic_memory.py",
-    "sha256": "a2969fbcce97af8783ce7860205580b2a390721532d167743a373df7eff41cd0"
+    "sha256": "7d7b4684ff3be44cdab8329edb352676183c54fb0f4b7e6ffe840dd4b069e8f0"
   },
   {
     "path": "backend/tests/test_v2_automatic_memory_live.py",

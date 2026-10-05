@@ -1,0 +1,1 @@
+2026-10-05 UTC: corrected exact credential scan. Anchored OPENAI_API_KEY value comparison=false; Bearer pattern=false. The earlier broad scan falsely matched numeric LLM_MAX_OUTPUT_TOKENS=1536; it was not a credential. Original raw log is retained unchanged. The readable copy now matches raw exactly; no credential value was included.

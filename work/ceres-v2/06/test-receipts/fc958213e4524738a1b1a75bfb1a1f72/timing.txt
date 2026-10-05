@@ -1,0 +1,6 @@
+START_UTC=2026-10-05T10:00:18.4843580Z
+RUN_DIR=C:\Users\20616\Desktop\Agent\Agent产品\work\ceres-v2-test-env\run-fc958213e4524738a1b1a75bfb1a1f72
+RAW_LOG=C:\Users\20616\Desktop\Agent\Agent产品\work\ceres-v2-test-env\run-fc958213e4524738a1b1a75bfb1a1f72\06-final-related-green.txt
+
+PYTEST_EXIT_CODE=0
+END_UTC=2026-10-05T10:01:21.6952089Z

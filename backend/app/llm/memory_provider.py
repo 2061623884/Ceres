@@ -49,10 +49,13 @@ class MemoryProvider:
             "enable_thinking": False,
             "response_format": {"type": "json_object"},
         })
-        choice = data["choices"][0]
-        if choice.get("finish_reason") == "length":
-            raise LLMProviderError("MEMORY_OUTPUT_TRUNCATED", "记忆模型输出被截断，未保存。", retryable=False)
         try:
-            return MemoryOutput.model_validate(extract_json_object(choice["message"]["content"]))
-        except ValueError as exc:
+            choice = data["choices"][0]
+            content = choice["message"]["content"]
+            if choice.get("finish_reason") == "length":
+                raise LLMProviderError("MEMORY_OUTPUT_TRUNCATED", "记忆模型输出被截断，未保存。", retryable=False)
+            if not isinstance(content, str):
+                raise ValueError("记忆模型内容不是文本。")
+            return MemoryOutput.model_validate(extract_json_object(content))
+        except (KeyError, IndexError, TypeError, ValueError) as exc:
             raise LLMProviderError("INVALID_MEMORY_OUTPUT", str(exc), retryable=False) from exc

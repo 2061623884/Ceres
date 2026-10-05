@@ -12,7 +12,7 @@
 - [03 缺货规格适配与部分采购决定](ceres-v2-03-supply-adaptation.md)
 - [04 聊天可乐筛选比较到加购](ceres-v2-04-cola-comparison.md)
 - [05 显式跨会话记忆与聊天管理](ceres-v2-05-explicit-memory.md)
-- [06 后台自动提取与轻量 Dream](ceres-v2-06-automatic-memory-dream.md)
+- [06 后台自动提取与低频 Dream](ceres-v2-06-automatic-memory-dream.md)
 - [07 历史方案参考到本次新采购](ceres-v2-07-historical-repurchase.md)
 - [08 模拟下单到墨墨选单咨询](ceres-v2-08-order-mercury.md)
 - [09 同版购买记忆订单演示交付](ceres-v2-09-integrated-demo.md)

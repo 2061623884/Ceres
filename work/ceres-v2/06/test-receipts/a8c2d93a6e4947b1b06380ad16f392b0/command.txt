@@ -1,0 +1,2 @@
+PowerShell invocation: & $py @pytestArgs
+Exact executable and argv (the -k expression is one argument) are in command-argv.json.

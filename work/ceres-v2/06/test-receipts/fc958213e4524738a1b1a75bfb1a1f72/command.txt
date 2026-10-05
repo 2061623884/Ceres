@@ -1,0 +1,3 @@
+PowerShell invocation: & $py @pytestArgs
+Argument vector is preserved exactly in command-argv.json; no shell splitting.
+Tests: 06/05 automation+explicit memory, stop/stream/progress/revision, two prompt contracts, provider errors.

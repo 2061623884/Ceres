@@ -1,0 +1,67 @@
+diff --git a/backend/app/llm/memory_provider.py b/backend/app/llm/memory_provider.py
+index bc1ef68..5f63d99 100644
+--- a/backend/app/llm/memory_provider.py
++++ b/backend/app/llm/memory_provider.py
+@@ -49,10 +49,13 @@ class MemoryProvider:
+             "enable_thinking": False,
+             "response_format": {"type": "json_object"},
+         })
+-        choice = data["choices"][0]
+-        if choice.get("finish_reason") == "length":
+-            raise LLMProviderError("MEMORY_OUTPUT_TRUNCATED", "记忆模型输出被截断，未保存。", retryable=False)
+         try:
+-            return MemoryOutput.model_validate(extract_json_object(choice["message"]["content"]))
+-        except ValueError as exc:
++            choice = data["choices"][0]
++            content = choice["message"]["content"]
++            if choice.get("finish_reason") == "length":
++                raise LLMProviderError("MEMORY_OUTPUT_TRUNCATED", "记忆模型输出被截断，未保存。", retryable=False)
++            if not isinstance(content, str):
++                raise ValueError("记忆模型内容不是文本。")
++            return MemoryOutput.model_validate(extract_json_object(content))
++        except (KeyError, IndexError, TypeError, ValueError) as exc:
+             raise LLMProviderError("INVALID_MEMORY_OUTPUT", str(exc), retryable=False) from exc
+diff --git a/backend/tests/test_v2_automatic_memory.py b/backend/tests/test_v2_automatic_memory.py
+index 57feafc..fb38c9b 100644
+--- a/backend/tests/test_v2_automatic_memory.py
++++ b/backend/tests/test_v2_automatic_memory.py
+@@ -339,3 +339,39 @@ def test_memory_provider_requires_explicit_memories(monkeypatch, run):
+     with pytest.raises(LLMProviderError) as error:
+         MemoryProvider().complete("extract", {"message": "今天预算60元", "reply": "好的。", "memories": []})
+     assert error.value.code == "INVALID_MEMORY_OUTPUT"
++
++
++@pytest.mark.parametrize("run", [1, 2])
++@pytest.mark.parametrize("response", [
++    {"choices": []},
++    {"choices": [{}]},
++    {"choices": [{"message": {}}]},
++    {"choices": [{"message": {"content": None}}]},
++], ids=["empty-choices", "missing-message", "missing-content", "nontext-content"])
++def test_background_records_invalid_response_envelope(client, semantic_provider, monkeypatch, run, response):
++    from app.core.config import get_settings
++    from app.core.database import SessionLocal
++    from app.llm.openai_transport import OpenAICompatTransport
++    from app.models.trace import TraceEvent
++    from app.services.memory_service import MemoryService
++
++    monkeypatch.setenv("MEMORY_MODEL", "test-memory-model")
++    get_settings.cache_clear()
++    monkeypatch.setattr(OpenAICompatTransport, "post_json", lambda self, payload, **kwargs: response)
++    semantic_provider([{"reply": "好的，今天不采购。"}])
++    sid = create_session(client)
++    result = send_turn(client, sid, "今天不采购", request_id=f"invalid-envelope-{run}")
++    assert result["answer_status"] == "accepted" and result["message"] == "好的，今天不采购。"
++    owner = client.cookies.get("sg_owner_id")
++    deadline = time.monotonic() + 3
++    failure = None
++    while time.monotonic() < deadline:
++        with SessionLocal() as db:
++            failure = db.query(TraceEvent).filter_by(owner_id=owner, phase="memory_background_failed").first()
++            if failure is not None:
++                assert MemoryService(db, owner).list_valid() == []
++                assert db.query(TraceEvent).filter_by(owner_id=owner, phase="memory_extract_completed").count() == 0
++                break
++        time.sleep(0.02)
++    assert failure is not None and failure.error == "INVALID_MEMORY_OUTPUT"
++    assert failure.output_summary

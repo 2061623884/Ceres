@@ -111,6 +111,31 @@
     "run": "07865cc22bb0476d915f9db59f79acd1",
     "raw": "work/ceres-v2/06/test-receipts/07865cc22bb0476d915f9db59f79acd1/v2-automatic-memory-live-eight-final.txt",
     "original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-07865cc22bb0476d915f9db59f79acd1\\v2-automatic-memory-live-eight-final.txt",
-    "exit_code": "1"
+    "exit_code": "1",
+    "readonly_latency": {
+      "raw": "work/ceres-v2/06/test-receipts/07865cc22bb0476d915f9db59f79acd1/latency-trace-readonly.txt",
+      "original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-07865cc22bb0476d915f9db59f79acd1\\latency-trace-readonly.txt",
+      "exit_code": 0,
+      "additional_model_calls": 0
+    }
+  },
+  {
+    "run": "a8c2d93a6e4947b1b06380ad16f392b0",
+    "raw": "work/ceres-v2/06/test-receipts/a8c2d93a6e4947b1b06380ad16f392b0/invalid-response-envelope-red.txt",
+    "original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-a8c2d93a6e4947b1b06380ad16f392b0\\invalid-response-envelope-red.txt",
+    "exit_code": "1",
+    "command": "work/ceres-v2/06/test-receipts/a8c2d93a6e4947b1b06380ad16f392b0/command.txt",
+    "environment": "work/ceres-v2/06/test-receipts/a8c2d93a6e4947b1b06380ad16f392b0/environment.txt",
+    "timing": "work/ceres-v2/06/test-receipts/a8c2d93a6e4947b1b06380ad16f392b0/timing.txt",
+    "note": "Root checked the exact configured OPENAI_API_KEY (67 chars): no actual key or Bearer pattern present. Preliminary tester scanner falsely matched 1536; use original safe log, not its numeric-redacted copy."
+  },
+  {
+    "run": "fc958213e4524738a1b1a75bfb1a1f72",
+    "raw": "work/ceres-v2/06/test-receipts/fc958213e4524738a1b1a75bfb1a1f72/06-final-related-green.txt",
+    "original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-fc958213e4524738a1b1a75bfb1a1f72\\06-final-related-green.txt",
+    "exit_code": "0",
+    "command_argv": "work/ceres-v2/06/test-receipts/fc958213e4524738a1b1a75bfb1a1f72/command-argv.json",
+    "environment": "work/ceres-v2/06/test-receipts/fc958213e4524738a1b1a75bfb1a1f72/environment.txt",
+    "timing": "work/ceres-v2/06/test-receipts/fc958213e4524738a1b1a75bfb1a1f72/timing.txt"
   }
 ]

@@ -17,13 +17,17 @@
 | 06a8b55e0f9d41179c37c559bb316acc | 1fail / exit1 | 首次修正仍遗漏explicit_confirmation |
 | 5bb72886b6fc4f58a4a4b11e9bc18c4a | 1pass / exit0 | 按实际两关键字参数转交，生产取消逻辑未改 |
 | 886827bec14f4e52a929009bdc3e75c8 | 2fail / exit1 | Dream原样回显把5天期限变成30天 |
-| b33385addd2d43fa968bf544f9708b11 | 59pass / exit0 | 最终受控相关回归，含全部22项06、12项05、18项stream/取消/修订、2项Prompt例子、5项provider错误 |
+| b33385addd2d43fa968bf544f9708b11 | 59pass / exit0 | 审查前受控相关回归，含全部22项06、12项05、18项stream/取消/修订、2项Prompt例子、5项provider错误 |
+| a8c2d93a6e4947b1b06380ad16f392b0 | 2fail/2teardown error / exit1 | 审查外壳红测：空choices未记后台失败，worker抛IndexError |
+| fc958213e4524738a1b1a75bfb1a1f72 | 67pass / exit0 | 审查修复后最终相关集：原59项及四种外壳各两次；06共30项 |
 
 最终相关命令：
 ```text
 python -X utf8 -m pytest -q -p no:cacheprovider -W error::pytest.PytestUnhandledThreadExceptionWarning tests/test_v2_automatic_memory.py tests/test_v2_explicit_memory.py tests/test_phase2a_cancellation.py tests/test_reply_stream.py tests/test_turn_progress.py tests/test_revision_confirmation.py tests/test_live_retrieval_wiring.py::test_purchase_examples_declare_intent_and_lookup_in_the_same_pass tests/test_live_retrieval_wiring.py::test_supply_gap_opt_in_example_reuses_pending_real_dish_and_question tests/test_live_provider_errors.py --basetemp <external-run>/pytest-tmp
 ```
 起止UTC2026-10-05T09:30:05.6630601Z–09:31:03.8295197Z；MEMORY_MODEL为空、检索索引为空、无live opt-in；pytest55.76s。仅保留已有template_matcher.py:21的SyntaxWarning，不顺手修改。
+
+审查修复后使用同一集合与外置新run环境，LLM_MODEL与MEMORY_MODEL均为空，无live opt-in，UTC10:00:18.484–10:01:21.695、pytest60.78s、67pass/exit0。command-argv.json保留实际参数，command/environment/timing/exit原始文件见对应test-receipts。源注释的普通数值曾被tester宽泛TOKEN扫描误报成凭据，主Agent与tester用精确OPENAI_API_KEY均核查原日志无实际key/Bearer；纠正记录保留，不改红测业务结论。
 
 ## 真实模型
 
@@ -46,6 +50,10 @@ python -X utf8 -m pytest -q -p no:cacheprovider -W error::pytest.PytestUnhandled
 | Dream | 后台10.516 / 13.172 | 均去重并清理自有过期自动内容，保留显式内容、间隔门控通过 |
 
 实跑命令为上述公共pytest参数加`-s tests/test_v2_automatic_memory_live.py`及外置basetemp。记忆业务行为在这批均符合观测，但主回复速度门槛未全通过；失败Trace继续只读定位，不通过重发或放宽门槛抹掉此记录。
+
+这批真实采样对应ab77e63及ticket-delta.patch的实际源码版本；之后审查修复仅改变错误响应的转换与其验证，未更改正常文本响应的Prompt或后台业务流程。没有为新的provider哈希再重发真实批次，不宣称最终同版八项全绿。
+
+失败样本的只读SQL时间线见该run下`latency-trace-readonly.txt`，命令、`mode=ro/query_only=ON`和实际退出码0均保留，没有新增模型请求。该request只有一组主`model_call_started/completed`，stage=understanding、call_number=1：事件间18.016319秒，存储duration_ms=18000。其后23.936ms记录turn_result，再后9.290ms才memory_extract_started；后台4.668181秒另行完成。这支持耗时集中在一次主provider.propose调用，不支持后台提取导致18秒等待；Trace无法进一步区分纯网络与provider本地/模型处理耗时，也没有精确的SSE客户端返回时间戳。不凭此猜测远端排队，不用更短超时冒充成功回复。当前速度门槛仍未通过。
 
 ## 全套结果与归因边界
 
