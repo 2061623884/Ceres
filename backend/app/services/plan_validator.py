@@ -11,7 +11,7 @@ from sqlalchemy.orm import Session
 from app.core.config import get_settings
 from app.models.catalog import CatalogProduct
 from app.services import plan_contract as contract
-from app.services.catalog_service import CatalogService
+from app.services.catalog_service import CatalogService, product_to_dict
 from app.services.delivery_service import DeliveryService
 from app.services.image_assets import image_kind_for_path, image_kind_legacy
 from app.services.offer_service import OfferService
@@ -161,18 +161,8 @@ class PlanValidator:
             if not product or product.review_status != "approved":
                 errors.append(f"SKU {sku_id} not approved")
                 continue
-            product_dict = {
-                "sku_id": sku_id,
-                "ingredient_ids": [],
-                "spec_quantity": product.spec_quantity,
-                "spec_unit": product.spec_unit,
-            }
-            try:
-                import json
-
-                product_dict["ingredient_ids"] = json.loads(product.ingredient_ids or "[]")
-            except json.JSONDecodeError:
-                pass
+            offer = self.offers.get_offer(sku_id)
+            product_dict = product_to_dict(product, offer)
             if ctx and not ctx.product_allowed(product_dict):
                 errors.append(f"SKU {sku_id} violates constraints")
                 continue
@@ -180,7 +170,6 @@ class PlanValidator:
             if excluded and ing_ids.intersection(excluded):
                 errors.append(f"SKU {sku_id} contains excluded ingredient")
                 continue
-            offer = self.offers.get_offer(sku_id)
             if offer is None:
                 # No offer row at all is *missing information*, not a stock-out.
                 gaps.append(

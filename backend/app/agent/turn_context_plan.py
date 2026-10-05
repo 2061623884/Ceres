@@ -209,8 +209,12 @@ def plan_context_writes(
                 "reply_ok": True,
             }
         )
+    clear_displayed = bool(context.get("displayed_candidates")) and not displayed and any(
+        query.kind == "compare" for query in proposal.queries
+    )
     changed = bool(
-        new_pending
+        clear_displayed
+        or new_pending
         or resolved
         or displayed
         or pending_list != base_pending
@@ -228,6 +232,7 @@ def plan_context_writes(
             candidate_to_store.model_dump() if candidate_to_store is not None else None
         ),
         clear_goal_candidate=bool(task_switched),
+        clear_displayed=clear_displayed,
         task_switched=task_switched,
         changed=changed,
         answer_parts=answer_parts,

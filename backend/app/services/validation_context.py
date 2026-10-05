@@ -48,6 +48,35 @@ class ValidationContext:
         )
 
     def matches_spec(self, product: dict[str, Any]) -> bool:
+        if self.specification.get("comparison") == "cola":
+            from app.services.catalog_service import comparison_card
+
+            if comparison_card(product) is None:
+                return False
+        brand = self.specification.get("brand")
+        if brand and brand != "any" and product.get("brand") != brand:
+            return False
+        metadata = product.get("metadata") or {}
+        item_ml = self.specification.get("item_volume_ml")
+        if item_ml:
+            amount = metadata.get("item_quantity")
+            unit = metadata.get("item_unit")
+            if unit not in ("ml", "l") or amount is None or amount * (1000 if unit == "l" else 1) != item_ml:
+                return False
+        packaging = self.specification.get("packaging")
+        if packaging in ("can", "bottle") and metadata.get("packaging") != packaging:
+            return False
+        count = self.specification.get("pack_count")
+        if count and metadata.get("pack_count") != count:
+            return False
+        mode = self.specification.get("pack_mode")
+        if mode == "single" and metadata.get("pack_count") != 1:
+            return False
+        if mode == "multi" and (metadata.get("pack_count") is None or metadata["pack_count"] <= 1):
+            return False
+        max_price = self.specification.get("max_price_fen")
+        if max_price and (product.get("price_fen") is None or product["price_fen"] > max_price):
+            return False
         size = self.specification.get("size")
         if size != "small":
             return True

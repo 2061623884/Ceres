@@ -53,10 +53,46 @@ def product_to_dict(p: CatalogProduct, offer: Offer | None = None) -> dict[str, 
     }
 
 
+def comparison_card(product: dict[str, Any]) -> dict[str, Any] | None:
+    """A sales pack with verified per-item and total-volume facts."""
+    metadata = product["metadata"]
+    if (metadata.get("family_id") != "cola" or not product["brand"]
+            or not product["sellable"] or not product["available_qty"]
+            or product["price_fen"] is None or product["spec_quantity"] is None
+            or product["spec_unit"] not in ("ml", "l")
+            or metadata.get("item_unit") not in ("ml", "l")
+            or not metadata.get("item_quantity") or not metadata.get("pack_count")
+            or metadata.get("packaging") not in ("can", "bottle")):
+        return None
+    total_ml = product["spec_quantity"] * (1000 if product["spec_unit"] == "l" else 1)
+    item_ml = metadata["item_quantity"] * (1000 if metadata["item_unit"] == "l" else 1)
+    return {
+        "sku_id": product["sku_id"], "name": product["name_zh"] or product["name"],
+        "brand": product["brand"], "image_path": product["image_path"],
+        "packaging": metadata["packaging"], "pack_count": metadata["pack_count"],
+        "item_volume_ml": item_ml, "total_volume_ml": total_ml,
+        "price_fen": product["price_fen"],
+        "price_per_litre_yuan": round(product["price_fen"] * 10 / total_ml, 2),
+    }
+
+
 class CatalogService:
     def __init__(self, db: Session, store_id: str = "store-demo-01"):
         self.db = db
         self.store_id = store_id
+
+    def comparison_cards(self, displayed: list[dict[str, Any]]) -> list[dict[str, Any]]:
+        cards = []
+        for entry in displayed:
+            if entry["kind"] != "product":
+                continue
+            product = self.get_product(entry["target_id"])
+            if product is None:
+                continue
+            card = comparison_card(product)
+            if card is not None:
+                cards.append({**card, "ref": entry["ref"]})
+        return cards[:5]
 
     def _quarantined_barcodes(self) -> set[str]:
         rows = self.db.query(CatalogReview).filter_by(status="quarantined").all()

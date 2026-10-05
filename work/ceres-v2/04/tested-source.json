@@ -1,0 +1,19 @@
+{
+  "backend/app/agent/protocol.py": "aa7456e1d80b4b05806d73d24dfddc629b61511aaf351ad37efab4be8be9631c",
+  "backend/app/schemas/goal.py": "aa9618630a26a136b81f959f719a9205baf9a85b960b6f88aae7d47a155f72dc",
+  "backend/app/services/validation_context.py": "5b268d0adc2ca9a2f1dba4699cf5ee4740308727c6cdb48f67909235b0f65505",
+  "backend/app/services/catalog_service.py": "d5f5e2ee73d039301aeb771a755ec18cbdf23989ce073dbed186ff9f72ec9b20",
+  "backend/app/agent/tools/read.py": "e01bae8e1c873f26ba8b215950b15e89e86a6252566625c0ea357b52ef6c484c",
+  "backend/app/services/plan_validator.py": "e4db66b6aa1bef8559b52c5a08b90281fafd0cedd2bd0bb413f7ea4b7a03a8a6",
+  "backend/app/agent/graph/turn_commit.py": "97aa3b67d85c3a283097afdd98a2be88f260c928e898037067122dcf835b17b4",
+  "backend/app/api/guide.py": "b477a5cdffbedb6581b16fec021cf73233f918db503138672aa7532107b885cf",
+  "backend/app/schemas/guide.py": "369fadb7aef5845e5cfb353ff75f73e24fcf87b1ce69af02d911cad90c8955bd",
+  "backend/app/prompts/semantic.py": "577192af144cbedb62c446bc0391858c9476f246498a7d26169169aab5576bb1",
+  "frontend/src/App.tsx": "77bbc804608508ab01cee85ab06ef81efb8199680350c5d14d6565921bd9cd82",
+  "frontend/src/lib/saleGuide.ts": "6afb39cdf5324bfddaaa6616337cda2df80ea9c99c9e50fd3333e0cc6f6b8eca",
+  "backend/tests/test_semantic_phase2d_constraints.py": "593b0efe22015315eccb0163dab2755f87d3c021db17fed2c9812805cd3667f1",
+  "backend/app/services/confirmation_service.py": "627f1a15c2b9f92a0f818bdd3c55e82e29caa7b059ce5ba0aeba9d87c44e015b",
+  "backend/app/agent/turn_context_plan.py": "a67d8525997777be798ad4d7b4f7ae24560e784ab80da4e5a395631da56885c6",
+  "backend/tests/test_answer_display_refs.py": "b141e21b0b1674ba1c4a61a1b4c13043cf4d5cf3e04afb587903f7902c89bb44",
+  "backend/tests/test_v2_cola_comparison.py": "72a69a7e661aca1b7d2f320365a5f42e59a73b7ec3bbec44fe0b8eff3e5aa117"
+}

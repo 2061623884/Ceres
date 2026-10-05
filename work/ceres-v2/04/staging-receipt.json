@@ -1,0 +1,23 @@
+{
+  "staged_own_source": [
+    "backend/app/services/validation_context.py",
+    "backend/app/services/catalog_service.py",
+    "backend/app/services/plan_validator.py",
+    "backend/app/api/guide.py",
+    "backend/app/schemas/guide.py",
+    "frontend/src/App.tsx",
+    "backend/app/agent/turn_context_plan.py"
+  ],
+  "artifact_only": [
+    "backend/app/agent/protocol.py",
+    "backend/app/schemas/goal.py",
+    "backend/app/agent/tools/read.py",
+    "backend/app/agent/graph/turn_commit.py",
+    "backend/app/prompts/semantic.py",
+    "frontend/src/lib/saleGuide.ts",
+    "backend/tests/test_semantic_phase2d_constraints.py",
+    "backend/app/services/confirmation_service.py",
+    "backend/tests/test_answer_display_refs.py"
+  ],
+  "reason": "Inherited V1 untracked functions/files or contexts absent HEAD; exact own delta committed, effective full source preserved and frozen in09."
+}

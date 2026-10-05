@@ -200,6 +200,7 @@ class TurnResponse(BaseModel):
     session_version: int = 0
     status: Step | Literal["stopped"]
     message: str
+    product_cards: list[dict[str, Any]] = Field(default_factory=list)
     clarification: str | None = None
     plan: PlanResponse | None = None
     plan_effect: PlanEffect = "keep"
@@ -415,6 +416,7 @@ class SupplyContextRequest(BaseModel):
 
 class SessionResponse(BaseModel):
     session_id: str
+    product_cards: list[dict[str, Any]] = Field(default_factory=list)
     task_id: str | None = None
     state_version: int = 0
     session_version: int = 0

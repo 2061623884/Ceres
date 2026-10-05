@@ -61,7 +61,8 @@ def _session_response(
     *,
     include_messages: bool = False,
 ) -> SessionResponse:
-    from app.agent.context import pending_for_session
+    from app.agent.context import pending_for_session, load_context
+    from app.services.catalog_service import CatalogService
 
     entry = EntryContext(**json.loads(session.entry_context_json))
     task_id = session.current_task_id
@@ -136,6 +137,9 @@ def _session_response(
         confirmation_id=confirmation_id,
         history_status=session.history_status,
         messages=messages,
+        product_cards=CatalogService(db, entry.store_id).comparison_cards(
+            (load_context(db, session) or {}).get("displayed_candidates", []),
+        ),
     )
 
 

@@ -1,0 +1,632 @@
+--- a/backend/app/agent/protocol.py
++++ b/backend/app/agent/protocol.py
+@@ -44,7 +44,7 @@
+ PROPOSAL_VERSION = 1
+ 
+ LOOKUP_KINDS = ("dish", "product")
+-QUERY_KINDS = ("recommend", "recipe", "cart", "catalog")
++QUERY_KINDS = ("recommend", "recipe", "cart", "catalog", "compare")
+ 
+ CANDIDATE_KINDS = ("dish", "product", "scenario", "group", "item")
+ 
+@@ -299,7 +299,7 @@
+     people: int | None = None
+     excluded_ingredients: list[str] = dc_field(default_factory=list)
+     budget_fen: int | None = None
+-    specification: dict[str, str] = dc_field(default_factory=dict)
++    specification: dict[str, Any] = dc_field(default_factory=dict)
+ 
+ 
+ @dataclass
+@@ -312,7 +312,7 @@
+     #: can never silently drop one.
+     excluded_ingredients: list[str] = dc_field(default_factory=list)
+     budget_fen: int | None = None
+-    specification: dict[str, str] = dc_field(default_factory=dict)
++    specification: dict[str, Any] = dc_field(default_factory=dict)
+ 
+ 
+ @dataclass
+@@ -322,7 +322,7 @@
+     #: The same read-only filter a lookup carries (``recommend`` / ``recipe`` only).
+     excluded_ingredients: list[str] = dc_field(default_factory=list)
+     budget_fen: int | None = None
+-    specification: dict[str, str] = dc_field(default_factory=dict)
++    specification: dict[str, Any] = dc_field(default_factory=dict)
+ 
+ 
+ @dataclass
+@@ -508,10 +508,27 @@
+     excluded = _strings(spec.get("excluded_ingredients"), "constraints.excluded_ingredients")
+     if excluded:
+         stated["excluded_ingredients"] = excluded
+-    packaging = _wire(spec.get("specification"), frozenset({"size"}), "constraints.specification")
++    packaging = _wire(spec.get("specification"), frozenset({
++        "size", "brand", "item_volume_ml", "packaging", "pack_count", "pack_mode", "max_price_yuan",
++    }), "constraints.specification")
++    conditions: dict[str, Any] = {}
+     size = _choice(packaging.get("size"), ("none", "small"), "constraints.specification.size")
+     if size == "small":
+-        stated["specification"] = {"size": "small"}
++        conditions["size"] = "small"
++    if brand := _text(packaging.get("brand"), "constraints.specification.brand"):
++        conditions["brand"] = brand
++    for key in ("item_volume_ml", "pack_count"):
++        if key in packaging:
++            conditions[key] = _count(packaging[key], "constraints.specification." + key) or 0
++    for key, options in (("packaging", ("none", "can", "bottle", "any")),
++                         ("pack_mode", ("none", "single", "multi", "any"))):
++        value = _choice(packaging.get(key), options, "constraints.specification." + key)
++        if value != "none":
++            conditions[key] = value
++    if "max_price_yuan" in packaging:
++        conditions["max_price_fen"] = yuan_to_fen(packaging["max_price_yuan"])
++    if conditions:
++        stated["specification"] = conditions
+     clear = _strings(spec.get("clear"), "constraints.clear")
+     unknown = sorted(set(clear) - set(CLEARABLE))
+     if unknown:
+@@ -599,7 +616,7 @@
+     excluded = list(stated.get("excluded_ingredients") or [])
+     budget = stated.get("budget_yuan")
+     budget_fen = None if budget is None else yuan_to_fen(budget)
+-    reads = [*proposal.lookups, *(q for q in proposal.queries if q.kind in ("recipe", "recommend"))]
++    reads = [*proposal.lookups, *(q for q in proposal.queries if q.kind in ("recipe", "recommend", "compare"))]
+     for read in reads:
+         read.excluded_ingredients = list(excluded)
+         read.budget_fen = budget_fen
+@@ -620,10 +637,12 @@
+     topic = _text(spec.get("topic"), "read.topic")
+     if topic and len(topic) > 200:
+         raise SemanticProtocolError("MALFORMED_PROPOSAL", "read.topic 最多 200 字")
+-    if topic and kind not in ("recipe", "recommend"):
++    if kind == "compare" and not topic:
++        raise SemanticProtocolError("MALFORMED_PROPOSAL", "compare 需要商品品类 topic")
++    if topic and kind not in ("recipe", "recommend", "compare"):
+         # cart / catalog describe the session itself; a product name is a lookup.
+         raise SemanticProtocolError(
+-            "UNSUPPORTED_OPERATION", "只有 recipe 与 recommend 支持主题；商品名使用 lookups"
++            "UNSUPPORTED_OPERATION", "只有 recipe、recommend 与 compare 支持主题；商品名使用 lookups"
+         )
+     return Query(kind=kind, query=topic)
+ 
+@@ -742,7 +761,16 @@
+             "budget_yuan": {"type": "number", "minimum": 0},
+             "fulfillment_mode": enum(FULFILLMENT, "只有用户说了自己做 / 买现成才填"),
+             "excluded_ingredients": texts,
+-            "specification": obj({"size": enum(("none", "small"), "用户要求小包装时填small")}),
++            "specification": obj({
++                "size": enum(("none", "small"), "用户要求小包装时填small"),
++                "brand": {**text, "description": "明确品牌名；any撤销品牌限制"},
++                "item_volume_ml": {**count, "description": "每罐/瓶容量（ml），0撤销"},
++                "packaging": enum(("none", "can", "bottle", "any"), "罐/瓶；any撤销"),
++                "pack_count": {**count, "description": "一销售包装内件数，0撤销"},
++                "pack_mode": enum(("none", "single", "multi", "any"), "单件/多件；any撤销"),
++                "max_price_yuan": {"type": "number", "minimum": 0,
++                                   "description": "一销售包装的最高售价（元），0撤销；不是整份清单预算"},
++            }),
+             "clear": {"type": "array", "items": enum(CLEARABLE)},
+             "unsupported": {**texts, "description": "用户说了、上面没有字段的条件原话，如「清淡」「10分钟送到」「大包装」「精确100克」"},
+         }),
+@@ -753,8 +781,8 @@
+         "lookups": {"type": "array", "maxItems": 2, "items": obj({
+             "kind": enum(LOOKUP_KINDS), "query": {**text, "description": "只填名称，不带否定词"}})},
+         "reads": {"type": "array", "maxItems": 4, "items": obj({
+-            "kind": enum(QUERY_KINDS, "recommend=推荐菜品，recipe=做法，cart=购物车，catalog=列商品目录；查具体商品必须用lookups"),
+-            "topic": {**text, "description": "仅recommend / recipe允许主题；cart / catalog不能填写topic，商品名放lookups.query"}})},
++            "kind": enum(QUERY_KINDS, "compare=品类商品规格价格比较，recommend=推荐菜品，recipe=做法，cart=购物车，catalog=目录；具名商品用lookups"),
++            "topic": {**text, "description": "compare必须填品类名（如可乐）；recommend / recipe可填主题；cart / catalog不填"}})},
+         "questions": {"type": "array", "maxItems": 3, "items": obj({
+             "slot": text, "question": text, "options": texts})},
+         "display_refs": texts,
+--- a/backend/app/schemas/goal.py
++++ b/backend/app/schemas/goal.py
+@@ -230,7 +230,7 @@
+     dietary: list[str] = Field(default_factory=list)
+     excluded_ingredients: list[str] = Field(default_factory=list)
+     meal_time: MealTime | None = None
+-    specification: dict[Literal["size"], Literal["small"]] = Field(default_factory=dict)
++    specification: dict[Literal["size", "brand", "item_volume_ml", "packaging", "pack_count", "pack_mode", "max_price_fen"], Any] = Field(default_factory=dict)
+ 
+ 
+ class Goal(BaseModel):
+@@ -279,7 +279,7 @@
+     meal_time: MealTime | None = None
+     dietary: list[str] | None = None
+     excluded_ingredients: list[str] | None = None
+-    specification: dict[Literal["size"], Literal["small"]] | None = None
++    specification: dict[Literal["size", "brand", "item_volume_ml", "packaging", "pack_count", "pack_mode", "max_price_fen"], Any] | None = None
+ 
+     def stated(self) -> dict[str, Any]:
+         """Only the fields this patch really sets."""
+--- a/backend/app/services/validation_context.py
++++ b/backend/app/services/validation_context.py
+@@ -48,6 +48,35 @@
+         )
+ 
+     def matches_spec(self, product: dict[str, Any]) -> bool:
++        if self.specification.get("comparison") == "cola":
++            from app.services.catalog_service import comparison_card
++
++            if comparison_card(product) is None:
++                return False
++        brand = self.specification.get("brand")
++        if brand and brand != "any" and product.get("brand") != brand:
++            return False
++        metadata = product.get("metadata") or {}
++        item_ml = self.specification.get("item_volume_ml")
++        if item_ml:
++            amount = metadata.get("item_quantity")
++            unit = metadata.get("item_unit")
++            if unit not in ("ml", "l") or amount is None or amount * (1000 if unit == "l" else 1) != item_ml:
++                return False
++        packaging = self.specification.get("packaging")
++        if packaging in ("can", "bottle") and metadata.get("packaging") != packaging:
++            return False
++        count = self.specification.get("pack_count")
++        if count and metadata.get("pack_count") != count:
++            return False
++        mode = self.specification.get("pack_mode")
++        if mode == "single" and metadata.get("pack_count") != 1:
++            return False
++        if mode == "multi" and (metadata.get("pack_count") is None or metadata["pack_count"] <= 1):
++            return False
++        max_price = self.specification.get("max_price_fen")
++        if max_price and (product.get("price_fen") is None or product["price_fen"] > max_price):
++            return False
+         size = self.specification.get("size")
+         if size != "small":
+             return True
+--- a/backend/app/services/catalog_service.py
++++ b/backend/app/services/catalog_service.py
+@@ -53,10 +53,46 @@
+     }
+ 
+ 
++def comparison_card(product: dict[str, Any]) -> dict[str, Any] | None:
++    """A sales pack with verified per-item and total-volume facts."""
++    metadata = product["metadata"]
++    if (metadata.get("family_id") != "cola" or not product["brand"]
++            or not product["sellable"] or not product["available_qty"]
++            or product["price_fen"] is None or product["spec_quantity"] is None
++            or product["spec_unit"] not in ("ml", "l")
++            or metadata.get("item_unit") not in ("ml", "l")
++            or not metadata.get("item_quantity") or not metadata.get("pack_count")
++            or metadata.get("packaging") not in ("can", "bottle")):
++        return None
++    total_ml = product["spec_quantity"] * (1000 if product["spec_unit"] == "l" else 1)
++    item_ml = metadata["item_quantity"] * (1000 if metadata["item_unit"] == "l" else 1)
++    return {
++        "sku_id": product["sku_id"], "name": product["name_zh"] or product["name"],
++        "brand": product["brand"], "image_path": product["image_path"],
++        "packaging": metadata["packaging"], "pack_count": metadata["pack_count"],
++        "item_volume_ml": item_ml, "total_volume_ml": total_ml,
++        "price_fen": product["price_fen"],
++        "price_per_litre_yuan": round(product["price_fen"] * 10 / total_ml, 2),
++    }
++
++
+ class CatalogService:
+     def __init__(self, db: Session, store_id: str = "store-demo-01"):
+         self.db = db
+         self.store_id = store_id
++
++    def comparison_cards(self, displayed: list[dict[str, Any]]) -> list[dict[str, Any]]:
++        cards = []
++        for entry in displayed:
++            if entry["kind"] != "product":
++                continue
++            product = self.get_product(entry["target_id"])
++            if product is None:
++                continue
++            card = comparison_card(product)
++            if card is not None:
++                cards.append({**card, "ref": entry["ref"]})
++        return cards[:5]
+ 
+     def _quarantined_barcodes(self) -> set[str]:
+         rows = self.db.query(CatalogReview).filter_by(status="quarantined").all()
+--- a/backend/app/agent/tools/read.py
++++ b/backend/app/agent/tools/read.py
+@@ -39,6 +39,7 @@
+ )
+ from app.services.retrieval_index import IndexUnavailable, read_pointer
+ from app.services.retrieval_service import RetrievalService
++from app.services.catalog_service import CatalogService, comparison_card
+ from app.services.shopping_plan_service import ShoppingPlanService
+ from app.services.template_matcher import dish_display_name, load_templates
+ from app.services.template_plan_service import TemplatePlanService, expand_ingredient_terms
+@@ -175,7 +176,7 @@
+         *,
+         extra_excluded: list[str] | None = None,
+         extra_budget_fen: int | None = None,
+-        extra_specification: dict[str, str] | None = None,
++        extra_specification: dict[str, Any] | None = None,
+     ) -> ValidationContext | None:
+         """The turn's real constraints, merged with what this read stated.
+ 
+@@ -255,7 +256,7 @@
+         limit: int = MAX_LOOKUP_ROWS,
+         extra_excluded: list[str] | None = None,
+         extra_budget_fen: int | None = None,
+-        extra_specification: dict[str, str] | None = None,
++        extra_specification: dict[str, Any] | None = None,
+     ) -> dict[str, Any] | None:
+         """Run the shared retrieval service, or ``None`` if there is no index.
+ 
+@@ -503,7 +504,7 @@
+         *,
+         extra_excluded: list[str] | None = None,
+         extra_budget_fen: int | None = None,
+-        extra_specification: dict[str, str] | None = None,
++        extra_specification: dict[str, Any] | None = None,
+     ) -> dict[str, Any]:
+         """Fetch real facts for a read-only query.
+ 
+@@ -515,6 +516,35 @@
+         really excludes peanut from a recommendation or a recipe instead of being
+         left to the retrieval route to "understand".
+         """
++        if kind == "compare":
++            context = self._validation_context(
++                extra_excluded=extra_excluded, extra_budget_fen=extra_budget_fen,
++                extra_specification={**(extra_specification or {}), "comparison": "cola"},
++            )
++            retrieval = self._retrieval(
++                "product", query, extra_excluded=extra_excluded,
++                extra_budget_fen=extra_budget_fen, extra_specification=context.specification,
++            )
++            if retrieval is not None and retrieval["status"] == "unavailable":
++                return {"kind": "compare", "status": STATUS_FAILED,
++                        **self._retrieval_evidence(retrieval), "sellable_products": []}
++            catalog = CatalogService(self.db, self.store_id)
++            if retrieval is None:
++                products = ShoppingPlanService(self.db, self.store_id).find_product_candidates(query, max_results=50)
++                evidence = {"retrieval_status": "unavailable", "fallback_reason": "no_published_index",
++                            "filters_applied": _filters_applied(context)}
++            else:
++                products = [catalog.get_product(hit["target_id"]) for hit in retrieval["hits"]]
++                evidence = self._retrieval_evidence(retrieval)
++            cards = []
++            for product in products:
++                if product is None or (context is not None and not context.product_allowed(product)):
++                    continue
++                card = comparison_card(product)
++                if card is not None:
++                    cards.append(card)
++            return {"kind": "compare", "status": STATUS_COMPLETED, "empty": not cards,
++                    **evidence, "sellable_products": cards[:MAX_LOOKUP_ROWS]}
+         if kind == "recommend":
+             context = self._validation_context(
+                 extra_excluded=extra_excluded,
+--- a/backend/app/services/plan_validator.py
++++ b/backend/app/services/plan_validator.py
+@@ -11,7 +11,7 @@
+ from app.core.config import get_settings
+ from app.models.catalog import CatalogProduct
+ from app.services import plan_contract as contract
+-from app.services.catalog_service import CatalogService
++from app.services.catalog_service import CatalogService, product_to_dict
+ from app.services.delivery_service import DeliveryService
+ from app.services.image_assets import image_kind_for_path, image_kind_legacy
+ from app.services.offer_service import OfferService
+@@ -161,18 +161,8 @@
+             if not product or product.review_status != "approved":
+                 errors.append(f"SKU {sku_id} not approved")
+                 continue
+-            product_dict = {
+-                "sku_id": sku_id,
+-                "ingredient_ids": [],
+-                "spec_quantity": product.spec_quantity,
+-                "spec_unit": product.spec_unit,
+-            }
+-            try:
+-                import json
+-
+-                product_dict["ingredient_ids"] = json.loads(product.ingredient_ids or "[]")
+-            except json.JSONDecodeError:
+-                pass
++            offer = self.offers.get_offer(sku_id)
++            product_dict = product_to_dict(product, offer)
+             if ctx and not ctx.product_allowed(product_dict):
+                 errors.append(f"SKU {sku_id} violates constraints")
+                 continue
+@@ -180,7 +170,6 @@
+             if excluded and ing_ids.intersection(excluded):
+                 errors.append(f"SKU {sku_id} contains excluded ingredient")
+                 continue
+-            offer = self.offers.get_offer(sku_id)
+             if offer is None:
+                 # No offer row at all is *missing information*, not a stock-out.
+                 gaps.append(
+--- a/backend/app/agent/graph/turn_commit.py
++++ b/backend/app/agent/graph/turn_commit.py
+@@ -503,6 +503,9 @@
+             allowed=allowed,
+             action_results=action_results,
+         )
++        from app.services.catalog_service import CatalogService
++
++        response["product_cards"] = CatalogService(db, runtime.store_id).comparison_cards(displayed)
+         if reservation is not None and receipts is not None:
+             receipts.complete(db, reservation, response)
+         if staged.get("plan_effect") == "clear" or staged.get("verb") == "confirm_plan":
+--- a/backend/app/api/guide.py
++++ b/backend/app/api/guide.py
+@@ -61,7 +61,8 @@
+     *,
+     include_messages: bool = False,
+ ) -> SessionResponse:
+-    from app.agent.context import pending_for_session
++    from app.agent.context import pending_for_session, load_context
++    from app.services.catalog_service import CatalogService
+ 
+     entry = EntryContext(**json.loads(session.entry_context_json))
+     task_id = session.current_task_id
+@@ -136,6 +137,9 @@
+         confirmation_id=confirmation_id,
+         history_status=session.history_status,
+         messages=messages,
++        product_cards=CatalogService(db, entry.store_id).comparison_cards(
++            (load_context(db, session) or {}).get("displayed_candidates", []),
++        ),
+     )
+ 
+ 
+--- a/backend/app/schemas/guide.py
++++ b/backend/app/schemas/guide.py
+@@ -216,6 +216,7 @@
+     session_version: int = 0
+     status: Step | Literal["stopped"]
+     message: str
++    product_cards: list[dict[str, Any]] = Field(default_factory=list)
+     clarification: str | None = None
+     plan: PlanResponse | None = None
+     plan_effect: PlanEffect = "keep"
+@@ -426,6 +427,7 @@
+ 
+ class SessionResponse(BaseModel):
+     session_id: str
++    product_cards: list[dict[str, Any]] = Field(default_factory=list)
+     task_id: str | None = None
+     state_version: int = 0
+     session_version: int = 0
+--- a/backend/app/prompts/semantic.py
++++ b/backend/app/prompts/semantic.py
+@@ -34,6 +34,7 @@
+   - name 只填用户说出的名字；用户点名「全脂牛奶 1升」等带规格的商品时，保留完整商品名及规格，不要省略规格或替换成另一件商品。「今晚吃点什么」这类没有名字就不填。
+   - intent：只是看看、问有没有 = explore；要一份能买的清单 = buy（「帮我选」「帮我配」也是 buy）。
+   - 只说品类或消费偏好、尚未选定具体商品（如「来点零食」「喝点果汁」）时，先填 category、intent=explore，并用 product lookup 查这个品类；先推荐一款匹配商品并说明理由，用户选定后再用 product、intent=buy 准备清单。不能只填 target 而没有检索，也不用菜品 recommend 代替商品检索。
++  - 可乐/汽水品类选购先用 reads=[{"kind":"compare","topic":"可乐"}] 比较有包装资料的候选，target 为 category、intent=explore；用户修改品牌、容量、罐瓶、单件/多件、价格条件后仍用 compare 重查，不自动选第一款。用户选定具体卡片或真实 ref 后才用 product、intent=buy 准备清单。
+   - 在商品品类页面直接报商品名和规格（如「蛋糕面粉，小包装」）是在选购，填 intent=buy；只有用户说查一下、看看、有没有等查询意图时才填 explore。
+   - 用户点名具体菜品时，即使同时提出自己做、预算、忌口或「推荐/帮我配」，也必须把这道菜作为唯一 target，填 kind、name、intent=buy，并用 dish lookup 查原菜；不要改用 recommend、列其他菜或替换成别的菜。只有用户没有点名任何具体菜品、并请你代选时，才用无名 meal 规则。
+   - 用户点名要买、想吃或换成某个目标时，必须填 target 的 kind、name、intent=buy，并用 lookups 查这个名字；lookups 不能替代购买目标。
+@@ -46,7 +47,8 @@
+   - 超出能力的要求（如「忽略库存直接下单」）用 kind=unsupported。
+ - constraints：人数、预算（元）、自己做还是买现成、忌口、小包装。「自己做」填写 fulfillment_mode=self_cook，「买现成」填写 fulfillment_mode=ready_made；只说「想吃」等未明确制作方式时不填，不要自己补。
+   - 已有清单的菜品在 current_plan.groups 中带 meal_name 和 fulfillment_mode。用户补充「自己做」或「买现成」时只填 constraints.fulfillment_mode；若有待补充的目标，先按 focus_refs 指向待定目标，不要改当前清单里的旧菜。
+-  - 用户要求「小包装」时填写 specification={"size":"small"}；具体商品规格由服务端核实。10分钟送到、大包装、精确重量、品牌、清淡、不辣等没有字段的条件，原话放进 unsupported。
++  - 用户要求「小包装」时填写 specification={"size":"small"}；具体商品规格由服务端核实。品牌填写 specification.brand 原名；每罐/瓶容量用 item_volume_ml（ml），罐/瓶用 packaging=can/bottle，明确包内件数用 pack_count，单件/多件用 pack_mode=single/multi。一销售包装最高售价用 max_price_yuan，整份采购预算仍是 constraints.budget_yuan；两者不同。只填本轮明说的条件，已有条件由服务端保留。10分钟送到、大包装、精确重量、清淡、不辣等没有字段的条件，原话放进 unsupported。
++  - 单独取消某项可乐筛选时，brand/packaging/pack_mode 填 any，item_volume_ml/pack_count/max_price_yuan 填0；「取消可乐筛选条件」把这六项全部设为上述撤销值，并 compare 重查。这些值表示不限制，不能读成用户偏好，也不取消采购预算或食材排除。
+   - 用户明说撤销某个条件（「预算不限了」），放进 clear。
+   - 「不用小包装了」填写 clear=["specification"]；不要用none表示撤销，也不要同时提出新目标或检索。
+ - focus：用户指着的那一项，只能填 focus_refs 里的 ref，并写同一行的 name；指代不清就不填。
+@@ -58,7 +60,7 @@
+   有唯一的待答候选时可以填 target.ref 表示选择、准备清单；选择候选和确认加购是两件事。
+ - lookups：需要真实候选时查菜名或商品名；query 保留用户点名商品的完整名称及规格，不带「不要」之类的否定词。只读查某个商品也用 product lookup，target.intent=explore；小包装条件单独填写 constraints.specification，不放进 query 或 reads.topic。
+   用户说「只读查一下」表示这轮不购买，不表示必须填写 reads。只读查询面粉等具体商品时仍填 product lookup、target.intent=explore；用户明确的小包装等条件仍必须填写 constraints。
+-- reads：recommend 查用户想找的主题（没主题就是开放式推荐）；recipe 查做法；cart / catalog 查购物车和目录，不能填 topic。查询具体商品名使用 lookups，不用 catalog/topic。
++- reads：compare 用 topic=可乐查该品类规格与当前报价差异；recommend 查用户想找的主题（没主题就是开放式推荐）；recipe 查做法；cart / catalog 查购物车和目录，不能填 topic。查询具体具名商品使用 lookups，不用 catalog/topic。compare 回复只依据 sellable_products，展示不超过五个真实 ref；无匹配如实说明，不换其他品类。
+ - questions：只有真正卡住这一轮的歧义才问，每轮只问一个；options 只能是服务端给过的 ref。
+   无名一餐的预算或忌口由服务端只问一次，不要在 questions 里另外追问人数、口味或菜名。
+ - 用户本轮明确回答 pending_clarifications 中的问题时，必须把该问题的真实 question_id 填入 resolved_questions，并在对应字段记录答案明确的目标、约束及追加或替换关系；未回答的问题不填。普通 ACK（如“好的”“嗯”）不算对澄清问题的回答，也不标记为 resolved。
+@@ -77,6 +79,11 @@
+ # Small, isolated one-pass examples. Example refs never resolve in a real
+ # CandidateSet; each shows only the dimensions that sentence speaks to.
+ PROPOSAL_EXAMPLES = [
++    ({"user_message": "比较可乐，只要百事单罐330毫升，价格不超过4元"},
++     {"target": {"kind": "category", "name": "可乐", "intent": "explore"},
++      "reads": [{"kind": "compare", "topic": "可乐"}],
++      "constraints": {"specification": {"brand": "百事可乐", "item_volume_ml": 330,
++                       "packaging": "can", "pack_mode": "single", "max_price_yuan": 4}}}),
+     ({"user_message": "买一盒牛奶"},
+      {"target": {"kind": "product", "name": "牛奶", "intent": "buy", "quantity": 1},
+       "lookups": [{"kind": "product", "query": "牛奶"}]}),
+--- a/frontend/src/App.tsx
++++ b/frontend/src/App.tsx
+@@ -35,6 +35,7 @@
+   type LocalOrder,
+   type PlanResponse,
+   type Product,
++  type ProductComparisonCard,
+   type SessionResponse,
+   type TurnResponse,
+ } from './lib/saleGuide'
+@@ -256,7 +257,7 @@
+ }
+ 
+ type Role = 'user' | 'ai'
+-interface Msg { id: string; role: Role; text: string; suggestions?: string[] }
++interface Msg { id: string; role: Role; text: string; suggestions?: string[]; productCards?: ProductComparisonCard[] }
+ 
+ const WELCOME_MSG: Msg = {
+   id: 'welcome',
+@@ -1243,10 +1244,11 @@
+             text: m.content,
+           }))
+         if (restored.length) {
+-          if (chipLabels.length) {
++          if (chipLabels.length || session.product_cards?.length) {
+             const lastAi = restored.map((m, index) => ({ m, index })).reverse().find(entry => entry.m.role === 'ai')
+             if (lastAi) {
+-              restored[lastAi.index] = { ...restored[lastAi.index], suggestions: chipLabels }
++              restored[lastAi.index] = { ...restored[lastAi.index], suggestions: chipLabels,
++                productCards: session.product_cards }
+             }
+           }
+           setMsgs(restored)
+@@ -1321,7 +1323,8 @@
+       )
+       const chipLabels = clarificationChipLabels(clarifications)
+       setMsgs(p => p.map(m => m.id === assistantId
+-        ? { ...m, text: finalText, suggestions: chipLabels.length ? chipLabels : undefined }
++        ? { ...m, text: finalText, suggestions: chipLabels.length ? chipLabels : undefined,
++            productCards: turn.product_cards }
+         : m))
+       applyTurnTerminalState(turn)
+     } catch (e) {
+@@ -1497,6 +1500,35 @@
+                   </span>
+                 </div>
+               ) : null}
++              {!!msg.productCards?.length && (
++                <section aria-label="可乐候选" className="flex w-full flex-col gap-2">
++                  {msg.productCards.map(card => (
++                    <div key={card.ref} className="guide-glass-bubble rounded-2xl px-4 py-3">
++                      <p className="text-[12px] font-semibold leading-5">{card.name}</p>
++                      <p className="mt-1 text-[11px] text-black/55">
++                        每{card.packaging === 'can' ? '罐' : '瓶'} {card.item_volume_ml}ml · {card.pack_count}{card.packaging === 'can' ? '罐' : '瓶'}/包
++                        {' · '}共 {card.total_volume_ml}ml
++                      </p>
++                      <p className="mt-1 text-[12px] font-semibold">
++                        {yuan(card.price_fen)}/包 <span className="font-normal text-black/55">· {card.price_per_litre_yuan.toFixed(2)} 元/升</span>
++                      </p>
++                      <button disabled={typing || confirming || restoring}
++                        onClick={() => send(`选择「${card.name}」（候选 ${card.ref}）生成采购清单`)}
++                        className="mt-2 rounded-full bg-[#eac867] px-3 py-1.5 text-[11px] font-medium disabled:opacity-40">
++                        选这款，生成清单
++                      </button>
++                    </div>
++                  ))}
++                  <div className="flex flex-wrap gap-1.5">
++                    {['只看可口可乐', '只看百事可乐', '只看罐装', '只看瓶装', '只看单件装', '只看多件装', '取消可乐筛选条件'].map(label => (
++                      <button key={label} disabled={typing || confirming || restoring}
++                        onClick={() => send(`${label}，重新比较可乐`)}
++                        className="guide-glass-chip rounded-full px-3 py-2 text-[11px] text-black/60 disabled:opacity-40">{label}</button>
++                    ))}
++                  </div>
++                  <p className="text-[10px] text-black/45">模拟门店报价；选择后生成清单，明确确认才加购。</p>
++                </section>
++              )}
+               {msg.suggestions && msg.role === 'ai' && !typing && !confirming && (
+                 <div className="flex w-full flex-col gap-1.5">
+                   {msg.suggestions.map((s, i) => (
+--- a/frontend/src/lib/saleGuide.ts
++++ b/frontend/src/lib/saleGuide.ts
+@@ -369,6 +369,19 @@
+   selected_items: Array<{ sku_id: string; quantity: number }>;
+ }
+ 
++export interface ProductComparisonCard {
++  ref: string;
++  sku_id: string;
++  name: string;
++  brand: string;
++  packaging: 'can' | 'bottle';
++  pack_count: number;
++  item_volume_ml: number;
++  total_volume_ml: number;
++  price_fen: number;
++  price_per_litre_yuan: number;
++}
++
+ export interface TurnResponse {
+   request_id: string;
+   session_id: string;
+@@ -377,6 +390,7 @@
+   session_version: number;
+   status: string;
+   message: string;
++  product_cards?: ProductComparisonCard[];
+   route: string | null;
+   committed: boolean;
+   plan?: PlanResponse | null;
+@@ -391,6 +405,7 @@
+ }
+ 
+ export interface SessionResponse {
++  product_cards?: ProductComparisonCard[];
+   confirmation_result?: {
+     items_added?: Array<{ sku_id: string; quantity: number }>;
+     cart_version?: number;
+--- a/backend/tests/test_semantic_phase2d_constraints.py
++++ b/backend/tests/test_semantic_phase2d_constraints.py
+@@ -20,7 +20,7 @@
+ 
+ @pytest.mark.parametrize(
+     "specification",
+-    [{"size": "large"}, {"brand": "演示品牌"}, "small"],
++    [{"size": "large"}, {"brand": 123}, "small"],
+ )
+ def test_specification_rejects_values_outside_current_size_contract(specification):
+     with pytest.raises(SemanticProtocolError) as error:
+--- a/backend/app/services/confirmation_service.py
++++ b/backend/app/services/confirmation_service.py
+@@ -18,6 +18,7 @@
+ from app.models.session import GuideSession, GuideTask
+ from app.schemas.guide import ConfirmItem, EntryContext
+ from app.services.cart_service import CartService
++from app.services.catalog_service import product_to_dict
+ from app.services.conversation_service import ConversationService
+ from app.services.delivery_service import DeliveryService
+ from app.services.operation_service import OperationService
+@@ -153,12 +154,7 @@
+                 raise AppError(409, "PRICE_CHANGED", "Price changed, reconfirm required")
+             if ctx.specification:
+                 product = self.db.get(CatalogProduct, sku_id)
+-                if not ctx.matches_spec(
+-                    {
+-                        "spec_quantity": product.spec_quantity,
+-                        "spec_unit": product.spec_unit,
+-                    }
+-                ):
++                if not ctx.matches_spec(product_to_dict(product, offer)):
+                     product_size = (
+                         f"{product.spec_quantity}{product.spec_unit}"
+                         if product.spec_quantity is not None and product.spec_unit
+@@ -168,7 +164,8 @@
+                         422,
+                         "CONSTRAINT_UNSATISFIED",
+                         f"商品「{product.name_zh or product.name or sku_id}」当前规格为 {product_size}，"
+-                        "不符合小包装要求，请刷新清单后再确认。",
++                        + ("不符合小包装要求" if ctx.specification.get("size") == "small"
++                           else "不符合指定的商品筛选条件") + "，请刷新清单后再确认。",
+                         detail=f"SKU {sku_id} violates specification {ctx.specification}",
+                     )
+             selected_total += offer.price_fen * qty
+--- a/backend/app/agent/turn_context_plan.py
++++ b/backend/app/agent/turn_context_plan.py
+@@ -271,8 +271,12 @@
+                 "reply_ok": True,
+             }
+         )
++    clear_displayed = bool(context.get("displayed_candidates")) and not displayed and any(
++        query.kind == "compare" for query in proposal.queries
++    )
+     changed = bool(
+-        new_pending
++        clear_displayed
++        or new_pending
+         or resolved
+         or displayed
+         or pending_list != base_pending
+@@ -290,6 +294,7 @@
+             candidate_to_store.model_dump() if candidate_to_store is not None else None
+         ),
+         clear_goal_candidate=bool(task_switched),
++        clear_displayed=clear_displayed,
+         task_switched=task_switched,
+         changed=changed,
+         answer_parts=answer_parts,
+--- a/backend/tests/test_answer_display_refs.py
++++ b/backend/tests/test_answer_display_refs.py
+@@ -56,7 +56,8 @@
+ 
+ 
+ def test_prompt_example_maps_jiu_second_to_the_second_displayed_ref():
+-    request, raw_proposal = PROPOSAL_EXAMPLES[-1]
++    request, raw_proposal = next(example for example in PROPOSAL_EXAMPLES
++                                 if example[0]["user_message"] == "就第二个")
+     parsed = parse_proposal(raw_proposal)
+ 
+     assert request["user_message"] == "就第二个"

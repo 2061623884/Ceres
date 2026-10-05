@@ -1,0 +1,119 @@
+{
+  "executor": "/root/v2_test_executor",
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend",
+  "interpreter": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+  "command_prefix": "python -X utf8 -m pytest -q -p no:cacheprovider -W error::pytest.PytestUnhandledThreadExceptionWarning",
+  "environment": {
+    "PYTHONUTF8": "1",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "DATABASE_URL": "sqlite:///external-run/ceres.sqlite3",
+    "MERCURY_DB_PATH": "external-run/mercury.sqlite3",
+    "RETRIEVAL_INDEX_DIR": "",
+    "basetemp": "external-run/pytest-tmp"
+  },
+  "records": [
+    {
+      "run": "f5a3b36c4c8246bc8ff8b947b5aa49d8",
+      "raw": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-f5a3b36c4c8246bc8ff8b947b5aa49d8\\v2-cola-comparison-red.txt",
+      "actual_exit": 1,
+      "result": "2 failed",
+      "start_utc": "2026-10-05T06:45:48.8072705Z",
+      "end_utc": "2026-10-05T06:45:53.9866001Z",
+      "targets": "test_v2_cola_comparison.py"
+    },
+    {
+      "run": "20527d2d8c09447ba536325ba21407aa",
+      "raw": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-20527d2d8c09447ba536325ba21407aa\\v2-cola-comparison-green.txt",
+      "actual_exit": 1,
+      "result": "2 failed",
+      "start_utc": "2026-10-05T07:02:52.0055604Z",
+      "end_utc": "2026-10-05T07:02:56.8132370Z",
+      "targets": "test_v2_cola_comparison.py"
+    },
+    {
+      "run": "e53072673765420db2f2554e2492a855",
+      "raw": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-e53072673765420db2f2554e2492a855\\v2-cola-comparison-green-retry.txt",
+      "actual_exit": 0,
+      "result": "2 passed",
+      "start_utc": "2026-10-05T07:05:26.4155213Z",
+      "end_utc": "2026-10-05T07:05:30.9112784Z",
+      "targets": "test_v2_cola_comparison.py"
+    },
+    {
+      "run": "46355f9a4c2f478f9ba8f1dca24e4f14",
+      "raw": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-46355f9a4c2f478f9ba8f1dca24e4f14\\v2-cola-comparison-slice.txt",
+      "actual_exit": 1,
+      "result": "4 passed 2 failed",
+      "start_utc": "2026-10-05T07:08:02.9978516Z",
+      "end_utc": "2026-10-05T07:08:14.1790923Z",
+      "targets": "test_v2_cola_comparison.py"
+    },
+    {
+      "run": "8a3ea07e2ff34768be5fb947ed30a047",
+      "raw": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-8a3ea07e2ff34768be5fb947ed30a047\\v2-cola-comparison-green-after-confirm-fix.txt",
+      "actual_exit": 0,
+      "result": "6 passed",
+      "start_utc": "2026-10-05T07:10:38.5249737Z",
+      "end_utc": "2026-10-05T07:10:49.3957044Z",
+      "targets": "test_v2_cola_comparison.py"
+    },
+    {
+      "run": "d9c80ab996dd4b96bc3a0591d3710892",
+      "raw": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-d9c80ab996dd4b96bc3a0591d3710892\\v2-cola-confirm-related-regressions.txt",
+      "actual_exit": 0,
+      "result": "47 passed",
+      "start_utc": "2026-10-05T07:11:31.4095238Z",
+      "end_utc": "2026-10-05T07:12:14.7398879Z",
+      "targets": "test_semantic_phase2d_constraints.py test_snack_selection.py test_purchase_selection.py test_revision_confirmation.py test_read_tools.py"
+    },
+    {
+      "run": "15a3bfeb59dc4ae4afc702eec83def2a",
+      "raw": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-15a3bfeb59dc4ae4afc702eec83def2a\\v2-empty-comparison-session-restore-red.txt",
+      "actual_exit": 1,
+      "result": "2 failed",
+      "start_utc": "2026-10-05T07:13:31.6855311Z",
+      "end_utc": "2026-10-05T07:13:36.8798377Z",
+      "targets": "test_v2_cola_comparison.py::test_empty_comparison_clears_prior_candidates_on_session_restore"
+    },
+    {
+      "run": "2f327507e4514a0196adbcdc604367b7",
+      "raw": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-2f327507e4514a0196adbcdc604367b7\\v2-cola-comparison-eight-green.txt",
+      "actual_exit": 0,
+      "result": "8 passed",
+      "start_utc": "2026-10-05T07:15:11.2943040Z",
+      "end_utc": "2026-10-05T07:15:23.7718192Z",
+      "targets": "test_v2_cola_comparison.py"
+    },
+    {
+      "run": "09fbe1e63c9e45a0b548779a15f24200",
+      "raw": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-09fbe1e63c9e45a0b548779a15f24200\\answer-display-refs-regression.txt",
+      "actual_exit": 1,
+      "result": "10 passed 1 failed",
+      "start_utc": "2026-10-05T07:15:38.8724340Z",
+      "end_utc": "2026-10-05T07:15:52.8130611Z",
+      "targets": "test_answer_display_refs.py"
+    },
+    {
+      "run": "b86f3bfb021646588cdb300731876246",
+      "raw": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-b86f3bfb021646588cdb300731876246\\answer-display-refs-green-retry.txt",
+      "actual_exit": 0,
+      "result": "11 passed",
+      "start_utc": "2026-10-05T07:17:26.1187144Z",
+      "end_utc": "2026-10-05T07:17:40.0406846Z",
+      "targets": "test_answer_display_refs.py"
+    }
+  ],
+  "boundary": "65 fixture, isolated sqlite, controlled semantic provider, lexical test index; not live model/browser acceptance",
+  "frontend": {
+    "run": "run-721246154c884e2dbc95e2b473925119",
+    "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\frontend",
+    "start_utc": "2026-10-05T07:13:05.3396300Z",
+    "end_utc": "2026-10-05T07:13:07.8176326Z",
+    "tsc_command": "node_modules/.bin/tsc.cmd --noEmit",
+    "tsc_actual_exit": 0,
+    "build_command": "node_modules/.bin/vite.cmd build --outDir C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-721246154c884e2dbc95e2b473925119\\frontend-dist",
+    "build_actual_exit": 0,
+    "build_raw": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-721246154c884e2dbc95e2b473925119\\frontend-vite-build.txt",
+    "tsc_raw_note": "tsc stdout empty; direct exit-file captured"
+  }
+}

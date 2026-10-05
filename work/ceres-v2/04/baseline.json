@@ -1,0 +1,72 @@
+{
+  "git_head": "4968547fbcbb50e5d19c52329fee25c71ccf51ad",
+  "scope": "04 cola comparison",
+  "paths": [
+    {
+      "path": "backend/app/agent/protocol.py",
+      "sha256": "46174fd0ee69be6b4663d5560f4e626ce418f16261847100e76f80b82a692ae3"
+    },
+    {
+      "path": "backend/app/schemas/goal.py",
+      "sha256": "4a98c20c344478bfe239abe9351097a49536a5ccad6e2c52c8d1fc3035c4208d"
+    },
+    {
+      "path": "backend/app/services/validation_context.py",
+      "sha256": "4a36813affcd926812b0417a616b56d2b2d627be695af8bcd58e135fd66d2179"
+    },
+    {
+      "path": "backend/app/services/catalog_service.py",
+      "sha256": "8a8d603da6964ea23646f72c89b428a9374fe68311c6d888f1349b269b9de7db"
+    },
+    {
+      "path": "backend/app/agent/tools/read.py",
+      "sha256": "03079e1bfc4ddd4ff8259cda0ae9ff400ab05f67ad598250ad00553683c34efe"
+    },
+    {
+      "path": "backend/app/services/plan_validator.py",
+      "sha256": "128af763b564b97eb8542dd18d80a9aa9c112b92451a3d3fbee4d9c8ee4fb635"
+    },
+    {
+      "path": "backend/app/agent/graph/turn_commit.py",
+      "sha256": "f874208abb20c6d6263be76693bd6454c000290bccc3cda6f6d5811d36025d31"
+    },
+    {
+      "path": "backend/app/api/guide.py",
+      "sha256": "932e14d47986ef9c7eb3c250693d747d1bfb83397c348724f669d74856d9b9fe"
+    },
+    {
+      "path": "backend/app/schemas/guide.py",
+      "sha256": "b716a75873e9d39a47372fec9555237885a81c9d18f4e1c1d1637c3ef81e7f88"
+    },
+    {
+      "path": "backend/app/prompts/semantic.py",
+      "sha256": "46e9de313e2b34a6a9b87f96cec699538f3ab83cde4b1b66925887a265fdd3fc"
+    },
+    {
+      "path": "frontend/src/App.tsx",
+      "sha256": "41367bf5d86ccb6a09357006836942c5e7a4479de4d824c305cb798a72b09a8c"
+    },
+    {
+      "path": "frontend/src/lib/saleGuide.ts",
+      "sha256": "ce63c8418d6f829979c2cbc31adc5bfb368087f8c8ce508fced772f457edfec3"
+    },
+    {
+      "path": "backend/tests/test_semantic_phase2d_constraints.py",
+      "sha256": "108608905243f58f781ea449fcc5e24c321801db17e50f5cff0fa8fd24365d51"
+    },
+    {
+      "path": "backend/app/services/confirmation_service.py",
+      "sha256": "14aa86c3f1c0c3e69b3b6959908022bd1424f81c5d7109aaeee919b1954a88f5"
+    },
+    {
+      "path": "backend/app/agent/turn_context_plan.py",
+      "sha256": "af69fc5c3a64e354bcaa4d27fb86eb8b55c24b8af5730e528505ea4607863588"
+    },
+    {
+      "path": "backend/tests/test_answer_display_refs.py",
+      "sha256": "6a531a435c19476d4c549a2750c922cb999b87f1844c00b2e7737855fe46720d"
+    }
+  ],
+  "review_base_after_03_close": "6dabe238a95cce722e90253a186d0d771c6aedc9",
+  "note": "04 first RED began at git_head while independent 03 review fix was closing; 04 source before snapshots retain exact actual edit baseline. Review excludes 03 committed fixes/docs by using review_base_after_03_close."
+}

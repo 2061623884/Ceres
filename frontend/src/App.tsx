@@ -35,6 +35,7 @@ import {
   type LocalOrder,
   type PlanResponse,
   type Product,
+  type ProductComparisonCard,
   type SessionResponse,
   type TurnResponse,
 } from './lib/saleGuide'
@@ -256,7 +257,7 @@ function DemoBadge() {
 }
 
 type Role = 'user' | 'ai'
-interface Msg { id: string; role: Role; text: string; suggestions?: string[] }
+interface Msg { id: string; role: Role; text: string; suggestions?: string[]; productCards?: ProductComparisonCard[] }
 
 const WELCOME_MSG: Msg = {
   id: 'welcome',
@@ -1159,10 +1160,11 @@ function ChatScreen({
             text: m.content,
           }))
         if (restored.length) {
-          if (chipLabels.length) {
+          if (chipLabels.length || session.product_cards?.length) {
             const lastAi = restored.map((m, index) => ({ m, index })).reverse().find(entry => entry.m.role === 'ai')
             if (lastAi) {
-              restored[lastAi.index] = { ...restored[lastAi.index], suggestions: chipLabels }
+              restored[lastAi.index] = { ...restored[lastAi.index], suggestions: chipLabels,
+                productCards: session.product_cards }
             }
           }
           setMsgs(restored)
@@ -1232,7 +1234,8 @@ function ChatScreen({
       )
       const chipLabels = clarificationChipLabels(clarifications)
       setMsgs(p => p.map(m => m.id === assistantId
-        ? { ...m, text: finalText, suggestions: chipLabels.length ? chipLabels : undefined }
+        ? { ...m, text: finalText, suggestions: chipLabels.length ? chipLabels : undefined,
+            productCards: turn.product_cards }
         : m))
       applyTurnTerminalState(turn)
     } catch (e) {
@@ -1417,6 +1420,35 @@ function ChatScreen({
                   </span>
                 </div>
               ) : null}
+              {!!msg.productCards?.length && (
+                <section aria-label="可乐候选" className="flex w-full flex-col gap-2">
+                  {msg.productCards.map(card => (
+                    <div key={card.ref} className="guide-glass-bubble rounded-2xl px-4 py-3">
+                      <p className="text-[12px] font-semibold leading-5">{card.name}</p>
+                      <p className="mt-1 text-[11px] text-black/55">
+                        每{card.packaging === 'can' ? '罐' : '瓶'} {card.item_volume_ml}ml · {card.pack_count}{card.packaging === 'can' ? '罐' : '瓶'}/包
+                        {' · '}共 {card.total_volume_ml}ml
+                      </p>
+                      <p className="mt-1 text-[12px] font-semibold">
+                        {yuan(card.price_fen)}/包 <span className="font-normal text-black/55">· {card.price_per_litre_yuan.toFixed(2)} 元/升</span>
+                      </p>
+                      <button disabled={typing || confirming || restoring}
+                        onClick={() => send(`选择「${card.name}」（候选 ${card.ref}）生成采购清单`)}
+                        className="mt-2 rounded-full bg-[#eac867] px-3 py-1.5 text-[11px] font-medium disabled:opacity-40">
+                        选这款，生成清单
+                      </button>
+                    </div>
+                  ))}
+                  <div className="flex flex-wrap gap-1.5">
+                    {['只看可口可乐', '只看百事可乐', '只看罐装', '只看瓶装', '只看单件装', '只看多件装', '取消可乐筛选条件'].map(label => (
+                      <button key={label} disabled={typing || confirming || restoring}
+                        onClick={() => send(`${label}，重新比较可乐`)}
+                        className="guide-glass-chip rounded-full px-3 py-2 text-[11px] text-black/60 disabled:opacity-40">{label}</button>
+                    ))}
+                  </div>
+                  <p className="text-[10px] text-black/45">模拟门店报价；选择后生成清单，明确确认才加购。</p>
+                </section>
+              )}
               {msg.suggestions && msg.role === 'ai' && !typing && !confirming && (
                 <div className="flex w-full flex-col gap-1.5">
                   {msg.suggestions.map((s, i) => (
