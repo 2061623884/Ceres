@@ -278,6 +278,7 @@ export interface PlanItem {
   spec_quantity?: number | null;
   spec_unit?: string | null;
   requirement?: { quantity: number | null; unit: string | null } | null;
+  contributions?: { group_id: string; quantity: number; requirement?: PlanItem['requirement'] }[] | null;
 }
 
 export interface PlanGap {
@@ -293,6 +294,7 @@ export interface PlanResponse {
   plan_version: number;
   mode: 'bundle' | 'alternatives';
   items: PlanItem[];
+  targets?: { group_id: string | null; name: string | null }[];
   total_price_fen: number;
   selected_total_fen?: number;
   expires_at: string;

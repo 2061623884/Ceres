@@ -838,12 +838,14 @@ function PlanSheetContent({
       <GuideSheetItemList itemCount={plan.items.length}>
         {plan.items.map((item) => {
           const checked = item.selected !== false
-          const requirement = item.requirement
           const packageUnit = item.spec_unit === 'kg' ? 'g' : item.spec_unit === 'l' ? 'ml' : item.spec_unit
           const packageAmount = (item.spec_quantity ?? 0) * (item.spec_unit === 'kg' || item.spec_unit === 'l' ? 1000 : 1)
-          const comparable = requirement?.quantity != null && requirement.unit === packageUnit && packageAmount > 0
+          const requirements = item.contributions?.map(c => c.requirement) ?? [item.requirement]
+          const compatible = requirements.filter(r => r?.quantity != null && r.unit === packageUnit)
+          const requirementQuantity = compatible.reduce((sum, r) => sum + r!.quantity!, 0)
+          const comparable = compatible.length > 0 && packageAmount > 0
           const purchased = ((item.added_quantity ?? 0) + (checked ? remainingQuantity(item) : 0)) * packageAmount
-          const needed = comparable ? (packageUnit === 'pc' ? Math.ceil(requirement.quantity!) : requirement.quantity!) : 0
+          const needed = packageUnit === 'pc' ? Math.ceil(requirementQuantity) : requirementQuantity
           const difference = purchased - needed
           const unitLabel = packageUnit === 'pc' ? '枚' : packageUnit
           return (
@@ -860,9 +862,14 @@ function PlanSheetContent({
                 <p className="mt-0.5 text-[10px] text-black/38">已加购 {item.added_quantity ?? 0} 件 · 本次选购 {checked ? remainingQuantity(item) : 0} 件</p>
                 {comparable && (
                   <p className="mt-0.5 text-[10px] leading-snug text-black/45">
-                    需求 {requirement!.quantity}{unitLabel}{packageUnit === 'pc' && needed !== requirement!.quantity ? `（整枚 ${needed}）` : ''} · 采购覆盖 {purchased}{unitLabel} · {difference >= 0 ? '包装余量' : '本次未覆盖'} {Math.abs(difference)}{unitLabel}
+                    需求 {requirementQuantity}{unitLabel}{packageUnit === 'pc' && needed !== requirementQuantity ? `（整枚 ${needed}）` : ''} · 采购覆盖 {purchased}{unitLabel} · {difference >= 0 ? '包装余量' : '本次未覆盖'} {Math.abs(difference)}{unitLabel}
                   </p>
                 )}
+                {(item.contributions?.length ?? 0) > 1 && item.contributions!.map(c => (
+                  <p key={c.group_id} className="mt-0.5 text-[10px] leading-snug text-black/38">
+                    {plan.targets?.find(t => t.group_id === c.group_id)?.name ?? c.group_id}：{c.requirement?.quantity ?? '用量未明确'}{c.requirement?.unit === 'pc' ? '枚' : c.requirement?.unit}
+                  </p>
+                ))}
               </div>
               <span className="shrink-0 text-[12px] font-medium text-black/55">{yuan(checked ? remainingQuantity(item) * item.unit_price_fen : 0)}</span>
             </div>

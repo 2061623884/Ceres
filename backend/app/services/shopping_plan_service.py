@@ -589,8 +589,8 @@ class ShoppingPlanService:
         recommendation keeps accumulating in ``recommended_quantity`` so the
         original suggestion stays explainable.
 
-        This demo sums per-pack needs rather than optimising weights across
-        dishes: two recipes that each need 300 g tomato buy two 500 g packs.
+        Compatible recipe amounts are combined before rounding to whole packs;
+        direct product quantities remain additional, explicit pack counts.
         """
         new_rows = [dict(item) for item in new_plan.get("items") or []]
         for row in new_rows:
@@ -609,6 +609,11 @@ class ShoppingPlanService:
         # or replaced plan that drops them would read "full" while its own rows
         # prove the opposite.
         replacing = operation == "replace" or not base
+        if not replacing:
+            previous_selection = {row["sku_id"]: row["selected"] for row in base["items"]}
+            for row in new_rows:
+                if row["sku_id"] in previous_selection:
+                    row["selected"] = previous_selection[row["sku_id"]]
         carried_gaps = (
             [] if replacing else self._strip_group_gaps(base.get("gaps"), group_id)
         )
@@ -680,6 +685,10 @@ class ShoppingPlanService:
             kept_rows + new_rows,
             cart_quantities=cart_quantities,
             preserved_overrides=preserved_overrides,
+            preserved_added_quantities={
+                row["sku_id"]: int(row.get("added_quantity") or 0)
+                for row in base.get("items") or []
+            } if not replacing else {},
         )
         totals = self._totals(
             items,
@@ -897,7 +906,7 @@ class ShoppingPlanService:
         stripped["contributions"] = remaining
         if stripped.get("quantity_source") != "user":
             stripped["quantity"] = sum(int(c.get("quantity") or 0) for c in remaining)
-        stripped["added_quantity"] = sum(int(c.get("added_quantity") or 0) for c in remaining)
+        # Removing a recipe source does not undo purchases of the remaining SKU.
         return stripped
 
     @staticmethod
@@ -955,7 +964,8 @@ class ShoppingPlanService:
                 result[key] = {
                     "group_id": key,
                     "quantity": max(0, int(entry.get("quantity") or 0)),
-                    "selected": bool(entry.get("selected", row.get("selected", True))),
+                    # Selection is edited per SKU row, not per recipe source.
+                    "selected": bool(row.get("selected", True)),
                     "added_quantity": int(entry.get("added_quantity") or 0),
                     "required_item_id": required_item_id,
                     "requirement": requirement,
@@ -980,6 +990,7 @@ class ShoppingPlanService:
         *,
         cart_quantities: dict[str, int] | None = None,
         preserved_overrides: dict[str, int] | None = None,
+        preserved_added_quantities: dict[str, int] | None = None,
     ) -> list[dict[str, Any]]:
         """Collapse rows by SKU while keeping every target's contribution.
 
@@ -987,6 +998,7 @@ class ShoppingPlanService:
         *replaces* its own contribution instead of piling onto it.
         """
         preserved_overrides = preserved_overrides or {}
+        preserved_added_quantities = preserved_added_quantities or {}
         order: list[str] = []
         per_sku: dict[str, dict[str, Any]] = {}
         for row in rows:
@@ -1010,8 +1022,30 @@ class ShoppingPlanService:
             bucket = per_sku[sku_id]
             base = bucket["base"]
             contributions = list(bucket["contributions"].values())
-            recommended_total = sum(int(c.get("quantity") or 0) for c in contributions) or 1
-            added_total = sum(int(c.get("added_quantity") or 0) for c in contributions)
+            spec_unit = base.get("spec_unit")
+            unit = {"kg": "g", "l": "ml"}.get(spec_unit, spec_unit)
+            package_amount = float(base.get("spec_quantity") or 0) * UNIT_TO_GRAMS.get(spec_unit, 1)
+            ingredient_amounts: dict[str, float] = {}
+            pack_count = 0
+            for contribution in contributions:
+                requirement = contribution.get("requirement") or {}
+                if (requirement.get("ingredient_id") and requirement.get("quantity") is not None
+                        and requirement.get("unit") == unit and package_amount > 0):
+                    ingredient_id = requirement["ingredient_id"]
+                    ingredient_amounts[ingredient_id] = ingredient_amounts.get(ingredient_id, 0) + requirement["quantity"]
+                else:
+                    # Direct products and unknown/incompatible amounts retain
+                    # their existing pack count, without claiming shared coverage.
+                    pack_count += int(contribution.get("quantity") or 0)
+            recommended_total = pack_count + sum(
+                math.ceil((math.ceil(amount) if unit == "pc" else amount) / package_amount)
+                for amount in ingredient_amounts.values()
+            ) or 1
+            added_total = max(
+                int(base.get("added_quantity") or 0),
+                sum(int(c.get("added_quantity") or 0) for c in contributions),
+                preserved_added_quantities.get(sku_id, 0),
+            )
             selected = any(bool(c.get("selected", True)) for c in contributions)
 
             offer = self.offers.get_offer(sku_id)

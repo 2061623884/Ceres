@@ -383,7 +383,8 @@ class PlanChangeExecutor:
             "plan_result": result,
             "args": args,
             "candidate_ref": candidate.ref,
-            "message": f"采购清单已加入「{candidate.name or candidate.target_id}」",
+            "message": f"采购清单已加入「{candidate.name or candidate.target_id}」"
+            + (f"（{result['target']['people']} 人份）" if candidate.kind == "dish" else ""),
         }
 
     def _prepare_remove(
