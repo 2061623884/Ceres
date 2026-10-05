@@ -9,7 +9,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 
-from app.api import bootstrap, cart, catalog, events, guide, internal, mercury
+from app.api import bootstrap, cart, catalog, events, guide, internal, mercury, orders
 from app.core.database import init_db
 from app.core.errors import AppError
 
@@ -39,6 +39,7 @@ app.add_middleware(
 app.include_router(bootstrap.router)
 app.include_router(catalog.router)
 app.include_router(cart.router)
+app.include_router(orders.router)
 app.include_router(guide.router)
 app.include_router(mercury.router)
 app.include_router(events.router)

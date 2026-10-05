@@ -1,0 +1,10 @@
+vite v8.0.5 building client environment for production...
+[2Ktransforming...✓ 20 modules transformed.
+rendering chunks...
+computing gzip size...
+../../work/ceres-v2-test-env/frontend-build-a0a472ccc6a64941925ef8a3e4c3bb97/frontend-dist/robots.txt                   0.02 kB │ gzip:  0.04 kB
+../../work/ceres-v2-test-env/frontend-build-a0a472ccc6a64941925ef8a3e4c3bb97/frontend-dist/index.html                   0.91 kB │ gzip:  0.42 kB
+../../work/ceres-v2-test-env/frontend-build-a0a472ccc6a64941925ef8a3e4c3bb97/frontend-dist/assets/index-DxfSbifi.css   52.84 kB │ gzip: 10.11 kB
+../../work/ceres-v2-test-env/frontend-build-a0a472ccc6a64941925ef8a3e4c3bb97/frontend-dist/assets/index-C_2vD3mO.js   273.71 kB │ gzip: 82.70 kB
+
+✓ built in 811ms

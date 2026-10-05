@@ -1,0 +1,8 @@
+Runner=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+Runtime=C:\Program Files\nodejs\node.exe
+NodeVersion=v24.14.0
+NODE_ENV=<unset>
+FIGMA_PUBLIC_URL=<empty>
+VITE_* / key-like environment values omitted; subprocess inherits current environment.
+Working directory=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\frontend
+Build output=C:\Users\20616\Desktop\Agent\Agent产品\work\ceres-v2-test-env\frontend-build-dfb25fc37b25417197adbdb69907aca1\frontend-dist

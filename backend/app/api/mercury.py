@@ -1,134 +1,110 @@
-"""Mercury customer service API endpoints."""
+"""Mercury consultation of this anonymous owner's persistent orders."""
 
 from __future__ import annotations
 
 import asyncio
 import json
 import sys
-import uuid
-from datetime import datetime
 from pathlib import Path
-from typing import Any
-
-from contextlib import closing
+from uuid import uuid4
 
 from fastapi import APIRouter, Depends, Request, Response
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
+from sqlalchemy.dialects.sqlite import insert
 from sqlalchemy.orm import Session
 from sse_starlette import EventSourceResponse
 
+from app.core.config import get_settings
 from app.core.database import get_db
+from app.core.errors import AppError
 from app.core.identity import get_or_create_owner
+from app.models.order import AfterSalesPolicy, MercurySession
+from app.services.order_service import OrderService
 
-# 添加 Mercury 到 Python 路径
 mercury_path = Path(__file__).resolve().parents[3] / "Mercury"
 if str(mercury_path) not in sys.path:
     sys.path.insert(0, str(mercury_path))
 
 from mercury.agent import run_mercury
-from mercury.db import connect
+from mercury.llm import OpenAIChatClient
+from mercury.seed import POLICIES
 
-DEMO_MERCURY_USER = "test_user_001"
+router = APIRouter(prefix="/api/v1/mercury", tags=["mercury"])
 
 
 def _owner(request: Request, response: Response, db: Session = Depends(get_db)) -> str:
     return get_or_create_owner(request, response, db)
 
 
-def resolve_mercury_user_id(ceres_owner_id: str) -> str:
-    """Ceres owner 与 Mercury 演示库用户对齐。"""
-    with closing(connect()) as conn:
-        if conn.execute(
-            "SELECT 1 FROM users WHERE user_id = ?", (ceres_owner_id,)
-        ).fetchone():
-            return ceres_owner_id
-        if conn.execute(
-            "SELECT 1 FROM users WHERE user_id = ?", (DEMO_MERCURY_USER,)
-        ).fetchone():
-            return DEMO_MERCURY_USER
-    return ceres_owner_id
-
-router = APIRouter(prefix="/api/v1/mercury", tags=["mercury"])
+def _session(db: Session, owner_id: str, session_id: str) -> MercurySession:
+    session = db.query(MercurySession).filter_by(session_id=session_id, owner_id=owner_id).first()
+    if session is None:
+        raise AppError(404, "SESSION_NOT_FOUND", "没有找到这个售后会话")
+    return session
 
 
 class TurnRequest(BaseModel):
-    """Mercury turn request."""
     message: str
     request_id: str
 
 
 class SessionResponse(BaseModel):
-    """Mercury session response."""
     session_id: str
     created_at: str
+    selected_order_id: str | None
+
+
+class SelectOrderRequest(BaseModel):
+    order_id: str = Field(..., min_length=1, max_length=64)
 
 
 @router.post("/sessions", response_model=SessionResponse)
-async def create_mercury_session(owner_id: str = Depends(_owner)) -> dict[str, Any]:
-    """创建 Mercury 客服会话."""
-    session_id = f"ms_{uuid.uuid4().hex[:12]}"
-    return {
-        "session_id": session_id,
-        "created_at": datetime.utcnow().isoformat()
-    }
+def create_mercury_session(owner_id: str = Depends(_owner), db: Session = Depends(get_db)):
+    db.execute(insert(AfterSalesPolicy).values([
+        {"policy_id": policy_id, "category": category, "title": title,
+         "content": content, "keywords": keywords}
+        for policy_id, category, title, content, keywords in POLICIES
+    ]).on_conflict_do_nothing(index_elements=["policy_id"]))
+    session = MercurySession(session_id=f"ms_{uuid4().hex[:12]}", owner_id=owner_id)
+    db.add(session)
+    db.commit()
+    return SessionResponse(session_id=session.session_id, created_at=session.created_at,
+                           selected_order_id=session.selected_order_id)
+
+
+@router.post("/sessions/{session_id}/order")
+def select_order(session_id: str, body: SelectOrderRequest, owner_id: str = Depends(_owner),
+                 db: Session = Depends(get_db)):
+    session = _session(db, owner_id, session_id)
+    order = OrderService(db, owner_id).get_order(body.order_id)
+    session.selected_order_id = order["order_id"]
+    db.commit()
+    return {"session_id": session_id, "order": order}
 
 
 @router.post("/sessions/{session_id}/turns/stream")
-async def mercury_turn_stream(
-    session_id: str,
-    request: TurnRequest,
-    owner_id: str = Depends(_owner)
-):
-    """发送消息给墨墨,返回 SSE 流式响应."""
-    message = request.message
+def mercury_turn_stream(session_id: str, request: TurnRequest, owner_id: str = Depends(_owner),
+                        db: Session = Depends(get_db)):
+    session = _session(db, owner_id, session_id)
+    selected_order_id = session.selected_order_id
+    orders = OrderService(db, owner_id).list_orders() if selected_order_id is None else None
+    settings = get_settings()
+    database_path = str(db.get_bind().url.database)
 
     async def event_generator():
-        # 1. 发送接受事件
-        yield {
-            "event": "accepted",
-            "data": json.dumps({"request_id": request.request_id})
-        }
-
-        try:
-            # 2. 调用 Mercury (同步调用)
-            # 在生产环境中,应该使用 asyncio.to_thread 或异步包装
-            mercury_uid = resolve_mercury_user_id(owner_id)
-            response_text = await asyncio.to_thread(
-                run_mercury, mercury_uid, message
-            )
-
-            # 3. 分块发送以模拟流式输出（中文按字符，英文尽量按词）
-            chunk_size = 2
-            i = 0
-            text = response_text
-            while i < len(text):
-                end = i + chunk_size
-                if end < len(text) and text[end - 1].isascii() and text[end].isascii():
-                    while end < len(text) and end - i < 12 and text[end - 1].isascii() and text[end] != " ":
-                        end += 1
-                    while end < len(text) and text[end] == " ":
-                        end += 1
-                piece = text[i:end]
-                yield {
-                    "event": "answer.delta",
-                    "data": json.dumps({"text": piece}),
-                }
-                await asyncio.sleep(0.03)
-                i = end
-
-            # 4. 发送完成事件
-            yield {
-                "event": "turn.completed",
-                "data": json.dumps({
-                    "session_id": session_id,
-                    "final_text": response_text
-                })
-            }
-        except Exception as e:
-            # 5. 错误处理
-            yield {
-                "event": "error",
-                "data": json.dumps({"message": str(e)})
-            }
+        yield {"event": "accepted", "data": json.dumps({"request_id": request.request_id})}
+        if selected_order_id is None:
+            yield {"event": "orders", "data": json.dumps({"items": orders}, ensure_ascii=False)}
+            response_text = "请选择要咨询的订单。" if orders else "你目前没有模拟订单，可先在购物车完成模拟结算。"
+        else:
+            llm = OpenAIChatClient({"base_url": settings.openai_base_url, "api_key": settings.openai_api_key,
+                                    "model": settings.llm_model, "timeout": settings.llm_timeout,
+                                    "max_output_tokens": settings.llm_max_output_tokens})
+            response_text = await asyncio.to_thread(run_mercury, owner_id, request.message, llm,
+                                                   database_path=database_path, session_id=session_id,
+                                                   selected_order_id=selected_order_id)
+        yield {"event": "answer.delta", "data": json.dumps({"text": response_text}, ensure_ascii=False)}
+        yield {"event": "turn.completed", "data": json.dumps({"session_id": session_id,
+                                                                "final_text": response_text}, ensure_ascii=False)}
 
     return EventSourceResponse(event_generator())

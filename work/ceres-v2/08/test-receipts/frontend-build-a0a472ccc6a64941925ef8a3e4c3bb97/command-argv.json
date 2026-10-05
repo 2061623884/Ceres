@@ -1,0 +1,21 @@
+{
+  "runner_executable": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+  "executable": "C:\\Program Files\\nodejs\\node.exe",
+  "argv": [
+    "--require",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\frontend-build-a0a472ccc6a64941925ef8a3e4c3bb97\\vite-config-globals.cjs",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\frontend\\node_modules\\vite\\bin\\vite.js",
+    "build",
+    "--configLoader",
+    "runner",
+    "--outDir",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\frontend-build-a0a472ccc6a64941925ef8a3e4c3bb97\\frontend-dist"
+  ],
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\frontend",
+  "node_version_argv": [
+    "--version"
+  ],
+  "node_version": "v24.14.0",
+  "config_loader": "runner",
+  "external_config_global_shim": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\frontend-build-a0a472ccc6a64941925ef8a3e4c3bb97\\vite-config-globals.cjs"
+}

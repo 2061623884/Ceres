@@ -154,6 +154,24 @@ export interface Cart {
   business_data_mode?: string;
 }
 
+export interface OrderItem {
+  item_id: string;
+  sku_id: string;
+  product_name: string;
+  quantity: number;
+  unit_price_fen: number;
+  returnable: boolean;
+}
+
+export interface Order {
+  order_id: string;
+  status: string;
+  created_at: string;
+  delivered_at: string | null;
+  total_fen: number;
+  items: OrderItem[];
+}
+
 export function listCategories() {
   return fetchApi<Category[]>('/api/v1/categories');
 }
@@ -173,6 +191,17 @@ export function getProduct(skuId: string) {
 
 export function getCart() {
   return fetchApi<Cart>('/api/v1/cart');
+}
+
+export function checkoutCart(expectedCartVersion: number) {
+  return fetchApi<{ order: Order; cart: Cart }>('/api/v1/cart/checkout', {
+    method: 'POST',
+    body: JSON.stringify({ expected_cart_version: expectedCartVersion }),
+  });
+}
+
+export function listOrders() {
+  return fetchApi<{ items: Order[] }>('/api/v1/orders');
 }
 
 export function addCartItem(skuId: string, quantity: number, expectedCartVersion: number) {
@@ -198,54 +227,6 @@ export function removeCartItem(skuId: string, expectedCartVersion: number) {
   return fetchApi<Cart>(`/api/v1/cart/items/${encodeURIComponent(skuId)}?${qs}`, {
     method: 'DELETE',
   });
-}
-
-export async function clearCartItems(cart: Cart): Promise<Cart> {
-  let current = cart;
-  for (const item of [...current.items]) {
-    current = await removeCartItem(item.sku_id, current.version);
-  }
-  return current;
-}
-
-export interface LocalOrder {
-  id: string;
-  date: string;
-  status: string;
-  items: string[];
-  total: number;
-  total_fen: number;
-}
-
-const LOCAL_ORDERS_KEY = 'ceres-local-orders';
-
-export function getLocalOrders(): LocalOrder[] {
-  if (typeof window === 'undefined') return [];
-  try {
-    const raw = sessionStorage.getItem(LOCAL_ORDERS_KEY);
-    if (!raw) return [];
-    const parsed = JSON.parse(raw) as LocalOrder[];
-    return Array.isArray(parsed) ? parsed : [];
-  } catch {
-    return [];
-  }
-}
-
-export function addLocalOrder(order: LocalOrder): void {
-  if (typeof window === 'undefined') return;
-  const existing = getLocalOrders();
-  sessionStorage.setItem(LOCAL_ORDERS_KEY, JSON.stringify([order, ...existing]));
-}
-
-export function formatOrderDate(d = new Date()): string {
-  const hh = String(d.getHours()).padStart(2, '0');
-  const mm = String(d.getMinutes()).padStart(2, '0');
-  return `今天 ${hh}:${mm}`;
-}
-
-export function nextLocalOrderId(): string {
-  const n = getLocalOrders().length + 7;
-  return `#CE24${String(n).padStart(2, '0')}`;
 }
 
 /** Map catalog image_path to a browser-loadable URL. */

@@ -75,15 +75,16 @@ TOOLS = [
 _BY_NAME = {t["schema"]["function"]["name"]: t for t in TOOLS}
 
 
-def openai_tools() -> list:
-    return [t["schema"] for t in TOOLS]
+def openai_tools(selected_order_id: str | None = None) -> list:
+    return [t["schema"] for t in TOOLS
+            if selected_order_id is None or t["schema"]["function"]["name"] != "list_orders"]
 
 
 def _dump(result) -> str:
     return json.dumps(result, ensure_ascii=False)
 
 
-def execute_tool(name: str, arguments: str, user_id: str) -> str:
+def execute_tool(name: str, arguments: str, user_id: str, selected_order_id: str | None = None) -> str:
     tool = _BY_NAME.get(name)
     if tool is None:
         return _dump({"ok": False, "error": "UNKNOWN_TOOL", "message": f"没有名为 {name} 的工具"})
@@ -98,6 +99,11 @@ def execute_tool(name: str, arguments: str, user_id: str) -> str:
     params = tool["schema"]["function"]["parameters"]
     # 只取 schema 声明的参数；模型传入的 user_id 等其他字段一律丢弃
     args = {k: raw[k] for k in params["properties"] if k in raw and raw[k] is not None}
+    if selected_order_id is not None:
+        if name == "list_orders" or ("order_id" in args and args["order_id"] != selected_order_id):
+            return _dump({"ok": False, "error": "ORDER_NOT_SELECTED", "message": "请先选择要咨询的订单"})
+        if "order_id" in params["properties"]:
+            args["order_id"] = selected_order_id
     missing = [k for k in params["required"] if k not in args or args[k] == ""]
     if missing:
         return _dump({"ok": False, "error": "BAD_ARGUMENTS", "message": f"缺少必填参数：{', '.join(missing)}"})

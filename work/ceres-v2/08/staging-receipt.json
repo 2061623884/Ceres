@@ -1,0 +1,39 @@
+{
+  "original_baseline": "301fa2c6f2eb6276e3b7639fc02efdfb4a41de06",
+  "review_fixed_point": "8420f0ea036f9b7187a20dc90cd79f8f70d91b35",
+  "source_staged": [
+    "backend/app/api/cart.py",
+    "backend/app/api/mercury.py",
+    "backend/app/main.py",
+    "backend/app/schemas/cart.py",
+    "backend/app/services/cart_service.py",
+    "Mercury/mercury/db.py",
+    "Mercury/mercury/agent.py",
+    "Mercury/mercury/tools.py",
+    "Mercury/mercury/llm.py",
+    "Mercury/tests/conftest.py",
+    "frontend/src/lib/saleGuide.ts",
+    "frontend/src/lib/mercury.ts"
+  ],
+  "new_files": [
+    "backend/app/models/order.py",
+    "backend/app/services/order_service.py",
+    "backend/app/api/orders.py",
+    "backend/tests/test_v2_order_mercury.py"
+  ],
+  "artifact_only": [
+    {
+      "path": "backend/app/models/__init__.py",
+      "reason": "error: patch failed: backend/app/models/__init__.py:4\nerror: backend/app/models/__init__.py: patch does not apply"
+    },
+    {
+      "path": "frontend/src/App.tsx",
+      "reason": "error: patch failed: frontend/src/App.tsx:1114\nerror: frontend/src/App.tsx: patch does not apply"
+    },
+    {
+      "path": "frontend/src/MercuryChat.tsx",
+      "reason": "error: patch failed: frontend/src/MercuryChat.tsx:204\nerror: frontend/src/MercuryChat.tsx: patch does not apply"
+    }
+  ],
+  "note": "Only 08 own deltas. Inherited dirty source retained; working source plus exact patch artifacts is tested input, not a clean Git checkout."
+}

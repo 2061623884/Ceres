@@ -1,0 +1,17 @@
+{
+  "runner_executable": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+  "executable": "C:\\Program Files\\nodejs\\node.exe",
+  "argv": [
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\frontend\\node_modules\\typescript\\bin\\tsc",
+    "--noEmit",
+    "--project",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\frontend\\tsconfig.json",
+    "--pretty",
+    "false"
+  ],
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\frontend",
+  "node_version_argv": [
+    "--version"
+  ],
+  "node_version": "v24.14.0"
+}

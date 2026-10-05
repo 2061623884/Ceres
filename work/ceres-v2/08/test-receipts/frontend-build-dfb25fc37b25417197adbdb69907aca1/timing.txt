@@ -1,0 +1,4 @@
+start_utc=2026-10-05T12:26:57.062464+00:00
+end_utc=2026-10-05T12:26:59.505422+00:00
+elapsed_seconds=2.442958
+vite_exit_code=1

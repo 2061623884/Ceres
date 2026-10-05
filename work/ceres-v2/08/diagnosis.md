@@ -1,0 +1,9 @@
+# 08 复现与实现依据
+
+首RED误用了不存在SKU demo:egg-6，加购422，未触及checkout；修正为已核fixture demo:eggs-fresh-6pack后两独立RED均checkout404。首片两独立GREEN通过，新增统一订单快照与一次cart事务。
+
+第二RED的两例已结算成功，Mercury会话响应缺selected_order_id，尚未验证后续流程。新增owner归属的独立MercurySession、REST选单、同库端口并直接复用Mercury工具，四项GREEN通过（含同owner新会话、other-owner拒绝、查询不申请售后、Ceres显式模型配置）；最新16项必要边界和前端检查待回执。
+
+依据现有代码：前端结算为sessionStorage并逐SKU删除；Mercury resolve_mercury_user_id回退test_user_001、会话无持久归属。两处均不能支持本票同一订单事实。现在由Ceres订单明细存成交SKU/名称/数量/价格，Mercury只改真实连接与选单范围，单独模块测试库保留；不复制商品目录、采购状态或跨角色消息。
+
+React.StrictMode真实调用初始化effect两次，故政策补缺采用SQLite冲突不覆盖，而非每次覆盖或删库seed。导购确认仍只加cart；模拟checkout独立触发，无自动跳转墨墨。

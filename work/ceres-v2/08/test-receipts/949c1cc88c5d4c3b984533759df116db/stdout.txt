@@ -1,0 +1,8 @@
+................                                                         [100%]
+============================== warnings summary ===============================
+tests/test_v2_order_mercury.py::test_checkout_persists_exact_cart_and_clears_it[1]
+  C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\app\services\template_matcher.py:21: SyntaxWarning: invalid escape sequence '\['
+    _PUNCT_PATTERN = re.compile(r"[\s\u3000，。！？、；：""''（）()\[\]【】\-—·…]+")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+16 passed, 1 warning in 12.49s

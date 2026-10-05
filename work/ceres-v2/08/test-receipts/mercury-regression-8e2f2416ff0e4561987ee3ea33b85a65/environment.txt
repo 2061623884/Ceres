@@ -1,0 +1,12 @@
+PYTHONUTF8=1
+PYTHONDONTWRITEBYTECODE=1
+PYTHONUNBUFFERED=1
+LLM_MODEL=<empty>
+MEMORY_MODEL=<empty>
+RETRIEVAL_INDEX_DIR=<empty>
+CERES_LIVE_MEMORY_ACCEPTANCE=<empty>
+DATABASE_URL=sqlite:///C:/Users/20616/Desktop/Agent/Agent产品/work/ceres-v2-test-env/mercury-regression-8e2f2416ff0e4561987ee3ea33b85a65/ceres.sqlite3
+MERCURY_DB_PATH=C:\Users\20616\Desktop\Agent\Agent产品\work\ceres-v2-test-env\mercury-regression-8e2f2416ff0e4561987ee3ea33b85a65\mercury.sqlite3
+PYTEST_BASETEMP=C:\Users\20616\Desktop\Agent\Agent产品\work\ceres-v2-test-env\mercury-regression-8e2f2416ff0e4561987ee3ea33b85a65\pytest-tmp
+Mercury tests use fake LLM; per-test Mercury SQLite is under pytest basetemp.
+No live model opt-in; credentials omitted

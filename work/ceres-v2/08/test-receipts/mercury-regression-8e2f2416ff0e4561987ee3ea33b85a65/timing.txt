@@ -1,0 +1,4 @@
+start_utc=2026-10-05T12:30:00.820873+00:00
+end_utc=2026-10-05T12:30:06.430414+00:00
+elapsed_seconds=5.609541
+pytest_exit_code=0

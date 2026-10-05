@@ -29,6 +29,10 @@ class CartItemAddRequest(BaseModel):
     expected_cart_version: int = Field(default=0, ge=0)
 
 
+class CartCheckoutRequest(BaseModel):
+    expected_cart_version: int = Field(..., ge=1)
+
+
 class CartItemPatchRequest(BaseModel):
     quantity: int = Field(..., ge=0, le=99)
     expected_cart_version: int = Field(..., ge=0)

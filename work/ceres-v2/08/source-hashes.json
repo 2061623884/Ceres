@@ -1,0 +1,21 @@
+{
+  "backend/app/api/cart.py": "1a5fd43b10cdf62f848dbee48c0d67c09c17088be29e05176c7cd1c08652157b",
+  "backend/app/api/mercury.py": "1e9b3e958bc106132cc57ddb4deff2e8f7902adf623fe186b6019d3bd7ae8056",
+  "backend/app/main.py": "7abab89186fd9a938a9fb7e345bcf5db9102ff247036e6e6204fb1ced7e2031b",
+  "backend/app/models/__init__.py": "99a4c4e7585e574732d85496d1fc5adc6ce16189f83e2e6a54c3d03de0c32184",
+  "backend/app/schemas/cart.py": "1e141a25e7c98dafcc7ea86df362fca8b5962019a9546619d0fc2fff64632033",
+  "backend/app/services/cart_service.py": "cee9e31006cba2b7965f686a298b9bba9a5b5b3a83ab5b5326309240cb4f6021",
+  "Mercury/mercury/db.py": "374322d24edee19f1eb0f66bfb9f786947ed6bd75bbe0eab81576e99d9886d57",
+  "Mercury/mercury/agent.py": "709fa5da73fb5455b65dcd0565b0ce6776bb07e604883c4b7ac008ed60735d29",
+  "Mercury/mercury/tools.py": "a75be4e95515e6dc26de390bdd426d1eb48ee636b267bdd5d9c5e240a32d74f3",
+  "Mercury/mercury/llm.py": "b626c62dc07b925665e6e7099d85e144d8930ae3d2a31e9b73c3379b167ceeba",
+  "Mercury/tests/conftest.py": "15e3f93877d9656ea40e277c70bfcd6d08bc9060caf5d857a1f2530f15ab2f1f",
+  "frontend/src/App.tsx": "e76fb7f4438dfc28384789ce267846b826e014e83d07e9fbc0b8af6081322aa8",
+  "frontend/src/MercuryChat.tsx": "4df3cce342857ce7bdf8c2f7393d6900d1724672e746038a8867c41aff759609",
+  "frontend/src/lib/saleGuide.ts": "c6f9d66ac9eeff29083c0dd64cb10f34521a160bac33bdd4e03308a9d9d2cac5",
+  "frontend/src/lib/mercury.ts": "43947fb676943786cd1110e5d5ce819fe7b6b1fdaf2b3205a6764f5c29dde605",
+  "backend/app/models/order.py": "f10aa79be648ab7f132ce618c243208901a88ff63f2c065a1f6194b773243eb0",
+  "backend/app/services/order_service.py": "81a1984f0c988fea1dd2788dd3492c6b7eba5136d937958e76c94bf20a31eed6",
+  "backend/app/api/orders.py": "7d7cf2da45e6b06b2f9f4e66a2d67a345bcd4a80af6eca4ced642380d20bf4a5",
+  "backend/tests/test_v2_order_mercury.py": "6d66737a78d0e815170c2cb983da22f1ae72f949dc91d97d2b3208d8a08b7a59"
+}

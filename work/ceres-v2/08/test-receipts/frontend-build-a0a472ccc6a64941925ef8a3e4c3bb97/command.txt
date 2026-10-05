@@ -1,0 +1,3 @@
+Python runner invokes subprocess.run([node.exe, *argv])
+Exact Node executable/argv/cwd: command-argv.json
+The external CJS preload provides the existing Vite config's __dirname global while using configLoader=runner, avoiding bundled config temp output in the repository.

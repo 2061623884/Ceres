@@ -1,0 +1,42 @@
+FF                                                                       [100%]
+================================== FAILURES ===================================
+_____________ test_checkout_persists_exact_cart_and_clears_it[1] ______________
+
+client = <starlette.testclient.TestClient object at 0x000002005BC13F20>, run = 1
+
+    @pytest.mark.parametrize("run", [1, 2])
+    def test_checkout_persists_exact_cart_and_clears_it(client, run):
+        added = client.post("/api/v1/cart/items", json={
+            "sku_id": "demo:egg-6", "quantity": 2, "expected_cart_version": 0,
+        })
+>       assert added.status_code == 200, added.json()
+E       AssertionError: {'error': {'code': 'PRODUCT_UNAVAILABLE', 'message': 'Product demo:egg-6 unavailable', 'retryable': False}}
+E       assert 422 == 200
+E        +  where 422 = <Response [422 Unprocessable Content]>.status_code
+
+tests\test_v2_order_mercury.py:13: AssertionError
+_____________ test_checkout_persists_exact_cart_and_clears_it[2] ______________
+
+client = <starlette.testclient.TestClient object at 0x000002005E513E00>, run = 2
+
+    @pytest.mark.parametrize("run", [1, 2])
+    def test_checkout_persists_exact_cart_and_clears_it(client, run):
+        added = client.post("/api/v1/cart/items", json={
+            "sku_id": "demo:egg-6", "quantity": 2, "expected_cart_version": 0,
+        })
+>       assert added.status_code == 200, added.json()
+E       AssertionError: {'error': {'code': 'PRODUCT_UNAVAILABLE', 'message': 'Product demo:egg-6 unavailable', 'retryable': False}}
+E       assert 422 == 200
+E        +  where 422 = <Response [422 Unprocessable Content]>.status_code
+
+tests\test_v2_order_mercury.py:13: AssertionError
+============================== warnings summary ===============================
+tests/test_v2_order_mercury.py::test_checkout_persists_exact_cart_and_clears_it[1]
+  C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\app\services\template_matcher.py:21: SyntaxWarning: invalid escape sequence '\['
+    _PUNCT_PATTERN = re.compile(r"[\s\u3000，。！？、；：""''（）()\[\]【】\-—·…]+")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_v2_order_mercury.py::test_checkout_persists_exact_cart_and_clears_it[1]
+FAILED tests/test_v2_order_mercury.py::test_checkout_persists_exact_cart_and_clears_it[2]
+2 failed, 1 warning in 2.70s

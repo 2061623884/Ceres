@@ -1,0 +1,2 @@
+NOT A TYPESCRIPT RESULT: tsc did not run. Node parsed the Python runner source as JavaScript.
+The later valid TypeScript noEmit invocation is recorded separately under frontend-tsc-325478d9aa9b4d0f884dea312611324d.

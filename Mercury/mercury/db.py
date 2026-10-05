@@ -1,8 +1,23 @@
 """SQLite 连接与建表。"""
 
 import sqlite3
+from contextlib import contextmanager
+from contextvars import ContextVar
+from pathlib import Path
 
 from mercury import config
+
+_DATABASE_PATH: ContextVar[Path | None] = ContextVar("mercury_database_path", default=None)
+
+
+@contextmanager
+def use_database(path: str | None):
+    """Bind the integrated Ceres database for one tool-calling turn."""
+    token = _DATABASE_PATH.set(Path(path) if path is not None else None)
+    try:
+        yield
+    finally:
+        _DATABASE_PATH.reset(token)
 
 SCHEMA = """
 CREATE TABLE users (
@@ -60,7 +75,9 @@ CREATE TABLE policies (
 
 
 def connect() -> sqlite3.Connection:
-    path = config.db_path()
+    path = _DATABASE_PATH.get()
+    if path is None:
+        path = config.db_path()
     path.parent.mkdir(parents=True, exist_ok=True)
     conn = sqlite3.connect(path)
     conn.row_factory = sqlite3.Row

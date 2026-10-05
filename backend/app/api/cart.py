@@ -8,6 +8,7 @@ from sqlalchemy.orm import Session
 from app.core.database import get_db
 from app.core.identity import get_or_create_owner
 from app.schemas.cart import (
+    CartCheckoutRequest,
     CartItemAddRequest,
     CartItemPatchRequest,
     CartOperationResponse,
@@ -41,6 +42,12 @@ def add_cart_item(
         body.sku_id, body.quantity, body.expected_cart_version
     )
     return CartResponse(**cart)
+
+
+@router.post("/cart/checkout")
+def checkout_cart(body: CartCheckoutRequest, request: Request, response: Response, db: Session = Depends(get_db)):
+    owner_id = _owner(request, response, db)
+    return CartService(db, owner_id).checkout(body.expected_cart_version)
 
 
 @router.patch("/cart/items/{sku_id}", response_model=CartResponse)

@@ -1,0 +1,50 @@
+FF                                                                       [100%]
+================================== FAILURES ===================================
+_________ test_mercury_selects_and_queries_this_owners_real_order[1] __________
+
+client = <starlette.testclient.TestClient object at 0x000001EDB57B1BB0>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001EDB2F67BC0>
+run = 1
+
+    @pytest.mark.parametrize("run", [1, 2])
+    def test_mercury_selects_and_queries_this_owners_real_order(client, monkeypatch, run):
+        cart = client.post("/api/v1/cart/items", json={
+            "sku_id": "demo:eggs-fresh-6pack", "quantity": 2, "expected_cart_version": 0,
+        }).json()
+        order = client.post("/api/v1/cart/checkout", json={"expected_cart_version": cart["version"]}).json()["order"]
+        session = client.post("/api/v1/mercury/sessions").json()
+        sid = session["session_id"]
+>       assert session["selected_order_id"] is None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'selected_order_id'
+
+tests\test_v2_order_mercury.py:49: KeyError
+_________ test_mercury_selects_and_queries_this_owners_real_order[2] __________
+
+client = <starlette.testclient.TestClient object at 0x000001EDB554DF70>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001EDB5896F60>
+run = 2
+
+    @pytest.mark.parametrize("run", [1, 2])
+    def test_mercury_selects_and_queries_this_owners_real_order(client, monkeypatch, run):
+        cart = client.post("/api/v1/cart/items", json={
+            "sku_id": "demo:eggs-fresh-6pack", "quantity": 2, "expected_cart_version": 0,
+        }).json()
+        order = client.post("/api/v1/cart/checkout", json={"expected_cart_version": cart["version"]}).json()["order"]
+        session = client.post("/api/v1/mercury/sessions").json()
+        sid = session["session_id"]
+>       assert session["selected_order_id"] is None
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'selected_order_id'
+
+tests\test_v2_order_mercury.py:49: KeyError
+============================== warnings summary ===============================
+tests/test_v2_order_mercury.py::test_mercury_selects_and_queries_this_owners_real_order[1]
+  C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\app\services\template_matcher.py:21: SyntaxWarning: invalid escape sequence '\['
+    _PUNCT_PATTERN = re.compile(r"[\s\u3000，。！？、；：""''（）()\[\]【】\-—·…]+")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_v2_order_mercury.py::test_mercury_selects_and_queries_this_owners_real_order[1]
+FAILED tests/test_v2_order_mercury.py::test_mercury_selects_and_queries_this_owners_real_order[2]
+2 failed, 2 deselected, 1 warning in 2.64s

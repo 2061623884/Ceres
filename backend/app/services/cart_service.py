@@ -15,7 +15,9 @@ from sqlalchemy.orm import Session
 from app.core.errors import AppError
 from app.models.cart import Cart, CartItem, CartOperation
 from app.models.catalog import CatalogProduct
+from app.models.order import Order, OrderItem
 from app.services.offer_service import OfferService
+from app.services.order_service import OrderService
 
 
 class CartService:
@@ -209,6 +211,23 @@ class CartService:
 
     def remove_item(self, sku_id: str, expected_version: int) -> dict:
         return self.update_item(sku_id, 0, expected_version)
+
+    def checkout(self, expected_version: int) -> dict:
+        cart = self._get_or_create_cart()
+        snapshot = self.get_cart()
+        if not snapshot["items"]:
+            raise AppError(422, "EMPTY_CART", "购物车为空，不能结算")
+        self._bump_cart_version(cart, expected_version)
+        order = Order(order_id=f"O{uuid4().hex[:16]}", user_id=self.owner_id,
+                      total_fen=snapshot["total_price_fen"])
+        self.db.add(order)
+        self.db.flush()
+        self.db.add_all([OrderItem(order_id=order.order_id, sku_id=i["sku_id"], product_name=i["name"],
+                                   quantity=i["quantity"], unit_price_fen=i["unit_price_fen"])
+                         for i in snapshot["items"]])
+        self.db.query(CartItem).filter_by(cart_id=cart.id).delete()
+        self.db.commit()
+        return {"order": OrderService(self.db, self.owner_id).get_order(order.order_id), "cart": self.get_cart()}
 
     @staticmethod
     def digest_request(data: dict) -> str:

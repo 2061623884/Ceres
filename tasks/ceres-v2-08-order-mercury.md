@@ -1,6 +1,6 @@
 # 08 模拟下单到墨墨选单咨询
 
-状态：待开始
+状态：进行中
 负责人：主 Agent；测试命令由专职测试子 Agent执行。
 规格：[实施规格](../docs/plans/ceres-v2-spec.md)
 依赖：继承输入基线已记录；与其他业务票独立。
@@ -25,8 +25,10 @@
 
 ## 阻塞与下一步
 
-在现有 Ceres 开发；禁止整体提交继承的 dirty 变动。读取本票/规格，记录本票 Git 与工作树基线，先一个公共行为红测，再最小实现。需要用户本人确认的体验项目保持待验收。
+16代表项各独立两次、61项Mercury离线回归、TS及外部Vite构建通过；尚待本票提交与双轴审查。真实模型/页面及本人确认留09。模拟订单为paid/未发货，无真实支付、配送推进或自动跨角色跳转。
 
 ## 提交与证据
 
-继承 Git HEAD：f41c5821e8764a0ae03653d161c566dfd4b6415e；本票基线执行前记录。测试/审查/运行结果：尚未执行，不声明通过。证据位于 work/ceres-v2/08/。
+本票 Git 基线：301fa2c6f2eb6276e3b7639fc02efdfb4a41de06；文件哈希与继承dirty见 work/ceres-v2/08/baseline.json。开始公开cart结算RED；尚未通过，不声明验收。证据位于 work/ceres-v2/08/。
+
+[定位](../work/ceres-v2/08/diagnosis.md)、[验证回执](../work/ceres-v2/08/validation.md)、[本票源码增量](../work/ceres-v2/08/ticket-delta.patch)、[暂存边界](../work/ceres-v2/08/staging-receipt.json)。原基线301fa2c，07并行修复已单独提交，08审查固定点8420f0e以排除07改动。

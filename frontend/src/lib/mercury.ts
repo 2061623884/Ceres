@@ -3,13 +3,22 @@
  * Mirrors the pattern from saleGuide.ts
  */
 
+import type { Order } from './saleGuide'
+
 export interface MercurySessionResponse {
   session_id: string
   created_at: string
+  selected_order_id: string | null
+}
+
+export interface MercuryOrderResponse {
+  session_id: string
+  order: Order
 }
 
 export interface MercuryTurnCallbacks {
   onAnswerDelta?: (text: string) => void
+  onOrders?: (orders: Order[]) => void
   onCompleted?: (finalText: string) => void
   onError?: (error: string) => void
 }
@@ -42,6 +51,9 @@ function dispatchSseBlock(block: string, callbacks: MercuryTurnCallbacks): void 
         if (typeof data.text === 'string') {
           callbacks.onAnswerDelta?.(data.text)
         }
+        break
+      case 'orders':
+        callbacks.onOrders?.(data.items as Order[])
         break
       case 'turn.completed':
         if (typeof data.final_text === 'string') {
@@ -89,6 +101,24 @@ export async function createMercurySession(): Promise<string> {
   return data.session_id
 }
 
+export async function selectMercuryOrder(
+  sessionId: string,
+  orderId: string,
+): Promise<MercuryOrderResponse> {
+  const resp = await fetch(`/api/v1/mercury/sessions/${encodeURIComponent(sessionId)}/order`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    body: JSON.stringify({ order_id: orderId }),
+  })
+
+  if (!resp.ok) {
+    throw new Error(`Failed to select order: ${resp.statusText}`)
+  }
+
+  return resp.json()
+}
+
 /**
  * Send a message to Mercury and receive streaming response
  */
@@ -116,6 +146,7 @@ export async function sendMercuryTurn(
   let assembled = ''
 
   const wrapped: MercuryTurnCallbacks = {
+    onOrders: callbacks.onOrders,
     onAnswerDelta: (text) => {
       assembled += text
       callbacks.onAnswerDelta?.(text)

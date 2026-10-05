@@ -1,0 +1,3 @@
+Python runner (backend .venv) subprocess.run([node.exe, *argv])
+Exact Node executable/argv/cwd: command-argv.json
+Vite config loader: runner; build outDir is outside the repository.

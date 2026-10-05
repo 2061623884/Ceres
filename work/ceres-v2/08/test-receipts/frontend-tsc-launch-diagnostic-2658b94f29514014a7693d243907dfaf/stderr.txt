@@ -1,0 +1,17 @@
+file:///C:/Users/20616/Desktop/Agent/Agent%E4%BA%A7%E5%93%81/[eval1]:1
+import datetime, json, os, pathlib, re, subprocess, sys, uuid
+               ^
+
+Expected 'from', got 'ident'
+SyntaxError: Unexpected token ','
+    at compileSourceTextModule (node:internal/modules/esm/utils:318:16)
+    at ModuleLoader.createModuleWrap (node:internal/modules/esm/loader:253:12)
+    at asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:11)
+    at Object.runEntryPointWithESMLoader (node:internal/modules/run_main:139:19)
+    at evalTypeScriptModuleEntryPoint (node:internal/modules/esm/loader:311:47)
+    at evalTypeScript (node:internal/process/execution:249:12)
+    at node:internal/main/eval_stdin:51:5
+    at Socket.<anonymous> (node:internal/process/execution:520:5)
+    at Socket.emit (node:events:520:35)
+
+Node.js v24.14.0

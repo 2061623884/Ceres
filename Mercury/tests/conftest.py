@@ -68,8 +68,8 @@ def tool_spy(monkeypatch):
     records = []
     real = tools.execute_tool
 
-    def spy(name, arguments, user_id):
-        result = real(name, arguments, user_id=user_id)
+    def spy(name, arguments, user_id, selected_order_id=None):
+        result = real(name, arguments, user_id=user_id, selected_order_id=selected_order_id)
         try:
             args = json.loads(arguments)
         except (json.JSONDecodeError, TypeError):

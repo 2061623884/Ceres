@@ -1,0 +1,3 @@
+credential_value_match=false
+bearer_pattern_match=false
+secret_values_printed=false

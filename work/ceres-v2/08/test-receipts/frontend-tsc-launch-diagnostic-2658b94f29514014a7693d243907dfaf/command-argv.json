@@ -1,0 +1,8 @@
+{
+  "shell": "PowerShell",
+  "assigned_node": "C:\\Program Files\\nodejs\\node.exe",
+  "actual_invocation": "PowerShell here-string containing Python source piped to node.exe -X utf8 -",
+  "working_directory": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品",
+  "requested_operation": "Intended to launch TypeScript noEmit runner; tsc was not invoked",
+  "node_exit_code": 1
+}

@@ -1,0 +1,1126 @@
+--- a/backend/app/api/cart.py
++++ b/backend/app/api/cart.py
+@@ -8,6 +8,7 @@
+ from app.core.database import get_db
+ from app.core.identity import get_or_create_owner
+ from app.schemas.cart import (
++    CartCheckoutRequest,
+     CartItemAddRequest,
+     CartItemPatchRequest,
+     CartOperationResponse,
+@@ -41,6 +42,12 @@
+         body.sku_id, body.quantity, body.expected_cart_version
+     )
+     return CartResponse(**cart)
++
++
++@router.post("/cart/checkout")
++def checkout_cart(body: CartCheckoutRequest, request: Request, response: Response, db: Session = Depends(get_db)):
++    owner_id = _owner(request, response, db)
++    return CartService(db, owner_id).checkout(body.expected_cart_version)
+ 
+ 
+ @router.patch("/cart/items/{sku_id}", response_model=CartResponse)
+--- a/backend/app/api/mercury.py
++++ b/backend/app/api/mercury.py
+@@ -1,134 +1,110 @@
+-"""Mercury customer service API endpoints."""
++"""Mercury consultation of this anonymous owner's persistent orders."""
+ 
+ from __future__ import annotations
+ 
+ import asyncio
+ import json
+ import sys
+-import uuid
+-from datetime import datetime
+ from pathlib import Path
+-from typing import Any
+-
+-from contextlib import closing
++from uuid import uuid4
+ 
+ from fastapi import APIRouter, Depends, Request, Response
+-from pydantic import BaseModel
++from pydantic import BaseModel, Field
++from sqlalchemy.dialects.sqlite import insert
+ from sqlalchemy.orm import Session
+ from sse_starlette import EventSourceResponse
+ 
++from app.core.config import get_settings
+ from app.core.database import get_db
++from app.core.errors import AppError
+ from app.core.identity import get_or_create_owner
++from app.models.order import AfterSalesPolicy, MercurySession
++from app.services.order_service import OrderService
+ 
+-# 添加 Mercury 到 Python 路径
+ mercury_path = Path(__file__).resolve().parents[3] / "Mercury"
+ if str(mercury_path) not in sys.path:
+     sys.path.insert(0, str(mercury_path))
+ 
+ from mercury.agent import run_mercury
+-from mercury.db import connect
++from mercury.llm import OpenAIChatClient
++from mercury.seed import POLICIES
+ 
+-DEMO_MERCURY_USER = "test_user_001"
++router = APIRouter(prefix="/api/v1/mercury", tags=["mercury"])
+ 
+ 
+ def _owner(request: Request, response: Response, db: Session = Depends(get_db)) -> str:
+     return get_or_create_owner(request, response, db)
+ 
+ 
+-def resolve_mercury_user_id(ceres_owner_id: str) -> str:
+-    """Ceres owner 与 Mercury 演示库用户对齐。"""
+-    with closing(connect()) as conn:
+-        if conn.execute(
+-            "SELECT 1 FROM users WHERE user_id = ?", (ceres_owner_id,)
+-        ).fetchone():
+-            return ceres_owner_id
+-        if conn.execute(
+-            "SELECT 1 FROM users WHERE user_id = ?", (DEMO_MERCURY_USER,)
+-        ).fetchone():
+-            return DEMO_MERCURY_USER
+-    return ceres_owner_id
+-
+-router = APIRouter(prefix="/api/v1/mercury", tags=["mercury"])
++def _session(db: Session, owner_id: str, session_id: str) -> MercurySession:
++    session = db.query(MercurySession).filter_by(session_id=session_id, owner_id=owner_id).first()
++    if session is None:
++        raise AppError(404, "SESSION_NOT_FOUND", "没有找到这个售后会话")
++    return session
+ 
+ 
+ class TurnRequest(BaseModel):
+-    """Mercury turn request."""
+     message: str
+     request_id: str
+ 
+ 
+ class SessionResponse(BaseModel):
+-    """Mercury session response."""
+     session_id: str
+     created_at: str
++    selected_order_id: str | None
++
++
++class SelectOrderRequest(BaseModel):
++    order_id: str = Field(..., min_length=1, max_length=64)
+ 
+ 
+ @router.post("/sessions", response_model=SessionResponse)
+-async def create_mercury_session(owner_id: str = Depends(_owner)) -> dict[str, Any]:
+-    """创建 Mercury 客服会话."""
+-    session_id = f"ms_{uuid.uuid4().hex[:12]}"
+-    return {
+-        "session_id": session_id,
+-        "created_at": datetime.utcnow().isoformat()
+-    }
++def create_mercury_session(owner_id: str = Depends(_owner), db: Session = Depends(get_db)):
++    db.execute(insert(AfterSalesPolicy).values([
++        {"policy_id": policy_id, "category": category, "title": title,
++         "content": content, "keywords": keywords}
++        for policy_id, category, title, content, keywords in POLICIES
++    ]).on_conflict_do_nothing(index_elements=["policy_id"]))
++    session = MercurySession(session_id=f"ms_{uuid4().hex[:12]}", owner_id=owner_id)
++    db.add(session)
++    db.commit()
++    return SessionResponse(session_id=session.session_id, created_at=session.created_at,
++                           selected_order_id=session.selected_order_id)
++
++
++@router.post("/sessions/{session_id}/order")
++def select_order(session_id: str, body: SelectOrderRequest, owner_id: str = Depends(_owner),
++                 db: Session = Depends(get_db)):
++    session = _session(db, owner_id, session_id)
++    order = OrderService(db, owner_id).get_order(body.order_id)
++    session.selected_order_id = order["order_id"]
++    db.commit()
++    return {"session_id": session_id, "order": order}
+ 
+ 
+ @router.post("/sessions/{session_id}/turns/stream")
+-async def mercury_turn_stream(
+-    session_id: str,
+-    request: TurnRequest,
+-    owner_id: str = Depends(_owner)
+-):
+-    """发送消息给墨墨,返回 SSE 流式响应."""
+-    message = request.message
++def mercury_turn_stream(session_id: str, request: TurnRequest, owner_id: str = Depends(_owner),
++                        db: Session = Depends(get_db)):
++    session = _session(db, owner_id, session_id)
++    selected_order_id = session.selected_order_id
++    orders = OrderService(db, owner_id).list_orders() if selected_order_id is None else None
++    settings = get_settings()
++    database_path = str(db.get_bind().url.database)
+ 
+     async def event_generator():
+-        # 1. 发送接受事件
+-        yield {
+-            "event": "accepted",
+-            "data": json.dumps({"request_id": request.request_id})
+-        }
+-
+-        try:
+-            # 2. 调用 Mercury (同步调用)
+-            # 在生产环境中,应该使用 asyncio.to_thread 或异步包装
+-            mercury_uid = resolve_mercury_user_id(owner_id)
+-            response_text = await asyncio.to_thread(
+-                run_mercury, mercury_uid, message
+-            )
+-
+-            # 3. 分块发送以模拟流式输出（中文按字符，英文尽量按词）
+-            chunk_size = 2
+-            i = 0
+-            text = response_text
+-            while i < len(text):
+-                end = i + chunk_size
+-                if end < len(text) and text[end - 1].isascii() and text[end].isascii():
+-                    while end < len(text) and end - i < 12 and text[end - 1].isascii() and text[end] != " ":
+-                        end += 1
+-                    while end < len(text) and text[end] == " ":
+-                        end += 1
+-                piece = text[i:end]
+-                yield {
+-                    "event": "answer.delta",
+-                    "data": json.dumps({"text": piece}),
+-                }
+-                await asyncio.sleep(0.03)
+-                i = end
+-
+-            # 4. 发送完成事件
+-            yield {
+-                "event": "turn.completed",
+-                "data": json.dumps({
+-                    "session_id": session_id,
+-                    "final_text": response_text
+-                })
+-            }
+-        except Exception as e:
+-            # 5. 错误处理
+-            yield {
+-                "event": "error",
+-                "data": json.dumps({"message": str(e)})
+-            }
++        yield {"event": "accepted", "data": json.dumps({"request_id": request.request_id})}
++        if selected_order_id is None:
++            yield {"event": "orders", "data": json.dumps({"items": orders}, ensure_ascii=False)}
++            response_text = "请选择要咨询的订单。" if orders else "你目前没有模拟订单，可先在购物车完成模拟结算。"
++        else:
++            llm = OpenAIChatClient({"base_url": settings.openai_base_url, "api_key": settings.openai_api_key,
++                                    "model": settings.llm_model, "timeout": settings.llm_timeout,
++                                    "max_output_tokens": settings.llm_max_output_tokens})
++            response_text = await asyncio.to_thread(run_mercury, owner_id, request.message, llm,
++                                                   database_path=database_path, session_id=session_id,
++                                                   selected_order_id=selected_order_id)
++        yield {"event": "answer.delta", "data": json.dumps({"text": response_text}, ensure_ascii=False)}
++        yield {"event": "turn.completed", "data": json.dumps({"session_id": session_id,
++                                                                "final_text": response_text}, ensure_ascii=False)}
+ 
+     return EventSourceResponse(event_generator())
+--- a/backend/app/main.py
++++ b/backend/app/main.py
+@@ -9,7 +9,7 @@
+ from fastapi.responses import JSONResponse
+ from fastapi.staticfiles import StaticFiles
+ 
+-from app.api import bootstrap, cart, catalog, events, guide, internal, mercury
++from app.api import bootstrap, cart, catalog, events, guide, internal, mercury, orders
+ from app.core.database import init_db
+ from app.core.errors import AppError
+ 
+@@ -39,6 +39,7 @@
+ app.include_router(bootstrap.router)
+ app.include_router(catalog.router)
+ app.include_router(cart.router)
++app.include_router(orders.router)
+ app.include_router(guide.router)
+ app.include_router(mercury.router)
+ app.include_router(events.router)
+--- a/backend/app/models/__init__.py
++++ b/backend/app/models/__init__.py
+@@ -4,12 +4,15 @@
+ from app.models.catalog import CatalogProduct, CatalogReview, PurchaseTemplate
+ from app.models.conversation import GuideMessage, GuideOperation, PlanSnapshot
+ from app.models.memory import ShoppingMemory
++from app.models.order import Order, OrderItem
+ from app.models.session import GuideSession, GuideTask, Owner
+ from app.models.store import DeliveryQuote, Offer, Store
+ from app.models.trace import Badcase, BusinessEvent, TraceEvent
+ 
+ __all__ = [
+     "ShoppingMemory",
++    "Order",
++    "OrderItem",
+     "Cart",
+     "CartItem",
+     "CartOperation",
+--- a/backend/app/schemas/cart.py
++++ b/backend/app/schemas/cart.py
+@@ -29,6 +29,10 @@
+     expected_cart_version: int = Field(default=0, ge=0)
+ 
+ 
++class CartCheckoutRequest(BaseModel):
++    expected_cart_version: int = Field(..., ge=1)
++
++
+ class CartItemPatchRequest(BaseModel):
+     quantity: int = Field(..., ge=0, le=99)
+     expected_cart_version: int = Field(..., ge=0)
+--- a/backend/app/services/cart_service.py
++++ b/backend/app/services/cart_service.py
+@@ -15,7 +15,9 @@
+ from app.core.errors import AppError
+ from app.models.cart import Cart, CartItem, CartOperation
+ from app.models.catalog import CatalogProduct
++from app.models.order import Order, OrderItem
+ from app.services.offer_service import OfferService
++from app.services.order_service import OrderService
+ 
+ 
+ class CartService:
+@@ -210,6 +212,23 @@
+     def remove_item(self, sku_id: str, expected_version: int) -> dict:
+         return self.update_item(sku_id, 0, expected_version)
+ 
++    def checkout(self, expected_version: int) -> dict:
++        cart = self._get_or_create_cart()
++        snapshot = self.get_cart()
++        if not snapshot["items"]:
++            raise AppError(422, "EMPTY_CART", "购物车为空，不能结算")
++        self._bump_cart_version(cart, expected_version)
++        order = Order(order_id=f"O{uuid4().hex[:16]}", user_id=self.owner_id,
++                      total_fen=snapshot["total_price_fen"])
++        self.db.add(order)
++        self.db.flush()
++        self.db.add_all([OrderItem(order_id=order.order_id, sku_id=i["sku_id"], product_name=i["name"],
++                                   quantity=i["quantity"], unit_price_fen=i["unit_price_fen"])
++                         for i in snapshot["items"]])
++        self.db.query(CartItem).filter_by(cart_id=cart.id).delete()
++        self.db.commit()
++        return {"order": OrderService(self.db, self.owner_id).get_order(order.order_id), "cart": self.get_cart()}
++
+     @staticmethod
+     def digest_request(data: dict) -> str:
+         return hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()
+--- a/Mercury/mercury/db.py
++++ b/Mercury/mercury/db.py
+@@ -1,8 +1,23 @@
+ """SQLite 连接与建表。"""
+ 
+ import sqlite3
++from contextlib import contextmanager
++from contextvars import ContextVar
++from pathlib import Path
+ 
+ from mercury import config
++
++_DATABASE_PATH: ContextVar[Path | None] = ContextVar("mercury_database_path", default=None)
++
++
++@contextmanager
++def use_database(path: str | None):
++    """Bind the integrated Ceres database for one tool-calling turn."""
++    token = _DATABASE_PATH.set(Path(path) if path is not None else None)
++    try:
++        yield
++    finally:
++        _DATABASE_PATH.reset(token)
+ 
+ SCHEMA = """
+ CREATE TABLE users (
+@@ -60,7 +75,9 @@
+ 
+ 
+ def connect() -> sqlite3.Connection:
+-    path = config.db_path()
++    path = _DATABASE_PATH.get()
++    if path is None:
++        path = config.db_path()
+     path.parent.mkdir(parents=True, exist_ok=True)
+     conn = sqlite3.connect(path)
+     conn.row_factory = sqlite3.Row
+--- a/Mercury/mercury/agent.py
++++ b/Mercury/mercury/agent.py
+@@ -4,7 +4,7 @@
+ from contextlib import closing
+ 
+ from mercury import tools
+-from mercury.db import connect
++from mercury.db import connect, use_database
+ from mercury.llm import OpenAIChatClient
+ from mercury.prompt import SYSTEM_PROMPT
+ 
+@@ -14,7 +14,7 @@
+ HISTORY_TURNS = 6
+ 
+ # user_id -> [{"role": "user", ...}, {"role": "assistant", ...}, ...]，只存最终文本
+-_HISTORY: dict[str, list[dict]] = {}
++_HISTORY: dict[str | tuple[str, str, str | None], list[dict]] = {}
+ 
+ 
+ def _user_exists(user_id) -> bool:
+@@ -22,44 +22,50 @@
+         return conn.execute("SELECT 1 FROM users WHERE user_id = ?", (user_id,)).fetchone() is not None
+ 
+ 
+-def run_mercury(user_id: str, message: str, llm=None) -> str:
+-    if not _user_exists(user_id):
+-        return "未找到该用户"
+-    if llm is None:
+-        llm = OpenAIChatClient()
++def run_mercury(user_id: str, message: str, llm=None, *, database_path: str | None = None,
++                session_id: str | None = None, selected_order_id: str | None = None) -> str:
++    with use_database(database_path):
++        if session_id is None and not _user_exists(user_id):
++            return "未找到该用户"
++        if llm is None:
++            llm = OpenAIChatClient()
+ 
+-    history = _HISTORY.get(user_id, [])[-HISTORY_TURNS * 2:]
+-    messages = [{"role": "system", "content": SYSTEM_PROMPT}, *history, {"role": "user", "content": message}]
++        history_key = user_id if session_id is None else (user_id, session_id, selected_order_id)
++        history = _HISTORY.get(history_key, [])[-HISTORY_TURNS * 2:]
++        prompt = SYSTEM_PROMPT
++        if selected_order_id is not None:
++            prompt += f"\n本会话只咨询已选订单 {selected_order_id}。选单与查询不会申请售后；用户明确要求时才执行对应写工具。"
++        messages = [{"role": "system", "content": prompt}, *history, {"role": "user", "content": message}]
+ 
+-    try:
+-        answer = None
+-        for _ in range(MAX_TOOL_ROUNDS):
+-            msg = llm.chat(messages, tools=tools.openai_tools())
+-            if not msg.tool_calls:
+-                answer = msg.content
+-                break
+-            messages.append({
+-                "role": "assistant",
+-                "content": msg.content or "",
+-                "tool_calls": [
+-                    {"id": tc.id, "type": "function",
+-                     "function": {"name": tc.function.name, "arguments": tc.function.arguments}}
+-                    for tc in msg.tool_calls
+-                ],
+-            })
+-            for tc in msg.tool_calls:
+-                result = tools.execute_tool(tc.function.name, tc.function.arguments, user_id=user_id)
+-                messages.append({"role": "tool", "tool_call_id": tc.id, "content": result})
+-        else:
+-            # 5 轮 Tool 都执行完仍没有最终回答：不带 tools 再调用一次
+-            messages.append({"role": "user", "content": "已达到工具调用上限，请只根据已有 Tool 结果回答"})
+-            answer = llm.chat(messages).content
+-    except Exception as exc:
+-        logger.warning("LLM 调用失败：%s %s", type(exc).__name__, getattr(exc, "status_code", ""))
+-        return "抱歉，服务暂时不可用，请稍后再试。"
++        try:
++            answer = None
++            for _ in range(MAX_TOOL_ROUNDS):
++                msg = llm.chat(messages, tools=tools.openai_tools(selected_order_id))
++                if not msg.tool_calls:
++                    answer = msg.content
++                    break
++                messages.append({
++                    "role": "assistant",
++                    "content": msg.content or "",
++                    "tool_calls": [
++                        {"id": tc.id, "type": "function",
++                         "function": {"name": tc.function.name, "arguments": tc.function.arguments}}
++                        for tc in msg.tool_calls
++                    ],
++                })
++                for tc in msg.tool_calls:
++                    result = tools.execute_tool(tc.function.name, tc.function.arguments, user_id=user_id, selected_order_id=selected_order_id)
++                    messages.append({"role": "tool", "tool_call_id": tc.id, "content": result})
++            else:
++                # 5 轮 Tool 都执行完仍没有最终回答：不带 tools 再调用一次
++                messages.append({"role": "user", "content": "已达到工具调用上限，请只根据已有 Tool 结果回答"})
++                answer = llm.chat(messages).content
++        except Exception as exc:
++            logger.warning("LLM 调用失败：%s %s", type(exc).__name__, getattr(exc, "status_code", ""))
++            return "抱歉，服务暂时不可用，请稍后再试。"
+ 
+-    answer = (answer or "").strip() or "抱歉，我暂时无法回答这个问题。"
+-    turns = _HISTORY.setdefault(user_id, [])
+-    turns += [{"role": "user", "content": message}, {"role": "assistant", "content": answer}]
+-    del turns[:-HISTORY_TURNS * 2]
+-    return answer
++        answer = (answer or "").strip() or "抱歉，我暂时无法回答这个问题。"
++        turns = _HISTORY.setdefault(history_key, [])
++        turns += [{"role": "user", "content": message}, {"role": "assistant", "content": answer}]
++        del turns[:-HISTORY_TURNS * 2]
++        return answer
+--- a/Mercury/mercury/tools.py
++++ b/Mercury/mercury/tools.py
+@@ -75,15 +75,16 @@
+ _BY_NAME = {t["schema"]["function"]["name"]: t for t in TOOLS}
+ 
+ 
+-def openai_tools() -> list:
+-    return [t["schema"] for t in TOOLS]
++def openai_tools(selected_order_id: str | None = None) -> list:
++    return [t["schema"] for t in TOOLS
++            if selected_order_id is None or t["schema"]["function"]["name"] != "list_orders"]
+ 
+ 
+ def _dump(result) -> str:
+     return json.dumps(result, ensure_ascii=False)
+ 
+ 
+-def execute_tool(name: str, arguments: str, user_id: str) -> str:
++def execute_tool(name: str, arguments: str, user_id: str, selected_order_id: str | None = None) -> str:
+     tool = _BY_NAME.get(name)
+     if tool is None:
+         return _dump({"ok": False, "error": "UNKNOWN_TOOL", "message": f"没有名为 {name} 的工具"})
+@@ -98,6 +99,11 @@
+     params = tool["schema"]["function"]["parameters"]
+     # 只取 schema 声明的参数；模型传入的 user_id 等其他字段一律丢弃
+     args = {k: raw[k] for k in params["properties"] if k in raw and raw[k] is not None}
++    if selected_order_id is not None:
++        if name == "list_orders" or ("order_id" in args and args["order_id"] != selected_order_id):
++            return _dump({"ok": False, "error": "ORDER_NOT_SELECTED", "message": "请先选择要咨询的订单"})
++        if "order_id" in params["properties"]:
++            args["order_id"] = selected_order_id
+     missing = [k for k in params["required"] if k not in args or args[k] == ""]
+     if missing:
+         return _dump({"ok": False, "error": "BAD_ARGUMENTS", "message": f"缺少必填参数：{', '.join(missing)}"})
+--- a/Mercury/mercury/llm.py
++++ b/Mercury/mercury/llm.py
+@@ -6,16 +6,20 @@
+ 
+ 
+ class OpenAIChatClient:
+-    def __init__(self):
++    def __init__(self, settings=None):
+         self._client = None
+         self._model = None
++        self._settings = settings
+ 
+     def chat(self, messages, tools=None):
+         if self._client is None:
+-            s = config.llm_settings()
+-            self._client = OpenAI(base_url=s["base_url"], api_key=s["api_key"], timeout=45)
++            s = config.llm_settings() if self._settings is None else self._settings
++            self._client = OpenAI(base_url=s["base_url"], api_key=s["api_key"],
++                                  timeout=45 if self._settings is None else s["timeout"])
+             self._model = s["model"]
+         kwargs = {"model": self._model, "messages": messages, "temperature": 0.2}
++        if self._settings is not None:
++            kwargs["max_tokens"] = self._settings["max_output_tokens"]
+         if tools is not None:
+             kwargs["tools"] = tools
+             kwargs["tool_choice"] = "auto"
+--- a/Mercury/tests/conftest.py
++++ b/Mercury/tests/conftest.py
+@@ -68,8 +68,8 @@
+     records = []
+     real = tools.execute_tool
+ 
+-    def spy(name, arguments, user_id):
+-        result = real(name, arguments, user_id=user_id)
++    def spy(name, arguments, user_id, selected_order_id=None):
++        result = real(name, arguments, user_id=user_id, selected_order_id=selected_order_id)
+         try:
+             args = json.loads(arguments)
+         except (json.JSONDecodeError, TypeError):
+--- a/frontend/src/App.tsx
++++ b/frontend/src/App.tsx
+@@ -4,24 +4,21 @@
+ import {
+   ApiError,
+   addCartItem,
+-  addLocalOrder,
+   cartItemCount,
++  checkoutCart,
+   categoryEmoji,
+-  clearCartItems,
+   clearStoredSessionId,
+   confirmPlan,
+   confirmableItems,
+   createGuideSession,
+   ensureIdentity,
+-  formatOrderDate,
+   getCart,
+   getGuideSession,
+-  getLocalOrders,
+   getStoredSessionId,
++  listOrders,
+   listCategories,
+   listProducts,
+   clarificationChipLabels,
+-  nextLocalOrderId,
+   normalizePendingClarifications,
+   patchCartItem,
+   progressPhaseLabel,
+@@ -32,7 +29,7 @@
+   yuan,
+   type Cart,
+   type Category,
+-  type LocalOrder,
++  type Order,
+   type PlanResponse,
+   type Product,
+   type ProductComparisonCard,
+@@ -1047,7 +1044,7 @@
+   onDone,
+   onViewOrders,
+ }: {
+-  order: LocalOrder
++  order: Order
+   onDone: () => void
+   onViewOrders: () => void
+ }) {
+@@ -1055,7 +1052,7 @@
+     <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-[#fcfbf8] px-8">
+       <div className="w-full max-w-[280px] rounded-[28px] bg-[#f7f6f2] px-6 py-8 text-center">
+         <p className="text-[12px] font-medium text-black/40">订单已提交</p>
+-        <p className="mt-3 text-[22px] font-semibold tracking-[-0.05em] text-[#1d1c1a]">{order.id}</p>
++        <p className="mt-3 text-[22px] font-semibold tracking-[-0.05em] text-[#1d1c1a]">{order.order_id}</p>
+         <p className="mt-2 text-[15px] font-medium text-black/55">{yuan(order.total_fen)}</p>
+         <p className="mt-4 text-[11px] leading-relaxed text-black/35">门店会尽快为你备货，可在订单页查看进度</p>
+       </div>
+@@ -1114,7 +1111,7 @@
+   const [checkoutPhase, setCheckoutPhase] = useState<'checkout' | 'success' | null>(null)
+   const [checkoutBusy, setCheckoutBusy] = useState(false)
+   const [checkoutError, setCheckoutError] = useState<string | null>(null)
+-  const [placedOrder, setPlacedOrder] = useState<LocalOrder | null>(null)
++  const [placedOrder, setPlacedOrder] = useState<Order | null>(null)
+   const [openSheet, setOpenSheet] = useState<GuideSheet | null>(null)
+   const [sheetClosing, setSheetClosing] = useState(false)
+   const [sheetMorphOrigin, setSheetMorphOrigin] = useState('50% 100%')
+@@ -1365,20 +1362,10 @@
+     setCheckoutBusy(true)
+     setCheckoutError(null)
+     try {
+-      const order: LocalOrder = {
+-        id: nextLocalOrderId(),
+-        date: formatOrderDate(),
+-        status: '待备货',
+-        items: cart.items.map(i => `${i.name} × ${i.quantity}`),
+-        total: cart.total_price_fen / 100,
+-        total_fen: cart.total_price_fen,
+-      }
+-      const cleared = await clearCartItems(cart)
+-      onCartChange(cleared)
+-      addLocalOrder(order)
+-      setPlacedOrder(order)
++      const result = await checkoutCart(cart.version)
++      onCartChange(result.cart)
++      setPlacedOrder(result.order)
+       setCheckoutPhase('success')
+-      onCartRefresh()
+     } catch (e) {
+       if (e instanceof ApiError && e.code === 'STALE_STATE') {
+         const fresh = await getCart()
+@@ -1690,61 +1677,41 @@
+ }
+ 
+ // ── Orders Screen ─────────────────────────────────────────────
+-const ORDERS = [
+-  { id: '#CE2406', date: '今天 14:32', status: '配送中', items: ['有机西兰花 × 2', '三文鱼 × 1'], total: 88.50 },
+-  { id: '#CE2405', date: '昨天 10:15', status: '已完成', items: ['草莓 × 1', '牛奶 × 2'], total: 57.80 },
+-  { id: '#CE2404', date: '2天前 19:08', status: '已完成', items: ['鸡蛋 × 1', '红甜椒 × 2', '生姜 × 1'], total: 67.65 },
+-]
+-
+ function OrdersScreen() {
+-  const [localOrders, setLocalOrders] = useState<LocalOrder[]>(() => getLocalOrders())
++  const [orders, setOrders] = useState<Order[]>([])
++  const [loading, setLoading] = useState(true)
++  const [error, setError] = useState<string | null>(null)
+ 
+   useEffect(() => {
+-    setLocalOrders(getLocalOrders())
++    listOrders()
++      .then(({ items }) => setOrders(items))
++      .catch((err) => setError(err instanceof Error ? err.message : '订单加载失败'))
++      .finally(() => setLoading(false))
+   }, [])
+ 
+   return (
+     <div className="flex h-full flex-col bg-[#fcfbf8]">
+       <div className="flex-shrink-0 px-6 pt-10 pb-4">
+-        <div className="flex items-end justify-between"><h2 className="flex items-center gap-2 text-[26px] font-semibold tracking-[-0.07em] text-[#191817]">我的订单 <DemoBadge /></h2><span className="mb-1 text-[11px] font-medium text-black/35">近 30 天</span></div>
++        <h2 className="flex items-center gap-2 text-[26px] font-semibold tracking-[-0.07em] text-[#191817]">我的订单 <DemoBadge /></h2>
+       </div>
+       <div className="scrollbar-hide flex-1 space-y-3 overflow-y-auto px-5 pb-5">
+-        {localOrders.map((order) => (
+-          <button key={order.id} className="w-full rounded-[26px] bg-[#f7f6f2] p-4 text-left transition hover:bg-[#f2f1ed] active:scale-[.985]">
++        {loading && <p className="py-8 text-center text-[12px] text-black/40">正在加载订单…</p>}
++        {error && <p className="py-8 text-center text-[12px] text-red-600">订单加载失败：{error}</p>}
++        {!loading && !error && orders.length === 0 && (
++          <p className="py-8 text-center text-[12px] text-black/40">还没有订单</p>
++        )}
++        {!loading && !error && orders.map((order) => (
++          <article key={order.order_id} className="w-full rounded-[26px] bg-[#f7f6f2] p-4">
+             <div className="mb-3 flex items-center justify-between">
+-              <div className="flex items-center gap-2"><span className="text-[13px] font-semibold tracking-[-0.02em] text-[#252421]">{order.id}</span><span className="text-[10px] font-medium text-black/32">{order.date}</span></div>
+-              <span className="rounded-full bg-[#f7e8a7] px-2.5 py-1 text-[10px] font-medium text-[#735a13]">{order.status}</span>
++              <div className="flex items-center gap-2"><span className="text-[13px] font-semibold tracking-[-0.02em] text-[#252421]">{order.order_id}</span><span className="text-[10px] font-medium text-black/32">{new Date(order.created_at).toLocaleString('zh-CN')}</span></div>
++              <span className="rounded-full bg-[#f7e8a7] px-2.5 py-1 text-[10px] font-medium text-[#735a13]">{order.status === 'paid' ? '模拟下单，未发货' : order.status}</span>
+             </div>
+-            <p className="text-[12px] leading-relaxed text-black/52">{order.items.join(' · ')}</p>
++            <p className="text-[12px] leading-relaxed text-black/52">{order.items.map(item => `${item.product_name} × ${item.quantity}`).join(' · ')}</p>
+             <div className="flex items-center justify-between">
+-              <span className="mt-3 text-[10px] font-medium text-black/28">查看订单详情 →</span>
+-              <span className="mt-3 text-[14px] font-semibold tracking-[-0.03em] text-[#1d1c1a]">¥{order.total.toFixed(2)}</span>
++              <span className="mt-3 text-[10px] font-medium text-black/28">共 {order.items.length} 项商品</span>
++              <span className="mt-3 text-[14px] font-semibold tracking-[-0.03em] text-[#1d1c1a]">¥{(order.total_fen / 100).toFixed(2)}</span>
+             </div>
+-          </button>
+-        ))}
+-        <div className="rounded-[30px] bg-[#f2f1ed] p-5">
+-          <div className="flex items-center justify-between">
+-            <div><p className="text-[11px] font-medium text-black/40">当前进度</p><p className="mt-1 text-[17px] font-semibold tracking-[-0.045em] text-[#1d1c1a]">配送员正在路上</p></div>
+-            <span className="rounded-full bg-[#f7e8a7] px-3 py-1.5 text-[10px] font-semibold text-[#735a13]">预计 16:10</span>
+-          </div>
+-          <div className="mt-5 flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-[#30302c]" /><span className="h-[2px] flex-1 bg-[#30302c]" /><span className="h-2 w-2 rounded-full bg-[#30302c]" /><span className="h-[2px] flex-1 bg-black/[.09]" /><span className="h-2 w-2 rounded-full bg-black/[.12]" /></div>
+-          <div className="mt-2 flex justify-between text-[10px] font-medium text-black/35"><span>已接单</span><span>备货完成</span><span>送达</span></div>
+-        </div>
+-        <div className="px-2 pt-1 text-[10px] font-medium tracking-[0.12em] text-black/30">RECENT ORDERS</div>
+-        {ORDERS.map((order, index) => (
+-          <button key={order.id} className="w-full rounded-[26px] bg-[#f7f6f2] p-4 text-left transition hover:bg-[#f2f1ed] active:scale-[.985]">
+-            <div className="mb-3 flex items-center justify-between">
+-              <div className="flex items-center gap-2"><span className="text-[13px] font-semibold tracking-[-0.02em] text-[#252421]">{order.id}</span><span className="text-[10px] font-medium text-black/32">{order.date}</span></div>
+-              <span className={`rounded-full px-2.5 py-1 text-[10px] font-medium ${order.status === '配送中' ? 'bg-[#f7e8a7] text-[#735a13]' : 'bg-white/70 text-black/38'}`}>
+-                {order.status}
+-              </span>
+-            </div>
+-            <p className="text-[12px] leading-relaxed text-black/52">{order.items.join(' · ')}</p>
+-            <div className="flex items-center justify-between">
+-              <span className="mt-3 text-[10px] font-medium text-black/28">{index === 0 ? '查看配送详情' : '查看订单详情'} →</span>
+-              <span className="mt-3 text-[14px] font-semibold tracking-[-0.03em] text-[#1d1c1a]">¥{order.total.toFixed(2)}</span>
+-            </div>
+-          </button>
++          </article>
+         ))}
+       </div>
+     </div>
+--- a/frontend/src/MercuryChat.tsx
++++ b/frontend/src/MercuryChat.tsx
+@@ -4,13 +4,15 @@
+ 
+ import { useState, useEffect, useRef, useCallback } from 'react'
+ import { MomoAvatar, MomoToastHero } from './components/MomoToast'
+-import { createMercurySession, sendMercuryTurn } from './lib/mercury'
++import { createMercurySession, selectMercuryOrder, sendMercuryTurn } from './lib/mercury'
++import { listOrders, yuan, type Order } from './lib/saleGuide'
+ 
+ interface MercuryMsg {
+   id: string
+   role: 'user' | 'ai'
+   text: string
+   suggestions?: string[]
++  orderOptions?: Order[]
+ }
+ 
+ const WELCOME_MSG: MercuryMsg = {
+@@ -32,19 +34,23 @@
+ }
+ 
+ interface MercuryChatProps {
+-  prefilledOrder?: string
+   visible?: boolean
+ }
+ 
+-export function MercuryChat({ prefilledOrder, visible = true }: MercuryChatProps) {
++export function MercuryChat({ visible = true }: MercuryChatProps) {
+   const [sessionId, setSessionId] = useState<string | null>(null)
++  const [selectedOrder, setSelectedOrder] = useState<Order | null>(null)
+   const [msgs, setMsgs] = useState<MercuryMsg[]>([WELCOME_MSG])
+   const [input, setInput] = useState('')
+   const [typing, setTyping] = useState(false)
+   const [restoring, setRestoring] = useState(true)
+   const [error, setError] = useState<string | null>(null)
++  const [orderPickerOpen, setOrderPickerOpen] = useState(false)
++  const [pickerOrders, setPickerOrders] = useState<Order[]>([])
++  const [orderPickerLoading, setOrderPickerLoading] = useState(false)
++  const [orderPickerError, setOrderPickerError] = useState<string | null>(null)
++  const [selectingOrderId, setSelectingOrderId] = useState<string | null>(null)
+   const bottomRef = useRef<HTMLDivElement>(null)
+-  const prefilledSentRef = useRef(false)
+ 
+   useEffect(() => {
+     if (visible) {
+@@ -72,7 +78,7 @@
+ 
+   const send = useCallback(
+     async (text: string) => {
+-      if (!text.trim() || !sessionId || typing || restoring) return
++      if (!text.trim() || !sessionId || typing || restoring || selectingOrderId) return
+       const trimmed = text.trim()
+       setMsgs((p) => [...p, { id: `u-${Date.now()}`, role: 'user', text: trimmed }])
+       setInput('')
+@@ -88,6 +94,9 @@
+           onAnswerDelta: (chunk) => {
+             assistantText += chunk
+             setMsgs((p) => p.map((m) => (m.id === assistantId ? { ...m, text: assistantText } : m)))
++          },
++          onOrders: (orders) => {
++            setMsgs((p) => p.map((m) => (m.id === assistantId ? { ...m, orderOptions: orders } : m)))
+           },
+           onCompleted: (finalText) => {
+             setMsgs((p) =>
+@@ -129,19 +138,51 @@
+         setTyping(false)
+       }
+     },
+-    [sessionId, typing, restoring],
++    [sessionId, typing, restoring, selectingOrderId],
+   )
+ 
+-  useEffect(() => {
+-    if (!prefilledOrder || prefilledSentRef.current || restoring || !sessionId || !visible) return
+-    prefilledSentRef.current = true
+-    send(`关于订单 ${prefilledOrder} 我想咨询…`)
+-  }, [prefilledOrder, restoring, sessionId, visible, send])
++  async function openOrderPicker() {
++    setOrderPickerOpen(true)
++    setOrderPickerLoading(true)
++    setOrderPickerError(null)
++    try {
++      const result = await listOrders()
++      setPickerOrders(result.items)
++    } catch (e) {
++      setOrderPickerError(e instanceof Error ? e.message : '订单加载失败')
++    } finally {
++      setOrderPickerLoading(false)
++    }
++  }
++
++  async function selectOrder(orderId: string) {
++    if (!sessionId || selectingOrderId || restoring || typing) return
++    setSelectingOrderId(orderId)
++    setError(null)
++    try {
++      const result = await selectMercuryOrder(sessionId, orderId)
++      const order = result.order
++      setSelectedOrder(order)
++      setOrderPickerOpen(false)
++      const items = order.items.map((item) => `${item.product_name} × ${item.quantity}`).join('、')
++      setMsgs((p) => [...p, {
++        id: `selected-${Date.now()}`,
++        role: 'ai',
++        text: `已选中订单 ${order.order_id}：${items}，合计 ${yuan(order.total_fen)}。你可以继续咨询这笔订单。`,
++      }])
++    } catch (e) {
++      setError(e instanceof Error ? e.message : '选单失败')
++    } finally {
++      setSelectingOrderId(null)
++    }
++  }
+ 
+   async function handleNewChat() {
+     setMsgs([WELCOME_MSG])
+     setSessionId(null)
+-    prefilledSentRef.current = false
++    setSelectedOrder(null)
++    setOrderPickerOpen(false)
++    setOrderPickerError(null)
+     await initSession()
+   }
+ 
+@@ -204,7 +245,8 @@
+                       key={i}
+                       type="button"
+                       onClick={() => send(s)}
+-                      className="guide-glass-chip rounded-full px-4 py-2.5 text-left text-[12px] font-medium text-black/55 transition active:scale-[.98]"
++                      disabled={Boolean(selectingOrderId)}
++                      className="guide-glass-chip rounded-full px-4 py-2.5 text-left text-[12px] font-medium text-black/55 transition active:scale-[.98] disabled:opacity-55"
+                     >
+                       <span className="mr-2 text-[10px] font-semibold text-[#d79b58]">✦</span>
+                       {QUICK_LABELS[i] ?? s}
+@@ -212,11 +254,71 @@
+                   ))}
+                 </div>
+               )}
++              {msg.orderOptions && msg.role === 'ai' && !typing && (
++                <div className="flex w-full flex-col gap-1.5">
++                  {msg.orderOptions.map((order) => (
++                    <button
++                      key={order.order_id}
++                      type="button"
++                      onClick={() => selectOrder(order.order_id)}
++                      disabled={typing || Boolean(selectingOrderId)}
++                      className="guide-glass-chip rounded-[18px] px-4 py-3 text-left text-[12px] font-medium text-black/60 transition active:scale-[.98] disabled:opacity-55"
++                    >
++                      <span className="flex items-center justify-between gap-3">
++                        <span className="font-semibold text-[#252421]">{order.order_id}</span>
++                        <span className="text-[10px] text-black/35">选择这笔订单</span>
++                      </span>
++                      <span className="mt-1 block text-[10px] leading-relaxed text-black/40">
++                        {order.items.map((item) => `${item.product_name} × ${item.quantity}`).join(' · ')}
++                      </span>
++                    </button>
++                  ))}
++                </div>
++              )}
+             </div>
+           </div>
+         ))}
+         <div ref={bottomRef} />
+       </div>
++
++      {orderPickerOpen && (
++        <div className="absolute inset-x-4 bottom-[82px] z-30 flex max-h-[420px] flex-col overflow-hidden rounded-[26px] border border-black/[.06] bg-[#fcfbf8] shadow-[0_12px_40px_rgba(25,24,23,.18)]">
++          <div className="flex flex-shrink-0 items-center justify-between px-5 py-3">
++            <p className="text-[13px] font-semibold text-[#1d1c1a]">选择要咨询的订单</p>
++            <button
++              type="button"
++              onClick={() => setOrderPickerOpen(false)}
++              className="grid h-7 w-7 place-items-center rounded-full bg-black/[.05] text-[16px] text-black/45"
++              aria-label="关闭订单列表"
++            >×</button>
++          </div>
++          <div className="scrollbar-hide min-h-0 space-y-2 overflow-y-auto px-4 pb-4">
++            {orderPickerLoading && <p className="py-6 text-center text-[11px] text-black/40">正在加载订单…</p>}
++            {orderPickerError && <p className="py-6 text-center text-[11px] text-red-600">订单加载失败：{orderPickerError}</p>}
++            {!orderPickerLoading && !orderPickerError && pickerOrders.length === 0 && (
++              <p className="py-6 text-center text-[11px] text-black/40">还没有可咨询的订单</p>
++            )}
++            {!orderPickerLoading && !orderPickerError && pickerOrders.map((order) => (
++              <button
++                key={order.order_id}
++                type="button"
++                onClick={() => selectOrder(order.order_id)}
++                disabled={typing || Boolean(selectingOrderId)}
++                className="w-full rounded-[18px] bg-[#f2f1ed] px-4 py-3 text-left transition active:scale-[.99] disabled:opacity-55"
++              >
++                <span className="flex items-center justify-between gap-3">
++                  <span className="text-[12px] font-semibold text-[#252421]">{order.order_id}</span>
++                  <span className="text-[10px] text-black/38">{order.status === 'paid' ? '已付款，待发货' : order.status}</span>
++                </span>
++                <span className="mt-1 block text-[10px] leading-relaxed text-black/45">
++                  {order.items.map((item) => `${item.product_name} × ${item.quantity}`).join(' · ')}
++                </span>
++                <span className="mt-1 block text-[10px] font-medium text-black/55">合计 {yuan(order.total_fen)}</span>
++              </button>
++            ))}
++          </div>
++        </div>
++      )}
+ 
+       <div className="pointer-events-none absolute inset-x-0 top-0 z-20 px-6 pt-3 pb-3">
+         <div className="flex justify-center" aria-hidden="true">
+@@ -226,6 +328,7 @@
+           <button
+             type="button"
+             onClick={handleNewChat}
++            disabled={Boolean(selectingOrderId)}
+             className="guide-glass-icon-btn pointer-events-auto absolute right-5 top-1/2 z-10 grid h-9 w-9 -translate-y-1/2 place-items-center rounded-full text-black/45 transition hover:bg-white/70 active:scale-95"
+             aria-label="发起新对话"
+           >
+@@ -244,7 +347,24 @@
+       </div>
+ 
+       <div className="relative z-10 flex-shrink-0 px-5 pb-4 pt-2">
++        {selectedOrder && (
++          <div className="mb-2 flex items-center justify-between px-3 text-[10px] text-black/45">
++            <span>当前咨询订单：<strong className="font-semibold text-[#252421]">{selectedOrder.order_id}</strong></span>
++            <button
++              type="button"
++              onClick={openOrderPicker}
++              disabled={typing || restoring || Boolean(selectingOrderId)}
++              className="font-medium text-[#54755a] disabled:opacity-50"
++            >更换</button>
++          </div>
++        )}
+         <div className="guide-glass-surface flex items-center gap-2 rounded-[28px] px-4 py-2.5">
++          <button
++            type="button"
++            onClick={openOrderPicker}
++            disabled={typing || restoring || Boolean(selectingOrderId)}
++            className="flex-shrink-0 rounded-full border border-black/[.08] bg-white/75 px-3 py-1.5 text-[11px] font-semibold text-black/55 transition active:scale-95 disabled:opacity-50"
++          >订单</button>
+           <input
+             value={input}
+             onChange={(e) => setInput(e.target.value)}
+@@ -252,15 +372,15 @@
+               if (e.key === 'Enter') send(input)
+             }}
+             placeholder="问问墨墨吧…"
+-            disabled={restoring}
++            disabled={restoring || typing || Boolean(selectingOrderId)}
+             className="min-w-0 flex-1 bg-transparent text-[13px] font-medium text-[#1d1c1a] outline-none placeholder:text-black/30"
+           />
+           <button
+             type="button"
+             onClick={() => send(input)}
+-            disabled={!input.trim() || !sessionId || typing || restoring}
++            disabled={!input.trim() || !sessionId || typing || restoring || Boolean(selectingOrderId)}
+             className={`flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full transition-all active:scale-90 ${
+-              input.trim() && !typing && !restoring ? 'bg-[#171716]' : 'bg-[#eeece7]'
++              input.trim() && !typing && !restoring && !selectingOrderId ? 'bg-[#171716]' : 'bg-[#eeece7]'
+             }`}
+           >
+             <svg width="13" height="13" viewBox="0 0 24 24" fill="white">
+--- a/frontend/src/lib/saleGuide.ts
++++ b/frontend/src/lib/saleGuide.ts
+@@ -154,6 +154,24 @@
+   business_data_mode?: string;
+ }
+ 
++export interface OrderItem {
++  item_id: string;
++  sku_id: string;
++  product_name: string;
++  quantity: number;
++  unit_price_fen: number;
++  returnable: boolean;
++}
++
++export interface Order {
++  order_id: string;
++  status: string;
++  created_at: string;
++  delivered_at: string | null;
++  total_fen: number;
++  items: OrderItem[];
++}
++
+ export function listCategories() {
+   return fetchApi<Category[]>('/api/v1/categories');
+ }
+@@ -173,6 +191,17 @@
+ 
+ export function getCart() {
+   return fetchApi<Cart>('/api/v1/cart');
++}
++
++export function checkoutCart(expectedCartVersion: number) {
++  return fetchApi<{ order: Order; cart: Cart }>('/api/v1/cart/checkout', {
++    method: 'POST',
++    body: JSON.stringify({ expected_cart_version: expectedCartVersion }),
++  });
++}
++
++export function listOrders() {
++  return fetchApi<{ items: Order[] }>('/api/v1/orders');
+ }
+ 
+ export function addCartItem(skuId: string, quantity: number, expectedCartVersion: number) {
+@@ -198,54 +227,6 @@
+   return fetchApi<Cart>(`/api/v1/cart/items/${encodeURIComponent(skuId)}?${qs}`, {
+     method: 'DELETE',
+   });
+-}
+-
+-export async function clearCartItems(cart: Cart): Promise<Cart> {
+-  let current = cart;
+-  for (const item of [...current.items]) {
+-    current = await removeCartItem(item.sku_id, current.version);
+-  }
+-  return current;
+-}
+-
+-export interface LocalOrder {
+-  id: string;
+-  date: string;
+-  status: string;
+-  items: string[];
+-  total: number;
+-  total_fen: number;
+-}
+-
+-const LOCAL_ORDERS_KEY = 'ceres-local-orders';
+-
+-export function getLocalOrders(): LocalOrder[] {
+-  if (typeof window === 'undefined') return [];
+-  try {
+-    const raw = sessionStorage.getItem(LOCAL_ORDERS_KEY);
+-    if (!raw) return [];
+-    const parsed = JSON.parse(raw) as LocalOrder[];
+-    return Array.isArray(parsed) ? parsed : [];
+-  } catch {
+-    return [];
+-  }
+-}
+-
+-export function addLocalOrder(order: LocalOrder): void {
+-  if (typeof window === 'undefined') return;
+-  const existing = getLocalOrders();
+-  sessionStorage.setItem(LOCAL_ORDERS_KEY, JSON.stringify([order, ...existing]));
+-}
+-
+-export function formatOrderDate(d = new Date()): string {
+-  const hh = String(d.getHours()).padStart(2, '0');
+-  const mm = String(d.getMinutes()).padStart(2, '0');
+-  return `今天 ${hh}:${mm}`;
+-}
+-
+-export function nextLocalOrderId(): string {
+-  const n = getLocalOrders().length + 7;
+-  return `#CE24${String(n).padStart(2, '0')}`;
+ }
+ 
+ /** Map catalog image_path to a browser-loadable URL. */
+--- a/frontend/src/lib/mercury.ts
++++ b/frontend/src/lib/mercury.ts
+@@ -3,13 +3,22 @@
+  * Mirrors the pattern from saleGuide.ts
+  */
+ 
++import type { Order } from './saleGuide'
++
+ export interface MercurySessionResponse {
+   session_id: string
+   created_at: string
++  selected_order_id: string | null
++}
++
++export interface MercuryOrderResponse {
++  session_id: string
++  order: Order
+ }
+ 
+ export interface MercuryTurnCallbacks {
+   onAnswerDelta?: (text: string) => void
++  onOrders?: (orders: Order[]) => void
+   onCompleted?: (finalText: string) => void
+   onError?: (error: string) => void
+ }
+@@ -42,6 +51,9 @@
+         if (typeof data.text === 'string') {
+           callbacks.onAnswerDelta?.(data.text)
+         }
++        break
++      case 'orders':
++        callbacks.onOrders?.(data.items as Order[])
+         break
+       case 'turn.completed':
+         if (typeof data.final_text === 'string') {
+@@ -89,6 +101,24 @@
+   return data.session_id
+ }
+ 
++export async function selectMercuryOrder(
++  sessionId: string,
++  orderId: string,
++): Promise<MercuryOrderResponse> {
++  const resp = await fetch(`/api/v1/mercury/sessions/${encodeURIComponent(sessionId)}/order`, {
++    method: 'POST',
++    headers: { 'Content-Type': 'application/json' },
++    credentials: 'include',
++    body: JSON.stringify({ order_id: orderId }),
++  })
++
++  if (!resp.ok) {
++    throw new Error(`Failed to select order: ${resp.statusText}`)
++  }
++
++  return resp.json()
++}
++
+ /**
+  * Send a message to Mercury and receive streaming response
+  */
+@@ -116,6 +146,7 @@
+   let assembled = ''
+ 
+   const wrapped: MercuryTurnCallbacks = {
++    onOrders: callbacks.onOrders,
+     onAnswerDelta: (text) => {
+       assembled += text
+       callbacks.onAnswerDelta?.(text)

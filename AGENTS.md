@@ -5,7 +5,7 @@
 - Ceres 是超市智能导购 MVP，产品定义以 `prd.md` 为准，当前阶段目标见 `PROJECT.md`。
 - 两个 P0 场景是购买任务规划和品类内选购；导购 V1 止于用户确认加购。价格、库存和配送为模拟数据，演示不能表述为真实交易或履约。
 - `backend/` 承担 FastAPI API、LangGraph 导购回合和确定性业务执行；`frontend/` 承担 React 界面与 API/SSE 客户端，前端修改还须阅读 `frontend/AGENTS.md`。
-- `Mercury/` 是同仓独立售后模块，由 Ceres 后端导入，使用独立演示订单库；其集成单独验收，不作为导购 V1 的验收前提。
+- `Mercury/` 是同仓售后模块，由 Ceres 后端导入；V2 集成读取 Ceres 持久模拟订单，当前匿名 owner 不映射到固定演示用户。独立演示库保留用于模块单独运行和测试；其集成不作为导购 V1 的验收前提。
 - Ceres、相邻的 Sale-guide 和 Sale-guide-langgraph 是不同项目。历史复制来的文档及测试结果必须保留来源与适用版本，不能直接作为 Ceres 当前版本的结论。
 
 ## 修改约定
