@@ -1,0 +1,26 @@
+{
+  "candidate_sha256": "ae73702e64cf902d0da45b5276e0d8f9cd048f2fd0c73d6369d25aee6d1db03e",
+  "runtime_change": "none; only test locators corrected, all business assertions retained",
+  "receipt_root": "work/ceres-v2/09/test-receipts/ui-orders-c417efc3a8464096a788c887ebf5e6b9",
+  "variants": [
+    {
+      "path": "work/ceres-v2/09/ui-order-controls.executed-red.cjs",
+      "sha256": "6eaba21bd830103d8e5071721d2700435ba4673dd89971415b0f83f50e97ec65",
+      "stage": "system TEMP EPERM and d6d9 locator failure",
+      "provenance": "reconstructed after execution by reversing exactly the two avatar button locator edits; hash not recorded at original launch"
+    },
+    {
+      "path": "work/ceres-v2/09/ui-order-controls.executed-heading-red.cjs",
+      "sha256": "6d8e5a76b833386d6775c653ae1d4f844766d65ddac377e7658cb934a558b3d6",
+      "stage": "586811 heading locator failure",
+      "provenance": "saved before heading edit; tester recorded executed SHA 6d8e5a76b833386d6775c653ae1d4f844766d65ddac377e7658cb934a558b3d6"
+    },
+    {
+      "path": "work/ceres-v2/09/ui-order-controls.cjs",
+      "sha256": "f571a0d8de1114858cfb3670e1766454e6359715c6059c027443773369cb3bbb",
+      "stage": "d2d5 effective green two independent cases",
+      "provenance": "actual executed SHA present in ui-order-controls.command.json"
+    }
+  ],
+  "exceptions": "Historical failed execution and owner data retained. Each verification uses new BrowserContext/owner; two hosts route to distinct external fixture DBs. No provider sampling or business retry/fallback."
+}

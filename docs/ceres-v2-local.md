@@ -6,6 +6,8 @@
 
 当前候选的源码、测试、Prompt、fixture 图片和索引逐文件原始字节 SHA256 由 [source-inputs.json](../work/ceres-v2/09/source-inputs.json) 记录，外部 `source-inputs.zip` 的绝对位置及归档哈希也在该文件。归档不含 `.env`、密钥、运行库、虚拟环境或 node_modules；不要从当前 HEAD 单独重建并宣称是这份候选。
 
+归档内PROJECT是冻结时文档快照，后续验证状态以仓库当前TASK为准。最新包相对完成冷验证的前包只修改PROJECT和live旅程两处状态断言，生产/供给/索引/前端哈希相同；回执标明复用范围，不宣称所有检查在最新包重新执行。
+
 索引明确复用 V1 冻结的真实向量 `idx-d3e9873a747cb2d6`，包含 65 SKU、105 菜谱、170 文档及 1024 维 float32 向量。embedding 模型为 `Qwen/Qwen3-Embedding-0.6B`，revision 未指定；不宣称新建或锁定模型权重的 V2 索引。聊天与后台模型均为显式配置的 `qwen3.8-27b`；聊天服务与 embedding 服务是两个独立配置，不能互换。
 
 先将归档解压到新的目录。Python 和 Node 的实际版本、依赖及冷启动回执由 [09 验证记录](../work/ceres-v2/09/validation.md) 提供；本轮验证复用 Python 3.12.10 的现有虚拟环境与 Node 24.14.0/npm 11.9.0 的现有依赖，未验证全新安装。前端 package-lock.json 提供安装输入，后端 pyproject.toml 描述依赖；pip freeze 因原虚拟环境的 editable 路径元数据错误失败，版本清单不能冒充完整安装锁。需要真实模型时在解压目录安全配置本机 `.env`，公开参数见 [无密钥配置](../work/ceres-v2/09/settings-sanitized.json)，凭据不进入报告。
@@ -47,6 +49,8 @@ $env:RETRIEVAL_INDEX_DIR = 'data/retrieval_index-v2-frozen'
 新库预期 65 商品、65 Offer（56 显式、9 默认价格）、111 模板（105 菜谱、6 其他）。`seed_runtime` 初始化及 Mercury 会话创建应保留已有活动订单/政策，不运行旧 Mercury 破坏性 seed。所有价格、供给、结算、订单和售后均为模拟业务；没有支付或履约推进。
 
 ## 用户本人验收清单
+
+代表性技术演示已留档：[真实模型连续旅程](../work/ceres-v2/09/validation.md)只有第一条完整通过，第二条在历史回复16.953秒停止；两独立无模型Chrome页面控件已通过显式商品加购、独立模拟结算、刷新订单和墨墨胶囊/真实ID气泡手动选单。可查看[订单持久化截图](../work/ceres-v2/09/test-receipts/ui-orders-c417efc3a8464096a788c887ebf5e6b9/effective-attempt-d2d5f0651ee94bb0a80f14f7fa302826/run-1/persisted-order.png)及[真实ID选单截图](../work/ceres-v2/09/test-receipts/ui-orders-c417efc3a8464096a788c887ebf5e6b9/effective-attempt-d2d5f0651ee94bb0a80f14f7fa302826/run-1/selected-order-bubble.png)。这两次只证明控件，选后咨询、采购勾选与完整聊天UI仍按下面本人清单确认。
 
 每一行保持**待验收**。使用同版候选，独立新数据库和浏览器 owner 完整操作两次；第二次使用 run-2.sqlite3。记录开始/结束时间、每轮最终回复秒数、截图、实际清单/购物车/订单 ID 和不符结果。超时、错误、重新发送不算通过，不能用 API 或模型替身结果代替本人页面操作。
 

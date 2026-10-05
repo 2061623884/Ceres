@@ -7,7 +7,7 @@ def console_emit(text,kind):
     if kind!='stdout':
         sys.stdout.write(text); sys.stdout.flush(); return
     try: obj=json.loads(text.strip())
-    except Exception:
+    except json.JSONDecodeError:
         sys.stdout.write(text); sys.stdout.flush(); return
     if not isinstance(obj,dict):
         sys.stdout.write(text); sys.stdout.flush(); return

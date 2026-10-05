@@ -1,0 +1,22 @@
+Ceres corrected journey run 2 read-only trace inspection
+start_utc=2026-10-05T14:13:50.223208+00:00
+python_executable=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+argv=["C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\python.exe", "-X", "utf8", "-u", "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-corrected-journey-fb5a1006ddc74188903a615f40009b75\\trace_readonly.py"]
+cwd=C:\Users\20616\Desktop\Agent\Agent产品
+database=C:\Users\20616\Desktop\Agent\Agent产品\work\ceres-v2-test-env\09-corrected-journey-fb5a1006ddc74188903a615f40009b75\pytest-temp\live-journey-corrected\test_live_v2_purchase_history_1\test.sqlite3
+sqlite_mode=ro; PRAGMA query_only=ON
+request_id=c825eac3-7164-4f82-82db-731844bb2dc4
+guide_message_rows=2
+guide_message={"role": "user", "kind": "text", "content": "查询我之前的番茄炒蛋方案", "status": "completed", "created_at": "2026-10-05 14:06:50.386805"}
+guide_message={"role": "assistant", "kind": "text", "content": "找到你之前的一份番茄炒蛋方案：plan-e80cffb3190f（版本 2，task-6f487a864d87）。历史按 4 人配置，包含：番茄 500g ×2（历史单价 6.8 元）、鸡蛋 6 枚 ×1（历史单价 9.8 元）、食用油 500ml ×1（历史单价 12.8 元）、盐 500g ×1（历史单价 3.2 元）、白糖 500g ×1（历史单价 6.5 元）。以上人数、数量和价格均为历史信息，不代表当前库存或价格；旧选择与加购授权也不会自动恢复。\n1. 番茄炒蛋", "status": "completed", "created_at": "2026-10-05 14:06:50.388344"}
+trace_event_rows=8
+trace={"event_id": "evt-a2af154f7607", "trace_id": "trace-1daa4d53d5a8", "phase": "understanding", "model_mode": "live", "summary": null, "error": null, "duration_ms": null, "created_at": "2026-10-05 14:06:33.475187"}
+trace={"event_id": "evt-77af1c30694a", "trace_id": "trace-1daa4d53d5a8", "phase": "model_call_started", "model_mode": "live", "summary": {"call_number": 1, "stage": "understanding", "repair": false, "read_result_count": 0, "status": "started"}, "error": null, "duration_ms": null, "created_at": "2026-10-05 14:06:33.482474"}
+trace={"event_id": "evt-b12d2ef08746", "trace_id": "trace-1daa4d53d5a8", "phase": "model_call_completed", "model_mode": "live", "summary": {"call_number": 1, "stage": "understanding", "repair": false, "read_result_count": 0, "status": "completed", "duration_ms": 1390}, "error": null, "duration_ms": 1390, "created_at": "2026-10-05 14:06:34.884210"}
+trace={"event_id": "evt-900c1558d420", "trace_id": "trace-1daa4d53d5a8", "phase": "retrieve", "model_mode": "live", "summary": null, "error": null, "duration_ms": null, "created_at": "2026-10-05 14:06:34.894045"}
+trace={"event_id": "evt-e5b817008dad", "trace_id": "trace-1daa4d53d5a8", "phase": "model_call_started", "model_mode": "live", "summary": {"call_number": 2, "stage": "answer", "repair": false, "read_result_count": 1, "status": "started"}, "error": null, "duration_ms": null, "created_at": "2026-10-05 14:06:34.908093"}
+trace={"event_id": "evt-8ce8e6fa6357", "trace_id": "trace-1daa4d53d5a8", "phase": "model_call_completed", "model_mode": "live", "summary": {"call_number": 2, "stage": "answer", "repair": false, "read_result_count": 1, "status": "completed", "duration_ms": 15452}, "error": null, "duration_ms": 15452, "created_at": "2026-10-05 14:06:50.375060"}
+trace={"event_id": "evt-486e3593ec5b", "trace_id": "trace-1daa4d53d5a8", "phase": "turn_result", "model_mode": "live", "summary": {"status": "understanding", "plan_effect": "keep", "actions": [{"type": "read_only", "status": "completed"}]}, "error": null, "duration_ms": null, "created_at": "2026-10-05 14:06:50.395863"}
+trace={"event_id": "evt-f97a9e9e2ac3", "trace_id": "trace-1daa4d53d5a8", "phase": "memory_extract_started", "model_mode": "live", "summary": {"model": "qwen3.8-27b"}, "error": null, "duration_ms": null, "created_at": "2026-10-05 14:06:50.404377"}
+finish_utc=2026-10-05T14:13:50.224210+00:00
+diagnostic_exit_code=0

@@ -33,7 +33,7 @@ def safe_fields(v):
         return out
     if isinstance(v,list):return [safe_fields(x) for x in v]
     return v
-root=Path(sys.argv[1]); run=Path(sys.argv[2]); dotenv=parse_dotenv(root/'Ceres'/'work'/'ceres-v2'/'09'/'source-inputs.json') if False else parse_dotenv(run/'cold-1'/'.env')
+root=Path(sys.argv[1]); run=Path(sys.argv[2]); dotenv=parse_dotenv(run/'cold-1'/'.env')
 items=[('stable-1',run/'pytest-temp'/'live-memory'/'test_real_reply_and_background0'/'test.sqlite3','live-memory-stable-1'),('explicit-conflict-2',run/'pytest-temp'/'live-memory'/'test_real_reply_and_background5'/'test.sqlite3','live-memory-explicit-conflict-2')]
 out=[]
 for label,dbpath,rid in items:

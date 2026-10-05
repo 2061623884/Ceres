@@ -1,0 +1,216 @@
+[
+  {
+    "url": "http://127.0.0.71:5171/",
+    "started_utc": "2026-10-05T14:39:14.401Z",
+    "steps": [
+      {
+        "step": "initial_orders_empty",
+        "utc": "2026-10-05T14:39:16.894Z"
+      },
+      {
+        "step": "explicit_product_add",
+        "utc": "2026-10-05T14:39:17.651Z"
+      }
+    ],
+    "requests": [
+      {
+        "method": "GET",
+        "url": "http://127.0.0.71:5171/api/v1/bootstrap",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.71:5171/api/v1/cart",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.71:5171/api/v1/cart",
+        "status": 200
+      },
+      {
+        "method": "POST",
+        "url": "http://127.0.0.71:5171/api/v1/mercury/sessions",
+        "status": 200
+      },
+      {
+        "method": "POST",
+        "url": "http://127.0.0.71:5171/api/v1/mercury/sessions",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.71:5171/api/v1/orders",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.71:5171/api/v1/orders",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.71:5171/api/v1/categories",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.71:5171/api/v1/categories",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.71:5171/api/v1/products?page_size=40",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.71:5171/api/v1/products?category_id=baking&page_size=40",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.71:5171/api/v1/products?page_size=40",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.71:5171/api/v1/products?q=%E7%95%AA%E8%8C%84&page_size=40",
+        "status": 200
+      },
+      {
+        "method": "POST",
+        "url": "http://127.0.0.71:5171/api/v1/cart/items",
+        "status": 200
+      }
+    ],
+    "page_errors": [],
+    "cart_after_explicit_add": {
+      "store_id": "store-demo-01",
+      "version": 2,
+      "items": [
+        {
+          "sku_id": "demo:tomato-fresh-500g",
+          "name": "新鲜番茄 500克",
+          "quantity": 1,
+          "unit_price_fen": 680,
+          "line_total_fen": 680,
+          "image_path": "data/images/demo-tomato-fresh-500g.jpg",
+          "sellable": true
+        }
+      ],
+      "total_price_fen": 680,
+      "business_data_mode": "demo"
+    },
+    "status": "failed",
+    "error": "locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: '问问可可', exact: true })\u001b[22m\n\n    at main (C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v2\\09\\ui-order-controls.cjs:43:71)",
+    "finished_utc": "2026-10-05T14:39:32.723Z"
+  },
+  {
+    "url": "http://127.0.0.72:5172/",
+    "started_utc": "2026-10-05T14:39:32.853Z",
+    "steps": [
+      {
+        "step": "initial_orders_empty",
+        "utc": "2026-10-05T14:39:35.101Z"
+      },
+      {
+        "step": "explicit_product_add",
+        "utc": "2026-10-05T14:39:35.810Z"
+      }
+    ],
+    "requests": [
+      {
+        "method": "GET",
+        "url": "http://127.0.0.72:5172/api/v1/bootstrap",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.72:5172/api/v1/cart",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.72:5172/api/v1/cart",
+        "status": 200
+      },
+      {
+        "method": "POST",
+        "url": "http://127.0.0.72:5172/api/v1/mercury/sessions",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.72:5172/api/v1/orders",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.72:5172/api/v1/orders",
+        "status": 200
+      },
+      {
+        "method": "POST",
+        "url": "http://127.0.0.72:5172/api/v1/mercury/sessions",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.72:5172/api/v1/categories",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.72:5172/api/v1/categories",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.72:5172/api/v1/products?page_size=40",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.72:5172/api/v1/products?category_id=baking&page_size=40",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.72:5172/api/v1/products?page_size=40",
+        "status": 200
+      },
+      {
+        "method": "GET",
+        "url": "http://127.0.0.72:5172/api/v1/products?q=%E7%95%AA%E8%8C%84&page_size=40",
+        "status": 200
+      },
+      {
+        "method": "POST",
+        "url": "http://127.0.0.72:5172/api/v1/cart/items",
+        "status": 200
+      }
+    ],
+    "page_errors": [],
+    "cart_after_explicit_add": {
+      "store_id": "store-demo-01",
+      "version": 2,
+      "items": [
+        {
+          "sku_id": "demo:tomato-fresh-500g",
+          "name": "新鲜番茄 500克",
+          "quantity": 1,
+          "unit_price_fen": 680,
+          "line_total_fen": 680,
+          "image_path": "data/images/demo-tomato-fresh-500g.jpg",
+          "sellable": true
+        }
+      ],
+      "total_price_fen": 680,
+      "business_data_mode": "demo"
+    },
+    "status": "failed",
+    "error": "locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: '问问可可', exact: true })\u001b[22m\n\n    at main (C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v2\\09\\ui-order-controls.cjs:43:71)",
+    "finished_utc": "2026-10-05T14:39:50.862Z"
+  }
+]

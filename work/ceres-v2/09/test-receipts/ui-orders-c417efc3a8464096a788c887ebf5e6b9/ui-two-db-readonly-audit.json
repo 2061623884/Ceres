@@ -1,0 +1,84 @@
+{
+  "started_utc": "2026-10-05T14:40:48.670266+00:00",
+  "finished_utc": "2026-10-05T14:40:48.674232+00:00",
+  "executable": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+  "argv": [
+    "C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "-X",
+    "utf8",
+    "-u",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\ui-orders-c417efc3a8464096a788c887ebf5e6b9\\audit_ui_databases_readonly.py"
+  ],
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品",
+  "sqlite": "mode=ro; PRAGMA query_only=ON",
+  "databases": [
+    {
+      "label": "owner-71",
+      "db_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\ui-orders-c417efc3a8464096a788c887ebf5e6b9\\owner-71\\ceres-ui.sqlite3",
+      "owners": [
+        {
+          "owner_id": "owner-fce73b4b6c004436",
+          "created_at": "2026-10-05 14:39:14.557945"
+        }
+      ],
+      "carts": [
+        {
+          "owner_id": "owner-fce73b4b6c004436",
+          "store_id": "store-demo-01",
+          "version": 2,
+          "sku_id": "demo:tomato-fresh-500g",
+          "quantity": 1,
+          "unit_price_fen": 680
+        }
+      ],
+      "orders": [],
+      "mercury_sessions": [
+        {
+          "session_id": "ms_8e74ce4ff4fb",
+          "owner_id": "owner-fce73b4b6c004436",
+          "selected_order_id": null
+        },
+        {
+          "session_id": "ms_d65d933fbb8e",
+          "owner_id": "owner-fce73b4b6c004436",
+          "selected_order_id": null
+        }
+      ],
+      "trace_phase_counts": {}
+    },
+    {
+      "label": "owner-72",
+      "db_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\ui-orders-c417efc3a8464096a788c887ebf5e6b9\\owner-72\\ceres-ui.sqlite3",
+      "owners": [
+        {
+          "owner_id": "owner-8245b45e35094ef0",
+          "created_at": "2026-10-05 14:39:32.999158"
+        }
+      ],
+      "carts": [
+        {
+          "owner_id": "owner-8245b45e35094ef0",
+          "store_id": "store-demo-01",
+          "version": 2,
+          "sku_id": "demo:tomato-fresh-500g",
+          "quantity": 1,
+          "unit_price_fen": 680
+        }
+      ],
+      "orders": [],
+      "mercury_sessions": [
+        {
+          "session_id": "ms_c65850ff9542",
+          "owner_id": "owner-8245b45e35094ef0",
+          "selected_order_id": null
+        },
+        {
+          "session_id": "ms_da3ccee96378",
+          "owner_id": "owner-8245b45e35094ef0",
+          "selected_order_id": null
+        }
+      ],
+      "trace_phase_counts": {}
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "note": "Original execution scripts remain in local Git 322c237 and external run, unchanged. Current repository copies contain explicit static review fixes; raw commands/results are not rewritten. No new model or test batch.",
+  "files": [
+    {
+      "path": "work/ceres-v2/09/test-receipts/09-corrected-journey-fb5a1006ddc74188903a615f40009b75/corrected-journey-runner.py",
+      "executed_version": "322c2378008016b8527b11a97258f9ad3133f390:work/ceres-v2/09/test-receipts/09-corrected-journey-fb5a1006ddc74188903a615f40009b75/corrected-journey-runner.py",
+      "external_original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-corrected-journey-fb5a1006ddc74188903a615f40009b75\\corrected-journey-runner.py",
+      "executed_sha256": "4b27c627e3876a95e97c8ec6f911f9d3f4c2208b77b4c558ba99d5656410212c",
+      "static_corrected_sha256": "085b6767f6789e22a6ea7245afabd5d3aacfec8790aa40d089be9d4228107780",
+      "change": "except Exception: -> except json.JSONDecodeError:",
+      "validation": "static review only; not executed again; existing receipts refer to original executed version"
+    },
+    {
+      "path": "work/ceres-v2/09/test-receipts/09-final-candidate-83f1c39408e649a495c633c23a4bbe4c/readonly-live-trace.py",
+      "executed_version": "322c2378008016b8527b11a97258f9ad3133f390:work/ceres-v2/09/test-receipts/09-final-candidate-83f1c39408e649a495c633c23a4bbe4c/readonly-live-trace.py",
+      "external_original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-83f1c39408e649a495c633c23a4bbe4c\\readonly-live-trace.py",
+      "executed_sha256": "fe1df09996c4f4e5d9e62e53eda63cd40fc8e2d3d7bc869465407dcf98439121",
+      "static_corrected_sha256": "d93985854dc51e489b56f8e73bb1bf113253b60a72c757ac2000f82ecf5e8bd1",
+      "change": "dotenv=parse_dotenv(root/'Ceres'/'work'/'ceres-v2'/'09'/'source-inputs.json') if False else parse_dotenv(run/'cold-1'/'.env') -> dotenv=parse_dotenv(run/'cold-1'/'.env')",
+      "validation": "static review only; not executed again; existing receipts refer to original executed version"
+    }
+  ]
+}

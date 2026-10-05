@@ -1,0 +1,174 @@
+{
+  "started_utc": "2026-10-05T14:45:09.262915+00:00",
+  "executable": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+  "argv": [
+    "C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "-X",
+    "utf8",
+    "-u",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\ui-orders-c417efc3a8464096a788c887ebf5e6b9\\effective-attempt-586811ddb2444ed68f19397d6372d83f\\audit_db_readonly.py"
+  ],
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品",
+  "sqlite": "mode=ro; PRAGMA query_only=ON",
+  "dbs": [
+    {
+      "label": "owner-71",
+      "db": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\ui-orders-c417efc3a8464096a788c887ebf5e6b9\\owner-71\\ceres-ui.sqlite3",
+      "owners": [
+        {
+          "owner_id": "owner-fce73b4b6c004436",
+          "created_at": "2026-10-05 14:39:14.557945"
+        },
+        {
+          "owner_id": "owner-0d63bb0db45c4d57",
+          "created_at": "2026-10-05 14:43:28.206148"
+        }
+      ],
+      "orders": [
+        {
+          "order_id": "O1b7d7478331a4105",
+          "owner_id": "owner-0d63bb0db45c4d57",
+          "status": "paid",
+          "total_fen": 680,
+          "created_at": "2026-10-05T22:43:31.158475",
+          "sku_id": "demo:tomato-fresh-500g",
+          "product_name": "新鲜番茄 500克",
+          "quantity": 1,
+          "unit_price_fen": 680
+        }
+      ],
+      "carts": [
+        {
+          "owner_id": "owner-0d63bb0db45c4d57",
+          "version": 3,
+          "sku_id": null,
+          "quantity": null,
+          "unit_price_fen": null
+        },
+        {
+          "owner_id": "owner-fce73b4b6c004436",
+          "version": 2,
+          "sku_id": "demo:tomato-fresh-500g",
+          "quantity": 1,
+          "unit_price_fen": 680
+        }
+      ],
+      "mercury_sessions": [
+        {
+          "session_id": "ms_8e74ce4ff4fb",
+          "owner_id": "owner-fce73b4b6c004436",
+          "selected_order_id": null
+        },
+        {
+          "session_id": "ms_d65d933fbb8e",
+          "owner_id": "owner-fce73b4b6c004436",
+          "selected_order_id": null
+        },
+        {
+          "session_id": "ms_7769ddcdfbee",
+          "owner_id": "owner-0d63bb0db45c4d57",
+          "selected_order_id": null
+        },
+        {
+          "session_id": "ms_8777cf1399b2",
+          "owner_id": "owner-0d63bb0db45c4d57",
+          "selected_order_id": null
+        },
+        {
+          "session_id": "ms_18e142077fb8",
+          "owner_id": "owner-0d63bb0db45c4d57",
+          "selected_order_id": null
+        },
+        {
+          "session_id": "ms_4c92a1bd07f0",
+          "owner_id": "owner-0d63bb0db45c4d57",
+          "selected_order_id": null
+        }
+      ],
+      "trace_phase_counts": {},
+      "model_call_started_count": 0
+    },
+    {
+      "label": "owner-72",
+      "db": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\ui-orders-c417efc3a8464096a788c887ebf5e6b9\\owner-72\\ceres-ui.sqlite3",
+      "owners": [
+        {
+          "owner_id": "owner-8245b45e35094ef0",
+          "created_at": "2026-10-05 14:39:32.999158"
+        },
+        {
+          "owner_id": "owner-912fa5372f034316",
+          "created_at": "2026-10-05 14:43:46.532558"
+        }
+      ],
+      "orders": [
+        {
+          "order_id": "O4467837ab5704bd8",
+          "owner_id": "owner-912fa5372f034316",
+          "status": "paid",
+          "total_fen": 680,
+          "created_at": "2026-10-05T22:43:49.037008",
+          "sku_id": "demo:tomato-fresh-500g",
+          "product_name": "新鲜番茄 500克",
+          "quantity": 1,
+          "unit_price_fen": 680
+        }
+      ],
+      "carts": [
+        {
+          "owner_id": "owner-8245b45e35094ef0",
+          "version": 2,
+          "sku_id": "demo:tomato-fresh-500g",
+          "quantity": 1,
+          "unit_price_fen": 680
+        },
+        {
+          "owner_id": "owner-912fa5372f034316",
+          "version": 3,
+          "sku_id": null,
+          "quantity": null,
+          "unit_price_fen": null
+        }
+      ],
+      "mercury_sessions": [
+        {
+          "session_id": "ms_c65850ff9542",
+          "owner_id": "owner-8245b45e35094ef0",
+          "selected_order_id": null
+        },
+        {
+          "session_id": "ms_da3ccee96378",
+          "owner_id": "owner-8245b45e35094ef0",
+          "selected_order_id": null
+        },
+        {
+          "session_id": "ms_35fb01b79a49",
+          "owner_id": "owner-912fa5372f034316",
+          "selected_order_id": null
+        },
+        {
+          "session_id": "ms_b0033152eba8",
+          "owner_id": "owner-912fa5372f034316",
+          "selected_order_id": null
+        },
+        {
+          "session_id": "ms_7708bb5f59d5",
+          "owner_id": "owner-912fa5372f034316",
+          "selected_order_id": null
+        },
+        {
+          "session_id": "ms_92e72940ea64",
+          "owner_id": "owner-912fa5372f034316",
+          "selected_order_id": null
+        }
+      ],
+      "trace_phase_counts": {},
+      "model_call_started_count": 0
+    }
+  ],
+  "finished_utc": "2026-10-05T14:45:09.275928+00:00",
+  "effective_attempt_result_files": [
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\ui-orders-c417efc3a8464096a788c887ebf5e6b9\\effective-attempt-586811ddb2444ed68f19397d6372d83f\\run-1\\result.json",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\ui-orders-c417efc3a8464096a788c887ebf5e6b9\\effective-attempt-586811ddb2444ed68f19397d6372d83f\\run-2\\result.json"
+  ]
+}

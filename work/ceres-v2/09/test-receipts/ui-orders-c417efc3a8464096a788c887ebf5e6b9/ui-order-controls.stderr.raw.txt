@@ -1,0 +1,3 @@
+browserType.launch: EPERM: operation not permitted, mkdtemp 'C:\Users\20616\AppData\Local\Temp\playwright-artifacts-XXXXXX'
+    at main (C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-v2\09\ui-order-controls.cjs:10:34)
+    at Object.<anonymous> (C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-v2\09\ui-order-controls.cjs:127:1)

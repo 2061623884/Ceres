@@ -1,0 +1,150 @@
+{
+  "started_utc": "2026-10-05T14:22:21.4120662Z",
+  "checked_utc": "2026-10-05T14:22:25.2715229Z",
+  "services": [
+    {
+      "backend": {
+        "utc": "2026-10-05T14:22:21.4120662Z",
+        "executable": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+        "argv": [
+          "-X",
+          "utf8",
+          "-m",
+          "uvicorn",
+          "app.main:app",
+          "--host",
+          "127.0.0.71",
+          "--port",
+          "8111"
+        ],
+        "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-corrected-journey-fb5a1006ddc74188903a615f40009b75\\cold-journey\\backend",
+        "pid": 41156,
+        "host": "127.0.0.71",
+        "port": 8111,
+        "database": "C:/Users/20616/Desktop/Agent/Agent产品/work/ceres-v2-test-env/ui-orders-c417efc3a8464096a788c887ebf5e6b9/owner-71/ceres-ui.sqlite3",
+        "log_out": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\ui-orders-c417efc3a8464096a788c887ebf5e6b9\\owner-71\\backend.stdout.log",
+        "log_err": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\ui-orders-c417efc3a8464096a788c887ebf5e6b9\\owner-71\\backend.stderr.log",
+        "environment": {
+          "PYTHONUTF8": "1",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "DATABASE_URL": "sqlite:///C:/Users/20616/Desktop/Agent/Agent产品/work/ceres-v2-test-env/ui-orders-c417efc3a8464096a788c887ebf5e6b9/owner-71/ceres-ui.sqlite3",
+          "MERCURY_DB_PATH": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\ui-orders-c417efc3a8464096a788c887ebf5e6b9\\owner-71\\mercury-ui.sqlite3",
+          "SOURCE_DATABASE_PATH": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\ui-orders-c417efc3a8464096a788c887ebf5e6b9\\owner-71\\source-not-imported.db",
+          "LLM_MODE": "offline",
+          "LLM_MODEL": "",
+          "MEMORY_MODEL": "",
+          "OPENAI_BASE_URL": "",
+          "OPENAI_API_KEY": "",
+          "RETRIEVAL_INDEX_DIR": "",
+          "BUSINESS_DATA_MODE": "demo"
+        }
+      },
+      "frontend": {
+        "utc": "2026-10-05T14:22:21.4307915Z",
+        "executable": "C:\\Program Files\\nodejs\\node.exe",
+        "argv": [
+          "node_modules/vite/bin/vite.js",
+          "--config",
+          "vite.ui-owner71.config.ts",
+          "--host",
+          "127.0.0.71",
+          "--port",
+          "5171",
+          "--strictPort"
+        ],
+        "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-corrected-journey-fb5a1006ddc74188903a615f40009b75\\cold-journey\\frontend",
+        "pid": 15344,
+        "host": "127.0.0.71",
+        "port": 5171,
+        "config": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-corrected-journey-fb5a1006ddc74188903a615f40009b75\\cold-journey\\frontend\\vite.ui-owner71.config.ts",
+        "proxy_target": "http://127.0.0.71:8111",
+        "log_out": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\ui-orders-c417efc3a8464096a788c887ebf5e6b9\\owner-71\\frontend.stdout.log",
+        "log_err": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\ui-orders-c417efc3a8464096a788c887ebf5e6b9\\owner-71\\frontend.stderr.log",
+        "environment": {
+          "FIGMA_DEV_SERVER_HOST": "127.0.0.71",
+          "PORT": "5171"
+        }
+      }
+    },
+    {
+      "backend": {
+        "utc": "2026-10-05T14:22:21.4454012Z",
+        "executable": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+        "argv": [
+          "-X",
+          "utf8",
+          "-m",
+          "uvicorn",
+          "app.main:app",
+          "--host",
+          "127.0.0.72",
+          "--port",
+          "8112"
+        ],
+        "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-corrected-journey-fb5a1006ddc74188903a615f40009b75\\cold-journey\\backend",
+        "pid": 24468,
+        "host": "127.0.0.72",
+        "port": 8112,
+        "database": "C:/Users/20616/Desktop/Agent/Agent产品/work/ceres-v2-test-env/ui-orders-c417efc3a8464096a788c887ebf5e6b9/owner-72/ceres-ui.sqlite3",
+        "log_out": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\ui-orders-c417efc3a8464096a788c887ebf5e6b9\\owner-72\\backend.stdout.log",
+        "log_err": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\ui-orders-c417efc3a8464096a788c887ebf5e6b9\\owner-72\\backend.stderr.log",
+        "environment": {
+          "PYTHONUTF8": "1",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "DATABASE_URL": "sqlite:///C:/Users/20616/Desktop/Agent/Agent产品/work/ceres-v2-test-env/ui-orders-c417efc3a8464096a788c887ebf5e6b9/owner-72/ceres-ui.sqlite3",
+          "MERCURY_DB_PATH": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\ui-orders-c417efc3a8464096a788c887ebf5e6b9\\owner-72\\mercury-ui.sqlite3",
+          "SOURCE_DATABASE_PATH": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\ui-orders-c417efc3a8464096a788c887ebf5e6b9\\owner-72\\source-not-imported.db",
+          "LLM_MODE": "offline",
+          "LLM_MODEL": "",
+          "MEMORY_MODEL": "",
+          "OPENAI_BASE_URL": "",
+          "OPENAI_API_KEY": "",
+          "RETRIEVAL_INDEX_DIR": "",
+          "BUSINESS_DATA_MODE": "demo"
+        }
+      },
+      "frontend": {
+        "utc": "2026-10-05T14:22:21.4567798Z",
+        "executable": "C:\\Program Files\\nodejs\\node.exe",
+        "argv": [
+          "node_modules/vite/bin/vite.js",
+          "--config",
+          "vite.ui-owner72.config.ts",
+          "--host",
+          "127.0.0.72",
+          "--port",
+          "5172",
+          "--strictPort"
+        ],
+        "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-corrected-journey-fb5a1006ddc74188903a615f40009b75\\cold-journey\\frontend",
+        "pid": 39992,
+        "host": "127.0.0.72",
+        "port": 5172,
+        "config": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-corrected-journey-fb5a1006ddc74188903a615f40009b75\\cold-journey\\frontend\\vite.ui-owner72.config.ts",
+        "proxy_target": "http://127.0.0.72:8112",
+        "log_out": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\ui-orders-c417efc3a8464096a788c887ebf5e6b9\\owner-72\\frontend.stdout.log",
+        "log_err": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\ui-orders-c417efc3a8464096a788c887ebf5e6b9\\owner-72\\frontend.stderr.log",
+        "environment": {
+          "FIGMA_DEV_SERVER_HOST": "127.0.0.72",
+          "PORT": "5172"
+        }
+      }
+    }
+  ],
+  "health": [
+    {
+      "host": "127.0.0.71",
+      "api": 200,
+      "frontend": 200,
+      "backend_pid": 41156,
+      "frontend_pid": 15344
+    },
+    {
+      "host": "127.0.0.72",
+      "api": 200,
+      "frontend": 200,
+      "backend_pid": 24468,
+      "frontend_pid": 39992
+    }
+  ]
+}

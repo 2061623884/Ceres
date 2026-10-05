@@ -1,0 +1,17 @@
+{
+  "started_utc": "2026-10-05T14:51:24.648752+00:00",
+  "finished_utc": "2026-10-05T14:51:32.515532+00:00",
+  "argv": [
+    "powershell",
+    "-NoProfile",
+    "-ExecutionPolicy",
+    "Bypass",
+    "-File",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent\u4ea7\u54c1\\work\\ceres-v2-test-env\\ui-orders-c417efc3a8464096a788c887ebf5e6b9\\effective-attempt-d2d5f0651ee94bb0a80f14f7fa302826\\stop_ui_services_exact_pids.ps1"
+  ],
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent\u4ea7\u54c1\\work\\ceres-v2-test-env\\ui-orders-c417efc3a8464096a788c887ebf5e6b9\\effective-attempt-d2d5f0651ee94bb0a80f14f7fa302826",
+  "runner_executable": "C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+  "exit_code": 1,
+  "stdout_file": "C:\\Users\\20616\\Desktop\\Agent\\Agent\u4ea7\u54c1\\work\\ceres-v2-test-env\\ui-orders-c417efc3a8464096a788c887ebf5e6b9\\effective-attempt-d2d5f0651ee94bb0a80f14f7fa302826\\service-cleanup.stdout.raw.txt",
+  "stderr_file": "C:\\Users\\20616\\Desktop\\Agent\\Agent\u4ea7\u54c1\\work\\ceres-v2-test-env\\ui-orders-c417efc3a8464096a788c887ebf5e6b9\\effective-attempt-d2d5f0651ee94bb0a80f14f7fa302826\\service-cleanup.stderr.raw.txt"
+}

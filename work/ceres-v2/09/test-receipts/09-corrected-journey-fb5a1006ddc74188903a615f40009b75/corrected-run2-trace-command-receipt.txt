@@ -1,0 +1,10 @@
+Read-only Trace command receipt
+UTC execution window: 2026-10-05T14:13:50.223208+00:00 to 2026-10-05T14:13:50.224210+00:00 (from diagnostic script)
+Shell: PowerShell
+cwd: C:\Users\20616\Desktop\Agent\Agent产品
+argv: & 'C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe' -X utf8 -u 'C:\Users\20616\Desktop\Agent\Agent产品\work\ceres-v2-test-env\09-corrected-journey-fb5a1006ddc74188903a615f40009b75\trace_readonly.py'
+Database: C:\Users\20616\Desktop\Agent\Agent产品\work\ceres-v2-test-env\09-corrected-journey-fb5a1006ddc74188903a615f40009b75\pytest-temp\live-journey-corrected\test_live_v2_purchase_history_1\test.sqlite3
+SQLite: URI mode=ro; PRAGMA query_only=ON
+Environment: inherited; no env mutation, no model/network call
+Actual command exit code (exec result): 0
+Report: corrected-run2-read-history-trace-readonly.txt

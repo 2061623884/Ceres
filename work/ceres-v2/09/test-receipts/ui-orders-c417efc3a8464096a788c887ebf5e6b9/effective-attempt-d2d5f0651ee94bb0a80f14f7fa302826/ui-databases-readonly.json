@@ -1,0 +1,190 @@
+{
+  "started_utc": "2026-10-05T14:49:22.127688+00:00",
+  "executable": "C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+  "argv": [
+    "C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "-X",
+    "utf8",
+    "-u",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\ui-orders-c417efc3a8464096a788c887ebf5e6b9\\effective-attempt-d2d5f0651ee94bb0a80f14f7fa302826\\audit_ui_readonly.py"
+  ],
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品",
+  "access": "SQLite URI mode=ro; PRAGMA query_only=ON",
+  "runs": [
+    {
+      "run": "http://127.0.0.71:5171/",
+      "owner_id": "owner-924ba06f5fc543f2",
+      "order_id_expected_from_ui": "O03b03ca2a93c47dd",
+      "order_row": {
+        "order_id": "O03b03ca2a93c47dd",
+        "owner_id": "owner-924ba06f5fc543f2",
+        "status": "paid",
+        "total_fen": 680,
+        "created_at": "2026-10-05T22:48:04.895027"
+      },
+      "order_items": [
+        {
+          "sku_id": "demo:tomato-fresh-500g",
+          "product_name": "新鲜番茄 500克",
+          "quantity": 1,
+          "unit_price_fen": 680
+        }
+      ],
+      "cart_rows": [
+        {
+          "version": 3,
+          "sku_id": null,
+          "quantity": null,
+          "unit_price_fen": null
+        }
+      ],
+      "mercury_sessions": [
+        {
+          "session_id": "ms_84fe03a920c1",
+          "selected_order_id": null
+        },
+        {
+          "session_id": "ms_4fb1e701170f",
+          "selected_order_id": null
+        },
+        {
+          "session_id": "ms_44c3e7f1cda5",
+          "selected_order_id": null
+        },
+        {
+          "session_id": "ms_f4111de4957b",
+          "selected_order_id": null
+        },
+        {
+          "session_id": "ms_7589f39c14c2",
+          "selected_order_id": null
+        },
+        {
+          "session_id": "ms_9a850a637e3c",
+          "selected_order_id": "O03b03ca2a93c47dd"
+        },
+        {
+          "session_id": "ms_cc8646d802c9",
+          "selected_order_id": "O03b03ca2a93c47dd"
+        }
+      ],
+      "trace_evidence": {
+        "columns": [
+          "event_id",
+          "trace_id",
+          "request_id",
+          "session_id",
+          "task_id",
+          "owner_id",
+          "phase",
+          "model_mode",
+          "workflow_version",
+          "input_summary",
+          "output_summary",
+          "error",
+          "duration_ms",
+          "created_at"
+        ],
+        "phase_counts_all_db": {},
+        "model_call_started_all_db": 0,
+        "selected_owner_session_phase_counts": {}
+      },
+      "ui_turn_requests": [
+        {
+          "method": "POST",
+          "url": "http://127.0.0.71:5171/api/v1/mercury/sessions/ms_cc8646d802c9/turns/stream",
+          "status": 200
+        }
+      ],
+      "page_errors": []
+    },
+    {
+      "run": "http://127.0.0.72:5172/",
+      "owner_id": "owner-5135fa89114f4544",
+      "order_id_expected_from_ui": "Oab816f8f5bab416f",
+      "order_row": {
+        "order_id": "Oab816f8f5bab416f",
+        "owner_id": "owner-5135fa89114f4544",
+        "status": "paid",
+        "total_fen": 680,
+        "created_at": "2026-10-05T22:48:09.264748"
+      },
+      "order_items": [
+        {
+          "sku_id": "demo:tomato-fresh-500g",
+          "product_name": "新鲜番茄 500克",
+          "quantity": 1,
+          "unit_price_fen": 680
+        }
+      ],
+      "cart_rows": [
+        {
+          "version": 3,
+          "sku_id": null,
+          "quantity": null,
+          "unit_price_fen": null
+        }
+      ],
+      "mercury_sessions": [
+        {
+          "session_id": "ms_35d39c3a42e1",
+          "selected_order_id": null
+        },
+        {
+          "session_id": "ms_94b122b4927a",
+          "selected_order_id": null
+        },
+        {
+          "session_id": "ms_8744634d088c",
+          "selected_order_id": null
+        },
+        {
+          "session_id": "ms_889275a0633a",
+          "selected_order_id": null
+        },
+        {
+          "session_id": "ms_c85e019ceca9",
+          "selected_order_id": null
+        },
+        {
+          "session_id": "ms_8925e2022b17",
+          "selected_order_id": "Oab816f8f5bab416f"
+        },
+        {
+          "session_id": "ms_1a820d28dc83",
+          "selected_order_id": "Oab816f8f5bab416f"
+        }
+      ],
+      "trace_evidence": {
+        "columns": [
+          "event_id",
+          "trace_id",
+          "request_id",
+          "session_id",
+          "task_id",
+          "owner_id",
+          "phase",
+          "model_mode",
+          "workflow_version",
+          "input_summary",
+          "output_summary",
+          "error",
+          "duration_ms",
+          "created_at"
+        ],
+        "phase_counts_all_db": {},
+        "model_call_started_all_db": 0,
+        "selected_owner_session_phase_counts": {}
+      },
+      "ui_turn_requests": [
+        {
+          "method": "POST",
+          "url": "http://127.0.0.72:5172/api/v1/mercury/sessions/ms_1a820d28dc83/turns/stream",
+          "status": 200
+        }
+      ],
+      "page_errors": []
+    }
+  ],
+  "finished_utc": "2026-10-05T14:49:22.140765+00:00"
+}

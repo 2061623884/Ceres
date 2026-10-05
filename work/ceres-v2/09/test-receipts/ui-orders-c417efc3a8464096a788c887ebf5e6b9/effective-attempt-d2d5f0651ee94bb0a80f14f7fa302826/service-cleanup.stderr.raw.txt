@@ -1,0 +1,9 @@
+Join-Path : Cannot bind argument to parameter 'Path' because it is null.
+At C:\Users\20616\Desktop\Agent\Agent产品\work\ceres-v2-test-env\ui-orders-c417efc3a8464096a788c887ebf5e6b9\effective-att
+empt-d2d5f0651ee94bb0a80f14f7fa302826\stop_ui_services_exact_pids.ps1:33 char:73
++ ... -Json -Depth 6 | Set-Content -LiteralPath (Join-Path $attempt 'servic ...
++                                                          ~~~~~~~~
+    + CategoryInfo          : InvalidData: (:) [Join-Path], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : ParameterArgumentValidationErrorNullNotAllowed,Microsoft.PowerShell.Commands.JoinPathCom 
+   mand
+ 

@@ -15,3 +15,5 @@
 状态断言修复后旅程1pass/1fail；run2 history读到真实源但16.953秒，Trace两个主调用：理解1390ms，history读取，解释15452ms，repair=false。turn_result后8.5ms启动后台；只读观察时尚无completed，不凭此称成功或失败。完整回答正确，耗时门槛失败。用户已决定不再换模型/增加采样；不把额外解释调用当重试，不为该样本增加历史回复特例或兜底。
 
 首次live旅程两参数均生成真实待确认方案、正确默认勾选与23.40元；新脚本误要求accepted而停止，未执行后续业务。response_contract.py:158–173规定有task回复保留业务step，accepted用于taskless。仅修正first/rebuilt两断言为awaiting_confirmation，其余保存/历史读断言仍accepted。新包相对已验证包只有本测试与PROJECT文档变化，生产无改；只复验修正旅程，不重发06。旧失败不算旅程完成。
+
+页面反馈循环：CUA无可用browser surface，改用本机已有Playwright 1.62.1和系统Chrome，未安装或下载浏览器。首次启动在系统TEMP的mkdtemp报EPERM，exit1、0业务请求；仅将TEMP/TMP指向隔离外部目录。首个实际DOM批次两例都完成680分番茄显式加购，在“问问可可”定位停止；App.tsx:87的Avatar SVG aria-label参与按钮名称，exact:true错误。仅修正可可/墨墨名称为包含匹配，生产不变。下一批两例都生成真实680分模拟订单并清车，但h2包含DemoBadge的“演示”文本，精确“我的订单”定位再次错误；仅改为按heading名称匹配。两版旧场景及各批失败截图/结果保留，新BrowserContext/owner定向复验，不清旧owner、cart或订单，不发真实模型请求。它们是场景定位失败，不作为业务代码故障或通过样本；最终结果另见validation。

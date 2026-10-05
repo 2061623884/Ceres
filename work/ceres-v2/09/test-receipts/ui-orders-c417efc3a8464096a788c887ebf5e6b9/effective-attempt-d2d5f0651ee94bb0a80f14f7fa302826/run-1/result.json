@@ -1,0 +1,265 @@
+{
+  "url": "http://127.0.0.71:5171/",
+  "started_utc": "2026-10-05T14:48:00.479Z",
+  "steps": [
+    {
+      "step": "initial_orders_empty",
+      "utc": "2026-10-05T14:48:03.042Z"
+    },
+    {
+      "step": "explicit_product_add",
+      "utc": "2026-10-05T14:48:03.791Z"
+    },
+    {
+      "step": "explicit_simulated_checkout",
+      "utc": "2026-10-05T14:48:04.920Z"
+    },
+    {
+      "step": "order_persists_after_browser_refresh",
+      "utc": "2026-10-05T14:48:05.249Z"
+    },
+    {
+      "step": "manual_order_capsule_selection",
+      "utc": "2026-10-05T14:48:06.008Z"
+    },
+    {
+      "step": "manual_real_order_id_bubble_selection_without_model",
+      "utc": "2026-10-05T14:48:06.438Z"
+    }
+  ],
+  "requests": [
+    {
+      "method": "GET",
+      "url": "http://127.0.0.71:5171/api/v1/bootstrap",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.71:5171/api/v1/cart",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.71:5171/api/v1/cart",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.71:5171/api/v1/mercury/sessions",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.71:5171/api/v1/orders",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.71:5171/api/v1/mercury/sessions",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.71:5171/api/v1/orders",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.71:5171/api/v1/categories",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.71:5171/api/v1/categories",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.71:5171/api/v1/products?page_size=40",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.71:5171/api/v1/products?page_size=40",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.71:5171/api/v1/products?category_id=baking&page_size=40",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.71:5171/api/v1/products?q=%E7%95%AA%E8%8C%84&page_size=40",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.71:5171/api/v1/cart/items",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.71:5171/api/v1/guide/sessions",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.71:5171/api/v1/guide/sessions",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.71:5171/api/v1/cart/checkout",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.71:5171/api/v1/mercury/sessions",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.71:5171/api/v1/orders",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.71:5171/api/v1/mercury/sessions",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.71:5171/api/v1/orders",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.71:5171/api/v1/bootstrap",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.71:5171/api/v1/cart",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.71:5171/api/v1/cart",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.71:5171/api/v1/mercury/sessions",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.71:5171/api/v1/orders",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.71:5171/api/v1/mercury/sessions",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.71:5171/api/v1/orders",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.71:5171/api/v1/orders",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.71:5171/api/v1/mercury/sessions/ms_9a850a637e3c/order",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.71:5171/api/v1/mercury/sessions",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.71:5171/api/v1/mercury/sessions/ms_cc8646d802c9/turns/stream",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "url": "http://127.0.0.71:5171/api/v1/mercury/sessions/ms_cc8646d802c9/order",
+      "status": 200
+    }
+  ],
+  "page_errors": [],
+  "cart_after_explicit_add": {
+    "store_id": "store-demo-01",
+    "version": 2,
+    "items": [
+      {
+        "sku_id": "demo:tomato-fresh-500g",
+        "name": "新鲜番茄 500克",
+        "quantity": 1,
+        "unit_price_fen": 680,
+        "line_total_fen": 680,
+        "image_path": "data/images/demo-tomato-fresh-500g.jpg",
+        "sellable": true
+      }
+    ],
+    "total_price_fen": 680,
+    "business_data_mode": "demo"
+  },
+  "checkout": {
+    "order": {
+      "order_id": "O03b03ca2a93c47dd",
+      "status": "paid",
+      "created_at": "2026-10-05T22:48:04.895027",
+      "delivered_at": null,
+      "total_fen": 680,
+      "items": [
+        {
+          "item_id": 2,
+          "sku_id": "demo:tomato-fresh-500g",
+          "product_name": "新鲜番茄 500克",
+          "quantity": 1,
+          "unit_price_fen": 680,
+          "returnable": true
+        }
+      ]
+    },
+    "cart": {
+      "store_id": "store-demo-01",
+      "version": 3,
+      "items": [],
+      "total_price_fen": 0,
+      "business_data_mode": "demo"
+    }
+  },
+  "persisted_orders": {
+    "items": [
+      {
+        "order_id": "O03b03ca2a93c47dd",
+        "status": "paid",
+        "created_at": "2026-10-05T22:48:04.895027",
+        "delivered_at": null,
+        "total_fen": 680,
+        "items": [
+          {
+            "item_id": 2,
+            "sku_id": "demo:tomato-fresh-500g",
+            "product_name": "新鲜番茄 500克",
+            "quantity": 1,
+            "unit_price_fen": 680,
+            "returnable": true
+          }
+        ]
+      }
+    ]
+  },
+  "owner_id": "owner-924ba06f5fc543f2",
+  "status": "passed",
+  "finished_utc": "2026-10-05T14:48:06.438Z"
+}

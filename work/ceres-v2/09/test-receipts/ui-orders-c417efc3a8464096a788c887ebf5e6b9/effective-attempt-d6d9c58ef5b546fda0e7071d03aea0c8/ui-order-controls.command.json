@@ -1,0 +1,44 @@
+{
+  "started_utc": "2026-10-05T14:39:13.714783+00:00",
+  "finished_utc": "2026-10-05T14:39:51.055179+00:00",
+  "argv": [
+    "C:\\Users\\20616\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v2\\09\\ui-order-controls.cjs",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\ui-orders-c417efc3a8464096a788c887ebf5e6b9\\effective-attempt-d6d9c58ef5b546fda0e7071d03aea0c8",
+    "C:\\Users\\20616\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\node_modules\\playwright",
+    "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+    "http://127.0.0.71:5171/",
+    "http://127.0.0.72:5172/"
+  ],
+  "runner_argv": [
+    "C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "-X",
+    "utf8",
+    "-u",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\ui-orders-c417efc3a8464096a788c887ebf5e6b9\\run_ui_order_controls_attempt2.py"
+  ],
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\ui-orders-c417efc3a8464096a788c887ebf5e6b9\\effective-attempt-d6d9c58ef5b546fda0e7071d03aea0c8",
+  "python_executable": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+  "node_path": "C:\\Users\\20616\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+  "scenario_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v2\\09\\ui-order-controls.cjs",
+  "playwright_module": "C:\\Users\\20616\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\node_modules\\playwright",
+  "chrome_executable": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+  "urls": [
+    "http://127.0.0.71:5171/",
+    "http://127.0.0.72:5172/"
+  ],
+  "environment": {
+    "TEMP": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\ui-orders-c417efc3a8464096a788c887ebf5e6b9\\effective-attempt-d6d9c58ef5b546fda0e7071d03aea0c8\\browser-temp",
+    "TMP": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\ui-orders-c417efc3a8464096a788c887ebf5e6b9\\effective-attempt-d6d9c58ef5b546fda0e7071d03aea0c8\\browser-temp",
+    "LLM_MODE": "offline",
+    "LLM_MODEL": "",
+    "MEMORY_MODEL": "",
+    "OPENAI_BASE_URL": "",
+    "OPENAI_API_KEY": "",
+    "PYTHONUTF8": "1",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "exit_code": 1,
+  "stdout_file": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\ui-orders-c417efc3a8464096a788c887ebf5e6b9\\effective-attempt-d6d9c58ef5b546fda0e7071d03aea0c8\\ui-order-controls.stdout.raw.txt",
+  "stderr_file": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\ui-orders-c417efc3a8464096a788c887ebf5e6b9\\effective-attempt-d6d9c58ef5b546fda0e7071d03aea0c8\\ui-order-controls.stderr.raw.txt"
+}
