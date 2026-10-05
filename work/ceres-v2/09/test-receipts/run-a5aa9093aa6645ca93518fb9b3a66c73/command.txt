@@ -1,0 +1,3 @@
+PowerShell invocation: & $py @argv
+Exact executable/argv/cwd: command-argv.json
+Pytest command: ["C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe", "-X", "utf8", "-m", "pytest", "tests/test_v2_integrated_demo.py", "-q", "-p", "no:cacheprovider", "-W", "error::pytest.PytestUnhandledThreadExceptionWarning", "--basetemp", "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-a5aa9093aa6645ca93518fb9b3a66c73\\pytest-tmp"]

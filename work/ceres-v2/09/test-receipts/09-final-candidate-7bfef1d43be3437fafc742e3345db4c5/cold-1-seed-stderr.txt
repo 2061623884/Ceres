@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "C:\Users\20616\Desktop\Agent\Agent产品\work\ceres-v2-test-env\09-final-candidate-7bfef1d43be3437fafc742e3345db4c5\cold-1\scripts\seed_runtime.py", line 21, in <module>
+    from scripts.import_db import INGREDIENT_CATALOG
+ModuleNotFoundError: No module named 'scripts.import_db'

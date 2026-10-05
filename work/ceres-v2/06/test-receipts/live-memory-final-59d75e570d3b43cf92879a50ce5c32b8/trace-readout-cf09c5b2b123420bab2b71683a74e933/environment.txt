@@ -1,0 +1,3 @@
+PYTHONUTF8=1
+PYTHONDONTWRITEBYTECODE=1
+No Settings/provider/model/key values loaded for this read-only query.

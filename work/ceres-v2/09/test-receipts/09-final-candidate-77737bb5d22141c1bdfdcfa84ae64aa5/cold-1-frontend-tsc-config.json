@@ -1,0 +1,26 @@
+{
+  "result_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-77737bb5d22141c1bdfdcfa84ae64aa5\\cold-1-frontend-tsc-result.json",
+  "node": "C:\\Program Files\\nodejs\\node.exe",
+  "stdout_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-77737bb5d22141c1bdfdcfa84ae64aa5\\cold-1-frontend-tsc-stdout.txt",
+  "stderr_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-77737bb5d22141c1bdfdcfa84ae64aa5\\cold-1-frontend-tsc-stderr.txt",
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-77737bb5d22141c1bdfdcfa84ae64aa5\\cold-1\\frontend",
+  "argv": [
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\frontend\\node_modules\\typescript\\bin\\tsc",
+    "--noEmit",
+    "--project",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-77737bb5d22141c1bdfdcfa84ae64aa5\\cold-1\\frontend\\tsconfig.json",
+    "--pretty",
+    "false"
+  ],
+  "unset_env": [
+    "NODE_ENV",
+    "OPENAI_API_KEY",
+    "EMBEDDING_API_KEY",
+    "INTERNAL_ADMIN_TOKEN",
+    "FIGMA_PUBLIC_URL"
+  ],
+  "unset_prefixes": [
+    "VITE_"
+  ],
+  "env_overrides": {}
+}

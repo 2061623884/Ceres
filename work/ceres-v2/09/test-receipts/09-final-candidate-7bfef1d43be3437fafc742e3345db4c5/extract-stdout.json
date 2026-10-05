@@ -1,0 +1,25 @@
+{
+  "utc": "2026-10-05T13:06:05.924897+00:00",
+  "archive_sha256": "990d3493bb1997f64f0976eef161e4545307982b7e3f486f6d29c4cdc0fabae4",
+  "source_files": 410,
+  "clones": [
+    {
+      "clone_root": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-7bfef1d43be3437fafc742e3345db4c5\\cold-1",
+      "backend_app_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-7bfef1d43be3437fafc742e3345db4c5\\cold-1\\backend\\app",
+      "mercury_modules_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-7bfef1d43be3437fafc742e3345db4c5\\cold-1\\Mercury\\mercury",
+      "frontend_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-7bfef1d43be3437fafc742e3345db4c5\\cold-1\\frontend",
+      "file_count": 410,
+      "mismatch_count": 0,
+      "mismatches": []
+    },
+    {
+      "clone_root": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-7bfef1d43be3437fafc742e3345db4c5\\cold-2",
+      "backend_app_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-7bfef1d43be3437fafc742e3345db4c5\\cold-2\\backend\\app",
+      "mercury_modules_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-7bfef1d43be3437fafc742e3345db4c5\\cold-2\\Mercury\\mercury",
+      "frontend_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-7bfef1d43be3437fafc742e3345db4c5\\cold-2\\frontend",
+      "file_count": 410,
+      "mismatch_count": 0,
+      "mismatches": []
+    }
+  ]
+}

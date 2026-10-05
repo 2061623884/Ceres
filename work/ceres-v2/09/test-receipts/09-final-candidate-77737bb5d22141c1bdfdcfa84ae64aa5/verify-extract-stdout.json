@@ -1,0 +1,42 @@
+{
+  "utc": "2026-10-05T13:10:30.218987+00:00",
+  "manifest": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v2\\09\\source-inputs.json",
+  "archive": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-release-87405f2e538741dabcae80b496c14865\\source-inputs.zip",
+  "archive_sha256_actual": "ad45f3bc916f0f61f71c0e9ceb8ef88cd79beae17624a6a7f3c5118d05cf6dde",
+  "archive_sha256_manifest": "ad45f3bc916f0f61f71c0e9ceb8ef88cd79beae17624a6a7f3c5118d05cf6dde",
+  "archive_sha256_expected_from_root_message": "ad45f3bc916f0f61f71c0e9ceb8ef88cd79beae17624a6a7f3c5118d05cf6dde",
+  "archive_hashes_match": true,
+  "manifest_file_count": 411,
+  "expected": {
+    "products": 65,
+    "offers": 65,
+    "templates": 111,
+    "dish_templates": 105,
+    "index_documents": 170,
+    "vector_dimension": 1024
+  },
+  "prompt_hashes": {
+    "backend/app/prompts/semantic.py": "233ddfe942c0fdb43213b168e68c5db5c61d5f96ba3a51ce811c7ed70fc4201d",
+    "Mercury/mercury/prompt.py": "5cb15d3a561983c9d23cb807f60d81b58892c18ee0a3b16dcbca70f3d22433d3"
+  },
+  "clones": [
+    {
+      "clone_root": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-77737bb5d22141c1bdfdcfa84ae64aa5\\cold-1",
+      "backend_app_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-77737bb5d22141c1bdfdcfa84ae64aa5\\cold-1\\backend\\app",
+      "mercury_module_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-77737bb5d22141c1bdfdcfa84ae64aa5\\cold-1\\Mercury\\mercury",
+      "frontend_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-77737bb5d22141c1bdfdcfa84ae64aa5\\cold-1\\frontend",
+      "files_expected": 411,
+      "files_verified": 411,
+      "mismatches": []
+    },
+    {
+      "clone_root": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-77737bb5d22141c1bdfdcfa84ae64aa5\\cold-2",
+      "backend_app_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-77737bb5d22141c1bdfdcfa84ae64aa5\\cold-2\\backend\\app",
+      "mercury_module_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-77737bb5d22141c1bdfdcfa84ae64aa5\\cold-2\\Mercury\\mercury",
+      "frontend_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-77737bb5d22141c1bdfdcfa84ae64aa5\\cold-2\\frontend",
+      "files_expected": 411,
+      "files_verified": 411,
+      "mismatches": []
+    }
+  ]
+}

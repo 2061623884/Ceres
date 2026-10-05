@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "-X",
+    "utf8",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-77737bb5d22141c1bdfdcfa84ae64aa5\\verify-extract.py",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v2\\09\\source-inputs.json",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-release-87405f2e538741dabcae80b496c14865\\source-inputs.zip",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-77737bb5d22141c1bdfdcfa84ae64aa5\\cold-1",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-77737bb5d22141c1bdfdcfa84ae64aa5\\cold-2"
+  ],
+  "started_utc": "2026-10-05T13:10:26.4968443Z",
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend",
+  "executable": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+  "env": {
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONUTF8": "1",
+    "destinations": "external cold-1/cold-2"
+  }
+}

@@ -1,6 +1,6 @@
 # 09 同版购买记忆订单演示交付
 
-状态：待开始
+状态：阻塞
 负责人：主 Agent；测试命令由专职测试子 Agent执行。
 规格：[实施规格](../docs/plans/ceres-v2-spec.md)
 依赖：[01 单菜人数到采购与确认](ceres-v2-01-single-dish-servings.md)、[02 明确多菜与共用食材采购](ceres-v2-02-multi-dish-demand.md)、[03 缺货规格适配与部分采购决定](ceres-v2-03-supply-adaptation.md)、[04 聊天可乐筛选比较到加购](ceres-v2-04-cola-comparison.md)、[05 显式跨会话记忆与聊天管理](ceres-v2-05-explicit-memory.md)、[06 后台自动提取与轻量 Dream](ceres-v2-06-automatic-memory-dream.md)、[07 历史方案参考到本次新采购](ceres-v2-07-historical-repurchase.md)、[08 模拟下单到墨墨选单咨询](ceres-v2-08-order-mercury.md)。
@@ -25,8 +25,8 @@
 
 ## 阻塞与下一步
 
-在现有 Ceres 开发；禁止整体提交继承的 dirty 变动。读取本票/规格，记录本票 Git 与工作树基线，先一个公共行为红测，再最小实现。需要用户本人确认的体验项目保持待验收。
+06最新候选真实8项7pass/1fail：temporary-2主回复22.11秒，15秒门槛未解除，09不能按依赖已通过验收。继续不受影响的集成、冻结、审查及本人验收准备。首个已实现的完整公共行为旅程两独立运行通过；不制造RED来冒充新实现。禁止整体提交继承dirty；本人确认仍待验收。
 
 ## 提交与证据
 
-继承 Git HEAD：f41c5821e8764a0ae03653d161c566dfd4b6415e；本票基线执行前记录。测试/审查/运行结果：尚未执行，不声明通过。证据位于 work/ceres-v2/09/。
+继承 Git HEAD：f41c5821e8764a0ae03653d161c566dfd4b6415e；本票基线0da93aec60721ca33609ab2ba40a1ba5b28d4ff2，见baseline.json；08文案修复另提交83ed7a6。首次控制旅程2pass/exit0，后续同版集成/真实模型/冻结核查/双轴尚在执行，不声明全票通过。证据位于 work/ceres-v2/09/。

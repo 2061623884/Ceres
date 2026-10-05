@@ -1,0 +1,14 @@
+{
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend",
+  "executable": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+  "env": {
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONUTF8": "1"
+  },
+  "argv": [
+    "-X",
+    "utf8",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-7bfef1d43be3437fafc742e3345db4c5\\inspect-frozen-inputs.py"
+  ],
+  "started_utc": "2026-10-05T13:05:29.0242968Z"
+}

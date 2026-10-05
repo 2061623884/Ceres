@@ -1,0 +1,9 @@
+request_id=live-memory-temporary-2
+database_mode=ro query_only=1
+trace_event_count=6
+event_id=evt-5c36806def4f trace_id=trace-c1fe3ee5c0eb phase=understanding model_mode=live duration_ms=None created_at_utc=2026-10-05T12:48:58.898728+00:00 error_type=None input_chars=None output_chars=None
+event_id=evt-9c8c08b6f120 trace_id=trace-c1fe3ee5c0eb phase=model_call_started model_mode=live duration_ms=None created_at_utc=2026-10-05T12:48:58.905431+00:00 error_type=None input_chars=None output_chars=136
+event_id=evt-96d3c6812826 trace_id=trace-c1fe3ee5c0eb phase=model_call_completed model_mode=live duration_ms=22015 created_at_utc=2026-10-05T12:49:20.927723+00:00 error_type=None input_chars=None output_chars=160
+event_id=evt-4b32c0f4138f trace_id=trace-c1fe3ee5c0eb phase=turn_result model_mode=live duration_ms=None created_at_utc=2026-10-05T12:49:20.952154+00:00 error_type=None input_chars=None output_chars=123
+event_id=evt-170fed4f22c2 trace_id=trace-c1fe3ee5c0eb phase=memory_extract_started model_mode=live duration_ms=None created_at_utc=2026-10-05T12:49:20.959709+00:00 error_type=None input_chars=None output_chars=24
+event_id=evt-fe8c12fcf8ee trace_id=trace-c1fe3ee5c0eb phase=memory_extract_completed model_mode=live duration_ms=None created_at_utc=2026-10-05T12:49:22.863293+00:00 error_type=None input_chars=None output_chars=36

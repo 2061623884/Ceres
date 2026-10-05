@@ -1,0 +1,26 @@
+{
+  "ticket_baseline": "0da93aec60721ca33609ab2ba40a1ba5b28d4ff2",
+  "implementation_parent": "83ed7a6d0b77f4cb0deb1acd1fb740ac29d30339",
+  "review_fixed_point": "f41c5821e8764a0ae03653d161c566dfd4b6415e",
+  "source_staged": [
+    "backend/tests/test_v2_automatic_memory_live.py"
+  ],
+  "artifact_only": [
+    {
+      "path": "backend/app/prompts/semantic.py",
+      "reason": "error: patch failed: backend/app/prompts/semantic.py:48\nerror: backend/app/prompts/semantic.py: patch does not apply"
+    }
+  ],
+  "new_source": [
+    "backend/tests/test_v2_integrated_demo.py",
+    "backend/tests/test_v2_integrated_demo_live.py"
+  ],
+  "candidate_sha256": "c1c286f30f029040e199dcb2d8caf670b671aaa82ee1e41fc605f49c3d522eab",
+  "working_sha256": {
+    "backend/app/prompts/semantic.py": "233ddfe942c0fdb43213b168e68c5db5c61d5f96ba3a51ce811c7ed70fc4201d",
+    "backend/tests/test_v2_automatic_memory_live.py": "3575647a863c4bf97fcac9db5679223162a6545eb0421def6e37633d9d79c0a4",
+    "backend/tests/test_v2_integrated_demo.py": "cfb3eec2a4745ed6dbbe262f1f30f5eb9daa1b3b414c33b49bc73b941540ce5b",
+    "backend/tests/test_v2_integrated_demo_live.py": "81bb3ab9c1af62ceb2bb618bf95d59aa989cacc9165908acbf6d1c9ed52c9d3e"
+  },
+  "note": "Only 09 own deltas staged where applicable; exact prompt patch plus working hashes retained where inherited dirty source prevents cached apply. Candidate is actual working source, not a clean Git release."
+}

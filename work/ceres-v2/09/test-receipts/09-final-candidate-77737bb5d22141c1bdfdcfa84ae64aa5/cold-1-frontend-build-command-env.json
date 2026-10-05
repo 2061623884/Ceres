@@ -1,0 +1,49 @@
+{
+  "external_config_global_shim": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-77737bb5d22141c1bdfdcfa84ae64aa5\\vite-config-globals.cjs",
+  "runner_argv": [
+    "-X",
+    "utf8",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-77737bb5d22141c1bdfdcfa84ae64aa5\\run-node-command.py",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-77737bb5d22141c1bdfdcfa84ae64aa5\\cold-1-frontend-build-config.json"
+  ],
+  "junction_target": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\frontend\\node_modules",
+  "vite_module": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\frontend\\node_modules\\vite\\bin\\vite.js",
+  "config_loader": "runner",
+  "node_modules_junction": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-77737bb5d22141c1bdfdcfa84ae64aa5\\cold-1\\frontend\\node_modules",
+  "frontend_dot_vite_temp_before": true,
+  "runner_executable": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+  "external_dist": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-77737bb5d22141c1bdfdcfa84ae64aa5\\cold-1-frontend-dist",
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-77737bb5d22141c1bdfdcfa84ae64aa5\\cold-1\\frontend",
+  "started_utc": "2026-10-05T13:27:14.6528609Z",
+  "dependency_module_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\frontend\\node_modules via clone node_modules junction",
+  "config": {
+    "result_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-77737bb5d22141c1bdfdcfa84ae64aa5\\cold-1-frontend-build-result.json",
+    "node": "C:\\Program Files\\nodejs\\node.exe",
+    "stdout_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-77737bb5d22141c1bdfdcfa84ae64aa5\\cold-1-frontend-build-stdout.txt",
+    "stderr_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-77737bb5d22141c1bdfdcfa84ae64aa5\\cold-1-frontend-build-stderr.txt",
+    "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-77737bb5d22141c1bdfdcfa84ae64aa5\\cold-1\\frontend",
+    "argv": [
+      "--require",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-77737bb5d22141c1bdfdcfa84ae64aa5\\vite-config-globals.cjs",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\frontend\\node_modules\\vite\\bin\\vite.js",
+      "build",
+      "--configLoader",
+      "runner",
+      "--outDir",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-77737bb5d22141c1bdfdcfa84ae64aa5\\cold-1-frontend-dist"
+    ],
+    "unset_env": [
+      "NODE_ENV",
+      "OPENAI_API_KEY",
+      "EMBEDDING_API_KEY",
+      "INTERNAL_ADMIN_TOKEN"
+    ],
+    "unset_prefixes": [
+      "VITE_"
+    ],
+    "env_overrides": {
+      "FIGMA_PUBLIC_URL": "",
+      "CERES_FRONTEND_DIR": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-77737bb5d22141c1bdfdcfa84ae64aa5\\cold-1\\frontend"
+    }
+  }
+}

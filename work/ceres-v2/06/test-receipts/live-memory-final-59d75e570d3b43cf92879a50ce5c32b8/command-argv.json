@@ -1,0 +1,19 @@
+{
+  "executable": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+  "argv": [
+    "-X",
+    "utf8",
+    "-m",
+    "pytest",
+    "-q",
+    "-s",
+    "-p",
+    "no:cacheprovider",
+    "-W",
+    "error::pytest.PytestUnhandledThreadExceptionWarning",
+    "tests/test_v2_automatic_memory_live.py",
+    "--basetemp",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\live-memory-final-59d75e570d3b43cf92879a50ce5c32b8\\pytest-tmp"
+  ],
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend"
+}

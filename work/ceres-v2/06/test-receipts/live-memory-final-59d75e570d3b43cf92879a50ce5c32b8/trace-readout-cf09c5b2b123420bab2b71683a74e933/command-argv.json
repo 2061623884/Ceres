@@ -1,0 +1,10 @@
+{
+  "executable": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+  "argv": [
+    "-X",
+    "utf8",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\live-memory-final-59d75e570d3b43cf92879a50ce5c32b8\\trace-readout-cf09c5b2b123420bab2b71683a74e933\\read_trace.py"
+  ],
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend",
+  "database": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\live-memory-final-59d75e570d3b43cf92879a50ce5c32b8\\pytest-tmp\\test_real_reply_and_background3\\test.sqlite3"
+}

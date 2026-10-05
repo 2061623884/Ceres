@@ -1,0 +1,25 @@
+{
+  "started_utc": "2026-10-05T13:12:47.2550065Z",
+  "env": {
+    "LLM_MODE": "offline",
+    "OPENAI_API_KEY": "",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "MEMORY_MODEL": "",
+    "retrieval_index": "explicit read-only verify target",
+    "LLM_MODEL": "",
+    "EMBEDDING_API_KEY": "",
+    "PYTHONUTF8": "1"
+  },
+  "executable": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+  "argv": [
+    "-X",
+    "utf8",
+    "scripts/build_retrieval_index.py",
+    "--index-root",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-77737bb5d22141c1bdfdcfa84ae64aa5\\cold-2\\data\\retrieval_index-v2-frozen",
+    "verify",
+    "--version",
+    "idx-d3e9873a747cb2d6"
+  ],
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-77737bb5d22141c1bdfdcfa84ae64aa5\\cold-2"
+}

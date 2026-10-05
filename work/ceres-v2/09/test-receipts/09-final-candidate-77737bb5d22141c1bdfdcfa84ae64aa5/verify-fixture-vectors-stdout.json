@@ -1,0 +1,50 @@
+{
+  "utc": "2026-10-05T13:13:25.928943+00:00",
+  "read_only": true,
+  "results": [
+    {
+      "clone_root": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-77737bb5d22141c1bdfdcfa84ae64aa5\\cold-1",
+      "runtime_db": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-77737bb5d22141c1bdfdcfa84ae64aa5\\isolated-databases\\cold-1-runtime.sqlite3",
+      "catalog_products_approved": 65,
+      "offers": 65,
+      "purchase_templates": 111,
+      "purchase_template_sources": {
+        "chinese-dishes-v1": 105,
+        "fixture": 6
+      },
+      "frozen_index_dir": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-77737bb5d22141c1bdfdcfa84ae64aa5\\cold-1\\data\\retrieval_index-v2-frozen\\idx-d3e9873a747cb2d6",
+      "index_version": "idx-d3e9873a747cb2d6",
+      "manifest_counts": {
+        "dishes": 105,
+        "docs": 170,
+        "skus": 65
+      },
+      "manifest_embedding_dimension": 1024,
+      "stored_vector_dimension_counts": {
+        "1024": 170
+      }
+    },
+    {
+      "clone_root": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-77737bb5d22141c1bdfdcfa84ae64aa5\\cold-2",
+      "runtime_db": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-77737bb5d22141c1bdfdcfa84ae64aa5\\isolated-databases\\cold-2-runtime.sqlite3",
+      "catalog_products_approved": 65,
+      "offers": 65,
+      "purchase_templates": 111,
+      "purchase_template_sources": {
+        "chinese-dishes-v1": 105,
+        "fixture": 6
+      },
+      "frozen_index_dir": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-77737bb5d22141c1bdfdcfa84ae64aa5\\cold-2\\data\\retrieval_index-v2-frozen\\idx-d3e9873a747cb2d6",
+      "index_version": "idx-d3e9873a747cb2d6",
+      "manifest_counts": {
+        "dishes": 105,
+        "docs": 170,
+        "skus": 65
+      },
+      "manifest_embedding_dimension": 1024,
+      "stored_vector_dimension_counts": {
+        "1024": 170
+      }
+    }
+  ]
+}

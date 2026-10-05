@@ -1,0 +1,17 @@
+failed to load config from C:\Users\20616\Desktop\Agent\Agent产品\work\ceres-v2-test-env\09-final-candidate-77737bb5d22141c1bdfdcfa84ae64aa5\cold-1\frontend\vite.config.ts
+error during build:
+Error: Failed to load url ./.figma/make/site.json (resolved id: ./.figma/make/site.json) in C:/Users/20616/Desktop/Agent/Agent产品/work/ceres-v2-test-env/09-final-candidate-77737bb5d22141c1bdfdcfa84ae64aa5/cold-1/frontend/vite.config.ts. Does the file exist?
+    at loadAndTransform (file:///C:/Users/20616/Desktop/Agent/Agent%E4%BA%A7%E5%93%81/Ceres/frontend/node_modules/.pnpm/vite@8.0.5_jiti@2.6.1/node_modules/vite/dist/node/chunks/node.js:24448:31) {
+  code: 'ERR_LOAD_URL',
+  runnerError: Error: RunnerError
+      at reviveInvokeError (file:///C:/Users/20616/Desktop/Agent/Agent%E4%BA%A7%E5%93%81/Ceres/frontend/node_modules/.pnpm/vite@8.0.5_jiti@2.6.1/node_modules/vite/dist/node/module-runner.js:539:64)
+      at Object.invoke (file:///C:/Users/20616/Desktop/Agent/Agent%E4%BA%A7%E5%93%81/Ceres/frontend/node_modules/.pnpm/vite@8.0.5_jiti@2.6.1/node_modules/vite/dist/node/module-runner.js:612:11)
+      at async ModuleRunner.getModuleInformation (file:///C:/Users/20616/Desktop/Agent/Agent%E4%BA%A7%E5%93%81/Ceres/frontend/node_modules/.pnpm/vite@8.0.5_jiti@2.6.1/node_modules/vite/dist/node/module-runner.js:1187:7)
+      at async request (file:///C:/Users/20616/Desktop/Agent/Agent%E4%BA%A7%E5%93%81/Ceres/frontend/node_modules/.pnpm/vite@8.0.5_jiti@2.6.1/node_modules/vite/dist/node/module-runner.js:1204:83)
+      at async eval (C:/Users/20616/Desktop/Agent/Agent产品/work/ceres-v2-test-env/09-final-candidate-77737bb5d22141c1bdfdcfa84ae64aa5/cold-1/frontend/vite.config.ts:8:31)
+      at async ESModulesEvaluator.runInlinedModule (file:///C:/Users/20616/Desktop/Agent/Agent%E4%BA%A7%E5%93%81/Ceres/frontend/node_modules/.pnpm/vite@8.0.5_jiti@2.6.1/node_modules/vite/dist/node/module-runner.js:992:3)
+      at async ModuleRunner.directRequest (file:///C:/Users/20616/Desktop/Agent/Agent%E4%BA%A7%E5%93%81/Ceres/frontend/node_modules/.pnpm/vite@8.0.5_jiti@2.6.1/node_modules/vite/dist/node/module-runner.js:1247:59)
+      at async ModuleRunner.cachedRequest (file:///C:/Users/20616/Desktop/Agent/Agent%E4%BA%A7%E5%93%81/Ceres/frontend/node_modules/.pnpm/vite@8.0.5_jiti@2.6.1/node_modules/vite/dist/node/module-runner.js:1154:73)
+      at async ModuleRunner.import (file:///C:/Users/20616/Desktop/Agent/Agent%E4%BA%A7%E5%93%81/Ceres/frontend/node_modules/.pnpm/vite@8.0.5_jiti@2.6.1/node_modules/vite/dist/node/module-runner.js:1104:10)
+      at async runnerImport (file:///C:/Users/20616/Desktop/Agent/Agent%E4%BA%A7%E5%93%81/Ceres/frontend/node_modules/.pnpm/vite@8.0.5_jiti@2.6.1/node_modules/vite/dist/node/chunks/node.js:33670:18)
+}

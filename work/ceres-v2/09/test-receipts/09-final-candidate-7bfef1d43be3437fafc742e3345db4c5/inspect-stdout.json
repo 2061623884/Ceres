@@ -1,0 +1,49 @@
+{
+  "utc": "2026-10-05T13:05:29.181321+00:00",
+  "manifest": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v2\\09\\source-inputs.json",
+  "archive": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-release-cb9f7fbc8dfe421e85aaa0b7c5c2e7c7\\source-inputs.zip",
+  "archive_sha256_actual": "990d3493bb1997f64f0976eef161e4545307982b7e3f486f6d29c4cdc0fabae4",
+  "archive_sha256_expected": "990d3493bb1997f64f0976eef161e4545307982b7e3f486f6d29c4cdc0fabae4",
+  "archive_sha256_match": true,
+  "manifest_file_count": 410,
+  "zip_file_count": 410,
+  "manifest_and_zip_paths_exactly_match": true,
+  "zip_top_level_prefixes": {
+    "AGENTS.md": 1,
+    "backend": 230,
+    "data": 44,
+    "docs": 2,
+    "frontend": 110,
+    "GLOSSARY.md": 1,
+    "Mercury": 17,
+    "prd.md": 1,
+    "PROJECT-next.md": 1,
+    "PROJECT.md": 1,
+    "scripts": 2
+  },
+  "first_zip_names": [
+    "AGENTS.md",
+    "backend/app/__init__.py",
+    "backend/app/agent/authorization.py",
+    "backend/app/agent/clarification_state.py",
+    "backend/app/agent/context.py",
+    "backend/app/agent/context_resolver.py",
+    "backend/app/agent/goal.py",
+    "backend/app/agent/goal_router.py",
+    "backend/app/agent/graph/__init__.py",
+    "backend/app/agent/graph/coordinator.py",
+    "backend/app/agent/graph/graph.py",
+    "backend/app/agent/graph/nodes/__init__.py",
+    "backend/app/agent/graph/nodes/answer.py",
+    "backend/app/agent/graph/nodes/context.py",
+    "backend/app/agent/graph/nodes/mutation.py"
+  ],
+  "manifest_expected": {
+    "products": 65,
+    "offers": 65,
+    "templates": 111,
+    "dish_templates": 105,
+    "index_documents": 170,
+    "vector_dimension": 1024
+  }
+}

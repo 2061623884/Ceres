@@ -69,6 +69,7 @@ def test_real_reply_and_background_extraction(client, run, case):
         "memory_phase": terminal.phase, "memory_error": terminal.error, "records": records,
     }, ensure_ascii=False))
     assert terminal.phase == "memory_extract_completed", terminal.output_summary
+    assert result["action_results"] == [], "no-purchase discussion must not ask for a plan focus"
     assert reply_seconds <= 15
     if case == "stable":
         assert records and all(row["source"] == "automatic" for row in records)

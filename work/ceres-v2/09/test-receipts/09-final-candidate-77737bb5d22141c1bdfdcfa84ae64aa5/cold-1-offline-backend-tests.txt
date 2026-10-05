@@ -1,0 +1,12 @@
+tests/test_v2_automatic_memory.py
+tests/test_v2_cola_comparison.py
+tests/test_v2_explicit_memory.py
+tests/test_v2_historical_repurchase.py
+tests/test_v2_history_named_lookup.py
+tests/test_v2_integrated_demo.py
+tests/test_v2_order_mercury.py
+tests/test_v2_servings.py
+tests/test_v2_shared_demand.py
+tests/test_v2_supply_adaptation.py
+tests/test_purchase_selection.py
+tests/test_read_tools.py

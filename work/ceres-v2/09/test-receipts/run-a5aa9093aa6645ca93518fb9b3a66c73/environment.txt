@@ -1,0 +1,13 @@
+PYTHONUTF8=1
+PYTHONDONTWRITEBYTECODE=1
+PYTHONUNBUFFERED=1
+LLM_MODEL=<empty>
+MEMORY_MODEL=<empty>
+CERES_LIVE_MEMORY_ACCEPTANCE=<empty>
+RETRIEVAL_INDEX_DIR=<empty>
+DATABASE_URL=sqlite:///C:/Users/20616/Desktop/Agent/Agent产品/work/ceres-v2-test-env/run-a5aa9093aa6645ca93518fb9b3a66c73/ceres.sqlite3
+MERCURY_DB_PATH=C:\Users\20616\Desktop\Agent\Agent产品\work\ceres-v2-test-env\run-a5aa9093aa6645ca93518fb9b3a66c73\mercury.sqlite3
+PYTEST_BASETEMP=C:\Users\20616\Desktop\Agent\Agent产品\work\ceres-v2-test-env\run-a5aa9093aa6645ca93518fb9b3a66c73\pytest-tmp
+source_database_path fixture from test module; no development source DB used
+semantic proposal and Mercury OpenAI SDK boundaries are test doubles; no live opt-in
+credentials omitted

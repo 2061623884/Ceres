@@ -1,0 +1,10 @@
+........................................................................ [ 44%]
+........................................................................ [ 89%]
+.................                                                        [100%]
+============================== warnings summary ===============================
+app\services\template_matcher.py:21
+  C:\Users\20616\Desktop\Agent\Agent产品\work\ceres-v2-test-env\09-final-candidate-77737bb5d22141c1bdfdcfa84ae64aa5\cold-1\backend\app\services\template_matcher.py:21: SyntaxWarning: invalid escape sequence '\['
+    _PUNCT_PATTERN = re.compile(r"[\s\u3000，。！？、；：""''（）()\[\]【】\-—·…]+")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+161 passed, 1 warning in 198.89s (0:03:18)

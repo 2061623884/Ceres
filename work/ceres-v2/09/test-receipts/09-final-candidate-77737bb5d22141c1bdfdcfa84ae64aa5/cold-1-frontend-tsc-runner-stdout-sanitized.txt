@@ -1,0 +1,31 @@
+{
+  "started_utc": "2026-10-05T13:27:12.974195+00:00",
+  "ended_utc": "2026-10-05T13:27:14.610527+00:00",
+  "elapsed_seconds": 1.6368776001036167,
+  "executable": "C:\\Program Files\\nodejs\\node.exe",
+  "argv": [
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\frontend\\node_modules\\typescript\\bin\\tsc",
+    "--noEmit",
+    "--project",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-77737bb5d22141c1bdfdcfa84ae64aa5\\cold-1\\frontend\\tsconfig.json",
+    "--pretty",
+    "false"
+  ],
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-77737bb5d22141c1bdfdcfa84ae64aa5\\cold-1\\frontend",
+  "exit_code": 2,
+  "environment_policy": {
+    "unset_names": [
+      "NODE_ENV",
+      "OPENAI_API_KEY",
+      "EMBEDDING_API_KEY",
+      "INTERNAL_ADMIN_TOKEN",
+      "FIGMA_PUBLIC_URL"
+    ],
+    "unset_prefixes": [
+      "VITE_"
+    ],
+    "overrides": {}
+  },
+  "stdout_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-77737bb5d22141c1bdfdcfa84ae64aa5\\cold-1-frontend-tsc-stdout.txt",
+  "stderr_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-77737bb5d22141c1bdfdcfa84ae64aa5\\cold-1-frontend-tsc-stderr.txt"
+}

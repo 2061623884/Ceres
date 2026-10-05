@@ -1,0 +1,24 @@
+{
+  "env": {
+    "MEMORY_MODEL": "",
+    "LLM_MODE": "offline",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONUTF8": "1",
+    "SOURCE_DATABASE_PATH": "external nonexisting path (fixture-only; source not read)",
+    "OPENAI_API_KEY": "",
+    "LLM_MODEL": "",
+    "MERCURY_DB_PATH": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-7bfef1d43be3437fafc742e3345db4c5\\isolated-databases\\cold-1-mercury.sqlite3",
+    "RETRIEVAL_INDEX_DIR": "",
+    "EMBEDDING_API_KEY": "",
+    "DATABASE_URL": "sqlite:///C:/Users/20616/Desktop/Agent/Agent产品/work/ceres-v2-test-env/09-final-candidate-7bfef1d43be3437fafc742e3345db4c5/isolated-databases/cold-1-runtime.sqlite3"
+  },
+  "started_utc": "2026-10-05T13:07:49.5471483Z",
+  "argv": [
+    "-X",
+    "utf8",
+    "scripts/seed_runtime.py",
+    "--fixture-only"
+  ],
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-7bfef1d43be3437fafc742e3345db4c5\\cold-1",
+  "executable": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe"
+}

@@ -1,0 +1,15 @@
+{
+  "env": {
+    "PYTHONUTF8": "1",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "argv": [
+    "-X",
+    "utf8",
+    "-c",
+    "import app; print(app.__file__)"
+  ],
+  "executable": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-final-candidate-77737bb5d22141c1bdfdcfa84ae64aa5\\cold-1\\backend",
+  "started_utc": "2026-10-05T13:17:19.8706600Z"
+}

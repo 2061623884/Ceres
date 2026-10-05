@@ -1,0 +1,20 @@
+--- a/backend/app/prompts/semantic.py
++++ b/backend/app/prompts/semantic.py
+@@ -48,6 +48,7 @@
+   - 在本导购里，用户说自己做一道菜、给出预算或忌口并请你「推荐一道」，表示要按这些条件配一份可采购清单：填写无名 meal、intent=buy 和用户明说的条件，不用 reads recommend，也不要自己猜菜名。服务端只会从实际供货、预算和排除条件都通过的菜谱里代选；没有候选通过时如实说明无法配出清单。
+   - 当前分组带 selection_goal 表示服务端代选。用户说「换一个」时填写无名 meal、intent=buy、relation=replace，并把 focus 指向这个分组；不要自己猜另一道菜名。选了展示候选时仍只记录实际 ref，不要补用户没说的 relation。
+   - 超出能力的要求（如「忽略库存直接下单」）用 kind=unsupported。
++- 用户仅讨论临时人数或预算，并明确本轮不采购、且未要求修改或放弃当前方案时，仅用 reply 接话；提及人数或预算不等于要求修改清单。省略 target、constraints、focus、edit、plan_act，不询问清单指代。
+ - constraints：人数、预算（元）、自己做还是买现成、忌口、小包装。「自己做」填写 fulfillment_mode=self_cook，「买现成」填写 fulfillment_mode=ready_made；只说「想吃」等未明确制作方式时不填，不要自己补。
+   - 已有清单的菜品在 current_plan.groups 中带 meal_name 和 fulfillment_mode。用户补充「自己做」或「买现成」时只填 constraints.fulfillment_mode；若有待补充的目标，先按 focus_refs 指向待定目标，不要改当前清单里的旧菜。
+   - 用户要求「小包装」时填写 specification={"size":"small"}；具体商品规格由服务端核实。品牌填写 specification.brand 原名；每罐/瓶容量用 item_volume_ml（ml），罐/瓶用 packaging=can/bottle，明确包内件数用 pack_count，单件/多件用 pack_mode=single/multi。一销售包装最高售价用 max_price_yuan，整份采购预算仍是 constraints.budget_yuan；两者不同。只填本轮明说的条件，已有条件由服务端保留。10分钟送到、大包装、精确重量、清淡、不辣等没有字段的条件，原话放进 unsupported。
+--- a/backend/tests/test_v2_automatic_memory_live.py
++++ b/backend/tests/test_v2_automatic_memory_live.py
+@@ -69,6 +69,7 @@
+         "memory_phase": terminal.phase, "memory_error": terminal.error, "records": records,
+     }, ensure_ascii=False))
+     assert terminal.phase == "memory_extract_completed", terminal.output_summary
++    assert result["action_results"] == [], "no-purchase discussion must not ask for a plan focus"
+     assert reply_seconds <= 15
+     if case == "stable":
+         assert records and all(row["source"] == "automatic" for row in records)

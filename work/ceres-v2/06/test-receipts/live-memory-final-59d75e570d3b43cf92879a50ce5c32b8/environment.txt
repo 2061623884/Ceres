@@ -1,0 +1,15 @@
+PYTHONUTF8=1
+PYTHONDONTWRITEBYTECODE=1
+PYTHONUNBUFFERED=1
+CERES_LIVE_MEMORY_ACCEPTANCE=1
+LLM_MODE=live
+LLM_MODEL=<removed from process; backend .env supplies <not found>>
+MEMORY_MODEL=<removed from process; backend .env supplies <not found>>
+OPENAI_BASE_URL=<removed from process; .env present=false>
+OPENAI_API_KEY=<removed from process; backend .env credential present=false>
+RETRIEVAL_INDEX_DIR=<empty>
+DATABASE_URL=sqlite:///C:/Users/20616/Desktop/Agent/Agent产品/work/ceres-v2-test-env/live-memory-final-59d75e570d3b43cf92879a50ce5c32b8/ceres.sqlite3
+MERCURY_DB_PATH=C:\Users\20616\Desktop\Agent\Agent产品\work\ceres-v2-test-env\live-memory-final-59d75e570d3b43cf92879a50ce5c32b8\mercury.sqlite3
+PYTEST_BASETEMP=C:\Users\20616\Desktop\Agent\Agent产品\work\ceres-v2-test-env\live-memory-final-59d75e570d3b43cf92879a50ce5c32b8\pytest-tmp
+source_database_path is pytest tmp fixture under basetemp; checked-in source fixture only
+No development DB/index path used; credentials and URL omitted

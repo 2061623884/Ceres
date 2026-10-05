@@ -1,0 +1,3 @@
+PowerShell Python runner invokes read_trace.py
+Exact executable/argv/cwd/database: command-argv.json
+SQLite URI uses mode=ro; PRAGMA query_only=ON; summary contents omitted.

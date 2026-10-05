@@ -1,0 +1,362 @@
+{
+  "review_fixed_point": "f41c5821e8764a0ae03653d161c566dfd4b6415e",
+  "candidate_sha256": "c1c286f30f029040e199dcb2d8caf670b671aaa82ee1e41fc605f49c3d522eab",
+  "note": "Full effective V2 increments since actual dirty takeover; unchanged inherited source excluded. New files and repairs included.",
+  "paths": [
+    {
+      "path": "backend/app/agent/graph/nodes/answer.py",
+      "before_source": "00 actual source snapshot",
+      "sha256": "f756ee529036fd1295a759c68cfeef88f0e61b7b78e899ef00a7a490684c3a07"
+    },
+    {
+      "path": "backend/app/agent/graph/nodes/context.py",
+      "before_source": "00 actual source snapshot",
+      "sha256": "b4af09f510a459b797ad68715f9983d6a451d87a42c22a84ddc0c608bdda406e"
+    },
+    {
+      "path": "backend/app/agent/graph/nodes/mutation.py",
+      "before_source": "00 actual source snapshot",
+      "sha256": "55dbed861da59a06037fb3d8826db9200a81dae0238679f557aa9d635a7adcd9"
+    },
+    {
+      "path": "backend/app/agent/graph/turn_commit.py",
+      "before_source": "00 actual source snapshot",
+      "sha256": "7342f701ae7703d7ef9529cbfae5a0cbe72e293b2641d7e67b45cf4242130633"
+    },
+    {
+      "path": "backend/app/agent/protocol.py",
+      "before_source": "00 actual source snapshot",
+      "sha256": "34a9d20c972e1162a80bb3185dd5cb3bef5d2628c93e982befe06e5283882674"
+    },
+    {
+      "path": "backend/app/agent/tools/change_plan.py",
+      "before_source": "00 actual source snapshot",
+      "sha256": "41e56ebdf4d198a5b86777af5962bae2be51cda1a78815fcea0ba11c6dd9c134"
+    },
+    {
+      "path": "backend/app/agent/tools/prepare_purchase_plan.py",
+      "before_source": "00 actual source snapshot",
+      "sha256": "f078b67a766c899af754f279febcad8096fa2cd3e473d60e50527d2e61e0fb04"
+    },
+    {
+      "path": "backend/app/agent/tools/read.py",
+      "before_source": "00 actual source snapshot",
+      "sha256": "ee59b61e4845edea9a5e844eb7b52125820e01bcbb18aa249f53695e78d450a7"
+    },
+    {
+      "path": "backend/app/agent/turn_context_plan.py",
+      "before_source": "00 actual source snapshot",
+      "sha256": "a67d8525997777be798ad4d7b4f7ae24560e784ab80da4e5a395631da56885c6"
+    },
+    {
+      "path": "backend/app/agent/turn_primitives.py",
+      "before_source": "00 actual source snapshot",
+      "sha256": "7eb04a78882eb758b1b96b99e6a0f48d4b4aa44f7da48b764ce281890acfd2d0"
+    },
+    {
+      "path": "backend/app/api/cart.py",
+      "before_source": "00 actual source snapshot",
+      "sha256": "1a5fd43b10cdf62f848dbee48c0d67c09c17088be29e05176c7cd1c08652157b"
+    },
+    {
+      "path": "backend/app/api/guide.py",
+      "before_source": "00 actual source snapshot",
+      "sha256": "9688d8c46da160eaf2cc4b72219c1edb8e0dd5950619142815b34a2c450aaaae"
+    },
+    {
+      "path": "backend/app/api/mercury.py",
+      "before_source": "00 actual source snapshot",
+      "sha256": "1e9b3e958bc106132cc57ddb4deff2e8f7902adf623fe186b6019d3bd7ae8056"
+    },
+    {
+      "path": "backend/app/api/orders.py",
+      "before_source": "new file",
+      "sha256": "7d7cf2da45e6b06b2f9f4e66a2d67a345bcd4a80af6eca4ced642380d20bf4a5"
+    },
+    {
+      "path": "backend/app/core/config.py",
+      "before_source": "00 actual source snapshot",
+      "sha256": "af10731e8ffb32ab0b1b43f3c96b7f86824148e89d627bb1cc9492ebc441e22b"
+    },
+    {
+      "path": "backend/app/core/database.py",
+      "before_source": "00 actual source snapshot",
+      "sha256": "2960f483e2df3f48be7ce7c98ea3277aba28e858f879f53165e88fc2be7bd74d"
+    },
+    {
+      "path": "backend/app/llm/live_semantic_provider.py",
+      "before_source": "00 actual source snapshot",
+      "sha256": "b9c9939592aeaeb1fd36dbd86da92a713603a67776c302d23775b7bac81d7ae2"
+    },
+    {
+      "path": "backend/app/llm/memory_provider.py",
+      "before_source": "new file",
+      "sha256": "6de76480cc75a0151afbfeb8e0949274064894c69ae80b2ca338beb647bdc35a"
+    },
+    {
+      "path": "backend/app/main.py",
+      "before_source": "00 actual source snapshot",
+      "sha256": "7abab89186fd9a938a9fb7e345bcf5db9102ff247036e6e6204fb1ced7e2031b"
+    },
+    {
+      "path": "backend/app/models/__init__.py",
+      "before_source": "00 actual source snapshot",
+      "sha256": "99a4c4e7585e574732d85496d1fc5adc6ce16189f83e2e6a54c3d03de0c32184"
+    },
+    {
+      "path": "backend/app/models/memory.py",
+      "before_source": "new file",
+      "sha256": "e235775d67213cd7683a12e25bb28a48fb3238036d028eb4f3ca05aea80fa003"
+    },
+    {
+      "path": "backend/app/models/order.py",
+      "before_source": "new file",
+      "sha256": "f10aa79be648ab7f132ce618c243208901a88ff63f2c065a1f6194b773243eb0"
+    },
+    {
+      "path": "backend/app/prompts/semantic.py",
+      "before_source": "00 actual source snapshot",
+      "sha256": "233ddfe942c0fdb43213b168e68c5db5c61d5f96ba3a51ce811c7ed70fc4201d"
+    },
+    {
+      "path": "backend/app/schemas/cart.py",
+      "before_source": "00 actual source snapshot",
+      "sha256": "1e141a25e7c98dafcc7ea86df362fca8b5962019a9546619d0fc2fff64632033"
+    },
+    {
+      "path": "backend/app/schemas/goal.py",
+      "before_source": "00 actual source snapshot",
+      "sha256": "aa9618630a26a136b81f959f719a9205baf9a85b960b6f88aae7d47a155f72dc"
+    },
+    {
+      "path": "backend/app/schemas/guide.py",
+      "before_source": "00 actual source snapshot",
+      "sha256": "369fadb7aef5845e5cfb353ff75f73e24fcf87b1ce69af02d911cad90c8955bd"
+    },
+    {
+      "path": "backend/app/services/automatic_memory_service.py",
+      "before_source": "new file",
+      "sha256": "4e19c49f2787015dcad9bf6f8e45392ae7adb38ad28db55e32ecb4ae175ffc6b"
+    },
+    {
+      "path": "backend/app/services/cart_service.py",
+      "before_source": "00 actual source snapshot",
+      "sha256": "cee9e31006cba2b7965f686a298b9bba9a5b5b3a83ab5b5326309240cb4f6021"
+    },
+    {
+      "path": "backend/app/services/catalog_service.py",
+      "before_source": "00 actual source snapshot",
+      "sha256": "d5f5e2ee73d039301aeb771a755ec18cbdf23989ce073dbed186ff9f72ec9b20"
+    },
+    {
+      "path": "backend/app/services/confirmation_service.py",
+      "before_source": "00 actual source snapshot",
+      "sha256": "627f1a15c2b9f92a0f818bdd3c55e82e29caa7b059ce5ba0aeba9d87c44e015b"
+    },
+    {
+      "path": "backend/app/services/conversation_service.py",
+      "before_source": "00 actual source snapshot",
+      "sha256": "ce8e01f8937aa072b029bed0ce55700b5458a0d6131bda5d85d061071579ca71"
+    },
+    {
+      "path": "backend/app/services/graph_turn_service.py",
+      "before_source": "00 actual source snapshot",
+      "sha256": "e773f9d65589b15703f795c4e2687861f4c0d05aff9a7a2f21b51a95f4804a7f"
+    },
+    {
+      "path": "backend/app/services/memory_service.py",
+      "before_source": "new file",
+      "sha256": "5d1e5292188d5d34f919b032838d93b9aeb938d693fafa884000c60e91caecd7"
+    },
+    {
+      "path": "backend/app/services/order_service.py",
+      "before_source": "new file",
+      "sha256": "81a1984f0c988fea1dd2788dd3492c6b7eba5136d937958e76c94bf20a31eed6"
+    },
+    {
+      "path": "backend/app/services/plan_commit_service.py",
+      "before_source": "00 actual source snapshot",
+      "sha256": "c2affd0968345eb5811da3eec5bb4b31f7b116f1ac3e17b0e647833a6328cbb2"
+    },
+    {
+      "path": "backend/app/services/plan_validator.py",
+      "before_source": "00 actual source snapshot",
+      "sha256": "e4db66b6aa1bef8559b52c5a08b90281fafd0cedd2bd0bb413f7ea4b7a03a8a6"
+    },
+    {
+      "path": "backend/app/services/shopping_plan_service.py",
+      "before_source": "00 actual source snapshot",
+      "sha256": "82cbce0239760c3638aebbaa94047b5f456eac594e25575f3f3c8ee613ef06d5"
+    },
+    {
+      "path": "backend/app/services/template_matcher.py",
+      "before_source": "00 actual source snapshot",
+      "sha256": "fbe86d4ac244bd504ce6fdebfabf9a9ae4b79f956457ba7608552be9cee31d5f"
+    },
+    {
+      "path": "backend/app/services/template_plan_service.py",
+      "before_source": "00 actual source snapshot",
+      "sha256": "22474df872a92ba011dc62fb9d6d9fccf7d95b262139dbb83274be881678192e"
+    },
+    {
+      "path": "backend/app/services/turn_stream_service.py",
+      "before_source": "00 actual source snapshot",
+      "sha256": "478beb5320f94a13def0444a6007860226e76d24a1525da52dacfb9095ea4a81"
+    },
+    {
+      "path": "backend/app/services/validation_context.py",
+      "before_source": "00 actual source snapshot",
+      "sha256": "5b268d0adc2ca9a2f1dba4699cf5ee4740308727c6cdb48f67909235b0f65505"
+    },
+    {
+      "path": "backend/tests/conftest.py",
+      "before_source": "00 actual source snapshot",
+      "sha256": "1a9a33ceb5e3a49845d1b66dacef7cd3e9429f9f09764776421fee2ae973f250"
+    },
+    {
+      "path": "backend/tests/support/v2_fixture.py",
+      "before_source": "new file",
+      "sha256": "87c284a1ff83063ec0a9b4761c1ec13fb283763d277b53653d7545e9b67b681d"
+    },
+    {
+      "path": "backend/tests/test_answer_display_refs.py",
+      "before_source": "00 actual source snapshot",
+      "sha256": "b141e21b0b1674ba1c4a61a1b4c13043cf4d5cf3e04afb587903f7902c89bb44"
+    },
+    {
+      "path": "backend/tests/test_p0_gap_integrity.py",
+      "before_source": "00 actual source snapshot",
+      "sha256": "5e3e5eafdcfcd2ce19b24e1aa9fa2b8cde84aa2e23a4e00fff00b43aa13dda36"
+    },
+    {
+      "path": "backend/tests/test_phase2a_cancellation.py",
+      "before_source": "00 actual source snapshot",
+      "sha256": "d7bae517dfe8ac50eaaebbb1bd8fc6e739d67dca1c58e0dba809a525419a7e31"
+    },
+    {
+      "path": "backend/tests/test_semantic_phase2d_constraints.py",
+      "before_source": "00 actual source snapshot",
+      "sha256": "593b0efe22015315eccb0163dab2755f87d3c021db17fed2c9812805cd3667f1"
+    },
+    {
+      "path": "backend/tests/test_shopping_workflow.py",
+      "before_source": "00 actual source snapshot",
+      "sha256": "887a4cffe11eacfdb0448ff831be81e8ff6c3485998202819799b3e9d1dd234c"
+    },
+    {
+      "path": "backend/tests/test_v2_automatic_memory.py",
+      "before_source": "new file",
+      "sha256": "7d7b4684ff3be44cdab8329edb352676183c54fb0f4b7e6ffe840dd4b069e8f0"
+    },
+    {
+      "path": "backend/tests/test_v2_automatic_memory_live.py",
+      "before_source": "new file",
+      "sha256": "3575647a863c4bf97fcac9db5679223162a6545eb0421def6e37633d9d79c0a4"
+    },
+    {
+      "path": "backend/tests/test_v2_cola_comparison.py",
+      "before_source": "new file",
+      "sha256": "393068b9e16cb1cdfce8a6f23ecbadd854f7bb23151a3ec89e2c69d2d420740a"
+    },
+    {
+      "path": "backend/tests/test_v2_explicit_memory.py",
+      "before_source": "new file",
+      "sha256": "0a641d597b08582f4e158a081769ba301b1c144d0fd5adc3bfe0224153912bbc"
+    },
+    {
+      "path": "backend/tests/test_v2_historical_repurchase.py",
+      "before_source": "new file",
+      "sha256": "66fe89a7ba4ef5843d268da45b97792f7df5529068ab15b1b46131a827262ff4"
+    },
+    {
+      "path": "backend/tests/test_v2_history_named_lookup.py",
+      "before_source": "new file",
+      "sha256": "c92967481edc0554041fc6b368e6932a6b0e83395f68fd7dc20b3fcd42e212be"
+    },
+    {
+      "path": "backend/tests/test_v2_integrated_demo.py",
+      "before_source": "new file",
+      "sha256": "cfb3eec2a4745ed6dbbe262f1f30f5eb9daa1b3b414c33b49bc73b941540ce5b"
+    },
+    {
+      "path": "backend/tests/test_v2_integrated_demo_live.py",
+      "before_source": "new file",
+      "sha256": "81bb3ab9c1af62ceb2bb618bf95d59aa989cacc9165908acbf6d1c9ed52c9d3e"
+    },
+    {
+      "path": "backend/tests/test_v2_order_mercury.py",
+      "before_source": "new file",
+      "sha256": "6d66737a78d0e815170c2cb983da22f1ae72f949dc91d97d2b3208d8a08b7a59"
+    },
+    {
+      "path": "backend/tests/test_v2_servings.py",
+      "before_source": "new file",
+      "sha256": "86cdb36b81a16eb129581daa32314edf30087ce3c12946410e313cfd3226034d"
+    },
+    {
+      "path": "backend/tests/test_v2_shared_demand.py",
+      "before_source": "new file",
+      "sha256": "0424286a61450eb8e02500178bd7ba7a6476f73259c2a27acb10cef8f02ead3d"
+    },
+    {
+      "path": "backend/tests/test_v2_supply_adaptation.py",
+      "before_source": "new file",
+      "sha256": "44bb705f69d6e1487ee3aeb37dc116519196d165f935ea105c1a9178c9fa7fe3"
+    },
+    {
+      "path": "frontend/src/App.tsx",
+      "before_source": "00 actual source snapshot",
+      "sha256": "6c2c19483115a803754e5da513743fc1c221233c60cbd27d49ac774221239956"
+    },
+    {
+      "path": "frontend/src/lib/mercury.ts",
+      "before_source": "00 actual source snapshot",
+      "sha256": "43947fb676943786cd1110e5d5ce819fe7b6b1fdaf2b3205a6764f5c29dde605"
+    },
+    {
+      "path": "frontend/src/lib/saleGuide.ts",
+      "before_source": "00 actual source snapshot",
+      "sha256": "c6f9d66ac9eeff29083c0dd64cb10f34521a160bac33bdd4e03308a9d9d2cac5"
+    },
+    {
+      "path": "frontend/src/MercuryChat.tsx",
+      "before_source": "00 actual source snapshot",
+      "sha256": "36a3b8d88e5ae38158e581e52c751f2f183d9a4cac77d97607814024a486dd87"
+    },
+    {
+      "path": "Mercury/mercury/agent.py",
+      "before_source": "00 actual source snapshot",
+      "sha256": "709fa5da73fb5455b65dcd0565b0ce6776bb07e604883c4b7ac008ed60735d29"
+    },
+    {
+      "path": "Mercury/mercury/db.py",
+      "before_source": "00 actual source snapshot",
+      "sha256": "374322d24edee19f1eb0f66bfb9f786947ed6bd75bbe0eab81576e99d9886d57"
+    },
+    {
+      "path": "Mercury/mercury/llm.py",
+      "before_source": "00 actual source snapshot",
+      "sha256": "b626c62dc07b925665e6e7099d85e144d8930ae3d2a31e9b73c3379b167ceeba"
+    },
+    {
+      "path": "Mercury/mercury/services.py",
+      "before_source": "00 actual source snapshot",
+      "sha256": "48f8cef43273459e67a4b6c43d689d0cd7694d18358ea6023f6306249bb1870a"
+    },
+    {
+      "path": "Mercury/mercury/tools.py",
+      "before_source": "00 actual source snapshot",
+      "sha256": "a75be4e95515e6dc26de390bdd426d1eb48ee636b267bdd5d9c5e240a32d74f3"
+    },
+    {
+      "path": "Mercury/tests/conftest.py",
+      "before_source": "fixed Git base for uncaptured path",
+      "sha256": "15e3f93877d9656ea40e277c70bfcd6d08bc9060caf5d857a1f2530f15ab2f1f"
+    },
+    {
+      "path": "Mercury/tests/test_services.py",
+      "before_source": "fixed Git base for uncaptured path",
+      "sha256": "ac161045d07c0bb56dde3d19232aba1b85cd04a036401a7b96ccea15b6557ace"
+    }
+  ]
+}

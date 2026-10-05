@@ -1,0 +1,7 @@
+Correction for environment.txt; original file is unchanged.
+The earlier recorder incorrectly inspected backend/.env and wrote backend .env supplies <not found>; this is the wrong settings source path.
+app/core/config.py ROOT_DIR resolves the Ceres project root, so Settings reads Ceres/.env.
+The live test's Settings output directly recorded llm_model=qwen3.8-27b, memory_model=qwen3.8-27b, and openai_base_url=https://discovery-api.intern-ai.org.cn/v1.
+Process overrides for LLM_MODEL, MEMORY_MODEL, OPENAI_BASE_URL, and OPENAI_API_KEY were removed for the run; settings therefore used the project .env values.
+No API key value is included here. The run's credential scan recorded only a boolean match result.
+correction_created_utc=2026-10-05T12:53:22.064596+00:00
