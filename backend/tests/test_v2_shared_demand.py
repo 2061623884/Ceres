@@ -191,3 +191,22 @@ def test_shared_demand_preserves_whole_plan_constraints(indexed_client, semantic
     assert after["constraints_summary"]["budget_fen"] == 2000
     assert after["constraints_summary"]["excluded_ingredients"] == before["constraints_summary"]["excluded_ingredients"]
     assert indexed_client.get("/api/v1/cart").json()["items"] == []
+
+
+@pytest.mark.parametrize("run", [1, 2])
+def test_append_dish_is_still_constrained_by_ingredient_exclusion(indexed_client, semantic_provider, run):
+    semantic_provider([
+        request_new("dish", "番茄炒蛋", people=2, mode="self_cook",
+                    constraints={"budget_yuan": 100, "excluded_ingredients": ["猪肉"]}),
+        request_new("dish", "青椒肉丝", people=2, mode="self_cook", relation="append"),
+    ])
+    sid = create_session(indexed_client)
+    first = send_turn(indexed_client, sid, "两人份番茄炒蛋，预算100元，不吃猪肉")
+    before = indexed_client.get(f"/api/v1/guide/sessions/{sid}").json()
+    refused = send_turn(indexed_client, sid, "再加一道两人份青椒肉丝", first)
+    assert refused["plan_effect"] == "keep", refused
+    after = indexed_client.get(f"/api/v1/guide/sessions/{sid}").json()
+    assert after["plan"] == before["plan"]
+    assert after["constraints_summary"]["budget_fen"] == 10000
+    assert after["constraints_summary"]["excluded_ingredients"] == before["constraints_summary"]["excluded_ingredients"]
+    assert indexed_client.get("/api/v1/cart").json()["items"] == []
