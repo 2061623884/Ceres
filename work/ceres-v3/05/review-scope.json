@@ -1,0 +1,40 @@
+{
+  "captured_at": "2026-10-06T05:39:00.707242+08:00",
+  "baseline_head": "5462e999d583a9bab6147d0b4141d98321f3cc92",
+  "baseline_zip_sha256": "e91bbd5f0e02469d4cce9942d42763d75c4c64d6219c40b040fb7faa29c1382c",
+  "fixed_point": "Pre-ticket working source ZIP; eight owned additions absent HEAD compared to empty, prepared test contents in ZIP are not inherited V2",
+  "diff_command": "Read05/source.patch, eight owned additions only; not git diff HEAD containing inherited V2",
+  "commit_list": [],
+  "paths": [
+    "backend/tests/test_v3_core_evaluation.py",
+    "backend/tests/test_v3_live_routing.py",
+    "backend/tests/test_v3_live_sampling.py",
+    "evals/v3/core-cases.json",
+    "evals/v3/holdout-cases.json",
+    "work/ceres-v3/05/evaluation-protocol.md",
+    "work/ceres-v3/05/coverage-plan.json",
+    "work/ceres-v3/05/analyze-evidence.py"
+  ],
+  "owned_new_paths": [
+    "backend/tests/test_v3_core_evaluation.py",
+    "backend/tests/test_v3_live_routing.py",
+    "backend/tests/test_v3_live_sampling.py",
+    "evals/v3/core-cases.json",
+    "evals/v3/holdout-cases.json",
+    "work/ceres-v3/05/evaluation-protocol.md",
+    "work/ceres-v3/05/coverage-plan.json",
+    "work/ceres-v3/05/analyze-evidence.py"
+  ],
+  "sha256": {
+    "backend/tests/test_v3_core_evaluation.py": "92a2e0692161713da89318dadbb162e6ed9bb922d6c40932398c312dc53587e5",
+    "backend/tests/test_v3_live_routing.py": "6f8392b055470d0a61def747d102fc70f4376b2ddce09868df4f9bfe20b5039b",
+    "backend/tests/test_v3_live_sampling.py": "8807779441c0f47bd8d78824fc11d80979073ad7621834adb26120dd4398cdf8",
+    "evals/v3/core-cases.json": "48795e7f53608091cb00f1a85a5662b75eaf704761851ee4f86c2b9391bb1464",
+    "evals/v3/holdout-cases.json": "8d071c4725ec3ff95cd5e078f3e5db5a0528bcb9f70d42010e99c4558e09f792",
+    "work/ceres-v3/05/evaluation-protocol.md": "847fae02f77dcefadc4efff3ada4be55b1bff14eeda88d40d63f0cfb3a5fe7f6",
+    "work/ceres-v3/05/coverage-plan.json": "3b39acc693ed3debb7023ab2f205c7ff132ab046f6eb004c20c0df2c7dd9a6f3",
+    "work/ceres-v3/05/analyze-evidence.py": "8c791f14c60b0e7b53956eacaf2f2433c07d1338671dbfa3a7d6716dfb80d2bd"
+  },
+  "review_source_zip_sha256": "a8095549ce1099a0fd67e8e637404e55690c65c4cf8b196650796283bccc6a86",
+  "source_change_scope": "Test/case/protocol/evidence analyzer additions only. No production model/data/Prompt/source changes; measurements pending."
+}

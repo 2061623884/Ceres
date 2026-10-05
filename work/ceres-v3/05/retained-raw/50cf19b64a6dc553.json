@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/controlled-20261005T213814Z-e9eee78c/core-001/run-start.json",
+  "original_sha256": "22f244c6fdc9afd15bb4a832e7ff882ae1e558c6a5e6e1ca7097a4988c7d0111",
+  "original_utf8_bom": false,
+  "utf8_text": "{\r\n  \"started_at_utc\": \"2026-10-05T21:54:47.082972+00:00\",\r\n  \"run_id\": \"core-001\",\r\n  \"selected_node_count\": 16,\r\n  \"selected_case_count\": 18,\r\n  \"baseline_intake_path\": \"work\\\\ceres-v3\\\\05\\\\evidence\\\\controlled-20261005T213814Z-e9eee78c\\\\baseline-intake.json\",\r\n  \"collection_path\": \"work\\\\ceres-v3\\\\05\\\\evidence\\\\controlled-20261005T213814Z-e9eee78c\\\\collect\\\\collection.json\"\r\n}\r\n"
+}

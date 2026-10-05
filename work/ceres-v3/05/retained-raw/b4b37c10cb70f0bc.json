@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/analyzer-v4-20261005T225315Z-a999063e/negative-one-successful-role/stdout.txt",
+  "original_sha256": "b18e00c00b04282a84eb188cb0c1eef6ff1ca7f052633983c4cbcacaa324aab5",
+  "original_utf8_bom": false,
+  "utf8_text": "{\"route_n\": 22, \"route_correct\": 22, \"route_failed\": 0, \"route_p95_ms\": 691.9858001638204, \"route_q20_pass\": true, \"role_sample_n\": 1, \"reply_max_ms\": 1493.2436998933554, \"reply_q20_pass\": false}\r\n"
+}

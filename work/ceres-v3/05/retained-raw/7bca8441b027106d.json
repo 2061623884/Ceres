@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/analyzer-v4-20261005T225315Z-a999063e/negative-observer-route-partial/command.json",
+  "original_sha256": "22b1b10c9f2e5d67962c14e06ddfef89835d275ec2b86d0f6ba6265273043150",
+  "original_utf8_bom": false,
+  "utf8_text": "{\r\n  \"argv\": [\r\n    \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\backend\\\\.venv\\\\Scripts\\\\python.exe\",\r\n    \"-X\",\r\n    \"utf8\",\r\n    \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\05\\\\analyze-evidence.py\",\r\n    \"--routes\",\r\n    \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\05\\\\evidence\\\\analyzer-v4-20261005T225315Z-a999063e\\\\fixtures\\\\observer-route-request-failed\\\\routes\",\r\n    \"--role-samples\",\r\n    \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\05\\\\evidence\\\\analyzer-v4-20261005T225315Z-a999063e\\\\fixtures\\\\observer-route-request-failed\\\\roles\",\r\n    \"--output\",\r\n    \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\05\\\\evidence\\\\analyzer-v4-20261005T225315Z-a999063e\\\\negative-observer-route-partial\\\\analysis.json\"\r\n  ],\r\n  \"cwd\": \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\",\r\n  \"shell\": false\r\n}\r\n"
+}

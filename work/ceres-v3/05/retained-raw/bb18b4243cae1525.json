@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/candidate-v3-20261005T224125Z-6ab847de/probe-route/command.json",
+  "original_sha256": "815d01c31857e23d60071afd6911baabdbdd038911ee70fdc900853348c86f57",
+  "original_utf8_bom": false,
+  "utf8_text": "{\r\n  \"argv\": [\r\n    \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\backend\\\\.venv\\\\Scripts\\\\python.exe\",\r\n    \"-X\",\r\n    \"utf8\",\r\n    \"-m\",\r\n    \"pytest\",\r\n    \"-vv\",\r\n    \"--showlocals\",\r\n    \"-p\",\r\n    \"no:cacheprovider\",\r\n    \"-W\",\r\n    \"error::pytest.PytestUnhandledThreadExceptionWarning\",\r\n    \"-p\",\r\n    \"ceres_controlled_trace\",\r\n    \"-p\",\r\n    \"ceres_failure_inject\",\r\n    \"--basetemp=C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\05\\\\evidence\\\\candidate-v3-20261005T224125Z-6ab847de\\\\probe-route\\\\pytest-basetemp\",\r\n    \"--junitxml=C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\05\\\\evidence\\\\candidate-v3-20261005T224125Z-6ab847de\\\\probe-route\\\\junit.xml\",\r\n    \"tests/test_v3_live_routing.py::test_real_kev_fixed_public_contexts\"\r\n  ],\r\n  \"cwd\": \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\backend\",\r\n  \"process\": \"subprocess argv; no shell\"\r\n}\r\n"
+}

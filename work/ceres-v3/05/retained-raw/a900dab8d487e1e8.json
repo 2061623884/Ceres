@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/controlled-20261005T213814Z-e9eee78c/core-002/phase-001-r01-r08/command.txt",
+  "original_sha256": "16fb13e3eda34d05f98276523931d0134739f5ad80e67a02fb3ce2534a942a7f",
+  "original_utf8_bom": false,
+  "utf8_text": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe -X utf8 -m pytest -vv --showlocals -p no:cacheprovider -W error::pytest.PytestUnhandledThreadExceptionWarning -p ceres_controlled_trace --basetemp=C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\05\\evidence\\controlled-20261005T213814Z-e9eee78c\\core-002\\phase-001-r01-r08\\pytest-basetemp --junitxml=C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\05\\evidence\\controlled-20261005T213814Z-e9eee78c\\core-002\\phase-001-r01-r08\\junit.xml tests/test_v3_core_evaluation.py::test_fixed_shopping_utterance_reaches_real_plan_after_required_consent[keke-\\u60f3\\u4e70\\u4e24\\u74f6\\u65e0\\u7cd6\\u53ef\\u4e50-stay_current-2] tests/test_v3_core_evaluation.py::test_fixed_shopping_utterance_reaches_real_plan_after_required_consent[momo-\\u60f3\\u4e70\\u65e0\\u7cd6\\u53ef\\u4e50-suggest_switch-1]\r\n"
+}

@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/analyzer-v4-20261005T225315Z-a999063e/validation-checks.json",
+  "original_sha256": "2f66208ba37dbe06f3712490d03703cf41b1c23fc85a2568c99803b6299862b3",
+  "original_utf8_bom": false,
+  "utf8_text": "{\r\n  \"one_successful_role_rejected_and_cases_named_missing\": true,\r\n  \"missing_h01_handoff_rejected_by_six_observation_gate\": true,\r\n  \"observer_route_missing_timing_rejected_without_zero_fill\": true,\r\n  \"empty_role_input_returns_none_and_missing_ids\": true,\r\n  \"original_v3_r01_failure_preserved_in_analysis\": true\r\n}\r\n"
+}

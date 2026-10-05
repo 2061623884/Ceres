@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/analyzer-v5-20261005T230316Z-3bc02469/actual-observer-null-route-time/roles/R01-named-product-variant.json",
+  "original_sha256": "5c23d96608952207ac1b687f5e599427c4f807fcc51efd79c9690dd70d4970a6",
+  "original_utf8_bom": false,
+  "utf8_text": "{\r\n  \"case_id\": \"R01-named-product-variant\",\r\n  \"passed\": true,\r\n  \"backend_api_wall_ms\": 1000.0,\r\n  \"upstream\": []\r\n}\r\n"
+}

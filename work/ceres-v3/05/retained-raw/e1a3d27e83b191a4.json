@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/analyzer-v4-20261005T225315Z-a999063e/freeze-check.json",
+  "original_sha256": "b48aca4bef5115b2c207f342a744718962c387471aee21d5797644a48ab78b16",
+  "original_utf8_bom": false,
+  "utf8_text": "{\r\n  \"head\": \"5462e999d583a9bab6147d0b4141d98321f3cc92\",\r\n  \"candidate_zip_sha256\": \"496e3417b4176ed3e4fcf35fda963037e193f6c357c9921c04bc47fde07b55f6\",\r\n  \"expected_candidate_zip_sha256\": \"496e3417b4176ed3e4fcf35fda963037e193f6c357c9921c04bc47fde07b55f6\",\r\n  \"manifest_paths\": 306,\r\n  \"expected_paths\": 306,\r\n  \"source_matches_candidate_v4\": true,\r\n  \"mismatches\": [],\r\n  \"analyzer_sha256\": \"b570c4cfc718875fb2c480dbb090edb64c6e089ab4ee55911e742aba8985a229\",\r\n  \"expected_analyzer_sha256\": \"b570c4cfc718875fb2c480dbb090edb64c6e089ab4ee55911e742aba8985a229\"\r\n}\r\n"
+}

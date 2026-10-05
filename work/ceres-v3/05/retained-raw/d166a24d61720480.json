@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/analyzer-v4-20261005T225315Z-a999063e/negative-empty-role-directory/analysis.json",
+  "original_sha256": "98b1a8b1bd1cdbab43ab7d08653b4f6ea0b594af9ef2dfe8cedb16df1d712302",
+  "original_utf8_bom": false,
+  "utf8_text": "{\r\n  \"route_n\": 22,\r\n  \"route_correct\": 22,\r\n  \"route_failed\": 0,\r\n  \"route_confusion\": {\r\n    \"stay_current -> stay_current\": 16,\r\n    \"suggest_switch -> suggest_switch\": 4,\r\n    \"clarify -> clarify\": 2\r\n  },\r\n  \"route_p95_ms\": 691.9858001638204,\r\n  \"route_timing_missing_n\": 0,\r\n  \"route_q20_pass\": true,\r\n  \"role_sample_n\": 0,\r\n  \"role_samples\": [],\r\n  \"role_missing_cases\": [\r\n    \"H01\",\r\n    \"R01\",\r\n    \"R01-named-product-variant\",\r\n    \"R02\",\r\n    \"R03\"\r\n  ],\r\n  \"reply_observations_n\": 0,\r\n  \"reply_max_ms\": null,\r\n  \"reply_q20_pass\": false,\r\n  \"measurement_scope\": \"In-process public API terminal SSE; no browser evidence; confirmed handoff request separately timed\",\r\n  \"cold_start\": \"Not measured here; GPU already loaded. See ticket01 raw cold start and ticket03 client initialization.\",\r\n  \"quality_scope\": \"Fixed public samples, not independent holdout or generalization proof\"\r\n}\r\n"
+}

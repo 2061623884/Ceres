@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/analyzer-v5-controlled-20261005T230523Z-e149b47e/missing-h01-handoff/stdout.txt",
+  "original_sha256": "832ab7d5a08ba633d0dfbcb25da3800c0962483d1eb5172097a17587beab3ec1",
+  "original_utf8_bom": false,
+  "utf8_text": "{\"route_n\": 22, \"route_correct\": 22, \"route_failed\": 0, \"route_p95_ms\": 200.0, \"route_q20_pass\": true, \"role_sample_n\": 0, \"reply_max_ms\": null, \"reply_q20_pass\": false}\r\n"
+}

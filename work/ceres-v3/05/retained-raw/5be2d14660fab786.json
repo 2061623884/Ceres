@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/analyzer-v5-controlled-retry-20261005T230606Z-5380d5c9/single-role-only/stdout.txt",
+  "original_sha256": "fabce4a9a46e69d3166d136681789c6f08d77cf98d857db9782a9f37d57955f5",
+  "original_utf8_bom": false,
+  "utf8_text": "{\"route_n\": 22, \"route_correct\": 22, \"route_failed\": 0, \"route_p95_ms\": 200.0, \"route_q20_pass\": true, \"role_sample_n\": 1, \"reply_max_ms\": 1000.0, \"reply_q20_pass\": false}\r\n"
+}

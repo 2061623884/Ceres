@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/20261006T064846294-4702c589bd6944b79f900a77c1d202bb/preflight/service-still-running.json",
+  "original_sha256": "9da9aac7e6a7b9f8561d7a44bb6148c9ac0728c5e27805bf1d7f44dfde796cf7",
+  "original_utf8_bom": false,
+  "utf8_text": "{\r\n  \"captured_at\": \"2026-10-05T22:50:27.3077308Z\",\r\n  \"ssh_exit\": 0,\r\n  \"http_get_status\": 200,\r\n  \"listeners\": [\r\n    {\r\n      \"LocalAddress\": \"127.0.0.1\",\r\n      \"LocalPort\": 18009,\r\n      \"OwningProcess\": 25040\r\n    }\r\n  ],\r\n  \"stdout_path\": \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\05\\\\evidence\\\\20261006T064846294-4702c589bd6944b79f900a77c1d202bb\\\\preflight\\\\service-still-running.stdout\",\r\n  \"stderr_path\": \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\05\\\\evidence\\\\20261006T064846294-4702c589bd6944b79f900a77c1d202bb\\\\preflight\\\\service-still-running.stderr\",\r\n  \"models_path\": \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\05\\\\evidence\\\\20261006T064846294-4702c589bd6944b79f900a77c1d202bb\\\\preflight\\\\models-still-running.json\"\r\n}\r\n"
+}

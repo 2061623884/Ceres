@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/20261006T064846294-4702c589bd6944b79f900a77c1d202bb/preflight/effective-settings.json",
+  "original_sha256": "829d84a6a096e8e883e92e64c1fbdd5340f937d7c7949909269874614797dece",
+  "original_utf8_bom": false,
+  "utf8_text": "{\r\n  \"actual_python_exit_code\": 0,\r\n  \"cwd\": \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\backend\",\r\n  \"interpreter\": \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\backend\\\\.venv\\\\Scripts\\\\python.exe\",\r\n  \"stdout_path\": \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\05\\\\evidence\\\\20261006T064846294-4702c589bd6944b79f900a77c1d202bb\\\\preflight\\\\effective-settings.stdout\",\r\n  \"stderr_path\": \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\05\\\\evidence\\\\20261006T064846294-4702c589bd6944b79f900a77c1d202bb\\\\preflight\\\\effective-settings.stderr\"\r\n}\r\n"
+}

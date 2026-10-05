@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/analyzer-v4-20261005T225315Z-a999063e/negative-one-successful-role/environment.json",
+  "original_sha256": "a2cb315207abc7c71d766a93ddee2c2e5929df10092a9f3571b3170f773a9be9",
+  "original_utf8_bom": false,
+  "utf8_text": "{\r\n  \"explicit_environment\": {\r\n    \"SYSTEMROOT\": \"C:\\\\WINDOWS\",\r\n    \"WINDIR\": \"C:\\\\WINDOWS\",\r\n    \"TEMP\": \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\05\\\\evidence\\\\analyzer-v4-20261005T225315Z-a999063e\\\\negative-one-successful-role\\\\temp\",\r\n    \"TMP\": \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\05\\\\evidence\\\\analyzer-v4-20261005T225315Z-a999063e\\\\negative-one-successful-role\\\\temp\",\r\n    \"PYTHONUTF8\": \"1\",\r\n    \"PYTHONNOUSERSITE\": \"1\"\r\n  },\r\n  \"PATH\": \"inherited for Windows/Python runtime; value intentionally not copied\",\r\n  \"no_dotenv_or_credentials_loaded\": true\r\n}\r\n"
+}

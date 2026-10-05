@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/analyzer-v4-20261005T225315Z-a999063e/negative-one-successful-role/command.json",
+  "original_sha256": "873808fff025783114bde9b1b2c706a9f38f363d86df016613cf367e6cf56489",
+  "original_utf8_bom": false,
+  "utf8_text": "{\r\n  \"argv\": [\r\n    \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\backend\\\\.venv\\\\Scripts\\\\python.exe\",\r\n    \"-X\",\r\n    \"utf8\",\r\n    \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\05\\\\analyze-evidence.py\",\r\n    \"--routes\",\r\n    \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\05\\\\evidence\\\\analyzer-v4-20261005T225315Z-a999063e\\\\fixtures\\\\one-successful-role\\\\routes\",\r\n    \"--role-samples\",\r\n    \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\05\\\\evidence\\\\analyzer-v4-20261005T225315Z-a999063e\\\\fixtures\\\\one-successful-role\\\\roles\",\r\n    \"--output\",\r\n    \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\05\\\\evidence\\\\analyzer-v4-20261005T225315Z-a999063e\\\\negative-one-successful-role\\\\analysis.json\"\r\n  ],\r\n  \"cwd\": \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\",\r\n  \"shell\": false\r\n}\r\n"
+}

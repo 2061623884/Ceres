@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/20261006T061823837-d5a54529857c4f1ba7896cef338a4441/preflight/amax-readonly.json",
+  "original_sha256": "afd8f1db893fcbc90baa26cb8d463572802c517337452b29abd98849c6cecf6c",
+  "original_utf8_bom": false,
+  "utf8_text": "{\r\n  \"actual_exit_code\": 0,\r\n  \"command\": \"ssh amax <recorded remote read-only command>\",\r\n  \"stdout_path\": \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\05\\\\evidence\\\\20261006T061823837-d5a54529857c4f1ba7896cef338a4441\\\\preflight\\\\amax-readonly.stdout\",\r\n  \"stderr_path\": \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\05\\\\evidence\\\\20261006T061823837-d5a54529857c4f1ba7896cef338a4441\\\\preflight\\\\amax-readonly.stderr\"\r\n}\r\n"
+}

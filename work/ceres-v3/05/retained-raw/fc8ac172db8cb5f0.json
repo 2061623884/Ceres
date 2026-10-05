@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/20261006T054335257-4b3698ab82f34a9a9026c70781b92a3d/preflight/amax-gpus.stdout",
+  "original_sha256": "a688a930ff74be3b36bc520362287b0587cf563bc69ec551ededc4eae0b367e3",
+  "original_utf8_bom": false,
+  "utf8_text": "0, NVIDIA TITAN RTX, GPU-a98772b3-7e88-3ccc-864b-3451aaa76776, 6 MiB, 24576 MiB, 0 %\r\n1, NVIDIA TITAN RTX, GPU-5165b827-1b01-e6f0-d147-38e565ee823f, 17012 MiB, 24576 MiB, 0 %\r\n2, NVIDIA TITAN RTX, GPU-d50a1486-0295-d32b-7e83-a647d786fda0, 6 MiB, 24576 MiB, 0 %\r\n3, NVIDIA TITAN RTX, GPU-249d2818-e285-cd3f-5068-26f8867c9998, 6 MiB, 24576 MiB, 0 %"
+}

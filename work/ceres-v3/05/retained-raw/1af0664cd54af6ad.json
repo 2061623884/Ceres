@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/20261006T061823837-d5a54529857c4f1ba7896cef338a4441/routing.stdout",
+  "original_sha256": "79a97ee8f1b7ea16d9a9ec04ced90c3065c63b1888743ad6c9c5c052a65c6998",
+  "original_utf8_bom": false,
+  "utf8_text": "F                                                                        [100%]\r\n================================== FAILURES ===================================\r\n_____________________ test_real_kev_fixed_public_contexts _____________________\r\ntests\\test_v3_live_routing.py:79: in test_real_kev_fixed_public_contexts\r\n    assert all(row[\"passed\"] for row in rows), [(r[\"case_id\"], r[\"repetition\"], r[\"actual\"]) for r in rows if not r[\"passed\"]]\r\nE   AssertionError: [('R06', 0, {'status': 'completed', 'decision': 'clarify', 'raw_choice': 'clarify', 'probabilities': {'stay_current': ...'raw_choice': 'clarify', 'probabilities': {'stay_current': 0.3961, 'suggest_switch': 0.1062, 'clarify': 0.4977}, ...})]\r\nE   assert False\r\nE    +  where False = all(<generator object test_real_kev_fixed_public_contexts.<locals>.<genexpr> at 0x000001D3A4334E10>)\r\n=========================== short test summary info ===========================\r\nFAILED tests/test_v3_live_routing.py::test_real_kev_fixed_public_contexts - A...\r\n1 failed in 15.71s\r\n"
+}

@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/20261006T061823837-d5a54529857c4f1ba7896cef338a4441/role-sampling.stdout",
+  "original_sha256": "28ca493beaf2a12348db6ea8da75bbc5c45108a951b28a0f066276b82dfba032",
+  "original_utf8_bom": false,
+  "utf8_text": "F....                                                                    [100%]\r\n================================== FAILURES ===================================\r\n_ test_real_role_and_kev_sample[R01-keke-\\u60f3\\u4e70\\u4e24\\u74f6\\u65e0\\u7cd6\\u53ef\\u4e50-stay_current-None] _\r\ntests\\test_v3_live_sampling.py:100: in test_real_role_and_kev_sample\r\n    assert item[\"user_quantity\"] == 2, item\r\nE   AssertionError: {'sku_id': 'demo:cn-coke-zero-500ml-bottle', 'name': '可口可乐零度无糖汽水500ml瓶装', 'quantity': 2, 'recommended_quantity': 2, ...}\r\nE   assert None == 2\r\n=========================== short test summary info ===========================\r\nFAILED tests/test_v3_live_sampling.py::test_real_role_and_kev_sample[R01-keke-\\u60f3\\u4e70\\u4e24\\u74f6\\u65e0\\u7cd6\\u53ef\\u4e50-stay_current-None]\r\n1 failed, 4 passed in 29.12s\r\n"
+}

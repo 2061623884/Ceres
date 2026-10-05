@@ -1,0 +1,105 @@
+{
+  "reader": "primary Agent; raw files read, no test/evaluation rerun",
+  "receipts": [
+    {
+      "path": "work/ceres-v3/05/evidence/20261006T054335257-4b3698ab82f34a9a9026c70781b92a3d/role-samples/H01.json",
+      "byte_sha256": "41b7a6abdb10c1d478d879b48dafac8378c7820d676502d27cfb5941326eac30",
+      "recorded_sidecar": "eb77868dea6cee96114f66f3ca480d0491a92da4a77f919cca786d431ee9008a",
+      "bytes_match": false,
+      "lf_normalized_match": true
+    },
+    {
+      "path": "work/ceres-v3/05/evidence/20261006T054335257-4b3698ab82f34a9a9026c70781b92a3d/role-samples/R01-named-product-variant.json",
+      "byte_sha256": "bedd0206298d03fb1ac831dfea96721de10ec6c116af14b6cfe05e09b3de3d49",
+      "recorded_sidecar": "c45dcd2634146ac71f1ff3d7dfab6d7a38586c5eb2f09ff2259f9c04082d96d3",
+      "bytes_match": false,
+      "lf_normalized_match": true
+    },
+    {
+      "path": "work/ceres-v3/05/evidence/20261006T054335257-4b3698ab82f34a9a9026c70781b92a3d/role-samples/R02.json",
+      "byte_sha256": "1f001ae2a5a66eb984eb47f19094a795ce13f75e5d15b93c92650d186a8314eb",
+      "recorded_sidecar": "900d3d7a63292c3f334c77ac9bad7e8d0942cd0ee3cd8945e934bfba21097c3b",
+      "bytes_match": false,
+      "lf_normalized_match": true
+    },
+    {
+      "path": "work/ceres-v3/05/evidence/20261006T054335257-4b3698ab82f34a9a9026c70781b92a3d/role-samples/R03.json",
+      "byte_sha256": "59e6f4fb84db1305a836fdef234e86bad8664dac9fd717118a819a98b86aa66e",
+      "recorded_sidecar": "af0d3f8aa3738b1387034d66e97fa1abe25cbd794a97b9b6e29649ef6d52b5d7",
+      "bytes_match": false,
+      "lf_normalized_match": true
+    }
+  ],
+  "original_role_launch": {
+    "group": "role_samples",
+    "started_at": "2026-10-06T05:50:13.0677829+08:00",
+    "finished_at": "2026-10-06T05:50:33.0212259+08:00",
+    "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend",
+    "interpreter": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+    "argv": [
+      "-X",
+      "utf8",
+      "-m",
+      "pytest",
+      "-p",
+      "no:cacheprovider",
+      "-W",
+      "error::pytest.PytestUnhandledThreadExceptionWarning",
+      "--basetemp",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\05\\evidence\\20261006T054335257-4b3698ab82f34a9a9026c70781b92a3d\\temp-role-sampling\\pytest-basetemp",
+      "-q",
+      "tests/test_v3_live_sampling.py::test_real_role_and_kev_sample",
+      "--tb=short"
+    ],
+    "actual_python_exit_code": 1,
+    "python_pid": 16844,
+    "stdout_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\05\\evidence\\20261006T054335257-4b3698ab82f34a9a9026c70781b92a3d\\role-sampling.stdout",
+    "stderr_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\05\\evidence\\20261006T054335257-4b3698ab82f34a9a9026c70781b92a3d\\role-sampling.stderr",
+    "temp": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\05\\evidence\\20261006T054335257-4b3698ab82f34a9a9026c70781b92a3d\\temp-role-sampling",
+    "tmp": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\05\\evidence\\20261006T054335257-4b3698ab82f34a9a9026c70781b92a3d\\temp-role-sampling",
+    "basetemp": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\05\\evidence\\20261006T054335257-4b3698ab82f34a9a9026c70781b92a3d\\temp-role-sampling\\pytest-basetemp",
+    "evidence_dir": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\05\\evidence\\20261006T054335257-4b3698ab82f34a9a9026c70781b92a3d\\role-samples",
+    "environment": {
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONUTF8": "1",
+      "MEMORY_MODEL": "",
+      "RETRIEVAL_INDEX_DIR": "",
+      "OPENAI_API_KEY": "inherited from root .env; presence only",
+      "OPENAI_BASE_URL": "inherited unchanged",
+      "LLM_MODEL": "inherited unchanged from root .env qwen3.8-27b"
+    }
+  },
+  "routing_command_exit": {
+    "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend",
+    "interpreter": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+    "argv": [
+      "-X",
+      "utf8",
+      "-m",
+      "pytest",
+      "-p",
+      "no:cacheprovider",
+      "-W",
+      "error::pytest.PytestUnhandledThreadExceptionWarning",
+      "--basetemp",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\05\\evidence\\20261006T054335257-4b3698ab82f34a9a9026c70781b92a3d\\temp-routing\\pytest-basetemp",
+      "-q",
+      "tests/test_v3_live_routing.py::test_real_kev_fixed_public_contexts",
+      "--tb=short"
+    ],
+    "actual_python_exit_code": 1,
+    "environment": {
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONUTF8": "1",
+      "MEMORY_MODEL": "",
+      "RETRIEVAL_INDEX_DIR": "",
+      "CERES_V3_ROUTE_EVIDENCE_DIR": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\05\\evidence\\20261006T054335257-4b3698ab82f34a9a9026c70781b92a3d\\routing",
+      "LLM_MODE": "from root .env",
+      "LLM_MODEL": "from root .env qwen3.8-27b",
+      "OPENAI_BASE_URL": "from root .env, unchanged",
+      "OPENAI_API_KEY": "inherited unchanged; presence only",
+      "KEV_BASE_URL": "unset in root .env; Settings default 127.0.0.1:18009"
+    }
+  },
+  "evidence_integrity_note": "Original sidecars hashed LF in-memory text before Windows write_text converted to CRLF. Byte digest mismatch retained; normalized digest comparison is separately labelled, never substituted for byte integrity."
+}

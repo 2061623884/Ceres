@@ -1,0 +1,11 @@
+{
+  "version": "ceres-v3-05-runtime-v4",
+  "LLM_MODE": "live",
+  "LLM_MODEL": "qwen3.8-27b",
+  "LLM_MAX_OUTPUT_TOKENS": 3072,
+  "previous_output_budget": 1536,
+  "change_basis": "v3 R01 actual finish_reason=length, null content, 1536 reasoning-only completion tokens; incomplete proposal refused without business write",
+  "prompt_temperature": 0.3,
+  "credentials": "Excluded; no .env copy or API key values retained",
+  "proof_boundary": "Settings and runtime version only; actual outgoing requests, business outcome and Q20 require dedicated execution evidence"
+}

@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/analyzer-v4-20261005T225315Z-a999063e/negative-observer-route-partial/stdout.txt",
+  "original_sha256": "1fd74536639417be808244d5818facc239ee5f5229d5374b78e6ee20838e00a4",
+  "original_utf8_bom": false,
+  "utf8_text": "{\"route_n\": 1, \"route_correct\": 0, \"route_failed\": 1, \"route_p95_ms\": null, \"route_q20_pass\": false, \"role_sample_n\": 5, \"reply_max_ms\": 8981.779500143602, \"reply_q20_pass\": false}\r\n"
+}

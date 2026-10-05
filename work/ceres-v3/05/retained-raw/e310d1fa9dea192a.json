@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/analyzer-v5-controlled-20261005T230523Z-e149b47e/actual-observer-null-route-time/roles/roles/R01.json",
+  "original_sha256": "44f13fc60fb02f3832658bd8f2d9bf99ffb38528e8f40dcc2d6330bd70c08554",
+  "original_utf8_bom": false,
+  "utf8_text": "{\r\n  \"case_id\": \"R01\",\r\n  \"passed\": true,\r\n  \"backend_api_wall_ms\": 1000.0,\r\n  \"upstream\": [],\r\n  \"selection_backend_wall_ms\": 200.0\r\n}\r\n"
+}

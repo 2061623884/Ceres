@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/analyzer-v4-20261005T225315Z-a999063e/negative-h01-handoff-omitted/stdout.txt",
+  "original_sha256": "b7edcce474dacff8f8977e0f76b81427f31f6919b70dab95eb5845d427ddaeec",
+  "original_utf8_bom": false,
+  "utf8_text": "{\"route_n\": 22, \"route_correct\": 22, \"route_failed\": 0, \"route_p95_ms\": 691.9858001638204, \"route_q20_pass\": true, \"role_sample_n\": 5, \"reply_max_ms\": 100.0, \"reply_q20_pass\": false}\r\n"
+}

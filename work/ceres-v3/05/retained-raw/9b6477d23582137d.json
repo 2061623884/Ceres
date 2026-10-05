@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/analyzer-v4-20261005T225315Z-a999063e/negative-one-successful-role/input-sha256.json",
+  "original_sha256": "b9c32f0e5bd0b6db5d73616abf9767281fd4026de5433e1d9cfc4ae4d5af6c96",
+  "original_utf8_bom": false,
+  "utf8_text": "{\r\n  \"routes\": {\r\n    \"results.json\": \"e3b3d901c2c3319612ef2737f0b57f024043bf1c37010f6a2064fd69bb1c0b3d\"\r\n  },\r\n  \"roles\": {\r\n    \"H01.json\": \"57bed0a6caed07b403a0535c47936fe2bf14867ef877c40ad3a6f71a8fcbd84a\"\r\n  }\r\n}\r\n"
+}

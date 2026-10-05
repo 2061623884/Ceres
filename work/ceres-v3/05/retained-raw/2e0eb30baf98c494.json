@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/candidate-v3-20261005T223716Z-47398eb3/candidate-freeze-check.json",
+  "original_sha256": "e39a7f51ae8fc2e5db8428ae465b34ce54af6b4f4e8c64cfd912157514652ab9",
+  "original_utf8_bom": false,
+  "utf8_text": "{\r\n  \"head\": \"5462e999d583a9bab6147d0b4141d98321f3cc92\",\r\n  \"expected_head\": \"5462e999d583a9bab6147d0b4141d98321f3cc92\",\r\n  \"candidate_zip_sha256\": \"057c8503f97e49da9425e07294bfdaf5af3d8cb46c20fb1814eac0f202131b69\",\r\n  \"expected_candidate_zip_sha256\": \"057c8503f97e49da9425e07294bfdaf5af3d8cb46c20fb1814eac0f202131b69\",\r\n  \"manifest_paths\": 305,\r\n  \"expected_manifest_paths\": 305,\r\n  \"current_matches_manifest\": true,\r\n  \"mismatches\": [],\r\n  \"source_catalog_sha256\": \"772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10\",\r\n  \"expected_source_catalog_sha256\": \"772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10\"\r\n}\r\n"
+}

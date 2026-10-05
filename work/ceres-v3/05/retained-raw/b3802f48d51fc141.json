@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/20261006T064846294-4702c589bd6944b79f900a77c1d202bb/role-sampling.stdout",
+  "original_sha256": "410a63aeb8d422918e79abac1d0681802ff58267e1a256e411e95c3baad20430",
+  "original_utf8_bom": false,
+  "utf8_text": "F....                                                                    [100%]\r\n================================== FAILURES ===================================\r\n_ test_real_role_and_kev_sample[R01-keke-\\u60f3\\u4e70\\u4e24\\u74f6\\u65e0\\u7cd6\\u53ef\\u4e50-stay_current-None] _\r\ntests\\test_v3_live_sampling.py:95: in test_real_role_and_kev_sample\r\n    assert plan is not None, parsed[-1]\r\nE   AssertionError: {'protocol_version': 1, 'run_id': 'run-3dfffefaa927', 'sequence': 4, 'type': 'turn.completed', ...}\r\nE   assert None is not None\r\n=========================== short test summary info ===========================\r\nFAILED tests/test_v3_live_sampling.py::test_real_role_and_kev_sample[R01-keke-\\u60f3\\u4e70\\u4e24\\u74f6\\u65e0\\u7cd6\\u53ef\\u4e50-stay_current-None]\r\n1 failed, 4 passed in 48.18s\r\n"
+}

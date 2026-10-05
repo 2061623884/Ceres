@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/candidate-v5-20261005T230721Z-y3rsbooc/role-sampling/role-sampling.command.txt",
+  "original_sha256": "c78ae9f3657b3e0f4be77cadc039eeba2de0a4f16e2d0f26617259a9a61ed290",
+  "original_utf8_bom": false,
+  "utf8_text": "\"C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe\" -X utf8 -m pytest -p no:cacheprovider -W error::pytest.PytestUnhandledThreadExceptionWarning --basetemp C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\05\\evidence\\candidate-v5-20261005T230721Z-y3rsbooc\\role-sampling\\temp\\pytest-basetemp -q tests/test_v3_live_sampling.py::test_real_role_and_kev_sample --tb=short\r\n"
+}

@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/candidate-v3-20261005T224125Z-6ab847de/probe-route/boundary-attempts.jsonl",
+  "original_sha256": "353d9bf9e0f9b0e54ac5d27e81f26877087afff8d0d785d8039917da7dad7764",
+  "original_utf8_bom": false,
+  "utf8_text": "{\"kind\": \"testserver-allowed\", \"host\": \"testserver\", \"method\": \"POST\", \"path\": \"/api/v1/guide/sessions\"}\n{\"kind\": \"testserver-allowed\", \"host\": \"testserver\", \"method\": \"POST\", \"path\": \"/api/v1/mercury/sessions\"}\n{\"kind\": \"testserver-allowed\", \"host\": \"testserver\", \"method\": \"POST\", \"path\": \"/api/v1/chat/openings\"}\n{\"kind\": \"injected\", \"host\": \"testserver\", \"method\": \"POST\", \"path\": \"/api/v1/chat/openings/open_6b9811d880fb41aca1cceda8d730b966/turns/stream\"}\n"
+}

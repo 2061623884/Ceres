@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/analyzer-v5-20261005T230316Z-3bc02469/missing-r01-selection/stdout.txt",
+  "original_sha256": "723f8ecf966e76558b7b8d0e624ee8dc941396c70f8597264dfd598808dec571",
+  "original_utf8_bom": false,
+  "utf8_text": "{\"route_n\": 22, \"route_correct\": 22, \"route_failed\": 0, \"route_p95_ms\": 200.0, \"route_q20_pass\": true, \"role_sample_n\": 5, \"reply_max_ms\": 1000.0, \"reply_q20_pass\": false}\r\n"
+}

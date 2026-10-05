@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/20261006T061823837-d5a54529857c4f1ba7896cef338a4441/preflight/local-listener.json",
+  "original_sha256": "43337556e20dc4028b268b11cce2455d1a5ad16f98024f5df8cdeb85ff4fa765",
+  "original_utf8_bom": false,
+  "utf8_text": "{\r\n  \"capturedAt\": \"2026-10-05T22:19:22.8994464Z\",\r\n  \"expectedBind\": \"127.0.0.1:18009\",\r\n  \"listeners\": [\r\n    {\r\n      \"LocalAddress\": \"127.0.0.1\",\r\n      \"LocalPort\": 18009,\r\n      \"OwningProcess\": 25040,\r\n      \"ProcessName\": \"ssh.exe\",\r\n      \"CommandLine\": \"\\\"C:\\\\WINDOWS\\\\System32\\\\OpenSSH\\\\ssh.exe\\\" -N -L 127.0.0.1:18009:127.0.0.1:8009 -o BatchMode=yes -o ExitOnForwardFailure=yes -o ConnectTimeout=12 amax\"\r\n    }\r\n  ]\r\n}\r\n"
+}

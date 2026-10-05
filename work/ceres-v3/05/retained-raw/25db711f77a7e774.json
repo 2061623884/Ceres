@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/analyzer-v4-20261005T225315Z-a999063e/negative-observer-route-partial/environment.json",
+  "original_sha256": "744b8f4f4efbab646a6e2fe48d6aa0c59682ba1f7b0011a3132d61baeea14677",
+  "original_utf8_bom": false,
+  "utf8_text": "{\r\n  \"explicit_environment\": {\r\n    \"SYSTEMROOT\": \"C:\\\\WINDOWS\",\r\n    \"WINDIR\": \"C:\\\\WINDOWS\",\r\n    \"TEMP\": \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\05\\\\evidence\\\\analyzer-v4-20261005T225315Z-a999063e\\\\negative-observer-route-partial\\\\temp\",\r\n    \"TMP\": \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\05\\\\evidence\\\\analyzer-v4-20261005T225315Z-a999063e\\\\negative-observer-route-partial\\\\temp\",\r\n    \"PYTHONUTF8\": \"1\",\r\n    \"PYTHONNOUSERSITE\": \"1\"\r\n  },\r\n  \"PATH\": \"inherited for Windows/Python runtime; value intentionally not copied\",\r\n  \"no_dotenv_or_credentials_loaded\": true\r\n}\r\n"
+}

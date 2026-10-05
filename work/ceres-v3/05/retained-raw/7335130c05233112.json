@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/observer-malformed-selection-v6-20261005T232644Z-91b257fb/stderr.txt",
+  "original_sha256": "cd8a668f8fba3cdaf74506f5cc383697962180d4ae180fb9a660d9c429ba29b4",
+  "original_utf8_bom": false,
+  "utf8_text": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Lib\\site-packages\\_pytest\\unraisableexception.py:67: PytestUnraisableExceptionWarning: Exception ignored in: <function BaseEventLoop.__del__ at 0x000001CD15B81580>\r\n\r\nTraceback (most recent call last):\r\n  File \"C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\asyncio\\base_events.py\", line 732, in __del__\r\n    self.close()\r\n  File \"C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\asyncio\\proactor_events.py\", line 697, in close\r\n    self._close_self_pipe()\r\n  File \"C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\asyncio\\proactor_events.py\", line 779, in _close_self_pipe\r\n    self._ssock.close()\r\n    ^^^^^^^^^^^\r\nAttributeError: 'ProactorEventLoop' object has no attribute '_ssock'\r\n\r\nEnable tracemalloc to get traceback where the object was allocated.\r\nSee https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.\r\n  warnings.warn(pytest.PytestUnraisableExceptionWarning(msg))\r\n"
+}

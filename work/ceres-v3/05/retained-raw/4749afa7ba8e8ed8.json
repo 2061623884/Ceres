@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/observer-malformed-selection-v6-20261005T232644Z-91b257fb/probe-ledger.json",
+  "original_sha256": "2f8b0e73a87f467dcfdb510fe72e9c468b2d9ac5b918ede2defad9a16c8bc99e",
+  "original_utf8_bom": false,
+  "utf8_text": "{\r\n  \"kind\": \"controlled-observer-only\",\r\n  \"seam\": \"public Starlette TestClient.send\",\r\n  \"external_network_policy\": \"deny all socket connects and all non-testserver HTTP sends\",\r\n  \"testclient_requests\": [],\r\n  \"turn_requests\": [],\r\n  \"blocked_http\": [],\r\n  \"blocked_sockets\": [\r\n    {\r\n      \"operation\": \"connect\",\r\n      \"address\": \"('127.0.0.1', 55922)\"\r\n    }\r\n  ],\r\n  \"pytest_exitstatus\": 1\r\n}\r\n"
+}

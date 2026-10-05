@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/controlled-20261005T213814Z-e9eee78c/core-002/phase-002-core16-goal-protocol/result.json",
+  "original_sha256": "51df536245a6cb43cc4a6693eb6a84e596a27e40e1642d110efc3d9f9aa3bb53",
+  "original_utf8_bom": false,
+  "utf8_text": "{\r\n  \"exit_code\": 0,\r\n  \"duration_seconds\": 24.125,\r\n  \"selected_node_count\": 18,\r\n  \"junit_node_count\": 18,\r\n  \"passed\": 18,\r\n  \"failed_or_error\": [],\r\n  \"trace_record_count\": 64,\r\n  \"sse_trace_count\": 28,\r\n  \"stdout_sha256\": \"58c3d7dbfd2384163700645cccf7e69239c203501129fc970e40a660cdf13043\",\r\n  \"stderr_sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\",\r\n  \"source_unchanged\": true\r\n}\r\n"
+}

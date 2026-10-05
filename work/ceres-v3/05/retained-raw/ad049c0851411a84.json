@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/20261006T063034368-f2b8c785af8745e7b39535c735aa930f/source-hashes-after.json",
+  "original_sha256": "12a29bfc2c50470bbfe1c63e9b5bcce6e519e269a1bc64122b4edc39ba1891c3",
+  "original_utf8_bom": false,
+  "utf8_text": "{\r\n  \"captured_at_utc\": \"2026-10-05T22:34:00.400410+00:00\",\r\n  \"frozen_baseline_zip_sha256\": \"057c8503f97e49da9425e07294bfdaf5af3d8cb46c20fb1814eac0f202131b69\",\r\n  \"source_path_count\": 305,\r\n  \"match_count\": 305,\r\n  \"missing\": [],\r\n  \"mismatches\": [],\r\n  \"catalog_path\": \"data/sale_guide.db\",\r\n  \"catalog_sha256_before\": \"772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10\",\r\n  \"catalog_sha256_after\": \"772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10\",\r\n  \"catalog_unchanged\": true\r\n}\r\n"
+}

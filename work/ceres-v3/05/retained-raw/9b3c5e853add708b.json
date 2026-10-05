@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/20261006T064846294-4702c589bd6944b79f900a77c1d202bb/analysis.stdout",
+  "original_sha256": "04772ba40c70db5fd117c9c4b4f668ebce332a1f52123a5d80413a6f8d92602d",
+  "original_utf8_bom": false,
+  "utf8_text": "{\"route_n\": 22, \"route_correct\": 22, \"route_failed\": 0, \"route_p95_ms\": 691.9858001638204, \"route_q20_pass\": true, \"role_sample_n\": 5, \"reply_max_ms\": 14474.29780010134, \"reply_q20_pass\": false}\r\n"
+}

@@ -8,7 +8,7 @@ from pydantic import BaseModel, Field, field_validator
 from app.core.config import get_settings
 
 Decision = Literal["stay_current", "suggest_switch", "clarify"]
-CRITERIA_VERSION = "ceres-service-v3.1"
+CRITERIA_VERSION = "ceres-service-v3.2"
 # 01 observed 235.6–773ms. This bounds network/inference, not the 1s P95 target.
 KEV_TIMEOUT_SECONDS = 3.0
 INSTRUCTIONS = """Classify this turn using current_role, selected_object and recent_dialogue.
@@ -16,13 +16,17 @@ Keke handles shopping, product comparison, purchase lists. Momo handles specific
 order eligibility and after-sales actions. BOTH roles answer GENERAL store policies (returns,
 refunds, delivery) and greetings. A product being considered is NOT a placed order.
 The latest explicit new request overrides the old topic. Be conservative about switching.
+Decide which SERVICE can continue, not whether its business action is fully specified.
+Recent dialogue can resolve the service even when selected_object is null. If that dialogue
+is about removing an item from a purchase list, Keke handles the next cancellation reply;
+Keke can clarify the exact item/action within its own business turn.
 For '取消一下': shopping-list context stays with Keke; placed-order context needs Momo;
 with no resolvable object choose clarify. Questions about a general policy stay even when
 they mention returns. Only classify; never act, invent an object or automatically switch."""
 CRITERIA = {
-    "stay_current": "Current role can handle it: shopping with Keke, specific orders with Momo, or GENERAL policies/greetings with either role.",
+    "stay_current": "Current role can handle it: shopping or purchase-list changes with Keke (including a short cancellation reply to list-removal dialogue, even without selected_object), specific orders with Momo, or GENERAL policies/greetings with either role. Business details may still need clarification within that role.",
     "suggest_switch": "Clearly requires the OTHER role: specific placed-order work from Keke, or a NEW shopping request from Momo. Not general policy or ambiguous cancellation.",
-    "clarify": "Intent/object is unresolved even with context, especially cancellation with no object. Ask in the current chat before choosing a service.",
+    "clarify": "The SERVICE needed is unresolved even with current role, selected object and dialogue. Cancellation with neither a purchase-list nor placed-order context needs clarification. Missing item details inside an already clear shopping service do not require service clarification.",
 }
 
 

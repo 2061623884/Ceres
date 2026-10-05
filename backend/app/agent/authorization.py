@@ -228,10 +228,13 @@ def goal_target_mutation(candidate: Any, candidates: CandidateSet) -> Mutation |
         return None
     goal = candidate.goal
     constraints = goal.constraints
+    quantity = goal.quantity if resolved.kind == "product" else None
     return Mutation(
         verb="add",
         candidate_ref=resolved.ref,
         name=resolved.name,
+        quantity_mode="set" if quantity is not None else None,
+        quantity_value=quantity,
         people=constraints.people,
         excluded_ingredients=list(constraints.excluded_ingredients),
         budget_fen=(

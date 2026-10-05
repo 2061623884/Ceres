@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/candidate-v3-20261005T224125Z-6ab847de/probe-role-r01/evidence/R01.json",
+  "original_sha256": "ba4bd01f47a755bd2e865c6f2416662ed00ad00faab1f2af701054cb7e1546db",
+  "original_utf8_bom": false,
+  "utf8_text": "{\n  \"case_id\": \"R01\",\n  \"message\": \"想买两瓶无糖可乐\",\n  \"expected_route\": \"stay_current\",\n  \"passed\": false,\n  \"opening\": {\n    \"opening_id\": \"open_dd38b63d0810484fb531c1a5840fd0f3\",\n    \"guide_session_id\": \"sess-cfdf66d10409\",\n    \"mercury_session_id\": \"ms_98c936a22614\",\n    \"role\": \"keke\",\n    \"prompt_displayed\": false,\n    \"handoff_id\": null\n  },\n  \"actual_order\": null,\n  \"upstream\": [],\n  \"clock_scope\": \"public API call failed before terminal SSE; failure duration, not successful reply latency\",\n  \"memory_model\": \"controlled empty output; actual worker drained; both role main models real\",\n  \"error_type\": \"ConnectError\",\n  \"assertion\": \"controlled recording probe\",\n  \"backend_api_wall_ms\": 0.583200016990304\n}\n"
+}

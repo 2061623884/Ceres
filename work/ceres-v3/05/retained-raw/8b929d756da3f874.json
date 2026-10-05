@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/20261006T054335257-4b3698ab82f34a9a9026c70781b92a3d/preflight/amax-compute-processes.stdout",
+  "original_sha256": "52937e9899fd8610d6305e321a5870ce667268c9020310e652832e70c18a5d01",
+  "original_utf8_bom": false,
+  "utf8_text": "GPU-5165b827-1b01-e6f0-d147-38e565ee823f, 2701504, .venv/bin/python, 16944 MiB"
+}

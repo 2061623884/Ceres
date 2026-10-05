@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/candidate-v3-20261005T223716Z-47398eb3/probe-role-r01/boundary-attempts.jsonl",
+  "original_sha256": "b7a41d2df55c4680d3c6be3e55f7962e042252c76b28bd3d8459e9b19e92f2d3",
+  "original_utf8_bom": false,
+  "utf8_text": "{\"kind\": \"external-blocked\", \"host\": \"127.0.0.1\", \"method\": \"POST\", \"path\": \"/v1/systemone\"}\n{\"kind\": \"external-blocked\", \"host\": \"127.0.0.1\", \"method\": \"POST\", \"path\": \"/v1/chat/completions\"}\n"
+}

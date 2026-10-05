@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/analyzer-v4-20261005T225315Z-a999063e/negative-h01-handoff-omitted/environment.json",
+  "original_sha256": "4cfd8c620ff23c8d929ebd91e25cd26efc5d524c5c7440c25972be7f6a00f3b9",
+  "original_utf8_bom": false,
+  "utf8_text": "{\r\n  \"explicit_environment\": {\r\n    \"SYSTEMROOT\": \"C:\\\\WINDOWS\",\r\n    \"WINDIR\": \"C:\\\\WINDOWS\",\r\n    \"TEMP\": \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\05\\\\evidence\\\\analyzer-v4-20261005T225315Z-a999063e\\\\negative-h01-handoff-omitted\\\\temp\",\r\n    \"TMP\": \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\05\\\\evidence\\\\analyzer-v4-20261005T225315Z-a999063e\\\\negative-h01-handoff-omitted\\\\temp\",\r\n    \"PYTHONUTF8\": \"1\",\r\n    \"PYTHONNOUSERSITE\": \"1\"\r\n  },\r\n  \"PATH\": \"inherited for Windows/Python runtime; value intentionally not copied\",\r\n  \"no_dotenv_or_credentials_loaded\": true\r\n}\r\n"
+}

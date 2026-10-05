@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/20261006T061823837-d5a54529857c4f1ba7896cef338a4441/preflight/amax-readonly.stdout",
+  "original_sha256": "edeeca3ca5f8823abf746e7742c0eedb016be5c1451db5722286c603b9ee7946",
+  "original_utf8_bom": false,
+  "utf8_text": "amax\n2701504   17128 python          .venv/bin/python -u -m kev.serve --run jaredpalmer/kev-4b@139fdd94f1b6a6ad80cc15e08fcb99cac885a101 --host 127.0.0.1 --port 8009\n1, GPU-5165b827-1b01-e6f0-d147-38e565ee823f, NVIDIA TITAN RTX, 24576 MiB, 17012 MiB\nGPU-5165b827-1b01-e6f0-d147-38e565ee823f, 2701504, .venv/bin/python, 16944 MiB\n"
+}

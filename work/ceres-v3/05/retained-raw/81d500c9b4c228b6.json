@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/analyzer-v4-20261005T225315Z-a999063e/negative-empty-role-directory/command.txt",
+  "original_sha256": "f78bccbd4ef29d550cfbd7647cb9bed0af2bf60d0c1cf7bfb9f7062cdd19aa84",
+  "original_utf8_bom": false,
+  "utf8_text": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe -X utf8 C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\05\\analyze-evidence.py --routes C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\05\\evidence\\analyzer-v4-20261005T225315Z-a999063e\\fixtures\\empty-role-samples\\routes --role-samples C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\05\\evidence\\analyzer-v4-20261005T225315Z-a999063e\\negative-empty-role-directory\\empty-roles --output C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\05\\evidence\\analyzer-v4-20261005T225315Z-a999063e\\negative-empty-role-directory\\analysis.json\r\n"
+}

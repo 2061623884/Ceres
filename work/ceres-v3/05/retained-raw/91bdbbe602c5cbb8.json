@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/analyzer-v5-controlled-retry-20261005T230606Z-5380d5c9/actual-observer-null-route-time/stdout.txt",
+  "original_sha256": "5ef392cb9cced6d4ebb3bdafb1394978eb009be30595493e15f1677d393c7d28",
+  "original_utf8_bom": false,
+  "utf8_text": "{\"route_n\": 1, \"route_correct\": 0, \"route_failed\": 1, \"route_p95_ms\": null, \"route_q20_pass\": false, \"role_sample_n\": 5, \"reply_max_ms\": 1000.0, \"reply_q20_pass\": true}\r\n"
+}

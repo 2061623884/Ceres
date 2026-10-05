@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/20261006T064846294-4702c589bd6944b79f900a77c1d202bb/preflight/effective-settings.command-input.py",
+  "original_sha256": "a77e7f6ab63a80f801450e99787115a47b48c723d12b846d155ee9e3ecc0d53c",
+  "original_utf8_bom": false,
+  "utf8_text": "import json, os\nfrom urllib.parse import urlsplit\nfrom app.core.config import Settings\ns=Settings()\nu=urlsplit(s.openai_base_url)\nprint(json.dumps({'llm_mode':s.llm_mode,'llm_model':s.llm_model,'llm_max_output_tokens':s.llm_max_output_tokens,'memory_model':s.memory_model,'openai_base_url_sanitized':{'scheme':u.scheme,'host':u.hostname,'path':u.path},'openai_api_key_present':bool(s.openai_api_key),'retrieval_mode':s.retrieval_mode,'retrieval_index_dir_present':bool(s.retrieval_index_dir),'process_override_names_present':{k:(k in os.environ) for k in ('LLM_MAX_OUTPUT_TOKENS','LLM_MODEL','OPENAI_BASE_URL','OPENAI_API_KEY','KEV_BASE_URL')}},ensure_ascii=False))\r\n"
+}

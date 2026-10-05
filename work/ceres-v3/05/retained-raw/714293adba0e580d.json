@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/analyzer-v4-20261005T225315Z-a999063e/negative-empty-role-directory/stdout.txt",
+  "original_sha256": "c30f490b4827e13007f0987355cfafb851f6b8a0af7de1676dc50b015401e6ea",
+  "original_utf8_bom": false,
+  "utf8_text": "{\"route_n\": 22, \"route_correct\": 22, \"route_failed\": 0, \"route_p95_ms\": 691.9858001638204, \"route_q20_pass\": true, \"role_sample_n\": 0, \"reply_max_ms\": null, \"reply_q20_pass\": false}\r\n"
+}

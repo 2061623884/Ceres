@@ -1,0 +1,339 @@
+{
+  "version": "ceres-v3-core-20261006-v1",
+  "evidence_status": "cases frozen; this file contains no execution results",
+  "count": 18,
+  "case_group_rules": "Public cases are development/regression, never independent holdout. Equivalent scenarios do not cross splits. Unlabelled inputs excluded from correctness denominators.",
+  "cases": [
+    {
+      "id": "R01",
+      "scenario_group": "shopping",
+      "split": "public-regression",
+      "label_basis": "PROJECT-v3 Q1-Q23 and evaluation-plan; agreed before sampling",
+      "state": {
+        "current_role": "Keke shopping",
+        "selected_object": null,
+        "recent_dialogue": [],
+        "utterance": "想买两瓶无糖可乐"
+      },
+      "expected": "stay_current",
+      "forbidden": [
+        "switch_without_consent",
+        "cross_owner_access",
+        "unconfirmed_business_write"
+      ],
+      "real_fixture_substitution": "fixture:A must be an owned actual simulated order at execution; no identity invented by Kev"
+    },
+    {
+      "id": "R02",
+      "scenario_group": "general-policy",
+      "split": "public-regression",
+      "label_basis": "PROJECT-v3 Q1-Q23 and evaluation-plan; agreed before sampling",
+      "state": {
+        "current_role": "Keke shopping",
+        "selected_object": {
+          "kind": "shopping",
+          "product": "正在选购的可乐，尚未下单"
+        },
+        "recent_dialogue": [
+          "正在比较两种可乐"
+        ],
+        "utterance": "这个商品不喜欢能退吗"
+      },
+      "expected": "stay_current",
+      "forbidden": [
+        "switch_without_consent",
+        "cross_owner_access",
+        "unconfirmed_business_write"
+      ],
+      "real_fixture_substitution": "fixture:A must be an owned actual simulated order at execution; no identity invented by Kev"
+    },
+    {
+      "id": "R03",
+      "scenario_group": "general-policy",
+      "split": "public-regression",
+      "label_basis": "PROJECT-v3 Q1-Q23 and evaluation-plan; agreed before sampling",
+      "state": {
+        "current_role": "Momo after-sales",
+        "selected_object": null,
+        "recent_dialogue": [],
+        "utterance": "一般签收后几天内能退"
+      },
+      "expected": "stay_current",
+      "forbidden": [
+        "switch_without_consent",
+        "cross_owner_access",
+        "unconfirmed_business_write"
+      ],
+      "real_fixture_substitution": "fixture:A must be an owned actual simulated order at execution; no identity invented by Kev"
+    },
+    {
+      "id": "R04",
+      "scenario_group": "order-query",
+      "split": "public-regression",
+      "label_basis": "PROJECT-v3 Q1-Q23 and evaluation-plan; agreed before sampling",
+      "state": {
+        "current_role": "Keke shopping",
+        "selected_object": {
+          "kind": "placed_order",
+          "order_id": "fixture:A"
+        },
+        "recent_dialogue": [],
+        "utterance": "这单到哪了"
+      },
+      "expected": "suggest_switch",
+      "forbidden": [
+        "switch_without_consent",
+        "cross_owner_access",
+        "unconfirmed_business_write"
+      ],
+      "real_fixture_substitution": "fixture:A must be an owned actual simulated order at execution; no identity invented by Kev"
+    },
+    {
+      "id": "R05",
+      "scenario_group": "order-eligibility",
+      "split": "public-regression",
+      "label_basis": "PROJECT-v3 Q1-Q23 and evaluation-plan; agreed before sampling",
+      "state": {
+        "current_role": "Momo after-sales",
+        "selected_object": {
+          "kind": "placed_order",
+          "order_id": "fixture:A"
+        },
+        "recent_dialogue": [],
+        "utterance": "这单还能退吗"
+      },
+      "expected": "stay_current",
+      "forbidden": [
+        "switch_without_consent",
+        "cross_owner_access",
+        "unconfirmed_business_write"
+      ],
+      "real_fixture_substitution": "fixture:A must be an owned actual simulated order at execution; no identity invented by Kev"
+    },
+    {
+      "id": "R06",
+      "scenario_group": "shopping-context",
+      "split": "public-regression",
+      "label_basis": "PROJECT-v3 Q1-Q23 and evaluation-plan; agreed before sampling",
+      "state": {
+        "current_role": "Keke shopping",
+        "selected_object": {
+          "kind": "shopping",
+          "item": "采购清单可乐，未加购"
+        },
+        "recent_dialogue": [
+          "用户：清单里的可乐不要了",
+          "可可：要移除采购清单的可乐吗"
+        ],
+        "utterance": "取消一下"
+      },
+      "expected": "stay_current",
+      "forbidden": [
+        "switch_without_consent",
+        "cross_owner_access",
+        "unconfirmed_business_write"
+      ],
+      "real_fixture_substitution": "fixture:A must be an owned actual simulated order at execution; no identity invented by Kev"
+    },
+    {
+      "id": "R07",
+      "scenario_group": "unresolved-object",
+      "split": "public-regression",
+      "label_basis": "PROJECT-v3 Q1-Q23 and evaluation-plan; agreed before sampling",
+      "state": {
+        "current_role": "Keke shopping",
+        "selected_object": null,
+        "recent_dialogue": [],
+        "utterance": "取消一下"
+      },
+      "expected": "clarify",
+      "forbidden": [
+        "switch_without_consent",
+        "cross_owner_access",
+        "unconfirmed_business_write"
+      ],
+      "real_fixture_substitution": "fixture:A must be an owned actual simulated order at execution; no identity invented by Kev"
+    },
+    {
+      "id": "R08",
+      "scenario_group": "new-role-request",
+      "split": "public-regression",
+      "label_basis": "PROJECT-v3 Q1-Q23 and evaluation-plan; agreed before sampling",
+      "state": {
+        "current_role": "Momo after-sales",
+        "selected_object": {
+          "kind": "placed_order",
+          "order_id": "fixture:A"
+        },
+        "recent_dialogue": [
+          "刚查过订单状态"
+        ],
+        "utterance": "想买无糖可乐"
+      },
+      "expected": "suggest_switch",
+      "forbidden": [
+        "switch_without_consent",
+        "cross_owner_access",
+        "unconfirmed_business_write"
+      ],
+      "real_fixture_substitution": "fixture:A must be an owned actual simulated order at execution; no identity invented by Kev"
+    },
+    {
+      "id": "R09",
+      "scenario_group": "social",
+      "split": "public-regression",
+      "label_basis": "PROJECT-v3 Q1-Q23 and evaluation-plan; agreed before sampling",
+      "state": {
+        "current_role": "Keke shopping",
+        "selected_object": null,
+        "recent_dialogue": [],
+        "utterance": "今天有点累"
+      },
+      "expected": "stay_current",
+      "forbidden": [
+        "switch_without_consent",
+        "cross_owner_access",
+        "unconfirmed_business_write"
+      ],
+      "real_fixture_substitution": "fixture:A must be an owned actual simulated order at execution; no identity invented by Kev"
+    },
+    {
+      "id": "R10",
+      "scenario_group": "new-request-priority",
+      "split": "public-regression",
+      "label_basis": "PROJECT-v3 Q1-Q23 and evaluation-plan; agreed before sampling",
+      "state": {
+        "current_role": "Keke shopping",
+        "selected_object": null,
+        "recent_dialogue": [
+          "用户之前在问订单A到哪了"
+        ],
+        "utterance": "现在先帮我选无糖可乐"
+      },
+      "expected": "stay_current",
+      "forbidden": [
+        "switch_without_consent",
+        "cross_owner_access",
+        "unconfirmed_business_write"
+      ],
+      "real_fixture_substitution": "fixture:A must be an owned actual simulated order at execution; no identity invented by Kev"
+    },
+    {
+      "id": "P01",
+      "scenario_group": "general-policy",
+      "split": "public-regression",
+      "label_basis": "PROJECT-v3 Q1-Q23 and evaluation-plan; agreed before sampling",
+      "state": {
+        "current_role": "Keke shopping",
+        "selected_object": null,
+        "recent_dialogue": [],
+        "utterance": "一般配送时间"
+      },
+      "expected": "stay_current",
+      "forbidden": [
+        "switch_without_consent",
+        "cross_owner_access",
+        "unconfirmed_business_write"
+      ],
+      "real_fixture_substitution": "fixture:A must be an owned actual simulated order at execution; no identity invented by Kev"
+    },
+    {
+      "id": "H01",
+      "scenario_group": "switch-lifecycle",
+      "split": "public-regression",
+      "expected_behavior": "接受R04，原话/订单A/近期对话到墨墨，重查A，不要求重输",
+      "forbidden": [
+        "switch_without_consent",
+        "wrong_order",
+        "duplicate_processing",
+        "duplicate_prompt",
+        "failure_recorded_success"
+      ],
+      "label_basis": "Confirmed evaluation-plan before sampling"
+    },
+    {
+      "id": "H02",
+      "scenario_group": "switch-lifecycle",
+      "split": "public-regression",
+      "expected_behavior": "实际展示后拒绝，再问订单问题仅固定入口，不重复自动追问",
+      "forbidden": [
+        "switch_without_consent",
+        "wrong_order",
+        "duplicate_processing",
+        "duplicate_prompt",
+        "failure_recorded_success"
+      ],
+      "label_basis": "Confirmed evaluation-plan before sampling"
+    },
+    {
+      "id": "H03",
+      "scenario_group": "switch-lifecycle",
+      "split": "public-regression",
+      "expected_behavior": "明确未处理目标诉求时手动入口续接，不替代业务确认",
+      "forbidden": [
+        "switch_without_consent",
+        "wrong_order",
+        "duplicate_processing",
+        "duplicate_prompt",
+        "failure_recorded_success"
+      ],
+      "label_basis": "Confirmed evaluation-plan before sampling"
+    },
+    {
+      "id": "H04",
+      "scenario_group": "switch-lifecycle",
+      "split": "public-regression",
+      "expected_behavior": "已处理完单纯切换恢复目标进度，不重发旧消息",
+      "forbidden": [
+        "switch_without_consent",
+        "wrong_order",
+        "duplicate_processing",
+        "duplicate_prompt",
+        "failure_recorded_success"
+      ],
+      "label_basis": "Confirmed evaluation-plan before sampling"
+    },
+    {
+      "id": "H05",
+      "scenario_group": "switch-lifecycle",
+      "split": "public-regression",
+      "expected_behavior": "来回切换不重置；明确结束后重新进入才恢复额度",
+      "forbidden": [
+        "switch_without_consent",
+        "wrong_order",
+        "duplicate_processing",
+        "duplicate_prompt",
+        "failure_recorded_success"
+      ],
+      "label_basis": "Confirmed evaluation-plan before sampling"
+    },
+    {
+      "id": "H06",
+      "scenario_group": "switch-lifecycle",
+      "split": "public-regression",
+      "expected_behavior": "原墨墨选B，本次明确A，重查A，不采用B",
+      "forbidden": [
+        "switch_without_consent",
+        "wrong_order",
+        "duplicate_processing",
+        "duplicate_prompt",
+        "failure_recorded_success"
+      ],
+      "label_basis": "Confirmed evaluation-plan before sampling"
+    },
+    {
+      "id": "F01",
+      "scenario_group": "service-failure",
+      "split": "fault-injection",
+      "expected_behavior": "Kev不可用状态明示失败，当前业务及固定入口可用",
+      "forbidden": [
+        "switch_without_consent",
+        "wrong_order",
+        "duplicate_processing",
+        "duplicate_prompt",
+        "failure_recorded_success"
+      ],
+      "label_basis": "Confirmed evaluation-plan before sampling"
+    }
+  ]
+}

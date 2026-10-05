@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/analyzer-v5-20261005T230316Z-3bc02469/actual-observer-null-route-time/fixture-note.json",
+  "original_sha256": "b1798f5c8e6b46eb343b8a71e57ea7eaae0daae4c76ad585c2c5fa586e7fb27d",
+  "original_utf8_bom": false,
+  "utf8_text": "{\r\n  \"scenario\": \"actual-observer-null-route-time\",\r\n  \"classification\": \"Synthetic receipt completeness probe only; not model or business evidence\",\r\n  \"route_input\": \"work/ceres-v3/05/evidence/candidate-v3-20261005T224125Z-6ab847de/probe-route/evidence/results.json\",\r\n  \"mutation\": \"none\"\r\n}\r\n"
+}

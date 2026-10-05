@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/20261006T061823837-d5a54529857c4f1ba7896cef338a4441/preflight/commands.json",
+  "original_sha256": "a80680e988f21047aaaf022ad46c4f9afa871c94501765b897ac8dc482118243",
+  "original_utf8_bom": false,
+  "utf8_text": "{\r\n  \"local_listener\": \"Get-NetTCPConnection -State Listen -LocalPort 18009; Get-CimInstance Win32_Process | Where-Object { $_.ProcessId -in (Get-NetTCPConnection -State Listen -LocalPort 18009).OwningProcess } | Select-Object ProcessId,Name,CommandLine\",\r\n  \"dotenv\": \"Read .env keys in memory; write only model/mode, sanitized scheme+host+path, key-presence and env-override-presence; never values for credentials\",\r\n  \"models_get\": \"GET http://127.0.0.1:18009/v1/models (read-only; no auth header)\",\r\n  \"remote_readonly\": \"hostname; ps -eo pid,etimes,comm,args | grep '[k]ev.serve'; nvidia-smi --query-gpu=index,uuid,name,memory.total,memory.used --format=csv,noheader -i 1; nvidia-smi --query-compute-apps=gpu_uuid,pid,process_name,used_memory --format=csv,noheader -i 1\"\r\n}\r\n"
+}

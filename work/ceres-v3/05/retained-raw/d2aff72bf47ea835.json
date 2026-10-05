@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/candidate-v3-20261005T224125Z-6ab847de/probe-route/command.txt",
+  "original_sha256": "830ef5dee7dd3d73f0b5d51f2d4d7eb120f07657e1ca60898fd9ae2d39d91f2b",
+  "original_utf8_bom": false,
+  "utf8_text": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe -X utf8 -m pytest -vv --showlocals -p no:cacheprovider -W error::pytest.PytestUnhandledThreadExceptionWarning -p ceres_controlled_trace -p ceres_failure_inject --basetemp=C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\05\\evidence\\candidate-v3-20261005T224125Z-6ab847de\\probe-route\\pytest-basetemp --junitxml=C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\05\\evidence\\candidate-v3-20261005T224125Z-6ab847de\\probe-route\\junit.xml tests/test_v3_live_routing.py::test_real_kev_fixed_public_contexts\r\n"
+}

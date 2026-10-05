@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/analyzer-v4-20261005T225315Z-a999063e/negative-empty-role-directory/command.json",
+  "original_sha256": "2a9873a3826442dd4f7ec47a49afc70bdce66c6efba5ce31e8303c4c2af46928",
+  "original_utf8_bom": false,
+  "utf8_text": "{\r\n  \"argv\": [\r\n    \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\backend\\\\.venv\\\\Scripts\\\\python.exe\",\r\n    \"-X\",\r\n    \"utf8\",\r\n    \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\05\\\\analyze-evidence.py\",\r\n    \"--routes\",\r\n    \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\05\\\\evidence\\\\analyzer-v4-20261005T225315Z-a999063e\\\\fixtures\\\\empty-role-samples\\\\routes\",\r\n    \"--role-samples\",\r\n    \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\05\\\\evidence\\\\analyzer-v4-20261005T225315Z-a999063e\\\\negative-empty-role-directory\\\\empty-roles\",\r\n    \"--output\",\r\n    \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\05\\\\evidence\\\\analyzer-v4-20261005T225315Z-a999063e\\\\negative-empty-role-directory\\\\analysis.json\"\r\n  ],\r\n  \"cwd\": \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\",\r\n  \"shell\": false\r\n}\r\n"
+}

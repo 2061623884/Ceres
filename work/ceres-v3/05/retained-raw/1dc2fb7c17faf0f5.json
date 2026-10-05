@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "review-v6/check-review-zip.py",
+  "original_sha256": "6deaab9412dd8471ecacf188dc67b880d562a6f6ca5e74794642fd36c07bf6a0",
+  "original_utf8_bom": false,
+  "utf8_text": "import hashlib,json,zipfile\nfrom pathlib import Path\nroot=Path.cwd(); d=root/'work/ceres-v3/05/review-v6'; scope=json.loads((d/'review-scope.json').read_text(encoding='utf-8'))\nsha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()\nrz=d/'review-source.zip'; patch=d/'source.patch'; wrapper=d/'source.patch.json'\nprint('review_zip',sha(rz),'expected',scope['review_source_zip_sha256'],'match',sha(rz)==scope['review_source_zip_sha256'])\nwith zipfile.ZipFile(rz) as z:\n print('review_zip_entries',len(z.namelist()),z.namelist())\n print('entry_hash_mismatches',[n for n in z.namelist() if n in scope['sha256'] and hashlib.sha256(z.read(n)).hexdigest()!=scope['sha256'][n]])\nprint('source.patch sha',sha(patch),'source.patch.json sha',sha(wrapper))\np=json.loads(wrapper.read_text(encoding='utf-8')); print('patch wrapper keys',list(p)); print('patch wrapper values',{k:v for k,v in p.items() if k not in ('patch','content','data')})"
+}

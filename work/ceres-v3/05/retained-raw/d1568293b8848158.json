@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/controlled-20261005T213814Z-e9eee78c/collect/command.txt",
+  "original_sha256": "d4250b86ed0abe6401de21de3bf3aea4c63a11ad9b52dc71ae6baca1c775fd71",
+  "original_utf8_bom": false,
+  "utf8_text": "Working directory: C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\r\nCommand: C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe -X utf8 -m pytest --collect-only -q --showlocals -p no:cacheprovider -W error::pytest.PytestUnhandledThreadExceptionWarning --basetemp=C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\05\\evidence\\controlled-20261005T213814Z-e9eee78c\\collect\\pytest-basetemp tests/test_v3_core_evaluation.py tests/test_v3_routing_handoff.py tests/test_v3_routing_context.py tests/test_v3_switch_lifecycle.py\r\n"
+}

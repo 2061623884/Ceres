@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/analyzer-v5-controlled-retry-20261005T230606Z-5380d5c9/missing-h01-handoff/roles/R03.json",
+  "original_sha256": "50d03c8ec1c4aed88a287bfb5e68777e6b2908093119e7aabd394dffc0919d7d",
+  "original_utf8_bom": false,
+  "utf8_text": "{\r\n  \"case_id\": \"R03\",\r\n  \"passed\": true,\r\n  \"backend_api_wall_ms\": 1000.0,\r\n  \"upstream\": []\r\n}\r\n"
+}

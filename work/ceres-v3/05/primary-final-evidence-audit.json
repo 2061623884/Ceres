@@ -1,0 +1,62 @@
+{
+  "reader": "Primary Agent; raw receipt/command/environment audit only, no tests/models/performance execution",
+  "actual_python_exit_code": 0,
+  "python_executable": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+  "argv": [
+    "-X",
+    "utf8",
+    "-m",
+    "pytest",
+    "-p",
+    "no:cacheprovider",
+    "-W",
+    "error::pytest.PytestUnhandledThreadExceptionWarning",
+    "--basetemp",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\05\\evidence\\candidate-v5-20261005T230721Z-y3rsbooc\\role-sampling\\temp\\pytest-basetemp",
+    "-q",
+    "tests/test_v3_live_sampling.py::test_real_role_and_kev_sample",
+    "--tb=short"
+  ],
+  "process_id": 86496,
+  "receipts": [
+    {
+      "path": "work/ceres-v3/05/evidence/candidate-v5-20261005T230721Z-y3rsbooc/role-sampling/role-samples/H01.json",
+      "actual_sha256": "404183750b35748401df2b0c496fd9be48370387b68e1eed7ee32d610aac20a2",
+      "sidecar_sha256": "404183750b35748401df2b0c496fd9be48370387b68e1eed7ee32d610aac20a2",
+      "byte_match": true,
+      "passed_recorded": true
+    },
+    {
+      "path": "work/ceres-v3/05/evidence/candidate-v5-20261005T230721Z-y3rsbooc/role-sampling/role-samples/R01-named-product-variant.json",
+      "actual_sha256": "db280bca21a1cb5b7bdf50910f6e28bd5faf1d9ec3e7f9e7a1ddc857700248ee",
+      "sidecar_sha256": "db280bca21a1cb5b7bdf50910f6e28bd5faf1d9ec3e7f9e7a1ddc857700248ee",
+      "byte_match": true,
+      "passed_recorded": true
+    },
+    {
+      "path": "work/ceres-v3/05/evidence/candidate-v5-20261005T230721Z-y3rsbooc/role-sampling/role-samples/R01.json",
+      "actual_sha256": "d7b8767032186555ff1767ff85a8c317b519f66ca159f1f1ee62eb9cbaa978e5",
+      "sidecar_sha256": "d7b8767032186555ff1767ff85a8c317b519f66ca159f1f1ee62eb9cbaa978e5",
+      "byte_match": true,
+      "passed_recorded": true
+    },
+    {
+      "path": "work/ceres-v3/05/evidence/candidate-v5-20261005T230721Z-y3rsbooc/role-sampling/role-samples/R02.json",
+      "actual_sha256": "51a4010f370493719af9c476445f56c74a508eae5248569addb9b8134b12b623",
+      "sidecar_sha256": "51a4010f370493719af9c476445f56c74a508eae5248569addb9b8134b12b623",
+      "byte_match": true,
+      "passed_recorded": true
+    },
+    {
+      "path": "work/ceres-v3/05/evidence/candidate-v5-20261005T230721Z-y3rsbooc/role-sampling/role-samples/R03.json",
+      "actual_sha256": "82fded81112bf33e62f310d8d46df84393de2cd92915a77f3719f3c971d42d8f",
+      "sidecar_sha256": "82fded81112bf33e62f310d8d46df84393de2cd92915a77f3719f3c971d42d8f",
+      "byte_match": true,
+      "passed_recorded": true
+    }
+  ],
+  "analysis_file": "work/ceres-v3/05/evidence/candidate-v5-20261005T230721Z-y3rsbooc/analysis.json",
+  "analysis_sha256": "a88fdb66ffa5fc79268a83429d537bb8570d43757027afc8704a1b09c21a1649",
+  "manual_policy_review": "R02/R03: simulated store,7-day window,returnable flag/fresh exceptions,P-RET-01/02 sources,no application/eligibility promise; H01 status matches owned simulated order",
+  "version_note": "Real v5 source-before/after; v6 observer-only fix occurred afterward. Raw v4 and v3 failures untouched."
+}

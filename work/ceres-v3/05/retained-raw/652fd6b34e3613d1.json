@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/analyzer-v5-20261005T230316Z-3bc02469/missing-h01-handoff/roles/H01.json",
+  "original_sha256": "0553f7e4c59b2781f8265dd0c45f0275b0c7ae861f033f692e35b379108a74bf",
+  "original_utf8_bom": false,
+  "utf8_text": "{\r\n  \"case_id\": \"H01\",\r\n  \"passed\": true,\r\n  \"backend_api_wall_ms\": 1000.0,\r\n  \"upstream\": []\r\n}\r\n"
+}

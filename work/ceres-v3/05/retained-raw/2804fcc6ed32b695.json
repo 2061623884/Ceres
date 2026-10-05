@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/analyzer-v5-controlled-retry-20261005T230606Z-5380d5c9/complete-seven-timings-synthetic/stdout.txt",
+  "original_sha256": "53f4bb09fbb7a569d47127a0577ab46afce7c713a6e86e1750190973e5284c2d",
+  "original_utf8_bom": false,
+  "utf8_text": "{\"route_n\": 22, \"route_correct\": 22, \"route_failed\": 0, \"route_p95_ms\": 200.0, \"route_q20_pass\": true, \"role_sample_n\": 5, \"reply_max_ms\": 1000.0, \"reply_q20_pass\": true}\r\n"
+}

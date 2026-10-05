@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/analyzer-v5-controlled-20261005T230523Z-e149b47e/actual-observer-null-route-time/stdout.txt",
+  "original_sha256": "347e83cc3c87ceab02f68992ad8a7070955cdf886571c0032b4982130893752e",
+  "original_utf8_bom": false,
+  "utf8_text": "{\"route_n\": 1, \"route_correct\": 0, \"route_failed\": 1, \"route_p95_ms\": null, \"route_q20_pass\": false, \"role_sample_n\": 0, \"reply_max_ms\": null, \"reply_q20_pass\": false}\r\n"
+}

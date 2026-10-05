@@ -1,0 +1,69 @@
+{
+  "case_version": "ceres-v3-core-20261006-v1",
+  "status": "planned mapping; no execution or pass results",
+  "case_count": 18,
+  "mapping": {
+    "R01": [
+      "backend/tests/test_v3_core_evaluation.py::test_fixed_shopping_utterance_reaches_real_plan_after_required_consent"
+    ],
+    "R02": [
+      "backend/tests/test_v3_core_evaluation.py::test_keke_policy_stays_and_answers_with_source"
+    ],
+    "R03": [
+      "backend/tests/test_v3_core_evaluation.py::test_r03_unselected_momo_reads_shared_policy_without_order"
+    ],
+    "R04": [
+      "backend/tests/test_v3_routing_handoff.py::test_order_request_waits_for_consent_and_replays_exactly_once"
+    ],
+    "R05": [
+      "backend/tests/test_v3_core_evaluation.py::test_r05_order_eligibility_stays_and_reads_actual_owned_order"
+    ],
+    "R06": [
+      "backend/tests/test_v3_routing_context.py::test_list_cancellation_uses_guide_history_without_order_action"
+    ],
+    "R07": [
+      "backend/tests/test_v3_routing_handoff.py::test_unknown_object_clarifies_without_role_business_or_order_mutation"
+    ],
+    "R08": [
+      "backend/tests/test_v3_core_evaluation.py::test_fixed_shopping_utterance_reaches_real_plan_after_required_consent"
+    ],
+    "R09": [
+      "backend/tests/test_v3_core_evaluation.py::test_r09_life_comment_stays_without_creating_task"
+    ],
+    "R10": [
+      "backend/tests/test_v3_routing_context.py::test_new_shopping_request_invalidates_old_order_handoff"
+    ],
+    "P01": [
+      "backend/tests/test_v3_core_evaluation.py::test_keke_policy_stays_and_answers_with_source"
+    ],
+    "H01": [
+      "backend/tests/test_v3_routing_handoff.py::test_order_request_waits_for_consent_and_replays_exactly_once",
+      "backend/tests/test_v3_switch_lifecycle.py::test_momo_handoff_keeps_relevant_dialogue_and_resumes_existing_guide_state"
+    ],
+    "H02": [
+      "backend/tests/test_v3_switch_lifecycle.py::test_display_quota_survives_get_rejection_and_role_switch_until_explicit_close"
+    ],
+    "H03": [
+      "backend/tests/test_v3_switch_lifecycle.py::test_manual_selection_resumes_pending_handoff_but_later_selection_only_restores"
+    ],
+    "H04": [
+      "backend/tests/test_v3_switch_lifecycle.py::test_manual_selection_resumes_pending_handoff_but_later_selection_only_restores"
+    ],
+    "H05": [
+      "backend/tests/test_v3_switch_lifecycle.py::test_display_quota_survives_get_rejection_and_role_switch_until_explicit_close"
+    ],
+    "H06": [
+      "backend/tests/test_v3_routing_handoff.py::test_order_request_waits_for_consent_and_replays_exactly_once",
+      "backend/tests/test_v3_routing_handoff.py::test_momo_explicit_order_matches_router_and_business_instead_of_old_selection"
+    ],
+    "F01": [
+      "backend/tests/test_v3_routing_handoff.py::test_route_unavailable_is_failure_but_current_role_still_operates"
+    ]
+  },
+  "notes": [
+    "Parametrized R02/P01 must resolve to their corresponding concrete collected nodes at execution.",
+    "Parametrized R01/R08 use the fixed original utterances and real zero-cola plan/quantity; distinguish current-role processing and consent-required processing.",
+    "H01 target dialogue and actual plan preservation are exercised by the reverse journey; exact order A and deduplication are exercised by the forward journey.",
+    "Append original commands, actual collected nodes, exit codes and case-specific assertions only after execution."
+  ]
+}

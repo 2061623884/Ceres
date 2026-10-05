@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/analyzer-v4-20261005T225315Z-a999063e/negative-h01-handoff-omitted/command.txt",
+  "original_sha256": "450383120bea2c927835a3e99755ce65404f72469bd3c312f68b7f85cd88a92e",
+  "original_utf8_bom": false,
+  "utf8_text": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe -X utf8 C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\05\\analyze-evidence.py --routes C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\05\\evidence\\analyzer-v4-20261005T225315Z-a999063e\\fixtures\\five-roles-h01-handoff-omitted\\routes --role-samples C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\05\\evidence\\analyzer-v4-20261005T225315Z-a999063e\\fixtures\\five-roles-h01-handoff-omitted\\roles --output C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\05\\evidence\\analyzer-v4-20261005T225315Z-a999063e\\negative-h01-handoff-omitted\\analysis.json\r\n"
+}

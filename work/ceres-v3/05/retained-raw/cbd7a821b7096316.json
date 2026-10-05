@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/20261006T064846294-4702c589bd6944b79f900a77c1d202bb/preflight/runtime-config-file.json",
+  "original_sha256": "180cff9d643a7af17a43199676c438e81e2f39eefea65b45b6ff3a79b27d03ec",
+  "original_utf8_bom": false,
+  "utf8_text": "{\r\n  \"runtime_config_path\": \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\05\\\\runtime-config.json\",\r\n  \"runtime_config_sha256\": \"35963f172b7035da5909d404aeeac7aaa3e5163a23d9d07e2bba06299caedd15\",\r\n  \"config_reference\": \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\05\\\\candidate-v4\\\\baseline.json\"\r\n}\r\n"
+}

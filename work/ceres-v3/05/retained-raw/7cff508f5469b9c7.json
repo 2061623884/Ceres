@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/20261006T064846294-4702c589bd6944b79f900a77c1d202bb/preflight/service-still-running.command.txt",
+  "original_sha256": "21c38e2bc38354bfd04a23489e169a4e24798788804b2b928f51cd64a105ed97",
+  "original_utf8_bom": false,
+  "utf8_text": "ps -p 2701504 -o pid=,etimes=,comm=,args=\r\n"
+}

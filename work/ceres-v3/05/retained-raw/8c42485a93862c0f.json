@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/20261006T063034368-f2b8c785af8745e7b39535c735aa930f/preflight/service-still-running.command.txt",
+  "original_sha256": "d85a6e378ea3e9e5afe5096ddd749e13f839b96a12815cc8c398c5e6ba9466d5",
+  "original_utf8_bom": false,
+  "utf8_text": "ssh amax ps -p 2701504 -o pid=,etimes=,comm=,args=\r\n"
+}

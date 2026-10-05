@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/analyzer-v4-20261005T225315Z-a999063e/negative-observer-route-partial/command.txt",
+  "original_sha256": "f8ba81672943538236efa044f704523c103ec79fb746c017c773eba05d1b1216",
+  "original_utf8_bom": false,
+  "utf8_text": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe -X utf8 C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\05\\analyze-evidence.py --routes C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\05\\evidence\\analyzer-v4-20261005T225315Z-a999063e\\fixtures\\observer-route-request-failed\\routes --role-samples C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\05\\evidence\\analyzer-v4-20261005T225315Z-a999063e\\fixtures\\observer-route-request-failed\\roles --output C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\05\\evidence\\analyzer-v4-20261005T225315Z-a999063e\\negative-observer-route-partial\\analysis.json\r\n"
+}

@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/controlled-20261005T213814Z-e9eee78c/core-002/phase-001-r01-r08/junit.xml",
+  "original_sha256": "9d9505e41e34399ebb385e359df09747a00bf1286ed1554336a4672afd0b891e",
+  "original_utf8_bom": false,
+  "utf8_text": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"2\" time=\"3.604\" timestamp=\"2026-10-06T06:09:01.192784+08:00\" hostname=\"Diablo‘s_dark\"><testcase classname=\"tests.test_v3_core_evaluation\" name=\"test_fixed_shopping_utterance_reaches_real_plan_after_required_consent[keke-\\u60f3\\u4e70\\u4e24\\u74f6\\u65e0\\u7cd6\\u53ef\\u4e50-stay_current-2]\" time=\"2.116\" /><testcase classname=\"tests.test_v3_core_evaluation\" name=\"test_fixed_shopping_utterance_reaches_real_plan_after_required_consent[momo-\\u60f3\\u4e70\\u65e0\\u7cd6\\u53ef\\u4e50-suggest_switch-1]\" time=\"1.171\" /></testsuite></testsuites>"
+}

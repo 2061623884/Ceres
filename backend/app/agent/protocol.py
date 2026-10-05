@@ -550,6 +550,7 @@ def _goal(kind: str, intent: str, target: dict[str, Any], stated: dict[str, Any]
         kind=goal_kind,
         fulfillment_mode=stated.get("fulfillment_mode", "unspecified"),
         target_name=name,
+        quantity=_count(target.get("quantity"), "target.quantity") if kind == "product" else None,
         category_name=name if kind == "category" else None,
         items=items,
         constraints=GoalConstraints(**conditions),

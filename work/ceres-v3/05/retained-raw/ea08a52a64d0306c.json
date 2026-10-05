@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/20261006T063034368-f2b8c785af8745e7b39535c735aa930f/routing.command.txt",
+  "original_sha256": "56a7ac89b81bf604733e56431b7d4716d0922ed8d832d3dcf05a96a42b05f18c",
+  "original_utf8_bom": false,
+  "utf8_text": "\"C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe\" -X utf8 -m pytest -p no:cacheprovider -W error::pytest.PytestUnhandledThreadExceptionWarning --basetemp C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\05\\evidence\\20261006T063034368-f2b8c785af8745e7b39535c735aa930f\\temp-routing\\pytest-basetemp -q tests/test_v3_live_routing.py::test_real_kev_fixed_public_contexts --tb=short\r\n"
+}

@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/candidate-v5-20261005T230721Z-y3rsbooc/preflight/effective-settings.py",
+  "original_sha256": "76d0a3787c1f75d7da4fe49e8d399ce4e6a1ab32be1641c26a812be762f313bb",
+  "original_utf8_bom": false,
+  "utf8_text": "import json\nimport sys\nsys.path.insert(0, r'C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend')\nfrom app.core.config import Settings\nfrom urllib.parse import urlsplit\ns = Settings()\nprint(json.dumps({\"llm_mode\": s.llm_mode, \"llm_model\": s.llm_model,\n \"llm_max_output_tokens\": s.llm_max_output_tokens,\n \"openai_api_key_present\": bool(s.openai_api_key),\n \"openai_base_url_host\": urlsplit(s.openai_base_url).hostname}, ensure_ascii=False))\r\n"
+}

@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/analyzer-v4-20261005T225315Z-a999063e/negative-h01-handoff-omitted/input-sha256.json",
+  "original_sha256": "1341a246a8ba55a0dcb64b9b1d35f973b85d1285bc8d3d58a5e70cc69eeac97d",
+  "original_utf8_bom": false,
+  "utf8_text": "{\r\n  \"routes\": {\r\n    \"results.json\": \"e3b3d901c2c3319612ef2737f0b57f024043bf1c37010f6a2064fd69bb1c0b3d\"\r\n  },\r\n  \"roles\": {\r\n    \"H01.json\": \"36591cabbf60ed9b42033ff2d52872289e303cb0361759661ee3153f9744bf68\",\r\n    \"R01-named-product-variant.json\": \"36a9357a75aefa6cff3f7df2097bfd7f630191f864174d35b18fb98b90d9c592\",\r\n    \"R01.json\": \"61b26494c670378254de849f1c770bef37b5121dc4793b57f2dc925572d28fa0\",\r\n    \"R02.json\": \"a8727320ee9c5f2cb95e6d946022b68908f980b8c64616702f085a05555f19b9\",\r\n    \"R03.json\": \"c1d4d4ab28d7df3329d6ea40b0aee4975a2b2821b2568d8d7e2cb56c658708fc\"\r\n  }\r\n}\r\n"
+}

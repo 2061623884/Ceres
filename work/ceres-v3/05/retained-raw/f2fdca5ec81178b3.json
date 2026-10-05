@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/20261006T061823837-d5a54529857c4f1ba7896cef338a4441/preflight/amax-source-revision.command.txt",
+  "original_sha256": "1eabd8981c1c866f3612ee52db36cdf0ee47f8a8f41b900e7fe300b4be1b1af5",
+  "original_utf8_bom": false,
+  "utf8_text": "git -C /data/amax/services/ceres-kev4b-probe-20261005/upstream rev-parse HEAD; git -C /data/amax/services/ceres-kev4b-probe-20261005/upstream status --short\r\n"
+}

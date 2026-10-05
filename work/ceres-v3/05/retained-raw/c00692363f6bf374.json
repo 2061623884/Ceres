@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/analyzer-v4-20261005T225315Z-a999063e/negative-one-successful-role/command.txt",
+  "original_sha256": "a626b3ce074fc478a96ef2234f44e8fb8296516ab23e8c0d764167db3623bdd1",
+  "original_utf8_bom": false,
+  "utf8_text": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe -X utf8 C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\05\\analyze-evidence.py --routes C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\05\\evidence\\analyzer-v4-20261005T225315Z-a999063e\\fixtures\\one-successful-role\\routes --role-samples C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\05\\evidence\\analyzer-v4-20261005T225315Z-a999063e\\fixtures\\one-successful-role\\roles --output C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\05\\evidence\\analyzer-v4-20261005T225315Z-a999063e\\negative-one-successful-role\\analysis.json\r\n"
+}

@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/analyzer-v4-20261005T225315Z-a999063e/original-v3-22-routes-5-roles/command.txt",
+  "original_sha256": "4f881d43099e48968e388b0085d5e5d986d70716baa0bb30cdac5ac773d7b956",
+  "original_utf8_bom": false,
+  "utf8_text": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe -X utf8 C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\05\\analyze-evidence.py --routes C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\05\\evidence\\20261006T063034368-f2b8c785af8745e7b39535c735aa930f\\routing --role-samples C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\05\\evidence\\20261006T063034368-f2b8c785af8745e7b39535c735aa930f\\role-samples --output C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\05\\evidence\\analyzer-v4-20261005T225315Z-a999063e\\original-v3-22-routes-5-roles\\analysis.json\r\n"
+}

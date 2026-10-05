@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/candidate-v5-20261005T230721Z-y3rsbooc/preflight/effective-settings.stdout.txt",
+  "original_sha256": "a59dc51d3ff241281ecd85cbfc2a9073043826af2ba169239a80aae07b665149",
+  "original_utf8_bom": false,
+  "utf8_text": "{\"llm_mode\": \"live\", \"llm_model\": \"qwen3.8-27b\", \"llm_max_output_tokens\": 3072, \"openai_api_key_present\": true, \"openai_base_url_host\": \"discovery-api.intern-ai.org.cn\"}\r\n"
+}

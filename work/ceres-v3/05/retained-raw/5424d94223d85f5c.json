@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/analyzer-v5-controlled-20261005T230523Z-e149b47e/single-role-only/fixture-note.json",
+  "original_sha256": "d19d3cf6fc4201e6f0598afc5ca454ee9de984e88abd4f5fd3fb46d2a48c7e3e",
+  "original_utf8_bom": false,
+  "utf8_text": "{\r\n  \"scenario\": \"single-role-only\",\r\n  \"classification\": \"Synthetic receipt completeness probe only; not model or business evidence\",\r\n  \"route_input\": \"Synthetic complete 22-row route fixture\",\r\n  \"mutation\": \"roles\"\r\n}\r\n"
+}

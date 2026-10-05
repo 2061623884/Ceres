@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/candidate-v5-20261005T230721Z-y3rsbooc/analysis/stdout.txt",
+  "original_sha256": "25b82089ab698b47f7db79a7ecf5912348ac959e977a2904d8463bdeabab83ff",
+  "original_utf8_bom": false,
+  "utf8_text": "{\"route_n\": 22, \"route_correct\": 22, \"route_failed\": 0, \"route_p95_ms\": 691.9858001638204, \"route_q20_pass\": true, \"role_sample_n\": 5, \"reply_max_ms\": 10895.951899932697, \"reply_q20_pass\": true}\r\n"
+}

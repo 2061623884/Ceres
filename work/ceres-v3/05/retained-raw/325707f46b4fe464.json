@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/analyzer-v5-20261005T230316Z-3bc02469/actual-observer-null-route-time/routes/results.json",
+  "original_sha256": "6985718058411ce4f492244958c864dc906e17e938d0d81fa6097d9a500138f5",
+  "original_utf8_bom": false,
+  "utf8_text": "{\r\n  \"case_version\": \"ceres-v3-core-20261006-v1\",\r\n  \"scope\": \"actual API route_ms includes context preparation, real network and parsed decision; role and memory models controlled\",\r\n  \"requested_rows\": 22,\r\n  \"rows\": [\r\n    {\r\n      \"case_id\": \"R01\",\r\n      \"repetition\": 0,\r\n      \"expected\": \"stay_current\",\r\n      \"actual\": {\r\n        \"status\": \"request_failed\",\r\n        \"decision\": null,\r\n        \"route_ms\": null\r\n      },\r\n      \"passed\": false,\r\n      \"error\": \"ConnectError: controlled recording probe\",\r\n      \"api_wall_ms\": 0.5717999301850796,\r\n      \"upstream\": []\r\n    }\r\n  ]\r\n}\r\n"
+}

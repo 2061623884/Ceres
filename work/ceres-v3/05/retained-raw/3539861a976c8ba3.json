@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/candidate-v3-20261005T223716Z-47398eb3/observer-receipt-check.json",
+  "original_sha256": "f8529d6c241b20f088d0aead6540a5d4dcaddd2a25b0fcce6aaece2eff493f2b",
+  "original_utf8_bom": false,
+  "utf8_text": "{\r\n  \"role_receipt_exists\": true,\r\n  \"role_recorded_connect_error\": false,\r\n  \"role_source_sha_matches\": true,\r\n  \"route_receipt_exists\": true,\r\n  \"route_first_row_failed_with_missing_production_timing\": false,\r\n  \"route_requested_rows_incomplete\": false\r\n}\r\n"
+}

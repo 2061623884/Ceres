@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/analyzer-v4-20261005T225315Z-a999063e/original-v3-22-routes-5-roles/stdout.txt",
+  "original_sha256": "903a271259a6472e1b46bb1957d66cc3c99270535632646a38ef07526321169d",
+  "original_utf8_bom": false,
+  "utf8_text": "{\"route_n\": 22, \"route_correct\": 22, \"route_failed\": 0, \"route_p95_ms\": 691.9858001638204, \"route_q20_pass\": true, \"role_sample_n\": 5, \"reply_max_ms\": 8981.779500143602, \"reply_q20_pass\": false}\r\n"
+}

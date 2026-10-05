@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/controlled-20261005T213814Z-e9eee78c/core-002/phase-001-r01-r08/junit-summary.json",
+  "original_sha256": "fed2a11a6f4e3c724d82df53817cb9e7cefa14d310d9ca0cd88f3bd376536c1b",
+  "original_utf8_bom": false,
+  "utf8_text": "{\r\n  \"cases\": [\r\n    {\r\n      \"classname\": \"tests.test_v3_core_evaluation\",\r\n      \"name\": \"test_fixed_shopping_utterance_reaches_real_plan_after_required_consent[keke-\\\\u60f3\\\\u4e70\\\\u4e24\\\\u74f6\\\\u65e0\\\\u7cd6\\\\u53ef\\\\u4e50-stay_current-2]\",\r\n      \"outcome\": \"passed\",\r\n      \"failure\": null\r\n    },\r\n    {\r\n      \"classname\": \"tests.test_v3_core_evaluation\",\r\n      \"name\": \"test_fixed_shopping_utterance_reaches_real_plan_after_required_consent[momo-\\\\u60f3\\\\u4e70\\\\u65e0\\\\u7cd6\\\\u53ef\\\\u4e50-suggest_switch-1]\",\r\n      \"outcome\": \"passed\",\r\n      \"failure\": null\r\n    }\r\n  ],\r\n  \"parse_error\": null\r\n}\r\n"
+}

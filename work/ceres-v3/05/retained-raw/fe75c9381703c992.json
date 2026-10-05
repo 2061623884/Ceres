@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/analyzer-v5-controlled-retry-20261005T230606Z-5380d5c9/missing-h01-handoff/fixture-note.json",
+  "original_sha256": "300bc7331fa8a883456a29fd012548bf77513f4ce93da01999e0cfb3acc59033",
+  "original_utf8_bom": false,
+  "utf8_text": "{\r\n  \"scenario\": \"missing-h01-handoff\",\r\n  \"classification\": \"Synthetic receipt completeness probe only; not model or business evidence\",\r\n  \"route_input\": \"Synthetic complete 22-row route fixture\",\r\n  \"mutation\": \"handoff\"\r\n}\r\n"
+}

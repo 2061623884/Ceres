@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/20261006T064846294-4702c589bd6944b79f900a77c1d202bb/preflight/effective-settings.stdout",
+  "original_sha256": "d126bbac1fe8ebf6d55341d678c3d36c50b4cec9aa995f9c85cbfeeae59aac7a",
+  "original_utf8_bom": false,
+  "utf8_text": "{\"llm_mode\": \"live\", \"llm_model\": \"qwen3.8-27b\", \"llm_max_output_tokens\": 3072, \"memory_model\": \"qwen3.8-27b\", \"openai_base_url_sanitized\": {\"scheme\": \"https\", \"host\": \"discovery-api.intern-ai.org.cn\", \"path\": \"/v1\"}, \"openai_api_key_present\": true, \"retrieval_mode\": \"hybrid\", \"retrieval_index_dir_present\": true, \"process_override_names_present\": {\"LLM_MAX_OUTPUT_TOKENS\": false, \"LLM_MODEL\": false, \"OPENAI_BASE_URL\": false, \"OPENAI_API_KEY\": false, \"KEV_BASE_URL\": false}}\r\n"
+}

@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/analyzer-v5-20261005T230316Z-3bc02469/missing-r01-selection/fixture-note.json",
+  "original_sha256": "1b8d616f07d842245e1a3a34491f13a0103f1119c90190ce6c4934f8a9cceea5",
+  "original_utf8_bom": false,
+  "utf8_text": "{\r\n  \"scenario\": \"missing-r01-selection\",\r\n  \"classification\": \"Synthetic receipt completeness probe only; not model or business evidence\",\r\n  \"route_input\": \"Synthetic complete 22-row route fixture\",\r\n  \"mutation\": \"selection\"\r\n}\r\n"
+}

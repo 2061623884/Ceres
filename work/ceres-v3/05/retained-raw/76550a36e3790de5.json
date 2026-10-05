@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/analyzer-v4-20261005T225315Z-a999063e/negative-empty-role-directory/input-sha256.json",
+  "original_sha256": "ad3ec6a4f52baeef703c9d9321a70a2cd5a51f93a9cd16f80aa2b52ff9c1a8e7",
+  "original_utf8_bom": false,
+  "utf8_text": "{\r\n  \"routes\": {\r\n    \"results.json\": \"e3b3d901c2c3319612ef2737f0b57f024043bf1c37010f6a2064fd69bb1c0b3d\"\r\n  },\r\n  \"roles\": {}\r\n}\r\n"
+}

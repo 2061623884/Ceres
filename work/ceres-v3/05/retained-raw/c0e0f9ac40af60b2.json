@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/analyzer-v4-20261005T225315Z-a999063e/original-v3-22-routes-5-roles/input-sha256.json",
+  "original_sha256": "46edb4eafb3253bdef00af61502e7791ac06df4119be1b5fb6a5fe0aa3deee58",
+  "original_utf8_bom": false,
+  "utf8_text": "{\r\n  \"routes\": {\r\n    \"results.json\": \"e3b3d901c2c3319612ef2737f0b57f024043bf1c37010f6a2064fd69bb1c0b3d\"\r\n  },\r\n  \"roles\": {\r\n    \"H01.json\": \"57bed0a6caed07b403a0535c47936fe2bf14867ef877c40ad3a6f71a8fcbd84a\",\r\n    \"R01-named-product-variant.json\": \"d22d34121413c2ed8b0007ec47352bd71ecebb0916f677ef872a880d76536128\",\r\n    \"R01.json\": \"6b7532e0798cf6a3159d343ace4a5d7ed3a3eb67488b60e60fa03eb1708ebb8d\",\r\n    \"R02.json\": \"70f48e0b3192191b413da3dec932cbb2df4669b5a9dd0904a3136237ef7bfd98\",\r\n    \"R03.json\": \"251c7bbf760105d926fdee3360a95a38b971ff7231d8f2e163f2732617eced25\"\r\n  }\r\n}\r\n"
+}

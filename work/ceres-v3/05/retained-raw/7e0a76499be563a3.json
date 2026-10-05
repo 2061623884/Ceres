@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/20261006T061823837-d5a54529857c4f1ba7896cef338a4441/source-hashes-after.json",
+  "original_sha256": "cb9f5844144466f37b7394a7d2b37ead75fdaf81fd33fac5621bddc875771f5f",
+  "original_utf8_bom": false,
+  "utf8_text": "{\r\n  \"captured_at_utc\": \"2026-10-05T22:23:43.479487+00:00\",\r\n  \"frozen_baseline_zip_sha256\": \"52862371fc088a8c529bc522a7a1b054ad1fd57c06c5d99d5e61ca0646c1d5a1\",\r\n  \"source_path_count\": 304,\r\n  \"match_count\": 304,\r\n  \"missing\": [],\r\n  \"mismatches\": [],\r\n  \"catalog_path\": \"data/sale_guide.db\",\r\n  \"catalog_sha256_before\": \"772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10\",\r\n  \"catalog_sha256_after\": \"772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10\"\r\n}\r\n"
+}

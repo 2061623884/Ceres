@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/candidate-v3-20261005T224125Z-6ab847de/probe-role-r01/command.txt",
+  "original_sha256": "5d552a33488c81696fe969ef0a5e434952446c8b345651a111b0c481b9299aa9",
+  "original_utf8_bom": false,
+  "utf8_text": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe -X utf8 -m pytest -vv --showlocals -p no:cacheprovider -W error::pytest.PytestUnhandledThreadExceptionWarning -p ceres_controlled_trace -p ceres_failure_inject --basetemp=C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\05\\evidence\\candidate-v3-20261005T224125Z-6ab847de\\probe-role-r01\\pytest-basetemp --junitxml=C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\05\\evidence\\candidate-v3-20261005T224125Z-6ab847de\\probe-role-r01\\junit.xml tests/test_v3_live_sampling.py::test_real_role_and_kev_sample -k \"R01 and not named\"\r\n"
+}

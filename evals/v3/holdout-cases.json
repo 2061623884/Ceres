@@ -1,0 +1,73 @@
+{
+  "version": "ceres-v3-independent-dialogue-20261006-v1",
+  "frozen_before_prompt_changes": true,
+  "grouping": "Dialogue phenomena are held out; these are new contexts/structures, not paraphrases of the public-core inputs. Business labels remain shared. No statistical generalization claim from four cases.",
+  "execution": "Execute only once after freezing candidate06; do not use holdout failures to tune that candidate and then claim independent success.",
+  "cases": [
+    {
+      "id": "HO01",
+      "scenario_group": "negated-order-intent-with-quoted-history",
+      "state": {
+        "current_role": "Keke shopping",
+        "selected_object": null,
+        "recent_dialogue": [
+          {
+            "role": "assistant",
+            "content": "你之前问过订单，现在需要继续查询吗？"
+          }
+        ],
+        "utterance": "订单不用查了。朋友让我问问有没有适合露营的小包装零食"
+      },
+      "expected": "stay_current"
+    },
+    {
+      "id": "HO02",
+      "scenario_group": "quotation-versus-personal-eligibility",
+      "state": {
+        "current_role": "Keke shopping",
+        "selected_object": null,
+        "recent_dialogue": [],
+        "utterance": "包装写着“签收后可申请退货”，这句话是指门店的一般规则吗？我还没购买"
+      },
+      "expected": "stay_current"
+    },
+    {
+      "id": "HO03",
+      "scenario_group": "answered-object-clarification",
+      "state": {
+        "current_role": "Keke shopping",
+        "selected_object": {
+          "kind": "placed_order",
+          "order_id": "fixture:A"
+        },
+        "recent_dialogue": [
+          {
+            "role": "user",
+            "content": "帮我取消那个"
+          },
+          {
+            "role": "assistant",
+            "content": "你要取消采购清单项，还是已下单的订单？"
+          }
+        ],
+        "pending_question": "你要取消采购清单项，还是已下单的订单？",
+        "utterance": "是已经下单的订单，取消这单"
+      },
+      "expected": "suggest_switch"
+    },
+    {
+      "id": "HO04",
+      "scenario_group": "self-correction-within-one-utterance",
+      "state": {
+        "current_role": "Momo after-sales",
+        "selected_object": {
+          "kind": "placed_order",
+          "order_id": "fixture:A"
+        },
+        "recent_dialogue": [],
+        "utterance": "我想退——说错了，不处理订单，先帮我比较一下两种酸奶"
+      },
+      "expected": "suggest_switch"
+    }
+  ]
+}

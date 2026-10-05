@@ -1,0 +1,9 @@
+# V2 Spec review
+
+审查绑定：HEAD `5462e999d583a9bab6147d0b4141d98321f3cc92`，本票前实际工作源码 ZIP SHA256 `e91bbd5f0e02469d4cce9942d42763d75c4c64d6219c40b040fb7faa29c1382c`；按 `review-v2/source.patch` 与 11 项 scope 审查，不包含继承 V2 dirty。**Findings: 2。**下述结论仅针对 V2 冻结版本；后续修订须另行冻结、复审。
+
+1. **[功能未通过] R06 将业务动作含糊误判为服务不明。**规格要求“取消一下”结合清单或订单上下文理解，并在含糊时留在原聊天澄清（`docs/plans/ceres-v3-spec.md:11,22-23,62`）；R06 已冻结为 Keke、采购清单可乐未加购、相关对话明确提及清单，预期 `stay_current`（`evals/v3/core-cases.json:114-133`）。实际 V2 路由两次均为 `clarify`，概率 `stay_current=.3961 / clarify=.4977`；原始状态带着“清单里的可乐不要了”及“要移除采购清单的可乐吗”（`work/ceres-v3/05/evidence/20261006T061823837-d5a54529857c4f1ba7896cef338a4441/routing/results.json`）。判断标准把具体移除对象未定混成服务角色未定。后续准则应在对话已经锚定清单时保留 Keke，让业务回合澄清动作/对象；不要补造 `selected_object`、改标签或强制 choice。V2 真实路由 20/22，功能验收未过。
+
+2. **[评测 oracle 错误] R01 把初始目标数量误当手动行覆盖。**V2 采样断言 `item["user_quantity"] == 2`（`backend/tests/test_v3_live_sampling.py:100`）超出固定案例与 TASK 要求；R01 要求两瓶无糖可乐并最终计划数量为 2（`evals/v3/core-cases.json:8-20`，`tasks/ceres-v3-05-baseline-evaluation.md` 验收标准）。`build_product_plan()` 将显式数量写入计划 `quantity`，而 `user_quantity` 仅由 `apply_row_quantity()` 对手动计划行覆盖设置（`backend/app/services/shopping_plan_service.py:173-228,861-887,1171-1182,1248-1306`）。实际 R01 SKU 和数量均为预期值，`user_quantity=null`，故 V2 回执报失败仅由此额外断言导致（`role-samples/R01.json`）。修订 oracle 保留最终 `quantity==2`，保留 V2 原始失败记录，另版重新采样；不能追写 V2 为通过。
+
+**待复核边界：**以上 V2 证据不宣称 V3 已通过。由后续冻结版重跑固定核心、真实路由与角色样本；功能断言未全过前不得交付“业务已完成”，当前 Q20/性能记录也不能代替功能通过。本审查未运行测试或模型。

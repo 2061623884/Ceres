@@ -249,6 +249,8 @@ class Goal(BaseModel):
     #: The named dish / product / category target. One field, because the same
     #: name means different things under different kinds; the kind disambiguates.
     target_name: str | None = None
+    #: User-stated sell-unit count for a product purchase.
+    quantity: int | None = None
     category_id: str | None = None
     category_name: str | None = None
     #: Products the user explicitly named ("买一盒牛奶" → ["牛奶"]).

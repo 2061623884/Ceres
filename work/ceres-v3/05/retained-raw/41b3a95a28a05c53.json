@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/analyzer-v5-controlled-retry-20261005T230606Z-5380d5c9/missing-r01-selection/roles/R01.json",
+  "original_sha256": "e3a77cd2c655b207f3be49d2901ab4515ad181bd000df4b2950072403845c007",
+  "original_utf8_bom": false,
+  "utf8_text": "{\r\n  \"case_id\": \"R01\",\r\n  \"passed\": true,\r\n  \"backend_api_wall_ms\": 1000.0,\r\n  \"upstream\": []\r\n}\r\n"
+}

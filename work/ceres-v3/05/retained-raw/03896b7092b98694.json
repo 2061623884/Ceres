@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/20261006T061823837-d5a54529857c4f1ba7896cef338a4441/preflight/amax-readonly.command.txt",
+  "original_sha256": "4f03c68d1394f00a9fde6f79aa11be11ce5e5f32db3e75b7d17ad59c8f00ff41",
+  "original_utf8_bom": false,
+  "utf8_text": "hostname; ps -eo pid,etimes,comm,args | grep '[k]ev.serve'; nvidia-smi --query-gpu=index,uuid,name,memory.total,memory.used --format=csv,noheader -i 1; nvidia-smi --query-compute-apps=gpu_uuid,pid,process_name,used_memory --format=csv,noheader -i 1\r\n"
+}

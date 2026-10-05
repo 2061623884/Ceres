@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/analyzer-v5-controlled-retry-20261005T230606Z-5380d5c9/complete-seven-timings-synthetic/fixture-note.json",
+  "original_sha256": "aa0c24d0cb6884f31125153c5655f6829638ddda97d688b082d47e4646cac0ab",
+  "original_utf8_bom": false,
+  "utf8_text": "{\r\n  \"scenario\": \"complete-seven-timings-synthetic\",\r\n  \"classification\": \"Synthetic receipt completeness probe only; not model or business evidence\",\r\n  \"route_input\": \"Synthetic complete 22-row route fixture\",\r\n  \"mutation\": \"none\"\r\n}\r\n"
+}
