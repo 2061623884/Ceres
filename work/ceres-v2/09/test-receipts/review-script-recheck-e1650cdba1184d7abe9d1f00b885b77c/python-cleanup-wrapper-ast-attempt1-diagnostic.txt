@@ -1,0 +1,1 @@
+Attempt 1 failed before AST parsing: PowerShell reported `python.exe : File "<string>", line 1` for the inline -c argument; outer exit 1. No ast.parse result or command receipt was produced. The failing invocation and output are preserved in this diagnostic note; no repository file was executed or changed.

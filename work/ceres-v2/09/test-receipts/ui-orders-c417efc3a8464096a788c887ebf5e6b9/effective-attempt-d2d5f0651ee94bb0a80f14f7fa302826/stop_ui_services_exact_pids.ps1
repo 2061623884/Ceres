@@ -1,3 +1,4 @@
+param([string]$AttemptPath)
 $ErrorActionPreference = 'Stop'
 $started = [DateTime]::UtcNow.ToString('o')
 $expected = @(
@@ -27,9 +28,9 @@ foreach ($item in $expected) {
 Start-Sleep -Milliseconds 500
 $ids = @($expected | ForEach-Object { $_.Id })
 $remaining = @(Get-CimInstance Win32_Process | Where-Object { $ids -contains $_.ProcessId } | Select-Object ProcessId,Name,CommandLine)
-$listeners = @(Get-NetTCPConnection -State Listen -ErrorAction SilentlyContinue | Where-Object { $_.LocalPort -in @(8111,8112,5171,5172) } | Select-Object LocalAddress,LocalPort,OwningProcess)
+$listeners = @(Get-NetTCPConnection -ErrorAction Stop | Where-Object { $_.State -eq 'Listen' -and $_.LocalPort -in @(8111,8112,5171,5172) } | Select-Object LocalAddress,LocalPort,OwningProcess)
 $finished = [DateTime]::UtcNow.ToString('o')
 $report = [pscustomobject]@{ started_utc=$started; finished_utc=$finished; expected=$expected; verified_before=$before; remaining_pids=$remaining; remaining_test_port_listeners=$listeners }
-$report | ConvertTo-Json -Depth 6 | Set-Content -LiteralPath (Join-Path $attempt 'service-cleanup.json') -Encoding utf8
+$report | ConvertTo-Json -Depth 6 | Set-Content -LiteralPath (Join-Path $AttemptPath 'service-cleanup.json') -Encoding utf8
 $report | ConvertTo-Json -Depth 6
 if ($remaining.Count -gt 0 -or $listeners.Count -gt 0) { exit 1 }

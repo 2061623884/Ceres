@@ -46,3 +46,9 @@ run2：保存2.016s，建单7.812s，必需默认选/调味料不选与金额、
 历史失败全部保留：系统TEMP EPERM启动exit1、0案例；d6d9c58批次2fail在Avatar参与的按钮accessible name精确定位停止，仅显式加购；586811dd批次2fail在含“演示”徽标的heading精确文本定位停止，模拟结算已成功。主Agent只修正场景三处locator，业务断言、生产、15秒门槛不变，每次用新Context/owner定向复验，未重发模型或清旧失败数据。旧脚本与适用批次见ui-scenario-versions.json，原raw结果不改。命令、环境、截图与只读审计位于test-receipts/ui-orders-c417efc3a8464096a788c887ebf5e6b9；浏览器临时profile、DB、.env均不复制入Git。
 
 测试服务清理仅针对核实完整命令行的41156/15344/24468/39992四个PID。清理记录器先有Windows PowerShell String.Contains重载错误（停止前），随后已停止但摘要漏传AttemptPath而exit1；两条失败不改成成功。独立只读service-cleanup-verification.command.json实际exit0，service-cleanup-verification.json确认四PID均不存在，8111/8112/5171/5172无监听；原服务未作为清理目标。pip list的cwd实际为产品父目录，单独cwd-correction.txt保留更正，argv/解释器/原输出不改。
+
+## 最终审查修复的必要复验
+
+原始执行脚本分别保存在Git322c237/04a4与外部原件，execution-script-review-fixes.json逐项绑定6组executed/static SHA。当前副本收窄JSON解析捕获、删除死分支及诊断外层宽catch；TCP查询改为错误传播后筛选，停服报告补既有输出目录参数并由wrapper传入。不重新执行历史Trace SQL或停服操作，不改生产或UI场景。
+
+专职tester在review-script-recheck-e1650cdba1184d7abe9d1f00b885b77c执行3个Python AST（exit0）、2个PowerShell Parser（exit0），再严格只读执行verify，exit0、四历史PID及测试端口均空，当前verify SHA前后相同；cleanup wrapper追加实参后的单文件AST另exit0、SHA前后相同。全部命令/环境/UTC/raw/目标SHA在该目录summary.json及python-cleanup-wrapper-ast.command.json，嵌套service-verification目录保存实际JSON。没有业务、浏览器、模型、SQL或进程停止。首个e9ba批次的PS5中文路径ANSI解码失败、单AST的-c转义失败（目标尚未解析）均保留；外部包装器修正采用ASCII相对路径/独立解析helper，仓库源码不作环境兼容改动。该复验不增加模型样本、不解除06/09速度门槛，也不替代实际业务测试。

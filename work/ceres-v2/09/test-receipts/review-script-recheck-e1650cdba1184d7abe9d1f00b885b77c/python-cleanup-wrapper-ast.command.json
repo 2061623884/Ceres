@@ -1,0 +1,23 @@
+﻿{
+    "started_utc":  "2026-10-05T15:22:11.7696199Z",
+    "finished_utc":  "2026-10-05T15:22:11.8746107Z",
+    "argv":  [
+                 "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+                 "-X",
+                 "utf8",
+                 "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\review-script-recheck-e1650cdba1184d7abe9d1f00b885b77c\\parse_cleanup_wrapper_once.py",
+                 "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v2\\09\\test-receipts\\ui-orders-c417efc3a8464096a788c887ebf5e6b9\\effective-attempt-d2d5f0651ee94bb0a80f14f7fa302826\\run_service_cleanup.py"
+             ],
+    "cwd":  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres",
+    "python_executable":  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+    "environment":  {
+                        "PYTHONUTF8":  "1",
+                        "PYTHONDONTWRITEBYTECODE":  "1"
+                    },
+    "source_path":  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v2\\09\\test-receipts\\ui-orders-c417efc3a8464096a788c887ebf5e6b9\\effective-attempt-d2d5f0651ee94bb0a80f14f7fa302826\\run_service_cleanup.py",
+    "source_sha256_before":  "BB8CE33799985691C05579BEACAE7B77BD23E6A5FCED2D6367B50160EE4A6D2E",
+    "source_sha256_after":  "BB8CE33799985691C05579BEACAE7B77BD23E6A5FCED2D6367B50160EE4A6D2E",
+    "exit_code":  0,
+    "stdout_file":  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\review-script-recheck-e1650cdba1184d7abe9d1f00b885b77c\\python-cleanup-wrapper-ast.stdout.raw.txt",
+    "stderr_file":  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\review-script-recheck-e1650cdba1184d7abe9d1f00b885b77c\\python-cleanup-wrapper-ast.stderr.raw.txt"
+}

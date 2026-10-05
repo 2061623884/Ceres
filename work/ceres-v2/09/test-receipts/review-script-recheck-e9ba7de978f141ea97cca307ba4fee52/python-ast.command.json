@@ -1,0 +1,28 @@
+{
+  "started_utc": "2026-10-05T15:17:40.548704+00:00",
+  "finished_utc": "2026-10-05T15:17:40.639647+00:00",
+  "argv": [
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-c",
+    "import ast, pathlib, sys\nfor item in sys.argv[1:]:\n p=pathlib.Path(item); ast.parse(p.read_text(encoding=\"utf-8-sig\"), filename=str(p)); print(\"AST_OK \"+str(p))",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v2\\09\\test-receipts\\09-corrected-journey-fb5a1006ddc74188903a615f40009b75\\corrected-journey-runner.py",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v2\\09\\test-receipts\\09-final-candidate-83f1c39408e649a495c633c23a4bbe4c\\readonly-live-trace.py",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v2\\09\\test-receipts\\09-corrected-journey-fb5a1006ddc74188903a615f40009b75\\trace_readonly.py"
+  ],
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres",
+  "executable": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+  "environment": {
+    "PYTHONUTF8": "1",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "script_sha256": {
+    "corrected_journey_runner": "085B6767F6789E22A6EA7245AFABD5D3AACFEC8790AA40D089BE9D4228107780",
+    "readonly_live_trace": "D93985854DC51E489B56F8E73BB1BF113253B60A72C757AC2000F82ECF5E8BD1",
+    "trace_readonly": "50D5AFE002B90042D49789A232E5ED96917BCE2F441407AA8ED2D220D291DC24"
+  },
+  "exit_code": 0,
+  "stdout_file": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\review-script-recheck-e9ba7de978f141ea97cca307ba4fee52\\python-ast.stdout.raw.txt",
+  "stderr_file": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\review-script-recheck-e9ba7de978f141ea97cca307ba4fee52\\python-ast.stderr.raw.txt"
+}

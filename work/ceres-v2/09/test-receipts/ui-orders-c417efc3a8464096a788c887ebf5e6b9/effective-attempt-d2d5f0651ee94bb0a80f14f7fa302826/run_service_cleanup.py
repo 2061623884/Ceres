@@ -3,7 +3,7 @@ import json, subprocess, sys
 from datetime import datetime, timezone
 from pathlib import Path
 attempt=Path(sys.argv[1]); ps=attempt/'stop_ui_services_exact_pids.ps1'
-argv=['powershell','-NoProfile','-ExecutionPolicy','Bypass','-File',str(ps)]
+argv=['powershell','-NoProfile','-ExecutionPolicy','Bypass','-File',str(ps),str(attempt)]
 started=datetime.now(timezone.utc).isoformat()
 proc=subprocess.run(argv,cwd=str(attempt),capture_output=True,text=True,encoding='utf-8',errors='replace')
 finished=datetime.now(timezone.utc).isoformat()

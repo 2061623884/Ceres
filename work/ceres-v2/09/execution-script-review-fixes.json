@@ -1,5 +1,5 @@
 {
-  "note": "Original execution scripts remain in local Git 322c237 and external run, unchanged. Current repository copies contain explicit static review fixes; raw commands/results are not rewritten. No new model or test batch.",
+  "note": "Original execution scripts remain in their recorded local Git versions and external run, unchanged. Current repository copies contain explicit static review fixes; raw commands/results are not rewritten. No new model or business test batch.",
   "files": [
     {
       "path": "work/ceres-v2/09/test-receipts/09-corrected-journey-fb5a1006ddc74188903a615f40009b75/corrected-journey-runner.py",
@@ -8,7 +8,9 @@
       "executed_sha256": "4b27c627e3876a95e97c8ec6f911f9d3f4c2208b77b4c558ba99d5656410212c",
       "static_corrected_sha256": "085b6767f6789e22a6ea7245afabd5d3aacfec8790aa40d089be9d4228107780",
       "change": "except Exception: -> except json.JSONDecodeError:",
-      "validation": "static review only; not executed again; existing receipts refer to original executed version"
+      "validation": "static review only; not executed again; existing receipts refer to original executed version",
+      "validation_status": "passed delegated Python AST syntax parse only; original diagnostic not executed again",
+      "validation_receipt": "work/ceres-v2/09/test-receipts/review-script-recheck-e1650cdba1184d7abe9d1f00b885b77c/summary.json"
     },
     {
       "path": "work/ceres-v2/09/test-receipts/09-final-candidate-83f1c39408e649a495c633c23a4bbe4c/readonly-live-trace.py",
@@ -17,7 +19,53 @@
       "executed_sha256": "fe1df09996c4f4e5d9e62e53eda63cd40fc8e2d3d7bc869465407dcf98439121",
       "static_corrected_sha256": "d93985854dc51e489b56f8e73bb1bf113253b60a72c757ac2000f82ecf5e8bd1",
       "change": "dotenv=parse_dotenv(root/'Ceres'/'work'/'ceres-v2'/'09'/'source-inputs.json') if False else parse_dotenv(run/'cold-1'/'.env') -> dotenv=parse_dotenv(run/'cold-1'/'.env')",
-      "validation": "static review only; not executed again; existing receipts refer to original executed version"
+      "validation": "static review only; not executed again; existing receipts refer to original executed version",
+      "validation_status": "passed delegated Python AST syntax parse only; original diagnostic not executed again",
+      "validation_receipt": "work/ceres-v2/09/test-receipts/review-script-recheck-e1650cdba1184d7abe9d1f00b885b77c/summary.json"
+    },
+    {
+      "path": "work/ceres-v2/09/test-receipts/09-corrected-journey-fb5a1006ddc74188903a615f40009b75/trace_readonly.py",
+      "executed_version": "04a4f521531582ce80d37ec02c5d1cde3612a542:work/ceres-v2/09/test-receipts/09-corrected-journey-fb5a1006ddc74188903a615f40009b75/trace_readonly.py",
+      "external_original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\09-corrected-journey-fb5a1006ddc74188903a615f40009b75\\trace_readonly.py",
+      "executed_sha256": "a4e7e7b7e2c8117f385d9cabbec440b0885fe21e57f1685505e7cd8cd4c798dd",
+      "static_corrected_sha256": "50d5afe002b90042d49789a232e5ed96917bce2f441407aa8ed2d220d291dc24",
+      "change": "Remove outer broad diagnostic catch; let errors propagate with their full stack, delete redundant status/exit bookkeeping; retain existing JSONDecodeError raw-field display.",
+      "validation": "static code review and delegated AST syntax parse only; original diagnostic not executed again; no DB or model call; existing receipts refer to original executed version",
+      "validation_status": "passed delegated Python AST syntax parse only; original diagnostic not executed again",
+      "validation_receipt": "work/ceres-v2/09/test-receipts/review-script-recheck-e1650cdba1184d7abe9d1f00b885b77c/summary.json"
+    },
+    {
+      "path": "work/ceres-v2/09/test-receipts/ui-orders-c417efc3a8464096a788c887ebf5e6b9/effective-attempt-d2d5f0651ee94bb0a80f14f7fa302826/stop_ui_services_exact_pids.ps1",
+      "executed_version": "04a4f521531582ce80d37ec02c5d1cde3612a542:work/ceres-v2/09/test-receipts/ui-orders-c417efc3a8464096a788c887ebf5e6b9/effective-attempt-d2d5f0651ee94bb0a80f14f7fa302826/stop_ui_services_exact_pids.ps1",
+      "external_original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\ui-orders-c417efc3a8464096a788c887ebf5e6b9\\effective-attempt-d2d5f0651ee94bb0a80f14f7fa302826\\stop_ui_services_exact_pids.ps1",
+      "executed_sha256": "109d016dba78391c809fbc7e35a6af1dfbcd72787ee9941b071b87e33c7da407",
+      "static_corrected_sha256": "bcf3f9c9ec7e3437ffcef182ab3a2f7814cc638ebe437fffa8c6c7091f2ccabb",
+      "change": "Replace silent TCP query with fail-fast enumeration/filter; add previously missing AttemptPath parameter matching the known failed summary-write contract. Do not stop historical PIDs again.",
+      "validation": "delegated PowerShell syntax parse only; not executed again; original cleanup failure/stop evidence retained",
+      "validation_status": "passed delegated PowerShell syntax parse only; historical stop never executed again",
+      "validation_receipt": "work/ceres-v2/09/test-receipts/review-script-recheck-e1650cdba1184d7abe9d1f00b885b77c/summary.json"
+    },
+    {
+      "path": "work/ceres-v2/09/test-receipts/ui-orders-c417efc3a8464096a788c887ebf5e6b9/effective-attempt-d2d5f0651ee94bb0a80f14f7fa302826/verify_ui_services_stopped.ps1",
+      "executed_version": "04a4f521531582ce80d37ec02c5d1cde3612a542:work/ceres-v2/09/test-receipts/ui-orders-c417efc3a8464096a788c887ebf5e6b9/effective-attempt-d2d5f0651ee94bb0a80f14f7fa302826/verify_ui_services_stopped.ps1",
+      "external_original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\ui-orders-c417efc3a8464096a788c887ebf5e6b9\\effective-attempt-d2d5f0651ee94bb0a80f14f7fa302826\\verify_ui_services_stopped.ps1",
+      "executed_sha256": "288da9934f96ca5b8f152c3c0044f3eaa543c6583e6fad7b4c96b268c92a8b2d",
+      "static_corrected_sha256": "9dca8eea1d1cb0743f4ccbce4183e1ed7143807e840ccf8a5481e2561e013095",
+      "change": "Replace silent TCP query with fail-fast enumeration/filter, so query errors cannot become an empty success.",
+      "validation": "delegated syntax parse and strict read-only verification into a new external receipt directory; no process stop, DB or model call",
+      "validation_status": "passed delegated PowerShell syntax parse and strict read-only service check, exit 0; four historical PIDs and test ports absent; no mutation",
+      "validation_receipt": "work/ceres-v2/09/test-receipts/review-script-recheck-e1650cdba1184d7abe9d1f00b885b77c/summary.json"
+    },
+    {
+      "path": "work/ceres-v2/09/test-receipts/ui-orders-c417efc3a8464096a788c887ebf5e6b9/effective-attempt-d2d5f0651ee94bb0a80f14f7fa302826/run_service_cleanup.py",
+      "executed_version": "04a4f521531582ce80d37ec02c5d1cde3612a542:work/ceres-v2/09/test-receipts/ui-orders-c417efc3a8464096a788c887ebf5e6b9/effective-attempt-d2d5f0651ee94bb0a80f14f7fa302826/run_service_cleanup.py",
+      "external_original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\ui-orders-c417efc3a8464096a788c887ebf5e6b9\\effective-attempt-d2d5f0651ee94bb0a80f14f7fa302826\\run_service_cleanup.py",
+      "executed_sha256": "907075233088251a8f5822d5c91e5b6220728cbcd36ca1c8e7ef1849ba16e8b8",
+      "static_corrected_sha256": "bb8ce33799985691c05579beacae7b77bd23e6a5fced2d6367b50160ee4a6d2e",
+      "change": "Pass existing attempt directory through the current static wrapper to the matching AttemptPath parameter; preserve the original failed call and logs.",
+      "validation": "delegated AST syntax parse and static caller-to-parameter review only; never execute this historical process-stop wrapper again",
+      "validation_status": "passed delegated Python AST syntax parse and static caller argument review only; stop wrapper never executed again",
+      "validation_receipt": "work/ceres-v2/09/test-receipts/review-script-recheck-e1650cdba1184d7abe9d1f00b885b77c/python-cleanup-wrapper-ast.command.json"
     }
   ]
 }

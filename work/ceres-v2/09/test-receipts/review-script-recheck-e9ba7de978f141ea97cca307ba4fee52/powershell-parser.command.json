@@ -1,0 +1,20 @@
+{
+  "started_utc": "2026-10-05T15:17:40.641753+00:00",
+  "finished_utc": "2026-10-05T15:17:40.875205+00:00",
+  "argv": [
+    "powershell",
+    "-NoProfile",
+    "-ExecutionPolicy",
+    "Bypass",
+    "-File",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\review-script-recheck-e9ba7de978f141ea97cca307ba4fee52\\parse_ui_scripts.ps1"
+  ],
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres",
+  "script_sha256": {
+    "stop_ui_services": "BCF3F9C9EC7E3437FFCEF182AB3A2F7814CC638EBE437FFFA8C6C7091F2CCABB",
+    "verify_ui_services": "9DCA8EEA1D1CB0743F4CCBCE4183E1ED7143807E840CCF8A5481E2561E013095"
+  },
+  "exit_code": 1,
+  "stdout_file": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\review-script-recheck-e9ba7de978f141ea97cca307ba4fee52\\powershell-parser.stdout.raw.txt",
+  "stderr_file": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\review-script-recheck-e9ba7de978f141ea97cca307ba4fee52\\powershell-parser.stderr.raw.txt"
+}

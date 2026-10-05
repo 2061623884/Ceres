@@ -1,0 +1,90 @@
+{
+  "run_directory": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\review-script-recheck-e1650cdba1184d7abe9d1f00b885b77c",
+  "verify_output_directory": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\review-script-recheck-e1650cdba1184d7abe9d1f00b885b77c\\service-verification-9cbc44adbf5e4ada80d280d3c8313db0",
+  "python_ast": {
+    "started_utc": "2026-10-05T15:19:04.092868+00:00",
+    "finished_utc": "2026-10-05T15:19:04.187476+00:00",
+    "argv": [
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "-c",
+      "import ast, pathlib, sys\nfor item in sys.argv[1:]:\n p=pathlib.Path(item); ast.parse(p.read_text(encoding=\"utf-8-sig\"), filename=str(p)); print(\"AST_OK \"+p.name)",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v2\\09\\test-receipts\\09-corrected-journey-fb5a1006ddc74188903a615f40009b75\\corrected-journey-runner.py",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v2\\09\\test-receipts\\09-final-candidate-83f1c39408e649a495c633c23a4bbe4c\\readonly-live-trace.py",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v2\\09\\test-receipts\\09-corrected-journey-fb5a1006ddc74188903a615f40009b75\\trace_readonly.py"
+    ],
+    "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres",
+    "executable": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+    "environment": {
+      "PYTHONUTF8": "1",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    },
+    "script_sha256": {
+      "corrected_journey_runner": "085B6767F6789E22A6EA7245AFABD5D3AACFEC8790AA40D089BE9D4228107780",
+      "readonly_live_trace": "D93985854DC51E489B56F8E73BB1BF113253B60A72C757AC2000F82ECF5E8BD1",
+      "trace_readonly": "50D5AFE002B90042D49789A232E5ED96917BCE2F441407AA8ED2D220D291DC24"
+    },
+    "exit_code": 0,
+    "stdout_file": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\review-script-recheck-e1650cdba1184d7abe9d1f00b885b77c\\python-ast.stdout.raw.txt",
+    "stderr_file": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\review-script-recheck-e1650cdba1184d7abe9d1f00b885b77c\\python-ast.stderr.raw.txt"
+  },
+  "powershell_parse": {
+    "started_utc": "2026-10-05T15:19:04.189487+00:00",
+    "finished_utc": "2026-10-05T15:19:04.485290+00:00",
+    "argv": [
+      "powershell",
+      "-NoProfile",
+      "-ExecutionPolicy",
+      "Bypass",
+      "-File",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\review-script-recheck-e1650cdba1184d7abe9d1f00b885b77c\\parse_ui_scripts.ps1"
+    ],
+    "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres",
+    "script_sha256": {
+      "stop_ui_services": "BCF3F9C9EC7E3437FFCEF182AB3A2F7814CC638EBE437FFFA8C6C7091F2CCABB",
+      "verify_ui_services": "9DCA8EEA1D1CB0743F4CCBCE4183E1ED7143807E840CCF8A5481E2561E013095"
+    },
+    "exit_code": 0,
+    "stdout_file": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\review-script-recheck-e1650cdba1184d7abe9d1f00b885b77c\\powershell-parser.stdout.raw.txt",
+    "stderr_file": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\review-script-recheck-e1650cdba1184d7abe9d1f00b885b77c\\powershell-parser.stderr.raw.txt"
+  },
+  "readonly_verification": {
+    "started_utc": "2026-10-05T15:19:04.486792+00:00",
+    "finished_utc": "2026-10-05T15:19:07.976810+00:00",
+    "argv": [
+      "powershell",
+      "-NoProfile",
+      "-ExecutionPolicy",
+      "Bypass",
+      "-File",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v2\\09\\test-receipts\\ui-orders-c417efc3a8464096a788c887ebf5e6b9\\effective-attempt-d2d5f0651ee94bb0a80f14f7fa302826\\verify_ui_services_stopped.ps1",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\review-script-recheck-e1650cdba1184d7abe9d1f00b885b77c\\service-verification-9cbc44adbf5e4ada80d280d3c8313db0"
+    ],
+    "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres",
+    "environment": {
+      "PYTHONUTF8": "1",
+      "PYTHONDONTWRITEBYTECODE": "1"
+    },
+    "script_sha256_before": "9DCA8EEA1D1CB0743F4CCBCE4183E1ED7143807E840CCF8A5481E2561E013095",
+    "script_sha256_after": "9DCA8EEA1D1CB0743F4CCBCE4183E1ED7143807E840CCF8A5481E2561E013095",
+    "output_directory": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\review-script-recheck-e1650cdba1184d7abe9d1f00b885b77c\\service-verification-9cbc44adbf5e4ada80d280d3c8313db0",
+    "exit_code": 0,
+    "stdout_file": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\review-script-recheck-e1650cdba1184d7abe9d1f00b885b77c\\readonly-verification.stdout.raw.txt",
+    "stderr_file": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\review-script-recheck-e1650cdba1184d7abe9d1f00b885b77c\\readonly-verification.stderr.raw.txt"
+  },
+  "all_script_hashes_before": {
+    "corrected_journey_runner": "085B6767F6789E22A6EA7245AFABD5D3AACFEC8790AA40D089BE9D4228107780",
+    "readonly_live_trace": "D93985854DC51E489B56F8E73BB1BF113253B60A72C757AC2000F82ECF5E8BD1",
+    "trace_readonly": "50D5AFE002B90042D49789A232E5ED96917BCE2F441407AA8ED2D220D291DC24",
+    "stop_ui_services": "BCF3F9C9EC7E3437FFCEF182AB3A2F7814CC638EBE437FFFA8C6C7091F2CCABB",
+    "verify_ui_services": "9DCA8EEA1D1CB0743F4CCBCE4183E1ED7143807E840CCF8A5481E2561E013095"
+  },
+  "all_script_hashes_after": {
+    "corrected_journey_runner": "085B6767F6789E22A6EA7245AFABD5D3AACFEC8790AA40D089BE9D4228107780",
+    "readonly_live_trace": "D93985854DC51E489B56F8E73BB1BF113253B60A72C757AC2000F82ECF5E8BD1",
+    "trace_readonly": "50D5AFE002B90042D49789A232E5ED96917BCE2F441407AA8ED2D220D291DC24",
+    "stop_ui_services": "BCF3F9C9EC7E3437FFCEF182AB3A2F7814CC638EBE437FFFA8C6C7091F2CCABB",
+    "verify_ui_services": "9DCA8EEA1D1CB0743F4CCBCE4183E1ED7143807E840CCF8A5481E2561E013095"
+  }
+}
