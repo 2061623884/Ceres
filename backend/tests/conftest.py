@@ -99,9 +99,14 @@ def test_db_url(tmp_path):
 
 
 @pytest.fixture()
-def client(test_db_url, monkeypatch):
+def source_database_path():
+    return ROOT / "data" / "sale_guide.db"
+
+
+@pytest.fixture()
+def client(test_db_url, monkeypatch, source_database_path):
     monkeypatch.setenv("DATABASE_URL", test_db_url)
-    monkeypatch.setenv("SOURCE_DATABASE_PATH", str(ROOT / "data" / "sale_guide.db"))
+    monkeypatch.setenv("SOURCE_DATABASE_PATH", str(source_database_path))
 
     from app.core.config import get_settings
 

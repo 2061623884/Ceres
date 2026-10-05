@@ -842,7 +842,7 @@ function PlanSheetContent({
           const packageUnit = item.spec_unit === 'kg' ? 'g' : item.spec_unit === 'l' ? 'ml' : item.spec_unit
           const packageAmount = (item.spec_quantity ?? 0) * (item.spec_unit === 'kg' || item.spec_unit === 'l' ? 1000 : 1)
           const comparable = requirement?.quantity != null && requirement.unit === packageUnit && packageAmount > 0
-          const purchased = checked ? item.quantity * packageAmount : 0
+          const purchased = ((item.added_quantity ?? 0) + (checked ? remainingQuantity(item) : 0)) * packageAmount
           const needed = comparable ? (packageUnit === 'pc' ? Math.ceil(requirement.quantity!) : requirement.quantity!) : 0
           const difference = purchased - needed
           const unitLabel = packageUnit === 'pc' ? '枚' : packageUnit
@@ -857,10 +857,10 @@ function PlanSheetContent({
               <img src={productImageUrl(item.image_path)} alt="" className="h-11 w-11 shrink-0 rounded-xl bg-black/[0.04] object-cover" />
               <div className="min-w-0 flex-1">
                 <p className="truncate text-[12px] font-medium text-[#1d1c1a]">{item.name || item.sku_id}</p>
-                <p className="mt-0.5 text-[10px] text-black/38">× {remainingQuantity(item)}</p>
+                <p className="mt-0.5 text-[10px] text-black/38">已加购 {item.added_quantity ?? 0} 件 · 本次选购 {checked ? remainingQuantity(item) : 0} 件</p>
                 {comparable && (
                   <p className="mt-0.5 text-[10px] leading-snug text-black/45">
-                    需求 {requirement!.quantity}{unitLabel}{packageUnit === 'pc' && needed !== requirement!.quantity ? `（整枚 ${needed}）` : ''} · 本次采购 {purchased}{unitLabel} · {difference >= 0 ? '包装余量' : '本次未覆盖'} {Math.abs(difference)}{unitLabel}
+                    需求 {requirement!.quantity}{unitLabel}{packageUnit === 'pc' && needed !== requirement!.quantity ? `（整枚 ${needed}）` : ''} · 采购覆盖 {purchased}{unitLabel} · {difference >= 0 ? '包装余量' : '本次未覆盖'} {Math.abs(difference)}{unitLabel}
                   </p>
                 )}
               </div>
