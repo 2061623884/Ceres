@@ -1,0 +1,20 @@
+{
+  "executable": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+  "argv": [
+    "-X",
+    "utf8",
+    "-m",
+    "pytest",
+    "tests/test_v2_historical_repurchase.py",
+    "tests/test_v2_history_named_lookup.py",
+    "tests/test_read_tools.py",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "-W",
+    "error::pytest.PytestUnhandledThreadExceptionWarning",
+    "--basetemp",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-864f46fef7244f2589f5f0ae0568b395\\pytest-tmp"
+  ],
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend"
+}

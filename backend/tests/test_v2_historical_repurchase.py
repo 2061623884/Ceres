@@ -171,6 +171,41 @@ def test_history_is_owner_scoped_and_missing_source_does_not_guess(indexed_clien
 
 
 @pytest.mark.parametrize("run", [1, 2])
+@pytest.mark.parametrize("source_shape", ["missing_items", "shared_quantity", "null_association"])
+def test_incomplete_product_history_asks_quantity_without_purchase_ref(indexed_client, semantic_provider, run, source_shape):
+    semantic_provider([request_new("product", "新鲜鸡蛋 6枚装")])
+    original = send_turn(indexed_client, create_session(indexed_client), "买鸡蛋6枚装")
+    source_id = original["plan"]["plan_id"]
+    with db_module.SessionLocal() as db:
+        snap = db.get(PlanSnapshot, (source_id, original["plan"]["plan_version"]))
+        legacy = json.loads(snap.plan_json)
+        if source_shape == "missing_items":
+            legacy["items"] = []
+        elif source_shape == "shared_quantity":
+            item = legacy["items"][0]
+            item["contributions"] = [{"group_id": legacy["targets"][0]["group_id"]},
+                                     {"group_id": "another-dish"}]
+        else:
+            legacy["targets"][0]["group_id"] = None
+            legacy["items"][0]["group_id"] = None
+            legacy["items"][0]["contributions"] = None
+        snap.plan_json = json.dumps(legacy)
+        db.commit()
+
+    def clarify(request):
+        row = request["query_results"][0]["plans"][0]
+        assert row["source_complete"] is False
+        assert all("ref" not in target for target in row["targets"])
+        return {"reply": "历史商品缺少独立件数，请告诉我这次需要几盒鸡蛋。", "display_refs": []}
+
+    semantic_provider([{"reads": [{"kind": "history", "topic": source_id}]}, Continuation(clarify)])
+    sid = create_session(indexed_client)
+    result = send_turn(indexed_client, sid, "照上次买鸡蛋")
+    assert "几盒" in result["message"] and result["plan"] is None and result["task_id"] is None
+    assert indexed_client.get("/api/v1/cart").json()["items"] == []
+
+
+@pytest.mark.parametrize("run", [1, 2])
 def test_historical_multi_dish_is_rebuilt_by_explicit_additions(indexed_client, semantic_provider, run):
     semantic_provider([request_new("dish", "番茄炒蛋", people=2, mode="self_cook"),
                        request_new("dish", "番茄蛋汤", people=1, mode="self_cook", relation="append")])

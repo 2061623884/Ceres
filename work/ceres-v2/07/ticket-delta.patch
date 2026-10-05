@@ -103,7 +103,7 @@
          return facts
  
      def _collect_query(
-@@ -516,6 +523,37 @@
+@@ -516,6 +523,43 @@
          really excludes peanut from a recommendation or a recipe instead of being
          left to the retrieval route to "understand".
          """
@@ -124,17 +124,23 @@
 +                        current = catalog.get_product(target_id)
 +                    else:
 +                        current = scenarios.get(target_id)
-+                    if current is None:
++                    group_id = target.get("group_id")
++                    historical_items = [
++                        {"sku_id": item["sku_id"], "quantity": item["quantity"],
++                         "unit_price_fen": item["unit_price_fen"],
++                         "shared": len(item.get("contributions") or []) > 1}
++                        for item in plan["items"]
++                        if group_id is not None and (
++                            item.get("group_id") == group_id
++                            or any(c["group_id"] == group_id for c in (item.get("contributions") or [])))
++                    ]
++                    if current is None or group_id is None or (target_kind == "product" and (
++                        not historical_items or any(item["shared"] for item in historical_items)
++                    )):
 +                        source_complete = False
 +                    targets.append({"kind": target_kind, "target_id": target_id, "name": target["name"],
 +                                    "historical_people": target.get("people"),
-+                                    "historical_items": [{"sku_id": item["sku_id"], "quantity": item["quantity"],
-+                                                          "unit_price_fen": item["unit_price_fen"],
-+                                                          "shared": len(item.get("contributions", [])) > 1}
-+                                                         for item in plan["items"]
-+                                                         if item["group_id"] == target["group_id"]
-+                                                         or any(c["group_id"] == target["group_id"]
-+                                                                for c in item.get("contributions", []))]})
++                                    "historical_items": historical_items})
 +                plans.append({**source, "source_complete": source_complete, "targets": targets})
 +            return {"kind": "history", "status": STATUS_COMPLETED, "empty": not plans,
 +                    "plans": plans, "note": "历史信息仅供参考；当前价格库存及数量须重新核查，旧选择与加购授权不恢复。来源不完整先澄清，不猜SKU或数量。"}

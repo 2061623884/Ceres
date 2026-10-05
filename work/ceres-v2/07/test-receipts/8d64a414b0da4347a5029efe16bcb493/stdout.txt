@@ -1,0 +1,460 @@
+FFFFFF                                                                   [100%]
+================================== FAILURES ===================================
+_ test_incomplete_product_history_asks_quantity_without_purchase_ref[missing_items-1] _
+
+indexed_client = <starlette.testclient.TestClient object at 0x000001FF8BA04CE0>
+semantic_provider = <function semantic_provider.<locals>._install at 0x000001FF8E6D1EE0>
+run = 1, source_shape = 'missing_items'
+
+    @pytest.mark.parametrize("run", [1, 2])
+    @pytest.mark.parametrize("source_shape", ["missing_items", "shared_quantity", "null_association"])
+    def test_incomplete_product_history_asks_quantity_without_purchase_ref(indexed_client, semantic_provider, run, source_shape):
+        semantic_provider([request_new("product", "新鲜鸡蛋 6枚装")])
+        original = send_turn(indexed_client, create_session(indexed_client), "买鸡蛋6枚装")
+        source_id = original["plan"]["plan_id"]
+        with db_module.SessionLocal() as db:
+            snap = db.get(PlanSnapshot, (source_id, original["plan"]["plan_version"]))
+            legacy = json.loads(snap.plan_json)
+            if source_shape == "missing_items":
+                legacy["items"] = []
+            elif source_shape == "shared_quantity":
+                item = legacy["items"][0]
+                item["contributions"] = [{"group_id": legacy["targets"][0]["group_id"]},
+                                         {"group_id": "another-dish"}]
+            else:
+                legacy["targets"][0]["group_id"] = None
+                legacy["items"][0]["group_id"] = None
+                legacy["items"][0]["contributions"] = None
+            snap.plan_json = json.dumps(legacy)
+            db.commit()
+    
+        def clarify(request):
+            row = request["query_results"][0]["plans"][0]
+            assert row["source_complete"] is False
+            assert all("ref" not in target for target in row["targets"])
+            return {"reply": "历史商品缺少独立件数，请告诉我这次需要几盒鸡蛋。", "display_refs": []}
+    
+        semantic_provider([{"reads": [{"kind": "history", "topic": source_id}]}, Continuation(clarify)])
+        sid = create_session(indexed_client)
+>       result = send_turn(indexed_client, sid, "照上次买鸡蛋")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_v2_historical_repurchase.py:203: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+client = <starlette.testclient.TestClient object at 0x000001FF8BA04CE0>
+session_id = 'sess-41dc5310a509', message = '照上次买鸡蛋', previous = None
+request_id = None, headers = None, extra = {}
+
+    def send_turn(
+        client,
+        session_id: str,
+        message: str,
+        previous: dict[str, Any] | None = None,
+        *,
+        request_id: str | None = None,
+        headers: dict[str, str] | None = None,
+        **extra: Any,
+    ) -> dict[str, Any]:
+        """One SSE turn; returns turn.completed payload or raises on error/stop."""
+        response = post_turn(
+            client,
+            session_id,
+            message,
+            previous,
+            request_id=request_id,
+            headers=headers,
+            **extra,
+        )
+        if response.status_code >= 400:
+            err = response.json()["error"]
+>           raise AssertionError(
+                f"SSE error {err.get('code')}: {err.get('message')}"
+            )
+E           AssertionError: SSE error AssertionError: assert True is False
+
+tests\support\__init__.py:160: AssertionError
+_ test_incomplete_product_history_asks_quantity_without_purchase_ref[missing_items-2] _
+
+indexed_client = <starlette.testclient.TestClient object at 0x000001FF8E4C0770>
+semantic_provider = <function semantic_provider.<locals>._install at 0x000001FF8EAEA480>
+run = 2, source_shape = 'missing_items'
+
+    @pytest.mark.parametrize("run", [1, 2])
+    @pytest.mark.parametrize("source_shape", ["missing_items", "shared_quantity", "null_association"])
+    def test_incomplete_product_history_asks_quantity_without_purchase_ref(indexed_client, semantic_provider, run, source_shape):
+        semantic_provider([request_new("product", "新鲜鸡蛋 6枚装")])
+        original = send_turn(indexed_client, create_session(indexed_client), "买鸡蛋6枚装")
+        source_id = original["plan"]["plan_id"]
+        with db_module.SessionLocal() as db:
+            snap = db.get(PlanSnapshot, (source_id, original["plan"]["plan_version"]))
+            legacy = json.loads(snap.plan_json)
+            if source_shape == "missing_items":
+                legacy["items"] = []
+            elif source_shape == "shared_quantity":
+                item = legacy["items"][0]
+                item["contributions"] = [{"group_id": legacy["targets"][0]["group_id"]},
+                                         {"group_id": "another-dish"}]
+            else:
+                legacy["targets"][0]["group_id"] = None
+                legacy["items"][0]["group_id"] = None
+                legacy["items"][0]["contributions"] = None
+            snap.plan_json = json.dumps(legacy)
+            db.commit()
+    
+        def clarify(request):
+            row = request["query_results"][0]["plans"][0]
+            assert row["source_complete"] is False
+            assert all("ref" not in target for target in row["targets"])
+            return {"reply": "历史商品缺少独立件数，请告诉我这次需要几盒鸡蛋。", "display_refs": []}
+    
+        semantic_provider([{"reads": [{"kind": "history", "topic": source_id}]}, Continuation(clarify)])
+        sid = create_session(indexed_client)
+>       result = send_turn(indexed_client, sid, "照上次买鸡蛋")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_v2_historical_repurchase.py:203: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+client = <starlette.testclient.TestClient object at 0x000001FF8E4C0770>
+session_id = 'sess-fa9c8142c6d1', message = '照上次买鸡蛋', previous = None
+request_id = None, headers = None, extra = {}
+
+    def send_turn(
+        client,
+        session_id: str,
+        message: str,
+        previous: dict[str, Any] | None = None,
+        *,
+        request_id: str | None = None,
+        headers: dict[str, str] | None = None,
+        **extra: Any,
+    ) -> dict[str, Any]:
+        """One SSE turn; returns turn.completed payload or raises on error/stop."""
+        response = post_turn(
+            client,
+            session_id,
+            message,
+            previous,
+            request_id=request_id,
+            headers=headers,
+            **extra,
+        )
+        if response.status_code >= 400:
+            err = response.json()["error"]
+>           raise AssertionError(
+                f"SSE error {err.get('code')}: {err.get('message')}"
+            )
+E           AssertionError: SSE error AssertionError: assert True is False
+
+tests\support\__init__.py:160: AssertionError
+_ test_incomplete_product_history_asks_quantity_without_purchase_ref[shared_quantity-1] _
+
+indexed_client = <starlette.testclient.TestClient object at 0x000001FF8E906930>
+semantic_provider = <function semantic_provider.<locals>._install at 0x000001FF8ECE7380>
+run = 1, source_shape = 'shared_quantity'
+
+    @pytest.mark.parametrize("run", [1, 2])
+    @pytest.mark.parametrize("source_shape", ["missing_items", "shared_quantity", "null_association"])
+    def test_incomplete_product_history_asks_quantity_without_purchase_ref(indexed_client, semantic_provider, run, source_shape):
+        semantic_provider([request_new("product", "新鲜鸡蛋 6枚装")])
+        original = send_turn(indexed_client, create_session(indexed_client), "买鸡蛋6枚装")
+        source_id = original["plan"]["plan_id"]
+        with db_module.SessionLocal() as db:
+            snap = db.get(PlanSnapshot, (source_id, original["plan"]["plan_version"]))
+            legacy = json.loads(snap.plan_json)
+            if source_shape == "missing_items":
+                legacy["items"] = []
+            elif source_shape == "shared_quantity":
+                item = legacy["items"][0]
+                item["contributions"] = [{"group_id": legacy["targets"][0]["group_id"]},
+                                         {"group_id": "another-dish"}]
+            else:
+                legacy["targets"][0]["group_id"] = None
+                legacy["items"][0]["group_id"] = None
+                legacy["items"][0]["contributions"] = None
+            snap.plan_json = json.dumps(legacy)
+            db.commit()
+    
+        def clarify(request):
+            row = request["query_results"][0]["plans"][0]
+            assert row["source_complete"] is False
+            assert all("ref" not in target for target in row["targets"])
+            return {"reply": "历史商品缺少独立件数，请告诉我这次需要几盒鸡蛋。", "display_refs": []}
+    
+        semantic_provider([{"reads": [{"kind": "history", "topic": source_id}]}, Continuation(clarify)])
+        sid = create_session(indexed_client)
+>       result = send_turn(indexed_client, sid, "照上次买鸡蛋")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_v2_historical_repurchase.py:203: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+client = <starlette.testclient.TestClient object at 0x000001FF8E906930>
+session_id = 'sess-593e9065fddd', message = '照上次买鸡蛋', previous = None
+request_id = None, headers = None, extra = {}
+
+    def send_turn(
+        client,
+        session_id: str,
+        message: str,
+        previous: dict[str, Any] | None = None,
+        *,
+        request_id: str | None = None,
+        headers: dict[str, str] | None = None,
+        **extra: Any,
+    ) -> dict[str, Any]:
+        """One SSE turn; returns turn.completed payload or raises on error/stop."""
+        response = post_turn(
+            client,
+            session_id,
+            message,
+            previous,
+            request_id=request_id,
+            headers=headers,
+            **extra,
+        )
+        if response.status_code >= 400:
+            err = response.json()["error"]
+>           raise AssertionError(
+                f"SSE error {err.get('code')}: {err.get('message')}"
+            )
+E           AssertionError: SSE error AssertionError: assert True is False
+
+tests\support\__init__.py:160: AssertionError
+_ test_incomplete_product_history_asks_quantity_without_purchase_ref[shared_quantity-2] _
+
+indexed_client = <starlette.testclient.TestClient object at 0x000001FF8EC76510>
+semantic_provider = <function semantic_provider.<locals>._install at 0x000001FF8EDF6520>
+run = 2, source_shape = 'shared_quantity'
+
+    @pytest.mark.parametrize("run", [1, 2])
+    @pytest.mark.parametrize("source_shape", ["missing_items", "shared_quantity", "null_association"])
+    def test_incomplete_product_history_asks_quantity_without_purchase_ref(indexed_client, semantic_provider, run, source_shape):
+        semantic_provider([request_new("product", "新鲜鸡蛋 6枚装")])
+        original = send_turn(indexed_client, create_session(indexed_client), "买鸡蛋6枚装")
+        source_id = original["plan"]["plan_id"]
+        with db_module.SessionLocal() as db:
+            snap = db.get(PlanSnapshot, (source_id, original["plan"]["plan_version"]))
+            legacy = json.loads(snap.plan_json)
+            if source_shape == "missing_items":
+                legacy["items"] = []
+            elif source_shape == "shared_quantity":
+                item = legacy["items"][0]
+                item["contributions"] = [{"group_id": legacy["targets"][0]["group_id"]},
+                                         {"group_id": "another-dish"}]
+            else:
+                legacy["targets"][0]["group_id"] = None
+                legacy["items"][0]["group_id"] = None
+                legacy["items"][0]["contributions"] = None
+            snap.plan_json = json.dumps(legacy)
+            db.commit()
+    
+        def clarify(request):
+            row = request["query_results"][0]["plans"][0]
+            assert row["source_complete"] is False
+            assert all("ref" not in target for target in row["targets"])
+            return {"reply": "历史商品缺少独立件数，请告诉我这次需要几盒鸡蛋。", "display_refs": []}
+    
+        semantic_provider([{"reads": [{"kind": "history", "topic": source_id}]}, Continuation(clarify)])
+        sid = create_session(indexed_client)
+>       result = send_turn(indexed_client, sid, "照上次买鸡蛋")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_v2_historical_repurchase.py:203: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+client = <starlette.testclient.TestClient object at 0x000001FF8EC76510>
+session_id = 'sess-0f095ea5de55', message = '照上次买鸡蛋', previous = None
+request_id = None, headers = None, extra = {}
+
+    def send_turn(
+        client,
+        session_id: str,
+        message: str,
+        previous: dict[str, Any] | None = None,
+        *,
+        request_id: str | None = None,
+        headers: dict[str, str] | None = None,
+        **extra: Any,
+    ) -> dict[str, Any]:
+        """One SSE turn; returns turn.completed payload or raises on error/stop."""
+        response = post_turn(
+            client,
+            session_id,
+            message,
+            previous,
+            request_id=request_id,
+            headers=headers,
+            **extra,
+        )
+        if response.status_code >= 400:
+            err = response.json()["error"]
+>           raise AssertionError(
+                f"SSE error {err.get('code')}: {err.get('message')}"
+            )
+E           AssertionError: SSE error AssertionError: assert True is False
+
+tests\support\__init__.py:160: AssertionError
+_ test_incomplete_product_history_asks_quantity_without_purchase_ref[null_association-1] _
+
+indexed_client = <starlette.testclient.TestClient object at 0x000001FF8ED252E0>
+semantic_provider = <function semantic_provider.<locals>._install at 0x000001FF8EE680E0>
+run = 1, source_shape = 'null_association'
+
+    @pytest.mark.parametrize("run", [1, 2])
+    @pytest.mark.parametrize("source_shape", ["missing_items", "shared_quantity", "null_association"])
+    def test_incomplete_product_history_asks_quantity_without_purchase_ref(indexed_client, semantic_provider, run, source_shape):
+        semantic_provider([request_new("product", "新鲜鸡蛋 6枚装")])
+        original = send_turn(indexed_client, create_session(indexed_client), "买鸡蛋6枚装")
+        source_id = original["plan"]["plan_id"]
+        with db_module.SessionLocal() as db:
+            snap = db.get(PlanSnapshot, (source_id, original["plan"]["plan_version"]))
+            legacy = json.loads(snap.plan_json)
+            if source_shape == "missing_items":
+                legacy["items"] = []
+            elif source_shape == "shared_quantity":
+                item = legacy["items"][0]
+                item["contributions"] = [{"group_id": legacy["targets"][0]["group_id"]},
+                                         {"group_id": "another-dish"}]
+            else:
+                legacy["targets"][0]["group_id"] = None
+                legacy["items"][0]["group_id"] = None
+                legacy["items"][0]["contributions"] = None
+            snap.plan_json = json.dumps(legacy)
+            db.commit()
+    
+        def clarify(request):
+            row = request["query_results"][0]["plans"][0]
+            assert row["source_complete"] is False
+            assert all("ref" not in target for target in row["targets"])
+            return {"reply": "历史商品缺少独立件数，请告诉我这次需要几盒鸡蛋。", "display_refs": []}
+    
+        semantic_provider([{"reads": [{"kind": "history", "topic": source_id}]}, Continuation(clarify)])
+        sid = create_session(indexed_client)
+>       result = send_turn(indexed_client, sid, "照上次买鸡蛋")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_v2_historical_repurchase.py:203: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+client = <starlette.testclient.TestClient object at 0x000001FF8ED252E0>
+session_id = 'sess-5f1a738647c3', message = '照上次买鸡蛋', previous = None
+request_id = None, headers = None, extra = {}
+
+    def send_turn(
+        client,
+        session_id: str,
+        message: str,
+        previous: dict[str, Any] | None = None,
+        *,
+        request_id: str | None = None,
+        headers: dict[str, str] | None = None,
+        **extra: Any,
+    ) -> dict[str, Any]:
+        """One SSE turn; returns turn.completed payload or raises on error/stop."""
+        response = post_turn(
+            client,
+            session_id,
+            message,
+            previous,
+            request_id=request_id,
+            headers=headers,
+            **extra,
+        )
+        if response.status_code >= 400:
+            err = response.json()["error"]
+>           raise AssertionError(
+                f"SSE error {err.get('code')}: {err.get('message')}"
+            )
+E           AssertionError: SSE error TypeError: object of type 'NoneType' has no len()
+
+tests\support\__init__.py:160: AssertionError
+_ test_incomplete_product_history_asks_quantity_without_purchase_ref[null_association-2] _
+
+indexed_client = <starlette.testclient.TestClient object at 0x000001FF8EBD41D0>
+semantic_provider = <function semantic_provider.<locals>._install at 0x000001FF8EFD1120>
+run = 2, source_shape = 'null_association'
+
+    @pytest.mark.parametrize("run", [1, 2])
+    @pytest.mark.parametrize("source_shape", ["missing_items", "shared_quantity", "null_association"])
+    def test_incomplete_product_history_asks_quantity_without_purchase_ref(indexed_client, semantic_provider, run, source_shape):
+        semantic_provider([request_new("product", "新鲜鸡蛋 6枚装")])
+        original = send_turn(indexed_client, create_session(indexed_client), "买鸡蛋6枚装")
+        source_id = original["plan"]["plan_id"]
+        with db_module.SessionLocal() as db:
+            snap = db.get(PlanSnapshot, (source_id, original["plan"]["plan_version"]))
+            legacy = json.loads(snap.plan_json)
+            if source_shape == "missing_items":
+                legacy["items"] = []
+            elif source_shape == "shared_quantity":
+                item = legacy["items"][0]
+                item["contributions"] = [{"group_id": legacy["targets"][0]["group_id"]},
+                                         {"group_id": "another-dish"}]
+            else:
+                legacy["targets"][0]["group_id"] = None
+                legacy["items"][0]["group_id"] = None
+                legacy["items"][0]["contributions"] = None
+            snap.plan_json = json.dumps(legacy)
+            db.commit()
+    
+        def clarify(request):
+            row = request["query_results"][0]["plans"][0]
+            assert row["source_complete"] is False
+            assert all("ref" not in target for target in row["targets"])
+            return {"reply": "历史商品缺少独立件数，请告诉我这次需要几盒鸡蛋。", "display_refs": []}
+    
+        semantic_provider([{"reads": [{"kind": "history", "topic": source_id}]}, Continuation(clarify)])
+        sid = create_session(indexed_client)
+>       result = send_turn(indexed_client, sid, "照上次买鸡蛋")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_v2_historical_repurchase.py:203: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+client = <starlette.testclient.TestClient object at 0x000001FF8EBD41D0>
+session_id = 'sess-7f49582a25fb', message = '照上次买鸡蛋', previous = None
+request_id = None, headers = None, extra = {}
+
+    def send_turn(
+        client,
+        session_id: str,
+        message: str,
+        previous: dict[str, Any] | None = None,
+        *,
+        request_id: str | None = None,
+        headers: dict[str, str] | None = None,
+        **extra: Any,
+    ) -> dict[str, Any]:
+        """One SSE turn; returns turn.completed payload or raises on error/stop."""
+        response = post_turn(
+            client,
+            session_id,
+            message,
+            previous,
+            request_id=request_id,
+            headers=headers,
+            **extra,
+        )
+        if response.status_code >= 400:
+            err = response.json()["error"]
+>           raise AssertionError(
+                f"SSE error {err.get('code')}: {err.get('message')}"
+            )
+E           AssertionError: SSE error TypeError: object of type 'NoneType' has no len()
+
+tests\support\__init__.py:160: AssertionError
+============================== warnings summary ===============================
+app\services\template_matcher.py:21
+  C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\app\services\template_matcher.py:21: SyntaxWarning: invalid escape sequence '\['
+    _PUNCT_PATTERN = re.compile(r"[\s\u3000，。！？、；：""''（）()\[\]【】\-—·…]+")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_v2_historical_repurchase.py::test_incomplete_product_history_asks_quantity_without_purchase_ref[missing_items-1]
+FAILED tests/test_v2_historical_repurchase.py::test_incomplete_product_history_asks_quantity_without_purchase_ref[missing_items-2]
+FAILED tests/test_v2_historical_repurchase.py::test_incomplete_product_history_asks_quantity_without_purchase_ref[shared_quantity-1]
+FAILED tests/test_v2_historical_repurchase.py::test_incomplete_product_history_asks_quantity_without_purchase_ref[shared_quantity-2]
+FAILED tests/test_v2_historical_repurchase.py::test_incomplete_product_history_asks_quantity_without_purchase_ref[null_association-1]
+FAILED tests/test_v2_historical_repurchase.py::test_incomplete_product_history_asks_quantity_without_purchase_ref[null_association-2]
+6 failed, 14 deselected, 1 warning in 7.40s
