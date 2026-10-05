@@ -141,6 +141,44 @@ def test_near_price_prefers_less_surplus(indexed_client, semantic_provider, run)
 
 
 @pytest.mark.parametrize("run", [1, 2])
+def test_unchecked_pack_does_not_replace_selected_pack_on_servings_change(
+    indexed_client, semantic_provider, run,
+):
+    with db_module.SessionLocal() as db:
+        db.query(Offer).filter(Offer.sku_id.in_(["demo:eggs-fresh-6pack", "demo:eggs-10pack"])).update(
+            {Offer.available_qty: 1}, synchronize_session=False,
+        )
+        db.commit()
+
+    def resize(request):
+        group = request["current_plan"]["groups"][0]
+        return request_amend(focus=group["ref"], name=group["name"], changes={"set": {"people": 4}})
+
+    semantic_provider([request_new("dish", "番茄炒蛋", people=8, mode="self_cook"), resize])
+    sid = create_session(indexed_client)
+    prepared = send_turn(indexed_client, sid, "八人份番茄炒蛋")
+    plan = prepared["plan"]
+    revision = indexed_client.post(
+        f"/api/v1/guide/tasks/{prepared['task_id']}/plan-revisions",
+        json={"request_id": str(uuid.uuid4()), "expected_session_version": prepared["session_version"],
+              "expected_state_version": prepared["state_version"], "base_plan_id": plan["plan_id"],
+              "base_plan_version": plan["plan_version"], "coverage_intent": "full",
+              "items": [{"sku_id": i["sku_id"], "quantity": i["quantity"],
+                         "selected": False if i["sku_id"] == "demo:eggs-10pack" else i["selected"]}
+                        for i in plan["items"]]},
+    )
+    assert revision.status_code == 200, revision.json()
+    previous = indexed_client.get(f"/api/v1/guide/sessions/{sid}").json()
+    resized = send_turn(indexed_client, sid, "改成四人份", previous)
+    eggs = [i for i in resized["plan"]["items"] if i["requirement"]["ingredient_id"] == "egg"]
+    assert [(i["sku_id"], i["quantity"], i["selected"]) for i in eggs] == [
+        ("demo:eggs-fresh-6pack", 1, True),
+    ]
+    assert resized["plan"]["selected_total_fen"] == 2340
+    assert indexed_client.get("/api/v1/cart").json()["items"] == []
+
+
+@pytest.mark.parametrize("run", [1, 2])
 @pytest.mark.parametrize("stock", [0, 1])
 def test_supply_preview_preserves_old_plan_then_partial_confirmation(indexed_client, semantic_provider, stock, run):
     target = request_new("dish", "番茄炒蛋", people=8, mode="self_cook", relation="append")

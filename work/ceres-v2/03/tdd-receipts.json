@@ -307,5 +307,25 @@
   "frontend_commands": [
     "frontend/node_modules/.bin/tsc.cmd --noEmit -p tsconfig.json",
     "npm.cmd run build -- --outDir external-run/frontend-dist"
+  ],
+  "spec_fix_validation": [
+    {
+      "run": "5f11c8b8c92f4881beac2c47465dfa94",
+      "raw": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-5f11c8b8c92f4881beac2c47465dfa94\\v2-unchecked-pack-servings-red.txt",
+      "actual_exit": 1,
+      "result": "2 failed",
+      "start_utc": "2026-10-05T06:49:07.5700829Z",
+      "end_utc": "2026-10-05T06:49:15.0148910Z",
+      "targets": "test_v2_supply_adaptation.py::test_unchecked_pack_does_not_replace_selected_pack_on_servings_change"
+    },
+    {
+      "run": "7e7321a2184d4319b7e937e92be0d0bd",
+      "raw": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-7e7321a2184d4319b7e937e92be0d0bd\\v2-supply-shared-servings-green-regression.txt",
+      "actual_exit": 0,
+      "result": "43 passed",
+      "start_utc": "2026-10-05T06:50:49.4708322Z",
+      "end_utc": "2026-10-05T06:51:59.4038223Z",
+      "targets": "test_v2_supply_adaptation.py test_v2_shared_demand.py test_v2_servings.py"
+    }
   ]
 }

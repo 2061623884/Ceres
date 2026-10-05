@@ -1,6 +1,6 @@
 {
   "backend/app/services/template_plan_service.py": "22474df872a92ba011dc62fb9d6d9fccf7d95b262139dbb83274be881678192e",
-  "backend/app/services/shopping_plan_service.py": "5f7ab375216f438e24831b6e194bb20efc6c387327f7aac85e2415fe893554ca",
+  "backend/app/services/shopping_plan_service.py": "82cbce0239760c3638aebbaa94047b5f456eac594e25575f3f3c8ee613ef06d5",
   "backend/app/agent/tools/change_plan.py": "41e56ebdf4d198a5b86777af5962bae2be51cda1a78815fcea0ba11c6dd9c134",
   "frontend/src/App.tsx": "41367bf5d86ccb6a09357006836942c5e7a4479de4d824c305cb798a72b09a8c",
   "frontend/src/lib/saleGuide.ts": "ce63c8418d6f829979c2cbc31adc5bfb368087f8c8ce508fced772f457edfec3",
@@ -9,6 +9,6 @@
   "backend/app/agent/graph/nodes/mutation.py": "f95c32f56d003200a11987f653f7004a46a06480d11dbe7c8a0b2d08bd90367c",
   "backend/tests/test_shopping_workflow.py": "887a4cffe11eacfdb0448ff831be81e8ff6c3485998202819799b3e9d1dd234c",
   "backend/tests/test_p0_gap_integrity.py": "5e3e5eafdcfcd2ce19b24e1aa9fa2b8cde84aa2e23a4e00fff00b43aa13dda36",
-  "backend/tests/test_v2_supply_adaptation.py": "c5cdde6ac401d498014e623838409ec6dd0d0c6cef555ab0e85229bfd31b6a85",
+  "backend/tests/test_v2_supply_adaptation.py": "44bb705f69d6e1487ee3aeb37dc116519196d165f935ea105c1a9178c9fa7fe3",
   "backend/tests/test_v2_shared_demand.py": "0424286a61450eb8e02500178bd7ba7a6476f73259c2a27acb10cef8f02ead3d"
 }

@@ -897,7 +897,7 @@ class ShoppingPlanService:
         from app.services.template_plan_service import TemplatePlanService, UNIT_TO_GRAMS
 
         demands: dict[tuple[str, str], dict[str, Any]] = {}
-        fixed: dict[tuple[str, str], list[dict[str, Any]]] = {}
+        choices: dict[tuple[str, str], dict[str, dict[str, Any]]] = {}
         bought: dict[tuple[str, str], dict[str, dict[str, Any]]] = {}
         for row in base.get("items") or []:
             for contribution in self._row_contributions(row).values():
@@ -905,8 +905,7 @@ class ShoppingPlanService:
                 if (requirement.get("source") or {}).get("kind") != "local_recipe":
                     continue
                 key = (requirement["ingredient_id"], requirement["unit"])
-                if row.get("quantity_source") == "user" or not row["selected"]:
-                    fixed.setdefault(key, []).append(row)
+                choices.setdefault(key, {})[row["sku_id"]] = row
                 if row.get("added_quantity"):
                     bought.setdefault(key, {})[row["sku_id"]] = row
         for row in rows:
@@ -930,7 +929,10 @@ class ShoppingPlanService:
         for (ingredient, unit), demand in demands.items():
             amount = sum(request["amount"] for request in demand["requests"].values())
             needed = {"ingredient_id": ingredient, "quantity_" + unit: amount}
-            fixed_rows = {row["sku_id"]: row for row in fixed.get((ingredient, unit), [])}
+            previous_rows = choices.get((ingredient, unit), {})
+            partial_selection = any(not row["selected"] for row in previous_rows.values())
+            fixed_rows = {sku_id: row for sku_id, row in previous_rows.items()
+                          if row.get("quantity_source") == "user" or (partial_selection and row["selected"])}
             if len(fixed_rows) > 1:
                 # Several explicitly edited specs remain the shopper's allocation.
                 continue
@@ -989,13 +991,14 @@ class ShoppingPlanService:
                     requirement["source"].pop("original_unit", None)
                     if len(purchase) > 1:
                         requirement["source"].update(original_quantity=request["amount"], original_unit=unit)
-                    previous = fixed_rows.get(sku["sku_id"])
+                    previous = previous_rows.get(sku["sku_id"])
                     raw_rows.append({
                         "sku_id": sku["sku_id"], "quantity": previous["quantity"]
                         if previous and previous.get("quantity_source") == "user"
                         else math.ceil(allocated / (sku["spec_quantity"] * UNIT_TO_GRAMS[sku["spec_unit"]])),
                         "quantity_source": previous.get("quantity_source") if previous else "recommended",
-                        "selected": previous["selected"] if previous else request["row"]["selected"],
+                        "selected": previous["selected"] if previous else
+                        any(row["selected"] for row in previous_rows.values()) if previous_rows else request["row"]["selected"],
                         "role": request["row"]["role"], "group_id": request["contribution"]["group_id"],
                         "target_kind": "dish", "target_id": original["source"]["ref"],
                         "required_item_id": requirement["required_item_id"], "requirement": requirement,
