@@ -47,6 +47,26 @@ def display_comparison(request):
 
 
 @pytest.mark.parametrize("run", [1, 2])
+def test_empty_comparison_rejects_reused_prior_card_refs(indexed_client, semantic_provider, run):
+    def stale_answer(request):
+        assert request["query_results"][0]["sellable_products"] == []
+        return {"reply": "没有符合条件的可乐。",
+                "display_refs": [row["ref"] for row in request["displayed_candidates"]]}
+
+    semantic_provider([
+        {"reads": [{"kind": "compare", "topic": "可乐"}]}, Continuation(display_comparison),
+        {"reads": [{"kind": "compare", "topic": "可乐"}],
+         "constraints": {"specification": {"brand": "没有这个品牌"}}}, Continuation(stale_answer),
+    ])
+    sid = create_session(indexed_client)
+    first = send_turn(indexed_client, sid, "比较可乐")
+    empty = send_turn(indexed_client, sid, "只看没有这个品牌", first)
+    assert empty["product_cards"] == []
+    assert indexed_client.get(f"/api/v1/guide/sessions/{sid}").json()["product_cards"] == []
+    assert indexed_client.get("/api/v1/cart").json()["items"] == []
+
+
+@pytest.mark.parametrize("run", [1, 2])
 def test_empty_comparison_clears_prior_candidates_on_session_restore(indexed_client, semantic_provider, run):
     semantic_provider([
         {"reads": [{"kind": "compare", "topic": "可乐"}]}, Continuation(display_comparison),

@@ -1,0 +1,8 @@
+{
+  "base": "dbb192d",
+  "staged": [],
+  "artifact_only": [
+    "backend/app/agent/graph/nodes/answer.py",
+    "backend/app/api/guide.py"
+  ]
+}
