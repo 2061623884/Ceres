@@ -12,13 +12,13 @@ from mercury.db import connect
 
 RETURN_WINDOW_DAYS = 7
 
-ORDER_STATUS_TEXT = {"paid": "已支付未发货", "shipped": "配送中", "delivered": "已签收", "cancelled": "已取消"}
+ORDER_STATUS_TEXT = {"paid": "模拟订单，未发货", "shipped": "配送中", "delivered": "已签收", "cancelled": "已取消"}
 DELIVERY_STATUS_TEXT = {"shipping": "配送中", "delivered": "已签收"}
 REFUND_STATUS_TEXT = {"pending": "退款处理中", "completed": "退款已完成", "rejected": "退款被拒绝"}
 RETURN_STATUS_TEXT = {"requested": "待审核", "approved": "审核通过", "completed": "退货已完成", "rejected": "已拒绝"}
 
 # 没有物流记录时的订单状态说明
-NO_DELIVERY_TEXT = {"paid": "已支付，未发货", "cancelled": "已取消"}
+NO_DELIVERY_TEXT = {"paid": "模拟订单，未发货", "cancelled": "已取消"}
 
 
 def _yuan(fen: int) -> str:

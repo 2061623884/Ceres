@@ -40,7 +40,7 @@ def test_delivery_shipping(db):
 def test_delivery_none(db):
     data = s.get_delivery_status(U1, order_id="O1003")["data"]
     assert data["has_delivery"] is False
-    assert data["order_status_text"] == "已支付，未发货"
+    assert data["order_status_text"] == "模拟订单，未发货"
 
 
 # ---------- 退款 ----------

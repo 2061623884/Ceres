@@ -17,3 +17,13 @@
 TS启动记录器被误交给Node的错误未运行tsc，见launch-diagnostic回执；首次Vite runner缺__dirname的build exit1见dfb25回执。之后明确外部globals shim与runner配置构建成功，.vite-temp前后均不存在，仓库无构建写入。失败未算成功、未改项目源码规避验证。
 
 各回执根文件保留实际executable/argv/cwd、环境、UTC、真实退出码及stdout/stderr；临时数据库/编译产物只在外部保留。16代表项＋61相关回归，不累计重复执行。真实模型/浏览器及本人页面验收留09；06速度阻塞依旧。
+
+## 双轴有效修复后复验
+
+| 回执 | 实际结果 | 范围 |
+| --- | --- | --- |
+| run-f9f820241e814508a9a3c8271c52c244 | 16pass/exit0 | 8种代表场景各两次；UTC12:44:15.410–12:44:30.066 |
+| mercury-regression-1529d04785e84450b66cc1873cab5633 | 61pass/exit0 | 既有离线四文件；UTC12:44:59.774–12:45:05.439 |
+| frontend-tsc-ee21b68b55ad4d11bc8a5179065f6afa | exit0 | TS noEmit；UTC12:45:33.287–12:45:34.775 |
+
+主Agent已核原始回执。模拟订单状态与成功页文案修复，两轴复审剩余0，技术部分通过；人工项目仍待验收。

@@ -1,0 +1,51 @@
+--- a/frontend/src/MercuryChat.tsx
++++ b/frontend/src/MercuryChat.tsx
+@@ -308,7 +308,7 @@
+               >
+                 <span className="flex items-center justify-between gap-3">
+                   <span className="text-[12px] font-semibold text-[#252421]">{order.order_id}</span>
+-                  <span className="text-[10px] text-black/38">{order.status === 'paid' ? '已付款，待发货' : order.status}</span>
++                  <span className="text-[10px] text-black/38">{order.status === 'paid' ? '模拟下单，未发货' : order.status}</span>
+                 </span>
+                 <span className="mt-1 block text-[10px] leading-relaxed text-black/45">
+                   {order.items.map((item) => `${item.product_name} × ${item.quantity}`).join(' · ')}
+--- a/frontend/src/App.tsx
++++ b/frontend/src/App.tsx
+@@ -1054,7 +1054,7 @@
+         <p className="text-[12px] font-medium text-black/40">订单已提交</p>
+         <p className="mt-3 text-[22px] font-semibold tracking-[-0.05em] text-[#1d1c1a]">{order.order_id}</p>
+         <p className="mt-2 text-[15px] font-medium text-black/55">{yuan(order.total_fen)}</p>
+-        <p className="mt-4 text-[11px] leading-relaxed text-black/35">门店会尽快为你备货，可在订单页查看进度</p>
++        <p className="mt-4 text-[11px] leading-relaxed text-black/35">本次为模拟下单，未发货；可在订单页查看商品和成交快照</p>
+       </div>
+       <div className="mt-8 flex w-full max-w-[280px] flex-col gap-2">
+         <button
+--- a/Mercury/mercury/services.py
++++ b/Mercury/mercury/services.py
+@@ -12,13 +12,13 @@
+ 
+ RETURN_WINDOW_DAYS = 7
+ 
+-ORDER_STATUS_TEXT = {"paid": "已支付未发货", "shipped": "配送中", "delivered": "已签收", "cancelled": "已取消"}
++ORDER_STATUS_TEXT = {"paid": "模拟订单，未发货", "shipped": "配送中", "delivered": "已签收", "cancelled": "已取消"}
+ DELIVERY_STATUS_TEXT = {"shipping": "配送中", "delivered": "已签收"}
+ REFUND_STATUS_TEXT = {"pending": "退款处理中", "completed": "退款已完成", "rejected": "退款被拒绝"}
+ RETURN_STATUS_TEXT = {"requested": "待审核", "approved": "审核通过", "completed": "退货已完成", "rejected": "已拒绝"}
+ 
+ # 没有物流记录时的订单状态说明
+-NO_DELIVERY_TEXT = {"paid": "已支付，未发货", "cancelled": "已取消"}
++NO_DELIVERY_TEXT = {"paid": "模拟订单，未发货", "cancelled": "已取消"}
+ 
+ 
+ def _yuan(fen: int) -> str:
+--- a/Mercury/tests/test_services.py
++++ b/Mercury/tests/test_services.py
+@@ -40,7 +40,7 @@
+ def test_delivery_none(db):
+     data = s.get_delivery_status(U1, order_id="O1003")["data"]
+     assert data["has_delivery"] is False
+-    assert data["order_status_text"] == "已支付，未发货"
++    assert data["order_status_text"] == "模拟订单，未发货"
+ 
+ 
+ # ---------- 退款 ----------

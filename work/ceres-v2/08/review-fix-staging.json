@@ -1,0 +1,12 @@
+{
+  "repair_source_staged": [
+    "Mercury/mercury/services.py",
+    "Mercury/tests/test_services.py"
+  ],
+  "artifact_only": [
+    "frontend/src/App.tsx",
+    "frontend/src/MercuryChat.tsx"
+  ],
+  "exact_repair": "review-fix.patch",
+  "note": "Only scoped text fixes and 08 status/receipts. Inherited frontend dirty remains un-staged."
+}
