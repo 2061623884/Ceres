@@ -134,8 +134,8 @@
 +                            item.get("group_id") == group_id
 +                            or any(c["group_id"] == group_id for c in (item.get("contributions") or [])))
 +                    ]
-+                    if current is None or group_id is None or (target_kind == "product" and (
-+                        not historical_items or any(item["shared"] for item in historical_items)
++                    if current is None or (target_kind == "product" and (
++                        group_id is None or not historical_items or any(item["shared"] for item in historical_items)
 +                    )):
 +                        source_complete = False
 +                    targets.append({"kind": target_kind, "target_id": target_id, "name": target["name"],

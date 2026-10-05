@@ -206,6 +206,41 @@ def test_incomplete_product_history_asks_quantity_without_purchase_ref(indexed_c
 
 
 @pytest.mark.parametrize("run", [1, 2])
+def test_named_dish_history_without_group_uses_current_recipe(indexed_client, semantic_provider, run):
+    semantic_provider([request_new("dish", "番茄炒蛋", people=2, mode="self_cook")])
+    original = send_turn(indexed_client, create_session(indexed_client), "两人番茄炒蛋")
+    source_id = original["plan"]["plan_id"]
+    with db_module.SessionLocal() as db:
+        snap = db.get(PlanSnapshot, (source_id, original["plan"]["plan_version"]))
+        legacy = json.loads(snap.plan_json)
+        legacy["targets"][0]["group_id"] = None
+        for item in legacy["items"]:
+            item["group_id"] = None
+            item["contributions"] = None
+        snap.plan_json = json.dumps(legacy)
+        db.commit()
+
+    def answer(request):
+        row = request["query_results"][0]["plans"][0]
+        target = row["targets"][0]
+        assert row["source_complete"] is True and target["historical_items"] == []
+        return {"reply": "历史菜品是番茄炒蛋；本次按当前菜谱重新配货。", "display_refs": [target["ref"]]}
+
+    def choose(request):
+        target = request["candidates"]["dishes"][0]
+        return request_new("dish", target["name"], ref=target["ref"], people=4, mode="self_cook")
+
+    semantic_provider([{"reads": [{"kind": "history", "topic": source_id}]}, Continuation(answer), choose])
+    sid = create_session(indexed_client)
+    found = send_turn(indexed_client, sid, "查上次那道菜")
+    rebuilt = send_turn(indexed_client, sid, "这次做四人份", found)
+    assert rebuilt["task_id"] != original["task_id"]
+    assert rebuilt["plan"]["plan_id"] != source_id
+    assert rebuilt["plan"]["targets"][0]["people"] == 4
+    assert indexed_client.get("/api/v1/cart").json()["items"] == []
+
+
+@pytest.mark.parametrize("run", [1, 2])
 def test_historical_multi_dish_is_rebuilt_by_explicit_additions(indexed_client, semantic_provider, run):
     semantic_provider([request_new("dish", "番茄炒蛋", people=2, mode="self_cook"),
                        request_new("dish", "番茄蛋汤", people=1, mode="self_cook", relation="append")])

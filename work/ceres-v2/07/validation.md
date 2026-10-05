@@ -17,7 +17,9 @@
 | 0453b1e74652488981575ed723b7ab69 | 21pass，exit0 | 修正查询编码后16历史代表项＋5provider错误；UTC11:46:28.613–11:46:59.267 |
 | 8d64a414b0da4347a5029efe16bcb493 | 6fail，exit1 | 审查RED：缺行/共享数量误标完整；允许null贡献读取TypeError |
 | 864f46fef7244f2589f5f0ae0568b395 | 42pass，exit0 | 修复后22历史代表项＋20read-tools，UTC12:02:09.866–12:02:53.738 |
+| ae7fa86ec8f54b389d3e6bcadb3d3c40 | 2fail，exit1 | 无group但有真实菜谱ID的历史来源被过度拦截，审查RED |
+| f9793bf6b0154bd09a3ff9586cda247a | 44pass，exit0 | 限制仅用于商品独立件数后24历史＋20read-tools，UTC12:14:14.291–12:15:08.137 |
 
-test_read_tools.py最初被tester的路径正则误判不存在（Windows反斜线），主Agent已用rg核实并完成补验，不重复55项。随后只读代码核查发现通用检索Prompt强制唯一商品与历史菜品/多目标冲突，改为history专用回答提示，仍只读输出reply/display_refs；上述最小复验通过。中文名称查询另经RED→只读定位→一处编码修复→GREEN。双轴审查发现不完整件数与可空关联，六个独立RED后最小修复，42项复验通过。唯一验证范围为22历史代表项（各两次独立）＋75相关回归＋5provider错误；重复运行不累计为额外用例。真实模型理解/时长及本人页面体验仍待09，受控通过不替代真实验收。
+test_read_tools.py最初被tester的路径正则误判不存在（Windows反斜线），主Agent已用rg核实并完成补验，不重复55项。随后只读代码核查发现通用检索Prompt强制唯一商品与历史菜品/多目标冲突，改为history专用回答提示，仍只读输出reply/display_refs；上述最小复验通过。中文名称查询另经RED→只读定位→一处编码修复→GREEN。双轴审查发现不完整件数与可空关联，六个独立RED后最小修复，42项复验通过。复审发现菜品无需依赖旧行数量，两独立RED后删除此多余限制，44项复验通过。唯一验证范围为24历史代表项（各两次独立）＋75相关回归＋5provider错误；重复运行不累计为额外用例。真实模型理解/时长及本人页面体验仍待09，受控通过不替代真实验收。
 
 实际命令、argv、环境、UTC时间、pytest退出码和stdout/stderr见test-receipts对应run文本；完整临时数据库在外部work/ceres-v2-test-env保留。本轮误复制入07的部分临时数据不纳入Git，只显式提交文本回执。
