@@ -23,6 +23,7 @@ class Settings(BaseSettings):
     openai_base_url: str = Field(default="", alias="OPENAI_BASE_URL")
     openai_api_key: str = Field(default="", alias="OPENAI_API_KEY")
     llm_model: str = Field(default="", alias="LLM_MODEL")
+    memory_model: str = Field(default="", alias="MEMORY_MODEL")
     llm_timeout: float = Field(default=45.0, alias="LLM_TIMEOUT")
     llm_max_output_tokens: int = Field(default=1536, ge=256, le=8192, alias="LLM_MAX_OUTPUT_TOKENS")
     #: Max model calls per request: one understanding step, plus one grounded

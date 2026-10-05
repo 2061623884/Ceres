@@ -1,0 +1,140 @@
+FF                                                                       [100%]
+================================== FAILURES ===================================
+_____ test_dream_threshold_interval_deduplication_and_expired_cleanup[1] ______
+
+client = <starlette.testclient.TestClient object at 0x000001F04275EA50>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F0427EC680>
+run = 1
+
+    @pytest.mark.parametrize("run", [1, 2])
+    def test_dream_threshold_interval_deduplication_and_expired_cleanup(client, monkeypatch, run):
+        from datetime import datetime, timedelta, timezone
+        from app.core.config import get_settings
+        from app.core.database import SessionLocal
+        from app.llm.openai_transport import OpenAICompatTransport
+        from app.models.memory import ShoppingMemory
+        from app.models.trace import TraceEvent
+        from app.services.automatic_memory_service import AutomaticMemoryService
+        from app.services.memory_service import MemoryService
+    
+        create_session(client)
+        owner = client.cookies.get("sg_owner_id")
+        now = datetime.now(timezone.utc)
+        monkeypatch.setenv("MEMORY_MODEL", "test-memory-model")
+        get_settings.cache_clear()
+    
+        def post_json(self, payload, **kwargs):
+            assert json.loads(payload["messages"][-1]["content"])["mode"] == "dream"
+            return {"choices": [{"message": {"content": json.dumps({"memories": [
+                {"category": "feedback", "content": "先讲理由"},
+            ], "drop_refs": ["auto-1"]}, ensure_ascii=False)}}]}
+    
+        monkeypatch.setattr(OpenAICompatTransport, "post_json", post_json)
+        with SessionLocal() as db:
+            for i in range(9):
+                db.add(ShoppingMemory(memory_id=f"auto-{i}", owner_id=owner, category="feedback", source="automatic",
+                    content="先讲理由" if i < 2 else f"持续纠正{i}", expires_at=now + timedelta(days=30)))
+            db.add(ShoppingMemory(memory_id="explicit", owner_id=owner, category="user", source="explicit", content="喜欢百事可乐"))
+            db.add(ShoppingMemory(memory_id="expired", owner_id=owner, category="project", source="automatic", content="旧采购背景", expires_at=now - timedelta(days=1)))
+            db.add(ShoppingMemory(memory_id="other-owner-expired", owner_id="other-owner", category="project", source="automatic", content="别人的旧背景", expires_at=now - timedelta(days=1)))
+            original_expiry = now + timedelta(days=5)
+            db.commit()
+            db.get(ShoppingMemory, "auto-0").expires_at = original_expiry
+            db.commit()
+            service = AutomaticMemoryService(db, owner)
+            assert service.dream_if_due(trace_id="below-threshold") is False
+            db.add(ShoppingMemory(memory_id="auto-9", owner_id=owner, category="feedback", source="automatic", content="持续纠正9", expires_at=now + timedelta(days=30)))
+            db.add(TraceEvent(event_id="prior-dream", trace_id="prior", owner_id=owner, phase="memory_dream_completed", created_at=now - timedelta(hours=23)))
+            db.commit()
+            assert service.dream_if_due(trace_id="too-soon") is False
+            db.get(TraceEvent, "prior-dream").created_at = now - timedelta(hours=25)
+            db.commit()
+            assert service.dream_if_due(trace_id="due") is True
+            records = MemoryService(db, owner).list_valid()
+            assert len([row for row in records if row.source == "automatic"]) == 9
+            assert db.get(ShoppingMemory, "auto-1") is None and db.get(ShoppingMemory, "expired") is None
+            assert db.get(ShoppingMemory, "explicit").content == "喜欢百事可乐"
+>           assert db.get(ShoppingMemory, "auto-0").expires_at.replace(tzinfo=timezone.utc) == original_expiry
+E           AssertionError: assert datetime.datetime(2026, 11, 4, 9, 26, 23, 25099, tzinfo=datetime.timezone.utc) == datetime.datetime(2026, 10, 10, 9, 26, 22, 977152, tzinfo=datetime.timezone.utc)
+E            +  where datetime.datetime(2026, 11, 4, 9, 26, 23, 25099, tzinfo=datetime.timezone.utc) = <built-in method replace of datetime.datetime object at 0x000001F0454AA0A0>(tzinfo=datetime.timezone.utc)
+E            +    where <built-in method replace of datetime.datetime object at 0x000001F0454AA0A0> = datetime.datetime(2026, 11, 4, 9, 26, 23, 25099).replace
+E            +      where datetime.datetime(2026, 11, 4, 9, 26, 23, 25099) = <app.models.memory.ShoppingMemory object at 0x000001F0454ABB60>.expires_at
+E            +        where <app.models.memory.ShoppingMemory object at 0x000001F0454ABB60> = get(<class 'app.models.memory.ShoppingMemory'>, 'auto-0')
+E            +          where get = <sqlalchemy.orm.session.Session object at 0x000001F045330080>.get
+E            +    and   datetime.timezone.utc = <class 'datetime.timezone'>.utc
+
+tests\test_v2_automatic_memory.py:195: AssertionError
+_____ test_dream_threshold_interval_deduplication_and_expired_cleanup[2] ______
+
+client = <starlette.testclient.TestClient object at 0x000001F0453FCFB0>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F0453DF4A0>
+run = 2
+
+    @pytest.mark.parametrize("run", [1, 2])
+    def test_dream_threshold_interval_deduplication_and_expired_cleanup(client, monkeypatch, run):
+        from datetime import datetime, timedelta, timezone
+        from app.core.config import get_settings
+        from app.core.database import SessionLocal
+        from app.llm.openai_transport import OpenAICompatTransport
+        from app.models.memory import ShoppingMemory
+        from app.models.trace import TraceEvent
+        from app.services.automatic_memory_service import AutomaticMemoryService
+        from app.services.memory_service import MemoryService
+    
+        create_session(client)
+        owner = client.cookies.get("sg_owner_id")
+        now = datetime.now(timezone.utc)
+        monkeypatch.setenv("MEMORY_MODEL", "test-memory-model")
+        get_settings.cache_clear()
+    
+        def post_json(self, payload, **kwargs):
+            assert json.loads(payload["messages"][-1]["content"])["mode"] == "dream"
+            return {"choices": [{"message": {"content": json.dumps({"memories": [
+                {"category": "feedback", "content": "先讲理由"},
+            ], "drop_refs": ["auto-1"]}, ensure_ascii=False)}}]}
+    
+        monkeypatch.setattr(OpenAICompatTransport, "post_json", post_json)
+        with SessionLocal() as db:
+            for i in range(9):
+                db.add(ShoppingMemory(memory_id=f"auto-{i}", owner_id=owner, category="feedback", source="automatic",
+                    content="先讲理由" if i < 2 else f"持续纠正{i}", expires_at=now + timedelta(days=30)))
+            db.add(ShoppingMemory(memory_id="explicit", owner_id=owner, category="user", source="explicit", content="喜欢百事可乐"))
+            db.add(ShoppingMemory(memory_id="expired", owner_id=owner, category="project", source="automatic", content="旧采购背景", expires_at=now - timedelta(days=1)))
+            db.add(ShoppingMemory(memory_id="other-owner-expired", owner_id="other-owner", category="project", source="automatic", content="别人的旧背景", expires_at=now - timedelta(days=1)))
+            original_expiry = now + timedelta(days=5)
+            db.commit()
+            db.get(ShoppingMemory, "auto-0").expires_at = original_expiry
+            db.commit()
+            service = AutomaticMemoryService(db, owner)
+            assert service.dream_if_due(trace_id="below-threshold") is False
+            db.add(ShoppingMemory(memory_id="auto-9", owner_id=owner, category="feedback", source="automatic", content="持续纠正9", expires_at=now + timedelta(days=30)))
+            db.add(TraceEvent(event_id="prior-dream", trace_id="prior", owner_id=owner, phase="memory_dream_completed", created_at=now - timedelta(hours=23)))
+            db.commit()
+            assert service.dream_if_due(trace_id="too-soon") is False
+            db.get(TraceEvent, "prior-dream").created_at = now - timedelta(hours=25)
+            db.commit()
+            assert service.dream_if_due(trace_id="due") is True
+            records = MemoryService(db, owner).list_valid()
+            assert len([row for row in records if row.source == "automatic"]) == 9
+            assert db.get(ShoppingMemory, "auto-1") is None and db.get(ShoppingMemory, "expired") is None
+            assert db.get(ShoppingMemory, "explicit").content == "喜欢百事可乐"
+>           assert db.get(ShoppingMemory, "auto-0").expires_at.replace(tzinfo=timezone.utc) == original_expiry
+E           AssertionError: assert datetime.datetime(2026, 11, 4, 9, 26, 23, 998558, tzinfo=datetime.timezone.utc) == datetime.datetime(2026, 10, 10, 9, 26, 23, 957257, tzinfo=datetime.timezone.utc)
+E            +  where datetime.datetime(2026, 11, 4, 9, 26, 23, 998558, tzinfo=datetime.timezone.utc) = <built-in method replace of datetime.datetime object at 0x000001F04565F8A0>(tzinfo=datetime.timezone.utc)
+E            +    where <built-in method replace of datetime.datetime object at 0x000001F04565F8A0> = datetime.datetime(2026, 11, 4, 9, 26, 23, 998558).replace
+E            +      where datetime.datetime(2026, 11, 4, 9, 26, 23, 998558) = <app.models.memory.ShoppingMemory object at 0x000001F04565F7A0>.expires_at
+E            +        where <app.models.memory.ShoppingMemory object at 0x000001F04565F7A0> = get(<class 'app.models.memory.ShoppingMemory'>, 'auto-0')
+E            +          where get = <sqlalchemy.orm.session.Session object at 0x000001F0453DF620>.get
+E            +    and   datetime.timezone.utc = <class 'datetime.timezone'>.utc
+
+tests\test_v2_automatic_memory.py:195: AssertionError
+============================== warnings summary ===============================
+tests/test_v2_automatic_memory.py::test_dream_threshold_interval_deduplication_and_expired_cleanup[1]
+  C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\app\services\template_matcher.py:21: SyntaxWarning: invalid escape sequence '\['
+    _PUNCT_PATTERN = re.compile(r"[\s\u3000，。！？、；：""''（）()\[\]【】\-—·…]+")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_v2_automatic_memory.py::test_dream_threshold_interval_deduplication_and_expired_cleanup[1]
+FAILED tests/test_v2_automatic_memory.py::test_dream_threshold_interval_deduplication_and_expired_cleanup[2]
+2 failed, 1 warning in 2.93s

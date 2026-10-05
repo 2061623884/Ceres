@@ -1,0 +1,48 @@
+FF                                                                       [100%]
+================================== FAILURES ===================================
+_____________ test_memory_provider_requires_explicit_memories[1] ______________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000203BE839D60>
+run = 1
+
+    @pytest.mark.parametrize("run", [1, 2])
+    def test_memory_provider_requires_explicit_memories(monkeypatch, run):
+        from app.core.config import get_settings
+        from app.llm.errors import LLMProviderError
+        from app.llm.memory_provider import MemoryProvider
+        from app.llm.openai_transport import OpenAICompatTransport
+    
+        monkeypatch.setenv("MEMORY_MODEL", "test-memory-model")
+        get_settings.cache_clear()
+        monkeypatch.setattr(OpenAICompatTransport, "post_json", lambda self, payload, **kwargs:
+                            {"choices": [{"message": {"content": "{}"}}]})
+>       with pytest.raises(LLMProviderError) as error:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE LLMProviderError
+
+tests\test_v2_automatic_memory.py:333: Failed
+_____________ test_memory_provider_requires_explicit_memories[2] ______________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000203BECB58E0>
+run = 2
+
+    @pytest.mark.parametrize("run", [1, 2])
+    def test_memory_provider_requires_explicit_memories(monkeypatch, run):
+        from app.core.config import get_settings
+        from app.llm.errors import LLMProviderError
+        from app.llm.memory_provider import MemoryProvider
+        from app.llm.openai_transport import OpenAICompatTransport
+    
+        monkeypatch.setenv("MEMORY_MODEL", "test-memory-model")
+        get_settings.cache_clear()
+        monkeypatch.setattr(OpenAICompatTransport, "post_json", lambda self, payload, **kwargs:
+                            {"choices": [{"message": {"content": "{}"}}]})
+>       with pytest.raises(LLMProviderError) as error:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE LLMProviderError
+
+tests\test_v2_automatic_memory.py:333: Failed
+=========================== short test summary info ===========================
+FAILED tests/test_v2_automatic_memory.py::test_memory_provider_requires_explicit_memories[1]
+FAILED tests/test_v2_automatic_memory.py::test_memory_provider_requires_explicit_memories[2]
+2 failed in 0.41s

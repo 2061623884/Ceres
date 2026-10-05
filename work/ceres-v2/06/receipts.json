@@ -1,0 +1,116 @@
+[
+  {
+    "run": "ce93b2a50de24a1686d0bb057878ab50",
+    "raw": "work/ceres-v2/06/test-receipts/ce93b2a50de24a1686d0bb057878ab50/v2-automatic-memory-pending-red.txt",
+    "original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-ce93b2a50de24a1686d0bb057878ab50\\v2-automatic-memory-pending-red.txt",
+    "exit_code": "1"
+  },
+  {
+    "run": "8b51572eec8e4f5095d485a13122ada5",
+    "raw": "work/ceres-v2/06/test-receipts/8b51572eec8e4f5095d485a13122ada5/v2-automatic-memory-pending-green.txt",
+    "original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-8b51572eec8e4f5095d485a13122ada5\\v2-automatic-memory-pending-green.txt",
+    "exit_code": "0"
+  },
+  {
+    "run": "66f05db3604a491b9932071c3664713b",
+    "raw": "work/ceres-v2/06/test-receipts/66f05db3604a491b9932071c3664713b/v2-automatic-memory-replay-red.txt",
+    "original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-66f05db3604a491b9932071c3664713b\\v2-automatic-memory-replay-red.txt",
+    "exit_code": "1"
+  },
+  {
+    "run": "04c2e47a98a945af973e3ee4b240bf6b",
+    "raw": "work/ceres-v2/06/test-receipts/04c2e47a98a945af973e3ee4b240bf6b/v2-automatic-memory-fourteen-green.txt",
+    "original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-04c2e47a98a945af973e3ee4b240bf6b\\v2-automatic-memory-fourteen-green.txt",
+    "exit_code": "0"
+  },
+  {
+    "run": "1c449cff76124c5691ddb56f543f6cf1",
+    "raw": "work/ceres-v2/06/test-receipts/1c449cff76124c5691ddb56f543f6cf1/v2-explicit-correction-red.txt",
+    "original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-1c449cff76124c5691ddb56f543f6cf1\\v2-explicit-correction-red.txt",
+    "exit_code": "1"
+  },
+  {
+    "run": "6ce5044cc64c4d40b738c2ef07660e49",
+    "raw": "work/ceres-v2/06/test-receipts/6ce5044cc64c4d40b738c2ef07660e49/v2-explicit-correction-green.txt",
+    "original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-6ce5044cc64c4d40b738c2ef07660e49\\v2-explicit-correction-green.txt",
+    "exit_code": "0"
+  },
+  {
+    "run": "d83e5663921c47dbbc30e134e060e7d1",
+    "raw": "work/ceres-v2/06/test-receipts/d83e5663921c47dbbc30e134e060e7d1/memory-provider-schema-red.txt",
+    "original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-d83e5663921c47dbbc30e134e060e7d1\\memory-provider-schema-red.txt",
+    "exit_code": "1"
+  },
+  {
+    "run": "6ee041d1d56a463cbcbf512f6c2e9946",
+    "raw": "work/ceres-v2/06/test-receipts/6ee041d1d56a463cbcbf512f6c2e9946/v2-memory-related-regression.txt",
+    "original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-6ee041d1d56a463cbcbf512f6c2e9946\\v2-memory-related-regression.txt",
+    "exit_code": "1"
+  },
+  {
+    "run": "3ebdf4747e474beeb46e687125f71f39",
+    "raw": "work/ceres-v2/06/test-receipts/3ebdf4747e474beeb46e687125f71f39/fresh-env-memory-provider-preflight.txt",
+    "original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-3ebdf4747e474beeb46e687125f71f39\\fresh-env-memory-provider-preflight.txt",
+    "exit_code": "0"
+  },
+  {
+    "run": "7a3a218b27bf4faca23759eb319128f3",
+    "raw": "work/ceres-v2/06/test-receipts/7a3a218b27bf4faca23759eb319128f3/v2-automatic-memory-live-eight.txt",
+    "original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-7a3a218b27bf4faca23759eb319128f3\\v2-automatic-memory-live-eight.txt",
+    "exit_code": "1"
+  },
+  {
+    "run": "5bb72886b6fc4f58a4a4b11e9bc18c4a",
+    "raw": "work/ceres-v2/06/test-receipts/5bb72886b6fc4f58a4a4b11e9bc18c4a/phase2a-single-regression-recheck.txt",
+    "original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-5bb72886b6fc4f58a4a4b11e9bc18c4a\\phase2a-single-regression-recheck.txt",
+    "exit_code": "0"
+  },
+  {
+    "run": "6b96350ffc80443db5302bca69bad648",
+    "raw": "work/ceres-v2/06/test-receipts/6b96350ffc80443db5302bca69bad648/dream-thinking-placement-ab.txt",
+    "original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-6b96350ffc80443db5302bca69bad648\\dream-thinking-placement-ab.txt",
+    "exit_code": "0"
+  },
+  {
+    "run": "cba8cb5e8e2d463b847583d51899ecd3",
+    "raw": "work/ceres-v2/06/test-receipts/cba8cb5e8e2d463b847583d51899ecd3/backend-offline-full-suite.txt",
+    "original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-cba8cb5e8e2d463b847583d51899ecd3\\backend-offline-full-suite.txt",
+    "exit_code": "1"
+  },
+  {
+    "run": "606f34283a0a48df988be4e449d5a4ee",
+    "raw": "work/ceres-v2/06/test-receipts/606f34283a0a48df988be4e449d5a4ee/dream-output-capacity-4096.txt",
+    "original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-606f34283a0a48df988be4e449d5a4ee\\dream-output-capacity-4096.txt",
+    "exit_code": "0"
+  },
+  {
+    "run": "886827bec14f4e52a929009bdc3e75c8",
+    "raw": "work/ceres-v2/06/test-receipts/886827bec14f4e52a929009bdc3e75c8/dream-threshold-ttl-red.txt",
+    "original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-886827bec14f4e52a929009bdc3e75c8\\dream-threshold-ttl-red.txt",
+    "exit_code": "1"
+  },
+  {
+    "run": "06a8b55e0f9d41179c37c559bb316acc",
+    "raw": "work/ceres-v2/06/test-receipts/06a8b55e0f9d41179c37c559bb316acc/phase2a-single-regression.txt",
+    "original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-06a8b55e0f9d41179c37c559bb316acc\\phase2a-single-regression.txt",
+    "exit_code": "1"
+  },
+  {
+    "run": "b33385addd2d43fa968bf544f9708b11",
+    "raw": "work/ceres-v2/06/test-receipts/b33385addd2d43fa968bf544f9708b11/06-final-related-regression.txt",
+    "original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-b33385addd2d43fa968bf544f9708b11\\06-final-related-regression.txt",
+    "exit_code": "0"
+  },
+  {
+    "run": "5870630ffb9d44ee87b3275028c53b3a",
+    "raw": "work/ceres-v2/06/test-receipts/5870630ffb9d44ee87b3275028c53b3a/pre06-twenty-regressions.txt",
+    "original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-5870630ffb9d44ee87b3275028c53b3a\\pre06-twenty-regressions.txt",
+    "exit_code": "1"
+  },
+  {
+    "run": "07865cc22bb0476d915f9db59f79acd1",
+    "raw": "work/ceres-v2/06/test-receipts/07865cc22bb0476d915f9db59f79acd1/v2-automatic-memory-live-eight-final.txt",
+    "original": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\work\\ceres-v2-test-env\\run-07865cc22bb0476d915f9db59f79acd1\\v2-automatic-memory-live-eight-final.txt",
+    "exit_code": "1"
+  }
+]

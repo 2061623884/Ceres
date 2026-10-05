@@ -1,0 +1,38 @@
+[
+  {
+    "path": "backend/app/core/config.py",
+    "sha256": "af10731e8ffb32ab0b1b43f3c96b7f86824148e89d627bb1cc9492ebc441e22b"
+  },
+  {
+    "path": ".env.example",
+    "sha256": "47f963cea7a4279211afa8b5bfd384d24cc7d0f3cb05e78c1ed7baf85a7d5b70"
+  },
+  {
+    "path": "backend/app/services/turn_stream_service.py",
+    "sha256": "478beb5320f94a13def0444a6007860226e76d24a1525da52dacfb9095ea4a81"
+  },
+  {
+    "path": "backend/app/prompts/semantic.py",
+    "sha256": "06f700eec7d09e2edc451e9d214613bb1f1d42120006408b317f7b5cf839a153"
+  },
+  {
+    "path": "backend/tests/test_phase2a_cancellation.py",
+    "sha256": "d7bae517dfe8ac50eaaebbb1bd8fc6e739d67dca1c58e0dba809a525419a7e31"
+  },
+  {
+    "path": "backend/app/llm/memory_provider.py",
+    "sha256": "6ddc470626f394296f6277b2300beb5f4fb11549591d805c62b2fa7d3aca38a9"
+  },
+  {
+    "path": "backend/app/services/automatic_memory_service.py",
+    "sha256": "4e19c49f2787015dcad9bf6f8e45392ae7adb38ad28db55e32ecb4ae175ffc6b"
+  },
+  {
+    "path": "backend/tests/test_v2_automatic_memory.py",
+    "sha256": "a2969fbcce97af8783ce7860205580b2a390721532d167743a373df7eff41cd0"
+  },
+  {
+    "path": "backend/tests/test_v2_automatic_memory_live.py",
+    "sha256": "8a72e09a8bdbc19c074297c2390f264fcabf15259ff17446b57fff4163adaab5"
+  }
+]

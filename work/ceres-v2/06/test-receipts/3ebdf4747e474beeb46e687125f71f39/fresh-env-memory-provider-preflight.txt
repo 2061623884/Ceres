@@ -1,0 +1,5 @@
+{"event": "fresh_settings", "llm_mode": "live", "llm_model": "qwen3.8-27b", "memory_model": "qwen3.8-27b", "credentials_configured": true, "llm_max_output_tokens": 1536}
+{"event": "model_list", "http_status": 200, "elapsed_seconds": 0.454}
+{"requested_models": {"llm_model": "qwen3.8-27b", "memory_model": "qwen3.8-27b"}, "exact_model_ids_available": {"llm_model": true, "memory_model": true}}
+{"case": "stable_brand_preference", "started_utc": "2026-10-05T08:36:22.166738+00:00", "elapsed_seconds": 6.809, "output": {"memories": [{"category": "user", "content": "用户平时喜欢百事可乐", "conflicts_with": []}], "drop_refs": []}}
+{"case": "temporary_people_budget", "started_utc": "2026-10-05T08:36:28.977044+00:00", "elapsed_seconds": 1.909, "output": {"memories": [], "drop_refs": []}}

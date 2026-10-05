@@ -1,0 +1,226 @@
+FFFF                                                                     [100%]
+================================== FAILURES ===================================
+______ test_user_correction_during_model_call_stays_explicit[extract-1] _______
+
+client = <starlette.testclient.TestClient object at 0x0000024FD91E5EB0>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000024FD8E1D610>
+run = 1, mode = 'extract'
+
+    @pytest.mark.parametrize("run", [1, 2])
+    @pytest.mark.parametrize("mode", ["extract", "dream"])
+    def test_user_correction_during_model_call_stays_explicit(client, monkeypatch, run, mode):
+        from datetime import datetime, timedelta, timezone
+        from app.agent.protocol import MemoryAction
+        from app.core.config import get_settings
+        from app.core.database import SessionLocal
+        from app.core.errors import AppError
+        from app.llm.openai_transport import OpenAICompatTransport
+        from app.models.memory import ShoppingMemory
+        from app.services.automatic_memory_service import AutomaticMemoryService
+        from app.services.memory_service import MemoryService
+    
+        sid = create_session(client)
+        owner = client.cookies.get("sg_owner_id")
+        monkeypatch.setenv("MEMORY_MODEL", "test-memory-model")
+        get_settings.cache_clear()
+        with SessionLocal() as db:
+            for i in range(10):
+                db.add(ShoppingMemory(memory_id=f"auto-{i}", owner_id=owner, category="feedback",
+                    source="automatic", content=f"原始纠正{i}", expires_at=datetime.now(timezone.utc) + timedelta(days=30)))
+            db.commit()
+    
+        def post_json(self, payload, **kwargs):
+            # The user edits through the real service while the model owns an old
+            # context. Its result must not delete/expire that now-explicit record.
+            with SessionLocal() as other_db:
+                MemoryService(other_db, owner).execute(MemoryAction(verb="update", ref="auto-1", content="原始纠正1"))
+                other_db.commit()
+            output = {"memories": [{"category": "feedback", "content": "原始纠正1"}]} if mode == "extract" else {"drop_refs": ["auto-1"]}
+            return {"choices": [{"message": {"content": json.dumps(output, ensure_ascii=False)}}]}
+    
+        monkeypatch.setattr(OpenAICompatTransport, "post_json", post_json)
+        with SessionLocal() as db:
+            service = AutomaticMemoryService(db, owner)
+            if mode == "extract":
+                service.process_turn(session_id=sid, request_id="correction-during-extract", trace_id="extract",
+                                     message="以后先讲理由", reply="好的。")
+            else:
+                with pytest.raises(AppError):
+                    service.dream_if_due(trace_id="dream")
+        with SessionLocal() as db:
+            corrected = db.get(ShoppingMemory, "auto-1")
+>           assert corrected is not None and corrected.source == "explicit" and corrected.expires_at is None
+E           AssertionError: assert (<app.models.memory.ShoppingMemory object at 0x0000024FDBB28530> is not None and 'explicit' == 'explicit'
+E             
+E               explicit and datetime.datetime(2026, 11, 4, 8, 41, 43, 815251) is None)
+E            +  where datetime.datetime(2026, 11, 4, 8, 41, 43, 815251) = <app.models.memory.ShoppingMemory object at 0x0000024FDBB28530>.expires_at
+
+tests\test_v2_automatic_memory.py:263: AssertionError
+______ test_user_correction_during_model_call_stays_explicit[extract-2] _______
+
+client = <starlette.testclient.TestClient object at 0x0000024FDB9A1790>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000024FDBA4B3E0>
+run = 2, mode = 'extract'
+
+    @pytest.mark.parametrize("run", [1, 2])
+    @pytest.mark.parametrize("mode", ["extract", "dream"])
+    def test_user_correction_during_model_call_stays_explicit(client, monkeypatch, run, mode):
+        from datetime import datetime, timedelta, timezone
+        from app.agent.protocol import MemoryAction
+        from app.core.config import get_settings
+        from app.core.database import SessionLocal
+        from app.core.errors import AppError
+        from app.llm.openai_transport import OpenAICompatTransport
+        from app.models.memory import ShoppingMemory
+        from app.services.automatic_memory_service import AutomaticMemoryService
+        from app.services.memory_service import MemoryService
+    
+        sid = create_session(client)
+        owner = client.cookies.get("sg_owner_id")
+        monkeypatch.setenv("MEMORY_MODEL", "test-memory-model")
+        get_settings.cache_clear()
+        with SessionLocal() as db:
+            for i in range(10):
+                db.add(ShoppingMemory(memory_id=f"auto-{i}", owner_id=owner, category="feedback",
+                    source="automatic", content=f"原始纠正{i}", expires_at=datetime.now(timezone.utc) + timedelta(days=30)))
+            db.commit()
+    
+        def post_json(self, payload, **kwargs):
+            # The user edits through the real service while the model owns an old
+            # context. Its result must not delete/expire that now-explicit record.
+            with SessionLocal() as other_db:
+                MemoryService(other_db, owner).execute(MemoryAction(verb="update", ref="auto-1", content="原始纠正1"))
+                other_db.commit()
+            output = {"memories": [{"category": "feedback", "content": "原始纠正1"}]} if mode == "extract" else {"drop_refs": ["auto-1"]}
+            return {"choices": [{"message": {"content": json.dumps(output, ensure_ascii=False)}}]}
+    
+        monkeypatch.setattr(OpenAICompatTransport, "post_json", post_json)
+        with SessionLocal() as db:
+            service = AutomaticMemoryService(db, owner)
+            if mode == "extract":
+                service.process_turn(session_id=sid, request_id="correction-during-extract", trace_id="extract",
+                                     message="以后先讲理由", reply="好的。")
+            else:
+                with pytest.raises(AppError):
+                    service.dream_if_due(trace_id="dream")
+        with SessionLocal() as db:
+            corrected = db.get(ShoppingMemory, "auto-1")
+>           assert corrected is not None and corrected.source == "explicit" and corrected.expires_at is None
+E           AssertionError: assert (<app.models.memory.ShoppingMemory object at 0x0000024FDBCD4E30> is not None and 'explicit' == 'explicit'
+E             
+E               explicit and datetime.datetime(2026, 11, 4, 8, 41, 44, 803664) is None)
+E            +  where datetime.datetime(2026, 11, 4, 8, 41, 44, 803664) = <app.models.memory.ShoppingMemory object at 0x0000024FDBCD4E30>.expires_at
+
+tests\test_v2_automatic_memory.py:263: AssertionError
+_______ test_user_correction_during_model_call_stays_explicit[dream-1] ________
+
+client = <starlette.testclient.TestClient object at 0x0000024FDBC5EFF0>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000024FDBC5E750>
+run = 1, mode = 'dream'
+
+    @pytest.mark.parametrize("run", [1, 2])
+    @pytest.mark.parametrize("mode", ["extract", "dream"])
+    def test_user_correction_during_model_call_stays_explicit(client, monkeypatch, run, mode):
+        from datetime import datetime, timedelta, timezone
+        from app.agent.protocol import MemoryAction
+        from app.core.config import get_settings
+        from app.core.database import SessionLocal
+        from app.core.errors import AppError
+        from app.llm.openai_transport import OpenAICompatTransport
+        from app.models.memory import ShoppingMemory
+        from app.services.automatic_memory_service import AutomaticMemoryService
+        from app.services.memory_service import MemoryService
+    
+        sid = create_session(client)
+        owner = client.cookies.get("sg_owner_id")
+        monkeypatch.setenv("MEMORY_MODEL", "test-memory-model")
+        get_settings.cache_clear()
+        with SessionLocal() as db:
+            for i in range(10):
+                db.add(ShoppingMemory(memory_id=f"auto-{i}", owner_id=owner, category="feedback",
+                    source="automatic", content=f"原始纠正{i}", expires_at=datetime.now(timezone.utc) + timedelta(days=30)))
+            db.commit()
+    
+        def post_json(self, payload, **kwargs):
+            # The user edits through the real service while the model owns an old
+            # context. Its result must not delete/expire that now-explicit record.
+            with SessionLocal() as other_db:
+                MemoryService(other_db, owner).execute(MemoryAction(verb="update", ref="auto-1", content="原始纠正1"))
+                other_db.commit()
+            output = {"memories": [{"category": "feedback", "content": "原始纠正1"}]} if mode == "extract" else {"drop_refs": ["auto-1"]}
+            return {"choices": [{"message": {"content": json.dumps(output, ensure_ascii=False)}}]}
+    
+        monkeypatch.setattr(OpenAICompatTransport, "post_json", post_json)
+        with SessionLocal() as db:
+            service = AutomaticMemoryService(db, owner)
+            if mode == "extract":
+                service.process_turn(session_id=sid, request_id="correction-during-extract", trace_id="extract",
+                                     message="以后先讲理由", reply="好的。")
+            else:
+>               with pytest.raises(AppError):
+                     ^^^^^^^^^^^^^^^^^^^^^^^
+E               Failed: DID NOT RAISE AppError
+
+tests\test_v2_automatic_memory.py:259: Failed
+_______ test_user_correction_during_model_call_stays_explicit[dream-2] ________
+
+client = <starlette.testclient.TestClient object at 0x0000024FDBCF3410>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000024FDBCF3080>
+run = 2, mode = 'dream'
+
+    @pytest.mark.parametrize("run", [1, 2])
+    @pytest.mark.parametrize("mode", ["extract", "dream"])
+    def test_user_correction_during_model_call_stays_explicit(client, monkeypatch, run, mode):
+        from datetime import datetime, timedelta, timezone
+        from app.agent.protocol import MemoryAction
+        from app.core.config import get_settings
+        from app.core.database import SessionLocal
+        from app.core.errors import AppError
+        from app.llm.openai_transport import OpenAICompatTransport
+        from app.models.memory import ShoppingMemory
+        from app.services.automatic_memory_service import AutomaticMemoryService
+        from app.services.memory_service import MemoryService
+    
+        sid = create_session(client)
+        owner = client.cookies.get("sg_owner_id")
+        monkeypatch.setenv("MEMORY_MODEL", "test-memory-model")
+        get_settings.cache_clear()
+        with SessionLocal() as db:
+            for i in range(10):
+                db.add(ShoppingMemory(memory_id=f"auto-{i}", owner_id=owner, category="feedback",
+                    source="automatic", content=f"原始纠正{i}", expires_at=datetime.now(timezone.utc) + timedelta(days=30)))
+            db.commit()
+    
+        def post_json(self, payload, **kwargs):
+            # The user edits through the real service while the model owns an old
+            # context. Its result must not delete/expire that now-explicit record.
+            with SessionLocal() as other_db:
+                MemoryService(other_db, owner).execute(MemoryAction(verb="update", ref="auto-1", content="原始纠正1"))
+                other_db.commit()
+            output = {"memories": [{"category": "feedback", "content": "原始纠正1"}]} if mode == "extract" else {"drop_refs": ["auto-1"]}
+            return {"choices": [{"message": {"content": json.dumps(output, ensure_ascii=False)}}]}
+    
+        monkeypatch.setattr(OpenAICompatTransport, "post_json", post_json)
+        with SessionLocal() as db:
+            service = AutomaticMemoryService(db, owner)
+            if mode == "extract":
+                service.process_turn(session_id=sid, request_id="correction-during-extract", trace_id="extract",
+                                     message="以后先讲理由", reply="好的。")
+            else:
+>               with pytest.raises(AppError):
+                     ^^^^^^^^^^^^^^^^^^^^^^^
+E               Failed: DID NOT RAISE AppError
+
+tests\test_v2_automatic_memory.py:259: Failed
+============================== warnings summary ===============================
+tests/test_v2_automatic_memory.py::test_user_correction_during_model_call_stays_explicit[extract-1]
+  C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\app\services\template_matcher.py:21: SyntaxWarning: invalid escape sequence '\['
+    _PUNCT_PATTERN = re.compile(r"[\s\u3000，。！？、；：""''（）()\[\]【】\-—·…]+")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_v2_automatic_memory.py::test_user_correction_during_model_call_stays_explicit[extract-1]
+FAILED tests/test_v2_automatic_memory.py::test_user_correction_during_model_call_stays_explicit[extract-2]
+FAILED tests/test_v2_automatic_memory.py::test_user_correction_during_model_call_stays_explicit[dream-1]
+FAILED tests/test_v2_automatic_memory.py::test_user_correction_during_model_call_stays_explicit[dream-2]
+4 failed, 1 warning in 4.19s

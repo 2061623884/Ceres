@@ -1,0 +1,108 @@
+FF                                                                       [100%]
+================================== FAILURES ===================================
+____________ test_reply_finishes_while_memory_model_is_pending[1] _____________
+
+client = <starlette.testclient.TestClient object at 0x00000247C070FCB0>
+semantic_provider = <function semantic_provider.<locals>._install at 0x00000247C3333100>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000247C06F2810>
+run = 1
+
+    @pytest.mark.parametrize("run", [1, 2])
+    def test_reply_finishes_while_memory_model_is_pending(client, semantic_provider, monkeypatch, run):
+        from app.core.config import get_settings
+        from app.core.database import SessionLocal
+        from app.llm.openai_transport import OpenAICompatTransport
+        from app.services.memory_service import MemoryService
+    
+        monkeypatch.setenv("MEMORY_MODEL", "test-memory-model")
+        get_settings.cache_clear()
+        entered = threading.Event()
+        release = threading.Event()
+        calls = []
+    
+        def post_json(self, payload, **kwargs):
+            assert payload["model"] == "test-memory-model"
+            calls.append(payload["model"])
+            entered.set()
+            assert release.wait(5), "test must release the isolated memory provider"
+            return {"choices": [{"message": {"content": json.dumps({"memories": [
+                {"category": "user", "content": "平时喜欢百事可乐", "conflicts_with": []},
+            ]}, ensure_ascii=False)}}]}
+    
+        monkeypatch.setattr(OpenAICompatTransport, "post_json", post_json)
+        semantic_provider([{"reply": "明白，推荐时会先说明理由。"}])
+        sid = create_session(client)
+        try:
+            reply = send_turn(client, sid, "我平时喜欢百事可乐", request_id=f"memory-pending-{run}")
+            assert reply["answer_status"] == "accepted"
+            assert entered.wait(1), "normal chat did not start background extraction"
+            assert not release.is_set(), "final reply must not wait for the memory model"
+            replayed = send_turn(client, sid, "我平时喜欢百事可乐", request_id=f"memory-pending-{run}")
+            assert replayed["assistant_message_id"] == reply["assistant_message_id"]
+            time.sleep(0.05)
+>           assert calls == ["test-memory-model"], "receipt replay must not start another background model call"
+E           AssertionError: receipt replay must not start another background model call
+E           assert ['test-memory...memory-model'] == ['test-memory-model']
+E             
+E             Left contains one more item: 'test-memory-model'
+E             Use -v to get more diff
+
+tests\test_v2_automatic_memory.py:46: AssertionError
+____________ test_reply_finishes_while_memory_model_is_pending[2] _____________
+
+client = <starlette.testclient.TestClient object at 0x00000247C06F2930>
+semantic_provider = <function semantic_provider.<locals>._install at 0x00000247C35FECA0>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000247C3336EA0>
+run = 2
+
+    @pytest.mark.parametrize("run", [1, 2])
+    def test_reply_finishes_while_memory_model_is_pending(client, semantic_provider, monkeypatch, run):
+        from app.core.config import get_settings
+        from app.core.database import SessionLocal
+        from app.llm.openai_transport import OpenAICompatTransport
+        from app.services.memory_service import MemoryService
+    
+        monkeypatch.setenv("MEMORY_MODEL", "test-memory-model")
+        get_settings.cache_clear()
+        entered = threading.Event()
+        release = threading.Event()
+        calls = []
+    
+        def post_json(self, payload, **kwargs):
+            assert payload["model"] == "test-memory-model"
+            calls.append(payload["model"])
+            entered.set()
+            assert release.wait(5), "test must release the isolated memory provider"
+            return {"choices": [{"message": {"content": json.dumps({"memories": [
+                {"category": "user", "content": "平时喜欢百事可乐", "conflicts_with": []},
+            ]}, ensure_ascii=False)}}]}
+    
+        monkeypatch.setattr(OpenAICompatTransport, "post_json", post_json)
+        semantic_provider([{"reply": "明白，推荐时会先说明理由。"}])
+        sid = create_session(client)
+        try:
+            reply = send_turn(client, sid, "我平时喜欢百事可乐", request_id=f"memory-pending-{run}")
+            assert reply["answer_status"] == "accepted"
+            assert entered.wait(1), "normal chat did not start background extraction"
+            assert not release.is_set(), "final reply must not wait for the memory model"
+            replayed = send_turn(client, sid, "我平时喜欢百事可乐", request_id=f"memory-pending-{run}")
+            assert replayed["assistant_message_id"] == reply["assistant_message_id"]
+            time.sleep(0.05)
+>           assert calls == ["test-memory-model"], "receipt replay must not start another background model call"
+E           AssertionError: receipt replay must not start another background model call
+E           assert ['test-memory...memory-model'] == ['test-memory-model']
+E             
+E             Left contains one more item: 'test-memory-model'
+E             Use -v to get more diff
+
+tests\test_v2_automatic_memory.py:46: AssertionError
+============================== warnings summary ===============================
+tests/test_v2_automatic_memory.py::test_reply_finishes_while_memory_model_is_pending[1]
+  C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\app\services\template_matcher.py:21: SyntaxWarning: invalid escape sequence '\['
+    _PUNCT_PATTERN = re.compile(r"[\s\u3000，。！？、；：""''（）()\[\]【】\-—·…]+")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_v2_automatic_memory.py::test_reply_finishes_while_memory_model_is_pending[1]
+FAILED tests/test_v2_automatic_memory.py::test_reply_finishes_while_memory_model_is_pending[2]
+2 failed, 1 warning in 3.56s

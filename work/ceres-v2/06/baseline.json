@@ -1,0 +1,28 @@
+{
+  "git_head": "bb729971ae9efa4279cfe8207c20def463771a03",
+  "scope": "06 automatic memory and dream",
+  "paths": [
+    {
+      "path": "backend/app/core/config.py",
+      "sha256": "9c65195b8d4bc387d4573b25a28246c941ffc8a7e367b70714a3e86b5e165535"
+    },
+    {
+      "path": ".env.example",
+      "sha256": "a5f59a5119f88950ff651aa23033d6dcd13f290ac3874214f4732de158f4d3f0"
+    },
+    {
+      "path": "backend/app/services/turn_stream_service.py",
+      "sha256": "20dcb1bca6332b1e7b195ab3b36bfa20699f8b0d2212577f56500264c0fb7110"
+    },
+    {
+      "path": "backend/app/prompts/semantic.py",
+      "sha256": "0a73e53884ff2a7c37f2d60d319f133e0cc12aff13730b82a396e8de879fe7d8"
+    },
+    {
+      "path": "backend/tests/test_phase2a_cancellation.py",
+      "sha256": "8edd7ba8cc019bd13dab28ad2b1fc5099c4bc089e885c4f701b61edea0e3f223",
+      "purpose": "narrow test recorder signature correction after observed regression TypeError"
+    }
+  ],
+  "review_base_after_05_close": "ecec5b382cbf51f977a3d610c20aaf49fda60033"
+}

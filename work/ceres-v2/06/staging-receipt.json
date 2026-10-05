@@ -1,0 +1,27 @@
+{
+  "base": "bb729971ae9efa4279cfe8207c20def463771a03",
+  "review_base_after_05_close": "ecec5b382cbf51f977a3d610c20aaf49fda60033",
+  "source_staged": [
+    "backend/app/core/config.py",
+    ".env.example",
+    "backend/app/services/turn_stream_service.py"
+  ],
+  "artifact_only": [
+    {
+      "path": "backend/app/prompts/semantic.py",
+      "reason": "error: patch failed: backend/app/prompts/semantic.py:27\nerror: backend/app/prompts/semantic.py: patch does not apply"
+    },
+    {
+      "path": "backend/tests/test_phase2a_cancellation.py",
+      "reason": "error: backend/tests/test_phase2a_cancellation.py: does not exist in index"
+    }
+  ],
+  "unchanged": [],
+  "new_files": [
+    "backend/app/llm/memory_provider.py",
+    "backend/app/services/automatic_memory_service.py",
+    "backend/tests/test_v2_automatic_memory.py",
+    "backend/tests/test_v2_automatic_memory_live.py"
+  ],
+  "note": "Commits isolate ticket increments; inherited V1 and earlier V2 source overlays remain in this working tree. This is not a clean-checkout freeze. before snapshots are local diagnosis inputs."
+}

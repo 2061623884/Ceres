@@ -1,0 +1,89 @@
+.....................................F..............                     [100%]
+================================== FAILURES ===================================
+__ test_abandon_clears_a_fresh_pending_question_after_old_task_was_cancelled __
+
+client = <starlette.testclient.TestClient object at 0x000002E4E455DA60>
+semantic_provider = <function semantic_provider.<locals>._install at 0x000002E4E4704720>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002E4E2A946B0>
+
+    def test_abandon_clears_a_fresh_pending_question_after_old_task_was_cancelled(
+        client, semantic_provider, monkeypatch
+    ):
+        provider = semantic_provider([*lookup_then_add("dish", "番茄炒蛋")])
+        session_id = create_session(client)
+        first, _ = _turn(client, session_id, "我要番茄炒蛋")
+        old_task_id = first["task_id"]
+        old_plan = _persisted(session_id, old_task_id)["task"]["plan_json"]
+        cart_before = client.get("/api/v1/cart").json()
+    
+        provider = semantic_provider([{"plan_act": "abandon"}])
+        cancelled, _ = _turn(client, session_id, "不买了", first)
+        assert cancelled["plan_effect"] == "clear"
+        assert cancelled["task_id"] == old_task_id
+        assert _persisted(session_id, old_task_id)["task"]["status"] == "cancelled"
+    
+        provider = semantic_provider([request_new("dish", "")])
+        asked, _ = _turn(client, session_id, "今晚想吃顿简单的饭", cancelled)
+        assert asked["plan"] is None
+        assert asked["pending_clarifications"]
+        asked_state = _persisted(session_id, old_task_id)
+        assert asked_state["task_count"] == 1
+        assert asked_state["task"]["status"] == "cancelled"
+        assert asked_state["task"]["plan_json"] == old_plan
+        assert asked_state["context"].get("task_status") == "cancelled"
+        assert asked_state["context"].get("pending_clarifications")
+        assert client.get("/api/v1/cart").json() == cart_before
+    
+        from app.agent.graph.nodes import understand as understand_node
+    
+        decisions = []
+        original_evaluate_gate = understand_node.evaluate_gate
+    
+        def record_decision(snapshot, proposal, candidates):
+            decision = original_evaluate_gate(snapshot, proposal, candidates)
+            decisions.append(decision)
+            return decision
+    
+        monkeypatch.setattr(understand_node, "evaluate_gate", record_decision)
+        provider = semantic_provider([{"plan_act": "abandon"}])
+>       cleared, _ = _turn(client, session_id, "算了，不买了", asked)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_phase2a_cancellation.py:336: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+client = <starlette.testclient.TestClient object at 0x000002E4E455DA60>
+session_id = 'sess-2cf2b749de7f', message = '算了，不买了'
+previous = {'session_id': 'sess-2cf2b749de7f', 'task_id': 'task-10f0bec34907', 'state_version': 3, 'status': 'clarifying', ...}
+request_id = None
+
+    def _turn(client, session_id, message, previous=None, *, request_id=None):
+        events = stream_turn(
+            client,
+            session_id,
+            message,
+            previous,
+            request_id=request_id or str(uuid.uuid4()),
+        )
+        terminal = [
+            event for event in events
+            if event.get("type") in {"turn.completed", "turn.stopped", "error"}
+        ]
+        assert len(terminal) == 1, events
+>       assert terminal[0]["type"] == "turn.completed", json.dumps(terminal[0], ensure_ascii=False)
+E       AssertionError: {"protocol_version": 1, "run_id": "run-68ece38056cb", "sequence": 2, "type": "error", "session_id": "sess-2cf2b749de7f", "target_task_id": null, "message_id": null, "payload": {"code": "TypeError", "message": "test_abandon_clears_a_fresh_pending_question_after_old_task_was_cancelled.<locals>.record_decision() got an unexpected keyword argument 'plan_selection'", "retryable": false}}
+E       assert 'error' == 'turn.completed'
+E         
+E         - turn.completed
+E         + error
+
+tests\test_phase2a_cancellation.py:29: AssertionError
+============================== warnings summary ===============================
+app\services\template_matcher.py:21
+  C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\app\services\template_matcher.py:21: SyntaxWarning: invalid escape sequence '\['
+    _PUNCT_PATTERN = re.compile(r"[\s\u3000，。！？、；：""''（）()\[\]【】\-—·…]+")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_phase2a_cancellation.py::test_abandon_clears_a_fresh_pending_question_after_old_task_was_cancelled
+1 failed, 51 passed, 1 warning in 59.02s

@@ -272,6 +272,20 @@ class TurnStreamService:
             _offer(event_queue, None, client_gone)
             db.close()
 
+        result = result_holder.get("result")
+        if result and result["answer_status"] == "accepted" and not any(
+            row["type"] == "memory" for row in result["action_results"]
+        ):
+            from app.services.automatic_memory_service import AutomaticMemoryService
+
+            # The queue sentinel releases the SSE response before this worker
+            # continues with an independent memory transaction.
+            with _session_for(engine_bind) as memory_db:
+                AutomaticMemoryService(memory_db, self.owner_id).process_turn(
+                    session_id=session_id, request_id=request_id, trace_id=result["trace_id"],
+                    message=message, reply=result["message"],
+                )
+
     # ------------------------------------------------------------------ streaming
 
     async def stream_turn(

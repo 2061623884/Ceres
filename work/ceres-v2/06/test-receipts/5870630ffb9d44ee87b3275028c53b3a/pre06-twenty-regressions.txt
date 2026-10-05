@@ -1,0 +1,744 @@
+C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\app\services\template_matcher.py:21: SyntaxWarning: invalid escape sequence '\['
+  _PUNCT_PATTERN = re.compile(r"[\s\u3000，。！？、；：""''（）()\[\]【】\-—·…]+")
+FFFFFFFFFFF.FFFFFFFF                                                     [100%]
+================================== FAILURES ===================================
+____________ test_a_model_that_outlives_the_budget_writes_nothing _____________
+
+client = <starlette.testclient.TestClient object at 0x000002630EFA48F0>
+semantic_provider = <function semantic_provider.<locals>._install at 0x0000026310F38E00>
+turn_clock = <test_agent_deadline._TurnClock object at 0x0000026310F35DF0>
+turn_budget = 30.0
+
+    def test_a_model_that_outlives_the_budget_writes_nothing(
+        client, semantic_provider, turn_clock, turn_budget
+    ):
+        """The call itself is slower than the whole turn: no task, no plan, no cart.
+    
+        A turn with nothing committed fails through the ordinary failure path — the
+        same one a model failure takes — with its own code and ``retryable``, so the
+        trace and the SSE error agree.
+        """
+    
+        def slow_round(request):
+            turn_clock.now += turn_budget * 2
+            return {
+                "target": {"kind": "product", "name": "牛奶", "intent": "buy"},
+                "lookups": [{"kind": "product", "query": "牛奶"}],
+            }
+    
+        semantic_provider([slow_round])
+        sid = create_session(client)
+    
+        response = send(client, sid, "买一盒牛奶")
+    
+>       assert response.status_code == 503, response.text
+E       AssertionError: {"error": {"code": "TURN_DEADLINE_EXCEEDED", "message": "本轮处理超时，未执行的修改没有写入。", "retryable": true}}
+E       assert 502 == 503
+E        +  where 502 = TurnHTTPResponse(status_code=502, _body=None, _error={'code': 'TURN_DEADLINE_EXCEEDED', 'message': '本轮处理超时，未执行的修改没有写入。', 'retryable': True}).status_code
+
+tests\test_agent_deadline.py:119: AssertionError
+_____________ test_a_read_that_outlives_the_budget_writes_nothing _____________
+
+client = <starlette.testclient.TestClient object at 0x0000026310DD09B0>
+semantic_provider = <function semantic_provider.<locals>._install at 0x00000263111CD3A0>
+turn_clock = <test_agent_deadline._TurnClock object at 0x000002631121E750>
+turn_budget = 30.0
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002631023EB10>
+
+    def test_a_read_that_outlives_the_budget_writes_nothing(
+        client, semantic_provider, turn_clock, turn_budget, monkeypatch
+    ):
+        """A slow read, not a slow model: the same refusal, with real services."""
+        from app.agent.tools import read as read_module
+    
+        original_lookup = read_module.ReadTools._lookup
+    
+        def slow_lookup(self, lookup, candidates):
+            turn_clock.now += turn_budget * 2
+            return original_lookup(self, lookup, candidates)
+    
+        monkeypatch.setattr(read_module.ReadTools, "_lookup", slow_lookup)
+    
+        semantic_provider([*lookup_then_add("product", "全脂牛奶 1升")])
+        sid = create_session(client)
+    
+        response = send(client, sid, "买一盒牛奶")
+    
+>       assert response.status_code == 503, response.text
+E       AssertionError: {"error": {"code": "TURN_DEADLINE_EXCEEDED", "message": "本轮处理超时，未执行的修改没有写入。", "retryable": true}}
+E       assert 502 == 503
+E        +  where 502 = TurnHTTPResponse(status_code=502, _body=None, _error={'code': 'TURN_DEADLINE_EXCEEDED', 'message': '本轮处理超时，未执行的修改没有写入。', 'retryable': True}).status_code
+
+tests\test_agent_deadline.py:147: AssertionError
+______________ test_a_shopper_stop_is_a_stop_and_never_a_timeout ______________
+
+client = <starlette.testclient.TestClient object at 0x000002631121C440>
+semantic_provider = <function semantic_provider.<locals>._install at 0x0000026310480720>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002631121EED0>
+
+    def test_a_shopper_stop_is_a_stop_and_never_a_timeout(
+        client, semantic_provider, monkeypatch
+    ):
+        """The two are different facts about a turn, and the client can tell them apart."""
+        from app.agent.turn_progress import NoOpTurnProgressSink
+    
+        stopped = {"value": False}
+        monkeypatch.setattr(
+            NoOpTurnProgressSink, "should_stop", lambda self: stopped["value"]
+        )
+    
+        def stop_during_the_call(request):
+            stopped["value"] = True
+            return {"reply": "已经买好了"}
+    
+        semantic_provider([stop_during_the_call])
+        sid = create_session(client)
+        request_id = str(uuid.uuid4())
+    
+        body = send_ok(client, sid, "买一件牛奶", None, request_id)
+    
+>       assert body["status"] == "stopped"
+E       AssertionError: assert 'understanding' == 'stopped'
+E         
+E         - stopped
+E         + understanding
+
+tests\test_agent_deadline.py:176: AssertionError
+__ test_a_mutation_committed_before_the_budget_runs_out_is_reported_as_saved __
+
+client = <starlette.testclient.TestClient object at 0x0000026311178B30>
+semantic_provider = <function semantic_provider.<locals>._install at 0x00000263112C0D60>
+turn_clock = <test_agent_deadline._TurnClock object at 0x000002631127DDC0>
+turn_budget = 30.0
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002631127F8F0>
+
+    def test_a_mutation_committed_before_the_budget_runs_out_is_reported_as_saved(
+        client, semantic_provider, turn_clock, turn_budget, monkeypatch
+    ):
+        """A plan, then two headcount rebuilds where only the first fits the budget.
+    
+        Two supplements of the *same* goal are one turn's work: the first rebuild
+        commits, and the second one is what consumes the remaining budget — so the
+        refusal happens after that mutation has started, the case a check placed
+        before the whole execution would miss.
+        """
+        from app.agent.turn_progress import NoOpTurnProgressSink
+    
+        armed = {"value": False}
+        validates = {"n": 0}
+        original_phase = NoOpTurnProgressSink.on_phase
+    
+        def on_phase(self, phase):
+            original_phase(self, phase)
+            if phase != "validate" or not armed["value"]:
+                return
+            validates["n"] += 1
+            if validates["n"] == 2:
+                # The second rebuild is what the budget runs out during.
+                turn_clock.now += turn_budget * 2
+    
+        monkeypatch.setattr(NoOpTurnProgressSink, "on_phase", on_phase)
+    
+        def two_people_changes(request):
+            """A headcount supplement of the goal on screen (four people)."""
+            group = request["current_plan"]["groups"][0]
+            return request_amend(
+                focus=group["ref"], name=group["name"], changes={"set": {"people": 4}}
+            )
+    
+        sid = create_session(client)
+        semantic_provider([*lookup_then_add("dish", "番茄炒蛋", "番茄", people=2)])
+        first = send_ok(client, sid, "我想自己煮番茄炒蛋，两个人", None)
+>       assert first["plan"]["items"]
+               ^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: 'NoneType' object is not subscriptable
+
+tests\test_agent_deadline.py:221: TypeError
+__________ test_a_stop_that_arrives_during_the_build_writes_no_plan ___________
+
+client = <starlette.testclient.TestClient object at 0x00000263113D14F0>
+semantic_provider = <function semantic_provider.<locals>._install at 0x0000026310FD7240>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000026311323530>
+
+    def test_a_stop_that_arrives_during_the_build_writes_no_plan(
+        client, semantic_provider, monkeypatch
+    ):
+        """The cancellation lands while the mutation is being prepared."""
+        from app.agent.turn_progress import NoOpTurnProgressSink
+    
+        stopped = {"value": False}
+        original_phase = NoOpTurnProgressSink.on_phase
+    
+        def on_phase(self, phase):
+            original_phase(self, phase)
+            if phase == "validate":
+                stopped["value"] = True
+    
+        monkeypatch.setattr(NoOpTurnProgressSink, "on_phase", on_phase)
+        monkeypatch.setattr(
+            NoOpTurnProgressSink, "should_stop", lambda self: stopped["value"]
+        )
+    
+        semantic_provider([*lookup_then_add("product", "全脂牛奶 1升")])
+        sid = create_session(client)
+        request_id = str(uuid.uuid4())
+    
+        body = send_ok(client, sid, "买一盒牛奶", None, request_id)
+    
+>       assert body["task_id"] is None
+E       AssertionError: assert 'task-8dffe9e6d0bf' is None
+
+tests\test_agent_deadline.py:278: AssertionError
+______ test_partial_plan_is_consistent_across_every_read_and_write_path _______
+
+client = <starlette.testclient.TestClient object at 0x00000263113D0350>
+semantic_provider = <function semantic_provider.<locals>._install at 0x00000263115D8540>
+
+    def test_partial_plan_is_consistent_across_every_read_and_write_path(client, semantic_provider):
+>       body = _partial_dish(client, semantic_provider)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_p0_coverage_consistency.py:85: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+client = <starlette.testclient.TestClient object at 0x00000263113D0350>
+semantic_provider = <function semantic_provider.<locals>._install at 0x00000263115D8540>
+
+    def _partial_dish(client, semantic_provider) -> dict:
+        from support.semantic_agent import lookup_then_add_id
+    
+        semantic_provider(lookup_then_add_id("dish", "三杯鸡", "dish-sanbei-ji", people=2))
+        sid = create_session(client)
+        body = turn(client, sid, "我想吃三杯鸡，2人").json()
+>       assert body["plan"] and body["plan"]["gaps"], body
+E       AssertionError: {'session_id': 'sess-3f14b4f5011e', 'task_id': None, 'state_version': 0, 'status': 'understanding', ...}
+E       assert (None)
+
+tests\test_p0_coverage_consistency.py:80: AssertionError
+___________ test_row_add_keeps_gaps_and_never_re_arms_a_bought_row ____________
+
+client = <starlette.testclient.TestClient object at 0x0000026311588F80>
+semantic_provider = <function semantic_provider.<locals>._install at 0x00000263116CCA40>
+
+    def test_row_add_keeps_gaps_and_never_re_arms_a_bought_row(client, semantic_provider):
+>       body = _partial_dish(client, semantic_provider)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_p0_coverage_consistency.py:148: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+client = <starlette.testclient.TestClient object at 0x0000026311588F80>
+semantic_provider = <function semantic_provider.<locals>._install at 0x00000263116CCA40>
+
+    def _partial_dish(client, semantic_provider) -> dict:
+        from support.semantic_agent import lookup_then_add_id
+    
+        semantic_provider(lookup_then_add_id("dish", "三杯鸡", "dish-sanbei-ji", people=2))
+        sid = create_session(client)
+        body = turn(client, sid, "我想吃三杯鸡，2人").json()
+>       assert body["plan"] and body["plan"]["gaps"], body
+E       AssertionError: {'session_id': 'sess-aea74cae242f', 'task_id': None, 'state_version': 0, 'status': 'understanding', ...}
+E       assert (None)
+
+tests\test_p0_coverage_consistency.py:80: AssertionError
+_______ test_refresh_uses_the_persisted_intent_not_the_coverage_result ________
+
+client = <starlette.testclient.TestClient object at 0x0000026311056F00>
+semantic_provider = <function semantic_provider.<locals>._install at 0x000002631170A700>
+
+    def test_refresh_uses_the_persisted_intent_not_the_coverage_result(client, semantic_provider):
+        """A partial draft must not be silently downgraded by a re-price."""
+>       body = _partial_dish(client, semantic_provider)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_p0_coverage_consistency.py:219: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+client = <starlette.testclient.TestClient object at 0x0000026311056F00>
+semantic_provider = <function semantic_provider.<locals>._install at 0x000002631170A700>
+
+    def _partial_dish(client, semantic_provider) -> dict:
+        from support.semantic_agent import lookup_then_add_id
+    
+        semantic_provider(lookup_then_add_id("dish", "三杯鸡", "dish-sanbei-ji", people=2))
+        sid = create_session(client)
+        body = turn(client, sid, "我想吃三杯鸡，2人").json()
+>       assert body["plan"] and body["plan"]["gaps"], body
+E       AssertionError: {'session_id': 'sess-05bac61d66fe', 'task_id': None, 'state_version': 0, 'status': 'understanding', ...}
+E       assert (None)
+
+tests\test_p0_coverage_consistency.py:80: AssertionError
+________ test_plan_json_persists_the_gap_and_the_requirement_evidence _________
+
+indexed_client = <starlette.testclient.TestClient object at 0x00000263116A5280>
+semantic_provider = <function semantic_provider.<locals>._install at 0x0000026311706A20>
+
+    def test_plan_json_persists_the_gap_and_the_requirement_evidence(indexed_client, semantic_provider):
+>       body = _partial_dish(indexed_client, semantic_provider)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_p0_gap_persistence.py:98: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+client = <starlette.testclient.TestClient object at 0x00000263116A5280>
+semantic_provider = <function semantic_provider.<locals>._install at 0x0000026311706A20>
+
+    def _partial_dish(client, semantic_provider) -> dict:
+        from support.semantic_agent import lookup_then_add_id
+    
+        target = lookup_then_add_id(
+            "dish", "酸汤肥牛", "dish-suantang-feiniu", people=2
+        )[0]
+    
+        def opt_in(request):
+            question = next(
+                item for item in request["pending_clarifications"]
+                if item["slot"] == "supply_gap_choice"
+            )
+            return {
+                **target(request),
+                "resolved_questions": [question["question_id"]],
+            }
+    
+        semantic_provider([target, opt_in])
+        sid = create_session(client)
+        preview = turn(client, sid, "我想吃酸汤肥牛，2人").json()
+        assert preview["plan"] is None and preview["task_id"] is None, preview
+        assert preview["pending_clarifications"][0]["slot"] == "supply_gap_choice", preview
+        assert client.get("/api/v1/cart").json()["items"] == []
+        body = turn(client, sid, "那就先买能买到的", preview).json()
+        plan = body["plan"]
+        assert plan and plan["coverage_mode"] == "partial", body
+>       assert {gap["ingredient_id"] for gap in plan["gaps"]} == {"enoki_mushroom"}, plan
+E       AssertionError: {'plan_id': 'plan-e96d24ca77db', 'plan_version': 1, 'mode': 'bundle', 'items': [{'sku_id': '00000162', 'name': 'Flying...y': 1, ...}, {'sku_id': 'demo:vinegar-500ml', 'name': '米醋 500毫升', 'quantity': 1, 'recommended_quantity': 1, ...}], ...}
+E       assert {'chili_sauce...oki_mushroom'} == {'enoki_mushroom'}
+E         
+E         Extra items in the left set:
+E         'chili_sauce'
+E         Use -v to get more diff
+
+tests\test_p0_gap_persistence.py:76: AssertionError
+_______________ test_every_read_surface_echoes_gaps_and_intent ________________
+
+indexed_client = <starlette.testclient.TestClient object at 0x00000263113D27E0>
+semantic_provider = <function semantic_provider.<locals>._install at 0x00000263128FE7A0>
+
+    def test_every_read_surface_echoes_gaps_and_intent(indexed_client, semantic_provider):
+        client = indexed_client
+>       body = _partial_dish(client, semantic_provider)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_p0_gap_persistence.py:138: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+client = <starlette.testclient.TestClient object at 0x00000263113D27E0>
+semantic_provider = <function semantic_provider.<locals>._install at 0x00000263128FE7A0>
+
+    def _partial_dish(client, semantic_provider) -> dict:
+        from support.semantic_agent import lookup_then_add_id
+    
+        target = lookup_then_add_id(
+            "dish", "酸汤肥牛", "dish-suantang-feiniu", people=2
+        )[0]
+    
+        def opt_in(request):
+            question = next(
+                item for item in request["pending_clarifications"]
+                if item["slot"] == "supply_gap_choice"
+            )
+            return {
+                **target(request),
+                "resolved_questions": [question["question_id"]],
+            }
+    
+        semantic_provider([target, opt_in])
+        sid = create_session(client)
+        preview = turn(client, sid, "我想吃酸汤肥牛，2人").json()
+        assert preview["plan"] is None and preview["task_id"] is None, preview
+        assert preview["pending_clarifications"][0]["slot"] == "supply_gap_choice", preview
+        assert client.get("/api/v1/cart").json()["items"] == []
+        body = turn(client, sid, "那就先买能买到的", preview).json()
+        plan = body["plan"]
+        assert plan and plan["coverage_mode"] == "partial", body
+>       assert {gap["ingredient_id"] for gap in plan["gaps"]} == {"enoki_mushroom"}, plan
+E       AssertionError: {'plan_id': 'plan-0c15245ea565', 'plan_version': 1, 'mode': 'bundle', 'items': [{'sku_id': '00000162', 'name': 'Flying...y': 1, ...}, {'sku_id': 'demo:vinegar-500ml', 'name': '米醋 500毫升', 'quantity': 1, 'recommended_quantity': 1, ...}], ...}
+E       assert {'chili_sauce...oki_mushroom'} == {'enoki_mushroom'}
+E         
+E         Extra items in the left set:
+E         'chili_sauce'
+E         Use -v to get more diff
+
+tests\test_p0_gap_persistence.py:76: AssertionError
+______________ test_the_reply_names_the_missing_main_ingredient _______________
+
+indexed_client = <starlette.testclient.TestClient object at 0x0000026312968170>
+semantic_provider = <function semantic_provider.<locals>._install at 0x0000026312B2E160>
+
+    def test_the_reply_names_the_missing_main_ingredient(indexed_client, semantic_provider):
+        """D3: the shortage is stated in words the shopper reads, not just in fields."""
+>       body = _partial_dish(indexed_client, semantic_provider)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_p0_gap_persistence.py:249: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+client = <starlette.testclient.TestClient object at 0x0000026312968170>
+semantic_provider = <function semantic_provider.<locals>._install at 0x0000026312B2E160>
+
+    def _partial_dish(client, semantic_provider) -> dict:
+        from support.semantic_agent import lookup_then_add_id
+    
+        target = lookup_then_add_id(
+            "dish", "酸汤肥牛", "dish-suantang-feiniu", people=2
+        )[0]
+    
+        def opt_in(request):
+            question = next(
+                item for item in request["pending_clarifications"]
+                if item["slot"] == "supply_gap_choice"
+            )
+            return {
+                **target(request),
+                "resolved_questions": [question["question_id"]],
+            }
+    
+        semantic_provider([target, opt_in])
+        sid = create_session(client)
+        preview = turn(client, sid, "我想吃酸汤肥牛，2人").json()
+        assert preview["plan"] is None and preview["task_id"] is None, preview
+        assert preview["pending_clarifications"][0]["slot"] == "supply_gap_choice", preview
+        assert client.get("/api/v1/cart").json()["items"] == []
+        body = turn(client, sid, "那就先买能买到的", preview).json()
+        plan = body["plan"]
+        assert plan and plan["coverage_mode"] == "partial", body
+>       assert {gap["ingredient_id"] for gap in plan["gaps"]} == {"enoki_mushroom"}, plan
+E       AssertionError: {'plan_id': 'plan-1ec88b19203f', 'plan_version': 1, 'mode': 'bundle', 'items': [{'sku_id': '00000162', 'name': 'Flying...y': 1, ...}, {'sku_id': 'demo:vinegar-500ml', 'name': '米醋 500毫升', 'quantity': 1, 'recommended_quantity': 1, ...}], ...}
+E       assert {'chili_sauce...oki_mushroom'} == {'enoki_mushroom'}
+E         
+E         Extra items in the left set:
+E         'chili_sauce'
+E         Use -v to get more diff
+
+tests\test_p0_gap_persistence.py:76: AssertionError
+______ test_review_completed_people_change_requires_scope_clarification _______
+
+client = <starlette.testclient.TestClient object at 0x00000263107C2720>
+semantic_provider = <function semantic_provider.<locals>._install at 0x0000026312BE7A60>
+
+    def test_review_completed_people_change_requires_scope_clarification(client, semantic_provider):
+        """After a completed task, "改成四人份" does not name the scope.
+    
+        The headcount change on a finished list is ambiguous: append to what was
+        bought, or make a separate new list. That is a question the *model* states in
+        the real proposal protocol (an uncertainty with its own wording), not a
+        server keyword rule; the turn must surface it and change nothing until the
+        shopper answers. The scripted provider stands in for that model reading
+        only - the parse/decide/execute/HTTP chain below is the real one.
+    
+        An older assertion required the top-level ``status`` to read "clarifying",
+        which conflated the task's own step with the answer's clarification. The
+        finished task must stay ``completed``; the open question is asserted where
+        it really lives (``pending_clarification`` / the clarification receipt), and
+        a replay of the same request must not reopen the task.
+        """
+        from support.semantic_agent import lookup_then_add_id
+    
+        def ask_scope(request):
+            return {
+                "reply": "这份清单已经确认过了，我先确认一下你要怎么改。",
+                "questions": [
+                    {
+                        "slot": "gap_fill_scope",
+                        "question": "是在已购清单上追加，还是另做一份新清单？",
+                    }
+                ],
+            }
+    
+        semantic_provider(
+            [
+                *lookup_then_add_id("dish", "番茄炒蛋", "dish-fanqie-chao-dan", people=2),
+                ask_scope,
+            ]
+        )
+        first = plan(client)
+        result = confirm(client, first)
+        assert result.status_code == 200, result.text
+        confirmed = result.json()
+        cart_before = _cart_snapshot(client)
+    
+        request_id = str(uuid4())
+        body = {
+            "request_id": request_id,
+            "message": "改成四人份",
+            "expected_task_id": confirmed["task_id"],
+            "expected_state_version": confirmed["state_version"],
+            "expected_session_version": confirmed["session_version"],
+        }
+        following = post_turn(
+            client,
+            first["session_id"],
+            body["message"],
+            confirmed,
+            request_id=request_id,
+        ).json()
+    
+        # The task status and the answer's clarification are different fields. A
+        # finished task stays finished (``status`` is the task step, the single
+        # source for which is app/schemas/guide.Step); the open question is carried
+        # by ``pending_clarification`` and the clarification receipt. The response
+        # never labels a finished task as a task-step "clarifying", and nothing of
+        # the finished work is rewritten.
+        assert following["status"] == "completed", following
+        assert following["status"] in get_args(Step), following["status"]
+        # "completed" is not an AnswerStatus, so the answer field falls back exactly
+        # as app/agent/responses.py documents; the clarification is not smuggled into
+        # it as a task step.
+        assert following["answer_status"] in get_args(AnswerStatus), following["answer_status"]
+        assert following["answer_status"] == "accepted", following["answer_status"]
+        assert following.get("plan") is None, following.get("plan")
+        assert following.get("plan_effect") == "keep", following.get("plan_effect")
+    
+        pending = following.get("pending_clarification") or {}
+        assert pending.get("slot") == "gap_fill_scope", pending
+        assert pending.get("question"), pending
+        assert any(
+            r.get("type") == "clarification"
+            and r.get("slot") == "gap_fill_scope"
+            and r.get("status") == "needs_clarification"
+            for r in following.get("action_results") or []
+        ), following.get("action_results")
+    
+        # The finished task, its plan, its version and the cart are facts this turn
+        # may not rewrite, and the question it asked is the question that is stored.
+        state = client.get(f"/api/v1/guide/sessions/{first['session_id']}").json()
+        assert state["task_id"] == first["task_id"]
+        assert state["task_status"] == "completed", state["task_status"]
+        assert state["state_version"] == confirmed["state_version"], state["state_version"]
+>       assert state["plan"] == first["plan"]
+E       AssertionError: assert {'plan_id': '...0, ...}], ...} == {'plan_id': '...1, ...}], ...}
+E         
+E         Omitting 14 identical items, use -vv to show
+E         Differing items:
+E         {'targets': [{'group_id': 'dish:dish-fanqie-chao-dan', 'kind': 'dish', 'target_id': 'dish-fanqie-chao-dan', 'name': '番茄炒蛋', ...}]} != {'targets': [{'group_id': 'dish:dish-fanqie-chao-dan', 'kind': 'dish', 'target_id': 'dish-fanqie-chao-dan', 'name': '番茄炒蛋', ...}]}
+E         {'items': [{'sku_id': 'demo:tomato-fresh-500g', 'name': '新鲜番茄 500克', 'quantity': 1, 'unit_price_fen': 680, ...}, {'sku...e_fen': 320, ...}, {'sku_id': 'demo:sugar-white-500g', 'name': '白砂糖 500克', 'quantity': 1, 'unit_price_fen': 650, ...}]} != {'items'...
+E         
+E         ...Full output truncated (4 lines hidden), use '-vv' to show
+
+tests\test_review_probes.py:341: AssertionError
+__________________ test_cola_chicken_wing_plan_includes_cola __________________
+
+db_session = <sqlalchemy.orm.session.Session object at 0x00000263128361B0>
+
+    def test_cola_chicken_wing_plan_includes_cola(db_session):
+        from app.services.template_plan_service import TemplatePlanService
+    
+        dish = next(d for d in _load_dishes() if d["dish_id"] == "dish-kele-jichi")
+        cola_item = next(i for i in dish["required_items"] if i["ingredient_id"] == "cola")
+        assert cola_item.get("quantity_ml") == 330
+        assert "cola" not in dish.get("pantry_items", [])
+    
+        service = TemplatePlanService(db_session)
+        result = service.validate_template_plan(dish, people=2)
+        assert result["validation_status"] == "passed"
+        skus = {item["sku_id"] for item in result["items"]}
+>       assert "demo:cola-330ml" in skus
+E       AssertionError: assert 'demo:cola-330ml' in {'demo:chicken-wing-500g', 'demo:cn-pepsi-original-330ml-can', 'demo:salt-500g', 'demo:soy-sauce-500ml'}
+
+tests\test_s1_data_completion.py:80: AssertionError
+____ test_remove_preserves_shared_sku_manual_quantity_and_remaining_ledger ____
+
+db_session = <sqlalchemy.orm.session.Session object at 0x0000026312D68EC0>
+
+    def test_remove_preserves_shared_sku_manual_quantity_and_remaining_ledger(db_session):
+        from app.services.shopping_plan_service import ShoppingPlanService
+        service = ShoppingPlanService(db_session)
+        a = service.build_product_plan("", target_id="demo:eggs-fresh-6pack", quantity=2)
+        assert a["status"] == "ok"
+        a["target"]["group_id"] = "dish:a"
+        a["target"]["kind"] = "dish"
+        a["target"]["target_id"] = "a"
+        for row in a["items"]:
+            row["group_id"] = "dish:a"
+            row.pop("contributions", None)
+        b = copy.deepcopy(a)
+        b["target"].update(group_id="dish:b", target_id="b")
+        for row in b["items"]:
+            row["group_id"] = "dish:b"
+        plan = service.merge_plan(None, a, group_id="dish:a", operation="replace")
+        plan = service.merge_plan(plan, b, group_id="dish:b", operation="append")
+        sku = plan["items"][0]["sku_id"]
+        plan = service.apply_row_quantity(plan, sku, 6)
+        row = plan["items"][0]
+        for c in row["contributions"]:
+            c["added_quantity"] = 1
+        row["added_quantity"] = 2
+        removed = service.merge_plan(plan, {"items": [], "target": {}}, group_id="dish:a",
+                                     operation="remove", cart_quantities={sku: 2})
+        kept = removed["items"][0]
+        assert kept["quantity"] == 6
+        assert kept["quantity_source"] == "user"
+>       assert kept["added_quantity"] == 1
+E       assert 2 == 1
+
+tests\test_semantic_acceptance_edges.py:198: AssertionError
+________________ test_w03_gap_fill_clarify_append_or_new_plan _________________
+
+client = <starlette.testclient.TestClient object at 0x0000026312A7CDA0>
+
+    def test_w03_gap_fill_clarify_append_or_new_plan(client):
+        """W03: post-confirm people change clarifies append vs 另做一份; new plan is independent."""
+        from app.core.database import SessionLocal
+        from app.models.session import GuideTask
+    
+        first = plan(client)
+        confirmed = confirm(client, first).json()
+        assert confirmed["status"] == "completed", confirmed
+    
+        clarify = turn(client, first["session_id"], "改成四人份", confirmed)
+>       assert clarify["status"] == "clarifying", clarify
+E       AssertionError: {'session_id': 'sess-3365d5f1ca56', 'task_id': 'task-f7bb29ba3b59', 'state_version': 3, 'status': 'completed', ...}
+E       assert 'completed' == 'clarifying'
+E         
+E         - clarifying
+E         + completed
+
+tests\test_w_dish_and_gap.py:72: AssertionError
+_____________________ test_m1b_gap_fill_2_to_4_via_turns ______________________
+
+client = <starlette.testclient.TestClient object at 0x0000026312D82510>
+
+    def test_m1b_gap_fill_2_to_4_via_turns(client):
+        """M1b: post-confirm 2→4 gap plan is produced via /turns (append must carry people)."""
+        first = plan(client)
+        tomato_sku = next(i["sku_id"] for i in first["plan"]["items"] if "tomato" in i["sku_id"])
+    
+        confirmed = confirm(client, first).json()
+        assert confirmed["status"] == "completed"
+    
+        clarify4 = turn(client, first["session_id"], "改成四人份", confirmed)
+>       assert clarify4["status"] == "clarifying"
+E       AssertionError: assert 'completed' == 'clarifying'
+E         
+E         - clarifying
+E         + completed
+
+tests\test_w_dish_and_gap.py:206: AssertionError
+________________ test_m1b_gap_fill_second_zero_delta_via_turns ________________
+
+client = <starlette.testclient.TestClient object at 0x000002631436E6C0>
+
+    def test_m1b_gap_fill_second_zero_delta_via_turns(client):
+        """M1b: when chain already satisfies target people, append should zero_delta via /turns."""
+        first = plan(client)
+        confirmed = confirm(client, first).json()
+        assert confirmed["status"] == "completed"
+    
+        clarify = turn(client, first["session_id"], "改成两人份", confirmed)
+>       assert clarify["status"] == "clarifying"
+E       AssertionError: assert 'completed' == 'clarifying'
+E         
+E         - clarifying
+E         + completed
+
+tests\test_w_dish_and_gap.py:225: AssertionError
+__________ test_the_category_page_retrieves_real_products_then_asks ___________
+
+client = <starlette.testclient.TestClient object at 0x0000026312D80470>
+semantic_provider = <function semantic_provider.<locals>._install at 0x000002631443EFC0>
+
+    def test_the_category_page_retrieves_real_products_then_asks(
+        client, semantic_provider
+    ):
+        """A real product lookup on the browsed category, and a question from it.
+    
+        One pass (spec rule 1): the target and its lookup are the same model call.
+        "面粉" only names the SKU by substring, never its exact name ("低筋面粉
+        250克（小包装）"), so the mutation node's own resolution
+        (``_resolve_named_target`` in ``app/agent/graph/nodes/mutation.py``) finds no
+        exact/alias hit and turns the real lookup hits into a clarify question
+        (spec rule 1: "a similar hit becomes a question, never a build") — the
+        model never authors the question or its options itself.
+        """
+        semantic_provider(
+            [
+                {
+                    "target": {"kind": "product", "name": "面粉", "intent": "buy"},
+                    "lookups": [{"kind": "product", "query": "面粉"}],
+                }
+            ]
+        )
+        sid = create_session(client, page="category", category_id="baking")
+        body = turn(client, sid, "想做蛋糕，面粉小包装，20元以内").json()
+    
+>       assert body["plan"] is None, "a question is not a plan"
+E       AssertionError: a question is not a plan
+E       assert {'plan_id': 'plan-f02ead3d0482', 'plan_version': 1, 'mode': 'bundle', 'items': [{'sku_id': 'demo:cake-flour-250g', 'name': '低筋面粉 250克（小包装）', 'quantity': 1, 'recommended_quantity': 1, ...}], ...} is None
+
+tests\test_workflow_category.py:63: AssertionError
+_______ test_a_category_turn_can_plan_a_real_product_but_writes_no_cart _______
+
+client = <starlette.testclient.TestClient object at 0x00000263144E0E30>
+semantic_provider = <function semantic_provider.<locals>._install at 0x000002631458E5C0>
+
+    def test_a_category_turn_can_plan_a_real_product_but_writes_no_cart(
+        client, semantic_provider
+    ):
+        # The exact SKU name ("低筋面粉 250克（小包装）") gets an exact retrieval hit,
+        # which the mutation node binds without a question (spec rule 1); a mere
+        # substring like "面粉" is ambiguous and would clarify instead (see the test
+        # above).
+        semantic_provider(lookup_then_add("product", "低筋面粉 250克（小包装）"))
+        sid = create_session(client, page="category", category_id="baking")
+        body = turn(client, sid, "帮我配齐做蛋糕的材料").json()
+    
+        assert body["plan"], body
+        target = body["plan"]["targets"][0]
+        assert target["kind"] == "product", target
+        assert body["task_id"]
+        # The retrieval really happened and really returned a sellable row: the
+        # built plan's own line carries the real SKU, price and stock evidence, and
+        # the turn's lookup receipt reports a completed retrieval (there is no
+        # second model call to inspect query_results on — spec rule 1, one pass).
+        lookup_receipt = next(
+            r for r in body["action_results"] if r.get("kind") == "lookup"
+        )
+        assert lookup_receipt["status"] == "completed", lookup_receipt
+>       assert lookup_receipt["retrieval_status"] == "ok", lookup_receipt
+E       AssertionError: {'type': 'read_only', 'kind': 'lookup', 'status': 'completed', 'saved': False, ...}
+E       assert 'unavailable' == 'ok'
+E         
+E         - ok
+E         + unavailable
+
+tests\test_workflow_category.py:94: AssertionError
+============================== warnings summary ===============================
+.venv\Lib\site-packages\_pytest\config\__init__.py:1345
+  C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Lib\site-packages\_pytest\config\__init__.py:1345: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; anyio
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+.venv\Lib\site-packages\_pytest\config\__init__.py:1345
+  C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Lib\site-packages\_pytest\config\__init__.py:1345: PytestAssertRewriteWarning: Module already imported so cannot be rewritten; langsmith
+    self._mark_plugins_for_rewrite(hook, disable_autoload)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_agent_deadline.py::test_a_model_that_outlives_the_budget_writes_nothing
+FAILED tests/test_agent_deadline.py::test_a_read_that_outlives_the_budget_writes_nothing
+FAILED tests/test_agent_deadline.py::test_a_shopper_stop_is_a_stop_and_never_a_timeout
+FAILED tests/test_agent_deadline.py::test_a_mutation_committed_before_the_budget_runs_out_is_reported_as_saved
+FAILED tests/test_agent_deadline.py::test_a_stop_that_arrives_during_the_build_writes_no_plan
+FAILED tests/test_p0_coverage_consistency.py::test_partial_plan_is_consistent_across_every_read_and_write_path
+FAILED tests/test_p0_coverage_consistency.py::test_row_add_keeps_gaps_and_never_re_arms_a_bought_row
+FAILED tests/test_p0_coverage_consistency.py::test_refresh_uses_the_persisted_intent_not_the_coverage_result
+FAILED tests/test_p0_gap_persistence.py::test_plan_json_persists_the_gap_and_the_requirement_evidence
+FAILED tests/test_p0_gap_persistence.py::test_every_read_surface_echoes_gaps_and_intent
+FAILED tests/test_p0_gap_persistence.py::test_the_reply_names_the_missing_main_ingredient
+FAILED tests/test_review_probes.py::test_review_completed_people_change_requires_scope_clarification
+FAILED tests/test_s1_data_completion.py::test_cola_chicken_wing_plan_includes_cola
+FAILED tests/test_semantic_acceptance_edges.py::test_remove_preserves_shared_sku_manual_quantity_and_remaining_ledger
+FAILED tests/test_w_dish_and_gap.py::test_w03_gap_fill_clarify_append_or_new_plan
+FAILED tests/test_w_dish_and_gap.py::test_m1b_gap_fill_2_to_4_via_turns - Ass...
+FAILED tests/test_w_dish_and_gap.py::test_m1b_gap_fill_second_zero_delta_via_turns
+FAILED tests/test_workflow_category.py::test_the_category_page_retrieves_real_products_then_asks
+FAILED tests/test_workflow_category.py::test_a_category_turn_can_plan_a_real_product_but_writes_no_cart
+19 failed, 1 passed, 2 warnings in 40.18s

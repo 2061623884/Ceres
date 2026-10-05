@@ -1,0 +1,92 @@
+FF                                                                       [100%]
+================================== FAILURES ===================================
+____________ test_reply_finishes_while_memory_model_is_pending[1] _____________
+
+client = <starlette.testclient.TestClient object at 0x0000019FC664D730>
+semantic_provider = <function semantic_provider.<locals>._install at 0x0000019FC924E840>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000019FC664F6E0>
+run = 1
+
+    @pytest.mark.parametrize("run", [1, 2])
+    def test_reply_finishes_while_memory_model_is_pending(client, semantic_provider, monkeypatch, run):
+        from app.core.config import get_settings
+        from app.core.database import SessionLocal
+        from app.llm.openai_transport import OpenAICompatTransport
+        from app.services.memory_service import MemoryService
+    
+        monkeypatch.setenv("MEMORY_MODEL", "test-memory-model")
+        get_settings.cache_clear()
+        entered = threading.Event()
+        release = threading.Event()
+    
+        def post_json(self, payload, **kwargs):
+            assert payload["model"] == "test-memory-model"
+            entered.set()
+            assert release.wait(5), "test must release the isolated memory provider"
+            return {"choices": [{"message": {"content": json.dumps({"memories": [
+                {"category": "user", "content": "平时喜欢百事可乐", "conflicts_with": []},
+            ]}, ensure_ascii=False)}}]}
+    
+        monkeypatch.setattr(OpenAICompatTransport, "post_json", post_json)
+        semantic_provider([{"reply": "明白，推荐时会先说明理由。"}])
+        sid = create_session(client)
+        try:
+            reply = send_turn(client, sid, "我平时喜欢百事可乐")
+            assert reply["answer_status"] == "accepted"
+>           assert entered.wait(1), "normal chat did not start background extraction"
+E           AssertionError: normal chat did not start background extraction
+E           assert False
+E            +  where False = wait(1)
+E            +    where wait = <threading.Event at 0x19fc65dfa10: unset>.wait
+
+tests\test_v2_automatic_memory.py:39: AssertionError
+____________ test_reply_finishes_while_memory_model_is_pending[2] _____________
+
+client = <starlette.testclient.TestClient object at 0x0000019FC8ED3CE0>
+semantic_provider = <function semantic_provider.<locals>._install at 0x0000019FC94CFBA0>
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000019FC92C30B0>
+run = 2
+
+    @pytest.mark.parametrize("run", [1, 2])
+    def test_reply_finishes_while_memory_model_is_pending(client, semantic_provider, monkeypatch, run):
+        from app.core.config import get_settings
+        from app.core.database import SessionLocal
+        from app.llm.openai_transport import OpenAICompatTransport
+        from app.services.memory_service import MemoryService
+    
+        monkeypatch.setenv("MEMORY_MODEL", "test-memory-model")
+        get_settings.cache_clear()
+        entered = threading.Event()
+        release = threading.Event()
+    
+        def post_json(self, payload, **kwargs):
+            assert payload["model"] == "test-memory-model"
+            entered.set()
+            assert release.wait(5), "test must release the isolated memory provider"
+            return {"choices": [{"message": {"content": json.dumps({"memories": [
+                {"category": "user", "content": "平时喜欢百事可乐", "conflicts_with": []},
+            ]}, ensure_ascii=False)}}]}
+    
+        monkeypatch.setattr(OpenAICompatTransport, "post_json", post_json)
+        semantic_provider([{"reply": "明白，推荐时会先说明理由。"}])
+        sid = create_session(client)
+        try:
+            reply = send_turn(client, sid, "我平时喜欢百事可乐")
+            assert reply["answer_status"] == "accepted"
+>           assert entered.wait(1), "normal chat did not start background extraction"
+E           AssertionError: normal chat did not start background extraction
+E           assert False
+E            +  where False = wait(1)
+E            +    where wait = <threading.Event at 0x19fc93a4e30: unset>.wait
+
+tests\test_v2_automatic_memory.py:39: AssertionError
+============================== warnings summary ===============================
+tests/test_v2_automatic_memory.py::test_reply_finishes_while_memory_model_is_pending[1]
+  C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\app\services\template_matcher.py:21: SyntaxWarning: invalid escape sequence '\['
+    _PUNCT_PATTERN = re.compile(r"[\s\u3000，。！？、；：""''（）()\[\]【】\-—·…]+")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_v2_automatic_memory.py::test_reply_finishes_while_memory_model_is_pending[1]
+FAILED tests/test_v2_automatic_memory.py::test_reply_finishes_while_memory_model_is_pending[2]
+2 failed, 1 warning in 5.12s
