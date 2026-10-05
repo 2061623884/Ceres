@@ -7,3 +7,5 @@ RED b4053d600a984d8fa3ea6583d93eeeca：2fail/exit1；07:36:38.6845476–07:36:43
 命令: .venv/Scripts/python.exe -X utf8 -m pytest -q -p no:cacheprovider -W error::pytest.PytestUnhandledThreadExceptionWarning <targets> --basetemp <external-run>/pytest-tmp。cwd Ceres/backend；PYTHONUTF8=1，PYTHONDONTWRITEBYTECODE=1，DATABASE_URL/MERCURY_DB_PATH独立外部run目录；RETRIEVAL_INDEX_DIR空，fixture source是tmp/no-source.sqlite3。原始logs位于父目录work/ceres-v2-test-env/run-<ID>。旧SyntaxWarning保留。
 四类显式内容无自动期限、跨session/重新打开SQLite、查询完整8条与recall5/2000、真实CRUD与owner隔离、删除不改计划/消息、临时人数预算不保存、本次品牌例外不改旧偏好，代表行为均两独立owner。
 模型语义受控；相关召回user/feedback通用，project/reference按中文二字/英文词词法重合，显式先于自动。当前明确语义优先通过独立只读memories输入和prompt落实，不把memory混入hard requirements。真实模型/页面及reference业务流程仍09验收。
+
+Spec补证：prompt明确explicit高于冲突automatic，新两个公开用例51425c73da2d4089bfad19f4a3f1da26，07:59:50.3364624–07:59:55.9469893UTC，2pass/exit0；相同pytest参数、MEMORY_MODEL为空防止受控验证调用网络。受控provider仅证明来源传递与购物业务不覆盖；真实模型遵从待09。

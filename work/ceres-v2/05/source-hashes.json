@@ -6,8 +6,8 @@
   "backend/app/agent/graph/nodes/context.py": "b4af09f510a459b797ad68715f9983d6a451d87a42c22a84ddc0c608bdda406e",
   "backend/app/agent/graph/nodes/answer.py": "f756ee529036fd1295a759c68cfeef88f0e61b7b78e899ef00a7a490684c3a07",
   "backend/app/agent/graph/turn_commit.py": "7342f701ae7703d7ef9529cbfae5a0cbe72e293b2641d7e67b45cf4242130633",
-  "backend/app/prompts/semantic.py": "c3802868b55bed5cfc592b0dd5cef710e407d5140cebea2a3c4b97171c93a87b",
+  "backend/app/prompts/semantic.py": "0a73e53884ff2a7c37f2d60d319f133e0cc12aff13730b82a396e8de879fe7d8",
   "backend/app/models/memory.py": "e235775d67213cd7683a12e25bb28a48fb3238036d028eb4f3ca05aea80fa003",
   "backend/app/services/memory_service.py": "5d1e5292188d5d34f919b032838d93b9aeb938d693fafa884000c60e91caecd7",
-  "backend/tests/test_v2_explicit_memory.py": "a8d4a52f5849a3147bdd3cccd02ff38e3c0e9da9c36486fa794664f66d05178a"
+  "backend/tests/test_v2_explicit_memory.py": "0a641d597b08582f4e158a081769ba301b1c144d0fd5adc3bfe0224153912bbc"
 }

@@ -141,3 +141,37 @@ def test_current_brand_exception_wins_without_editing_memory(indexed_client, sem
     assert len(remembered["product_cards"]) == 1 and remembered["product_cards"][0]["brand"] == "百事可乐"
     listed = send_turn(indexed_client, normal, "查询记忆", remembered)
     assert [row["content"] for row in next(row for row in listed["action_results"] if row["type"] == "memory")["records"]] == ["平时喜欢百事可乐"]
+
+
+@pytest.mark.parametrize("run", [1, 2])
+def test_explicit_source_is_preserved_and_prioritized_over_automatic(indexed_client, semantic_provider, run):
+    from datetime import datetime, timedelta, timezone
+    from app.core.database import SessionLocal
+    from app.models.memory import ShoppingMemory
+
+    semantic_provider([{"memory": {"verb": "save", "category": "user", "content": "平时喜欢百事可乐"}}])
+    sid = create_session(indexed_client)
+    send_turn(indexed_client, sid, "请记住平时喜欢百事可乐")
+    owner = indexed_client.cookies.get("sg_owner_id")
+    with SessionLocal() as db:
+        db.add(ShoppingMemory(memory_id=f"automatic-{run}", owner_id=owner, category="user",
+                              source="automatic", content="平时喜欢可口可乐",
+                              expires_at=datetime.now(timezone.utc) + timedelta(days=30)))
+        db.commit()
+
+    def propose(request):
+        assert [row["source"] for row in request["memories"]] == ["explicit", "automatic"]
+        assert request["memories"][0]["content"] == "平时喜欢百事可乐"
+        return {"reads": [{"kind": "compare", "topic": "可乐"}],
+                "constraints": {"specification": {"brand": "百事可乐"}}}
+
+    def answer(request):
+        rows = request["query_results"][0]["sellable_products"]
+        return {"reply": "按您明确保存的百事偏好比较当前商品。", "display_refs": [row["ref"] for row in rows]}
+
+    semantic_provider([propose, Continuation(answer), {"memory": {"verb": "list"}}])
+    sid = create_session(indexed_client)
+    result = send_turn(indexed_client, sid, "按我的偏好比较可乐")
+    assert len(result["product_cards"]) == 1 and result["product_cards"][0]["brand"] == "百事可乐"
+    listed = send_turn(indexed_client, sid, "查询记忆", result)
+    assert {row["source"] for row in next(row for row in listed["action_results"] if row["type"] == "memory")["records"]} == {"explicit", "automatic"}
