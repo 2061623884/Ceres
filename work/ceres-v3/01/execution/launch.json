@@ -1,0 +1,40 @@
+{
+  "event": "single_authorized_service_launch",
+  "command_argv": [
+    "ssh",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=12",
+    "amax",
+    "bash /data/amax/services/ceres-kev4b-probe-20261005/amax-start.sh"
+  ],
+  "remote_command": "bash /data/amax/services/ceres-kev4b-probe-20261005/amax-start.sh",
+  "controller_context": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python_executable": "C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "python_version": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+    "shell": "PowerShell",
+    "working_directory": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres",
+    "ssh_target_alias": "amax"
+  },
+  "remote_startup_script_safe_environment": {
+    "CUDA_VISIBLE_DEVICES": "GPU-5165b827-1b01-e6f0-d147-38e565ee823f",
+    "KEV_BACKEND": "torch",
+    "KEV_DTYPE": "fp32",
+    "KEV_CUDA_GRAPHS": "0",
+    "KEV_FUSED": "0",
+    "KEV_PREFIX_CACHE": "0",
+    "HF_HUB_CACHE": "/data/amax/services/ceres-kev4b-probe-20261005/amax-direct-download/hub",
+    "HF_HUB_OFFLINE": "1",
+    "model": "jaredpalmer/kev-4b@139fdd94f1b6a6ad80cc15e08fcb99cac885a101",
+    "host": "127.0.0.1",
+    "port": 8009,
+    "sensitive_environment_dumped": false
+  },
+  "started_utc": "2026-10-05T17:33:55.542549+00:00",
+  "duration_seconds": 2.425,
+  "exit_code": 0,
+  "stdout": "2701504\n",
+  "stderr": ""
+}

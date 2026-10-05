@@ -1,0 +1,25 @@
+{
+  "command_argv": [
+    "scp",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=12",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3-discussion\\kev-local-probe\\run-pilot.py",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3-discussion\\kev-local-probe\\chinese-pilot.json",
+    "amax:/data/amax/services/ceres-kev4b-probe-20261005/01-pilot/"
+  ],
+  "controller_context": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python_executable": "C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "python_version": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+    "shell": "PowerShell",
+    "working_directory": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres",
+    "ssh_target_alias": "amax"
+  },
+  "started_utc": "2026-10-05T17:37:25.207980+00:00",
+  "duration_seconds": 3.737,
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": ""
+}

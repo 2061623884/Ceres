@@ -1,0 +1,19 @@
+{
+  "command_argv": [
+    "scp",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=12",
+    "amax:/data/amax/services/ceres-kev4b-probe-20261005/01-pilot/pilot-results.jsonl",
+    "amax:/data/amax/services/ceres-kev4b-probe-20261005/01-pilot/pilot.stdout.log",
+    "amax:/data/amax/services/ceres-kev4b-probe-20261005/01-pilot/pilot.stderr.log",
+    "amax:/data/amax/services/ceres-kev4b-probe-20261005/01-pilot/pilot.exit-code",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\01\\execution"
+  ],
+  "started_utc": "2026-10-05T17:39:38.250548+00:00",
+  "duration_seconds": 9.608,
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": ""
+}

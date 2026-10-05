@@ -1,0 +1,57 @@
+{
+  "status": "published_and_verified",
+  "source_script": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3-discussion\\kev-local-probe\\amax-start.sh",
+  "source_sha256": "58e4c25051ef5d4dd4257285710cf8fceee1544013f73163ff56292635b22b58",
+  "remote_target": "/data/amax/services/ceres-kev4b-probe-20261005/amax-start.sh",
+  "remote_expected_cache": "/data/amax/services/ceres-kev4b-probe-20261005/amax-direct-download/hub",
+  "controller_context": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python_executable": "C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "python_version": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+    "shell": "PowerShell",
+    "working_directory": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres",
+    "ssh_target_alias": "amax"
+  },
+  "preflight_gate_evidence": [
+    "02-gpu1-physical-device.json",
+    "03-gpu1-compute-processes.json",
+    "05-kev-source-revision-and-worktree.json",
+    "09-startup-script-safe-inspection.json",
+    "10-startup-cache-and-direct-cache-paths.json",
+    "11-port-8009-listener.json"
+  ],
+  "transfer": {
+    "command_argv": [
+      "scp",
+      "-p",
+      "-o",
+      "BatchMode=yes",
+      "-o",
+      "ConnectTimeout=12",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3-discussion\\kev-local-probe\\amax-start.sh",
+      "amax:/data/amax/services/ceres-kev4b-probe-20261005/amax-start.sh"
+    ],
+    "started_utc": "2026-10-05T17:28:06.699373+00:00",
+    "duration_seconds": 2.302,
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "remote_verification": {
+    "command_argv": [
+      "ssh",
+      "-o",
+      "BatchMode=yes",
+      "-o",
+      "ConnectTimeout=12",
+      "amax",
+      "set -eu; p=/data/amax/services/ceres-kev4b-probe-20261005/amax-start.sh; test -f \"$p\"; printf 'path='; readlink -f \"$p\"; printf 'sha256='; sha256sum \"$p\" | cut -d' ' -f1; bash -n \"$p\"; printf 'bash_syntax=ok\\n'; grep -Fq 'export HF_HUB_CACHE=\"$probe_root/amax-direct-download/hub\"' \"$p\"; printf 'direct_cache_path=verified\\n'; grep -Fq -- '--run jaredpalmer/kev-4b@139fdd94f1b6a6ad80cc15e08fcb99cac885a101' \"$p\"; printf 'checkpoint_ref=verified\\n'"
+    ],
+    "command_remote": "set -eu; p=/data/amax/services/ceres-kev4b-probe-20261005/amax-start.sh; test -f \"$p\"; printf 'path='; readlink -f \"$p\"; printf 'sha256='; sha256sum \"$p\" | cut -d' ' -f1; bash -n \"$p\"; printf 'bash_syntax=ok\\n'; grep -Fq 'export HF_HUB_CACHE=\"$probe_root/amax-direct-download/hub\"' \"$p\"; printf 'direct_cache_path=verified\\n'; grep -Fq -- '--run jaredpalmer/kev-4b@139fdd94f1b6a6ad80cc15e08fcb99cac885a101' \"$p\"; printf 'checkpoint_ref=verified\\n'",
+    "started_utc": "2026-10-05T17:28:09.000742+00:00",
+    "duration_seconds": 2.368,
+    "exit_code": 0,
+    "stdout": "path=/data/amax/services/ceres-kev4b-probe-20261005/amax-start.sh\nsha256=58e4c25051ef5d4dd4257285710cf8fceee1544013f73163ff56292635b22b58\nbash_syntax=ok\ndirect_cache_path=verified\ncheckpoint_ref=verified\n",
+    "stderr": ""
+  }
+}

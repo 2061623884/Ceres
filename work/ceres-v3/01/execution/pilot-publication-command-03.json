@@ -1,0 +1,24 @@
+{
+  "command_argv": [
+    "ssh",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=12",
+    "amax",
+    "set -eu; cd /data/amax/services/ceres-kev4b-probe-20261005/01-pilot; sha256sum run-pilot.py chinese-pilot.json"
+  ],
+  "controller_context": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python_executable": "C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "python_version": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+    "shell": "PowerShell",
+    "working_directory": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres",
+    "ssh_target_alias": "amax"
+  },
+  "started_utc": "2026-10-05T17:37:28.946205+00:00",
+  "duration_seconds": 2.298,
+  "exit_code": 0,
+  "stdout": "2d139172857225245c6dfc7f7795927d78e90b90ed768753ef42ffa438fbaf17  run-pilot.py\n0a92aa350431b752fd6fb4d37ce5b659ff4e6140a52a3077f1d98bfc28dd83d1  chinese-pilot.json\n",
+  "stderr": ""
+}

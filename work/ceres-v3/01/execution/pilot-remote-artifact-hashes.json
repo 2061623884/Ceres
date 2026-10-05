@@ -1,0 +1,17 @@
+{
+  "command_argv": [
+    "ssh",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=12",
+    "amax",
+    "set -eu; cd /data/amax/services/ceres-kev4b-probe-20261005/01-pilot; sha256sum pilot-results.jsonl pilot.stdout.log pilot.stderr.log pilot.exit-code"
+  ],
+  "remote_command": "set -eu; cd /data/amax/services/ceres-kev4b-probe-20261005/01-pilot; sha256sum pilot-results.jsonl pilot.stdout.log pilot.stderr.log pilot.exit-code",
+  "started_utc": "2026-10-05T17:39:34.935424+00:00",
+  "duration_seconds": 3.314,
+  "exit_code": 0,
+  "stdout": "b9fb94b4da989c9c95c25c018f84246d05638585d76e7fc765c40138acaf204e  pilot-results.jsonl\n50b15963e272cda5bebec3fdf68586c14264a3274e86848d8ea0ed347f2ba326  pilot.stdout.log\ne3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  pilot.stderr.log\n9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa  pilot.exit-code\n",
+  "stderr": ""
+}

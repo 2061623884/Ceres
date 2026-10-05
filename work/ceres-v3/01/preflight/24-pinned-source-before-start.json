@@ -1,0 +1,27 @@
+{
+  "name": "pinned-source-before-start",
+  "command_argv": [
+    "ssh",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=12",
+    "amax",
+    "set -eu; git -C /data/amax/services/ceres-kev4b-probe-20261005/upstream rev-parse HEAD; git -C /data/amax/services/ceres-kev4b-probe-20261005/upstream status --short"
+  ],
+  "command_remote": "set -eu; git -C /data/amax/services/ceres-kev4b-probe-20261005/upstream rev-parse HEAD; git -C /data/amax/services/ceres-kev4b-probe-20261005/upstream status --short",
+  "controller_context": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python_executable": "C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "python_version": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+    "shell": "PowerShell",
+    "working_directory": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres",
+    "ssh_target_alias": "amax",
+    "captured_environment_values": "No process environment dump; no key or token variables queried."
+  },
+  "started_utc": "2026-10-05T17:29:52.232116+00:00",
+  "duration_seconds": 2.638,
+  "exit_code": 0,
+  "stdout": "fe64b1274ea7f80d4095866df90666abb03e9cf6\n",
+  "stderr": ""
+}

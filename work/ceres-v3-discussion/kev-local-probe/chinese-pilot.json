@@ -1,0 +1,10 @@
+[
+  {"id":"guide-shopping","state":{"current_role":"可可导购","selected_object":null,"recent_dialogue":[],"utterance":"我想买两瓶无糖可乐"},"expected":"stay_current"},
+  {"id":"guide-order-logistics","state":{"current_role":"可可导购","selected_object":"演示订单 DEMO-V3-01","recent_dialogue":[],"utterance":"我这单到哪了？"},"expected":"suggest_switch"},
+  {"id":"guide-general-return-policy","state":{"current_role":"可可导购","selected_object":"正在选购的可乐，尚未下单","recent_dialogue":["用户正在比较两种可乐"],"utterance":"这个可乐不喜欢能退吗？"},"expected":"stay_current"},
+  {"id":"momo-order-return-eligibility","state":{"current_role":"墨墨售后","selected_object":"演示订单 DEMO-V3-01","recent_dialogue":[],"utterance":"这单还能退吗？"},"expected":"stay_current"},
+  {"id":"momo-new-shopping","state":{"current_role":"墨墨售后","selected_object":"演示订单 DEMO-V3-01","recent_dialogue":["刚查询过订单状态"],"utterance":"现在帮我挑两瓶无糖可乐"},"expected":"suggest_switch"},
+  {"id":"cancel-without-object","state":{"current_role":"可可导购","selected_object":null,"recent_dialogue":[],"utterance":"取消一下"},"expected":"clarify"},
+  {"id":"cancel-shopping-list","state":{"current_role":"可可导购","selected_object":"采购清单中的可乐项，尚未加购","recent_dialogue":["用户：清单里的可乐不要了","可可：你要把这项从采购清单移除吗？"],"utterance":"取消一下"},"expected":"stay_current"},
+  {"id":"cancel-placed-order","state":{"current_role":"可可导购","selected_object":"已经下单的演示订单 DEMO-V3-01","recent_dialogue":["用户：我不需要这个已下单的订单了"],"utterance":"取消一下"},"expected":"suggest_switch"}
+]

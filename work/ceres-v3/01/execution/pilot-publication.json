@@ -1,0 +1,18 @@
+{
+  "status": "verified",
+  "remote_directory": "/data/amax/services/ceres-kev4b-probe-20261005/01-pilot",
+  "local_expected_sha256": {
+    "run-pilot.py": "2d139172857225245c6dfc7f7795927d78e90b90ed768753ef42ffa438fbaf17",
+    "chinese-pilot.json": "0a92aa350431b752fd6fb4d37ce5b659ff4e6140a52a3077f1d98bfc28dd83d1"
+  },
+  "remote_sha256": {
+    "run-pilot.py": "2d139172857225245c6dfc7f7795927d78e90b90ed768753ef42ffa438fbaf17",
+    "chinese-pilot.json": "0a92aa350431b752fd6fb4d37ce5b659ff4e6140a52a3077f1d98bfc28dd83d1"
+  },
+  "command_records": [
+    "pilot-publication-command-01.json",
+    "pilot-publication-command-02.json",
+    "pilot-publication-command-03.json"
+  ],
+  "sensitive_environment_dumped": false
+}

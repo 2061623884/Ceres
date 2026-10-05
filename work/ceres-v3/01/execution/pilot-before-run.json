@@ -1,0 +1,25 @@
+{
+  "event": "pilot_run_state_before_single_execution",
+  "command_argv": [
+    "ssh",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=12",
+    "amax",
+    "set -eu; d=/data/amax/services/ceres-kev4b-probe-20261005/01-pilot; printf 'directory='; readlink -f \"$d\"; for f in pilot.pid pilot.exit-code pilot.stdout.log pilot.stderr.log pilot-results.jsonl; do if test -e \"$d/$f\"; then printf 'present=%s\\n' \"$f\"; else printf 'absent=%s\\n' \"$f\"; fi; done"
+  ],
+  "remote_command": "set -eu; d=/data/amax/services/ceres-kev4b-probe-20261005/01-pilot; printf 'directory='; readlink -f \"$d\"; for f in pilot.pid pilot.exit-code pilot.stdout.log pilot.stderr.log pilot-results.jsonl; do if test -e \"$d/$f\"; then printf 'present=%s\\n' \"$f\"; else printf 'absent=%s\\n' \"$f\"; fi; done",
+  "controller_context": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python_executable": "C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "python_version": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+    "shell": "PowerShell",
+    "working_directory": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres"
+  },
+  "started_utc": "2026-10-05T17:38:09.848374+00:00",
+  "duration_seconds": 2.542,
+  "exit_code": 0,
+  "stdout": "directory=/data/amax/services/ceres-kev4b-probe-20261005/01-pilot\nabsent=pilot.pid\nabsent=pilot.exit-code\nabsent=pilot.stdout.log\nabsent=pilot.stderr.log\nabsent=pilot-results.jsonl\n",
+  "stderr": ""
+}

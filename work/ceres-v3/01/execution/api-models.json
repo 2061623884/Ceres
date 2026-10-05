@@ -1,0 +1,26 @@
+{
+  "event": "first_successful_readonly_models_api",
+  "command_argv": [
+    "ssh",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=12",
+    "amax",
+    "curl --fail --silent --show-error --include --max-time 30 http://127.0.0.1:8009/v1/models"
+  ],
+  "remote_command": "curl --fail --silent --show-error --include --max-time 30 http://127.0.0.1:8009/v1/models",
+  "controller_context": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python_executable": "C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "python_version": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+    "shell": "PowerShell",
+    "working_directory": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres",
+    "ssh_target_alias": "amax"
+  },
+  "started_utc": "2026-10-05T17:35:39.953170+00:00",
+  "duration_seconds": 2.641,
+  "exit_code": 0,
+  "stdout": "HTTP/1.1 200 OK\ndate: Mon, 05 Oct 2026 17:35:42 GMT\nserver: uvicorn\ncontent-length: 1256\ncontent-type: application/json\nx-typesafe-request-id: 3ab18f89fadb40d880bf22b5c29077ef\nserver-timing: app;dur=3.5\n\n{\"models\":[{\"name\":\"kev-latest\",\"description\":\"Kev pointer head on Qwen/Qwen3.5-4B-Base, serving jaredpalmer/kev-4b@139fdd94f1b6a6ad80cc15e08fcb99cac885a101 at temperature 2.41\",\"release_date\":\"2026-10-05\",\"run\":\"jaredpalmer/kev-4b@139fdd94f1b6a6ad80cc15e08fcb99cac885a101\",\"base\":\"Qwen/Qwen3.5-4B-Base\",\"lora\":16,\"device\":\"cuda\",\"backend\":\"torch\",\"dtype\":\"float32\",\"temperature\":2.406050072164233,\"max_state_tokens\":65536,\"truncate_states\":false,\"cuda_graphs\":null,\"prefix_cache\":{\"size\":0,\"min_state_tokens\":0,\"max_tokens\":65536,\"hits\":0,\"misses\":0,\"cached_states\":0,\"oom_retries\":0},\"batches\":{\"count\":0,\"requests\":0,\"queued\":0}},{\"name\":\"jev-latest\",\"description\":\"Kev pointer head on Qwen/Qwen3.5-4B-Base, serving jaredpalmer/kev-4b@139fdd94f1b6a6ad80cc15e08fcb99cac885a101 at temperature 2.41\",\"release_date\":\"2026-10-05\",\"run\":\"jaredpalmer/kev-4b@139fdd94f1b6a6ad80cc15e08fcb99cac885a101\",\"base\":\"Qwen/Qwen3.5-4B-Base\",\"lora\":16,\"device\":\"cuda\",\"backend\":\"torch\",\"dtype\":\"float32\",\"temperature\":2.406050072164233,\"max_state_tokens\":65536,\"truncate_states\":false,\"cuda_graphs\":null,\"prefix_cache\":{\"size\":0,\"min_state_tokens\":0,\"max_tokens\":65536,\"hits\":0,\"misses\":0,\"cached_states\":0,\"oom_retries\":0},\"batches\":{\"count\":0,\"requests\":0,\"queued\":0}}]}",
+  "stderr": ""
+}

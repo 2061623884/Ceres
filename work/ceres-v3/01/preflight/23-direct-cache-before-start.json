@@ -1,0 +1,27 @@
+{
+  "name": "direct-cache-before-start",
+  "command_argv": [
+    "ssh",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=12",
+    "amax",
+    "set -eu; printf 'checkpoint_revision='; test -d /data/amax/services/ceres-kev4b-probe-20261005/amax-direct-download/hub/models--jaredpalmer--kev-4b/snapshots/139fdd94f1b6a6ad80cc15e08fcb99cac885a101 && echo present || echo absent; printf 'base_revision='; test -d /data/amax/services/ceres-kev4b-probe-20261005/amax-direct-download/hub/models--Qwen--Qwen3.5-4B-Base/snapshots/1001bb4d826a52d1f399e183466143f4da7b741b && echo present || echo absent; printf 'unfinished_files='; find /data/amax/services/ceres-kev4b-probe-20261005/amax-direct-download/hub -type f -name '*.incomplete' | wc -l"
+  ],
+  "command_remote": "set -eu; printf 'checkpoint_revision='; test -d /data/amax/services/ceres-kev4b-probe-20261005/amax-direct-download/hub/models--jaredpalmer--kev-4b/snapshots/139fdd94f1b6a6ad80cc15e08fcb99cac885a101 && echo present || echo absent; printf 'base_revision='; test -d /data/amax/services/ceres-kev4b-probe-20261005/amax-direct-download/hub/models--Qwen--Qwen3.5-4B-Base/snapshots/1001bb4d826a52d1f399e183466143f4da7b741b && echo present || echo absent; printf 'unfinished_files='; find /data/amax/services/ceres-kev4b-probe-20261005/amax-direct-download/hub -type f -name '*.incomplete' | wc -l",
+  "controller_context": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python_executable": "C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "python_version": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+    "shell": "PowerShell",
+    "working_directory": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres",
+    "ssh_target_alias": "amax",
+    "captured_environment_values": "No process environment dump; no key or token variables queried."
+  },
+  "started_utc": "2026-10-05T17:29:49.477577+00:00",
+  "duration_seconds": 2.754,
+  "exit_code": 0,
+  "stdout": "checkpoint_revision=present\nbase_revision=present\nunfinished_files=0\n",
+  "stderr": ""
+}

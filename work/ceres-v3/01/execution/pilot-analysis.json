@@ -1,0 +1,185 @@
+{
+  "case_count": 8,
+  "matches": 6,
+  "mismatches": [
+    "guide-general-return-policy",
+    "cancel-without-object"
+  ],
+  "wall_ms": {
+    "min": 235.6,
+    "median": 254.3,
+    "max": 773.0,
+    "p95_nearest_rank": 773.0
+  },
+  "cases": [
+    {
+      "id": "guide-shopping",
+      "expected": "stay_current",
+      "actual": "stay_current",
+      "matches_expected": true,
+      "wall_ms": 773.0,
+      "model_latency_ms": 683.5,
+      "input_tokens": 176,
+      "output_tokens": 65,
+      "confidence": 0.779,
+      "answer": {
+        "type": "choice",
+        "choice": "stay_current",
+        "confidence": 0.779,
+        "probabilities": {
+          "stay_current": 0.8527,
+          "suggest_switch": 0.0524,
+          "clarify": 0.095
+        }
+      }
+    },
+    {
+      "id": "guide-order-logistics",
+      "expected": "suggest_switch",
+      "actual": "suggest_switch",
+      "matches_expected": true,
+      "wall_ms": 252.2,
+      "model_latency_ms": 246.8,
+      "input_tokens": 184,
+      "output_tokens": 65,
+      "confidence": 0.847,
+      "answer": {
+        "type": "choice",
+        "choice": "suggest_switch",
+        "confidence": 0.847,
+        "probabilities": {
+          "stay_current": 0.0514,
+          "suggest_switch": 0.898,
+          "clarify": 0.0506
+        }
+      }
+    },
+    {
+      "id": "guide-general-return-policy",
+      "expected": "stay_current",
+      "actual": "suggest_switch",
+      "matches_expected": false,
+      "wall_ms": 258.5,
+      "model_latency_ms": 251.4,
+      "input_tokens": 193,
+      "output_tokens": 67,
+      "confidence": 0.1443,
+      "answer": {
+        "type": "choice",
+        "choice": "suggest_switch",
+        "confidence": 0.1443,
+        "probabilities": {
+          "stay_current": 0.3666,
+          "suggest_switch": 0.4295,
+          "clarify": 0.2039
+        }
+      }
+    },
+    {
+      "id": "momo-order-return-eligibility",
+      "expected": "stay_current",
+      "actual": "stay_current",
+      "matches_expected": true,
+      "wall_ms": 252.9,
+      "model_latency_ms": 246.8,
+      "input_tokens": 186,
+      "output_tokens": 66,
+      "confidence": 0.8958,
+      "answer": {
+        "type": "choice",
+        "choice": "stay_current",
+        "confidence": 0.8958,
+        "probabilities": {
+          "stay_current": 0.9305,
+          "suggest_switch": 0.0254,
+          "clarify": 0.044
+        }
+      }
+    },
+    {
+      "id": "momo-new-shopping",
+      "expected": "suggest_switch",
+      "actual": "suggest_switch",
+      "matches_expected": true,
+      "wall_ms": 255.4,
+      "model_latency_ms": 249.1,
+      "input_tokens": 197,
+      "output_tokens": 67,
+      "confidence": 0.2148,
+      "answer": {
+        "type": "choice",
+        "choice": "suggest_switch",
+        "confidence": 0.2148,
+        "probabilities": {
+          "stay_current": 0.2681,
+          "suggest_switch": 0.4766,
+          "clarify": 0.2553
+        }
+      }
+    },
+    {
+      "id": "cancel-without-object",
+      "expected": "clarify",
+      "actual": "suggest_switch",
+      "matches_expected": false,
+      "wall_ms": 235.6,
+      "model_latency_ms": 229.7,
+      "input_tokens": 171,
+      "output_tokens": 67,
+      "confidence": 0.1952,
+      "answer": {
+        "type": "choice",
+        "choice": "suggest_switch",
+        "confidence": 0.1952,
+        "probabilities": {
+          "stay_current": 0.2599,
+          "suggest_switch": 0.4634,
+          "clarify": 0.2766
+        }
+      }
+    },
+    {
+      "id": "cancel-shopping-list",
+      "expected": "stay_current",
+      "actual": "stay_current",
+      "matches_expected": true,
+      "wall_ms": 255.1,
+      "model_latency_ms": 248.5,
+      "input_tokens": 207,
+      "output_tokens": 67,
+      "confidence": 0.4257,
+      "answer": {
+        "type": "choice",
+        "choice": "stay_current",
+        "confidence": 0.4257,
+        "probabilities": {
+          "stay_current": 0.6171,
+          "suggest_switch": 0.1296,
+          "clarify": 0.2533
+        }
+      }
+    },
+    {
+      "id": "cancel-placed-order",
+      "expected": "suggest_switch",
+      "actual": "suggest_switch",
+      "matches_expected": true,
+      "wall_ms": 253.5,
+      "model_latency_ms": 246.8,
+      "input_tokens": 198,
+      "output_tokens": 66,
+      "confidence": 0.7237,
+      "answer": {
+        "type": "choice",
+        "choice": "suggest_switch",
+        "confidence": 0.7237,
+        "probabilities": {
+          "stay_current": 0.1012,
+          "suggest_switch": 0.8158,
+          "clarify": 0.083
+        }
+      }
+    }
+  ],
+  "interpretation": "Eight single-pass development examples only; too small to establish stable production P95."
+}

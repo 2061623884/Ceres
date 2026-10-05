@@ -1,0 +1,27 @@
+{
+  "name": "startup-script-safe-inspection",
+  "command_argv": [
+    "ssh",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=12",
+    "amax",
+    "set -eu; p=/data/amax/services/ceres-kev4b-probe-20261005/amax-start.sh; test -f \"$p\"; printf 'path='; readlink -f \"$p\"; printf 'sha256='; sha256sum \"$p\" | cut -d' ' -f1; bash -n \"$p\"; printf 'bash_syntax=ok\\n'; grep -nE '^[[:space:]]*(probe_root=|root=|cd |export (CUDA_VISIBLE_DEVICES|KEV_BACKEND|KEV_DTYPE|KEV_CUDA_GRAPHS|KEV_FUSED|KEV_PREFIX_CACHE|HF_HUB_CACHE|HF_HUB_OFFLINE)=)' \"$p\" || true; grep -Fq 'kev.serve' \"$p\" && echo service_command_present=yes || echo service_command_present=no; grep -Fq -- '--host 127.0.0.1' \"$p\" && echo host=127.0.0.1 || true; grep -Fq -- '--port 8009' \"$p\" && echo port=8009 || true; grep -Fq -- '--run jaredpalmer/kev-4b@139fdd94f1b6a6ad80cc15e08fcb99cac885a101' \"$p\" && echo pinned_checkpoint_ref=verified || echo pinned_checkpoint_ref=other; grep -Fq '.venv/bin/python' \"$p\" && echo interpreter=.venv/bin/python || echo interpreter=other"
+  ],
+  "command_remote": "set -eu; p=/data/amax/services/ceres-kev4b-probe-20261005/amax-start.sh; test -f \"$p\"; printf 'path='; readlink -f \"$p\"; printf 'sha256='; sha256sum \"$p\" | cut -d' ' -f1; bash -n \"$p\"; printf 'bash_syntax=ok\\n'; grep -nE '^[[:space:]]*(probe_root=|root=|cd |export (CUDA_VISIBLE_DEVICES|KEV_BACKEND|KEV_DTYPE|KEV_CUDA_GRAPHS|KEV_FUSED|KEV_PREFIX_CACHE|HF_HUB_CACHE|HF_HUB_OFFLINE)=)' \"$p\" || true; grep -Fq 'kev.serve' \"$p\" && echo service_command_present=yes || echo service_command_present=no; grep -Fq -- '--host 127.0.0.1' \"$p\" && echo host=127.0.0.1 || true; grep -Fq -- '--port 8009' \"$p\" && echo port=8009 || true; grep -Fq -- '--run jaredpalmer/kev-4b@139fdd94f1b6a6ad80cc15e08fcb99cac885a101' \"$p\" && echo pinned_checkpoint_ref=verified || echo pinned_checkpoint_ref=other; grep -Fq '.venv/bin/python' \"$p\" && echo interpreter=.venv/bin/python || echo interpreter=other",
+  "controller_context": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python_executable": "C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "python_version": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+    "shell": "PowerShell",
+    "working_directory": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres",
+    "ssh_target_alias": "amax",
+    "captured_environment_values": "No process environment dump; only non-secret runtime facts explicitly queried by the listed commands."
+  },
+  "started_utc": "2026-10-05T17:24:55.464920+00:00",
+  "duration_seconds": 2.507,
+  "exit_code": 0,
+  "stdout": "path=/data/amax/services/ceres-kev4b-probe-20261005/amax-start.sh\nsha256=403f6660b0b075c62e36c9234dd101da866a82ce4b29a1b5377065e081b69cb8\nbash_syntax=ok\n3:probe_root=/data/amax/services/ceres-kev4b-probe-20261005\n4:cd \"$probe_root/upstream\"\n5:export CUDA_VISIBLE_DEVICES=GPU-5165b827-1b01-e6f0-d147-38e565ee823f\n6:export KEV_BACKEND=torch\n7:export KEV_DTYPE=fp32\n8:export KEV_CUDA_GRAPHS=0\n9:export KEV_FUSED=0\n10:export KEV_PREFIX_CACHE=0\n11:export HF_HUB_CACHE=\"$probe_root/hub\"\n12:export HF_HUB_OFFLINE=1\nservice_command_present=yes\nhost=127.0.0.1\nport=8009\npinned_checkpoint_ref=verified\ninterpreter=.venv/bin/python\n",
+  "stderr": ""
+}

@@ -1,0 +1,15 @@
+{
+  "baseline_head": "a81a39d3a40f9f1bbb270961366cb5f6e930c664",
+  "implementation_files": {
+    "work/ceres-v3-discussion/kev-local-probe/amax-start.sh": "58e4c25051ef5d4dd4257285710cf8fceee1544013f73163ff56292635b22b58",
+    "work/ceres-v3-discussion/kev-local-probe/run-pilot.py": "2d139172857225245c6dfc7f7795927d78e90b90ed768753ef42ffa438fbaf17",
+    "work/ceres-v3-discussion/kev-local-probe/chinese-pilot.json": "0a92aa350431b752fd6fb4d37ce5b659ff4e6140a52a3077f1d98bfc28dd83d1"
+  },
+  "diff": "source.patch relative to pre-ticket working-source baseline; review complete adopted scripts too",
+  "spec": "tasks/ceres-v3-01-kev-service.md",
+  "evidence": [
+    "preflight",
+    "execution"
+  ],
+  "excluded": "all inherited V2 business changes and other ticket sources"
+}

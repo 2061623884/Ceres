@@ -1,0 +1,74 @@
+{
+  "status": "captured",
+  "capture_time_utc": "2026-10-05T17:25:03.583728+00:00",
+  "controller_context": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python_executable": "C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "python_version": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+    "shell": "PowerShell",
+    "working_directory": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres",
+    "ssh_target_alias": "amax",
+    "captured_environment_values": "No process environment dump; only non-secret runtime facts explicitly queried by the listed commands."
+  },
+  "gpu1_uuid_expected": "GPU-5165b827-1b01-e6f0-d147-38e565ee823f",
+  "service_root": "/data/amax/services/ceres-kev4b-probe-20261005",
+  "direct_cache": "/data/amax/services/ceres-kev4b-probe-20261005/amax-direct-download/hub",
+  "startup_script_expected_from_existing_probe": "/data/amax/services/ceres-kev4b-probe-20261005/amax-start.sh",
+  "commands": [
+    {
+      "name": "amax-connection-environment",
+      "exit_code": 0,
+      "evidence_file": "01-amax-connection-environment.json"
+    },
+    {
+      "name": "gpu1-physical-device",
+      "exit_code": 0,
+      "evidence_file": "02-gpu1-physical-device.json"
+    },
+    {
+      "name": "gpu1-compute-processes",
+      "exit_code": 0,
+      "evidence_file": "03-gpu1-compute-processes.json"
+    },
+    {
+      "name": "independent-python-runtime",
+      "exit_code": 0,
+      "evidence_file": "04-independent-python-runtime.json"
+    },
+    {
+      "name": "kev-source-revision-and-worktree",
+      "exit_code": 0,
+      "evidence_file": "05-kev-source-revision-and-worktree.json"
+    },
+    {
+      "name": "locked-dependency-tree",
+      "exit_code": 0,
+      "evidence_file": "06-locked-dependency-tree.json"
+    },
+    {
+      "name": "installed-runtime-package-versions",
+      "exit_code": 0,
+      "evidence_file": "07-installed-runtime-package-versions.json"
+    },
+    {
+      "name": "startup-script-discovery",
+      "exit_code": 0,
+      "evidence_file": "08-startup-script-discovery.json"
+    },
+    {
+      "name": "startup-script-safe-inspection",
+      "exit_code": 0,
+      "evidence_file": "09-startup-script-safe-inspection.json"
+    },
+    {
+      "name": "startup-cache-and-direct-cache-paths",
+      "exit_code": 0,
+      "evidence_file": "10-startup-cache-and-direct-cache-paths.json"
+    },
+    {
+      "name": "port-8009-listener",
+      "exit_code": 0,
+      "evidence_file": "11-port-8009-listener.json"
+    }
+  ]
+}

@@ -1,0 +1,202 @@
+{
+  "status": "completed_development_probe_not_acceptance",
+  "remote_service_root": "/data/amax/services/ceres-kev4b-probe-20261005",
+  "remote_pilot_root": "/data/amax/services/ceres-kev4b-probe-20261005/01-pilot",
+  "model_revision": "jaredpalmer/kev-4b@139fdd94f1b6a6ad80cc15e08fcb99cac885a101",
+  "base_revision": "Qwen/Qwen3.5-4B-Base@1001bb4d826a52d1f399e183466143f4da7b741b",
+  "source_revision": "fe64b1274ea7f80d4095866df90666abb03e9cf6",
+  "runtime": {
+    "gpu_index": 1,
+    "gpu_uuid": "GPU-5165b827-1b01-e6f0-d147-38e565ee823f",
+    "backend": "torch",
+    "device": "cuda",
+    "dtype": "float32",
+    "host": "127.0.0.1",
+    "port": 8009,
+    "server_pid": 2701504
+  },
+  "cold_readiness": {
+    "launch_started_utc": "2026-10-05T17:33:55.542549+00:00",
+    "first_successful_models_get_started_utc": "2026-10-05T17:35:39.953170+00:00",
+    "launch_to_first_successful_models_get_seconds": 104.411,
+    "first_get_ssh_wall_seconds": 2.641,
+    "first_get_server_timing": "server-timing: app;dur=3.5",
+    "interpretation": "Startup command to first successful GET /v1/models; readiness proxy measured with controller UTC timestamps. Cold first inference is separately observed in the first pilot request."
+  },
+  "models_api": {
+    "exit_code": 0,
+    "http_status": "HTTP/1.1 200 OK",
+    "cards": [
+      {
+        "name": "kev-latest",
+        "run": "jaredpalmer/kev-4b@139fdd94f1b6a6ad80cc15e08fcb99cac885a101",
+        "base": "Qwen/Qwen3.5-4B-Base",
+        "device": "cuda",
+        "backend": "torch",
+        "dtype": "float32"
+      },
+      {
+        "name": "jev-latest",
+        "run": "jaredpalmer/kev-4b@139fdd94f1b6a6ad80cc15e08fcb99cac885a101",
+        "base": "Qwen/Qwen3.5-4B-Base",
+        "device": "cuda",
+        "backend": "torch",
+        "dtype": "float32"
+      }
+    ]
+  },
+  "pilot": {
+    "launch_started_utc": "2026-10-05T17:38:35.356546+00:00",
+    "remote_exit_code": "0",
+    "case_count": 8,
+    "matches": 6,
+    "mismatch_count": 2,
+    "wall_ms": {
+      "min": 235.6,
+      "median": 254.3,
+      "max": 773.0,
+      "sample_p95_nearest_rank": 773.0
+    },
+    "model_latency_ms": {
+      "min": 229.7,
+      "median": 247.65,
+      "max": 683.5
+    },
+    "cases": [
+      {
+        "id": "guide-shopping",
+        "expected": "stay_current",
+        "actual": "stay_current",
+        "matches": true,
+        "wall_ms": 773.0,
+        "model_latency_ms": 683.5,
+        "probabilities": {
+          "stay_current": 0.8527,
+          "suggest_switch": 0.0524,
+          "clarify": 0.095
+        }
+      },
+      {
+        "id": "guide-order-logistics",
+        "expected": "suggest_switch",
+        "actual": "suggest_switch",
+        "matches": true,
+        "wall_ms": 252.2,
+        "model_latency_ms": 246.8,
+        "probabilities": {
+          "stay_current": 0.0514,
+          "suggest_switch": 0.898,
+          "clarify": 0.0506
+        }
+      },
+      {
+        "id": "guide-general-return-policy",
+        "expected": "stay_current",
+        "actual": "suggest_switch",
+        "matches": false,
+        "wall_ms": 258.5,
+        "model_latency_ms": 251.4,
+        "probabilities": {
+          "stay_current": 0.3666,
+          "suggest_switch": 0.4295,
+          "clarify": 0.2039
+        }
+      },
+      {
+        "id": "momo-order-return-eligibility",
+        "expected": "stay_current",
+        "actual": "stay_current",
+        "matches": true,
+        "wall_ms": 252.9,
+        "model_latency_ms": 246.8,
+        "probabilities": {
+          "stay_current": 0.9305,
+          "suggest_switch": 0.0254,
+          "clarify": 0.044
+        }
+      },
+      {
+        "id": "momo-new-shopping",
+        "expected": "suggest_switch",
+        "actual": "suggest_switch",
+        "matches": true,
+        "wall_ms": 255.4,
+        "model_latency_ms": 249.1,
+        "probabilities": {
+          "stay_current": 0.2681,
+          "suggest_switch": 0.4766,
+          "clarify": 0.2553
+        }
+      },
+      {
+        "id": "cancel-without-object",
+        "expected": "clarify",
+        "actual": "suggest_switch",
+        "matches": false,
+        "wall_ms": 235.6,
+        "model_latency_ms": 229.7,
+        "probabilities": {
+          "stay_current": 0.2599,
+          "suggest_switch": 0.4634,
+          "clarify": 0.2766
+        }
+      },
+      {
+        "id": "cancel-shopping-list",
+        "expected": "stay_current",
+        "actual": "stay_current",
+        "matches": true,
+        "wall_ms": 255.1,
+        "model_latency_ms": 248.5,
+        "probabilities": {
+          "stay_current": 0.6171,
+          "suggest_switch": 0.1296,
+          "clarify": 0.2533
+        }
+      },
+      {
+        "id": "cancel-placed-order",
+        "expected": "suggest_switch",
+        "actual": "suggest_switch",
+        "matches": true,
+        "wall_ms": 253.5,
+        "model_latency_ms": 246.8,
+        "probabilities": {
+          "stay_current": 0.1012,
+          "suggest_switch": 0.8158,
+          "clarify": 0.083
+        }
+      }
+    ],
+    "interpretation": "Eight sequential development examples; not enough samples to establish production P95."
+  },
+  "gpu1_snapshots": {
+    "during_weight_loading": "1, GPU-5165b827-1b01-e6f0-d147-38e565ee823f, 12030 MiB, 11994 MiB, 15 %; compute process 2701504 at 12002 MiB",
+    "after_ready": "1, GPU-5165b827-1b01-e6f0-d147-38e565ee823f, 17004 MiB, 7020 MiB, 0 %",
+    "after_pilot": "1, GPU-5165b827-1b01-e6f0-d147-38e565ee823f, 17012 MiB, 7012 MiB, 0 %"
+  },
+  "integrity": {
+    "pilot_runner_and_cases_remote_sha256_match": true,
+    "fetched_raw_artifacts_sha256_match": true,
+    "pilot_runner_exit_code": 0,
+    "pilot_stdout_saved": "pilot.stdout.log",
+    "pilot_stderr_saved": "pilot.stderr.log",
+    "raw_request_response_jsonl": "pilot-results.jsonl"
+  },
+  "evidence_files": [
+    "launch.json",
+    "status-01.json",
+    "status-02.json",
+    "api-models.json",
+    "pilot-publication.json",
+    "pilot-launch.json",
+    "pilot-status-01.json",
+    "pilot-results.jsonl",
+    "pilot.stdout.log",
+    "pilot.stderr.log",
+    "pilot.exit-code",
+    "pilot-fetch-verification.json",
+    "pilot-analysis.json"
+  ],
+  "sensitive_environment_dumped": false
+}

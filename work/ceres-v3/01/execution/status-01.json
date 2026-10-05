@@ -1,0 +1,25 @@
+{
+  "event": "server_status_observation",
+  "command_argv": [
+    "ssh",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=12",
+    "amax",
+    "set -u; root=/data/amax/services/ceres-kev4b-probe-20261005; p=$(cat \"$root/server.pid\" 2>/dev/null || true); printf 'pid=%s\\n' \"$p\"; if test -n \"$p\" && kill -0 \"$p\" 2>/dev/null; then ps -p \"$p\" -o pid=,stat=,etime=,args=; else printf 'process=not_alive\\n'; fi; printf 'listener\\n'; ss -ltnp | grep -E '(:|\\])8009[[:space:]]' || true; printf 'gpu1\\n'; nvidia-smi --id=GPU-5165b827-1b01-e6f0-d147-38e565ee823f --query-gpu=index,uuid,memory.used,memory.free,utilization.gpu --format=csv,noheader; nvidia-smi --id=GPU-5165b827-1b01-e6f0-d147-38e565ee823f --query-compute-apps=pid,process_name,used_gpu_memory --format=csv,noheader; printf 'log_tail\\n'; tail -n 30 \"$root/server.log\""
+  ],
+  "remote_command": "set -u; root=/data/amax/services/ceres-kev4b-probe-20261005; p=$(cat \"$root/server.pid\" 2>/dev/null || true); printf 'pid=%s\\n' \"$p\"; if test -n \"$p\" && kill -0 \"$p\" 2>/dev/null; then ps -p \"$p\" -o pid=,stat=,etime=,args=; else printf 'process=not_alive\\n'; fi; printf 'listener\\n'; ss -ltnp | grep -E '(:|\\])8009[[:space:]]' || true; printf 'gpu1\\n'; nvidia-smi --id=GPU-5165b827-1b01-e6f0-d147-38e565ee823f --query-gpu=index,uuid,memory.used,memory.free,utilization.gpu --format=csv,noheader; nvidia-smi --id=GPU-5165b827-1b01-e6f0-d147-38e565ee823f --query-compute-apps=pid,process_name,used_gpu_memory --format=csv,noheader; printf 'log_tail\\n'; tail -n 30 \"$root/server.log\"",
+  "controller_context": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python_executable": "C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "python_version": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+    "shell": "PowerShell",
+    "working_directory": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres"
+  },
+  "started_utc": "2026-10-05T17:34:37.292518+00:00",
+  "duration_seconds": 2.701,
+  "exit_code": 0,
+  "stdout": "pid=2701504\n2701504 Rl         00:42 .venv/bin/python -u -m kev.serve --run jaredpalmer/kev-4b@139fdd94f1b6a6ad80cc15e08fcb99cac885a101 --host 127.0.0.1 --port 8009\nlistener\ngpu1\n1, GPU-5165b827-1b01-e6f0-d147-38e565ee823f, 12030 MiB, 11994 MiB, 15 %\n2701504, .venv/bin/python, 12002 MiB\nlog_tail\n\nFetching 13 files:   0%|          | 0/13 [00:00<?, ?it/s]\nFetching 13 files: 100%|██████████| 13/13 [00:00<00:00, 779.63it/s]\n\nLoading weights:   0%|          | 0/426 [00:00<?, ?it/s]\nLoading weights:   0%|          | 1/426 [00:02<17:05,  2.41s/it]\nLoading weights:  37%|███▋      | 157/426 [00:02<00:03, 81.06it/s]\nLoading weights:  46%|████▌     | 195/426 [00:04<00:05, 42.46it/s]\nLoading weights:  51%|█████     | 217/426 [00:05<00:04, 45.30it/s]\nLoading weights:  55%|█████▍    | 233/426 [00:06<00:05, 35.65it/s]\nLoading weights:  58%|█████▊    | 248/426 [00:07<00:06, 27.33it/s]\nLoading weights:  62%|██████▏   | 262/426 [00:07<00:05, 31.45it/s]\nLoading weights:  63%|██████▎   | 270/426 [00:08<00:05, 26.26it/s]\nLoading weights:  65%|██████▍   | 276/426 [00:09<00:09, 15.43it/s]\nLoading weights:  67%|██████▋   | 287/426 [00:09<00:07, 18.04it/s]\nLoading weights:  69%|██████▊   | 292/426 [00:10<00:09, 14.89it/s]\nLoading weights:  71%|███████   | 301/426 [00:10<00:06, 18.69it/s]\nLoading weights:  74%|███████▍  | 316/426 [00:12<00:08, 12.84it/s]\nLoading weights:  75%|███████▌  | 320/426 [00:12<00:07, 13.88it/s]\nLoading weights:  77%|███████▋  | 326/426 [00:13<00:07, 12.63it/s]\nLoading weights:  77%|███████▋  | 329/426 [00:13<00:07, 13.30it/s]\nLoading weights:  81%|████████  | 343/426 [00:14<00:06, 13.04it/s]\nLoading weights:  83%|████████▎ | 354/426 [00:15<00:04, 14.88it/s]\nLoading weights:  87%|████████▋ | 369/426 [00:16<00:03, 14.37it/s]\nLoading weights:  90%|████████▉ | 382/426 [00:16<00:03, 14.61it/s]\nLoading weights:  92%|█████████▏| 393/426 [00:18<00:02, 12.87it/s]\nLoading weights:  99%|█████████▉| 422/426 [00:18<00:00, 22.73it/s]\nLoading weights: 100%|██████████| 426/426 [00:18<00:00, 23.10it/s]\n",
+  "stderr": ""
+}

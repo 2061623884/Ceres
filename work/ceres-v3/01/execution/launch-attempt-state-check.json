@@ -1,0 +1,25 @@
+{
+  "event": "check_launch_attempt_state",
+  "command_argv": [
+    "ssh",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=12",
+    "amax",
+    "set -eu; p=/data/amax/services/ceres-kev4b-probe-20261005/server.pid; if test -f \"$p\"; then printf 'pidfile='; cat \"$p\"; else printf 'pidfile=absent\\n'; fi; ss -ltnp | grep -E '(:|\\])8009[[:space:]]' || true"
+  ],
+  "remote_command": "set -eu; p=/data/amax/services/ceres-kev4b-probe-20261005/server.pid; if test -f \"$p\"; then printf 'pidfile='; cat \"$p\"; else printf 'pidfile=absent\\n'; fi; ss -ltnp | grep -E '(:|\\])8009[[:space:]]' || true",
+  "controller_context": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python_executable": "C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "python_version": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+    "shell": "PowerShell",
+    "working_directory": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres"
+  },
+  "started_utc": "2026-10-05T17:33:32.978327+00:00",
+  "duration_seconds": 2.534,
+  "exit_code": 0,
+  "stdout": "pidfile=absent\n",
+  "stderr": ""
+}

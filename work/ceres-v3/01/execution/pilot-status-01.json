@@ -1,0 +1,26 @@
+{
+  "event": "pilot_execution_status_observation",
+  "command_argv": [
+    "ssh",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=12",
+    "amax",
+    "set -u; d=/data/amax/services/ceres-kev4b-probe-20261005/01-pilot; pid=$(cat \"$d/pilot.pid\"); printf 'pid=%s\\n' \"$pid\"; if test -f \"$d/pilot.exit-code\"; then printf 'exit_code='; cat \"$d/pilot.exit-code\"; else printf 'exit_code=running\\n'; fi; if kill -0 \"$pid\" 2>/dev/null; then ps -p \"$pid\" -o pid=,stat=,etime=,args=; else printf 'pilot_process=not_alive\\n'; fi; if test -f \"$d/pilot-results.jsonl\"; then printf 'result_lines='; wc -l < \"$d/pilot-results.jsonl\"; else printf 'result_lines=0\\n'; fi; printf 'stdout_progress\\n'; cat \"$d/pilot.stdout.log\" 2>/dev/null || true; printf 'stderr_tail\\n'; tail -n 20 \"$d/pilot.stderr.log\" 2>/dev/null || true; printf 'gpu1\\n'; nvidia-smi --id=GPU-5165b827-1b01-e6f0-d147-38e565ee823f --query-gpu=index,uuid,memory.used,memory.free,utilization.gpu --format=csv,noheader; nvidia-smi --id=GPU-5165b827-1b01-e6f0-d147-38e565ee823f --query-compute-apps=pid,process_name,used_gpu_memory --format=csv,noheader"
+  ],
+  "remote_command": "set -u; d=/data/amax/services/ceres-kev4b-probe-20261005/01-pilot; pid=$(cat \"$d/pilot.pid\"); printf 'pid=%s\\n' \"$pid\"; if test -f \"$d/pilot.exit-code\"; then printf 'exit_code='; cat \"$d/pilot.exit-code\"; else printf 'exit_code=running\\n'; fi; if kill -0 \"$pid\" 2>/dev/null; then ps -p \"$pid\" -o pid=,stat=,etime=,args=; else printf 'pilot_process=not_alive\\n'; fi; if test -f \"$d/pilot-results.jsonl\"; then printf 'result_lines='; wc -l < \"$d/pilot-results.jsonl\"; else printf 'result_lines=0\\n'; fi; printf 'stdout_progress\\n'; cat \"$d/pilot.stdout.log\" 2>/dev/null || true; printf 'stderr_tail\\n'; tail -n 20 \"$d/pilot.stderr.log\" 2>/dev/null || true; printf 'gpu1\\n'; nvidia-smi --id=GPU-5165b827-1b01-e6f0-d147-38e565ee823f --query-gpu=index,uuid,memory.used,memory.free,utilization.gpu --format=csv,noheader; nvidia-smi --id=GPU-5165b827-1b01-e6f0-d147-38e565ee823f --query-compute-apps=pid,process_name,used_gpu_memory --format=csv,noheader",
+  "controller_context": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python_executable": "C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "python_version": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+    "shell": "PowerShell",
+    "working_directory": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres",
+    "ssh_target_alias": "amax"
+  },
+  "started_utc": "2026-10-05T17:38:57.602550+00:00",
+  "duration_seconds": 2.655,
+  "exit_code": 0,
+  "stdout": "pid=2705220\nexit_code=0\npilot_process=not_alive\nresult_lines=8\nstdout_progress\n{\"id\": \"guide-shopping\", \"expected\": \"stay_current\", \"matches_expected\": true, \"wall_ms\": 773.0}\n{\"id\": \"guide-order-logistics\", \"expected\": \"suggest_switch\", \"matches_expected\": true, \"wall_ms\": 252.2}\n{\"id\": \"guide-general-return-policy\", \"expected\": \"stay_current\", \"matches_expected\": false, \"wall_ms\": 258.5}\n{\"id\": \"momo-order-return-eligibility\", \"expected\": \"stay_current\", \"matches_expected\": true, \"wall_ms\": 252.9}\n{\"id\": \"momo-new-shopping\", \"expected\": \"suggest_switch\", \"matches_expected\": true, \"wall_ms\": 255.4}\n{\"id\": \"cancel-without-object\", \"expected\": \"clarify\", \"matches_expected\": false, \"wall_ms\": 235.6}\n{\"id\": \"cancel-shopping-list\", \"expected\": \"stay_current\", \"matches_expected\": true, \"wall_ms\": 255.1}\n{\"id\": \"cancel-placed-order\", \"expected\": \"suggest_switch\", \"matches_expected\": true, \"wall_ms\": 253.5}\nstderr_tail\ngpu1\n1, GPU-5165b827-1b01-e6f0-d147-38e565ee823f, 17012 MiB, 7012 MiB, 0 %\n2701504, .venv/bin/python, 16944 MiB\n",
+  "stderr": ""
+}

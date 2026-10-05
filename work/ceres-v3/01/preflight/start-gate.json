@@ -1,0 +1,41 @@
+{
+  "status": "ready_to_start",
+  "capture_time_utc": "2026-10-05T17:29:57.631594+00:00",
+  "controller_context": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python_executable": "C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "python_version": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+    "shell": "PowerShell",
+    "working_directory": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres",
+    "ssh_target_alias": "amax",
+    "captured_environment_values": "No process environment dump; no key or token variables queried."
+  },
+  "gpu1_uuid_expected": "GPU-5165b827-1b01-e6f0-d147-38e565ee823f",
+  "local_start_script_sha256": "58e4c25051ef5d4dd4257285710cf8fceee1544013f73163ff56292635b22b58",
+  "checks": {
+    "gpu1-physical-device-before-start": {
+      "exit_code": 0,
+      "evidence_file": "20-gpu1-physical-device-before-start.json"
+    },
+    "gpu1-compute-processes-before-start": {
+      "exit_code": 0,
+      "evidence_file": "21-gpu1-compute-processes-before-start.json"
+    },
+    "port-8009-before-start": {
+      "exit_code": 0,
+      "evidence_file": "22-port-8009-before-start.json"
+    },
+    "direct-cache-before-start": {
+      "exit_code": 0,
+      "evidence_file": "23-direct-cache-before-start.json"
+    },
+    "pinned-source-before-start": {
+      "exit_code": 0,
+      "evidence_file": "24-pinned-source-before-start.json"
+    },
+    "published-script-before-start": {
+      "exit_code": 0,
+      "evidence_file": "25-published-script-before-start.json"
+    }
+  }
+}

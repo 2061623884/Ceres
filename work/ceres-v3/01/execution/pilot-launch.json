@@ -1,0 +1,29 @@
+{
+  "event": "single_authorized_eight_case_pilot_launch",
+  "command_argv": [
+    "ssh",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=12",
+    "amax",
+    "set -eu; cd /data/amax/services/ceres-kev4b-probe-20261005/01-pilot; nohup bash -c 'cd /data/amax/services/ceres-kev4b-probe-20261005/01-pilot; /data/amax/services/ceres-kev4b-probe-20261005/upstream/.venv/bin/python -u run-pilot.py > pilot.stdout.log 2> pilot.stderr.log; rc=$?; printf \"%s\\n\" \"$rc\" > pilot.exit-code; exit \"$rc\"' </dev/null >/dev/null 2>&1 & child=$!; printf '%s\\n' \"$child\" > pilot.pid; printf '%s\\n' \"$child\""
+  ],
+  "remote_command": "set -eu; cd /data/amax/services/ceres-kev4b-probe-20261005/01-pilot; nohup bash -c 'cd /data/amax/services/ceres-kev4b-probe-20261005/01-pilot; /data/amax/services/ceres-kev4b-probe-20261005/upstream/.venv/bin/python -u run-pilot.py > pilot.stdout.log 2> pilot.stderr.log; rc=$?; printf \"%s\\n\" \"$rc\" > pilot.exit-code; exit \"$rc\"' </dev/null >/dev/null 2>&1 & child=$!; printf '%s\\n' \"$child\" > pilot.pid; printf '%s\\n' \"$child\"",
+  "remote_directory": "/data/amax/services/ceres-kev4b-probe-20261005/01-pilot",
+  "controller_context": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python_executable": "C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "python_version": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+    "shell": "PowerShell",
+    "working_directory": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres",
+    "ssh_target_alias": "amax"
+  },
+  "client_environment": "No sensitive variables were read or printed; runner makes HTTP requests to loopback and needs no model/GPU environment.",
+  "started_utc": "2026-10-05T17:38:35.356546+00:00",
+  "duration_seconds": 2.404,
+  "exit_code": 0,
+  "stdout": "2705220\n",
+  "stderr": "",
+  "sensitive_environment_dumped": false
+}

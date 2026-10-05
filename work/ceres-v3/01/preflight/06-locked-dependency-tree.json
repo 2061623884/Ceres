@@ -1,0 +1,27 @@
+{
+  "name": "locked-dependency-tree",
+  "command_argv": [
+    "ssh",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=12",
+    "amax",
+    "set -eu; /home/amax/.local/bin/uv --version; /home/amax/.local/bin/uv tree --project /data/amax/services/ceres-kev4b-probe-20261005/upstream --locked --offline --depth 1"
+  ],
+  "command_remote": "set -eu; /home/amax/.local/bin/uv --version; /home/amax/.local/bin/uv tree --project /data/amax/services/ceres-kev4b-probe-20261005/upstream --locked --offline --depth 1",
+  "controller_context": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python_executable": "C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "python_version": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+    "shell": "PowerShell",
+    "working_directory": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres",
+    "ssh_target_alias": "amax",
+    "captured_environment_values": "No process environment dump; only non-secret runtime facts explicitly queried by the listed commands."
+  },
+  "started_utc": "2026-10-05T17:24:48.346450+00:00",
+  "duration_seconds": 2.353,
+  "exit_code": 0,
+  "stdout": "uv 0.10.11\nkev v0.1.0\n├── accelerate v1.15.0\n├── datasets v5.0.1\n├── numpy v2.5.3\n├── peft v0.21.0\n├── pydantic v2.13.5\n├── scikit-learn v1.9.1\n├── torch v2.8.0\n├── transformers v5.17.0\n├── fastapi v0.141.1 (extra: serve)\n├── typesafe-sdk v0.6.0 (extra: serve)\n├── uvicorn v0.53.0 (extra: serve)\n├── httpx v0.28.1 (group: dev)\n├── matplotlib v3.11.2 (group: dev)\n├── modal v1.5.5 (group: dev)\n└── pytest v9.1.1 (group: dev)\n",
+  "stderr": "Resolved 120 packages in 1ms\n"
+}

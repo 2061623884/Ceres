@@ -1,0 +1,27 @@
+{
+  "name": "gpu1-physical-device-before-start",
+  "command_argv": [
+    "ssh",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=12",
+    "amax",
+    "nvidia-smi --id=GPU-5165b827-1b01-e6f0-d147-38e565ee823f --query-gpu=index,uuid,name,memory.total,memory.used,memory.free,utilization.gpu --format=csv,noheader"
+  ],
+  "command_remote": "nvidia-smi --id=GPU-5165b827-1b01-e6f0-d147-38e565ee823f --query-gpu=index,uuid,name,memory.total,memory.used,memory.free,utilization.gpu --format=csv,noheader",
+  "controller_context": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python_executable": "C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "python_version": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+    "shell": "PowerShell",
+    "working_directory": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres",
+    "ssh_target_alias": "amax",
+    "captured_environment_values": "No process environment dump; no key or token variables queried."
+  },
+  "started_utc": "2026-10-05T17:29:41.955473+00:00",
+  "duration_seconds": 2.411,
+  "exit_code": 0,
+  "stdout": "1, GPU-5165b827-1b01-e6f0-d147-38e565ee823f, NVIDIA TITAN RTX, 24576 MiB, 66 MiB, 23958 MiB, 0 %\n",
+  "stderr": ""
+}

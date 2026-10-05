@@ -1,0 +1,37 @@
+{
+  "event": "pilot_destination_inspection",
+  "command_argv": [
+    "ssh",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=12",
+    "amax",
+    "set -eu; d=/data/amax/services/ceres-kev4b-probe-20261005/01-pilot; if test -e \"$d\"; then printf 'destination=present\\n'; find \"$d\" -maxdepth 1 -type f -printf '%f %s bytes\\n'; else printf 'destination=absent\\n'; fi"
+  ],
+  "remote_command": "set -eu; d=/data/amax/services/ceres-kev4b-probe-20261005/01-pilot; if test -e \"$d\"; then printf 'destination=present\\n'; find \"$d\" -maxdepth 1 -type f -printf '%f %s bytes\\n'; else printf 'destination=absent\\n'; fi",
+  "controller_context": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python_executable": "C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "python_version": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+    "shell": "PowerShell",
+    "working_directory": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres"
+  },
+  "local_artifacts": {
+    "run-pilot.py": {
+      "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3-discussion\\kev-local-probe\\run-pilot.py",
+      "size_bytes": 2314,
+      "sha256": "2d139172857225245c6dfc7f7795927d78e90b90ed768753ef42ffa438fbaf17"
+    },
+    "chinese-pilot.json": {
+      "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3-discussion\\kev-local-probe\\chinese-pilot.json",
+      "size_bytes": 1820,
+      "sha256": "0a92aa350431b752fd6fb4d37ce5b659ff4e6140a52a3077f1d98bfc28dd83d1"
+    }
+  },
+  "started_utc": "2026-10-05T17:37:00.921210+00:00",
+  "duration_seconds": 2.375,
+  "exit_code": 0,
+  "stdout": "destination=absent\n",
+  "stderr": ""
+}

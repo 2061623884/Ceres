@@ -1,0 +1,32 @@
+{
+  "status": "verified",
+  "remote_directory": "/data/amax/services/ceres-kev4b-probe-20261005/01-pilot",
+  "remote_sha256": {
+    "pilot-results.jsonl": "b9fb94b4da989c9c95c25c018f84246d05638585d76e7fc765c40138acaf204e",
+    "pilot.stdout.log": "50b15963e272cda5bebec3fdf68586c14264a3274e86848d8ea0ed347f2ba326",
+    "pilot.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "pilot.exit-code": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "local_sha256": {
+    "pilot-results.jsonl": "b9fb94b4da989c9c95c25c018f84246d05638585d76e7fc765c40138acaf204e",
+    "pilot.stdout.log": "50b15963e272cda5bebec3fdf68586c14264a3274e86848d8ea0ed347f2ba326",
+    "pilot.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "pilot.exit-code": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  "files": {
+    "pilot-results.jsonl": {
+      "size_bytes": 11168
+    },
+    "pilot.stdout.log": {
+      "size_bytes": 835
+    },
+    "pilot.stderr.log": {
+      "size_bytes": 0
+    },
+    "pilot.exit-code": {
+      "size_bytes": 2
+    }
+  },
+  "fetch_command_record": "pilot-fetch-command.json",
+  "remote_hash_command_record": "pilot-remote-artifact-hashes.json"
+}
