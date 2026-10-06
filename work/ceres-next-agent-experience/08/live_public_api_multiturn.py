@@ -82,7 +82,7 @@ class KevCapture(httpx.BaseTransport):
  def __init__(self,helper,timeout): self.forward=helper.CapturingTransport(timeout); self.calls=self.forward.calls
  def handle_request(self,request):
   body=json.loads(request.read()); response=self.forward.handle_request(request); row=self.calls[-1]
-  row["request"]={k:body[k] for k in ("model","questions","state") if k in body}
+  row["kev_request"]={k:body[k] for k in ("model","questions","state") if k in body}
   if response.status_code<400:
    data=response.json(); row["kev_response"]={k:data[k] for k in ("model","answers","usage") if k in data}
   return response
