@@ -46,6 +46,7 @@ from uuid import uuid4
 
 from app.agent.turn_primitives import TIMEOUT_CODE
 from app.agent.responses import build_response, plan_summary_message
+from app.agent.goal_router import REASON_MEAL_PREFERENCES
 from app.schemas.goal import TurnDecision
 from app.services.session_actions import available_actions_for_task
 
@@ -214,7 +215,22 @@ def build_graph_response(
     guard = guard or {}
     pending = list(staged.get("pending") or [])
     pending_payload = next(iter(pending), None)
-    effect = "replace" if plan else "keep"
+    effect = (
+        "clear"
+        if guard.get("allowed") and staged.get("plan_effect") == "clear"
+        else "replace" if plan else "keep"
+    )
+    codes = outcome_codes(guard, staged, action_results)
+    constrained_validation_failed = (
+        "VALIDATION_FAILED" in codes
+        and decision is not None
+        and decision.goal is not None
+        and bool(decision.goal.constraints.specification)
+    )
+    status_override = (
+        "degraded" if "NO_FEASIBLE_MEAL" in codes or constrained_validation_failed else
+        "clarifying" if decision and decision.reason_code == REASON_MEAL_PREFERENCES else None
+    )
 
     response = build_response(
         task_state,
@@ -223,9 +239,10 @@ def build_graph_response(
         plan_effect=effect,
         pending_clarification=pending_payload,
         decision=decision,
+        status_override=status_override,
     )
     status, answer_status = _turn_result_fields(
-        response, outcome_codes(guard, staged, action_results)
+        response, codes
     )
 
     receipts = [dict(result) for result in (action_results or [])]

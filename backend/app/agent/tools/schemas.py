@@ -33,6 +33,11 @@ PREPARE_PURCHASE_PLAN_INPUT_SCHEMA: dict[str, Any] = {
             "items": {"type": "string"},
             "default": [],
         },
+        "specification": {
+            "type": "object",
+            "properties": {"size": {"type": "string", "enum": ["small"]}},
+            "additionalProperties": False,
+        },
     },
     "required": [],
 }

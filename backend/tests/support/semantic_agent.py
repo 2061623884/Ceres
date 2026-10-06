@@ -70,11 +70,16 @@ class ScriptedSemanticProvider:
                 "说明上一轮的检索脚本没有被消费（多步脚本与实际模型调用数不一致）"
             )
         self.proposals.pop(0)
-        if isinstance(item, Continuation):
-            return item.build(request)
         if isinstance(item, Exception):
             raise item
-        result = item(request) if callable(item) else item
+        if isinstance(item, Continuation):
+            result = item.build(request)
+        else:
+            result = item(request) if callable(item) else item
+        if request.get("query_results"):
+            # Scripted replies with no displayed candidates still follow the
+            # answer-stage contract.
+            result = {"display_refs": [], **result}
         reply = result.get("reply") if isinstance(result, dict) else None
         if on_reply_delta is not None and isinstance(reply, str) and reply:
             on_reply_delta(reply, False, False)

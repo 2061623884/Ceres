@@ -116,8 +116,8 @@ class CatalogService:
             "baking": ("烘焙原料", "Baking"),
             "staple": ("粮油米面", "Staples"),
             "dairy": ("乳品", "Dairy"),
-            "snack": ("零食", "Snacks"),
             "beverage": ("饮料", "Beverages"),
+            "snack": ("零食", "Snacks"),
         }
         result = []
         for cat_id, count in sorted(counts.items()):

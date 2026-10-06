@@ -15,9 +15,10 @@ action and never fabricates a price, a stock level or a success.
 
 from __future__ import annotations
 
+from dataclasses import asdict, replace
 from typing import Any
 
-from app.agent.goal_router import PLAN_ACT_REPLIES
+from app.agent.goal_router import GATE_REPLIES
 from app.agent.graph.nodes.staging import base, plan_context
 from app.agent.graph.nodes.understand import (
     Halt,
@@ -32,7 +33,7 @@ from app.agent.graph.turn_commit import (
     committed_step_row,
     understanding_wrapper,
 )
-from app.agent.protocol import SemanticProtocolError
+from app.agent.protocol import SemanticProtocolError, parse_proposal
 from app.schemas.goal import TurnDecision
 
 def answer(state: GraphState, runtime: TurnRuntime) -> dict[str, Any]:
@@ -83,7 +84,7 @@ def _compose_message(
         kind=kind,
         # A plan act chat cannot carry out is answered in the server's words.
         model_reply=(
-            PLAN_ACT_REPLIES.get(str(decision.get("reason_code") or ""))
+            GATE_REPLIES.get(str(decision.get("reason_code") or ""))
             or str(state["turn"].get("answer_reply") or proposal.get("reply") or "")
             if kind == "answer" else ""
         ),
@@ -111,7 +112,7 @@ def _unsupported_note(state: GraphState) -> str:
 
 
 def _grounded_answer(state: GraphState, runtime: TurnRuntime) -> GraphState:
-    """One read-only model call that supplies answer text only.
+    """One read-only model call that supplies text and actual displayed refs.
 
     The original Decision remains authoritative.  In particular, mutations in
     a malformed/over-eager read-only response never become a new route.
@@ -137,7 +138,47 @@ def _grounded_answer(state: GraphState, runtime: TurnRuntime) -> GraphState:
                 ),
             ),
         )
-    return merge_state(state, update_partition(state, "turn", answer_reply=reply))
+    try:
+        if not isinstance(raw.get("display_refs"), list):
+            raise SemanticProtocolError("MALFORMED_PROPOSAL", "回答的 display_refs 必须是数组")
+        displayed = parse_proposal({"display_refs": raw["display_refs"]}).display_refs
+    except SemanticProtocolError as exc:
+        return merge_state(state, halt_update(state, "failed", understanding_error(exc)))
+
+    target = (state["turn"].get("proposal") or {}).get("target") or {}
+    if (
+        target.get("kind") == "category"
+        and target.get("intent") == "explore"
+        and len(displayed) == 1
+    ):
+        selected = runtime.candidates.resolve(displayed[0])
+        if selected is not None and selected.kind == "product":
+            product_matches = []
+            for result in query_results:
+                if (
+                    result.get("kind") == "lookup"
+                    and result.get("lookup_kind") == "product"
+                ):
+                    product_matches.extend(result.get("matches") or [])
+            match = next(
+                (row for row in product_matches if row.get("ref") == selected.ref),
+                None,
+            )
+            if (
+                match is not None
+                and match.get("stock_verified") is True
+                and not match.get("unknown_constraints")
+            ):
+                reply = f"主推「{match['name']}」；推荐理由：{match['evidence'][2]}"
+
+    comparisons = [row for row in query_results if row.get("kind") == "compare"]
+    if comparisons and not any(row["sellable_products"] for row in comparisons):
+        displayed = []
+    proposal = replace(state["turn"]["parsed_proposal"], display_refs=displayed)
+    return merge_state(
+        state,
+        update_partition(state, "turn", answer_reply=reply, parsed_proposal=proposal),
+    )
 
 
 def _dispatch(state: GraphState, runtime: TurnRuntime) -> dict[str, Any]:
@@ -157,13 +198,15 @@ def _dispatch(state: GraphState, runtime: TurnRuntime) -> dict[str, Any]:
 
 def answer_prepare(state: GraphState, runtime: TurnRuntime) -> dict[str, Any]:
     turn = state["turn"]
+    proposal = turn["parsed_proposal"]
+    if proposal.memory is not None:
+        return base(state, runtime, kind="memory", memory=asdict(proposal.memory), message="")
     result = base(
         state,
         runtime,
         kind="answer",
         message=str(turn.get("answer_reply") or (turn.get("proposal") or {}).get("reply") or ""),
     )
-    proposal = turn["parsed_proposal"]
     decision = TurnDecision.model_validate(turn["decision"]) if turn.get("decision") else None
     result = _attach_plan(result, state, runtime, proposal, decision)
     return result
@@ -247,10 +290,15 @@ def refuse_prepare(state: GraphState, runtime: TurnRuntime) -> dict[str, Any]:
                 "understanding": bool(error.get("understanding")),
             },
         )
-    message = "本轮没有执行修改。"
+    reason_code = str(decision.get("reason_code") or "")
+    message = (
+        GATE_REPLIES[reason_code]
+        if reason_code in ("TASK_NOT_WRITABLE", "TASK_CANCEL_IN_PROGRESS")
+        else "本轮没有执行修改。"
+    )
     return base(
         state, runtime, kind="refuse", message=message,
-        error={"code": decision.get("reason_code") or "TURN_REFUSED", "message": message},
+        error={"code": reason_code or "TURN_REFUSED", "message": message},
     )
 
 

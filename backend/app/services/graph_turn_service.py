@@ -168,6 +168,9 @@ class GraphTurnService:
         ]
         if budgets:
             base["budget_fen"] = min(budgets)
+        base["specification"] = {
+            **(base.get("specification") or {}), **(constraints.get("specification") or {}),
+        }
         return Requirements.from_dict(base)
 
     def process_turn(
@@ -180,6 +183,7 @@ class GraphTurnService:
         expected_state_version: int,
         expected_session_version: int | None = None,
         view_context: dict[str, Any] | None = None,
+        plan_selection: dict[str, Any] | None = None,
         handoff_recent_messages: list[dict[str, Any]] | None = None,
         progress: TurnProgressSink | None = None,
         should_stop: Any = None,
@@ -252,6 +256,7 @@ class GraphTurnService:
                 expected_state_version=expected_state_version,
                 expected_session_version=expected_session_version,
                 view_context=view_context,
+                plan_selection=plan_selection,
                 handoff_recent_messages=handoff_recent_messages,
                 trace_id=effective_trace,
                 model_mode=settings.llm_mode,

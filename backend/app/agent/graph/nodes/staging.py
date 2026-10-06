@@ -15,6 +15,7 @@ from typing import Any
 from app.agent import context as turn_context
 from app.agent.graph.runtime import TurnRuntime
 from app.agent.graph.state import GraphState, update_partition
+from app.agent.goal_router import REASON_TASK_CONTEXT_CLEAR
 from app.agent.protocol import SemanticProtocolError
 from app.agent.state import TaskState
 from app.agent.turn_context_plan import gate_pending, plan_context_writes
@@ -86,6 +87,31 @@ def plan_context(
     if session is None:
         return None
     context = turn_context.load_context(runtime.db, session) or {}
+    if decision is not None and decision.mutation_action == "cancel_task":
+        from app.agent.turn_context_plan import ContextPlan
+
+        clear_plan = ContextPlan(
+            decision=decision,
+            pending=[],
+            displayed=[],
+            clear_goal_candidate=True,
+            clear_displayed=True,
+            changed=bool(
+                context.get("pending_clarifications")
+                or context.get("displayed_candidates")
+                or context.get("goal_candidate")
+            ),
+            session_version_already_bumped=(
+                task_state is not None
+                and decision.reason_code != REASON_TASK_CONTEXT_CLEAR
+            ),
+            base_state_version=(
+                task_state.state_version if task_state is not None else 0
+            ),
+        )
+        data = dataclasses.asdict(clear_plan)
+        data.pop("decision", None)
+        return data
     try:
         new_pending = [
             turn_context.build_pending(u, runtime.candidates) for u in proposal.uncertainties
@@ -120,6 +146,8 @@ def plan_context(
             new_pending=new_pending,
             business_pending=list(business_pending or []),
         )
+        if decision is not None and decision.mutation_action == "confirm_plan":
+            plan.session_version_already_bumped = True
     except SemanticProtocolError as exc:
         return {
             "__error__": {

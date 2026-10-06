@@ -229,34 +229,75 @@ def run_case(client: TestClient, case: dict) -> dict:
         "entry_context",
         {"page": "home", "store_id": "store-demo-01", "delivery_zone_id": "zone-default"},
     )
-    sid = client.post("/api/v1/guide/sessions", json={"entry_context": ctx}).json()["session_id"]
+    session = client.post("/api/v1/guide/sessions", json={"entry_context": ctx}).json()
+    sid = session["session_id"]
+    session_version = session["session_version"]
     task_id = None
     version = 0
     last_data: dict | None = None
     turn_states: list[dict] = []
     result["turn_states"] = turn_states
+    result["turn_responses"] = []
     check_turn_cart = any(isinstance(a, dict) and a.get("type") == "turn_cart_unchanged" for a in case.get("expected_actions", []))
     for i, turn in enumerate(case.get("turns", [])):
-        resp = client.post(
-            f"/api/v1/guide/sessions/{sid}/turns",
+        data = None
+        with client.stream(
+            "POST",
+            f"/api/v1/guide/sessions/{sid}/turns/stream",
             json={
                 "request_id": str(uuid.uuid4()),
                 "message": turn["message"],
                 "expected_task_id": task_id,
                 "expected_state_version": version,
+                "expected_session_version": session_version,
             },
-        )
-        if resp.status_code != 200:
+        ) as resp:
+            if resp.status_code != 200:
+                result["passed"] = False
+                result["failures"].append(f"turn {i} status {resp.status_code}")
+                return result
+            for line in resp.iter_lines():
+                if not line.startswith("data:"):
+                    continue
+                event = json.loads(line.removeprefix("data:"))
+                if event["type"] == "turn.completed":
+                    data = event["payload"]
+                    break
+                if event["type"] == "error":
+                    error = event["payload"]
+                    result["passed"] = False
+                    result["failures"].append(
+                        f"turn {i} error {error['code']}: {error['message']}"
+                    )
+                    return result
+                if event["type"] == "turn.stopped":
+                    result["passed"] = False
+                    result["failures"].append(f"turn {i} stopped")
+                    return result
+        if data is None:
             result["passed"] = False
-            result["failures"].append(f"turn {i} status {resp.status_code}")
+            result["failures"].append(f"turn {i} stream ended without turn.completed")
             return result
-        data = resp.json()
+        # SSE carries a plan delta. Check the saved business state while keeping
+        # the original payload available for diagnosis (null + keep retains it).
+        result["turn_responses"].append(data)
+        saved_plan = client.get(f"/api/v1/guide/sessions/{sid}").json()["plan"]
+        if data["plan_effect"] != "clear":
+            data = {**data, "plan": saved_plan}
         if check_turn_cart:
             data["_cart"] = client.get("/api/v1/cart").json()
         last_data = data
         turn_states.append(data)
+        for action in data["action_results"]:
+            if action.get("code") == "MODEL_TIMEOUT":
+                result["passed"] = False
+                result["failures"].append(
+                    f"turn {i} error {action['code']}: {action['message']}"
+                )
+                return result
         task_id = data["task_id"]
         version = data["state_version"]
+        session_version = data["session_version"]
         if "expected_status" in turn and data["status"] != turn["expected_status"]:
             result["passed"] = False
             result["failures"].append(
@@ -281,6 +322,7 @@ def run_case(client: TestClient, case: dict) -> dict:
                     "plan_id": plan["plan_id"],
                     "plan_version": plan["plan_version"],
                     "expected_state_version": version,
+                    "expected_session_version": session_version,
                     "selected_items": items,
                 },
             )

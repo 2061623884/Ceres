@@ -155,12 +155,15 @@ class LocalUpstream:
 def build_settings(base_url: str, **overrides: Any):
     from app.core.config import Settings
 
+    # Settings exposes environment-style aliases (OPENAI_BASE_URL, ...).
+    # Construct with those aliases so this helper does not silently drop the
+    # endpoint when pydantic-settings is run without populate_by_name.
     values: dict[str, Any] = {
-        "llm_mode": "live",
-        "openai_base_url": base_url,
-        "openai_api_key": "test-key",
-        "llm_model": "test-model",
-        "llm_timeout": 10.0,
+        "LLM_MODE": "live",
+        "OPENAI_BASE_URL": base_url,
+        "OPENAI_API_KEY": "test-key",
+        "LLM_MODEL": "test-model",
+        "LLM_TIMEOUT": 10.0,
     }
     values.update(overrides)
     # ``_env_file=None`` keeps the test away from any real .env file.

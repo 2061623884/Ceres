@@ -19,7 +19,13 @@ from uuid import uuid4
 
 from app.agent import context as turn_context
 from app.agent.clarification_state import PendingClarification
-from app.agent.goal_router import SLOT_FOCUS, SLOT_MIXED, SLOT_QUESTIONS
+from app.agent.goal_router import (
+    SLOT_FOCUS,
+    SLOT_GOAL_RELATION,
+    SLOT_MIXED,
+    SLOT_QUESTIONS,
+    SLOT_SUPPLY_GAP_CHOICE,
+)
 from app.agent.protocol import CandidateSet
 from app.agent.state import TaskState
 
@@ -81,11 +87,46 @@ class ContextPlan:
     resolved: list[str] = field(default_factory=list)
     candidate_to_store: dict[str, Any] | None = None
     clear_goal_candidate: bool = False
+    clear_displayed: bool = False
     task_switched: bool = False
     changed: bool = False
+    session_version_already_bumped: bool = False
     answer_parts: list[str] = field(default_factory=list)
     clarification_results: list[dict[str, Any]] = field(default_factory=list)
     base_state_version: int = 0
+
+
+def _supply_gap_answer(
+    context: dict[str, Any], proposal: Any, decision: Any
+) -> tuple[bool, set[str]]:
+    """Bind an explicit partial-supply choice to its original target and question."""
+    previous = context.get("goal_candidate") or {}
+    candidate = getattr(decision, "candidate", None)
+    understanding = getattr(proposal, "understanding", None)
+    if (
+        not previous
+        or candidate is None
+        or understanding is None
+        or understanding.intent != "buy"
+        or understanding.new_goal is None
+        or not previous.get("target_id")
+        or candidate.target_id != previous.get("target_id")
+        or candidate.target_kind != previous.get("target_kind")
+    ):
+        return False, set()
+
+    pending = [
+        item
+        for item in context.get("pending_clarifications", [])
+        if item.get("slot") == SLOT_SUPPLY_GAP_CHOICE
+        and item.get("candidate_ref") == previous.get("ref")
+    ]
+    question_ids = {
+        item["question_id"]
+        for item in pending
+        if item.get("question_id") in proposal.resolved_questions
+    }
+    return bool(pending), question_ids
 
 
 def plan_context_writes(
@@ -111,6 +152,9 @@ def plan_context_writes(
     """
     displayed = turn_context.resolve_display_refs(proposal.display_refs, candidates)
     turn_context.check_resolved_questions(proposal.resolved_questions, context)
+    same_supply_target, supply_gap_answers = _supply_gap_answer(
+        context, proposal, decision
+    )
     new_pending = list(new_pending or [])
     activated = any(
         r.get("status") == committed_status and r.get("verb") == "add"
@@ -129,6 +173,7 @@ def plan_context_writes(
             not activated
             and proposal.understanding is not None
             and proposal.understanding.new_goal is not None
+            and not same_supply_target
         ):
             stored.ref = "goal-" + uuid4().hex[:12]
         decision = decision.model_copy(update={"candidate": stored})
@@ -141,6 +186,12 @@ def plan_context_writes(
     }
     task_switched = bool(previous_task_id) and session.current_task_id != previous_task_id
     resolved = set(proposal.resolved_questions)
+    for question in context.get("pending_clarifications", []):
+        if (
+            question.get("slot") == SLOT_SUPPLY_GAP_CHOICE
+            and question.get("question_id") not in supply_gap_answers
+        ):
+            resolved.discard(question["question_id"])
     understanding = proposal.understanding
     if decision is not None and decision.candidate is not None:
         answered_slots: set[str] = set()
@@ -149,20 +200,26 @@ def plan_context_writes(
                 decision.missing_slots
             )
         for question in context.get("pending_clarifications", []):
-            if question.get("candidate_ref") == decision.candidate.ref and (
+            if (
+                question.get("slot") != SLOT_SUPPLY_GAP_CHOICE
+                and question.get("candidate_ref") == decision.candidate.ref and (
                 activated or question.get("slot") in answered_slots
+                )
             ):
                 resolved.add(question["question_id"])
     if activated:
-        # "Which one do you mean?" asked without a candidate to bind to: the gate
-        # had none to offer, so the question carries ``candidate_ref = None`` and
-        # the match above can never close it — no candidate ref equals None, and
-        # the candidate-changed purge below keeps exactly the unbound items. An
-        # add committed this turn decides the focus, so the question is answered
-        # however the shopper phrased it; left open it outlives its own answer
-        # and hangs under the success receipt as a stale chip.
+        # An add can resolve an unbound focus question because it determines
+        # the target. An explicit append/switch add also resolves the unbound
+        # relation question. Failed or ambiguous turns never reach this branch.
         for question in context.get("pending_clarifications", []):
-            if question.get("candidate_ref") is None and question.get("slot") == SLOT_FOCUS:
+            if question.get("candidate_ref") is None and (
+                question.get("slot") == SLOT_FOCUS
+                or (
+                    decision is not None
+                    and decision.relation in ("append", "switch")
+                    and question.get("slot") == SLOT_GOAL_RELATION
+                )
+            ):
                 resolved.add(question["question_id"])
     base_pending = [] if task_switched else list(context.get("pending_clarifications", []))
     new_pending.extend(business_pending or [])
@@ -183,6 +240,11 @@ def plan_context_writes(
                 item
                 for item in context.get("pending_clarifications", [])
                 if not item.get("candidate_ref")
+                or (
+                    same_supply_target
+                    and item.get("slot") == SLOT_SUPPLY_GAP_CHOICE
+                    and item.get("question_id") not in resolved
+                )
             ],
         }
     pending_list = turn_context.merge_pending(
@@ -259,7 +321,9 @@ def apply_context_plan(
         item["base_state_version"] = plan.base_state_version
     context = dict(context)
     context["pending_clarifications"] = plan.pending
-    if plan.displayed:
+    if plan.clear_displayed:
+        context["displayed_candidates"] = []
+    elif plan.displayed:
         context["displayed_candidates"] = plan.displayed
     elif plan.task_switched:
         context["displayed_candidates"] = []

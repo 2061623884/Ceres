@@ -20,6 +20,8 @@ from app.services.shopping_plan_service import (
 )
 from app.services.template_matcher import get_template_by_id
 from app.services.template_plan_service import TemplatePlanService
+from app.services.catalog_service import CatalogService
+from app.services.ingredient_catalog import ingredient_name_zh
 from app.services.validation_context import ValidationContext
 
 TARGET_KINDS = ("dish", "product", "scenario")
@@ -42,10 +44,34 @@ def _missing_keys(gaps: list[dict[str, Any]] | None) -> list[str]:
     return keys
 
 
-def _friendly_failure(dish_label: str, errors: list[str]) -> tuple[str, str]:
+def _friendly_failure(
+    dish_label: str,
+    errors: list[str],
+    *,
+    ctx: ValidationContext,
+    db: Session,
+    store_id: str,
+) -> tuple[str, str]:
     """Map validator wording onto something a shopper can act on."""
     joined = "; ".join(errors)
     lowered = joined.lower()
+    if ctx.specification.get("size") == "small":
+        for error in errors:
+            if "violates constraints" not in error.lower():
+                continue
+            sku_id = error.split(" ", 2)[1]
+            product = CatalogService(db, store_id).get_product(sku_id)
+            if not ctx.matches_spec(product):
+                size = (
+                    f"{product['spec_quantity']}{product['spec_unit']}"
+                    if product.get("spec_quantity") is not None and product.get("spec_unit")
+                    else "规格信息不完整"
+                )
+                name = product.get("name_zh") or product.get("name") or sku_id
+                return (
+                    "VALIDATION_FAILED",
+                    f"商品「{name}」当前规格为 {size}，不符合小包装要求；「{dish_label}」清单没有生成。",
+                )
     if "insufficient stock" in lowered or "not sellable" in lowered or "not approved" in lowered:
         return (
             "SUPPLY_UNAVAILABLE",
@@ -56,7 +82,11 @@ def _friendly_failure(dish_label: str, errors: list[str]) -> tuple[str, str]:
     if "uncovered" in lowered or "覆盖" in joined:
         return "UNCOVERED", f"「{dish_label}」还有主料没有勾选，勾选后才能确认。"
     if "not in candidate set" in lowered or "violates constraints" in lowered:
-        return "VALIDATION_FAILED", f"「{dish_label}」里有商品不满足当前条件，暂时无法配齐。"
+        message = f"「{dish_label}」里有商品不满足当前条件，暂时无法配齐。"
+        if ctx.excluded_ingredients:
+            names = dict.fromkeys(ingredient_name_zh(term) or term for term in ctx.excluded_ingredients)
+            message += f"本次排除条件：{'、'.join(names)}。"
+        return "VALIDATION_FAILED", message
     return "VALIDATION_FAILED", f"暂时无法配齐「{dish_label}」：{joined}"
 
 
@@ -94,6 +124,7 @@ def guarded_prepare_purchase_plan(
     exclude_ingredients: list[str] | None = None,
     operation: str = "append",
     quantity: int = 1,
+    specification: dict[str, str] | None = None,
     allowed_dish_ids: set[str] | None = None,
 ) -> dict[str, Any]:
     """Structure-check a target, then build the plan.
@@ -137,6 +168,7 @@ def guarded_prepare_purchase_plan(
         exclude_ingredients=exclude_ingredients,
         operation=operation,
         quantity=quantity,
+        specification=specification,
     )
 
 
@@ -154,6 +186,7 @@ def prepare_purchase_plan(
     exclude_ingredients: list[str] | None = None,
     operation: str = "append",
     quantity: int = 1,
+    specification: dict[str, str] | None = None,
 ) -> dict[str, Any]:
     """Prepare a plan for a dish, a direct product or an open scenario.
 
@@ -184,6 +217,7 @@ def prepare_purchase_plan(
             budget_fen=budget_fen,
             exclude_ingredients=exclude_ingredients,
             operation=operation,
+            specification=specification,
         )
     if target_kind == "scenario":
         return _prepare_scenario(
@@ -195,6 +229,7 @@ def prepare_purchase_plan(
             budget_fen=budget_fen,
             exclude_ingredients=exclude_ingredients,
             operation=operation,
+            specification=specification,
         )
     return _prepare_product(
         db,
@@ -206,6 +241,7 @@ def prepare_purchase_plan(
         budget_fen=budget_fen,
         exclude_ingredients=exclude_ingredients,
         operation=operation,
+        specification=specification,
     )
 
 
@@ -219,6 +255,7 @@ def _prepare_dish(
     budget_fen: int | None,
     exclude_ingredients: list[str] | None,
     operation: str,
+    specification: dict[str, str] | None,
 ) -> dict[str, Any]:
     if not dish_id:
         return _error("INVALID_ARGS", "target_id (dish_id) is required for target_kind=dish")
@@ -236,6 +273,7 @@ def _prepare_dish(
         people=effective_people,
         budget_fen=budget_fen,
         excluded_ingredients=list(exclude_ingredients or []),
+        specification=dict(specification or {}),
         goal=dish.get("name") or dish.get("scenario"),
     )
     ctx = ValidationContext.from_requirements(
@@ -255,9 +293,18 @@ def _prepare_dish(
     if validated.get("validation_status") != "passed":
         errors = validated.get("errors") or ["validation failed"]
         label = str(dish.get("name") or dish.get("scenario") or dish_id)
-        code, message = _friendly_failure(label, errors)
+        code, message = _friendly_failure(
+            label,
+            errors,
+            ctx=ctx,
+            db=db,
+            store_id=store_id,
+        )
         gaps = validated.get("gaps") or []
-        if gaps:
+        if gaps and not (
+            ctx.specification.get("size") == "small"
+            and any("violates constraints" in error.lower() for error in errors)
+        ):
             code = "SUPPLY_UNAVAILABLE"
         return {
             "status": "error",
@@ -324,6 +371,7 @@ def _prepare_scenario(
     budget_fen: int | None,
     exclude_ingredients: list[str] | None,
     operation: str,
+    specification: dict[str, str] | None,
 ) -> dict[str, Any]:
     scenario = get_scenario(scenario_id)
     if scenario is None:
@@ -334,6 +382,7 @@ def _prepare_scenario(
         people=people,
         budget_fen=budget_fen,
         excluded_ingredients=exclude_ingredients,
+        specification=specification,
     )
     if result.get("status") == "ok":
         result["operation"] = operation
@@ -351,6 +400,7 @@ def _prepare_product(
     budget_fen: int | None,
     exclude_ingredients: list[str] | None,
     operation: str,
+    specification: dict[str, str] | None,
 ) -> dict[str, Any]:
     if not target_id and not target_name:
         return _error("INVALID_ARGS", "target_id 或 target_name 至少需要一个")
@@ -361,6 +411,7 @@ def _prepare_product(
         quantity=quantity,
         budget_fen=budget_fen,
         excluded_ingredients=exclude_ingredients,
+        specification=specification,
     )
     if result.get("status") == "ok":
         result["operation"] = operation

@@ -6,6 +6,8 @@ from typing import Any, Literal
 
 from pydantic import BaseModel, Field, field_validator
 
+from app.schemas.goal import FulfillmentMode
+
 Intent = Literal["purchase_task", "category_selection"]
 Step = Literal[
     "understanding",
@@ -34,6 +36,17 @@ class ViewContext(BaseModel):
     product_id: str | None = None
 
 
+class ConfirmItem(BaseModel):
+    sku_id: str = Field(..., min_length=1, max_length=64)
+    quantity: int = Field(..., ge=1, le=99)
+
+
+class PlanSelection(BaseModel):
+    plan_id: str
+    plan_version: int = Field(..., ge=1)
+    selected_items: list[ConfirmItem] = Field(..., max_length=99)
+
+
 class TurnRequest(BaseModel):
     request_id: str = Field(..., min_length=1, max_length=128)
     message: str = Field(..., min_length=1, max_length=4000)
@@ -41,6 +54,7 @@ class TurnRequest(BaseModel):
     expected_state_version: int = Field(..., ge=0)
     expected_session_version: int | None = Field(None, ge=0)
     view_context: ViewContext | None = None
+    plan_selection: PlanSelection | None = None
 
     @field_validator("expected_state_version")
     @classmethod
@@ -140,6 +154,8 @@ class PlanTarget(BaseModel):
     kind: Literal["dish", "product", "scenario"] | None = None
     target_id: str | None = None
     name: str | None = None
+    meal_name: str | None = None
+    fulfillment_mode: FulfillmentMode | None = None
     people: int | None = None
     people_source: Literal["user", "default"] | None = None
     #: Honest remarks about this target (e.g. missing components).
@@ -228,11 +244,6 @@ class TurnResponse(BaseModel):
     route: str | None = None
     readiness: str | None = None
     missing_slots: list[str] = Field(default_factory=list)
-
-
-class ConfirmItem(BaseModel):
-    sku_id: str = Field(..., min_length=1, max_length=64)
-    quantity: int = Field(..., ge=1, le=99)
 
 
 class AddPlanItemRequest(BaseModel):

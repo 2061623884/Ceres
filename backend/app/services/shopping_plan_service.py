@@ -178,6 +178,7 @@ class ShoppingPlanService:
         quantity: int = 1,
         budget_fen: int | None = None,
         excluded_ingredients: list[str] | None = None,
+        specification: dict[str, str] | None = None,
     ) -> dict[str, Any]:
         if target_id:
             sku = self.catalog.get_product(target_id)
@@ -238,6 +239,7 @@ class ShoppingPlanService:
             candidate_ids=[target_id],
             budget_fen=budget_fen,
             excluded_ingredients=excluded_ingredients,
+            specification=specification,
             # A direct product has no headcount at all: it is never reported as
             # "what the user said about people".
             people=None,
@@ -253,6 +255,7 @@ class ShoppingPlanService:
         people: int | None = None,
         budget_fen: int | None = None,
         excluded_ingredients: list[str] | None = None,
+        specification: dict[str, str] | None = None,
     ) -> dict[str, Any]:
         """Build an open-scenario basket.
 
@@ -384,6 +387,7 @@ class ShoppingPlanService:
             candidate_ids=candidate_ids,
             budget_fen=budget_fen,
             excluded_ingredients=excluded_ingredients,
+            specification=specification,
             people=people,
             people_source=people_source,
             missing_required_items=missing_required,
@@ -472,6 +476,7 @@ class ShoppingPlanService:
         people: int | None = None,
         people_source: str = "default",
         missing_required_items: list[dict[str, Any]] | None = None,
+        specification: dict[str, str] | None = None,
     ) -> dict[str, Any]:
         from app.agent.state import Requirements
 
@@ -479,6 +484,7 @@ class ShoppingPlanService:
             people=people,
             budget_fen=budget_fen,
             excluded_ingredients=list(excluded_ingredients or []),
+            specification=dict(specification or {}),
             goal=target_name,
         )
         ctx = ValidationContext.from_requirements(
@@ -507,15 +513,37 @@ class ShoppingPlanService:
         if validated.get("validation_status") != "passed":
             errors = validated.get("errors") or ["validation failed"]
             code = "VALIDATION_FAILED"
-            if budget_fen is not None and any(
+            message = "; ".join(errors)
+            condition_failure = False
+            if ctx.specification.get("size") == "small":
+                for error in errors:
+                    if "violates constraints" not in error.lower():
+                        continue
+                    sku_id = error.split(" ", 2)[1]
+                    product = self.catalog.get_product(sku_id)
+                    if not ctx.matches_spec(product):
+                        condition_failure = True
+                        size = (
+                            f"{product['spec_quantity']}{product['spec_unit']}"
+                            if product.get("spec_quantity") is not None and product.get("spec_unit")
+                            else "规格信息不完整"
+                        )
+                        name = product.get("name_zh") or product.get("name") or sku_id
+                        message = (
+                            f"商品「{name}」当前规格为 {size}，不符合小包装要求；"
+                            f"「{target_name}」清单没有生成。"
+                        )
+                        break
+            if not condition_failure and budget_fen is not None and any(
                 "budget" in err.lower() or "预算" in err for err in errors
             ):
                 code = "BUDGET_EXCEEDED"
             return {
                 "status": "error",
                 "code": code,
-                "message": "; ".join(errors),
+                "message": message,
                 "validation_status": validated.get("validation_status"),
+                "detail": "; ".join(errors),
                 "missing": [],
                 "gaps": validated.get("gaps", []),
             }

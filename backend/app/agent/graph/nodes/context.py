@@ -80,7 +80,11 @@ def _authoritative(
     pending: list[dict[str, Any]],
 ) -> dict[str, Any]:
     plan = json.loads(task.plan_json) if task and task.plan_json else None
-    kind, target_id, target_name = _real_target(db, state, plan)
+    if task and effective_status(task) == "cancelled":
+        plan = None
+        kind, target_id, target_name = None, None, None
+    else:
+        kind, target_id, target_name = _real_target(db, state, plan)
     return {
         "task_id": session.current_task_id,
         "plan_id": (plan or {}).get("plan_id"),
@@ -119,6 +123,9 @@ def _merge_constraints(
     ]
     if budgets:
         merged["budget_fen"] = min(budgets)
+    merged["specification"] = {
+        **(merged.get("specification") or {}), **(extra.get("specification") or {}),
+    }
     return merged
 
 

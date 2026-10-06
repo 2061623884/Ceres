@@ -15,7 +15,8 @@ import uuid
 import pytest
 
 from support import post_turn
-from support import post_turn
+from support import stream_turn
+from test_semantic_phase1_purchase import indexed_client
 
 
 def create_session(client) -> str:
@@ -49,10 +50,40 @@ def turn(client, session_id: str, message: str, previous: dict | None = None):
 def _partial_dish(client, semantic_provider) -> dict:
     from support.semantic_agent import lookup_then_add_id
 
-    semantic_provider(lookup_then_add_id("dish", "三杯鸡", "dish-sanbei-ji", people=2))
+    target = lookup_then_add_id(
+        "dish", "酸汤肥牛", "dish-suantang-feiniu", people=2
+    )[0]
+
+    def opt_in(request):
+        question = next(
+            item for item in request["pending_clarifications"]
+            if item["slot"] == "supply_gap_choice"
+        )
+        return {
+            **target(request),
+            "resolved_questions": [question["question_id"]],
+        }
+
+    semantic_provider([target, opt_in])
     sid = create_session(client)
-    body = turn(client, sid, "我想吃三杯鸡，2人").json()
-    assert body["plan"] and body["plan"]["gaps"], body
+    preview = turn(client, sid, "我想吃酸汤肥牛，2人").json()
+    assert preview["plan"] is None and preview["task_id"] is None, preview
+    assert preview["pending_clarifications"][0]["slot"] == "supply_gap_choice", preview
+    assert client.get("/api/v1/cart").json()["items"] == []
+    body = turn(client, sid, "那就先买能买到的", preview).json()
+    plan = body["plan"]
+    assert plan and plan["coverage_mode"] == "partial", body
+    assert {gap["ingredient_id"] for gap in plan["gaps"]} == {"enoki_mushroom", "chili_sauce"}, plan
+    enoki = next(gap for gap in plan["gaps"] if gap["ingredient_id"] == "enoki_mushroom")
+    assert enoki["requiredness"] == "core", enoki
+    chili = next(gap for gap in plan["gaps"] if gap["ingredient_id"] == "chili_sauce")
+    assert chili["requiredness"] == "optional", chili
+    assert chili["kind"] == "unknown" and chili["unknown_of"] == "quantity", chili
+    beef_rows = [
+        row for row in plan["items"]
+        if row["requirement"]["ingredient_id"] == "beef_slice"
+    ]
+    assert len(beef_rows) == 1 and beef_rows[0]["availability"] == "available", beef_rows
     return body
 
 
@@ -68,13 +99,13 @@ def _task_plan(client, task_id: str) -> dict:
         db.close()
 
 
-def test_plan_json_persists_the_gap_and_the_requirement_evidence(client, semantic_provider):
-    body = _partial_dish(client, semantic_provider)
-    stored = _task_plan(client, body["task_id"])
+def test_plan_json_persists_the_gap_and_the_requirement_evidence(indexed_client, semantic_provider):
+    body = _partial_dish(indexed_client, semantic_provider)
+    stored = _task_plan(indexed_client, body["task_id"])
 
     assert stored["coverage_intent"] == "partial_ok", stored
     assert stored["coverage_mode"] == "partial", stored
-    basil = next(g for g in stored["gaps"] if g["ingredient_id"] == "basil")
+    enoki = next(g for g in stored["gaps"] if g["ingredient_id"] == "enoki_mushroom")
     for key in (
         "gap_id",
         "group_id",
@@ -91,9 +122,10 @@ def test_plan_json_persists_the_gap_and_the_requirement_evidence(client, semanti
         "source",
         "message",
     ):
-        assert key in basil, (key, basil)
-    assert basil["source"] == {"kind": "local_recipe", "ref": "dish-sanbei-ji"}, basil
-    assert basil["required_item_id"] == "dish:dish-sanbei-ji#basil", basil
+        assert key in enoki, (key, enoki)
+    assert enoki["name"] == "金针菇", enoki
+    assert enoki["source"] == {"kind": "local_recipe", "ref": "dish-suantang-feiniu"}, enoki
+    assert enoki["required_item_id"] == "dish:dish-suantang-feiniu#enoki_mushroom", enoki
 
     for row in stored["items"]:
         assert row["required_item_id"], row
@@ -106,7 +138,8 @@ def test_plan_json_persists_the_gap_and_the_requirement_evidence(client, semanti
     assert stored["uncovered_items"] == [], stored
 
 
-def test_every_read_surface_echoes_gaps_and_intent(client, semantic_provider):
+def test_every_read_surface_echoes_gaps_and_intent(indexed_client, semantic_provider):
+    client = indexed_client
     body = _partial_dish(client, semantic_provider)
     plan = body["plan"]
     expected_ids = {gap["gap_id"] for gap in plan["gaps"]}
@@ -170,15 +203,34 @@ def test_every_read_surface_echoes_gaps_and_intent(client, semantic_provider):
     assert added_body["coverage_intent"] == "partial_ok", added_body
 
 
-def test_plan_ready_sse_carries_the_same_gaps(client, semantic_provider):
+def test_plan_ready_sse_carries_the_same_gaps(indexed_client, semantic_provider):
     from support.semantic_agent import lookup_then_add_id
 
-    semantic_provider(lookup_then_add_id("dish", "三杯鸡", "dish-sanbei-ji", people=2))
+    target = lookup_then_add_id(
+        "dish", "酸汤肥牛", "dish-suantang-feiniu", people=2
+    )[0]
+
+    def opt_in(request):
+        question = next(
+            item for item in request["pending_clarifications"]
+            if item["slot"] == "supply_gap_choice"
+        )
+        return {
+            **target(request),
+            "resolved_questions": [question["question_id"]],
+        }
+
+    semantic_provider([target, opt_in])
+    client = indexed_client
     sid = create_session(client)
+    preview_events = stream_turn(client, sid, "我想吃酸汤肥牛，2人")
+    preview = next(event["payload"] for event in preview_events if event["type"] == "turn.completed")
+    assert preview["plan"] is None and preview["task_id"] is None, preview
+    assert preview["pending_clarifications"][0]["slot"] == "supply_gap_choice", preview
     with client.stream(
         "POST",
         f"/api/v1/guide/sessions/{sid}/turns/stream",
-        json=turn_body(sid, "我想吃三杯鸡，2人"),
+        json=turn_body(sid, "那就先买能买到的", preview),
     ) as response:
         assert response.status_code == 200, response.read()
         events = [
@@ -190,23 +242,23 @@ def test_plan_ready_sse_carries_the_same_gaps(client, semantic_provider):
     ready_plan = ready["payload"]["plan"]
     assert ready_plan["coverage_mode"] == "partial", ready_plan
     assert ready_plan["coverage_intent"] == "partial_ok", ready_plan
-    assert any(gap["ingredient_id"] == "basil" for gap in ready_plan["gaps"]), ready_plan
+    assert any(gap["ingredient_id"] == "enoki_mushroom" for gap in ready_plan["gaps"]), ready_plan
 
     completed = next(event for event in events if event["type"] == "turn.completed")
     terminal_plan = completed["payload"]["plan"]
     assert terminal_plan["gaps"] == ready_plan["gaps"], (terminal_plan, ready_plan)
 
 
-def test_the_reply_names_the_missing_main_ingredient(client, semantic_provider):
+def test_the_reply_names_the_missing_main_ingredient(indexed_client, semantic_provider):
     """D3: the shortage is stated in words the shopper reads, not just in fields."""
-    body = _partial_dish(client, semantic_provider)
+    body = _partial_dish(indexed_client, semantic_provider)
     message = body["message"]
-    assert "罗勒" in message, message
+    assert "金针菇" in message, message
     assert "无法配齐" in message, message
     # The sentence is the structured gap's own wording (server-composed), and
     # money stays in yuan — the internal fen amount never leaks into prose.
     gap_text = next(
-        gap["message"] for gap in body["plan"]["gaps"] if gap["ingredient_id"] == "basil"
+        gap["message"] for gap in body["plan"]["gaps"] if gap["ingredient_id"] == "enoki_mushroom"
     )
     assert gap_text in message, message
     assert "fen" not in message, message

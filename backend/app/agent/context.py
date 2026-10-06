@@ -75,7 +75,8 @@ def build_candidate_set(
     del delivery_zone_id  # reserved: supply context is already resolved upstream
     candidates = CandidateSet()
 
-    active_id = getattr(state, "active_template_id", None)
+    cancelled = state is not None and state.current_step == "cancelled"
+    active_id = getattr(state, "active_template_id", None) if not cancelled else None
     if active_id:
         # The dish the shopper is already working on is the one most likely to be
         # referenced again, so it must never fall off the list.
@@ -91,7 +92,7 @@ def build_candidate_set(
             "scenario", str(scenario_id), str(scenario.get("name") or scenario_id)
         )
 
-    plan = getattr(state, "plan", None) if state is not None else None
+    plan = getattr(state, "plan", None) if state is not None and not cancelled else None
     if isinstance(plan, dict):
         for target in (plan.get("targets") or [])[:MAX_GROUPS]:
             group_id = target.get("group_id")
@@ -196,7 +197,11 @@ def build_focus_refs(
     """
     context = context or {}
     refs: list[dict[str, Any]] = []
-    plan = getattr(state, "plan", None) if state is not None else None
+    plan = (
+        getattr(state, "plan", None)
+        if state is not None and state.current_step != "cancelled"
+        else None
+    )
     if isinstance(plan, dict) and plan.get("items"):
         names = [str(t.get("name")) for t in plan.get("targets") or [] if t.get("name")]
         refs.append(
@@ -262,6 +267,7 @@ def build_turn_snapshot(
     return TurnSnapshot(
         turn_mode=turn_mode,
         message=message,
+        current_step=state.current_step if state is not None else None,
         requirements=requirements.to_dict() if requirements else {},
         # The page the shopper entered from. Every page runs this same turn, so
         # the page travels as context rather than as a route.
@@ -270,7 +276,11 @@ def build_turn_snapshot(
         # Only the plan is snapshotted here. The model's candidate view is rebuilt
         # from the live set on every loop round, so a ref found by a read-only
         # lookup is usable immediately.
-        current_plan=candidates.model_view(state).get("current_plan"),
+        current_plan=(
+            None
+            if state is not None and state.current_step == "cancelled"
+            else candidates.model_view(state).get("current_plan")
+        ),
         purchase_summary=getattr(ctx, "purchase_summary", None),
         pending_clarification=next(iter(pending), None),
         pending_clarifications=pending,
@@ -300,7 +310,13 @@ def load_context(db: Session, session: GuideSession) -> dict[str, Any]:
     if context.get("task_id") != session.current_task_id:
         return {}
     task = db.get(GuideTask, session.current_task_id) if session.current_task_id else None
-    if task and effective_status(task) in ("cancelled", "superseded"):
+    if task and effective_status(task) == "superseded":
+        return {}
+    if (
+        task
+        and effective_status(task) == "cancelled"
+        and context.get("task_status") != "cancelled"
+    ):
         return {}
     # Confirming the task ends the plan this context describes: questions and
     # displayed refs written while it was still active belong to a purchase the

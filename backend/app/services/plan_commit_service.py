@@ -148,6 +148,15 @@ class PlanCommitService:
             target.requirements.people = int(target_people)
         if args.get("budget_fen") is not None:
             target.requirements.budget_fen = int(args["budget_fen"])
+        target.requirements.specification = dict(args["specification"])
+        if "selection_goal" in plan_result["target"]:
+            selected_constraints = plan_result["target"]["selection_goal"]["constraints"]
+            selected_budget = selected_constraints["budget_yuan"]
+            target.requirements.budget_fen = (
+                round(selected_budget * 100) if selected_budget is not None else None
+            )
+            target.requirements.excluded_ingredients = list(args.get("exclude_ingredients", []))
+            target.requirements.specification = dict(selected_constraints["specification"])
         # A per-target validation only ever sees its own rows, so the merged plan
         # can exceed the budget the task already carries. The confirmation path
         # rejects that, but ``can_confirm`` must not promise a write that will be

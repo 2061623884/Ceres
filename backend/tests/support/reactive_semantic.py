@@ -112,7 +112,7 @@ class ReactiveSemanticProvider:
         self.requests.append(request)
         if request.get("query_results"):
             # The answer stage only puts the real facts into words.
-            result: dict[str, Any] = {"reply": self.answer}
+            result: dict[str, Any] = {"reply": self.answer, "display_refs": []}
         else:
             result = self._plan_change(request) or self._understand(request)
         if on_reply_delta is not None and result.get("reply"):

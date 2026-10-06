@@ -16,15 +16,18 @@ The approved contract (D2/D3/D7, see
 
 from __future__ import annotations
 
+import json
 import uuid
 
 import pytest
+from sqlalchemy import text
 
 from app.models.catalog import CatalogProduct
 from app.models.store import Offer
 from app.services.plan_validator import PlanValidator
 from app.services.shopping_plan_service import ShoppingPlanService
 from support import post_turn
+from test_semantic_phase1_purchase import indexed_client
 
 
 # --------------------------------------------------------------------- helpers
@@ -106,34 +109,95 @@ def _core_requirement(requirement_id: str, ingredient_id: str) -> dict:
 # ----------------------------------------------------------- dish / production
 
 
-def test_dish_with_missing_main_ingredient_is_partial_and_confirmable(
-    client, semantic_provider
+@pytest.mark.parametrize("run", [1, 2])
+def test_dish_with_missing_main_ingredient_requires_two_explicit_steps(
+    indexed_client, semantic_provider, run
 ):
-    """三杯鸡 needs basil, which this store cannot sell: partial, not a refusal."""
+    """The shopper sees the supply gap before choosing a partial plan."""
     from support.semantic_agent import lookup_then_add_id
 
-    semantic_provider(lookup_then_add_id("dish", "三杯鸡", "dish-sanbei-ji", people=2))
-    sid = create_session(client)
-    body = turn(client, sid, "我想吃三杯鸡，2人").json()
+    target = lookup_then_add_id(
+        "dish", "酸汤肥牛", "dish-suantang-feiniu", people=2
+    )[0]
 
-    assert body["status"] == "awaiting_confirmation", body
-    plan = body["plan"]
-    assert plan is not None, body
+    def opt_in(request):
+        question = next(
+            item for item in request["pending_clarifications"]
+            if item["slot"] == "supply_gap_choice"
+        )
+        return {
+            **target(request),
+            "resolved_questions": [question["question_id"]],
+        }
+
+    def question_only_ack(request):
+        question = next(
+            item for item in request["pending_clarifications"]
+            if item["slot"] == "supply_gap_choice"
+        )
+        return {
+            "reply": "先等等。",
+            "resolved_questions": [question["question_id"]],
+        }
+
+    provider = semantic_provider([
+        target,
+        {"reply": "好的，先不生成部分清单。"},
+        target,
+        question_only_ack,
+        opt_in,
+    ])
+    client = indexed_client
+    sid = create_session(client)
+    preview = turn(client, sid, "我想吃酸汤肥牛，2人").json()
+
+    assert preview["plan"] is None and preview["task_id"] is None, preview
+    assert preview["plan_effect"] == "keep", preview
+    question = preview["pending_clarifications"][0]
+    assert question["slot"] == "supply_gap_choice", question
+    assert "金针菇" in question["question"], question
+    assert "。。" not in question["question"], question
+    assert "只为这些商品生成" in question["question"], question
+    assert "模拟价格" in question["question"], question
+    assert client.get("/api/v1/cart").json()["items"] == []
+
+    ack = turn(client, sid, "好的", preview).json()
+    assert ack["plan"] is None, ack
+    assert ack["pending_clarifications"][0]["question_id"] == question["question_id"], ack
+
+    repeated = turn(client, sid, "我想吃酸汤肥牛，2人", ack).json()
+    assert repeated["plan"] is None, repeated
+    assert repeated["pending_clarifications"][0]["question_id"] == question["question_id"], repeated
+
+    question_only = turn(client, sid, "先等等", repeated).json()
+    assert question_only["plan"] is None, question_only
+    assert question_only["pending_clarifications"][0]["question_id"] == question["question_id"], question_only
+
+    partial = turn(client, sid, "那就先买能买到的", question_only).json()
+
+    assert partial["status"] == "awaiting_confirmation", partial
+    plan = partial["plan"]
     assert plan["coverage_mode"] == "partial", plan
     assert plan["coverage_intent"] == "partial_ok", plan
+    pantry_rows = [row for row in plan["items"] if row["role"] == "pantry"]
+    assert pantry_rows, plan["items"]
+    assert "调味料，默认不勾选" in question["question"], question
+    assert all(row["name"] in question["question"] for row in pantry_rows), question
+    assert all(not row["selected"] and row["line_total_fen"] == 0 for row in pantry_rows), pantry_rows
 
     missing = [g for g in plan["gaps"] if g["kind"] == "not_found"]
     assert missing, plan["gaps"]
-    basil = next(g for g in missing if g["ingredient_id"] == "basil")
-    assert basil["requiredness"] == "core", basil
-    assert basil["name"], basil
-    assert "无法配齐" in basil["message"], basil
-    assert "没有找到" in basil["message"], basil
-    assert "本店没有" not in basil["message"], basil
-    assert basil["source"] == {"kind": "local_recipe", "ref": "dish-sanbei-ji"}, basil
-    assert basil["required_item_id"] == "dish:dish-sanbei-ji#basil", basil
-    assert basil["group_id"] == "dish:dish-sanbei-ji", basil
-    assert basil["target_kind"] == "dish", basil
+    assert {gap["ingredient_id"] for gap in missing} == {"enoki_mushroom"}, missing
+    enoki = next(g for g in missing if g["ingredient_id"] == "enoki_mushroom")
+    assert enoki["requiredness"] == "core", enoki
+    assert enoki["name"] == "金针菇", enoki
+    assert "无法配齐" in enoki["message"], enoki
+    assert "没有找到" in enoki["message"], enoki
+    assert "本店没有" not in enoki["message"], enoki
+    assert enoki["source"] == {"kind": "local_recipe", "ref": "dish-suantang-feiniu"}, enoki
+    assert enoki["required_item_id"] == "dish:dish-suantang-feiniu#enoki_mushroom", enoki
+    assert enoki["group_id"] == "dish:dish-suantang-feiniu", enoki
+    assert enoki["target_kind"] == "dish", enoki
 
     # The resolvable rows are still there, each carrying its requirement/evidence.
     assert plan["items"], plan
@@ -146,37 +210,183 @@ def test_dish_with_missing_main_ingredient_is_partial_and_confirmable(
         assert row["evidence"]["data_mode"], row
         assert "不是外部实时库存源" in row["evidence"]["source_note"], row
     assert plan["can_confirm"] is True, plan
+    beef_rows = [
+        row for row in plan["items"]
+        if row["requirement"]["ingredient_id"] == "beef_slice"
+    ]
+    assert len(beef_rows) == 1 and beef_rows[0]["selected"], beef_rows
 
-    result = confirm(client, body)
+    assert client.get("/api/v1/cart").json()["items"] == []
+    result = confirm(client, partial)
     assert result.status_code == 200, result.text
     cart_skus = {i["sku_id"] for i in client.get("/api/v1/cart").json()["items"]}
     assert {row["sku_id"] for row in plan["items"] if row["selected"]} <= cart_skus
+    assert provider.remaining() == 0
 
 
-def test_zero_sellable_row_is_a_clear_unconfirmable_plan_with_the_gap(
-    client, semantic_provider
+def test_explicit_supply_gap_opt_in_replace_preserves_original_constraints(
+    indexed_client, semantic_provider
 ):
-    """清炒豆芽 only needs bean sprout: nothing is buyable, but the gap survives."""
+    """The opt-in answer keeps the pending target's constraints and relation."""
     from support.semantic_agent import lookup_then_add_id
 
-    semantic_provider(lookup_then_add_id("dish", "清炒豆芽", "dish-qingchao-douya", people=2))
+    new_dish = lookup_then_add_id(
+        "dish", "酸汤肥牛", "dish-suantang-feiniu", people=2
+    )[0]
+    replace_dish = lookup_then_add_id(
+        "dish", "酸汤肥牛", "dish-suantang-feiniu", relation="switch", people=2
+    )[0]
+
+    def original_goal(request):
+        proposal = new_dish(request)
+        proposal["constraints"] = {
+            "budget_yuan": 100,
+            "excluded_ingredients": ["鸡蛋"],
+        }
+        return proposal
+
+    def explicit_replace_opt_in(request):
+        question = next(
+            item for item in request["pending_clarifications"]
+            if item["slot"] == "supply_gap_choice"
+        )
+        proposal = replace_dish(request)
+        proposal["resolved_questions"] = [question["question_id"]]
+        return proposal
+
+    semantic_provider([original_goal, explicit_replace_opt_in])
+    client = indexed_client
     sid = create_session(client)
-    body = turn(client, sid, "我想吃清炒豆芽，2人").json()
+    preview = turn(client, sid, "我想吃酸汤肥牛，2人，预算100元，不吃鸡蛋").json()
+    assert preview["plan"] is None, preview
+    assert len(preview["pending_clarifications"]) == 1, preview
+    assert preview["pending_clarifications"][0]["slot"] == "supply_gap_choice", preview
 
-    plan = body["plan"]
-    assert body["status"] == "awaiting_confirmation", body
-    assert plan is not None, body
-    gap = next(g for g in plan["gaps"] if g["ingredient_id"] == "bean_sprout")
-    assert gap["kind"] == "not_found", gap
-    assert gap["requiredness"] == "core", gap
-    assert plan["coverage_mode"] == "uncovered", plan
-    assert plan["can_confirm"] is False, plan
-    # Not an empty silent failure: the reason is in the reply the shopper reads.
-    assert "无法配齐" in body["message"], body["message"]
+    partial = turn(client, sid, "那就先买能买到的", preview).json()
 
-    refused = confirm(client, body)
-    assert refused.status_code == 422, refused.text
+    assert partial["plan"]["selected_total_fen"] <= 10000, partial["plan"]
+    assert {target["target_id"] for target in partial["plan"]["targets"]} == {
+        "dish-suantang-feiniu"
+    }, partial["plan"]["targets"]
+    session = client.get(f"/api/v1/guide/sessions/{sid}").json()
+    assert session["constraints_summary"]["budget_fen"] == 10000, session
+    assert "鸡蛋" in session["constraints_summary"]["excluded_ingredients"], session
+    db = _db(client)
+    requirements_json = db.execute(
+        text("SELECT requirements_json FROM guide_tasks WHERE task_id = :task_id"),
+        {"task_id": partial["task_id"]},
+    ).scalar_one()
+    context_json = db.execute(
+        text("SELECT context_json FROM guide_semantic_contexts WHERE session_id = :session_id"),
+        {"session_id": sid},
+    ).scalar_one()
+    db.close()
+    requirements = json.loads(requirements_json)
+    assert requirements["budget_fen"] == 10000, requirements
+    assert "鸡蛋" in requirements["excluded_ingredients"], requirements
+    context = json.loads(context_json)
+    assert context["goal_candidate"]["relation"] == "new", context
     assert client.get("/api/v1/cart").json()["items"] == []
+
+
+def test_no_sellable_rows_do_not_produce_a_confirmable_partial_plan(db_session):
+    """No sellable required ingredient cannot become an empty draft for commit."""
+    from app.agent.tools.prepare_purchase_plan import prepare_purchase_plan
+
+    db_session.execute(text("UPDATE offers SET available_qty = 0"))
+    db_session.commit()
+    result = prepare_purchase_plan(
+        db_session,
+        store_id="store-demo-01",
+        delivery_zone_id="zone-default",
+        target_kind="dish",
+        target_id="dish-sanbei-ji",
+        people=2,
+    )
+
+    assert result["status"] == "ok", result
+    assert result["items"] == [], result["items"]
+    assert result["gaps"] and any(gap["requiredness"] == "core" for gap in result["gaps"]), result
+    assert result["coverage_mode"] == "uncovered", result
+    assert result["can_confirm"] is False, result
+
+
+def test_pantry_only_supply_gap_can_be_previewed_and_explicitly_purchased(
+    indexed_client, semantic_provider
+):
+    from support.semantic_agent import lookup_then_add_id
+
+    target = lookup_then_add_id("dish", "清炒豆芽", "dish-qingchao-douya", people=2)[0]
+
+    def opt_in(request):
+        question = next(
+            item for item in request["pending_clarifications"]
+            if item["slot"] == "supply_gap_choice"
+        )
+        return {
+            **target(request),
+            "resolved_questions": [question["question_id"]],
+        }
+
+    semantic_provider([target, opt_in])
+    sid = create_session(indexed_client)
+    preview = turn(indexed_client, sid, "我想吃清炒豆芽，2人").json()
+    assert preview["plan"] is None and preview["task_id"] is None, preview
+    question = preview["pending_clarifications"][0]
+    assert question["slot"] == "supply_gap_choice", question
+    assert "豆芽" in question["question"], question
+    assert "调味料，默认不勾选" in question["question"], question
+    assert indexed_client.get("/api/v1/cart").json()["items"] == []
+
+    partial = turn(indexed_client, sid, "那就先买能买到的", preview).json()
+    plan = partial["plan"]
+    assert plan["coverage_mode"] == "uncovered", plan
+    assert plan["coverage_intent"] == "partial_ok", plan
+    assert plan["can_confirm"] is False, plan
+    assert plan["items"] and all(row["role"] == "pantry" for row in plan["items"]), plan
+    assert all(row["name"] in question["question"] for row in plan["items"]), question
+    assert all(not row["selected"] and row["line_total_fen"] == 0 for row in plan["items"]), plan
+    assert indexed_client.get("/api/v1/cart").json()["items"] == []
+
+    selected = plan["items"][0]["sku_id"]
+    revision_response = indexed_client.post(
+        f"/api/v1/guide/tasks/{partial['task_id']}/plan-revisions",
+        json={
+            "request_id": str(uuid.uuid4()),
+            "expected_session_version": partial["session_version"],
+            "expected_state_version": partial["state_version"],
+            "base_plan_id": plan["plan_id"],
+            "base_plan_version": plan["plan_version"],
+            "client_edit_sequence": 1,
+            "coverage_intent": plan["coverage_intent"],
+            "items": [
+                {
+                    "sku_id": row["sku_id"],
+                    "quantity": row["quantity"],
+                    "selected": row["sku_id"] == selected,
+                }
+                for row in plan["items"]
+            ],
+        },
+    )
+    assert revision_response.status_code == 200, revision_response.text
+    revised = revision_response.json()
+    assert revised["can_confirm"] is True, revised
+    assert indexed_client.get("/api/v1/cart").json()["items"] == []
+
+    confirmed = confirm(
+        indexed_client,
+        {
+            **partial,
+            "plan": revised,
+            "state_version": revised["state_version"],
+            "session_version": revised["session_version"],
+        },
+    )
+    assert confirmed.status_code == 200, confirmed.text
+    assert selected in {
+        row["sku_id"] for row in indexed_client.get("/api/v1/cart").json()["items"]
+    }
 
 
 def test_product_out_of_stock_is_a_gap_and_never_confirmable(db_session):

@@ -1,15 +1,14 @@
-"""Checks for the "I don't want it" case under the one-pass protocol (spec rule 2).
+"""Checks for located removal and whole-task cancellation under the contract.
 
 There is no whole-turn ``stop`` label any more. "I don't want it" is either:
 * a located row edit — ``focus`` + ``edit{op: remove}`` on one group, or
-* a whole-plan drop — ``plan_act: abandon``, answered read-only in the server's
-  own words, with nothing written.
+* a whole-task drop — ``plan_act: abandon``, routed to the cancellation core.
 
 Model layer: the prompt examples for both phrasings parse into the right shape;
 optional live model check for「我不想要了」with a clear 红烧肉 plan.
 
 Decision layer: a located focus + ``edit.op=remove`` routes to ``mutation``;
-``plan_act=abandon`` with an active plan is answered read-only, not written.
+``plan_act=abandon`` with a writable task routes to ``mutation(cancel_task)``.
 
 Execution layer: the real loop removes the located group in one turn.
 """
@@ -24,8 +23,6 @@ import pytest
 from app.agent.goal_router import (
     GateFacts,
     MutationView,
-    PLAN_ACT_REPLIES,
-    REASON_PLAN_ABANDON,
     decide_turn,
 )
 from app.agent.protocol import parse_proposal, proposal_schema
@@ -127,16 +124,15 @@ def test_located_remove_decision_is_mutation_not_a_whole_turn_refusal():
     assert decision.reason_code != "STOP_REQUESTED"
 
 
-def test_abandon_with_an_active_plan_is_read_only_and_writes_nothing():
+def test_abandon_with_a_writable_task_routes_to_cancellation():
     proposal = parse_proposal({"plan_act": "abandon"})
     decision = decide_turn(
         proposal.understanding,
-        GateFacts(has_active_plan=True),
+        GateFacts(has_active_plan=True, current_step="awaiting_confirmation"),
     )
-    assert decision.route == "answer"
-    assert decision.write_blocked is True
-    assert decision.reason_code == REASON_PLAN_ABANDON
-    assert PLAN_ACT_REPLIES[REASON_PLAN_ABANDON]
+    assert decision.route == "mutation"
+    assert decision.mutation_action == "cancel_task"
+    assert decision.write_blocked is False
 
 
 # ------------------------------------------------------------------ execution layer

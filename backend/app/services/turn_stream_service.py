@@ -223,6 +223,7 @@ class TurnStreamService:
         expected_state_version: int,
         expected_session_version: int | None,
         view_context: dict[str, Any] | None,
+        plan_selection: dict[str, Any] | None,
         handoff_recent_messages: list[dict[str, str]] | None,
         event_queue: queue.Queue,
         seq_holder: dict[str, int],
@@ -257,6 +258,7 @@ class TurnStreamService:
                 expected_state_version=expected_state_version,
                 expected_session_version=expected_session_version,
                 view_context=view_context,
+                plan_selection=plan_selection,
                 handoff_recent_messages=handoff_recent_messages,
                 progress=progress,
                 should_stop=stop_event.is_set,
@@ -299,6 +301,7 @@ class TurnStreamService:
         expected_state_version: int,
         expected_session_version: int | None,
         view_context: dict[str, Any] | None,
+        plan_selection: dict[str, Any] | None = None,
         handoff_recent_messages: list[dict[str, str]] | None = None,
     ) -> AsyncGenerator[dict[str, Any], None]:
         # Ownership check happens before any work is started; the request-level
@@ -343,6 +346,7 @@ class TurnStreamService:
                 "expected_state_version": expected_state_version,
                 "expected_session_version": expected_session_version,
                 "view_context": view_context,
+                "plan_selection": plan_selection,
                 "handoff_recent_messages": handoff_recent_messages,
                 "event_queue": event_queue,
                 "seq_holder": seq_holder,

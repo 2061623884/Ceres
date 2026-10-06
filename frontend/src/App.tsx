@@ -1,38 +1,44 @@
-import { useState, useRef, useEffect, useCallback } from 'react'
+import { useState, useRef, useEffect, useLayoutEffect, useCallback } from 'react'
+import {
+  ensureOpening,
+  fetchOpening,
+  fixedRoleSwitch,
+  markPromptDisplayed,
+  streamRoleSwitch,
+  sendOpeningTurnStream,
+  type ChatRole,
+  type OpeningView,
+} from './lib/chatOpening'
 import { MercuryChat } from './MercuryChat'
 import { MomoAvatar } from './components/MomoToast'
 import {
   ApiError,
   addCartItem,
-  addLocalOrder,
   cartItemCount,
+  checkoutCart,
   categoryEmoji,
-  clearCartItems,
   clearStoredSessionId,
   confirmPlan,
   confirmableItems,
-  createGuideSession,
   ensureIdentity,
-  formatOrderDate,
   getCart,
   getGuideSession,
-  getLocalOrders,
   getStoredSessionId,
+  listOrders,
   listCategories,
   listProducts,
   clarificationChipLabels,
-  nextLocalOrderId,
   normalizePendingClarifications,
   patchCartItem,
   progressPhaseLabel,
   productImageUrl,
   remainingQuantity,
   revisePlan,
-  sendTurnStream,
+  storeSessionId,
   yuan,
   type Cart,
   type Category,
-  type LocalOrder,
+  type Order,
   type PlanResponse,
   type Product,
   type ProductComparisonCard,
@@ -419,7 +425,7 @@ function ProductCard({ p, onAdd, adding }: { p: Product; onAdd: (skuId: string) 
   const unitLabel = p.spec_unit ? `/${p.spec_unit}` : ''
   return (
     <article className="group flex flex-col overflow-hidden rounded-[22px] border border-black/[0.06] bg-white transition-colors duration-200 hover:border-black/[0.13]">
-      <div className="relative aspect-[1/0.91] overflow-hidden bg-[#f2f2f4]">
+      <div className="relative aspect-[1/0.91] overflow-hidden bg-[#f2f1ed]">
         <img src={productImageUrl(p.image_path)} alt={displayName} className="h-full w-full object-cover" loading="lazy" />
         <span className="absolute left-3 top-3 rounded-md bg-white/95 px-2 py-1 text-[9px] font-medium tracking-[0.02em] text-[#5f655f]">产地可溯源</span>
         <button onClick={() => setLiked(v => !v)} aria-label={liked ? `取消收藏${displayName}` : `收藏${displayName}`} className="absolute right-3 top-3 grid h-8 w-8 place-items-center rounded-full bg-white/95 text-[15px] text-[#4c554c] transition active:scale-90">
@@ -585,13 +591,13 @@ function ShelfScreen({
   }
 
   return (
-    <div className="relative flex h-full flex-col overflow-hidden bg-[#f5f5f7]">
-      <header className="z-10 flex-shrink-0 border-b border-black/[0.05] bg-[#f5f5f7] px-5 pb-3 pt-5">
+    <div className="relative flex h-full flex-col overflow-hidden bg-[#fcfbf8]">
+      <header className="z-10 flex-shrink-0 border-b border-black/[0.05] bg-[#fcfbf8] px-5 pb-3 pt-5">
         <div className="mb-4 flex items-center justify-between">
           <button className="flex items-center gap-1 text-[18px] font-extrabold tracking-[-0.07em] text-[#22231f]">静安区 <span className="mt-0.5 text-[11px] font-semibold text-black/35">⌄</span></button>
           <div className="flex items-center gap-2">
             <button aria-label="通知" className="grid h-9 w-9 place-items-center rounded-full bg-white text-[#626560] transition active:scale-90"><IconBell /></button>
-            <button aria-label="购物车" onClick={() => setCartOpen(true)} className="relative grid h-9 w-9 place-items-center rounded-full bg-[#1d1d1f] text-white transition active:scale-90">
+            <button aria-label="购物车" onClick={() => setCartOpen(true)} className="relative grid h-9 w-9 place-items-center rounded-full bg-[#171716] text-white transition active:scale-90">
               <IconCart />
               {cartCount > 0 && (
                 <span className="absolute -top-1 -right-1 flex h-[17px] min-w-[17px] items-center justify-center rounded-full bg-[#df7f51] px-1 text-[9px] font-extrabold text-white">
@@ -619,7 +625,7 @@ function ShelfScreen({
                 aria-pressed={isActive}
                 className={`group relative flex w-[68px] flex-shrink-0 flex-col items-center gap-2 bg-transparent pb-1 outline-none transition duration-200 ease-out active:scale-[0.98] ${isActive ? '-translate-y-0.5' : 'hover:-translate-y-px'}`}
               >
-                <span className={`grid h-[58px] w-[58px] place-items-center rounded-[20px] bg-[#f5f5f7] transition-all duration-200 ${isActive ? 'shadow-[0_5px_10px_rgba(29,29,31,0.12),0_1px_2px_rgba(29,29,31,0.06)]' : 'shadow-[0_0_0_1px_rgba(245,245,247,0.6)] group-hover:shadow-[0_3px_7px_rgba(29,29,31,0.05)]'}`}>
+                <span className={`grid h-[58px] w-[58px] place-items-center rounded-[20px] bg-[#f7f6f2] transition-all duration-200 ${isActive ? 'shadow-[0_5px_10px_rgba(25,24,23,0.12),0_1px_2px_rgba(25,24,23,0.06)]' : 'shadow-[0_0_0_1px_rgba(247,246,242,0.9)] group-hover:shadow-[0_3px_7px_rgba(25,24,23,0.05)]'}`}>
                   <span className={`text-[30px] leading-none transition-transform duration-200 ${isActive ? 'scale-[1.04]' : 'grayscale-[0.08] group-hover:scale-[1.02]'}`}>{emoji}</span>
                 </span>
                 <span className={`relative w-full truncate text-center text-[12px] font-semibold tracking-[-0.05em] transition-colors duration-200 ${isActive ? 'text-[#252622]' : 'text-[#8c8d87] group-hover:text-[#596158]'}`}>
@@ -636,7 +642,7 @@ function ShelfScreen({
         {!search && (
           <section className="mb-6">
             <div className="mb-3 flex items-center justify-between">
-              <h2 className="flex items-center gap-2 text-[19px] font-semibold tracking-[-0.06em] text-[#202124]">今日精选 <DemoBadge /></h2>
+              <h2 className="flex items-center gap-2 text-[19px] font-semibold tracking-[-0.06em] text-[#191817]">今日精选 <DemoBadge /></h2>
             </div>
             <div className="grid grid-cols-2 gap-3">
               {PROMO_CARDS.map((card) => (
@@ -666,10 +672,10 @@ function ShelfScreen({
         )}
         <div ref={productsRef} className="mb-3 flex items-end justify-between">
           <div>
-            <h2 className="text-[19px] font-semibold tracking-[-0.06em] text-[#202124]">{search ? '搜索结果' : '人气鲜品'}</h2>
-            <p className="mt-0.5 text-[10px] font-medium tracking-[0.02em] text-[#7c7c80]">最快 30 分钟送达</p>
+            <h2 className="text-[19px] font-semibold tracking-[-0.06em] text-[#191817]">{search ? '搜索结果' : '人气鲜品'}</h2>
+            <p className="mt-0.5 text-[10px] font-medium tracking-[0.02em] text-black/40">最快 30 分钟送达</p>
           </div>
-          <button className="flex items-center gap-1 rounded-full border border-black/[0.08] bg-transparent px-3.5 py-2 text-[10px] font-medium text-[#505055] transition active:scale-95">综合排序⌄ <DemoBadge /></button>
+          <button className="flex items-center gap-1 rounded-full border border-black/[0.08] bg-transparent px-3.5 py-2 text-[10px] font-medium text-black/40 transition active:scale-95">综合排序⌄ <DemoBadge /></button>
         </div>
         {error && (
           <div className="mb-4 rounded-2xl bg-red-50 px-4 py-3 text-center">
@@ -706,10 +712,37 @@ function SheetCloseButton({ onClose }: { onClose: () => void }) {
   )
 }
 
-function ChatFloatingSheet({ children, onClose }: { children: React.ReactNode; onClose: () => void }) {
+function ChatFloatingSheet({
+  children,
+  onClose,
+  panelRef,
+  morphOrigin,
+  closing,
+  onMorphEnd,
+  sheetKey,
+}: {
+  children: React.ReactNode
+  onClose: () => void
+  panelRef: React.RefObject<HTMLDivElement | null>
+  morphOrigin: string
+  closing: boolean
+  onMorphEnd: () => void
+  sheetKey: GuideSheet
+}) {
   return (
-    <div className="guide-sheet-enter absolute inset-x-0 bottom-full z-10 mb-2 px-4">
-      <div className="relative flex flex-col overflow-hidden rounded-[24px] bg-[#fcfbf8]">
+    <div className="absolute inset-x-0 bottom-full z-10 mb-2 px-4">
+      <div
+        ref={panelRef}
+        key={sheetKey}
+        className={`guide-glass-surface relative flex flex-col overflow-hidden rounded-[24px] ${
+          closing ? 'guide-sheet-morph-out' : 'guide-sheet-morph-in'
+        }`}
+        style={{ transformOrigin: morphOrigin }}
+        onAnimationEnd={(e) => {
+          if (e.target !== e.currentTarget || !closing) return
+          onMorphEnd()
+        }}
+      >
         <SheetCloseButton onClose={onClose} />
         {children}
       </div>
@@ -735,15 +768,23 @@ function ChatGuideCapsules({
   onToggle,
   planCount,
   cartCount,
+  capsuleRefs,
+  onSwitchToMomo,
+  switchBusy,
 }: {
   openSheet: GuideSheet | null
   onToggle: (sheet: GuideSheet) => void
   planCount: number
   cartCount: number
+  capsuleRefs: Record<GuideSheet, React.RefObject<HTMLButtonElement | null>>
+  onSwitchToMomo?: () => void
+  switchBusy?: boolean
 }) {
   const capsuleClass = (active: boolean) =>
     `inline-flex shrink-0 items-center gap-1.5 rounded-full px-4 py-2.5 text-[13px] font-medium tracking-[-0.01em] transition-colors ${
-      active ? 'bg-white/92 text-[#1d1c1a]' : 'bg-white/45 text-black/42'
+      active
+        ? 'guide-glass-surface text-[#1d1c1a]'
+        : 'guide-glass-chip text-black/42'
     }`
 
   const countBadge = (count: number) =>
@@ -755,16 +796,25 @@ function ChatGuideCapsules({
 
   return (
     <div className="scrollbar-hide mb-2.5 flex gap-2.5 overflow-x-auto">
-      <button type="button" onClick={() => onToggle('activity')} className={capsuleClass(openSheet === 'activity')}>
+      <button type="button" ref={capsuleRefs.activity} onClick={() => onToggle('activity')} className={capsuleClass(openSheet === 'activity')}>
         今日活动
       </button>
-      <button type="button" onClick={() => onToggle('plan')} className={capsuleClass(openSheet === 'plan')} aria-label={planCount > 0 ? `采购清单 ${planCount} 件` : '采购清单'}>
+      <button type="button" ref={capsuleRefs.plan} onClick={() => onToggle('plan')} className={capsuleClass(openSheet === 'plan')} aria-label={planCount > 0 ? `采购清单 ${planCount} 件` : '采购清单'}>
         采购清单
         {countBadge(planCount)}
       </button>
-      <button type="button" onClick={() => onToggle('cart')} className={capsuleClass(openSheet === 'cart')} aria-label={cartCount > 0 ? `购物车 ${cartCount} 件` : '购物车'}>
+      <button type="button" ref={capsuleRefs.cart} onClick={() => onToggle('cart')} className={capsuleClass(openSheet === 'cart')} aria-label={cartCount > 0 ? `购物车 ${cartCount} 件` : '购物车'}>
         购物车
         {countBadge(cartCount)}
+      </button>
+      <button
+        type="button"
+        disabled={switchBusy || !onSwitchToMomo}
+        onClick={() => onSwitchToMomo?.()}
+        className={`${capsuleClass(false)} disabled:opacity-45`}
+      >
+        <MomoAvatar size={20} />
+        售后找我
       </button>
     </div>
   )
@@ -1016,7 +1066,7 @@ function ChatCheckoutSuccess({
   onDone,
   onViewOrders,
 }: {
-  order: LocalOrder
+  order: Order
   onDone: () => void
   onViewOrders: () => void
 }) {
@@ -1024,9 +1074,9 @@ function ChatCheckoutSuccess({
     <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-[#fcfbf8] px-8">
       <div className="w-full max-w-[280px] rounded-[28px] bg-[#f7f6f2] px-6 py-8 text-center">
         <p className="text-[12px] font-medium text-black/40">订单已提交</p>
-        <p className="mt-3 text-[22px] font-semibold tracking-[-0.05em] text-[#1d1c1a]">{order.id}</p>
+        <p className="mt-3 text-[22px] font-semibold tracking-[-0.05em] text-[#1d1c1a]">{order.order_id}</p>
         <p className="mt-2 text-[15px] font-medium text-black/55">{yuan(order.total_fen)}</p>
-        <p className="mt-4 text-[11px] leading-relaxed text-black/35">门店会尽快为你备货，可在订单页查看进度</p>
+        <p className="mt-4 text-[11px] leading-relaxed text-black/35">本次为模拟下单，未发货；可在订单页查看商品和成交快照</p>
       </div>
       <div className="mt-8 flex w-full max-w-[280px] flex-col gap-2">
         <button
@@ -1049,6 +1099,7 @@ function ChatCheckoutSuccess({
 }
 
 function ChatScreen({
+  active,
   viewContext,
   autoSend,
   onAutoSendDone,
@@ -1056,7 +1107,14 @@ function ChatScreen({
   cart,
   onCartChange,
   onViewOrders,
+  openingId,
+  openingGuideSessionId,
+  liveHandoff,
+  onSwitchToMomo,
+  switchBusy,
+  onHandoffSwitch,
 }: {
+  active: boolean
   viewContext: { page: string; category_id?: string | null }
   autoSend?: string | null
   onAutoSendDone?: () => void
@@ -1064,6 +1122,16 @@ function ChatScreen({
   cart: Cart | null
   onCartChange: (cart: Cart) => void
   onViewOrders: () => void
+  openingId: string | null
+  openingGuideSessionId: string | null
+  liveHandoff?: { role: ChatRole; user: string; assistant: string; typing: boolean } | null
+  onSwitchToMomo?: () => void
+  switchBusy?: boolean
+  onHandoffSwitch?: (
+    body: { accept: boolean; target_role: ChatRole; handoff_id: string },
+    userMessage: string,
+    guideCallbacks: Parameters<typeof streamRoleSwitch>[2],
+  ) => Promise<void>
 }) {
   const [msgs, setMsgs] = useState<Msg[]>([WELCOME_MSG])
   const [input, setInput] = useState('')
@@ -1083,13 +1151,69 @@ function ChatScreen({
   const [checkoutPhase, setCheckoutPhase] = useState<'checkout' | 'success' | null>(null)
   const [checkoutBusy, setCheckoutBusy] = useState(false)
   const [checkoutError, setCheckoutError] = useState<string | null>(null)
-  const [placedOrder, setPlacedOrder] = useState<LocalOrder | null>(null)
+  const [placedOrder, setPlacedOrder] = useState<Order | null>(null)
   const [openSheet, setOpenSheet] = useState<GuideSheet | null>(null)
+  const [sheetClosing, setSheetClosing] = useState(false)
+  const [sheetMorphOrigin, setSheetMorphOrigin] = useState('50% 100%')
   const bottomRef = useRef<HTMLDivElement>(null)
+  const guideCapsuleActivityRef = useRef<HTMLButtonElement>(null)
+  const guideCapsulePlanRef = useRef<HTMLButtonElement>(null)
+  const guideCapsuleCartRef = useRef<HTMLButtonElement>(null)
+  const guideSheetPanelRef = useRef<HTMLDivElement>(null)
   const streamRef = useRef<AbortController | null>(null)
   const autoSentRef = useRef(false)
+  const [pendingHandoff, setPendingHandoff] = useState<{
+    handoffId: string
+    targetRole: ChatRole
+    promptMode: string
+  } | null>(null)
+  const promptMarkedRef = useRef<string | null>(null)
 
   useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: 'smooth' }) }, [msgs, typing, plan, progressText, openSheet])
+
+  const measureGuideSheetOrigin = useCallback((sheet: GuideSheet) => {
+    const capsule = sheet === 'activity'
+      ? guideCapsuleActivityRef.current
+      : sheet === 'plan'
+        ? guideCapsulePlanRef.current
+        : guideCapsuleCartRef.current
+    const panel = guideSheetPanelRef.current
+    if (!capsule || !panel) return
+    const cap = capsule.getBoundingClientRect()
+    const pan = panel.getBoundingClientRect()
+    const x = cap.left + cap.width / 2 - pan.left
+    const y = cap.top + cap.height / 2 - pan.top
+    setSheetMorphOrigin(`${x}px ${y}px`)
+  }, [])
+
+  useLayoutEffect(() => {
+    if (!openSheet || sheetClosing) return
+    measureGuideSheetOrigin(openSheet)
+  }, [openSheet, sheetClosing, measureGuideSheetOrigin])
+
+  const closeGuideSheet = useCallback(() => {
+    if (!openSheet) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setOpenSheet(null)
+      setSheetClosing(false)
+      return
+    }
+    setSheetClosing(true)
+  }, [openSheet])
+
+  const handleGuideSheetMorphEnd = useCallback(() => {
+    setOpenSheet(null)
+    setSheetClosing(false)
+  }, [])
+
+  const toggleGuideSheet = useCallback((sheet: GuideSheet) => {
+    if (openSheet === sheet && !sheetClosing) {
+      closeGuideSheet()
+      return
+    }
+    setSheetClosing(false)
+    setOpenSheet(sheet)
+  }, [openSheet, sheetClosing, closeGuideSheet])
 
   const applyAuthoritativeSnapshot = useCallback((snapshot: Pick<
     SessionResponse,
@@ -1130,24 +1254,25 @@ function ChatScreen({
     ) {
       setOpenSheet('plan')
     }
-  }, [])
+    if (turn.route === 'confirm_plan' && turn.committed) {
+      onCartRefresh()
+    }
+  }, [onCartRefresh])
 
-  const initSession = useCallback(async () => {
+  const initSession = useCallback(async (forcedSessionId?: string | null) => {
     setRestoring(true)
     setError(null)
     try {
       await ensureIdentity()
-      const stored = getStoredSessionId()
-      let session: SessionResponse
-      if (stored) {
-        session = await getGuideSession(stored, true)
-      } else {
-        session = await createGuideSession({
-          page: viewContext.page,
-          category_id: viewContext.category_id ?? null,
-        })
+      const sid = forcedSessionId ?? getStoredSessionId()
+      if (!sid) {
+        setSessionId(null)
+        setError('会话连接失败，请稍后再试')
+        return
       }
+      const session = await getGuideSession(sid, true)
       setSessionId(session.session_id)
+      storeSessionId(session.session_id)
       applyAuthoritativeSnapshot(session)
       const pending = normalizePendingClarifications(session.pending_clarifications ?? [])
       const chipLabels = clarificationChipLabels(pending)
@@ -1176,18 +1301,22 @@ function ChatScreen({
     } finally {
       setRestoring(false)
     }
-  }, [viewContext.category_id, viewContext.page, applyAuthoritativeSnapshot])
+  }, [applyAuthoritativeSnapshot])
 
-  useEffect(() => { initSession() }, [initSession])
+  useEffect(() => {
+    if (!active || !openingGuideSessionId) return
+    initSession(openingGuideSessionId)
+  }, [active, openingGuideSessionId, initSession])
 
   const send = useCallback(async (text: string) => {
-    if (!text.trim() || !sessionId || typing || confirming || restoring) return
+    if (!text.trim() || !sessionId || typing || confirming || restoring || !openingId) return
     const trimmed = text.trim()
     setMsgs(p => [...p, { id: `u-${Date.now()}`, role: 'user', text: trimmed }])
     setInput('')
     setTyping(true)
     setError(null)
     setProgressText(null)
+    setPendingHandoff(null)
 
     const requestId = newRequestId()
     const assistantId = `a-${requestId}`
@@ -1199,12 +1328,13 @@ function ChatScreen({
     streamRef.current = ac
 
     try {
-      const turn = await sendTurnStream(
-        sessionId,
+      const result = await sendOpeningTurnStream(
+        openingId,
+        'keke',
         trimmed,
+        requestId,
         taskId,
         stateVersion,
-        requestId,
         sessionVersion,
         viewContext,
         {
@@ -1226,8 +1356,28 @@ function ChatScreen({
             assistantText = payload?.replace === true ? delta : assistantText + delta
             setMsgs(p => p.map(m => m.id === assistantId ? { ...m, text: assistantText } : m))
           },
+          onRoutePrompt: (message, route) => {
+            assistantText = message
+            setMsgs(p => p.map(m => m.id === assistantId ? { ...m, text: message } : m))
+            if (route.handoff_id && route.target_role) {
+              setPendingHandoff({
+                handoffId: route.handoff_id,
+                targetRole: route.target_role,
+                promptMode: route.prompt_mode ?? 'automatic',
+              })
+            }
+          },
         },
+        plan ? {
+          plan_id: plan.plan_id,
+          plan_version: plan.plan_version,
+          selected_items: confirmableItems(plan.items),
+        } : undefined,
       )
+      if (result.kind === 'route_only') {
+        return
+      }
+      const turn = result.turn
       const finalText = turn.message || assistantText
       const clarifications = normalizePendingClarifications(
         turn.pending_clarifications ?? (turn.pending_clarification ? [turn.pending_clarification] : []),
@@ -1249,13 +1399,82 @@ function ChatScreen({
       setTyping(false)
       setProgressText(null)
     }
-  }, [sessionId, taskId, stateVersion, sessionVersion, typing, confirming, restoring, viewContext, applyTurnTerminalState])
+  }, [sessionId, taskId, stateVersion, sessionVersion, typing, confirming, restoring, viewContext, plan, applyTurnTerminalState, openingId])
 
   useEffect(() => {
-    if (!autoSend || autoSentRef.current || restoring || !sessionId) return
+    if (!autoSend || autoSentRef.current || restoring || !sessionId || !openingId) return
     autoSentRef.current = true
     send(autoSend).finally(() => onAutoSendDone?.())
-  }, [autoSend, restoring, sessionId, send, onAutoSendDone])
+  }, [autoSend, restoring, sessionId, openingId, send, onAutoSendDone])
+
+  useEffect(() => {
+    if (!openingId || !pendingHandoff || pendingHandoff.promptMode !== 'automatic') return
+    if (promptMarkedRef.current === pendingHandoff.handoffId) return
+    promptMarkedRef.current = pendingHandoff.handoffId
+    markPromptDisplayed(openingId, pendingHandoff.handoffId).catch(() => {})
+  }, [openingId, pendingHandoff])
+
+  async function respondHandoff(accept: boolean) {
+    if (!pendingHandoff || !openingId) return
+    const lastUser = [...msgs].reverse().find(m => m.role === 'user')
+    const userMessage = lastUser?.text ?? ''
+    const { handoffId, targetRole } = pendingHandoff
+    setPendingHandoff(null)
+    if (!accept) {
+      try {
+        await streamRoleSwitch(openingId, {
+          accept: false,
+          target_role: targetRole,
+          handoff_id: handoffId,
+        })
+      } catch (e) {
+        setError(e instanceof Error ? e.message : '操作失败')
+      }
+      return
+    }
+    if (!onHandoffSwitch) return
+    setTyping(true)
+    setError(null)
+    try {
+      let assistantText = ''
+      const assistantId = `handoff-${Date.now()}`
+      if (targetRole === 'keke') {
+        setMsgs(p => [...p, { id: assistantId, role: 'ai', text: '' }])
+      }
+      await onHandoffSwitch(
+        { accept: true, target_role: targetRole, handoff_id: handoffId },
+        userMessage,
+        {
+          onProgress: (event) => {
+            const phase = typeof event.payload?.phase === 'string' ? event.payload.phase : null
+            setProgressText(progressPhaseLabel(phase))
+          },
+          onAnswerDelta: (event) => {
+            const payload = event.payload
+            const delta = typeof payload?.delta === 'string'
+              ? payload.delta
+              : typeof payload?.text === 'string'
+                ? payload.text
+                : ''
+            if (!delta) return
+            assistantText += delta
+            setMsgs(p => p.map(m => (m.id === assistantId ? { ...m, text: assistantText } : m)))
+          },
+          onMercuryCompleted: (finalText) => {
+            assistantText = finalText
+          },
+        },
+      )
+      if (targetRole === 'keke' && assistantText) {
+        setMsgs(p => p.map(m => (m.id === assistantId ? { ...m, text: assistantText } : m)))
+      }
+    } catch (e) {
+      setError(e instanceof Error ? e.message : '切换失败')
+    } finally {
+      setTyping(false)
+      setProgressText(null)
+    }
+  }
 
   async function handleNewChat() {
     streamRef.current?.abort()
@@ -1268,7 +1487,10 @@ function ChatScreen({
     setSessionVersion(0)
     setSessionId(null)
     autoSentRef.current = false
-    await initSession()
+    setPendingHandoff(null)
+    if (openingGuideSessionId) {
+      await initSession(openingGuideSessionId)
+    }
   }
 
   async function handleCheckoutConfirm() {
@@ -1276,20 +1498,10 @@ function ChatScreen({
     setCheckoutBusy(true)
     setCheckoutError(null)
     try {
-      const order: LocalOrder = {
-        id: nextLocalOrderId(),
-        date: formatOrderDate(),
-        status: '待备货',
-        items: cart.items.map(i => `${i.name} × ${i.quantity}`),
-        total: cart.total_price_fen / 100,
-        total_fen: cart.total_price_fen,
-      }
-      const cleared = await clearCartItems(cart)
-      onCartChange(cleared)
-      addLocalOrder(order)
-      setPlacedOrder(order)
+      const result = await checkoutCart(cart.version)
+      onCartChange(result.cart)
+      setPlacedOrder(result.order)
       setCheckoutPhase('success')
-      onCartRefresh()
     } catch (e) {
       if (e instanceof ApiError && e.code === 'STALE_STATE') {
         const fresh = await getCart()
@@ -1373,23 +1585,17 @@ function ChatScreen({
   const planItemCount = hasPlan ? plan.items.length : 0
 
   return (
-    <section className="chat-panel-enter relative flex h-[min(71vh,650px)] min-h-[500px] flex-col overflow-hidden rounded-t-[38px] bg-[#fcfbf8] font-sans shadow-[0_-20px_60px_rgba(40,36,29,0.12)]">
-      <div className="flex justify-center bg-[#f7f5f0] pt-3 pb-1.5" aria-hidden="true"><span className="h-1 w-10 rounded-full bg-black/[.12]" /></div>
-      <div className="flex flex-shrink-0 items-center gap-3 bg-[#f7f5f0] px-6 pt-2 pb-5">
-        <KekeAvatar size={40} animated />
-        <div>
-          <p className="text-[15px] font-semibold tracking-[-0.04em] text-[#191817]">可可</p>
-          {progressText && <p className="text-[10px] text-black/40">{progressText}</p>}
-        </div>
-        <button
-          onClick={handleNewChat}
-          className="ml-auto grid h-9 w-9 place-items-center rounded-full bg-white/70 text-black/48 transition hover:bg-white active:scale-95"
-          aria-label="发起新对话">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M12 5v14M5 12h14" /></svg>
-        </button>
-      </div>
-
-      <div className="scrollbar-hide flex-1 space-y-5 overflow-y-auto px-6 py-5">
+    <section
+      className={`guide-chat-panel chat-panel-enter relative flex h-[min(71vh,650px)] max-h-full w-full min-h-[min(500px,71vh)] flex-shrink-0 flex-col overflow-hidden rounded-t-[38px] font-sans ${
+        active ? '' : 'hidden'
+      }`}
+      aria-hidden={!active}
+    >
+      <div
+        className={`guide-chat-scroll scrollbar-hide relative z-0 min-h-0 flex-1 space-y-5 overflow-y-auto px-6 pb-5 ${
+          progressText ? 'pt-[7.75rem]' : 'pt-[6.75rem]'
+        }`}
+      >
         {restoring && <p className="text-center text-sm text-black/40">正在连接可可…</p>}
         {error && <p className="text-center text-xs text-red-600">{error}</p>}
         {msgs.map(msg => (
@@ -1397,20 +1603,22 @@ function ChatScreen({
             {msg.role === 'ai' && <KekeAvatar size={26} />}
             <div className={`flex max-w-[82%] flex-col gap-2.5 ${msg.role === 'user' ? 'items-end' : 'items-start'}`}>
               {msg.text ? (
-                <div className="px-4 py-3 text-[13px] font-medium leading-[1.7] tracking-[-0.015em]"
+                <div
+                  className={`px-4 py-3 text-[13px] font-medium leading-[1.7] tracking-[-0.015em] ${
+                    msg.role === 'ai' ? 'guide-glass-bubble' : ''
+                  }`}
                   style={{
                     borderRadius: msg.role === 'user' ? '24px 24px 8px 24px' : '24px 24px 24px 8px',
-                    background: msg.role === 'user' ? '#171716' : '#f2f1ed',
+                    background: msg.role === 'user' ? '#171716' : undefined,
                     color: msg.role === 'user' ? '#fff' : '#292825',
                   }}>
                   {formatText(stripDuplicateClarificationOptions(msg.text, msg.suggestions))}
                 </div>
               ) : msg.role === 'ai' && typing ? (
                 <div
-                  className="ai-loading-bubble px-4 py-3 text-[13px] font-medium leading-[1.7] tracking-[-0.015em]"
+                  className="guide-glass-bubble ai-loading-bubble px-4 py-3 text-[13px] font-medium leading-[1.7] tracking-[-0.015em]"
                   style={{
                     borderRadius: '24px 24px 24px 8px',
-                    background: '#f2f1ed',
                     color: '#292825',
                   }}>
                   <span className="ai-loading-ellipsis" aria-label="可可正在输入">
@@ -1452,22 +1660,86 @@ function ChatScreen({
               {msg.suggestions && msg.role === 'ai' && !typing && !confirming && (
                 <div className="flex w-full flex-col gap-1.5">
                   {msg.suggestions.map((s, i) => (
-                    <button key={i} onClick={() => send(s)} className="rounded-full bg-[#f5f4f0] px-4 py-2.5 text-left text-[12px] font-medium text-black/55 transition hover:bg-[#eceae4] active:scale-[.98]">
+                    <button key={i} onClick={() => send(s)} className="guide-glass-chip rounded-full px-4 py-2.5 text-left text-[12px] font-medium text-black/55 transition active:scale-[.98]">
                       <span className="mr-2 text-[10px] font-semibold text-[#d79b58]">✦</span>
                       {s}
                     </button>
                   ))}
                 </div>
               )}
+              {pendingHandoff && msg.role === 'ai' && msg.id === msgs[msgs.length - 1]?.id && !typing && (
+                <div className="flex flex-wrap gap-2 pt-1">
+                  <button
+                    type="button"
+                    onClick={() => respondHandoff(true)}
+                    className="rounded-full bg-[#eac867] px-4 py-2 text-[12px] font-semibold text-[#4E3D12] active:scale-[.98]"
+                  >
+                    {pendingHandoff.targetRole === 'momo' ? '找墨墨' : '找可可'}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => respondHandoff(false)}
+                    className="guide-glass-chip rounded-full px-4 py-2 text-[12px] font-medium text-black/55 active:scale-[.98]"
+                  >
+                    继续聊
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         ))}
+        {liveHandoff?.role === 'keke' && (
+          <div className="space-y-5">
+            <div className="flex justify-end">
+              <div className="guide-glass-bubble-user max-w-[85%] rounded-[22px] px-4 py-3 text-[13px] leading-relaxed text-[#1d1c1a]">
+                {liveHandoff.user}
+              </div>
+            </div>
+            <div className="flex justify-start">
+              <div className="guide-glass-bubble-ai max-w-[90%] rounded-[22px] px-4 py-3 text-[13px] leading-relaxed text-[#1d1c1a]">
+                {liveHandoff.assistant}
+                {liveHandoff.typing && !liveHandoff.assistant && (
+                  <span className="text-black/35">…</span>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
         <div ref={bottomRef} />
       </div>
 
-      <div className="relative flex-shrink-0 bg-[#f7f5f0]/75 px-5 pb-4 pt-2">
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-20 px-6 pt-3 pb-3">
+        <div className="flex justify-center" aria-hidden="true">
+          <span className="h-1 w-10 rounded-full bg-black/[.12]" />
+        </div>
+        <div className="relative mt-2 flex min-h-[44px] items-center justify-center">
+          <button
+            type="button"
+            onClick={handleNewChat}
+            className="guide-glass-icon-btn pointer-events-auto absolute right-5 top-1/2 z-10 grid h-9 w-9 -translate-y-1/2 place-items-center rounded-full text-black/45 transition hover:bg-white/70 active:scale-95"
+            aria-label="发起新对话">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M12 5v14M5 12h14" /></svg>
+          </button>
+          <div className="guide-glass-header-pill pointer-events-auto relative z-10 inline-flex items-center gap-2.5 rounded-full py-2 pl-2 pr-5">
+            <KekeAvatar size={36} animated />
+            <p className="text-[15px] font-semibold tracking-[-0.04em] text-[#191817]">可可</p>
+          </div>
+        </div>
+        {progressText && (
+          <p className="mt-1 text-center text-[10px] text-black/40">{progressText}</p>
+        )}
+      </div>
+
+      <div className="relative z-10 flex-shrink-0 px-5 pb-4 pt-2">
         {openSheet && !checkoutPhase && (
-          <ChatFloatingSheet onClose={() => setOpenSheet(null)}>
+          <ChatFloatingSheet
+            sheetKey={openSheet}
+            panelRef={guideSheetPanelRef}
+            morphOrigin={sheetMorphOrigin}
+            closing={sheetClosing}
+            onMorphEnd={handleGuideSheetMorphEnd}
+            onClose={closeGuideSheet}
+          >
             {openSheet === 'activity' && <ActivitySheetContent />}
             {openSheet === 'plan' && (
               hasPlan
@@ -1521,11 +1793,18 @@ function ChatScreen({
         )}
         <ChatGuideCapsules
           openSheet={openSheet}
-          onToggle={(sheet) => setOpenSheet(prev => (prev === sheet ? null : sheet))}
+          onToggle={toggleGuideSheet}
           planCount={planItemCount}
           cartCount={cartCount}
+          capsuleRefs={{
+            activity: guideCapsuleActivityRef,
+            plan: guideCapsulePlanRef,
+            cart: guideCapsuleCartRef,
+          }}
+          onSwitchToMomo={onSwitchToMomo}
+          switchBusy={switchBusy}
         />
-        <div className="flex items-center gap-2 rounded-[28px] bg-white/85 px-4 py-2.5 backdrop-blur-sm">
+        <div className="guide-glass-surface flex items-center gap-2 rounded-[28px] px-4 py-2.5">
           <input
             value={input}
             onChange={e => setInput(e.target.value)}
@@ -1576,61 +1855,41 @@ function ChatScreen({
 }
 
 // ── Orders Screen ─────────────────────────────────────────────
-const ORDERS = [
-  { id: '#CE2406', date: '今天 14:32', status: '配送中', items: ['有机西兰花 × 2', '三文鱼 × 1'], total: 88.50 },
-  { id: '#CE2405', date: '昨天 10:15', status: '已完成', items: ['草莓 × 1', '牛奶 × 2'], total: 57.80 },
-  { id: '#CE2404', date: '2天前 19:08', status: '已完成', items: ['鸡蛋 × 1', '红甜椒 × 2', '生姜 × 1'], total: 67.65 },
-]
-
 function OrdersScreen() {
-  const [localOrders, setLocalOrders] = useState<LocalOrder[]>(() => getLocalOrders())
+  const [orders, setOrders] = useState<Order[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    setLocalOrders(getLocalOrders())
+    listOrders()
+      .then(({ items }) => setOrders(items))
+      .catch((err) => setError(err instanceof Error ? err.message : '订单加载失败'))
+      .finally(() => setLoading(false))
   }, [])
 
   return (
     <div className="flex h-full flex-col bg-[#fcfbf8]">
       <div className="flex-shrink-0 px-6 pt-10 pb-4">
-        <div className="flex items-end justify-between"><h2 className="flex items-center gap-2 text-[26px] font-semibold tracking-[-0.07em] text-[#191817]">我的订单 <DemoBadge /></h2><span className="mb-1 text-[11px] font-medium text-black/35">近 30 天</span></div>
+        <h2 className="flex items-center gap-2 text-[26px] font-semibold tracking-[-0.07em] text-[#191817]">我的订单 <DemoBadge /></h2>
       </div>
       <div className="scrollbar-hide flex-1 space-y-3 overflow-y-auto px-5 pb-5">
-        {localOrders.map((order) => (
-          <button key={order.id} className="w-full rounded-[26px] bg-[#f7f6f2] p-4 text-left transition hover:bg-[#f2f1ed] active:scale-[.985]">
+        {loading && <p className="py-8 text-center text-[12px] text-black/40">正在加载订单…</p>}
+        {error && <p className="py-8 text-center text-[12px] text-red-600">订单加载失败：{error}</p>}
+        {!loading && !error && orders.length === 0 && (
+          <p className="py-8 text-center text-[12px] text-black/40">还没有订单</p>
+        )}
+        {!loading && !error && orders.map((order) => (
+          <article key={order.order_id} className="w-full rounded-[26px] bg-[#f7f6f2] p-4">
             <div className="mb-3 flex items-center justify-between">
-              <div className="flex items-center gap-2"><span className="text-[13px] font-semibold tracking-[-0.02em] text-[#252421]">{order.id}</span><span className="text-[10px] font-medium text-black/32">{order.date}</span></div>
-              <span className="rounded-full bg-[#f7e8a7] px-2.5 py-1 text-[10px] font-medium text-[#735a13]">{order.status}</span>
+              <div className="flex items-center gap-2"><span className="text-[13px] font-semibold tracking-[-0.02em] text-[#252421]">{order.order_id}</span><span className="text-[10px] font-medium text-black/32">{new Date(order.created_at).toLocaleString('zh-CN')}</span></div>
+              <span className="rounded-full bg-[#f7e8a7] px-2.5 py-1 text-[10px] font-medium text-[#735a13]">{order.status === 'paid' ? '模拟下单，未发货' : order.status}</span>
             </div>
-            <p className="text-[12px] leading-relaxed text-black/52">{order.items.join(' · ')}</p>
+            <p className="text-[12px] leading-relaxed text-black/52">{order.items.map(item => `${item.product_name} × ${item.quantity}`).join(' · ')}</p>
             <div className="flex items-center justify-between">
-              <span className="mt-3 text-[10px] font-medium text-black/28">查看订单详情 →</span>
-              <span className="mt-3 text-[14px] font-semibold tracking-[-0.03em] text-[#1d1c1a]">¥{order.total.toFixed(2)}</span>
+              <span className="mt-3 text-[10px] font-medium text-black/28">共 {order.items.length} 项商品</span>
+              <span className="mt-3 text-[14px] font-semibold tracking-[-0.03em] text-[#1d1c1a]">¥{(order.total_fen / 100).toFixed(2)}</span>
             </div>
-          </button>
-        ))}
-        <div className="rounded-[30px] bg-[#f2f1ed] p-5">
-          <div className="flex items-center justify-between">
-            <div><p className="text-[11px] font-medium text-black/40">当前进度</p><p className="mt-1 text-[17px] font-semibold tracking-[-0.045em] text-[#1d1c1a]">配送员正在路上</p></div>
-            <span className="rounded-full bg-[#f7e8a7] px-3 py-1.5 text-[10px] font-semibold text-[#735a13]">预计 16:10</span>
-          </div>
-          <div className="mt-5 flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-[#30302c]" /><span className="h-[2px] flex-1 bg-[#30302c]" /><span className="h-2 w-2 rounded-full bg-[#30302c]" /><span className="h-[2px] flex-1 bg-black/[.09]" /><span className="h-2 w-2 rounded-full bg-black/[.12]" /></div>
-          <div className="mt-2 flex justify-between text-[10px] font-medium text-black/35"><span>已接单</span><span>备货完成</span><span>送达</span></div>
-        </div>
-        <div className="px-2 pt-1 text-[10px] font-medium tracking-[0.12em] text-black/30">RECENT ORDERS</div>
-        {ORDERS.map((order, index) => (
-          <button key={order.id} className="w-full rounded-[26px] bg-[#f7f6f2] p-4 text-left transition hover:bg-[#f2f1ed] active:scale-[.985]">
-            <div className="mb-3 flex items-center justify-between">
-              <div className="flex items-center gap-2"><span className="text-[13px] font-semibold tracking-[-0.02em] text-[#252421]">{order.id}</span><span className="text-[10px] font-medium text-black/32">{order.date}</span></div>
-              <span className={`rounded-full px-2.5 py-1 text-[10px] font-medium ${order.status === '配送中' ? 'bg-[#f7e8a7] text-[#735a13]' : 'bg-white/70 text-black/38'}`}>
-                {order.status}
-              </span>
-            </div>
-            <p className="text-[12px] leading-relaxed text-black/52">{order.items.join(' · ')}</p>
-            <div className="flex items-center justify-between">
-              <span className="mt-3 text-[10px] font-medium text-black/28">{index === 0 ? '查看配送详情' : '查看订单详情'} →</span>
-              <span className="mt-3 text-[14px] font-semibold tracking-[-0.03em] text-[#1d1c1a]">¥{order.total.toFixed(2)}</span>
-            </div>
-          </button>
+          </article>
         ))}
       </div>
     </div>
@@ -1766,7 +2025,18 @@ export default function App() {
   const [shelfSearch, setShelfSearch] = useState('')
   const [guideFromHome, setGuideFromHome] = useState(false)
   const [autoSendMessage, setAutoSendMessage] = useState<string | null>(null)
+  const [opening, setOpening] = useState<OpeningView | null>(null)
+  const [openingError, setOpeningError] = useState<string | null>(null)
+  const [roleSwitchBusy, setRoleSwitchBusy] = useState(false)
+  const [liveHandoff, setLiveHandoff] = useState<{
+    role: ChatRole
+    user: string
+    assistant: string
+    typing: boolean
+  } | null>(null)
   const cartCount = cartItemCount(cart)
+  const chatOverlayOpen = view === 'keke' || view === 'momo'
+  const chatRole: ChatRole = view === 'momo' ? 'momo' : 'keke'
 
   const refreshCart = useCallback(async () => {
     try {
@@ -1781,12 +2051,75 @@ export default function App() {
   useEffect(() => { refreshCart() }, [refreshCart])
 
   const guideViewContext = guideFromHome
-    ? { page: 'home', category_id: null }
+    ? { page: 'home', category_id: null as string | null }
     : shelfSearch.trim()
-      ? { page: 'search', category_id: null }
+      ? { page: 'search', category_id: null as string | null }
       : view === 'shelf' || view === 'keke'
         ? { page: 'category', category_id: activeCategoryId }
-        : { page: 'home', category_id: null }
+        : { page: 'home', category_id: null as string | null }
+
+  useEffect(() => {
+    if (!chatOverlayOpen) return
+    let cancelled = false
+    setOpeningError(null)
+    ensureOpening(chatRole, guideViewContext)
+      .then((next) => {
+        if (!cancelled) setOpening(next)
+      })
+      .catch((err) => {
+        if (!cancelled) {
+          setOpening(null)
+          setOpeningError(err instanceof Error ? err.message : '聊天连接失败')
+        }
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [chatOverlayOpen, chatRole, guideViewContext.page, guideViewContext.category_id])
+
+  const handleFixedRoleSwitch = useCallback(async (target: ChatRole) => {
+    if (!opening || roleSwitchBusy) return
+    setRoleSwitchBusy(true)
+    setLiveHandoff(null)
+    try {
+      const next = await fixedRoleSwitch(opening.opening_id, target)
+      setOpening(next)
+      setView(target === 'momo' ? 'momo' : 'keke')
+    } catch (err) {
+      setOpeningError(err instanceof Error ? err.message : '切换失败')
+    } finally {
+      setRoleSwitchBusy(false)
+    }
+  }, [opening, roleSwitchBusy])
+
+  const handleHandoffSwitch = useCallback(async (
+    body: { accept: boolean; target_role: ChatRole; handoff_id: string },
+    userMessage: string,
+    guideCallbacks: Parameters<typeof streamRoleSwitch>[2],
+  ) => {
+    if (!opening) return
+    let assistantAcc = ''
+    await streamRoleSwitch(opening.opening_id, body, {
+      ...guideCallbacks,
+      onMercuryDelta: (chunk) => {
+        assistantAcc += chunk
+        guideCallbacks?.onMercuryDelta?.(chunk)
+      },
+      onMercuryCompleted: (finalText) => {
+        assistantAcc = finalText
+        guideCallbacks?.onMercuryCompleted?.(finalText)
+      },
+    }, body.target_role)
+    const next = await fetchOpening(opening.opening_id)
+    setOpening(next)
+    setView(body.target_role === 'momo' ? 'momo' : 'keke')
+    setLiveHandoff({
+      role: body.target_role,
+      user: userMessage,
+      assistant: assistantAcc,
+      typing: false,
+    })
+  }, [opening])
 
   function handleNavTap(id: string) {
     if (id === 'home')    { setView('home'); return }
@@ -1827,9 +2160,16 @@ export default function App() {
         </div>
 
         <BottomNav view={view} onTap={handleNavTap} />
-        {view === 'keke' && (
+        {chatOverlayOpen && (
           <div className="absolute inset-x-0 bottom-[82px] top-0 z-10 flex flex-col justify-end bg-[#18261b]/20 backdrop-blur-[1px]">
+            {openingError && (
+              <p className="pointer-events-none absolute inset-x-0 top-24 z-30 text-center text-[11px] text-red-600">
+                {openingError}
+              </p>
+            )}
+            <div className="relative flex w-full flex-col justify-end">
             <ChatScreen
+              active={chatRole === 'keke'}
               viewContext={guideViewContext}
               autoSend={autoSendMessage}
               onAutoSendDone={() => setAutoSendMessage(null)}
@@ -1837,19 +2177,24 @@ export default function App() {
               cart={cart}
               onCartChange={setCart}
               onViewOrders={() => setView('orders')}
+              openingId={opening?.opening_id ?? null}
+              openingGuideSessionId={opening?.guide_session_id ?? null}
+              liveHandoff={liveHandoff}
+              onSwitchToMomo={() => handleFixedRoleSwitch('momo')}
+              switchBusy={roleSwitchBusy || !opening}
+              onHandoffSwitch={handleHandoffSwitch}
             />
-          </div>
-        )}
-        {(view === 'orders' || view === 'momo') && (
-          <div
-            className={
-              view === 'momo'
-                ? 'absolute inset-x-0 bottom-[82px] top-0 z-10 flex flex-col justify-end bg-[#18261b]/20 backdrop-blur-[1px]'
-                : 'pointer-events-none absolute h-0 w-0 overflow-hidden opacity-0'
-            }
-            aria-hidden={view !== 'momo'}
-          >
-            <MercuryChat visible={view === 'momo'} />
+            <MercuryChat
+              active={chatRole === 'momo'}
+              visible={chatOverlayOpen}
+              openingId={opening?.opening_id ?? null}
+              mercurySessionId={opening?.mercury_session_id ?? null}
+              liveHandoff={liveHandoff}
+              onSwitchToKeke={() => handleFixedRoleSwitch('keke')}
+              switchBusy={roleSwitchBusy || !opening}
+              onHandoffSwitch={handleHandoffSwitch}
+            />
+            </div>
           </div>
         )}
       </div>

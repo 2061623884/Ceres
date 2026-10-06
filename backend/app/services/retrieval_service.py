@@ -90,7 +90,7 @@ _UNKNOWN_SIGNALS: tuple[tuple[str, tuple[str, ...]], ...] = (
     ("taste", ("辣", "清淡", "口味", "酸甜", "咸", "香")),
     ("cook_minutes", ("分钟", "快手", "简单", "复杂", "耗时")),
     ("allergens", ("过敏", "花生", "坚果", "麸质", "乳", "忌口")),
-    ("nutrition", ("热量", "卡路里", "营养", "蛋白", "低脂")),
+    ("nutrition", ("热量", "卡路里", "营养", "蛋白", "低脂", "低糖", "糖含量", "含糖量")),
 )
 
 #: Query vectors are cached per process, keyed by the *whole* embedding contract
@@ -267,12 +267,19 @@ def _dish_evidence(
 
 def _sku_evidence(doc: dict[str, Any], payload: dict[str, Any], route: str) -> list[str]:
     evidence = [_clip(f"商品：{doc.get('name') or ''}")]
+    facts = []
     spec_qty = payload.get("spec_quantity")
     spec_unit = payload.get("spec_unit")
     if spec_qty is not None and spec_unit:
-        evidence.append(_clip(f"规格：{spec_qty}{spec_unit}"))
+        facts.append(f"规格：{spec_qty}{spec_unit}")
+    if payload.get("category_id"):
+        facts.append(f"品类：{payload['category_id']}")
+    if payload.get("product_type"):
+        facts.append(f"商品类型：{payload['product_type']}")
+    if facts:
+        evidence.append(_clip("；".join(facts)))
     if payload.get("usage_tags"):
-        evidence.append(_clip("用途：" + "、".join(str(t) for t in payload["usage_tags"][:4])))
+        evidence.append(_clip("用途：" + "、".join(str(t) for t in payload["usage_tags"])))
     evidence.append(_clip(f"匹配方式：{route}"))
     return evidence[:MAX_EVIDENCE_ITEMS]
 
@@ -291,6 +298,8 @@ def _unknown_constraints(query: str, filters: RetrievalFilters, kind: str) -> li
     if kind == DOC_DISH and filters.budget_fen is not None:
         # Budget is a whole-basket property; retrieval does not price one.
         unknown.append("budget")
+    if kind == DOC_DISH and filters.specification:
+        unknown.append("specification")
     return list(dict.fromkeys(unknown))
 
 
@@ -517,8 +526,21 @@ class RetrievalService:
         exact = self._exact_hit(index, query, kind=kind)
         dropped_exact: dict[str, Any] | None = None
         if exact is not None:
-            verified, drop = self._verify(exact["doc"], kind=kind, filters=filters)
+            verified, drop, constraint_fields = self._verify(
+                exact["doc"], kind=kind, filters=filters
+            )
             if drop:
+                if constraint_fields:
+                    base["status"] = STATUS_OK
+                    base["match_kind"] = exact["match_kind"]
+                    base["conflict"] = {
+                        "code": "CONSTRAINT_CONFLICT",
+                        "target_id": exact["doc"]["target_id"],
+                        "name": exact["doc"]["name"],
+                        "constraint_fields": constraint_fields,
+                        "message": "这件商品不符合你提出的小包装要求，不能用其他商品替代你点名的商品。",
+                    }
+                    return base
                 # The shopper named this dish and the live store no longer
                 # matches the indexed document. It is not resurrected from the
                 # fixture, and the answer is **not** quietly filled with a
@@ -861,7 +883,9 @@ class RetrievalService:
                 break
             routes = tuple(sorted(entry["routes"]))
             match_kind = _match_kind(routes)
-            verified, drop = self._verify(entry["doc"], kind=kind, filters=filters)
+            verified, drop, _constraint_fields = self._verify(
+                entry["doc"], kind=kind, filters=filters
+            )
             if drop:
                 # A document the live store no longer has, no longer sells, or
                 # can no longer build is dropped rather than shown with a caveat.
@@ -883,8 +907,8 @@ class RetrievalService:
 
     def _verify(
         self, doc: dict[str, Any], *, kind: str, filters: RetrievalFilters
-    ) -> tuple[bool | None, bool]:
-        """``(verified, stale)`` against the live store.
+    ) -> tuple[bool | None, bool, list[str]]:
+        """``(verified, stale, constraint_fields)`` against the live store.
 
         Dishes go through the existing plan builder — the same one that decides
         whether a plan can be generated, so retrieval never invents a second
@@ -892,16 +916,17 @@ class RetrievalService:
         Products check the live offer and available quantity.
         """
         if not self.verify_live:
-            return None, False
+            return None, False, []
         # The caller may have pending ORM mutations on this session. Reading live
         # facts must not flush them: a read-only port that commits someone else's
         # half-built write is not read-only.
         with self.db.no_autoflush:
             if self._live_document_is_stale(doc, kind=kind):
                 self._stale_ids.append(doc["doc_id"])
-                return None, True
+                return None, True, []
             if kind == DOC_DISH:
-                return self._verify_dish(doc, filters)
+                verified, drop = self._verify_dish(doc, filters)
+                return verified, drop, []
             return self._verify_sku(doc)
 
     def _live_document_is_stale(self, doc: dict[str, Any], *, kind: str) -> bool:
@@ -1006,7 +1031,7 @@ class RetrievalService:
         # Live identity was checked above; fulfillment belongs to the planner.
         return False, False
 
-    def _verify_sku(self, doc: dict[str, Any]) -> tuple[bool | None, bool]:
+    def _verify_sku(self, doc: dict[str, Any]) -> tuple[bool | None, bool, list[str]]:
         from app.services.catalog_service import CatalogService
         from app.services.delivery_service import DeliveryService
         if self._live_products is None:
@@ -1018,27 +1043,27 @@ class RetrievalService:
             self._live_delivery = DeliveryService(self.db).get_quote(self.store_id, self.delivery_zone_id)
         delivery = self._live_delivery
         if not delivery.get("reachable"):
-            return False, True
+            return False, True, []
         deadline = self._context.delivery_deadline_minutes if self._context else None
         eta = delivery.get("eta_minutes")
         if deadline is not None and (eta is None or eta > deadline):
-            return False, True
+            return False, True, []
         product = self._live_products.get(str(doc["target_id"]))
         if product is None:
             # Not sellable at this store any more: a ghost row, dropped and logged.
             logger.info("dropping ghost sku %s: not sellable at this store", doc["doc_id"])
-            return None, True
+            return None, True, []
         if self._context is not None and not self._context.matches_spec(product):
             # A stated specification (for example "小包装") is a hard filter, and
             # it is answered by the same business rule the plan builder uses —
             # not by a second copy of the rule here.
-            return False, True
+            return False, True, ["specification"]
         available = product.get("available_qty")
         if available is None or product.get("price_fen") is None:
-            return False, True
+            return False, True, []
         if int(available) < 1:
-            return False, True
-        return True, False
+            return False, True, []
+        return True, False, []
 
     # ------------------------------------------------------------------- hits
 

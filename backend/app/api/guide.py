@@ -138,7 +138,7 @@ def _session_response(
         history_status=session.history_status,
         messages=messages,
         product_cards=CatalogService(db, entry.store_id).comparison_cards(
-            (load_context(db, session) or {}).get("displayed_candidates", []),
+            load_context(db, session).get("displayed_candidates", []),
         ),
     )
 
@@ -508,6 +508,7 @@ async def process_guide_turn_stream(
         raise AppError(403, "SESSION_FORBIDDEN", "Session not found")
     svc = TurnStreamService(db, owner_id)
     view_ctx = body.view_context.model_dump() if body.view_context else None
+    plan_selection = body.plan_selection.model_dump() if body.plan_selection is not None else None
 
     async def event_generator():
         async for event in svc.stream_turn(
@@ -518,6 +519,7 @@ async def process_guide_turn_stream(
             body.expected_state_version,
             body.expected_session_version,
             view_ctx,
+            plan_selection,
             handoff_recent_messages,
         ):
             yield f"data: {json.dumps(event, ensure_ascii=False)}\n\n"

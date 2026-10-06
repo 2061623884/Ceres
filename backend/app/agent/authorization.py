@@ -46,6 +46,8 @@ def inherit_candidate_constraints(mutation: Mutation, decision: Any) -> Mutation
         mutation.budget_fen = int(round(constraints.budget_yuan * 100))
     if not mutation.excluded_ingredients and constraints.excluded_ingredients:
         mutation.excluded_ingredients = list(constraints.excluded_ingredients)
+    if not mutation.specification and constraints.specification:
+        mutation.specification = dict(constraints.specification)
     return mutation
 
 
@@ -92,6 +94,10 @@ def authorize_mutations(
                 m.budget_fen is not None
                 and goal.constraints.budget_yuan is not None
                 and m.budget_fen != round(goal.constraints.budget_yuan * 100)
+            )
+            or (
+                bool(m.specification)
+                and m.specification != goal.constraints.specification
             )
             for m in goal_adds
         ):
@@ -147,6 +153,12 @@ def compile_decision(
         # bound to. Nothing is inferred from the sentence.
         mutation = goal_target_mutation(decision.candidate, candidates)
         if mutation is None:
+            if decision.candidate.goal.fulfillment_mode == "ready_made":
+                return (
+                    [],
+                    f"没有找到与「{decision.candidate.goal.target_name}」名称相符的成品商品，原清单保持不变。",
+                    "GOAL_TARGET_UNRESOLVED",
+                )
             return (
                 [],
                 "我还不确定要准备哪一份清单，请再说一次目标名称。",
@@ -157,21 +169,41 @@ def compile_decision(
         decision.candidate.target_id = resolved.target_id
         decision.candidate.target_kind = resolved.kind
         return [mutation], "", ""
+    if getattr(decision, "mutation_action", None) == "patch_meal_mode":
+        group = focused_group(decision, candidates)
+        if group is None:
+            return [], SLOT_QUESTIONS[SLOT_FOCUS], SLOT_FOCUS
+        return (
+            [
+                Mutation(
+                    verb="change",
+                    target_ref=group.ref,
+                    name=group.name,
+                    field="fulfillment_mode",
+                )
+            ],
+            "",
+            "",
+        )
     understanding = getattr(proposal, "understanding", None)
     changes = understanding.changes if understanding is not None else None
     if getattr(decision, "mutation_action", None) == "apply_mutation" and decision.relation == "amend" and changes:
         unsupported = [
             field
-            for field in changes.changed_fields()
+            for field in decision.changed_fields
             if field not in PATCHABLE_PLAN_FIELDS or field in changes.clear
         ]
         if unsupported:
+            labels = {
+                "specification": "小包装要求",
+            }
             # Rewriting an existing plan's budget or exclusions needs a whole
             # re-plan. Saying so is required: silently dropping the patch would
             # leave a plan on screen that no longer matches what was asked.
             return (
                 [],
-                "已有清单的" + "、".join(unsupported) + "暂时不能就地改，本轮没有改动；"
+                "已有清单的" + "、".join(labels.get(field, field) for field in unsupported)
+                + "暂时不能就地改，本轮没有改动；"
                 "可以说要换成什么，我会另建一份清单。",
                 "UNSUPPORTED_CHANGE_FIELD",
             )
@@ -242,6 +274,7 @@ def goal_target_mutation(candidate: Any, candidates: CandidateSet) -> Mutation |
             if constraints.budget_yuan is not None
             else None
         ),
+        specification=dict(constraints.specification),
     )
 
 

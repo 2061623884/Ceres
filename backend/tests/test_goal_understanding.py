@@ -14,6 +14,7 @@ from app.agent.goal import GoalParseError, parse_goal, parse_intent_state
 from app.agent.goal_router import (
     SLOT_CATEGORY,
     SLOT_ITEMS,
+    SLOT_MEAL_PREFERENCES,
     SLOT_MEAL_TARGET,
     route_goal,
 )
@@ -40,7 +41,7 @@ def test_undecided_meal_routes_to_clarification() -> None:
     assert decision.kind == "meal_decision"
     assert decision.readiness == "needs_clarification"
     assert decision.route == "clarify_goal"
-    assert decision.missing_slots == [SLOT_MEAL_TARGET]
+    assert decision.missing_slots == [SLOT_MEAL_PREFERENCES]
 
 
 def test_light_flavor_constraint_is_kept_verbatim() -> None:

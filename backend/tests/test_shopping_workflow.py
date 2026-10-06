@@ -10,7 +10,8 @@ They cover the behaviours the iteration was asked for:
 * incremental targets preserve the user's selections and hand-edited quantities
 * open scenarios are freely shoppable and are built generically from their own
   components/common_tags
-* only explicit clicks mutate the cart, and a per-row add is never bought twice
+* only an explicit confirmation (button or chat) mutates the cart, and a
+  per-row add is never bought twice
 
 Every turn is scripted in the one-pass **proposal** protocol
 (``semantic_provider``): a write names its target and the lookup it needs in one
@@ -40,6 +41,7 @@ from support.semantic_agent import (
     request_amend,
     request_new,
 )
+from test_semantic_phase1_purchase import indexed_client
 
 TOMATO = "dish-fanqie-chao-dan"
 TOMATO_SOUP = "dish-fanqie-dan-tang"
@@ -401,13 +403,14 @@ def test_partial_shorthand_resolves_against_the_shown_candidates(client, semanti
 # ------------------------------------------------------- incremental targets
 
 
-def test_append_keeps_selection_and_hand_edited_quantity(client, semantic_provider):
+def test_append_keeps_selection_and_hand_edited_quantity(indexed_client, semantic_provider):
     semantic_provider(
         [
             *lookup_then_add_id("dish", "番茄炒蛋", TOMATO, people=2),
             *lookup_then_add_id("dish", "番茄蛋汤", TOMATO_SOUP, relation="append"),
         ]
     )
+    client = indexed_client
     sid = create_session(client)
     first = turn(client, sid, "我想吃番茄炒蛋，2人").json()
     tomato = next(i for i in first["plan"]["items"] if "tomato" in i["sku_id"])
@@ -453,6 +456,114 @@ def test_append_keeps_selection_and_hand_edited_quantity(client, semantic_provid
     )
     assert kept["quantity"] >= edited_quantity, "the hand-edited quantity survived the append"
     assert kept["quantity_source"] == "user"
+
+
+def test_explicit_add_dish_keeps_shared_egg_contribution_and_old_selection(
+    indexed_client, semantic_provider
+):
+    semantic_provider(
+        [
+            *lookup_then_add_id(
+                "dish", "番茄炒蛋", TOMATO, mode="self_cook",
+                constraints={"budget_yuan": 100},
+            ),
+            *lookup_then_add_id(
+                "dish", "蛋炒饭", "dish-dan-chao-fan", relation="append",
+                mode="self_cook",
+            ),
+        ]
+    )
+    client = indexed_client
+    sid = create_session(client)
+    first = turn(client, sid, "今晚自己做番茄炒蛋，预算100元，没有忌口").json()
+    original_selection = {
+        item["sku_id"]: item["selected"] for item in first["plan"]["items"]
+    }
+
+    appended = turn(client, sid, "再加一道蛋炒饭，自己做", first).json()
+
+    assert appended["plan_effect"] == "replace", appended
+    assert appended["pending_clarifications"] == [], appended
+    assert {target["target_id"] for target in appended["plan"]["targets"]} == {
+        TOMATO,
+        "dish-dan-chao-fan",
+    }
+    assert all(
+        target["fulfillment_mode"] == "self_cook"
+        for target in appended["plan"]["targets"]
+    )
+    by_sku = {item["sku_id"]: item for item in appended["plan"]["items"]}
+    assert {
+        sku_id: by_sku[sku_id]["selected"] for sku_id in original_selection
+    } == original_selection
+
+    shared_egg = by_sku[EGG_SKU]
+    assert shared_egg["selected"] is True
+    assert {row["group_id"] for row in shared_egg["contributions"]} == {
+        f"dish:{TOMATO}",
+        "dish:dish-dan-chao-fan",
+    }
+
+
+def test_named_dish_without_add_or_replace_still_asks(indexed_client, semantic_provider):
+    def append_after_answer(request):
+        return lookup_then_add_id(
+            "dish", "蛋炒饭", "dish-dan-chao-fan",
+            relation="append", mode="self_cook",
+        )[0](request)
+
+    provider = semantic_provider(
+        [
+            *lookup_then_add_id(
+                "dish", "番茄炒蛋", TOMATO, mode="self_cook",
+                constraints={"budget_yuan": 100},
+            ),
+            *lookup_then_add_id(
+                "dish", "蛋炒饭", "dish-dan-chao-fan", mode="self_cook"
+            ),
+            append_after_answer,
+        ]
+    )
+    client = indexed_client
+    sid = create_session(client)
+    first = turn(client, sid, "今晚自己做番茄炒蛋，预算100元，没有忌口").json()
+    before = _snapshot(client, sid)["plan"]
+
+    ambiguous = turn(client, sid, "我想吃蛋炒饭，自己做", first).json()
+
+    assert ambiguous["route"] == "clarify", ambiguous
+    assert ambiguous["pending_clarifications"][0]["slot"] == "goal_relation", ambiguous
+    assert ambiguous["plan_effect"] == "keep", ambiguous
+    assert ambiguous["plan"] is None, ambiguous
+    pending = ambiguous["pending_clarifications"][0]
+    after = _snapshot(client, sid)["plan"]
+    assert after["plan_id"] == before["plan_id"]
+    assert after["plan_version"] == before["plan_version"]
+    assert {target["target_id"] for target in after["targets"]} == {TOMATO}
+    assert client.get("/api/v1/cart").json()["items"] == []
+
+    appended = turn(
+        client, sid, "追加，保留原来的番茄炒蛋", ambiguous
+    ).json()
+    answer_request = provider.requests[-1]
+    assert any(
+        question["question_id"] == pending["question_id"]
+        for question in answer_request["pending_clarifications"]
+    )
+
+    assert appended["pending_clarifications"] == [], appended
+    assert {target["target_id"] for target in appended["plan"]["targets"]} == {
+        TOMATO,
+        "dish-dan-chao-fan",
+    }
+    persisted = _snapshot(client, sid)
+    assert persisted["pending_clarifications"] == []
+    assert persisted["constraints_summary"]["budget_fen"] == 10000
+    assert {target["target_id"] for target in persisted["plan"]["targets"]} == {
+        TOMATO,
+        "dish-dan-chao-fan",
+    }
+    assert client.get("/api/v1/cart").json()["items"] == []
 
 
 def test_direct_product_append_keeps_the_dish_and_counts_in_pieces(client, semantic_provider):
@@ -576,30 +687,54 @@ def test_headcount_change_rescales_only_the_recipe(client, semantic_provider):
     assert target["people"] == 4 and target["people_source"] == "user"
 
 
-def test_second_dish_without_stock_appends_a_partial_group_and_keeps_the_first(
-    client, semantic_provider
+def test_second_dish_without_stock_requires_choice_then_appends_partial_group(
+    indexed_client, semantic_provider
 ):
-    """A new target with a supply gap is reported, never silently completed.
+    """A core gap previews first, then keeps both groups after explicit opt-in."""
+    second_target = lookup_then_add_id(
+        "dish", "番茄蛋汤", TOMATO_SOUP, relation="append"
+    )[0]
 
-    Behaviour change under the approved P0 contract (D2/D3): the second dish is
-    no longer refused outright. It is appended as a *partial* group that names
-    the shortage, while the first dish keeps every row it already had.
-    """
-    semantic_provider(
-        [
-            *lookup_then_add_id("dish", "番茄炒蛋", TOMATO, people=2),
-            *lookup_then_add_id("dish", "番茄蛋汤", TOMATO_SOUP, relation="append"),
-        ]
-    )
+    def opt_in(request):
+        question = next(
+            item for item in request["pending_clarifications"]
+            if item["slot"] == "supply_gap_choice"
+        )
+        return {
+            **second_target(request),
+            "resolved_questions": [question["question_id"]],
+        }
+
+    semantic_provider([
+        *lookup_then_add_id("dish", "番茄炒蛋", TOMATO, people=2),
+        second_target,
+        opt_in,
+    ])
+    client = indexed_client
     sid = create_session(client)
     first = turn(client, sid, "我想吃番茄炒蛋，2人").json()
     db = _db(client)
+    original_plan_json = db.execute(
+        text("SELECT plan_json FROM guide_tasks WHERE task_id = :task_id"),
+        {"task_id": first["task_id"]},
+    ).scalar_one()
     # Zero *every* egg SKU: zeroing one pack size is no longer a shortage, because
     # the picker now prefers a sellable SKU that really has stock.
     db.execute(text("UPDATE offers SET available_qty = 0 WHERE sku_id LIKE 'demo:eggs%'"))
     db.commit()
 
-    second = turn(client, sid, "还想吃番茄蛋汤", first).json()
+    preview = turn(client, sid, "还想吃番茄蛋汤", first).json()
+    assert preview["plan_effect"] == "keep", preview
+    assert preview["plan"] is None, preview
+    assert preview["pending_clarifications"][0]["slot"] == "supply_gap_choice", preview
+    assert "鸡蛋" in preview["pending_clarifications"][0]["question"], preview
+    assert client.get("/api/v1/cart").json()["items"] == []
+    assert db.execute(
+        text("SELECT plan_json FROM guide_tasks WHERE task_id = :task_id"),
+        {"task_id": first["task_id"]},
+    ).scalar_one() == original_plan_json
+
+    second = turn(client, sid, "那就先买能买到的", preview).json()
     assert second["plan_effect"] == "replace", second
     plan = second["plan"]
     # The first dish's rows are still there, and the second target is recorded.
@@ -621,9 +756,6 @@ def test_second_dish_without_stock_appends_a_partial_group_and_keeps_the_first(
     assert egg_gaps and all(g["kind"] == "out_of_stock" for g in egg_gaps), plan["gaps"]
     assert all(g["available_quantity"] == 0 for g in egg_gaps), plan["gaps"]
     assert plan["coverage_mode"] == "partial", plan
-    # The missing egg is simply not part of the buyable subset: the remaining
-    # selected rows are still purchasable (the pure `plan_contract.coverage`
-    # rule), so the plan is not disabled wholesale.
     assert plan["can_confirm"] is True, plan
     assert "库存" in second["message"], second["message"]
 
@@ -631,6 +763,7 @@ def test_second_dish_without_stock_appends_a_partial_group_and_keeps_the_first(
     assert any("tomato" in i["sku_id"] for i in reloaded["plan"]["items"])
     assert reloaded["plan"]["coverage_mode"] == "partial", reloaded["plan"]
     assert any(g["sku_id"] == EGG_SKU for g in reloaded["plan"]["gaps"]), reloaded["plan"]
+    assert client.get("/api/v1/cart").json()["items"] == []
 
 
 # ------------------------------------------------------------- open scenario

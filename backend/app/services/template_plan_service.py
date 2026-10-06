@@ -12,7 +12,7 @@ from app.core.config import get_settings
 from app.services import plan_contract as contract
 from app.services.catalog_service import CatalogService
 from app.services.image_assets import is_raster_image_path
-from app.services.ingredient_catalog import ingredient_name_zh
+from app.services.ingredient_catalog import ingredient_name_zh, load_ingredient_catalog
 from app.services.plan_validator import PlanValidator
 from app.services.template_matcher import (
     dish_display_name,
@@ -54,12 +54,17 @@ def expand_ingredient_terms(terms: list[str] | None) -> set[str]:
     the same exclusion means the same thing on every read path.
     """
     expanded: set[str] = set()
+    catalog = load_ingredient_catalog()
     for term in terms or []:
         text = str(term).strip()
         if not text:
             continue
         expanded.add(text)
         expanded.update(INGREDIENT_ALIASES.get(text, []))
+        for ingredient_id, ingredient in catalog["ingredients"].items():
+            if text == ingredient["name_zh"] or text in ingredient["aliases"]:
+                expanded.add(ingredient_id)
+                expanded.update(INGREDIENT_ALIASES.get(ingredient_id, []))
     return expanded
 
 
@@ -444,6 +449,7 @@ class TemplatePlanService:
         people: int = 2,
         deadline_expired: Any = None,
         excluded_ingredients: list[str] | None = None,
+        excluded_dish_ids: set[str] | None = None,
     ) -> list[dict[str, Any]]:
         """Dishes this store can resolve into a plan right now.
 
@@ -473,6 +479,8 @@ class TemplatePlanService:
         self.catalog = _SnapshotCatalog(catalog.list_sellable_products(), catalog)
         try:
             for dish in _load_all_dishes(self.db):
+                if str(dish.get("dish_id") or dish.get("template_id")) in (excluded_dish_ids or set()):
+                    continue
                 if len(suggestions) >= limit:
                     break
                 if deadline_expired is not None and deadline_expired():

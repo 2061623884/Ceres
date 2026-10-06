@@ -92,6 +92,7 @@ CHANGE_FIELDS: tuple[str, ...] = (
     "meal_time",
     "dietary",
     "excluded_ingredients",
+    "specification",
 )
 
 GOAL_KINDS: tuple[str, ...] = (
@@ -229,6 +230,7 @@ class GoalConstraints(BaseModel):
     dietary: list[str] = Field(default_factory=list)
     excluded_ingredients: list[str] = Field(default_factory=list)
     meal_time: MealTime | None = None
+    specification: dict[Literal["size", "brand", "item_volume_ml", "packaging", "pack_count", "pack_mode", "max_price_fen"], Any] = Field(default_factory=dict)
 
 
 class Goal(BaseModel):
@@ -279,6 +281,7 @@ class GoalChangeSet(BaseModel):
     meal_time: MealTime | None = None
     dietary: list[str] | None = None
     excluded_ingredients: list[str] | None = None
+    specification: dict[Literal["size", "brand", "item_volume_ml", "packaging", "pack_count", "pack_mode", "max_price_fen"], Any] | None = None
 
     def stated(self) -> dict[str, Any]:
         """Only the fields this patch really sets."""
@@ -414,7 +417,9 @@ class TurnDecision(BaseModel):
     #: Minimal internal action for the unified ``mutation`` route.  The route
     #: remains the sole graph decision; this field only preserves the existing
     #: prepare-vs-amend executor behavior.
-    mutation_action: Literal["prepare", "apply_mutation"] | None = None
+    mutation_action: Literal[
+        "prepare", "apply_mutation", "patch_meal_mode", "cancel_task", "confirm_plan"
+    ] | None = None
     readiness: Readiness
     missing_slots: list[str] = Field(default_factory=list)
     write_blocked: bool

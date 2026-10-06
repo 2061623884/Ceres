@@ -52,6 +52,7 @@ def run_graph_turn(
     expected_state_version: int | None = None,
     expected_session_version: int | None = None,
     view_context: dict[str, Any] | None = None,
+    plan_selection: dict[str, Any] | None = None,
     handoff_recent_messages: list[dict[str, Any]] | None = None,
     store_id: str | None = None,
     delivery_zone_id: str | None = None,
@@ -74,6 +75,7 @@ def run_graph_turn(
         expected_state_version=expected_state_version,
         expected_session_version=expected_session_version,
         view_context=view_context,
+        plan_selection=plan_selection,
     )
     factory = sessionmaker(bind=db.get_bind(), autoflush=False, expire_on_commit=False)
     receipts = TurnReceiptService(factory, owner_id)
@@ -129,6 +131,7 @@ def run_graph_turn(
             expected_state_version=expected_state_version,
             expected_session_version=expected_session_version,
             view_context=dict(view_context) if view_context else None,
+            plan_selection=plan_selection,
             handoff_recent_messages=handoff_recent_messages,
             store_id=store_id or "store-demo-01",
             delivery_zone_id=delivery_zone_id or "zone-default",

@@ -33,6 +33,7 @@ from app.agent.turn_primitives import TIMEOUT_CODE
 from app.agent.state import TaskState
 from app.core.errors import AppError
 from app.models.session import GuideSession, GuideTask
+from app.services.confirmation_service import ConfirmationService
 from app.services.conversation_service import ConversationService
 from app.services.plan_commit_service import PlanCommitService
 from app.services.task_lifecycle_service import TaskLifecycleService, TurnAnchor
@@ -260,8 +261,21 @@ def commit_graph_turn(state: dict[str, Any], runtime: TurnRuntime) -> dict[str, 
 
         proposal = state["turn"].get("parsed_proposal")
         if allowed and proposal is not None:
-            _persist_session_constraints(db, runtime, session, proposal)
-        effect = "replace" if plan else "keep"
+            changes = proposal.understanding.changes
+            clear = (
+                changes.clear if changes is not None and (
+                    committed or (
+                        staged.get("kind") == "clarify"
+                        and context_plan.get("candidate_to_store") is not None
+                    )
+                ) else []
+            )
+            _persist_session_constraints(db, runtime, session, proposal, clear)
+        effect = (
+            "clear"
+            if allowed and staged.get("plan_effect") == "clear"
+            else "replace" if plan else "keep"
+        )
         refusal_message = None
         if not allowed:
             # A guard denial publishes no un-persisted question as if it were real,
@@ -487,7 +501,7 @@ def commit_graph_turn(state: dict[str, Any], runtime: TurnRuntime) -> dict[str, 
             task,
             runtime,
             state,
-            {**staged, "pending": merged_pending},
+            {**staged, "pending": merged_pending, "plan_effect": effect},
             guard,
             user_msg=user_msg,
             assistant=assistant,
@@ -497,8 +511,13 @@ def commit_graph_turn(state: dict[str, Any], runtime: TurnRuntime) -> dict[str, 
             allowed=allowed,
             action_results=action_results,
         )
+        from app.services.catalog_service import CatalogService
+
+        response["product_cards"] = CatalogService(db, runtime.store_id).comparison_cards(displayed)
         if reservation is not None and receipts is not None:
             receipts.complete(db, reservation, response)
+        if staged.get("plan_effect") == "clear" or staged.get("verb") == "confirm_plan":
+            _refuse_unwritable(runtime)
         db.commit()
     except Exception:
         db.rollback()
@@ -591,6 +610,42 @@ def _apply_batch(
             task = db.get(GuideTask, target.task_id) if target else None
             plan = json.loads(task.plan_json) if task and task.plan_json else None
             anchor.advance(target.state_version, target.task_id)
+        elif step.get("verb") == "cancel_task":
+            args = step["args"]
+            if args.get("task_id"):
+                TaskLifecycleService(db, runtime.owner_id).cancel_task_core(
+                    str(args["task_id"]),
+                    request_id=str(args["request_id"]),
+                    expected_session_version=int(args["expected_session_version"]),
+                    expected_state_version=int(args["expected_state_version"]),
+                    request_digest=str(args["request_digest"]),
+                )
+                _refuse_unwritable(runtime)
+                session = db.get(GuideSession, runtime.session_id)
+            plan = None
+        elif step.get("verb") == "confirm_plan":
+            args = step["args"]
+            result, action_message, _session_id, executed = ConfirmationService(
+                db,
+                runtime.owner_id,
+                runtime.store_id,
+                runtime.delivery_zone_id,
+            ).confirm_core(
+                task_id=args["task_id"],
+                plan_id=args["plan_id"],
+                plan_version=args["plan_version"],
+                expected_state_version=args["expected_state_version"],
+                selected_items=args["selected_items"],
+                idempotency_key=args["idempotency_key"],
+                request_digest=args["request_digest"],
+                expected_session_version=args["expected_session_version"],
+            )
+            _refuse_unwritable(runtime)
+            session = db.get(GuideSession, runtime.session_id)
+            plan = None
+            step["confirmation_result"] = result
+            step["confirmation_executed"] = executed
+            step["message"] = action_message
         else:
             state = _task_state(db, session)
             if state is None:
@@ -611,22 +666,26 @@ def _stated_constraints(proposal: Any) -> dict[str, Any]:
     """The durable user facts this request stated on its read requests."""
     excluded: list[str] = []
     budget: int | None = None
+    specification: dict[str, str] = {}
     for item in [*proposal.lookups, *proposal.queries]:
         excluded.extend(getattr(item, "excluded_ingredients", []) or [])
         stated_budget = getattr(item, "budget_fen", None)
         if stated_budget is not None:
             budget = stated_budget if budget is None else min(budget, stated_budget)
+        specification.update(item.specification)
     result: dict[str, Any] = {}
     unique = [name for name in dict.fromkeys(str(x) for x in excluded) if name.strip()]
     if unique:
         result["excluded_ingredients"] = unique
     if budget is not None:
         result["budget_fen"] = budget
+    if specification:
+        result["specification"] = specification
     return result
 
 
 def _persist_session_constraints(
-    db: Any, runtime: TurnRuntime, session: GuideSession, proposal: Any
+    db: Any, runtime: TurnRuntime, session: GuideSession, proposal: Any, clear: list[str]
 ) -> None:
     """Save user-stated read constraints as durable session facts.
 
@@ -636,7 +695,8 @@ def _persist_session_constraints(
     stricter budget), inside this same transaction, never in a new store.
     """
     stated = _stated_constraints(proposal)
-    if not stated:
+    revoked = set(clear).intersection(("specification",))
+    if not stated and not revoked:
         return
     context = turn_context.load_context(db, session) or {}
     existing = dict(context.get("session_constraints") or {})
@@ -658,6 +718,13 @@ def _persist_session_constraints(
     ]
     if budgets:
         merged["budget_fen"] = min(budgets)
+    specification = {
+        **(existing.get("specification") or {}), **(stated.get("specification") or {}),
+    }
+    if specification:
+        merged["specification"] = specification
+    if "specification" in revoked:
+        merged.pop("specification", None)
     if merged == existing and "session_constraints" in context:
         return
     expected = int(session.session_version or 0)
@@ -682,6 +749,15 @@ def committed_step_row(step: dict[str, Any]) -> dict[str, Any]:
     are omitted rather than emitted as ``null``, so the receipt matches the loop
     entry's shape without dropping any field that has a value.
     """
+    if step.get("verb") == "confirm_plan" and "confirmation_result" not in step:
+        return {
+            "type": "mutation",
+            "verb": "confirm_plan",
+            "status": "pending",
+            "saved": False,
+            "reply_ok": True,
+            "plan_effect": "keep",
+        }
     row: dict[str, Any] = {
         "type": "mutation",
         "verb": step.get("verb"),
@@ -689,9 +765,22 @@ def committed_step_row(step: dict[str, Any]) -> dict[str, Any]:
         "status": "committed",
         "saved": True,
         "reply_ok": True,
-        "plan_effect": "replace",
+        "plan_effect": (
+            "clear" if step.get("verb") == "cancel_task"
+            else "keep" if step.get("verb") == "confirm_plan"
+            else "replace"
+        ),
         "message": step.get("message"),
     }
+    if step.get("verb") == "confirm_plan":
+        result = step["confirmation_result"]
+        row.update(
+            status="committed" if step["confirmation_executed"] else "completed",
+            saved=step["confirmation_executed"],
+            operation_id=result["operation_id"],
+            cart_version=result["cart_version"],
+            items_added=result["items_added"],
+        )
     candidate_ref = step.get("candidate_ref") or (
         (step.get("plan_result") or {}).get("target") or {}
     ).get("ref")
@@ -742,7 +831,7 @@ def _apply_context(
     # this same transaction's own effect, so the CAS rides the current in-tx value.
     expected_sv = int(session.session_version or 0)
     context_now = turn_context.load_context(db, session) or {}
-    if context_model.changed:
+    if context_model.changed and not context_model.session_version_already_bumped:
         cas = db.execute(
             text(
                 "UPDATE guide_sessions SET session_version = session_version + 1 "
@@ -758,7 +847,9 @@ def _apply_context(
         session=session,
         context=context_now,
         plan=context_model,
-        session_version_already_bumped=context_model.changed,
+        session_version_already_bumped=(
+            context_model.changed or context_model.session_version_already_bumped
+        ),
     )
 
 

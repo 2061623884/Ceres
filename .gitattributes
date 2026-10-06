@@ -147,3 +147,10 @@
 
 # Frozen diff: preserve its bytes and required context whitespace.
 work/ceres-v1/01-fixture-baseline/runtime-baseline.patch -text -whitespace
+
+work/ceres-v1/06-demo-acceptance/final-runtime.patch -text -whitespace
+work/ceres-v1/06-demo-acceptance/runtime-delta-since-01.patch -text -whitespace
+work/ceres-v1/06-demo-acceptance/windows/*/final-runtime.patch -text -whitespace
+
+# Frozen manifests and receipts use byte hashes; Windows checkout must preserve them.
+work/ceres-v1/**/*.json -text

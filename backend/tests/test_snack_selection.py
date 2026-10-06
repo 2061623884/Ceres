@@ -14,6 +14,7 @@ from support.semantic_agent import pick
 ROOT = Path(__file__).resolve().parents[2]
 CHIPS = "demo:snack-original-potato-chips-70g-bag"
 CRACKERS = "demo:snack-soda-crackers-100g-box"
+PEACH_JUICE = "demo:cn-minute-maid-peach-450ml-bottle"
 
 
 @pytest.mark.parametrize("index,message", [(0, "就第一个"), (1, "就第二个")])
@@ -104,4 +105,102 @@ def test_snack_selection_requires_confirmation_and_preserves_cart_on_no_match(
     assert "薯片" not in empty["message"] and "饼干" not in empty["message"]
     assert client.get(f"/api/v1/guide/sessions/{sid}").json()["plan"] == before_plan
     assert client.get("/api/v1/cart").json() == cart
+    assert provider.remaining() == 0
+
+
+@pytest.mark.parametrize(
+    "message,category,lookup_query,sku_id,tags,name_tokens",
+    [
+        ("来点零食", "零食", "零食", CRACKERS,
+         ("零食", "即食"), ("苏打饼干", "100克", "盒装")),
+        ("喝点甜的", "甜味饮品", "甜味", PEACH_JUICE,
+         ("甜味", "甜而不腻"), ("桃汁饮料", "450毫升", "瓶装")),
+    ],
+)
+def test_single_category_recommendation_uses_selected_sellable_sku_evidence(
+    client, semantic_provider, tmp_path, monkeypatch,
+    message, category, lookup_query, sku_id, tags, name_tokens,
+):
+    settings = get_settings()
+    index_root = tmp_path / "retrieval-index"
+    subprocess.run(
+        [sys.executable, str(ROOT / "scripts/build_retrieval_index.py"),
+         "--index-root", str(index_root), "build", "--candidate-db",
+         str(settings.runtime_db_path), "--no-embed"],
+        check=True, capture_output=True, text=True,
+    )
+    monkeypatch.setattr(settings, "retrieval_index_dir", str(index_root))
+
+    def fabricate(request):
+        result = request["query_results"][0]
+        match = next(row for row in result["matches"] if row["target_id"] == sku_id)
+        assert match["stock_verified"] is True
+        assert match["unknown_constraints"] == []
+        assert all(tag in " ".join(match["evidence"]) for tag in tags)
+        return {
+            "reply": "这款非常受欢迎，销量很好，库存充足。",
+            "display_refs": [match["ref"]],
+        }
+
+    provider = semantic_provider([
+        {
+            "target": {"kind": "category", "name": category, "intent": "explore"},
+            "lookups": [{"kind": "product", "query": lookup_query}],
+        },
+        fabricate,
+    ])
+    sid = create_session(client)
+    cart_before = client.get("/api/v1/cart").json()
+
+    response = send_turn(client, sid, message)
+
+    result = provider.requests[-1]["query_results"][0]
+    selected = next(row for row in result["matches"] if row["target_id"] == sku_id)
+    assert response["plan"] is None and response["plan_effect"] == "keep"
+    assert selected["name"] in response["message"]
+    assert all(token in selected["name"] for token in name_tokens)
+    assert selected["evidence"][2] in response["message"]
+    assert all(tag in response["message"] for tag in tags)
+    assert all(term not in response["message"] for term in (
+        "非常受欢迎", "销量", "库存充足", "beverage", "snack", "juice_drink",
+        "soda_crackers", "匹配方式",
+    ))
+    assert client.get("/api/v1/cart").json() == cart_before
+    assert provider.remaining() == 0
+
+
+def test_unknown_sugar_content_returns_no_product_recommendation_or_plan(
+    client, semantic_provider, tmp_path, monkeypatch
+):
+    settings = get_settings()
+    index_root = tmp_path / "retrieval-index"
+    subprocess.run(
+        [sys.executable, str(ROOT / "scripts/build_retrieval_index.py"),
+         "--index-root", str(index_root), "build", "--candidate-db",
+         str(settings.runtime_db_path), "--no-embed"],
+        check=True, capture_output=True, text=True,
+    )
+    monkeypatch.setattr(settings, "retrieval_index_dir", str(index_root))
+    provider = semantic_provider([
+        {
+            "target": {"kind": "category", "name": "低糖果汁", "intent": "explore"},
+            "lookups": [{"kind": "product", "query": "桃汁低糖糖含量"}],
+        },
+        {
+            "reply": "商品资料未提供糖含量，无法确认是否符合低糖要求。",
+            "display_refs": [],
+        },
+    ])
+    sid = create_session(client)
+    cart_before = client.get("/api/v1/cart").json()
+
+    response = send_turn(client, sid, "想喝低糖的果汁，有糖含量数据吗？")
+
+    result = provider.requests[-1]["query_results"][0]
+    assert result["matches"]
+    assert all("nutrition" in row["unknown_constraints"] for row in result["matches"])
+    assert response["message"] == "商品资料未提供糖含量，无法确认是否符合低糖要求。"
+    assert response["plan"] is None and response["plan_effect"] == "keep"
+    assert "美汁源" not in response["message"]
+    assert client.get("/api/v1/cart").json() == cart_before
     assert provider.remaining() == 0

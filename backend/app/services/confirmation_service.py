@@ -10,16 +10,20 @@ from uuid import uuid4
 from sqlalchemy import text
 from sqlalchemy.orm import Session
 
+from app.agent.state import Requirements
 from app.core.config import get_settings
 from app.core.errors import AppError
 from app.models.cart import CartOperation
+from app.models.catalog import CatalogProduct
 from app.models.session import GuideSession, GuideTask
 from app.schemas.guide import ConfirmItem, EntryContext
 from app.services.cart_service import CartService
+from app.services.catalog_service import product_to_dict
 from app.services.conversation_service import ConversationService
 from app.services.delivery_service import DeliveryService
 from app.services.operation_service import OperationService
 from app.services.trace_service import TraceService
+from app.services.validation_context import ValidationContext
 
 
 class ConfirmationService:
@@ -71,6 +75,12 @@ class ConfirmationService:
             ],
         }
 
+    def _action_message(self, result: dict[str, Any]) -> str:
+        items = ", ".join(
+            f"{item['quantity']}件 {item['sku_id']}" for item in result["items_added"]
+        )
+        return f"已加入购物车：{items}（购物车版本 {result['cart_version']}）"
+
     def _assert_cart_unchanged(self, before: dict[str, Any]) -> None:
         after = self._cart_snapshot()
         if before["version"] != after["version"] or before["items"] != after["items"]:
@@ -80,7 +90,8 @@ class ConfirmationService:
         self,
         plan: dict[str, Any],
         selected: list[ConfirmItem],
-        budget_fen: int | None,
+        requirements: Requirements,
+        ctx: ValidationContext,
     ) -> list[dict[str, Any]]:
         plan_items = {item["sku_id"]: item for item in plan.get("items", [])}
         selected_map = {item.sku_id: item.quantity for item in selected}
@@ -141,16 +152,32 @@ class ConfirmationService:
                 raise AppError(422, "PRODUCT_UNAVAILABLE", f"SKU {sku_id} unavailable")
             if offer.price_fen != snapshot["unit_price_fen"]:
                 raise AppError(409, "PRICE_CHANGED", "Price changed, reconfirm required")
+            if ctx.specification:
+                product = self.db.get(CatalogProduct, sku_id)
+                if not ctx.matches_spec(product_to_dict(product, offer)):
+                    product_size = (
+                        f"{product.spec_quantity}{product.spec_unit}"
+                        if product.spec_quantity is not None and product.spec_unit
+                        else "规格信息不完整"
+                    )
+                    raise AppError(
+                        422,
+                        "CONSTRAINT_UNSATISFIED",
+                        f"商品「{product.name_zh or product.name or sku_id}」当前规格为 {product_size}，"
+                        + ("不符合小包装要求" if ctx.specification.get("size") == "small"
+                           else "不符合指定的商品筛选条件") + "，请刷新清单后再确认。",
+                        detail=f"SKU {sku_id} violates specification {ctx.specification}",
+                    )
             selected_total += offer.price_fen * qty
             validated.append({"sku_id": sku_id, "quantity": qty})
 
-        if budget_fen is not None and selected_total > budget_fen:
+        if requirements.budget_fen is not None and selected_total > requirements.budget_fen:
             raise AppError(
                 422,
                 "CONSTRAINT_UNSATISFIED",
                 # Customer-facing wording: money is never shown in the internal unit.
                 f"待确认合计 {selected_total / 100:.2f} 元，超出你说的预算 "
-                f"{budget_fen / 100:.2f} 元。",
+                f"{requirements.budget_fen / 100:.2f} 元。",
             )
 
         return validated
@@ -203,6 +230,52 @@ class ConfirmationService:
         expected_session_version: int | None = None,
     ) -> dict[str, Any]:
         cart_before = self._cart_snapshot()
+        try:
+            result, action_message, session_id, executed = self.confirm_core(
+                task_id=task_id,
+                plan_id=plan_id,
+                plan_version=plan_version,
+                expected_state_version=expected_state_version,
+                selected_items=selected_items,
+                idempotency_key=idempotency_key,
+                request_digest=request_digest,
+                expected_session_version=expected_session_version,
+            )
+            if not executed:
+                return result
+            self.conversation.save_message(
+                session_id,
+                task_id=task_id,
+                role="assistant",
+                kind="action_result",
+                content=action_message,
+                request_id=idempotency_key,
+                plan_id=plan_id,
+                plan_version=plan_version,
+            )
+            self.db.commit()
+            return result
+        except AppError:
+            self._assert_cart_unchanged(cart_before)
+            self.db.rollback()
+            raise
+        except Exception as exc:
+            self._assert_cart_unchanged(cart_before)
+            self.db.rollback()
+            raise AppError(500, "INTERNAL_ERROR", str(exc), retryable=True) from exc
+
+    def confirm_core(
+        self,
+        task_id: str,
+        plan_id: str,
+        plan_version: int,
+        expected_state_version: int,
+        selected_items: list[dict[str, Any]] | list[ConfirmItem],
+        idempotency_key: str,
+        request_digest: str,
+        expected_session_version: int | None = None,
+    ) -> tuple[dict[str, Any], str | None, str | None, bool]:
+        cart_before = self._cart_snapshot()
 
         op = (
             self.db.query(CartOperation)
@@ -215,8 +288,10 @@ class ConfirmationService:
             if op.status == "completed" and op.result_json:
                 guide_op = self.operations.find("confirm", task_id, idempotency_key)
                 if guide_op and guide_op.result_json:
-                    return json.loads(guide_op.result_json)
-                return json.loads(op.result_json)
+                    result = json.loads(guide_op.result_json)
+                    return result, self._action_message(result), None, False
+                result = json.loads(op.result_json)
+                return result, self._action_message(result), None, False
             if op.status == "pending":
                 raise AppError(409, "TURN_IN_PROGRESS", "Confirmation in progress")
 
@@ -224,7 +299,8 @@ class ConfirmationService:
             "confirm", "task", task_id, idempotency_key, request_digest, "TURN_IN_PROGRESS"
         )
         if guide_cached and guide_cached.result_json:
-            return json.loads(guide_cached.result_json)
+            result = json.loads(guide_cached.result_json)
+            return result, self._action_message(result), None, False
 
         pre_task = self.db.get(GuideTask, task_id)
         if not pre_task or pre_task.owner_id != self.owner_id:
@@ -264,9 +340,15 @@ class ConfirmationService:
             raise AppError(422, "CONSTRAINT_UNSATISFIED", "Delivery not reachable")
 
         req = json.loads(pre_task.requirements_json or "{}")
+        requirements = Requirements.from_dict(req)
+        ctx = ValidationContext.from_requirements(
+            requirements,
+            store_id=self.store_id,
+            delivery_zone_id=self.delivery_zone_id,
+        )
         normalized = self._normalize_selected_items(selected_items)
         try:
-            validated_items = self._validate_snapshot(plan, normalized, req.get("budget_fen"))
+            validated_items = self._validate_snapshot(plan, normalized, requirements, ctx)
         except AppError:
             self._assert_cart_unchanged(cart_before)
             raise
@@ -309,21 +391,7 @@ class ConfirmationService:
             op.status = "completed"
             op.result_json = json.dumps(result)
 
-            action_msg = (
-                f"已加入购物车：{', '.join(f'{i['quantity']}件 {i['sku_id']}' for i in applied['items_added'])}"
-                f"（购物车版本 {applied['cart_version']}）"
-            )
-            self.conversation.save_message(
-                session.session_id,
-                task_id=task_id,
-                role="assistant",
-                kind="action_result",
-                content=action_msg,
-                request_id=idempotency_key,
-                plan_id=plan_id,
-                plan_version=plan_version,
-            )
-
+            action_msg = self._action_message(applied)
             settings = get_settings()
             self.trace.record_event(
                 self.owner_id,
@@ -346,15 +414,12 @@ class ConfirmationService:
             guide_op = self.operations.find("confirm", task_id, idempotency_key)
             if guide_op:
                 self.operations.complete(guide_op, result)
-            self.db.commit()
-            return result
+            return result, action_msg, session.session_id, True
         except AppError:
             task.current_step = "awaiting_confirmation"
             self._assert_cart_unchanged(cart_before)
-            self.db.rollback()
             raise
         except Exception as exc:
             task.current_step = "awaiting_confirmation"
             self._assert_cart_unchanged(cart_before)
-            self.db.rollback()
             raise AppError(500, "INTERNAL_ERROR", str(exc), retryable=True) from exc

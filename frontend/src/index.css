@@ -72,6 +72,90 @@ body {
   backdrop-filter: blur(18px);
 }
 
+/* Ceres guide chat — Grok-style light glass */
+.guide-chat-panel {
+  background: rgba(252, 251, 248, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow:
+    0 -20px 60px rgba(40, 36, 29, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.55);
+}
+
+.guide-glass-header-pill {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.92) 0%,
+    rgba(245, 244, 240, 0.78) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  box-shadow:
+    0 8px 24px rgba(40, 36, 29, 0.08),
+    0 2px 6px rgba(40, 36, 29, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.guide-glass-icon-btn {
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 14px rgba(40, 36, 29, 0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.guide-glass-surface {
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.guide-glass-bubble {
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow:
+    0 2px 10px rgba(40, 36, 29, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.guide-glass-bubble-ai {
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow:
+    0 2px 10px rgba(40, 36, 29, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.guide-glass-bubble-user {
+  background: #171716;
+  color: #fff;
+  box-shadow: 0 2px 10px rgba(40, 36, 29, 0.12);
+}
+
+.guide-glass-chip {
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.guide-glass-chip:hover {
+  background: rgba(255, 255, 255, 0.82);
+}
+
+/* Fade only the handle band so bubbles are not hard-clipped under the identity pill. */
+.guide-chat-scroll {
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0 8px, #000 22px);
+  mask-image: linear-gradient(to bottom, transparent 0 8px, #000 22px);
+}
+
 .chat-panel-enter {
   animation: chatIn 0.22s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
@@ -97,8 +181,43 @@ body {
   to   { opacity: 1; transform: translateY(0); }
 }
 
+.guide-sheet-morph-in {
+  animation: guideSheetMorphIn 0.34s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.guide-sheet-morph-out {
+  animation: guideSheetMorphOut 0.24s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes guideSheetMorphIn {
+  from {
+    opacity: 0;
+    transform: scale(0.18);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes guideSheetMorphOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.18);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .guide-sheet-enter {
+    animation: none;
+  }
+
+  .guide-sheet-morph-in,
+  .guide-sheet-morph-out {
     animation: none;
   }
 }

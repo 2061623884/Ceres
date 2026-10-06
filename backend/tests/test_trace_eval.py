@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import json
 import uuid
+from contextlib import contextmanager
+from types import SimpleNamespace
 import pytest
 
 from app.models.trace import TraceEvent
@@ -113,9 +115,11 @@ def test_eval_fails_when_confirm_broken(client, monkeypatch):
         "expected_actions": [{"type": "cart_has_sku", "sku_id": "demo:tomato-fresh-500g"}],
     }
     real_post = client.post
+    confirms = []
 
     def post(url, *args, **kwargs):
         if "/confirm" in url:
+            confirms.append((url, kwargs))
             class FakeResp:
                 status_code = 500
 
@@ -124,8 +128,189 @@ def test_eval_fails_when_confirm_broken(client, monkeypatch):
 
     monkeypatch.setattr(client, "post", post)
     result = run_case(client, case)
+    assert len(confirms) == 1, result
+    assert result["turn_states"][0]["plan"]
     assert result["passed"] is False
     assert any("confirm" in f for f in result["failures"])
+
+
+def test_eval_sse_plan_confirm_and_cart(client, monkeypatch):
+    from app.evaluation.runner import run_case
+
+    real_post = client.post
+    real_stream = client.stream
+    requests = []
+    confirms = []
+
+    def stream(method, url, **kwargs):
+        requests.append((method, url, kwargs["json"]))
+        return real_stream(method, url, **kwargs)
+
+    def post(url, *args, **kwargs):
+        if "/confirm" in url:
+            confirms.append(kwargs["json"])
+        return real_post(url, *args, **kwargs)
+
+    monkeypatch.setattr(client, "stream", stream)
+    monkeypatch.setattr(client, "post", post)
+    result = run_case(client, {
+        "case_id": "sse-plan-confirm",
+        "turns": [{"message": "我想吃番茄炒蛋"}],
+        "confirm_plan": True,
+        "check_cart": True,
+        "expected_actions": [
+            "has_plan",
+            {"type": "cart_has_sku", "sku_id": "demo:tomato-fresh-500g"},
+        ],
+    })
+    assert result["passed"], result
+    assert len(result["turn_states"]) == 1
+    assert len(requests) == 1
+    assert requests[0][0] == "POST"
+    assert requests[0][1].endswith("/turns/stream")
+    assert len(confirms) == 1
+    assert confirms[0]["plan_id"] == result["turn_states"][0]["plan"]["plan_id"]
+
+
+def test_eval_sse_multiturn_forwards_versions(client, monkeypatch):
+    from app.evaluation.runner import run_case
+
+    real_stream = client.stream
+    bodies = []
+
+    def stream(method, url, **kwargs):
+        assert method == "POST" and url.endswith("/turns/stream")
+        bodies.append(kwargs["json"])
+        return real_stream(method, url, **kwargs)
+
+    monkeypatch.setattr(client, "stream", stream)
+    result = run_case(client, {
+        "case_id": "sse-versions",
+        "turns": [{"message": "我想吃番茄炒蛋"}, {"message": "改成3人份"}],
+        "expected_actions": ["has_plan"],
+    })
+    assert result["passed"], result
+    first, second = result["turn_states"]
+    assert len(bodies) == 2
+    assert bodies[0]["expected_task_id"] is None
+    assert bodies[0]["expected_state_version"] == 0
+    assert bodies[0]["expected_session_version"] == 0
+    assert bodies[1]["expected_task_id"] == first["task_id"]
+    assert bodies[1]["expected_state_version"] == first["state_version"]
+    assert bodies[1]["expected_session_version"] == first["session_version"]
+    assert second["task_id"] == first["task_id"]
+
+
+def test_eval_checks_saved_plan_after_read_only_keep(client, semantic_provider):
+    from app.evaluation.runner import run_case
+    from support.semantic_agent import lookup_then_add, reply_only
+
+    semantic_provider([*lookup_then_add("dish", "番茄炒蛋"), reply_only("好的。")])
+    result = run_case(client, {
+        "case_id": "read-only-keeps-saved-plan",
+        "turns": [{"message": "我要番茄炒蛋"}, {"message": "谢谢"}],
+        "expected_actions": [
+            "has_plan",
+            {"type": "turn_plan_unchanged", "turn": 2},
+            {"type": "turn_plan_has_sku", "turn": 2, "sku_id": "demo:tomato-fresh-500g"},
+        ],
+    })
+    assert result["passed"], result
+    assert result["turn_responses"][1]["plan"] is None
+    assert result["turn_responses"][1]["plan_effect"] == "keep"
+    assert result["turn_states"][1]["plan"] == result["turn_states"][0]["plan"]
+
+
+def test_eval_stops_after_timeout_in_a_completed_turn(client, semantic_provider):
+    from app.evaluation.runner import run_case
+    from app.llm.errors import LLMProviderError
+    from support.semantic_agent import request_new
+
+    provider = semantic_provider([
+        LLMProviderError("MODEL_TIMEOUT", "Model request timed out", retryable=True),
+        request_new("dish", "番茄炒蛋"),
+    ])
+    result = run_case(client, {
+        "case_id": "timeout-before-dependent-feedback",
+        "turns": [{"message": "我要番茄炒蛋"}, {"message": "自己做"}],
+        "confirm_plan": True,
+        "expected_actions": ["has_plan"],
+    })
+    assert result["passed"] is False
+    assert "MODEL_TIMEOUT" in result["failures"][0]
+    assert len(provider.requests) == 1
+    assert len(result["turn_responses"]) == len(result["turn_states"]) == 1
+    assert result["turn_responses"][0]["action_results"][0]["code"] == "MODEL_TIMEOUT"
+    assert client.get("/api/v1/cart").json()["items"] == []
+
+
+def test_eval_preserves_cancel_clear_through_a_later_read_only_turn(client, semantic_provider):
+    from app.evaluation.runner import run_case
+    from support.semantic_agent import lookup_then_add, reply_only
+
+    semantic_provider([
+        *lookup_then_add("dish", "番茄炒蛋"),
+        {"plan_act": "abandon"},
+        reply_only("好的。"),
+    ])
+    result = run_case(client, {
+        "case_id": "cancel-clears-visible-plan",
+        "turns": [
+            {"message": "我要番茄炒蛋"},
+            {"message": "算了，不买了"},
+            {"message": "谢谢"},
+        ],
+        "expected_actions": ["no_plan"],
+        "check_cart": True,
+    })
+    assert result["passed"], result
+    assert result["turn_responses"][1]["plan_effect"] == "clear"
+    assert result["turn_responses"][1]["plan"] is None
+    assert result["turn_states"][1]["plan"] is None
+    assert result["turn_states"][2]["plan"] is None
+    assert client.get("/api/v1/cart").json()["items"] == []
+
+
+@pytest.mark.parametrize(
+    ("status", "events", "failure"),
+    [
+        (409, [], "status 409"),
+        (200, [{"type": "error", "payload": {"code": "STALE_STATE", "message": "version mismatch"}}], "error STALE_STATE"),
+        (200, [{"type": "turn.stopped", "payload": {"status": "stopped"}}], "stopped"),
+        (200, [{"type": "accepted", "payload": {}}], "without turn.completed"),
+    ],
+)
+def test_eval_sse_failure_never_confirms(client, monkeypatch, status, events, failure):
+    from app.evaluation.runner import run_case
+
+    real_post = client.post
+    confirms = []
+
+    def post(url, *args, **kwargs):
+        if "/confirm" in url:
+            confirms.append(url)
+        return real_post(url, *args, **kwargs)
+
+    @contextmanager
+    def stream(method, url, **kwargs):
+        assert method == "POST" and url.endswith("/turns/stream")
+        yield SimpleNamespace(
+            status_code=status,
+            iter_lines=lambda: iter(f"data: {json.dumps(event)}" for event in events),
+        )
+
+    monkeypatch.setattr(client, "post", post)
+    monkeypatch.setattr(client, "stream", stream)
+    result = run_case(client, {
+        "case_id": "sse-failure",
+        "turns": [{"message": "我想吃番茄炒蛋"}],
+        "confirm_plan": True,
+        "expected_actions": ["has_plan"],
+    })
+    assert result["passed"] is False
+    assert any(failure in item for item in result["failures"]), result
+    assert result["turn_states"] == []
+    assert confirms == []
 
 
 def test_strong_eval_cases_have_assertions():

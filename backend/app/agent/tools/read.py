@@ -39,7 +39,9 @@ from app.agent.protocol import (
 )
 from app.services.retrieval_index import IndexUnavailable, read_pointer
 from app.services.retrieval_service import RetrievalService
-from app.services.shopping_plan_service import ShoppingPlanService
+from app.services.catalog_service import CatalogService, comparison_card
+from app.services.conversation_service import ConversationService
+from app.services.shopping_plan_service import ShoppingPlanService, load_scenarios
 from app.services.template_matcher import dish_display_name, load_templates
 from app.services.template_plan_service import TemplatePlanService, expand_ingredient_terms
 from app.services.validation_context import ValidationContext
@@ -82,14 +84,17 @@ class ReadTools:
         deadline_expired: Callable[[], bool] | None = None,
         requirements: Any | None = None,
         retrieval: RetrievalService | None = None,
+        owner_id: str | None = None,
     ):
         self.db = db
+        self.owner_id = owner_id
         self.store_id = store_id
         self.delivery_zone_id = delivery_zone_id
         #: The turn's real user constraints. Hard filters come from here, not from
         #: a dictionary a test handed in: "不要花生" only excludes peanut if the
         #: resolved requirements say so.
         self.requirements = requirements
+        self.excluded_dish_ids: set[str] = set()
         self._retrieval_service = retrieval
         #: The dish the shopper is already working on, used by a recipe query that
         #: does not name one.
@@ -174,6 +179,7 @@ class ReadTools:
         *,
         extra_excluded: list[str] | None = None,
         extra_budget_fen: int | None = None,
+        extra_specification: dict[str, Any] | None = None,
     ) -> ValidationContext | None:
         """The turn's real constraints, merged with what this read stated.
 
@@ -181,9 +187,9 @@ class ReadTools:
         turn, before any task state exists — otherwise "不要花生" would be left
         to the embedding route to "understand".
 
-        The merge is a **union** on exclusions: a read can add one, and can never
-        silently drop one that is already saved. Budget keeps the stricter of the
-        two for the same reason.
+        Exclusions are unioned and budget keeps the stricter value. A stated
+        specification adds to the saved one, so a read cannot silently drop a
+        condition that is already saved.
         """
         base = None
         if self.requirements is not None:
@@ -194,7 +200,13 @@ class ReadTools:
                 active_template_id=self.active_template_id,
             )
         extra_excluded = [x for x in (extra_excluded or []) if str(x).strip()]
-        if base is None and not extra_excluded and extra_budget_fen is None:
+        extra_specification = dict(extra_specification or {})
+        if (
+            base is None
+            and not extra_excluded
+            and extra_budget_fen is None
+            and not extra_specification
+        ):
             return None
         if base is None:
             from app.agent.state import Requirements
@@ -209,30 +221,12 @@ class ReadTools:
             dict.fromkeys([*base.excluded_ingredients, *extra_excluded])
         )
         budgets = [b for b in (base.budget_fen, extra_budget_fen) if b is not None]
+        specification = {**base.specification, **extra_specification}
         return replace(
             base,
             excluded_ingredients=merged_excluded,
             budget_fen=min(budgets) if budgets else None,
-        )
-
-    def _applied_constraints(
-        self,
-        extra_excluded: list[str] | None,
-        extra_budget_fen: int | None,
-    ) -> tuple[list[str], int | None]:
-        """The exclusions and budget this read must honour, after the union.
-
-        Both the indexed route and the pre-index path read the filter from here,
-        so a constraint cannot apply on one route and be silently ignored on the
-        other.
-        """
-        context = self._validation_context(
-            extra_excluded=extra_excluded, extra_budget_fen=extra_budget_fen
-        )
-        if context is None:
-            return [], None
-        return [str(x) for x in context.excluded_ingredients or [] if str(x).strip()], (
-            context.budget_fen
+            specification=specification,
         )
 
     @staticmethod
@@ -265,6 +259,7 @@ class ReadTools:
         limit: int = MAX_LOOKUP_ROWS,
         extra_excluded: list[str] | None = None,
         extra_budget_fen: int | None = None,
+        extra_specification: dict[str, Any] | None = None,
     ) -> dict[str, Any] | None:
         """Run the shared retrieval service, or ``None`` if there is no index.
 
@@ -300,7 +295,9 @@ class ReadTools:
                 "INDEX_STALE", "检索索引与当前运行库不一致，本轮没有执行检索。"
             )
         context = self._validation_context(
-            extra_excluded=extra_excluded, extra_budget_fen=extra_budget_fen
+            extra_excluded=extra_excluded,
+            extra_budget_fen=extra_budget_fen,
+            extra_specification=extra_specification,
         )
         try:
             if kind == "dish":
@@ -325,8 +322,9 @@ class ReadTools:
         retrieval = self._retrieval(
             lookup.kind,
             lookup.query,
-            extra_excluded=list(getattr(lookup, "excluded_ingredients", []) or []),
-            extra_budget_fen=getattr(lookup, "budget_fen", None),
+            extra_excluded=lookup.excluded_ingredients,
+            extra_budget_fen=lookup.budget_fen,
+            extra_specification=lookup.specification,
         )
         if retrieval is None:
             return self._legacy_lookup(lookup, candidates)
@@ -383,12 +381,14 @@ class ReadTools:
         and it applies the same hard exclusions the indexed route does, so a
         "不要花生" is not honoured only when an index happens to be deployed.
         """
-        # The budget is merged into the same union, but this path builds no plan,
-        # so only the exclusions can be applied here.
-        excluded, _budget_fen = self._applied_constraints(
-            list(getattr(lookup, "excluded_ingredients", []) or []),
-            getattr(lookup, "budget_fen", None),
+        # The merged context is shared with the indexed route, including the
+        # existing hard exclusions and the stated product specification.
+        context = self._validation_context(
+            extra_excluded=lookup.excluded_ingredients,
+            extra_budget_fen=lookup.budget_fen,
+            extra_specification=lookup.specification,
         )
+        excluded = context.excluded_ingredients if context else []
         outcome: dict[str, Any] = {}
         if lookup.kind == "dish":
             search = self._legacy_dish_search(lookup.query, excluded=excluded)
@@ -398,7 +398,7 @@ class ReadTools:
                 candidates, kind="dish", rows=rows, limit=MAX_LOOKUP_ROWS
             )
         else:
-            rows = self.find_products(lookup.query, excluded=excluded)
+            rows = self.find_products(lookup.query, context=context)
             refs = add_lookup_candidates(
                 candidates, kind="product", rows=rows, limit=MAX_LOOKUP_ROWS
             )
@@ -410,7 +410,7 @@ class ReadTools:
             "empty": not refs,
             "retrieval_status": "unavailable",
             "fallback_reason": "no_published_index",
-            "filters_applied": _applied_exclusions(excluded),
+            "filters_applied": _filters_applied(context),
             "matches": [
                 {"ref": c.ref, "name": c.name, "target_id": c.target_id} for c in refs
             ],
@@ -462,12 +462,20 @@ class ReadTools:
         return _legacy_rows(self._legacy_dish_search(query, excluded=excluded))
 
     def find_products(
-        self, query: str, *, excluded: list[str] | None = None
+        self,
+        query: str,
+        *,
+        excluded: list[str] | None = None,
+        context: ValidationContext | None = None,
     ) -> list[dict[str, Any]]:
         rows = ShoppingPlanService(self.db, self.store_id).find_product_candidates(
             query, max_results=MAX_LOOKUP_ROWS
         )
-        return _drop_excluded_products(rows, excluded)
+        if context is None:
+            return _drop_excluded_products(rows, excluded)
+        rows = _drop_excluded_products(rows, context.excluded_ingredients)
+        rows = [row for row in rows if context.matches_spec(row)]
+        return rows
 
     # ------------------------------------------------------------------- queries
 
@@ -475,8 +483,9 @@ class ReadTools:
         facts = self._collect_query(
             query.kind,
             query.query,
-            extra_excluded=list(getattr(query, "excluded_ingredients", []) or []),
-            extra_budget_fen=getattr(query, "budget_fen", None),
+            extra_excluded=query.excluded_ingredients,
+            extra_budget_fen=query.budget_fen,
+            extra_specification=query.specification,
         )
         facts["query"] = query.query
         for row in facts.get("buildable_dishes", []):
@@ -489,6 +498,10 @@ class ReadTools:
         for row in facts.get("candidates", []):
             if row.get("dish_id"):
                 row["ref"] = candidates.allocate("dish", str(row["dish_id"]), row["name"]).ref
+        for plan in facts.get("plans", []):
+            if plan["source_complete"]:
+                for target in plan["targets"]:
+                    target["ref"] = candidates.allocate(target["kind"], target["target_id"], target["name"]).ref
         return facts
 
     def _collect_query(
@@ -498,6 +511,7 @@ class ReadTools:
         *,
         extra_excluded: list[str] | None = None,
         extra_budget_fen: int | None = None,
+        extra_specification: dict[str, Any] | None = None,
     ) -> dict[str, Any]:
         """Fetch real facts for a read-only query.
 
@@ -514,10 +528,82 @@ class ReadTools:
 
             return search_policies(self.db, query or "")
 
+        if kind == "history":
+            plans = []
+            catalog = CatalogService(self.db, self.store_id)
+            dishes = {row["template_id"]: row for row in load_templates(self.db)}
+            scenarios = {row["scenario_id"]: row for row in load_scenarios()}
+            for source in ConversationService(self.db, self.owner_id).list_plan_history(query):
+                plan = source.pop("plan")
+                targets = []
+                source_complete = bool(plan.get("targets"))
+                for target in plan.get("targets", []):
+                    target_kind, target_id = target["kind"], target["target_id"]
+                    if target_kind == "dish":
+                        current = dishes.get(target_id)
+                    elif target_kind == "product":
+                        current = catalog.get_product(target_id)
+                    else:
+                        current = scenarios.get(target_id)
+                    group_id = target.get("group_id")
+                    historical_items = [
+                        {"sku_id": item["sku_id"], "quantity": item["quantity"],
+                         "unit_price_fen": item["unit_price_fen"],
+                         "shared": len(item.get("contributions") or []) > 1}
+                        for item in plan["items"]
+                        if group_id is not None and (
+                            item.get("group_id") == group_id
+                            or any(c["group_id"] == group_id for c in (item.get("contributions") or [])))
+                    ]
+                    if current is None or (target_kind == "product" and (
+                        group_id is None or not historical_items or any(item["shared"] for item in historical_items)
+                    )):
+                        source_complete = False
+                    targets.append({"kind": target_kind, "target_id": target_id, "name": target["name"],
+                                    "historical_people": target.get("people"),
+                                    "historical_items": historical_items})
+                plans.append({**source, "source_complete": source_complete, "targets": targets})
+            return {"kind": "history", "status": STATUS_COMPLETED, "empty": not plans,
+                    "plans": plans, "note": "历史信息仅供参考；当前价格库存及数量须重新核查，旧选择与加购授权不恢复。来源不完整先澄清，不猜SKU或数量。"}
+        if kind == "compare":
+            context = self._validation_context(
+                extra_excluded=extra_excluded, extra_budget_fen=extra_budget_fen,
+                extra_specification={**(extra_specification or {}), "comparison": "cola"},
+            )
+            retrieval = self._retrieval(
+                "product", query, extra_excluded=extra_excluded,
+                extra_budget_fen=extra_budget_fen, extra_specification=context.specification,
+            )
+            if retrieval is not None and retrieval["status"] == "unavailable":
+                return {"kind": "compare", "status": STATUS_FAILED,
+                        **self._retrieval_evidence(retrieval), "sellable_products": []}
+            catalog = CatalogService(self.db, self.store_id)
+            if retrieval is None:
+                products = ShoppingPlanService(self.db, self.store_id).find_product_candidates(query, max_results=50)
+                evidence = {"retrieval_status": "unavailable", "fallback_reason": "no_published_index",
+                            "filters_applied": _filters_applied(context)}
+            else:
+                products = [catalog.get_product(hit["target_id"]) for hit in retrieval["hits"]]
+                evidence = self._retrieval_evidence(retrieval)
+            cards = []
+            for product in products:
+                if product is None or (context is not None and not context.product_allowed(product)):
+                    continue
+                card = comparison_card(product)
+                if card is not None:
+                    cards.append(card)
+            return {"kind": "compare", "status": STATUS_COMPLETED, "empty": not cards,
+                    **evidence, "sellable_products": cards[:MAX_LOOKUP_ROWS]}
         if kind == "recommend":
-            excluded, budget_fen = self._applied_constraints(extra_excluded, extra_budget_fen)
+            context = self._validation_context(
+                extra_excluded=extra_excluded,
+                extra_budget_fen=extra_budget_fen,
+                extra_specification=extra_specification,
+            )
+            excluded = context.excluded_ingredients if context else []
+            budget_fen = context.budget_fen if context else None
             if query is not None:
-                return self._recommend_topic(query, excluded=excluded, budget_fen=budget_fen)
+                return self._recommend_topic(query, context=context)
             # No topic: an open exploration, explicitly labelled as one. Only
             # dishes this store can actually build are offered — no unrelated
             # products are mixed in to pad the list, and nothing here claims the
@@ -533,6 +619,7 @@ class ReadTools:
                 scan=None,
                 deadline_expired=self._deadline_expired,
                 excluded_ingredients=excluded,
+                excluded_dish_ids=self.excluded_dish_ids,
             )
             incomplete = bool(getattr(planner, "last_suggest_scan_exhausted", False))
             return {
@@ -542,14 +629,14 @@ class ReadTools:
                 "incomplete": incomplete,
                 "retrieval_status": "ok" if not incomplete else "degraded",
                 "fallback_reason": "turn_deadline_exceeded" if incomplete else None,
-                "filters_applied": _applied_exclusions(excluded),
+                "filters_applied": _filters_applied(context),
                 # A generated plan is not a verified purchase: the scan resolves
                 # ingredients to sellable SKUs, but nothing here has checked stock,
                 # pack size or the turn's budget.
                 "stock_verified": False,
                 "note": (
-                    "开放式探索候选，只表示这些菜谱能生成采购方案；"
-                    "库存、规格与预算都没有严格校验，不构成有货或价格承诺，也不代表已满足口味。"
+                    "开放式探索候选只表示这些菜谱能生成采购方案；尚未校验实际商品规格、"
+                    "库存或预算，不构成有货或价格承诺，也不代表已满足口味。"
                     if not incomplete
                     else "本轮时间不足，只考察了部分菜谱，结果不完整；不代表没有别的可做菜。"
                 ),
@@ -562,15 +649,22 @@ class ReadTools:
 
         if kind == "recipe":
             if query:
-                excluded, budget_fen = self._applied_constraints(
-                    extra_excluded, extra_budget_fen
+                context = self._validation_context(
+                    extra_excluded=extra_excluded,
+                    extra_budget_fen=extra_budget_fen,
+                    extra_specification=extra_specification,
                 )
                 retrieval = self._retrieval(
-                    "dish", query, extra_excluded=excluded, extra_budget_fen=budget_fen
+                    "dish",
+                    query,
+                    extra_excluded=extra_excluded,
+                    extra_budget_fen=extra_budget_fen,
+                    extra_specification=extra_specification,
                 )
                 if retrieval is None:
+                    excluded = context.excluded_ingredients if context else []
                     search = self._legacy_dish_search(query, excluded=excluded)
-                    return self._legacy_recipe(query, search, excluded=excluded)
+                    return self._legacy_recipe(query, search, context=context)
                 if retrieval["status"] == "unavailable":
                     # The index is deployed and cannot answer. That is a failed
                     # read, not an empty recipe and not a pre-index lookup.
@@ -650,7 +744,11 @@ class ReadTools:
         }
 
     def _legacy_recipe(
-        self, query: str, search: dict[str, Any], *, excluded: list[str]
+        self,
+        query: str,
+        search: dict[str, Any],
+        *,
+        context: ValidationContext | None,
     ) -> dict[str, Any]:
         """The pre-index recipe lookup, with its own evidence reported.
 
@@ -666,7 +764,7 @@ class ReadTools:
             "steps_available": False,
             "retrieval_status": "unavailable",
             "fallback_reason": "no_published_index",
-            "filters_applied": _applied_exclusions(excluded),
+            "filters_applied": _filters_applied(context),
             "empty": not rows,
         }
         if search.get("match_kind"):
@@ -677,7 +775,7 @@ class ReadTools:
         return facts
 
     def _recommend_topic(
-        self, query: str, *, excluded: list[str], budget_fen: int | None
+        self, query: str, *, context: ValidationContext | None
     ) -> dict[str, Any]:
         """A recommendation for the topic the shopper actually named.
 
@@ -695,17 +793,27 @@ class ReadTools:
                 "buildable_dishes": [],
                 "sellable_products": [],
             }
+        excluded = context.excluded_ingredients if context else []
+        budget_fen = context.budget_fen if context else None
         dish_retrieval = self._retrieval(
-            "dish", query, extra_excluded=excluded, extra_budget_fen=budget_fen
+            "dish",
+            query,
+            extra_excluded=excluded,
+            extra_budget_fen=budget_fen,
+            extra_specification=context.specification if context else None,
         )
         product_retrieval = self._retrieval(
-            "product", query, extra_excluded=excluded, extra_budget_fen=budget_fen
+            "product",
+            query,
+            extra_excluded=excluded,
+            extra_budget_fen=budget_fen,
+            extra_specification=context.specification if context else None,
         )
         if dish_retrieval is not None or product_retrieval is not None:
             return self._recommend_from_retrieval(query, dish_retrieval, product_retrieval)
         dish_search = self._legacy_dish_search(query, excluded=excluded)
         dishes = _legacy_rows(dish_search)[:MAX_LOOKUP_ROWS]
-        products = self.find_products(query, excluded=excluded)
+        products = self.find_products(query, context=context)
         unavailable = {
             "status": "unavailable",
             "reason": "no_published_index",
@@ -718,7 +826,7 @@ class ReadTools:
             "empty": not dishes and not products,
             "retrieval_status": "unavailable",
             "fallback_reason": "no_published_index",
-            "filters_applied": _applied_exclusions(excluded),
+            "filters_applied": _filters_applied(context),
             "partial_sources": {
                 "dishes": {**unavailable, "hits": len(dishes)},
                 "products": {**unavailable, "hits": len(products)},
@@ -729,8 +837,8 @@ class ReadTools:
             # promise. Availability is decided when a plan is actually built.
             "stock_verified": False,
             "note": (
-                "按菜名/用途标签匹配到的菜谱，尚未校验是否配得齐，也不是库存或价格承诺；"
-                "只有生成清单时才会校验真实商品与库存。"
+                "按菜名/用途标签匹配到的菜谱，尚未按真实商品校验规格、库存或价格；"
+                "只有生成清单时才会校验。"
             ),
             "buildable_dishes": [
                 {
@@ -858,14 +966,14 @@ def _legacy_rows(search: dict[str, Any]) -> list[dict[str, Any]]:
     return list(search.get("candidates") or []) if search.get("status") == "ok" else []
 
 
-def _applied_exclusions(excluded: list[str]) -> dict[str, Any]:
-    """Which exclusions a pre-index read really applied.
-
-    The indexed route reports its own ``filters_applied``; the pre-index path
-    reports the same field from the same merged list, so a caller can tell what
-    was filtered on either route instead of having to assume nothing was.
-    """
-    return {"excluded_ingredient_ids": sorted({str(x) for x in excluded if str(x).strip()})}
+def _filters_applied(context: ValidationContext | None) -> dict[str, Any]:
+    excluded = context.excluded_ingredients if context else []
+    return {
+        "excluded_ingredient_ids": sorted(
+            {str(value) for value in excluded if str(value).strip()}
+        ),
+        "specification": dict(context.specification) if context else {},
+    }
 
 
 def _drop_excluded_products(

@@ -8,6 +8,7 @@ import httpx
 import pytest
 
 from app.core.config import Settings
+from app.agent.protocol import parse_proposal
 from app.llm.embedding import EmbeddingContract, HttpEmbeddingProvider
 from app.prompts.semantic import PROPOSAL_EXAMPLES
 from app.services.retrieval_service import RetrievalService
@@ -84,6 +85,48 @@ def test_purchase_examples_declare_intent_and_lookup_in_the_same_pass():
     assert milk['target']['intent'] == 'buy'
     assert milk['target']['name'] == '牛奶'
     assert any(lookup['kind'] == 'product' for lookup in milk['lookups'])
+
+    simple_dinner = parse_proposal(_example_for('今晚想做顿简单的饭'))
+    assert simple_dinner.understanding.new_goal.fulfillment_mode == 'self_cook'
+
+    self_cook = parse_proposal(
+        _example_for('今晚自己做一道菜，预算30元，不吃鸡蛋，你帮我推荐一道')
+    )
+    assert self_cook.understanding.new_goal.fulfillment_mode == 'self_cook'
+    assert self_cook.understanding.new_goal.constraints.budget_yuan == 30
+    assert self_cook.understanding.new_goal.constraints.excluded_ingredients == ['鸡蛋']
+
+    eat_dish = parse_proposal(_example_for('我想吃番茄炒蛋'))
+    assert eat_dish.understanding.new_goal.fulfillment_mode == 'unspecified'
+
+    named_dish = _example_for('今晚自己做酸汤肥牛，预算100元，不吃鸡蛋')
+    parsed = parse_proposal(named_dish)
+    assert parsed.understanding.new_goal.target_name == '酸汤肥牛'
+    assert parsed.understanding.new_goal.fulfillment_mode == 'self_cook'
+    assert parsed.understanding.new_goal.constraints.budget_yuan == 100
+    assert parsed.understanding.new_goal.constraints.excluded_ingredients == ['鸡蛋']
+    assert [(lookup.kind, lookup.query) for lookup in parsed.lookups] == [
+        ('dish', '酸汤肥牛'),
+    ]
+    assert not parsed.queries
+
+
+def test_supply_gap_opt_in_example_reuses_pending_real_dish_and_question():
+    request, proposal = next(
+        (request, proposal)
+        for request, proposal in PROPOSAL_EXAMPLES
+        if request.get('user_message') == '那就先买能买到的'
+    )
+    parsed = parse_proposal(proposal)
+
+    assert request['pending_clarifications'][0]['slot'] == 'supply_gap_choice'
+    assert request['goal_candidate']['target_name'] == '酸汤肥牛'
+    assert parsed.understanding.new_goal.target_name == '酸汤肥牛'
+    assert parsed.understanding.intent == 'buy'
+    assert [(lookup.kind, lookup.query) for lookup in parsed.lookups] == [
+        ('dish', '酸汤肥牛'),
+    ]
+    assert parsed.resolved_questions == ['q-gap-example']
 
 
 def test_answer_stage_gets_no_examples_and_answer_schema(monkeypatch):

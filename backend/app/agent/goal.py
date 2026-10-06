@@ -123,6 +123,7 @@ def _constraints(raw: Mapping[str, Any]) -> GoalConstraints:
                 raw.get("excluded_ingredients"), "constraints.excluded_ingredients"
             ),
             meal_time=normalize_meal_time(raw.get("meal_time")),
+            specification=raw.get("specification", {}),
         )
     except ValidationError as exc:  # pragma: no cover - guarded above
         raise GoalParseError("MALFORMED_GOAL", _validation_message(exc)) from exc
@@ -212,6 +213,8 @@ def apply_goal_changes(goal: Goal, changes: GoalChanges) -> Goal:
             data["fulfillment_mode"] = "unspecified"
         elif name in ("dietary", "excluded_ingredients"):
             constraints[name] = []
+        elif name == "specification":
+            constraints[name] = {}
         else:
             constraints[name] = None
     data["constraints"] = constraints

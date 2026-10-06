@@ -14,7 +14,10 @@ scripted, the store, the plan, the pending questions and the cart are real.
   own pending state, and the shopper stays free to change direction instead of
   being locked into the options they were shown.
 
-Cart writes only ever happen through the product's own confirmation endpoint.
+Cart writes still use the same confirmation core: either the explicit button
+or an explicit chat ``plan_act=confirm`` may call it after the server checks
+the current plan and version. Planning, edits, reads and ordinary acknowledgments
+do not write the cart.
 """
 
 from __future__ import annotations

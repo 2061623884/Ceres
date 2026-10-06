@@ -44,7 +44,7 @@ from app.schemas.goal import Goal, GoalChanges, GoalChangeSet, GoalConstraints, 
 PROPOSAL_VERSION = 1
 
 LOOKUP_KINDS = ("dish", "product")
-QUERY_KINDS = ("recommend", "recipe", "cart", "catalog", "policy")
+QUERY_KINDS = ("recommend", "recipe", "cart", "catalog", "compare", "history", "policy")
 
 CANDIDATE_KINDS = ("dish", "product", "scenario", "group", "item")
 
@@ -219,6 +219,7 @@ class CandidateSet:
         rows = {
             str(item.get("sku_id")): item for item in plan.get("items") or []
         }
+        targets = {target["group_id"]: target for target in plan.get("targets") or []}
         return {
             "plan_id": plan.get("plan_id"),
             "plan_version": plan.get("plan_version"),
@@ -230,6 +231,12 @@ class CandidateSet:
                     "group_id": c.group_id,
                     "target_kind": c.target_kind,
                     "name": c.name,
+                    **({"meal_name": targets[c.group_id]["meal_name"]}
+                       if targets[c.group_id].get("meal_name") else {}),
+                    **({"fulfillment_mode": targets[c.group_id]["fulfillment_mode"]}
+                       if targets[c.group_id].get("fulfillment_mode") else {}),
+                    **({"selection_goal": targets[c.group_id]["selection_goal"]}
+                       if "selection_goal" in targets[c.group_id] else {}),
                 }
                 for c in self.by_kind("group")
             ],
@@ -293,6 +300,7 @@ class Mutation:
     people: int | None = None
     excluded_ingredients: list[str] = dc_field(default_factory=list)
     budget_fen: int | None = None
+    specification: dict[str, Any] = dc_field(default_factory=dict)
 
 
 @dataclass
@@ -305,6 +313,7 @@ class Lookup:
     #: can never silently drop one.
     excluded_ingredients: list[str] = dc_field(default_factory=list)
     budget_fen: int | None = None
+    specification: dict[str, Any] = dc_field(default_factory=dict)
 
 
 @dataclass
@@ -314,6 +323,7 @@ class Query:
     #: The same read-only filter a lookup carries (``recommend`` / ``recipe`` only).
     excluded_ingredients: list[str] = dc_field(default_factory=list)
     budget_fen: int | None = None
+    specification: dict[str, Any] = dc_field(default_factory=dict)
 
 
 @dataclass
@@ -387,11 +397,15 @@ FULFILLMENT = ("unstated", "self_cook", "ready_made", "mixed")
 EDIT_OPS = ("none", "remove", "set_quantity", "adjust_quantity")
 PLAN_ACTS = ("none", "confirm", "abandon")
 #: Conditions a shopper may revoke; the same names as ``GoalChangeSet``.
-CLEARABLE = ("people", "budget_yuan", "fulfillment_mode", "excluded_ingredients")
+CLEARABLE = (
+    "people", "budget_yuan", "fulfillment_mode", "excluded_ingredients",
+    "specification",
+)
 
 TARGET_KEYS = frozenset({"kind", "name", "ref", "items", "intent", "relation", "quantity"})
 CONSTRAINT_KEYS = frozenset(
-    {"people", "budget_yuan", "fulfillment_mode", "excluded_ingredients", "clear", "unsupported"}
+    {"people", "budget_yuan", "fulfillment_mode", "excluded_ingredients",
+     "specification", "clear", "unsupported"}
 )
 FOCUS_KEYS = frozenset({"ref", "name"})
 EDIT_KEYS = frozenset({"op", "quantity"})
@@ -472,6 +486,13 @@ def _attach_understanding(proposal: SemanticProposal, top: dict[str, Any]) -> No
     focus_ref = _text(focus.get("ref"), "focus.ref")
 
     goal = _goal(kind, intent, target, stated)
+    if "specification" in clear and (
+        kind != "none" or proposal.lookups or proposal.queries
+    ):
+        raise SemanticProtocolError(
+            "UNSUPPORTED_OPERATION",
+            "撤销小包装条件请单独提出，本轮没有修改条件或清单。",
+        )
     if goal is not None and _text(target.get("ref"), "target.ref"):
         proposal.mutations.append(_add(target, goal, stated))
     row_edit = _edit(op, edit.get("quantity"), focus_ref, _text(focus.get("name"), "focus.name"))
@@ -522,6 +543,27 @@ def _constraints(raw: Any) -> tuple[dict[str, Any], list[str], list[str]]:
     excluded = _strings(spec.get("excluded_ingredients"), "constraints.excluded_ingredients")
     if excluded:
         stated["excluded_ingredients"] = excluded
+    packaging = _wire(spec.get("specification"), frozenset({
+        "size", "brand", "item_volume_ml", "packaging", "pack_count", "pack_mode", "max_price_yuan",
+    }), "constraints.specification")
+    conditions: dict[str, Any] = {}
+    size = _choice(packaging.get("size"), ("none", "small"), "constraints.specification.size")
+    if size == "small":
+        conditions["size"] = "small"
+    if brand := _text(packaging.get("brand"), "constraints.specification.brand"):
+        conditions["brand"] = brand
+    for key in ("item_volume_ml", "pack_count"):
+        if key in packaging:
+            conditions[key] = _count(packaging[key], "constraints.specification." + key) or 0
+    for key, options in (("packaging", ("none", "can", "bottle", "any")),
+                         ("pack_mode", ("none", "single", "multi", "any"))):
+        value = _choice(packaging.get(key), options, "constraints.specification." + key)
+        if value != "none":
+            conditions[key] = value
+    if "max_price_yuan" in packaging:
+        conditions["max_price_fen"] = yuan_to_fen(packaging["max_price_yuan"])
+    if conditions:
+        stated["specification"] = conditions
     clear = _strings(spec.get("clear"), "constraints.clear")
     unknown = sorted(set(clear) - set(CLEARABLE))
     if unknown:
@@ -570,6 +612,7 @@ def _add(target: dict[str, Any], goal: Goal, stated: dict[str, Any]) -> Mutation
         people=stated.get("people"),
         excluded_ingredients=list(stated.get("excluded_ingredients") or []),
         budget_fen=None if budget is None else yuan_to_fen(budget),
+        specification=dict(stated.get("specification", {})),
     )
 
 
@@ -609,10 +652,11 @@ def _filter_reads(proposal: SemanticProposal, stated: dict[str, Any]) -> None:
     excluded = list(stated.get("excluded_ingredients") or [])
     budget = stated.get("budget_yuan")
     budget_fen = None if budget is None else yuan_to_fen(budget)
-    reads = [*proposal.lookups, *(q for q in proposal.queries if q.kind in ("recipe", "recommend"))]
+    reads = [*proposal.lookups, *(q for q in proposal.queries if q.kind in ("recipe", "recommend", "compare"))]
     for read in reads:
         read.excluded_ingredients = list(excluded)
         read.budget_fen = budget_fen
+        read.specification = dict(stated.get("specification", {}))
 
 
 def _parse_lookup(entry: Any) -> Lookup:
@@ -629,10 +673,12 @@ def _parse_read(entry: Any) -> Query:
     topic = _text(spec.get("topic"), "read.topic")
     if topic and len(topic) > 200:
         raise SemanticProtocolError("MALFORMED_PROPOSAL", "read.topic 最多 200 字")
-    if topic and kind not in ("recipe", "recommend", "policy"):
+    if kind == "compare" and not topic:
+        raise SemanticProtocolError("MALFORMED_PROPOSAL", "compare 需要商品品类 topic")
+    if topic and kind not in ("recipe", "recommend", "compare", "history", "policy"):
         # cart / catalog describe the session itself; a product name is a lookup.
         raise SemanticProtocolError(
-            "UNSUPPORTED_OPERATION", "只有 recipe、recommend 与 policy 支持主题；商品名使用 lookups"
+            "UNSUPPORTED_OPERATION", "只有 recipe、recommend、compare、history 与 policy 支持主题；商品名使用 lookups"
         )
     return Query(kind=kind, query=topic)
 
@@ -751,8 +797,18 @@ def proposal_schema() -> dict[str, Any]:
             "budget_yuan": {"type": "number", "minimum": 0},
             "fulfillment_mode": enum(FULFILLMENT, "只有用户说了自己做 / 买现成才填"),
             "excluded_ingredients": texts,
+            "specification": obj({
+                "size": enum(("none", "small"), "用户要求小包装时填small"),
+                "brand": {**text, "description": "明确品牌名；any撤销品牌限制"},
+                "item_volume_ml": {**count, "description": "每罐/瓶容量（ml），0撤销"},
+                "packaging": enum(("none", "can", "bottle", "any"), "罐/瓶；any撤销"),
+                "pack_count": {**count, "description": "一销售包装内件数，0撤销"},
+                "pack_mode": enum(("none", "single", "multi", "any"), "单件/多件；any撤销"),
+                "max_price_yuan": {"type": "number", "minimum": 0,
+                                   "description": "一销售包装的最高售价（元），0撤销；不是整份清单预算"},
+            }),
             "clear": {"type": "array", "items": enum(CLEARABLE)},
-            "unsupported": {**texts, "description": "用户说了、上面没有字段的条件原话，如「清淡」「10分钟送到」"},
+            "unsupported": {**texts, "description": "用户说了、上面没有字段的条件原话，如「清淡」「10分钟送到」「大包装」「精确100克」"},
         }),
         "focus": obj({"ref": {**text, "description": "focus_refs 里的一个引用；指代不清就不填"},
                       "name": text}),
@@ -761,7 +817,8 @@ def proposal_schema() -> dict[str, Any]:
         "lookups": {"type": "array", "maxItems": 2, "items": obj({
             "kind": enum(LOOKUP_KINDS), "query": {**text, "description": "只填名称，不带否定词"}})},
         "reads": {"type": "array", "maxItems": 4, "items": obj({
-            "kind": enum(QUERY_KINDS, "policy=一般门店政策"), "topic": {**text, "description": "recommend / recipe 的主题；policy填写政策问题"}})},
+            "kind": enum(QUERY_KINDS, "policy=一般门店政策，history=本用户历史方案，compare=品类商品规格价格比较，recommend=推荐菜品，recipe=做法，cart=购物车，catalog=目录；具名商品用lookups"),
+            "topic": {**text, "description": "policy填写政策问题；compare必须填品类名；history可填已核实方案ID或菜/商品名，不填则最近方案；recommend / recipe可填主题；cart / catalog不填"}})},
         "questions": {"type": "array", "maxItems": 3, "items": obj({
             "slot": text, "question": text, "options": texts})},
         "display_refs": texts,
@@ -776,13 +833,19 @@ def proposal_schema() -> dict[str, Any]:
 
 
 def answer_schema() -> dict[str, Any]:
-    """The answer stage: retrieval is done, only the words remain."""
+    """The answer stage: grounded words and the candidates actually shown."""
     return {
         "type": "object",
         "properties": {
             "reply": {"type": "string", "description": "只根据 query_results 回答"},
+            "display_refs": {
+                "type": "array",
+                "items": {"type": "string"},
+                "maxItems": 12,
+                "description": "按向用户展示的顺序列出候选 ref；没有展示候选时填空数组",
+            },
         },
-        "required": ["reply"],
+        "required": ["reply", "display_refs"],
         "additionalProperties": False,
     }
 

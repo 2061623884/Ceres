@@ -226,7 +226,16 @@ def decide_turn(state: GraphState, runtime: TurnRuntime) -> dict[str, Any]:
     proposal = turn.get("parsed_proposal")
 
     snapshot = runtime.snapshot_for(state["session"].get("turn_mode", "active"))
-    decision = evaluate_gate(snapshot, proposal, runtime.candidates)
+    confirmation_command = turn["user_input"].strip().rstrip("。.!！?？")
+    decision = evaluate_gate(
+        snapshot,
+        proposal,
+        runtime.candidates,
+        plan_selection=runtime.plan_selection,
+        explicit_confirmation=confirmation_command in {
+            "确认加购", "确认加入购物车", "加入购物车", "下单",
+        },
+    )
     return update_partition(
         state,
         "turn",

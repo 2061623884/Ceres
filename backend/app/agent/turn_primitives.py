@@ -14,7 +14,7 @@ from copy import deepcopy
 from dataclasses import dataclass, field
 from typing import Any
 
-from app.agent.goal_router import GateFacts, MutationView, decide_turn
+from app.agent.goal_router import GateFacts, MutationView, SLOT_MEAL_PREFERENCES, decide_turn
 from app.agent.protocol import (
     CandidateSet,
     SemanticProposal,
@@ -75,6 +75,7 @@ class TurnSnapshot:
     #: The goal under discussion, when the session holds one that is still bound
     #: to the current task and plan version. Plain data, never an ORM object.
     goal_candidate: dict[str, Any] | None = None
+    current_step: str | None = None
 
 
 @dataclass(frozen=True)
@@ -159,7 +160,10 @@ def build_request(
         "purchase_summary": deepcopy(snapshot.purchase_summary),
         "pending_clarification": deepcopy(snapshot.pending_clarification),
         "pending_clarifications": deepcopy(list(snapshot.pending_clarifications or [])),
-        "displayed_candidates": deepcopy(list(snapshot.displayed_candidates or [])),
+        "displayed_candidates": [
+            {**deepcopy(candidate), "position": position}
+            for position, candidate in enumerate(snapshot.displayed_candidates, start=1)
+        ],
         "recent_messages": [
             {"role": m.get("role"), "content": m.get("content")}
             for m in (snapshot.recent_messages or [])[-6:]
@@ -180,7 +184,7 @@ def gate_facts(snapshot: TurnSnapshot) -> GateFacts:
     Pure and total: a candidate that cannot be read back (an old shape, a
     corrupted payload) simply is not a candidate.
     """
-    from app.schemas.goal import GoalCandidate
+    from app.schemas.goal import Goal, GoalCandidate, GoalConstraints
 
     candidate = None
     if snapshot.goal_candidate:
@@ -189,14 +193,78 @@ def gate_facts(snapshot: TurnSnapshot) -> GateFacts:
         except Exception:  # pragma: no cover - defensive: an unusable candidate
             candidate = None
     plan = snapshot.current_plan or {}
+    requirements = snapshot.requirements
+    specification = dict(requirements.get("specification") or {})
     groups = [str(g.get("ref")) for g in (plan.get("groups") or []) if g.get("ref")]
+    plan_groups = plan.get("groups") or []
+    single_group = plan_groups[0] if len(plan_groups) == 1 else None
+    selection = (
+        single_group
+        if single_group is not None and "selection_goal" in single_group
+        else None
+    )
+    active_meal_goal = None
+    active_meal_ref = None
+    active_meal_target_kind = None
+    active_excluded_ingredients = list(requirements.get("excluded_ingredients") or [])
+    if single_group is not None and single_group.get("meal_name"):
+        source_goal = (
+            Goal.model_validate(single_group["selection_goal"])
+            if "selection_goal" in single_group else None
+        )
+        constraints = (
+            source_goal.constraints
+            if source_goal is not None
+            else GoalConstraints(
+                people=requirements.get("people"),
+                budget_yuan=(
+                    requirements["budget_fen"] / 100
+                    if requirements.get("budget_fen") is not None else None
+                ),
+                excluded_ingredients=active_excluded_ingredients,
+                specification=specification,
+            )
+        )
+        active_meal_goal = Goal(
+            kind="meal_plan",
+            target_name=str(single_group["meal_name"]),
+            fulfillment_mode=single_group["fulfillment_mode"],
+            constraints=constraints,
+        )
+        active_meal_ref = single_group["ref"]
+        active_meal_target_kind = single_group.get("target_kind")
+        if source_goal is not None:
+            active_excluded_ingredients = list(source_goal.constraints.excluded_ingredients)
     return GateFacts(
         has_active_plan=bool(plan.get("items")),
+        current_plan_id=plan.get("plan_id"),
+        current_plan_version=plan.get("plan_version"),
+        current_plan_can_confirm=plan.get("can_confirm") is True,
         task_terminal=snapshot.turn_mode == "completed",
+        current_step=snapshot.current_step,
         candidate=candidate,
         focus_refs=tuple(snapshot.focus_refs or ()),
         plan_target_refs=tuple(groups),
         has_pending_question=bool(snapshot.pending_clarifications),
+        meal_preferences_asked=bool(candidate and any(
+            question.get("candidate_ref") == candidate.ref
+            and question.get("slot") == SLOT_MEAL_PREFERENCES
+            for question in snapshot.pending_clarifications
+        )),
+        saved_meal_preferences=(
+            requirements.get("budget_fen") is not None
+            or bool(requirements.get("excluded_ingredients"))
+            or specification.get("size") == "small"
+        ),
+        system_selection_goal=Goal.model_validate(selection["selection_goal"]) if selection else None,
+        system_selection_ref=selection["ref"] if selection else None,
+        active_meal_goal=active_meal_goal,
+        active_meal_ref=active_meal_ref,
+        active_meal_target_kind=active_meal_target_kind,
+        active_budget_fen=requirements.get("budget_fen"),
+        active_excluded_ingredients=active_excluded_ingredients,
+        active_specification=specification,
+        displayed_refs=tuple(item["ref"] for item in snapshot.displayed_candidates),
     )
 
 
@@ -204,6 +272,8 @@ def evaluate_gate(
     snapshot: TurnSnapshot,
     proposal: SemanticProposal,
     candidates: CandidateSet,
+    plan_selection: dict[str, Any] | None = None,
+    explicit_confirmation: bool = False,
 ) -> Any:
     """The turn's decision: what may happen next, and what may not.
 
@@ -231,6 +301,8 @@ def evaluate_gate(
         mutations=views,
         has_read_requests=bool(proposal.lookups or proposal.queries),
         has_questions=bool(proposal.uncertainties),
+        plan_selection=plan_selection,
+        explicit_confirmation=explicit_confirmation,
     )
 
 

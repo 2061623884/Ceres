@@ -15,11 +15,13 @@ of that boundary for a plan mutation:
 It has no workflow, no model, no turn routing and no direct persistence. What it does have is the
 owner's real state: the plan on screen, the already-bought ledger, the current
 version. Those are read through the services that own them, never re-implemented
-here. There is deliberately no cart-confirmation capability at this boundary.
+here. Explicit chat confirmation calls the shared confirmation core from the
+turn commit node, outside this plan-change boundary.
 """
 
 from __future__ import annotations
 
+from copy import deepcopy
 from dataclasses import asdict, replace
 from typing import Any
 
@@ -122,6 +124,8 @@ class PlanChangeExecutor:
             return self._prepare_add(state, mutation, candidate, store, zone)
         if mutation.verb == "remove":
             return self._prepare_remove(state, candidate, store, zone)
+        if mutation.field == "fulfillment_mode":
+            return self._prepare_meal_mode_patch(state, candidate)
         if mutation.field == "quantity":
             return self._prepare_quantity(state, mutation, candidate, store, zone)
         if mutation.field == "people":
@@ -143,6 +147,29 @@ class PlanChangeExecutor:
             "改写已有清单的预算或忌口需要重算整份清单，当前版本还不支持；"
             "这些条件不会生效，请直接说要换成什么菜，或新建一份清单。",
         )
+
+    def _prepare_meal_mode_patch(
+        self, state: TaskState | None, candidate: CandidateRef
+    ) -> dict[str, Any]:
+        self._ensure_writable(state)
+        goal = self.decision.goal
+        plan = deepcopy(state.plan)
+        target = next(
+            target
+            for target in plan["targets"]
+            if str(target.get("group_id") or "") == str(candidate.group_id)
+        )
+        target["fulfillment_mode"] = goal.fulfillment_mode
+        if "selection_goal" in target:
+            target["selection_goal"]["fulfillment_mode"] = goal.fulfillment_mode
+        return {
+            "status": "staged",
+            "verb": "change",
+            "field": "fulfillment_mode",
+            "group_id": candidate.group_id,
+            "plan_patch": plan,
+            "message": f"已记录「{target['meal_name']}」按自己做来准备。",
+        }
 
     def prepare_many(
         self,
@@ -310,6 +337,15 @@ class PlanChangeExecutor:
             raise SemanticProtocolError(
                 "UNSUPPORTED_OPERATION", "修改预算需要重算整份旧清单，本轮未修改原方案或条件。"
             )
+        if (
+            active_plan
+            and not switching
+            and mutation.specification
+            and mutation.specification != state.requirements.specification
+        ):
+            raise SemanticProtocolError(
+                "UNSUPPORTED_OPERATION", "修改商品规格需要校验整份旧清单，本轮未修改原方案或条件。"
+            )
         constraints = self._turn_constraints(state, [mutation])
         operation = self._operation_for(state, candidate, mutation)
         args = compile_internal_args(
@@ -318,6 +354,7 @@ class PlanChangeExecutor:
             people=constraints.people,
             budget_fen=constraints.budget_fen,
             excluded_ingredients=constraints.excluded_ingredients,
+            specification=constraints.specification,
             operation=operation,
         )
         if candidate.kind == "product":
@@ -344,6 +381,7 @@ class PlanChangeExecutor:
             people=constraints.people,
             budget_fen=constraints.budget_fen,
             exclude_ingredients=list(args.get("exclude_ingredients") or []),
+            specification=args["specification"],
             operation=operation,
             quantity=int(args.get("quantity") or 1),
         )
@@ -355,6 +393,10 @@ class PlanChangeExecutor:
                 "code": result.get("code"),
                 "message": result.get("message"),
             }
+        goal = getattr(self.goal_candidate, "goal", None)
+        if goal is not None and goal.kind in ("meal_plan", "meal_decision"):
+            result["target"]["meal_name"] = goal.target_name or candidate.name
+            result["target"]["fulfillment_mode"] = goal.fulfillment_mode
         preview = ShoppingPlanService(self.db, store, zone).merge_plan(
             active_plan,
             result,
@@ -508,12 +550,14 @@ class PlanChangeExecutor:
         people = None
         budget = None
         excluded: list[str] = []
+        specification: dict[str, str] = {}
         for mutation in mutations:
             if mutation.people:
                 people = mutation.people
             if mutation.budget_fen is not None:
                 budget = mutation.budget_fen
             excluded.extend(mutation.excluded_ingredients)
+            specification.update(mutation.specification)
         requirements = getattr(state, "requirements", None)
         if state and self.tasks.task_is_terminal(state.task_id):
             requirements = None
@@ -528,6 +572,10 @@ class PlanChangeExecutor:
                     (requirements.excluded_ingredients if requirements else []) + excluded
                 )
             ),
+            specification={
+                **(requirements.specification if requirements else {}),
+                **specification,
+            },
         )
 
     def _operation_for(
@@ -669,6 +717,7 @@ def compile_internal_args(
     budget_fen: int | None,
     excluded_ingredients: list[str],
     operation: str,
+    specification: dict[str, str] | None = None,
 ) -> dict[str, Any]:
     """Compile a validated ``add``/``resize`` into the existing internal call args."""
     if candidate.kind not in ("dish", "product", "scenario"):
@@ -679,6 +728,7 @@ def compile_internal_args(
         "target_kind": candidate.kind,
         "target_id": candidate.target_id,
         "operation": operation,
+        "specification": dict(specification or {}),
     }
     if people:
         args["people"] = people

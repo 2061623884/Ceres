@@ -26,7 +26,8 @@ from app.agent.goal_router import (
     SLOT_FOCUS,
     SLOT_FULFILLMENT_MODE,
     SLOT_GOAL_RELATION,
-    SLOT_MEAL_TARGET,
+    SLOT_MEAL_PREFERENCES,
+    SLOT_MIXED,
     decide_turn,
     mutation_refusal,
 )
@@ -71,6 +72,51 @@ def test_read_only_turns_block_every_write() -> None:
         assert decision.missing_slots == []
 
 
+def test_chat_confirmation_needs_an_explicit_user_utterance() -> None:
+    decision = decide_turn(
+        understanding(plan_act="confirm"),
+        facts(
+            has_active_plan=True,
+            current_step="awaiting_confirmation",
+            current_plan_can_confirm=True,
+        ),
+    )
+
+    assert decision.route == "answer"
+    assert decision.reason_code == "PLAN_CONFIRM_IN_CHAT"
+    assert decision.write_blocked is True
+
+    confirmed = decide_turn(
+        understanding(plan_act="confirm"),
+        facts(
+            has_active_plan=True,
+            current_step="awaiting_confirmation",
+            current_plan_can_confirm=True,
+        ),
+        explicit_confirmation=True,
+    )
+    assert confirmed.route == "mutation"
+    assert confirmed.mutation_action == "confirm_plan"
+    assert confirmed.write_blocked is False
+
+    repeated_constraint = decide_turn(
+        understanding(
+            plan_act="confirm",
+            goal_relation="amend",
+            changes=GoalChanges(set=GoalChangeSet(budget_yuan=10)),
+        ),
+        facts(
+            has_active_plan=True,
+            current_step="awaiting_confirmation",
+            current_plan_can_confirm=True,
+            active_budget_fen=1000,
+        ),
+    )
+    assert repeated_constraint.route == "answer"
+    assert repeated_constraint.reason_code == "PLAN_CONFIRM_IN_CHAT"
+    assert repeated_constraint.write_blocked is True
+
+
 def test_a_located_remove_routes_to_mutation_not_stop_refusal() -> None:
     group_ref = "dish:dish-hongshao-rou"
     decision = decide_turn(
@@ -112,7 +158,7 @@ def test_an_undecided_meal_asks_instead_of_preparing() -> None:
         facts(),
     )
     assert decision.route == "clarify"
-    assert decision.missing_slots == [SLOT_MEAL_TARGET]
+    assert decision.missing_slots == [SLOT_MEAL_PREFERENCES]
     assert decision.write_blocked is True
 
 
@@ -267,6 +313,84 @@ def test_a_located_low_level_row_operation_is_authorized() -> None:
     assert decision.relation == "amend"
 
 
+def test_edit_plus_confirm_executes_only_the_edit() -> None:
+    """The mixed-action exception must not confirm the unchanged plan."""
+    group_ref = "dish:dish-hongshao-rou"
+    decision = decide_turn(
+        understanding(
+            plan_act="confirm",
+            goal_relation="amend",
+            focus_ref=group_ref,
+        ),
+        facts(
+            has_active_plan=True,
+            focus_refs=({"ref": group_ref, "kind": "plan_target", "label": "红烧肉"},),
+            plan_target_refs=(group_ref,),
+        ),
+        mutations=[
+            MutationView(verb="remove", ref=group_ref, ref_kind="dish", ref_name="红烧肉")
+        ],
+    )
+    assert decision.route == "mutation"
+    assert decision.mutation_action == "apply_mutation"
+    assert decision.relation == "amend"
+    assert decision.write_blocked is False
+
+
+def test_abandon_plus_replace_follows_replace() -> None:
+    """A named replacement wins over an accompanying abandon signal."""
+    decision = decide_turn(
+        understanding(
+            plan_act="abandon",
+            intent="buy",
+            goal_relation="switch",
+            new_goal=Goal(kind="meal_plan", target_name="火锅"),
+        ),
+        facts(has_active_plan=True),
+        mutations=[add("dish:hotpot", "dish")],
+    )
+    assert decision.route == "mutation"
+    assert decision.mutation_action == "prepare"
+    assert decision.relation == "switch"
+    assert decision.write_blocked is False
+
+
+def test_questions_precede_whole_task_abandonment() -> None:
+    decision = decide_turn(
+        understanding(plan_act="abandon"),
+        facts(has_active_plan=True, current_step="awaiting_confirmation"),
+        has_questions=True,
+    )
+    assert decision.route == "clarify"
+    assert decision.reason_code == "MODEL_QUESTION"
+    assert decision.mutation_action is None
+    assert decision.write_blocked is True
+
+
+def test_abandon_plus_located_edit_asks_which_change_to_make() -> None:
+    group_ref = "dish:dish-hongshao-rou"
+    decision = decide_turn(
+        understanding(
+            plan_act="abandon",
+            goal_relation="amend",
+            focus_ref=group_ref,
+        ),
+        facts(
+            has_active_plan=True,
+            current_step="awaiting_confirmation",
+            focus_refs=({"ref": group_ref, "kind": "plan_target", "label": "红烧肉"},),
+            plan_target_refs=(group_ref,),
+        ),
+        mutations=[
+            MutationView(verb="remove", ref=group_ref, ref_kind="dish", ref_name="红烧肉")
+        ],
+    )
+    assert decision.route == "clarify"
+    assert decision.missing_slots == [SLOT_MIXED]
+    assert decision.mutation_action is None
+    assert decision.write_blocked is True
+
+
 # ------------------------------------------------------------ the amend path
 
 
@@ -332,6 +456,42 @@ def test_a_people_answer_on_a_named_candidate_can_prepare_without_mode_first() -
     assert decision.candidate.goal.constraints.people == 3
 
 
+def test_mode_feedback_without_focus_completes_pending_switch_before_active_meal() -> None:
+    candidate = GoalCandidate(
+        ref="goal-gongbao",
+        goal=Goal(kind="meal_plan", target_name="宫保鸡丁"),
+        relation="switch",
+        missing_slots=[SLOT_FULFILLMENT_MODE],
+        task_id="t1",
+        plan_version=2,
+    )
+    decision = decide_turn(
+        understanding(
+            goal_relation="amend",
+            changes=GoalChanges(set=GoalChangeSet(fulfillment_mode="self_cook")),
+        ),
+        facts(
+            has_active_plan=True,
+            candidate=candidate,
+            has_pending_question=True,
+            plan_target_refs=("group-tomato",),
+            active_meal_goal=Goal(
+                kind="meal_plan", target_name="番茄炒蛋", fulfillment_mode="unspecified"
+            ),
+            active_meal_ref="group-tomato",
+            active_meal_target_kind="dish",
+        ),
+    )
+    assert decision.route == "mutation"
+    assert decision.mutation_action == "prepare"
+    assert decision.relation == "amend"
+    assert decision.candidate is not None
+    assert decision.candidate.ref == candidate.ref
+    assert decision.candidate.relation == "switch"
+    assert decision.candidate.goal.target_name == "宫保鸡丁"
+    assert decision.candidate.goal.fulfillment_mode == "self_cook"
+
+
 def test_an_amendment_without_focus_on_an_active_plan_patches_people() -> None:
     decision = decide_turn(
         understanding(goal_relation="amend", changes=GoalChanges(set=GoalChangeSet(people=3))),
@@ -341,6 +501,24 @@ def test_an_amendment_without_focus_on_an_active_plan_patches_people() -> None:
     assert decision.mutation_action == "apply_mutation"
     assert decision.write_blocked is False
     assert decision.focus_kind == "active_goal"
+
+
+def test_same_mode_feedback_without_reads_gets_a_server_answer() -> None:
+    decision = decide_turn(
+        understanding(
+            goal_relation="amend",
+            changes=GoalChanges(set=GoalChangeSet(fulfillment_mode="self_cook")),
+        ),
+        facts(
+            has_active_plan=True,
+            active_meal_goal=Goal(
+                kind="meal_plan", target_name="番茄炒蛋", fulfillment_mode="self_cook"
+            ),
+        ),
+    )
+    assert decision.route == "answer"
+    assert decision.reason_code == "UNCHANGED_PLAN_FEEDBACK"
+    assert decision.write_blocked is True
 
 
 # ----------------------------------------------------- the contract's strictness

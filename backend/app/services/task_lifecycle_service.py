@@ -186,7 +186,7 @@ class TaskLifecycleService:
                         + list(args.get("exclude_ingredients") or [])
                     )
                 ),
-                specification=dict((inherited.specification if inherited else None) or {}),
+                specification=dict(args["specification"]),
             ),
             current_step="understanding",
             active_template_id=str(dish_id) if dish_id else None,
@@ -270,6 +270,35 @@ class TaskLifecycleService:
         expected_state_version: int,
         request_digest: str,
     ) -> dict[str, Any]:
+        response, applied = self.cancel_task_core(
+            task_id,
+            request_id=request_id,
+            expected_session_version=expected_session_version,
+            expected_state_version=expected_state_version,
+            request_digest=request_digest,
+        )
+        if not applied:
+            return response
+        self.conversation.save_message(
+            self.db.get(GuideTask, task_id).session_id,
+            task_id=task_id,
+            role="assistant",
+            kind="action_result",
+            content="已取消当前任务。",
+            request_id=request_id,
+        )
+        self.db.commit()
+        return response
+
+    def cancel_task_core(
+        self,
+        task_id: str,
+        *,
+        request_id: str,
+        expected_session_version: int,
+        expected_state_version: int,
+        request_digest: str,
+    ) -> tuple[dict[str, Any], bool]:
         task = self.db.get(GuideTask, task_id)
         if not task or task.owner_id != self.owner_id:
             raise AppError(403, "SESSION_FORBIDDEN", "Task not found")
@@ -281,7 +310,7 @@ class TaskLifecycleService:
             "cancel", "task", task_id, request_id, request_digest
         )
         if cached and cached.result_json:
-            return json.loads(cached.result_json)
+            return json.loads(cached.result_json), False
 
         if effective_status(task) != "active":
             raise AppError(409, "TASK_NOT_WRITABLE", "Task not writable")
@@ -297,7 +326,8 @@ class TaskLifecycleService:
                 """
                 UPDATE guide_tasks
                 SET status = 'cancelled', current_step = 'cancelled',
-                    state_version = state_version + 1, updated_at = :now
+                    state_version = state_version + 1, pending_clarification_json = NULL,
+                    updated_at = :now
                 WHERE task_id = :tid AND owner_id = :oid AND status = 'active'
                   AND state_version = :ver
                 """
@@ -317,14 +347,6 @@ class TaskLifecycleService:
         task = self.db.get(GuideTask, task_id)
         if task:
             self.db.refresh(task)
-        self.conversation.save_message(
-            session.session_id,
-            task_id=task_id,
-            role="assistant",
-            kind="action_result",
-            content="已取消当前任务。",
-            request_id=request_id,
-        )
         response = {
             "task_id": task_id,
             "status": "cancelled",
@@ -334,8 +356,7 @@ class TaskLifecycleService:
         op = self.operations.find("cancel", task_id, request_id)
         if op:
             self.operations.complete(op, response)
-        self.db.commit()
-        return response
+        return response, True
 
     def create_task(
         self,

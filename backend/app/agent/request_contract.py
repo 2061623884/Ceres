@@ -22,22 +22,21 @@ def request_digest(
     expected_state_version: int | None,
     expected_session_version: int | None,
     view_context: dict[str, Any] | None,
+    plan_selection: dict[str, Any] | None = None,
 ) -> str:
-    """The exact digest the legacy workflow has always computed.
-
-    Same JSON fields, same ``None`` handling, same ``sort_keys`` and the default
-    ``ensure_ascii=True`` — so a receipt committed by either path replays under
-    the other.
-    """
+    """Bind the receipt to the supplied selection; absent packets keep the old digest."""
+    payload = {
+        "message": message,
+        "expected_task_id": expected_task_id,
+        "expected_state_version": expected_state_version,
+        "expected_session_version": expected_session_version,
+        "view_context": view_context,
+    }
+    if plan_selection is not None:
+        payload["plan_selection"] = plan_selection
     return hashlib.sha256(
         json.dumps(
-            {
-                "message": message,
-                "expected_task_id": expected_task_id,
-                "expected_state_version": expected_state_version,
-                "expected_session_version": expected_session_version,
-                "view_context": view_context,
-            },
+            payload,
             sort_keys=True,
         ).encode()
     ).hexdigest()
