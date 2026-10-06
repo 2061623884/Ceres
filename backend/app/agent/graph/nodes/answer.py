@@ -33,12 +33,13 @@ from app.agent.graph.turn_commit import (
     committed_step_row,
     understanding_wrapper,
 )
-from app.agent.protocol import SemanticProtocolError, parse_proposal
+from app.agent.protocol import CandidateSet, SemanticProtocolError, parse_proposal
 from app.agent.turn_context_plan import (
     product_filter_clarification,
     product_type_clarification,
 )
 from app.schemas.goal import TurnDecision
+from app.services.catalog_service import CatalogService
 
 def answer(state: GraphState, runtime: TurnRuntime) -> dict[str, Any]:
     """Stage the reply / question / refusal for this request."""
@@ -122,9 +123,78 @@ def _grounded_answer(state: GraphState, runtime: TurnRuntime) -> GraphState:
     a malformed/over-eager read-only response never become a new route.
     """
     query_results = list(state["turn"].get("read_results") or [])
+    target = (state["turn"].get("proposal") or {}).get("target") or {}
+    answer_runtime = runtime
+    category_product_lookup = (
+        target.get("kind") == "category"
+        and target.get("intent") == "explore"
+        and any(
+            result.get("kind") == "lookup"
+            and result.get("lookup_kind") == "product"
+            for result in query_results
+        )
+    )
+    product_type_pending = (
+        product_type_clarification(query_results) if category_product_lookup else []
+    )
+    if category_product_lookup:
+        product_lookup_refs = {
+            match["ref"]
+            for result in query_results
+            if result.get("kind") == "lookup"
+            and result.get("lookup_kind") == "product"
+            for match in result.get("matches") or []
+        }
+        card_candidates = [
+            {
+                "kind": "product",
+                "target_id": match["target_id"],
+                "ref": match["ref"],
+            }
+            for result in query_results
+            if result.get("kind") == "lookup"
+            and result.get("lookup_kind") == "product"
+            for match in result.get("matches") or []
+            if match.get("stock_verified") is True
+            and not match.get("unknown_constraints")
+        ]
+        cardable_refs = {
+            card["ref"]
+            for card in CatalogService(runtime.db, runtime.store_id).comparison_cards(
+                card_candidates
+            )
+        }
+        if cardable_refs and not product_type_pending:
+            query_results = [
+                {
+                    **result,
+                    "matches": [
+                        match
+                        for match in result.get("matches") or []
+                        if match["ref"] in cardable_refs
+                    ],
+                }
+                if result.get("kind") == "lookup"
+                and result.get("lookup_kind") == "product"
+                else result
+                for result in query_results
+            ]
+            uncardable_refs = product_lookup_refs - cardable_refs
+            candidates = runtime.candidates
+            answer_runtime = replace(
+                runtime,
+                candidates=CandidateSet(
+                    refs={
+                        ref: candidate
+                        for ref, candidate in candidates.refs.items()
+                        if ref not in uncardable_refs
+                    },
+                    order=[ref for ref in candidates.order if ref not in uncardable_refs],
+                ),
+            )
     try:
         raw, calls = propose_round(
-            state, runtime, query_results=query_results, read_only=True
+            state, answer_runtime, query_results=query_results, read_only=True
         )
     except Halt as halt:
         return merge_state(state, halt_update(state, halt.reason, halt.error))
@@ -149,7 +219,6 @@ def _grounded_answer(state: GraphState, runtime: TurnRuntime) -> GraphState:
     except SemanticProtocolError as exc:
         return merge_state(state, halt_update(state, "failed", understanding_error(exc)))
 
-    target = (state["turn"].get("proposal") or {}).get("target") or {}
     if (
         target.get("kind") == "category"
         and target.get("intent") == "explore"
@@ -176,17 +245,21 @@ def _grounded_answer(state: GraphState, runtime: TurnRuntime) -> GraphState:
                 reply = f"我找到「{match['name']}」了，你可以先看看卡片里的商品信息。"
 
     business_pending = []
-    if target.get("kind") == "category" and target.get("intent") == "explore":
-        business_pending = product_type_clarification(query_results)
+    if category_product_lookup:
+        business_pending = product_type_pending
         if business_pending:
             reply = ""
             displayed = []
         else:
+            if cardable_refs:
+                displayed = [ref for ref in displayed if ref in cardable_refs]
             business_pending = product_filter_clarification(
                 query_results,
                 displayed,
                 query=str(target.get("name") or ""),
             )
+            if business_pending:
+                reply = ""
 
     comparisons = [row for row in query_results if row.get("kind") == "compare"]
     if comparisons and not any(row["sellable_products"] for row in comparisons):

@@ -207,7 +207,7 @@ def test_purchase_modify_broad_category_preserves_type_choice_before_plan(
     assert completed_calls[0]["capability"] == "purchase_modify"
 
 
-def test_verified_product_type_and_filter_answers_use_category_guidance(
+def test_type_answer_uses_only_comparable_candidates_and_offers_real_filter_bubbles(
     indexed_client, kev_api, internal_trace_headers, monkeypatch
 ):
     kev_api["choices"]["capability"] = "purchase_modify"
@@ -232,10 +232,8 @@ def test_verified_product_type_and_filter_answers_use_category_guidance(
                 and result.get("lookup_kind") == "product"
                 for match in result.get("matches", [])
             ]
-            if payload["messages"][-1]["content"] in {"买点饮料，预算20元", "可乐"}:
-                matches = [match for match in matches if match.get("family_id") == "cola"]
             content = {
-                "reply": "筛选结果如下。",
+                "reply": "这里没有价格信息。",
                 "display_refs": [match["ref"] for match in matches],
             }
         return httpx.Response(
@@ -287,6 +285,22 @@ def test_verified_product_type_and_filter_answers_use_category_guidance(
         },
     )
 
+    assert {card["sku_id"] for card in selected_type["product_cards"]} == {
+        "demo:cn-pepsi-original-330ml-can",
+        "demo:cn-coke-original-330ml-can",
+        "demo:cn-coke-original-500ml-bottle",
+        "demo:cn-coke-zero-500ml-bottle",
+    }
+    assert all(card["price_fen"] is not None for card in selected_type["product_cards"])
+    assert "没有价格信息" not in selected_type["message"]
+    selected_type_context = json.loads(sent_requests[-2]["messages"][-2]["content"])[
+        "server_context"
+    ]
+    assert "demo:cola-330ml" not in {
+        match["target_id"]
+        for result in selected_type_context["query_results"]
+        for match in result.get("matches", [])
+    }
     assert filtered["pending_clarifications"] == []
     assert {card["brand"] for card in filtered["product_cards"]} == {"百事可乐"}
     type_answer_prompt = sent_requests[-2]["messages"][0]["content"].split(
