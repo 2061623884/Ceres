@@ -1,0 +1,10 @@
+{
+  "run_id": "e5095afb1e2b4d19babc56f38e917212",
+  "run_dir": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\full-e5095afb1e2b4d19babc56f38e917212",
+  "source_zip_sha256": "094eb7d28777d5c3d7025bcad4aebd9f71a300cb275fe8679c9ec5cd825d2dfb",
+  "source_path_count": 312,
+  "catalog_sha256": "772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10",
+  "backend_exit_code": 1,
+  "mercury_exit_code": 0,
+  "finished_at_utc": "2026-10-06T00:54:14.8133685Z"
+}

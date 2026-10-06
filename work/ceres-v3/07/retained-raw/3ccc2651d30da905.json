@@ -1,0 +1,6 @@
+{
+  "original_path": "evidence/full-e5095afb1e2b4d19babc56f38e917212/backend/process-completion.json",
+  "bytes": 95,
+  "sha256": "25ce931e19907733edb7ccc59c5b04371c848777b9e029b2b09eda1287b1852e",
+  "utf8_text": "{\r\n  \"pid\": 72400,\r\n  \"finished_at_utc\": \"2026-10-06T00:54:07.8079911Z\",\r\n  \"exit_code\": 1\r\n}\r\n"
+}

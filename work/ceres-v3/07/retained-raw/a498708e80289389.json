@@ -1,0 +1,6 @@
+{
+  "original_path": "evidence/full-e5095afb1e2b4d19babc56f38e917212/Mercury/process-completion.json",
+  "bytes": 95,
+  "sha256": "940249b5cca32f44c57c3227d55816a63536f1cefe873c91a4f43feb335cddc2",
+  "utf8_text": "{\r\n  \"pid\": 29180,\r\n  \"finished_at_utc\": \"2026-10-06T00:54:14.3120701Z\",\r\n  \"exit_code\": 0\r\n}\r\n"
+}

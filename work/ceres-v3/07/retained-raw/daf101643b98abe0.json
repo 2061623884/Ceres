@@ -1,0 +1,6 @@
+{
+  "original_path": "evidence/live-role5-v5-089d7f42ae254264b4e23d0615847335/stdout.raw.txt",
+  "bytes": 598,
+  "sha256": "ede58fb2d738a16b3cc7da133ccd7224fb75aa947c66315f4d5342cdb12d5f31",
+  "utf8_text": "============================= test session starts =============================\r\nplatform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.6.0\r\nrootdir: C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\r\nconfigfile: pyproject.toml\r\nplugins: anyio-4.15.1, langsmith-0.14.1, asyncio-1.4.0\r\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\r\ncollected 5 items\r\n\r\ntests\\test_v3_live_sampling.py .....                                     [100%]\r\n\r\n============================= 5 passed in 38.47s ==============================\r\n"
+}

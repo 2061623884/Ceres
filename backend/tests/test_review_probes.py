@@ -288,6 +288,7 @@ def test_review_completed_people_change_requires_scope_clarification(client, sem
     result = confirm(client, first)
     assert result.status_code == 200, result.text
     confirmed = result.json()
+    plan_before = client.get(f"/api/v1/guide/sessions/{first['session_id']}").json()["plan"]
     cart_before = _cart_snapshot(client)
 
     request_id = str(uuid4())
@@ -338,7 +339,7 @@ def test_review_completed_people_change_requires_scope_clarification(client, sem
     assert state["task_id"] == first["task_id"]
     assert state["task_status"] == "completed", state["task_status"]
     assert state["state_version"] == confirmed["state_version"], state["state_version"]
-    assert state["plan"] == first["plan"]
+    assert state["plan"] == plan_before
     assert len(state["pending_clarifications"]) == 1, state["pending_clarifications"]
     stored = state["pending_clarifications"][0]
     assert stored["question_id"] == pending["question_id"], (stored, pending)
@@ -366,7 +367,7 @@ def test_review_completed_people_change_requires_scope_clarification(client, sem
     assert after["task_id"] == first["task_id"]
     assert after["task_status"] == "completed", after["task_status"]
     assert after["state_version"] == confirmed["state_version"], after["state_version"]
-    assert after["plan"] == first["plan"]
+    assert after["plan"] == plan_before
     assert _cart_snapshot(client) == cart_before
 
 

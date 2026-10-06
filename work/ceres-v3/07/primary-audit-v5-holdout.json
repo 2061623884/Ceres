@@ -1,0 +1,128 @@
+{
+  "at": "2026-10-06T01:53:17.766030+00:00",
+  "purpose": "Primary-agent raw-record and provenance audit, not a test run",
+  "baseline": "work\\ceres-v3\\07\\candidate-v5\\baseline.json",
+  "expected_zip_sha256": "a85bfc70c017999c01833c0969abf7217a4373c49673ca2ed750ef662a3a7dae",
+  "actual_zip_sha256": "a85bfc70c017999c01833c0969abf7217a4373c49673ca2ed750ef662a3a7dae",
+  "actual_results": [
+    {
+      "run": "work\\ceres-v3\\07\\evidence\\live-holdout4-v5-16391552984743c7b6d246e2ae472a60",
+      "command": {
+        "process_id": 47416,
+        "started_utc": "2026-10-06T01:52:04.9931557Z",
+        "executable": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+        "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend",
+        "argv": [
+          "-X",
+          "utf8",
+          "-m",
+          "pytest",
+          "-p",
+          "no:cacheprovider",
+          "-W",
+          "error::pytest.PytestUnhandledThreadExceptionWarning",
+          "--basetemp",
+          "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\live-holdout4-v5-16391552984743c7b6d246e2ae472a60\\backend-basetemp",
+          "tests/test_v3_independent_routing.py"
+        ],
+        "environment": {
+          "LLM_MODE": "live",
+          "LLM_MAX_OUTPUT_TOKENS": "3072",
+          "MERCURY_LIVE": "0",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "PYTHONUTF8": "1",
+          "RETRIEVAL_MODE": "lexical",
+          "RETRIEVAL_INDEX_DIR": "",
+          "MEMORY_MODEL": "",
+          "TEMP": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\live-holdout4-v5-16391552984743c7b6d246e2ae472a60\\backend-temp",
+          "TMP": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\live-holdout4-v5-16391552984743c7b6d246e2ae472a60\\backend-temp",
+          "CERES_V3_INDEPENDENT_EVIDENCE_DIR": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\live-holdout4-v5-16391552984743c7b6d246e2ae472a60\\model-evidence",
+          "other_CERES_V3_and_CERES_LIVE_gates": "",
+          "OPENAI_API_KEY": "inherited unchanged; value not recorded",
+          "OPENAI_BASE_URL": "inherited unchanged; value not recorded",
+          "LLM_MODEL": "loaded from frozen runtime configuration / root env; value not recorded here",
+          "cleared_and_enabled_gates": [
+            "CERES_V3_INDEPENDENT_EVIDENCE_DIR"
+          ],
+          "credential_values_recorded": false
+        },
+        "stdout_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\live-holdout4-v5-16391552984743c7b6d246e2ae472a60\\stdout.raw.txt",
+        "stderr_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\live-holdout4-v5-16391552984743c7b6d246e2ae472a60\\stderr.raw.txt",
+        "evidence_dir": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\live-holdout4-v5-16391552984743c7b6d246e2ae472a60\\model-evidence"
+      },
+      "completion": {
+        "process_id": 47416,
+        "started_utc": "2026-10-06T01:52:04.9931557Z",
+        "ended_utc": "2026-10-06T01:52:13.2440947Z",
+        "exit_code": 0,
+        "stdout_bytes": 597,
+        "stderr_bytes": 0
+      },
+      "source": [
+        {
+          "file": "source-before.json",
+          "paths": 312,
+          "expected_paths": 312,
+          "changed_or_missing": [],
+          "extra": [],
+          "zip": "a85bfc70c017999c01833c0969abf7217a4373c49673ca2ed750ef662a3a7dae",
+          "zip_note": "reported by executor",
+          "head": "d3f426ecaf169bd01a7b86c137c61b9034d5079b",
+          "catalog": "772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10",
+          "expected_catalog": "772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10"
+        },
+        {
+          "file": "source-after.json",
+          "paths": 312,
+          "expected_paths": 312,
+          "changed_or_missing": [],
+          "extra": [],
+          "zip": "a85bfc70c017999c01833c0969abf7217a4373c49673ca2ed750ef662a3a7dae",
+          "zip_note": "reported by executor",
+          "head": "d3f426ecaf169bd01a7b86c137c61b9034d5079b",
+          "catalog": "772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10",
+          "expected_catalog": "772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10"
+        }
+      ],
+      "raw": {
+        "process-start.json": {
+          "bytes": 2373,
+          "sha256": "d29dbbc2ca0110cd544386f6557b24a2557e17cd19ce4b0f6a647388391b39a3"
+        },
+        "process-exit.json": {
+          "bytes": 192,
+          "sha256": "1f3b44b004729a2f8487c91b21bcc013b582c7ce6a4d6ca511086288b6bbbf21"
+        },
+        "source-before.json": {
+          "bytes": 35343,
+          "sha256": "8841d9b65aff59466433d4e4987ef834d68f12eed4bff17c0bbcb653b1858054"
+        },
+        "source-after.json": {
+          "bytes": 35343,
+          "sha256": "9db5b67217507c450f0872090140c8f15808f3f0bde6ba8d46360667a8da3162"
+        },
+        "stdout.raw.txt": {
+          "bytes": 597,
+          "sha256": "30ce7379569bfa3be17094666c6cd18fb126955ef5e78159b60befb0e2956b3d"
+        },
+        "stderr.raw.txt": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "stdout_tail": [
+        "platform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.6.0",
+        "rootdir: C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend",
+        "configfile: pyproject.toml",
+        "plugins: anyio-4.15.1, langsmith-0.14.1, asyncio-1.4.0",
+        "asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function",
+        "collected 1 item",
+        "",
+        "tests\\test_v3_independent_routing.py .                                   [100%]",
+        "",
+        "============================== 1 passed in 6.47s =============================="
+      ],
+      "stderr": ""
+    }
+  ]
+}

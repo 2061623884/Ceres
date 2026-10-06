@@ -1,0 +1,24 @@
+{
+  "case_version": "ceres-v3-independent-dialogue-20261006-v1",
+  "requested_rows": 4,
+  "scope": "First independent candidate check; real Kev/public API, controlled role/memory models; setup observations separate",
+  "rows": [
+    {
+      "case_id": "HO01",
+      "expected": "stay_current",
+      "passed": false,
+      "message": "订单不用查了。朋友让我问问有没有适合露营的小包装零食",
+      "preparation": [],
+      "actual_order": null,
+      "error": {
+        "error_type": "TypeError",
+        "message": "block_external_model_sends_for_probe.<locals>.guarded_send() missing 1 required positional argument: 'req'"
+      }
+    }
+  ],
+  "all_upstream": [],
+  "failure": {
+    "error_type": "TypeError",
+    "message": "block_external_model_sends_for_probe.<locals>.guarded_send() missing 1 required positional argument: 'req'"
+  }
+}

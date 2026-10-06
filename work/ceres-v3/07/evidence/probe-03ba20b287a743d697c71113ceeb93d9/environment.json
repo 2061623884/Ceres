@@ -1,0 +1,17 @@
+{
+  "LLM_MODE": "offline",
+  "PYTHONDONTWRITEBYTECODE": "1",
+  "PYTHONUTF8": "1",
+  "MERCURY_LIVE": "0",
+  "CERES_LIVE_MEMORY_ACCEPTANCE": "",
+  "CERES_LIVE_V2_DEMO": "",
+  "CERES_V3_ROUTE_EVIDENCE_DIR": "",
+  "CERES_V3_LIVE_EVIDENCE_DIR": "",
+  "CERES_V3_INDEPENDENT_EVIDENCE_DIR": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\probe-03ba20b287a743d697c71113ceeb93d9\\independent-evidence",
+  "RETRIEVAL_MODE": "lexical",
+  "RETRIEVAL_INDEX_DIR": "",
+  "MEMORY_MODEL": "",
+  "OPENAI_API_KEY": "inherited unchanged; value not recorded",
+  "OPENAI_BASE_URL": "inherited unchanged; value not recorded",
+  "LLM_MODEL": "inherited unchanged; value not recorded"
+}

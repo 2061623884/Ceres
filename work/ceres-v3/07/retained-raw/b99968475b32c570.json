@@ -1,0 +1,6 @@
+{
+  "original_path": "evidence/full-e5095afb1e2b4d19babc56f38e917212/run-summary.json",
+  "bytes": 511,
+  "sha256": "7934f3d79ec170c9ad3795241ad76d30c1159e5b0a1fe23125c0f42dc36bbefb",
+  "utf8_text": "{\r\n  \"run_id\": \"e5095afb1e2b4d19babc56f38e917212\",\r\n  \"run_dir\": \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\07\\\\evidence\\\\full-e5095afb1e2b4d19babc56f38e917212\",\r\n  \"source_zip_sha256\": \"094eb7d28777d5c3d7025bcad4aebd9f71a300cb275fe8679c9ec5cd825d2dfb\",\r\n  \"source_path_count\": 312,\r\n  \"catalog_sha256\": \"772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10\",\r\n  \"backend_exit_code\": 1,\r\n  \"mercury_exit_code\": 0,\r\n  \"finished_at_utc\": \"2026-10-06T00:54:14.8133685Z\"\r\n}\r\n"
+}

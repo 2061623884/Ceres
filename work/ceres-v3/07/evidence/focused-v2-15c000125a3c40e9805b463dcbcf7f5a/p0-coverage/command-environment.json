@@ -1,0 +1,42 @@
+{
+  "executable": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+  "argv": [
+    "-X",
+    "utf8",
+    "-m",
+    "pytest",
+    "-p",
+    "no:cacheprovider",
+    "-W",
+    "error::pytest.PytestUnhandledThreadExceptionWarning",
+    "-vv",
+    "--tb=short",
+    "-rs",
+    "--basetemp",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\focused-v2-15c000125a3c40e9805b463dcbcf7f5a\\p0-coverage\\basetemp",
+    "tests/test_p0_coverage_consistency.py"
+  ],
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend",
+  "environment": {
+    "LLM_MODE": "offline",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONUTF8": "1",
+    "MERCURY_LIVE": "0",
+    "CERES_LIVE_MEMORY_ACCEPTANCE": "",
+    "CERES_LIVE_V2_DEMO": "",
+    "CERES_V3_ROUTE_EVIDENCE_DIR": "",
+    "CERES_V3_LIVE_EVIDENCE_DIR": "",
+    "CERES_V3_INDEPENDENT_EVIDENCE_DIR": "",
+    "RETRIEVAL_MODE": "lexical",
+    "RETRIEVAL_INDEX_DIR": "",
+    "MEMORY_MODEL": "",
+    "OPENAI_API_KEY": "inherited unchanged; value not recorded",
+    "OPENAI_BASE_URL": "inherited unchanged; value not recorded",
+    "LLM_MODEL": "inherited unchanged; value not recorded",
+    "TEMP": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\focused-v2-15c000125a3c40e9805b463dcbcf7f5a\\p0-coverage\\temp",
+    "TMP": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\focused-v2-15c000125a3c40e9805b463dcbcf7f5a\\p0-coverage\\temp"
+  },
+  "run_id": "15c000125a3c40e9805b463dcbcf7f5a",
+  "run_dir": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\focused-v2-15c000125a3c40e9805b463dcbcf7f5a",
+  "basetemp": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\focused-v2-15c000125a3c40e9805b463dcbcf7f5a\\p0-coverage\\basetemp"
+}

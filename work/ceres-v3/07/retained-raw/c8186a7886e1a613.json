@@ -1,0 +1,6 @@
+{
+  "original_path": "evidence/p0-coverage-replay-3521071ea9a8416ea57d7f18b16397fd/process-completion.json",
+  "bytes": 95,
+  "sha256": "a137ed3a05f553a64c1a0ab6bd73e190781e96eea1d6c5cb82e3f87235f5493d",
+  "utf8_text": "{\r\n  \"pid\": 85820,\r\n  \"exit_code\": 1,\r\n  \"finished_at_utc\": \"2026-10-06T00:34:04.2123327Z\"\r\n}\r\n"
+}

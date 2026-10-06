@@ -1,0 +1,12 @@
+{
+  "pid": 54528,
+  "finished_at_utc": "2026-10-06T01:30:06.0172593Z",
+  "exit_code": 1,
+  "suite": "agent-deadline-candidate-v4",
+  "run_id": "04c44c7c6dfd4208830ca5c16bbcdbcf",
+  "run_dir": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\deadline-candidate-v4-04c44c7c6dfd4208830ca5c16bbcdbcf",
+  "source_path_count": 312,
+  "source_mismatch_count": 0,
+  "source_zip_sha256": "352dfeddcd894ea7024d2c940da6ee59f3dbe6e5d548a1407b0d8ada4a4ba980",
+  "catalog_sha256": "772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10"
+}

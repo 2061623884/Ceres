@@ -1,0 +1,6 @@
+{
+  "original_path": "evidence/focused-v2-15c000125a3c40e9805b463dcbcf7f5a/p0-coverage/stdout.txt",
+  "bytes": 1073,
+  "sha256": "899a7a490fadafdc723ae24a1c1dbe84aefa5b46f8b8a9f86abca3bf51ad96f6",
+  "utf8_text": "============================= test session starts =============================\r\nplatform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.6.0 -- C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe\r\nrootdir: C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\r\nconfigfile: pyproject.toml\r\nplugins: anyio-4.15.1, langsmith-0.14.1, asyncio-1.4.0\r\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\r\ncollecting ... collected 4 items\r\n\r\ntests/test_p0_coverage_consistency.py::test_partial_plan_is_consistent_across_every_read_and_write_path PASSED [ 25%]\r\ntests/test_p0_coverage_consistency.py::test_row_add_keeps_gaps_and_never_re_arms_a_bought_row PASSED [ 50%]\r\ntests/test_p0_coverage_consistency.py::test_deselection_is_uncovered_items_and_never_a_supply_gap PASSED [ 75%]\r\ntests/test_p0_coverage_consistency.py::test_refresh_uses_the_persisted_intent_not_the_coverage_result PASSED [100%]\r\n\r\n============================= 4 passed in 19.62s ==============================\r\n"
+}

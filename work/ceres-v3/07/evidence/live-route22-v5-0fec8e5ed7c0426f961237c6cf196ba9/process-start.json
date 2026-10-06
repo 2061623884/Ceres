@@ -1,0 +1,43 @@
+{
+  "process_id": 38104,
+  "started_utc": "2026-10-06T01:48:00.9139777Z",
+  "executable": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend",
+  "argv": [
+    "-X",
+    "utf8",
+    "-m",
+    "pytest",
+    "-p",
+    "no:cacheprovider",
+    "-W",
+    "error::pytest.PytestUnhandledThreadExceptionWarning",
+    "--basetemp",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\live-route22-v5-0fec8e5ed7c0426f961237c6cf196ba9\\backend-basetemp",
+    "tests/test_v3_live_routing.py::test_real_kev_fixed_public_contexts"
+  ],
+  "environment": {
+    "LLM_MODE": "live",
+    "LLM_MAX_OUTPUT_TOKENS": "3072",
+    "MERCURY_LIVE": "0",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONUTF8": "1",
+    "RETRIEVAL_MODE": "lexical",
+    "RETRIEVAL_INDEX_DIR": "",
+    "MEMORY_MODEL": "",
+    "TEMP": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\live-route22-v5-0fec8e5ed7c0426f961237c6cf196ba9\\backend-temp",
+    "TMP": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\live-route22-v5-0fec8e5ed7c0426f961237c6cf196ba9\\backend-temp",
+    "CERES_V3_ROUTE_EVIDENCE_DIR": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\live-route22-v5-0fec8e5ed7c0426f961237c6cf196ba9\\model-evidence",
+    "other_CERES_V3_and_CERES_LIVE_gates": "",
+    "OPENAI_API_KEY": "inherited unchanged; value not recorded",
+    "OPENAI_BASE_URL": "inherited unchanged; value not recorded",
+    "LLM_MODEL": "loaded from frozen runtime configuration / root env; value not recorded here",
+    "cleared_and_enabled_gates": [
+      "CERES_V3_ROUTE_EVIDENCE_DIR"
+    ],
+    "credential_values_recorded": false
+  },
+  "stdout_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\live-route22-v5-0fec8e5ed7c0426f961237c6cf196ba9\\stdout.raw.txt",
+  "stderr_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\live-route22-v5-0fec8e5ed7c0426f961237c6cf196ba9\\stderr.raw.txt",
+  "evidence_dir": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\live-route22-v5-0fec8e5ed7c0426f961237c6cf196ba9\\model-evidence"
+}

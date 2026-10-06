@@ -1,0 +1,24 @@
+{
+  "pid": 54528,
+  "started_at_utc": "2026-10-06T01:29:46.2941282Z",
+  "suite": "agent-deadline-candidate-v4",
+  "run_id": "04c44c7c6dfd4208830ca5c16bbcdbcf",
+  "run_dir": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\deadline-candidate-v4-04c44c7c6dfd4208830ca5c16bbcdbcf",
+  "argv": [
+    "-X",
+    "utf8",
+    "-m",
+    "pytest",
+    "-p",
+    "no:cacheprovider",
+    "-W",
+    "error::pytest.PytestUnhandledThreadExceptionWarning",
+    "-vv",
+    "--tb=short",
+    "-rs",
+    "--basetemp",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\deadline-candidate-v4-04c44c7c6dfd4208830ca5c16bbcdbcf\\agent-deadline\\basetemp",
+    "tests/test_agent_deadline.py"
+  ],
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend"
+}

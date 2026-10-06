@@ -1,0 +1,91 @@
+{
+  "candidate": {
+    "version": "07-final-public-contract-v5",
+    "zip_sha256": "a85bfc70c017999c01833c0969abf7217a4373c49673ca2ed750ef662a3a7dae",
+    "head": "d3f426ecaf169bd01a7b86c137c61b9034d5079b"
+  },
+  "checks": {
+    "git_diff_cached_check": {
+      "exit_code": 2,
+      "stdout_bytes": 79,
+      "stderr_bytes": 0
+    },
+    "retained_raw": {
+      "manifest_entry_count": 193,
+      "representation_counts": {
+        "utf8_text": 193,
+        "base64_bytes": 0
+      },
+      "checked_count": 193,
+      "failure_count": 0,
+      "failures": []
+    },
+    "publication_source": {
+      "candidate_zip_sha256": "a85bfc70c017999c01833c0969abf7217a4373c49673ca2ed750ef662a3a7dae",
+      "tested_head": "d3f426ecaf169bd01a7b86c137c61b9034d5079b",
+      "source_path_count": 312,
+      "changed_since_v5": [
+        "docs/ceres-v3.md",
+        "tasks/ceres-v3-07-final-acceptance.md",
+        "tasks/ceres-v3.md"
+      ],
+      "publication_paths": [
+        "docs/ceres-v3.md",
+        "tasks/ceres-v3-07-final-acceptance.md",
+        "tasks/ceres-v3.md"
+      ],
+      "catalog_sha256": "772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10",
+      "unchanged_families": {
+        "runtime": {
+          "path_count": 132,
+          "changed_since_v5": []
+        },
+        "tests": {
+          "path_count": 135,
+          "changed_since_v5": []
+        },
+        "data": {
+          "path_count": 8,
+          "changed_since_v5": []
+        },
+        "prompts": {
+          "path_count": 1,
+          "changed_since_v5": []
+        },
+        "cases": {
+          "path_count": 2,
+          "changed_since_v5": []
+        },
+        "demo_or_frontend": {
+          "path_count": 13,
+          "changed_since_v5": []
+        }
+      },
+      "failure_count": 0,
+      "failures": []
+    },
+    "staged_scope": {
+      "scope_manifest": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\precommit\\approved-scope.json",
+      "expected_count": 406,
+      "staged_count": 406,
+      "missing": [],
+      "extra": [],
+      "forbidden_paths": []
+    },
+    "readme_index": {
+      "added_v3_entries": [
+        "- [Ceres V3 TASK](tasks/ceres-v3.md) / [Kev 与 Cursor 接入](docs/ceres-v3.md)：上下文路由、经同意双向切换、政策问答与最终验证证据；正式页面和本人验收单列。"
+      ],
+      "staged_v3_entry_count": 1,
+      "head_v3_entry_count": 0,
+      "passed": true
+    }
+  },
+  "errors": [
+    {
+      "check": "git_diff_cached_check",
+      "message": "git diff --cached --check returned nonzero"
+    }
+  ],
+  "passed": false
+}

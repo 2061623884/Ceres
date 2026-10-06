@@ -1,0 +1,6 @@
+{
+  "original_path": "evidence/live-holdout4-v5-16391552984743c7b6d246e2ae472a60/stdout.raw.txt",
+  "bytes": 597,
+  "sha256": "30ce7379569bfa3be17094666c6cd18fb126955ef5e78159b60befb0e2956b3d",
+  "utf8_text": "============================= test session starts =============================\r\nplatform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.6.0\r\nrootdir: C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\r\nconfigfile: pyproject.toml\r\nplugins: anyio-4.15.1, langsmith-0.14.1, asyncio-1.4.0\r\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\r\ncollected 1 item\r\n\r\ntests\\test_v3_independent_routing.py .                                   [100%]\r\n\r\n============================== 1 passed in 6.47s ==============================\r\n"
+}

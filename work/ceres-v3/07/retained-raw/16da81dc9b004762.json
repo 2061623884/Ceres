@@ -1,0 +1,6 @@
+{
+  "original_path": "evidence/probe-88a689ab4e9342628b03aaf4491a0486/process-completion.json",
+  "bytes": 152,
+  "sha256": "3b5cb14d7970a71e1003d2f28143ee4378f938c6ddfcf8e90f509a190dbc1bb6",
+  "utf8_text": "{\r\n  \"pid\": 61196,\r\n  \"finished_at_utc\": \"2026-10-06T00:20:57.6030888Z\",\r\n  \"exit_code\": 1,\r\n  \"expected_exit_code\": 1,\r\n  \"source_unchanged\": true\r\n}\r\n"
+}

@@ -1,0 +1,10 @@
+{
+  "process_id": 59260,
+  "started_utc": "2026-10-06T01:53:37.4623604Z",
+  "ended_utc": "2026-10-06T01:53:37.6982581Z",
+  "exit_code": 0,
+  "stdout_bytes": 196,
+  "stderr_bytes": 0,
+  "report_exists": true,
+  "report_sha256": "3e147ad86201d8281b1fc4742a84f55dff0e1de422616e3855ebc1b65be5a834"
+}

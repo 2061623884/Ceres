@@ -1,0 +1,254 @@
+{
+  "audited_at": "2026-10-06T01:13:52.365638+00:00",
+  "candidate_zip": "b504bee9e277d01a4e3c3e742f4be374ae0e4e8c591647434fb406d2a19dc930",
+  "runs": [
+    {
+      "directory": "work/ceres-v3/07/evidence/focused-v2-d8443124a9304ce69b2cf63f926b5cae/agent-deadline-exit-capture",
+      "actual_exit": 0,
+      "pid": 4640,
+      "argv": [
+        "-X",
+        "utf8",
+        "-m",
+        "pytest",
+        "-p",
+        "no:cacheprovider",
+        "-W",
+        "error::pytest.PytestUnhandledThreadExceptionWarning",
+        "-vv",
+        "--tb=short",
+        "-rs",
+        "--basetemp",
+        "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\focused-v2-d8443124a9304ce69b2cf63f926b5cae\\agent-deadline-exit-capture\\basetemp",
+        "tests/test_agent_deadline.py"
+      ],
+      "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend",
+      "environment": {
+        "LLM_MODE": "offline",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONUTF8": "1",
+        "MERCURY_LIVE": "0",
+        "CERES_LIVE_MEMORY_ACCEPTANCE": "",
+        "CERES_LIVE_V2_DEMO": "",
+        "CERES_V3_ROUTE_EVIDENCE_DIR": "",
+        "CERES_V3_LIVE_EVIDENCE_DIR": "",
+        "CERES_V3_INDEPENDENT_EVIDENCE_DIR": "",
+        "RETRIEVAL_MODE": "lexical",
+        "RETRIEVAL_INDEX_DIR": "",
+        "MEMORY_MODEL": "",
+        "OPENAI_API_KEY": "inherited unchanged; value not recorded",
+        "OPENAI_BASE_URL": "inherited unchanged; value not recorded",
+        "LLM_MODEL": "inherited unchanged; value not recorded",
+        "TEMP": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\focused-v2-d8443124a9304ce69b2cf63f926b5cae\\agent-deadline-exit-capture\\temp",
+        "TMP": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\focused-v2-d8443124a9304ce69b2cf63f926b5cae\\agent-deadline-exit-capture\\temp"
+      },
+      "source_audit": [
+        {
+          "file": "source-before.json",
+          "paths": 312,
+          "mismatches": [],
+          "zip": "b504bee9e277d01a4e3c3e742f4be374ae0e4e8c591647434fb406d2a19dc930",
+          "catalog": "772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10",
+          "head": "d3f426ecaf169bd01a7b86c137c61b9034d5079b"
+        },
+        {
+          "file": "source-after.json",
+          "paths": 312,
+          "mismatches": [],
+          "zip": "b504bee9e277d01a4e3c3e742f4be374ae0e4e8c591647434fb406d2a19dc930",
+          "catalog": "772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10",
+          "head": "d3f426ecaf169bd01a7b86c137c61b9034d5079b"
+        }
+      ],
+      "raw": {
+        "stdout.txt": {
+          "bytes": 1352,
+          "sha256": "d0730b58c9bfde25edb88b8f19a9753d2c66837425c733a9b78c365a6ad376c7"
+        },
+        "stderr.txt": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "command-environment.json": {
+          "bytes": 1995,
+          "sha256": "b100ee39dfe5afca9e31ad093f68f097a4b3146b77d2802e78d4eb870255e31e"
+        },
+        "process-start.json": {
+          "bytes": 833,
+          "sha256": "76c123c1772dde76602b02313faff30d4a04dacf9ceec87f68f904cfd691397e"
+        },
+        "process-completion.json": {
+          "bytes": 329,
+          "sha256": "30d087eaf002cf8844d90dfa9833a67893d288921bbc6f07bbaca7ee9c4733b1"
+        }
+      }
+    },
+    {
+      "directory": "work/ceres-v3/07/evidence/focused-v2-15c000125a3c40e9805b463dcbcf7f5a/p0-coverage",
+      "actual_exit": 0,
+      "pid": 35604,
+      "argv": [
+        "-X",
+        "utf8",
+        "-m",
+        "pytest",
+        "-p",
+        "no:cacheprovider",
+        "-W",
+        "error::pytest.PytestUnhandledThreadExceptionWarning",
+        "-vv",
+        "--tb=short",
+        "-rs",
+        "--basetemp",
+        "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\focused-v2-15c000125a3c40e9805b463dcbcf7f5a\\p0-coverage\\basetemp",
+        "tests/test_p0_coverage_consistency.py"
+      ],
+      "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend",
+      "environment": {
+        "LLM_MODE": "offline",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONUTF8": "1",
+        "MERCURY_LIVE": "0",
+        "CERES_LIVE_MEMORY_ACCEPTANCE": "",
+        "CERES_LIVE_V2_DEMO": "",
+        "CERES_V3_ROUTE_EVIDENCE_DIR": "",
+        "CERES_V3_LIVE_EVIDENCE_DIR": "",
+        "CERES_V3_INDEPENDENT_EVIDENCE_DIR": "",
+        "RETRIEVAL_MODE": "lexical",
+        "RETRIEVAL_INDEX_DIR": "",
+        "MEMORY_MODEL": "",
+        "OPENAI_API_KEY": "inherited unchanged; value not recorded",
+        "OPENAI_BASE_URL": "inherited unchanged; value not recorded",
+        "LLM_MODEL": "inherited unchanged; value not recorded",
+        "TEMP": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\focused-v2-15c000125a3c40e9805b463dcbcf7f5a\\p0-coverage\\temp",
+        "TMP": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\focused-v2-15c000125a3c40e9805b463dcbcf7f5a\\p0-coverage\\temp"
+      },
+      "source_audit": [
+        {
+          "file": "source-before.json",
+          "paths": 312,
+          "mismatches": [],
+          "zip": "b504bee9e277d01a4e3c3e742f4be374ae0e4e8c591647434fb406d2a19dc930",
+          "catalog": "772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10",
+          "head": "d3f426ecaf169bd01a7b86c137c61b9034d5079b"
+        },
+        {
+          "file": "source-after.json",
+          "paths": 312,
+          "mismatches": [],
+          "zip": "b504bee9e277d01a4e3c3e742f4be374ae0e4e8c591647434fb406d2a19dc930",
+          "catalog": "772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10",
+          "head": "d3f426ecaf169bd01a7b86c137c61b9034d5079b"
+        }
+      ],
+      "raw": {
+        "stdout.txt": {
+          "bytes": 1073,
+          "sha256": "899a7a490fadafdc723ae24a1c1dbe84aefa5b46f8b8a9f86abca3bf51ad96f6"
+        },
+        "stderr.txt": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "command-environment.json": {
+          "bytes": 1940,
+          "sha256": "a3ef85a72918fc1fc4b87766fb33fa0311878c0b2e921139bb50c134a7a69196"
+        },
+        "process-start.json": {
+          "bytes": 811,
+          "sha256": "b4f92f85c01b912854e9a31f5747ef07a29f840388984eb9f1adac4603c54c08"
+        },
+        "process-completion.json": {
+          "bytes": 314,
+          "sha256": "61538360592cfe163ed3453d47aa01495b40356dd30013ecef2a4a313f66e6fb"
+        }
+      }
+    },
+    {
+      "directory": "work/ceres-v3/07/evidence/observer-probe-v2-83b4291f9b0b4328bb17fe0abf2a4c9f/pytest",
+      "actual_exit": 1,
+      "pid": 82784,
+      "argv": [
+        "-X",
+        "utf8",
+        "-m",
+        "pytest",
+        "-p",
+        "no:cacheprovider",
+        "-W",
+        "error::pytest.PytestUnhandledThreadExceptionWarning",
+        "-vv",
+        "--tb=short",
+        "-rs",
+        "--basetemp",
+        "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\observer-probe-v2-83b4291f9b0b4328bb17fe0abf2a4c9f\\pytest\\basetemp",
+        "-p",
+        "probe_http200_malformed_sse",
+        "tests/test_v3_independent_routing.py"
+      ],
+      "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend",
+      "environment": {
+        "LLM_MODE": "offline",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONUTF8": "1",
+        "MERCURY_LIVE": "0",
+        "CERES_LIVE_MEMORY_ACCEPTANCE": "",
+        "CERES_LIVE_V2_DEMO": "",
+        "CERES_V3_ROUTE_EVIDENCE_DIR": "",
+        "CERES_V3_LIVE_EVIDENCE_DIR": "",
+        "CERES_V3_INDEPENDENT_EVIDENCE_DIR": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\observer-probe-v2-83b4291f9b0b4328bb17fe0abf2a4c9f\\results",
+        "RETRIEVAL_MODE": "lexical",
+        "RETRIEVAL_INDEX_DIR": "",
+        "MEMORY_MODEL": "",
+        "PYTHONPATH": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\runner",
+        "OPENAI_API_KEY": "inherited unchanged; value not recorded",
+        "OPENAI_BASE_URL": "inherited unchanged; value not recorded",
+        "LLM_MODEL": "inherited unchanged; value not recorded",
+        "TEMP": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\observer-probe-v2-83b4291f9b0b4328bb17fe0abf2a4c9f\\pytest\\temp",
+        "TMP": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\observer-probe-v2-83b4291f9b0b4328bb17fe0abf2a4c9f\\pytest\\temp"
+      },
+      "source_audit": [
+        {
+          "file": "source-before.json",
+          "paths": 312,
+          "mismatches": [],
+          "zip": "b504bee9e277d01a4e3c3e742f4be374ae0e4e8c591647434fb406d2a19dc930",
+          "catalog": "772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10",
+          "head": "d3f426ecaf169bd01a7b86c137c61b9034d5079b"
+        },
+        {
+          "file": "source-after.json",
+          "paths": 312,
+          "mismatches": [],
+          "zip": "b504bee9e277d01a4e3c3e742f4be374ae0e4e8c591647434fb406d2a19dc930",
+          "catalog": "772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10",
+          "head": "d3f426ecaf169bd01a7b86c137c61b9034d5079b"
+        }
+      ],
+      "raw": {
+        "stdout.txt": {
+          "bytes": 1768,
+          "sha256": "1d94af928edecc9f27abc63aa70ecd2a4b56ca99a842a596b3df9439e0d6dbf9"
+        },
+        "stderr.txt": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "command-environment.json": {
+          "bytes": 2247,
+          "sha256": "42b1f2b63937cfcea9306c5784b909bcc78820166b9f79ba89c0168d5942de50"
+        },
+        "process-start.json": {
+          "bytes": 883,
+          "sha256": "ef500ad2c30a0c235d1af9781b3a9805db7b45aea8d59132fdb2d08ae6e8cd17"
+        },
+        "process-completion.json": {
+          "bytes": 366,
+          "sha256": "3f19533268ff089efcfea376e880183d5fdcbf20849a46a47a9318231415f20b"
+        }
+      }
+    }
+  ],
+  "excluded_unknown_exit_run": "focused-v2-adc5482cc36a45709e8205123f44d9fd/agent-deadline",
+  "limitation": "Probe expected failure confirms recording only, not live model or business quality; original full failures remain."
+}

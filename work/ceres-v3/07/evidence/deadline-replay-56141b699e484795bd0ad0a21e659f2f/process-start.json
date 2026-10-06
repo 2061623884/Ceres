@@ -1,0 +1,26 @@
+{
+  "pid": 24628,
+  "started_at_utc": "2026-10-06T00:29:57.7427889Z",
+  "run_id": "56141b699e484795bd0ad0a21e659f2f",
+  "run_dir": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\deadline-replay-56141b699e484795bd0ad0a21e659f2f",
+  "argv": [
+    "-X",
+    "utf8",
+    "-m",
+    "pytest",
+    "-p",
+    "no:cacheprovider",
+    "-W",
+    "error::pytest.PytestUnhandledThreadExceptionWarning",
+    "-vv",
+    "--tb=short",
+    "--basetemp",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\deadline-replay-56141b699e484795bd0ad0a21e659f2f\\basetemp",
+    "tests/test_agent_deadline.py::test_a_model_that_outlives_the_budget_writes_nothing",
+    "tests/test_agent_deadline.py::test_a_read_that_outlives_the_budget_writes_nothing",
+    "tests/test_agent_deadline.py::test_a_shopper_stop_is_a_stop_and_never_a_timeout",
+    "tests/test_agent_deadline.py::test_a_mutation_committed_before_the_budget_runs_out_is_reported_as_saved",
+    "tests/test_agent_deadline.py::test_a_stop_that_arrives_during_the_build_writes_no_plan"
+  ],
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend"
+}

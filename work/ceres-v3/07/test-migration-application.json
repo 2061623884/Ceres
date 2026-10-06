@@ -1,0 +1,19 @@
+{
+  "reason": "Independent Spec observer P2 plus deadline andP0coverage actualred diagnostics",
+  "production_changed": false,
+  "baseline_before_application": "d3f426ecaf169bd01a7b86c137c61b9034d5079b",
+  "applied": {
+    "backend/tests/test_v3_independent_routing.py": {
+      "before_sha256": "053f1b622d2512fe990846483cccee97597780feb9102427b4fc5d03ea9b46f0",
+      "after_sha256": "a43a0de047986d014ac9f11e323a8ed8b22a71a3c3bbf6d5b8087a353b57af72"
+    },
+    "backend/tests/test_agent_deadline.py": {
+      "before_sha256": "1484e5979b717112ee31fbce0c6ef236857720cca02c036aad4ac997227a0bba",
+      "after_sha256": "d70290ccad9aa1271b864786e027a37a1821831f6d4667c92f1681fe50ffc4d3"
+    },
+    "backend/tests/test_p0_coverage_consistency.py": {
+      "before_sha256": "5a9a42ae0c3ed7d28025bdf5f2b7e2bad5aab639a0e184be78d330194e46fd1e",
+      "after_sha256": "88693c540fcdfadd4754a4119def9bc919b031689c291ee9f0b1b346f7cd061e"
+    }
+  }
+}

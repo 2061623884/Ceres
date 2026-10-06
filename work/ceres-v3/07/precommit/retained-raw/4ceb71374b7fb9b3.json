@@ -1,0 +1,6 @@
+{
+  "original_path": "work/ceres-v3/07/precommit/approved-precommit-rerun-7bd05a73477f4a9cb4341e7307b5a03f/checker.stdout.raw.txt",
+  "bytes": 205,
+  "sha256": "2bf62a95f1f04dd65f894a9a7245e253c662dcd09af0a8c13f869b339feb316c",
+  "utf8_text": "{\"passed\": true, \"error_count\": 0, \"output_dir\": \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\07\\\\precommit\\\\approved-precommit-rerun-7bd05a73477f4a9cb4341e7307b5a03f\\\\checker\"}\r\n"
+}

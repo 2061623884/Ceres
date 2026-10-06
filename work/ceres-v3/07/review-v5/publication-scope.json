@@ -1,0 +1,32 @@
+{
+  "fixed_head": "d3f426ecaf169bd01a7b86c137c61b9034d5079b",
+  "tested_zip_sha256": "a85bfc70c017999c01833c0969abf7217a4373c49673ca2ed750ef662a3a7dae",
+  "publication_scope": {
+    "README.md": "f0a2392df10d525722edb0e1dadf565d6323c575fc6e96d5a270319da8c24453",
+    "backend/tests/test_agent_deadline.py": "eef79a3a6a1b29bbe5ec8935d7f24ff6397d9d94a2c57a434cda2da7e868dd55",
+    "backend/tests/test_p0_coverage_consistency.py": "88693c540fcdfadd4754a4119def9bc919b031689c291ee9f0b1b346f7cd061e",
+    "backend/tests/test_p0_gap_persistence.py": "c18fb45d93275082743683e4baf554307cea385ab78fc9b86cb5271fef1ec6b8",
+    "backend/tests/test_review_probes.py": "45bfc495674ba60590ecb7a72adfa7cfb9a17e9af800e9608bbe2eee45103188",
+    "backend/tests/test_s1_data_completion.py": "050a0c3f7a0cac7fef8bcf6618032862fd689d7d8c84d4dc31ae408b1bb300b5",
+    "backend/tests/test_semantic_acceptance_edges.py": "be70b57f85fddfed456727b89fc44152340b87eb3cea75db4c472573f2b42484",
+    "backend/tests/test_v3_independent_routing.py": "a43a0de047986d014ac9f11e323a8ed8b22a71a3c3bbf6d5b8087a353b57af72",
+    "backend/tests/test_workflow_category.py": "1d9f503e047674a73674b8829984cbabea1882c40d100e81078c8b5eff5be82f",
+    "docs/ceres-v3.md": "54dfd3df37655fb8e9fa24d69487f14317d837281dafe8c38894b6853e58995c",
+    "tasks/ceres-v3-07-final-acceptance.md": "d345f1899da0a8ca0cc1336466941f63b4682feab04793ad50409d952188c61c",
+    "work/ceres-v3/07/regression-plan.json": "c98f346d7bd68c26e2759d0ae023b9925243f7e1799c21547e0ffc61ad295f4e",
+    "tasks/ceres-v3.md": "b85e643add382a4b1d1ca5f21557bd9ff852a782271d390ead8c66c83c22250c",
+    "work/ceres-v3/07/validation.md": "379afbd166fb95943149db960b5a41aa9986a31e7016c9e48ebc0b0bbd1ee93b",
+    "work/ceres-v3/07/fixes.md": "da723b3c8f66b3ea823a345172b3d26263222ffa0e095516d3c108b5868660bf",
+    "work/ceres-v3/07/cursor-acceptance.md": "2a2155a548e4d473c7d2c208ead7385aa0e907b8934e8f46aea016f44c53d81f",
+    "work/ceres-v3/07/primary-answer-audit.md": "2cf393c69374df5c53ec155ae331dfaf19e64afe06c84eced6306b1efcc70338",
+    "work/ceres-v3/07/audit-evidence.py": "4602616e95536659c25a70d7e80d155b6706c846b53a191f7eec643407ea043c",
+    "work/ceres-v3/07/publish-records.py": "c2c2fdb2cf3c74da478731aa0aa72ce6d41dd909f0bc7798a389369c67526f74",
+    "work/ceres-v3/07/source-provenance.json": "d4adb293bb22ae265e82e7611373568b60f398d2948ebca1fe6353bdad9a0d53",
+    "work/ceres-v3/07/publication-delta.json": "39be641486190fdf749911313f40132b85d48ec4f65baa3c00f9f52a5de22094",
+    "work/ceres-v3/07/retained-raw-manifest.json": "186b817e29abb446ad9836e806bfaf06443edef5a63dd640bc8cc31a27588274",
+    "work/ceres-v3/07/commit-scope-draft.json": "65b84d606fcee9cb6c50470d8afa73834b72edc930cf1557ab592cf496f2e2c7"
+  },
+  "raw_record_manifest": "work/ceres-v3/07/retained-raw-manifest.json",
+  "review_claim": "Review actual reported evidence, boundaries, TASK state and publication-only delta; no test or model execution; clean HEAD is not the tested dirty freeze. Runtime scope already dual-reviewed v5 unchanged.",
+  "wording_fix": "README statement describes commit scope, not an unexecuted staging action; adds actual publication/boundary report links. No tested source change."
+}

@@ -1,0 +1,18 @@
+{
+  "candidate_zip_sha256": "a85bfc70c017999c01833c0969abf7217a4373c49673ca2ed750ef662a3a7dae",
+  "git_head": "d3f426ecaf169bd01a7b86c137c61b9034d5079b",
+  "source_path_count": 312,
+  "catalog_sha256": "772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10",
+  "kev_model": "Kev-4B",
+  "kev_service_source_revision": "fe64b1274ea7f80d4095866df90666abb03e9cf6",
+  "kev_checkpoint_revision": "139fdd94f1b6a6ad80cc15e08fcb99cac885a101",
+  "kev_base_revision": "1001bb4d826a52d1f399e183466143f4da7b741b",
+  "role_model_configured_name": "qwen3.8-27b",
+  "role_model_remote_weight_revision": "Unavailable; actual response model field captured, not immutable-weight claim",
+  "max_output_tokens": 3072,
+  "prompt_sha256": "9f53f25266359e6d87e4fd96827cc9655a79e40e591291000c3241c2e32fe603",
+  "core_cases_sha256": "48795e7f53608091cb00f1a85a5662b75eaf704761851ee4f86c2b9391bb1464",
+  "holdout_cases_sha256": "8d071c4725ec3ff95cd5e078f3e5db5a0528bcb9f70d42010e99c4558e09f792",
+  "runtime_config_sha256": "35963f172b7035da5909d404aeeac7aaa3e5163a23d9d07e2bba06299caedd15",
+  "evaluation_protocol_sha256": "ab549a5dee659e64d4491f94847b232f67866b829cdc35fccc320428a02aee61"
+}

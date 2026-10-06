@@ -1,0 +1,6 @@
+{
+  "original_path": "evidence/targeted-v3-3bdd644c57f24527afbd192bad0f10e7/semantic-shared-sku-ledger/stdout.txt",
+  "bytes": 740,
+  "sha256": "01f37ad4207d8cae13cec77b3e7afb097cd50a3edc92a113e5a19003eb20cb29",
+  "utf8_text": "============================= test session starts =============================\r\nplatform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.6.0 -- C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe\r\nrootdir: C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\r\nconfigfile: pyproject.toml\r\nplugins: anyio-4.15.1, langsmith-0.14.1, asyncio-1.4.0\r\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\r\ncollecting ... collected 1 item\r\n\r\ntests/test_semantic_acceptance_edges.py::test_remove_preserves_shared_sku_manual_quantity_and_remaining_ledger PASSED [100%]\r\n\r\n============================== 1 passed in 1.07s ==============================\r\n"
+}

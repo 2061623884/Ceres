@@ -1,0 +1,85 @@
+{
+  "captured_utc": "2026-10-06T01:43:32.766404+00:00",
+  "method": "Read immutable ZIP bytes with stdlib; no test or model execution",
+  "records": [
+    {
+      "version": "baseline",
+      "zip_sha256": "c585b1d78a9f9466a127d2c4de9515ed05f4e0dd7e8c005eb79d8f516c86b722",
+      "paths": 312,
+      "metadata_mismatch": [],
+      "actual_changed_from_previous": [],
+      "head": "d3f426ecaf169bd01a7b86c137c61b9034d5079b"
+    },
+    {
+      "version": "candidate",
+      "zip_sha256": "094eb7d28777d5c3d7025bcad4aebd9f71a300cb275fe8679c9ec5cd825d2dfb",
+      "paths": 312,
+      "metadata_mismatch": [],
+      "actual_changed_from_previous": [
+        "README.md",
+        "backend/tests/test_v3_independent_routing.py",
+        "tasks/ceres-v3-07-final-acceptance.md",
+        "work/ceres-v3/07/regression-plan.json"
+      ],
+      "head": "d3f426ecaf169bd01a7b86c137c61b9034d5079b"
+    },
+    {
+      "version": "candidate-v2",
+      "zip_sha256": "b504bee9e277d01a4e3c3e742f4be374ae0e4e8c591647434fb406d2a19dc930",
+      "paths": 312,
+      "metadata_mismatch": [],
+      "actual_changed_from_previous": [
+        "backend/tests/test_agent_deadline.py",
+        "backend/tests/test_p0_coverage_consistency.py",
+        "backend/tests/test_v3_independent_routing.py"
+      ],
+      "head": "d3f426ecaf169bd01a7b86c137c61b9034d5079b"
+    },
+    {
+      "version": "candidate-v3",
+      "zip_sha256": "0a4e45eb99354942322890c81c7a523fa40df0fbb8b77779c298442ee760dc4d",
+      "paths": 312,
+      "metadata_mismatch": [],
+      "actual_changed_from_previous": [
+        "backend/tests/test_p0_gap_persistence.py",
+        "backend/tests/test_review_probes.py",
+        "backend/tests/test_s1_data_completion.py",
+        "backend/tests/test_semantic_acceptance_edges.py",
+        "backend/tests/test_w_dish_and_gap.py",
+        "backend/tests/test_workflow_category.py"
+      ],
+      "head": "d3f426ecaf169bd01a7b86c137c61b9034d5079b"
+    },
+    {
+      "version": "candidate-v4",
+      "zip_sha256": "352dfeddcd894ea7024d2c940da6ee59f3dbe6e5d548a1407b0d8ada4a4ba980",
+      "paths": 312,
+      "metadata_mismatch": [],
+      "actual_changed_from_previous": [
+        "backend/tests/test_agent_deadline.py",
+        "backend/tests/test_w_dish_and_gap.py"
+      ],
+      "head": "d3f426ecaf169bd01a7b86c137c61b9034d5079b"
+    },
+    {
+      "version": "candidate-v5",
+      "zip_sha256": "a85bfc70c017999c01833c0969abf7217a4373c49673ca2ed750ef662a3a7dae",
+      "paths": 312,
+      "metadata_mismatch": [],
+      "actual_changed_from_previous": [
+        "backend/tests/test_agent_deadline.py"
+      ],
+      "head": "d3f426ecaf169bd01a7b86c137c61b9034d5079b"
+    }
+  ],
+  "metadata_note": "candidate-v5/baseline.json inherited changed_from_v5 and scope_note fields from earlier ticket metadata. They are not a second 07 v5 change or execution claim. Actual 07 ZIP deltas are enumerated here. v5 measurement_status was at freeze time; actual later evidence remains separate.",
+  "commit_boundary": {
+    "inherited_dirty": [
+      "README.md",
+      "backend/tests/test_p0_gap_persistence.py"
+    ],
+    "gap_oracle": "The HEAD gap test lacks inherited V2 sour-soup/opt-in/indexed-client prerequisites. Preserve the complete working file; publish only baseline→candidate patch plus applicable source digests. Do not stage the whole V2 migration or claim this oracle exists in HEAD.",
+    "readme": "Stage only one new V3 entry against HEAD.",
+    "runtime": "07 adds no production runtime code."
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "original_path": "evidence/focused-v2-d8443124a9304ce69b2cf63f926b5cae/agent-deadline-exit-capture/process-completion.json",
+  "bytes": 329,
+  "sha256": "30d087eaf002cf8844d90dfa9833a67893d288921bbc6f07bbaca7ee9c4733b1",
+  "utf8_text": "{\r\n  \"pid\": 4640,\r\n  \"finished_at_utc\": \"2026-10-06T01:09:58.6147756Z\",\r\n  \"exit_code\": 0,\r\n  \"suite\": \"agent-deadline-exit-capture\",\r\n  \"run_id\": \"d8443124a9304ce69b2cf63f926b5cae\",\r\n  \"run_dir\": \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\07\\\\evidence\\\\focused-v2-d8443124a9304ce69b2cf63f926b5cae\"\r\n}"
+}

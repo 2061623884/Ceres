@@ -4,6 +4,7 @@
 
 ## 项目与任务入口
 
+- [Ceres V3 TASK](tasks/ceres-v3.md) / [Kev 与 Cursor 接入](docs/ceres-v3.md)：上下文路由、经同意双向切换、政策问答与最终验证证据；正式页面和本人验收单列。
 - [Ceres v1 TASK](tasks/ceres-v1.md) / [本机重建](docs/ceres-v1-local.md)：64 fixture 基础与最少果汁补齐，按已确认六任务编排实现；向量和业务验收分别记录。
 
 ## 启动（PowerShell）

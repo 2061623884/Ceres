@@ -1,0 +1,29 @@
+{
+  "process_id": 59260,
+  "started_utc": "2026-10-06T01:53:37.4623604Z",
+  "executable": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres",
+  "argv": [
+    "-X",
+    "utf8",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\05\\analyze-evidence.py",
+    "--routes",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\live-route22-v5-0fec8e5ed7c0426f961237c6cf196ba9\\model-evidence",
+    "--role-samples",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\live-role5-v5-089d7f42ae254264b4e23d0615847335\\model-evidence",
+    "--output",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\performance-analysis-v5-3aa73880edae4536b4e81a0a506cfe2e\\report.json"
+  ],
+  "environment": {
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONUTF8": "1",
+    "TEMP": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\performance-analysis-v5-3aa73880edae4536b4e81a0a506cfe2e\\temp",
+    "TMP": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\performance-analysis-v5-3aa73880edae4536b4e81a0a506cfe2e\\temp",
+    "model_calls_made": false
+  },
+  "input_routes": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\live-route22-v5-0fec8e5ed7c0426f961237c6cf196ba9\\model-evidence",
+  "input_role_samples": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\live-role5-v5-089d7f42ae254264b4e23d0615847335\\model-evidence",
+  "output_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\performance-analysis-v5-3aa73880edae4536b4e81a0a506cfe2e\\report.json",
+  "stdout_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\performance-analysis-v5-3aa73880edae4536b4e81a0a506cfe2e\\stdout.raw.txt",
+  "stderr_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\performance-analysis-v5-3aa73880edae4536b4e81a0a506cfe2e\\stderr.raw.txt"
+}

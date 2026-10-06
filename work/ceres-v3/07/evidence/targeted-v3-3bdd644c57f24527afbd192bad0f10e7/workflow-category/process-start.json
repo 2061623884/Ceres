@@ -1,0 +1,27 @@
+{
+  "pid": 74220,
+  "started_at_utc": "2026-10-06T01:20:53.3555382Z",
+  "suite": "workflow-category",
+  "targets": [
+    "tests/test_workflow_category.py"
+  ],
+  "argv": [
+    "-X",
+    "utf8",
+    "-m",
+    "pytest",
+    "-p",
+    "no:cacheprovider",
+    "-W",
+    "error::pytest.PytestUnhandledThreadExceptionWarning",
+    "-vv",
+    "--tb=short",
+    "-rs",
+    "--basetemp",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\targeted-v3-3bdd644c57f24527afbd192bad0f10e7\\workflow-category\\basetemp",
+    "tests/test_workflow_category.py"
+  ],
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend",
+  "run_dir": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\targeted-v3-3bdd644c57f24527afbd192bad0f10e7",
+  "suite_dir": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\targeted-v3-3bdd644c57f24527afbd192bad0f10e7\\workflow-category"
+}

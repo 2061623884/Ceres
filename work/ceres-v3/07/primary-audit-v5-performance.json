@@ -1,0 +1,65 @@
+{
+  "purpose": "Primary read of dedicated analysis command and original byte digests; no performance execution by primary",
+  "command": {
+    "process_id": 59260,
+    "started_utc": "2026-10-06T01:53:37.4623604Z",
+    "executable": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+    "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres",
+    "argv": [
+      "-X",
+      "utf8",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\05\\analyze-evidence.py",
+      "--routes",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\live-route22-v5-0fec8e5ed7c0426f961237c6cf196ba9\\model-evidence",
+      "--role-samples",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\live-role5-v5-089d7f42ae254264b4e23d0615847335\\model-evidence",
+      "--output",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\performance-analysis-v5-3aa73880edae4536b4e81a0a506cfe2e\\report.json"
+    ],
+    "environment": {
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONUTF8": "1",
+      "TEMP": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\performance-analysis-v5-3aa73880edae4536b4e81a0a506cfe2e\\temp",
+      "TMP": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\performance-analysis-v5-3aa73880edae4536b4e81a0a506cfe2e\\temp",
+      "model_calls_made": false
+    },
+    "input_routes": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\live-route22-v5-0fec8e5ed7c0426f961237c6cf196ba9\\model-evidence",
+    "input_role_samples": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\live-role5-v5-089d7f42ae254264b4e23d0615847335\\model-evidence",
+    "output_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\performance-analysis-v5-3aa73880edae4536b4e81a0a506cfe2e\\report.json",
+    "stdout_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\performance-analysis-v5-3aa73880edae4536b4e81a0a506cfe2e\\stdout.raw.txt",
+    "stderr_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\performance-analysis-v5-3aa73880edae4536b4e81a0a506cfe2e\\stderr.raw.txt"
+  },
+  "exit": {
+    "process_id": 59260,
+    "started_utc": "2026-10-06T01:53:37.4623604Z",
+    "ended_utc": "2026-10-06T01:53:37.6982581Z",
+    "exit_code": 0,
+    "stdout_bytes": 196,
+    "stderr_bytes": 0,
+    "report_exists": true,
+    "report_sha256": "3e147ad86201d8281b1fc4742a84f55dff0e1de422616e3855ebc1b65be5a834"
+  },
+  "reported_metrics": {
+    "route_n": 22,
+    "route_correct": 22,
+    "route_failed": 0,
+    "route_p95_ms": 719.9079999700189,
+    "route_timing_missing_n": 0,
+    "route_q20_pass": true,
+    "role_sample_n": 5,
+    "role_missing_cases": [],
+    "reply_observations_n": 7,
+    "reply_max_ms": 11018.671500030905,
+    "reply_q20_pass": true,
+    "measurement_scope": "In-process public API terminal SSE; no browser evidence; R01 explicit product choice and H01 confirmed handoff separately timed",
+    "cold_start": "Not measured here; GPU already loaded. See ticket01 raw cold start and ticket03 client initialization.",
+    "quality_scope": "Fixed public samples, not independent holdout or generalization proof"
+  },
+  "raw": {
+    "process-start.json": "2c494f0dfd314d755cc3ffe75c598ef316959b33b17a27b9fc83f7135be5ac2f",
+    "process-exit.json": "04637cab3a167f00ce0c2164885e341d75c32be939b584b2608a5d025906bff0",
+    "stdout.raw.txt": "487886bc555c9eaaf21e3b2ad460ac62e29ccb459d8f10266fd3631bc29173bf",
+    "stderr.raw.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "report.json": "3e147ad86201d8281b1fc4742a84f55dff0e1de422616e3855ebc1b65be5a834"
+  }
+}

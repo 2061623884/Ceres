@@ -1,0 +1,6 @@
+{
+  "original_path": "evidence/deadline-candidate-v4-04c44c7c6dfd4208830ca5c16bbcdbcf/agent-deadline/process-completion.json",
+  "bytes": 582,
+  "sha256": "239b1578fa038ff6c766c60518c17e6a0d30f54256590ee46e7319343cc39e4a",
+  "utf8_text": "{\r\n  \"pid\": 54528,\r\n  \"finished_at_utc\": \"2026-10-06T01:30:06.0172593Z\",\r\n  \"exit_code\": 1,\r\n  \"suite\": \"agent-deadline-candidate-v4\",\r\n  \"run_id\": \"04c44c7c6dfd4208830ca5c16bbcdbcf\",\r\n  \"run_dir\": \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\07\\\\evidence\\\\deadline-candidate-v4-04c44c7c6dfd4208830ca5c16bbcdbcf\",\r\n  \"source_path_count\": 312,\r\n  \"source_mismatch_count\": 0,\r\n  \"source_zip_sha256\": \"352dfeddcd894ea7024d2c940da6ee59f3dbe6e5d548a1407b0d8ada4a4ba980\",\r\n  \"catalog_sha256\": \"772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10\"\r\n}"
+}

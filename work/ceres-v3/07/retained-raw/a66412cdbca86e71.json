@@ -1,0 +1,6 @@
+{
+  "original_path": "evidence/focused-v2-15c000125a3c40e9805b463dcbcf7f5a/p0-coverage/process-completion.json",
+  "bytes": 314,
+  "sha256": "61538360592cfe163ed3453d47aa01495b40356dd30013ecef2a4a313f66e6fb",
+  "utf8_text": "{\r\n  \"pid\": 35604,\r\n  \"finished_at_utc\": \"2026-10-06T01:08:27.5175262Z\",\r\n  \"exit_code\": 0,\r\n  \"suite\": \"p0-coverage\",\r\n  \"run_id\": \"15c000125a3c40e9805b463dcbcf7f5a\",\r\n  \"run_dir\": \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\07\\\\evidence\\\\focused-v2-15c000125a3c40e9805b463dcbcf7f5a\"\r\n}"
+}

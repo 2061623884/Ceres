@@ -1,0 +1,27 @@
+{
+  "pid": 6312,
+  "started_at_utc": "2026-10-06T01:20:05.1071347Z",
+  "suite": "semantic-shared-sku-ledger",
+  "targets": [
+    "tests/test_semantic_acceptance_edges.py::test_remove_preserves_shared_sku_manual_quantity_and_remaining_ledger"
+  ],
+  "argv": [
+    "-X",
+    "utf8",
+    "-m",
+    "pytest",
+    "-p",
+    "no:cacheprovider",
+    "-W",
+    "error::pytest.PytestUnhandledThreadExceptionWarning",
+    "-vv",
+    "--tb=short",
+    "-rs",
+    "--basetemp",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\targeted-v3-3bdd644c57f24527afbd192bad0f10e7\\semantic-shared-sku-ledger\\basetemp",
+    "tests/test_semantic_acceptance_edges.py::test_remove_preserves_shared_sku_manual_quantity_and_remaining_ledger"
+  ],
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend",
+  "run_dir": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\targeted-v3-3bdd644c57f24527afbd192bad0f10e7",
+  "suite_dir": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\targeted-v3-3bdd644c57f24527afbd192bad0f10e7\\semantic-shared-sku-ledger"
+}

@@ -7,8 +7,7 @@ the business services.
 
 These tests cover the three things that could still go wrong on that page:
 
-* the retrieval is a real **product** lookup for the category the shopper is
-  browsing, and the model asks before planning anything;
+* a common product name uses real lookup order on the category page;
 * a plan built from it is a normal pending plan that writes nothing to the cart;
 * a task row that still carries the retired ``category_selection`` intent (a
   pre-cutover row) runs the same chain as any other task.
@@ -21,6 +20,7 @@ import uuid
 
 from support import create_session, post_turn
 from support.semantic_agent import lookup_then_add
+from test_semantic_phase1_purchase import indexed_client  # noqa: F401
 
 BAKING = {"page": "category", "category_id": "baking"}
 
@@ -36,23 +36,16 @@ def _db(client):
     return db_module.SessionLocal()
 
 
-def test_the_category_page_retrieves_real_products_then_asks(
-    client, semantic_provider
+def test_the_category_page_uses_real_common_product_lookup_without_cart_write(
+    indexed_client, semantic_provider
 ):
-    """A real product lookup on the browsed category, and a question from it.
-
-    One pass (spec rule 1): the target and its lookup are the same model call.
-    "面粉" only names the SKU by substring, never its exact name ("低筋面粉
-    250克（小包装）"), so the mutation node's own resolution
-    (``_resolve_named_target`` in ``app/agent/graph/nodes/mutation.py``) finds no
-    exact/alias hit and turns the real lookup hits into a clarify question
-    (spec rule 1: "a similar hit becomes a question, never a build") — the
-    model never authors the question or its options itself.
-    """
+    """Common product names may bind a real hit; planning still cannot buy."""
+    client = indexed_client
     semantic_provider(
         [
             {
                 "target": {"kind": "product", "name": "面粉", "intent": "buy"},
+                "constraints": {"budget_yuan": 20, "specification": {"size": "small"}},
                 "lookups": [{"kind": "product", "query": "面粉"}],
             }
         ]
@@ -60,21 +53,21 @@ def test_the_category_page_retrieves_real_products_then_asks(
     sid = create_session(client, page="category", category_id="baking")
     body = turn(client, sid, "想做蛋糕，面粉小包装，20元以内").json()
 
-    assert body["plan"] is None, "a question is not a plan"
-    assert body["plan_effect"] == "keep"
-    pending = body["pending_clarifications"]
-    assert pending and pending[0]["options"], body
-    assert all(o.get("label") for o in pending[0]["options"]), pending
+    assert body["plan"] and body["plan_effect"] == "replace", body
+    lookup = next(row for row in body["action_results"] if row["kind"] == "lookup")
+    assert lookup["status"] == "completed" and lookup["retrieval_status"] == "ok", lookup
+    line = body["plan"]["items"][0]
+    assert line["sku_id"] == "demo:cake-flour-250g", line
+    assert line["unit_price_fen"] == 680 and line["evidence"]["stock_verified"], line
+    assert body["plan"]["selected_total_fen"] <= 2000, body
     assert client.get("/api/v1/cart").json()["items"] == []
 
 
 def test_a_category_turn_can_plan_a_real_product_but_writes_no_cart(
-    client, semantic_provider
+    indexed_client, semantic_provider
 ):
-    # The exact SKU name ("低筋面粉 250克（小包装）") gets an exact retrieval hit,
-    # which the mutation node binds without a question (spec rule 1); a mere
-    # substring like "面粉" is ambiguous and would clarify instead (see the test
-    # above).
+    # An exact name and a common product name both use the same purchase chain.
+    client = indexed_client
     semantic_provider(lookup_then_add("product", "低筋面粉 250克（小包装）"))
     sid = create_session(client, page="category", category_id="baking")
     body = turn(client, sid, "帮我配齐做蛋糕的材料").json()

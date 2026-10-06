@@ -1,0 +1,6 @@
+{
+  "original_path": "preflight/20261006T-service-gate/ssh.command.txt",
+  "bytes": 624,
+  "sha256": "a1bfb9d3ff2a224c5a5b89027b2537e3993f900e07df7e105b0307b4991ee848",
+  "utf8_text": "ssh.exe -o BatchMode=yes -o ConnectTimeout=10 amax set -eu; root=/data/amax/services/ceres-kev4b-probe-20261005; p=$(cat \"$root/server.pid\"); printf \"pid_file=%s\\n\" \"$p\"; printf \"cmdline=\"; tr \"\\000\" \" \" < \"/proc/$p/cmdline\"; printf \"\\n\"; printf \"upstream_git_sha=\"; git -C \"$root/upstream\" rev-parse HEAD; printf \"gpu1=\"; nvidia-smi --id=GPU-5165b827-1b01-e6f0-d147-38e565ee823f --query-gpu=index,uuid,memory.used,memory.free,utilization.gpu --format=csv,noheader; printf \"gpu1_compute=\"; nvidia-smi --id=GPU-5165b827-1b01-e6f0-d147-38e565ee823f --query-compute-apps=pid,process_name,used_gpu_memory --format=csv,noheader\r\n"
+}

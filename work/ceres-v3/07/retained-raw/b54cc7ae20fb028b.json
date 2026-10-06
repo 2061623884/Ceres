@@ -1,0 +1,6 @@
+{
+  "original_path": "evidence/targeted-v3-3bdd644c57f24527afbd192bad0f10e7/workflow-category/process-completion.json",
+  "bytes": 741,
+  "sha256": "064acdece89d2ed308a9d0f1c411cb3c52a34597129cd3c030181ad7d6dd91c7",
+  "utf8_text": "{\r\n  \"pid\": 74220,\r\n  \"finished_at_utc\": \"2026-10-06T01:21:03.3064463Z\",\r\n  \"exit_code\": 0,\r\n  \"suite\": \"workflow-category\",\r\n  \"targets\": [\r\n    \"tests/test_workflow_category.py\"\r\n  ],\r\n  \"run_dir\": \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\07\\\\evidence\\\\targeted-v3-3bdd644c57f24527afbd192bad0f10e7\",\r\n  \"suite_dir\": \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\07\\\\evidence\\\\targeted-v3-3bdd644c57f24527afbd192bad0f10e7\\\\workflow-category\",\r\n  \"source_path_count\": 312,\r\n  \"source_mismatch_count\": 0,\r\n  \"source_zip_sha256\": \"0a4e45eb99354942322890c81c7a523fa40df0fbb8b77779c298442ee760dc4d\",\r\n  \"catalog_sha256\": \"772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10\"\r\n}"
+}

@@ -1,0 +1,6 @@
+{
+  "original_path": "preflight/20261006T-service-gate/models.command.txt",
+  "bytes": 128,
+  "sha256": "b35c8ae306bb9ccc6c28024c56a1ea07d456ad4e2286f5a119f5a320ed98eb9d",
+  "utf8_text": "curl.exe --fail --silent --show-error --include --connect-timeout 5 --max-time 15 --noproxy * http://127.0.0.1:18009/v1/models\r\n"
+}

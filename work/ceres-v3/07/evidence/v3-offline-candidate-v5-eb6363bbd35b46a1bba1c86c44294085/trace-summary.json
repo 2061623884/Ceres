@@ -1,0 +1,234 @@
+{
+  "collection_count": 39,
+  "collection_nodeids": [
+    "tests/test_v3_core_evaluation.py::test_fixed_shopping_utterance_reaches_real_plan_after_required_consent[keke-\\u60f3\\u4e70\\u4e24\\u74f6\\u65e0\\u7cd6\\u53ef\\u4e50-stay_current-2]",
+    "tests/test_v3_core_evaluation.py::test_fixed_shopping_utterance_reaches_real_plan_after_required_consent[momo-\\u60f3\\u4e70\\u65e0\\u7cd6\\u53ef\\u4e50-suggest_switch-1]",
+    "tests/test_v3_core_evaluation.py::test_keke_policy_stays_and_answers_with_source[R02-\\u8fd9\\u4e2a\\u5546\\u54c1\\u4e0d\\u559c\\u6b22\\u80fd\\u9000\\u5417-\\u8fd9\\u4e2a\\u5546\\u54c1\\u4e0d\\u559c\\u6b22\\u80fd\\u9000\\u5417-P-RET-01]",
+    "tests/test_v3_core_evaluation.py::test_keke_policy_stays_and_answers_with_source[P01-\\u4e00\\u822c\\u914d\\u9001\\u65f6\\u95f4-\\u4e00\\u822c\\u914d\\u9001\\u65f6\\u95f4-P-DEL-01]",
+    "tests/test_v3_core_evaluation.py::test_r03_unselected_momo_reads_shared_policy_without_order",
+    "tests/test_v3_core_evaluation.py::test_r05_order_eligibility_stays_and_reads_actual_owned_order",
+    "tests/test_v3_core_evaluation.py::test_r09_life_comment_stays_without_creating_task",
+    "tests/test_v3_policy_consultation.py::test_keke_reads_return_policy_before_any_mercury_session",
+    "tests/test_v3_policy_consultation.py::test_keke_policy_answer_uses_conditions_instead_of_product_recommendation",
+    "tests/test_v3_policy_consultation.py::test_momo_can_consult_policy_without_selecting_an_order",
+    "tests/test_v3_policy_consultation.py::test_unselected_policy_chat_rejects_even_unsolicited_order_tools[get_order_details]",
+    "tests/test_v3_policy_consultation.py::test_unselected_policy_chat_rejects_even_unsolicited_order_tools[create_refund]",
+    "tests/test_v3_policy_consultation.py::test_unselected_policy_chat_rejects_even_unsolicited_order_tools[create_return]",
+    "tests/test_v3_policy_consultation.py::test_greetings_and_life_comments_do_not_create_a_purchase_task",
+    "tests/test_v3_policy_consultation.py::test_policy_reinitialization_keeps_existing_facts_and_unknown_query_is_honest",
+    "tests/test_v3_routing_context.py::test_list_cancellation_uses_guide_history_without_order_action",
+    "tests/test_v3_routing_context.py::test_new_shopping_request_invalidates_old_order_handoff",
+    "tests/test_v3_routing_context.py::test_foreign_opening_and_order_are_rejected_before_model",
+    "tests/test_v3_routing_handoff.py::test_shopping_continues_existing_guide_with_observable_route",
+    "tests/test_v3_routing_handoff.py::test_order_request_waits_for_consent_and_replays_exactly_once",
+    "tests/test_v3_routing_handoff.py::test_unknown_object_clarifies_without_role_business_or_order_mutation",
+    "tests/test_v3_routing_handoff.py::test_route_unavailable_is_failure_but_current_role_still_operates",
+    "tests/test_v3_routing_handoff.py::test_failed_handoff_replays_failure_without_reexecuting",
+    "tests/test_v3_routing_handoff.py::test_after_manual_switch_router_receives_actual_momo_role_and_order",
+    "tests/test_v3_routing_handoff.py::test_momo_explicit_order_matches_router_and_business_instead_of_old_selection",
+    "tests/test_v3_switch_lifecycle.py::test_momo_shopping_request_returns_to_keke_only_after_user_consent",
+    "tests/test_v3_switch_lifecycle.py::test_momo_handoff_keeps_relevant_dialogue_and_resumes_existing_guide_state",
+    "tests/test_v3_switch_lifecycle.py::test_manual_selection_resumes_pending_handoff_but_later_selection_only_restores",
+    "tests/test_v3_switch_lifecycle.py::test_answered_switch_question_is_not_pending_for_next_route[accept]",
+    "tests/test_v3_switch_lifecycle.py::test_answered_switch_question_is_not_pending_for_next_route[reject]",
+    "tests/test_v3_switch_lifecycle.py::test_display_quota_survives_get_rejection_and_role_switch_until_explicit_close",
+    "tests/test_v3_switch_lifecycle.py::test_unclear_object_clarification_does_not_assume_cancellation",
+    "tests/test_v3_independent_routing.py::test_independent_dialogue_phenomena",
+    "tests/test_v3_live_routing.py::test_real_kev_fixed_public_contexts",
+    "tests/test_v3_live_sampling.py::test_real_role_and_kev_sample[R01-keke-\\u60f3\\u4e70\\u4e24\\u74f6\\u65e0\\u7cd6\\u53ef\\u4e50-stay_current-None]",
+    "tests/test_v3_live_sampling.py::test_real_role_and_kev_sample[R01-named-product-variant-keke-\\u60f3\\u4e70\\u4e00\\u76d2\\u65b0\\u9c9c\\u9e21\\u86cb-stay_current-None]",
+    "tests/test_v3_live_sampling.py::test_real_role_and_kev_sample[R02-keke-\\u8fd9\\u4e2a\\u5546\\u54c1\\u4e0d\\u559c\\u6b22\\u80fd\\u9000\\u5417-stay_current-P-RET-01]",
+    "tests/test_v3_live_sampling.py::test_real_role_and_kev_sample[R03-momo-\\u4e00\\u822c\\u7b7e\\u6536\\u540e\\u51e0\\u5929\\u5185\\u80fd\\u9000-stay_current-P-RET-01]",
+    "tests/test_v3_live_sampling.py::test_real_role_and_kev_sample[H01-keke-\\u8fd9\\u5355\\u5230\\u54ea\\u4e86-suggest_switch-None]"
+  ],
+  "case_version": "ceres-v3-core-20261006-v1",
+  "case_count": 18,
+  "unique_mapped_nodes": 16,
+  "case_nodes": {
+    "R01": [
+      "tests/test_v3_core_evaluation.py::test_fixed_shopping_utterance_reaches_real_plan_after_required_consent[keke-\\u60f3\\u4e70\\u4e24\\u74f6\\u65e0\\u7cd6\\u53ef\\u4e50-stay_current-2]"
+    ],
+    "R02": [
+      "tests/test_v3_core_evaluation.py::test_keke_policy_stays_and_answers_with_source[R02-\\u8fd9\\u4e2a\\u5546\\u54c1\\u4e0d\\u559c\\u6b22\\u80fd\\u9000\\u5417-\\u8fd9\\u4e2a\\u5546\\u54c1\\u4e0d\\u559c\\u6b22\\u80fd\\u9000\\u5417-P-RET-01]"
+    ],
+    "R03": [
+      "tests/test_v3_core_evaluation.py::test_r03_unselected_momo_reads_shared_policy_without_order"
+    ],
+    "R04": [
+      "tests/test_v3_routing_handoff.py::test_order_request_waits_for_consent_and_replays_exactly_once"
+    ],
+    "R05": [
+      "tests/test_v3_core_evaluation.py::test_r05_order_eligibility_stays_and_reads_actual_owned_order"
+    ],
+    "R06": [
+      "tests/test_v3_routing_context.py::test_list_cancellation_uses_guide_history_without_order_action"
+    ],
+    "R07": [
+      "tests/test_v3_routing_handoff.py::test_unknown_object_clarifies_without_role_business_or_order_mutation"
+    ],
+    "R08": [
+      "tests/test_v3_core_evaluation.py::test_fixed_shopping_utterance_reaches_real_plan_after_required_consent[momo-\\u60f3\\u4e70\\u65e0\\u7cd6\\u53ef\\u4e50-suggest_switch-1]"
+    ],
+    "R09": [
+      "tests/test_v3_core_evaluation.py::test_r09_life_comment_stays_without_creating_task"
+    ],
+    "R10": [
+      "tests/test_v3_routing_context.py::test_new_shopping_request_invalidates_old_order_handoff"
+    ],
+    "P01": [
+      "tests/test_v3_core_evaluation.py::test_keke_policy_stays_and_answers_with_source[P01-\\u4e00\\u822c\\u914d\\u9001\\u65f6\\u95f4-\\u4e00\\u822c\\u914d\\u9001\\u65f6\\u95f4-P-DEL-01]"
+    ],
+    "H01": [
+      "tests/test_v3_routing_handoff.py::test_order_request_waits_for_consent_and_replays_exactly_once",
+      "tests/test_v3_switch_lifecycle.py::test_momo_handoff_keeps_relevant_dialogue_and_resumes_existing_guide_state"
+    ],
+    "H02": [
+      "tests/test_v3_switch_lifecycle.py::test_display_quota_survives_get_rejection_and_role_switch_until_explicit_close"
+    ],
+    "H03": [
+      "tests/test_v3_switch_lifecycle.py::test_manual_selection_resumes_pending_handoff_but_later_selection_only_restores"
+    ],
+    "H04": [
+      "tests/test_v3_switch_lifecycle.py::test_manual_selection_resumes_pending_handoff_but_later_selection_only_restores"
+    ],
+    "H05": [
+      "tests/test_v3_switch_lifecycle.py::test_display_quota_survives_get_rejection_and_role_switch_until_explicit_close"
+    ],
+    "H06": [
+      "tests/test_v3_routing_handoff.py::test_order_request_waits_for_consent_and_replays_exactly_once",
+      "tests/test_v3_routing_handoff.py::test_momo_explicit_order_matches_router_and_business_instead_of_old_selection"
+    ],
+    "F01": [
+      "tests/test_v3_routing_handoff.py::test_route_unavailable_is_failure_but_current_role_still_operates"
+    ]
+  },
+  "case_results": {
+    "R01": [
+      {
+        "nodeid": "tests/test_v3_core_evaluation.py::test_fixed_shopping_utterance_reaches_real_plan_after_required_consent[keke-\\u60f3\\u4e70\\u4e24\\u74f6\\u65e0\\u7cd6\\u53ef\\u4e50-stay_current-2]",
+        "outcome": "passed"
+      }
+    ],
+    "R02": [
+      {
+        "nodeid": "tests/test_v3_core_evaluation.py::test_keke_policy_stays_and_answers_with_source[R02-\\u8fd9\\u4e2a\\u5546\\u54c1\\u4e0d\\u559c\\u6b22\\u80fd\\u9000\\u5417-\\u8fd9\\u4e2a\\u5546\\u54c1\\u4e0d\\u559c\\u6b22\\u80fd\\u9000\\u5417-P-RET-01]",
+        "outcome": "passed"
+      }
+    ],
+    "R03": [
+      {
+        "nodeid": "tests/test_v3_core_evaluation.py::test_r03_unselected_momo_reads_shared_policy_without_order",
+        "outcome": "passed"
+      }
+    ],
+    "R04": [
+      {
+        "nodeid": "tests/test_v3_routing_handoff.py::test_order_request_waits_for_consent_and_replays_exactly_once",
+        "outcome": "passed"
+      }
+    ],
+    "R05": [
+      {
+        "nodeid": "tests/test_v3_core_evaluation.py::test_r05_order_eligibility_stays_and_reads_actual_owned_order",
+        "outcome": "passed"
+      }
+    ],
+    "R06": [
+      {
+        "nodeid": "tests/test_v3_routing_context.py::test_list_cancellation_uses_guide_history_without_order_action",
+        "outcome": "passed"
+      }
+    ],
+    "R07": [
+      {
+        "nodeid": "tests/test_v3_routing_handoff.py::test_unknown_object_clarifies_without_role_business_or_order_mutation",
+        "outcome": "passed"
+      }
+    ],
+    "R08": [
+      {
+        "nodeid": "tests/test_v3_core_evaluation.py::test_fixed_shopping_utterance_reaches_real_plan_after_required_consent[momo-\\u60f3\\u4e70\\u65e0\\u7cd6\\u53ef\\u4e50-suggest_switch-1]",
+        "outcome": "passed"
+      }
+    ],
+    "R09": [
+      {
+        "nodeid": "tests/test_v3_core_evaluation.py::test_r09_life_comment_stays_without_creating_task",
+        "outcome": "passed"
+      }
+    ],
+    "R10": [
+      {
+        "nodeid": "tests/test_v3_routing_context.py::test_new_shopping_request_invalidates_old_order_handoff",
+        "outcome": "passed"
+      }
+    ],
+    "P01": [
+      {
+        "nodeid": "tests/test_v3_core_evaluation.py::test_keke_policy_stays_and_answers_with_source[P01-\\u4e00\\u822c\\u914d\\u9001\\u65f6\\u95f4-\\u4e00\\u822c\\u914d\\u9001\\u65f6\\u95f4-P-DEL-01]",
+        "outcome": "passed"
+      }
+    ],
+    "H01": [
+      {
+        "nodeid": "tests/test_v3_routing_handoff.py::test_order_request_waits_for_consent_and_replays_exactly_once",
+        "outcome": "passed"
+      },
+      {
+        "nodeid": "tests/test_v3_switch_lifecycle.py::test_momo_handoff_keeps_relevant_dialogue_and_resumes_existing_guide_state",
+        "outcome": "passed"
+      }
+    ],
+    "H02": [
+      {
+        "nodeid": "tests/test_v3_switch_lifecycle.py::test_display_quota_survives_get_rejection_and_role_switch_until_explicit_close",
+        "outcome": "passed"
+      }
+    ],
+    "H03": [
+      {
+        "nodeid": "tests/test_v3_switch_lifecycle.py::test_manual_selection_resumes_pending_handoff_but_later_selection_only_restores",
+        "outcome": "passed"
+      }
+    ],
+    "H04": [
+      {
+        "nodeid": "tests/test_v3_switch_lifecycle.py::test_manual_selection_resumes_pending_handoff_but_later_selection_only_restores",
+        "outcome": "passed"
+      }
+    ],
+    "H05": [
+      {
+        "nodeid": "tests/test_v3_switch_lifecycle.py::test_display_quota_survives_get_rejection_and_role_switch_until_explicit_close",
+        "outcome": "passed"
+      }
+    ],
+    "H06": [
+      {
+        "nodeid": "tests/test_v3_routing_handoff.py::test_order_request_waits_for_consent_and_replays_exactly_once",
+        "outcome": "passed"
+      },
+      {
+        "nodeid": "tests/test_v3_routing_handoff.py::test_momo_explicit_order_matches_router_and_business_instead_of_old_selection",
+        "outcome": "passed"
+      }
+    ],
+    "F01": [
+      {
+        "nodeid": "tests/test_v3_routing_handoff.py::test_route_unavailable_is_failure_but_current_role_still_operates",
+        "outcome": "passed"
+      }
+    ]
+  },
+  "unmapped_case_ids": [],
+  "case_nodes_without_result": [],
+  "pytest_call_outcomes": {
+    "passed": 32
+  },
+  "testclient_response_records": 232,
+  "raw_response_unavailable": 9,
+  "testclient_send_errors": 0,
+  "sse_event_records": 40,
+  "trace_records": 338,
+  "trace_sha256": "aab984cccb22803c071029d4ca9ad2ce786f16efc8f54df89ee1131ed13eda54"
+}

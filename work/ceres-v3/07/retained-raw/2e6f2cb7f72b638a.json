@@ -1,0 +1,6 @@
+{
+  "original_path": "evidence/probe-03ba20b287a743d697c71113ceeb93d9/process-start.json",
+  "bytes": 803,
+  "sha256": "39ec089eea287977692aedb77d5f04195732e296709b0b84c74b7d028f04c768",
+  "utf8_text": "{\r\n  \"pid\": 79840,\r\n  \"started_at_utc\": \"2026-10-06T00:22:40.2463311Z\",\r\n  \"run_id\": \"03ba20b287a743d697c71113ceeb93d9\",\r\n  \"run_dir\": \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\07\\\\evidence\\\\probe-03ba20b287a743d697c71113ceeb93d9\",\r\n  \"argv\": [\r\n    \"-X\",\r\n    \"utf8\",\r\n    \"-m\",\r\n    \"pytest\",\r\n    \"-p\",\r\n    \"no:cacheprovider\",\r\n    \"-W\",\r\n    \"error::pytest.PytestUnhandledThreadExceptionWarning\",\r\n    \"--basetemp\",\r\n    \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\07\\\\evidence\\\\probe-03ba20b287a743d697c71113ceeb93d9\\\\basetemp\",\r\n    \"-p\",\r\n    \"probe_http200_malformed_sse\",\r\n    \"tests/test_v3_independent_routing.py::test_independent_dialogue_phenomena\"\r\n  ],\r\n  \"cwd\": \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\backend\"\r\n}\r\n"
+}

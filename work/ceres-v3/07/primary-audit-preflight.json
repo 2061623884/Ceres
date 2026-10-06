@@ -1,0 +1,61 @@
+{
+  "reviewer": "primary agent; read original command/env/exit/raw records; no tests executed",
+  "candidate_zip_sha256": "094eb7d28777d5c3d7025bcad4aebd9f71a300cb275fe8679c9ec5cd825d2dfb",
+  "source_observed": {
+    "head": "d3f426ecaf169bd01a7b86c137c61b9034d5079b",
+    "source_zip_sha256": "094eb7d28777d5c3d7025bcad4aebd9f71a300cb275fe8679c9ec5cd825d2dfb",
+    "source_path_count": 312,
+    "hash_entry_count": 312,
+    "mismatch_count": 0,
+    "mismatch_paths": [],
+    "catalog_path": "data/sale_guide.db",
+    "catalog_sha256": "772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10",
+    "catalog_expected_sha256": "772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10"
+  },
+  "probe_exit_code": 1,
+  "probe_scope": "Instrumentation failure retention only, not real model quality or independent pass",
+  "observed": {
+    "case_id": "HO01",
+    "passed": false,
+    "message": "订单不用查了。朋友让我问问有没有适合露营的小包装零食",
+    "http_status": 200,
+    "raw_sse": "event: route.result\ndata: {invalid-json}\n\n",
+    "error": {
+      "error_type": "JSONDecodeError",
+      "message": "Expecting property name enclosed in double quotes: line 1 column 2 (char 1)"
+    },
+    "all_upstream_count": 0
+  },
+  "preceding_plugin_failure_retained": "evidence/probe-88a689ab4e9342628b03aaf4491a0486",
+  "preflight_observed": {
+    "models_http": 200,
+    "models_exit": 0,
+    "ssh_exit": 0,
+    "server_pid": 2701504,
+    "upstream_git_sha": "fe64b1274ea7f80d4095866df90666abb03e9cf6",
+    "checkpoint_revision": "139fdd94f1b6a6ad80cc15e08fcb99cac885a101",
+    "gpu_uuid": "GPU-5165b827-1b01-e6f0-d147-38e565ee823f",
+    "dtype": "float32",
+    "no_inference_or_cold_start": true
+  },
+  "record_sha256": {
+    "work/ceres-v3/07/preflight/20261006T-service-gate/models.command.txt": "b35c8ae306bb9ccc6c28024c56a1ea07d456ad4e2286f5a119f5a320ed98eb9d",
+    "work/ceres-v3/07/preflight/20261006T-service-gate/models.exit-code": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+    "work/ceres-v3/07/preflight/20261006T-service-gate/models.stderr.raw.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "work/ceres-v3/07/preflight/20261006T-service-gate/models.stdout.raw.txt": "6e155dac5e758329fa7961f9f0d70d5ab1757ac013d8d6843036c327e6ea49dc",
+    "work/ceres-v3/07/preflight/20261006T-service-gate/ssh.command.txt": "a1bfb9d3ff2a224c5a5b89027b2537e3993f900e07df7e105b0307b4991ee848",
+    "work/ceres-v3/07/preflight/20261006T-service-gate/ssh.exit-code": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+    "work/ceres-v3/07/preflight/20261006T-service-gate/ssh.stderr.raw.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "work/ceres-v3/07/preflight/20261006T-service-gate/ssh.stdout.raw.txt": "c584ec68d694709a24d438c882ede0a4340e0cdf63d6ea184b357d53b885b42a",
+    "work/ceres-v3/07/evidence/probe-03ba20b287a743d697c71113ceeb93d9/command.json": "11687d2cd652742895d8edef1fed22c2a814a04f2f2e786eacd4cb0fabcff2f6",
+    "work/ceres-v3/07/evidence/probe-03ba20b287a743d697c71113ceeb93d9/environment.json": "d13b66ecda1da11c0920bc594125d1d094e6777864c1e0d98ffe8f83f581f6f5",
+    "work/ceres-v3/07/evidence/probe-03ba20b287a743d697c71113ceeb93d9/process-completion.json": "03f8906569f3f434b186d48a7aeb055a9fe066f08d93aa1ebb76c9fbf35ed0c0",
+    "work/ceres-v3/07/evidence/probe-03ba20b287a743d697c71113ceeb93d9/process-start.json": "39ec089eea287977692aedb77d5f04195732e296709b0b84c74b7d028f04c768",
+    "work/ceres-v3/07/evidence/probe-03ba20b287a743d697c71113ceeb93d9/source-after.json": "995e9a7a5e78ec7af355e1808b69438b33aa454b2c11b64037d5e9fa5bfa0db5",
+    "work/ceres-v3/07/evidence/probe-03ba20b287a743d697c71113ceeb93d9/source-before.json": "995e9a7a5e78ec7af355e1808b69438b33aa454b2c11b64037d5e9fa5bfa0db5",
+    "work/ceres-v3/07/evidence/probe-03ba20b287a743d697c71113ceeb93d9/stdout.txt": "423a6fb0931232a81d6693a064f82416256938fee130b63a9be341e40d3a9fea",
+    "work/ceres-v3/07/evidence/probe-03ba20b287a743d697c71113ceeb93d9/stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "work/ceres-v3/07/evidence/probe-03ba20b287a743d697c71113ceeb93d9/independent-evidence/results.json": "893000cd219cfe9e9d0457ec7b50733c122aa7b46af48840824161a1ed52635a",
+    "work/ceres-v3/07/evidence/probe-03ba20b287a743d697c71113ceeb93d9/independent-evidence/results.sha256": "90cceeecd75e1ed1d33fc4b71442ef5c32abb6cad2d43348d2ded70bc6d5abba"
+  }
+}

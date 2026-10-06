@@ -1,0 +1,6 @@
+{
+  "original_path": "work/ceres-v3/07/precommit/approved-precommit-0f4d6c8e2b4b46188c3574f267edefbd/checker/git-diff-cached-check.stdout.raw.txt",
+  "bytes": 79,
+  "sha256": "cba744bed268795c8370e903baea18c406252787a37f29ecfd1a8818b1d4945b",
+  "utf8_text": "work/ceres-v3/07/diagnosis/remaining-regressions.md:49: new blank line at EOF.\n"
+}

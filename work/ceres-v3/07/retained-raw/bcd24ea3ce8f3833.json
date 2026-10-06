@@ -1,0 +1,6 @@
+{
+  "original_path": "evidence/performance-analysis-v5-3aa73880edae4536b4e81a0a506cfe2e/process-exit.json",
+  "bytes": 306,
+  "sha256": "04637cab3a167f00ce0c2164885e341d75c32be939b584b2608a5d025906bff0",
+  "utf8_text": "{\r\n  \"process_id\": 59260,\r\n  \"started_utc\": \"2026-10-06T01:53:37.4623604Z\",\r\n  \"ended_utc\": \"2026-10-06T01:53:37.6982581Z\",\r\n  \"exit_code\": 0,\r\n  \"stdout_bytes\": 196,\r\n  \"stderr_bytes\": 0,\r\n  \"report_exists\": true,\r\n  \"report_sha256\": \"3e147ad86201d8281b1fc4742a84f55dff0e1de422616e3855ebc1b65be5a834\"\r\n}\r\n"
+}

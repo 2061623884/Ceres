@@ -1,0 +1,32 @@
+{
+  "case_version": "ceres-v3-core-20261006-v1",
+  "requested_rows": 22,
+  "actual_rows": 22,
+  "passed": 22,
+  "failed": [],
+  "unique_case_ids": [
+    "P01",
+    "R01",
+    "R02",
+    "R03",
+    "R04",
+    "R05",
+    "R06",
+    "R07",
+    "R08",
+    "R09",
+    "R10"
+  ],
+  "repetition_counts": {
+    "0": 11,
+    "1": 11
+  },
+  "upstream_calls": 22,
+  "upstream_http_statuses": {
+    "200": 22
+  },
+  "upstream_response_models": {
+    "kev-latest": 22
+  },
+  "results_sha256": "185e9ddf1fde5d3aff5f6b392db77ad9f92c6a4621cefa03323e90ba8d71a326"
+}

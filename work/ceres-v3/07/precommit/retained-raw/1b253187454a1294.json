@@ -1,0 +1,6 @@
+{
+  "original_path": "work/ceres-v3/07/precommit/approved-precommit-0f4d6c8e2b4b46188c3574f267edefbd/checker/git-diff-cached-check.process.json",
+  "bytes": 751,
+  "sha256": "7b7ec4443bebef69b073e8b4349109bdff6ee0fc991e2ee5014e6d3f769ba62e",
+  "utf8_text": "{\r\n  \"argv\": [\r\n    \"git\",\r\n    \"diff\",\r\n    \"--cached\",\r\n    \"--check\"\r\n  ],\r\n  \"cwd\": \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\",\r\n  \"process_id\": 73296,\r\n  \"started_utc\": \"2026-10-06T02:23:10.772136+00:00\",\r\n  \"ended_utc\": \"2026-10-06T02:23:10.883746+00:00\",\r\n  \"exit_code\": 2,\r\n  \"environment\": {\r\n    \"GIT_DIR\": null,\r\n    \"GIT_WORK_TREE\": null,\r\n    \"GIT_INDEX_FILE\": null,\r\n    \"GIT_COMMON_DIR\": null,\r\n    \"GIT_OBJECT_DIRECTORY\": null,\r\n    \"GIT_OPTIONAL_LOCKS\": null,\r\n    \"GIT_CONFIG_NOSYSTEM\": null,\r\n    \"GIT_CONFIG_SYSTEM\": null,\r\n    \"GIT_CONFIG_GLOBAL\": null\r\n  },\r\n  \"credential_values_recorded\": false,\r\n  \"stdout_path\": \"git-diff-cached-check.stdout.raw.txt\",\r\n  \"stderr_path\": \"git-diff-cached-check.stderr.raw.txt\"\r\n}\r\n"
+}

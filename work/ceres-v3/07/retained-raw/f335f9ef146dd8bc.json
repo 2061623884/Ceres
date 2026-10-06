@@ -1,0 +1,6 @@
+{
+  "original_path": "evidence/live-route22-v5-0fec8e5ed7c0426f961237c6cf196ba9/stdout.raw.txt",
+  "bytes": 597,
+  "sha256": "b8d034423d3520c3ca29ba44d9fc1643746ce3277e5a3ada39abf72c0fde506e",
+  "utf8_text": "============================= test session starts =============================\r\nplatform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.6.0\r\nrootdir: C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\r\nconfigfile: pyproject.toml\r\nplugins: anyio-4.15.1, langsmith-0.14.1, asyncio-1.4.0\r\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\r\ncollected 1 item\r\n\r\ntests\\test_v3_live_routing.py .                                          [100%]\r\n\r\n============================= 1 passed in 17.27s ==============================\r\n"
+}

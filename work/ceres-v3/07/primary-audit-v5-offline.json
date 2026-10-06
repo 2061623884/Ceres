@@ -1,0 +1,140 @@
+{
+  "at": "2026-10-06T01:46:03.261520+00:00",
+  "purpose": "Primary-agent raw-record and provenance audit, not a test run",
+  "baseline": "work\\ceres-v3\\07\\candidate-v5\\baseline.json",
+  "expected_zip_sha256": "a85bfc70c017999c01833c0969abf7217a4373c49673ca2ed750ef662a3a7dae",
+  "actual_zip_sha256": "a85bfc70c017999c01833c0969abf7217a4373c49673ca2ed750ef662a3a7dae",
+  "actual_results": [
+    {
+      "run": "work\\ceres-v3\\07\\evidence\\v3-offline-candidate-v5-eb6363bbd35b46a1bba1c86c44294085",
+      "command": {
+        "process_id": 81492,
+        "started_utc": "2026-10-06T01:41:19.2670739Z",
+        "executable": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+        "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend",
+        "argv": [
+          "-X",
+          "utf8",
+          "-m",
+          "pytest",
+          "-p",
+          "ceres_testclient_trace",
+          "-p",
+          "no:cacheprovider",
+          "-W",
+          "error::pytest.PytestUnhandledThreadExceptionWarning",
+          "--basetemp",
+          "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\v3-offline-candidate-v5-eb6363bbd35b46a1bba1c86c44294085\\backend-basetemp",
+          "tests/test_v3_core_evaluation.py",
+          "tests/test_v3_policy_consultation.py",
+          "tests/test_v3_routing_context.py",
+          "tests/test_v3_routing_handoff.py",
+          "tests/test_v3_switch_lifecycle.py",
+          "tests/test_v3_independent_routing.py",
+          "tests/test_v3_live_routing.py",
+          "tests/test_v3_live_sampling.py"
+        ],
+        "environment": {
+          "LLM_MODE": "offline",
+          "MERCURY_LIVE": "0",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "PYTHONUTF8": "1",
+          "RETRIEVAL_MODE": "lexical",
+          "RETRIEVAL_INDEX_DIR": "",
+          "MEMORY_MODEL": "",
+          "TEMP": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\v3-offline-candidate-v5-eb6363bbd35b46a1bba1c86c44294085\\backend-temp",
+          "TMP": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\v3-offline-candidate-v5-eb6363bbd35b46a1bba1c86c44294085\\backend-temp",
+          "PYTHONPATH": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\observer-prep-v4-352dfedd",
+          "CERES_TRACE_PATH": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\v3-offline-candidate-v5-eb6363bbd35b46a1bba1c86c44294085\\api-trace.jsonl",
+          "CERES_COVERAGE_PLAN_PATH": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\05\\coverage-plan.json",
+          "cleared_gate_names": [
+            "CERES_LIVE_MEMORY_ACCEPTANCE",
+            "CERES_LIVE_V2_DEMO",
+            "CERES_V3_INDEPENDENT_EVIDENCE_DIR",
+            "CERES_V3_LIVE_EVIDENCE_DIR",
+            "CERES_V3_ROUTE_EVIDENCE_DIR"
+          ],
+          "credential_values_recorded": false
+        },
+        "stdout_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\v3-offline-candidate-v5-eb6363bbd35b46a1bba1c86c44294085\\stdout.raw.txt",
+        "stderr_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\v3-offline-candidate-v5-eb6363bbd35b46a1bba1c86c44294085\\stderr.raw.txt",
+        "trace_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\v3-offline-candidate-v5-eb6363bbd35b46a1bba1c86c44294085\\api-trace.jsonl",
+        "observer_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\observer-prep-v4-352dfedd\\ceres_testclient_trace.py"
+      },
+      "completion": {
+        "process_id": 81492,
+        "started_utc": "2026-10-06T01:41:19.2670739Z",
+        "ended_utc": "2026-10-06T01:42:17.6672730Z",
+        "exit_code": 0,
+        "stdout_bytes": 1166,
+        "stderr_bytes": 0,
+        "trace_bytes": 399638
+      },
+      "source": [
+        {
+          "file": "source-before.json",
+          "paths": 312,
+          "expected_paths": 312,
+          "changed_or_missing": [],
+          "extra": [],
+          "zip": "a85bfc70c017999c01833c0969abf7217a4373c49673ca2ed750ef662a3a7dae",
+          "zip_note": "reported by executor",
+          "head": "d3f426ecaf169bd01a7b86c137c61b9034d5079b",
+          "catalog": "772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10",
+          "expected_catalog": "772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10"
+        },
+        {
+          "file": "source-after.json",
+          "paths": 312,
+          "expected_paths": 312,
+          "changed_or_missing": [],
+          "extra": [],
+          "zip": "a85bfc70c017999c01833c0969abf7217a4373c49673ca2ed750ef662a3a7dae",
+          "zip_note": "reported by executor",
+          "head": "d3f426ecaf169bd01a7b86c137c61b9034d5079b",
+          "catalog": "772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10",
+          "expected_catalog": "772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10"
+        }
+      ],
+      "raw": {
+        "process-start.json": {
+          "bytes": 2977,
+          "sha256": "f451b451ff55b0e0a19de8de43c4ffcad44c4fe08236db73d807a91b2f03eab1"
+        },
+        "process-exit.json": {
+          "bytes": 219,
+          "sha256": "5ff081a8e46ad66665d2d9e6cb2ca45a17015221bea66fc0b00f9cc893b947e9"
+        },
+        "source-before.json": {
+          "bytes": 35343,
+          "sha256": "75e6b35198bd39ee288358ad79adaabe49451d97b59645f5ea7f400a7b21af99"
+        },
+        "source-after.json": {
+          "bytes": 35343,
+          "sha256": "ee3a5b944f0fd39a1308f16ba1f2bdbf1b8548b892160c346b20ca7fa3ae11c6"
+        },
+        "stdout.raw.txt": {
+          "bytes": 1166,
+          "sha256": "412a822b9604ec1d38cb5dfba100301b17a7acb1a3bf3f058ac047170110d62f"
+        },
+        "stderr.raw.txt": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "stdout_tail": [
+        "tests\\test_v3_core_evaluation.py .......                                 [ 17%]",
+        "tests\\test_v3_policy_consultation.py ........                            [ 38%]",
+        "tests\\test_v3_routing_context.py ...                                     [ 46%]",
+        "tests\\test_v3_routing_handoff.py .......                                 [ 64%]",
+        "tests\\test_v3_switch_lifecycle.py .......                                [ 82%]",
+        "tests\\test_v3_independent_routing.py s                                   [ 84%]",
+        "tests\\test_v3_live_routing.py s                                          [ 87%]",
+        "tests\\test_v3_live_sampling.py sssss                                     [100%]",
+        "",
+        "======================= 32 passed, 7 skipped in 56.16s ========================"
+      ],
+      "stderr": ""
+    }
+  ]
+}

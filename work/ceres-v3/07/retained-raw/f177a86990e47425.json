@@ -1,0 +1,6 @@
+{
+  "original_path": "evidence/probe-03ba20b287a743d697c71113ceeb93d9/environment.json",
+  "bytes": 716,
+  "sha256": "d13b66ecda1da11c0920bc594125d1d094e6777864c1e0d98ffe8f83f581f6f5",
+  "utf8_text": "{\r\n  \"LLM_MODE\": \"offline\",\r\n  \"PYTHONDONTWRITEBYTECODE\": \"1\",\r\n  \"PYTHONUTF8\": \"1\",\r\n  \"MERCURY_LIVE\": \"0\",\r\n  \"CERES_LIVE_MEMORY_ACCEPTANCE\": \"\",\r\n  \"CERES_LIVE_V2_DEMO\": \"\",\r\n  \"CERES_V3_ROUTE_EVIDENCE_DIR\": \"\",\r\n  \"CERES_V3_LIVE_EVIDENCE_DIR\": \"\",\r\n  \"CERES_V3_INDEPENDENT_EVIDENCE_DIR\": \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\07\\\\evidence\\\\probe-03ba20b287a743d697c71113ceeb93d9\\\\independent-evidence\",\r\n  \"RETRIEVAL_MODE\": \"lexical\",\r\n  \"RETRIEVAL_INDEX_DIR\": \"\",\r\n  \"MEMORY_MODEL\": \"\",\r\n  \"OPENAI_API_KEY\": \"inherited unchanged; value not recorded\",\r\n  \"OPENAI_BASE_URL\": \"inherited unchanged; value not recorded\",\r\n  \"LLM_MODEL\": \"inherited unchanged; value not recorded\"\r\n}\r\n"
+}

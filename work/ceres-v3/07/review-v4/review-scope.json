@@ -1,0 +1,32 @@
+{
+  "fixed_head": "d3f426ecaf169bd01a7b86c137c61b9034d5079b",
+  "baseline_working_zip_sha256": "c585b1d78a9f9466a127d2c4de9515ed05f4e0dd7e8c005eb79d8f516c86b722",
+  "candidate_working_zip_sha256": "352dfeddcd894ea7024d2c940da6ee59f3dbe6e5d548a1407b0d8ada4a4ba980",
+  "diff_command": "git diff d3f426ecaf169bd01a7b86c137c61b9034d5079b...HEAD (no commits yet); owned actual working-source delta against baseline ZIP",
+  "commit_list": [],
+  "scope": {
+    "README.md": "f0a2392df10d525722edb0e1dadf565d6323c575fc6e96d5a270319da8c24453",
+    "backend/tests/test_agent_deadline.py": "ab472a1c877aeaa9b9dc088a0b15924328362eacf8253675ffca1364ba584907",
+    "backend/tests/test_p0_coverage_consistency.py": "88693c540fcdfadd4754a4119def9bc919b031689c291ee9f0b1b346f7cd061e",
+    "backend/tests/test_p0_gap_persistence.py": "c18fb45d93275082743683e4baf554307cea385ab78fc9b86cb5271fef1ec6b8",
+    "backend/tests/test_review_probes.py": "45bfc495674ba60590ecb7a72adfa7cfb9a17e9af800e9608bbe2eee45103188",
+    "backend/tests/test_s1_data_completion.py": "050a0c3f7a0cac7fef8bcf6618032862fd689d7d8c84d4dc31ae408b1bb300b5",
+    "backend/tests/test_semantic_acceptance_edges.py": "be70b57f85fddfed456727b89fc44152340b87eb3cea75db4c472573f2b42484",
+    "backend/tests/test_v3_independent_routing.py": "a43a0de047986d014ac9f11e323a8ed8b22a71a3c3bbf6d5b8087a353b57af72",
+    "backend/tests/test_workflow_category.py": "1d9f503e047674a73674b8829984cbabea1882c40d100e81078c8b5eff5be82f",
+    "docs/ceres-v3.md": "432cde189fdc20ced36a89b1bf28392ebf79496ac2acf535c297b2bf54bfa039",
+    "tasks/ceres-v3-07-final-acceptance.md": "d000a45108670ca43a2554f34ac2a1bd47e524ae9c01694b52edf48c4f9dfdd5",
+    "work/ceres-v3/07/regression-plan.json": "c98f346d7bd68c26e2759d0ae023b9925243f7e1799c21547e0ffc61ad295f4e"
+  },
+  "review_full_new_files": [
+    "docs/ceres-v3.md",
+    "backend/tests/test_v3_independent_routing.py"
+  ],
+  "claim": "No production runtime delta. W P1 source restored to inherited prechange bytes with failures retained. Added actual post-commit SSE publication/receipt replay deadline test. 07 original complete repository regression remains failed and unavailable S1 snapshot is not replaced.",
+  "evidence_inputs": [
+    "work/ceres-v3/07/diagnosis/remaining-regressions.md",
+    "work/ceres-v3/07/diagnosis/deadline.md",
+    "work/ceres-v3/07/primary-audit-v2.json",
+    "work/ceres-v3/07/cursor-acceptance.md"
+  ]
+}

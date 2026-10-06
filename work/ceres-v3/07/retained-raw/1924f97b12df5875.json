@@ -1,0 +1,6 @@
+{
+  "original_path": "evidence/live-holdout4-v5-16391552984743c7b6d246e2ae472a60/process-exit.json",
+  "bytes": 192,
+  "sha256": "1f3b44b004729a2f8487c91b21bcc013b582c7ce6a4d6ca511086288b6bbbf21",
+  "utf8_text": "{\r\n  \"process_id\": 47416,\r\n  \"started_utc\": \"2026-10-06T01:52:04.9931557Z\",\r\n  \"ended_utc\": \"2026-10-06T01:52:13.2440947Z\",\r\n  \"exit_code\": 0,\r\n  \"stdout_bytes\": 597,\r\n  \"stderr_bytes\": 0\r\n}\r\n"
+}

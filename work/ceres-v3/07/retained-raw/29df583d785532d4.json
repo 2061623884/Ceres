@@ -1,0 +1,6 @@
+{
+  "original_path": "evidence/v3-offline-candidate-v5-eb6363bbd35b46a1bba1c86c44294085/process-exit.json",
+  "bytes": 219,
+  "sha256": "5ff081a8e46ad66665d2d9e6cb2ca45a17015221bea66fc0b00f9cc893b947e9",
+  "utf8_text": "{\r\n  \"process_id\": 81492,\r\n  \"started_utc\": \"2026-10-06T01:41:19.2670739Z\",\r\n  \"ended_utc\": \"2026-10-06T01:42:17.6672730Z\",\r\n  \"exit_code\": 0,\r\n  \"stdout_bytes\": 1166,\r\n  \"stderr_bytes\": 0,\r\n  \"trace_bytes\": 399638\r\n}\r\n"
+}

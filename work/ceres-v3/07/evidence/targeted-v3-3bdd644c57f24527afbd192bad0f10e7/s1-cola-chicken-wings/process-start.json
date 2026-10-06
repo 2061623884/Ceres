@@ -1,0 +1,27 @@
+{
+  "pid": 50372,
+  "started_at_utc": "2026-10-06T01:21:18.9129194Z",
+  "suite": "s1-cola-chicken-wings",
+  "targets": [
+    "tests/test_s1_data_completion.py::test_cola_chicken_wing_plan_includes_cola"
+  ],
+  "argv": [
+    "-X",
+    "utf8",
+    "-m",
+    "pytest",
+    "-p",
+    "no:cacheprovider",
+    "-W",
+    "error::pytest.PytestUnhandledThreadExceptionWarning",
+    "-vv",
+    "--tb=short",
+    "-rs",
+    "--basetemp",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\targeted-v3-3bdd644c57f24527afbd192bad0f10e7\\s1-cola-chicken-wings\\basetemp",
+    "tests/test_s1_data_completion.py::test_cola_chicken_wing_plan_includes_cola"
+  ],
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend",
+  "run_dir": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\targeted-v3-3bdd644c57f24527afbd192bad0f10e7",
+  "suite_dir": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\targeted-v3-3bdd644c57f24527afbd192bad0f10e7\\s1-cola-chicken-wings"
+}

@@ -1,0 +1,31 @@
+{
+  "at": "2026-10-06T01:14:55.269567+00:00",
+  "reason": "Read-only diagnosis/remaining-regressions.md; category and gap details refined before freeze",
+  "changes": [
+    {
+      "path": "backend/tests/test_p0_gap_persistence.py",
+      "before": "a9f6d559569414351829845eb7dc5647e7a33d2638dfd7ac4627e4551b47ca8b",
+      "after_draft_application": "cd9d3da73b21fcde4e9df48dc6181e67d5032a043f0cee2fdc763bb12d2def72"
+    },
+    {
+      "path": "backend/tests/test_review_probes.py",
+      "before": "2104b6366ac3c12e964fce5c3b00dfcbe8e9e6229c6da8eb910bb855d0b9377f",
+      "after_draft_application": "45bfc495674ba60590ecb7a72adfa7cfb9a17e9af800e9608bbe2eee45103188"
+    },
+    {
+      "path": "backend/tests/test_semantic_acceptance_edges.py",
+      "before": "c84321a4411fa2d412995daaffbeb152a77c31c0abf413abdd10e23b9d181e73",
+      "after_draft_application": "be70b57f85fddfed456727b89fc44152340b87eb3cea75db4c472573f2b42484"
+    },
+    {
+      "path": "backend/tests/test_w_dish_and_gap.py",
+      "before": "313393d781ab68a3de24d516a69947998a73fe5bbb1b58f77a277a5cb9112ff3",
+      "after_draft_application": "5b9aaea08e4695441f893d1dc8fdcebb0f1bc96e3179339acc065dff3f499317"
+    },
+    {
+      "path": "backend/tests/test_workflow_category.py",
+      "before": "b14531769a868d8edf7cd4daccf8e993d4c22e96bb21bc532ce2766aeaaf8fe9",
+      "after_draft_application": "6cc900f3edcefbe7ddf557fd85e13b331c8e70c3a8a8836530ee85d24d2acbf3"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "pid": 29684,
+  "started_at_utc": "2026-10-06T01:19:12.5762186Z",
+  "suite": "p0-gap-persistence",
+  "targets": [
+    "tests/test_p0_gap_persistence.py"
+  ],
+  "argv": [
+    "-X",
+    "utf8",
+    "-m",
+    "pytest",
+    "-p",
+    "no:cacheprovider",
+    "-W",
+    "error::pytest.PytestUnhandledThreadExceptionWarning",
+    "-vv",
+    "--tb=short",
+    "-rs",
+    "--basetemp",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\targeted-v3-3bdd644c57f24527afbd192bad0f10e7\\p0-gap-persistence\\basetemp",
+    "tests/test_p0_gap_persistence.py"
+  ],
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend",
+  "run_dir": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\targeted-v3-3bdd644c57f24527afbd192bad0f10e7",
+  "suite_dir": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\targeted-v3-3bdd644c57f24527afbd192bad0f10e7\\p0-gap-persistence"
+}

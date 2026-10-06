@@ -1,0 +1,22 @@
+{
+  "pid": 29180,
+  "started_at_utc": "2026-10-06T00:54:08.3723195Z",
+  "suite": "Mercury",
+  "run_id": "e5095afb1e2b4d19babc56f38e917212",
+  "run_dir": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\full-e5095afb1e2b4d19babc56f38e917212",
+  "argv": [
+    "-X",
+    "utf8",
+    "-m",
+    "pytest",
+    "-p",
+    "no:cacheprovider",
+    "-W",
+    "error::pytest.PytestUnhandledThreadExceptionWarning",
+    "-rs",
+    "--basetemp",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\full-e5095afb1e2b4d19babc56f38e917212\\Mercury\\basetemp",
+    "tests"
+  ],
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\Mercury"
+}

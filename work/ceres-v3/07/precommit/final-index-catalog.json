@@ -1,0 +1,3579 @@
+{
+  "at": "2026-10-06T02:29:07.097006+00:00",
+  "head": "d3f426ecaf169bd01a7b86c137c61b9034d5079b",
+  "branch": "main",
+  "entries": [
+    {
+      "path": "README.md",
+      "old_mode": "100644",
+      "mode": "100644",
+      "old_git_blob": "7bab53ceee935f7abbee083088c11bf982e9eb66",
+      "git_blob": "32479ce2074cdadd3b28f6439b60a6b42c66fa22",
+      "status": "M"
+    },
+    {
+      "path": "backend/tests/test_agent_deadline.py",
+      "old_mode": "100644",
+      "mode": "100644",
+      "old_git_blob": "f1d1fb96d57292eef5d001ae1c39f6f9d7a30224",
+      "git_blob": "ab0111f1e5d92d452d577d5e5b041973a123da6b",
+      "status": "M"
+    },
+    {
+      "path": "backend/tests/test_p0_coverage_consistency.py",
+      "old_mode": "100644",
+      "mode": "100644",
+      "old_git_blob": "d722b466b3ae28456f95ec94381143428cf95053",
+      "git_blob": "30665f69b070fd2f39c23b13339232c078a73875",
+      "status": "M"
+    },
+    {
+      "path": "backend/tests/test_review_probes.py",
+      "old_mode": "100644",
+      "mode": "100644",
+      "old_git_blob": "8052622017f17e7d50f276752cfa875d360ed8af",
+      "git_blob": "414b831853c2ef2541a0e5904f8dbe0b1d86f1f1",
+      "status": "M"
+    },
+    {
+      "path": "backend/tests/test_s1_data_completion.py",
+      "old_mode": "100644",
+      "mode": "100644",
+      "old_git_blob": "cf946ca9dd2414b552d722160fe90a59b3307cb5",
+      "git_blob": "39a2cf172296fd45cd502424450f9fc23c67c723",
+      "status": "M"
+    },
+    {
+      "path": "backend/tests/test_semantic_acceptance_edges.py",
+      "old_mode": "100644",
+      "mode": "100644",
+      "old_git_blob": "09c114c062ccf49b9fbf8ccf10136ab62008e1c2",
+      "git_blob": "54caca3c723265d49dca4edce6fe2a58925a611f",
+      "status": "M"
+    },
+    {
+      "path": "backend/tests/test_v3_independent_routing.py",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "b8d16480df5dcf83007a32e325ea01cd2f12c065",
+      "status": "A"
+    },
+    {
+      "path": "backend/tests/test_workflow_category.py",
+      "old_mode": "100644",
+      "mode": "100644",
+      "old_git_blob": "3f7a5605a2d009d53673c4669181fa55d4c8ee88",
+      "git_blob": "d581b630d9ff7aaa07b9f7af56aeab13670afa8e",
+      "status": "M"
+    },
+    {
+      "path": "docs/ceres-v3.md",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "4492a8a063480a54c312ffb0297f4fa1de8143e9",
+      "status": "A"
+    },
+    {
+      "path": "tasks/ceres-v3-07-final-acceptance.md",
+      "old_mode": "100644",
+      "mode": "100644",
+      "old_git_blob": "db33f873374004447b1da30a16d72cc762fb83a9",
+      "git_blob": "a02cd399c568d975001663ee19501ed62fa68308",
+      "status": "M"
+    },
+    {
+      "path": "tasks/ceres-v3.md",
+      "old_mode": "100644",
+      "mode": "100644",
+      "old_git_blob": "edb62ac3ac6bb878ca432788bb4ec47efc9fa9b3",
+      "git_blob": "ca04029a31e220dca06bba75ac87ec7013ced3ee",
+      "status": "M"
+    },
+    {
+      "path": "work/ceres-v3/07/artifact-selection.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "03de5dd950ac22d7abb2c9ced09dd015d079bb82",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/audit-evidence.py",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "564b903c795b6a9cebe5b18baf248fe635a9a5df",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/baseline/baseline.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "eab9067f28a9f9bb13509b1df2b9e9be95c71e69",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/candidate-v2/baseline.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "3939c09d62617a2977aaee1e8fea63280503f7f5",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/candidate-v3/baseline.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "5fb4d9499a324ce7d8df3426dc32d37e3722ce77",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/candidate-v4/baseline.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "a2d8ec71f2d1c57663a6dcb710996d30bdf0d9ac",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/candidate-v5/baseline.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "34e81ec4d435aa1f81cf8bc6959fb0501cb1f0f7",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/candidate/baseline.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "ea2baf935375d92153632505cb63ab6f99dd6266",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/cursor-acceptance.md",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "ddcaeefceaf00b13d8a1d11441f6a42fe9599234",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/diagnosis/deadline.md",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "7fd9d892b83fe35450316117c81562e01bb6de28",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/diagnosis/p0-coverage.md",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "0796cabe0d99cc0ded026d44be9f245ef32108dd",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/diagnosis/remaining-regressions.md",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "baa9a04d92625b04454b1b14739684c84d85691c",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/diagnosis/s1-snapshot.md",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "40aa532adba858bc1ca85595afbc8810cbcdde32",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/diagnosis/spec-evidence-boundary.md",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "0eb8ce71ad17e4a706951c0bd6edb99b2f1f1735",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/deadline-candidate-v4-04c44c7c6dfd4208830ca5c16bbcdbcf/agent-deadline/command-environment.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "6bc815b67627a49bf33de7895a99df0d451e5ca9",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/deadline-candidate-v4-04c44c7c6dfd4208830ca5c16bbcdbcf/agent-deadline/process-completion.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "974dab3f440a758abf783f4f80bfcac74a06b989",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/deadline-candidate-v4-04c44c7c6dfd4208830ca5c16bbcdbcf/agent-deadline/process-start.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "5590136e51b52f57a99b750787244494466573ff",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/deadline-candidate-v4-04c44c7c6dfd4208830ca5c16bbcdbcf/agent-deadline/source-after.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "f57b4e7f8dc572a98e083f624014b30f07ae2935",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/deadline-candidate-v4-04c44c7c6dfd4208830ca5c16bbcdbcf/agent-deadline/source-before.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "bc164405707ab14ace401c15bab681fa34423f62",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/deadline-candidate-v5-baeb9ba429994619b73362cdc27eeb88/process-exit.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "2d5f15f8721312472c83f1956c3b242935099d2b",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/deadline-candidate-v5-baeb9ba429994619b73362cdc27eeb88/process-start.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "bbbc2b35f5fbb9ef8ea70f8e865570b3b7f282f7",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/deadline-candidate-v5-baeb9ba429994619b73362cdc27eeb88/source-after.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "86114a3d4c0bca9e339d3f2c6ebdd4c7d6c07165",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/deadline-candidate-v5-baeb9ba429994619b73362cdc27eeb88/source-before.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "8f7e771df0e190a7cd18339be64060ac719c87dc",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/deadline-replay-56141b699e484795bd0ad0a21e659f2f/command-environment.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "cc60a118e197e0bbab6ffd522ec2e2c09acf82e6",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/deadline-replay-56141b699e484795bd0ad0a21e659f2f/process-completion.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "82fc84259bbeffcb3043dc11bcf14007604a74ec",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/deadline-replay-56141b699e484795bd0ad0a21e659f2f/process-start.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "18a6a3f0f4734b6cd90bebc59eb44c1b13dc0d3d",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/deadline-replay-56141b699e484795bd0ad0a21e659f2f/source-after.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "7b32827603da5edafe9bf8329baa21abb9b3c289",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/deadline-replay-56141b699e484795bd0ad0a21e659f2f/source-before.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "7b32827603da5edafe9bf8329baa21abb9b3c289",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/focused-v2-15c000125a3c40e9805b463dcbcf7f5a/p0-coverage/command-environment.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "95d0bb8c266b2fbc7de24a0c42002e74825d8025",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/focused-v2-15c000125a3c40e9805b463dcbcf7f5a/p0-coverage/process-completion.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "5663436bd5c286b3fbc9552044c02d39cbbc9480",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/focused-v2-15c000125a3c40e9805b463dcbcf7f5a/p0-coverage/process-start.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "b95182ddea561728d0078e769c7d8ee65a892fee",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/focused-v2-15c000125a3c40e9805b463dcbcf7f5a/p0-coverage/source-after.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "f090db788a275eb6efca24d66ea6c87c34b38b14",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/focused-v2-15c000125a3c40e9805b463dcbcf7f5a/p0-coverage/source-before.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "72511aa4c20b2a8d18f61bce8d2dc07a2b1d4657",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/focused-v2-adc5482cc36a45709e8205123f44d9fd/agent-deadline/command-environment.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "879e9d9ed14e64436c43ae8a41993950c180e800",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/focused-v2-adc5482cc36a45709e8205123f44d9fd/agent-deadline/process-completion.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "7c4a685974a4c14cc34af51b830ca16e260077fd",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/focused-v2-adc5482cc36a45709e8205123f44d9fd/agent-deadline/process-start.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "c8640333c95ab11bcbbda6a697d376e849f194ba",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/focused-v2-adc5482cc36a45709e8205123f44d9fd/agent-deadline/source-after.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "398f6be29218a4c414b9ec712d6b39afd1cf96d1",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/focused-v2-adc5482cc36a45709e8205123f44d9fd/agent-deadline/source-before.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "03e2fcac13d2018307f154daff6545802ab551d2",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/focused-v2-d8443124a9304ce69b2cf63f926b5cae/agent-deadline-exit-capture/command-environment.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "45c5d1ae3238f9fda5627e204456a7762b02810f",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/focused-v2-d8443124a9304ce69b2cf63f926b5cae/agent-deadline-exit-capture/process-completion.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "1abf5044011e1cdbe7e92c123f60f53013c6e746",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/focused-v2-d8443124a9304ce69b2cf63f926b5cae/agent-deadline-exit-capture/process-start.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "eb2f851083b10e85fd0a88042147a4753439ead8",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/focused-v2-d8443124a9304ce69b2cf63f926b5cae/agent-deadline-exit-capture/source-after.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "759e8bffd2ba140e0cf08b15d8a1b844d955d885",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/focused-v2-d8443124a9304ce69b2cf63f926b5cae/agent-deadline-exit-capture/source-before.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "4fc2958237d2ab96db637209b6e9378d7ae72ddc",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/full-e5095afb1e2b4d19babc56f38e917212/Mercury-source-after.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "4c154b20842ea4c1a1981f2d5b5e79f9198b6c1a",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/full-e5095afb1e2b4d19babc56f38e917212/Mercury-source-before.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "4c154b20842ea4c1a1981f2d5b5e79f9198b6c1a",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/full-e5095afb1e2b4d19babc56f38e917212/Mercury/command-environment.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "368959fa132668fd377fddfd5c48095b6d65ff62",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/full-e5095afb1e2b4d19babc56f38e917212/Mercury/process-completion.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "4923e526a71f6eb26102657efaba650f4e938c3a",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/full-e5095afb1e2b4d19babc56f38e917212/Mercury/process-start.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "15e9537872968836b4b71306f0a49f4473d0436a",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/full-e5095afb1e2b4d19babc56f38e917212/backend-source-after.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "4c154b20842ea4c1a1981f2d5b5e79f9198b6c1a",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/full-e5095afb1e2b4d19babc56f38e917212/backend-source-before.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "4c154b20842ea4c1a1981f2d5b5e79f9198b6c1a",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/full-e5095afb1e2b4d19babc56f38e917212/backend/command-environment.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "e4afb07e5355979c909dba0ef36ad390cbb46f04",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/full-e5095afb1e2b4d19babc56f38e917212/backend/process-completion.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "3db0cde735c4f2243a06881176cc52fe8768f445",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/full-e5095afb1e2b4d19babc56f38e917212/backend/process-start.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "e323fee0bb17f3f59a9c2695de5bd195555217b5",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/full-e5095afb1e2b4d19babc56f38e917212/run-summary.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "aa829a1aab99a47319dfabe634f36d5b03121150",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/full-e5095afb1e2b4d19babc56f38e917212/source-after-all.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "4c154b20842ea4c1a1981f2d5b5e79f9198b6c1a",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/live-holdout4-v5-16391552984743c7b6d246e2ae472a60/holdout-summary.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "2c5c8fc0cfa0de89500d1b3a97a09f10ca90dfc7",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/live-holdout4-v5-16391552984743c7b6d246e2ae472a60/model-evidence/results.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "389614012d93525499ac2683137ceb3541863226",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/live-holdout4-v5-16391552984743c7b6d246e2ae472a60/model-evidence/results.sha256",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "bc84c0162d6b6b9d2d5b0bc66c583484f1be73be",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/live-holdout4-v5-16391552984743c7b6d246e2ae472a60/model-version-record.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "8cdb927fd3ff57dde8a7c17e8c180c77b29ac7a1",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/live-holdout4-v5-16391552984743c7b6d246e2ae472a60/process-exit.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "44b333cd7142404b1cf054e81dc6f1a9ad229fa3",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/live-holdout4-v5-16391552984743c7b6d246e2ae472a60/process-start.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "beb7364934289b490a18d9b2656bde5af80856b6",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/live-holdout4-v5-16391552984743c7b6d246e2ae472a60/source-after.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "4e55fd86b436680fb9feaef87c4f792ba0b006e1",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/live-holdout4-v5-16391552984743c7b6d246e2ae472a60/source-before.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "92baa4212acdb2fcb38cc7de92e6ec5a090b993f",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/live-role5-v5-089d7f42ae254264b4e23d0615847335/model-evidence/H01.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "bae08ad42233384fb4d96f116d30a9c7717c369c",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/live-role5-v5-089d7f42ae254264b4e23d0615847335/model-evidence/H01.sha256",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "72b69f849c6923cb140c805cca12ef6a2a681289",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/live-role5-v5-089d7f42ae254264b4e23d0615847335/model-evidence/R01-named-product-variant.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "6bc07b0168cdb7fb9e87df0a2d7a45d2432b4f9f",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/live-role5-v5-089d7f42ae254264b4e23d0615847335/model-evidence/R01-named-product-variant.sha256",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "fd5016e2e36b5a0b4a4ab11b4cf423ef5e4b0da4",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/live-role5-v5-089d7f42ae254264b4e23d0615847335/model-evidence/R01.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "8a7ea3c5edd43da27f02bf1f287fadedb59cdae0",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/live-role5-v5-089d7f42ae254264b4e23d0615847335/model-evidence/R01.sha256",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "2a232e843459c769d6e780f3cffb4f8bf5b32799",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/live-role5-v5-089d7f42ae254264b4e23d0615847335/model-evidence/R02.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "19d2e15bb516d00f2dbdae268d44d58551ac7499",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/live-role5-v5-089d7f42ae254264b4e23d0615847335/model-evidence/R02.sha256",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "183950f4fc8775160691c1645fa53dd8d44e26bd",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/live-role5-v5-089d7f42ae254264b4e23d0615847335/model-evidence/R03.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "a8ffb392514fc4d23fc8dde347ed314ba49424d7",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/live-role5-v5-089d7f42ae254264b4e23d0615847335/model-evidence/R03.sha256",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "95f63b81f6f2e7f5b3034589b3d75d8ebd1629bf",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/live-role5-v5-089d7f42ae254264b4e23d0615847335/model-version-record.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "8cdb927fd3ff57dde8a7c17e8c180c77b29ac7a1",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/live-role5-v5-089d7f42ae254264b4e23d0615847335/process-exit.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "9274736d0c120801881a1a7f278e6d9ea5e16ca1",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/live-role5-v5-089d7f42ae254264b4e23d0615847335/process-start.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "2a4281fae8f1ae9d6220243356de1082c3dd57ed",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/live-role5-v5-089d7f42ae254264b4e23d0615847335/sampling-summary.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "5f1926133b95ce7871536fe14f5fdb4aa9927f3e",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/live-role5-v5-089d7f42ae254264b4e23d0615847335/source-after.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "7cf745378cb72ffea4a58c98cab4ef42ac1d76cf",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/live-role5-v5-089d7f42ae254264b4e23d0615847335/source-before.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "9df0a1a8457d549519023b92e4ef2aaa8bf71abd",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/live-route22-v5-0fec8e5ed7c0426f961237c6cf196ba9/model-evidence/results.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "e78ec71bb9e60cdb5d001465a478c7eb28f10969",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/live-route22-v5-0fec8e5ed7c0426f961237c6cf196ba9/model-version-record.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "8cdb927fd3ff57dde8a7c17e8c180c77b29ac7a1",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/live-route22-v5-0fec8e5ed7c0426f961237c6cf196ba9/process-exit.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "0c61e66c83526ae930aa11ed63ee3dc82f38cb05",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/live-route22-v5-0fec8e5ed7c0426f961237c6cf196ba9/process-start.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "f399679d30ba75625cbe3920e8b7e555ee71d5f7",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/live-route22-v5-0fec8e5ed7c0426f961237c6cf196ba9/result-summary.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "6371c2d6b06c8e12e36294ce831d787c4920b3dc",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/live-route22-v5-0fec8e5ed7c0426f961237c6cf196ba9/source-after.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "962d4720c7920257158b6497ae901f2270be60f4",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/live-route22-v5-0fec8e5ed7c0426f961237c6cf196ba9/source-before.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "481b6a5692447e4117f6aaf957c85aec5109135d",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/observer-prep-v4-352dfedd/ceres_testclient_trace.py",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "1421680a71cd781437f026a299444f25161c674d",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/observer-probe-v2-83b4291f9b0b4328bb17fe0abf2a4c9f/pytest/command-environment.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "e2de925243da807c0e0a7587c19781490f7576b2",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/observer-probe-v2-83b4291f9b0b4328bb17fe0abf2a4c9f/pytest/process-completion.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "da2f9d45f899052f86e438f9de3168a238253597",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/observer-probe-v2-83b4291f9b0b4328bb17fe0abf2a4c9f/pytest/process-start.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "7513fc5792bf3166df6b10a97e72da50546a488f",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/observer-probe-v2-83b4291f9b0b4328bb17fe0abf2a4c9f/pytest/source-after.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "a0e53d63a9867a02097ca761f116fdda28c93334",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/observer-probe-v2-83b4291f9b0b4328bb17fe0abf2a4c9f/pytest/source-before.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "2ead258413b396b37505a0bb58bd49f4f01bd8a1",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/observer-probe-v2-83b4291f9b0b4328bb17fe0abf2a4c9f/results/results.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "4a2b81f1facc876ddaf4ccbc68526cf9df3c62ba",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/observer-probe-v2-83b4291f9b0b4328bb17fe0abf2a4c9f/results/results.sha256",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "c01839b8c33eefe3ec97e842c0368650413d7db4",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/p0-coverage-replay-3521071ea9a8416ea57d7f18b16397fd/command-environment.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "94d9f2a99cb1e1ce758db1cbf8eb4b0111fd985f",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/p0-coverage-replay-3521071ea9a8416ea57d7f18b16397fd/process-completion.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "8b34ee5af99df7288929f302aea49ad348eb2abf",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/p0-coverage-replay-3521071ea9a8416ea57d7f18b16397fd/process-start.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "02077834d01aada8d6529e477a60748f4b7c7882",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/p0-coverage-replay-3521071ea9a8416ea57d7f18b16397fd/source-after.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "7b32827603da5edafe9bf8329baa21abb9b3c289",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/p0-coverage-replay-3521071ea9a8416ea57d7f18b16397fd/source-before.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "7b32827603da5edafe9bf8329baa21abb9b3c289",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/performance-analysis-v5-3aa73880edae4536b4e81a0a506cfe2e/process-exit.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "d0c331929b02ef6192f8f2cfedc3128a11bfc551",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/performance-analysis-v5-3aa73880edae4536b4e81a0a506cfe2e/process-start.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "d7a9bb07c9c2e9d3d932af06e11b2815f7e534d1",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/performance-analysis-v5-3aa73880edae4536b4e81a0a506cfe2e/report.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "6dd5e6ee03183798de5d131372c411568286977b",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/probe-03ba20b287a743d697c71113ceeb93d9/command.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "65cb4ef8d0de8cc663ec3c1f22b6597223ef1ba9",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/probe-03ba20b287a743d697c71113ceeb93d9/environment.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "dbeda3076261c8cc09f09c6a73a462ecaa47c091",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/probe-03ba20b287a743d697c71113ceeb93d9/independent-evidence/results.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "b39da3aabf14b51ed42f1a1a36dde1e6593fb3f7",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/probe-03ba20b287a743d697c71113ceeb93d9/independent-evidence/results.sha256",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "ec1839781100f86792c3307be5318d1788444da2",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/probe-03ba20b287a743d697c71113ceeb93d9/process-completion.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "554ea7224b462d668b6b8d16bd06f2b9fd4bdf9a",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/probe-03ba20b287a743d697c71113ceeb93d9/process-start.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "eeda539123e0027871e0cf7609076e6df6e35660",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/probe-03ba20b287a743d697c71113ceeb93d9/source-after.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "4c154b20842ea4c1a1981f2d5b5e79f9198b6c1a",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/probe-03ba20b287a743d697c71113ceeb93d9/source-before.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "4c154b20842ea4c1a1981f2d5b5e79f9198b6c1a",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/probe-88a689ab4e9342628b03aaf4491a0486/command.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "49eb9712ab5e726f71e3a4755fb7aff3ba1fe575",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/probe-88a689ab4e9342628b03aaf4491a0486/environment.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "bac70d1f6c5c3da2c90a5dcb8318824b0db11c0e",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/probe-88a689ab4e9342628b03aaf4491a0486/independent-evidence/results.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "788dca6302dd1fc48af76833808da98d6a1e896c",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/probe-88a689ab4e9342628b03aaf4491a0486/independent-evidence/results.sha256",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "19d0ed4561fb03b9dd970d9fd235ed5f3d4ba2ea",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/probe-88a689ab4e9342628b03aaf4491a0486/process-completion.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "1bf191a821c4bf6ca31be3772a387a3c9babc7a4",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/probe-88a689ab4e9342628b03aaf4491a0486/process-start.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "f4209ff15be7a3da26ec63b99d73006a961d74bb",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/probe-88a689ab4e9342628b03aaf4491a0486/source-after.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "4c154b20842ea4c1a1981f2d5b5e79f9198b6c1a",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/probe-88a689ab4e9342628b03aaf4491a0486/source-before.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "4c154b20842ea4c1a1981f2d5b5e79f9198b6c1a",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/targeted-v3-3bdd644c57f24527afbd192bad0f10e7/batch-summary.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "e9b8eb146e4c7ae2c4a45898095743f88e1b6e65",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/targeted-v3-3bdd644c57f24527afbd192bad0f10e7/dish-gap-turns/command-environment.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "be7d32eb6dc96490fa59beecff901b0eb6d8ad8d",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/targeted-v3-3bdd644c57f24527afbd192bad0f10e7/dish-gap-turns/process-completion.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "9de0b079a411b5afb7f3bbaea4b9a626d2526346",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/targeted-v3-3bdd644c57f24527afbd192bad0f10e7/dish-gap-turns/process-start.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "57089bdeaaee053bb9405249877b9f92dba8426e",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/targeted-v3-3bdd644c57f24527afbd192bad0f10e7/dish-gap-turns/source-after.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "226a39c9f78aac551d83eaf815a3dc05b915c8db",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/targeted-v3-3bdd644c57f24527afbd192bad0f10e7/dish-gap-turns/source-before.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "6ed73853eddfd04128b5e94fb42bce209d705954",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/targeted-v3-3bdd644c57f24527afbd192bad0f10e7/p0-gap-persistence/command-environment.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "5cb578542f96baa188fd50a3754591063096a866",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/targeted-v3-3bdd644c57f24527afbd192bad0f10e7/p0-gap-persistence/process-completion.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "29632f137caae17260b6f4fee10ff6949fb367d9",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/targeted-v3-3bdd644c57f24527afbd192bad0f10e7/p0-gap-persistence/process-start.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "ef7d22d238fe7e39907fb87026fa070d530eeda8",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/targeted-v3-3bdd644c57f24527afbd192bad0f10e7/p0-gap-persistence/source-after.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "89bdba2e1c4acaf741cb7b418ab63fb4b5cb9d7b",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/targeted-v3-3bdd644c57f24527afbd192bad0f10e7/p0-gap-persistence/source-before.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "ab40d1dd69b984ecfe801398db5ef17b255b0730",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/targeted-v3-3bdd644c57f24527afbd192bad0f10e7/review-people-clarification/command-environment.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "503d9cdb493abd295e5cc878500fcca1757b65ae",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/targeted-v3-3bdd644c57f24527afbd192bad0f10e7/review-people-clarification/process-completion.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "8ced6cac88f733af0b0429a78dc7a9a40a6d6c0d",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/targeted-v3-3bdd644c57f24527afbd192bad0f10e7/review-people-clarification/process-start.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "9cf7063df82686785d4ff9a814ab0732d201d482",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/targeted-v3-3bdd644c57f24527afbd192bad0f10e7/review-people-clarification/source-after.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "1b7d931c31fc0038da6f330d2d41d96879932837",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/targeted-v3-3bdd644c57f24527afbd192bad0f10e7/review-people-clarification/source-before.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "5a546b68011369a5cff64185e85fcbc6799f1e7e",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/targeted-v3-3bdd644c57f24527afbd192bad0f10e7/run-group.ps1",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "11ce34d4689a72b4e2513799c749dd828045767e",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/targeted-v3-3bdd644c57f24527afbd192bad0f10e7/s1-cola-chicken-wings/command-environment.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "d524249db77cebcddfc0897ed72da05b0faf2e7f",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/targeted-v3-3bdd644c57f24527afbd192bad0f10e7/s1-cola-chicken-wings/process-completion.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "a5faa70582f575c3550abbee8bb5c2e93ec88d26",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/targeted-v3-3bdd644c57f24527afbd192bad0f10e7/s1-cola-chicken-wings/process-start.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "80b4280edf955353db9a28e7e544dcd0174c00d1",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/targeted-v3-3bdd644c57f24527afbd192bad0f10e7/s1-cola-chicken-wings/source-after.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "a41e92261611ec1118fe1e3293a192af5129d7cd",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/targeted-v3-3bdd644c57f24527afbd192bad0f10e7/s1-cola-chicken-wings/source-before.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "bab7f088093843d2fbf67e60e9aee23a9d1a723d",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/targeted-v3-3bdd644c57f24527afbd192bad0f10e7/semantic-shared-sku-ledger/command-environment.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "825e4d7327905b98d6d155eb8a3feca73ad04ad3",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/targeted-v3-3bdd644c57f24527afbd192bad0f10e7/semantic-shared-sku-ledger/process-completion.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "168f43c85e2a7852cb3598584c14f90b7a541889",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/targeted-v3-3bdd644c57f24527afbd192bad0f10e7/semantic-shared-sku-ledger/process-start.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "e1e83d7a7da94e31fb71c01000b4a717ee6d7e8e",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/targeted-v3-3bdd644c57f24527afbd192bad0f10e7/semantic-shared-sku-ledger/source-after.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "6bf040fc9d1f9a112b3ded6be08fb48b2f512228",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/targeted-v3-3bdd644c57f24527afbd192bad0f10e7/semantic-shared-sku-ledger/source-before.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "1e2c2108e98efd1b4364a7d21b90d7e36f5da8f6",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/targeted-v3-3bdd644c57f24527afbd192bad0f10e7/workflow-category/command-environment.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "bae9441d5dedb636a0894c69482f9b166b180cee",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/targeted-v3-3bdd644c57f24527afbd192bad0f10e7/workflow-category/process-completion.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "ba537faad0d35b1130f32ffb87b900417a4b9719",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/targeted-v3-3bdd644c57f24527afbd192bad0f10e7/workflow-category/process-start.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "f18710c1df1098b6a33e99ebbe38b53c0aed91f6",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/targeted-v3-3bdd644c57f24527afbd192bad0f10e7/workflow-category/source-after.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "620834377e9ef9bcc7a35b67e708389786cb489f",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/targeted-v3-3bdd644c57f24527afbd192bad0f10e7/workflow-category/source-before.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "265977e99c17cdc1218621ddf4a6ddd6b68736c8",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/v3-offline-candidate-v5-eb6363bbd35b46a1bba1c86c44294085/api-trace.jsonl",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "99bdd34e0efeb549055a37d7e418c7dc2f70f2a7",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/v3-offline-candidate-v5-eb6363bbd35b46a1bba1c86c44294085/process-exit.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "ad5f41cbfbdb1df1fbcf585735177380fc77a9fb",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/v3-offline-candidate-v5-eb6363bbd35b46a1bba1c86c44294085/process-start.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "5dabece90abed30d8a086e431b010046601d5b9f",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/v3-offline-candidate-v5-eb6363bbd35b46a1bba1c86c44294085/skip-summary.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "a7c4b1aa34a8b69a67906bd23e33c6332af4da54",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/v3-offline-candidate-v5-eb6363bbd35b46a1bba1c86c44294085/source-after.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "df02f85a11138de846e0c3fec218070ffc841be0",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/v3-offline-candidate-v5-eb6363bbd35b46a1bba1c86c44294085/source-before.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "28961002f75864b32bced9795cdf662657726f2a",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/evidence/v3-offline-candidate-v5-eb6363bbd35b46a1bba1c86c44294085/trace-summary.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "b7950fd09c1779ce410b4fe32067874c4443d9c2",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/fixes.md",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "ada621c8ddabf38410d7c1ca2159f68874d74fcd",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/precommit/approved-precommit-0f4d6c8e2b4b46188c3574f267edefbd/checker-process-exit.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "b26baf235775a26572a9adc3c609b02580ec7962",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/precommit/approved-precommit-0f4d6c8e2b4b46188c3574f267edefbd/checker-process-start.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "b42052525b2a5de7565be3da5a41fa4eac55fea2",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/precommit/approved-precommit-0f4d6c8e2b4b46188c3574f267edefbd/checker/checker-exit.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "75dbca2f88aeb1d618b3f487c0aacca60f86ad81",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/precommit/approved-precommit-0f4d6c8e2b4b46188c3574f267edefbd/checker/checker-start.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "f5a02753d773d65648cfe7244a383743e4657f8a",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/precommit/approved-precommit-0f4d6c8e2b4b46188c3574f267edefbd/checker/git-diff-cached-check.process.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "86f7d86a6866b2de86036233d91fb94ee57f7d30",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/precommit/approved-precommit-0f4d6c8e2b4b46188c3574f267edefbd/checker/precommit-summary.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "87f694ab61e8159b4be23fdc2101496dca3f2225",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/precommit/approved-precommit-rerun-7bd05a73477f4a9cb4341e7307b5a03f/checker-process-exit.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "3244cbee58caec52ec843901338fecb5ab30e1e2",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/precommit/approved-precommit-rerun-7bd05a73477f4a9cb4341e7307b5a03f/checker-process-start.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "9d2183f1c9afa944be9df0c813ec7564c400d8bd",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/precommit/approved-precommit-rerun-7bd05a73477f4a9cb4341e7307b5a03f/checker/checker-exit.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "4e95c395b7eed641f68be406bcf897dd9f5afe80",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/precommit/approved-precommit-rerun-7bd05a73477f4a9cb4341e7307b5a03f/checker/checker-start.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "37e1c5390e328e8419b3f4d1db8b552c1e56e1ac",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/precommit/approved-precommit-rerun-7bd05a73477f4a9cb4341e7307b5a03f/checker/git-diff-cached-check.process.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "e30f01029a3ce3b91857a864d62aa1968e151a2d",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/precommit/approved-precommit-rerun-7bd05a73477f4a9cb4341e7307b5a03f/checker/precommit-summary.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "966ac1d5f77c0003e7c19513d95aeb9ed5ec27d9",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/precommit/approved-scope.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "6eb3c7570b56c0f2348a6b96ef2b52c39f946698",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/precommit/eof-fix.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "0a1e04b786dd6fc566fd1009077d9c24edde10c2",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/precommit/precommit_static_check.py",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "f8576a6723404fefeb11248f1c1b8ee732938e25",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/precommit/primary-audit-first.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "529f27c59d7bc20a043ebc4fe85b748244d5a9c0",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/precommit/primary-audit-rerun.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "6b4349203489bf4fba55b9d89805bee927c3e25f",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/precommit/retained-raw-manifest.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "97c8afab50986621750967356dd1616dfc16d641",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/precommit/retained-raw/031a17cc81688b3c.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "ed594ffc70d77d6ff0e95c1d6f6c35c0a99939cb",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/precommit/retained-raw/1b253187454a1294.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "f7f9a7604abd59a873fad9c738cfe9021f058f96",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/precommit/retained-raw/20849ef5fdbd9384.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "545a9ad9f4282c6bf78496d4bb09d20b33e4c508",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/precommit/retained-raw/3918ebc1c38ac7f7.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "cbea865dcebcb7638d25f35f0ac4f38044a67a6e",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/precommit/retained-raw/3b199acb6b568f45.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "4a8fd90ec5ad83ff281337e275f60183a7b0ec97",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/precommit/retained-raw/3c37f81298c6b072.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "4045fe54281f85f5354b1568eaa8098c5e514ce1",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/precommit/retained-raw/4396860288e9864b.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "33a9e863460bc70c26ae0e3d8ab55696aba8af53",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/precommit/retained-raw/4ceb71374b7fb9b3.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "219e9983531cc4a9409e6f9166d059b961171a96",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/precommit/retained-raw/6c53aebc487a3dfc.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "cf8f21fdb691956f7d3cb1f2b6f641459155b2a0",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/precommit/retained-raw/6cb12a534d82b358.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "d4f3d1324290f7209dddc4d4dfd62f1fbc86cd22",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/precommit/retained-raw/6cd84af43dbd53bc.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "aabfab232487b9f1d56b4001d78e10e55b0f321b",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/precommit/retained-raw/77c0fe8088f23235.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "e3297bddf81089e7c6f3412f218d26c0127ffd7a",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/precommit/retained-raw/7b98c06bdc248cbf.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "89836e9301a61ba1cdf80e134c180132a44f564f",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/precommit/retained-raw/81e796660238255b.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "d8519725fe82bc8d95b57bbdc0d90f835fc45e82",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/precommit/retained-raw/9f4ac7ccedc38df1.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "671bc49b88c6d1c0ee29acf98f5a0d6121975014",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/precommit/retained-raw/c9f837d22355c272.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "a8eededa1e004485df4da193baf85217fa50dc04",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/precommit/retained-raw/d0f01d0e0ba1a9d7.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "8e0c969d9a0994f0892b844a773bbcd790ec2cab",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/precommit/retained-raw/dd16580123da680e.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "0dff80dc62dcaced7d1f1427b29a1529fcf7e7a7",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/precommit/retained-raw/e7fdee64cbe8470a.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "5dfe6841722f1042320442a4b9b14795f57cabfe",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/precommit/retained-raw/f4654fdd36947686.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "cc7c12c1e68b1d69086b7fffa77a3cecfab6b111",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/primary-answer-audit.md",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "666f92049d1d52152501fca09297f56468be42fe",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/primary-audit-offline-trace.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "64f70100315d9ce8e34010bcd98bb98cabc6df5c",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/primary-audit-preflight.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "2ed1197ad0a0eb29417dd9f38965eb217f4f6651",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/primary-audit-v2.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "47230186f03484dab8c1291b056d18e73cb67f05",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/primary-audit-v3.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "8a26afccc2cc218e0779ada7914140447c20a81a",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/primary-audit-v4.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "9e81c1eed2be72fa06afdca4053bab55bbd7f179",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/primary-audit-v5-boundary.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "dae5cc13223afb514c151683296cd2ac3b5d41c5",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/primary-audit-v5-holdout.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "0129f7e0e392065127f995908e906f01847ba467",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/primary-audit-v5-offline.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "749a87f9d914a1fd260708f7d8e867586ecf313c",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/primary-audit-v5-performance.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "185815a2559adc4c2d1eee65a0311746152cef00",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/primary-audit-v5-roles.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "e92f25481782fbfb8d0a3e297b9f4d793f08c559",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/primary-audit-v5-routes.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "91505602b3b11a265fad91c39d6061796ada8db7",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/publication-delta.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "f4e3782c8a9455ce23780cfd44d49ac11eac5767",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/publish-records.py",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "b57134d0c8f26ba77d205426cfe17e006bcdcfe2",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/regression-plan.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "a055e51d9ada78c2e5e4ffaaacfe55b905b93aed",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/remaining-migration-application.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "1938910d18c39f3d092ad8c52355d200661859d3",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw-manifest.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "33091a1374209b43015bff35bfd246636a777ed4",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/005e6f07e2fa27e6.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "f2af90b87ce96ccbc67af2697fa617a868118d36",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/02615b4068ac640c.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "906a45910bd8e5ee8c3329a15c82616514d975b0",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/02f1f3eeb6dead7b.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "51fd3ac515f9e7331072a8c284cbf7d9dd71ccb1",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/02f1f8a997ab2fb1.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "f29c46e995e928dc4854247f05367a1cd3a4d0b8",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/046fc3f74d88a78a.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "620f84d23b1f0845255771b235c5ecab0c3b1617",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/04eb37eb88fac5a2.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "ccff7d611e2257882f89b8588457fd7fdbf381c6",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/052158e1e0c543f7.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "199b60139f116f8a14ef0e8661a69a15a10d55c6",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/081815f14cbe88b8.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "a87c999791e86834413d85f7568c544ab89a3c68",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/08377a6f34094536.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "e877b534c9a0e5ca15dc5a1b2680b3bb24fc1422",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/08e253b10b58df4f.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "5e772e150c263e3b08d7289ad5e8e8d71d71451e",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/09d898ec0b85727e.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "1d4bf044dde2c349e2b746f08f77d64d9bf9b847",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/0abcd3a170fb5f50.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "411666dcf1cb30b5138f34dfa9b18889d55bafae",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/0b6f5c949995addc.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "5eb904355ed48070911b5dbc603b1344c7fe553f",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/0bc703c8ae010bbb.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "56985564b44ebfa93d81ff7816e9a67b11202734",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/0c26c4ef259d51dd.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "72e1a8fca88c8a05967995045a02a46414693ed4",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/105856385848a11c.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "2e1798b3d8c89224e13c947526679cebfea90812",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/12f69ebe4c11fb6f.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "7440a15242c8fce565984d171b40c84235e91775",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/14b5962d437d9aed.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "5903789f94607df6c0ca6a7025aace96aabb9900",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/15c6e2cc37438188.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "b5b3b89a175bbdc32ee995ae20327e7a86958f06",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/1608c5724dfb4b96.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "9acccdfb661ad83b62b8f768dea7d17479dc9aee",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/16da81dc9b004762.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "d1cff478dc3243450df775e0034df357cef5632d",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/1924f97b12df5875.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "482b775b76e1a0a33361f448f51848ed10c276d8",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/1bf219ff41d85234.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "aa0caacf95732eb8446c1e3d3f2fde85f1653005",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/1eeba24597f27f1f.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "6c6339ed8c9764a8cd5d8cb09348e5583cf156e1",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/1f7a40deeb7ee143.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "3343dcbd5d4e633765a9d5c560d3a24871c1eef0",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/1fd717f8276e6aa8.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "99d57fa355e101813e66df2d059c6e050645d5c6",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/235c7c978a8bf560.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "cdf6fcba27f8d4b3ecc9370e4a742f8454b4a400",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/239a87a3a62aa8b9.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "2f1c80768fd052849358a9b4661b26ba661218eb",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/25e0df60c1e46f8c.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "e84f87df9c158f1af5723ab51220dec4e7c1f649",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/267cd894426605c2.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "45bacc9766d2f7dae27627f6b5dda432ca999514",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/27e538f086cc1151.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "f0f40de07d98bad5de2b7e8e8e243bbc1517ec16",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/29df583d785532d4.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "07495d49026a146e1635c2a511f65989d6494083",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/2b9d1d646ac6144c.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "76d40d4aa8f7b5dee75c5c558f90013490c7209d",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/2c877535c9bfa427.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "d8e324cde62986be3067680955ac00894eee70ad",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/2e63bf3a52f094b0.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "c54645a63126f8f294ebf5fb8d42129a47a38141",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/2e6f2cb7f72b638a.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "d23a4cf11a6af0f5e599595b8e11a18e5a0e3dd5",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/2fc44c7eb0d098da.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "58e95e1ffbdc6fe8abaad001ab12c4390f50103c",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/30db590e8e29f596.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "916852b51ed557cfd14322bca46076ae197bd2e5",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/318c8234a0c934f5.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "f54baab369e7b96caf33ad8399e385c5840a4368",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/32a30277ed885f73.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "dd06832bbe051f37684f7ac9c7ed49b5cc150aa4",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/32d429855441005a.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "68bd91b5e7bf5722fe42499f52eb95b8cbabf2de",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/33f88081e9a52bda.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "f0a6a1c5910fa3734f1d34388a2f87df9571a568",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/3468f593df8fe3c6.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "68357f1a6765ac890ff47654325c9bab464b01f7",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/353c5037438c91ef.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "c3df7290bfa00ca6bde1ce448df7571a1a58b525",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/374de3dd4e6c9ea4.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "a1ad22e578693fe9b6fb2b1f4b778918cd1f715e",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/374e477be38b822e.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "0936bd4b923ee3476efff3898f7e10e4181eee88",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/37caea73e20f8eae.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "55fe527b07eebe0645ca13078f0fbf6fd830de79",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/38574266c0033cd1.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "698f793ab6eb7f3e62ce7a47fee257823d133f94",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/39f3e5e14e3ec8d0.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "3bcc21329849dd0cd739f223b2b4d8b7405f67f8",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/3aaa915f733424e0.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "03a079eb6d01293b50f8b15eea4f21c4386edb8b",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/3bc60aa0675d30da.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "952fed3e8684764343e37d9c3474d712e712a3ae",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/3ccc2651d30da905.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "acf831fee42665ffc5c742ce0a2daac24e5f2d32",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/3eeade89aaa08655.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "71f3f096bd40021be667530011473950cd5043ee",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/40977c3e7eba7415.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "efe1b27e64a0d54aff4c81e680dfa7bef7806935",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/421300ee5d7fdd4b.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "786d5205d6d1ae2b72a0b881c6cb2a5eeaf27ebe",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/421c694466ddeedb.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "a7cfce5f59d31c48e3541fdf8bec7b5676092696",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/4250db31a60efe7f.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "9c7b5fd0de37981e2bcf0233faba5e24a6d21884",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/45741a08304dd7bc.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "919223017feda71bfa397f49237a0ddbabfbe9d4",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/4629248a8594a8f0.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "259bff3403b5c21703bffb58c1cf0fd7d028be4b",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/47a4a8ac53c24a8e.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "11ec02238a67af6aa115c305b99b71867c37746d",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/48ae17f942f59534.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "05268a2b39e738322d412f987aa5942b3e5692c0",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/4a033be1abeb39ed.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "1e471f88b20028b6f5e321e24a6f6e8eb538ae2c",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/4a3ffb538c4d5bc7.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "4456be3a96edea913c60f268a26ae7192e569764",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/4a7ecff73cd139a4.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "a6b3e8007bee193f14c6cf26c7e1a7ccfcdeaa88",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/4b112e608797d12b.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "aa0f8bbcc6aaf1b6c9dbc2ec185c7306a19a20c7",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/4b2f936aa4e804de.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "103060c4265ce6af1a2f7f30289258da72ba2622",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/4da0d3bef490add0.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "4baaf2ed16d49d4a43555d6763ee63a7750247af",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/4db099c75cb402e6.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "ff6031553e83c3bfeae6cd8859bd09e6cf01ba03",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/4f06a5287aceb99b.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "d4bb32d7ec51c23eb4b294026d4e1ec1ac743316",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/4f0d756923dd610e.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "49fd34865bd84c90232000af82aae053ec1d3e00",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/5003c22ffd69b816.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "57e55879ad489db78eac7a7d4e38cf8463635c9e",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/50c52791871eb587.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "df9f0e4c4150776b51ec0c0c1454d9367e934576",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/51826ee68d606671.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "9bea072a45316cba5a5182947a594976a978e4a4",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/52a4d338344c2a7f.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "d67557e125000c468db04113a40ef17ffddb2659",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/532278108be38b80.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "01c56e14b8249e308421f30252a31e2d360d3e45",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/5b07a1a706cdaca2.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "e4cf84af72f43c1afd80390b89128661f84f2cc5",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/5c538599e04905c3.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "d0790d795ebc6f2091562f178acd3a0d1c52e7a2",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/5e1962cb2bf1dd09.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "4205c64a6d857b6b2f694c53fb743744c79f6e56",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/5e99d8d36e88b3cc.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "81268c0531d7ce9cace045ae94a13ea04b042271",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/5f439f34d7d85013.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "50a7c3fd8467525ca86f9dac7299426a5b40b0e3",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/6371a78fb319ce2c.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "709c8005c01d4dc2925179d25edf857373ae7684",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/63a5aaad81d9cfe6.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "cbb766e6bc8d8cf382ba230aa9822498d6c1cbf5",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/65a5e97ad28de00c.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "31c39aff5337c47cd64df08b47c581b9949d3644",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/6703a559b6c792b9.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "511a66564f06611e068feacf26bf08ddbe668cd6",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/69e25ecbee2633c2.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "abcd9aeaa19a23be0adc1987f74b7b82a6721a97",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/6b95f85bb6ba1c42.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "0911fd372b1f78a0c46c979831d62faa458c4673",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/6ce9508861c46722.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "0c5de7fad10c5bda0336276072a163936e06f43c",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/6d36e30939234729.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "eaf80d4eedb5705b81016f2061485cc64821bd68",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/6eb8f03876936675.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "20bdfb94f40419cc7dd969c73e05de720733589e",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/6ed3bcbb4342d3e7.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "1d2874f7e2ac1b750ee04f799f6ccc384e88d7fd",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/7039ff6cce38d9e5.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "b4e0cdc2b40548b688b9f431a1fa6be7009a7c97",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/73fbcb0a6e18cfc0.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "5b184b37b2bf8c85cc8cb6918ade799be821ecbe",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/741a688cd20f90e5.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "460766d08996be2be5c7cd190ee414af1359baac",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/75f00e9acef3df3d.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "713222a04a8cf7ed19fb8d662d78b55374e6da0d",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/761d5ee0a2d89382.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "9c1aa71a21710c555a094be2f505f6e0fba4f08d",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/769f5319acb92714.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "edc9d4866bd015ef5f352dd01362eeeee99799ea",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/79fe93b97ed4bb83.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "283d3a75067c20c52e5c6bcd548370607db7ba48",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/7a466f13a065f806.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "95a5f8a6f4f9631a07a8810b4764f937b8948497",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/7aad2c7a25826008.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "26b7730ab0824566825fbf425bda800e1397350f",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/7d93903e91e75abd.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "c3e1eb87214030bc44f18804f2422759dd6a4c17",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/7f050c087e01fbbb.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "16e86bef58c52a8942f3b84b8f246e174e488101",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/8206c2ead6fedc84.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "dbbdc5be05b6faf209fea2368b025b3971f49f11",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/861819d383f65849.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "aa07b66e888fad0de7f524d78832fc5721762786",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/891affc37ee9fcd6.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "0892c4d6af789cfd25e8ec61db187bb2bb3d4a75",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/8aa9a8bf19fbf8e4.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "bc518f2e0e31d94e88d24ffe09066944100602e8",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/8b85bb798ba257cc.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "270f8fd7039f75ce6609b67cc49f386b7eb8bd4a",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/8bad1afe34cf4773.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "b6847114a12ef103d43ff2bf0f7aaeabc84219b5",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/8c45e28e1914c00e.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "31864f2a8c170b40b0d4b8d9fa30ea2b5d4ff278",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/8c70ccdcdf60708d.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "01f561ca307f39f7579b2f64e9474227a86ff7f9",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/8cabefa9e7cd9358.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "727db633b18da50d6081add6cc06398093deaf09",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/8cdd7f9be6dfc9f1.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "630159781c548550e9a68913d38e28c4a87a7ac4",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/8e68ff9d50cb3d7c.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "b640e8a7ce57ea00ddbf584651710a70a8811621",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/8eb73a6adbe1a2d5.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "272719013e4e39e43d22a54afdee6abc7d0121ac",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/909b329cf5f6e2ac.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "083faa7134dceb50cf3212c778cd255f8768c07b",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/90bd993e9cf5aa36.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "8d43172cc24959c8669ecac6ddd98d434bb4fd5d",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/92dcb43a9efc46c6.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "9715ab9102d3503a0bba075ff3a63be17298e7e5",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/92e2521863d5d42f.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "1381f316d8fe6cfab857169f54d1c353cf34cff7",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/9682270f0820cd0e.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "f7ea031a8d53d323464ea0c019c460cd81f6a5e1",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/97c8c27d067ae6a0.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "b1ae4a15c2004e2405ac075898006daeb74c7b5a",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/9828f3a6013c18a1.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "06886ae654b8171e4fb41ead6cb2fd54e7732497",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/983559a6121bf122.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "21fd2b7afd03b06e690d85fa08b506e18656c918",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/986766771284fd4e.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "fa2cff0f722e2bbeca2868c53655e7b5311a7776",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/9af973ff5a78b2d7.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "ce2c3167ebd87f8e2a920e93213471dda07f845d",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/9dadfac2bab41d97.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "2da1ca4ed9d16a3f012cf7047e4dadd286f49136",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/9e302a6b833e2dda.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "21240c060eefa0a3adf9c6425410c7cf9aea89b2",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/a1c01c2a4c401e8c.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "03af93327c0e38de5be5f4fd74951b900756067b",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/a28105048559159f.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "98b00709ec20563e2ea9c46ebd923b7e1e1d8719",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/a2e95a44e27d7d81.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "41f2df4e845d3fbe388be8525b600b7683827111",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/a498708e80289389.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "3d30bfa797a5dc3d71443a296de1d8928d8f5ff7",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/a4de60100c4f669c.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "d88700f905156b708418c7c1bbf054219a992e4d",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/a66412cdbca86e71.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "42948041460f2ef98b59c76f349f1265b829aea3",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/a81b061460ae86b6.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "7d52c1ed84157f977dfb9f53d81a4086791e5b5b",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/a859be2e9b9f2d53.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "4fbdafdba54b2e8cdde96eaf18922e7b436abc25",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/a88ecc8c84031929.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "9a4c890a552723beea55565886f7e12051b60c02",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/abdaf9b9eb84b3c2.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "aa1a3b7d6c51632a1de7208b262409ded7897cb9",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/ad95640c6adc59bf.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "3332dc9b108ef0c58ee5a78ce27e6d53988ebd4a",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/aecc639a94c92a5d.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "b597d29d4e1d601d0ea806409ad18b6a3c235154",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/b00a19615d966275.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "3d7d5e4cc019570026ac0f1ee49b3ca3eff50bab",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/b032afa19116603a.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "42412e54326b0aac4cbeded3ff7cb3a05369c428",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/b06db65e9e947e6f.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "77d7defbd689cf5ec64e126cb2281b84c86e83ca",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/b215e3ecf47f9d81.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "c9e71a10c745fa8b5784a7bdf77763fdd6c5c712",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/b289db045dcc477d.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "ac09ba414103b02331df828b9b7f2d906a9c6376",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/b40b976ab4c9c500.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "a4f02cbf303cfeea140c3e7aadd9e8919f9bcec1",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/b468384441569691.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "deb7fcf7956b5326cc18d8fa2432484ce1e3e5c3",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/b54cc7ae20fb028b.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "f7406aa13cbc93dcf5a2605d1abf6608abcea4b8",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/b99968475b32c570.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "025c38c054cab1cd943d311546a63ed4c6ab4407",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/ba2073502d308e5e.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "b4598824409e611b48cd085a086b8feb61c7cf0f",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/bc5c7f5200928285.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "1ac74cbca1aef29e475e97ddf6b5bc989a2909b7",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/bcd24ea3ce8f3833.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "1aa2fef88f97207b8b4969e635a231c796af59cd",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/bd13b91e0471b967.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "ac0e41cbb60cae02ae763eef11691bbd01d9382c",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/bebfb0e1faaea600.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "06e6061ba6d29f5dab30e31f448bbd6fe24f455a",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/bec2fc36ea9e96fd.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "4c2ff30cac467ec48ada486378bf43e3fb1422d4",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/c223e17b2cfc748d.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "c81fce498d0a53a7c51bb784f7d4c65a45a59010",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/c2d00fe6471d3bc9.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "74e0920359f09df88425acc5ac335db0fcb63d84",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/c38783cf312ce5b9.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "7f7ec448d89010a0b9ebbc82ac22513967868fac",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/c3ecf8a21588173c.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "1009b203ba8fbcddba6c74b7e530c4eefe2166bd",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/c7bf41fe2e5b978b.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "1f83e24c674e6c23713cb342744abfc4a3d14403",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/c7f6eaf1af2b20b5.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "a9759ac6df7340c94de0131fbaf0024893702432",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/c8186a7886e1a613.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "867f242d78aac23ca22bf6fef9ed741eb45371b4",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/ca87c26f4130dc39.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "11ea8114f82290beff3639eadfbe1b0223acd3b4",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/d01a1ee18c975257.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "9d5ffaf7d23a8a0ea53762ac4d2959e4a76f3cf2",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/d10dec4a4311bba5.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "635a6907ec56e3f0d43b729086b6c52fd837b7b8",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/d413898bd492714d.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "9b191984ebfdfd284f8f72a41aafd2b8b67f1cab",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/d4692931eb15f320.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "1a8521fbac45662d9d39dc77b6df454767acc2c7",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/d6719df4441778bc.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "9c736ce0f97792d5babccf61cef35a7cb7bcd2bc",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/d8b6ca2c1ae15f3f.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "ab047909170e6b1461ff9aedb91e5fe4cb6813c2",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/d8e206477a0dd12a.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "9f3f3f3694e6b4d7f1f50fd569f3f22a85e6de60",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/d8e553d4ba6fb4de.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "03101419ca16e490ea1963902ec8413b28cfe757",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/d9be12fe30fa3a53.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "3d8477a884a03a708751e7095d13afd49af517ff",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/daf101643b98abe0.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "e64c3703e9ec2a1221cfe5292002fb92a6aa43a2",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/dbde98e1ee1ed9a9.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "6e9b12ecc7d8c219d3bcd0dbd8f1339777666595",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/df07470a23e701a4.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "4eaa464e0a955a8f99caf1924b28971e7584706c",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/e58ff3da519f4eb4.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "73d8d4ce5dc7cc3e64590629247d0720a14efb8f",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/e646e410dff65aac.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "f9af476dce04aa7bc4f491f9f938b6ce6e0a50fa",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/e6b766c7e227fda9.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "57ba8f5b35461a94edc7e95ed3ade0ad87cdaad1",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/e9c4ed7f88de0451.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "0df2696b9b3df53e6cc01429fae43ad1284ae2f4",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/ec5dae5d1f0821c6.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "cf5ca93d17f8529cec718731c5a90cab5640b21b",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/ecab3adafca877e9.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "bfa6794e65273c77df67fb9f39cacd9915722b2f",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/efc94fd1188d540f.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "a3934ec70c8d81947153d2ac6be153e81256a84a",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/f0080e5a95624f65.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "f18453e4aeaef43f4513d4b6c54ab7370184d72b",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/f12086d0395ee06b.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "4e67fe65c63fc3a8b1c80b7b66abe0866cb6d9e8",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/f177a86990e47425.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "bb2c68e57b9bab1a2bdd1efd6d2ff990f6acbb3f",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/f1c9a05a87a07e38.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "8b2aee3a7780381c582a66a56867e5f2beca1945",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/f254cc678d8636f4.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "cc456e754bbe1cf08cc2eaf53c30d14f58462b73",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/f2c5d1a20eb68f96.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "d68db953bcd2c3b6fc1e7ce63c32c6df242a0de1",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/f335f9ef146dd8bc.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "bde21e27401ed6137c504bebcf16d5d1ffa6ccf5",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/f7394a5f68d46e3c.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "9fd697f611cba9b2a3ea52b740aee67c53dd745b",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/f8de0814b7111461.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "7e21f2ca6d641d22834038e88add2a4a3e0ae1a5",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/f997553cdd5515fa.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "c7767de4ed262bad1d00325ad08531d12c54ea9e",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/f9e750e918e1ab50.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "11a502b719896336657af0c83cb348e67bee4f51",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/fa586be1ff71bcf9.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "d410e141fd9d2157b578b1e17f9abbff810ed7b5",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/fb7b4f415a15f545.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "781ed3e922201016d691ce7cc794d98c0692bb71",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/retained-raw/ff4fbe27dfa699c1.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "55aca3516a2e1b521115cadb43f2641c3d30604c",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/review-v3/review-scope.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "33a8fd20600cb0aa70548712bc873a3aaae3e71e",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/review-v3/source.patch.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "5483eb8093a1247c4a6c373b92240fcd281d5df1",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/review-v3/spec.md",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "1d748b9705c724779a0d64b7002a5d6eb69a198f",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/review-v3/standards.md",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "f66b570f25ae2a6c026421157f1ee852d1b1f568",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/review-v4/review-scope.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "e1f63e726726a77296ea332612a3e2bf438b8b20",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/review-v4/source.patch.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "a3fdd36a31a79288f7347eb166232728915fd1e9",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/review-v4/spec.md",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "76df0376ec07526f0383fddb3c317370f0987acf",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/review-v4/standards.md",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "1f08f1a1075244a45e9ec9180f11f39f51e03c68",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/review-v5/publication-scope.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "e656649a8cfbfe970613fb561996a6381ad1777f",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/review-v5/review-scope.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "e63fad694f2e39e1b33618696fbf60f9a488a4d7",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/review-v5/source.patch.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "f4cca2d062bdc003af476981c53c7d95d2305d43",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/review-v5/spec-precommit-fix.md",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "817bb17b06871ec7eb8003fe36d46fbd10d2c9ee",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/review-v5/spec-publication.md",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "8d012b406c963c2e745fa9d0802154c0a45f317d",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/review-v5/spec.md",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "eca339d19807d705b24ed2f4083030107fab36e4",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/review-v5/standards-precommit-fix.md",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "7f471d6bf20611fc55ac19f27d1b8fc67aa425a9",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/review-v5/standards-publication-final.md",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "8cf6e890a12bfdd546a79254119368375a628a31",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/review-v5/standards-publication.md",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "4d4acc6405bc1270f1ca70e37b245046c1a628bb",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/review-v5/standards.md",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "fe8fa88ba68e85668586dc7a5b98a1356a7864f2",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/review/review-scope.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "662d7cf167e2b26b6d95ee4d55c9dfcf5bfd3af4",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/review/source.patch.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "59e588b74696676bc8bc40b419e646e5acbd4ec0",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/review/spec.md",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "628c96e5468a5e700959f4f534c69cae8f91dc51",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/review/standards.md",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "08a96b580166c202dc4ba8cd5a77194ea1b07292",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/runner/probe_http200_malformed_sse.py",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "a1e99ebebf6ab31019ea4d3a89aaaa05d17041c5",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/source-provenance.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "86d2d226d34de1d5b66e9f719afc71ea86ecc34c",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/staged-scope.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "2f2dc4f8c2d589a71a762cca18071912a421b049",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/test-migration-application.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "301274d91bdda44e8ec0bc07e56d1c43a805212b",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/validation.md",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "08e010c286011643b7bc6b2172be775e1e15bf3e",
+      "status": "A"
+    },
+    {
+      "path": "work/ceres-v3/07/w-p1-restoration.json",
+      "old_mode": "000000",
+      "mode": "100644",
+      "old_git_blob": "0000000000000000000000000000000000000000",
+      "git_blob": "980fb7f980904c35b8d3354d5c3992fcefa5db09",
+      "status": "A"
+    }
+  ],
+  "entry_count": 445,
+  "self_entry_excluded": "work/ceres-v3/07/precommit/final-index-catalog.json",
+  "purpose": "final publication index before its own one known extra catalog entry; source checks completed previously; late changes add precommit proof/review only",
+  "stage_argv": [
+    "git",
+    "add",
+    "--pathspec-from-file=C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\precommit\\publication-pathspec.nul",
+    "--pathspec-file-nul"
+  ],
+  "stage_exit_code": 0,
+  "stage_stderr": "warning: in the working copy of 'work/ceres-v3/07/review-v5/spec-precommit-fix.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'work/ceres-v3/07/review-v5/standards-precommit-fix.md', LF will be replaced by CRLF the next time Git touches it\n",
+  "push": false
+}

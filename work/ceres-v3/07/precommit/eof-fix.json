@@ -1,0 +1,12 @@
+{
+  "at": "2026-10-06T02:24:15.649833+00:00",
+  "path": "work/ceres-v3/07/diagnosis/remaining-regressions.md",
+  "reason": "actual git diff --cached --check exit 2: extra blank line at EOF",
+  "before_sha256": "53590d18c0fcc6d8d8ccdfa7be1177e05552f78cd9ae3ee49d0316e9c0c08055",
+  "after_sha256": "5d6f6b8111aefe1a5a33849668b2a62dca11219c483cc6ee89edf4bfb870daaf",
+  "before_bytes": 7957,
+  "after_bytes": 7954,
+  "change": "removed EOF blank lines only, preserved CRLF and text",
+  "failed_evidence": "precommit/approved-precommit-0f4d6c8e2b4b46188c3574f267edefbd",
+  "runtime_changed": false
+}

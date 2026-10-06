@@ -1,0 +1,6 @@
+{
+  "original_path": "evidence/observer-probe-v2-83b4291f9b0b4328bb17fe0abf2a4c9f/pytest/process-completion.json",
+  "bytes": 366,
+  "sha256": "3f19533268ff089efcfea376e880183d5fdcbf20849a46a47a9318231415f20b",
+  "utf8_text": "{\r\n  \"pid\": 82784,\r\n  \"finished_at_utc\": \"2026-10-06T01:11:38.9616503Z\",\r\n  \"exit_code\": 1,\r\n  \"suite\": \"observer-malformed-sse-probe\",\r\n  \"run_id\": \"83b4291f9b0b4328bb17fe0abf2a4c9f\",\r\n  \"run_dir\": \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\07\\\\evidence\\\\observer-probe-v2-83b4291f9b0b4328bb17fe0abf2a4c9f\",\r\n  \"expected_exit_code\": 1\r\n}"
+}

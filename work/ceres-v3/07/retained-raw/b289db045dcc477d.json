@@ -1,0 +1,6 @@
+{
+  "original_path": "evidence/full-e5095afb1e2b4d19babc56f38e917212/Mercury/process-start.json",
+  "bytes": 730,
+  "sha256": "e10df170af3148ce3058b5a3fdfb12d9873f02280a542b78f47a9fc794a07deb",
+  "utf8_text": "{\r\n  \"pid\": 29180,\r\n  \"started_at_utc\": \"2026-10-06T00:54:08.3723195Z\",\r\n  \"suite\": \"Mercury\",\r\n  \"run_id\": \"e5095afb1e2b4d19babc56f38e917212\",\r\n  \"run_dir\": \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\07\\\\evidence\\\\full-e5095afb1e2b4d19babc56f38e917212\",\r\n  \"argv\": [\r\n    \"-X\",\r\n    \"utf8\",\r\n    \"-m\",\r\n    \"pytest\",\r\n    \"-p\",\r\n    \"no:cacheprovider\",\r\n    \"-W\",\r\n    \"error::pytest.PytestUnhandledThreadExceptionWarning\",\r\n    \"-rs\",\r\n    \"--basetemp\",\r\n    \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\07\\\\evidence\\\\full-e5095afb1e2b4d19babc56f38e917212\\\\Mercury\\\\basetemp\",\r\n    \"tests\"\r\n  ],\r\n  \"cwd\": \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\Mercury\"\r\n}\r\n"
+}

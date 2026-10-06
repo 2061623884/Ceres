@@ -1,0 +1,22 @@
+{
+  "executable": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+  "argv": [
+    "-X",
+    "utf8",
+    "-m",
+    "pytest",
+    "-p",
+    "no:cacheprovider",
+    "-W",
+    "error::pytest.PytestUnhandledThreadExceptionWarning",
+    "--basetemp",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\probe-03ba20b287a743d697c71113ceeb93d9\\basetemp",
+    "-p",
+    "probe_http200_malformed_sse",
+    "tests/test_v3_independent_routing.py::test_independent_dialogue_phenomena"
+  ],
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend",
+  "run_id": "03ba20b287a743d697c71113ceeb93d9",
+  "run_dir": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\probe-03ba20b287a743d697c71113ceeb93d9",
+  "evidence_dir": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\probe-03ba20b287a743d697c71113ceeb93d9\\independent-evidence"
+}

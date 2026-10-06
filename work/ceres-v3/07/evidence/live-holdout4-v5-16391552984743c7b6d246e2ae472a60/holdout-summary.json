@@ -1,0 +1,188 @@
+{
+  "case_version": "ceres-v3-independent-dialogue-20261006-v1",
+  "requested_rows": 4,
+  "actual_rows": 4,
+  "all_passed": true,
+  "results_sha256": "ba7274dd4fa85da012e95cd89f32e9e2c68445e754225733283837be9f3f2486",
+  "sidecar_sha256_matches": true,
+  "rows": [
+    {
+      "case_id": "HO01",
+      "expected": "stay_current",
+      "actual_status": "completed",
+      "actual_decision": "stay_current",
+      "passed": true,
+      "preparation": [
+        {
+          "kind": "actual Guide API / controlled role response",
+          "http_status": 200,
+          "expected": null,
+          "passed": null,
+          "upstream_records": 0
+        }
+      ]
+    },
+    {
+      "case_id": "HO02",
+      "expected": "stay_current",
+      "actual_status": "completed",
+      "actual_decision": "stay_current",
+      "passed": true,
+      "preparation": []
+    },
+    {
+      "case_id": "HO03",
+      "expected": "suggest_switch",
+      "actual_status": "completed",
+      "actual_decision": "suggest_switch",
+      "passed": true,
+      "preparation": [
+        {
+          "kind": "actual preceding Kev clarification; separate setup observation",
+          "http_status": 200,
+          "expected": "clarify",
+          "passed": true,
+          "upstream_records": 1
+        }
+      ]
+    },
+    {
+      "case_id": "HO04",
+      "expected": "suggest_switch",
+      "actual_status": "completed",
+      "actual_decision": "suggest_switch",
+      "passed": true,
+      "preparation": []
+    }
+  ],
+  "upstream_calls": 5,
+  "upstream_http_statuses": {
+    "200": 5
+  },
+  "upstream_response_models": {
+    "kev-latest": 5
+  },
+  "failure": null,
+  "phenomenon_summary": {
+    "case_count": 4,
+    "cases": [
+      {
+        "case_id": "HO01",
+        "scenario_group": "negated-order-intent-with-quoted-history",
+        "expected": "stay_current",
+        "actual": "stay_current",
+        "status": "completed",
+        "passed": true,
+        "role_unchanged_without_consent": true,
+        "transition": "stay_current -> stay_current"
+      },
+      {
+        "case_id": "HO02",
+        "scenario_group": "quotation-versus-personal-eligibility",
+        "expected": "stay_current",
+        "actual": "stay_current",
+        "status": "completed",
+        "passed": true,
+        "role_unchanged_without_consent": true,
+        "transition": "stay_current -> stay_current"
+      },
+      {
+        "case_id": "HO03",
+        "scenario_group": "answered-object-clarification",
+        "expected": "suggest_switch",
+        "actual": "suggest_switch",
+        "status": "completed",
+        "passed": true,
+        "role_unchanged_without_consent": true,
+        "transition": "suggest_switch -> suggest_switch"
+      },
+      {
+        "case_id": "HO04",
+        "scenario_group": "self-correction-within-one-utterance",
+        "expected": "suggest_switch",
+        "actual": "suggest_switch",
+        "status": "completed",
+        "passed": true,
+        "role_unchanged_without_consent": true,
+        "transition": "suggest_switch -> suggest_switch"
+      }
+    ],
+    "groups": {
+      "negated-order-intent-with-quoted-history": {
+        "case_ids": [
+          "HO01"
+        ],
+        "expected_to_actual": {
+          "stay_current -> stay_current": 1
+        },
+        "unexpected_suggest_switch": 0,
+        "missed_suggest_switch": 0,
+        "clarify": 0,
+        "failed": 0,
+        "role_changed_without_consent": 0
+      },
+      "quotation-versus-personal-eligibility": {
+        "case_ids": [
+          "HO02"
+        ],
+        "expected_to_actual": {
+          "stay_current -> stay_current": 1
+        },
+        "unexpected_suggest_switch": 0,
+        "missed_suggest_switch": 0,
+        "clarify": 0,
+        "failed": 0,
+        "role_changed_without_consent": 0
+      },
+      "answered-object-clarification": {
+        "case_ids": [
+          "HO03"
+        ],
+        "expected_to_actual": {
+          "suggest_switch -> suggest_switch": 1
+        },
+        "unexpected_suggest_switch": 0,
+        "missed_suggest_switch": 0,
+        "clarify": 0,
+        "failed": 0,
+        "role_changed_without_consent": 0
+      },
+      "self-correction-within-one-utterance": {
+        "case_ids": [
+          "HO04"
+        ],
+        "expected_to_actual": {
+          "suggest_switch -> suggest_switch": 1
+        },
+        "unexpected_suggest_switch": 0,
+        "missed_suggest_switch": 0,
+        "clarify": 0,
+        "failed": 0,
+        "role_changed_without_consent": 0
+      }
+    },
+    "expected_to_actual": {
+      "stay_current -> stay_current": 2,
+      "suggest_switch -> suggest_switch": 2
+    },
+    "counts": {
+      "unexpected_suggest_switch": 0,
+      "missed_suggest_switch": 0,
+      "clarify_in_four_holdout_cases": 0,
+      "failed_cases": 0,
+      "role_changed_without_consent": 0
+    },
+    "generalization_limit": "Four predeclared first-heldout cases only; descriptive counts do not support statistical or broader generalization claims."
+  },
+  "ho03_setup_separate": {
+    "case_id": "HO03",
+    "kind": "actual preceding Kev clarification; separate setup observation",
+    "expected": "clarify",
+    "actual_status": "completed",
+    "actual_decision": "clarify",
+    "http_status": 200,
+    "passed": true,
+    "upstream_count": 1,
+    "included_in_four_case_holdout_count": false
+  }
+}

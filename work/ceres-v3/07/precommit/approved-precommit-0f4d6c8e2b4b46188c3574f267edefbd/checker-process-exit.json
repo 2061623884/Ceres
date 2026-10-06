@@ -1,0 +1,39 @@
+{
+  "process_id": 55836,
+  "started_utc": "2026-10-06T02:23:10.6113427Z",
+  "ended_utc": "2026-10-06T02:23:11.1700856Z",
+  "exit_code": 1,
+  "argv": [
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\precommit\\precommit_static_check.py",
+    "--scope-manifest",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\precommit\\approved-scope.json",
+    "--output-dir",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\precommit\\approved-precommit-0f4d6c8e2b4b46188c3574f267edefbd\\checker"
+  ],
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres",
+  "environment": {
+    "PYTHONUTF8": null,
+    "PYTHONDONTWRITEBYTECODE": null,
+    "TEMP": "C:\\Users\\20616\\AppData\\Local\\Temp",
+    "TMP": "C:\\Users\\20616\\AppData\\Local\\Temp",
+    "SYSTEMROOT": "C:\\WINDOWS",
+    "USERPROFILE": "C:\\Users\\20616",
+    "HOME": null,
+    "PATH": "C:\\Users\\20616\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell;C:\\Users\\20616\\.codex\\tmp\\arg0\\codex-arg01FzBzl;C:\\Users\\20616\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\libheif\\libheif\\bin;C:\\Users\\20616\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\jxrlib\\jxrlib\\bin;C:\\Users\\20616\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\poppler\\Library\\bin;C:\\Users\\20616\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\bin\\override;C:\\Program Files (x86)\\Razer Chroma SDK\\bin;C:\\Program Files\\Razer Chroma SDK\\bin;C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v12.6\\bin;C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v12.6\\libnvvp;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\Program Files\\NVIDIA Corporation\\Nsight Compute 2024.3.0\\;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Program Files\\NVIDIA Corporation\\NVIDIA NvDLISR;C:\\Program Files\\Git\\cmd;C:\\Program Files\\nodejs\\;C:\\Program Files\\Tailscale\\;C:\\Users\\20616\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Program Files (x86)\\Razer\\ChromaBroadcast\\bin;C:\\Program Files\\Razer\\ChromaBroadcast\\bin;C:\\Users\\20616\\.cargo\\bin;C:\\Users\\20616\\AppData\\Local\\Microsoft\\WindowsApps;C:\\texlive\\2025\\bin\\windows;C:\\Users\\20616\\AppData\\Local\\GitHubDesktop\\bin;C:\\Users\\20616\\AppData\\Roaming\\npm;C:\\Program Files\\dotnet\\;C:\\LINGO64_18\\;C:\\Users\\20616\\AppData\\Local\\agy\\bin;C:\\Users\\20616\\.grok\\bin;c:\\Users\\20616\\AppData\\Local\\Programs\\cursor\\resources\\app\\codeBin;C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\Scripts\\;C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\;C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Launcher\\;C:\\Users\\20616\\AppData\\Local\\hermes\\hermes-agent\\venv\\Scripts;C:\\Users\\20616\\AppData\\Local\\Programs\\Microsoft VS Code;C:\\Users\\20616\\.local\\bin;C:\\Users\\20616\\AppData\\Local\\Programs\\Qoder\\bin;C:\\Users\\20616\\AppData\\Local\\Programs\\QoderCN\\bin;\\c\\texlive\\2026\\bin\\windows;C:\\Users\\20616\\AppData\\Local\\Programs\\Ollama;C:\\Users\\20616\\.dotnet\\tools;C:\\Users\\20616\\AppData\\Local\\Obsidian;C:\\Users\\20616\\AppData\\Local\\Programs\\cursor\\resources\\app\\bin;C:\\Users\\20616\\AppData\\Local\\Programs\\Antigravity IDE\\bin;C:\\Users\\20616\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\bin\\fallback;C:\\Users\\20616\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin;C:\\Users\\20616\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\git\\cmd;C:\\Users\\20616\\AppData\\Local\\OpenAI\\Codex\\bin\\6de5bf5fa8384f8d;C:\\Users\\20616\\AppData\\Local\\OpenAI\\Codex\\bin\\f544b3844e0f14e9",
+    "GIT_DIR": null,
+    "GIT_WORK_TREE": null,
+    "GIT_INDEX_FILE": null,
+    "GIT_COMMON_DIR": null,
+    "GIT_OPTIONAL_LOCKS": null,
+    "GIT_CONFIG_NOSYSTEM": null,
+    "GIT_CONFIG_SYSTEM": null,
+    "GIT_CONFIG_GLOBAL": null
+  },
+  "stdout_path": "checker.stdout.raw.txt",
+  "stdout_bytes": 200,
+  "stderr_path": "checker.stderr.raw.txt",
+  "stderr_bytes": 0
+}

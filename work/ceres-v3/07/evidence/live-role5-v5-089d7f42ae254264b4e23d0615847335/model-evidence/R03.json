@@ -1,0 +1,91 @@
+{
+  "case_id": "R03",
+  "message": "一般签收后几天内能退",
+  "expected_route": "stay_current",
+  "passed": true,
+  "opening": {
+    "opening_id": "open_e0831d32cb5a421c9d64e159407df687",
+    "guide_session_id": "sess-fcd69b2736c6",
+    "mercury_session_id": "ms_fe20ddb53881",
+    "role": "momo",
+    "prompt_displayed": false,
+    "handoff_id": null
+  },
+  "actual_order": null,
+  "upstream": [
+    {
+      "url": "http://127.0.0.1:18009/v1/systemone",
+      "method": "POST",
+      "request_body": "{\"state\":{\"current_role\":\"Momo after-sales\",\"selected_object\":null,\"recent_dialogue\":[],\"utterance\":\"一般签收后几天内能退\",\"pending_question\":null},\"model\":\"kev-latest\",\"questions\":{\"service\":{\"type\":\"choice\",\"instructions\":\"Classify this turn using current_role, selected_object and recent_dialogue.\\nKeke handles shopping, product comparison, purchase lists. Momo handles specific placed orders,\\norder eligibility and after-sales actions. BOTH roles answer GENERAL store policies (returns,\\nrefunds, delivery) and greetings. A product being considered is NOT a placed order.\\nThe latest explicit new request overrides the old topic. Be conservative about switching.\\nDecide which SERVICE can continue, not whether its business action is fully specified.\\nRecent dialogue can resolve the service even when selected_object is null. If that dialogue\\nis about removing an item from a purchase list, Keke handles the next cancellation reply;\\nKeke can clarify the exact item/action within its own business turn.\\nFor '取消一下': shopping-list context stays with Keke; placed-order context needs Momo;\\nwith no resolvable object choose clarify. Questions about a general policy stay even when\\nthey mention returns. Only classify; never act, invent an object or automatically switch.\",\"criteria\":{\"stay_current\":\"Current role can handle it: shopping or purchase-list changes with Keke (including a short cancellation reply to list-removal dialogue, even without selected_object), specific orders with Momo, or GENERAL policies/greetings with either role. Business details may still need clarification within that role.\",\"suggest_switch\":\"Clearly requires the OTHER role: specific placed-order work from Keke, or a NEW shopping request from Momo. Not general policy or ambiguous cancellation.\",\"clarify\":\"The SERVICE needed is unresolved even with current role, selected object and dialogue. Cancellation with neither a purchase-list nor placed-order context needs clarification. Missing item details inside an already clear shopping service do not require service clarification.\"}}}}",
+      "buffered_stream_capture": true,
+      "client_boundary": "httpx.Client",
+      "http_status": 200,
+      "response_body": "{\"model\":\"kev-latest\",\"answers\":{\"service\":{\"type\":\"choice\",\"choice\":\"stay_current\",\"confidence\":0.4292,\"probabilities\":{\"stay_current\":0.6195,\"suggest_switch\":0.199,\"clarify\":0.1815}}},\"usage\":{\"input_tokens\":392,\"output_tokens\":66},\"latency_ms\":386.2}",
+      "elapsed_ms": 675.3165998961776
+    },
+    {
+      "url": "https://discovery-api.intern-ai.org.cn/v1/chat/completions",
+      "method": "POST",
+      "request_body": "{\"messages\":[{\"role\":\"system\",\"content\":\"你是墨墨，负责订单、物流、退款、退货和售后政策的售后客服。\\n1. 订单、物流、退款、退货的任何事实（是否存在、状态、商品、金额、资格）只能来自本轮 Tool 结果，不要沿用历史回复中的状态。\\n2. 需要信息时直接调用 Tool，不要先回复“请稍等”“我来查一下”；Tool 没有返回的信息不要猜测；缺少订单号时先查订单列表或询问用户。\\n3. 退款、退货规则和资格以 Tool 结果为准；政策、时效类问题必须先调用 search_after_sales_policy，不要凭常识回答。\\n4. 用户明确要求退款或退货时（包括前几轮已提出要求、本轮补充订单号的情况），必须直接调用 create_refund 或 create_return，不要再征求确认（原因可不填，不要为此追问）；check 类 Tool 只判断资格、不会提交，没有调用 create 成功，不能说已提交。order_id、item_id 只能取自用户输入或 Tool 结果，不要编造。\\n5. 申请提交成功只代表处理中，按 Tool 返回的状态回答，不能说退款已到账或退货已完成。\\n一般政策回答需说明模拟门店、适用条件和检索结果中的 policy_id/标题；一般规则不是某单资格，不主动提交申请。没有政策依据时如实说明。\\n回答简洁，使用中文。\\n当前未选订单，只能咨询一般政策或普通问候。政策先检索、注明模拟门店来源policy_id/标题及条件；缺少依据就说明。具体订单查询、资格和申请须先选单，不能沿用历史订单或执行订单工具；需要时提示使用选单入口。\"},{\"role\":\"user\",\"content\":\"一般签收后几天内能退\"}],\"model\":\"qwen3.8-27b\",\"max_tokens\":3072,\"temperature\":0.2,\"tool_choice\":\"auto\",\"tools\":[{\"type\":\"function\",\"function\":{\"name\":\"search_after_sales_policy\",\"description\":\"检索退款、退货、配送相关的售后政策原文（如退款到账时间、退货期限、配送时间）。用户问规则、时效、哪些商品能退时必须先调用，不要凭常识回答；某个具体订单能否退款或退货，用对应的 check Tool 判断。\",\"parameters\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的问题或关键词\"},\"category\":{\"type\":\"string\",\"enum\":[\"refund\",\"return\",\"delivery\"],\"description\":\"可选：refund 退款 / return 退货 / delivery 配送\"}},\"required\":[\"query\"]}}}]}",
+      "buffered_stream_capture": true,
+      "client_boundary": "openai._base_client.SyncHttpxClientWrapper",
+      "http_status": 200,
+      "response_body": "{\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":null,\"refusal\":null,\"annotations\":null,\"audio\":null,\"function_call\":null,\"tool_calls\":[{\"id\":\"chatcmpl-tool-811124bd69f12ded\",\"type\":\"function\",\"function\":{\"name\":\"search_after_sales_policy\",\"arguments\":\"{\\\"query\\\": \\\"签收后几天内能退货\\\", \\\"category\\\": \\\"return\\\"}\"}}],\"reasoning_content\":\"用户问“一般签收后几天内能退”，这是退货政策/时效类问题。根据规则，必须先调用 search_after_sales_policy，category 应为 return，query 用用户问题关键词。当前未选订单，只能咨询一般政策。需要调用工具。\\n\"},\"logprobs\":null,\"finish_reason\":\"tool_calls\",\"stop_reason\":null,\"token_ids\":null,\"routed_experts\":null}],\"created\":1791251424,\"ec_transfer_params\":null,\"id\":\"chatcmpl-1dbafb84-71aa-40ba-86aa-10cfe2263081\",\"kv_transfer_params\":null,\"metrics\":null,\"model\":\"qwen3.8-27b-fp8\",\"object\":\"chat.completion\",\"prompt_logprobs\":null,\"prompt_text\":null,\"prompt_token_ids\":null,\"request_id\":\"req_44b8a372-2a44-4432-9d6d-896c020c2edc\",\"service_tier\":null,\"usage\":{\"prompt_tokens\":768,\"total_tokens\":870,\"completion_tokens\":102,\"prompt_tokens_details\":null,\"completion_tokens_details\":{\"reasoning_tokens\":56}}}",
+      "elapsed_ms": 1135.5830999091268
+    },
+    {
+      "url": "https://discovery-api.intern-ai.org.cn/v1/chat/completions",
+      "method": "POST",
+      "request_body": "{\"messages\":[{\"role\":\"system\",\"content\":\"你是墨墨，负责订单、物流、退款、退货和售后政策的售后客服。\\n1. 订单、物流、退款、退货的任何事实（是否存在、状态、商品、金额、资格）只能来自本轮 Tool 结果，不要沿用历史回复中的状态。\\n2. 需要信息时直接调用 Tool，不要先回复“请稍等”“我来查一下”；Tool 没有返回的信息不要猜测；缺少订单号时先查订单列表或询问用户。\\n3. 退款、退货规则和资格以 Tool 结果为准；政策、时效类问题必须先调用 search_after_sales_policy，不要凭常识回答。\\n4. 用户明确要求退款或退货时（包括前几轮已提出要求、本轮补充订单号的情况），必须直接调用 create_refund 或 create_return，不要再征求确认（原因可不填，不要为此追问）；check 类 Tool 只判断资格、不会提交，没有调用 create 成功，不能说已提交。order_id、item_id 只能取自用户输入或 Tool 结果，不要编造。\\n5. 申请提交成功只代表处理中，按 Tool 返回的状态回答，不能说退款已到账或退货已完成。\\n一般政策回答需说明模拟门店、适用条件和检索结果中的 policy_id/标题；一般规则不是某单资格，不主动提交申请。没有政策依据时如实说明。\\n回答简洁，使用中文。\\n当前未选订单，只能咨询一般政策或普通问候。政策先检索、注明模拟门店来源policy_id/标题及条件；缺少依据就说明。具体订单查询、资格和申请须先选单，不能沿用历史订单或执行订单工具；需要时提示使用选单入口。\"},{\"role\":\"user\",\"content\":\"一般签收后几天内能退\"},{\"role\":\"assistant\",\"content\":\"\",\"tool_calls\":[{\"id\":\"chatcmpl-tool-811124bd69f12ded\",\"type\":\"function\",\"function\":{\"name\":\"search_after_sales_policy\",\"arguments\":\"{\\\"query\\\": \\\"签收后几天内能退货\\\", \\\"category\\\": \\\"return\\\"}\"}}]},{\"role\":\"tool\",\"tool_call_id\":\"chatcmpl-tool-811124bd69f12ded\",\"content\":\"{\\\"ok\\\": true, \\\"data\\\": [{\\\"policy_id\\\": \\\"P-RET-01\\\", \\\"category\\\": \\\"return\\\", \\\"title\\\": \\\"签收后退货\\\", \\\"content\\\": \\\"签收后 7 天内，可退货商品可按件申请退货退款。\\\"}, {\\\"policy_id\\\": \\\"P-RET-02\\\", \\\"category\\\": \\\"return\\\", \\\"title\\\": \\\"不支持退货的商品\\\", \\\"content\\\": \\\"生鲜等标注“不可退货”的商品不支持退货。\\\"}]}\"}],\"model\":\"qwen3.8-27b\",\"max_tokens\":3072,\"temperature\":0.2,\"tool_choice\":\"auto\",\"tools\":[{\"type\":\"function\",\"function\":{\"name\":\"search_after_sales_policy\",\"description\":\"检索退款、退货、配送相关的售后政策原文（如退款到账时间、退货期限、配送时间）。用户问规则、时效、哪些商品能退时必须先调用，不要凭常识回答；某个具体订单能否退款或退货，用对应的 check Tool 判断。\",\"parameters\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的问题或关键词\"},\"category\":{\"type\":\"string\",\"enum\":[\"refund\",\"return\",\"delivery\"],\"description\":\"可选：refund 退款 / return 退货 / delivery 配送\"}},\"required\":[\"query\"]}}}]}",
+      "buffered_stream_capture": true,
+      "client_boundary": "openai._base_client.SyncHttpxClientWrapper",
+      "http_status": 200,
+      "response_body": "{\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"\\n\\n一般签收后 **7 天内**，可退货商品可按件申请退货退款（模拟门店政策 P-RET-01《签收后退货》）。\\n\\n注意：生鲜等标注“不可退货”的商品不支持退货（P-RET-02《不支持退货的商品》）。\\n\\n具体某单能否退，需先选中对应订单再判断。\",\"refusal\":null,\"annotations\":null,\"audio\":null,\"function_call\":null,\"reasoning_content\":\"The user is asking a general policy question: how many days after receipt can they return an item. I've already searched the policy. Let me answer concisely in Chinese, citing the policy_id and title, and noting the conditions.\\n\"},\"logprobs\":null,\"finish_reason\":\"stop\",\"stop_reason\":null,\"token_ids\":null,\"routed_experts\":null}],\"created\":1791251425,\"ec_transfer_params\":null,\"id\":\"chatcmpl-daae261a-5ce9-46e9-b1e0-3849aaf22d97\",\"kv_transfer_params\":null,\"metrics\":null,\"model\":\"qwen3.8-27b-fp8\",\"object\":\"chat.completion\",\"prompt_logprobs\":null,\"prompt_text\":null,\"prompt_token_ids\":null,\"request_id\":\"req_9972cc70-ce3b-4f6f-87ac-4a6d283bc37d\",\"service_tier\":null,\"usage\":{\"prompt_tokens\":927,\"total_tokens\":1053,\"completion_tokens\":126,\"prompt_tokens_details\":null,\"completion_tokens_details\":{\"reasoning_tokens\":49}}}",
+      "elapsed_ms": 1252.727699931711
+    }
+  ],
+  "clock_scope": "in-process public API receipt to fully drained terminal SSE; no browser evidence",
+  "memory_model": "controlled empty output; actual worker drained; both role main models real",
+  "api_http_status": 200,
+  "sse": "event: service.route\r\ndata: {\"status\": \"completed\", \"decision\": \"stay_current\", \"raw_choice\": \"stay_current\", \"probabilities\": {\"stay_current\": 0.6195, \"suggest_switch\": 0.199, \"clarify\": 0.1815}, \"raw_response\": {\"model\": \"kev-latest\", \"answers\": {\"service\": {\"type\": \"choice\", \"choice\": \"stay_current\", \"confidence\": 0.4292, \"probabilities\": {\"stay_current\": 0.6195, \"suggest_switch\": 0.199, \"clarify\": 0.1815}}}, \"usage\": {\"input_tokens\": 392, \"output_tokens\": 66}, \"latency_ms\": 386.2}, \"request_id\": \"R03\", \"current_role\": \"momo\", \"criteria_version\": \"ceres-service-v3.2\", \"route_ms\": 681.1742999125272, \"manual_switch_available\": true, \"prompt_mode\": \"none\"}\r\n\r\nevent: accepted\r\ndata: {\"request_id\": \"R03\"}\r\n\r\nevent: orders\r\ndata: {\"items\": []}\r\n\r\nevent: answer.delta\r\ndata: {\"text\": \"一般签收后 **7 天内**，可退货商品可按件申请退货退款（模拟门店政策 P-RET-01《签收后退货》）。\\n\\n注意：生鲜等标注“不可退货”的商品不支持退货（P-RET-02《不支持退货的商品》）。\\n\\n具体某单能否退，需先选中对应订单再判断。\"}\r\n\r\nevent: turn.completed\r\ndata: {\"session_id\": \"ms_fe20ddb53881\", \"final_text\": \"一般签收后 **7 天内**，可退货商品可按件申请退货退款（模拟门店政策 P-RET-01《签收后退货》）。\\n\\n注意：生鲜等标注“不可退货”的商品不支持退货（P-RET-02《不支持退货的商品》）。\\n\\n具体某单能否退，需先选中对应订单再判断。\"}\r\n\r\n",
+  "backend_api_wall_ms": 3233.6160000413656,
+  "route": {
+    "status": "completed",
+    "decision": "stay_current",
+    "raw_choice": "stay_current",
+    "probabilities": {
+      "stay_current": 0.6195,
+      "suggest_switch": 0.199,
+      "clarify": 0.1815
+    },
+    "raw_response": {
+      "model": "kev-latest",
+      "answers": {
+        "service": {
+          "type": "choice",
+          "choice": "stay_current",
+          "confidence": 0.4292,
+          "probabilities": {
+            "stay_current": 0.6195,
+            "suggest_switch": 0.199,
+            "clarify": 0.1815
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 392,
+        "output_tokens": 66
+      },
+      "latency_ms": 386.2
+    },
+    "request_id": "R03",
+    "current_role": "momo",
+    "criteria_version": "ceres-service-v3.2",
+    "route_ms": 681.1742999125272,
+    "manual_switch_available": true,
+    "prompt_mode": "none"
+  },
+  "orders_after": {
+    "items": []
+  }
+}

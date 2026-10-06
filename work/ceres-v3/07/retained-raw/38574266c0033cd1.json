@@ -1,0 +1,6 @@
+{
+  "original_path": "evidence/probe-88a689ab4e9342628b03aaf4491a0486/independent-evidence/results.json",
+  "bytes": 866,
+  "sha256": "5bf8a9bdc0d95afbce607107849bc38952ba5fded2d7888ab285abe1ddb3bafd",
+  "utf8_text": "{\n  \"case_version\": \"ceres-v3-independent-dialogue-20261006-v1\",\n  \"requested_rows\": 4,\n  \"scope\": \"First independent candidate check; real Kev/public API, controlled role/memory models; setup observations separate\",\n  \"rows\": [\n    {\n      \"case_id\": \"HO01\",\n      \"expected\": \"stay_current\",\n      \"passed\": false,\n      \"message\": \"订单不用查了。朋友让我问问有没有适合露营的小包装零食\",\n      \"preparation\": [],\n      \"actual_order\": null,\n      \"error\": {\n        \"error_type\": \"TypeError\",\n        \"message\": \"block_external_model_sends_for_probe.<locals>.guarded_send() missing 1 required positional argument: 'req'\"\n      }\n    }\n  ],\n  \"all_upstream\": [],\n  \"failure\": {\n    \"error_type\": \"TypeError\",\n    \"message\": \"block_external_model_sends_for_probe.<locals>.guarded_send() missing 1 required positional argument: 'req'\"\n  }\n}\n"
+}

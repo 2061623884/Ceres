@@ -1,0 +1,126 @@
+{
+  "scope": "separate precommit records only; reviewed 193-record main manifest unchanged",
+  "entry_count": 20,
+  "entries": [
+    {
+      "source": "work/ceres-v3/07/precommit/approved-precommit-0f4d6c8e2b4b46188c3574f267edefbd/checker/checker-exit.json",
+      "retained": "work/ceres-v3/07/precommit/retained-raw/d0f01d0e0ba1a9d7.json",
+      "bytes": 1235,
+      "sha256": "dc9f08ae0f068413177fd50d91a69ac5ec1f80ce136b1dc59a48ade149daf090"
+    },
+    {
+      "source": "work/ceres-v3/07/precommit/approved-precommit-0f4d6c8e2b4b46188c3574f267edefbd/checker/checker-start.json",
+      "retained": "work/ceres-v3/07/precommit/retained-raw/3b199acb6b568f45.json",
+      "bytes": 1164,
+      "sha256": "05af37bf7c4a23d7b2f92dfc8d5de96fcf36a85bb838494379e4c03e4416fd02"
+    },
+    {
+      "source": "work/ceres-v3/07/precommit/approved-precommit-0f4d6c8e2b4b46188c3574f267edefbd/checker/git-diff-cached-check.process.json",
+      "retained": "work/ceres-v3/07/precommit/retained-raw/1b253187454a1294.json",
+      "bytes": 751,
+      "sha256": "7b7ec4443bebef69b073e8b4349109bdff6ee0fc991e2ee5014e6d3f769ba62e"
+    },
+    {
+      "source": "work/ceres-v3/07/precommit/approved-precommit-0f4d6c8e2b4b46188c3574f267edefbd/checker/git-diff-cached-check.stderr.raw.txt",
+      "retained": "work/ceres-v3/07/precommit/retained-raw/7b98c06bdc248cbf.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "work/ceres-v3/07/precommit/approved-precommit-0f4d6c8e2b4b46188c3574f267edefbd/checker/git-diff-cached-check.stdout.raw.txt",
+      "retained": "work/ceres-v3/07/precommit/retained-raw/20849ef5fdbd9384.json",
+      "bytes": 79,
+      "sha256": "cba744bed268795c8370e903baea18c406252787a37f29ecfd1a8818b1d4945b"
+    },
+    {
+      "source": "work/ceres-v3/07/precommit/approved-precommit-0f4d6c8e2b4b46188c3574f267edefbd/checker/precommit-summary.json",
+      "retained": "work/ceres-v3/07/precommit/retained-raw/6cd84af43dbd53bc.json",
+      "bytes": 2713,
+      "sha256": "e6217efa94992d2f38c6b1631753c978fd664720e42ee10f9cd053c231a6dc1e"
+    },
+    {
+      "source": "work/ceres-v3/07/precommit/approved-precommit-0f4d6c8e2b4b46188c3574f267edefbd/checker-process-exit.json",
+      "retained": "work/ceres-v3/07/precommit/retained-raw/77c0fe8088f23235.json",
+      "bytes": 4545,
+      "sha256": "daadcc04a5c15ab597741eb4f26ddca7fde4d02c22a7001d2753bfcaeb11a424"
+    },
+    {
+      "source": "work/ceres-v3/07/precommit/approved-precommit-0f4d6c8e2b4b46188c3574f267edefbd/checker-process-start.json",
+      "retained": "work/ceres-v3/07/precommit/retained-raw/6cb12a534d82b358.json",
+      "bytes": 4821,
+      "sha256": "9748f0bf09ca426dcbf5236a55c0eaeb29b2520b0737dd4609a27f582820f9ea"
+    },
+    {
+      "source": "work/ceres-v3/07/precommit/approved-precommit-0f4d6c8e2b4b46188c3574f267edefbd/checker.stderr.raw.txt",
+      "retained": "work/ceres-v3/07/precommit/retained-raw/031a17cc81688b3c.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "work/ceres-v3/07/precommit/approved-precommit-0f4d6c8e2b4b46188c3574f267edefbd/checker.stdout.raw.txt",
+      "retained": "work/ceres-v3/07/precommit/retained-raw/3918ebc1c38ac7f7.json",
+      "bytes": 200,
+      "sha256": "536f8f94ccb50b704c552109e8813692e704d075996bf2219ef7991ea1d80497"
+    },
+    {
+      "source": "work/ceres-v3/07/precommit/approved-precommit-rerun-7bd05a73477f4a9cb4341e7307b5a03f/checker/checker-exit.json",
+      "retained": "work/ceres-v3/07/precommit/retained-raw/81e796660238255b.json",
+      "bytes": 1247,
+      "sha256": "e197378ba79f51eedf7ec5fc86d9f7fbf0326696f33cb6b29d68ce2f2b2fff1e"
+    },
+    {
+      "source": "work/ceres-v3/07/precommit/approved-precommit-rerun-7bd05a73477f4a9cb4341e7307b5a03f/checker/checker-start.json",
+      "retained": "work/ceres-v3/07/precommit/retained-raw/f4654fdd36947686.json",
+      "bytes": 1176,
+      "sha256": "26bc1a99c2be4c582c3a47094ca5b43b6f3b577dcf91501b5119e2fb864b182e"
+    },
+    {
+      "source": "work/ceres-v3/07/precommit/approved-precommit-rerun-7bd05a73477f4a9cb4341e7307b5a03f/checker/git-diff-cached-check.process.json",
+      "retained": "work/ceres-v3/07/precommit/retained-raw/dd16580123da680e.json",
+      "bytes": 751,
+      "sha256": "a67c0b6a3f684cd9ef0b41e745fbae1cf099571c0d4801c5939ecfae646e3498"
+    },
+    {
+      "source": "work/ceres-v3/07/precommit/approved-precommit-rerun-7bd05a73477f4a9cb4341e7307b5a03f/checker/git-diff-cached-check.stderr.raw.txt",
+      "retained": "work/ceres-v3/07/precommit/retained-raw/6c53aebc487a3dfc.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "work/ceres-v3/07/precommit/approved-precommit-rerun-7bd05a73477f4a9cb4341e7307b5a03f/checker/git-diff-cached-check.stdout.raw.txt",
+      "retained": "work/ceres-v3/07/precommit/retained-raw/c9f837d22355c272.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "work/ceres-v3/07/precommit/approved-precommit-rerun-7bd05a73477f4a9cb4341e7307b5a03f/checker/precommit-summary.json",
+      "retained": "work/ceres-v3/07/precommit/retained-raw/e7fdee64cbe8470a.json",
+      "bytes": 2589,
+      "sha256": "34d3d4a7065e0a046e110674a249a2696baee426cc3ba40974592c8262a5d0ae"
+    },
+    {
+      "source": "work/ceres-v3/07/precommit/approved-precommit-rerun-7bd05a73477f4a9cb4341e7307b5a03f/checker-process-exit.json",
+      "retained": "work/ceres-v3/07/precommit/retained-raw/9f4ac7ccedc38df1.json",
+      "bytes": 4551,
+      "sha256": "76b80499dc12f92b9205d30419bca2d0cbcc3236a5642e7605f0aefaa96b65fa"
+    },
+    {
+      "source": "work/ceres-v3/07/precommit/approved-precommit-rerun-7bd05a73477f4a9cb4341e7307b5a03f/checker-process-start.json",
+      "retained": "work/ceres-v3/07/precommit/retained-raw/3c37f81298c6b072.json",
+      "bytes": 4839,
+      "sha256": "80420f89cd2893bfda7469b9d74fb801ebae406d0293ee2e5802027698be7eda"
+    },
+    {
+      "source": "work/ceres-v3/07/precommit/approved-precommit-rerun-7bd05a73477f4a9cb4341e7307b5a03f/checker.stderr.raw.txt",
+      "retained": "work/ceres-v3/07/precommit/retained-raw/4396860288e9864b.json",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "work/ceres-v3/07/precommit/approved-precommit-rerun-7bd05a73477f4a9cb4341e7307b5a03f/checker.stdout.raw.txt",
+      "retained": "work/ceres-v3/07/precommit/retained-raw/4ceb71374b7fb9b3.json",
+      "bytes": 205,
+      "sha256": "2bf62a95f1f04dd65f894a9a7245e253c662dcd09af0a8c13f869b339feb316c"
+    }
+  ]
+}

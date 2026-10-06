@@ -1,0 +1,6 @@
+{
+  "original_path": "evidence/deadline-candidate-v5-baeb9ba429994619b73362cdc27eeb88/process-exit.json",
+  "bytes": 192,
+  "sha256": "54d434dfdb69742cfa791f487b88f18fc2de862185f98755d87cfcd06675913e",
+  "utf8_text": "{\r\n  \"process_id\": 74360,\r\n  \"started_utc\": \"2026-10-06T01:39:23.6029399Z\",\r\n  \"ended_utc\": \"2026-10-06T01:39:28.6503453Z\",\r\n  \"exit_code\": 0,\r\n  \"stdout_bytes\": 597,\r\n  \"stderr_bytes\": 0\r\n}\r\n"
+}

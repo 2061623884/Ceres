@@ -1,0 +1,116 @@
+{
+  "requested_samples": 5,
+  "actual_samples": 5,
+  "all_passed": true,
+  "samples": [
+    {
+      "case_id": "H01",
+      "passed": true,
+      "output_sha256": "242ddda7e3c31314f907e4c516433b6b0b94ba84050b1e500550f48dca26dfb2",
+      "sidecar_sha256_matches": true,
+      "upstream_records": 3,
+      "upstream_http_statuses": [
+        200,
+        200,
+        200
+      ],
+      "observed_response_models": [
+        "kev-latest",
+        "qwen3.8-27b-fp8",
+        "qwen3.8-27b-fp8"
+      ],
+      "initial_backend_api_wall_ms": 693.4402000624686,
+      "selection_backend_wall_ms": null,
+      "handoff_backend_wall_ms": 2136.9163000490516
+    },
+    {
+      "case_id": "R01-named-product-variant",
+      "passed": true,
+      "output_sha256": "cbbdff575bd2e981bfbe192f522b974237c36a5f7988830c4bc6324904a64613",
+      "sidecar_sha256_matches": true,
+      "upstream_records": 2,
+      "upstream_http_statuses": [
+        200,
+        200
+      ],
+      "observed_response_models": [
+        "kev-latest",
+        "qwen3.8-27b-fp8"
+      ],
+      "initial_backend_api_wall_ms": 2341.4253999944776,
+      "selection_backend_wall_ms": null,
+      "handoff_backend_wall_ms": null
+    },
+    {
+      "case_id": "R01",
+      "passed": true,
+      "output_sha256": "3bac0051b1afc78a1bc6ef637b714acbbd48f954f20fce453c8684e5600ec6a8",
+      "sidecar_sha256_matches": true,
+      "upstream_records": 5,
+      "upstream_http_statuses": [
+        200,
+        200,
+        200,
+        200,
+        200
+      ],
+      "observed_response_models": [
+        "kev-latest",
+        "qwen3.8-27b-fp8",
+        "qwen3.8-27b-fp8",
+        "kev-latest",
+        "qwen3.8-27b-fp8"
+      ],
+      "initial_backend_api_wall_ms": 11018.671500030905,
+      "selection_backend_wall_ms": 3431.2923001125455,
+      "handoff_backend_wall_ms": null
+    },
+    {
+      "case_id": "R02",
+      "passed": true,
+      "output_sha256": "c164ddfed3cea4009f4896cd981f2c90e7445a13171bcec4e0660b0ca002c4ce",
+      "sidecar_sha256_matches": true,
+      "upstream_records": 3,
+      "upstream_http_statuses": [
+        200,
+        200,
+        200
+      ],
+      "observed_response_models": [
+        "kev-latest",
+        "qwen3.8-27b-fp8",
+        "qwen3.8-27b-fp8"
+      ],
+      "initial_backend_api_wall_ms": 6941.357099916786,
+      "selection_backend_wall_ms": null,
+      "handoff_backend_wall_ms": null
+    },
+    {
+      "case_id": "R03",
+      "passed": true,
+      "output_sha256": "416f506452c025ac5a10f765070dbbf69938b959686519876322928e81a4698e",
+      "sidecar_sha256_matches": true,
+      "upstream_records": 3,
+      "upstream_http_statuses": [
+        200,
+        200,
+        200
+      ],
+      "observed_response_models": [
+        "kev-latest",
+        "qwen3.8-27b-fp8",
+        "qwen3.8-27b-fp8"
+      ],
+      "initial_backend_api_wall_ms": 3233.6160000413656,
+      "selection_backend_wall_ms": null,
+      "handoff_backend_wall_ms": null
+    }
+  ],
+  "upstream_http_status_counts": {
+    "200": 16
+  },
+  "observed_response_model_counts": {
+    "kev-latest": 6,
+    "qwen3.8-27b-fp8": 10
+  }
+}

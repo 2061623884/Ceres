@@ -1,0 +1,6 @@
+{
+  "original_path": "preflight/20261006T-service-gate/ssh.stdout.raw.txt",
+  "bytes": 337,
+  "sha256": "c584ec68d694709a24d438c882ede0a4340e0cdf63d6ea184b357d53b885b42a",
+  "utf8_text": "pid_file=2701504\ncmdline=.venv/bin/python -u -m kev.serve --run jaredpalmer/kev-4b@139fdd94f1b6a6ad80cc15e08fcb99cac885a101 --host 127.0.0.1 --port 8009 \nupstream_git_sha=fe64b1274ea7f80d4095866df90666abb03e9cf6\ngpu1=1, GPU-5165b827-1b01-e6f0-d147-38e565ee823f, 17012 MiB, 7012 MiB, 0 %\ngpu1_compute=2701504, .venv/bin/python, 16944 MiB\n"
+}

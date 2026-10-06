@@ -1,0 +1,15 @@
+{
+  "pid": 50372,
+  "finished_at_utc": "2026-10-06T01:21:22.1620733Z",
+  "exit_code": 0,
+  "suite": "s1-cola-chicken-wings",
+  "targets": [
+    "tests/test_s1_data_completion.py::test_cola_chicken_wing_plan_includes_cola"
+  ],
+  "run_dir": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\targeted-v3-3bdd644c57f24527afbd192bad0f10e7",
+  "suite_dir": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\targeted-v3-3bdd644c57f24527afbd192bad0f10e7\\s1-cola-chicken-wings",
+  "source_path_count": 312,
+  "source_mismatch_count": 0,
+  "source_zip_sha256": "0a4e45eb99354942322890c81c7a523fa40df0fbb8b77779c298442ee760dc4d",
+  "catalog_sha256": "772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10"
+}

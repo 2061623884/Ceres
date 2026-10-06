@@ -1,0 +1,6 @@
+{
+  "original_path": "evidence/deadline-candidate-v4-04c44c7c6dfd4208830ca5c16bbcdbcf/agent-deadline/process-start.json",
+  "bytes": 843,
+  "sha256": "8ee227fe11ccfa125a63377f745d1ef61259ee092d0b2c8462d5c571fcf34a5f",
+  "utf8_text": "{\r\n  \"pid\": 54528,\r\n  \"started_at_utc\": \"2026-10-06T01:29:46.2941282Z\",\r\n  \"suite\": \"agent-deadline-candidate-v4\",\r\n  \"run_id\": \"04c44c7c6dfd4208830ca5c16bbcdbcf\",\r\n  \"run_dir\": \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\07\\\\evidence\\\\deadline-candidate-v4-04c44c7c6dfd4208830ca5c16bbcdbcf\",\r\n  \"argv\": [\r\n    \"-X\",\r\n    \"utf8\",\r\n    \"-m\",\r\n    \"pytest\",\r\n    \"-p\",\r\n    \"no:cacheprovider\",\r\n    \"-W\",\r\n    \"error::pytest.PytestUnhandledThreadExceptionWarning\",\r\n    \"-vv\",\r\n    \"--tb=short\",\r\n    \"-rs\",\r\n    \"--basetemp\",\r\n    \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\07\\\\evidence\\\\deadline-candidate-v4-04c44c7c6dfd4208830ca5c16bbcdbcf\\\\agent-deadline\\\\basetemp\",\r\n    \"tests/test_agent_deadline.py\"\r\n  ],\r\n  \"cwd\": \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\backend\"\r\n}"
+}

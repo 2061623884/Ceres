@@ -1,0 +1,6 @@
+{
+  "original_path": "evidence/targeted-v3-3bdd644c57f24527afbd192bad0f10e7/review-people-clarification/stdout.txt",
+  "bytes": 723,
+  "sha256": "396e2996d9ce1d6e17dec391b200fd71e1ec6990095b259619bf0c15d9069c9d",
+  "utf8_text": "============================= test session starts =============================\r\nplatform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.6.0 -- C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe\r\nrootdir: C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\r\nconfigfile: pyproject.toml\r\nplugins: anyio-4.15.1, langsmith-0.14.1, asyncio-1.4.0\r\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\r\ncollecting ... collected 1 item\r\n\r\ntests/test_review_probes.py::test_review_completed_people_change_requires_scope_clarification PASSED [100%]\r\n\r\n============================== 1 passed in 5.45s ==============================\r\n"
+}

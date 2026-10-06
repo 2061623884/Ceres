@@ -195,8 +195,11 @@ def test_remove_preserves_shared_sku_manual_quantity_and_remaining_ledger(db_ses
     kept = removed["items"][0]
     assert kept["quantity"] == 6
     assert kept["quantity_source"] == "user"
-    assert kept["added_quantity"] == 1
+    # Removing a recipe contribution does not undo the two purchased packs.
+    assert kept["added_quantity"] == 2
+    assert kept["remaining_quantity"] == 4
     assert {c["group_id"] for c in kept["contributions"]} == {"dish:b"}
+    assert kept["contributions"][0]["added_quantity"] == 1
 
 
 def test_declared_purchase_survives_retrieval(client, semantic_provider):

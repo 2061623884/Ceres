@@ -1,0 +1,429 @@
+{
+  "at": "2026-10-06T01:22:45.611403+00:00",
+  "candidate_zip": "0a4e45eb99354942322890c81c7a523fa40df0fbb8b77779c298442ee760dc4d",
+  "actual_results": [
+    {
+      "group": "dish-gap-turns",
+      "pid": 5780,
+      "exit": 1,
+      "argv": [
+        "-X",
+        "utf8",
+        "-m",
+        "pytest",
+        "-p",
+        "no:cacheprovider",
+        "-W",
+        "error::pytest.PytestUnhandledThreadExceptionWarning",
+        "-vv",
+        "--tb=short",
+        "-rs",
+        "--basetemp",
+        "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\targeted-v3-3bdd644c57f24527afbd192bad0f10e7\\dish-gap-turns\\basetemp",
+        "tests/test_w_dish_and_gap.py::test_w03_gap_fill_clarify_append_or_new_plan",
+        "tests/test_w_dish_and_gap.py::test_m1b_gap_fill_2_to_4_via_turns",
+        "tests/test_w_dish_and_gap.py::test_m1b_gap_fill_second_zero_delta_via_turns"
+      ],
+      "environment": {
+        "LLM_MODE": "offline",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONUTF8": "1",
+        "MERCURY_LIVE": "0",
+        "CERES_LIVE_MEMORY_ACCEPTANCE": "",
+        "CERES_LIVE_V2_DEMO": "",
+        "CERES_V3_ROUTE_EVIDENCE_DIR": "",
+        "CERES_V3_LIVE_EVIDENCE_DIR": "",
+        "CERES_V3_INDEPENDENT_EVIDENCE_DIR": "",
+        "CERES_GATE_KEY_NAMES_BLANKED": [],
+        "RETRIEVAL_MODE": "lexical",
+        "RETRIEVAL_INDEX_DIR": "",
+        "MEMORY_MODEL": "",
+        "OPENAI_API_KEY": "inherited unchanged; value not recorded",
+        "OPENAI_BASE_URL": "inherited unchanged; value not recorded",
+        "LLM_MODEL": "inherited unchanged; value not recorded",
+        "TEMP": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\targeted-v3-3bdd644c57f24527afbd192bad0f10e7\\dish-gap-turns\\temp",
+        "TMP": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\targeted-v3-3bdd644c57f24527afbd192bad0f10e7\\dish-gap-turns\\temp"
+      },
+      "source": [
+        {
+          "file": "source-before.json",
+          "paths": 312,
+          "mismatches": [],
+          "zip": "0a4e45eb99354942322890c81c7a523fa40df0fbb8b77779c298442ee760dc4d",
+          "head": "d3f426ecaf169bd01a7b86c137c61b9034d5079b",
+          "catalog": "772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10"
+        },
+        {
+          "file": "source-after.json",
+          "paths": 312,
+          "mismatches": [],
+          "zip": "0a4e45eb99354942322890c81c7a523fa40df0fbb8b77779c298442ee760dc4d",
+          "head": "d3f426ecaf169bd01a7b86c137c61b9034d5079b",
+          "catalog": "772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10"
+        }
+      ],
+      "raw": {
+        "command-environment.json": "9562d5cf67835f6e1d0b921eb2c2c7eedd2a5ba0f77b6d456fba480dfeca1d33",
+        "process-start.json": "9008ed3cc6c737d86d3d02c6a67a334b654a574cd789c2f9f5c2d5590d6fb92d",
+        "process-completion.json": "39413fee398c9d30aea9971abfe298665f9ba1b72793804cde7345596df7bcc4",
+        "stdout.txt": "2873a4339ec48d420e6d919003d80e522f34726fa4f3d94dd3afde379072ae2c",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_tail": [
+        "E   TypeError: 'NoneType' object is not subscriptable",
+        "============================= 3 failed in 13.68s =============================="
+      ]
+    },
+    {
+      "group": "p0-gap-persistence",
+      "pid": 29684,
+      "exit": 0,
+      "argv": [
+        "-X",
+        "utf8",
+        "-m",
+        "pytest",
+        "-p",
+        "no:cacheprovider",
+        "-W",
+        "error::pytest.PytestUnhandledThreadExceptionWarning",
+        "-vv",
+        "--tb=short",
+        "-rs",
+        "--basetemp",
+        "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\targeted-v3-3bdd644c57f24527afbd192bad0f10e7\\p0-gap-persistence\\basetemp",
+        "tests/test_p0_gap_persistence.py"
+      ],
+      "environment": {
+        "LLM_MODE": "offline",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONUTF8": "1",
+        "MERCURY_LIVE": "0",
+        "CERES_LIVE_MEMORY_ACCEPTANCE": "",
+        "CERES_LIVE_V2_DEMO": "",
+        "CERES_V3_ROUTE_EVIDENCE_DIR": "",
+        "CERES_V3_LIVE_EVIDENCE_DIR": "",
+        "CERES_V3_INDEPENDENT_EVIDENCE_DIR": "",
+        "CERES_GATE_KEY_NAMES_BLANKED": [],
+        "RETRIEVAL_MODE": "lexical",
+        "RETRIEVAL_INDEX_DIR": "",
+        "MEMORY_MODEL": "",
+        "OPENAI_API_KEY": "inherited unchanged; value not recorded",
+        "OPENAI_BASE_URL": "inherited unchanged; value not recorded",
+        "LLM_MODEL": "inherited unchanged; value not recorded",
+        "TEMP": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\targeted-v3-3bdd644c57f24527afbd192bad0f10e7\\p0-gap-persistence\\temp",
+        "TMP": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\targeted-v3-3bdd644c57f24527afbd192bad0f10e7\\p0-gap-persistence\\temp"
+      },
+      "source": [
+        {
+          "file": "source-before.json",
+          "paths": 312,
+          "mismatches": [],
+          "zip": "0a4e45eb99354942322890c81c7a523fa40df0fbb8b77779c298442ee760dc4d",
+          "head": "d3f426ecaf169bd01a7b86c137c61b9034d5079b",
+          "catalog": "772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10"
+        },
+        {
+          "file": "source-after.json",
+          "paths": 312,
+          "mismatches": [],
+          "zip": "0a4e45eb99354942322890c81c7a523fa40df0fbb8b77779c298442ee760dc4d",
+          "head": "d3f426ecaf169bd01a7b86c137c61b9034d5079b",
+          "catalog": "772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10"
+        }
+      ],
+      "raw": {
+        "command-environment.json": "69a04c0b5ee9e92680d6f0ffb4764cfc967cb40f7ea4a2da997762a31a073147",
+        "process-start.json": "41865f1df4b8d9965b5f157e4c62edb47ee536d3b14b9a8b944d7d6d9562c11d",
+        "process-completion.json": "ff775f20ee9b7d501dda7aef7c530f7800902e9c69edaefded6a9a93101d2a05",
+        "stdout.txt": "f2903b5dddcd42e949562ce53877066d1da6c736da6d2c5a1cfb1ef60b2d0824",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_tail": [
+        "",
+        "============================= 4 passed in 22.01s =============================="
+      ]
+    },
+    {
+      "group": "review-people-clarification",
+      "pid": 12612,
+      "exit": 0,
+      "argv": [
+        "-X",
+        "utf8",
+        "-m",
+        "pytest",
+        "-p",
+        "no:cacheprovider",
+        "-W",
+        "error::pytest.PytestUnhandledThreadExceptionWarning",
+        "-vv",
+        "--tb=short",
+        "-rs",
+        "--basetemp",
+        "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\targeted-v3-3bdd644c57f24527afbd192bad0f10e7\\review-people-clarification\\basetemp",
+        "tests/test_review_probes.py::test_review_completed_people_change_requires_scope_clarification"
+      ],
+      "environment": {
+        "LLM_MODE": "offline",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONUTF8": "1",
+        "MERCURY_LIVE": "0",
+        "CERES_LIVE_MEMORY_ACCEPTANCE": "",
+        "CERES_LIVE_V2_DEMO": "",
+        "CERES_V3_ROUTE_EVIDENCE_DIR": "",
+        "CERES_V3_LIVE_EVIDENCE_DIR": "",
+        "CERES_V3_INDEPENDENT_EVIDENCE_DIR": "",
+        "CERES_GATE_KEY_NAMES_BLANKED": [],
+        "RETRIEVAL_MODE": "lexical",
+        "RETRIEVAL_INDEX_DIR": "",
+        "MEMORY_MODEL": "",
+        "OPENAI_API_KEY": "inherited unchanged; value not recorded",
+        "OPENAI_BASE_URL": "inherited unchanged; value not recorded",
+        "LLM_MODEL": "inherited unchanged; value not recorded",
+        "TEMP": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\targeted-v3-3bdd644c57f24527afbd192bad0f10e7\\review-people-clarification\\temp",
+        "TMP": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\targeted-v3-3bdd644c57f24527afbd192bad0f10e7\\review-people-clarification\\temp"
+      },
+      "source": [
+        {
+          "file": "source-before.json",
+          "paths": 312,
+          "mismatches": [],
+          "zip": "0a4e45eb99354942322890c81c7a523fa40df0fbb8b77779c298442ee760dc4d",
+          "head": "d3f426ecaf169bd01a7b86c137c61b9034d5079b",
+          "catalog": "772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10"
+        },
+        {
+          "file": "source-after.json",
+          "paths": 312,
+          "mismatches": [],
+          "zip": "0a4e45eb99354942322890c81c7a523fa40df0fbb8b77779c298442ee760dc4d",
+          "head": "d3f426ecaf169bd01a7b86c137c61b9034d5079b",
+          "catalog": "772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10"
+        }
+      ],
+      "raw": {
+        "command-environment.json": "9b485987ac3568200ec16404dd4119656c7256a8b51e9dcd1b6f9baa74083b59",
+        "process-start.json": "6d9c61f39e1416aa854246b338b9ea6f9ceb469056b1ce80a7efb944fe274161",
+        "process-completion.json": "ce14dc60e948336861f39b0a40ccdecfa4941afd3ff309a67a7a0e701462b305",
+        "stdout.txt": "396e2996d9ce1d6e17dec391b200fd71e1ec6990095b259619bf0c15d9069c9d",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_tail": [
+        "",
+        "============================== 1 passed in 5.45s =============================="
+      ]
+    },
+    {
+      "group": "s1-cola-chicken-wings",
+      "pid": 50372,
+      "exit": 0,
+      "argv": [
+        "-X",
+        "utf8",
+        "-m",
+        "pytest",
+        "-p",
+        "no:cacheprovider",
+        "-W",
+        "error::pytest.PytestUnhandledThreadExceptionWarning",
+        "-vv",
+        "--tb=short",
+        "-rs",
+        "--basetemp",
+        "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\targeted-v3-3bdd644c57f24527afbd192bad0f10e7\\s1-cola-chicken-wings\\basetemp",
+        "tests/test_s1_data_completion.py::test_cola_chicken_wing_plan_includes_cola"
+      ],
+      "environment": {
+        "LLM_MODE": "offline",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONUTF8": "1",
+        "MERCURY_LIVE": "0",
+        "CERES_LIVE_MEMORY_ACCEPTANCE": "",
+        "CERES_LIVE_V2_DEMO": "",
+        "CERES_V3_ROUTE_EVIDENCE_DIR": "",
+        "CERES_V3_LIVE_EVIDENCE_DIR": "",
+        "CERES_V3_INDEPENDENT_EVIDENCE_DIR": "",
+        "CERES_GATE_KEY_NAMES_BLANKED": [],
+        "RETRIEVAL_MODE": "lexical",
+        "RETRIEVAL_INDEX_DIR": "",
+        "MEMORY_MODEL": "",
+        "OPENAI_API_KEY": "inherited unchanged; value not recorded",
+        "OPENAI_BASE_URL": "inherited unchanged; value not recorded",
+        "LLM_MODEL": "inherited unchanged; value not recorded",
+        "TEMP": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\targeted-v3-3bdd644c57f24527afbd192bad0f10e7\\s1-cola-chicken-wings\\temp",
+        "TMP": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\targeted-v3-3bdd644c57f24527afbd192bad0f10e7\\s1-cola-chicken-wings\\temp"
+      },
+      "source": [
+        {
+          "file": "source-before.json",
+          "paths": 312,
+          "mismatches": [],
+          "zip": "0a4e45eb99354942322890c81c7a523fa40df0fbb8b77779c298442ee760dc4d",
+          "head": "d3f426ecaf169bd01a7b86c137c61b9034d5079b",
+          "catalog": "772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10"
+        },
+        {
+          "file": "source-after.json",
+          "paths": 312,
+          "mismatches": [],
+          "zip": "0a4e45eb99354942322890c81c7a523fa40df0fbb8b77779c298442ee760dc4d",
+          "head": "d3f426ecaf169bd01a7b86c137c61b9034d5079b",
+          "catalog": "772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10"
+        }
+      ],
+      "raw": {
+        "command-environment.json": "d6efde97a624b6f9664df1abf289e2304519fd9b92e37d6fc62c011ba5400b4f",
+        "process-start.json": "b7abacfd08543a47106aa4ecfb9205954d5329e5edb5ad7225b50b7e66c0192a",
+        "process-completion.json": "2a5a8e6445222063ba82f45e6b38dbdaf0789554c6fe363f0308f85943f4ec4b",
+        "stdout.txt": "74a282d65ebed43b0bbe8db6d8f0fbd8a1d6ce5a6add435bbc39771c72998d73",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_tail": [
+        "",
+        "============================== 1 passed in 1.46s =============================="
+      ]
+    },
+    {
+      "group": "semantic-shared-sku-ledger",
+      "pid": 6312,
+      "exit": 0,
+      "argv": [
+        "-X",
+        "utf8",
+        "-m",
+        "pytest",
+        "-p",
+        "no:cacheprovider",
+        "-W",
+        "error::pytest.PytestUnhandledThreadExceptionWarning",
+        "-vv",
+        "--tb=short",
+        "-rs",
+        "--basetemp",
+        "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\targeted-v3-3bdd644c57f24527afbd192bad0f10e7\\semantic-shared-sku-ledger\\basetemp",
+        "tests/test_semantic_acceptance_edges.py::test_remove_preserves_shared_sku_manual_quantity_and_remaining_ledger"
+      ],
+      "environment": {
+        "LLM_MODE": "offline",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONUTF8": "1",
+        "MERCURY_LIVE": "0",
+        "CERES_LIVE_MEMORY_ACCEPTANCE": "",
+        "CERES_LIVE_V2_DEMO": "",
+        "CERES_V3_ROUTE_EVIDENCE_DIR": "",
+        "CERES_V3_LIVE_EVIDENCE_DIR": "",
+        "CERES_V3_INDEPENDENT_EVIDENCE_DIR": "",
+        "CERES_GATE_KEY_NAMES_BLANKED": [],
+        "RETRIEVAL_MODE": "lexical",
+        "RETRIEVAL_INDEX_DIR": "",
+        "MEMORY_MODEL": "",
+        "OPENAI_API_KEY": "inherited unchanged; value not recorded",
+        "OPENAI_BASE_URL": "inherited unchanged; value not recorded",
+        "LLM_MODEL": "inherited unchanged; value not recorded",
+        "TEMP": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\targeted-v3-3bdd644c57f24527afbd192bad0f10e7\\semantic-shared-sku-ledger\\temp",
+        "TMP": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\targeted-v3-3bdd644c57f24527afbd192bad0f10e7\\semantic-shared-sku-ledger\\temp"
+      },
+      "source": [
+        {
+          "file": "source-before.json",
+          "paths": 312,
+          "mismatches": [],
+          "zip": "0a4e45eb99354942322890c81c7a523fa40df0fbb8b77779c298442ee760dc4d",
+          "head": "d3f426ecaf169bd01a7b86c137c61b9034d5079b",
+          "catalog": "772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10"
+        },
+        {
+          "file": "source-after.json",
+          "paths": 312,
+          "mismatches": [],
+          "zip": "0a4e45eb99354942322890c81c7a523fa40df0fbb8b77779c298442ee760dc4d",
+          "head": "d3f426ecaf169bd01a7b86c137c61b9034d5079b",
+          "catalog": "772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10"
+        }
+      ],
+      "raw": {
+        "command-environment.json": "1d8fc10ca9f69edc00c4e9f41d955d4a14b93c2b31ea58bc8d030f80341af545",
+        "process-start.json": "77607bb067320ae3a962179ff2f1c31ef51cf737603600b8b471b46aeba46676",
+        "process-completion.json": "87e282a28ee0b32b15e1db9811e7710b575752f2758dcefcbbc0cfa3186966c2",
+        "stdout.txt": "01f37ad4207d8cae13cec77b3e7afb097cd50a3edc92a113e5a19003eb20cb29",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_tail": [
+        "",
+        "============================== 1 passed in 1.07s =============================="
+      ]
+    },
+    {
+      "group": "workflow-category",
+      "pid": 74220,
+      "exit": 0,
+      "argv": [
+        "-X",
+        "utf8",
+        "-m",
+        "pytest",
+        "-p",
+        "no:cacheprovider",
+        "-W",
+        "error::pytest.PytestUnhandledThreadExceptionWarning",
+        "-vv",
+        "--tb=short",
+        "-rs",
+        "--basetemp",
+        "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\targeted-v3-3bdd644c57f24527afbd192bad0f10e7\\workflow-category\\basetemp",
+        "tests/test_workflow_category.py"
+      ],
+      "environment": {
+        "LLM_MODE": "offline",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONUTF8": "1",
+        "MERCURY_LIVE": "0",
+        "CERES_LIVE_MEMORY_ACCEPTANCE": "",
+        "CERES_LIVE_V2_DEMO": "",
+        "CERES_V3_ROUTE_EVIDENCE_DIR": "",
+        "CERES_V3_LIVE_EVIDENCE_DIR": "",
+        "CERES_V3_INDEPENDENT_EVIDENCE_DIR": "",
+        "CERES_GATE_KEY_NAMES_BLANKED": [],
+        "RETRIEVAL_MODE": "lexical",
+        "RETRIEVAL_INDEX_DIR": "",
+        "MEMORY_MODEL": "",
+        "OPENAI_API_KEY": "inherited unchanged; value not recorded",
+        "OPENAI_BASE_URL": "inherited unchanged; value not recorded",
+        "LLM_MODEL": "inherited unchanged; value not recorded",
+        "TEMP": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\targeted-v3-3bdd644c57f24527afbd192bad0f10e7\\workflow-category\\temp",
+        "TMP": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\targeted-v3-3bdd644c57f24527afbd192bad0f10e7\\workflow-category\\temp"
+      },
+      "source": [
+        {
+          "file": "source-before.json",
+          "paths": 312,
+          "mismatches": [],
+          "zip": "0a4e45eb99354942322890c81c7a523fa40df0fbb8b77779c298442ee760dc4d",
+          "head": "d3f426ecaf169bd01a7b86c137c61b9034d5079b",
+          "catalog": "772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10"
+        },
+        {
+          "file": "source-after.json",
+          "paths": 312,
+          "mismatches": [],
+          "zip": "0a4e45eb99354942322890c81c7a523fa40df0fbb8b77779c298442ee760dc4d",
+          "head": "d3f426ecaf169bd01a7b86c137c61b9034d5079b",
+          "catalog": "772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10"
+        }
+      ],
+      "raw": {
+        "command-environment.json": "67e62981ae81f8920e09009a71c2829afc1b44457f08673528aef5893f372574",
+        "process-start.json": "66de6fc9fdb27e5052ccc3396e38046b50faeaeebb3b81708d3393ecdbc5e02f",
+        "process-completion.json": "064acdece89d2ed308a9d0f1c411cb3c52a34597129cd3c030181ad7d6dd91c7",
+        "stdout.txt": "87cd828a3135bec0b36dec7b12eae3af6002726fdf18f2ab16a481d01a16b490",
+        "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout_tail": [
+        "",
+        "============================== 3 passed in 7.92s =============================="
+      ]
+    }
+  ],
+  "limitation": "10 passed /3 failed; task not accepted. W subsequent gap-scope paths unresolved; no failed assertion deleted or skipped."
+}

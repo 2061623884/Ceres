@@ -1,0 +1,6 @@
+{
+  "original_path": "evidence/targeted-v3-3bdd644c57f24527afbd192bad0f10e7/p0-gap-persistence/stdout.txt",
+  "bytes": 1010,
+  "sha256": "f2903b5dddcd42e949562ce53877066d1da6c736da6d2c5a1cfb1ef60b2d0824",
+  "utf8_text": "============================= test session starts =============================\r\nplatform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.6.0 -- C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe\r\nrootdir: C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\r\nconfigfile: pyproject.toml\r\nplugins: anyio-4.15.1, langsmith-0.14.1, asyncio-1.4.0\r\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\r\ncollecting ... collected 4 items\r\n\r\ntests/test_p0_gap_persistence.py::test_plan_json_persists_the_gap_and_the_requirement_evidence PASSED [ 25%]\r\ntests/test_p0_gap_persistence.py::test_every_read_surface_echoes_gaps_and_intent PASSED [ 50%]\r\ntests/test_p0_gap_persistence.py::test_plan_ready_sse_carries_the_same_gaps PASSED [ 75%]\r\ntests/test_p0_gap_persistence.py::test_the_reply_names_the_missing_main_ingredient PASSED [100%]\r\n\r\n============================= 4 passed in 22.01s ==============================\r\n"
+}

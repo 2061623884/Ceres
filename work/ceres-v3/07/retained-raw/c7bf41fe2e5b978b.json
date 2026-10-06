@@ -1,0 +1,6 @@
+{
+  "original_path": "evidence/targeted-v3-3bdd644c57f24527afbd192bad0f10e7/workflow-category/stdout.txt",
+  "bytes": 958,
+  "sha256": "87cd828a3135bec0b36dec7b12eae3af6002726fdf18f2ab16a481d01a16b490",
+  "utf8_text": "============================= test session starts =============================\r\nplatform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.6.0 -- C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe\r\nrootdir: C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\r\nconfigfile: pyproject.toml\r\nplugins: anyio-4.15.1, langsmith-0.14.1, asyncio-1.4.0\r\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\r\ncollecting ... collected 3 items\r\n\r\ntests/test_workflow_category.py::test_the_category_page_uses_real_common_product_lookup_without_cart_write PASSED [ 33%]\r\ntests/test_workflow_category.py::test_a_category_turn_can_plan_a_real_product_but_writes_no_cart PASSED [ 66%]\r\ntests/test_workflow_category.py::test_an_existing_category_selection_task_runs_the_same_chain PASSED [100%]\r\n\r\n============================== 3 passed in 7.92s ==============================\r\n"
+}

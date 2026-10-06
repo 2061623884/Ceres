@@ -1,0 +1,110 @@
+{
+  "at": "2026-10-06T02:25:37.434807+00:00",
+  "root_action": "manual original argv/environment/actual exits/raw bytes and summary review; no tests executed",
+  "checker_pid": 55836,
+  "checker_exit_code": 1,
+  "actual_argv": [
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\precommit\\precommit_static_check.py",
+    "--scope-manifest",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\precommit\\approved-scope.json",
+    "--output-dir",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\precommit\\approved-precommit-0f4d6c8e2b4b46188c3574f267edefbd\\checker"
+  ],
+  "environment": {
+    "PYTHONUTF8": null,
+    "PYTHONDONTWRITEBYTECODE": null,
+    "TEMP": "C:\\Users\\20616\\AppData\\Local\\Temp",
+    "TMP": "C:\\Users\\20616\\AppData\\Local\\Temp",
+    "SYSTEMROOT": "C:\\WINDOWS",
+    "USERPROFILE": "C:\\Users\\20616",
+    "HOME": null,
+    "PATH": "C:\\Users\\20616\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell;C:\\Users\\20616\\.codex\\tmp\\arg0\\codex-arg01FzBzl;C:\\Users\\20616\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\libheif\\libheif\\bin;C:\\Users\\20616\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\jxrlib\\jxrlib\\bin;C:\\Users\\20616\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\poppler\\Library\\bin;C:\\Users\\20616\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\bin\\override;C:\\Program Files (x86)\\Razer Chroma SDK\\bin;C:\\Program Files\\Razer Chroma SDK\\bin;C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v12.6\\bin;C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v12.6\\libnvvp;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\Program Files\\NVIDIA Corporation\\Nsight Compute 2024.3.0\\;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Program Files\\NVIDIA Corporation\\NVIDIA NvDLISR;C:\\Program Files\\Git\\cmd;C:\\Program Files\\nodejs\\;C:\\Program Files\\Tailscale\\;C:\\Users\\20616\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell;C:\\WINDOWS\\system32\\config\\systemprofile\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Program Files (x86)\\Razer\\ChromaBroadcast\\bin;C:\\Program Files\\Razer\\ChromaBroadcast\\bin;C:\\Users\\20616\\.cargo\\bin;C:\\Users\\20616\\AppData\\Local\\Microsoft\\WindowsApps;C:\\texlive\\2025\\bin\\windows;C:\\Users\\20616\\AppData\\Local\\GitHubDesktop\\bin;C:\\Users\\20616\\AppData\\Roaming\\npm;C:\\Program Files\\dotnet\\;C:\\LINGO64_18\\;C:\\Users\\20616\\AppData\\Local\\agy\\bin;C:\\Users\\20616\\.grok\\bin;c:\\Users\\20616\\AppData\\Local\\Programs\\cursor\\resources\\app\\codeBin;C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\Scripts\\;C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\;C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Launcher\\;C:\\Users\\20616\\AppData\\Local\\hermes\\hermes-agent\\venv\\Scripts;C:\\Users\\20616\\AppData\\Local\\Programs\\Microsoft VS Code;C:\\Users\\20616\\.local\\bin;C:\\Users\\20616\\AppData\\Local\\Programs\\Qoder\\bin;C:\\Users\\20616\\AppData\\Local\\Programs\\QoderCN\\bin;\\c\\texlive\\2026\\bin\\windows;C:\\Users\\20616\\AppData\\Local\\Programs\\Ollama;C:\\Users\\20616\\.dotnet\\tools;C:\\Users\\20616\\AppData\\Local\\Obsidian;C:\\Users\\20616\\AppData\\Local\\Programs\\cursor\\resources\\app\\bin;C:\\Users\\20616\\AppData\\Local\\Programs\\Antigravity IDE\\bin;C:\\Users\\20616\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\bin\\fallback;C:\\Users\\20616\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin;C:\\Users\\20616\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\git\\cmd;C:\\Users\\20616\\AppData\\Local\\OpenAI\\Codex\\bin\\6de5bf5fa8384f8d;C:\\Users\\20616\\AppData\\Local\\OpenAI\\Codex\\bin\\f544b3844e0f14e9",
+    "GIT_DIR": null,
+    "GIT_WORK_TREE": null,
+    "GIT_INDEX_FILE": null,
+    "GIT_COMMON_DIR": null,
+    "GIT_OPTIONAL_LOCKS": null,
+    "GIT_CONFIG_NOSYSTEM": null,
+    "GIT_CONFIG_SYSTEM": null,
+    "GIT_CONFIG_GLOBAL": null
+  },
+  "git_pid": 73296,
+  "git_exit_code": 2,
+  "git_argv": [
+    "git",
+    "diff",
+    "--cached",
+    "--check"
+  ],
+  "git_environment": {
+    "GIT_DIR": null,
+    "GIT_WORK_TREE": null,
+    "GIT_INDEX_FILE": null,
+    "GIT_COMMON_DIR": null,
+    "GIT_OBJECT_DIRECTORY": null,
+    "GIT_OPTIONAL_LOCKS": null,
+    "GIT_CONFIG_NOSYSTEM": null,
+    "GIT_CONFIG_SYSTEM": null,
+    "GIT_CONFIG_GLOBAL": null
+  },
+  "retained_raw_count": 193,
+  "source_count": 312,
+  "staged_count": 406,
+  "only_failure": "extra blank line at EOF in diagnosis/remaining-regressions.md",
+  "passed": false,
+  "files": [
+    {
+      "path": "work/ceres-v3/07/precommit/approved-precommit-0f4d6c8e2b4b46188c3574f267edefbd/checker/checker-exit.json",
+      "bytes": 1235,
+      "sha256": "dc9f08ae0f068413177fd50d91a69ac5ec1f80ce136b1dc59a48ade149daf090"
+    },
+    {
+      "path": "work/ceres-v3/07/precommit/approved-precommit-0f4d6c8e2b4b46188c3574f267edefbd/checker/checker-start.json",
+      "bytes": 1164,
+      "sha256": "05af37bf7c4a23d7b2f92dfc8d5de96fcf36a85bb838494379e4c03e4416fd02"
+    },
+    {
+      "path": "work/ceres-v3/07/precommit/approved-precommit-0f4d6c8e2b4b46188c3574f267edefbd/checker/git-diff-cached-check.process.json",
+      "bytes": 751,
+      "sha256": "7b7ec4443bebef69b073e8b4349109bdff6ee0fc991e2ee5014e6d3f769ba62e"
+    },
+    {
+      "path": "work/ceres-v3/07/precommit/approved-precommit-0f4d6c8e2b4b46188c3574f267edefbd/checker/git-diff-cached-check.stderr.raw.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "work/ceres-v3/07/precommit/approved-precommit-0f4d6c8e2b4b46188c3574f267edefbd/checker/git-diff-cached-check.stdout.raw.txt",
+      "bytes": 79,
+      "sha256": "cba744bed268795c8370e903baea18c406252787a37f29ecfd1a8818b1d4945b"
+    },
+    {
+      "path": "work/ceres-v3/07/precommit/approved-precommit-0f4d6c8e2b4b46188c3574f267edefbd/checker/precommit-summary.json",
+      "bytes": 2713,
+      "sha256": "e6217efa94992d2f38c6b1631753c978fd664720e42ee10f9cd053c231a6dc1e"
+    },
+    {
+      "path": "work/ceres-v3/07/precommit/approved-precommit-0f4d6c8e2b4b46188c3574f267edefbd/checker-process-exit.json",
+      "bytes": 4545,
+      "sha256": "daadcc04a5c15ab597741eb4f26ddca7fde4d02c22a7001d2753bfcaeb11a424"
+    },
+    {
+      "path": "work/ceres-v3/07/precommit/approved-precommit-0f4d6c8e2b4b46188c3574f267edefbd/checker-process-start.json",
+      "bytes": 4821,
+      "sha256": "9748f0bf09ca426dcbf5236a55c0eaeb29b2520b0737dd4609a27f582820f9ea"
+    },
+    {
+      "path": "work/ceres-v3/07/precommit/approved-precommit-0f4d6c8e2b4b46188c3574f267edefbd/checker.stderr.raw.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "work/ceres-v3/07/precommit/approved-precommit-0f4d6c8e2b4b46188c3574f267edefbd/checker.stdout.raw.txt",
+      "bytes": 200,
+      "sha256": "536f8f94ccb50b704c552109e8813692e704d075996bf2219ef7991ea1d80497"
+    }
+  ]
+}

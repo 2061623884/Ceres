@@ -66,6 +66,7 @@ def test_demo_sku_ingredient_ids_are_legal():
 
 
 def test_cola_chicken_wing_plan_includes_cola(db_session):
+    from app.models.catalog import CatalogProduct
     from app.services.template_plan_service import TemplatePlanService
 
     dish = next(d for d in _load_dishes() if d["dish_id"] == "dish-kele-jichi")
@@ -77,7 +78,12 @@ def test_cola_chicken_wing_plan_includes_cola(db_session):
     result = service.validate_template_plan(dish, people=2)
     assert result["validation_status"] == "passed"
     skus = {item["sku_id"] for item in result["items"]}
-    assert "demo:cola-330ml" in skus
+    cola_rows = [item for item in result["items"] if item["requirement"]["ingredient_id"] == "cola"]
+    assert len(cola_rows) == 1, result
+    cola = cola_rows[0]
+    assert cola["role"] == "required" and cola["quantity"] >= 1, cola
+    assert cola["requirement"]["quantity"] == 330 and cola["requirement"]["unit"] == "ml", cola
+    assert "cola" in json.loads(db_session.get(CatalogProduct, cola["sku_id"]).ingredient_ids)
     assert "demo:chicken-wing-500g" in skus
 
 

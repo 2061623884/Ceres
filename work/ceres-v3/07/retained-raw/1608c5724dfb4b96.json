@@ -1,0 +1,6 @@
+{
+  "original_path": "evidence/targeted-v3-3bdd644c57f24527afbd192bad0f10e7/semantic-shared-sku-ledger/process-completion.json",
+  "bytes": 837,
+  "sha256": "87e282a28ee0b32b15e1db9811e7710b575752f2758dcefcbbc0cfa3186966c2",
+  "utf8_text": "{\r\n  \"pid\": 6312,\r\n  \"finished_at_utc\": \"2026-10-06T01:20:07.9610240Z\",\r\n  \"exit_code\": 0,\r\n  \"suite\": \"semantic-shared-sku-ledger\",\r\n  \"targets\": [\r\n    \"tests/test_semantic_acceptance_edges.py::test_remove_preserves_shared_sku_manual_quantity_and_remaining_ledger\"\r\n  ],\r\n  \"run_dir\": \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\07\\\\evidence\\\\targeted-v3-3bdd644c57f24527afbd192bad0f10e7\",\r\n  \"suite_dir\": \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\07\\\\evidence\\\\targeted-v3-3bdd644c57f24527afbd192bad0f10e7\\\\semantic-shared-sku-ledger\",\r\n  \"source_path_count\": 312,\r\n  \"source_mismatch_count\": 0,\r\n  \"source_zip_sha256\": \"0a4e45eb99354942322890c81c7a523fa40df0fbb8b77779c298442ee760dc4d\",\r\n  \"catalog_sha256\": \"772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10\"\r\n}"
+}

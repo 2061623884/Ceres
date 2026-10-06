@@ -74,9 +74,20 @@ def _assert_same_rule(plan: dict) -> None:
 def _partial_dish(client, semantic_provider) -> dict:
     from support.semantic_agent import lookup_then_add_id
 
-    semantic_provider(lookup_then_add_id("dish", "三杯鸡", "dish-sanbei-ji", people=2))
+    target = lookup_then_add_id("dish", "三杯鸡", "dish-sanbei-ji", people=2)[0]
+
+    def opt_in(request):
+        question = next(item for item in request["pending_clarifications"]
+                        if item["slot"] == "supply_gap_choice")
+        return {**target(request), "resolved_questions": [question["question_id"]]}
+
+    semantic_provider([target, opt_in])
     sid = create_session(client)
-    body = turn(client, sid, "我想吃三杯鸡，2人").json()
+    preview = turn(client, sid, "我想吃三杯鸡，2人").json()
+    assert preview["plan"] is None and preview["task_id"] is None, preview
+    assert preview["pending_clarifications"][0]["slot"] == "supply_gap_choice", preview
+    assert client.get("/api/v1/cart").json()["items"] == []
+    body = turn(client, sid, "那就先买能买到的", preview).json()
     assert body["plan"] and body["plan"]["gaps"], body
     return body
 

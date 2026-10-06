@@ -1,0 +1,6 @@
+{
+  "original_path": "evidence/live-route22-v5-0fec8e5ed7c0426f961237c6cf196ba9/process-exit.json",
+  "bytes": 192,
+  "sha256": "388d30476a94272cac330ec93952e7b34d9628cc1e2146f5a45e9f4bf61c6ddb",
+  "utf8_text": "{\r\n  \"process_id\": 38104,\r\n  \"started_utc\": \"2026-10-06T01:48:00.9139777Z\",\r\n  \"ended_utc\": \"2026-10-06T01:48:19.9870268Z\",\r\n  \"exit_code\": 0,\r\n  \"stdout_bytes\": 597,\r\n  \"stderr_bytes\": 0\r\n}\r\n"
+}

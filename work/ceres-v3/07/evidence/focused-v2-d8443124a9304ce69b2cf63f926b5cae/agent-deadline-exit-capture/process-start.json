@@ -1,0 +1,24 @@
+{
+  "pid": 4640,
+  "started_at_utc": "2026-10-06T01:09:41.6990231Z",
+  "suite": "agent-deadline-exit-capture",
+  "run_id": "d8443124a9304ce69b2cf63f926b5cae",
+  "run_dir": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\focused-v2-d8443124a9304ce69b2cf63f926b5cae",
+  "argv": [
+    "-X",
+    "utf8",
+    "-m",
+    "pytest",
+    "-p",
+    "no:cacheprovider",
+    "-W",
+    "error::pytest.PytestUnhandledThreadExceptionWarning",
+    "-vv",
+    "--tb=short",
+    "-rs",
+    "--basetemp",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\focused-v2-d8443124a9304ce69b2cf63f926b5cae\\agent-deadline-exit-capture\\basetemp",
+    "tests/test_agent_deadline.py"
+  ],
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend"
+}

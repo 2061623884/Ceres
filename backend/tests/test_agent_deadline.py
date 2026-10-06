@@ -7,8 +7,10 @@ three things:
 
 * once the budget is spent, no further model call, read or plan change starts;
 * a timeout is reported as itself, never as a shopper cancellation;
-* a mutation that *did* commit before the budget ran out is reported as saved,
-  with its plan, and is never presented as a full rollback.
+* a prepared change whose budget expires before commit preserves the existing
+  plan and its versions; it cannot be reported as saved.
+* a plan already committed before its SSE publication remains visible and
+  replayable when the clock expires during that publication.
 
 They run through the real HTTP entry, the real services and a temporary database.
 The user's side of the race is real too: nothing here patches the executor's
@@ -21,7 +23,7 @@ import uuid
 
 import pytest
 
-from support import create_session, post_turn
+from support import create_session, post_turn, stream_turn
 from support.semantic_agent import (
     lookup_then_add,
     request_amend,
@@ -97,13 +99,7 @@ def _two_products(request, fragments: tuple[str, str]) -> dict:
 def test_a_model_that_outlives_the_budget_writes_nothing(
     client, semantic_provider, turn_clock, turn_budget
 ):
-    """The call itself is slower than the whole turn: no task, no plan, no cart.
-
-    A turn with nothing committed fails through the ordinary failure path — the
-    same one a model failure takes — with its own code and ``retryable``, so the
-    trace and the SSE error agree.
-    """
-
+    """A model timeout is an SSE error; no task, plan or cart write follows."""
     def slow_round(request):
         turn_clock.now += turn_budget * 2
         return {
@@ -113,24 +109,21 @@ def test_a_model_that_outlives_the_budget_writes_nothing(
 
     semantic_provider([slow_round])
     sid = create_session(client)
-
-    response = send(client, sid, "买一盒牛奶")
-
-    assert response.status_code == 503, response.text
-    error = response.json()["error"]
-    assert error["code"] == "TURN_DEADLINE_EXCEEDED", error
-    assert error["retryable"] is True, error
-    # Nothing was created behind the failure, and the cart is untouched.
+    events = stream_turn(client, sid, "买一盒牛奶")
+    terminal = events[-1]
+    assert terminal["type"] == "error", events
+    assert terminal["payload"]["code"] == "TURN_DEADLINE_EXCEEDED", terminal
+    assert terminal["payload"]["retryable"] is True, terminal
     assert snapshot(client, sid)["task_id"] is None
+    assert snapshot(client, sid)["plan"] is None
     assert client.get("/api/v1/cart").json()["items"] == []
 
 
 def test_a_read_that_outlives_the_budget_writes_nothing(
     client, semantic_provider, turn_clock, turn_budget, monkeypatch
 ):
-    """A slow read, not a slow model: the same refusal, with real services."""
+    """A slow read carries the same deadline error without a plan write."""
     from app.agent.tools import read as read_module
-
     original_lookup = read_module.ReadTools._lookup
 
     def slow_lookup(self, lookup, candidates):
@@ -138,154 +131,163 @@ def test_a_read_that_outlives_the_budget_writes_nothing(
         return original_lookup(self, lookup, candidates)
 
     monkeypatch.setattr(read_module.ReadTools, "_lookup", slow_lookup)
-
     semantic_provider([*lookup_then_add("product", "全脂牛奶 1升")])
     sid = create_session(client)
-
-    response = send(client, sid, "买一盒牛奶")
-
-    assert response.status_code == 503, response.text
-    assert response.json()["error"]["code"] == "TURN_DEADLINE_EXCEEDED", response.text
-    # The read really ran, but the plan change it was for did not.
+    events = stream_turn(client, sid, "买一盒牛奶")
+    terminal = events[-1]
+    assert terminal["type"] == "error", events
+    assert terminal["payload"]["code"] == "TURN_DEADLINE_EXCEEDED", terminal
+    assert terminal["payload"]["retryable"] is True, terminal
     assert snapshot(client, sid)["task_id"] is None
     assert snapshot(client, sid)["plan"] is None
     assert client.get("/api/v1/cart").json()["items"] == []
 
 
-def test_a_shopper_stop_is_a_stop_and_never_a_timeout(
-    client, semantic_provider, monkeypatch
-):
-    """The two are different facts about a turn, and the client can tell them apart."""
-    from app.agent.turn_progress import NoOpTurnProgressSink
-
-    stopped = {"value": False}
-    monkeypatch.setattr(
-        NoOpTurnProgressSink, "should_stop", lambda self: stopped["value"]
-    )
-
-    def stop_during_the_call(request):
-        stopped["value"] = True
-        return {"reply": "已经买好了"}
-
-    semantic_provider([stop_during_the_call])
+def test_a_shopper_stop_is_a_stop_and_never_a_timeout(client, semantic_provider):
+    """Signal the actual streaming request through the public stop API."""
     sid = create_session(client)
     request_id = str(uuid.uuid4())
 
-    body = send_ok(client, sid, "买一件牛奶", None, request_id)
+    def stop_during_the_call(request):
+        stopped = client.post(f"/api/v1/guide/sessions/{sid}/turns/stop",
+                              json={"request_id": request_id})
+        assert stopped.status_code == 200, stopped.text
+        assert stopped.json()["cancelled"] is True, stopped.text
+        return {"reply": "已经买好了"}
 
-    assert body["status"] == "stopped"
-    assert body["message"] == "已停止，原清单保持不变。"
-    assert body["plan"] is None
-    assert all(
-        r.get("code") != "TURN_DEADLINE_EXCEEDED" for r in body["action_results"]
-    )
+    semantic_provider([stop_during_the_call])
+    events = stream_turn(client, sid, "买一件牛奶", request_id=request_id)
+    terminal = events[-1]
+    assert terminal["type"] == "turn.stopped", events
+    assert terminal["payload"]["status"] == "stopped", terminal
+    assert terminal["payload"]["answer_status"] == "stopped", terminal
+    assert terminal["payload"]["plan"] is None, terminal
+    assert all(row.get("code") != "TURN_DEADLINE_EXCEEDED"
+               for row in terminal["payload"]["action_results"])
+    assert snapshot(client, sid)["task_id"] is None
+    assert client.get("/api/v1/cart").json()["items"] == []
 
 
-def test_a_mutation_committed_before_the_budget_runs_out_is_reported_as_saved(
+def test_a_rebuild_that_expires_before_commit_keeps_the_existing_plan(
     client, semantic_provider, turn_clock, turn_budget, monkeypatch
 ):
-    """A plan, then two headcount rebuilds where only the first fits the budget.
-
-    Two supplements of the *same* goal are one turn's work: the first rebuild
-    commits, and the second one is what consumes the remaining budget — so the
-    refusal happens after that mutation has started, the case a check placed
-    before the whole execution would miss.
-    """
-    from app.agent.turn_progress import NoOpTurnProgressSink
-
-    armed = {"value": False}
-    validates = {"n": 0}
-    original_phase = NoOpTurnProgressSink.on_phase
-
-    def on_phase(self, phase):
-        original_phase(self, phase)
-        if phase != "validate" or not armed["value"]:
-            return
-        validates["n"] += 1
-        if validates["n"] == 2:
-            # The second rebuild is what the budget runs out during.
-            turn_clock.now += turn_budget * 2
-
-    monkeypatch.setattr(NoOpTurnProgressSink, "on_phase", on_phase)
-
-    def two_people_changes(request):
-        """A headcount supplement of the goal on screen (four people)."""
-        group = request["current_plan"]["groups"][0]
-        return request_amend(
-            focus=group["ref"], name=group["name"], changes={"set": {"people": 4}}
-        )
-
+    """One current-protocol rebuild is prepared, then refused before commit."""
+    from app.agent.tools.change_plan import PlanChangeExecutor
     sid = create_session(client)
-    semantic_provider([*lookup_then_add("dish", "番茄炒蛋", "番茄", people=2)])
-    first = send_ok(client, sid, "我想自己煮番茄炒蛋，两个人", None)
-    assert first["plan"]["items"]
+    semantic_provider([*lookup_then_add("dish", "番茄炒蛋", people=2)])
+    first = send_ok(client, sid, "我想自己煮番茄炒蛋，两个人")
+    assert first["plan"]["items"], first
+    before = snapshot(client, sid)
+    cart_before = client.get("/api/v1/cart").json()
+    prepared = []
+    original_prepare = PlanChangeExecutor.prepare
 
-    armed["value"] = True
-    semantic_provider([two_people_changes])
-    body = send_ok(client, sid, "改成四个人的份量，再改成三个人", first)
+    def expire_after_prepare(self, *args, **kwargs):
+        result = original_prepare(self, *args, **kwargs)
+        prepared.append(result)
+        turn_clock.now += turn_budget * 2
+        return result
 
-    # A spent budget is not a purchase step: the turn itself is reported failed,
-    # while the step stays a legal one because a plan really is awaiting a decision.
-    assert body["status"] != "stopped"
-    assert body["answer_status"] == "failed"
-    assert body["purchase_step"] == "awaiting_confirmation"
-    committed = [r for r in body["action_results"] if r.get("status") == "committed"]
-    timed_out = [
-        r for r in body["action_results"] if r.get("code") == "TURN_DEADLINE_EXCEEDED"
-    ]
-    assert len(committed) == 1, body["action_results"]
-    assert len(timed_out) == 1, body["action_results"]
+    monkeypatch.setattr(PlanChangeExecutor, "prepare", expire_after_prepare)
 
-    # The part that really was saved is reported as saved — not as a rollback —
-    # and the plan that exists is delivered with it.
-    assert "已经保存的部分" in body["message"]
-    assert body["plan"] is not None
-    assert body["plan"]["targets"][0]["people"] == 4, body["plan"]["targets"]
+    def people_change(request):
+        group = request["current_plan"]["groups"][0]
+        return request_amend(focus=group["ref"], name=group["name"],
+                             changes={"set": {"people": 4}})
 
-    # The response agrees with the database, and the refused mutation advanced
-    # nothing: no phantom plan and no phantom version.
+    semantic_provider([people_change])
+    events = stream_turn(client, sid, "改成四个人的份量", first)
+    terminal = events[-1]
+    assert len(prepared) == 1, prepared
+    assert terminal["type"] == "error", events
+    assert terminal["payload"]["code"] == "TURN_DEADLINE_EXCEEDED", terminal
     stored = snapshot(client, sid)
-    assert stored["plan"]["targets"][0]["people"] == 4, stored["plan"]["targets"]
-    assert body["state_version"] == first["state_version"] + 1
-    assert stored["state_version"] == body["state_version"]
+    for key in ("task_id", "state_version", "session_version", "plan"):
+        assert stored[key] == before[key], (key, before, stored)
+    assert client.get("/api/v1/cart").json() == cart_before
+
+
+def test_a_saved_plan_is_reported_when_the_budget_expires_during_publication(
+    client, semantic_provider, turn_clock, turn_budget, monkeypatch
+):
+    """The committed plan is truth even if time runs out sending plan.ready."""
+    from app.agent.turn_progress import CallbackTurnProgressSink
+    sid = create_session(client)
+    request_id = str(uuid.uuid4())
+    original_ready = CallbackTurnProgressSink.on_plan_ready
+    published = []
+
+    def expire_after_publication(self, payload):
+        original_ready(self, payload)
+        published.append(payload)
+        turn_clock.now += turn_budget * 2
+
+    monkeypatch.setattr(CallbackTurnProgressSink, "on_plan_ready", expire_after_publication)
+    semantic_provider([*lookup_then_add("product", "全脂牛奶 1升")])
+    events = stream_turn(client, sid, "买一盒牛奶", request_id=request_id)
+    terminal = events[-1]
+    assert len(published) == 1, published
+    assert terminal["type"] == "turn.completed", events
+    body = terminal["payload"]
+    ready = next(event["payload"]["plan"] for event in events if event["type"] == "plan.ready")
+    assert body["committed"] is True, body
+    for key in ("plan_effect", "task_id", "state_version", "session_version"):
+        assert ready[key] == body[key], (key, ready, body)
+    assert {key: value for key, value in ready.items()
+            if key not in ("plan_effect", "task_id", "state_version", "session_version")} == body["plan"], (ready, body)
+    assert body["status"] == "awaiting_confirmation", body
+    assert all(row.get("code") != "TURN_DEADLINE_EXCEEDED" for row in body["action_results"]), body
+    before = snapshot(client, sid)
+    assert before["task_id"] == body["task_id"], before
+    assert before["state_version"] == body["state_version"], before
+    assert before["plan"]["plan_id"] == ready["plan_id"], before
+    assert before["plan"]["plan_version"] == ready["plan_version"], before
+    assert [(row["sku_id"], row["quantity"]) for row in before["plan"]["items"]] == [
+        (row["sku_id"], row["quantity"]) for row in ready["items"]
+    ], before
+    replay = stream_turn(client, sid, "买一盒牛奶", request_id=request_id)[-1]
+    assert replay["type"] == "turn.completed", replay
+    assert replay["payload"]["assistant_message_id"] == body["assistant_message_id"], replay
+    assert replay["payload"]["plan"] == body["plan"], replay
+    assert snapshot(client, sid) == before
+    assert client.get("/api/v1/cart").json()["items"] == []
 
 
 def test_a_stop_that_arrives_during_the_build_writes_no_plan(
     client, semantic_provider, monkeypatch
 ):
-    """The cancellation lands while the mutation is being prepared."""
-    from app.agent.turn_progress import NoOpTurnProgressSink
-
-    stopped = {"value": False}
-    original_phase = NoOpTurnProgressSink.on_phase
+    """Stop at the real SSE validation phase, preserving executor checks."""
+    from app.agent.turn_progress import CallbackTurnProgressSink
+    sid = create_session(client)
+    request_id = str(uuid.uuid4())
+    original_phase = CallbackTurnProgressSink.on_phase
+    phases = []
 
     def on_phase(self, phase):
         original_phase(self, phase)
+        phases.append(phase)
         if phase == "validate":
-            stopped["value"] = True
+            stopped = client.post(f"/api/v1/guide/sessions/{sid}/turns/stop",
+                                  json={"request_id": request_id})
+            assert stopped.status_code == 200, stopped.text
+            assert stopped.json()["cancelled"] is True, stopped.text
 
-    monkeypatch.setattr(NoOpTurnProgressSink, "on_phase", on_phase)
-    monkeypatch.setattr(
-        NoOpTurnProgressSink, "should_stop", lambda self: stopped["value"]
-    )
-
+    monkeypatch.setattr(CallbackTurnProgressSink, "on_phase", on_phase)
     semantic_provider([*lookup_then_add("product", "全脂牛奶 1升")])
-    sid = create_session(client)
-    request_id = str(uuid.uuid4())
-
-    body = send_ok(client, sid, "买一盒牛奶", None, request_id)
-
-    assert body["task_id"] is None
-    assert body["plan"] is None
-    codes = [r.get("code") for r in body["action_results"]]
-    assert "STOPPED" in codes
-    assert "TURN_DEADLINE_EXCEEDED" not in codes
-    # A stop that arrives while a plan is being built is a stopped generation, not
-    # a completed turn, and never a shopper-cancelled *task*.
-    assert body["status"] == "stopped"
-    assert body["answer_status"] == "stopped"
-    # A refused mutation leaves no half-built task behind.
+    events = stream_turn(client, sid, "买一盒牛奶", request_id=request_id)
+    terminal = events[-1]
+    assert "validate" in phases, phases
+    assert terminal["type"] == "turn.stopped", events
+    body = terminal["payload"]
+    assert body["task_id"] is None, body
+    assert body["plan"] is None, body
+    codes = [row.get("code") for row in body["action_results"]]
+    assert "STOPPED" in codes, body
+    assert "TURN_DEADLINE_EXCEEDED" not in codes, body
+    assert body["status"] == "stopped", body
+    assert body["answer_status"] == "stopped", body
     assert snapshot(client, sid)["task_id"] is None
+    assert client.get("/api/v1/cart").json()["items"] == []
 
 
 # ------------------------------------------------------------- the read port

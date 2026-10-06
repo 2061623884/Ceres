@@ -1,0 +1,6 @@
+{
+  "original_path": "evidence/performance-analysis-v5-3aa73880edae4536b4e81a0a506cfe2e/stdout.raw.txt",
+  "bytes": 196,
+  "sha256": "487886bc555c9eaaf21e3b2ad460ac62e29ccb459d8f10266fd3631bc29173bf",
+  "utf8_text": "{\"route_n\": 22, \"route_correct\": 22, \"route_failed\": 0, \"route_p95_ms\": 719.9079999700189, \"route_q20_pass\": true, \"role_sample_n\": 5, \"reply_max_ms\": 11018.671500030905, \"reply_q20_pass\": true}\r\n"
+}

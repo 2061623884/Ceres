@@ -1,0 +1,958 @@
+{
+  "case_version": "ceres-v3-independent-dialogue-20261006-v1",
+  "requested_rows": 4,
+  "scope": "First independent candidate check; real Kev/public API, controlled role/memory models; setup observations separate",
+  "rows": [
+    {
+      "case_id": "HO01",
+      "expected": "stay_current",
+      "passed": true,
+      "message": "订单不用查了。朋友让我问问有没有适合露营的小包装零食",
+      "preparation": [
+        {
+          "kind": "actual Guide API / controlled role response",
+          "http_status": 200,
+          "body": "{\"session_id\": \"sess-5736fc4b84a5\", \"task_id\": null, \"state_version\": 0, \"status\": \"understanding\", \"answer_status\": \"accepted\", \"purchase_step\": \"none\", \"message\": \"你之前问过订单，现在需要继续查询吗？\", \"clarification\": null, \"plan\": null, \"plan_effect\": \"keep\", \"pending_clarification\": null, \"missing_constraints\": [], \"route\": \"chat\", \"readiness\": \"information\", \"missing_slots\": [], \"request_id\": \"fcd7aa7c-0155-4f37-92e7-ddb391705f2a\", \"session_version\": 0, \"committed\": false, \"allowed\": true, \"guard_code\": null, \"pending_clarifications\": [], \"action_results\": [], \"available_actions\": [\"send_message\"], \"user_message_id\": \"msg-faf988b6832d\", \"assistant_message_id\": \"msg-cf0e0ab9e439\", \"message_sequence\": 2, \"trace_id\": \"trace-58550a81b98c\", \"model_mode\": \"live\", \"business_data_mode\": \"demo\", \"current_editable_task_id\": null, \"product_cards\": []}"
+        }
+      ],
+      "actual_order": null,
+      "http_status": 200,
+      "raw_sse": "data: {\"type\": \"service.route\", \"payload\": {\"status\": \"completed\", \"decision\": \"stay_current\", \"raw_choice\": \"stay_current\", \"probabilities\": {\"stay_current\": 0.4651, \"suggest_switch\": 0.2765, \"clarify\": 0.2584}, \"raw_response\": {\"model\": \"kev-latest\", \"answers\": {\"service\": {\"type\": \"choice\", \"choice\": \"stay_current\", \"confidence\": 0.1977, \"probabilities\": {\"stay_current\": 0.4651, \"suggest_switch\": 0.2765, \"clarify\": 0.2584}}}, \"usage\": {\"input_tokens\": 437, \"output_tokens\": 67}, \"latency_ms\": 457.7}, \"request_id\": \"HO01\", \"current_role\": \"keke\", \"criteria_version\": \"ceres-service-v3.2\", \"route_ms\": 908.6154999677092, \"manual_switch_available\": true, \"prompt_mode\": \"none\"}}\n\ndata: {\"protocol_version\": 1, \"run_id\": \"run-10e67e943805\", \"sequence\": 0, \"type\": \"accepted\", \"session_id\": \"sess-5736fc4b84a5\", \"target_task_id\": null, \"message_id\": null, \"payload\": {}}\n\ndata: {\"protocol_version\": 1, \"run_id\": \"run-10e67e943805\", \"sequence\": 1, \"type\": \"progress\", \"session_id\": \"sess-5736fc4b84a5\", \"target_task_id\": null, \"message_id\": null, \"payload\": {\"phase\": \"understanding\"}}\n\ndata: {\"protocol_version\": 1, \"run_id\": \"run-10e67e943805\", \"sequence\": 2, \"type\": \"answer.delta\", \"session_id\": \"sess-5736fc4b84a5\", \"target_task_id\": null, \"message_id\": null, \"payload\": {\"delta\": \"可以继续选购露营零食。\", \"final\": true, \"replace\": false}}\n\ndata: {\"protocol_version\": 1, \"run_id\": \"run-10e67e943805\", \"sequence\": 3, \"type\": \"turn.completed\", \"session_id\": \"sess-5736fc4b84a5\", \"target_task_id\": null, \"message_id\": \"msg-f018f30809af\", \"payload\": {\"session_id\": \"sess-5736fc4b84a5\", \"task_id\": null, \"state_version\": 0, \"status\": \"understanding\", \"answer_status\": \"accepted\", \"purchase_step\": \"none\", \"message\": \"可以继续选购露营零食。\", \"clarification\": null, \"plan\": null, \"plan_effect\": \"keep\", \"pending_clarification\": null, \"missing_constraints\": [], \"route\": \"chat\", \"readiness\": \"information\", \"missing_slots\": [], \"request_id\": \"HO01\", \"session_version\": 0, \"committed\": false, \"allowed\": true, \"guard_code\": null, \"pending_clarifications\": [], \"action_results\": [], \"available_actions\": [\"send_message\"], \"user_message_id\": \"msg-dd30303ad23f\", \"assistant_message_id\": \"msg-f018f30809af\", \"message_sequence\": 4, \"trace_id\": \"trace-a7c84be8c5cd\", \"model_mode\": \"live\", \"business_data_mode\": \"demo\", \"current_editable_task_id\": null, \"product_cards\": []}}\n\n",
+      "upstream": [
+        {
+          "request": {
+            "state": {
+              "current_role": "Keke shopping",
+              "selected_object": null,
+              "recent_dialogue": [
+                {
+                  "role": "user",
+                  "content": "我们之前聊过订单状态"
+                },
+                {
+                  "role": "assistant",
+                  "content": "你之前问过订单，现在需要继续查询吗？"
+                }
+              ],
+              "utterance": "订单不用查了。朋友让我问问有没有适合露营的小包装零食",
+              "pending_question": null
+            },
+            "model": "kev-latest",
+            "questions": {
+              "service": {
+                "type": "choice",
+                "instructions": "Classify this turn using current_role, selected_object and recent_dialogue.\nKeke handles shopping, product comparison, purchase lists. Momo handles specific placed orders,\norder eligibility and after-sales actions. BOTH roles answer GENERAL store policies (returns,\nrefunds, delivery) and greetings. A product being considered is NOT a placed order.\nThe latest explicit new request overrides the old topic. Be conservative about switching.\nDecide which SERVICE can continue, not whether its business action is fully specified.\nRecent dialogue can resolve the service even when selected_object is null. If that dialogue\nis about removing an item from a purchase list, Keke handles the next cancellation reply;\nKeke can clarify the exact item/action within its own business turn.\nFor '取消一下': shopping-list context stays with Keke; placed-order context needs Momo;\nwith no resolvable object choose clarify. Questions about a general policy stay even when\nthey mention returns. Only classify; never act, invent an object or automatically switch.",
+                "criteria": {
+                  "stay_current": "Current role can handle it: shopping or purchase-list changes with Keke (including a short cancellation reply to list-removal dialogue, even without selected_object), specific orders with Momo, or GENERAL policies/greetings with either role. Business details may still need clarification within that role.",
+                  "suggest_switch": "Clearly requires the OTHER role: specific placed-order work from Keke, or a NEW shopping request from Momo. Not general policy or ambiguous cancellation.",
+                  "clarify": "The SERVICE needed is unresolved even with current role, selected object and dialogue. Cancellation with neither a purchase-list nor placed-order context needs clarification. Missing item details inside an already clear shopping service do not require service clarification."
+                }
+              }
+            }
+          },
+          "http_status": 200,
+          "raw_response": "{\"model\":\"kev-latest\",\"answers\":{\"service\":{\"type\":\"choice\",\"choice\":\"stay_current\",\"confidence\":0.1977,\"probabilities\":{\"stay_current\":0.4651,\"suggest_switch\":0.2765,\"clarify\":0.2584}}},\"usage\":{\"input_tokens\":437,\"output_tokens\":67},\"latency_ms\":457.7}",
+          "response": {
+            "model": "kev-latest",
+            "answers": {
+              "service": {
+                "type": "choice",
+                "choice": "stay_current",
+                "confidence": 0.1977,
+                "probabilities": {
+                  "stay_current": 0.4651,
+                  "suggest_switch": 0.2765,
+                  "clarify": 0.2584
+                }
+              }
+            },
+            "usage": {
+              "input_tokens": 437,
+              "output_tokens": 67
+            },
+            "latency_ms": 457.7
+          }
+        }
+      ],
+      "scenario_group": "negated-order-intent-with-quoted-history",
+      "actual": {
+        "status": "completed",
+        "decision": "stay_current",
+        "raw_choice": "stay_current",
+        "probabilities": {
+          "stay_current": 0.4651,
+          "suggest_switch": 0.2765,
+          "clarify": 0.2584
+        },
+        "raw_response": {
+          "model": "kev-latest",
+          "answers": {
+            "service": {
+              "type": "choice",
+              "choice": "stay_current",
+              "confidence": 0.1977,
+              "probabilities": {
+                "stay_current": 0.4651,
+                "suggest_switch": 0.2765,
+                "clarify": 0.2584
+              }
+            }
+          },
+          "usage": {
+            "input_tokens": 437,
+            "output_tokens": 67
+          },
+          "latency_ms": 457.7
+        },
+        "request_id": "HO01",
+        "current_role": "keke",
+        "criteria_version": "ceres-service-v3.2",
+        "route_ms": 908.6154999677092,
+        "manual_switch_available": true,
+        "prompt_mode": "none"
+      },
+      "role_unchanged_without_consent": true,
+      "orders_before": {
+        "items": []
+      },
+      "orders_after": {
+        "items": []
+      }
+    },
+    {
+      "case_id": "HO02",
+      "expected": "stay_current",
+      "passed": true,
+      "message": "包装写着“签收后可申请退货”，这句话是指门店的一般规则吗？我还没购买",
+      "preparation": [],
+      "actual_order": null,
+      "http_status": 200,
+      "raw_sse": "data: {\"type\": \"service.route\", \"payload\": {\"status\": \"completed\", \"decision\": \"stay_current\", \"raw_choice\": \"stay_current\", \"probabilities\": {\"stay_current\": 0.6969, \"suggest_switch\": 0.1443, \"clarify\": 0.1588}, \"raw_response\": {\"model\": \"kev-latest\", \"answers\": {\"service\": {\"type\": \"choice\", \"choice\": \"stay_current\", \"confidence\": 0.5453, \"probabilities\": {\"stay_current\": 0.6969, \"suggest_switch\": 0.1443, \"clarify\": 0.1588}}}, \"usage\": {\"input_tokens\": 402, \"output_tokens\": 67}, \"latency_ms\": 369.8}, \"request_id\": \"HO02\", \"current_role\": \"keke\", \"criteria_version\": \"ceres-service-v3.2\", \"route_ms\": 518.4727997984737, \"manual_switch_available\": true, \"prompt_mode\": \"none\"}}\n\ndata: {\"protocol_version\": 1, \"run_id\": \"run-0eb2f3eb3977\", \"sequence\": 0, \"type\": \"accepted\", \"session_id\": \"sess-f0c31001f16c\", \"target_task_id\": null, \"message_id\": null, \"payload\": {}}\n\ndata: {\"protocol_version\": 1, \"run_id\": \"run-0eb2f3eb3977\", \"sequence\": 1, \"type\": \"progress\", \"session_id\": \"sess-f0c31001f16c\", \"target_task_id\": null, \"message_id\": null, \"payload\": {\"phase\": \"understanding\"}}\n\ndata: {\"protocol_version\": 1, \"run_id\": \"run-0eb2f3eb3977\", \"sequence\": 2, \"type\": \"answer.delta\", \"session_id\": \"sess-f0c31001f16c\", \"target_task_id\": null, \"message_id\": null, \"payload\": {\"delta\": \"本轮角色模型是受控边界，不进行业务写入。\", \"final\": true, \"replace\": false}}\n\ndata: {\"protocol_version\": 1, \"run_id\": \"run-0eb2f3eb3977\", \"sequence\": 3, \"type\": \"turn.completed\", \"session_id\": \"sess-f0c31001f16c\", \"target_task_id\": null, \"message_id\": \"msg-f653b5249923\", \"payload\": {\"session_id\": \"sess-f0c31001f16c\", \"task_id\": null, \"state_version\": 0, \"status\": \"understanding\", \"answer_status\": \"accepted\", \"purchase_step\": \"none\", \"message\": \"本轮角色模型是受控边界，不进行业务写入。\", \"clarification\": null, \"plan\": null, \"plan_effect\": \"keep\", \"pending_clarification\": null, \"missing_constraints\": [], \"route\": \"chat\", \"readiness\": \"information\", \"missing_slots\": [], \"request_id\": \"HO02\", \"session_version\": 0, \"committed\": false, \"allowed\": true, \"guard_code\": null, \"pending_clarifications\": [], \"action_results\": [], \"available_actions\": [\"send_message\"], \"user_message_id\": \"msg-608c4575b410\", \"assistant_message_id\": \"msg-f653b5249923\", \"message_sequence\": 2, \"trace_id\": \"trace-9f2247223d1e\", \"model_mode\": \"live\", \"business_data_mode\": \"demo\", \"current_editable_task_id\": null, \"product_cards\": []}}\n\n",
+      "upstream": [
+        {
+          "request": {
+            "state": {
+              "current_role": "Keke shopping",
+              "selected_object": null,
+              "recent_dialogue": [],
+              "utterance": "包装写着“签收后可申请退货”，这句话是指门店的一般规则吗？我还没购买",
+              "pending_question": null
+            },
+            "model": "kev-latest",
+            "questions": {
+              "service": {
+                "type": "choice",
+                "instructions": "Classify this turn using current_role, selected_object and recent_dialogue.\nKeke handles shopping, product comparison, purchase lists. Momo handles specific placed orders,\norder eligibility and after-sales actions. BOTH roles answer GENERAL store policies (returns,\nrefunds, delivery) and greetings. A product being considered is NOT a placed order.\nThe latest explicit new request overrides the old topic. Be conservative about switching.\nDecide which SERVICE can continue, not whether its business action is fully specified.\nRecent dialogue can resolve the service even when selected_object is null. If that dialogue\nis about removing an item from a purchase list, Keke handles the next cancellation reply;\nKeke can clarify the exact item/action within its own business turn.\nFor '取消一下': shopping-list context stays with Keke; placed-order context needs Momo;\nwith no resolvable object choose clarify. Questions about a general policy stay even when\nthey mention returns. Only classify; never act, invent an object or automatically switch.",
+                "criteria": {
+                  "stay_current": "Current role can handle it: shopping or purchase-list changes with Keke (including a short cancellation reply to list-removal dialogue, even without selected_object), specific orders with Momo, or GENERAL policies/greetings with either role. Business details may still need clarification within that role.",
+                  "suggest_switch": "Clearly requires the OTHER role: specific placed-order work from Keke, or a NEW shopping request from Momo. Not general policy or ambiguous cancellation.",
+                  "clarify": "The SERVICE needed is unresolved even with current role, selected object and dialogue. Cancellation with neither a purchase-list nor placed-order context needs clarification. Missing item details inside an already clear shopping service do not require service clarification."
+                }
+              }
+            }
+          },
+          "http_status": 200,
+          "raw_response": "{\"model\":\"kev-latest\",\"answers\":{\"service\":{\"type\":\"choice\",\"choice\":\"stay_current\",\"confidence\":0.5453,\"probabilities\":{\"stay_current\":0.6969,\"suggest_switch\":0.1443,\"clarify\":0.1588}}},\"usage\":{\"input_tokens\":402,\"output_tokens\":67},\"latency_ms\":369.8}",
+          "response": {
+            "model": "kev-latest",
+            "answers": {
+              "service": {
+                "type": "choice",
+                "choice": "stay_current",
+                "confidence": 0.5453,
+                "probabilities": {
+                  "stay_current": 0.6969,
+                  "suggest_switch": 0.1443,
+                  "clarify": 0.1588
+                }
+              }
+            },
+            "usage": {
+              "input_tokens": 402,
+              "output_tokens": 67
+            },
+            "latency_ms": 369.8
+          }
+        }
+      ],
+      "scenario_group": "quotation-versus-personal-eligibility",
+      "actual": {
+        "status": "completed",
+        "decision": "stay_current",
+        "raw_choice": "stay_current",
+        "probabilities": {
+          "stay_current": 0.6969,
+          "suggest_switch": 0.1443,
+          "clarify": 0.1588
+        },
+        "raw_response": {
+          "model": "kev-latest",
+          "answers": {
+            "service": {
+              "type": "choice",
+              "choice": "stay_current",
+              "confidence": 0.5453,
+              "probabilities": {
+                "stay_current": 0.6969,
+                "suggest_switch": 0.1443,
+                "clarify": 0.1588
+              }
+            }
+          },
+          "usage": {
+            "input_tokens": 402,
+            "output_tokens": 67
+          },
+          "latency_ms": 369.8
+        },
+        "request_id": "HO02",
+        "current_role": "keke",
+        "criteria_version": "ceres-service-v3.2",
+        "route_ms": 518.4727997984737,
+        "manual_switch_available": true,
+        "prompt_mode": "none"
+      },
+      "role_unchanged_without_consent": true,
+      "orders_before": {
+        "items": []
+      },
+      "orders_after": {
+        "items": []
+      }
+    },
+    {
+      "case_id": "HO03",
+      "expected": "suggest_switch",
+      "passed": true,
+      "message": "是已经下单的订单，取消这单",
+      "preparation": [
+        {
+          "kind": "actual preceding Kev clarification; separate setup observation",
+          "http_status": 200,
+          "sse": "data: {\"type\": \"service.route\", \"payload\": {\"status\": \"completed\", \"decision\": \"clarify\", \"raw_choice\": \"clarify\", \"probabilities\": {\"stay_current\": 0.2777, \"suggest_switch\": 0.1014, \"clarify\": 0.6209}, \"raw_response\": {\"model\": \"kev-latest\", \"answers\": {\"service\": {\"type\": \"choice\", \"choice\": \"clarify\", \"confidence\": 0.4314, \"probabilities\": {\"stay_current\": 0.2777, \"suggest_switch\": 0.1014, \"clarify\": 0.6209}}}, \"usage\": {\"input_tokens\": 387, \"output_tokens\": 67}, \"latency_ms\": 355.8}, \"request_id\": \"HO03-clarification-setup\", \"current_role\": \"keke\", \"criteria_version\": \"ceres-service-v3.2\", \"route_ms\": 718.6737998854369, \"manual_switch_available\": true, \"prompt_mode\": \"none\"}}\n\ndata: {\"type\": \"turn.completed\", \"payload\": {\"message\": \"你指的是正在选购的商品或采购清单项，还是已下单订单？\", \"business_not_run\": true}}\n\n",
+          "upstream": [
+            {
+              "request": {
+                "state": {
+                  "current_role": "Keke shopping",
+                  "selected_object": null,
+                  "recent_dialogue": [],
+                  "utterance": "帮我取消那个",
+                  "pending_question": null
+                },
+                "model": "kev-latest",
+                "questions": {
+                  "service": {
+                    "type": "choice",
+                    "instructions": "Classify this turn using current_role, selected_object and recent_dialogue.\nKeke handles shopping, product comparison, purchase lists. Momo handles specific placed orders,\norder eligibility and after-sales actions. BOTH roles answer GENERAL store policies (returns,\nrefunds, delivery) and greetings. A product being considered is NOT a placed order.\nThe latest explicit new request overrides the old topic. Be conservative about switching.\nDecide which SERVICE can continue, not whether its business action is fully specified.\nRecent dialogue can resolve the service even when selected_object is null. If that dialogue\nis about removing an item from a purchase list, Keke handles the next cancellation reply;\nKeke can clarify the exact item/action within its own business turn.\nFor '取消一下': shopping-list context stays with Keke; placed-order context needs Momo;\nwith no resolvable object choose clarify. Questions about a general policy stay even when\nthey mention returns. Only classify; never act, invent an object or automatically switch.",
+                    "criteria": {
+                      "stay_current": "Current role can handle it: shopping or purchase-list changes with Keke (including a short cancellation reply to list-removal dialogue, even without selected_object), specific orders with Momo, or GENERAL policies/greetings with either role. Business details may still need clarification within that role.",
+                      "suggest_switch": "Clearly requires the OTHER role: specific placed-order work from Keke, or a NEW shopping request from Momo. Not general policy or ambiguous cancellation.",
+                      "clarify": "The SERVICE needed is unresolved even with current role, selected object and dialogue. Cancellation with neither a purchase-list nor placed-order context needs clarification. Missing item details inside an already clear shopping service do not require service clarification."
+                    }
+                  }
+                }
+              },
+              "http_status": 200,
+              "raw_response": "{\"model\":\"kev-latest\",\"answers\":{\"service\":{\"type\":\"choice\",\"choice\":\"clarify\",\"confidence\":0.4314,\"probabilities\":{\"stay_current\":0.2777,\"suggest_switch\":0.1014,\"clarify\":0.6209}}},\"usage\":{\"input_tokens\":387,\"output_tokens\":67},\"latency_ms\":355.8}",
+              "response": {
+                "model": "kev-latest",
+                "answers": {
+                  "service": {
+                    "type": "choice",
+                    "choice": "clarify",
+                    "confidence": 0.4314,
+                    "probabilities": {
+                      "stay_current": 0.2777,
+                      "suggest_switch": 0.1014,
+                      "clarify": 0.6209
+                    }
+                  }
+                },
+                "usage": {
+                  "input_tokens": 387,
+                  "output_tokens": 67
+                },
+                "latency_ms": 355.8
+              }
+            }
+          ],
+          "expected": "clarify",
+          "passed": true
+        }
+      ],
+      "actual_order": {
+        "order_id": "Ob9b8e02b528f4d22",
+        "status": "paid",
+        "created_at": "2026-10-06T09:52:10.799583",
+        "delivered_at": null,
+        "total_fen": 980,
+        "items": [
+          {
+            "item_id": 1,
+            "sku_id": "demo:eggs-fresh-6pack",
+            "product_name": "鲜鸡蛋 6枚装",
+            "quantity": 1,
+            "unit_price_fen": 980,
+            "returnable": true
+          }
+        ]
+      },
+      "http_status": 200,
+      "raw_sse": "data: {\"type\": \"service.route\", \"payload\": {\"status\": \"completed\", \"decision\": \"suggest_switch\", \"raw_choice\": \"suggest_switch\", \"probabilities\": {\"stay_current\": 0.1259, \"suggest_switch\": 0.7306, \"clarify\": 0.1435}, \"raw_response\": {\"model\": \"kev-latest\", \"answers\": {\"service\": {\"type\": \"choice\", \"choice\": \"suggest_switch\", \"confidence\": 0.5959, \"probabilities\": {\"stay_current\": 0.1259, \"suggest_switch\": 0.7306, \"clarify\": 0.1435}}}, \"usage\": {\"input_tokens\": 449, \"output_tokens\": 67}, \"latency_ms\": 383.0}, \"request_id\": \"HO03\", \"current_role\": \"keke\", \"criteria_version\": \"ceres-service-v3.2\", \"route_ms\": 534.3059001024812, \"manual_switch_available\": true, \"prompt_mode\": \"automatic\", \"target_role\": \"momo\", \"handoff_id\": \"handoff_5e15e51274004600a8a008fc9a0c6184\"}}\n\ndata: {\"type\": \"turn.completed\", \"payload\": {\"message\": \"订单业务由墨墨处理，是否切换？\", \"business_not_run\": true}}\n\n",
+      "upstream": [
+        {
+          "request": {
+            "state": {
+              "current_role": "Keke shopping",
+              "selected_object": {
+                "kind": "placed_order",
+                "order_id": "Ob9b8e02b528f4d22"
+              },
+              "recent_dialogue": [
+                {
+                  "role": "user",
+                  "content": "帮我取消那个"
+                }
+              ],
+              "utterance": "是已经下单的订单，取消这单",
+              "pending_question": "你指的是正在选购的商品或采购清单项，还是已下单订单？"
+            },
+            "model": "kev-latest",
+            "questions": {
+              "service": {
+                "type": "choice",
+                "instructions": "Classify this turn using current_role, selected_object and recent_dialogue.\nKeke handles shopping, product comparison, purchase lists. Momo handles specific placed orders,\norder eligibility and after-sales actions. BOTH roles answer GENERAL store policies (returns,\nrefunds, delivery) and greetings. A product being considered is NOT a placed order.\nThe latest explicit new request overrides the old topic. Be conservative about switching.\nDecide which SERVICE can continue, not whether its business action is fully specified.\nRecent dialogue can resolve the service even when selected_object is null. If that dialogue\nis about removing an item from a purchase list, Keke handles the next cancellation reply;\nKeke can clarify the exact item/action within its own business turn.\nFor '取消一下': shopping-list context stays with Keke; placed-order context needs Momo;\nwith no resolvable object choose clarify. Questions about a general policy stay even when\nthey mention returns. Only classify; never act, invent an object or automatically switch.",
+                "criteria": {
+                  "stay_current": "Current role can handle it: shopping or purchase-list changes with Keke (including a short cancellation reply to list-removal dialogue, even without selected_object), specific orders with Momo, or GENERAL policies/greetings with either role. Business details may still need clarification within that role.",
+                  "suggest_switch": "Clearly requires the OTHER role: specific placed-order work from Keke, or a NEW shopping request from Momo. Not general policy or ambiguous cancellation.",
+                  "clarify": "The SERVICE needed is unresolved even with current role, selected object and dialogue. Cancellation with neither a purchase-list nor placed-order context needs clarification. Missing item details inside an already clear shopping service do not require service clarification."
+                }
+              }
+            }
+          },
+          "http_status": 200,
+          "raw_response": "{\"model\":\"kev-latest\",\"answers\":{\"service\":{\"type\":\"choice\",\"choice\":\"suggest_switch\",\"confidence\":0.5959,\"probabilities\":{\"stay_current\":0.1259,\"suggest_switch\":0.7306,\"clarify\":0.1435}}},\"usage\":{\"input_tokens\":449,\"output_tokens\":67},\"latency_ms\":383.0}",
+          "response": {
+            "model": "kev-latest",
+            "answers": {
+              "service": {
+                "type": "choice",
+                "choice": "suggest_switch",
+                "confidence": 0.5959,
+                "probabilities": {
+                  "stay_current": 0.1259,
+                  "suggest_switch": 0.7306,
+                  "clarify": 0.1435
+                }
+              }
+            },
+            "usage": {
+              "input_tokens": 449,
+              "output_tokens": 67
+            },
+            "latency_ms": 383.0
+          }
+        }
+      ],
+      "terminal": {
+        "type": "turn.completed",
+        "payload": {
+          "message": "订单业务由墨墨处理，是否切换？",
+          "business_not_run": true
+        }
+      },
+      "business_before": {
+        "guide": {
+          "task_id": null,
+          "state_version": 0,
+          "session_version": 0,
+          "plan": null
+        },
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 3,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        }
+      },
+      "business_after": {
+        "guide": {
+          "task_id": null,
+          "state_version": 0,
+          "session_version": 0,
+          "plan": null
+        },
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 3,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        }
+      },
+      "business_paused": true,
+      "scenario_group": "answered-object-clarification",
+      "actual": {
+        "status": "completed",
+        "decision": "suggest_switch",
+        "raw_choice": "suggest_switch",
+        "probabilities": {
+          "stay_current": 0.1259,
+          "suggest_switch": 0.7306,
+          "clarify": 0.1435
+        },
+        "raw_response": {
+          "model": "kev-latest",
+          "answers": {
+            "service": {
+              "type": "choice",
+              "choice": "suggest_switch",
+              "confidence": 0.5959,
+              "probabilities": {
+                "stay_current": 0.1259,
+                "suggest_switch": 0.7306,
+                "clarify": 0.1435
+              }
+            }
+          },
+          "usage": {
+            "input_tokens": 449,
+            "output_tokens": 67
+          },
+          "latency_ms": 383.0
+        },
+        "request_id": "HO03",
+        "current_role": "keke",
+        "criteria_version": "ceres-service-v3.2",
+        "route_ms": 534.3059001024812,
+        "manual_switch_available": true,
+        "prompt_mode": "automatic",
+        "target_role": "momo",
+        "handoff_id": "handoff_5e15e51274004600a8a008fc9a0c6184"
+      },
+      "role_unchanged_without_consent": true,
+      "orders_before": {
+        "items": [
+          {
+            "order_id": "Ob9b8e02b528f4d22",
+            "status": "paid",
+            "created_at": "2026-10-06T09:52:10.799583",
+            "delivered_at": null,
+            "total_fen": 980,
+            "items": [
+              {
+                "item_id": 1,
+                "sku_id": "demo:eggs-fresh-6pack",
+                "product_name": "鲜鸡蛋 6枚装",
+                "quantity": 1,
+                "unit_price_fen": 980,
+                "returnable": true
+              }
+            ]
+          }
+        ]
+      },
+      "orders_after": {
+        "items": [
+          {
+            "order_id": "Ob9b8e02b528f4d22",
+            "status": "paid",
+            "created_at": "2026-10-06T09:52:10.799583",
+            "delivered_at": null,
+            "total_fen": 980,
+            "items": [
+              {
+                "item_id": 1,
+                "sku_id": "demo:eggs-fresh-6pack",
+                "product_name": "鲜鸡蛋 6枚装",
+                "quantity": 1,
+                "unit_price_fen": 980,
+                "returnable": true
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "HO04",
+      "expected": "suggest_switch",
+      "passed": true,
+      "message": "我想退——说错了，不处理订单，先帮我比较一下两种酸奶",
+      "preparation": [],
+      "actual_order": {
+        "order_id": "O068adb75a2f7498b",
+        "status": "paid",
+        "created_at": "2026-10-06T09:52:12.127149",
+        "delivered_at": null,
+        "total_fen": 980,
+        "items": [
+          {
+            "item_id": 2,
+            "sku_id": "demo:eggs-fresh-6pack",
+            "product_name": "鲜鸡蛋 6枚装",
+            "quantity": 1,
+            "unit_price_fen": 980,
+            "returnable": true
+          }
+        ]
+      },
+      "http_status": 200,
+      "raw_sse": "event: service.route\r\ndata: {\"status\": \"completed\", \"decision\": \"suggest_switch\", \"raw_choice\": \"suggest_switch\", \"probabilities\": {\"stay_current\": 0.222, \"suggest_switch\": 0.4141, \"clarify\": 0.3639}, \"raw_response\": {\"model\": \"kev-latest\", \"answers\": {\"service\": {\"type\": \"choice\", \"choice\": \"suggest_switch\", \"confidence\": 0.1212, \"probabilities\": {\"stay_current\": 0.222, \"suggest_switch\": 0.4141, \"clarify\": 0.3639}}}, \"usage\": {\"input_tokens\": 427, \"output_tokens\": 66}, \"latency_ms\": 380.1}, \"request_id\": \"HO04\", \"current_role\": \"momo\", \"criteria_version\": \"ceres-service-v3.2\", \"route_ms\": 692.0098999980837, \"manual_switch_available\": true, \"prompt_mode\": \"automatic\", \"target_role\": \"keke\", \"handoff_id\": \"handoff_fcb3d13a3c4a4196abf76357c688888e\"}\r\n\r\nevent: turn.completed\r\ndata: {\"message\": \"选购业务由可可处理，是否切换？\", \"business_not_run\": true}\r\n\r\n",
+      "upstream": [
+        {
+          "request": {
+            "state": {
+              "current_role": "Momo after-sales",
+              "selected_object": {
+                "kind": "placed_order",
+                "order_id": "O068adb75a2f7498b"
+              },
+              "recent_dialogue": [],
+              "utterance": "我想退——说错了，不处理订单，先帮我比较一下两种酸奶",
+              "pending_question": null
+            },
+            "model": "kev-latest",
+            "questions": {
+              "service": {
+                "type": "choice",
+                "instructions": "Classify this turn using current_role, selected_object and recent_dialogue.\nKeke handles shopping, product comparison, purchase lists. Momo handles specific placed orders,\norder eligibility and after-sales actions. BOTH roles answer GENERAL store policies (returns,\nrefunds, delivery) and greetings. A product being considered is NOT a placed order.\nThe latest explicit new request overrides the old topic. Be conservative about switching.\nDecide which SERVICE can continue, not whether its business action is fully specified.\nRecent dialogue can resolve the service even when selected_object is null. If that dialogue\nis about removing an item from a purchase list, Keke handles the next cancellation reply;\nKeke can clarify the exact item/action within its own business turn.\nFor '取消一下': shopping-list context stays with Keke; placed-order context needs Momo;\nwith no resolvable object choose clarify. Questions about a general policy stay even when\nthey mention returns. Only classify; never act, invent an object or automatically switch.",
+                "criteria": {
+                  "stay_current": "Current role can handle it: shopping or purchase-list changes with Keke (including a short cancellation reply to list-removal dialogue, even without selected_object), specific orders with Momo, or GENERAL policies/greetings with either role. Business details may still need clarification within that role.",
+                  "suggest_switch": "Clearly requires the OTHER role: specific placed-order work from Keke, or a NEW shopping request from Momo. Not general policy or ambiguous cancellation.",
+                  "clarify": "The SERVICE needed is unresolved even with current role, selected object and dialogue. Cancellation with neither a purchase-list nor placed-order context needs clarification. Missing item details inside an already clear shopping service do not require service clarification."
+                }
+              }
+            }
+          },
+          "http_status": 200,
+          "raw_response": "{\"model\":\"kev-latest\",\"answers\":{\"service\":{\"type\":\"choice\",\"choice\":\"suggest_switch\",\"confidence\":0.1212,\"probabilities\":{\"stay_current\":0.222,\"suggest_switch\":0.4141,\"clarify\":0.3639}}},\"usage\":{\"input_tokens\":427,\"output_tokens\":66},\"latency_ms\":380.1}",
+          "response": {
+            "model": "kev-latest",
+            "answers": {
+              "service": {
+                "type": "choice",
+                "choice": "suggest_switch",
+                "confidence": 0.1212,
+                "probabilities": {
+                  "stay_current": 0.222,
+                  "suggest_switch": 0.4141,
+                  "clarify": 0.3639
+                }
+              }
+            },
+            "usage": {
+              "input_tokens": 427,
+              "output_tokens": 66
+            },
+            "latency_ms": 380.1
+          }
+        }
+      ],
+      "terminal": {
+        "type": "turn.completed",
+        "payload": {
+          "message": "选购业务由可可处理，是否切换？",
+          "business_not_run": true
+        }
+      },
+      "business_before": {
+        "guide": {
+          "task_id": null,
+          "state_version": 0,
+          "session_version": 0,
+          "plan": null
+        },
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 5,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        }
+      },
+      "business_after": {
+        "guide": {
+          "task_id": null,
+          "state_version": 0,
+          "session_version": 0,
+          "plan": null
+        },
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 5,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        }
+      },
+      "business_paused": true,
+      "scenario_group": "self-correction-within-one-utterance",
+      "actual": {
+        "status": "completed",
+        "decision": "suggest_switch",
+        "raw_choice": "suggest_switch",
+        "probabilities": {
+          "stay_current": 0.222,
+          "suggest_switch": 0.4141,
+          "clarify": 0.3639
+        },
+        "raw_response": {
+          "model": "kev-latest",
+          "answers": {
+            "service": {
+              "type": "choice",
+              "choice": "suggest_switch",
+              "confidence": 0.1212,
+              "probabilities": {
+                "stay_current": 0.222,
+                "suggest_switch": 0.4141,
+                "clarify": 0.3639
+              }
+            }
+          },
+          "usage": {
+            "input_tokens": 427,
+            "output_tokens": 66
+          },
+          "latency_ms": 380.1
+        },
+        "request_id": "HO04",
+        "current_role": "momo",
+        "criteria_version": "ceres-service-v3.2",
+        "route_ms": 692.0098999980837,
+        "manual_switch_available": true,
+        "prompt_mode": "automatic",
+        "target_role": "keke",
+        "handoff_id": "handoff_fcb3d13a3c4a4196abf76357c688888e"
+      },
+      "role_unchanged_without_consent": true,
+      "orders_before": {
+        "items": [
+          {
+            "order_id": "O068adb75a2f7498b",
+            "status": "paid",
+            "created_at": "2026-10-06T09:52:12.127149",
+            "delivered_at": null,
+            "total_fen": 980,
+            "items": [
+              {
+                "item_id": 2,
+                "sku_id": "demo:eggs-fresh-6pack",
+                "product_name": "鲜鸡蛋 6枚装",
+                "quantity": 1,
+                "unit_price_fen": 980,
+                "returnable": true
+              }
+            ]
+          },
+          {
+            "order_id": "Ob9b8e02b528f4d22",
+            "status": "paid",
+            "created_at": "2026-10-06T09:52:10.799583",
+            "delivered_at": null,
+            "total_fen": 980,
+            "items": [
+              {
+                "item_id": 1,
+                "sku_id": "demo:eggs-fresh-6pack",
+                "product_name": "鲜鸡蛋 6枚装",
+                "quantity": 1,
+                "unit_price_fen": 980,
+                "returnable": true
+              }
+            ]
+          }
+        ]
+      },
+      "orders_after": {
+        "items": [
+          {
+            "order_id": "O068adb75a2f7498b",
+            "status": "paid",
+            "created_at": "2026-10-06T09:52:12.127149",
+            "delivered_at": null,
+            "total_fen": 980,
+            "items": [
+              {
+                "item_id": 2,
+                "sku_id": "demo:eggs-fresh-6pack",
+                "product_name": "鲜鸡蛋 6枚装",
+                "quantity": 1,
+                "unit_price_fen": 980,
+                "returnable": true
+              }
+            ]
+          },
+          {
+            "order_id": "Ob9b8e02b528f4d22",
+            "status": "paid",
+            "created_at": "2026-10-06T09:52:10.799583",
+            "delivered_at": null,
+            "total_fen": 980,
+            "items": [
+              {
+                "item_id": 1,
+                "sku_id": "demo:eggs-fresh-6pack",
+                "product_name": "鲜鸡蛋 6枚装",
+                "quantity": 1,
+                "unit_price_fen": 980,
+                "returnable": true
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "all_upstream": [
+    {
+      "request": {
+        "state": {
+          "current_role": "Keke shopping",
+          "selected_object": null,
+          "recent_dialogue": [
+            {
+              "role": "user",
+              "content": "我们之前聊过订单状态"
+            },
+            {
+              "role": "assistant",
+              "content": "你之前问过订单，现在需要继续查询吗？"
+            }
+          ],
+          "utterance": "订单不用查了。朋友让我问问有没有适合露营的小包装零食",
+          "pending_question": null
+        },
+        "model": "kev-latest",
+        "questions": {
+          "service": {
+            "type": "choice",
+            "instructions": "Classify this turn using current_role, selected_object and recent_dialogue.\nKeke handles shopping, product comparison, purchase lists. Momo handles specific placed orders,\norder eligibility and after-sales actions. BOTH roles answer GENERAL store policies (returns,\nrefunds, delivery) and greetings. A product being considered is NOT a placed order.\nThe latest explicit new request overrides the old topic. Be conservative about switching.\nDecide which SERVICE can continue, not whether its business action is fully specified.\nRecent dialogue can resolve the service even when selected_object is null. If that dialogue\nis about removing an item from a purchase list, Keke handles the next cancellation reply;\nKeke can clarify the exact item/action within its own business turn.\nFor '取消一下': shopping-list context stays with Keke; placed-order context needs Momo;\nwith no resolvable object choose clarify. Questions about a general policy stay even when\nthey mention returns. Only classify; never act, invent an object or automatically switch.",
+            "criteria": {
+              "stay_current": "Current role can handle it: shopping or purchase-list changes with Keke (including a short cancellation reply to list-removal dialogue, even without selected_object), specific orders with Momo, or GENERAL policies/greetings with either role. Business details may still need clarification within that role.",
+              "suggest_switch": "Clearly requires the OTHER role: specific placed-order work from Keke, or a NEW shopping request from Momo. Not general policy or ambiguous cancellation.",
+              "clarify": "The SERVICE needed is unresolved even with current role, selected object and dialogue. Cancellation with neither a purchase-list nor placed-order context needs clarification. Missing item details inside an already clear shopping service do not require service clarification."
+            }
+          }
+        }
+      },
+      "http_status": 200,
+      "raw_response": "{\"model\":\"kev-latest\",\"answers\":{\"service\":{\"type\":\"choice\",\"choice\":\"stay_current\",\"confidence\":0.1977,\"probabilities\":{\"stay_current\":0.4651,\"suggest_switch\":0.2765,\"clarify\":0.2584}}},\"usage\":{\"input_tokens\":437,\"output_tokens\":67},\"latency_ms\":457.7}",
+      "response": {
+        "model": "kev-latest",
+        "answers": {
+          "service": {
+            "type": "choice",
+            "choice": "stay_current",
+            "confidence": 0.1977,
+            "probabilities": {
+              "stay_current": 0.4651,
+              "suggest_switch": 0.2765,
+              "clarify": 0.2584
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 437,
+          "output_tokens": 67
+        },
+        "latency_ms": 457.7
+      }
+    },
+    {
+      "request": {
+        "state": {
+          "current_role": "Keke shopping",
+          "selected_object": null,
+          "recent_dialogue": [],
+          "utterance": "包装写着“签收后可申请退货”，这句话是指门店的一般规则吗？我还没购买",
+          "pending_question": null
+        },
+        "model": "kev-latest",
+        "questions": {
+          "service": {
+            "type": "choice",
+            "instructions": "Classify this turn using current_role, selected_object and recent_dialogue.\nKeke handles shopping, product comparison, purchase lists. Momo handles specific placed orders,\norder eligibility and after-sales actions. BOTH roles answer GENERAL store policies (returns,\nrefunds, delivery) and greetings. A product being considered is NOT a placed order.\nThe latest explicit new request overrides the old topic. Be conservative about switching.\nDecide which SERVICE can continue, not whether its business action is fully specified.\nRecent dialogue can resolve the service even when selected_object is null. If that dialogue\nis about removing an item from a purchase list, Keke handles the next cancellation reply;\nKeke can clarify the exact item/action within its own business turn.\nFor '取消一下': shopping-list context stays with Keke; placed-order context needs Momo;\nwith no resolvable object choose clarify. Questions about a general policy stay even when\nthey mention returns. Only classify; never act, invent an object or automatically switch.",
+            "criteria": {
+              "stay_current": "Current role can handle it: shopping or purchase-list changes with Keke (including a short cancellation reply to list-removal dialogue, even without selected_object), specific orders with Momo, or GENERAL policies/greetings with either role. Business details may still need clarification within that role.",
+              "suggest_switch": "Clearly requires the OTHER role: specific placed-order work from Keke, or a NEW shopping request from Momo. Not general policy or ambiguous cancellation.",
+              "clarify": "The SERVICE needed is unresolved even with current role, selected object and dialogue. Cancellation with neither a purchase-list nor placed-order context needs clarification. Missing item details inside an already clear shopping service do not require service clarification."
+            }
+          }
+        }
+      },
+      "http_status": 200,
+      "raw_response": "{\"model\":\"kev-latest\",\"answers\":{\"service\":{\"type\":\"choice\",\"choice\":\"stay_current\",\"confidence\":0.5453,\"probabilities\":{\"stay_current\":0.6969,\"suggest_switch\":0.1443,\"clarify\":0.1588}}},\"usage\":{\"input_tokens\":402,\"output_tokens\":67},\"latency_ms\":369.8}",
+      "response": {
+        "model": "kev-latest",
+        "answers": {
+          "service": {
+            "type": "choice",
+            "choice": "stay_current",
+            "confidence": 0.5453,
+            "probabilities": {
+              "stay_current": 0.6969,
+              "suggest_switch": 0.1443,
+              "clarify": 0.1588
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 402,
+          "output_tokens": 67
+        },
+        "latency_ms": 369.8
+      }
+    },
+    {
+      "request": {
+        "state": {
+          "current_role": "Keke shopping",
+          "selected_object": null,
+          "recent_dialogue": [],
+          "utterance": "帮我取消那个",
+          "pending_question": null
+        },
+        "model": "kev-latest",
+        "questions": {
+          "service": {
+            "type": "choice",
+            "instructions": "Classify this turn using current_role, selected_object and recent_dialogue.\nKeke handles shopping, product comparison, purchase lists. Momo handles specific placed orders,\norder eligibility and after-sales actions. BOTH roles answer GENERAL store policies (returns,\nrefunds, delivery) and greetings. A product being considered is NOT a placed order.\nThe latest explicit new request overrides the old topic. Be conservative about switching.\nDecide which SERVICE can continue, not whether its business action is fully specified.\nRecent dialogue can resolve the service even when selected_object is null. If that dialogue\nis about removing an item from a purchase list, Keke handles the next cancellation reply;\nKeke can clarify the exact item/action within its own business turn.\nFor '取消一下': shopping-list context stays with Keke; placed-order context needs Momo;\nwith no resolvable object choose clarify. Questions about a general policy stay even when\nthey mention returns. Only classify; never act, invent an object or automatically switch.",
+            "criteria": {
+              "stay_current": "Current role can handle it: shopping or purchase-list changes with Keke (including a short cancellation reply to list-removal dialogue, even without selected_object), specific orders with Momo, or GENERAL policies/greetings with either role. Business details may still need clarification within that role.",
+              "suggest_switch": "Clearly requires the OTHER role: specific placed-order work from Keke, or a NEW shopping request from Momo. Not general policy or ambiguous cancellation.",
+              "clarify": "The SERVICE needed is unresolved even with current role, selected object and dialogue. Cancellation with neither a purchase-list nor placed-order context needs clarification. Missing item details inside an already clear shopping service do not require service clarification."
+            }
+          }
+        }
+      },
+      "http_status": 200,
+      "raw_response": "{\"model\":\"kev-latest\",\"answers\":{\"service\":{\"type\":\"choice\",\"choice\":\"clarify\",\"confidence\":0.4314,\"probabilities\":{\"stay_current\":0.2777,\"suggest_switch\":0.1014,\"clarify\":0.6209}}},\"usage\":{\"input_tokens\":387,\"output_tokens\":67},\"latency_ms\":355.8}",
+      "response": {
+        "model": "kev-latest",
+        "answers": {
+          "service": {
+            "type": "choice",
+            "choice": "clarify",
+            "confidence": 0.4314,
+            "probabilities": {
+              "stay_current": 0.2777,
+              "suggest_switch": 0.1014,
+              "clarify": 0.6209
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 387,
+          "output_tokens": 67
+        },
+        "latency_ms": 355.8
+      }
+    },
+    {
+      "request": {
+        "state": {
+          "current_role": "Keke shopping",
+          "selected_object": {
+            "kind": "placed_order",
+            "order_id": "Ob9b8e02b528f4d22"
+          },
+          "recent_dialogue": [
+            {
+              "role": "user",
+              "content": "帮我取消那个"
+            }
+          ],
+          "utterance": "是已经下单的订单，取消这单",
+          "pending_question": "你指的是正在选购的商品或采购清单项，还是已下单订单？"
+        },
+        "model": "kev-latest",
+        "questions": {
+          "service": {
+            "type": "choice",
+            "instructions": "Classify this turn using current_role, selected_object and recent_dialogue.\nKeke handles shopping, product comparison, purchase lists. Momo handles specific placed orders,\norder eligibility and after-sales actions. BOTH roles answer GENERAL store policies (returns,\nrefunds, delivery) and greetings. A product being considered is NOT a placed order.\nThe latest explicit new request overrides the old topic. Be conservative about switching.\nDecide which SERVICE can continue, not whether its business action is fully specified.\nRecent dialogue can resolve the service even when selected_object is null. If that dialogue\nis about removing an item from a purchase list, Keke handles the next cancellation reply;\nKeke can clarify the exact item/action within its own business turn.\nFor '取消一下': shopping-list context stays with Keke; placed-order context needs Momo;\nwith no resolvable object choose clarify. Questions about a general policy stay even when\nthey mention returns. Only classify; never act, invent an object or automatically switch.",
+            "criteria": {
+              "stay_current": "Current role can handle it: shopping or purchase-list changes with Keke (including a short cancellation reply to list-removal dialogue, even without selected_object), specific orders with Momo, or GENERAL policies/greetings with either role. Business details may still need clarification within that role.",
+              "suggest_switch": "Clearly requires the OTHER role: specific placed-order work from Keke, or a NEW shopping request from Momo. Not general policy or ambiguous cancellation.",
+              "clarify": "The SERVICE needed is unresolved even with current role, selected object and dialogue. Cancellation with neither a purchase-list nor placed-order context needs clarification. Missing item details inside an already clear shopping service do not require service clarification."
+            }
+          }
+        }
+      },
+      "http_status": 200,
+      "raw_response": "{\"model\":\"kev-latest\",\"answers\":{\"service\":{\"type\":\"choice\",\"choice\":\"suggest_switch\",\"confidence\":0.5959,\"probabilities\":{\"stay_current\":0.1259,\"suggest_switch\":0.7306,\"clarify\":0.1435}}},\"usage\":{\"input_tokens\":449,\"output_tokens\":67},\"latency_ms\":383.0}",
+      "response": {
+        "model": "kev-latest",
+        "answers": {
+          "service": {
+            "type": "choice",
+            "choice": "suggest_switch",
+            "confidence": 0.5959,
+            "probabilities": {
+              "stay_current": 0.1259,
+              "suggest_switch": 0.7306,
+              "clarify": 0.1435
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 449,
+          "output_tokens": 67
+        },
+        "latency_ms": 383.0
+      }
+    },
+    {
+      "request": {
+        "state": {
+          "current_role": "Momo after-sales",
+          "selected_object": {
+            "kind": "placed_order",
+            "order_id": "O068adb75a2f7498b"
+          },
+          "recent_dialogue": [],
+          "utterance": "我想退——说错了，不处理订单，先帮我比较一下两种酸奶",
+          "pending_question": null
+        },
+        "model": "kev-latest",
+        "questions": {
+          "service": {
+            "type": "choice",
+            "instructions": "Classify this turn using current_role, selected_object and recent_dialogue.\nKeke handles shopping, product comparison, purchase lists. Momo handles specific placed orders,\norder eligibility and after-sales actions. BOTH roles answer GENERAL store policies (returns,\nrefunds, delivery) and greetings. A product being considered is NOT a placed order.\nThe latest explicit new request overrides the old topic. Be conservative about switching.\nDecide which SERVICE can continue, not whether its business action is fully specified.\nRecent dialogue can resolve the service even when selected_object is null. If that dialogue\nis about removing an item from a purchase list, Keke handles the next cancellation reply;\nKeke can clarify the exact item/action within its own business turn.\nFor '取消一下': shopping-list context stays with Keke; placed-order context needs Momo;\nwith no resolvable object choose clarify. Questions about a general policy stay even when\nthey mention returns. Only classify; never act, invent an object or automatically switch.",
+            "criteria": {
+              "stay_current": "Current role can handle it: shopping or purchase-list changes with Keke (including a short cancellation reply to list-removal dialogue, even without selected_object), specific orders with Momo, or GENERAL policies/greetings with either role. Business details may still need clarification within that role.",
+              "suggest_switch": "Clearly requires the OTHER role: specific placed-order work from Keke, or a NEW shopping request from Momo. Not general policy or ambiguous cancellation.",
+              "clarify": "The SERVICE needed is unresolved even with current role, selected object and dialogue. Cancellation with neither a purchase-list nor placed-order context needs clarification. Missing item details inside an already clear shopping service do not require service clarification."
+            }
+          }
+        }
+      },
+      "http_status": 200,
+      "raw_response": "{\"model\":\"kev-latest\",\"answers\":{\"service\":{\"type\":\"choice\",\"choice\":\"suggest_switch\",\"confidence\":0.1212,\"probabilities\":{\"stay_current\":0.222,\"suggest_switch\":0.4141,\"clarify\":0.3639}}},\"usage\":{\"input_tokens\":427,\"output_tokens\":66},\"latency_ms\":380.1}",
+      "response": {
+        "model": "kev-latest",
+        "answers": {
+          "service": {
+            "type": "choice",
+            "choice": "suggest_switch",
+            "confidence": 0.1212,
+            "probabilities": {
+              "stay_current": 0.222,
+              "suggest_switch": 0.4141,
+              "clarify": 0.3639
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 427,
+          "output_tokens": 66
+        },
+        "latency_ms": 380.1
+      }
+    }
+  ],
+  "failure": null
+}

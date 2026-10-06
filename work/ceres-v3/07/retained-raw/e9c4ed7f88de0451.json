@@ -1,0 +1,6 @@
+{
+  "original_path": "evidence/probe-03ba20b287a743d697c71113ceeb93d9/source-after.json",
+  "bytes": 486,
+  "sha256": "995e9a7a5e78ec7af355e1808b69438b33aa454b2c11b64037d5e9fa5bfa0db5",
+  "utf8_text": "{\r\n  \"head\": \"d3f426ecaf169bd01a7b86c137c61b9034d5079b\",\r\n  \"source_zip_sha256\": \"094eb7d28777d5c3d7025bcad4aebd9f71a300cb275fe8679c9ec5cd825d2dfb\",\r\n  \"source_path_count\": 312,\r\n  \"hash_entry_count\": 312,\r\n  \"mismatch_count\": 0,\r\n  \"mismatch_paths\": [],\r\n  \"catalog_path\": \"data/sale_guide.db\",\r\n  \"catalog_sha256\": \"772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10\",\r\n  \"catalog_expected_sha256\": \"772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10\"\r\n}\r\n"
+}

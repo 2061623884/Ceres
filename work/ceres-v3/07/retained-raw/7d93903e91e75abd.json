@@ -1,0 +1,6 @@
+{
+  "original_path": "evidence/live-route22-v5-0fec8e5ed7c0426f961237c6cf196ba9/result-summary.json",
+  "bytes": 581,
+  "sha256": "d6c4f7b9fbfbefe48e81193a02c37e4e047e6823c0c20e6b7fc6e052e8abd2a2",
+  "utf8_text": "{\r\n  \"case_version\": \"ceres-v3-core-20261006-v1\",\r\n  \"requested_rows\": 22,\r\n  \"actual_rows\": 22,\r\n  \"passed\": 22,\r\n  \"failed\": [],\r\n  \"unique_case_ids\": [\r\n    \"P01\",\r\n    \"R01\",\r\n    \"R02\",\r\n    \"R03\",\r\n    \"R04\",\r\n    \"R05\",\r\n    \"R06\",\r\n    \"R07\",\r\n    \"R08\",\r\n    \"R09\",\r\n    \"R10\"\r\n  ],\r\n  \"repetition_counts\": {\r\n    \"0\": 11,\r\n    \"1\": 11\r\n  },\r\n  \"upstream_calls\": 22,\r\n  \"upstream_http_statuses\": {\r\n    \"200\": 22\r\n  },\r\n  \"upstream_response_models\": {\r\n    \"kev-latest\": 22\r\n  },\r\n  \"results_sha256\": \"185e9ddf1fde5d3aff5f6b392db77ad9f92c6a4621cefa03323e90ba8d71a326\"\r\n}\r\n"
+}

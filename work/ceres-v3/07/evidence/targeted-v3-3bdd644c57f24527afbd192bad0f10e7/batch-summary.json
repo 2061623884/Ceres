@@ -1,0 +1,87 @@
+{
+  "batch_id": "3bdd644c57f24527afbd192bad0f10e7",
+  "candidate": "07-remaining-contract-migrations-v3",
+  "source_zip_sha256": "0a4e45eb99354942322890c81c7a523fa40df0fbb8b77779c298442ee760dc4d",
+  "git_head": "d3f426ecaf169bd01a7b86c137c61b9034d5079b",
+  "catalog_sha256": "772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10",
+  "source_path_count": 312,
+  "source_mismatch_count": 0,
+  "total_collected": 13,
+  "total_passed": 10,
+  "total_failed": 3,
+  "total_skipped": 0,
+  "groups": [
+    {
+      "name": "p0-gap-persistence",
+      "pid": 29684,
+      "exit_code": 0,
+      "collected": 4,
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 22.01,
+      "evidence": "p0-gap-persistence"
+    },
+    {
+      "name": "review-people-clarification",
+      "pid": 12612,
+      "exit_code": 0,
+      "collected": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 5.45,
+      "evidence": "review-people-clarification"
+    },
+    {
+      "name": "semantic-shared-sku-ledger",
+      "pid": 6312,
+      "exit_code": 0,
+      "collected": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 1.07,
+      "evidence": "semantic-shared-sku-ledger"
+    },
+    {
+      "name": "dish-gap-turns",
+      "pid": 5780,
+      "exit_code": 1,
+      "collected": 3,
+      "passed": 0,
+      "failed": 3,
+      "skipped": 0,
+      "seconds": 13.68,
+      "evidence": "dish-gap-turns"
+    },
+    {
+      "name": "workflow-category",
+      "pid": 74220,
+      "exit_code": 0,
+      "collected": 3,
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 7.92,
+      "evidence": "workflow-category"
+    },
+    {
+      "name": "s1-cola-chicken-wings",
+      "pid": 50372,
+      "exit_code": 0,
+      "collected": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 1.46,
+      "evidence": "s1-cola-chicken-wings"
+    }
+  ],
+  "failure_nodes": [
+    "tests/test_w_dish_and_gap.py::test_w03_gap_fill_clarify_append_or_new_plan",
+    "tests/test_w_dish_and_gap.py::test_m1b_gap_fill_2_to_4_via_turns",
+    "tests/test_w_dish_and_gap.py::test_m1b_gap_fill_second_zero_delta_via_turns"
+  ],
+  "representative_source_after": "s1-cola-chicken-wings/source-after.json"
+}

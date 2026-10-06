@@ -1,0 +1,82 @@
+{
+  "method": "Primary read of immutable raw API record bytes; no test execution",
+  "trace_sha256": "aab984cccb22803c071029d4ca9ad2ce786f16efc8f54df89ee1131ed13eda54",
+  "records": 338,
+  "core_case_ids": [
+    "R01",
+    "R02",
+    "R03",
+    "R04",
+    "R05",
+    "R06",
+    "R07",
+    "R08",
+    "R09",
+    "R10",
+    "P01",
+    "H01",
+    "H02",
+    "H03",
+    "H04",
+    "H05",
+    "H06",
+    "F01"
+  ],
+  "unbuffered_raw_responses": [
+    {
+      "nodeid": "tests/test_v3_policy_consultation.py::test_keke_reads_return_policy_before_any_mercury_session",
+      "sequence": 52,
+      "url": "http://testserver/api/v1/guide/sessions/sess-8f3712de06b1/turns/stream",
+      "status": 200
+    },
+    {
+      "nodeid": "tests/test_v3_policy_consultation.py::test_keke_policy_answer_uses_conditions_instead_of_product_recommendation",
+      "sequence": 56,
+      "url": "http://testserver/api/v1/guide/sessions/sess-ccb482f2f29b/turns/stream",
+      "status": 200
+    },
+    {
+      "nodeid": "tests/test_v3_policy_consultation.py::test_greetings_and_life_comments_do_not_create_a_purchase_task",
+      "sequence": 78,
+      "url": "http://testserver/api/v1/guide/sessions/sess-8ab8a9c7742b/turns/stream",
+      "status": 200
+    },
+    {
+      "nodeid": "tests/test_v3_policy_consultation.py::test_greetings_and_life_comments_do_not_create_a_purchase_task",
+      "sequence": 79,
+      "url": "http://testserver/api/v1/guide/sessions/sess-8ab8a9c7742b/turns/stream",
+      "status": 200
+    },
+    {
+      "nodeid": "tests/test_v3_policy_consultation.py::test_greetings_and_life_comments_do_not_create_a_purchase_task",
+      "sequence": 80,
+      "url": "http://testserver/api/v1/guide/sessions/sess-8ab8a9c7742b/turns/stream",
+      "status": 200
+    },
+    {
+      "nodeid": "tests/test_v3_policy_consultation.py::test_policy_reinitialization_keeps_existing_facts_and_unknown_query_is_honest",
+      "sequence": 84,
+      "url": "http://testserver/api/v1/guide/sessions/sess-a9e822af3454/turns/stream",
+      "status": 200
+    },
+    {
+      "nodeid": "tests/test_v3_policy_consultation.py::test_policy_reinitialization_keeps_existing_facts_and_unknown_query_is_honest",
+      "sequence": 85,
+      "url": "http://testserver/api/v1/guide/sessions/sess-a9e822af3454/turns/stream",
+      "status": 200
+    },
+    {
+      "nodeid": "tests/test_v3_routing_context.py::test_list_cancellation_uses_guide_history_without_order_action",
+      "sequence": 89,
+      "url": "http://testserver/api/v1/guide/sessions/sess-2f1aa64931cc/turns/stream",
+      "status": 200
+    },
+    {
+      "nodeid": "tests/test_v3_switch_lifecycle.py::test_momo_handoff_keeps_relevant_dialogue_and_resumes_existing_guide_state",
+      "sequence": 176,
+      "url": "http://testserver/api/v1/guide/sessions/sess-3a4f0f03fa4b/turns/stream",
+      "status": 200
+    }
+  ],
+  "raw_limit": "TestClient.send observer did not actively consume streams. Raw byte absence is retained; parsed SSE records do not become invented raw response bytes."
+}

@@ -1,0 +1,129 @@
+{
+  "case_id": "H01",
+  "message": "这单到哪了",
+  "expected_route": "suggest_switch",
+  "passed": true,
+  "opening": {
+    "opening_id": "open_1ff3a518294b425db03e4058b8e0abe9",
+    "guide_session_id": "sess-e78f5abd18ba",
+    "mercury_session_id": "ms_a9216839bbc6",
+    "role": "keke",
+    "prompt_displayed": false,
+    "handoff_id": null
+  },
+  "actual_order": {
+    "order_id": "Of2a44129dff54abb",
+    "status": "paid",
+    "created_at": "2026-10-06T09:50:27.635599",
+    "delivered_at": null,
+    "total_fen": 980,
+    "items": [
+      {
+        "item_id": 1,
+        "sku_id": "demo:eggs-fresh-6pack",
+        "product_name": "鲜鸡蛋 6枚装",
+        "quantity": 1,
+        "unit_price_fen": 980,
+        "returnable": true
+      }
+    ]
+  },
+  "upstream": [
+    {
+      "url": "http://127.0.0.1:18009/v1/systemone",
+      "method": "POST",
+      "request_body": "{\"state\":{\"current_role\":\"Keke shopping\",\"selected_object\":{\"kind\":\"placed_order\",\"order_id\":\"Of2a44129dff54abb\"},\"recent_dialogue\":[],\"utterance\":\"这单到哪了\",\"pending_question\":null},\"model\":\"kev-latest\",\"questions\":{\"service\":{\"type\":\"choice\",\"instructions\":\"Classify this turn using current_role, selected_object and recent_dialogue.\\nKeke handles shopping, product comparison, purchase lists. Momo handles specific placed orders,\\norder eligibility and after-sales actions. BOTH roles answer GENERAL store policies (returns,\\nrefunds, delivery) and greetings. A product being considered is NOT a placed order.\\nThe latest explicit new request overrides the old topic. Be conservative about switching.\\nDecide which SERVICE can continue, not whether its business action is fully specified.\\nRecent dialogue can resolve the service even when selected_object is null. If that dialogue\\nis about removing an item from a purchase list, Keke handles the next cancellation reply;\\nKeke can clarify the exact item/action within its own business turn.\\nFor '取消一下': shopping-list context stays with Keke; placed-order context needs Momo;\\nwith no resolvable object choose clarify. Questions about a general policy stay even when\\nthey mention returns. Only classify; never act, invent an object or automatically switch.\",\"criteria\":{\"stay_current\":\"Current role can handle it: shopping or purchase-list changes with Keke (including a short cancellation reply to list-removal dialogue, even without selected_object), specific orders with Momo, or GENERAL policies/greetings with either role. Business details may still need clarification within that role.\",\"suggest_switch\":\"Clearly requires the OTHER role: specific placed-order work from Keke, or a NEW shopping request from Momo. Not general policy or ambiguous cancellation.\",\"clarify\":\"The SERVICE needed is unresolved even with current role, selected object and dialogue. Cancellation with neither a purchase-list nor placed-order context needs clarification. Missing item details inside an already clear shopping service do not require service clarification.\"}}}}",
+      "buffered_stream_capture": true,
+      "client_boundary": "httpx.Client",
+      "http_status": 200,
+      "response_body": "{\"model\":\"kev-latest\",\"answers\":{\"service\":{\"type\":\"choice\",\"choice\":\"suggest_switch\",\"confidence\":0.5723,\"probabilities\":{\"stay_current\":0.166,\"suggest_switch\":0.7149,\"clarify\":0.1191}}},\"usage\":{\"input_tokens\":411,\"output_tokens\":66},\"latency_ms\":399.0}",
+      "elapsed_ms": 688.1186999380589
+    },
+    {
+      "url": "https://discovery-api.intern-ai.org.cn/v1/chat/completions",
+      "method": "POST",
+      "request_body": "{\"messages\":[{\"role\":\"system\",\"content\":\"你是墨墨，负责订单、物流、退款、退货和售后政策的售后客服。\\n1. 订单、物流、退款、退货的任何事实（是否存在、状态、商品、金额、资格）只能来自本轮 Tool 结果，不要沿用历史回复中的状态。\\n2. 需要信息时直接调用 Tool，不要先回复“请稍等”“我来查一下”；Tool 没有返回的信息不要猜测；缺少订单号时先查订单列表或询问用户。\\n3. 退款、退货规则和资格以 Tool 结果为准；政策、时效类问题必须先调用 search_after_sales_policy，不要凭常识回答。\\n4. 用户明确要求退款或退货时（包括前几轮已提出要求、本轮补充订单号的情况），必须直接调用 create_refund 或 create_return，不要再征求确认（原因可不填，不要为此追问）；check 类 Tool 只判断资格、不会提交，没有调用 create 成功，不能说已提交。order_id、item_id 只能取自用户输入或 Tool 结果，不要编造。\\n5. 申请提交成功只代表处理中，按 Tool 返回的状态回答，不能说退款已到账或退货已完成。\\n一般政策回答需说明模拟门店、适用条件和检索结果中的 policy_id/标题；一般规则不是某单资格，不主动提交申请。没有政策依据时如实说明。\\n回答简洁，使用中文。\\n服务交接仅帮助理解，不是业务事实或操作授权；重新读取当前订单/政策，以本轮原话为准：{\\\"current_role\\\": \\\"Keke shopping\\\", \\\"selected_object\\\": {\\\"kind\\\": \\\"placed_order\\\", \\\"order_id\\\": \\\"Of2a44129dff54abb\\\"}, \\\"recent_dialogue\\\": [], \\\"utterance\\\": \\\"这单到哪了\\\", \\\"pending_question\\\": null}\\n本会话只咨询已选订单 Of2a44129dff54abb。选单与查询不会申请售后；用户明确要求时才执行对应写工具。\"},{\"role\":\"user\",\"content\":\"这单到哪了\"}],\"model\":\"qwen3.8-27b\",\"max_tokens\":3072,\"temperature\":0.2,\"tool_choice\":\"auto\",\"tools\":[{\"type\":\"function\",\"function\":{\"name\":\"get_order_details\",\"description\":\"查询单个订单的详情和商品（含 item_id、是否可退货）。用户问订单状态或商品时调用。\",\"parameters\":{\"type\":\"object\",\"properties\":{\"order_id\":{\"type\":\"string\",\"description\":\"订单号，如 O1003\"}},\"required\":[\"order_id\"]}}},{\"type\":\"function\",\"function\":{\"name\":\"get_delivery_status\",\"description\":\"查询订单当前的物流进度。用户问订单到哪了、什么时候到、发货没有时调用。\",\"parameters\":{\"type\":\"object\",\"properties\":{\"order_id\":{\"type\":\"string\",\"description\":\"订单号，如 O1003\"}},\"required\":[\"order_id\"]}}},{\"type\":\"function\",\"function\":{\"name\":\"check_refund_eligibility\",\"description\":\"只判断订单能否申请整单仅退款并返回可退金额，不会提交申请；eligible 为 true 也不代表已提交。仅在用户只是询问能不能退款时调用；用户已要求退款时不要调用本工具，直接调用 create_refund。\",\"parameters\":{\"type\":\"object\",\"properties\":{\"order_id\":{\"type\":\"string\",\"description\":\"订单号，如 O1003\"}},\"required\":[\"order_id\"]}}},{\"type\":\"function\",\"function\":{\"name\":\"create_refund\",\"description\":\"用户明确要求退款时调用。只适用于未发货订单的整单退款。成功只表示申请已提交。内部会校验资格，无需先调用 check_refund_eligibility；reason 可不填。\",\"parameters\":{\"type\":\"object\",\"properties\":{\"order_id\":{\"type\":\"string\",\"description\":\"订单号，如 O1003\"},\"reason\":{\"type\":\"string\",\"description\":\"用户说明的原因，可不填\"}},\"required\":[\"order_id\"]}}},{\"type\":\"function\",\"function\":{\"name\":\"get_refund_status\",\"description\":\"查询退款申请记录和状态。不传 order_id 时返回当前用户的全部退款记录。\",\"parameters\":{\"type\":\"object\",\"properties\":{\"order_id\":{\"type\":\"string\",\"description\":\"订单号，如 O1003\"}},\"required\":[]}}},{\"type\":\"function\",\"function\":{\"name\":\"check_return_eligibility\",\"description\":\"只判断订单内每件商品能否退货，返回 item_id 和可退金额，不会提交申请。用户只是询问能不能退货时调用。\",\"parameters\":{\"type\":\"object\",\"properties\":{\"order_id\":{\"type\":\"string\",\"description\":\"订单号，如 O1003\"}},\"required\":[\"order_id\"]}}},{\"type\":\"function\",\"function\":{\"name\":\"create_return\",\"description\":\"用户明确要求退货时调用，一次提交一件商品。item_id 不清楚时先调用 get_order_details 获取，拿到后立即调用本工具。内部会校验资格；reason 可不填，不要为此追问用户。成功只表示申请已提交，等待审核。\",\"parameters\":{\"type\":\"object\",\"properties\":{\"order_id\":{\"type\":\"string\",\"description\":\"订单号，如 O1003\"},\"item_id\":{\"type\":\"integer\",\"description\":\"要退货商品的 item_id，必须取自 get_order_details 返回的 items，不要猜测\"},\"reason\":{\"type\":\"string\",\"description\":\"用户说明的原因，可不填\"}},\"required\":[\"order_id\",\"item_id\"]}}},{\"type\":\"function\",\"function\":{\"name\":\"get_return_status\",\"description\":\"查询退货申请记录和状态。不传 order_id 时返回当前用户的全部退货记录。\",\"parameters\":{\"type\":\"object\",\"properties\":{\"order_id\":{\"type\":\"string\",\"description\":\"订单号，如 O1003\"}},\"required\":[]}}},{\"type\":\"function\",\"function\":{\"name\":\"search_after_sales_policy\",\"description\":\"检索退款、退货、配送相关的售后政策原文（如退款到账时间、退货期限、配送时间）。用户问规则、时效、哪些商品能退时必须先调用，不要凭常识回答；某个具体订单能否退款或退货，用对应的 check Tool 判断。\",\"parameters\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的问题或关键词\"},\"category\":{\"type\":\"string\",\"enum\":[\"refund\",\"return\",\"delivery\"],\"description\":\"可选：refund 退款 / return 退货 / delivery 配送\"}},\"required\":[\"query\"]}}}]}",
+      "buffered_stream_capture": true,
+      "client_boundary": "openai._base_client.SyncHttpxClientWrapper",
+      "http_status": 200,
+      "response_body": "{\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":null,\"refusal\":null,\"annotations\":null,\"audio\":null,\"function_call\":null,\"tool_calls\":[{\"id\":\"chatcmpl-tool-878875ecd4c38ff2\",\"type\":\"function\",\"function\":{\"name\":\"get_delivery_status\",\"arguments\":\"{\\\"order_id\\\": \\\"Of2a44129dff54abb\\\"}\"}}],\"reasoning_content\":\"The user is asking \\\"这单到哪了\\\" (Where is this order?). The selected order is Of2a44129dff54abb. I should call get_delivery_status with that order_id.\\n\"},\"logprobs\":null,\"finish_reason\":\"tool_calls\",\"stop_reason\":null,\"token_ids\":null,\"routed_experts\":null}],\"created\":1791251429,\"ec_transfer_params\":null,\"id\":\"chatcmpl-293a693b-007e-41b2-bae7-846640cce6e2\",\"kv_transfer_params\":null,\"metrics\":null,\"model\":\"qwen3.8-27b-fp8\",\"object\":\"chat.completion\",\"prompt_logprobs\":null,\"prompt_text\":null,\"prompt_token_ids\":null,\"request_id\":\"req_3db05a1e-3c78-4025-90d8-f60bd259fd9f\",\"service_tier\":null,\"usage\":{\"prompt_tokens\":1712,\"total_tokens\":1798,\"completion_tokens\":86,\"prompt_tokens_details\":null,\"completion_tokens_details\":{\"reasoning_tokens\":45}}}",
+      "elapsed_ms": 1013.26569984667
+    },
+    {
+      "url": "https://discovery-api.intern-ai.org.cn/v1/chat/completions",
+      "method": "POST",
+      "request_body": "{\"messages\":[{\"role\":\"system\",\"content\":\"你是墨墨，负责订单、物流、退款、退货和售后政策的售后客服。\\n1. 订单、物流、退款、退货的任何事实（是否存在、状态、商品、金额、资格）只能来自本轮 Tool 结果，不要沿用历史回复中的状态。\\n2. 需要信息时直接调用 Tool，不要先回复“请稍等”“我来查一下”；Tool 没有返回的信息不要猜测；缺少订单号时先查订单列表或询问用户。\\n3. 退款、退货规则和资格以 Tool 结果为准；政策、时效类问题必须先调用 search_after_sales_policy，不要凭常识回答。\\n4. 用户明确要求退款或退货时（包括前几轮已提出要求、本轮补充订单号的情况），必须直接调用 create_refund 或 create_return，不要再征求确认（原因可不填，不要为此追问）；check 类 Tool 只判断资格、不会提交，没有调用 create 成功，不能说已提交。order_id、item_id 只能取自用户输入或 Tool 结果，不要编造。\\n5. 申请提交成功只代表处理中，按 Tool 返回的状态回答，不能说退款已到账或退货已完成。\\n一般政策回答需说明模拟门店、适用条件和检索结果中的 policy_id/标题；一般规则不是某单资格，不主动提交申请。没有政策依据时如实说明。\\n回答简洁，使用中文。\\n服务交接仅帮助理解，不是业务事实或操作授权；重新读取当前订单/政策，以本轮原话为准：{\\\"current_role\\\": \\\"Keke shopping\\\", \\\"selected_object\\\": {\\\"kind\\\": \\\"placed_order\\\", \\\"order_id\\\": \\\"Of2a44129dff54abb\\\"}, \\\"recent_dialogue\\\": [], \\\"utterance\\\": \\\"这单到哪了\\\", \\\"pending_question\\\": null}\\n本会话只咨询已选订单 Of2a44129dff54abb。选单与查询不会申请售后；用户明确要求时才执行对应写工具。\"},{\"role\":\"user\",\"content\":\"这单到哪了\"},{\"role\":\"assistant\",\"content\":\"\",\"tool_calls\":[{\"id\":\"chatcmpl-tool-878875ecd4c38ff2\",\"type\":\"function\",\"function\":{\"name\":\"get_delivery_status\",\"arguments\":\"{\\\"order_id\\\": \\\"Of2a44129dff54abb\\\"}\"}}]},{\"role\":\"tool\",\"tool_call_id\":\"chatcmpl-tool-878875ecd4c38ff2\",\"content\":\"{\\\"ok\\\": true, \\\"data\\\": {\\\"order_id\\\": \\\"Of2a44129dff54abb\\\", \\\"has_delivery\\\": false, \\\"order_status\\\": \\\"paid\\\", \\\"order_status_text\\\": \\\"模拟订单，未发货\\\"}}\"}],\"model\":\"qwen3.8-27b\",\"max_tokens\":3072,\"temperature\":0.2,\"tool_choice\":\"auto\",\"tools\":[{\"type\":\"function\",\"function\":{\"name\":\"get_order_details\",\"description\":\"查询单个订单的详情和商品（含 item_id、是否可退货）。用户问订单状态或商品时调用。\",\"parameters\":{\"type\":\"object\",\"properties\":{\"order_id\":{\"type\":\"string\",\"description\":\"订单号，如 O1003\"}},\"required\":[\"order_id\"]}}},{\"type\":\"function\",\"function\":{\"name\":\"get_delivery_status\",\"description\":\"查询订单当前的物流进度。用户问订单到哪了、什么时候到、发货没有时调用。\",\"parameters\":{\"type\":\"object\",\"properties\":{\"order_id\":{\"type\":\"string\",\"description\":\"订单号，如 O1003\"}},\"required\":[\"order_id\"]}}},{\"type\":\"function\",\"function\":{\"name\":\"check_refund_eligibility\",\"description\":\"只判断订单能否申请整单仅退款并返回可退金额，不会提交申请；eligible 为 true 也不代表已提交。仅在用户只是询问能不能退款时调用；用户已要求退款时不要调用本工具，直接调用 create_refund。\",\"parameters\":{\"type\":\"object\",\"properties\":{\"order_id\":{\"type\":\"string\",\"description\":\"订单号，如 O1003\"}},\"required\":[\"order_id\"]}}},{\"type\":\"function\",\"function\":{\"name\":\"create_refund\",\"description\":\"用户明确要求退款时调用。只适用于未发货订单的整单退款。成功只表示申请已提交。内部会校验资格，无需先调用 check_refund_eligibility；reason 可不填。\",\"parameters\":{\"type\":\"object\",\"properties\":{\"order_id\":{\"type\":\"string\",\"description\":\"订单号，如 O1003\"},\"reason\":{\"type\":\"string\",\"description\":\"用户说明的原因，可不填\"}},\"required\":[\"order_id\"]}}},{\"type\":\"function\",\"function\":{\"name\":\"get_refund_status\",\"description\":\"查询退款申请记录和状态。不传 order_id 时返回当前用户的全部退款记录。\",\"parameters\":{\"type\":\"object\",\"properties\":{\"order_id\":{\"type\":\"string\",\"description\":\"订单号，如 O1003\"}},\"required\":[]}}},{\"type\":\"function\",\"function\":{\"name\":\"check_return_eligibility\",\"description\":\"只判断订单内每件商品能否退货，返回 item_id 和可退金额，不会提交申请。用户只是询问能不能退货时调用。\",\"parameters\":{\"type\":\"object\",\"properties\":{\"order_id\":{\"type\":\"string\",\"description\":\"订单号，如 O1003\"}},\"required\":[\"order_id\"]}}},{\"type\":\"function\",\"function\":{\"name\":\"create_return\",\"description\":\"用户明确要求退货时调用，一次提交一件商品。item_id 不清楚时先调用 get_order_details 获取，拿到后立即调用本工具。内部会校验资格；reason 可不填，不要为此追问用户。成功只表示申请已提交，等待审核。\",\"parameters\":{\"type\":\"object\",\"properties\":{\"order_id\":{\"type\":\"string\",\"description\":\"订单号，如 O1003\"},\"item_id\":{\"type\":\"integer\",\"description\":\"要退货商品的 item_id，必须取自 get_order_details 返回的 items，不要猜测\"},\"reason\":{\"type\":\"string\",\"description\":\"用户说明的原因，可不填\"}},\"required\":[\"order_id\",\"item_id\"]}}},{\"type\":\"function\",\"function\":{\"name\":\"get_return_status\",\"description\":\"查询退货申请记录和状态。不传 order_id 时返回当前用户的全部退货记录。\",\"parameters\":{\"type\":\"object\",\"properties\":{\"order_id\":{\"type\":\"string\",\"description\":\"订单号，如 O1003\"}},\"required\":[]}}},{\"type\":\"function\",\"function\":{\"name\":\"search_after_sales_policy\",\"description\":\"检索退款、退货、配送相关的售后政策原文（如退款到账时间、退货期限、配送时间）。用户问规则、时效、哪些商品能退时必须先调用，不要凭常识回答；某个具体订单能否退款或退货，用对应的 check Tool 判断。\",\"parameters\":{\"type\":\"object\",\"properties\":{\"query\":{\"type\":\"string\",\"description\":\"用户的问题或关键词\"},\"category\":{\"type\":\"string\",\"enum\":[\"refund\",\"return\",\"delivery\"],\"description\":\"可选：refund 退款 / return 退货 / delivery 配送\"}},\"required\":[\"query\"]}}}]}",
+      "buffered_stream_capture": true,
+      "client_boundary": "openai._base_client.SyncHttpxClientWrapper",
+      "http_status": 200,
+      "response_body": "{\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"\\n\\n订单 Of2a44129dff54abb 目前状态为**已付款、未发货**，还没有物流信息。发货后就可以查到具体物流进度了。\",\"refusal\":null,\"annotations\":null,\"audio\":null,\"function_call\":null,\"reasoning_content\":\"The user is asking about the delivery status of order Of2a44129dff54abb. The tool returned that the order is paid but not yet shipped (has_delivery: false, order_status: \\\"paid\\\", order_status_text: \\\"模拟订单，未发货\\\").\\n\\nI should answer concisely in Chinese: the order has been paid but not yet shipped, so there is no logistics progress yet.\\n\"},\"logprobs\":null,\"finish_reason\":\"stop\",\"stop_reason\":null,\"token_ids\":null,\"routed_experts\":null}],\"created\":1791251429,\"ec_transfer_params\":null,\"id\":\"chatcmpl-3f586ccf-2e98-45d8-a96f-0548ec3fffea\",\"kv_transfer_params\":null,\"metrics\":null,\"model\":\"qwen3.8-27b-fp8\",\"object\":\"chat.completion\",\"prompt_logprobs\":null,\"prompt_text\":null,\"prompt_token_ids\":null,\"request_id\":\"req_bbce34ec-dfb1-41d2-8be6-a830f352041e\",\"service_tier\":null,\"usage\":{\"prompt_tokens\":1819,\"total_tokens\":1947,\"completion_tokens\":128,\"prompt_tokens_details\":null,\"completion_tokens_details\":{\"reasoning_tokens\":87}}}",
+      "elapsed_ms": 1104.532799916342
+    }
+  ],
+  "clock_scope": "in-process public API receipt to fully drained terminal SSE; no browser evidence",
+  "memory_model": "controlled empty output; actual worker drained; both role main models real",
+  "api_http_status": 200,
+  "sse": "data: {\"type\": \"service.route\", \"payload\": {\"status\": \"completed\", \"decision\": \"suggest_switch\", \"raw_choice\": \"suggest_switch\", \"probabilities\": {\"stay_current\": 0.166, \"suggest_switch\": 0.7149, \"clarify\": 0.1191}, \"raw_response\": {\"model\": \"kev-latest\", \"answers\": {\"service\": {\"type\": \"choice\", \"choice\": \"suggest_switch\", \"confidence\": 0.5723, \"probabilities\": {\"stay_current\": 0.166, \"suggest_switch\": 0.7149, \"clarify\": 0.1191}}}, \"usage\": {\"input_tokens\": 411, \"output_tokens\": 66}, \"latency_ms\": 399.0}, \"request_id\": \"H01\", \"current_role\": \"keke\", \"criteria_version\": \"ceres-service-v3.2\", \"route_ms\": 691.1241998896003, \"manual_switch_available\": true, \"prompt_mode\": \"automatic\", \"target_role\": \"momo\", \"handoff_id\": \"handoff_3051621b6ff94fa8ae64d9603804b732\"}}\n\ndata: {\"type\": \"turn.completed\", \"payload\": {\"message\": \"订单业务由墨墨处理，是否切换？\", \"business_not_run\": true}}\n\n",
+  "backend_api_wall_ms": 693.4402000624686,
+  "route": {
+    "status": "completed",
+    "decision": "suggest_switch",
+    "raw_choice": "suggest_switch",
+    "probabilities": {
+      "stay_current": 0.166,
+      "suggest_switch": 0.7149,
+      "clarify": 0.1191
+    },
+    "raw_response": {
+      "model": "kev-latest",
+      "answers": {
+        "service": {
+          "type": "choice",
+          "choice": "suggest_switch",
+          "confidence": 0.5723,
+          "probabilities": {
+            "stay_current": 0.166,
+            "suggest_switch": 0.7149,
+            "clarify": 0.1191
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 411,
+        "output_tokens": 66
+      },
+      "latency_ms": 399.0
+    },
+    "request_id": "H01",
+    "current_role": "keke",
+    "criteria_version": "ceres-service-v3.2",
+    "route_ms": 691.1241998896003,
+    "manual_switch_available": true,
+    "prompt_mode": "automatic",
+    "target_role": "momo",
+    "handoff_id": "handoff_3051621b6ff94fa8ae64d9603804b732"
+  },
+  "handoff_sse": "event: accepted\r\ndata: {\"request_id\": \"handoff_handoff_3051621b6ff94fa8ae64d9603804b732\"}\r\n\r\nevent: answer.delta\r\ndata: {\"text\": \"订单 Of2a44129dff54abb 目前状态为**已付款、未发货**，还没有物流信息。发货后就可以查到具体物流进度了。\"}\r\n\r\nevent: turn.completed\r\ndata: {\"session_id\": \"ms_a9216839bbc6\", \"final_text\": \"订单 Of2a44129dff54abb 目前状态为**已付款、未发货**，还没有物流信息。发货后就可以查到具体物流进度了。\"}\r\n\r\n",
+  "handoff_backend_wall_ms": 2136.9163000490516,
+  "orders_after": {
+    "items": [
+      {
+        "order_id": "Of2a44129dff54abb",
+        "status": "paid",
+        "created_at": "2026-10-06T09:50:27.635599",
+        "delivered_at": null,
+        "total_fen": 980,
+        "items": [
+          {
+            "item_id": 1,
+            "sku_id": "demo:eggs-fresh-6pack",
+            "product_name": "鲜鸡蛋 6枚装",
+            "quantity": 1,
+            "unit_price_fen": 980,
+            "returnable": true
+          }
+        ]
+      }
+    ]
+  }
+}

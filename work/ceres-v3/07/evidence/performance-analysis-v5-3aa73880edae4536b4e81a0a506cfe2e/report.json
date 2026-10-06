@@ -1,0 +1,228 @@
+{
+  "route_n": 22,
+  "route_correct": 22,
+  "route_failed": 0,
+  "route_confusion": {
+    "stay_current -> stay_current": 16,
+    "suggest_switch -> suggest_switch": 4,
+    "clarify -> clarify": 2
+  },
+  "route_p95_ms": 719.9079999700189,
+  "route_timing_missing_n": 0,
+  "route_q20_pass": true,
+  "role_sample_n": 5,
+  "role_samples": [
+    {
+      "case_id": "H01",
+      "passed": true,
+      "initial_api_wall_ms": 693.4402000624686,
+      "handoff_wall_ms": 2136.9163000490516,
+      "selection_wall_ms": null,
+      "prompts": [
+        {
+          "model": "qwen3.8-27b",
+          "system_chars": 838,
+          "message_chars": 843,
+          "request_utf8_bytes": 5942,
+          "usage": {
+            "prompt_tokens": 1712,
+            "total_tokens": 1798,
+            "completion_tokens": 86,
+            "prompt_tokens_details": null,
+            "completion_tokens_details": {
+              "reasoning_tokens": 45
+            }
+          },
+          "token_scope": "Provider usage when present; character counts are not tokens, no guessed stream usage"
+        },
+        {
+          "model": "qwen3.8-27b",
+          "system_chars": 838,
+          "message_chars": 978,
+          "request_utf8_bytes": 6389,
+          "usage": {
+            "prompt_tokens": 1819,
+            "total_tokens": 1947,
+            "completion_tokens": 128,
+            "prompt_tokens_details": null,
+            "completion_tokens_details": {
+              "reasoning_tokens": 87
+            }
+          },
+          "token_scope": "Provider usage when present; character counts are not tokens, no guessed stream usage"
+        }
+      ]
+    },
+    {
+      "case_id": "R01-named-product-variant",
+      "passed": true,
+      "initial_api_wall_ms": 2341.4253999944776,
+      "handoff_wall_ms": null,
+      "selection_wall_ms": null,
+      "prompts": [
+        {
+          "model": "qwen3.8-27b",
+          "system_chars": 10564,
+          "message_chars": 18345,
+          "request_utf8_bytes": 32248,
+          "usage": {
+            "prompt_tokens": 7711,
+            "total_tokens": 7815,
+            "completion_tokens": 104,
+            "prompt_tokens_details": null,
+            "completion_tokens_details": {
+              "reasoning_tokens": 56
+            }
+          },
+          "token_scope": "Provider usage when present; character counts are not tokens, no guessed stream usage"
+        }
+      ]
+    },
+    {
+      "case_id": "R01",
+      "passed": true,
+      "initial_api_wall_ms": 11018.671500030905,
+      "handoff_wall_ms": null,
+      "selection_wall_ms": 3431.2923001125455,
+      "prompts": [
+        {
+          "model": "qwen3.8-27b",
+          "system_chars": 10564,
+          "message_chars": 18345,
+          "request_utf8_bytes": 32248,
+          "usage": {
+            "prompt_tokens": 7713,
+            "total_tokens": 8677,
+            "completion_tokens": 964,
+            "prompt_tokens_details": null,
+            "completion_tokens_details": {
+              "reasoning_tokens": 907
+            }
+          },
+          "token_scope": "Provider usage when present; character counts are not tokens, no guessed stream usage"
+        },
+        {
+          "model": "qwen3.8-27b",
+          "system_chars": 7538,
+          "message_chars": 10303,
+          "request_utf8_bytes": 19920,
+          "usage": {
+            "prompt_tokens": 4792,
+            "total_tokens": 5182,
+            "completion_tokens": 390,
+            "prompt_tokens_details": null,
+            "completion_tokens_details": {
+              "reasoning_tokens": 326
+            }
+          },
+          "token_scope": "Provider usage when present; character counts are not tokens, no guessed stream usage"
+        },
+        {
+          "model": "qwen3.8-27b",
+          "system_chars": 10564,
+          "message_chars": 18765,
+          "request_utf8_bytes": 33011,
+          "usage": {
+            "prompt_tokens": 7949,
+            "total_tokens": 8128,
+            "completion_tokens": 179,
+            "prompt_tokens_details": null,
+            "completion_tokens_details": {
+              "reasoning_tokens": 120
+            }
+          },
+          "token_scope": "Provider usage when present; character counts are not tokens, no guessed stream usage"
+        }
+      ]
+    },
+    {
+      "case_id": "R02",
+      "passed": true,
+      "initial_api_wall_ms": 6941.357099916786,
+      "handoff_wall_ms": null,
+      "selection_wall_ms": null,
+      "prompts": [
+        {
+          "model": "qwen3.8-27b",
+          "system_chars": 10564,
+          "message_chars": 18398,
+          "request_utf8_bytes": 32309,
+          "usage": {
+            "prompt_tokens": 7732,
+            "total_tokens": 7965,
+            "completion_tokens": 233,
+            "prompt_tokens_details": null,
+            "completion_tokens_details": {
+              "reasoning_tokens": 210
+            }
+          },
+          "token_scope": "Provider usage when present; character counts are not tokens, no guessed stream usage"
+        },
+        {
+          "model": "qwen3.8-27b",
+          "system_chars": 712,
+          "message_chars": 1791,
+          "request_utf8_bytes": 3044,
+          "usage": {
+            "prompt_tokens": 719,
+            "total_tokens": 1265,
+            "completion_tokens": 546,
+            "prompt_tokens_details": null,
+            "completion_tokens_details": {
+              "reasoning_tokens": 447
+            }
+          },
+          "token_scope": "Provider usage when present; character counts are not tokens, no guessed stream usage"
+        }
+      ]
+    },
+    {
+      "case_id": "R03",
+      "passed": true,
+      "initial_api_wall_ms": 3233.6160000413656,
+      "handoff_wall_ms": null,
+      "selection_wall_ms": null,
+      "prompts": [
+        {
+          "model": "qwen3.8-27b",
+          "system_chars": 660,
+          "message_chars": 670,
+          "request_utf8_bytes": 2487,
+          "usage": {
+            "prompt_tokens": 768,
+            "total_tokens": 870,
+            "completion_tokens": 102,
+            "prompt_tokens_details": null,
+            "completion_tokens_details": {
+              "reasoning_tokens": 56
+            }
+          },
+          "token_scope": "Provider usage when present; character counts are not tokens, no guessed stream usage"
+        },
+        {
+          "model": "qwen3.8-27b",
+          "system_chars": 660,
+          "message_chars": 903,
+          "request_utf8_bytes": 3181,
+          "usage": {
+            "prompt_tokens": 927,
+            "total_tokens": 1053,
+            "completion_tokens": 126,
+            "prompt_tokens_details": null,
+            "completion_tokens_details": {
+              "reasoning_tokens": 49
+            }
+          },
+          "token_scope": "Provider usage when present; character counts are not tokens, no guessed stream usage"
+        }
+      ]
+    }
+  ],
+  "role_missing_cases": [],
+  "reply_observations_n": 7,
+  "reply_max_ms": 11018.671500030905,
+  "reply_q20_pass": true,
+  "measurement_scope": "In-process public API terminal SSE; no browser evidence; R01 explicit product choice and H01 confirmed handoff separately timed",
+  "cold_start": "Not measured here; GPU already loaded. See ticket01 raw cold start and ticket03 client initialization.",
+  "quality_scope": "Fixed public samples, not independent holdout or generalization proof"
+}

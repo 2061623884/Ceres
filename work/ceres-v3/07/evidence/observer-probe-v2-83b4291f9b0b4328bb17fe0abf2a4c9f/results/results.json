@@ -1,0 +1,33 @@
+{
+  "case_version": "ceres-v3-independent-dialogue-20261006-v1",
+  "requested_rows": 4,
+  "scope": "First independent candidate check; real Kev/public API, controlled role/memory models; setup observations separate",
+  "rows": [
+    {
+      "case_id": "HO01",
+      "expected": "stay_current",
+      "passed": false,
+      "message": "订单不用查了。朋友让我问问有没有适合露营的小包装零食",
+      "preparation": [
+        {
+          "kind": "actual Guide API / controlled role response",
+          "http_status": 200,
+          "body": "{\"session_id\": \"sess-011eff1b2e08\", \"task_id\": null, \"state_version\": 0, \"status\": \"understanding\", \"answer_status\": \"accepted\", \"purchase_step\": \"none\", \"message\": \"你之前问过订单，现在需要继续查询吗？\", \"clarification\": null, \"plan\": null, \"plan_effect\": \"keep\", \"pending_clarification\": null, \"missing_constraints\": [], \"route\": \"chat\", \"readiness\": \"information\", \"missing_slots\": [], \"request_id\": \"f918417c-703d-405f-a7cd-8a1002fca403\", \"session_version\": 0, \"committed\": false, \"allowed\": true, \"guard_code\": null, \"pending_clarifications\": [], \"action_results\": [], \"available_actions\": [\"send_message\"], \"user_message_id\": \"msg-5e8db8cfc23a\", \"assistant_message_id\": \"msg-4ea0e9d79f18\", \"message_sequence\": 2, \"trace_id\": \"trace-e4843a757557\", \"model_mode\": \"offline\", \"business_data_mode\": \"demo\", \"current_editable_task_id\": null, \"product_cards\": []}"
+        }
+      ],
+      "actual_order": null,
+      "http_status": 200,
+      "raw_sse": "event: route.result\ndata: {invalid-json}\n\n",
+      "upstream": [],
+      "error": {
+        "error_type": "JSONDecodeError",
+        "message": "Expecting property name enclosed in double quotes: line 1 column 2 (char 1)"
+      }
+    }
+  ],
+  "all_upstream": [],
+  "failure": {
+    "error_type": "JSONDecodeError",
+    "message": "Expecting property name enclosed in double quotes: line 1 column 2 (char 1)"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "original_path": "evidence/focused-v2-15c000125a3c40e9805b463dcbcf7f5a/p0-coverage/process-start.json",
+  "bytes": 811,
+  "sha256": "b4f92f85c01b912854e9a31f5747ef07a29f840388984eb9f1adac4603c54c08",
+  "utf8_text": "{\r\n  \"pid\": 35604,\r\n  \"started_at_utc\": \"2026-10-06T01:08:06.1405296Z\",\r\n  \"suite\": \"p0-coverage\",\r\n  \"run_id\": \"15c000125a3c40e9805b463dcbcf7f5a\",\r\n  \"run_dir\": \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\07\\\\evidence\\\\focused-v2-15c000125a3c40e9805b463dcbcf7f5a\",\r\n  \"argv\": [\r\n    \"-X\",\r\n    \"utf8\",\r\n    \"-m\",\r\n    \"pytest\",\r\n    \"-p\",\r\n    \"no:cacheprovider\",\r\n    \"-W\",\r\n    \"error::pytest.PytestUnhandledThreadExceptionWarning\",\r\n    \"-vv\",\r\n    \"--tb=short\",\r\n    \"-rs\",\r\n    \"--basetemp\",\r\n    \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\07\\\\evidence\\\\focused-v2-15c000125a3c40e9805b463dcbcf7f5a\\\\p0-coverage\\\\basetemp\",\r\n    \"tests/test_p0_coverage_consistency.py\"\r\n  ],\r\n  \"cwd\": \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\backend\"\r\n}"
+}

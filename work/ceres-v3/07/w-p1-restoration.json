@@ -1,0 +1,7 @@
+{
+  "at": "2026-10-06T01:26:49.239817+00:00",
+  "path": "backend/tests/test_w_dish_and_gap.py",
+  "attempted_sha256": "5b9aaea08e4695441f893d1dc8fdcebb0f1bc96e3179339acc065dff3f499317",
+  "restored_prechange_sha256": "313393d781ab68a3de24d516a69947998a73fe5bbb1b58f77a277a5cb9112ff3",
+  "reason": "Independent Spec confirms post-confirmation cart gap fill is excluded P1; attempted status-only migration still failed all 3. Restore inherited source without deleting/skipping probes. Actual failures retained in original full and candidate-v3 evidence."
+}

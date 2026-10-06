@@ -1,0 +1,6 @@
+{
+  "original_path": "evidence/targeted-v3-3bdd644c57f24527afbd192bad0f10e7/p0-gap-persistence/process-completion.json",
+  "bytes": 744,
+  "sha256": "ff775f20ee9b7d501dda7aef7c530f7800902e9c69edaefded6a9a93101d2a05",
+  "utf8_text": "{\r\n  \"pid\": 29684,\r\n  \"finished_at_utc\": \"2026-10-06T01:19:36.6550320Z\",\r\n  \"exit_code\": 0,\r\n  \"suite\": \"p0-gap-persistence\",\r\n  \"targets\": [\r\n    \"tests/test_p0_gap_persistence.py\"\r\n  ],\r\n  \"run_dir\": \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\07\\\\evidence\\\\targeted-v3-3bdd644c57f24527afbd192bad0f10e7\",\r\n  \"suite_dir\": \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\07\\\\evidence\\\\targeted-v3-3bdd644c57f24527afbd192bad0f10e7\\\\p0-gap-persistence\",\r\n  \"source_path_count\": 312,\r\n  \"source_mismatch_count\": 0,\r\n  \"source_zip_sha256\": \"0a4e45eb99354942322890c81c7a523fa40df0fbb8b77779c298442ee760dc4d\",\r\n  \"catalog_sha256\": \"772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10\"\r\n}"
+}

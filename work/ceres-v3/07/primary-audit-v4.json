@@ -1,0 +1,134 @@
+{
+  "at": "2026-10-06T01:39:02.752377+00:00",
+  "purpose": "Primary-agent raw-record and provenance audit, not a test run",
+  "baseline": "work\\ceres-v3\\07\\candidate-v4\\baseline.json",
+  "expected_zip_sha256": "352dfeddcd894ea7024d2c940da6ee59f3dbe6e5d548a1407b0d8ada4a4ba980",
+  "actual_zip_sha256": "352dfeddcd894ea7024d2c940da6ee59f3dbe6e5d548a1407b0d8ada4a4ba980",
+  "actual_results": [
+    {
+      "run": "work\\ceres-v3\\07\\evidence\\deadline-candidate-v4-04c44c7c6dfd4208830ca5c16bbcdbcf\\agent-deadline",
+      "command": {
+        "executable": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+        "argv": [
+          "-X",
+          "utf8",
+          "-m",
+          "pytest",
+          "-p",
+          "no:cacheprovider",
+          "-W",
+          "error::pytest.PytestUnhandledThreadExceptionWarning",
+          "-vv",
+          "--tb=short",
+          "-rs",
+          "--basetemp",
+          "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\deadline-candidate-v4-04c44c7c6dfd4208830ca5c16bbcdbcf\\agent-deadline\\basetemp",
+          "tests/test_agent_deadline.py"
+        ],
+        "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend",
+        "environment": {
+          "LLM_MODE": "offline",
+          "PYTHONDONTWRITEBYTECODE": "1",
+          "PYTHONUTF8": "1",
+          "MERCURY_LIVE": "0",
+          "CERES_LIVE_MEMORY_ACCEPTANCE": "",
+          "CERES_LIVE_V2_DEMO": "",
+          "CERES_V3_ROUTE_EVIDENCE_DIR": "",
+          "CERES_V3_LIVE_EVIDENCE_DIR": "",
+          "CERES_V3_INDEPENDENT_EVIDENCE_DIR": "",
+          "CERES_GATE_KEY_NAMES_BLANKED": [],
+          "RETRIEVAL_MODE": "lexical",
+          "RETRIEVAL_INDEX_DIR": "",
+          "MEMORY_MODEL": "",
+          "OPENAI_API_KEY": "inherited unchanged; value not recorded",
+          "OPENAI_BASE_URL": "inherited unchanged; value not recorded",
+          "LLM_MODEL": "inherited unchanged; value not recorded",
+          "TEMP": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\deadline-candidate-v4-04c44c7c6dfd4208830ca5c16bbcdbcf\\agent-deadline\\temp",
+          "TMP": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\deadline-candidate-v4-04c44c7c6dfd4208830ca5c16bbcdbcf\\agent-deadline\\temp"
+        },
+        "run_id": "04c44c7c6dfd4208830ca5c16bbcdbcf",
+        "run_dir": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\deadline-candidate-v4-04c44c7c6dfd4208830ca5c16bbcdbcf",
+        "basetemp": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\deadline-candidate-v4-04c44c7c6dfd4208830ca5c16bbcdbcf\\agent-deadline\\basetemp"
+      },
+      "completion": {
+        "pid": 54528,
+        "finished_at_utc": "2026-10-06T01:30:06.0172593Z",
+        "exit_code": 1,
+        "suite": "agent-deadline-candidate-v4",
+        "run_id": "04c44c7c6dfd4208830ca5c16bbcdbcf",
+        "run_dir": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\deadline-candidate-v4-04c44c7c6dfd4208830ca5c16bbcdbcf",
+        "source_path_count": 312,
+        "source_mismatch_count": 0,
+        "source_zip_sha256": "352dfeddcd894ea7024d2c940da6ee59f3dbe6e5d548a1407b0d8ada4a4ba980",
+        "catalog_sha256": "772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10"
+      },
+      "source": [
+        {
+          "file": "source-before.json",
+          "paths": 312,
+          "expected_paths": 312,
+          "changed_or_missing": [],
+          "extra": [],
+          "zip": "352dfeddcd894ea7024d2c940da6ee59f3dbe6e5d548a1407b0d8ada4a4ba980",
+          "head": "d3f426ecaf169bd01a7b86c137c61b9034d5079b",
+          "catalog": "772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10",
+          "expected_catalog": "772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10"
+        },
+        {
+          "file": "source-after.json",
+          "paths": 312,
+          "expected_paths": 312,
+          "changed_or_missing": [],
+          "extra": [],
+          "zip": "352dfeddcd894ea7024d2c940da6ee59f3dbe6e5d548a1407b0d8ada4a4ba980",
+          "head": "d3f426ecaf169bd01a7b86c137c61b9034d5079b",
+          "catalog": "772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10",
+          "expected_catalog": "772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10"
+        }
+      ],
+      "raw": {
+        "command-environment.json": {
+          "bytes": 2039,
+          "sha256": "2ff8849be53640cb95b8fe3a6dd21a4b4fb08aab03d7c488b5a25c783fa7d212"
+        },
+        "process-start.json": {
+          "bytes": 843,
+          "sha256": "8ee227fe11ccfa125a63377f745d1ef61259ee092d0b2c8462d5c571fcf34a5f"
+        },
+        "process-completion.json": {
+          "bytes": 582,
+          "sha256": "239b1578fa038ff6c766c60518c17e6a0d30f54256590ee46e7319343cc39e4a"
+        },
+        "source-before.json": {
+          "bytes": 35680,
+          "sha256": "a05061d7e1bdb0c3eed4691cab0e32d198fc972e4aa4a4b9d699516e58e81bd6"
+        },
+        "source-after.json": {
+          "bytes": 35680,
+          "sha256": "1b306a0ad2c5500087e2b3640826cccdf8fdf7c8f3f97d8e81b32c420f6eb293"
+        },
+        "stdout.txt": {
+          "bytes": 15930,
+          "sha256": "116095b03d04d2cc4e8a981c41acdca175287005bdf436fd3786aec37ea790b2"
+        },
+        "stderr.txt": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "stdout_tail": [
+        "E                   'kind': 'product',",
+        "E                   'target_id': 'demo:milk-1l',",
+        "E                   'name': '全脂牛奶 1升',",
+        "E                   'people': None,",
+        "E                   'people_source': 'default',",
+        "E               },",
+        "E           ],",
+        "E           'merged_sku_contributions': [],",
+        "E       })",
+        "======================== 1 failed, 7 passed in 17.52s ========================="
+      ],
+      "stderr": ""
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "original_path": "evidence/targeted-v3-3bdd644c57f24527afbd192bad0f10e7/dish-gap-turns/process-completion.json",
+  "bytes": 934,
+  "sha256": "39413fee398c9d30aea9971abfe298665f9ba1b72793804cde7345596df7bcc4",
+  "utf8_text": "{\r\n  \"pid\": 5780,\r\n  \"finished_at_utc\": \"2026-10-06T01:20:40.5659155Z\",\r\n  \"exit_code\": 1,\r\n  \"suite\": \"dish-gap-turns\",\r\n  \"targets\": [\r\n    \"tests/test_w_dish_and_gap.py::test_w03_gap_fill_clarify_append_or_new_plan\",\r\n    \"tests/test_w_dish_and_gap.py::test_m1b_gap_fill_2_to_4_via_turns\",\r\n    \"tests/test_w_dish_and_gap.py::test_m1b_gap_fill_second_zero_delta_via_turns\"\r\n  ],\r\n  \"run_dir\": \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\07\\\\evidence\\\\targeted-v3-3bdd644c57f24527afbd192bad0f10e7\",\r\n  \"suite_dir\": \"C:\\\\Users\\\\20616\\\\Desktop\\\\Agent\\\\Agent产品\\\\Ceres\\\\work\\\\ceres-v3\\\\07\\\\evidence\\\\targeted-v3-3bdd644c57f24527afbd192bad0f10e7\\\\dish-gap-turns\",\r\n  \"source_path_count\": 312,\r\n  \"source_mismatch_count\": 0,\r\n  \"source_zip_sha256\": \"0a4e45eb99354942322890c81c7a523fa40df0fbb8b77779c298442ee760dc4d\",\r\n  \"catalog_sha256\": \"772a2d1c74bd112a01405aeefde7455f2c58e701e38d8186a29d24a52640be10\"\r\n}"
+}

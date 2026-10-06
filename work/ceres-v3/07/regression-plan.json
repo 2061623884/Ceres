@@ -1,0 +1,273 @@
+{
+  "task": "Ceres V3 ticket 07 final acceptance regression inventory",
+  "prepared_on": "2026-10-06",
+  "status": "plan-only; no pytest, collection, model call, or benchmark was run",
+  "candidate_gate": "Run only after the final candidate source and evidence scope are frozen; this file does not identify a frozen candidate hash.",
+  "environment_facts": {
+    "backend_python": {
+      "path": "backend/.venv/Scripts/python.exe",
+      "version": "3.12.10",
+      "exists": true
+    },
+    "mercury_python": {
+      "path": "Mercury/.venv/Scripts/python.exe",
+      "exists": false,
+      "execution_interpreter": "backend/.venv/Scripts/python.exe",
+      "verified_compatible_package_versions": {
+        "pytest": "9.1.1",
+        "openai": "3.19.2",
+        "python-dotenv": "1.2.3"
+      }
+    },
+    "root_env": {
+      "present": true,
+      "LLM_MODE": "live",
+      "OPENAI_API_KEY_present": true,
+      "OPENAI_BASE_URL_present": true,
+      "LLM_MODEL_present": true,
+      "credential_values_recorded": false,
+      "offline_override_probe": {
+        "process_LLM_MODE": "offline",
+        "settings_llm_mode": "offline",
+        "is_live_llm_configured": false,
+        "credential_fields_remain_present": true,
+        "result": "backend Settings reads the process override despite root .env containing live configuration"
+      }
+    },
+    "mercury_env": {
+      "Mercury/.env_present": false,
+      "config_behavior": "Mercury loads only Mercury/.env with override=false; setting process MERCURY_LIVE=0 keeps the live suite skipped even if a future Mercury/.env contains credentials."
+    },
+    "pytest_file_counts": {
+      "backend/tests/test_*.py": 121,
+      "Mercury/tests/test_*.py": 5
+    }
+  },
+  "offline_regression": {
+    "scope": "Run the complete current backend/tests and Mercury/tests trees once after freeze. Do not deselect tests by name, marker, or file; source-defined skips remain visible.",
+    "common_process_environment": {
+      "LLM_MODE": "offline",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONUTF8": "1",
+      "MERCURY_LIVE": "0",
+      "CERES_LIVE_MEMORY_ACCEPTANCE": "",
+      "CERES_LIVE_V2_DEMO": "",
+      "CERES_V3_ROUTE_EVIDENCE_DIR": "",
+      "CERES_V3_LIVE_EVIDENCE_DIR": "",
+      "CERES_V3_INDEPENDENT_EVIDENCE_DIR": "",
+      "OPENAI_API_KEY": "inherit unchanged; never print or record its value",
+      "OPENAI_BASE_URL": "inherit unchanged; never print its value",
+      "LLM_MODEL": "inherit unchanged; never print its value"
+    },
+    "commands": [
+      {
+        "name": "complete Ceres backend regression",
+        "cwd": "backend",
+        "executable": "backend/.venv/Scripts/python.exe",
+        "argv": [
+          "-X",
+          "utf8",
+          "-m",
+          "pytest",
+          "-p",
+          "no:cacheprovider",
+          "-W",
+          "error::pytest.PytestUnhandledThreadExceptionWarning",
+          "--basetemp",
+          "<unique-work-run>/backend-basetemp",
+          "tests"
+        ],
+        "temp_environment": {
+          "TEMP": "<unique-work-run>/backend-temp",
+          "TMP": "<unique-work-run>/backend-temp"
+        },
+        "capture": "Use Start-Process -Wait -PassThru with separate RedirectStandardOutput and RedirectStandardError files in the unique work run directory. Record the returned Process.ExitCode as the Python/pytest exit code; do not pipe through Tee-Object or infer success from a pipeline status. Keep stdout and stderr verbatim."
+      },
+      {
+        "name": "complete Mercury regression",
+        "cwd": "Mercury",
+        "executable": "backend/.venv/Scripts/python.exe",
+        "argv": [
+          "-X",
+          "utf8",
+          "-m",
+          "pytest",
+          "-p",
+          "no:cacheprovider",
+          "-W",
+          "error::pytest.PytestUnhandledThreadExceptionWarning",
+          "--basetemp",
+          "<unique-work-run>/mercury-basetemp",
+          "tests"
+        ],
+        "temp_environment": {
+          "TEMP": "<unique-work-run>/mercury-temp",
+          "TMP": "<unique-work-run>/mercury-temp"
+        },
+        "capture": "Use Start-Process -Wait -PassThru with separate RedirectStandardOutput and RedirectStandardError files in the unique work run directory. Record the returned Process.ExitCode as the Python/pytest exit code; do not pipe through Tee-Object or infer success from a pipeline status. Keep stdout and stderr verbatim."
+      }
+    ],
+    "execution_rules": [
+      "Create a new UUID-named work run directory for each execution; use distinct fresh TEMP/TMP and --basetemp paths per suite and retain them with the logs.",
+      "Run the two suites serially, not concurrently, and preserve the exact environment summary without credential values.",
+      "Do not add -k, --ignore, --deselect, or -m 'not live'. No pytest_addoption or custom CLI live switch exists in these test trees; live behavior is controlled by environment gates.",
+      "Do not rely on pytest's live marker to protect backend tests: the two direct model tests are not marked live."
+    ]
+  },
+  "live_gates_and_fixture_audit": {
+    "backend_direct_real_model_calls": [
+      {
+        "node": "backend/tests/test_llm_provider.py::test_smoke_live",
+        "gate": "skips unless Settings.is_live_llm_configured() is true"
+      },
+      {
+        "node": "backend/tests/test_remove_stop_semantics.py::test_live_model_unwanted_with_clear_plan_is_a_located_remove",
+        "gate": "skips unless Settings.is_live_llm_configured() is true"
+      }
+    ],
+    "backend_settings_gate": "is_live_llm_configured requires LLM_MODE=live plus nonempty API key, base URL, and model. The root .env currently has LLM_MODE=live and all three fields present, so offline regression must set process LLM_MODE=offline.",
+    "fixture_override_audit": {
+      "backend/tests/conftest.py": "os.environ.setdefault('LLM_MODE', 'live'); it preserves an already-set offline process value.",
+      "backend/tests/test_config.py": "sets LLM_MODE=live only through a test-scoped monkeypatch; pytest restores it after that test.",
+      "backend/tests/support/sse_upstream.py": "constructs Settings(_env_file=None) with LLM_MODE=live, a fixed test key, and an in-process fake HTTP/SSE upstream. This deliberately exercises the HTTP transport against localhost and does not load or call the configured external provider.",
+      "other_backend_test_fixtures": "No other persistent LLM_MODE=live override was found by source search."
+    },
+    "explicit_live_opt_ins": [
+      {
+        "tests": "backend/tests/test_v2_automatic_memory_live.py",
+        "gate": "CERES_LIVE_MEMORY_ACCEPTANCE=1"
+      },
+      {
+        "tests": "backend/tests/test_v2_integrated_demo_live.py",
+        "gate": "CERES_LIVE_V2_DEMO=1"
+      },
+      {
+        "tests": "backend/tests/test_v3_live_routing.py",
+        "gate": "CERES_V3_ROUTE_EVIDENCE_DIR is nonempty; final 22-route live group"
+      },
+      {
+        "tests": "backend/tests/test_v3_live_sampling.py",
+        "gate": "CERES_V3_LIVE_EVIDENCE_DIR is nonempty; final five real-role journeys with seven reply timings"
+      },
+      {
+        "tests": "backend/tests/test_v3_independent_routing.py",
+        "gate": "CERES_V3_INDEPENDENT_EVIDENCE_DIR is nonempty; separate independent Chinese holdout"
+      },
+      {
+        "tests": "Mercury/tests/test_live_llm.py",
+        "gate": "MERCURY_LIVE must equal 1 and Mercury llm_settings() must have all values; the live marker itself does not enable the test"
+      }
+    ],
+    "not_an_external_live_call": [
+      "backend/tests/test_live_retrieval_wiring.py uses a mock transport.",
+      "backend/tests/test_rag_retrieval.py uses an in-file MockEmbeddingProvider; it is not real embedding or model quality evidence."
+    ]
+  },
+  "related_regression_crosswalk": {
+    "guide_graph_and_turn_decision": [
+      "backend/tests/agent/graph/test_decide_route.py",
+      "backend/tests/agent/graph/test_load_context.py",
+      "backend/tests/agent/graph/test_phase2a_cancel_atomicity.py",
+      "backend/tests/agent/graph/test_phase2b_confirm_atomicity.py",
+      "backend/tests/agent/graph/test_r2_ordered_prepare.py",
+      "backend/tests/agent/graph/test_r5_terminal_amend_refusal.py",
+      "backend/tests/agent/graph/test_request_workflow.py",
+      "backend/tests/agent/graph/test_response_contract.py",
+      "backend/tests/test_goal_understanding.py",
+      "backend/tests/test_goal_decision_gate.py",
+      "backend/tests/test_decision_policy.py",
+      "backend/tests/test_v3_core_evaluation.py",
+      "backend/tests/test_v3_routing_context.py",
+      "backend/tests/test_v3_routing_handoff.py",
+      "backend/tests/test_v3_switch_lifecycle.py",
+      "backend/tests/test_v3_policy_consultation.py"
+    ],
+    "context_history_and_turn_continuity": [
+      "backend/tests/test_conversation_history.py",
+      "backend/tests/test_semantic_context_history.py",
+      "backend/tests/test_task_continuity.py",
+      "backend/tests/test_task_lifecycle.py",
+      "backend/tests/test_turn_pipeline_units.py (only the surviving ContextResolver test contract; historical TurnInterpreter/DecisionPolicy/AnswerGenerator unit subjects are retired)"
+    ],
+    "turnstream_sse_trace_and_deadlines": [
+      "backend/tests/test_turn_progress.py",
+      "backend/tests/test_reply_stream.py",
+      "backend/tests/test_m3_sse.py",
+      "backend/tests/test_sse_protocol_simulator.py",
+      "backend/tests/test_review_stream_contract.py",
+      "backend/tests/test_review_probes.py",
+      "backend/tests/test_events_trace.py",
+      "backend/tests/test_model_call_trace.py",
+      "backend/tests/test_trace_eval.py",
+      "backend/tests/test_agent_deadline.py",
+      "backend/tests/test_agent_concurrency.py"
+    ],
+    "role_order_policy_chat_and_public_api": [
+      "backend/tests/test_health.py",
+      "backend/tests/test_schemas.py",
+      "backend/tests/test_cart_service.py",
+      "backend/tests/test_confirmation.py",
+      "backend/tests/test_confirm_service.py",
+      "backend/tests/test_concurrent_confirm.py",
+      "backend/tests/test_idempotency.py",
+      "backend/tests/test_revision_confirmation.py",
+      "backend/tests/test_plan_revisions.py",
+      "backend/tests/test_phase2a_cancellation.py",
+      "backend/tests/test_phase2b_chat_confirmation.py",
+      "backend/tests/test_v2_integrated_demo.py",
+      "backend/tests/test_v2_order_mercury.py",
+      "backend/tests/test_v3_routing_handoff.py",
+      "backend/tests/test_v3_switch_lifecycle.py",
+      "backend/tests/test_v3_policy_consultation.py",
+      "Mercury/tests/test_agent_flows.py",
+      "Mercury/tests/test_policy.py",
+      "Mercury/tests/test_services.py",
+      "Mercury/tests/test_tools.py",
+      "Mercury/tests/test_live_llm.py (must remain collected and visibly skipped offline)"
+    ],
+    "policy_rag_and_read_contracts": [
+      "backend/tests/test_read_tools.py",
+      "backend/tests/test_validation_context.py",
+      "backend/tests/test_w_readonly.py",
+      "backend/tests/test_w_constraints.py",
+      "backend/tests/test_rag_codex_review.py",
+      "backend/tests/test_rag_read_contract.py",
+      "backend/tests/test_rag_retrieval.py",
+      "backend/tests/test_rag_eval_metrics.py",
+      "backend/tests/test_live_retrieval_wiring.py"
+    ],
+    "full_suite_coverage": "The commands still run all 121 backend test modules and all 5 Mercury test modules, so the crosswalk supplements rather than narrows the full regression."
+  },
+  "conditional_skips_to_report": [
+    {
+      "condition": "verification/data-completion/candidate_runtime.sqlite3 is currently absent",
+      "effect": "backend/tests/test_rag_retrieval.py is module-skipped; one test in test_rag_eval_metrics.py also skips when the same candidate snapshot is absent. Preserve these as skips, not passes."
+    },
+    {
+      "condition": "test_confirmation.py runtime condition 'baking plan not ready'",
+      "effect": "A source-defined conditional skip may occur; retain and report the pytest result."
+    }
+  ],
+  "retired_interface_contracts_to_keep_failing_if_reintroduced": [
+    "backend/tests/test_semantic_only_architecture.py: retired module/import closure, pipeline selector, old provider factories, and shared-validator ownership constraints.",
+    "backend/tests/test_semantic_pipeline.py::test_there_is_no_pipeline_selector_left.",
+    "backend/tests/test_semantic_acceptance_edges.py::test_legacy_purchase_requested_key_is_rejected_not_silently_dropped.",
+    "backend/tests/test_p1_planner_decision_layer.py::test_a_retired_mutation_list_is_rejected_and_writes_nothing.",
+    "backend/tests/test_agent_tools.py: current shared structural-validator ownership/contract.",
+    "backend/tests/test_turn_pipeline_units.py: keep its current resolver test; do not resurrect deleted TurnInterpreter, DecisionPolicy, or AnswerGenerator nodes/tests."
+  ],
+  "evaluation_separation": {
+    "offline_regression": "Deterministic tests and source-defined skips only; not real model quality or latency evidence.",
+    "post_freeze_live_groups": [
+      "22 route cases through test_v3_live_routing.py with a unique CERES_V3_ROUTE_EVIDENCE_DIR.",
+      "Five real-role journeys through test_v3_live_sampling.py with a separate unique CERES_V3_LIVE_EVIDENCE_DIR; five initial replies plus R01 explicit product choice and H01 consented handoff give seven reply timings.",
+      "Independent Chinese holdout through test_v3_independent_routing.py with a separate unique CERES_V3_INDEPENDENT_EVIDENCE_DIR."
+    ],
+    "claim_boundary": "Do not merge live evidence into offline pytest counts or report opt-in groups as run unless their tests were separately invoked and their raw logs and exit codes retained."
+  },
+  "execution_addendum": {
+    "MEMORY_MODEL": "empty in offline full regression; tests own scoped controlled transports remain effective",
+    "failure_recording": "holdout observer stores HTTP/raw bodies before parse and failed case/error in finally; no swallowed error",
+    "no_reruns": "run full suites once; repeat only targeted failures or newly changed source"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "process_id": 47416,
+  "started_utc": "2026-10-06T01:52:04.9931557Z",
+  "executable": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend",
+  "argv": [
+    "-X",
+    "utf8",
+    "-m",
+    "pytest",
+    "-p",
+    "no:cacheprovider",
+    "-W",
+    "error::pytest.PytestUnhandledThreadExceptionWarning",
+    "--basetemp",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\live-holdout4-v5-16391552984743c7b6d246e2ae472a60\\backend-basetemp",
+    "tests/test_v3_independent_routing.py"
+  ],
+  "environment": {
+    "LLM_MODE": "live",
+    "LLM_MAX_OUTPUT_TOKENS": "3072",
+    "MERCURY_LIVE": "0",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONUTF8": "1",
+    "RETRIEVAL_MODE": "lexical",
+    "RETRIEVAL_INDEX_DIR": "",
+    "MEMORY_MODEL": "",
+    "TEMP": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\live-holdout4-v5-16391552984743c7b6d246e2ae472a60\\backend-temp",
+    "TMP": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\live-holdout4-v5-16391552984743c7b6d246e2ae472a60\\backend-temp",
+    "CERES_V3_INDEPENDENT_EVIDENCE_DIR": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\live-holdout4-v5-16391552984743c7b6d246e2ae472a60\\model-evidence",
+    "other_CERES_V3_and_CERES_LIVE_gates": "",
+    "OPENAI_API_KEY": "inherited unchanged; value not recorded",
+    "OPENAI_BASE_URL": "inherited unchanged; value not recorded",
+    "LLM_MODEL": "loaded from frozen runtime configuration / root env; value not recorded here",
+    "cleared_and_enabled_gates": [
+      "CERES_V3_INDEPENDENT_EVIDENCE_DIR"
+    ],
+    "credential_values_recorded": false
+  },
+  "stdout_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\live-holdout4-v5-16391552984743c7b6d246e2ae472a60\\stdout.raw.txt",
+  "stderr_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\live-holdout4-v5-16391552984743c7b6d246e2ae472a60\\stderr.raw.txt",
+  "evidence_dir": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v3\\07\\evidence\\live-holdout4-v5-16391552984743c7b6d246e2ae472a60\\model-evidence"
+}

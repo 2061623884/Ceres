@@ -1,0 +1,40 @@
+{
+  "skip_count": 7,
+  "skips": [
+    {
+      "nodeid": "tests/test_v3_independent_routing.py::test_independent_dialogue_phenomena",
+      "gate": "CERES_V3_INDEPENDENT_EVIDENCE_DIR",
+      "reason": "Dedicated evaluator enables only after candidate freeze"
+    },
+    {
+      "nodeid": "tests/test_v3_live_routing.py::test_real_kev_fixed_public_contexts",
+      "gate": "CERES_V3_ROUTE_EVIDENCE_DIR",
+      "reason": "Dedicated evaluator must enable real Kev API measurement"
+    },
+    {
+      "nodeid": "tests/test_v3_live_sampling.py::test_real_role_and_kev_sample[R01-keke-\\u60f3\\u4e70\\u4e24\\u74f6\\u65e0\\u7cd6\\u53ef\\u4e50-stay_current-None]",
+      "gate": "CERES_V3_LIVE_EVIDENCE_DIR",
+      "reason": "Dedicated evaluator must explicitly enable real model sampling"
+    },
+    {
+      "nodeid": "tests/test_v3_live_sampling.py::test_real_role_and_kev_sample[R01-named-product-variant-keke-\\u60f3\\u4e70\\u4e00\\u76d2\\u65b0\\u9c9c\\u9e21\\u86cb-stay_current-None]",
+      "gate": "CERES_V3_LIVE_EVIDENCE_DIR",
+      "reason": "Dedicated evaluator must explicitly enable real model sampling"
+    },
+    {
+      "nodeid": "tests/test_v3_live_sampling.py::test_real_role_and_kev_sample[R02-keke-\\u8fd9\\u4e2a\\u5546\\u54c1\\u4e0d\\u559c\\u6b22\\u80fd\\u9000\\u5417-stay_current-P-RET-01]",
+      "gate": "CERES_V3_LIVE_EVIDENCE_DIR",
+      "reason": "Dedicated evaluator must explicitly enable real model sampling"
+    },
+    {
+      "nodeid": "tests/test_v3_live_sampling.py::test_real_role_and_kev_sample[R03-momo-\\u4e00\\u822c\\u7b7e\\u6536\\u540e\\u51e0\\u5929\\u5185\\u80fd\\u9000-stay_current-P-RET-01]",
+      "gate": "CERES_V3_LIVE_EVIDENCE_DIR",
+      "reason": "Dedicated evaluator must explicitly enable real model sampling"
+    },
+    {
+      "nodeid": "tests/test_v3_live_sampling.py::test_real_role_and_kev_sample[H01-keke-\\u8fd9\\u5355\\u5230\\u54ea\\u4e86-suggest_switch-None]",
+      "gate": "CERES_V3_LIVE_EVIDENCE_DIR",
+      "reason": "Dedicated evaluator must explicitly enable real model sampling"
+    }
+  ]
+}

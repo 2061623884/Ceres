@@ -1,0 +1,23 @@
+{
+  "pid": 8572,
+  "suite": "agent-deadline",
+  "process_exit_code": null,
+  "exit_code_status": "not directly captured; original PowerShell Start-Process was asynchronous",
+  "pytest_summary_tail": [
+    "configfile: pyproject.toml",
+    "plugins: anyio-4.15.1, langsmith-0.14.1, asyncio-1.4.0",
+    "asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function",
+    "collecting ... collected 7 items",
+    "",
+    "tests/test_agent_deadline.py::test_a_model_that_outlives_the_budget_writes_nothing PASSED [ 14%]",
+    "tests/test_agent_deadline.py::test_a_read_that_outlives_the_budget_writes_nothing PASSED [ 28%]",
+    "tests/test_agent_deadline.py::test_a_shopper_stop_is_a_stop_and_never_a_timeout PASSED [ 42%]",
+    "tests/test_agent_deadline.py::test_a_rebuild_that_expires_before_commit_keeps_the_existing_plan PASSED [ 57%]",
+    "tests/test_agent_deadline.py::test_a_stop_that_arrives_during_the_build_writes_no_plan PASSED [ 71%]",
+    "tests/test_agent_deadline.py::test_a_read_port_serves_the_first_read_and_skips_the_rest_once_time_is_up PASSED [ 85%]",
+    "tests/test_agent_deadline.py::test_a_read_port_out_of_time_serves_nothing_and_reports_every_request PASSED [100%]",
+    "",
+    "============================= 7 passed in 15.18s =============================="
+  ],
+  "captured_at_utc": "2026-10-06T01:07:05.3268803Z"
+}
