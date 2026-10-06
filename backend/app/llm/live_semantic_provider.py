@@ -25,6 +25,9 @@ from app.llm.structured_output import extract_json_object
 # The outbound prompt text lives in ``app.prompts.semantic``; this module owns
 # only the request shape, schema narrowing, transport and parsing.
 from app.prompts.semantic import (
+    CAPABILITY_COMPLETE_PROMPTS,
+    CAPABILITY_EXAMPLE_MESSAGES,
+    CAPABILITY_PROMPTS,
     HISTORY_COMPLETE_PROMPT,
     POLICY_COMPLETE_PROMPT,
     POLICY_SYSTEM_PROMPT,
@@ -114,14 +117,32 @@ class LiveSemanticProvider:
         # ``build_request`` already staged the protocol: the proposal schema while
         # understanding, the reply-only schema once retrieval ran.
         protocol = request.get("protocol") or {}
+        capability = request.get("capability")
+        capability_prompt = CAPABILITY_PROMPTS[capability] if capability is not None else ""
         answering = bool(request.get("query_results"))
-        answer_prompt = HISTORY_COMPLETE_PROMPT if any(
-            result.get("kind") == "history" for result in request.get("query_results", [])
-        ) else RETRIEVAL_COMPLETE_PROMPT
-        system = SYSTEM_PROMPT + (answer_prompt if answering else "")
-        if answering and all(result.get("kind") == "policy" for result in request["query_results"]):
+        query_results = request.get("query_results", [])
+        if any(result.get("kind") == "history" for result in query_results):
+            answer_prompt = HISTORY_COMPLETE_PROMPT
+        else:
+            answer_prompt = (
+                CAPABILITY_COMPLETE_PROMPTS[capability]
+                if capability is not None
+                else RETRIEVAL_COMPLETE_PROMPT
+            )
+        system = SYSTEM_PROMPT + ("\n" + capability_prompt if capability_prompt else "")
+        if answering:
+            system += answer_prompt
+        if answering and all(result.get("kind") == "policy" for result in query_results):
             system = POLICY_SYSTEM_PROMPT + POLICY_COMPLETE_PROMPT
-        examples = [] if answering else PROPOSAL_EXAMPLES
+        examples = (
+            [
+                example
+                for example in PROPOSAL_EXAMPLES
+                if example[0]["user_message"] in CAPABILITY_EXAMPLE_MESSAGES[capability]
+            ]
+            if not answering and capability is not None
+            else []
+        )
         return {
             "model": self.settings.llm_model,
             "messages": [

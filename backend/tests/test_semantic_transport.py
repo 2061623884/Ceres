@@ -143,45 +143,36 @@ def test_a_tiny_remaining_budget_is_not_rounded_up():
     assert tiny.connect == pytest.approx(0.01)
 
 
-def test_outbound_system_and_fewshots_come_from_the_prompts_module():
-    """The adapter must not carry its own copy of the prompt text."""
-    from app.llm import live_semantic_provider
-    from app.prompts import semantic
+def test_purchase_prompt_preserves_clarification_resolution_at_model_boundary():
     received = []
 
     def handler(request):
         received.append(json.loads(request.content))
         return httpx.Response(200, json={"choices": [{"message": {"content": '{"reply":"ok"}'}}]})
 
-    provider(handler).propose({"user_message": "你好"})
+    provider(handler).propose({
+        "user_message": "我想吃番茄炒蛋",
+        "capability": "purchase_modify",
+    })
     messages = received[0]["messages"]
+    capability_prompt = messages[0]["content"].split("\nprotocol:\n", 1)[0]
 
-    assert live_semantic_provider.SYSTEM_PROMPT is semantic.SYSTEM_PROMPT
-    assert messages[0]["content"].startswith(semantic.SYSTEM_PROMPT)
-    assert "输出 JSON 只能包含 protocol 当前 schema 声明的字段" in messages[0]["content"]
     assert (
         "用户本轮明确回答 pending_clarifications 中的问题时，必须把该问题的真实 question_id 填入 resolved_questions"
-        in messages[0]["content"]
-    )
-    assert (
-        "所有 reply（包括无新检索结果的追问）只能依据服务端上下文、检索结果或历史中已核实的商品/菜谱事实"
-        in messages[0]["content"]
+        in capability_prompt
     )
     assert (
         "若 current_plan 缺失或 groups 为空，普通 ACK 只简短接话并等待用户明确选择或提出需求"
-        in messages[0]["content"]
+        in capability_prompt
     )
     assert (
         "「自己做」填写 fulfillment_mode=self_cook，「买现成」填写 fulfillment_mode=ready_made；"
         "只说「想吃」等未明确制作方式时不填，不要自己补"
-        in messages[0]["content"]
+        in capability_prompt
     )
-    expected = [{"role": role, "content": json.dumps(content, ensure_ascii=False)}
-                for example in semantic.PROPOSAL_EXAMPLES
-                if not example[0].get("query_results")
-                for role, content in zip(("user", "assistant"), example)]
-    assert len(expected) > 0
-    assert messages[1:1 + len(expected)] == expected
+    proposal_examples = json.dumps(messages[1:-2], ensure_ascii=False)
+    assert "买一盒牛奶" in proposal_examples
+    assert "请记住我平时偏好小包装零食" not in proposal_examples
 
 
 def test_named_dish_add_example_marks_append_and_self_cook():
@@ -202,8 +193,7 @@ def test_named_dish_add_example_marks_append_and_self_cook():
     ]
 
 
-def test_retrieval_complete_prompt_is_appended_only_in_the_answer_phase():
-    from app.prompts.semantic import RETRIEVAL_COMPLETE_PROMPT, SYSTEM_PROMPT
+def test_category_answer_prompt_keeps_candidates_and_result_fact_boundaries():
     received = []
 
     def handler(request):
@@ -212,27 +202,24 @@ def test_retrieval_complete_prompt_is_appended_only_in_the_answer_phase():
 
     p = provider(handler)
     schema = {"type": "object", "properties": {}}
-    p.propose({"user_message": "推荐一下", "protocol": schema})
-    p.propose({"user_message": "推荐一下", "protocol": schema,
-               "query_results": [{"kind": "recommend", "status": "completed"}]})
-    open_phase = received[0]["messages"][0]["content"]
+    p.propose({
+        "user_message": "来点零食",
+        "capability": "category_exploration",
+        "protocol": schema,
+    })
+    p.propose({
+        "user_message": "来点零食",
+        "capability": "category_exploration",
+        "protocol": schema,
+        "query_results": [{"kind": "lookup", "status": "completed"}],
+    })
     answer_phase = received[1]["messages"][0]["content"]
-
-    # Same protocol both times, so the only difference is the appended text.
-    suffix = "\nprotocol:\n" + json.dumps(schema, ensure_ascii=False)
-    assert RETRIEVAL_COMPLETE_PROMPT.startswith("\n")
-    assert open_phase == SYSTEM_PROMPT + suffix
-    assert answer_phase == SYSTEM_PROMPT + RETRIEVAL_COMPLETE_PROMPT + suffix
-    assert "有匹配商品时只主推一款，并用 query_results 中明确给出的商品事实说明理由" in answer_phase
-    assert "有匹配商品时只主推一款，并用 query_results 中明确给出的商品事实说明理由" not in open_phase
-    assert "不得从商品类型或糖信息推断甜度" in answer_phase
-    assert "品类/用途判断依据 query_results 的品类、商品类型和用途事实" in answer_phase
-    assert "reply 只说明这款商品及事实支持的推荐理由，不得列出、提及或对比其他商品" in answer_phase
-    assert "display_refs 仅填写这款商品的一个 ref" in answer_phase
-    assert "没有匹配商品时 reply 如实说明、display_refs=[]" in answer_phase
-    assert "推荐理由可用已提供的品类、用途、规格等字段；不得编造热销、销量、促销、口感、营养等信息；价格和库存仅按 query_results 明确给出的字段说明，未提供则不要提及" in answer_phase
-    assert "stock_verified=true 只表示可售核验通过，不代表库存充足或具体数量；模拟价格和供给仅是演示数据，不得表述为店内真实价格或库存" in answer_phase
-    assert "query_results 中果汁候选的 unknown_constraints 含 nutrition，用户问「想喝低糖的果汁，有糖含量数据吗？」时，只答「商品资料未提供糖含量，无法确认是否符合低糖要求。」并返回 display_refs=[]" in answer_phase
+    capability_prompt = answer_phase.split("\nprotocol:\n", 1)[0]
+    assert "同类有多个匹配候选时直接展示比较" in capability_prompt
+    assert "只主推一款" not in capability_prompt
+    assert "stock_verified=true 只表示可售核验通过，不代表库存充足或具体数量" in capability_prompt
+    assert "模拟价格和供给不得表述为门店真实数据" in capability_prompt
+    assert "unknown_constraints 标为未知不代表满足条件" in capability_prompt
 
 
 def test_the_provider_hands_its_remaining_budget_to_the_transport():

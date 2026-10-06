@@ -129,9 +129,8 @@ def test_supply_gap_opt_in_example_reuses_pending_real_dish_and_question():
     assert parsed.resolved_questions == ['q-gap-example']
 
 
-def test_answer_stage_gets_no_examples_and_answer_schema(monkeypatch):
-    """Once retrieval ran, the live payload drops the examples and narrows the
-    schema to ``answer_schema`` (spec rule 10)."""
+def test_answer_stage_gets_no_capability_examples_and_answer_schema(monkeypatch):
+    """Once retrieval ran, the live payload drops the capability examples."""
     from app.core.config import Settings
     from app.llm.live_semantic_provider import LiveSemanticProvider
     from app.agent.protocol import answer_schema, proposal_schema
@@ -140,11 +139,16 @@ def test_answer_stage_gets_no_examples_and_answer_schema(monkeypatch):
     provider = LiveSemanticProvider(settings)
 
     understanding_payload = provider._build_payload(
-        {"user_message": "我想吃番茄炒蛋", "protocol": proposal_schema()}
+        {
+            "user_message": "我想吃番茄炒蛋",
+            "capability": "purchase_modify",
+            "protocol": proposal_schema(),
+        }
     )
     answer_payload = provider._build_payload(
         {
             "user_message": "我想吃番茄炒蛋",
+            "capability": "purchase_modify",
             "query_results": [{"kind": "lookup", "status": "completed"}],
             "protocol": answer_schema(),
         }
@@ -159,5 +163,3 @@ def test_answer_stage_gets_no_examples_and_answer_schema(monkeypatch):
     answer_system_messages = [m for m in answer_payload['messages'] if m['role'] == 'system']
     # No example turns at all once retrieval has run.
     assert len(answer_payload['messages']) - len(answer_system_messages) == 2
-    assert '本轮检索已经结束' in answer_payload['messages'][0]['content']
-    assert '本轮检索已经结束' not in understanding_payload['messages'][0]['content']
