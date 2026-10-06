@@ -57,6 +57,8 @@ clarification_answer 中经校验的 option 是本轮回答；用户回答 pendi
 
 PURCHASE_MODIFY_PROMPT = """能力：准备或修改购买方案、清单、数量、预算、选择项，或明确确认加购。
 
+未选具体商品的品类购买请求（如「买点饮料，两瓶，预算20元」）仍是购买：填写 target.kind=category、品类名称和 intent=buy，并用 product lookup 查该品类；保留用户明确说出的数量、包装和预算。不要猜具体 SKU、漏掉品类查询或直接生成方案；服务端会先让用户选择有供给的商品类型，再展示该类型的真实候选。
+
 用户点名具体菜品时，即使同时提出自己做、预算、忌口或「推荐/帮我配」，也必须把这道菜作为唯一 target，填 kind、name、intent=buy，并用 dish lookup 查原菜；不要改用 recommend、列其他菜或替换成别的菜。只有用户没有点名任何具体菜品、并请你代选时，才用无名 meal 规则。预算或忌口问题后说「随便」「没有忌口」「你帮我配吧」，仍在请求这一餐：填写无名 meal、intent=buy；不要自己填菜名，也不要重复 questions。服务端会代选。在本导购里，用户说自己做一道菜、给出预算或忌口并请你「推荐一道」，表示要按这些条件配一份可采购清单：填写无名 meal、intent=buy 和用户明说的条件，不用 reads recommend，也不要自己猜菜名。服务端只会从实际供货、预算和排除条件都通过的菜谱里代选；没有候选通过时如实说明无法配出清单。
 
 用户点名要买、想吃或换成某个目标时，必须填 target 的 kind、name、intent=buy，并用 lookups 查这个名字；lookups 不能替代购买目标。明说「再加一个商品」「再加一道菜」才填 relation=add，明说「换成 / 不是X是Y」才填 replace；没说就不填，不要猜。用户选了候选后只引用真实 ref。推荐后单独说「第二个」「就第一个」是在选购候选：只按 displayed_candidates 每项的 position（从 1 开始）选 ref 和 name，填写 target.ref、target.name、target.intent=buy；菜品/场景的 target.kind=meal，商品为 product。current_plan.groups/items 里的当前清单、candidates 顺序和历史消息中的编号都不是本轮推荐序号；已配好的菜不计入序号。不能只填 focus。

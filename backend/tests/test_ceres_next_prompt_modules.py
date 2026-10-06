@@ -141,6 +141,72 @@ def test_guide_and_mercury_send_the_shared_reply_style_through_public_routes(
         assert "先说明结果及下一步" in system_prompt, f"{role} prompt lacks shared reply style"
 
 
+def test_purchase_modify_broad_category_preserves_type_choice_before_plan(
+    indexed_client, kev_api, internal_trace_headers, monkeypatch
+):
+    kev_api["choices"]["capability"] = "purchase_modify"
+    sent_requests = []
+
+    def respond(request):
+        payload = json.loads(request.content)
+        sent_requests.append(payload)
+        content = {
+            "target": {
+                "kind": "category",
+                "name": "饮料",
+                "intent": "buy",
+                "quantity": 2,
+            },
+            "constraints": {
+                "budget_yuan": 20,
+                "specification": {"packaging": "bottle"},
+            },
+            "lookups": [{"kind": "product", "query": "饮料"}],
+        }
+        return httpx.Response(
+            200,
+            json={"choices": [{"message": {"content": json.dumps(content, ensure_ascii=False)}}]},
+            request=request,
+        )
+
+    settings = get_settings()
+    provider = LiveSemanticProvider(
+        settings,
+        OpenAICompatTransport(settings, httpx.MockTransport(respond)),
+    )
+    monkeypatch.setattr("app.llm.provider.get_semantic_provider", lambda: provider)
+
+    session_id = create_session(indexed_client)
+    cart_before = indexed_client.get("/api/v1/cart").json()
+    response = post_turn(indexed_client, session_id, "买点饮料，两瓶，预算20元")
+
+    assert response.status_code == 200, response.text
+    body = response.json()
+    question = next(
+        question for question in body["pending_clarifications"]
+        if question["slot"] == "product_type"
+    )
+    assert len(question["options"]) >= 2
+    assert body["plan"] is None
+    assert indexed_client.get("/api/v1/cart").json() == cart_before
+    capability_prompt = sent_requests[0]["messages"][0]["content"].split(
+        "\nprotocol:\n", 1
+    )[0]
+    assert "未选具体商品的品类购买请求" in capability_prompt
+
+    trace = indexed_client.get(
+        f"/api/v1/internal/traces/{body['trace_id']}",
+        headers=internal_trace_headers,
+    )
+    assert trace.status_code == 200, trace.text
+    completed_calls = [
+        json.loads(event["output_summary"])
+        for event in trace.json()["events"]
+        if event["phase"] == "model_call_completed"
+    ]
+    assert completed_calls[0]["capability"] == "purchase_modify"
+
+
 def test_verified_product_type_and_filter_answers_use_category_guidance(
     indexed_client, kev_api, internal_trace_headers, monkeypatch
 ):

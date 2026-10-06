@@ -1,0 +1,225 @@
+{
+  "case_set_id": "ceres-next-08-public-cases-v2",
+  "cases": [
+    {
+      "case_id": "snack_broad_then_type_bubble",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "broad-snack",
+          "message": "来点零食",
+          "expect": {
+            "pending_slots": ["product_type"],
+            "minimum_options": 2,
+            "plan_present": false,
+            "cart_unchanged": true,
+            "trace_capability": "category_exploration"
+          }
+        },
+        {
+          "op": "select_pending_option",
+          "label": "select-chips-type",
+          "slot": "product_type",
+          "label_contains": "薯片",
+          "message": "薯片",
+          "expect": {
+            "pending_slots": [],
+            "plan_present": false,
+            "cart_unchanged": true,
+            "trace_branch": "direct_product_type_workflow"
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "drink_multisku_attribute_filter_explicit_purchase_v2",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "broad-drinks",
+          "message": "买点饮料，两件，预算20元",
+          "expect": {
+            "pending_slots": ["product_type"],
+            "minimum_options": 2,
+            "plan_present": false,
+            "cart_unchanged": true,
+            "trace_capability": "purchase_modify"
+          }
+        },
+        {
+          "op": "select_pending_option",
+          "label": "select-cola-type",
+          "slot": "product_type",
+          "label_equals": "可乐",
+          "message": "可乐",
+          "expect": {
+            "pending_slots": ["product_filter"],
+            "minimum_product_cards": 2,
+            "card_field_values": {"brand": ["可口可乐", "百事可乐"]},
+            "plan_present": false,
+            "cart_unchanged": true,
+            "trace_branch": "direct_product_type_workflow"
+          }
+        },
+        {
+          "op": "select_pending_option",
+          "label": "filter-pepsi-brand",
+          "slot": "product_filter",
+          "label_equals": "品牌：百事可乐",
+          "message": "品牌：百事可乐",
+          "expect": {
+            "pending_slots": [],
+            "minimum_product_cards": 1,
+            "all_card_fields": {"brand": "百事可乐"},
+            "plan_present": false,
+            "cart_unchanged": true,
+            "budget_fen": 2000,
+            "trace_branch": "direct_product_filter_workflow"
+          }
+        },
+        {
+          "op": "turn",
+          "label": "prepare-selected-plan",
+          "message": "那就买两罐百事可乐原味汽水330ml罐装",
+          "expect": {
+            "plan_present": true,
+            "cart_unchanged": true,
+            "plan_item_skus": ["demo:cn-pepsi-original-330ml-can"],
+            "plan_quantities": {"demo:cn-pepsi-original-330ml-can": 2},
+            "maximum_plan_total_fen": 2000,
+            "budget_fen": 2000
+          }
+        },
+        {
+          "op": "confirm_plan",
+          "label": "explicit-plan-confirm",
+          "expect": {"cart_changed": true}
+        },
+        {
+          "op": "checkout",
+          "label": "create-paid-order-for-aftersales"
+        }
+      ]
+    },
+    {
+      "case_id": "drink_explicit_two_bottles_type_bubble",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "broad-bottled-drinks",
+          "message": "买点饮料，两瓶，预算20元",
+          "expect": {
+            "pending_slots": ["product_type"],
+            "minimum_options": 2,
+            "plan_present": false,
+            "cart_unchanged": true,
+            "trace_capability": "purchase_modify"
+          }
+        },
+        {
+          "op": "select_pending_option",
+          "label": "select-cola-for-bottles",
+          "slot": "product_type",
+          "label_equals": "可乐",
+          "message": "可乐",
+          "expect": {
+            "minimum_product_cards": 2,
+            "all_card_fields": {"packaging": "bottle"},
+            "plan_present": false,
+            "cart_unchanged": true,
+            "budget_fen": 2000,
+            "trace_branch": "direct_product_type_workflow"
+          }
+        },
+        {
+          "op": "turn",
+          "label": "prepare-two-bottle-plan",
+          "message": "那就买两瓶可口可乐经典原味汽水500ml瓶装",
+          "expect": {
+            "plan_present": true,
+            "cart_unchanged": true,
+            "plan_item_skus": ["demo:cn-coke-original-500ml-bottle"],
+            "plan_quantities": {"demo:cn-coke-original-500ml-bottle": 2},
+            "maximum_plan_total_fen": 2000,
+            "budget_fen": 2000
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "facts_qa_grounded_policy",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "delivery-policy-question",
+          "message": "一般配送时间是多久？",
+          "expect": {
+            "plan_present": false,
+            "cart_unchanged": true,
+            "orders_unchanged": true,
+            "trace_capability": "facts_qa"
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "chat-without-business-write",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "greeting",
+          "message": "你好，今天心情有点累。",
+          "expect": {
+            "plan_present": false,
+            "cart_unchanged": true,
+            "orders_unchanged": true,
+            "trace_capability": "chat"
+          }
+        }
+      ]
+    },
+    {
+      "case_id": "keke-momo-refund-visible-keke-plan",
+      "requires_latest_order": true,
+      "aftersales_expectation": {"tool": "create_refund", "result": "pending"},
+      "steps": [
+        {
+          "op": "select_order",
+          "label": "select-paid-order-for-aftersales",
+          "order_id": "latest"
+        },
+        {
+          "op": "turn",
+          "label": "ask-refund-and-continue",
+          "message": "我刚下的订单 {{latest_order_id}} 想申请退款，办好后再帮我买一瓶可乐。",
+          "expect": {
+            "decision": "suggest_switch",
+            "target_role": "momo",
+            "cart_unchanged": true
+          }
+        },
+        {
+          "op": "switch",
+          "label": "consent-to-momo",
+          "target_role": "momo",
+          "accept": true
+        },
+        {
+          "op": "switch",
+          "label": "consent-to-keke-continuation",
+          "target_role": "keke",
+          "accept": true,
+          "expect": {"plan_present": true, "cart_unchanged": true}
+        },
+        {
+          "op": "replay_switch",
+          "label": "replay-no-duplicate-write"
+        },
+        {
+          "op": "snapshot",
+          "label": "restored-guide-session"
+        }
+      ]
+    }
+  ]
+}

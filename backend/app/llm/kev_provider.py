@@ -10,7 +10,7 @@ from app.core.config import get_settings
 Decision = Literal["stay_current", "suggest_switch", "clarify"]
 Capability = Literal["category_exploration", "purchase_modify", "facts_qa", "chat"]
 CRITERIA_VERSION = "ceres-service-v3.2"
-CAPABILITY_CRITERIA_VERSION = "ceres-guide-capabilities-v1"
+CAPABILITY_CRITERIA_VERSION = "ceres-guide-capabilities-v2"
 # 01 observed 235.6–773ms. This bounds network/inference, not the 1s P95 target.
 KEV_TIMEOUT_SECONDS = 3.0
 INSTRUCTIONS = """Classify this turn using current_role, selected_object and recent_dialogue.
@@ -33,16 +33,19 @@ CRITERIA = {
 CAPABILITY_INSTRUCTIONS = """Classify the current Keke turn into exactly one capability using
 the utterance, selected_object and recent dialogue. This is an internal capability choice;
 do not choose or change the service role. Choose category_exploration when the user is
-browsing, narrowing or comparing product/category candidates. Choose purchase_modify when
-the user wants to prepare, revise, select or confirm a purchase plan. Choose facts_qa when
-the user asks for product, store or policy facts. Choose chat for greetings and ordinary
-conversation unrelated to shopping. A pending question and its answer are part of the current
-request context. Only classify: never provide business parameters, objects or authorization."""
+browsing, narrowing or comparing product/category candidates, including a broad shopping
+category request such as “来点零食” before a specific product is selected. Choose
+purchase_modify when the user explicitly wants to buy or prepare a purchase plan, including
+a broad category request such as “买点饮料，两瓶，预算20元”; a specific product name is
+not required. Choose facts_qa when the user asks for product, store or policy facts. Choose
+chat only for greetings and ordinary conversation unrelated to supermarket shopping. A pending
+question and its answer are part of the current request context. Only classify: never provide
+business parameters, objects or authorization."""
 CAPABILITY_CRITERIA = {
-    "category_exploration": "浏览、了解、缩小或比较品类及商品候选；包括继续回答选购中的类型或筛选问题。",
-    "purchase_modify": "准备或修改购买方案、清单、数量、预算、选择项，或明确确认加购。",
+    "category_exploration": "用户提出宽泛品类购物请求（如「来点零食」）但尚未选定具体商品时的浏览、了解、缩小或比较品类及商品候选；包括继续回答选购中的类型或筛选问题。",
+    "purchase_modify": "明确要买某宽泛品类或具体商品，或准备、修改购买方案、清单、数量、预算、选择项，或明确确认加购。",
     "facts_qa": "询问商品、门店或一般政策事实，需要依据业务数据或政策来源回答。",
-    "chat": "问候或与购物无关的普通交流。",
+    "chat": "问候或只用于与超市选购无关的交流。",
 }
 
 

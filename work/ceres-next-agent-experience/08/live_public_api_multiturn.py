@@ -28,32 +28,14 @@ SOURCE_FILES=("backend/app/api/chat.py","backend/app/agent/graph/nodes/capabilit
  "backend/app/agent/graph/nodes/workflow.py","backend/app/agent/turn_context_plan.py",
  "backend/app/prompts/semantic.py","backend/app/llm/kev_provider.py",
  "backend/app/llm/embedding.py","Mercury/mercury/prompt.py","frontend/src/App.tsx")
-PUBLIC_CASES=[
- {"case_id":"snack_broad_then_type_bubble","steps":[
-                {"op":"turn","label":"broad-snack","message":"来点零食","expect":{"pending_slots":["product_type"],"minimum_options":2,"plan_present":False,"cart_unchanged":True,"trace_capability":"category_exploration"}},
-  {"op":"select_pending_option","label":"select-chips-type","slot":"product_type","label_contains":"薯片","message":"薯片",
-   "expect":{"pending_slots":[],"plan_present":False,"cart_unchanged":True,"trace_branch":"direct_product_type_workflow"}}]},
- {"case_id":"drink_multisku_attribute_filter_explicit_purchase","steps":[
-  {"op":"turn","label":"broad-drinks","message":"买点饮料，两瓶，预算20元","expect":{"pending_slots":["product_type"],"minimum_options":2,"plan_present":False,"cart_unchanged":True,"trace_capability":"purchase_modify"}},
-  {"op":"select_pending_option","label":"select-cola-type","slot":"product_type","label_equals":"可乐","message":"可乐",
-   "expect":{"pending_slots":["product_filter"],"minimum_product_cards":2,"card_field_values":{"brand":["可口可乐","百事可乐"]},"plan_present":False,"cart_unchanged":True,"trace_branch":"direct_product_type_workflow"}},
-  {"op":"select_pending_option","label":"filter-pepsi-brand","slot":"product_filter","label_equals":"品牌：百事可乐","message":"品牌：百事可乐",
-   "expect":{"pending_slots":[],"minimum_product_cards":1,"all_card_fields":{"brand":"百事可乐"},"plan_present":False,"cart_unchanged":True,"budget_fen":2000,"trace_branch":"direct_product_filter_workflow"}},
- {"op":"turn","label":"prepare-selected-plan","message":"那就买两罐百事可乐原味汽水330ml罐装","expect":{"plan_present":True,"cart_unchanged":True,"plan_item_skus":["demo:cn-pepsi-original-330ml-can"],"plan_quantities":{"demo:cn-pepsi-original-330ml-can":2},"maximum_plan_total_fen":2000,"budget_fen":2000}},
-  {"op":"confirm_plan","label":"explicit-plan-confirm","expect":{"cart_changed":True}},
-  {"op":"checkout","label":"create-paid-order-for-aftersales"}]},
- {"case_id":"facts_qa_grounded_policy","steps":[
-  {"op":"turn","label":"delivery-policy-question","message":"一般配送时间是多久？","expect":{"plan_present":False,"cart_unchanged":True,"orders_unchanged":True,"trace_capability":"facts_qa"}}]},
- {"case_id":"chat-without-business-write","steps":[
-  {"op":"turn","label":"greeting","message":"你好，今天心情有点累。","expect":{"plan_present":False,"cart_unchanged":True,"orders_unchanged":True,"trace_capability":"chat"}}]},
- {"case_id":"keke-momo-refund-visible-keke-plan","requires_latest_order":True,
-  "aftersales_expectation":{"tool":"create_refund","result":"pending"},"steps":[
-  {"op":"select_order","label":"select-paid-order-for-aftersales","order_id":"latest"},
-  {"op":"turn","label":"ask-refund-and-continue","message":"我刚下的订单 {{latest_order_id}} 想申请退款，办好后再帮我买一瓶可乐。","expect":{"decision":"suggest_switch","target_role":"momo","cart_unchanged":True}},
-  {"op":"switch","label":"consent-to-momo","target_role":"momo","accept":True},
-  {"op":"switch","label":"consent-to-keke-continuation","target_role":"keke","accept":True,"expect":{"plan_present":True,"cart_unchanged":True}},
-  {"op":"replay_switch","label":"replay-no-duplicate-write"},
-  {"op":"snapshot","label":"restored-guide-session"}]}]
+RUNTIME_MODULES={
+ "app.main":"backend/app/main.py",
+ "app.llm.kev_provider":"backend/app/llm/kev_provider.py",
+ "app.llm.live_semantic_provider":"backend/app/llm/live_semantic_provider.py",
+ "app.prompts.semantic":"backend/app/prompts/semantic.py",
+ "app.agent.graph.nodes.capability":"backend/app/agent/graph/nodes/capability.py",
+ "app.agent.graph.nodes.workflow":"backend/app/agent/graph/nodes/workflow.py",
+}
 
 def module_from(path,name):
  spec=importlib.util.spec_from_file_location(name,path)
@@ -114,6 +96,20 @@ def source_manifest(tree,fixture_tree):
   "product_source_checkout":str(tree),"fixture_source_checkout":str(fixture_tree),"fixture_source_commit":fixture_head,
   "product_source_sha256":product_hashes,"product_source_absent":product_absent,"fixture_sha256":hashes,
   "raw_fixture_counts":counts,"note":"raw 58 offers are not the seeded DB Offer count"}
+def module_origin_manifest(tree):
+ origins={}
+ for name,relative_path in RUNTIME_MODULES.items():
+  module=sys.modules.get(name); module_path=Path(getattr(module,"__file__", "")).resolve() if module else None
+  if module_path and module_path.is_file():
+   try: origin=str(module_path.relative_to(tree.resolve()))
+   except ValueError: origin=str(module_path)
+   origins[name]={"status":"loaded","origin":origin,"sha256":sha(module_path)}
+  else:
+   source=tree/relative_path
+   origins[name]={"status":"not_imported" if source.is_file() else "source_absent",
+                  "origin":None,"source_path":relative_path,
+                  "sha256":sha(source) if source.is_file() else None}
+ return origins
 def verify_runtime(tree,database_url,index_root,mode):
  sys.path[:0]=[str(tree/"backend"),str(tree)]
  from sqlalchemy.engine import make_url
@@ -179,9 +175,21 @@ def new_case(client,case,role_calls,kev_calls):
 def read_pending(client,ctx):
  r=client.get(f"/api/v1/guide/sessions/{ctx['guide_session_id']}"); r.raise_for_status(); ctx["last_guide"]=r.json()
  return r.json().get("pending_clarifications") or []
-def trace_for(client,payload,helper,token):
- return helper.read_trace(client,payload["trace_id"],{"X-Internal-Token":token}) if payload.get("trace_id") else []
-def turn(client,ctx,message,label,answer,helper,token,view_context=None):
+def trace_for(client,payload,token):
+ if not payload.get("trace_id"): return []
+ response=client.get(f"/api/v1/internal/traces/{payload['trace_id']}",headers={"X-Internal-Token":token})
+ if response.status_code!=200: return [{"trace_read_status":response.status_code}]
+ fields=("phase","stage","status","duration_ms","capability","branch","criteria_version","call_number","model","code")
+ result=[]
+ for event in response.json().get("events",[]):
+  row={key:event[key] for key in ("phase","duration_ms") if key in event}
+  summary=event.get("output_summary")
+  if summary:
+   detail=json.loads(summary)
+   row.update({key:detail[key] for key in fields if key in detail})
+  if row: result.append(row)
+ return result
+def turn(client,ctx,message,label,answer,token,view_context=None):
  s=client.get(f"/api/v1/guide/sessions/{ctx['guide_session_id']}"); s.raise_for_status(); state=s.json()
  body={"request_id":"08-"+ctx["case_id"]+"-"+uuid.uuid4().hex[:10],"message":message,"expected_task_id":state.get("task_id"),
   "expected_state_version":state.get("state_version",0),"expected_session_version":state.get("session_version",0)}
@@ -194,7 +202,7 @@ def turn(client,ctx,message,label,answer,helper,token,view_context=None):
   "elapsed_ms":round((time.perf_counter()-start)*1000,1),"latency_target_ms":15000,
   "latency_target_exceeded":(time.perf_counter()-start)*1000>15000,"events":[compact(e) for e in events],
   "role_model_call_range":[rc,len(ctx["role_calls"])],"kev_call_range":[kc,len(ctx["kev_calls"])],
-  "terminal":compact({"type":"turn.completed","payload":end})["payload"],"trace":trace_for(client,end,helper,token)}
+  "terminal":compact({"type":"turn.completed","payload":end})["payload"],"trace":trace_for(client,end,token)}
  ctx["last_step"]={**row,"events":events}
  if response.status_code>=400: row["failure_body"]=response.text[:1000]; raise RuntimeError(f"{label}: HTTP {response.status_code}")
  row["snapshot_after"]=snapshot(client,ctx,True); return row
@@ -275,7 +283,7 @@ def execute(client,ctx,step,evidence,path,helper,token):
  try:
   if op=="turn":
    text=step["message"].replace("{{latest_order_id}}",str(evidence.get("latest_order_id") or "<missing-order>"))
-   row.update(turn(client,ctx,text,label,None,helper,token,step.get("view_context")))
+   row.update(turn(client,ctx,text,label,None,token,step.get("view_context")))
   elif op=="select_pending_option":
    questions=read_pending(client,ctx); q=next((x for x in questions if x.get("slot")==step["slot"]),None)
    if q is None: raise AssertionError(f"No pending field {step['slot']}")
@@ -285,7 +293,7 @@ def execute(client,ctx,step,evidence,path,helper,token):
    else: option=opts[0] if opts else None
    if option is None: raise AssertionError(f"No current option matches field {step['slot']}")
    row["selected_option"]={"question_id":q["question_id"],"option_id":option["id"],"slot":q["slot"],"label":option["label"]}
-   row.update(turn(client,ctx,step.get("message",option["label"]),label,{"question_id":q["question_id"],"option_id":option["id"]},helper,token,step.get("view_context")))
+   row.update(turn(client,ctx,step.get("message",option["label"]),label,{"question_id":q["question_id"],"option_id":option["id"]},token,step.get("view_context")))
   elif op=="switch":
    handoff=find_handoff(step,ctx); target=step["target_role"]; base=f"/api/v1/chat/openings/{ctx['opening_id']}"
    shown=client.post(base+"/prompt-displayed",json={"handoff_id":handoff}); shown.raise_for_status()
@@ -383,18 +391,23 @@ def run_case(client,case,role_calls,kev_calls,evidence,path,helper,token):
   record["elapsed_ms"]=round((time.perf_counter()-started)*1000,1); atomic_json(path,evidence,helper.CREDENTIAL_VALUE)
 
 def call_summary(calls):
- totals={"calls":len(calls),"calls_with_usage":0,"prompt_tokens":0,"completion_tokens":0,
-         "total_tokens":0,"request_latency_ms":0}
+ token_fields=(("prompt_tokens",("prompt_tokens","input_tokens")),
+               ("completion_tokens",("completion_tokens","output_tokens")),
+               ("total_tokens",("total_tokens",)))
+ sums={key:0 for key,_ in token_fields}; reported={key:0 for key,_ in token_fields}
+ totals={"calls":len(calls),"calls_with_usage":0,"request_latency_ms":0}
  for call in calls:
   usage=call.get("usage") or (call.get("kev_response") or {}).get("usage")
   if isinstance(usage,dict):
    totals["calls_with_usage"]+=1
-   for key,aliases in (("prompt_tokens",("prompt_tokens","input_tokens")),
-                       ("completion_tokens",("completion_tokens","output_tokens")),
-                       ("total_tokens",("total_tokens",))):
-    value=next((usage.get(k) for k in aliases if isinstance(usage.get(k),int)),0)
-    totals[key]+=value
+   for key,aliases in token_fields:
+    value=next((usage.get(k) for k in aliases if isinstance(usage.get(k),int)),None)
+    if value is not None:
+     sums[key]+=value; reported[key]+=1
   if isinstance(call.get("request_latency_ms"),(int,float)): totals["request_latency_ms"]+=call["request_latency_ms"]
+ for key,_ in token_fields:
+  totals[key]=sums[key] if reported[key] else None
+  totals[key+"_reported_calls"]=reported[key]
  return totals
 
 def setup_live(tree,database_url,index_root,mode,helper):
@@ -428,22 +441,24 @@ def main():
  parser.add_argument("--fixture-source-tree"); parser.add_argument("--capture-helper")
  parser.add_argument("--database-url",required=True); parser.add_argument("--index-root",required=True)
  parser.add_argument("--retrieval-mode",choices=("hybrid","lexical"),default="hybrid")
- parser.add_argument("--cases-file"); parser.add_argument("--seed-report"); parser.add_argument("--build-report")
+ parser.add_argument("--cases-file",required=True); parser.add_argument("--seed-report"); parser.add_argument("--build-report")
  args=parser.parse_args(); tree=Path(args.tree).resolve(); fixture_tree=Path(args.fixture_source_tree).resolve() if args.fixture_source_tree else tree
  capture_helper=Path(args.capture_helper).resolve() if args.capture_helper else tree/"work"/"ceres-next-agent-experience"/"04"/"collect_prompt_sample.py"
  output=Path(args.output_dir).resolve(); index=Path(args.index_root).resolve()
  if output.exists(): raise SystemExit("Evidence directory exists; choose a new path")
  output.mkdir(parents=True); evidence_path=output/"live-public-multiturn.json"
- if args.cases_file:
-  case_path=Path(args.cases_file).resolve(); cases=json.loads(case_path.read_text(encoding="utf-8"))
-  if not isinstance(cases,list) or not cases: raise ValueError("cases file must be a non-empty JSON list")
- else: case_path=None; cases=PUBLIC_CASES
+ case_path=Path(args.cases_file).resolve(); case_document=json.loads(case_path.read_text(encoding="utf-8"))
+ if isinstance(case_document,dict):
+  case_set_id=case_document["case_set_id"]; cases=case_document["cases"]
+ else: case_set_id="external-fixed-cases"; cases=case_document
+ if not isinstance(cases,list) or not cases: raise ValueError("cases file must contain a non-empty operation list")
  helper=module_from(capture_helper,"ceres_next_04_capture")
- evidence={"runner_version":"08-live-api-multiturn-v1","captured_at_utc":datetime.now(timezone.utc).isoformat(),
-  "source":None,"case_source_sha256":sha(case_path) if case_path else "embedded-public-cases",
+ evidence={"runner_version":"08-live-api-multiturn-v2","captured_at_utc":datetime.now(timezone.utc).isoformat(),
+  "source":None,"case_set_id":case_set_id,"case_source_sha256":sha(case_path),
   "case_ids":[c["case_id"] for c in cases],"seed_report_path":str(Path(args.seed_report).resolve()) if args.seed_report else None,
   "build_report_path":str(Path(args.build_report).resolve()) if args.build_report else None,"requested_retrieval_mode":args.retrieval_mode,
-  "runtime_identity":None,"model":None,"role_model_calls":[],"kev_calls":[],"cases":[],"steps":[],
+  "runtime_identity":None,"module_origins":None,"capability_criteria_versions":[],
+  "model":None,"role_model_calls":[],"kev_calls":[],"cases":[],"steps":[],
   "human_review":{"agent_expression_review":"pending","user_acceptance":"not_recorded"}}
  manager=kev_provider=None; started=time.perf_counter(); identity=None
  try:
@@ -458,11 +473,16 @@ def main():
     evidence[key+"_sha256"]=sha(report)
   identity,settings=verify_runtime(tree,args.database_url,index,args.retrieval_mode); evidence["runtime_identity"]=identity
   client,manager,settings,token,role_calls,kev_calls,kev_provider=setup_live(tree,args.database_url,index,args.retrieval_mode,helper)
+  evidence["module_origins"]=module_origin_manifest(tree)
   evidence["role_model_calls"]=role_calls; evidence["kev_calls"]=kev_calls
   evidence["model"]={"role_model":settings.llm_model,"kev_model":"kev-latest","role_endpoint_origin_path":origin(settings.openai_base_url),
    "capture_boundary":"work/ceres-next-agent-experience/04/collect_prompt_sample.py","timeout_seconds":settings.llm_timeout}
   evidence["preflight_startup_ms"]=round((time.perf_counter()-started)*1000,1)
   for case in cases: run_case(client,case,role_calls,kev_calls,evidence,evidence_path,helper,token)
+  evidence["capability_criteria_versions"]=sorted({
+   trace["criteria_version"] for step in evidence["steps"] for trace in step.get("trace",[])
+   if trace.get("stage")=="capability" and trace.get("criteria_version")
+  })
   evidence["model_call_summary"]={"role_model":call_summary(role_calls),"kev":call_summary(kev_calls)}
   bad=[c["case_id"] for c in evidence["cases"] if c["status"]!="captured"]
   evidence["status"]="captured" if not bad else "captured_with_failures"; evidence["failed_case_ids"]=bad

@@ -11,6 +11,7 @@ const appUrl = process.env.CERES_APP_URL;
 const evidenceFile = process.env.CERES_UI_EVIDENCE_FILE;
 const playwrightModule = process.env.CERES_PLAYWRIGHT_MODULE;
 const publicApiEvidenceFile = process.env.CERES_PUBLIC_API_EVIDENCE_FILE;
+const publicCasesFile = process.env.CERES_PUBLIC_CASES_FILE;
 const backendStartupReceiptFile = process.env.CERES_BACKEND_STARTUP_RECEIPT_FILE;
 const sourceRoot = process.env.CERES_SOURCE_ROOT;
 const sourceRevision = process.env.CERES_SOURCE_REVISION || null;
@@ -43,12 +44,13 @@ const SOURCE_FILES = [
   'Mercury/mercury/services.py',
 ];
 const evidence = {
-  runner_version: 'ceres-next-08-real-backend-ui-v1',
+  runner_version: 'ceres-next-08-real-backend-ui-v2',
   runner_sha256: null,
   status: 'running',
   current_stage: 'preflight',
   app_origin: null,
   timeout_ms: UI_TIMEOUT_MS,
+  case_source: null,
   runtime_identity: null,
   source_manifest: { revision: sourceRevision, files: [] },
   browser_actions: [],
@@ -516,9 +518,39 @@ async function writeRuntimeAndSourceEvidence() {
     'CERES_APP_URL',
     'CERES_PLAYWRIGHT_MODULE',
     'CERES_PUBLIC_API_EVIDENCE_FILE',
+    'CERES_PUBLIC_CASES_FILE',
     'CERES_BACKEND_STARTUP_RECEIPT_FILE',
     'CERES_SOURCE_ROOT',
   ]) assert.ok(process.env[name], name + ' is required');
+  const casePath = path.resolve(publicCasesFile);
+  const caseBytes = fs.readFileSync(casePath);
+  const caseDocument = JSON.parse(caseBytes.toString('utf8'));
+  assert.equal(caseDocument.case_set_id, 'ceres-next-08-public-cases-v2', 'UI and API must use the frozen public case set');
+  const cases = caseDocument.cases;
+  const drinkCase = cases.find(item => item.case_id === 'drink_multisku_attribute_filter_explicit_purchase_v2');
+  assert.ok(drinkCase, 'Frozen public cases must contain the multi-SKU drink case');
+  const byLabel = label => drinkCase.steps.find(step => step.label === label);
+  const broadStep = byLabel('broad-drinks');
+  const typeStep = byLabel('select-cola-type');
+  const filterStep = byLabel('filter-pepsi-brand');
+  const planStep = byLabel('prepare-selected-plan');
+  assert.ok(broadStep && typeStep && filterStep && planStep, 'Frozen drink case is missing a UI-aligned step');
+  const expectedSkus = planStep.expect.plan_item_skus;
+  const expectedQuantities = planStep.expect.plan_quantities;
+  assert.equal(expectedSkus.length, 1, 'UI probe expects one selected SKU');
+  const drinkSku = expectedSkus[0];
+  assert.equal(typeof expectedQuantities[drinkSku], 'number', 'UI probe requires the selected SKU quantity');
+  const drinkConfig = {
+    broadMessage: broadStep.message,
+    typeLabel: typeStep.label_equals,
+    brandLabel: filterStep.label_equals,
+    brands: typeStep.expect.card_field_values.brand,
+    brand: filterStep.expect.all_card_fields.brand,
+    sku: drinkSku,
+    quantity: expectedQuantities[drinkSku],
+    maximumTotalFen: planStep.expect.maximum_plan_total_fen,
+  };
+  evidence.case_source = { case_set_id: caseDocument.case_set_id, file: path.basename(casePath), sha256: sha256(caseBytes) };
   evidence.app_origin = new URL(appUrl).origin;
   const publicApiEvidence = JSON.parse(fs.readFileSync(publicApiEvidenceFile, 'utf8'));
   const backendStartupReceipt = JSON.parse(fs.readFileSync(backendStartupReceiptFile, 'utf8'));
@@ -688,12 +720,12 @@ async function main() {
 
   setStage('real-type-filter-bubbles');
   const cartBeforeBubbles = summarizeCart(await publicGet('/api/v1/cart', 'cart before type/filter exploration'));
-  const broadDrink = await sendKekeMessage('买点饮料，两瓶，预算20元', 'broad drink type clarification');
+  const broadDrink = await sendKekeMessage(drinkConfig.broadMessage, 'broad drink type clarification');
   assert.equal(broadDrink.status, 200, 'Broad drink turn must return a real response');
   const broadPayload = terminalPayload(broadDrink);
   const typeQuestion = (broadPayload?.pending_clarifications ?? []).find(item => item.slot === 'product_type');
   assert.ok(typeQuestion, 'Broad drink query must present a product_type bubble');
-  const colaChoice = findOption(typeQuestion, label => label === '可乐', 'drink type');
+  const colaChoice = findOption(typeQuestion, label => label === drinkConfig.typeLabel, 'drink type');
   await screenshot('06-product-type-bubbles.png');
   const typeRequestStart = turnRequests().length;
   const typeResponseStart = turnResponses().length;
@@ -707,11 +739,11 @@ async function main() {
   const selectedTypePayload = terminalPayload(selectedTypeTurn);
   const filterQuestion = (selectedTypePayload?.pending_clarifications ?? []).find(item => item.slot === 'product_filter');
   assert.ok(filterQuestion, 'Cola response must present a product_filter bubble');
-  const pepsiChoice = findOption(filterQuestion, label => label === '品牌：百事可乐', 'brand filter');
+  const pepsiChoice = findOption(filterQuestion, label => label === drinkConfig.brandLabel, 'brand filter');
   const colaCards = selectedTypePayload?.product_cards ?? [];
   assert.ok(colaCards.length >= 2, 'Type selection must show the actual multi-candidate cola list');
   const shownBrands = new Set(colaCards.map(card => card.brand));
-  assert.ok(shownBrands.has('可口可乐') && shownBrands.has('百事可乐'), 'Pre-filter candidates must include both actual cola brands');
+  for (const brand of drinkConfig.brands) assert.ok(shownBrands.has(brand), 'Pre-filter candidates must include actual brand ' + brand);
   await screenshot('07-product-filter-bubbles.png');
 
   const filterRequestStart = turnRequests().length;
@@ -725,16 +757,21 @@ async function main() {
   assert.equal(filterRequest.body?.clarification_answer?.option_id, pepsiChoice.option_id, 'Filter bubble must retain option_id');
   const filteredCards = terminalPayload(filteredTurn)?.product_cards ?? [];
   assert.ok(filteredCards.length > 0, 'Filter answer must return real product cards');
-  assert.ok(filteredCards.every(card => card.brand === '百事可乐'), 'Brand filter must leave only Pepsi product cards');
+  assert.ok(filteredCards.every(card => card.brand === drinkConfig.brand), 'Brand filter must leave only ' + drinkConfig.brand + ' product cards');
   const cartAfterFilter = summarizeCart(await publicGet('/api/v1/cart', 'cart after type/filter browsing'));
   assert.equal(JSON.stringify(cartAfterFilter), JSON.stringify(cartBeforeBubbles), 'Type/filter browsing must not change the real cart');
   await screenshot('08-filtered-products.png');
 
   setStage('persist-shopping-plan-for-continuation');
-  const selectedCard = filteredCards[filteredCards.length - 1];
+  const selectedCardIndex = filteredCards.findIndex(card => card.sku_id === drinkConfig.sku);
+  assert.ok(selectedCardIndex >= 0, 'Filtered candidates must include the SKU frozen in the shared public case');
+  const selectedCard = filteredCards[selectedCardIndex];
   const productButtonStart = turnRequests().length;
   const productTurnStart = turnResponses().length;
-  await page.getByRole('button', { name: '选这款，生成清单', exact: true }).last().click();
+  const latestProductCards = page.getByRole('region', { name: '可乐候选' }).last();
+  const productButtons = latestProductCards.getByRole('button', { name: '选这款，生成清单', exact: true });
+  assert.equal(await productButtons.count(), filteredCards.length, 'Latest candidate cards and visible product buttons must align');
+  await productButtons.nth(selectedCardIndex).click();
   recordAction('select-filtered-real-product-card', { sku_id: selectedCard.sku_id, candidate_ref: selectedCard.ref });
   const selectedProductTurn = await waitForNextTurn(productTurnStart, 'filtered product plan turn');
   const selectedProductRequest = turnRequests()[productButtonStart];
@@ -743,7 +780,10 @@ async function main() {
   const guideSessionIdForPlan = await waitUntil(() => sessionIdFromEvidence(), 'guide session ID for pending plan');
   const pendingPlanSnapshot = await readGuideSnapshot(guideSessionIdForPlan, 'pending beverage plan before Momo handoff');
   assert.ok(pendingPlanSnapshot.plan?.plan_id, 'Filtered product selection must persist a purchase plan');
-  assert.ok(pendingPlanSnapshot.plan.items.some(item => item.sku_id === selectedCard.sku_id), 'Pending plan must retain selected filtered SKU');
+  const beveragePlanItem = pendingPlanSnapshot.plan.items.find(item => item.sku_id === selectedCard.sku_id);
+  assert.ok(beveragePlanItem, 'Pending plan must retain selected filtered SKU');
+  assert.equal(beveragePlanItem.quantity, drinkConfig.quantity, 'Pending plan must preserve the public case quantity');
+  assert.ok(selectedCard.price_fen * beveragePlanItem.quantity <= drinkConfig.maximumTotalFen, 'Selected public SKU quantity must remain within the case budget');
   await clickPlanCapsuleIfNeeded();
   const pendingItemName = pendingPlanSnapshot.plan.items.find(item => item.sku_id === selectedCard.sku_id).name;
   await page.getByText(pendingItemName, { exact: true }).waitFor({ state: 'visible', timeout: UI_TIMEOUT_MS });

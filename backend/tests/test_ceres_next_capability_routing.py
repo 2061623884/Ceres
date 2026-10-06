@@ -41,13 +41,15 @@ def test_chat_capability_keeps_chat_out_of_purchase(
     assert capability_call is not None, events
     detail = json.loads(capability_call["output_summary"])
     assert detail["capability"] == "chat"
-    assert detail["criteria_version"] == "ceres-guide-capabilities-v1"
+    assert detail["criteria_version"] == "ceres-guide-capabilities-v2"
     assert set(detail["criteria"]) == {
         "category_exploration",
         "purchase_modify",
         "facts_qa",
         "chat",
     }
+    assert "来点零食" in detail["criteria"]["category_exploration"]
+    assert "只用于与超市选购无关的交流" in detail["criteria"]["chat"]
     assert detail["raw_response"]["answers"]["capability"]["choice"] == "chat"
     assert capability_call["duration_ms"] >= 0
     assert len([call for call in kev_api["calls"] if "capability" in call["request"]["questions"]]) == 1
