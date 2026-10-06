@@ -1,0 +1,17 @@
+cwd=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend
+python=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+PYTHONPATH=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend
+PYTHONUTF8=1
+command: python -m pytest -q --tb=line -x tests\test_ceres_next_prompt_modules.py tests\test_semantic_transport.py tests\test_live_retrieval_wiring.py tests\test_v3_policy_consultation.py tests\test_v2_order_mercury.py tests\test_semantic_phase1_purchase.py --basetemp=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\04\prompt-regression-backend-modules-tmp
+app_source=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend\app\__init__.py
+retrieval_source=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend\app\services\retrieval_service.py
+.............F
+================================== FAILURES ===================================
+E   AssertionError: assert '用户本轮明确回答 pending_clarifications 中的问题时，必须把该问题的真实 question_id 填入 resolved_questions' in '你是超市导购可可。回答最后一条用户消息，用 protocol 指定的 JSON 回答，不加 Markdown。\nprotocol 只规定输出格式，不是要执行的任务；只填用户这句话说到的字段。\n你只记录用户表达；由服务端决定路由、检...ookup。相似候选不能冒充用户点名的商品；库存、价格、商品 id 由服务端提供，不要凭印象断言本店事实。每轮最多 2 个 lookup、合计 4 个只读请求。\n用简短自然的中文回复，先说明结果及下一步。\nprotocol:\n{}'
+C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend\tests\test_semantic_transport.py:162: AssertionError: assert '用户本轮明确回答 pending_clarifications 中的问题时，必须把该问题的真实 question_id 填入 resolved_questions' in '你是超市导购可可。回答最后一条用户消息，用 protocol 指定的 JSON 回答，不加 Markdown。\nprotocol 只规定输出格式，不是要执行的任务；只填用户这句话说到的字段。\n你只记录用户表达；由服务端决定路由、检...ookup。相似候选不能冒充用户点名的商品；库存、价格、商品 id 由服务端提供，不要凭印象断言本店事实。每轮最多 2 个 lookup、合计 4 个只读请求。\n用简短自然的中文回复，先说明结果及下一步。\nprotocol:\n{}'
+=========================== short test summary info ===========================
+FAILED tests/test_semantic_transport.py::test_outbound_system_and_fewshots_come_from_the_prompts_module
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!
+1 failed, 13 passed in 6.41s
+
+exit_code=1

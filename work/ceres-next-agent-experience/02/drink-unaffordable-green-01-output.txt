@@ -1,0 +1,26 @@
+Command: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe -m pytest tests/test_ceres_next_drink_choice.py::test_unaffordable_drink_types_are_not_offered -vv --tb=short --no-showlocals --basetemp=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\02\drink-unaffordable-green-01-tmp
+cwd: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-02\backend
+PYTHONPATH: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-02\backend
+Exit code: 1
+Credential-bearing diagnostic lines filtered: False
+
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-02\backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.1, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 1 item
+
+tests/test_ceres_next_drink_choice.py::test_unaffordable_drink_types_are_not_offered FAILED [100%]
+
+================================== FAILURES ===================================
+________________ test_unaffordable_drink_types_are_not_offered ________________
+tests\test_ceres_next_drink_choice.py:66: in test_unaffordable_drink_types_are_not_offered
+    assert "没有符合条件的饮品" in response["message"]
+E   AssertionError: assert '\u6ca1\u6709\u7b26\u5408\u6761\u4ef6\u7684\u996e\u54c1' in '\u8fd9\u4e00\u6b65\u6ca1\u6709\u5b8c\u6210\uff1a\u6a21\u578b\u53ea\u7ed9\u51fa\u4e86\u52a8\u4f5c\uff0c\u6ca1\u6709\u7ed9\u51fa\u8981\u56de\u7b54\u7528\u6237\u7684\u8bdd\u3002 \u539f\u6765\u7684\u6e05\u5355\u6ca1\u6709\u53d8\u5316\u3002'
+=========================== short test summary info ===========================
+FAILED tests/test_ceres_next_drink_choice.py::test_unaffordable_drink_types_are_not_offered - AssertionError: assert '\u6ca1\u6709\u7b26\u5408\u6761\u4ef6\u7684\u996e\u54c1' in '\u8fd9\u4e00\u6b65\u6ca1\u6709\u5b8c\u6210\uff1a\u6a21\u578b\u53ea\u7ed9\u51fa\u4e86\u52a8\u4f5c\uff0c\u6ca1\u6709\u7ed9\u51fa\u8981\u56de\u7b54\u7528\u6237\u7684\u8bdd\u3002 \u539f\u6765\u7684\u6e05\u5355\u6ca1\u6709\u53d8\u5316\u3002'
+============================== 1 failed in 3.95s ==============================
+

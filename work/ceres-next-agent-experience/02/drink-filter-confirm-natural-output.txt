@@ -1,0 +1,11 @@
+cwd=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-02\backend
+python=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+PYTHONPATH=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-02\backend
+PYTHONUTF8=1
+command: python -m pytest -q --tb=line tests\test_ceres_next_drink_choice.py::test_drink_type_and_filter_keep_budget_quantity_until_explicit_confirmation --basetemp=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\02\drink-filter-confirm-natural-tmp
+app_source=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-02\backend\app\__init__.py
+retrieval_source=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-02\backend\app\services\retrieval_service.py
+.                                                                        [100%]
+1 passed in 3.87s
+
+exit_code=0

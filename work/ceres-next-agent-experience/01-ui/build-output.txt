@@ -1,0 +1,20 @@
+Command: corepack pnpm@10.34.3 run build
+Working directory: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01-ui\frontend
+pnpm: 10.34.3
+Exit code: 0
+
+
+> figma-make-app@1.0.0 build C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01-ui\frontend
+> vite build
+
+vite v8.0.5 building client environment for production...
+[2K
+transforming...✓ 21 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/robots.txt                   0.02 kB │ gzip:  0.04 kB
+dist/index.html                   0.91 kB │ gzip:  0.42 kB
+dist/assets/index-_0EjiBoA.css   53.16 kB │ gzip: 10.30 kB
+dist/assets/index-Cs6TA3RS.js   285.46 kB │ gzip: 85.85 kB
+
+✓ built in 214ms

@@ -1,0 +1,7 @@
+Command: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe -m pytest tests/test_ceres_next_capability_routing.py::test_chat_capability_keeps_chat_out_of_purchase -vv --tb=short --no-showlocals --basetemp=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\03\kev-capability-red-02-tmp
+cwd: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-03\backend
+PYTHONPATH: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-03\backend
+Exit code: 1
+Sensitive header text remains after filter: False
+
+

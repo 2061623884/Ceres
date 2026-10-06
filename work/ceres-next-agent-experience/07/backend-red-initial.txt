@@ -1,0 +1,25 @@
+cwd=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-07\backend
+python=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+PYTHONPATH=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-07\backend
+PYTHONUTF8=1
+command: python -m pytest -q --tb=line -x tests\test_ceres_next_theme_activity.py --basetemp=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\07\backend-red-initial-tmp
+C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-07\backend\app\services\template_matcher.py:21: SyntaxWarning: invalid escape sequence '\['
+  _PUNCT_PATTERN = re.compile(r"[\s\u3000，。！？、；：""''（）()\[\]【】\-—·…]+")
+app_source=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-07\backend\app\__init__.py
+retrieval_source=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-07\backend\app\services\retrieval_service.py
+E
+=================================== ERRORS ====================================
+_ ERROR at setup of test_activity_and_selected_sku_context_survive_followup_turns _
+file C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-07\backend\tests\test_ceres_next_theme_activity.py, line 47
+  def test_activity_and_selected_sku_context_survive_followup_turns(
+E       fixture 'kev' not found
+>       available fixtures: _asyncio_loop_factory, _class_scoped_runner, _function_scoped_runner, _module_scoped_runner, _package_scoped_runner, _session_scoped_runner, anyio_backend, anyio_backend_name, anyio_backend_options, cache, capfd, capfdbinary, caplog, capsys, capsysbinary, capteesys, client, db_session, doctest_namespace, event_loop_policy, free_tcp_port, free_tcp_port_factory, free_udp_port, free_udp_port_factory, internal_trace_headers, kev_api, monkeypatch, offline_providers, pytestconfig, reactive_agent, record_property, record_testsuite_property, record_xml_attribute, recwarn, semantic_provider, source_database_path, subtests, test_db_url, tmp_path, tmp_path_factory, tmpdir, tmpdir_factory, unused_tcp_port, unused_tcp_port_factory, unused_udp_port, unused_udp_port_factory
+>       use 'pytest --fixtures [testpath]' for help on them.
+
+C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-07\backend\tests\test_ceres_next_theme_activity.py:47
+=========================== short test summary info ===========================
+ERROR tests/test_ceres_next_theme_activity.py::test_activity_and_selected_sku_context_survive_followup_turns
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!
+1 error in 3.84s
+
+exit_code=1

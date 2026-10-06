@@ -1,0 +1,6 @@
+cwd=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-07\frontend
+runner=corepack pnpm@10.34.3
+pnpm_version=10.34.3
+command=corepack pnpm@10.34.3 exec tsc --noEmit -p tsconfig.json
+
+exit_code=0

@@ -1,0 +1,10 @@
+file:///C:/Users/20616/Desktop/Agent/Agent%E4%BA%A7%E5%93%81/Ceres/work/.ceres-next-01-ui/frontend/node_modules/vite/dist/node/chunks/node.js:24
+import { dev, oxcRuntimePlugin, resolveTsconfig, scan, viteAliasPlugin, viteBuildImportAnalysisPlugin, viteDynamicImportVarsPlugin, viteImportGlobPlugin, viteJsonPlugin, viteLoadFallbackPlugin, viteManifestPlugin, viteModulePreloadPolyfillPlugin, viteReporterPlugin, viteResolvePlugin, viteTransformPlugin, viteWasmFallbackPlugin, viteWebWorkerPostPlugin } from "rolldown/experimental";
+                                                                                                                                                                                                                                                                                                                   ^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: The requested module 'rolldown/experimental' does not provide an export named 'viteWasmFallbackPlugin'
+    at #asyncInstantiate (node:internal/modules/esm/module_job:327:21)
+    at async ModuleJob.run (node:internal/modules/esm/module_job:431:5)
+    at async node:internal/modules/esm/loader:643:26
+    at async file:///C:/Users/20616/Desktop/Agent/Agent%E4%BA%A7%E5%93%81/Ceres/work/.ceres-next-01-ui/work/ceres-next-agent-experience/01-ui/ui-clarification-probe.mjs:10:26
+
+Node.js v24.19.0

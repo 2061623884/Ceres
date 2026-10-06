@@ -1,0 +1,11 @@
+cwd=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend
+python=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+PYTHONPATH=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend
+PYTHONUTF8=1
+command: python -m pytest -q --tb=line tests\test_semantic_transport.py::test_purchase_prompt_preserves_clarification_resolution_at_model_boundary --basetemp=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\04\green-purchase-pending-rule-tmp
+app_source=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend\app\__init__.py
+retrieval_source=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend\app\services\retrieval_service.py
+.                                                                        [100%]
+1 passed in 0.16s
+
+exit_code=0

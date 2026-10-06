@@ -1,0 +1,7 @@
+Command: corepack pnpm@10.34.3 exec tsc --noEmit
+Working directory: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01-ui\frontend
+pnpm: 10.34.3
+Exit code: 2
+
+src/lib/chatOpening.ts(284,15): error TS2352: Conversion of type 'Record<string, unknown>' to type 'ServiceRoutePayload' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  Property 'decision' is missing in type 'Record<string, unknown>' but required in type 'ServiceRoutePayload'.

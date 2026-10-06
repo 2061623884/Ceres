@@ -1,0 +1,6 @@
+cwd: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend interpreter: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe PYTHONPATH: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend import app.prompts.semantic: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend\app\prompts\semantic.py selector: tests/test_ceres_next_prompt_modules.py::test_verified_product_type_and_filter_answers_use_category_guidance exit_code: 1 pytest output:
+E   AssertionError: assert '同类有多个匹配候选时直接展示比较' in [captured prompt omitted]
+C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend\tests\test_ceres_next_prompt_modules.py:221: AssertionError: assert '同类有多个匹配候选时直接展示比较' in [captured prompt omitted]
+FAILED tests/test_ceres_next_prompt_modules.py::test_verified_product_type_and_filter_answers_use_category_guidance
+1 failed in 3.86s
+note: traceback assertion repr sanitized; no full prompt retained

@@ -1,0 +1,14 @@
+semantic_prompt=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend\app\prompts\semantic.py
+live_semantic_provider=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend\app\llm\live_semantic_provider.py
+retrieval_service=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend\app\services\retrieval_service.py
+
+worktree=work/.ceres-next-04
+cwd=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend
+interpreter=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+PYTHONPATH=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend
+command=python -m pytest -q --tb=line -x tests\test_ceres_next_prompt_modules.py tests\test_semantic_transport.py tests\test_live_retrieval_wiring.py tests\test_v3_policy_consultation.py tests\test_v2_order_mercury.py tests\test_semantic_phase1_purchase.py tests\test_snack_selection.py::test_single_category_recommendation_uses_selected_sellable_sku_evidence tests\test_snack_selection.py::test_unknown_sugar_content_returns_no_product_recommendation_or_plan --basetemp=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\04\tmp-regression-facts-02
+
+............................................................             [100%]
+60 passed in 69.46s (0:01:09)
+
+exit_code=0

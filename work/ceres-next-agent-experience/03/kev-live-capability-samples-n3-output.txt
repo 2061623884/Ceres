@@ -1,0 +1,72 @@
+Python: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+cwd/PYTHONPATH: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-03\backend
+Exit code: 0
+Credential-bearing diagnostic lines filtered: False
+Full request/response artifact: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\03\kev-live-capability-samples-n3.json
+
+{
+  "sample_count_total": 3,
+  "provider_source_sha256": "e24e708bc31f180d7ce090a129a04c67664dc37e096f3caae79d080ee2965435",
+  "criteria_version": "ceres-guide-capabilities-v1",
+  "samples": [
+    {
+      "case": "purchase_modify",
+      "status": 200,
+      "http_latency_ms": 960.031,
+      "service_latency_ms": 345.5,
+      "choice": "purchase_modify",
+      "confidence": 0.2365,
+      "probabilities": {
+        "category_exploration": 0.1654,
+        "purchase_modify": 0.4274,
+        "facts_qa": 0.2185,
+        "chat": 0.1887
+      },
+      "usage": {
+        "input_tokens": 304,
+        "output_tokens": 81
+      },
+      "error": null
+    },
+    {
+      "case": "facts_qa",
+      "status": 200,
+      "http_latency_ms": 592.126,
+      "service_latency_ms": 285.3,
+      "choice": "facts_qa",
+      "confidence": 0.7986,
+      "probabilities": {
+        "category_exploration": 0.0316,
+        "purchase_modify": 0.0397,
+        "facts_qa": 0.849,
+        "chat": 0.0797
+      },
+      "usage": {
+        "input_tokens": 289,
+        "output_tokens": 81
+      },
+      "error": null
+    },
+    {
+      "case": "chat",
+      "status": 200,
+      "http_latency_ms": 592.571,
+      "service_latency_ms": 287.3,
+      "choice": "chat",
+      "confidence": 0.8794,
+      "probabilities": {
+        "category_exploration": 0.0234,
+        "purchase_modify": 0.0194,
+        "facts_qa": 0.0477,
+        "chat": 0.9096
+      },
+      "usage": {
+        "input_tokens": 289,
+        "output_tokens": 80
+      },
+      "error": null
+    }
+  ],
+  "failures": []
+}
+

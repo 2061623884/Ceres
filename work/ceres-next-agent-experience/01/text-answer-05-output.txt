@@ -1,0 +1,21 @@
+Command: & 'C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe' -m pytest -vv --showlocals tests/test_ceres_next_snack_choice.py::test_snack_type_can_be_answered_with_free_text_and_does_not_leave_stale_question --basetemp='C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\01\text-answer-05-tmp'
+Working directory: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01\backend
+PYTHONPATH: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01\backend
+PYTHONUTF8: 1
+Import check exit code: 0
+app=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01\backend\app\__init__.py
+retrieval=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01\backend\app\services\retrieval_service.py
+Pytest exit code: 0
+
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01\backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.1, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 1 item
+
+tests/test_ceres_next_snack_choice.py::test_snack_type_can_be_answered_with_free_text_and_does_not_leave_stale_question PASSED [100%]
+
+============================== 1 passed in 3.57s ==============================

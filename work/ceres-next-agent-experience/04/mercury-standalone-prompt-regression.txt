@@ -1,0 +1,12 @@
+mercury=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\Mercury\mercury\__init__.py
+
+worktree=work/.ceres-next-04
+cwd=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\Mercury
+interpreter=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+PYTHONPATH=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\Mercury
+command=python -m pytest -q --tb=line tests\test_agent_flows.py --basetemp=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\04\tmp-mercury-standalone
+
+.............                                                            [100%]
+13 passed in 0.93s
+
+exit_code=0

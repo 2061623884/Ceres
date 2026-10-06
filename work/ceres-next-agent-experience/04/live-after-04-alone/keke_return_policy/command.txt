@@ -1,0 +1,15 @@
+cwd=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04
+python=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+CERES_TREE_HEAD=04f5efde0c66d50213de72df266b7e692d2ca019
+harness_sha256=F5D050CF73A4959B27CB2971D1CADC8B22997542E2B215284996B87E22F07E6F
+case=keke_return_policy
+route=controlled Kev facts_qa; actual configured semantic model
+retrieval=case-local lexical index
+request logging=local messages/protocol/model/options/response/usage; no headers/settings
+command: python C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\04\collect_prompt_sample.py --tree C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04 --case keke_return_policy --output-dir C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\04\live-after-04-alone\keke_return_policy
+data/fixtures/demo-products.json_sha256=0A54260D2AB18788D630D0BEFC9C8EBE8E7BF0773EE507562FAAA32688508DE7
+data/fixtures/store-offers.json_sha256=CCF76B3908DEAB2F904D52DB820316F288D8B75BA105099DD30B221D7530E3FA
+data/fixtures/catalog-review.json_sha256=937EE32E6378622D3163B050CDECFF7520CA1536EAA35BD938CDB13463602C8B
+data/fixtures/default-offer-prices.json_sha256=CF694736A5A0EB4A369B7792784D128116E5358A1BD755A72DA2DB32D73844A0
+
+exit_code=0

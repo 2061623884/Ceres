@@ -1,0 +1,23 @@
+cwd=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend
+python=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+PYTHONPATH=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend
+PYTHONUTF8=1
+command: python -m pytest -q --tb=line tests\test_ceres_next_prompt_modules.py::test_guide_and_mercury_send_the_shared_reply_style_through_public_routes --basetemp=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\04\green-shared-style-guidance-tmp
+F                                                                        [100%]
+================================== FAILURES ===================================
+E   assert '只有明说「加入购物车 / 下单」' not in '你是一个可以正常聊天的...ies": false}'
+      
+      '只有明说「加入购物车 / 下单」' is contained here:
+         plan_act：只有明说「加入购物车 / 下单」= confirm，「不买了 / 都不要了」= abandon。
+      ?           ++++++++++++++++
+          用户只说「好的」「可以呀」「嗯」「行」时，plan_act 必须为 none 或省略，不能填 confirm 或 abandon。即使上一轮在推荐菜、问要不要准备或加入购物车，也不能把助手的话当成用户本轮明说的加购或放弃。 对这种普通回应，必须填写非空 reply；有待确认清单时回复「好的，清单先保留，等你明确确认后再加购」，不宣称清单已确认或商品已加购。
+          若 current_plan 缺失或 groups 为空，普通 ACK 只简短接话并等待用户明确选择或提出需求；不得声称或暗示已有清单、清单已保留、已确认或已生成。只有 current_plan 存在且 groups 非空时，才可说清单先保留。
+          有唯一的待答候选时可以填 target.ref 表示选择、准备清单；选择候选和确认加购是两件事。...
+      
+      ...Full output truncated (22 lines hidden), use '-vv' to show
+C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend\tests\test_ceres_next_prompt_modules.py:122: assert '只有明说「加入购物车 / 下单」' not in '你是一个可以正常聊天的...ies": false}'
+=========================== short test summary info ===========================
+FAILED tests/test_ceres_next_prompt_modules.py::test_guide_and_mercury_send_the_shared_reply_style_through_public_routes
+1 failed in 3.20s
+
+exit_code=1

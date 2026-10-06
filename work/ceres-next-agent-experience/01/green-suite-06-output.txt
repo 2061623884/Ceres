@@ -1,0 +1,64 @@
+Command: & 'C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe' -m pytest -q tests/test_ceres_next_snack_choice.py --basetemp='C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\01\green-suite-06-tmp'
+Working directory: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01\backend
+PYTHONPATH: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01\backend
+PYTHONUTF8: 1
+Import check exit code: 0
+app=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01\backend\app\__init__.py
+retrieval=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01\backend\app\services\retrieval_service.py
+Pytest exit code: 1
+
+.F...                                                                    [100%]
+================================== FAILURES ===================================
+_ test_choosing_snack_type_by_identity_clears_question_and_shows_matching_products _
+
+indexed_client = <starlette.testclient.TestClient object at 0x00000240AA1C08F0>
+semantic_provider = <function semantic_provider.<locals>._install at 0x00000240AA33AC00>
+
+    def test_choosing_snack_type_by_identity_clears_question_and_shows_matching_products(
+        indexed_client, semantic_provider
+    ):
+        def choose_type(_request):
+            return {
+                "target": {"kind": "category", "name": "薯片", "intent": "explore"},
+                "lookups": [{"kind": "product", "query": "薯片"}],
+            }
+    
+        def show_selected_type(request):
+            matches = request["query_results"][0]["matches"]
+            assert matches
+            assert all(row["product_type"] == "potato_chips" for row in matches)
+            return {"reply": "有原味薯片可选。", "display_refs": [matches[0]["ref"]]}
+    
+        semantic_provider(
+            [
+                {
+                    "target": {"kind": "category", "name": "零食", "intent": "explore"},
+                    "lookups": [{"kind": "product", "query": "零食"}],
+                },
+                lambda request: {
+                    "reply": "薯片和饼干都有，可以先选类型。",
+                    "display_refs": [row["ref"] for row in request["query_results"][0]["matches"]],
+                },
+                choose_type,
+                show_selected_type,
+            ]
+        )
+        session_id = create_session(indexed_client)
+        cart_before = indexed_client.get("/api/v1/cart").json()
+        before = send_turn(indexed_client, session_id, "来点零食")
+        question = before["pending_clarifications"][0]
+    
+        after = send_turn(
+            indexed_client,
+            session_id,
+            "薯片",
+            before,
+>           clarification_answer={"question_id": question["question_id"], "option_id": chips["id"]},
+                                                                                       ^^^^^
+        )
+E       NameError: name 'chips' is not defined
+
+tests\test_ceres_next_snack_choice.py:91: NameError
+=========================== short test summary info ===========================
+FAILED tests/test_ceres_next_snack_choice.py::test_choosing_snack_type_by_identity_clears_question_and_shows_matching_products
+1 failed, 4 passed in 11.69s

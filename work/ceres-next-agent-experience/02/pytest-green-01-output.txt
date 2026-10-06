@@ -1,0 +1,32 @@
+Command: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe -m pytest tests/test_ceres_next_drink_choice.py::test_broad_drink_purchase_asks_for_a_supplied_type_without_losing_conditions -vv --tb=short --no-showlocals --basetemp=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\02\pytest-green-01-tmp
+cwd: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-02\backend
+PYTHONPATH: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-02\backend
+Exit code: 1
+Sensitive diagnostic lines filtered: False
+
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-02\backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.1, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 1 item
+
+tests/test_ceres_next_drink_choice.py::test_broad_drink_purchase_asks_for_a_supplied_type_without_losing_conditions FAILED [100%]
+
+================================== FAILURES ===================================
+_ test_broad_drink_purchase_asks_for_a_supplied_type_without_losing_conditions _
+tests\test_ceres_next_drink_choice.py:36: in test_broad_drink_purchase_asks_for_a_supplied_type_without_losing_conditions
+    assert {"可乐", "茶", "饮用水", "桃汁饮料"} <= labels
+E   AssertionError: assert {'桃汁饮料', '可乐', '茶', '饮用水'} <= {'可乐', '茶', '饮用水', '苏打水'}
+E     
+E     Extra items in the left set:
+E     '桃汁饮料'
+=========================== short test summary info ===========================
+FAILED tests/test_ceres_next_drink_choice.py::test_broad_drink_purchase_asks_for_a_supplied_type_without_losing_conditions - AssertionError: assert {'桃汁饮料', '可乐', '茶', '饮用水'} <= {'可乐', '茶', '饮用水', '苏打水'}
+  
+  Extra items in the left set:
+  '桃汁饮料'
+============================== 1 failed in 3.47s ==============================
+

@@ -1,0 +1,13 @@
+case: controlled snack_type_first request body baseline
+timestamp_utc: 2026-10-06T10:26:59Z
+cwd: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-05\backend
+interpreter: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+PYTHONPATH: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-05\backend
+selector: tests/test_ceres_next_prompt_modules.py::test_category_exploration_sends_type_first_guidance_to_the_model
+HEAD: 481e7505951204d3d24c9c9a3bb61684e5edc213
+worktree status: M backend/tests/test_ceres_next_prompt_modules.py
+semantic.py sha256: 3A4845B0D6B5137BC6CBBF314CB0B6F65431A1A5470FEDF6516B2B9C3A38F822
+request body bytes: 15385
+request body sha256: 61bec9e5c2736898a4b451e4cb212371a877d801aa7ec76785f1b1de1aa69a53
+result: 1 passed in 3.38s; exit_code=0
+note: only byte count/hash emitted; body not displayed or stored

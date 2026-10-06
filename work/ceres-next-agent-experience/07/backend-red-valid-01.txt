@@ -1,0 +1,19 @@
+cwd=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-07\backend
+python=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+PYTHONPATH=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-07\backend
+PYTHONUTF8=1
+command: python -m pytest -q --tb=line -x tests\test_ceres_next_theme_activity.py --basetemp=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\07\backend-red-valid-01-tmp
+app_source=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-07\backend\app\__init__.py
+retrieval_source=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-07\backend\app\services\retrieval_service.py
+F
+================================== FAILURES ===================================
+E   AssertionError: {"detail":[{"type":"literal_error","loc":["body","entry_context","page"],"msg":"Input should be 'home', 'category', 'search', 'product' or 'cart'","input":"activity","ctx":{"expected":"'home', 'category', 'search', 'product' or 'cart'"}}]}
+    assert 422 == 200
+     +  where 422 = <Response [422 Unprocessable Content]>.status_code
+C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-07\backend\tests\test_ceres_next_theme_activity.py:24: AssertionError: {"detail":[{"type":"literal_error","loc":["body","entry_context","page"],"msg":"Input should be 'home', 'category', 'search', 'product' or 'cart'","input":"activity","ctx":{"expected":"'home', 'category', 'search', 'product' or 'cart'"}}]}
+=========================== short test summary info ===========================
+FAILED tests/test_ceres_next_theme_activity.py::test_activity_and_selected_sku_context_survive_followup_turns
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!
+1 failed in 3.13s
+
+exit_code=1

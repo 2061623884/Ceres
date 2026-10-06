@@ -1,0 +1,19 @@
+Command: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe -m pytest tests/test_ceres_next_drink_choice.py::test_broad_drink_purchase_asks_for_a_supplied_type_before_preparing_a_plan -vv --tb=short --no-showlocals --basetemp=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\02\pytest-green-03-tmp
+cwd: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-02\backend
+PYTHONPATH: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-02\backend
+Exit code: 0
+Credential-bearing diagnostic lines filtered: False
+
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-02\backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.1, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 1 item
+
+tests/test_ceres_next_drink_choice.py::test_broad_drink_purchase_asks_for_a_supplied_type_before_preparing_a_plan PASSED [100%]
+
+============================== 1 passed in 3.56s ==============================
+

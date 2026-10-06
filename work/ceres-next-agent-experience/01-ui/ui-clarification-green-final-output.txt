@@ -1,0 +1,18 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: equal labels must remain separate after the next turn
+
+4 !== 2
+
+    at file:///C:/Users/20616/Desktop/Agent/Agent%E4%BA%A7%E5%93%81/Ceres/work/.ceres-next-01-ui/work/ceres-next-agent-experience/01-ui/ui-clarification-probe.mjs:181:10 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 4,
+  expected: 2,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.19.0

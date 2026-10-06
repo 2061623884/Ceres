@@ -1,0 +1,20 @@
+live_semantic_provider=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend\app\llm\live_semantic_provider.py
+semantic_prompt=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend\app\prompts\semantic.py
+
+worktree=work/.ceres-next-04
+head=1766fc57fd1803d3e0f1fe158c0a3fdaa327ff47
+cwd=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend
+interpreter=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+PYTHONPATH=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend
+dirty_paths=backend/tests/test_ceres_next_prompt_modules.py
+command=python -m pytest -q --tb=line tests\test_ceres_next_prompt_modules.py::test_verified_product_type_and_filter_answers_use_category_guidance --basetemp=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\04\tmp-red-direct-category-prompt-02
+
+F                                                                        [100%]
+================================== FAILURES ===================================
+E   IndexError: list index out of range
+C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend\tests\test_ceres_next_prompt_modules.py:218: IndexError: list index out of range
+=========================== short test summary info ===========================
+FAILED tests/test_ceres_next_prompt_modules.py::test_verified_product_type_and_filter_answers_use_category_guidance
+1 failed in 3.86s
+
+exit_code=1

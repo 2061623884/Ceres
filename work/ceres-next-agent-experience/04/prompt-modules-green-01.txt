@@ -1,0 +1,16 @@
+cwd=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend
+python=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+PYTHONPATH=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend
+PYTHONUTF8=1
+command: python -m pytest -q --tb=line tests\test_ceres_next_prompt_modules.py --basetemp=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\04\prompt-modules-green-01-tmp
+app_source=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend\app\__init__.py
+retrieval_source=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend\app\services\retrieval_service.py
+.F                                                                       [100%]
+================================== FAILURES ===================================
+E   assert '问候和简单生活感受' in '你是超市导购可可。回答最后一条用户消息，用 protocol 指定的 JSON 回答，不加 Markdown。\nprotocol 只规定输出格式，不是要执行的任务；只填用户这句话说到的字段。\n你只记录用户表达；由服务端决定路由、检...", "description": "更正/删除必须用服务端给出的记忆 ref；不清楚先查询或问清楚"}}, "additionalProperties": false}}, "additionalProperties": false}'
+C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend\tests\test_ceres_next_prompt_modules.py:121: assert '问候和简单生活感受' in '你是超市导购可可。回答最后一条用户消息，用 protocol 指定的 JSON 回答，不加 Markdown。\nprotocol 只规定输出格式，不是要执行的任务；只填用户这句话说到的字段。\n你只记录用户表达；由服务端决定路由、检...", "description": "更正/删除必须用服务端给出的记忆 ref；不清楚先查询或问清楚"}}, "additionalProperties": false}}, "additionalProperties": false}'
+=========================== short test summary info ===========================
+FAILED tests/test_ceres_next_prompt_modules.py::test_guide_and_mercury_send_the_shared_reply_style_through_public_routes
+1 failed, 1 passed in 6.21s
+
+exit_code=1

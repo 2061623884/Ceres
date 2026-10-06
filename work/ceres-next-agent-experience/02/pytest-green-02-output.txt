@@ -1,0 +1,16 @@
+Command: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe -m pytest -q tests/test_ceres_next_drink_choice.py::test_broad_drink_purchase_asks_for_a_supplied_type_without_losing_conditions --tb=short --no-showlocals --basetemp=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\02\pytest-green-02-tmp
+cwd: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-02\backend
+PYTHONPATH: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-02\backend
+Exit code: 1
+Credential-bearing diagnostic lines filtered: False
+
+F                                                                        [100%]
+================================== FAILURES ===================================
+_ test_broad_drink_purchase_asks_for_a_supplied_type_without_losing_conditions _
+tests\test_ceres_next_drink_choice.py:40: in test_broad_drink_purchase_asks_for_a_supplied_type_without_losing_conditions
+    assert indexed_client.get("/api/v1/guide/sessions/" + session_id).json()[
+E   KeyError: 'budget_fen'
+=========================== short test summary info ===========================
+FAILED tests/test_ceres_next_drink_choice.py::test_broad_drink_purchase_asks_for_a_supplied_type_without_losing_conditions
+1 failed in 3.52s
+

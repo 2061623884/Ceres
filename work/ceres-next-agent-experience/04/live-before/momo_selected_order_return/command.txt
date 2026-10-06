@@ -1,0 +1,4 @@
+cwd=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04-before
+python=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+CERES_TREE_HEAD=91ca0b80161dada5c83fa5955b8a27043172299d
+command: python collect_prompt_sample.py --tree C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04-before --case momo_selected_order_return --output-dir C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\04\live-before\momo_selected_order_return

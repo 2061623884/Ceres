@@ -1,0 +1,32 @@
+Command: & 'C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe' -m pytest -vv --no-showlocals tests/test_ceres_next_snack_choice.py tests/test_snack_selection.py --basetemp='C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\01\final-01-aggregate-tmp'
+Working directory: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01\backend
+PYTHONPATH: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01\backend
+PYTHONUTF8: 1
+Locals output: disabled
+Import check exit code: 0
+app=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01\backend\app\__init__.py
+retrieval=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01\backend\app\services\retrieval_service.py
+Pytest exit code: 0
+
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01\backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.1, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 11 items
+
+tests/test_ceres_next_snack_choice.py::test_broad_snack_request_asks_for_available_type_before_showing_products PASSED [  9%]
+tests/test_ceres_next_snack_choice.py::test_broad_snack_purchase_asks_for_type_before_preparing_a_plan PASSED [ 18%]
+tests/test_ceres_next_snack_choice.py::test_choosing_snack_type_by_identity_clears_question_and_shows_matching_products PASSED [ 27%]
+tests/test_ceres_next_snack_choice.py::test_snack_type_answer_rejects_an_option_without_the_current_question_identity PASSED [ 36%]
+tests/test_ceres_next_snack_choice.py::test_snack_type_can_be_answered_with_free_text_and_does_not_leave_stale_question PASSED [ 45%]
+tests/test_ceres_next_snack_choice.py::test_snack_choice_carries_budget_and_quantity_through_plan_to_explicit_confirmation PASSED [ 54%]
+tests/test_snack_selection.py::test_snack_selection_requires_confirmation_and_preserves_cart_on_no_match[0-\u5c31\u7b2c\u4e00\u4e2a] PASSED [ 63%]
+tests/test_snack_selection.py::test_snack_selection_requires_confirmation_and_preserves_cart_on_no_match[1-\u5c31\u7b2c\u4e8c\u4e2a] PASSED [ 72%]
+tests/test_snack_selection.py::test_single_category_recommendation_uses_selected_sellable_sku_evidence[\u60f3\u770b\u770b\u82cf\u6253\u997c\u5e72-\u997c\u5e72-\u997c\u5e72-demo:snack-soda-crackers-100g-box-tags0-name_tokens0] PASSED [ 81%]
+tests/test_snack_selection.py::test_single_category_recommendation_uses_selected_sellable_sku_evidence[\u559d\u70b9\u751c\u7684-\u751c\u5473\u996e\u54c1-\u751c\u5473-demo:cn-minute-maid-peach-450ml-bottle-tags1-name_tokens1] PASSED [ 90%]
+tests/test_snack_selection.py::test_unknown_sugar_content_returns_no_product_recommendation_or_plan PASSED [100%]
+
+============================= 11 passed in 24.71s =============================

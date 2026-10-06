@@ -1,0 +1,38 @@
+Command: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe -m pytest tests/test_ceres_next_drink_choice.py::test_broad_drink_purchase_asks_for_a_supplied_type_without_losing_conditions -vv --tb=short --no-showlocals --basetemp=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\02\pytest-red-01-rerun-tmp
+cwd: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-02\backend
+PYTHONPATH: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-02\backend
+Exit code: 1
+Sensitive diagnostic lines filtered: False
+
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-02\backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.1, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 1 item
+
+tests/test_ceres_next_drink_choice.py::test_broad_drink_purchase_asks_for_a_supplied_type_without_losing_conditions FAILED [100%]
+
+================================== FAILURES ===================================
+_ test_broad_drink_purchase_asks_for_a_supplied_type_without_losing_conditions _
+tests\test_ceres_next_drink_choice.py:33: in test_broad_drink_purchase_asks_for_a_supplied_type_without_losing_conditions
+    assert question["slot"] == "product_type"
+E   AssertionError: assert 'dish' == 'product_type'
+E     
+E     - product_type
+E     + dish
+============================== warnings summary ===============================
+app\services\template_matcher.py:21
+  C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-02\backend\app\services\template_matcher.py:21: SyntaxWarning: invalid escape sequence '\['
+    _PUNCT_PATTERN = re.compile(r"[\s\u3000，。！？、；：""''（）()\[\]【】\-—·…]+")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_ceres_next_drink_choice.py::test_broad_drink_purchase_asks_for_a_supplied_type_without_losing_conditions - AssertionError: assert 'dish' == 'product_type'
+  
+  - product_type
+  + dish
+======================== 1 failed, 1 warning in 4.26s =========================
+

@@ -1,0 +1,31 @@
+cwd=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-02\backend
+python=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+PYTHONPATH=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-02\backend
+PYTHONUTF8=1
+command: python -m pytest -q --tb=line tests\test_ceres_next_snack_choice.py --basetemp=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\02\snack-module-green-after-answer-guard-tmp
+app_source=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-02\backend\app\__init__.py
+retrieval_source=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-02\backend\app\services\retrieval_service.py
+.FF..F                                                                   [100%]
+================================== FAILURES ===================================
+E   AssertionError: assert [{'base_sessi... '饼干'}], ...}] == []
+      
+      Left contains one more item: {'base_session_version': 1, 'base_state_version': 0, 'candidates': [], 'options': [{'id': 'product_type:potato_chips', 'label': '薯片'}, {'id': 'product_type:soda_crackers', 'label': '饼干'}], ...}
+      Use -v to get more diff
+C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-02\backend\tests\test_ceres_next_snack_choice.py:137: AssertionError: assert [{'base_sessi... '饼干'}], ...}] == []
+E   AssertionError: assert [{'base_sessi... '饼干'}], ...}] == []
+      
+      Left contains one more item: {'base_session_version': 1, 'base_state_version': 0, 'candidates': [], 'options': [{'id': 'product_type:potato_chips', 'label': '薯片'}, {'id': 'product_type:soda_crackers', 'label': '饼干'}], ...}
+      Use -v to get more diff
+C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-02\backend\tests\test_ceres_next_snack_choice.py:217: AssertionError: assert [{'base_sessi... '饼干'}], ...}] == []
+E   AssertionError: assert [{'base_sessi... '饼干'}], ...}] == []
+      
+      Left contains one more item: {'base_session_version': 1, 'base_state_version': 0, 'candidates': [], 'options': [{'id': 'product_type:potato_chips', 'label': '薯片'}, {'id': 'product_type:soda_crackers', 'label': '饼干'}], ...}
+      Use -v to get more diff
+C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-02\backend\tests\test_ceres_next_snack_choice.py:395: AssertionError: assert [{'base_sessi... '饼干'}], ...}] == []
+=========================== short test summary info ===========================
+FAILED tests/test_ceres_next_snack_choice.py::test_broad_snack_purchase_asks_for_type_before_preparing_a_plan
+FAILED tests/test_ceres_next_snack_choice.py::test_choosing_snack_type_by_identity_clears_question_and_shows_matching_products
+FAILED tests/test_ceres_next_snack_choice.py::test_snack_choice_carries_budget_and_quantity_through_plan_to_explicit_confirmation
+3 failed, 3 passed in 14.05s
+
+exit_code=1

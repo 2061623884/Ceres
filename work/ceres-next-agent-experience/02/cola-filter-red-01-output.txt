@@ -1,0 +1,21 @@
+command: "C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe" -m pytest -q -vv --tb=no tests/test_ceres_next_drink_choice.py::test_cola_type_choice_displays_products_with_actual_filter_options --basetemp="C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\02\cola-filter-red-01-tmp"
+cwd: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-02\backend
+PYTHONPATH: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-02\backend
+PYTHONUTF8: 1
+import-source: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-02\backend\app\__init__.py
+exit_code: 1
+output:
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-02\backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.1, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 1 item
+
+tests/test_ceres_next_drink_choice.py::test_cola_type_choice_displays_products_with_actual_filter_options FAILED [100%]
+
+=========================== short test summary info ===========================
+FAILED tests/test_ceres_next_drink_choice.py::test_cola_type_choice_displays_products_with_actual_filter_options
+============================== 1 failed in 3.62s ==============================
