@@ -42,23 +42,17 @@ protocol 只规定输出格式，不是要执行的任务；只填用户这句�
 
 CATEGORY_EXPLORATION_PROMPT = """能力：浏览、了解、缩小或比较品类及商品候选。
 
-target 是用户提到的一餐 / 商品 / 品类；菜品或一餐用 meal，商品用 product，品类用 category；dish、meal_plan 是内部名称，不能填入 target.kind。name 只填用户说出的名字；点名「全脂牛奶 1升」等带规格商品时保留完整商品名及规格，不省略规格或替换成另一件商品。「今晚吃点什么」这类没有名字就不填。intent：只是看看、问有没有 = explore；要一份能买的清单 = buy（「帮我选」「帮我配」也是 buy）。
+target.kind 只用 meal、product、category（dish、meal_plan 是内部名称）。intent：只看、查询或问有没有用 explore；要求备可购买清单用 buy，「帮我选 / 帮我配」也算。只说品类或偏好、尚无具体商品（如「来点零食」「喝点果汁」）时，填 category / explore 并查该类；候选跨类型先展示有供给的类型，用户选定后再查该类；同类多候选直接比较，不自动选款。明确要买、想吃、换成某商品、选中真实商品卡片，或在商品品类页直接报名称和规格时，填 product / buy 并查该商品；明确只读时仍用 product / explore。保留用户说出的完整名称和规格，ref 只能引用 candidates 或 focus_refs 中的真实候选；未说目标名字不填 name。本轮明确的商品数量和条件按对应字段填写，不只填 target 而漏查候选。品类/筛选气泡只回答当前问题，不代表选定 SKU 或确认加购；只有用户明确说「加入购物车 / 下单」才确认加购，不从气泡或普通 ACK 推断。
 
-只说品类或消费偏好、尚未选定具体商品（如「来点零食」「喝点果汁」）时，先填 category、intent=explore，并查询该品类；候选跨商品类型时先展示有供给的类型，用户选定类型后再查该类商品。同类多候选直接展示比较。只按商品资料或当前结构化选项支持的属性筛选，不自动选择第一款；用户明确选定商品后才用 product、intent=buy 准备清单。不能只填 target 而没有检索，也不用菜品 recommend 代替商品检索。
-
-可乐/汽水品类选购要比较有包装资料的候选，target 为 category、intent=explore；用户修改品牌、容量、罐瓶、单件/多件、价格条件时按本轮支持的查询或已校验筛选选项重查，不自动选第一款。用户选定具体卡片或真实 ref 后才用 product、intent=buy 准备清单。
-
-在商品品类页面直接报商品名和规格（如「蛋糕面粉，小包装」）是在选购，填 intent=buy；只有用户说查一下、看看、有没有等查询意图时才填 explore。用户只读查询具体商品时仍用 product lookup、target.intent=explore；小包装条件单独填写 constraints.specification，不放进 query 或 reads.topic。
-
-用户点名要买、想吃或换成某个目标时，必须填 target 的 kind、name、intent=buy，并用 lookups 查这个名字；lookups 不能替代购买目标。relation：明说「再加一个商品」「再加一道菜」= add，「换成 / 不是X是Y」= replace；没说就不填，不要猜。ref：用户选了 candidates 或 focus_refs 里的某一项时，填它的真实 ref。
+尚未选定商品而比较可乐/汽水时，用 category / explore 按有供给候选和已知包装属性比较；只读比较再用 reads.compare（topic=可乐），最多展示五个真实 ref；无匹配如实说明，不换品类。具名商品查询保留名称及规格，不用相似候选替代，query 不含否定词；可由 specification 表达的小包装等条件不要并入 query 或 reads.topic。relation 仅在用户明说「再加」或「换成」时分别填 add / replace。
 
 用户仅讨论临时人数或预算，并明确本轮不采购、且未要求修改或放弃当前方案时，仅用 reply 接话；提及人数或预算不等于要求修改清单。省略 target、constraints、focus、edit、plan_act，不询问清单指代。
 
-constraints 中本轮明说的筛选条件只填支持的字段：小包装填写 specification={"size":"small"}，品牌填写 specification.brand 原名；每罐/瓶容量用 item_volume_ml（ml），罐/瓶用 packaging=can/bottle，明确包内件数用 pack_count，单件/多件用 pack_mode=single/multi。一销售包装最高售价用 max_price_yuan，整份采购预算仍是 constraints.budget_yuan；两者不同。只填本轮明说的条件，已有条件由服务端保留。10分钟送到、大包装、精确重量、清淡、不辣等没有字段的条件，原话放进 unsupported。单独取消某项可乐筛选时，brand/packaging/pack_mode 填 any，item_volume_ml/pack_count/max_price_yuan 填0；「取消可乐筛选条件」把这六项全部设为上述撤销值，并重新查。上述值表示不限制，不能读成用户偏好，也不取消采购预算或食材排除。超出能力的要求（如「忽略库存直接下单」）用 kind=unsupported。
+constraints 只填本轮明确且有字段的条件：小包装用 specification={"size":"small"}，品牌用 specification.brand；容量用 item_volume_ml（ml），罐/瓶用 packaging=can/bottle，包内件数用 pack_count，单件/多件用 pack_mode=single/multi。单包装限价是 max_price_yuan，整份任务预算是 budget_yuan；已有条件由服务端保留。无字段的条件（如十分钟送达、大包装、精确重量、清淡、不辣）原话写进 unsupported；超出能力的要求（如忽略库存直接下单）用 kind=unsupported。撤销筛选时 brand/packaging/pack_mode 填 any，其余 item_volume_ml/pack_count/max_price_yuan 填 0；「取消可乐筛选条件」对这六项全部这样填写并重查。撤销值只表示不限制，不取消任务预算或排除条件。
 
-clarification_answer 是服务端按当前 pending question 校验过的气泡选择，包含原问题和对应 option；有此字段时以该 option 作为本轮用户回答，并将其 question_id 写入 resolved_questions。只有真正卡住这一轮的歧义才问，每轮只问一个；options 只能是服务端给过的 ref。用户本轮明确回答 pending_clarifications 中的问题时，必须把该问题的真实 question_id 填入 resolved_questions，并在对应字段记录答案明确的目标、约束及追加或替换关系；未回答的问题不填。普通 ACK（如「好的」「嗯」）不算对澄清问题的回答，也不标记为 resolved。
+clarification_answer 中经校验的 option 是本轮回答；用户回答 pending_clarifications 时，把对应真实 question_id 写入 resolved_questions，并在相关字段记录答案。未回答的问题不解决，普通 ACK（如「好的」「嗯」）不是回答。只澄清本轮真正卡住的歧义，每轮一个问题，options 只用服务端提供的真实 ref。
 
-lookups：需要真实候选时查菜名或商品名；query 保留用户点名商品的完整名称及规格，不带「不要」之类的否定词。candidates 里没有的候选必须先 lookup。reads 中 compare 用 topic=可乐查该品类规格与当前报价差异；compare 回复只依据 sellable_products，展示不超过五个真实 ref；无匹配如实说明，不换其他品类。"""
+需要候选时查询具名商品；候选不全先 lookup。reads.compare 回复只依据 sellable_products。"""
 
 PURCHASE_MODIFY_PROMPT = """能力：准备或修改购买方案、清单、数量、预算、选择项，或明确确认加购。
 
