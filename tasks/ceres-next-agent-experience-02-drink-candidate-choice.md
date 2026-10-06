@@ -31,4 +31,10 @@
 
 ## 下一步
 
-确定现有饮品属性与代表候选，用公开会话旅程验证分类和筛选。
+补齐同类商品属性筛选、文字修订与类型选择后数量/预算到明确确认的完整旅程，之后合入最新集成版本并跑必要回归。
+
+## 实施证据
+
+工作树 `work/.ceres-next-02`。宽泛饮品的实际类型选项公开旅程已通过（1 passed，3.56s），供给类型概览不受商品展示前五名截断；低预算两件无可买供给的行为经过有效 red 后通过（1 passed，3.40s），公开文案说明无符合条件饮品，pending/plan 为空且购物车未变。证据分别为 `work/ceres-next-agent-experience/02/pytest-green-03-output.txt`、`drink-unaffordable-red-02-output.txt`、`drink-unaffordable-green-02-output.txt` 及对应 provenance。
+
+早期用例把未创建采购任务时的 `constraints_summary` 当成预算载体，属于测试契约错误，已修正，不计作产品失败或通过。尚未完成同类筛选及完整确认，当前不是整票验收结果；本票暂不新增模拟商品。
