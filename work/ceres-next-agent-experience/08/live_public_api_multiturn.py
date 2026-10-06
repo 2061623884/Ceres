@@ -6,9 +6,11 @@ is a root-authorized fixed operation list; do not inspect holdout data before
 root's separate gate.
 
 Allowed operations: turn, select_pending_option, switch, replay_switch,
-select_order, confirm_plan, checkout, snapshot. Case fields are case_id and
-steps. A step may carry a narrow expect object for route, pending slots/options,
-product cards, plan and cart/order snapshots.
+select_order, confirm_plan, checkout, snapshot. Cases may set initial_role,
+entry_context and an actual aftersales_expectation; turns may carry view_context.
+A step may carry a narrow expect object for route, pending slots/options,
+product cards, plan and cart/order snapshots. aftersales_expectation is
+{"tool":"create_refund"|"create_return","result":"pending"|"failed"}.
 """
 from __future__ import annotations
 import argparse, hashlib, importlib.util, json, os, re, subprocess, sys, time, uuid
@@ -44,7 +46,8 @@ PUBLIC_CASES=[
   {"op":"turn","label":"delivery-policy-question","message":"一般配送时间是多久？","expect":{"plan_present":False,"cart_unchanged":True,"orders_unchanged":True,"trace_capability":"facts_qa"}}]},
  {"case_id":"chat-without-business-write","steps":[
   {"op":"turn","label":"greeting","message":"你好，今天心情有点累。","expect":{"plan_present":False,"cart_unchanged":True,"orders_unchanged":True,"trace_capability":"chat"}}]},
- {"case_id":"keke-momo-refund-visible-keke-plan","requires_latest_order":True,"steps":[
+ {"case_id":"keke-momo-refund-visible-keke-plan","requires_latest_order":True,
+  "aftersales_expectation":{"tool":"create_refund","result":"pending"},"steps":[
   {"op":"select_order","label":"select-paid-order-for-aftersales","order_id":"latest"},
   {"op":"turn","label":"ask-refund-and-continue","message":"我刚下的订单 {{latest_order_id}} 想申请退款，办好后再帮我买一瓶可乐。","expect":{"decision":"suggest_switch","target_role":"momo","cart_unchanged":True}},
   {"op":"switch","label":"consent-to-momo","target_role":"momo","accept":True},
@@ -100,11 +103,16 @@ def source_manifest(tree,fixture_tree):
   body=json.loads((fixture_tree/name).read_text(encoding="utf-8")); key="products" if "products" in body else "offers"
   counts[Path(name).name]=len(body[key])
  if counts!={"demo-products.json":67,"store-offers.json":58}: raise RuntimeError(f"Raw fixture counts differ: {counts}")
+ product_hashes={}; product_absent=[]
+ for name in SOURCE_FILES:
+  path=tree/name
+  if path.is_file(): product_hashes[name]=sha(path)
+  else: product_hashes[name]=None; product_absent.append(name)
  head=subprocess.run(["git","rev-parse","HEAD"],cwd=tree,capture_output=True,text=True,check=True).stdout.strip()
  fixture_head=subprocess.run(["git","rev-parse","HEAD"],cwd=fixture_tree,capture_output=True,text=True,check=True).stdout.strip()
  return {"product_source_base_commit":BASE_SOURCE_COMMIT,"runner_checkout_commit":head,
   "product_source_checkout":str(tree),"fixture_source_checkout":str(fixture_tree),"fixture_source_commit":fixture_head,
-  "product_source_sha256":{n:sha(tree/n) for n in SOURCE_FILES},"fixture_sha256":hashes,
+  "product_source_sha256":product_hashes,"product_source_absent":product_absent,"fixture_sha256":hashes,
   "raw_fixture_counts":counts,"note":"raw 58 offers are not the seeded DB Offer count"}
 def verify_runtime(tree,database_url,index_root,mode):
  sys.path[:0]=[str(tree/"backend"),str(tree)]
@@ -115,7 +123,8 @@ def verify_runtime(tree,database_url,index_root,mode):
  from app.services.retrieval_projection import build_projection
  from app.services.retrieval_index import embedding_contract_key,load_index
  from app.llm.embedding import HttpEmbeddingProvider
- os.environ.update({"LLM_MODE":"live","RETRIEVAL_MODE":mode})
+ os.environ.update({"LLM_MODE":"live","RETRIEVAL_MODE":mode,"DATABASE_URL":database_url,
+  "RETRIEVAL_INDEX_DIR":str(index_root.resolve())})
  get_settings.cache_clear(); settings=get_settings()
  if settings.llm_mode!="live" or settings.retrieval_mode!=mode: raise RuntimeError("Actual configured LLM/retrieval mode mismatch")
  if settings.database_url!=database_url or Path(settings.retrieval_index_dir).resolve()!=index_root.resolve(): raise RuntimeError("Runtime DB/index path mismatch")
@@ -158,22 +167,26 @@ def snapshot(client,ctx,include_messages=False):
  ctx["last_guide"]=g.json(); ctx["role"]=h.json()["role"]
  return {"cart":c.json(),"orders":o.json().get("items",[]),"guide":g.json(),
   "opening":{k:h.json().get(k) for k in ("role","pending_question","prompt_displayed")}}
-def new_case(client,case_id,role_calls,kev_calls):
- g=client.post("/api/v1/guide/sessions",json={"entry_context":{"page":"home","store_id":"store-demo-01","delivery_zone_id":"zone-default"}}); g.raise_for_status()
+def new_case(client,case,role_calls,kev_calls):
+ entry_context=case.get("entry_context",{"page":"home","store_id":"store-demo-01","delivery_zone_id":"zone-default"})
+ g=client.post("/api/v1/guide/sessions",json={"entry_context":entry_context}); g.raise_for_status()
  m=client.post("/api/v1/mercury/sessions"); m.raise_for_status()
- h=client.post("/api/v1/chat/openings",json={"guide_session_id":g.json()["session_id"],"mercury_session_id":m.json()["session_id"],"role":"keke"}); h.raise_for_status()
- return {"case_id":case_id,"guide_session_id":g.json()["session_id"],"mercury_session_id":m.json()["session_id"],
-  "opening_id":h.json()["opening_id"],"role":"keke","role_calls":role_calls,"kev_calls":kev_calls}
+ role=case.get("initial_role","keke")
+ h=client.post("/api/v1/chat/openings",json={"guide_session_id":g.json()["session_id"],"mercury_session_id":m.json()["session_id"],"role":role}); h.raise_for_status()
+ return {"case_id":case["case_id"],"guide_session_id":g.json()["session_id"],"mercury_session_id":m.json()["session_id"],
+  "opening_id":h.json()["opening_id"],"role":role,"role_calls":role_calls,"kev_calls":kev_calls,
+  "aftersales_expectation":case.get("aftersales_expectation",{"tool":"create_refund","result":"pending"})}
 def read_pending(client,ctx):
  r=client.get(f"/api/v1/guide/sessions/{ctx['guide_session_id']}"); r.raise_for_status(); ctx["last_guide"]=r.json()
  return r.json().get("pending_clarifications") or []
 def trace_for(client,payload,helper,token):
  return helper.read_trace(client,payload["trace_id"],{"X-Internal-Token":token}) if payload.get("trace_id") else []
-def turn(client,ctx,message,label,answer,helper,token):
+def turn(client,ctx,message,label,answer,helper,token,view_context=None):
  s=client.get(f"/api/v1/guide/sessions/{ctx['guide_session_id']}"); s.raise_for_status(); state=s.json()
  body={"request_id":"08-"+ctx["case_id"]+"-"+uuid.uuid4().hex[:10],"message":message,"expected_task_id":state.get("task_id"),
   "expected_state_version":state.get("state_version",0),"expected_session_version":state.get("session_version",0)}
  if answer: body["clarification_answer"]=answer
+ if view_context is not None: body["view_context"]=view_context
  before=snapshot(client,ctx); rc,kc=len(ctx["role_calls"]),len(ctx["kev_calls"]); start=time.perf_counter()
  response=client.post(f"/api/v1/chat/openings/{ctx['opening_id']}/turns/stream",json=body)
  events=parse_sse(response.text); end=terminal(events)
@@ -223,35 +236,46 @@ def expectation_failures(exp,row,before,after):
  if "trace_branch" in exp and not any(t.get("branch")==exp["trace_branch"] for t in trace): fail.append("workflow branch mismatch")
  return fail
 
-def refund_capture_check(calls,events):
- names=[]; pending=[]; visible=[]
+def aftersales_capture_check(calls,events,expectation):
+ expected_tool=expectation["tool"]; expected_result=expectation["result"]
+ if expected_tool not in ("create_refund","create_return") or expected_result not in ("pending","failed"):
+  raise ValueError("aftersales_expectation requires a supported tool and pending/failed result")
+ call_names={}; matching_calls=[]; results_by_id={}; visible=[]
  for call in calls:
   for choice in call.get("response_choices",[]):
    message=choice.get("message") or {}
    for tool in message.get("tool_calls") or []:
-    if (tool.get("function") or {}).get("name")=="create_refund": names.append(tool)
+    name=(tool.get("function") or {}).get("name"); call_id=tool.get("id")
+    if call_id: call_names[call_id]=name
+    if name==expected_tool: matching_calls.append(tool)
   for message in (call.get("request") or {}).get("messages") or []:
-   if message.get("role")!="tool": continue
-   try: body=json.loads(message.get("content") or "")
-   except (TypeError,ValueError): continue
-   if body.get("ok") and body.get("data",{}).get("status")=="pending":
-    pending.append(body["data"].get("message",""))
+   if message.get("role")!="tool" or call_names.get(message.get("tool_call_id"))!=expected_tool: continue
+   body=json.loads(message.get("content") or "")
+   data=body.get("data") if isinstance(body.get("data"),dict) else {}
+   status="failed" if body.get("ok") is False else data.get("status")
+   result={"ok":body.get("ok"),"status":status,"message":data.get("message") or body.get("message"),
+    "tool_call_id":message.get("tool_call_id")}
+   results_by_id[message.get("tool_call_id")]=result
  for event in events:
   body=event.get("payload") or {}
   if event.get("type")=="turn.completed" and body.get("business_not_run"):
    visible.append(body.get("message",""))
- if len(names)!=1: raise AssertionError(f"Expected one real create_refund call, captured {len(names)}")
- if not pending or not pending[-1]: raise AssertionError("No real pending refund tool result was captured")
- if not any(pending[-1] in text and "继续选购" in text for text in visible):
-  raise AssertionError("Pending refund result was not visible in the Keke continuation prompt")
- return {"create_refund_tool_calls":len(names),"refund_status":"pending",
-         "tool_result_message":pending[-1],"continuation_prompt_contains_result":True}
+ if len(matching_calls)!=1: raise AssertionError(f"Expected one real {expected_tool} call, captured {len(matching_calls)}")
+ matching_results=[results_by_id.get(tool.get("id")) for tool in matching_calls]
+ result=next((item for item in reversed(matching_results) if item),None)
+ if result is None: raise AssertionError(f"No actual {expected_tool} tool result was captured")
+ if result["status"]!=expected_result: raise AssertionError(f"Expected {expected_tool} result {expected_result}, captured {result['status']}")
+ contains_result=bool(result["message"] and any(result["message"] in text and "继续选购" in text for text in visible))
+ if expected_result=="pending" and not contains_result:
+  raise AssertionError("Pending after-sales result was not visible in the Keke continuation prompt")
+ return {"tool":expected_tool,"tool_calls":len(matching_calls),"result":result["status"],
+         "tool_result":result,"continuation_prompt_contains_result":contains_result}
 def execute(client,ctx,step,evidence,path,helper,token):
  op=step["op"]; label=step.get("label",op); before=snapshot(client,ctx); row={"case_id":ctx["case_id"],"op":op,"label":label,"before":before}; start=time.perf_counter()
  try:
   if op=="turn":
    text=step["message"].replace("{{latest_order_id}}",str(evidence.get("latest_order_id") or "<missing-order>"))
-   row.update(turn(client,ctx,text,label,None,helper,token))
+   row.update(turn(client,ctx,text,label,None,helper,token,step.get("view_context")))
   elif op=="select_pending_option":
    questions=read_pending(client,ctx); q=next((x for x in questions if x.get("slot")==step["slot"]),None)
    if q is None: raise AssertionError(f"No pending field {step['slot']}")
@@ -261,7 +285,7 @@ def execute(client,ctx,step,evidence,path,helper,token):
    else: option=opts[0] if opts else None
    if option is None: raise AssertionError(f"No current option matches field {step['slot']}")
    row["selected_option"]={"question_id":q["question_id"],"option_id":option["id"],"slot":q["slot"],"label":option["label"]}
-   row.update(turn(client,ctx,step.get("message",option["label"]),label,{"question_id":q["question_id"],"option_id":option["id"]},helper,token))
+   row.update(turn(client,ctx,step.get("message",option["label"]),label,{"question_id":q["question_id"],"option_id":option["id"]},helper,token,step.get("view_context")))
   elif op=="switch":
    handoff=find_handoff(step,ctx); target=step["target_role"]; base=f"/api/v1/chat/openings/{ctx['opening_id']}"
    shown=client.post(base+"/prompt-displayed",json={"handoff_id":handoff}); shown.raise_for_status()
@@ -278,7 +302,7 @@ def execute(client,ctx,step,evidence,path,helper,token):
     done=[e["payload"] for e in events if e.get("type")=="turn.completed" and not e.get("payload",{}).get("business_not_run")]
     if done: ctx["last_completed"]=done[-1]
     if target=="momo":
-     row["aftersales_result_check"]=refund_capture_check(ctx["role_calls"][rc:],events)
+     row["aftersales_result_check"]=aftersales_capture_check(ctx["role_calls"][rc:],events,ctx["aftersales_expectation"])
     if target=="keke":
      if not done or not done[-1].get("plan"): raise AssertionError("Keke continuation returned no visible plan")
      restored=after["guide"]; restored_plan=restored.get("plan") or {}
@@ -346,7 +370,10 @@ def run_case(client,case,role_calls,kev_calls,evidence,path,helper,token):
  try:
   if case.get("requires_latest_order") and not evidence.get("latest_order_id"):
    record.update({"status":"blocked_prerequisite","failure_message":"No paid order from drink case"}); return
-  ctx=new_case(client,case["case_id"],role_calls,kev_calls)
+  record["setup"]={"initial_role":case.get("initial_role","keke"),
+   "entry_context":case.get("entry_context",{"page":"home","store_id":"store-demo-01","delivery_zone_id":"zone-default"}),
+   "aftersales_expectation":case.get("aftersales_expectation")}
+  ctx=new_case(client,case,role_calls,kev_calls)
   record.update({k:ctx[k] for k in ("guide_session_id","mercury_session_id","opening_id")})
   for step in case["steps"]: execute(client,ctx,step,evidence,path,helper,token)
   record.update({"status":"captured","last_guide_snapshot":ctx.get("last_guide"),"active_role_at_end":ctx.get("role"),
