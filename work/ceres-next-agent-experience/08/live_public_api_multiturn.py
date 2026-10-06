@@ -45,6 +45,7 @@ PUBLIC_CASES=[
  {"case_id":"chat-without-business-write","steps":[
   {"op":"turn","label":"greeting","message":"你好，今天心情有点累。","expect":{"plan_present":False,"cart_unchanged":True,"orders_unchanged":True,"trace_capability":"chat"}}]},
  {"case_id":"keke-momo-refund-visible-keke-plan","requires_latest_order":True,"steps":[
+  {"op":"select_order","label":"select-paid-order-for-aftersales","order_id":"latest"},
   {"op":"turn","label":"ask-refund-and-continue","message":"我刚下的订单 {{latest_order_id}} 想申请退款，办好后再帮我买一瓶可乐。","expect":{"decision":"suggest_switch","target_role":"momo","cart_unchanged":True}},
   {"op":"switch","label":"consent-to-momo","target_role":"momo","accept":True},
   {"op":"switch","label":"consent-to-keke-continuation","target_role":"keke","accept":True,"expect":{"plan_present":True,"cart_unchanged":True}},
@@ -309,6 +310,7 @@ def execute(client,ctx,step,evidence,path,helper,token):
    if not order: raise AssertionError("No order available for selection")
    res=client.post(f"/api/v1/mercury/sessions/{ctx['mercury_session_id']}/order",json={"order_id":order})
    res.raise_for_status(); ctx["selected_order_id"]=order; row["selected_order"]=res.json()
+   if row["selected_order"].get("order",{}).get("order_id")!=order: raise AssertionError("Selected order response mismatch")
   elif op=="confirm_plan":
    res=client.get(f"/api/v1/guide/sessions/{ctx['guide_session_id']}"); res.raise_for_status(); state=res.json(); plan=state.get("plan")
    if not plan or not plan.get("can_confirm"): raise AssertionError("No confirmable plan")
