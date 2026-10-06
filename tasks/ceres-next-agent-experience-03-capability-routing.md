@@ -37,4 +37,4 @@
 
 真实 Kev 每类各 1 次均返回预期类别，只证明这四个实例。alias 为 `kev-latest`，物理权重 revision 未能确认；类型样本 token 计数因记录误脱敏丢失，保留 null，其他三类 input/output 为 304/81、289/81、289/80。原始记录：[类型选择](../work/ceres-next-agent-experience/03/kev-live-capability-snack-choice-n1.json)、[其余三类](../work/ceres-next-agent-experience/03/kev-live-capability-samples-n3.json)。不据此外推准确率或主模型整体性能。
 
-集成合并 `2304b3253ce8de942a5dbc356139f6d49e1355ee`，无冲突；[合并回执](../work/ceres-next-agent-experience/merges/03-receipt.md)。后续 04 复用 semantic request 的 capability 接缝。02 的 product_filter 契约冻结后补直达适配，并登记该阶段来源；同版真实主模型/页面与最终双轴 review 留 08。
+集成合并 `2304b3253ce8de942a5dbc356139f6d49e1355ee`，无冲突；[合并回执](../work/ceres-next-agent-experience/merges/03-receipt.md)。04 复用 semantic request 的 capability 接缝。02 的 `234a104` 已携 product_filter 直达适配及公开 Trace 验证，不重复实现；同版真实主模型/页面与最终双轴 review 留 08。

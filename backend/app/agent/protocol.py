@@ -510,6 +510,10 @@ def _attach_understanding(proposal: SemanticProposal, top: dict[str, Any]) -> No
         _filter_reads(proposal, stated)
     elif goal is None and (stated or clear):
         changes = GoalChanges(set=GoalChangeSet(**stated), clear=clear)
+    elif goal is not None and goal.kind == "category_purchase":
+        # A broad category purchase is still deciding which live supply fits
+        # this goal. Its current constraints must filter the type overview too.
+        _filter_reads(proposal, stated)
 
     if goal is not None:
         goal_relation = _RELATION[relation]
@@ -652,7 +656,7 @@ def _edit(op: str, quantity: Any, ref: str | None, name: str | None) -> Mutation
 
 
 def _filter_reads(proposal: SemanticProposal, stated: dict[str, Any]) -> None:
-    """A read-only turn's stated exclusions/budget filter the reads that can use them."""
+    """Apply the stated hard constraints to this proposal's reads."""
     excluded = list(stated.get("excluded_ingredients") or [])
     budget = stated.get("budget_yuan")
     budget_fen = None if budget is None else yuan_to_fen(budget)

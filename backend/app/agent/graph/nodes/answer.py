@@ -34,7 +34,10 @@ from app.agent.graph.turn_commit import (
     understanding_wrapper,
 )
 from app.agent.protocol import SemanticProtocolError, parse_proposal
-from app.agent.turn_context_plan import snack_type_clarification
+from app.agent.turn_context_plan import (
+    product_filter_clarification,
+    product_type_clarification,
+)
 from app.schemas.goal import TurnDecision
 
 def answer(state: GraphState, runtime: TurnRuntime) -> dict[str, Any]:
@@ -173,14 +176,17 @@ def _grounded_answer(state: GraphState, runtime: TurnRuntime) -> GraphState:
                 reply = f"主推「{match['name']}」；推荐理由：{match['evidence'][2]}"
 
     business_pending = []
-    if (
-        target.get("kind") == "category"
-        and target.get("name") == "零食"
-    ):
-        business_pending = snack_type_clarification(query_results)
+    if target.get("kind") == "category" and target.get("intent") == "explore":
+        business_pending = product_type_clarification(query_results)
         if business_pending:
             reply = ""
             displayed = []
+        else:
+            business_pending = product_filter_clarification(
+                query_results,
+                displayed,
+                query=str(target.get("name") or ""),
+            )
 
     comparisons = [row for row in query_results if row.get("kind") == "compare"]
     if comparisons and not any(row["sellable_products"] for row in comparisons):

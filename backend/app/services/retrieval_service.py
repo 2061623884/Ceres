@@ -229,6 +229,12 @@ class RetrievalHit:
     category_id: str | None = None
     product_type: str | None = None
     usage_tags: list[str] = field(default_factory=list)
+    family_id: str | None = None
+    brand: str | None = None
+    item_quantity: int | float | None = None
+    item_unit: str | None = None
+    packaging: str | None = None
+    pack_count: int | None = None
 
     def as_dict(self) -> dict[str, Any]:
         return {
@@ -243,6 +249,12 @@ class RetrievalHit:
             "category_id": self.category_id,
             "product_type": self.product_type,
             "usage_tags": list(self.usage_tags),
+            "family_id": self.family_id,
+            "brand": self.brand,
+            "item_quantity": self.item_quantity,
+            "item_unit": self.item_unit,
+            "packaging": self.packaging,
+            "pack_count": self.pack_count,
         }
 
 
@@ -461,14 +473,34 @@ class RetrievalService:
         return self._search(query, kind=DOC_DISH, context=context, limit=limit)
 
     def search_products(
-        self, query: str, *, context: ValidationContext | None = None, limit: int = 5
+        self,
+        query: str,
+        *,
+        context: ValidationContext | None = None,
+        limit: int = 5,
+        category_type_overview: str | None = None,
+        category_type_quantity: int | None = None,
     ) -> dict[str, Any]:
-        return self._search(query, kind=DOC_SKU, context=context, limit=limit)
+        return self._search(
+            query,
+            kind=DOC_SKU,
+            context=context,
+            limit=limit,
+            category_type_overview=category_type_overview,
+            category_type_quantity=category_type_quantity,
+        )
 
     # -------------------------------------------------------------- internals
 
     def _search(
-        self, query: str, *, kind: str, context: ValidationContext | None, limit: int,
+        self,
+        query: str,
+        *,
+        kind: str,
+        context: ValidationContext | None,
+        limit: int,
+        category_type_overview: str | None = None,
+        category_type_quantity: int | None = None,
     ) -> dict[str, Any]:
         # Live facts are cached for this search only, never across requests.
         self._live_products = None
@@ -476,7 +508,14 @@ class RetrievalService:
         self._stale_ids = []
         try:
             with self.db.no_autoflush:
-                result = self._search_impl(query, kind=kind, context=context, limit=max(0, min(limit, 5)))
+                result = self._search_impl(
+                    query,
+                    kind=kind,
+                    context=context,
+                    limit=max(0, min(limit, 5)),
+                    category_type_overview=category_type_overview,
+                    category_type_quantity=category_type_quantity,
+                )
             if self._stale_ids:
                 result["stale_document_ids"] = list(dict.fromkeys(self._stale_ids))
                 result["index_update_required"] = True
@@ -492,6 +531,8 @@ class RetrievalService:
         kind: str,
         context: ValidationContext | None,
         limit: int,
+        category_type_overview: str | None = None,
+        category_type_quantity: int | None = None,
     ) -> dict[str, Any]:
         self._context = context
         if self.mode not in (MODE_LEXICAL, MODE_HYBRID):
@@ -513,6 +554,14 @@ class RetrievalService:
             "hits": [],
             "empty": True,
         }
+        if category_type_overview is not None:
+            base["category_type_matches"] = self._category_type_matches(
+                index,
+                category_id=category_type_overview,
+                filters=filters,
+                query=query,
+                quantity=category_type_quantity,
+            ) if index is not None else []
         if index is None or not query.strip():
             if index is None:
                 base["code"] = (
@@ -635,6 +684,59 @@ class RetrievalService:
         base["hits"] = [hit.as_dict() for hit in ordered]
         base["empty"] = not ordered
         return base
+
+    def _category_type_matches(
+        self,
+        index: LoadedIndex,
+        *,
+        category_id: str,
+        filters: RetrievalFilters,
+        query: str,
+        quantity: int | None,
+    ) -> list[dict[str, Any]]:
+        """All live-verified rows for one bounded snack/drink type overview.
+
+        This supplements, but never widens, the five product candidates offered
+        by ordinary retrieval. Grouping needs to know which types this store can
+        actually supply, so the same index documents and live SKU/constraint
+        checks are applied to the small snack/beverage category only. A stated
+        purchase quantity is checked against live stock and the total budget.
+        """
+        matches: list[dict[str, Any]] = []
+        for doc in sorted(
+            self._candidate_pool(index, kind=DOC_SKU), key=lambda row: row["target_id"]
+        ):
+            if doc["payload"].get("category_id") != category_id:
+                continue
+            if self._conflicts_for(DOC_SKU, doc["payload"], filters):
+                continue
+            verified, drop, _constraint_fields = self._verify(
+                doc, kind=DOC_SKU, filters=filters
+            )
+            if drop or verified is not True:
+                continue
+            product = self._live_products[str(doc["target_id"])]
+            purchase_quantity = quantity or 1
+            if int(product["available_qty"]) < purchase_quantity:
+                continue
+            if (
+                filters.budget_fen is not None
+                and int(product["price_fen"]) * purchase_quantity > filters.budget_fen
+            ):
+                continue
+            hit = self._to_hit(
+                index,
+                doc,
+                kind=DOC_SKU,
+                match_kind="category",
+                filters=filters,
+                query=query,
+                routes=("category_overview",),
+                verified=verified,
+            )
+            if hit is not None:
+                matches.append(hit.as_dict())
+        return matches
 
     # ------------------------------------------------------------- exact route
 
@@ -1109,6 +1211,12 @@ class RetrievalService:
             category_id=payload.get("category_id"),
             product_type=payload.get("product_type"),
             usage_tags=list(payload.get("usage_tags") or []),
+            family_id=payload.get("family_id"),
+            brand=payload.get("brand"),
+            item_quantity=payload.get("item_quantity"),
+            item_unit=payload.get("item_unit"),
+            packaging=payload.get("packaging"),
+            pack_count=payload.get("pack_count"),
         )
 
 

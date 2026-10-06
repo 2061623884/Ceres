@@ -50,7 +50,7 @@ class ContextResolver:
             saved_view = {}
         view = {
             key: saved_view[key]
-            for key in ("page", "category_id", "product_id")
+            for key in ("page", "category_id", "product_id", "activity_id")
             if isinstance(saved_view, dict) and key in saved_view
         }
         store_id = entry.get("store_id", "store-demo-01")

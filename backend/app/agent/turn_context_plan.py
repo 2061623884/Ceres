@@ -13,6 +13,7 @@ a plan and never writes.
 
 from __future__ import annotations
 
+import json
 from dataclasses import dataclass, field
 from typing import Any
 from uuid import uuid4
@@ -78,37 +79,180 @@ def gate_pending(
     return pending
 
 
-def snack_type_clarification(read_results: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    """Ask for a snack product type when verified reads span multiple types."""
-    snack_types: dict[str, str] = {}
+def product_type_clarification(read_results: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Ask for a supplied snack or drink type when candidates span types."""
+    product_types: dict[tuple[str, str], str] = {}
     for result in read_results:
         if result.get("kind") != "lookup" or result.get("lookup_kind") != "product":
             continue
-        for match in result.get("matches") or []:
+        for match in result.get("type_matches") or result.get("matches") or []:
             tags = list(match.get("usage_tags") or [])
             product_type = match.get("product_type")
+            category_id = str(match.get("category_id") or "")
             if (
-                match.get("category_id") == "snack"
-                and match.get("stock_verified") is True
-                and not match.get("unknown_constraints")
-                and product_type
-                and len(tags) > 1
-                and tags[0] == "零食"
+                match.get("stock_verified") is not True
+                or match.get("unknown_constraints")
+                or category_id not in {"snack", "beverage"}
             ):
-                snack_types.setdefault(str(product_type), str(tags[1]))
-    if len(snack_types) <= 1:
+                continue
+
+            if category_id == "snack":
+                if not product_type or len(tags) < 2 or tags[0] != "零食":
+                    continue
+                type_id = str(product_type)
+                label = str(tags[1])
+            else:
+                family_id = match.get("family_id")
+                type_tags = [
+                    tag
+                    for tag in tags
+                    if tag
+                    not in {
+                        "饮料",
+                        "果汁",
+                        "无糖",
+                        "原味",
+                        "甜味",
+                        "甜而不腻",
+                        "瓶装",
+                        "罐装",
+                        "多件装",
+                    }
+                ]
+                label = str(type_tags[0]) if type_tags else ""
+                if not label and "苏打水" in str(match.get("name") or ""):
+                    label = "苏打水"
+                type_id = str(product_type or family_id or label)
+                if not label or not type_id:
+                    continue
+                if label == "水":
+                    label = "饮用水"
+                    type_id = str(family_id or "water")
+                elif label == "饮用水":
+                    type_id = str(family_id or "water")
+                elif label == "可乐":
+                    type_id = str(family_id or "cola")
+                elif label == "茶":
+                    type_id = str(family_id or "tea")
+
+            product_types.setdefault((category_id, type_id), label)
+    if len(product_types) <= 1:
         return []
+    labels = list(dict.fromkeys(product_types.values()))
+    category_ids = {category_id for category_id, _ in product_types}
+    if category_ids == {"snack"}:
+        question = "想选哪类零食？"
+    elif category_ids == {"beverage"}:
+        question = f"目前有{'、'.join(labels)}等饮品可选，想先看哪类？"
+    else:
+        question = f"目前有{'、'.join(labels)}等商品可选，想先看哪类？"
     return [
         PendingClarification(
             question_id="q-" + uuid4().hex[:12],
-            question="想选哪类零食？",
+            question=question,
             options=[
-                {"id": "product_type:" + product_type, "label": label}
-                for product_type, label in snack_types.items()
+                {"id": "product_type:" + type_id, "label": label}
+                for (_, type_id), label in product_types.items()
             ],
             slot="product_type",
         ).to_dict()
     ]
+
+
+def product_filter_clarification(
+    read_results: list[dict[str, Any]], displayed_refs: list[str], *, query: str
+) -> list[dict[str, Any]]:
+    """Offer filters grounded in the same-type products the user just saw."""
+    displayed = set(displayed_refs)
+    matches = [
+        match
+        for result in read_results
+        if result.get("kind") == "lookup" and result.get("lookup_kind") == "product"
+        for match in result.get("matches") or []
+        if match.get("ref") in displayed
+        and match.get("stock_verified") is True
+        and not match.get("unknown_constraints")
+        and match.get("category_id") in {"snack", "beverage"}
+    ]
+    type_ids = {
+        str(match.get("family_id") or match.get("product_type") or "")
+        for match in matches
+    }
+    if len(matches) < 2 or len(type_ids) != 1 or not next(iter(type_ids)):
+        return []
+
+    dimensions: list[tuple[str, list[tuple[Any, str]]]] = []
+    brands = list(dict.fromkeys(
+        (match["brand"], f"品牌：{match['brand']}")
+        for match in matches
+        if match.get("brand")
+    ))
+    if len(brands) > 1:
+        dimensions.append(("brand", brands))
+
+    volumes = list(dict.fromkeys(
+        (
+            int(match["item_quantity"] * (1000 if match["item_unit"] == "l" else 1)),
+            f"单件容量：{int(match['item_quantity'] * (1000 if match['item_unit'] == 'l' else 1))}毫升",
+        )
+        for match in matches
+        if match.get("item_quantity") is not None
+        and match.get("item_unit") in {"ml", "l"}
+    ))
+    if len(volumes) > 1:
+        dimensions.append(("item_volume_ml", volumes))
+
+    packaging_labels = {"can": "罐装", "bottle": "瓶装"}
+    packaging = list(dict.fromkeys(
+        (match["packaging"], packaging_labels[match["packaging"]])
+        for match in matches
+        if match.get("packaging") in packaging_labels
+    ))
+    if len(packaging) > 1:
+        dimensions.append(("packaging", packaging))
+
+    pack_counts = list(dict.fromkeys(
+        (
+            int(match["pack_count"]),
+            "单件装" if int(match["pack_count"]) == 1 else f"{int(match['pack_count'])}件装",
+        )
+        for match in matches
+        if match.get("pack_count") is not None
+    ))
+    if len(pack_counts) > 1:
+        dimensions.append(("pack_count", pack_counts))
+
+    options = [
+        {
+            "id": "product_filter:" + json.dumps(
+                {"query": query, "field": field_name, "value": value},
+                ensure_ascii=False,
+                separators=(",", ":"),
+            ),
+            "label": label,
+        }
+        for field_name, choices in dimensions
+        for value, label in choices
+    ]
+    if not options:
+        return []
+    return [
+        PendingClarification(
+            question_id="q-" + uuid4().hex[:12],
+            question="可直接查看这些商品，也可以按品牌或规格筛选。",
+            options=options,
+            slot="product_filter",
+        ).to_dict()
+    ]
+
+
+def product_filter_selection(option_id: str) -> dict[str, Any]:
+    """Compile one server-issued product-filter option for the existing read path."""
+    selection = json.loads(option_id.removeprefix("product_filter:"))
+    return {
+        "query": selection["query"],
+        "specification": {selection["field"]: selection["value"]},
+    }
 
 
 @dataclass

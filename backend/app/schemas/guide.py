@@ -24,16 +24,18 @@ Step = Literal[
 
 
 class EntryContext(BaseModel):
-    page: Literal["home", "category", "search", "product", "cart"] = "home"
+    page: Literal["home", "category", "search", "product", "cart", "activity"] = "home"
     category_id: str | None = None
+    activity_id: str | None = None
     store_id: str = "store-demo-01"
     delivery_zone_id: str = "zone-default"
 
 
 class ViewContext(BaseModel):
-    page: Literal["home", "category", "search", "product", "cart"] = "home"
+    page: Literal["home", "category", "search", "product", "cart", "activity"] = "home"
     category_id: str | None = None
     product_id: str | None = None
+    activity_id: str | None = None
 
 
 class ConfirmItem(BaseModel):

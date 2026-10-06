@@ -26,7 +26,10 @@ from app.agent.graph.nodes.context import load_context
 from app.agent.graph.nodes.mutation import mutation
 from app.agent.graph.nodes.respond import respond
 from app.agent.graph.nodes.retrieve import retrieve
-from app.agent.graph.nodes.workflow import direct_product_type_workflow
+from app.agent.graph.nodes.workflow import (
+    direct_product_filter_workflow,
+    direct_product_type_workflow,
+)
 from app.agent.graph.nodes.understand import (
     decide_turn,
     parse_validate,
@@ -41,6 +44,7 @@ PRODUCTION_NODES: tuple[str, ...] = (
     "load_context",
     "route_capability",
     "direct_product_type_workflow",
+    "direct_product_filter_workflow",
     "understand",
     "parse_validate",
     "decide_turn",
@@ -58,6 +62,7 @@ def build_graph() -> StateGraph:
         ("load_context", load_context),
         ("route_capability", route_capability),
         ("direct_product_type_workflow", direct_product_type_workflow),
+        ("direct_product_filter_workflow", direct_product_filter_workflow),
         ("understand", understand),
         ("parse_validate", parse_validate),
         ("decide_turn", decide_turn),
@@ -75,10 +80,12 @@ def build_graph() -> StateGraph:
         {
             "understand": "understand",
             "direct_product_type_workflow": "direct_product_type_workflow",
+            "direct_product_filter_workflow": "direct_product_filter_workflow",
         },
     )
     graph.add_edge("understand", "parse_validate")
     graph.add_edge("direct_product_type_workflow", "parse_validate")
+    graph.add_edge("direct_product_filter_workflow", "parse_validate")
     graph.add_edge("parse_validate", "decide_turn")
     graph.add_conditional_edges(
         "decide_turn",
