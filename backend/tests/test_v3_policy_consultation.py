@@ -59,16 +59,19 @@ def test_keke_reads_return_policy_before_any_mercury_session(client, semantic_pr
     assert client.get("/api/v1/orders").json()["items"] == []
 
 
-def test_keke_policy_answer_uses_conditions_instead_of_product_recommendation(client, monkeypatch):
-    from app.prompts.semantic import SYSTEM_PROMPT
-
+def test_keke_policy_answer_uses_conditions_instead_of_product_recommendation(
+    client, monkeypatch, kev_api
+):
+    kev_api["choices"]["capability"] = "facts_qa"
     calls = []
 
     def model(request):
         payload = json.loads(request.content)
         calls.append(payload)
         if len(calls) == 1:
-            assert payload["messages"][0]["content"].startswith(SYSTEM_PROMPT + "\nprotocol:\n")
+            system_prompt = payload["messages"][0]["content"].split("\nprotocol:\n", 1)[0]
+            assert "能力：回答商品、门店或政策事实。" in system_prompt
+            assert "一般退换货、退款、配送规则用 reads policy" in system_prompt
             result = {"reads": [{"kind": "policy", "topic": "一般配送时间"}]}
         else:
             assert len(payload["messages"][0]["content"]) <= 2000

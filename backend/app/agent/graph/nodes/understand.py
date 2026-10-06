@@ -97,8 +97,13 @@ def propose_round(
         query_results=list(query_results or []),
         read_only=read_only,
     )
-    if turn.get("capability") is not None:
-        request["capability"] = turn["capability"]
+    prompt_capability = turn.get("capability")
+    if read_only:
+        target = (turn.get("proposal") or {}).get("target") or {}
+        if target.get("kind") == "category" and target.get("intent") == "explore":
+            prompt_capability = "category_exploration"
+    if prompt_capability is not None:
+        request["capability"] = prompt_capability
     remaining = runtime.remaining()
     if remaining is not None and remaining <= 0:
         raise Halt("timed_out", timeout_error())
