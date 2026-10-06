@@ -1,6 +1,6 @@
 # 04 两角色 Prompt 模块化
 
-状态：待开始。
+状态：进行中。
 负责人：实施 Agent；主会话维护本阶段任务，专职测试 Agent 执行全部测试命令。
 规格：[实施规格](../docs/plans/ceres-next-agent-experience-spec.md)；所属任务：[实施总 TASK](ceres-next-agent-experience.md)。
 依赖：[03 内部能力路由与 workflow 直达](ceres-next-agent-experience-03-capability-routing.md)。依赖 03 已确定并可运行的能力分支、工具和上下文选择，避免先写无实际调用方的 Prompt 模块。
