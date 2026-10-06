@@ -1,0 +1,16 @@
+ticket: 06 public after-sales resume red
+timestamp_utc: 2026-10-06T10:37:46Z
+cwd: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-06\backend
+interpreter: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+PYTHONPATH: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-06\backend
+selector: tests/test_v3_switch_lifecycle.py::test_failed_aftersales_offers_explicit_resume_with_original_request_and_tool_result
+HEAD: 481e7505951204d3d24c9c9a3bb61684e5edc213
+worktree status: M tests/test_v3_switch_lifecycle.py
+import source: Traceback (most recent call last):   File "<string>", line 1, in <module> ModuleNotFoundError: No module named 'app.services.mercury_integration'
+exit_code: 1
+assertion_failure: prompt/public body repr omitted
+FAILED tests/test_v3_switch_lifecycle.py::test_failed_aftersales_offers_explicit_resume_with_original_request_and_tool_result
+first_result: 06 after-sales SSE/resume red selector run once
+diagnostic confirmation: same selector failed first at test_v3_switch_lifecycle.py:173 (AssertionError).
+public route to Momo, create_return NOT_DELIVERED result, final aftersales SSE refusal, and semantic_provider.requests empty assertions before this line all passed.
+initial optional import probe used a guessed nonexistent module name; correct app package source is recorded in failed-aftersales-resume-red-diagnostic.txt.

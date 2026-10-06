@@ -1,0 +1,17 @@
+cwd=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-06\backend
+interpreter=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+PYTHONPATH=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-06\backend
+import_sources=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-06\backend\app\__init__.py; C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-06\backend\app\agent\graph\nodes\answer.py
+selector=tests/test_snack_selection.py::test_single_category_recommendation_uses_selected_sellable_sku_evidence
+args=-q --tb=line --maxfail=1 --basetemp=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\06\pytest-basetemp-natural-red-20261006-01
+pytest_exit_code=1
+exception_class=AssertionError
+first_failure_location=test_snack_selection.py:180
+safe_summary=FAILED tests/test_snack_selection.py::test_single_category_recommendation_uses_selected_sellable_sku_evidence[\u60f3\u770b\u770b\u82cf\u6253\u997c\u5e72-\u997c\u5e72-\u997c\u5e72-demo:snack-soda-crackers-100g-box-tags0-name_tokens0]; 1 failed in 3.58s
+git_head_before=481e7505951204d3d24c9c9a3bb61684e5edc213
+git_head_after=481e7505951204d3d24c9c9a3bb61684e5edc213
+test_sha256_before=2FD50A8E6C72553923027CE5FB31EE50B42BADAA50503EFDBB85EED482E685BB
+test_sha256_after=2FD50A8E6C72553923027CE5FB31EE50B42BADAA50503EFDBB85EED482E685BB
+answer_py_sha256=F058A6B94C91022FC22E24598CBFBE441779BC8398703E4DB9C39D5E4EC60CC4
+credential_value_pattern_scan_count=0
+response_repr_locals_settings_headers=not_saved

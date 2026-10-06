@@ -1,0 +1,122 @@
+[
+  {
+    "path": "06/ui/after-sales-continuation-ui-probe.mjs",
+    "sha256": "FFD0D256013CE72208C242FE1DC1A575FC9639ADCE25ADA6719B103D467F7CA8"
+  },
+  {
+    "path": "06/red/snack-natural-reply-red.txt",
+    "sha256": "2EF5B189C096AF083B067BA7D7578AFFBC2C3FD88A2467611F65B7AAE6A2F6E2"
+  },
+  {
+    "path": "06/red/continuation-copy-red.txt",
+    "sha256": "FC82635CBD3AC3D38E3CF82616A7EB6008353BBD829CF2A1656DFFCA23FB2968"
+  },
+  {
+    "path": "06/green/two-aftersales-paths-green.txt",
+    "sha256": "5D5402903E4447BA90EDD07708664A6C1C5A45C6F2D7E8332FBB66F5696235AF"
+  },
+  {
+    "path": "06/green/snack-natural-reply-green.txt",
+    "sha256": "0803B44E0A21F7B7B6F6BE917F508C43FB20AC1CEEC6551503BFDF2BCA66F26D"
+  },
+  {
+    "path": "06/final/ui-controlled-probe.txt",
+    "sha256": "616414A25A9DEFB1E61E5B1F6FE0FB97D5DD379CC539549B6B4198ABE3C8275E"
+  },
+  {
+    "path": "06/final/ui-controlled-probe-rerun.txt",
+    "sha256": "664C798555E7189AEA6F1183FBE72540FDD24FAEE94A5183314CF5FDC69523BB"
+  },
+  {
+    "path": "06/final/post-merge-backend-regression.txt",
+    "sha256": "9D0E35BA158B4DE7162320222E03001D12DEFBA802222F39D99B8185DC1AEC2A"
+  },
+  {
+    "path": "06/final/post-merge-backend-regression-rerun.txt",
+    "sha256": "463BCDF309B6A9D583E4D5D3D8E593C559F66823223B2918F31A98315EDADE9D"
+  },
+  {
+    "path": "06/final/backend-lifecycle-suite.txt",
+    "sha256": "1982BFBAAAC27FBF96998B69B9564A24A501C8B2D6AA918018F0C4B0BE71C31C"
+  },
+  {
+    "path": "06/red/natural-reply-v2-red.txt",
+    "sha256": "B03890E01DEEA21984844091F9918ED65BA11AB04B3BF67DC7D96BFC91A2FD7F"
+  },
+  {
+    "path": "06/red/natural-reply-v2-red-03.txt",
+    "sha256": "A4748122DF5BBB56CB99B9A33124991C1AC650945916E55F8A12AF3E35783887"
+  },
+  {
+    "path": "06/red/natural-reply-v2-red-02.txt",
+    "sha256": "76D4D6641048D13D651FB1768AF18F709278D167F73EED37BC73D1C7C5EB16FF"
+  },
+  {
+    "path": "06/red/failed-aftersales-resume-red.txt",
+    "sha256": "3C736EF2A8756830ADD7213C604C8AA6086547909F1D0756B372B1A755DE212B"
+  },
+  {
+    "path": "06/red/failed-aftersales-resume-red-frozen.txt",
+    "sha256": "CD12B6A189A077A86FBCE324BC95194A28DBD1B8146790D97AAF8B32E31331B1"
+  },
+  {
+    "path": "06/red/failed-aftersales-resume-red-diagnostic.txt",
+    "sha256": "4B9C5F16C21F276A3E849532BD960A8B058E6EEB39D79C9DD255D9A76D05A2AC"
+  },
+  {
+    "path": "06/red/direct-momo-resume-red.txt",
+    "sha256": "1C23BCFEF339249E00BE4F01668630B79CA1E2BDFEC41D0DD8B21FA467D02D44"
+  },
+  {
+    "path": "06/red/continuation-route-provenance-red.txt",
+    "sha256": "26A6D62BF0CF00127E74EA91DF33C8BFBA38F8A7436B1509002E0B55AA90D756"
+  },
+  {
+    "path": "06/red/child-prompt-displayed-red.txt",
+    "sha256": "2A9D7E69CEEAB75E9314AFEA42F7BB90670A8AB723F551E205690D34C1BBFDD9"
+  },
+  {
+    "path": "06/green/failed-aftersales-resume-green-after-setup-fix.txt",
+    "sha256": "FC99E1EFFA085D7565D85D75CACBC0CEF6513BC2F1D1B4591D024938730C401F"
+  },
+  {
+    "path": "06/green/continuation-route-provenance-green.txt",
+    "sha256": "2925EA184DF31133181CEACC33268ED58F628A1245418DCA2633FE3071190907"
+  },
+  {
+    "path": "06/green/child-prompt-displayed-green.txt",
+    "sha256": "7C70633E3C63A6FA9353A98A2E21F2709CA7977FF1A685B1D7F52C4E60ED788D"
+  },
+  {
+    "path": "06/green/natural-reply-v2-green.txt",
+    "sha256": "750426004AD1CF0D7E201334C099EC649FDC695297AFF06FDCD28E18C56E1A2B"
+  },
+  {
+    "path": "06/green/natural-reply-v2-green-02.txt",
+    "sha256": "C52AAB36BD7C82008BBD02CEE34C79D686FABC36ACB72C4EBD4F60210D93105A"
+  },
+  {
+    "path": "06/green/frontend-build.txt",
+    "sha256": "9F9EB37CCA73B553B0C43848DBC0DC006F0A00149324DEC07A730355E5508AEB"
+  },
+  {
+    "path": "06/green/failed-aftersales-resume-setup-location.txt",
+    "sha256": "79C5CD31577331F008BB49291788A64A4841DEA50AFF1C50F7CCB8A62F504DBB"
+  },
+  {
+    "path": "06/green/failed-aftersales-resume-green.txt",
+    "sha256": "7E971660AA60F4733123A15FC4F41B22A8376726495D60D447B2D8B53C0F9D09"
+  },
+  {
+    "path": "06/green/failed-aftersales-resume-green-diagnostic.txt",
+    "sha256": "A11AB1250CC1D76585C378F074A995807B36BC3E68728BC2C55788E529C51425"
+  },
+  {
+    "path": "06/green/continuation-copy-green.txt",
+    "sha256": "01D7163B155E32FCDFD81384DE3428EADF69B418944D8595D740D30F8850E27C"
+  },
+  {
+    "path": "merges/06-receipt.md",
+    "sha256": "341547BBEEE201235AB5ACE016E15C1F476B49E74475DF4229FB513AE298C449"
+  }
+]

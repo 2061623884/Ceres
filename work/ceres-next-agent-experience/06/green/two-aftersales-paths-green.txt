@@ -1,0 +1,18 @@
+cwd=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-06\backend
+interpreter=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+PYTHONPATH=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-06\backend
+import_sources=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-06\backend\app\__init__.py; C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-06\backend\app\services\chat_opening_service.py
+selectors=test_failed_aftersales_offers_explicit_resume_with_original_request_and_tool_result; test_direct_momo_order_chat_offers_resume_after_actual_aftersales_tool
+args=-q --tb=line -x --basetemp=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\06\green-two-aftersales-paths
+pytest_exit_code=0
+safe_summary=2 passed in 5.69s
+exception_class=none
+first_failure_location=none
+git_head_before=481e7505951204d3d24c9c9a3bb61684e5edc213
+git_head_after=481e7505951204d3d24c9c9a3bb61684e5edc213
+changed_file_sha256_before=Mercury/mercury/agent.py=13FFD9E40CECAD0CF4214BD48A7A8A4516D756611DCA630A947D9E93B0BAA96B; backend/app/api/chat.py=E4870D83BC55225F97F30B10B9DEA7A5A3F0BC7506E698A2923D43F09915B0CE; backend/app/prompts/semantic.py=E011056B010B2B44860A96E0701823314CC29131DDFDF4855544D6AA2C8B7B54; backend/app/services/chat_opening_service.py=A4D0AE15D04BF490D8414E51C4A2D10577CAA4158313FB36280CE4669DD7A2B5; backend/tests/test_v3_switch_lifecycle.py=FF97F360E71ACDB6544F073266308B5F8DA124960D7B282C5CDD9D2D3AF5D139
+changed_file_sha256_after=Mercury/mercury/agent.py=13FFD9E40CECAD0CF4214BD48A7A8A4516D756611DCA630A947D9E93B0BAA96B; backend/app/api/chat.py=E4870D83BC55225F97F30B10B9DEA7A5A3F0BC7506E698A2923D43F09915B0CE; backend/app/prompts/semantic.py=E011056B010B2B44860A96E0701823314CC29131DDFDF4855544D6AA2C8B7B54; backend/app/services/chat_opening_service.py=A4D0AE15D04BF490D8414E51C4A2D10577CAA4158313FB36280CE4669DD7A2B5; backend/tests/test_v3_switch_lifecycle.py=FF97F360E71ACDB6544F073266308B5F8DA124960D7B282C5CDD9D2D3AF5D139
+test_sha256_before=FF97F360E71ACDB6544F073266308B5F8DA124960D7B282C5CDD9D2D3AF5D139
+test_sha256_after=FF97F360E71ACDB6544F073266308B5F8DA124960D7B282C5CDD9D2D3AF5D139
+credential_value_pattern_scan_count=0
+raw_message_content_headers_settings=not_saved

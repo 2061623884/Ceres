@@ -1,0 +1,16 @@
+cwd=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-06\backend
+interpreter=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+PYTHONPATH=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-06\backend
+import_sources=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-06\backend\app\__init__.py; C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-06\backend\app\services\chat_opening_service.py
+selector=tests/test_snack_selection.py::test_single_category_recommendation_uses_selected_sellable_sku_evidence
+args=-q --tb=line --basetemp=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\06\green\snack-natural-reply-basetemp
+pytest_exit_code=0
+pytest_summary=2 passed in 5.63s
+git_head_before=481e7505951204d3d24c9c9a3bb61684e5edc213
+git_head_after=481e7505951204d3d24c9c9a3bb61684e5edc213
+test_sha256_before=F025E1BB47407B6E8F504AE525C06085B80D40DDCA2451B7F6C298FABA76502A
+test_sha256_after=F025E1BB47407B6E8F504AE525C06085B80D40DDCA2451B7F6C298FABA76502A
+chat_opening_service_sha256_before=A4D0AE15D04BF490D8414E51C4A2D10577CAA4158313FB36280CE4669DD7A2B5
+chat_opening_service_sha256_after=A4D0AE15D04BF490D8414E51C4A2D10577CAA4158313FB36280CE4669DD7A2B5
+credential_value_pattern_scan_count=0
+response_repr_locals_settings_headers=not_saved

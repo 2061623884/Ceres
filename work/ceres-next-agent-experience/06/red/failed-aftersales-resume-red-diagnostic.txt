@@ -1,0 +1,13 @@
+ticket: 06 after-sales resume red diagnostic repeat
+cwd: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-06\backend
+interpreter: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+PYTHONPATH: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-06\backend
+selector: tests/test_v3_switch_lifecycle.py::test_failed_aftersales_offers_explicit_resume_with_original_request_and_tool_result
+HEAD: 481e7505951204d3d24c9c9a3bb61684e5edc213
+worktree status: M tests/test_v3_switch_lifecycle.py
+import app source: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-06\backend\app\__init__.py
+exit_code: 1
+first_failure_location: test_v3_switch_lifecycle.py:173
+failure_type: AssertionError
+safe_notes: assertions before continuation route check precede line 172; see test source order, no response/prompt body retained
+note: diagnostic repeat after original evidence capture omitted path line; not a new product sample

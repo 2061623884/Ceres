@@ -1,0 +1,15 @@
+HEAD=ae71bed071a469188111da33cfb3374fd2a163b8
+INTERPRETER=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+CWD=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-06\backend
+PYTHONPATH=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-06\backend
+COMMAND=python -m pytest -q --tb=line --maxfail=1 --basetemp=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\06\pytest-basetemp-post-merge-20261006-02 tests/test_ceres_next_prompt_modules.py tests/test_v3_switch_lifecycle.py tests/test_snack_selection.py
+SHA256 backend/tests/test_ceres_next_prompt_modules.py DBCF62280AC7D70E9421552A6A1CFB603F71B15A818D9B588075F4E5458E348D
+SHA256 backend/tests/test_v3_switch_lifecycle.py DBAD392B04B1C621C49A1F5ABD77B90726D561A07559FB5B2173D91C39CE7634
+SHA256 backend/tests/test_snack_selection.py DE8045909FFE801535FBAB78306787ACDDF3C29752BA396794270CAB15C4D2AC
+SHA256 backend/app/agent/graph/nodes/answer.py E8CFC8586158883D9CEECBAAD08B77196DD2207C1393E76F7755A0311DFFD018
+SHA256 backend/app/prompts/semantic.py 6D62849E82842A3CECAD491AAEB449ACF7B6D7CCCE02704C3D28D0893281ECB1
+APP_IMPORT=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-06\backend\app\__init__.py
+....................                                                     [100%]
+20 passed in 37.04s
+EXIT_CODE=0
+credential field-name scan: no matches

@@ -1,0 +1,18 @@
+ticket: 06 after-sales resume red on frozen test hash
+timestamp_utc: 2026-10-06T10:41:24Z
+test_file_sha256: 674C4D9F9B91CC4681BE57C517BB5E8445A2EE65FF548029BA0E454818F560AB
+expected_frozen_test_file_sha256: 674C4D9F9B91CC4681BE57C517BB5E8445A2EE65FF548029BA0E454818F560AB
+cwd: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-06\backend
+interpreter: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+PYTHONPATH: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-06\backend
+selector: tests/test_v3_switch_lifecycle.py::test_failed_aftersales_offers_explicit_resume_with_original_request_and_tool_result
+HEAD: 481e7505951204d3d24c9c9a3bb61684e5edc213
+worktree status: M tests/test_v3_switch_lifecycle.py
+import app source: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-06\backend\app\__init__.py
+exit_code: 1
+first_failure_location: test_v3_switch_lifecycle.py:176
+failure_type: AssertionError
+output policy: only failure location/type and summary retained; no request body or locals
+first failing assertion: line 176 requires exactly one aftersales public `service.route` event to target_role=keke; the condition was not met.
+preconditions passed before this line: accepted Momo route; create_return result ok=false/error=NOT_DELIVERED; final aftersales SSE refusal; semantic_provider.requests empty.
+valid red: test source hash matched the frozen hash before this run; the earlier overlapping diagnostic is not relied upon.

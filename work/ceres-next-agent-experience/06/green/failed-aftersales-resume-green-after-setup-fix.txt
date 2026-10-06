@@ -1,0 +1,18 @@
+cwd=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-06\backend
+interpreter=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+PYTHONPATH=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-06\backend
+import_sources=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-06\backend\app\__init__.py; C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-06\backend\app\services\chat_opening_service.py
+selector=tests/test_v3_switch_lifecycle.py::test_failed_aftersales_offers_explicit_resume_with_original_request_and_tool_result
+args=-q --tb=line -x --basetemp=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\06\green-first-fixed-basetemp
+pytest_exit_code=0
+pytest_summary=1 passed in 3.52s
+git_head_before=481e7505951204d3d24c9c9a3bb61684e5edc213
+git_head_after=481e7505951204d3d24c9c9a3bb61684e5edc213
+git_status_before_clean=False
+git_status_after_clean=False
+test_sha256_before=674C4D9F9B91CC4681BE57C517BB5E8445A2EE65FF548029BA0E454818F560AB
+test_sha256_after=674C4D9F9B91CC4681BE57C517BB5E8445A2EE65FF548029BA0E454818F560AB
+chat_opening_service_sha256_before=A4D0AE15D04BF490D8414E51C4A2D10577CAA4158313FB36280CE4669DD7A2B5
+chat_opening_service_sha256_after=A4D0AE15D04BF490D8414E51C4A2D10577CAA4158313FB36280CE4669DD7A2B5
+credential_value_pattern_scan_count=0
+raw_message_content=not_saved

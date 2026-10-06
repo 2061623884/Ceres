@@ -1,0 +1,15 @@
+cwd=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-06\backend
+interpreter=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+PYTHONPATH=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-06\backend
+selector=tests/test_v3_switch_lifecycle.py::test_failed_aftersales_offers_explicit_resume_with_original_request_and_tool_result
+args=-q --tb=short -x --basetemp=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\06\green-first-short-diagnostic-basetemp
+pytest_exit_code=1
+exception_class=NameError
+source_location=plugin.py:926
+undefined_identifier=Handoff
+git_head_before=481e7505951204d3d24c9c9a3bb61684e5edc213
+git_head_after=481e7505951204d3d24c9c9a3bb61684e5edc213
+test_sha256_before=674C4D9F9B91CC4681BE57C517BB5E8445A2EE65FF548029BA0E454818F560AB
+test_sha256_after=674C4D9F9B91CC4681BE57C517BB5E8445A2EE65FF548029BA0E454818F560AB
+credential_value_pattern_scan_count=0
+error_message_and_request_content=not_saved

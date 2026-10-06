@@ -1,0 +1,12 @@
+F
+================================== FAILURES ===================================
+E   assert False
+     +  where False = any(<generator object test_single_category_recommendation_uses_selected_sellable_sku_evidence.<locals>.<genexpr> at 0x0000024DAAB6A0A0>)
+C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-06\backend\tests\test_snack_selection.py:179: assert False
+=========================== short test summary info ===========================
+FAILED tests/test_snack_selection.py::test_single_category_recommendation_uses_selected_sellable_sku_evidence[\u60f3\u770b\u770b\u82cf\u6253\u997c\u5e72-\u997c\u5e72-\u997c\u5e72-demo:snack-soda-crackers-100g-box-tags0-name_tokens0]
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!
+1 failed in 3.50s
+credential field-name scan: no matches
+SOURCE_SHA256_CORRECTED_PATH=app/agent/graph/nodes/answer.py E8CFC8586158883D9CEECBAAD08B77196DD2207C1393E76F7755A0311DFFD018; initial metadata lookup used wrong path, test result unchanged
+RCA correction: test SHA BB2F6F0024F63328F9C93420E0F2299E51DFE9FC6575C29FFB745C4BDB53760F maps line 179 to the product_cards selected-SKU assertion (assert any(card...)); this failed before line 181 tag-label assertion. Therefore this run is not evidence for/against tag leakage and cannot be counted as its valid red/green.

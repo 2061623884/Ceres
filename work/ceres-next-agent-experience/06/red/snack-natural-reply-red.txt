@@ -1,0 +1,16 @@
+cwd=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-06\backend
+interpreter=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+PYTHONPATH=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-06\backend
+import_app=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-06\backend\app\__init__.py
+selector=tests/test_snack_selection.py::test_single_category_recommendation_uses_selected_sellable_sku_evidence
+args=-q --tb=line --basetemp=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\06\red\snack-natural-reply-basetemp
+pytest_exit_code=1
+first_failure_exception=AssertionError
+first_failure_location=test_snack_selection.py:182
+safe_summary=FAILED tests/test_snack_selection.py::test_single_category_recommendation_uses_selected_sellable_sku_evidence[\u60f3\u770b\u770b\u82cf\u6253\u997c\u5e72-\u997c\u5e72-\u997c\u5e72-demo:snack-soda-crackers-100g-box-tags0-name_tokens0]; FAILED tests/test_snack_selection.py::test_single_category_recommendation_uses_selected_sellable_sku_evidence[\u559d\u70b9\u751c\u7684-\u751c\u5473\u996e\u54c1-\u751c\u5473-demo:cn-minute-maid-peach-450ml-bottle-tags1-name_tokens1]; 2 failed in 5.70s
+git_head_before=481e7505951204d3d24c9c9a3bb61684e5edc213
+git_head_after=481e7505951204d3d24c9c9a3bb61684e5edc213
+test_sha256_before=B97A0F0D0CE79A5F0A00A452C52188982B86262A5E1F5912B30988B4FAA964E4
+test_sha256_after=B97A0F0D0CE79A5F0A00A452C52188982B86262A5E1F5912B30988B4FAA964E4
+credential_value_pattern_scan_count=0
+response_repr_locals_settings_headers=not_saved

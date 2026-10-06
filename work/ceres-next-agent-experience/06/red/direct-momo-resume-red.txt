@@ -1,0 +1,16 @@
+cwd=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-06\backend
+interpreter=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+PYTHONPATH=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-06\backend
+import_sources=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-06\backend\app\__init__.py; C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-06\backend\app\services\chat_opening_service.py
+selector=tests/test_v3_switch_lifecycle.py::test_direct_momo_order_chat_offers_resume_after_actual_aftersales_tool
+args=-q --tb=line -x --basetemp=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\06\red-direct-momo-basetemp
+pytest_exit_code=1
+exception_class=AssertionError
+first_failure_location=test_v3_switch_lifecycle.py:239
+safe_summary=FAILED tests/test_v3_switch_lifecycle.py::test_direct_momo_order_chat_offers_resume_after_actual_aftersales_tool; 1 failed in 3.30s
+git_head_before=481e7505951204d3d24c9c9a3bb61684e5edc213
+git_head_after=481e7505951204d3d24c9c9a3bb61684e5edc213
+test_sha256_before=FF97F360E71ACDB6544F073266308B5F8DA124960D7B282C5CDD9D2D3AF5D139
+test_sha256_after=FF97F360E71ACDB6544F073266308B5F8DA124960D7B282C5CDD9D2D3AF5D139
+credential_value_pattern_scan_count=0
+raw_message_content_headers_settings=not_saved

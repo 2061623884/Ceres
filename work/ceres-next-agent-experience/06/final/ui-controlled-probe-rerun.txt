@@ -1,0 +1,20 @@
+worktree=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-06
+cwd=C:\Users\20616\Desktop\Agent\Agent产品\Ceres
+probe=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\06\ui\after-sales-continuation-ui-probe.mjs
+probe_sha256_before=FFD0D256013CE72208C242FE1DC1A575FC9639ADCE25ADA6719B103D467F7CA8
+probe_sha256_after=FFD0D256013CE72208C242FE1DC1A575FC9639ADCE25ADA6719B103D467F7CA8
+node=C:\Users\20616\.cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin\node.exe
+node_version=v24.19.0
+browser_cache=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\00-preparation\playwright-cache
+CERES_NEXT_06_ROOT=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-06
+PLAYWRIGHT_BROWSERS_PATH=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\00-preparation\playwright-cache
+node_modules_junction=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-06\frontend\node_modules
+junction_target=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01-ui\frontend\node_modules
+probe_exit_code=0
+safe_summary=UI after-sales continuation probe passed
+app_tsx_sha256_before=92ECE7E47CDB87271A97EA752BCEE9CBF87F88DADA2C83C2E23268B14EB1D831
+app_tsx_sha256_after=92ECE7E47CDB87271A97EA752BCEE9CBF87F88DADA2C83C2E23268B14EB1D831
+mercury_chat_sha256_before=247909F18C881FCF4F8DC4777FF7F4F7E357B9679A159323A4EF6ED00239BEB6
+mercury_chat_sha256_after=247909F18C881FCF4F8DC4777FF7F4F7E357B9679A159323A4EF6ED00239BEB6
+credential_value_pattern_scan_count=0
+mocked_api=true; real_model=false; raw_request_or_page_text=not_saved

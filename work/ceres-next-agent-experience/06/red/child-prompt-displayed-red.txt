@@ -1,0 +1,16 @@
+cwd=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-06\backend
+interpreter=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+PYTHONPATH=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-06\backend
+import_app=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-06\backend\app\__init__.py
+selector=tests/test_v3_switch_lifecycle.py::test_failed_aftersales_offers_explicit_resume_with_original_request_and_tool_result
+args=-q --tb=line --basetemp=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\06\red\child-prompt-displayed-basetemp
+pytest_exit_code=1
+first_failure_exception=AssertionError
+first_failure_location=test_v3_switch_lifecycle.py:182
+safe_summary=FAILED tests/test_v3_switch_lifecycle.py::test_failed_aftersales_offers_explicit_resume_with_original_request_and_tool_result; 1 failed in 3.36s
+git_head_before=481e7505951204d3d24c9c9a3bb61684e5edc213
+git_head_after=481e7505951204d3d24c9c9a3bb61684e5edc213
+test_sha256_before=8B03ADC39ABF5E16EFF3DBAC801857081D4C595EAE234B9684F65C413831C371
+test_sha256_after=8B03ADC39ABF5E16EFF3DBAC801857081D4C595EAE234B9684F65C413831C371
+credential_value_pattern_scan_count=0
+response_prompt_repr_locals_settings_headers=not_saved
