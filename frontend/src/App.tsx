@@ -1768,7 +1768,7 @@ function ChatScreen({
                     onClick={() => respondHandoff(true)}
                     className="rounded-full bg-[#eac867] px-4 py-2 text-[12px] font-semibold text-[#4E3D12] active:scale-[.98]"
                   >
-                    {pendingHandoff.targetRole === 'momo' ? '找墨墨' : '找可可'}
+                    {pendingHandoff.targetRole === 'momo' ? '找墨墨' : '继续选购'}
                   </button>
                   <button
                     type="button"

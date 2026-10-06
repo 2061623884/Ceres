@@ -173,7 +173,7 @@ def _grounded_answer(state: GraphState, runtime: TurnRuntime) -> GraphState:
                 and match.get("stock_verified") is True
                 and not match.get("unknown_constraints")
             ):
-                reply = f"主推「{match['name']}」；推荐理由：{match['evidence'][2]}"
+                reply = f"我找到「{match['name']}」了，你可以先看看卡片里的商品信息。"
 
     business_pending = []
     if target.get("kind") == "category" and target.get("intent") == "explore":
