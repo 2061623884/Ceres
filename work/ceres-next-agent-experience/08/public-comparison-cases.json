@@ -1,0 +1,12 @@
+[
+  {
+    "case_id": "shared-cola-multipack-budget-query",
+    "steps": [
+      {
+        "op": "turn",
+        "label": "historical-cola-multipack-budget-query",
+        "message": "比较可口可乐多件装，整包不超过20元"
+      }
+    ]
+  }
+]
