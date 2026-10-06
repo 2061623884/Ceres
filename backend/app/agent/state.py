@@ -18,6 +18,7 @@ class Requirements:
     goal: str | None = None
     people: int | None = None
     budget_fen: int | None = None
+    quantity: int | None = None
     category_id: str | None = None
     usage: str | None = None
     specification: dict[str, Any] = field(default_factory=dict)
@@ -32,6 +33,7 @@ class Requirements:
             "goal": self.goal,
             "people": self.people,
             "budget_fen": self.budget_fen,
+            "quantity": self.quantity,
             "category_id": self.category_id,
             "usage": self.usage,
             "specification": self.specification,
@@ -48,6 +50,7 @@ class Requirements:
             goal=data.get("goal"),
             people=data.get("people"),
             budget_fen=data.get("budget_fen"),
+            quantity=data.get("quantity"),
             category_id=data.get("category_id"),
             usage=data.get("usage"),
             specification=data.get("specification") or {},

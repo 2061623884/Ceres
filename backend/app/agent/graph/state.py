@@ -80,6 +80,7 @@ class TurnState(TypedDict, total=False):
     #: The raw model payload of this request, exactly as the provider returned it.
     proposal: dict[str, Any] | None
     answer_reply: str | None
+    business_pending: list[dict[str, Any]]
     #: Parsed Proposal produced by ``parse_validate``; consumed by the sole
     #: decision node and never used as a second routing authority.
     parsed_proposal: object | None

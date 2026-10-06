@@ -168,6 +168,8 @@ class GraphTurnService:
         ]
         if budgets:
             base["budget_fen"] = min(budgets)
+        if constraints.get("quantity") is not None:
+            base["quantity"] = constraints["quantity"]
         base["specification"] = {
             **(base.get("specification") or {}), **(constraints.get("specification") or {}),
         }
@@ -184,6 +186,7 @@ class GraphTurnService:
         expected_session_version: int | None = None,
         view_context: dict[str, Any] | None = None,
         plan_selection: dict[str, Any] | None = None,
+        clarification_answer: dict[str, Any] | None = None,
         handoff_recent_messages: list[dict[str, Any]] | None = None,
         progress: TurnProgressSink | None = None,
         should_stop: Any = None,
@@ -257,6 +260,7 @@ class GraphTurnService:
                 expected_session_version=expected_session_version,
                 view_context=view_context,
                 plan_selection=plan_selection,
+                clarification_answer=clarification_answer,
                 handoff_recent_messages=handoff_recent_messages,
                 trace_id=effective_trace,
                 model_mode=settings.llm_mode,

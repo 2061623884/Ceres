@@ -22,6 +22,7 @@ def _turn_body(
     *,
     request_id: str | None = None,
     view_context: dict[str, Any] | None = None,
+    clarification_answer: dict[str, str] | None = None,
 ) -> dict[str, Any]:
     previous = previous or {}
     body: dict[str, Any] = {
@@ -33,6 +34,8 @@ def _turn_body(
     }
     if view_context is not None:
         body["view_context"] = view_context
+    if clarification_answer is not None:
+        body["clarification_answer"] = clarification_answer
     return body
 
 
@@ -44,10 +47,15 @@ def stream_turn(
     *,
     request_id: str | None = None,
     view_context: dict[str, Any] | None = None,
+    clarification_answer: dict[str, str] | None = None,
 ) -> list[dict[str, Any]]:
     """POST SSE turn; returns parsed events (terminal payload in turn.completed)."""
     body = _turn_body(
-        message, previous, request_id=request_id, view_context=view_context
+        message,
+        previous,
+        request_id=request_id,
+        view_context=view_context,
+        clarification_answer=clarification_answer,
     )
     with client.stream(
         "POST",
@@ -61,6 +69,7 @@ def stream_turn(
 
 _ERROR_HTTP_STATUS = {
     "STALE_STATE": 409,
+    "STALE_CLARIFICATION": 409,
     "IDEMPOTENCY_CONFLICT": 409,
     "TURN_IN_PROGRESS": 409,
     "SESSION_FORBIDDEN": 403,
@@ -113,6 +122,7 @@ def post_turn(
         previous,
         request_id=request_id,
         view_context=extra.get("view_context"),
+        clarification_answer=extra.get("clarification_answer"),
     )
     for event in reversed(events):
         if event.get("type") == "turn.completed":

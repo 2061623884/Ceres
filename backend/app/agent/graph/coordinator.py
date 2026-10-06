@@ -53,6 +53,7 @@ def run_graph_turn(
     expected_session_version: int | None = None,
     view_context: dict[str, Any] | None = None,
     plan_selection: dict[str, Any] | None = None,
+    clarification_answer: dict[str, Any] | None = None,
     handoff_recent_messages: list[dict[str, Any]] | None = None,
     store_id: str | None = None,
     delivery_zone_id: str | None = None,
@@ -76,6 +77,7 @@ def run_graph_turn(
         expected_session_version=expected_session_version,
         view_context=view_context,
         plan_selection=plan_selection,
+        clarification_answer=clarification_answer,
     )
     factory = sessionmaker(bind=db.get_bind(), autoflush=False, expire_on_commit=False)
     receipts = TurnReceiptService(factory, owner_id)
@@ -99,6 +101,30 @@ def run_graph_turn(
             expected_state_version=expected_state_version,
             expected_session_version=expected_session_version,
         )
+
+    resolved_clarification_answer = None
+    if clarification_answer is not None:
+        from app.agent.context import pending_for_session
+
+        pending = pending_for_session(db, session)
+        question = next(
+            (item for item in pending if item["question_id"] == clarification_answer["question_id"]),
+            None,
+        )
+        if question is None:
+            raise AppError(409, "STALE_CLARIFICATION", "这个选项对应的问题已失效。")
+        option = next(
+            (item for item in question["options"] if item["id"] == clarification_answer["option_id"]),
+            None,
+        )
+        if option is None or message.strip() != option["label"]:
+            raise AppError(409, "STALE_CLARIFICATION", "所选选项与当前问题不匹配。")
+        resolved_clarification_answer = {
+            **clarification_answer,
+            "question": question["question"],
+            "slot": question["slot"],
+            "option": option,
+        }
 
     reservation = receipts.reserve(
         session_id,
@@ -132,6 +158,7 @@ def run_graph_turn(
             expected_session_version=expected_session_version,
             view_context=dict(view_context) if view_context else None,
             plan_selection=plan_selection,
+            clarification_answer=resolved_clarification_answer,
             handoff_recent_messages=handoff_recent_messages,
             store_id=store_id or "store-demo-01",
             delivery_zone_id=delivery_zone_id or "zone-default",

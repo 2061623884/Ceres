@@ -47,6 +47,11 @@ class PlanSelection(BaseModel):
     selected_items: list[ConfirmItem] = Field(..., max_length=99)
 
 
+class ClarificationAnswer(BaseModel):
+    question_id: str = Field(..., min_length=1, max_length=128)
+    option_id: str = Field(..., min_length=1, max_length=128)
+
+
 class TurnRequest(BaseModel):
     request_id: str = Field(..., min_length=1, max_length=128)
     message: str = Field(..., min_length=1, max_length=4000)
@@ -55,6 +60,7 @@ class TurnRequest(BaseModel):
     expected_session_version: int | None = Field(None, ge=0)
     view_context: ViewContext | None = None
     plan_selection: PlanSelection | None = None
+    clarification_answer: ClarificationAnswer | None = None
 
     @field_validator("expected_state_version")
     @classmethod

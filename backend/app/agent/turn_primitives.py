@@ -67,6 +67,7 @@ class TurnSnapshot:
     purchase_summary: dict[str, Any] | None = None
     pending_clarification: dict[str, Any] | None = None
     pending_clarifications: list[dict[str, Any]] = field(default_factory=list)
+    clarification_answer: dict[str, Any] | None = None
     displayed_candidates: list[dict[str, Any]] = field(default_factory=list)
     recent_messages: list[dict[str, Any]] = field(default_factory=list)
     memories: list[dict[str, Any]] = field(default_factory=list)
@@ -160,6 +161,7 @@ def build_request(
         "purchase_summary": deepcopy(snapshot.purchase_summary),
         "pending_clarification": deepcopy(snapshot.pending_clarification),
         "pending_clarifications": deepcopy(list(snapshot.pending_clarifications or [])),
+        "clarification_answer": deepcopy(snapshot.clarification_answer),
         "displayed_candidates": [
             {**deepcopy(candidate), "position": position}
             for position, candidate in enumerate(snapshot.displayed_candidates, start=1)

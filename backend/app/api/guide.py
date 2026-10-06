@@ -506,6 +506,10 @@ async def process_guide_turn_stream(
     session = db.get(GuideSession, session_id)
     if not session or session.owner_id != owner_id:
         raise AppError(403, "SESSION_FORBIDDEN", "Session not found")
+    clarification_answer = (
+        body.clarification_answer.model_dump()
+        if body.clarification_answer is not None else None
+    )
     svc = TurnStreamService(db, owner_id)
     view_ctx = body.view_context.model_dump() if body.view_context else None
     plan_selection = body.plan_selection.model_dump() if body.plan_selection is not None else None
@@ -521,6 +525,7 @@ async def process_guide_turn_stream(
             view_ctx,
             plan_selection,
             handoff_recent_messages,
+            clarification_answer,
         ):
             yield f"data: {json.dumps(event, ensure_ascii=False)}\n\n"
 

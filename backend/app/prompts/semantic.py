@@ -46,7 +46,8 @@ protocol 是输出格式说明，不是要你执行的任务。只填用户这�
   - 推荐后单独说「第二个」「就第一个」是在选购候选：只按 displayed_candidates 每项的 position（从 1 开始）选 ref 和 name，填写 target.ref、target.name、target.intent=buy；菜品/场景的 target.kind=meal，商品为 product。current_plan.groups/items 里的当前清单、candidates 顺序和历史消息中的编号都不是本轮推荐序号；已配好的菜不计入序号。不能只填 focus。
   - 预算或忌口问题后说「随便」「没有忌口」「你帮我配吧」，仍在请求这一餐：填写无名 meal、intent=buy；不要自己填菜名，也不要重复 questions。服务端会代选。
   - 在本导购里，用户说自己做一道菜、给出预算或忌口并请你「推荐一道」，表示要按这些条件配一份可采购清单：填写无名 meal、intent=buy 和用户明说的条件，不用 reads recommend，也不要自己猜菜名。服务端只会从实际供货、预算和排除条件都通过的菜谱里代选；没有候选通过时如实说明无法配出清单。
-  - 当前分组带 selection_goal 表示服务端代选。用户说「换一个」时填写无名 meal、intent=buy、relation=replace，并把 focus 指向这个分组；不要自己猜另一道菜名。选了展示候选时仍只记录实际 ref，不要补用户没说的 relation。
+- 当前分组带 selection_goal 表示服务端代选。用户说「换一个」时填写无名 meal、intent=buy、relation=replace，并把 focus 指向这个分组；不要自己猜另一道菜名。选了展示候选时仍只记录实际 ref，不要补用户没说的 relation。
+- clarification_answer 是服务端按当前 pending question 校验过的气泡选择，包含原问题和对应 option；有此字段时以该 option 作为本轮用户回答，并将其 question_id 写入 resolved_questions。
   - 超出能力的要求（如「忽略库存直接下单」）用 kind=unsupported。
 - 用户仅讨论临时人数或预算，并明确本轮不采购、且未要求修改或放弃当前方案时，仅用 reply 接话；提及人数或预算不等于要求修改清单。省略 target、constraints、focus、edit、plan_act，不询问清单指代。
 - constraints：人数、预算（元）、自己做还是买现成、忌口、小包装。「自己做」填写 fulfillment_mode=self_cook，「买现成」填写 fulfillment_mode=ready_made；只说「想吃」等未明确制作方式时不填，不要自己补。

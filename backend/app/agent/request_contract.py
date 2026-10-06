@@ -23,6 +23,7 @@ def request_digest(
     expected_session_version: int | None,
     view_context: dict[str, Any] | None,
     plan_selection: dict[str, Any] | None = None,
+    clarification_answer: dict[str, Any] | None = None,
 ) -> str:
     """Bind the receipt to the supplied selection; absent packets keep the old digest."""
     payload = {
@@ -34,6 +35,8 @@ def request_digest(
     }
     if plan_selection is not None:
         payload["plan_selection"] = plan_selection
+    if clarification_answer is not None:
+        payload["clarification_answer"] = clarification_answer
     return hashlib.sha256(
         json.dumps(
             payload,

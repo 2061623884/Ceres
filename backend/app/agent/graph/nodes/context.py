@@ -104,7 +104,7 @@ def _authoritative(
 def _merge_constraints(
     base: dict[str, Any], extra: dict[str, Any]
 ) -> dict[str, Any]:
-    """Union of read exclusions and the stricter budget, as plain requirements."""
+    """Merge read exclusions, the stricter budget and explicit quantity."""
     merged = dict(base or {})
     exclusions = list(
         dict.fromkeys(
@@ -123,6 +123,8 @@ def _merge_constraints(
     ]
     if budgets:
         merged["budget_fen"] = min(budgets)
+    if extra.get("quantity") is not None:
+        merged["quantity"] = extra["quantity"]
     merged["specification"] = {
         **(merged.get("specification") or {}), **(extra.get("specification") or {}),
     }
@@ -249,6 +251,8 @@ def load_context(state: dict[str, Any], runtime: TurnRuntime) -> dict[str, Any]:
         # The request's view is a pure input for this run; it is persisted by the
         # commit transaction, never written to the session before the turn runs.
         snapshot = replace(snapshot, view_context=dict(runtime.view_context))
+    if runtime.clarification_answer is not None:
+        snapshot = replace(snapshot, clarification_answer=dict(runtime.clarification_answer))
     runtime.snapshot = snapshot
     runtime.store_id = inputs["store_id"]
     runtime.delivery_zone_id = inputs["delivery_zone_id"]

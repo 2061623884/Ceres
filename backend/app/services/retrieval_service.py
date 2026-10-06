@@ -226,6 +226,9 @@ class RetrievalHit:
     unknown_constraints: list[str]
     score: float = 0.0
     routes: tuple[str, ...] = ()
+    category_id: str | None = None
+    product_type: str | None = None
+    usage_tags: list[str] = field(default_factory=list)
 
     def as_dict(self) -> dict[str, Any]:
         return {
@@ -237,6 +240,9 @@ class RetrievalHit:
             "review_status": self.review_status,
             "stock_verified": self.stock_verified,
             "unknown_constraints": list(self.unknown_constraints),
+            "category_id": self.category_id,
+            "product_type": self.product_type,
+            "usage_tags": list(self.usage_tags),
         }
 
 
@@ -1100,6 +1106,9 @@ class RetrievalService:
             stock_verified=verified,
             unknown_constraints=_unknown_constraints(query, filters, kind),
             routes=routes,
+            category_id=payload.get("category_id"),
+            product_type=payload.get("product_type"),
+            usage_tags=list(payload.get("usage_tags") or []),
         )
 
 

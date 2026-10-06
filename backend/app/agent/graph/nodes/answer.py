@@ -34,6 +34,7 @@ from app.agent.graph.turn_commit import (
     understanding_wrapper,
 )
 from app.agent.protocol import SemanticProtocolError, parse_proposal
+from app.agent.turn_context_plan import snack_type_clarification
 from app.schemas.goal import TurnDecision
 
 def answer(state: GraphState, runtime: TurnRuntime) -> dict[str, Any]:
@@ -171,13 +172,29 @@ def _grounded_answer(state: GraphState, runtime: TurnRuntime) -> GraphState:
             ):
                 reply = f"主推「{match['name']}」；推荐理由：{match['evidence'][2]}"
 
+    business_pending = []
+    if (
+        target.get("kind") == "category"
+        and target.get("name") == "零食"
+    ):
+        business_pending = snack_type_clarification(query_results)
+        if business_pending:
+            reply = ""
+            displayed = []
+
     comparisons = [row for row in query_results if row.get("kind") == "compare"]
     if comparisons and not any(row["sellable_products"] for row in comparisons):
         displayed = []
     proposal = replace(state["turn"]["parsed_proposal"], display_refs=displayed)
     return merge_state(
         state,
-        update_partition(state, "turn", answer_reply=reply, parsed_proposal=proposal),
+        update_partition(
+            state,
+            "turn",
+            answer_reply=reply,
+            parsed_proposal=proposal,
+            business_pending=business_pending,
+        ),
     )
 
 
@@ -208,7 +225,14 @@ def answer_prepare(state: GraphState, runtime: TurnRuntime) -> dict[str, Any]:
         message=str(turn.get("answer_reply") or (turn.get("proposal") or {}).get("reply") or ""),
     )
     decision = TurnDecision.model_validate(turn["decision"]) if turn.get("decision") else None
-    result = _attach_plan(result, state, runtime, proposal, decision)
+    result = _attach_plan(
+        result,
+        state,
+        runtime,
+        proposal,
+        decision,
+        business_pending=list(turn.get("business_pending") or []),
+    )
     return result
 
 

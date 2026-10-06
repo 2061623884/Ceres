@@ -353,6 +353,7 @@ class SemanticProposal:
     uncertainties: list[Uncertainty] = dc_field(default_factory=list)
     display_refs: list[str] = dc_field(default_factory=list)
     resolved_questions: list[str] = dc_field(default_factory=list)
+    stated_quantity: int | None = None
     memory: MemoryAction | None = None
 
     @property
@@ -365,6 +366,7 @@ class SemanticProposal:
             or self.queries
             or self.uncertainties
             or self.display_refs
+            or self.stated_quantity is not None
             or self.memory
         )
 
@@ -486,6 +488,8 @@ def _attach_understanding(proposal: SemanticProposal, top: dict[str, Any]) -> No
     focus_ref = _text(focus.get("ref"), "focus.ref")
 
     goal = _goal(kind, intent, target, stated)
+    if kind == "category":
+        proposal.stated_quantity = _count(target.get("quantity"), "target.quantity")
     if "specification" in clear and (
         kind != "none" or proposal.lookups or proposal.queries
     ):

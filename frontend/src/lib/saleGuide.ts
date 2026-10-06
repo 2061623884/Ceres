@@ -284,6 +284,15 @@ export interface PlanResponse {
   can_confirm?: boolean;
 }
 
+export interface ClarificationAnswer {
+  question_id: string;
+  option_id: string;
+}
+
+export interface ClarificationChoice extends ClarificationAnswer {
+  label: string;
+}
+
 export interface ClarificationOption {
   id: string;
   label: string;
@@ -331,17 +340,14 @@ export function normalizePendingClarifications(raw: unknown): PendingClarificati
   return out;
 }
 
-export function clarificationChipLabels(clarifications: PendingClarification[]): string[] {
-  const seen = new Set<string>();
-  const labels: string[] = [];
-  for (const item of clarifications) {
-    for (const option of item.options) {
-      if (seen.has(option.label)) continue;
-      seen.add(option.label);
-      labels.push(option.label);
-    }
-  }
-  return labels;
+export function clarificationChipOptions(clarifications: PendingClarification[]): ClarificationChoice[] {
+  return clarifications.flatMap((item) =>
+    item.options.map((option) => ({
+      question_id: item.question_id,
+      option_id: option.id,
+      label: option.label,
+    })),
+  );
 }
 
 export interface PlanSelection {

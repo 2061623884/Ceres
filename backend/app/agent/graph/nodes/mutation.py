@@ -47,7 +47,11 @@ from app.agent.graph.state import GraphState, merge_state, update_partition
 from app.agent.protocol import Lookup, Query, SemanticProposal, SemanticProtocolError, Uncertainty
 from app.agent.state import Requirements
 from app.agent.tools.change_plan import PlanChangeExecutor
-from app.agent.turn_context_plan import _supply_gap_answer, gate_pending
+from app.agent.turn_context_plan import (
+    _supply_gap_answer,
+    gate_pending,
+    snack_type_clarification,
+)
 from app.agent.turn_primitives import clamp_limits
 from app.schemas.goal import GoalCandidate, TurnDecision
 from app.services.template_plan_service import expand_ingredient_terms
@@ -252,6 +256,31 @@ def _prepare(
     decision = TurnDecision.model_validate(turn["decision"])
     read_results = list(turn.get("read_results") or [])
     session, task_state = _load(runtime)
+    candidate = decision.candidate
+    if (
+        decision.mutation_action == "prepare"
+        and candidate is not None
+        and candidate.goal.kind == "category_purchase"
+        and candidate.goal.category_name == "零食"
+    ):
+        pending = snack_type_clarification(read_results)
+        if pending:
+            result = base(
+                state,
+                runtime,
+                kind="clarify",
+                pending=pending,
+                message=pending[0]["question"],
+            )
+            deferred_goal = decision.model_copy(update={"candidate": None})
+            return _attach_plan(
+                result,
+                state,
+                runtime,
+                proposal,
+                deferred_goal,
+                business_pending=pending,
+            )
     if decision.mutation_action == "confirm_plan":
         pre = preconditions(state, runtime)
         plan = runtime.snapshot.current_plan
