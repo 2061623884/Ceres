@@ -23,6 +23,9 @@ const screenshotDirectory = path.join(evidenceDirectory, 'real-backend-ui');
 fs.mkdirSync(evidenceDirectory, { recursive: true });
 
 const UI_TIMEOUT_MS = 15000;
+const TURN_LATENCY_TARGET_MS = 15000;
+const TURN_COMPLETION_GRACE_MS = 5000;
+let turnCompletionTimeoutMs = null;
 const IDENTITY_FIELDS = [
   'database_path_fingerprint',
   'projection_snapshot_hash',
@@ -31,6 +34,7 @@ const IDENTITY_FIELDS = [
   'index_manifest_id',
   'retrieval_mode',
   'embedding_contract',
+  'semantic_turn_timeout_seconds',
 ];
 const SOURCE_FILES = [
   'frontend/src/App.tsx',
@@ -41,15 +45,22 @@ const SOURCE_FILES = [
   'backend/app/api/mercury.py',
   'backend/app/api/cart.py',
   'backend/app/api/orders.py',
+  'backend/app/agent/graph/nodes/answer.py',
   'Mercury/mercury/services.py',
 ];
 const evidence = {
-  runner_version: 'ceres-next-08-real-backend-ui-v2',
+  runner_version: 'ceres-next-08-real-backend-ui-v3',
   runner_sha256: null,
   status: 'running',
   current_stage: 'preflight',
   app_origin: null,
   timeout_ms: UI_TIMEOUT_MS,
+  turn_latency_target_ms: TURN_LATENCY_TARGET_MS,
+  turn_completion_timeout_ms: null,
+  turn_timings: [],
+  latency_failures: [],
+  business_status: 'running',
+  latency_status: 'pending',
   case_source: null,
   runtime_identity: null,
   source_manifest: { revision: sourceRevision, files: [] },
@@ -431,11 +442,34 @@ async function waitUntil(predicate, label, timeout = UI_TIMEOUT_MS) {
   }
   throw new Error('Timed out after ' + timeout + 'ms waiting for ' + label);
 }
-async function waitForNextTurn(previousCount, label) {
-  return waitUntil(() => {
+function recordTurnTiming(label, started) {
+  const elapsedMs = Math.round((performance.now() - started) * 10) / 10;
+  const timing = {
+    label,
+    elapsed_ms: elapsedMs,
+    latency_target_ms: TURN_LATENCY_TARGET_MS,
+    latency_target_exceeded: elapsedMs > TURN_LATENCY_TARGET_MS,
+    completion_timeout_ms: turnCompletionTimeoutMs,
+  };
+  evidence.turn_timings.push(timing);
+  if (timing.latency_target_exceeded) evidence.latency_failures.push(timing);
+}
+async function waitForNextTurn(previousCount, label, started = performance.now()) {
+  const record = await waitUntil(() => {
     const records = turnResponses();
     return records.length > previousCount ? records[previousCount] : null;
-  }, label);
+  }, label, turnCompletionTimeoutMs);
+  recordTurnTiming(label, started);
+  return record;
+}
+async function waitForAgentResponseSince(previousCount, predicate, label, started) {
+  const response = await waitUntil(
+    () => evidence.api_responses.slice(previousCount).find(predicate),
+    label,
+    turnCompletionTimeoutMs,
+  );
+  recordTurnTiming(label, started);
+  return response;
 }
 async function waitForResponseSince(previousCount, predicate, label) {
   return waitUntil(() => evidence.api_responses.slice(previousCount).find(predicate), label);
@@ -496,14 +530,17 @@ function escapedRegExp(text) {
 async function clickClarificationBubble(label) {
   const locator = page.getByRole('button', { name: new RegExp(escapedRegExp(label) + '$') }).last();
   await locator.waitFor({ state: 'visible', timeout: UI_TIMEOUT_MS });
+  const started = performance.now();
   await locator.click();
+  return started;
 }
 async function sendKekeMessage(message, label) {
   const before = turnResponses().length;
   const input = page.getByPlaceholder('问问可可吧…');
   await input.fill(message);
+  const started = performance.now();
   await input.press('Enter');
-  return waitForNextTurn(before, label);
+  return waitForNextTurn(before, label, started);
 }
 async function clickPlanCapsuleIfNeeded() {
   const confirm = page.getByRole('button', { name: '确认加购', exact: true });
@@ -525,9 +562,9 @@ async function writeRuntimeAndSourceEvidence() {
   const casePath = path.resolve(publicCasesFile);
   const caseBytes = fs.readFileSync(casePath);
   const caseDocument = JSON.parse(caseBytes.toString('utf8'));
-  assert.equal(caseDocument.case_set_id, 'ceres-next-08-public-cases-v2', 'UI and API must use the frozen public case set');
+  assert.equal(caseDocument.case_set_id, 'ceres-next-08-public-cases-v3', 'UI and API must use the frozen public case set');
   const cases = caseDocument.cases;
-  const drinkCase = cases.find(item => item.case_id === 'drink_multisku_attribute_filter_explicit_purchase_v2');
+  const drinkCase = cases.find(item => item.case_id === 'drink_multisku_attribute_filter_explicit_purchase_v3');
   assert.ok(drinkCase, 'Frozen public cases must contain the multi-SKU drink case');
   const byLabel = label => drinkCase.steps.find(step => step.label === label);
   const broadStep = byLabel('broad-drinks');
@@ -567,6 +604,18 @@ async function writeRuntimeAndSourceEvidence() {
       ? { sha256: sha256(Buffer.from(stableJson(actual[key]), 'utf8')) }
       : scalar(actual[key]);
   }
+  const semanticTurnTimeoutSeconds = Number(expected.semantic_turn_timeout_seconds);
+  assert.ok(Number.isFinite(semanticTurnTimeoutSeconds) && semanticTurnTimeoutSeconds > 0,
+    'Runtime identity must include a positive semantic turn deadline');
+  turnCompletionTimeoutMs = Math.ceil(semanticTurnTimeoutSeconds * 1000) + TURN_COMPLETION_GRACE_MS;
+  evidence.turn_completion_timeout_ms = turnCompletionTimeoutMs;
+  evidence.performance_contract = {
+    latency_target_ms: TURN_LATENCY_TARGET_MS,
+    semantic_turn_timeout_seconds: semanticTurnTimeoutSeconds,
+    completion_grace_ms: TURN_COMPLETION_GRACE_MS,
+    over_target_behavior: 'record_failure_and_continue_after_a_valid_terminal_response_without_retry',
+  };
+  evidence.case_source.case_id = drinkCase.case_id;
   evidence.runtime_identity = { matched: true, process_id: backendStartupReceipt.process_id, identity: matched };
   for (const relativePath of SOURCE_FILES) {
     evidence.source_manifest.files.push({
@@ -631,9 +680,10 @@ async function main() {
   const saladButton = page.getByRole('button', { name: '选购牛油果成品沙拉', exact: true });
   await saladButton.waitFor({ state: 'visible', timeout: UI_TIMEOUT_MS });
   await screenshot('01-activity-products.png');
+  const activityTurnStarted = performance.now();
   await saladButton.click();
   recordAction('select-finished-activity-product', { sku_id: 'demo:green-reset-avocado-salad', activity_id: 'green_reset' });
-  const activityTurn = await waitForNextTurn(beforeActivityTurn, 'activity product turn');
+  const activityTurn = await waitForNextTurn(beforeActivityTurn, 'activity product turn', activityTurnStarted);
   assert.equal(activityTurn.status, 200, 'Activity selection stream must succeed');
   const activityRequest = turnRequests().at(-1);
   assert.ok(activityRequest, 'Activity product turn request is recorded');
@@ -729,9 +779,9 @@ async function main() {
   await screenshot('06-product-type-bubbles.png');
   const typeRequestStart = turnRequests().length;
   const typeResponseStart = turnResponses().length;
-  await clickClarificationBubble(colaChoice.label);
+  const selectedTypeStarted = await clickClarificationBubble(colaChoice.label);
   recordAction('click-product-type-bubble', { label: colaChoice.label, question_id: colaChoice.question_id, option_id: colaChoice.option_id });
-  const selectedTypeTurn = await waitForNextTurn(typeResponseStart, 'selected drink type response');
+  const selectedTypeTurn = await waitForNextTurn(typeResponseStart, 'selected drink type response', selectedTypeStarted);
   const selectedTypeRequest = turnRequests()[typeRequestStart];
   assert.ok(selectedTypeRequest, 'Type bubble request must be recorded');
   assert.equal(selectedTypeRequest.body?.clarification_answer?.question_id, colaChoice.question_id, 'Type bubble must retain question_id');
@@ -748,9 +798,9 @@ async function main() {
 
   const filterRequestStart = turnRequests().length;
   const filterResponseStart = turnResponses().length;
-  await clickClarificationBubble(pepsiChoice.label);
+  const filteredResponseStarted = await clickClarificationBubble(pepsiChoice.label);
   recordAction('click-product-filter-bubble', { label: pepsiChoice.label, question_id: pepsiChoice.question_id, option_id: pepsiChoice.option_id });
-  const filteredTurn = await waitForNextTurn(filterResponseStart, 'filtered beverage response');
+  const filteredTurn = await waitForNextTurn(filterResponseStart, 'filtered beverage response', filteredResponseStarted);
   const filterRequest = turnRequests()[filterRequestStart];
   assert.ok(filterRequest, 'Filter bubble request must be recorded');
   assert.equal(filterRequest.body?.clarification_answer?.question_id, pepsiChoice.question_id, 'Filter bubble must retain question_id');
@@ -771,9 +821,10 @@ async function main() {
   const latestProductCards = page.getByRole('region', { name: '可乐候选' }).last();
   const productButtons = latestProductCards.getByRole('button', { name: '选这款，生成清单', exact: true });
   assert.equal(await productButtons.count(), filteredCards.length, 'Latest candidate cards and visible product buttons must align');
+  const selectedProductStarted = performance.now();
   await productButtons.nth(selectedCardIndex).click();
   recordAction('select-filtered-real-product-card', { sku_id: selectedCard.sku_id, candidate_ref: selectedCard.ref });
-  const selectedProductTurn = await waitForNextTurn(productTurnStart, 'filtered product plan turn');
+  const selectedProductTurn = await waitForNextTurn(productTurnStart, 'filtered product plan turn', selectedProductStarted);
   const selectedProductRequest = turnRequests()[productButtonStart];
   assert.ok(selectedProductRequest?.body?.message?.includes('候选 ' + selectedCard.ref), 'Product-card click must submit displayed candidate ref');
   assert.equal(selectedProductTurn.status, 200, 'Filtered product selection turn must succeed');
@@ -852,12 +903,14 @@ async function main() {
   setStage('user-accepts-keke-continuation');
   const switchResponseStart = evidence.api_responses.length;
   const switchRequestStart = evidence.api_requests.length;
+  const switchStartedAt = performance.now();
   await page.getByRole('button', { name: '继续选购', exact: true }).click();
   recordAction('user-clicks-continue-shopping');
-  const switchResponse = await waitForResponseSince(
+  const switchResponse = await waitForAgentResponseSince(
     switchResponseStart,
     item => item.method === 'POST' && /\/api\/v1\/chat\/openings\/[^/]+\/switches\/stream$/.test(item.path),
     'user-approved Keke role-switch response',
+    switchStartedAt,
   );
   const switchRequest = requestAfter(
     switchRequestStart,
@@ -897,7 +950,9 @@ async function main() {
     plan: restoredSnapshot.plan,
     visible_plan_item: restoredItemName,
   };
-  evidence.status = 'passed';
+  evidence.business_status = 'passed';
+  evidence.latency_status = evidence.latency_failures.length ? 'failed' : 'passed';
+  evidence.status = evidence.latency_failures.length ? 'business_passed_latency_failed' : 'passed';
   evidence.current_stage = 'complete';
 }
 async function mainWrapper() {
@@ -907,6 +962,8 @@ async function mainWrapper() {
   } catch (error) {
     exitCode = 1;
     evidence.status = 'failed';
+    evidence.business_status = 'failed';
+    evidence.latency_status = evidence.latency_failures.length ? 'failed' : 'not_fully_observed';
     evidence.failure = {
       stage: evidence.current_stage,
       type: error?.constructor?.name ?? 'Error',
@@ -931,6 +988,8 @@ async function mainWrapper() {
   }
   process.stdout.write(JSON.stringify({
     status: evidence.status,
+    business_status: evidence.business_status,
+    latency_status: evidence.latency_status,
     stage: evidence.current_stage,
     actions: evidence.browser_actions.length,
     api_requests: evidence.api_requests.length,

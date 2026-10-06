@@ -25,7 +25,8 @@ FROZEN_INPUTS={
  "data/fixtures/store-offers.json":"b29b9491ba34f6f0f8ef8e9fb3acae314f092b5abf242809fefce8cfa0ccb16f",
 }
 SOURCE_FILES=("backend/app/api/chat.py","backend/app/agent/graph/nodes/capability.py",
- "backend/app/agent/graph/nodes/workflow.py","backend/app/agent/turn_context_plan.py",
+ "backend/app/agent/graph/nodes/workflow.py","backend/app/agent/graph/nodes/answer.py",
+ "backend/app/agent/turn_context_plan.py",
  "backend/app/prompts/semantic.py","backend/app/llm/kev_provider.py",
  "backend/app/llm/embedding.py","Mercury/mercury/prompt.py","frontend/src/App.tsx")
 RUNTIME_MODULES={
@@ -35,6 +36,7 @@ RUNTIME_MODULES={
  "app.prompts.semantic":"backend/app/prompts/semantic.py",
  "app.agent.graph.nodes.capability":"backend/app/agent/graph/nodes/capability.py",
  "app.agent.graph.nodes.workflow":"backend/app/agent/graph/nodes/workflow.py",
+ "app.agent.graph.nodes.answer":"backend/app/agent/graph/nodes/answer.py",
 }
 
 def module_from(path,name):
@@ -154,6 +156,7 @@ def verify_runtime(tree,database_url,index_root,mode):
    "index_root_fingerprint":hashlib.sha256(str(index_root.resolve()).encode()).hexdigest(),
    "index_version":index.version,"index_manifest_id":index.manifest["manifest_id"],
    "retrieval_mode":mode,"has_vectors":has_vectors,"embedding_contract":contract,
+   "semantic_turn_timeout_seconds":settings.semantic_turn_timeout_seconds,
    "hybrid_gate":hybrid,"database_counts":{"catalog_products":product_count,"offers":offer_count,"sellable_offers":sellable_count}},settings
  finally: index.close()
 def snapshot(client,ctx,include_messages=False):
@@ -197,10 +200,10 @@ def turn(client,ctx,message,label,answer,token,view_context=None):
  if view_context is not None: body["view_context"]=view_context
  before=snapshot(client,ctx); rc,kc=len(ctx["role_calls"]),len(ctx["kev_calls"]); start=time.perf_counter()
  response=client.post(f"/api/v1/chat/openings/{ctx['opening_id']}/turns/stream",json=body)
- events=parse_sse(response.text); end=terminal(events)
+ events=parse_sse(response.text); end=terminal(events); elapsed_ms=round((time.perf_counter()-start)*1000,1)
  row={"label":label,"active_role_before":ctx["role"],"request":body,"http_status":response.status_code,
-  "elapsed_ms":round((time.perf_counter()-start)*1000,1),"latency_target_ms":15000,
-  "latency_target_exceeded":(time.perf_counter()-start)*1000>15000,"events":[compact(e) for e in events],
+  "elapsed_ms":elapsed_ms,"latency_target_ms":15000,
+  "latency_target_exceeded":elapsed_ms>15000,"events":[compact(e) for e in events],
   "role_model_call_range":[rc,len(ctx["role_calls"])],"kev_call_range":[kc,len(ctx["kev_calls"])],
   "terminal":compact({"type":"turn.completed","payload":end})["payload"],"trace":trace_for(client,end,token)}
  ctx["last_step"]={**row,"events":events}
@@ -235,9 +238,13 @@ def expectation_failures(exp,row,before,after):
   quantities={i.get("sku_id"):i.get("quantity") for i in items}
   if any(quantities.get(sku)!=quantity for sku,quantity in exp["plan_quantities"].items()): fail.append(f"plan quantities: {quantities}")
  if "maximum_plan_total_fen" in exp and plan.get("selected_total_fen",0)>exp["maximum_plan_total_fen"]: fail.append("selected plan total exceeds budget")
+ if "plan_total_fen" in exp and plan.get("selected_total_fen")!=exp["plan_total_fen"]: fail.append("selected plan total mismatch")
  if "budget_fen" in exp and guide.get("constraints_summary",{}).get("budget_fen")!=exp["budget_fen"]: fail.append("budget constraint was not preserved")
  if exp.get("cart_unchanged") and before.get("cart")!=after.get("cart"): fail.append("cart changed without explicit confirmation")
  if exp.get("cart_changed") and before.get("cart")==after.get("cart"): fail.append("confirmation did not change cart")
+ if "cart_item_quantities" in exp:
+  quantities={item.get("sku_id"):item.get("quantity") for item in (after.get("cart") or {}).get("items",[])}
+  if any(quantities.get(sku)!=quantity for sku,quantity in exp["cart_item_quantities"].items()): fail.append(f"confirmed cart quantities: {quantities}")
  if exp.get("orders_unchanged") and before.get("orders")!=after.get("orders"): fail.append("orders changed during read/chat step")
  trace=row.get("trace") or []
  if "trace_capability" in exp and not any(t.get("capability")==exp["trace_capability"] for t in trace): fail.append("capability trace mismatch")
@@ -298,9 +305,12 @@ def execute(client,ctx,step,evidence,path,helper,token):
    handoff=find_handoff(step,ctx); target=step["target_role"]; base=f"/api/v1/chat/openings/{ctx['opening_id']}"
    shown=client.post(base+"/prompt-displayed",json={"handoff_id":handoff}); shown.raise_for_status()
    rc,kc=len(ctx["role_calls"]),len(ctx["kev_calls"])
+   switch_started=time.perf_counter()
    response=client.post(base+"/switches/stream",json={"target_role":target,"handoff_id":handoff,"accept":step["accept"]})
-   events=parse_sse(response.text); row.update({"handoff_id":handoff,"target_role":target,"accepted":step["accept"],
-    "http_status":response.status_code,"events":[compact(e) for e in events],"role_model_call_range":[rc,len(ctx["role_calls"])],
+   events=parse_sse(response.text); switch_elapsed_ms=round((time.perf_counter()-switch_started)*1000,1)
+   row.update({"handoff_id":handoff,"target_role":target,"accepted":step["accept"],
+    "http_status":response.status_code,"elapsed_ms":switch_elapsed_ms,"latency_target_ms":15000,
+    "latency_target_exceeded":switch_elapsed_ms>15000,"events":[compact(e) for e in events],"role_model_call_range":[rc,len(ctx["role_calls"])],
     "kev_call_range":[kc,len(ctx["kev_calls"])],"switch_terminal":compact({"type":"turn.completed","payload":terminal(events)})["payload"]})
    if response.status_code>=400: raise RuntimeError(f"{label}: switch HTTP {response.status_code}")
    after=snapshot(client,ctx,True); row["snapshot_after"]=after; ctx["last_handoff_id"]=handoff
@@ -359,11 +369,14 @@ def execute(client,ctx,step,evidence,path,helper,token):
    row["checkout"]=res.json(); evidence["latest_order_id"]=res.json()["order"]["order_id"]
   elif op=="snapshot": row["snapshot"]=snapshot(client,ctx,True)
   else: raise ValueError(f"Unsupported fixed operation {op}")
-  row.setdefault("snapshot_after",snapshot(client,ctx,True)); row["elapsed_ms"]=round((time.perf_counter()-start)*1000,1)
+  row.setdefault("snapshot_after",snapshot(client,ctx,True)); row.setdefault("elapsed_ms",round((time.perf_counter()-start)*1000,1))
   if step.get("expect"):
    row["expectation_failures"]=expectation_failures(step["expect"],row,before,row["snapshot_after"])
    row["status"]="failed_expectation" if row["expectation_failures"] else "captured"
   else: row["status"]="captured"
+  if row.get("latency_target_exceeded"):
+   evidence["timing_failures"].append({"case_id":ctx["case_id"],"op":op,"label":label,
+    "elapsed_ms":row["elapsed_ms"],"target_ms":row["latency_target_ms"]})
   evidence["steps"].append(row); atomic_json(path,evidence,helper.CREDENTIAL_VALUE)
   if row["status"]!="captured": raise AssertionError("; ".join(row["expectation_failures"]))
   return row
@@ -388,6 +401,9 @@ def run_case(client,case,role_calls,kev_calls,evidence,path,helper,token):
                  "last_handoff_id":ctx.get("last_handoff_id")})
  except Exception as exc: record.update({"status":"failed","failure_type":type(exc).__name__,"failure_message":str(exc)[:500]})
  finally:
+  case_timing_failures=[item for item in evidence["timing_failures"] if item["case_id"]==case["case_id"]]
+  record["latency_status"]="failed" if case_timing_failures else "passed"
+  record["timing_failures"]=case_timing_failures
   record["elapsed_ms"]=round((time.perf_counter()-started)*1000,1); atomic_json(path,evidence,helper.CREDENTIAL_VALUE)
 
 def call_summary(calls):
@@ -453,11 +469,11 @@ def main():
  else: case_set_id="external-fixed-cases"; cases=case_document
  if not isinstance(cases,list) or not cases: raise ValueError("cases file must contain a non-empty operation list")
  helper=module_from(capture_helper,"ceres_next_04_capture")
- evidence={"runner_version":"08-live-api-multiturn-v2","captured_at_utc":datetime.now(timezone.utc).isoformat(),
+ evidence={"runner_version":"08-live-api-multiturn-v3","captured_at_utc":datetime.now(timezone.utc).isoformat(),
   "source":None,"case_set_id":case_set_id,"case_source_sha256":sha(case_path),
   "case_ids":[c["case_id"] for c in cases],"seed_report_path":str(Path(args.seed_report).resolve()) if args.seed_report else None,
   "build_report_path":str(Path(args.build_report).resolve()) if args.build_report else None,"requested_retrieval_mode":args.retrieval_mode,
-  "runtime_identity":None,"module_origins":None,"capability_criteria_versions":[],
+  "runtime_identity":None,"module_origins":None,"capability_criteria_versions":[],"timing_failures":[],
   "model":None,"role_model_calls":[],"kev_calls":[],"cases":[],"steps":[],
   "human_review":{"agent_expression_review":"pending","user_acceptance":"not_recorded"}}
  manager=kev_provider=None; started=time.perf_counter(); identity=None
@@ -476,7 +492,11 @@ def main():
   evidence["module_origins"]=module_origin_manifest(tree)
   evidence["role_model_calls"]=role_calls; evidence["kev_calls"]=kev_calls
   evidence["model"]={"role_model":settings.llm_model,"kev_model":"kev-latest","role_endpoint_origin_path":origin(settings.openai_base_url),
-   "capture_boundary":"work/ceres-next-agent-experience/04/collect_prompt_sample.py","timeout_seconds":settings.llm_timeout}
+   "capture_boundary":"work/ceres-next-agent-experience/04/collect_prompt_sample.py","timeout_seconds":settings.llm_timeout,
+   "semantic_turn_timeout_seconds":settings.semantic_turn_timeout_seconds}
+  evidence["performance_contract"]={"latency_target_ms":15000,
+   "semantic_turn_timeout_seconds":settings.semantic_turn_timeout_seconds,
+   "over_target_behavior":"record_failure_and_continue_after_a_valid_terminal_response_without_retry"}
   evidence["preflight_startup_ms"]=round((time.perf_counter()-started)*1000,1)
   for case in cases: run_case(client,case,role_calls,kev_calls,evidence,evidence_path,helper,token)
   evidence["capability_criteria_versions"]=sorted({
@@ -484,7 +504,13 @@ def main():
    if trace.get("stage")=="capability" and trace.get("criteria_version")
   })
   evidence["model_call_summary"]={"role_model":call_summary(role_calls),"kev":call_summary(kev_calls)}
-  bad=[c["case_id"] for c in evidence["cases"] if c["status"]!="captured"]
+  business_bad=[c["case_id"] for c in evidence["cases"] if c["status"]!="captured"]
+  latency_bad=sorted({item["case_id"] for item in evidence["timing_failures"]})
+  evidence["business_status"]="captured" if not business_bad else "captured_with_failures"
+  evidence["latency_status"]="failed" if latency_bad else "passed"
+  evidence["business_failed_case_ids"]=business_bad
+  evidence["latency_failed_case_ids"]=latency_bad
+  bad=sorted(set(business_bad)|set(latency_bad))
   evidence["status"]="captured" if not bad else "captured_with_failures"; evidence["failed_case_ids"]=bad
   evidence["elapsed_ms"]=round((time.perf_counter()-started)*1000,1)
  except Exception as exc:
@@ -496,7 +522,8 @@ def main():
    from app.llm.kev_provider import get_kev_provider
    get_kev_provider.cache_clear()
  atomic_json(evidence_path,evidence,helper.CREDENTIAL_VALUE)
- print(json.dumps({"status":evidence["status"],"cases":len(evidence["cases"]),"failed_cases":evidence.get("failed_case_ids",[]),
+ print(json.dumps({"status":evidence["status"],"business_status":evidence.get("business_status"),
+  "latency_status":evidence.get("latency_status"),"cases":len(evidence["cases"]),"failed_cases":evidence.get("failed_case_ids",[]),
   "role_model_calls":len(evidence["role_model_calls"]),"kev_calls":len(evidence["kev_calls"]),
   "retrieval_mode":identity["retrieval_mode"],"has_vectors":identity["has_vectors"],
   "hybrid_gate":identity["hybrid_gate"],"index_version":identity["index_version"]},ensure_ascii=False))
