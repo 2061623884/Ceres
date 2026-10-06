@@ -476,7 +476,7 @@ export function MercuryChat({
                     onClick={() => respondHandoff(true)}
                     className="rounded-full bg-[#eac867] px-4 py-2 text-[12px] font-semibold text-[#4E3D12] active:scale-[.98]"
                   >
-                    找可可
+                    继续选购
                   </button>
                   <button
                     type="button"

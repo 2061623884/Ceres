@@ -1,4 +1,6 @@
 """An explicit chat-opening lifecycle; role histories remain in their own stores."""
+from __future__ import annotations
+
 from dataclasses import dataclass, field
 from threading import Lock
 from uuid import uuid4
@@ -15,6 +17,7 @@ class Handoff:
     context: dict
     status: str = "pending"
     chunks: list[str] = field(default_factory=list)
+    continuation: Handoff | None = None
 
 
 @dataclass
@@ -34,11 +37,23 @@ class Opening:
     closed: bool = False
     lock: Lock = field(default_factory=Lock)
 
+    def find_handoff(self, handoff_id: str) -> Handoff | None:
+        parent = self.pending
+        if parent is None:
+            return None
+        if parent.handoff_id == handoff_id:
+            return parent
+        continuation = parent.continuation
+        return continuation if continuation and continuation.handoff_id == handoff_id else None
+
     def view(self) -> dict:
         return {"opening_id": self.opening_id, "guide_session_id": self.guide_session_id,
                 "mercury_session_id": self.mercury_session_id, "role": self.role,
                 "prompt_displayed": self.prompt_displayed,
-                "handoff_id": self.pending.handoff_id if self.pending else None}
+                "handoff_id": (self.pending.continuation.handoff_id
+                    if self.pending and self.pending.continuation
+                    and self.pending.continuation.status == "pending"
+                    else self.pending.handoff_id if self.pending else None)}
 
     def require_open(self) -> None:
         if self.closed:

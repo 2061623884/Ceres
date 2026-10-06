@@ -13,6 +13,7 @@ logger = logging.getLogger(__name__)
 
 MAX_TOOL_ROUNDS = 5
 HISTORY_TURNS = 6
+AFTER_SALES_RESULT_TOOLS = {"create_refund", "create_return", "get_refund_status", "get_return_status"}
 
 # user_id -> [{"role": "user", ...}, {"role": "assistant", ...}, ...]，只存最终文本
 _HISTORY: dict[str | tuple[str, str, str | None], list[dict]] = {}
@@ -71,6 +72,14 @@ def run_mercury(user_id: str, message: str, llm=None, *, database_path: str | No
                 })
                 for tc in msg.tool_calls:
                     result = tools.execute_tool(tc.function.name, tc.function.arguments, user_id=user_id, selected_order_id=selected_order_id, policy_only=policy_only)
+                    if handoff_context is not None and tc.function.name in AFTER_SALES_RESULT_TOOLS:
+                        handoff_context.setdefault("tool_results", []).append({
+                            "source_request": handoff_context["utterance"],
+                            "selected_order_id": selected_order_id,
+                            "tool": tc.function.name,
+                            "arguments": tc.function.arguments,
+                            "result": json.loads(result),
+                        })
                     messages.append({"role": "tool", "tool_call_id": tc.id, "content": result})
             else:
                 # 5 轮 Tool 都执行完仍没有最终回答：不带 tools 再调用一次

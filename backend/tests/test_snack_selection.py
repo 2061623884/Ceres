@@ -176,8 +176,8 @@ def test_single_category_recommendation_uses_selected_sellable_sku_evidence(
     assert response["plan"] is None and response["plan_effect"] == "keep"
     assert selected["name"] in response["message"]
     assert all(token in selected["name"] for token in name_tokens)
-    assert selected["evidence"][2] in response["message"]
-    assert all(tag in response["message"] for tag in tags)
+    leaks_catalog_tag_label = "商品资料列出的用途包括" in response["message"]
+    assert not leaks_catalog_tag_label, "single-SKU category reply should not expose the catalog usage-tag label"
     assert all(term not in response["message"] for term in (
         "非常受欢迎", "销量", "库存充足", "beverage", "snack", "juice_drink",
         "soda_crackers", "匹配方式",

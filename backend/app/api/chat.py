@@ -98,7 +98,7 @@ def displayed(opening_id: str, body: DisplayRequest, owner_id: str = Depends(own
     opening = chat_openings.require(opening_id, owner_id)
     with opening.lock:
         opening.require_open()
-        if opening.pending is None or opening.pending.handoff_id != body.handoff_id:
+        if opening.find_handoff(body.handoff_id) is None:
             raise AppError(409, "HANDOFF_STALE", "这个切换建议已失效。")
         opening.prompt_displayed = True
         return opening.view()
@@ -133,7 +133,8 @@ def route_context(db: Session, opening: Opening, body: ChatTurnRequest) -> dict:
 
 
 async def business(opening: Opening, body: ChatTurnRequest, request: Request,
-                   response: Response, db: Session, handoff: Handoff | None = None):
+                   response: Response, db: Session, handoff: Handoff | None = None,
+                   service_context: dict | None = None):
     if opening.role == "keke":
         guide_body = TurnRequest.model_validate(body.model_dump(exclude={"order_id"}))
         handoff_recent_messages = handoff.context["recent_dialogue"] if handoff else None
@@ -151,7 +152,7 @@ async def business(opening: Opening, body: ChatTurnRequest, request: Request,
         result = mercury_response(opening.mercury_session_id,
             MercuryTurnRequest(message=body.message, request_id=body.request_id),
             owner_id=opening.owner_id, db=db,
-            handoff_context=handoff.context if handoff else None)
+            handoff_context=handoff.context if handoff else service_context)
     async for chunk in result.body_iterator:
         if isinstance(chunk, dict):
             yield ServerSentEvent(**chunk).encode().decode()
@@ -159,16 +160,65 @@ async def business(opening: Opening, body: ChatTurnRequest, request: Request,
             yield chunk.decode() if isinstance(chunk, bytes) else chunk
 
 
-def failed_chunk(chunk: str) -> bool:
+def event_payload(chunk: str) -> tuple[str, dict] | None:
     lines = chunk.replace("\r\n", "\n").splitlines()
     named = next((line[7:] for line in lines if line.startswith("event: ")), None)
     raw = next((line[6:] for line in lines if line.startswith("data: ")), None)
-    if raw is None:  # Existing SSE transport can also send heartbeat comments.
-        return False
+    if raw is None:
+        return None
     event = json.loads(raw)
-    event_type = named if named else event["type"]
-    payload = event if named else event["payload"]
+    return (named, event) if named else (event["type"], event["payload"])
+
+
+def failed_chunk(chunk: str) -> bool:
+    parsed = event_payload(chunk)
+    if parsed is None:
+        return False  # Existing SSE transport can also send heartbeat comments.
+    event_type, payload = parsed
     return event_type in ("error", "turn.stopped") or payload.get("answer_status") == "failed"
+
+
+def aftersales_continuation(opening: Opening, source_request_id: str, source_body: dict,
+                            source_context: dict,
+                            parent_handoff: Handoff | None = None) -> list[str]:
+    tool_results = source_context.get("tool_results", [])
+    if not any(result["tool"] in ("create_refund", "create_return") for result in tool_results):
+        return []
+    written_result = next(
+        result["result"] for result in reversed(tool_results)
+        if result["tool"] in ("create_refund", "create_return")
+    )
+    result_message = written_result["data"]["message"] if written_result["ok"] else written_result["message"]
+    record = {
+        "kind": "momo_after_sales_continuation",
+        "original_request": source_body["message"],
+        "selected_object": source_context["selected_object"],
+        "tool_results": tool_results,
+    }
+    continuation_context = {
+        **source_context,
+        "recent_dialogue": [
+            *source_context["recent_dialogue"],
+            {"role": "assistant", "content": "Momo after-sales continuation: "
+             + json.dumps(record, ensure_ascii=False)},
+        ][-6:],
+    }
+    continuation = Handoff(
+        f"handoff_{uuid4().hex}", source_request_id, "keke", dict(source_body), continuation_context,
+    )
+    if parent_handoff is None:
+        opening.pending = continuation
+    else:
+        parent_handoff.continuation = continuation
+    route = packet(opening, "service.route", {
+        "status": "completed", "decision": "suggest_switch", "raw_choice": None,
+        "decision_source": "aftersales_tool_result",
+        "target_role": "keke", "handoff_id": continuation.handoff_id,
+        "prompt_mode": "fixed_entry" if opening.prompt_displayed else "automatic",
+        "request_id": source_request_id, "current_role": opening.role,
+    })
+    prompt = result_message + "\n\n如需继续选购，请点“继续选购”。"
+    return [route, packet(opening, "turn.completed", {"message": prompt, "business_not_run": True})]
 
 
 @router.post("/openings/{opening_id}/turns/stream")
@@ -231,9 +281,16 @@ async def chat_turn(opening_id: str, body: ChatTurnRequest, request: Request, re
                 receipt["chunks"].append(chunk)
                 yield chunk
             else:
-                async for chunk in business(opening, body, request, response, db):
+                async for chunk in business(opening, body, request, response, db,
+                                            service_context=context if opening.role == "momo" else None):
                     receipt["chunks"].append(chunk)
                     yield chunk
+                if opening.role == "momo":
+                    for chunk in aftersales_continuation(
+                        opening, body.request_id, body.model_dump(), context,
+                    ):
+                        receipt["chunks"].append(chunk)
+                        yield chunk
             receipt["status"] = "completed"
         finally:
             opening.busy = False
@@ -246,7 +303,7 @@ async def switch_chat(opening_id: str, body: SwitchRequest, request: Request, re
     opening = chat_openings.require(opening_id, owner_id)
     with opening.lock:
         opening.require_open()
-        handoff = opening.pending
+        handoff = opening.find_handoff(body.handoff_id) if body.handoff_id is not None else opening.pending
         if body.handoff_id is not None and (handoff is None or handoff.handoff_id != body.handoff_id or handoff.target_role != body.target_role):
             raise AppError(409, "HANDOFF_STALE", "这个交接已失效。")
         if body.handoff_id is None and (handoff is None or handoff.target_role != body.target_role or handoff.status in ("completed", "failed")):
@@ -292,6 +349,14 @@ async def switch_chat(opening_id: str, body: SwitchRequest, request: Request, re
                 handoff.chunks.append(chunk)
                 yield chunk
             handoff.status = "failed" if failed else "completed"
+            if body.target_role == "momo" and handoff.context["current_role"] == "Keke shopping":
+                continuation_chunks = aftersales_continuation(
+                    opening, handoff.source_request_id, handoff.body, handoff.context,
+                    parent_handoff=handoff,
+                )
+                handoff.chunks.extend(continuation_chunks)
+                for chunk in continuation_chunks:
+                    yield chunk
         finally:
             opening.busy = False
     return stream(generate())
