@@ -27,7 +27,7 @@ import {
   listOrders,
   listCategories,
   listProducts,
-  clarificationChipLabels,
+  clarificationChipOptions,
   normalizePendingClarifications,
   patchCartItem,
   progressPhaseLabel,
@@ -42,6 +42,8 @@ import {
   type PlanResponse,
   type Product,
   type ProductComparisonCard,
+  type ClarificationAnswer,
+  type ClarificationChoice,
   type SessionResponse,
   type TurnResponse,
 } from './lib/saleGuide'
@@ -263,7 +265,7 @@ function DemoBadge() {
 }
 
 type Role = 'user' | 'ai'
-interface Msg { id: string; role: Role; text: string; suggestions?: string[]; productCards?: ProductComparisonCard[] }
+interface Msg { id: string; role: Role; text: string; suggestions?: string[]; clarificationOptions?: ClarificationChoice[]; productCards?: ProductComparisonCard[] }
 
 const WELCOME_MSG: Msg = {
   id: 'welcome',
@@ -1275,7 +1277,7 @@ function ChatScreen({
       storeSessionId(session.session_id)
       applyAuthoritativeSnapshot(session)
       const pending = normalizePendingClarifications(session.pending_clarifications ?? [])
-      const chipLabels = clarificationChipLabels(pending)
+      const chipOptions = clarificationChipOptions(pending)
       if (session.messages?.length) {
         const restored: Msg[] = session.messages
           .filter(m => m.role === 'user' || m.role === 'assistant')
@@ -1285,10 +1287,10 @@ function ChatScreen({
             text: m.content,
           }))
         if (restored.length) {
-          if (chipLabels.length || session.product_cards?.length) {
+          if (chipOptions.length || session.product_cards?.length) {
             const lastAi = restored.map((m, index) => ({ m, index })).reverse().find(entry => entry.m.role === 'ai')
             if (lastAi) {
-              restored[lastAi.index] = { ...restored[lastAi.index], suggestions: chipLabels,
+              restored[lastAi.index] = { ...restored[lastAi.index], clarificationOptions: chipOptions,
                 productCards: session.product_cards }
             }
           }
@@ -1308,10 +1310,10 @@ function ChatScreen({
     initSession(openingGuideSessionId)
   }, [active, openingGuideSessionId, initSession])
 
-  const send = useCallback(async (text: string) => {
+  const send = useCallback(async (text: string, clarificationAnswer?: ClarificationAnswer) => {
     if (!text.trim() || !sessionId || typing || confirming || restoring || !openingId) return
     const trimmed = text.trim()
-    setMsgs(p => [...p, { id: `u-${Date.now()}`, role: 'user', text: trimmed }])
+    setMsgs(p => [...p.map(m => m.clarificationOptions ? { ...m, clarificationOptions: undefined } : m), { id: `u-${Date.now()}`, role: 'user', text: trimmed }])
     setInput('')
     setTyping(true)
     setError(null)
@@ -1373,6 +1375,8 @@ function ChatScreen({
           plan_version: plan.plan_version,
           selected_items: confirmableItems(plan.items),
         } : undefined,
+        undefined,
+        clarificationAnswer,
       )
       if (result.kind === 'route_only') {
         return
@@ -1382,9 +1386,9 @@ function ChatScreen({
       const clarifications = normalizePendingClarifications(
         turn.pending_clarifications ?? (turn.pending_clarification ? [turn.pending_clarification] : []),
       )
-      const chipLabels = clarificationChipLabels(clarifications)
+      const chipOptions = clarificationChipOptions(clarifications)
       setMsgs(p => p.map(m => m.id === assistantId
-        ? { ...m, text: finalText, suggestions: chipLabels.length ? chipLabels : undefined,
+        ? { ...m, text: finalText, clarificationOptions: chipOptions.length ? chipOptions : undefined,
             productCards: turn.product_cards }
         : m))
       applyTurnTerminalState(turn)
@@ -1612,7 +1616,7 @@ function ChatScreen({
                     background: msg.role === 'user' ? '#171716' : undefined,
                     color: msg.role === 'user' ? '#fff' : '#292825',
                   }}>
-                  {formatText(stripDuplicateClarificationOptions(msg.text, msg.suggestions))}
+                  {formatText(stripDuplicateClarificationOptions(msg.text, msg.clarificationOptions?.map(option => option.label) ?? msg.suggestions))}
                 </div>
               ) : msg.role === 'ai' && typing ? (
                 <div
@@ -1656,6 +1660,23 @@ function ChatScreen({
                   </div>
                   <p className="text-[10px] text-black/45">模拟门店报价；选择后生成清单，明确确认才加购。</p>
                 </section>
+              )}
+              {msg.clarificationOptions && msg.role === 'ai' && !typing && !confirming && (
+                <div className="flex w-full flex-col gap-1.5">
+                  {msg.clarificationOptions.map((option, i) => (
+                    <button
+                      key={option.question_id + ':' + option.option_id + ':' + i}
+                      onClick={() => send(option.label, {
+                        question_id: option.question_id,
+                        option_id: option.option_id,
+                      })}
+                      className="guide-glass-chip rounded-full px-4 py-2.5 text-left text-[12px] font-medium text-black/55 transition active:scale-[.98]"
+                    >
+                      <span className="mr-2 text-[10px] font-semibold text-[#d79b58]">✦</span>
+                      {option.label}
+                    </button>
+                  ))}
+                </div>
               )}
               {msg.suggestions && msg.role === 'ai' && !typing && !confirming && (
                 <div className="flex w-full flex-col gap-1.5">
