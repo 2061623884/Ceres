@@ -3,7 +3,7 @@
 import uuid
 
 from support import create_session, post_turn, send_turn
-from support.semantic_agent import pick
+from support.semantic_agent import Continuation, pick
 
 from test_semantic_phase1_purchase import indexed_client  # noqa: F401
 
@@ -52,12 +52,6 @@ def test_broad_snack_request_asks_for_available_type_before_showing_products(
 def test_broad_snack_purchase_asks_for_type_before_preparing_a_plan(
     indexed_client, semantic_provider
 ):
-    def select_chips(_request):
-        return {
-            "target": {"kind": "category", "name": "薯片", "intent": "explore"},
-            "lookups": [{"kind": "product", "query": "薯片"}],
-        }
-
     def show_chips(request):
         chips = next(
             row
@@ -96,8 +90,7 @@ def test_broad_snack_purchase_asks_for_type_before_preparing_a_plan(
                 "constraints": {"budget_yuan": 15},
                 "lookups": [{"kind": "product", "query": "零食"}],
             },
-            select_chips,
-            show_chips,
+            Continuation(show_chips),
             prepare_plan,
         ]
     )
@@ -174,12 +167,6 @@ def test_broad_snack_purchase_asks_for_type_before_preparing_a_plan(
 def test_choosing_snack_type_by_identity_clears_question_and_shows_matching_products(
     indexed_client, semantic_provider
 ):
-    def choose_type(_request):
-        return {
-            "target": {"kind": "category", "name": "薯片", "intent": "explore"},
-            "lookups": [{"kind": "product", "query": "薯片"}],
-        }
-
     def show_selected_type(request):
         matches = request["query_results"][0]["matches"]
         assert matches
@@ -196,8 +183,7 @@ def test_choosing_snack_type_by_identity_clears_question_and_shows_matching_prod
                 "reply": "薯片和饼干都有，可以先选类型。",
                 "display_refs": [row["ref"] for row in request["query_results"][0]["matches"]],
             },
-            choose_type,
-            show_selected_type,
+            Continuation(show_selected_type),
         ]
     )
     session_id = create_session(indexed_client)
@@ -366,11 +352,7 @@ def test_snack_choice_carries_budget_and_quantity_through_plan_to_explicit_confi
                 "lookups": [{"kind": "product", "query": "零食"}],
             },
             show_snack_types,
-            {
-                "target": {"kind": "category", "name": "薯片", "intent": "explore"},
-                "lookups": [{"kind": "product", "query": "薯片"}],
-            },
-            show_chips,
+            Continuation(show_chips),
             prepare_plan,
         ]
     )

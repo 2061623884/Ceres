@@ -77,6 +77,8 @@ class TurnState(TypedDict, total=False):
     """This request's reasoning, from the message to the route decision."""
 
     user_input: str
+    capability: str | None
+    workflow_branch: str | None
     #: The raw model payload of this request, exactly as the provider returned it.
     proposal: dict[str, Any] | None
     answer_reply: str | None
@@ -182,6 +184,8 @@ def initial_state(
         "candidate": {"focus_refs": [], "goal_candidate": None, "displayed_candidates": []},
         "turn": {
             "user_input": user_input,
+            "capability": None,
+            "workflow_branch": None,
             "proposal": None,
             "answer_reply": None,
             "parsed_proposal": None,

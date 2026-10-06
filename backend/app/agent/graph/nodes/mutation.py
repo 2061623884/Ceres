@@ -50,7 +50,7 @@ from app.agent.tools.change_plan import PlanChangeExecutor
 from app.agent.turn_context_plan import (
     _supply_gap_answer,
     gate_pending,
-    snack_type_clarification,
+    product_type_clarification,
 )
 from app.agent.turn_primitives import clamp_limits
 from app.schemas.goal import GoalCandidate, TurnDecision
@@ -261,9 +261,32 @@ def _prepare(
         decision.mutation_action == "prepare"
         and candidate is not None
         and candidate.goal.kind == "category_purchase"
-        and candidate.goal.category_name == "零食"
     ):
-        pending = snack_type_clarification(read_results)
+        unavailable_overview = next(
+            (
+                result
+                for result in read_results
+                if result.get("kind") == "lookup"
+                and result.get("lookup_kind") == "product"
+                and result.get("query") in {"零食", "饮料"}
+                and result.get("type_matches") == []
+            ),
+            None,
+        )
+        if unavailable_overview is not None:
+            noun = "饮品" if unavailable_overview["query"] == "饮料" else "零食"
+            message = f"按你提出的预算和购买数量，目前没有符合条件的{noun}可选；可以调整预算或数量后再试。"
+            result = base(
+                state,
+                runtime,
+                kind="answer",
+                pending=[],
+            )
+            return {
+                **update_partition(state, "turn", answer_reply=message),
+                **result,
+            }
+        pending = product_type_clarification(read_results)
         if pending:
             result = base(
                 state,

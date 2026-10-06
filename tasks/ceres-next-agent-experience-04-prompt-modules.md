@@ -1,6 +1,6 @@
 # 04 两角色 Prompt 模块化
 
-状态：待开始。
+状态：进行中。
 负责人：实施 Agent；主会话维护本阶段任务，专职测试 Agent 执行全部测试命令。
 规格：[实施规格](../docs/plans/ceres-next-agent-experience-spec.md)；所属任务：[实施总 TASK](ceres-next-agent-experience.md)。
 依赖：[03 内部能力路由与 workflow 直达](ceres-next-agent-experience-03-capability-routing.md)。依赖 03 已确定并可运行的能力分支、工具和上下文选择，避免先写无实际调用方的 Prompt 模块。
@@ -30,4 +30,8 @@
 
 ## 下一步
 
-沿四类能力与墨墨当前调用链整理已有规则，固定阶段基线后模块化。
+沿四类能力与墨墨当前调用链整理已有规则，以公共聊天及外部模型边界观测进行模块化前后验证。
+
+## 阶段基线
+
+实施树 `work/.ceres-next-04` 的未修改起点为 `91ca0b80161dada5c83fa5955b8a27043172299d`。同一提交的独立只读基线树为 `work/.ceres-next-04-before`；测试 Agent 在该树记录模块化前实际调用，开发树可独立推进。模型、业务供给、索引与用例仍需在两臂执行时保持一致并登记；当前尚无本票整体通过或性能改善结论。

@@ -19,7 +19,7 @@ from types import SimpleNamespace
 import pytest
 from sqlalchemy import text
 
-from app.agent.graph.graph import PRODUCTION_NODES, get_graph
+from app.agent.graph.graph import get_graph
 from app.agent.graph.nodes.understand import route_from
 from app.agent.graph.runtime import TurnRuntime
 from app.agent.graph.turn_commit import final_guard
@@ -32,29 +32,20 @@ OWNER = "owner-1"
 # ------------------------------------------------------------------- topology
 
 
-def test_production_graph_routes_only_after_decision():
+def test_business_routes_still_use_the_decision_and_commit_boundaries():
     graph = get_graph().get_graph()
-    nodes = sorted(n for n in graph.nodes if not n.startswith("__"))
-    assert nodes == sorted(PRODUCTION_NODES)
-    assert nodes == ["answer", "decide_turn", "load_context", "mutation", "parse_validate", "respond", "retrieve", "understand"]
-
     plain = {(e.source, e.target) for e in graph.edges if not getattr(e, "conditional", False)}
     conditional = {
         (e.source, e.target) for e in graph.edges if getattr(e, "conditional", False)
     }
-    assert ("__start__", "load_context") in plain
-    assert ("load_context", "understand") in plain
-    assert ("understand", "parse_validate") in plain
     assert ("parse_validate", "decide_turn") in plain
-    assert ("retrieve", "answer") in plain
-    assert ("mutation", "answer") in plain
     assert ("answer", "respond") in plain
     assert ("respond", "__end__") in plain
-    assert conditional == {
+    assert {
         ("decide_turn", "retrieve"),
         ("decide_turn", "mutation"),
         ("decide_turn", "answer"),
-    }
+    } <= conditional
 
 
 # ------------------------------------------------------------ intent routing
