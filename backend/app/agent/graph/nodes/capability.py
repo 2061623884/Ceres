@@ -78,21 +78,17 @@ def route_capability(state: GraphState, runtime: TurnRuntime) -> dict[str, Any]:
 
     duration_ms = int((time.monotonic() - started) * 1000)
     clarification_answer = runtime.clarification_answer
-    direct_product_type = bool(
-        clarification_answer
-        and clarification_answer["slot"] == "product_type"
-    )
+    direct_workflow = {
+        "product_type": "direct_product_type_workflow",
+        "product_filter": "direct_product_filter_workflow",
+    }.get(clarification_answer["slot"] if clarification_answer else None)
     runtime.on_model_call(
         {
             **call,
             "status": "completed",
             "duration_ms": duration_ms,
             "capability": answer.choice,
-            "branch": (
-                "direct_product_type_workflow"
-                if direct_product_type
-                else "semantic_understanding"
-            ),
+            "branch": direct_workflow or "semantic_understanding",
             "probabilities": answer.probabilities,
             "raw_response": raw,
         }
@@ -101,11 +97,7 @@ def route_capability(state: GraphState, runtime: TurnRuntime) -> dict[str, Any]:
         return halt_update(state, "stopped")
     if runtime.expired():
         return halt_update(state, "timed_out", timeout_error())
-    workflow_branch = (
-        "direct_product_type_workflow"
-        if direct_product_type
-        else "understand"
-    )
+    workflow_branch = direct_workflow or "understand"
     return update_partition(
         state,
         "turn",
