@@ -158,18 +158,20 @@ def _grounded_answer(state: GraphState, runtime: TurnRuntime) -> GraphState:
             if match.get("stock_verified") is True
             and not match.get("unknown_constraints")
         ]
-        cardable_refs = {
-            card["ref"]
-            for card in CatalogService(runtime.db, runtime.store_id).comparison_cards(
-                card_candidates
-            )
-        }
+        comparison_cards = CatalogService(runtime.db, runtime.store_id).comparison_cards(
+            card_candidates
+        )
+        cards_by_ref = {card["ref"]: card for card in comparison_cards}
+        cardable_refs = set(cards_by_ref)
         if cardable_refs and not product_type_pending:
             query_results = [
                 {
                     **result,
                     "matches": [
-                        match
+                        {
+                            **match,
+                            "price_fen": cards_by_ref[match["ref"]]["price_fen"],
+                        }
                         for match in result.get("matches") or []
                         if match["ref"] in cardable_refs
                     ],

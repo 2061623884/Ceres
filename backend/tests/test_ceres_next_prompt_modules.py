@@ -301,6 +301,21 @@ def test_type_answer_uses_only_comparable_candidates_and_offers_real_filter_bubb
         for result in selected_type_context["query_results"]
         for match in result.get("matches", [])
     }
+    bottle_prices = {
+        match["target_id"]: match.get("price_yuan")
+        for result in selected_type_context["query_results"]
+        if result.get("kind") == "lookup"
+        and result.get("lookup_kind") == "product"
+        for match in result.get("matches", [])
+        if match["target_id"] in {
+            "demo:cn-coke-original-500ml-bottle",
+            "demo:cn-coke-zero-500ml-bottle",
+        }
+    }
+    assert bottle_prices == {
+        "demo:cn-coke-original-500ml-bottle": 4.0,
+        "demo:cn-coke-zero-500ml-bottle": 4.0,
+    }
     assert filtered["pending_clarifications"] == []
     assert {card["brand"] for card in filtered["product_cards"]} == {"百事可乐"}
     type_answer_prompt = sent_requests[-2]["messages"][0]["content"].split(
