@@ -89,18 +89,20 @@ class KevCapture(httpx.BaseTransport):
  def close(self): self.forward.close()
 def origin(url):
  p=urlsplit(url); return p.scheme+"://"+(p.hostname or "")+((":"+str(p.port)) if p.port else "")+p.path
-def source_manifest(tree):
+def source_manifest(tree,fixture_tree):
  hashes={}
  for name,expected in FROZEN_INPUTS.items():
-  hashes[name]=sha(tree/name)
+  hashes[name]=sha(fixture_tree/name)
   if hashes[name]!=expected: raise RuntimeError(f"Frozen input changed: {name}")
  counts={}
  for name in FROZEN_INPUTS:
-  body=json.loads((tree/name).read_text(encoding="utf-8")); key="products" if "products" in body else "offers"
+  body=json.loads((fixture_tree/name).read_text(encoding="utf-8")); key="products" if "products" in body else "offers"
   counts[Path(name).name]=len(body[key])
  if counts!={"demo-products.json":67,"store-offers.json":58}: raise RuntimeError(f"Raw fixture counts differ: {counts}")
  head=subprocess.run(["git","rev-parse","HEAD"],cwd=tree,capture_output=True,text=True,check=True).stdout.strip()
+ fixture_head=subprocess.run(["git","rev-parse","HEAD"],cwd=fixture_tree,capture_output=True,text=True,check=True).stdout.strip()
  return {"product_source_base_commit":BASE_SOURCE_COMMIT,"runner_checkout_commit":head,
+  "product_source_checkout":str(tree),"fixture_source_checkout":str(fixture_tree),"fixture_source_commit":fixture_head,
   "product_source_sha256":{n:sha(tree/n) for n in SOURCE_FILES},"fixture_sha256":hashes,
   "raw_fixture_counts":counts,"note":"raw 58 offers are not the seeded DB Offer count"}
 def verify_runtime(tree,database_url,index_root,mode):
@@ -394,17 +396,20 @@ def setup_live(tree,database_url,index_root,mode,helper):
 def main():
  parser=argparse.ArgumentParser()
  parser.add_argument("--tree",required=True); parser.add_argument("--output-dir",required=True)
+ parser.add_argument("--fixture-source-tree"); parser.add_argument("--capture-helper")
  parser.add_argument("--database-url",required=True); parser.add_argument("--index-root",required=True)
  parser.add_argument("--retrieval-mode",choices=("hybrid","lexical"),default="hybrid")
  parser.add_argument("--cases-file"); parser.add_argument("--seed-report"); parser.add_argument("--build-report")
- args=parser.parse_args(); tree=Path(args.tree).resolve(); output=Path(args.output_dir).resolve(); index=Path(args.index_root).resolve()
+ args=parser.parse_args(); tree=Path(args.tree).resolve(); fixture_tree=Path(args.fixture_source_tree).resolve() if args.fixture_source_tree else tree
+ capture_helper=Path(args.capture_helper).resolve() if args.capture_helper else tree/"work"/"ceres-next-agent-experience"/"04"/"collect_prompt_sample.py"
+ output=Path(args.output_dir).resolve(); index=Path(args.index_root).resolve()
  if output.exists(): raise SystemExit("Evidence directory exists; choose a new path")
  output.mkdir(parents=True); evidence_path=output/"live-public-multiturn.json"
  if args.cases_file:
   case_path=Path(args.cases_file).resolve(); cases=json.loads(case_path.read_text(encoding="utf-8"))
   if not isinstance(cases,list) or not cases: raise ValueError("cases file must be a non-empty JSON list")
  else: case_path=None; cases=PUBLIC_CASES
- helper=module_from(tree/"work"/"ceres-next-agent-experience"/"04"/"collect_prompt_sample.py","ceres_next_04_capture")
+ helper=module_from(capture_helper,"ceres_next_04_capture")
  evidence={"runner_version":"08-live-api-multiturn-v1","captured_at_utc":datetime.now(timezone.utc).isoformat(),
   "source":None,"case_source_sha256":sha(case_path) if case_path else "embedded-public-cases",
   "case_ids":[c["case_id"] for c in cases],"seed_report_path":str(Path(args.seed_report).resolve()) if args.seed_report else None,
@@ -413,9 +418,10 @@ def main():
   "human_review":{"agent_expression_review":"pending","user_acceptance":"not_recorded"}}
  manager=kev_provider=None; started=time.perf_counter(); identity=None
  try:
-  evidence["source"]=source_manifest(tree)
+  evidence["source"]=source_manifest(tree,fixture_tree)
   evidence["runner_sha256"]=sha(Path(__file__).resolve())
-  evidence["capture_helper_sha256"]=sha(tree/"work"/"ceres-next-agent-experience"/"04"/"collect_prompt_sample.py")
+  evidence["capture_helper_path"]=str(capture_helper)
+  evidence["capture_helper_sha256"]=sha(capture_helper)
   for key,arg in (("seed_report",args.seed_report),("build_report",args.build_report)):
    if arg:
     report=Path(arg).resolve()

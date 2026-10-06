@@ -141,7 +141,7 @@ def test_order_snapshot_and_existing_policy_survive_reinitialization(client, run
     assert session.status_code == 200, session.json()
     assert client.get(f"/api/v1/orders/{order['order_id']}").json() == order
     with db_module.SessionLocal() as db:
-        assert db.execute(text("SELECT COUNT(*) FROM catalog_products")).scalar_one() == 65
+        assert db.execute(text("SELECT COUNT(*) FROM catalog_products")).scalar_one() == 67
         assert db.execute(text("SELECT COUNT(*) FROM policies")).scalar_one() == 6
         assert db.execute(text("SELECT content FROM policies WHERE policy_id='P-REF-01'")).scalar_one() == "已核本地政策"
 
