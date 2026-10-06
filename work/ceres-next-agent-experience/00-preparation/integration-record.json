@@ -1,0 +1,9 @@
+{
+  "original_head": "df2930d47e4ba999355f7049e8269166e5258006",
+  "integration_start": "45150caefe89607558940c8a39593e0766b59892",
+  "integration_branch": "codex/ceres-next-agent-experience-integration",
+  "integration_workspace": "C:/Users/20616/Desktop/Agent/Agent产品/Ceres/work/.ceres-next-integration",
+  "original_changes_preserved": true,
+  "baseline_source_files": 449,
+  "tests_run_by_primary": false
+}
