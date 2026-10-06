@@ -28,7 +28,7 @@ from typing import Any, Iterable
 from app.services.ingredient_catalog import load_ingredient_catalog
 
 #: Bumped when the shape of a projected document changes.
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 2
 #: Bumped when the text that is embedded or tokenized changes. Changing it
 #: invalidates the embedding contract and forces an offline rebuild.
 TEXT_TEMPLATE_VERSION = "v1"
@@ -479,9 +479,15 @@ def project_sku_row(
             ],
             "inferred_ingredient_ids": inferred_ids,
             "usage_tags": usage_tags,
+            "brand": brand,
             "spec_quantity": row.get("spec_quantity"),
             "spec_unit": row.get("spec_unit"),
+            "item_quantity": metadata.get("item_quantity"),
+            "item_unit": metadata.get("item_unit"),
+            "packaging": metadata.get("packaging"),
+            "pack_count": metadata.get("pack_count"),
             "product_type": row.get("product_type"),
+            "family_id": metadata.get("family_id"),
             "category_id": row.get("category_id"),
             "source": row.get("source"),
             "review_status": row.get("review_status") or "approved",

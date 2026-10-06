@@ -55,6 +55,8 @@ STATUS_SKIPPED = "skipped"
 #: How many retrieved rows may be offered to the model per request.
 MAX_LOOKUP_ROWS = 5
 
+_PRODUCT_TYPE_OVERVIEW_QUERIES = {"零食": "snack", "饮料": "beverage"}
+
 #: Why a read was never served: the turn's own budget ran out. It is a real,
 #: reported outcome — never a silent drop and never a fake empty result.
 REASON_DEADLINE = "turn_deadline_exceeded"
@@ -142,7 +144,13 @@ class ReadTools:
                     }
                 )
                 continue
-            results.append(self._lookup(lookup, candidates))
+            results.append(
+                self._lookup(
+                    lookup,
+                    candidates,
+                    category_type_quantity=proposal.stated_quantity,
+                )
+            )
         for query in proposal.queries:
             if self._expired():
                 results.append(self._deadline_skipped(kind=query.kind, query=query.query))
@@ -260,6 +268,8 @@ class ReadTools:
         extra_excluded: list[str] | None = None,
         extra_budget_fen: int | None = None,
         extra_specification: dict[str, Any] | None = None,
+        category_type_overview: str | None = None,
+        category_type_quantity: int | None = None,
     ) -> dict[str, Any] | None:
         """Run the shared retrieval service, or ``None`` if there is no index.
 
@@ -302,11 +312,23 @@ class ReadTools:
         try:
             if kind == "dish":
                 return service.search_dishes(query, context=context, limit=limit)
-            return service.search_products(query, context=context, limit=limit)
+            return service.search_products(
+                query,
+                context=context,
+                limit=limit,
+                category_type_overview=category_type_overview,
+                category_type_quantity=category_type_quantity,
+            )
         except IndexUnavailable:
             return None
 
-    def _lookup(self, lookup: Any, candidates: CandidateSet) -> dict[str, Any]:
+    def _lookup(
+        self,
+        lookup: Any,
+        candidates: CandidateSet,
+        *,
+        category_type_quantity: int | None = None,
+    ) -> dict[str, Any]:
         if not searchable(lookup.query):
             # Not a retrieval input: nothing is searched, and nothing is matched
             # by accident. `?` must never find a product whose name contains it.
@@ -325,6 +347,12 @@ class ReadTools:
             extra_excluded=lookup.excluded_ingredients,
             extra_budget_fen=lookup.budget_fen,
             extra_specification=lookup.specification,
+            category_type_overview=(
+                _PRODUCT_TYPE_OVERVIEW_QUERIES.get(lookup.query.strip())
+                if lookup.kind == "product"
+                else None
+            ),
+            category_type_quantity=category_type_quantity,
         )
         if retrieval is None:
             return self._legacy_lookup(lookup, candidates)
@@ -364,6 +392,12 @@ class ReadTools:
                     "category_id": hit.get("category_id"),
                     "product_type": hit.get("product_type"),
                     "usage_tags": hit.get("usage_tags") or [],
+                    "family_id": hit.get("family_id"),
+                    "brand": hit.get("brand"),
+                    "item_quantity": hit.get("item_quantity"),
+                    "item_unit": hit.get("item_unit"),
+                    "packaging": hit.get("packaging"),
+                    "pack_count": hit.get("pack_count"),
                 }
             )
         return {
@@ -374,6 +408,23 @@ class ReadTools:
             "empty": not refs,
             **self._retrieval_evidence(retrieval),
             "matches": matches,
+            **({
+                "type_matches": [
+                    {
+                        key: hit.get(key)
+                        for key in (
+                            "name",
+                            "category_id",
+                            "product_type",
+                            "usage_tags",
+                            "family_id",
+                            "stock_verified",
+                            "unknown_constraints",
+                        )
+                    }
+                    for hit in retrieval["category_type_matches"]
+                ]
+            } if "category_type_matches" in retrieval else {}),
         }
 
     def _legacy_lookup(self, lookup: Any, candidates: CandidateSet) -> dict[str, Any]:
