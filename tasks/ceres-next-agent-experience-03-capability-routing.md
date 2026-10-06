@@ -1,6 +1,6 @@
 # 03 内部能力路由与 workflow 直达
 
-状态：待开始。
+状态：进行中。
 负责人：实施 Agent；主会话维护本阶段任务，专职测试 Agent 执行全部测试命令。
 规格：[实施规格](../docs/plans/ceres-next-agent-experience-spec.md)；所属任务：[实施总 TASK](ceres-next-agent-experience.md)。
 依赖：[01 零食分类气泡到确认加购](ceres-next-agent-experience-01-snack-choice.md)。复用 01 的有效结构化回答与 workflow 入口；02 是首轮覆盖范围的推荐先行票，不伪造为运行该路由的技术前置。

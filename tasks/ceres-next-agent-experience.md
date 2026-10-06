@@ -1,6 +1,6 @@
 # Ceres 下一阶段 Agent 体验实施总 TASK
 
-- 状态：进行中（规格与八票已确认，执行准备及 01 启动）。
+- 状态：进行中（01 技术交付并合入；02/03 并行实施）。
 - 负责人：本会话主 Agent；各实施 Agent 使用独立 worktree，专职测试 Agent 执行测试，merger Agent 负责合并；最后一次 Standards/Spec 双轴集成审查。
 - 规格：[实施规格](../docs/plans/ceres-next-agent-experience-spec.md)。
 - 授权：用户 2026-10-06 明确要求 implement-spec 按依赖持续执行八票，允许无共享修改冲突的票并行，每票 TDD；必要时添加最少模拟商品及供给支撑测试。无需重新确认已讨论的测试接缝或票据粒度。
@@ -31,6 +31,8 @@
 
 ## 当前进度与下一步
 
-执行准备已完成；集成工作区为原仓 work/.ceres-next-integration，冻结起点45150caefe89607558940c8a39593e0766b59892（当前有效源码＋原HEAD历史文件）。原main仍df2930d47e4ba999355f7049e8269166e5258006，原dirty变动保留。01已由implement_01启动，专职测试Agent负责红绿验证；各票具体进度、结果与阻塞在对应票据维护。最终Standards/Spec审查固定以该冻结点为起点。
+集成工作区为原仓 work/.ceres-next-integration，冻结起点 `45150caefe89607558940c8a39593e0766b59892`（开始时有效源码＋原 HEAD 历史文件），最终 Standards/Spec 审查以此为起点。01 已合入 `61b59bb3a0f136799a3ad8f1f818789abdb1edc8`；02/03 技术前置已满足，独立 worktree 并行实施，专职测试 Agent 统一执行红绿验证。各票具体结果在对应 TASK 维护。
+
+原工作区并发新增 UI 提交 `ee7ce104885f731bc48bc8c6338c00d802ba0619`，本阶段未操作原 main；保留该提交及既有 dirty 变动，集成基线不随并发修改漂移。
 
 证据入口：[执行准备](../work/ceres-next-agent-experience/00-preparation/)；执行中持续补入实际文件。规划与草案保留为历史讨论材料，不维护第二套实施状态。

@@ -1,6 +1,6 @@
 # 01 零食分类气泡到确认加购
 
-状态：进行中。
+状态：待验收（受控 API、前端点选、类型检查与构建通过；真实模型/同版页面联测在 08，用户本人验收待完成）。
 负责人：implement_01；主会话维护本阶段任务，专职测试 Agent 执行全部测试命令。
 规格：[实施规格](../docs/plans/ceres-next-agent-experience-spec.md)；所属任务：[实施总 TASK](ceres-next-agent-experience.md)。
 依赖：无。无技术阻塞，可作为首票。
@@ -31,4 +31,6 @@
 
 ## 下一步
 
-已完成两条公开行为的红→绿：宽泛零食先问实际类型；用问题/选项身份选择后旧问题清除、仅返回对应类型商品、清单和购物车不自动写入。原始证据见 [01 红绿记录](../work/ceres-next-agent-experience/01/01-red-test-log.md)。继续补数量/预算保留到清单及确认加购；前端由独立子任务并行承接相同选择契约，实际集成页面和真实模型证据在 08 分开登记。
+实施提交 `3d5348c86e9b68a663dd014be81f1729f6a3b598`，集成合并 `61b59bb3a0f136799a3ad8f1f818789abdb1edc8`。宽泛浏览/购买先问实际类型；身份回答与文字回答清除旧问题，数量 2、预算 ¥15 保留到清单，明确确认前购物车不变，确认后才加购两包。新 6 项与旧 5 项聚合 `11 passed in 24.71s`；受控页面点选、tsc、build 通过。真实模型/同版页面联测在 08，用户本人验收待完成。
+
+原始证据：[01 红绿记录](../work/ceres-next-agent-experience/01/01-red-test-log.md)、[最终聚合输出](../work/ceres-next-agent-experience/01/final-01-aggregate-output.txt)、[前端记录](../work/ceres-next-agent-experience/01-ui/ui-test-log.md)、[共用选择契约](../work/ceres-next-agent-experience/01/shared-selection-contract.md)、[合并回执](../work/ceres-next-agent-experience/merges/01-receipt.md)。01 技术依赖已满足，继续 02/03。

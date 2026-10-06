@@ -1,6 +1,6 @@
 # 02 饮品与多候选分类筛选
 
-状态：待开始。
+状态：进行中。
 负责人：实施 Agent；主会话维护本阶段任务，专职测试 Agent 执行全部测试命令。
 规格：[实施规格](../docs/plans/ceres-next-agent-experience-spec.md)；所属任务：[实施总 TASK](ceres-next-agent-experience.md)。
 依赖：[01 零食分类气泡到确认加购](ceres-next-agent-experience-01-snack-choice.md)。复用 01 已可用的当前问题/选项回答契约及端到端分类选购路径。
