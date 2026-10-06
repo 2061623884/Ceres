@@ -97,6 +97,8 @@ def propose_round(
         query_results=list(query_results or []),
         read_only=read_only,
     )
+    if turn.get("capability") is not None:
+        request["capability"] = turn["capability"]
     remaining = runtime.remaining()
     if remaining is not None and remaining <= 0:
         raise Halt("timed_out", timeout_error())
