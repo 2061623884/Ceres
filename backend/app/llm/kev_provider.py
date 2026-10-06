@@ -8,7 +8,9 @@ from pydantic import BaseModel, Field, field_validator
 from app.core.config import get_settings
 
 Decision = Literal["stay_current", "suggest_switch", "clarify"]
+Capability = Literal["category_exploration", "purchase_modify", "facts_qa", "chat"]
 CRITERIA_VERSION = "ceres-service-v3.2"
+CAPABILITY_CRITERIA_VERSION = "ceres-guide-capabilities-v1"
 # 01 observed 235.6–773ms. This bounds network/inference, not the 1s P95 target.
 KEV_TIMEOUT_SECONDS = 3.0
 INSTRUCTIONS = """Classify this turn using current_role, selected_object and recent_dialogue.
@@ -27,6 +29,20 @@ CRITERIA = {
     "stay_current": "Current role can handle it: shopping or purchase-list changes with Keke (including a short cancellation reply to list-removal dialogue, even without selected_object), specific orders with Momo, or GENERAL policies/greetings with either role. Business details may still need clarification within that role.",
     "suggest_switch": "Clearly requires the OTHER role: specific placed-order work from Keke, or a NEW shopping request from Momo. Not general policy or ambiguous cancellation.",
     "clarify": "The SERVICE needed is unresolved even with current role, selected object and dialogue. Cancellation with neither a purchase-list nor placed-order context needs clarification. Missing item details inside an already clear shopping service do not require service clarification.",
+}
+CAPABILITY_INSTRUCTIONS = """Classify the current Keke turn into exactly one capability using
+the utterance, selected_object and recent dialogue. This is an internal capability choice;
+do not choose or change the service role. Choose category_exploration when the user is
+browsing, narrowing or comparing product/category candidates. Choose purchase_modify when
+the user wants to prepare, revise, select or confirm a purchase plan. Choose facts_qa when
+the user asks for product, store or policy facts. Choose chat for greetings and ordinary
+conversation unrelated to shopping. A pending question and its answer are part of the current
+request context. Only classify: never provide business parameters, objects or authorization."""
+CAPABILITY_CRITERIA = {
+    "category_exploration": "浏览、了解、缩小或比较品类及商品候选；包括继续回答选购中的类型或筛选问题。",
+    "purchase_modify": "准备或修改购买方案、清单、数量、预算、选择项，或明确确认加购。",
+    "facts_qa": "询问商品、门店或一般政策事实，需要依据业务数据或政策来源回答。",
+    "chat": "问候或与购物无关的普通交流。",
 }
 
 
@@ -52,6 +68,28 @@ class KevResponse(BaseModel):
     answers: Answers
 
 
+class CapabilityChoiceAnswer(BaseModel):
+    type: Literal["choice"]
+    choice: Capability
+    probabilities: dict[Capability, float] = Field(min_length=4, max_length=4)
+
+    @field_validator("probabilities")
+    @classmethod
+    def valid_probabilities(cls, values):
+        if any(not 0 <= value <= 1 for value in values.values()):
+            raise ValueError("Kev probabilities must be between zero and one")
+        return values
+
+
+class CapabilityAnswers(BaseModel):
+    capability: CapabilityChoiceAnswer
+
+
+class CapabilityKevResponse(BaseModel):
+    model: Literal["kev-latest"]
+    answers: CapabilityAnswers
+
+
 class KevUnavailable(Exception):
     """The network or documented external response contract failed."""
 
@@ -69,6 +107,30 @@ class KevProvider:
             response.raise_for_status()
             raw = response.json()
             answer = KevResponse.model_validate(raw).answers.service
+        except (httpx.HTTPError, ValueError) as exc:
+            raise KevUnavailable(f"{type(exc).__name__}: {exc}") from exc
+        return answer, raw
+
+    def route_capability(self, state: dict) -> tuple[CapabilityChoiceAnswer, dict]:
+        payload = {
+            "state": state,
+            "model": "kev-latest",
+            "questions": {
+                "capability": {
+                    "type": "choice",
+                    "instructions": CAPABILITY_INSTRUCTIONS,
+                    "criteria": CAPABILITY_CRITERIA,
+                }
+            },
+        }
+        try:
+            response = self.client.post(
+                get_settings().kev_base_url.rstrip("/") + "/v1/systemone",
+                json=payload,
+            )
+            response.raise_for_status()
+            raw = response.json()
+            answer = CapabilityKevResponse.model_validate(raw).answers.capability
         except (httpx.HTTPError, ValueError) as exc:
             raise KevUnavailable(f"{type(exc).__name__}: {exc}") from exc
         return answer, raw

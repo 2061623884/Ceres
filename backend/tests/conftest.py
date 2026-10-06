@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+import secrets
 import tempfile
 from pathlib import Path
 
@@ -14,6 +15,61 @@ from sqlalchemy.orm import sessionmaker
 ROOT = Path(__file__).resolve().parents[2]
 os.environ.setdefault("LLM_MODE", "live")
 os.environ.setdefault("BUSINESS_DATA_MODE", "demo")
+
+
+@pytest.fixture
+def kev_api(monkeypatch):
+    """Stub only the external Kev HTTP boundary used by controlled guide tests."""
+    import httpx
+
+    choices = {"service": "stay_current", "capability": "chat"}
+    calls = []
+    original_post = httpx.Client.post
+
+    def post(client, url, *args, **kwargs):
+        if not str(url).rstrip("/").endswith("/v1/systemone"):
+            return original_post(client, url, *args, **kwargs)
+
+        payload = kwargs["json"]
+        question, spec = next(iter(payload["questions"].items()))
+        if (
+            question == "service"
+            and httpx.URL(str(url)).host == "kev-controlled.invalid"
+        ):
+            return original_post(client, url, *args, **kwargs)
+        labels = list(spec["criteria"])
+        selected = choices[question]
+        probabilities = {
+            label: 1.0 if label == selected else 0.0 for label in labels
+        }
+        raw = {
+            "model": "kev-latest",
+            "answers": {
+                question: {
+                    "type": "choice",
+                    "choice": selected,
+                    "probabilities": probabilities,
+                }
+            },
+        }
+        calls.append({"request": payload, "response": raw})
+        return httpx.Response(
+            200,
+            json=raw,
+            request=httpx.Request("POST", str(url)),
+        )
+
+    monkeypatch.setattr(httpx.Client, "post", post)
+    return {"choices": choices, "calls": calls}
+
+
+@pytest.fixture
+def internal_trace_headers(monkeypatch):
+    """Enable the existing internal trace read API with an ephemeral test token."""
+    token = secrets.token_urlsafe(18)
+    monkeypatch.setenv("INTERNAL_ENABLED", "true")
+    monkeypatch.setenv("INTERNAL_ADMIN_TOKEN", token)
+    return {"X-Internal-Token": token}
 
 
 @pytest.fixture()
@@ -104,7 +160,7 @@ def source_database_path():
 
 
 @pytest.fixture()
-def client(test_db_url, monkeypatch, source_database_path):
+def client(test_db_url, monkeypatch, source_database_path, kev_api):
     monkeypatch.setenv("DATABASE_URL", test_db_url)
     monkeypatch.setenv("SOURCE_DATABASE_PATH", str(source_database_path))
 

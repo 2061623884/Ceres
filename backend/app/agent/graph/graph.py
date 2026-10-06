@@ -1,8 +1,9 @@
 """Graph assembly: the request-level production workflow.
 
-The production graph has eight top-level nodes:
+The request-level production graph has these top-level stages:
 
-``START → load_context → understand → parse_validate → decide_turn``
+``START → load_context → route_capability → {understand | direct workflow}``
+``→ parse_validate → decide_turn``
 ``decide_turn → {retrieve | mutation | answer}``
 ``retrieve → answer``, ``mutation → answer``, ``answer → respond → END``.
 
@@ -20,10 +21,12 @@ from langgraph.graph import END, START, StateGraph
 from langgraph.graph.state import CompiledStateGraph
 
 from app.agent.graph.nodes.answer import answer
+from app.agent.graph.nodes.capability import route_after_capability, route_capability
 from app.agent.graph.nodes.context import load_context
 from app.agent.graph.nodes.mutation import mutation
 from app.agent.graph.nodes.respond import respond
 from app.agent.graph.nodes.retrieve import retrieve
+from app.agent.graph.nodes.workflow import direct_product_type_workflow
 from app.agent.graph.nodes.understand import (
     decide_turn,
     parse_validate,
@@ -36,6 +39,8 @@ from app.agent.graph.state import GraphState
 #: The production nodes, in contract order. ``load_context`` is the entry.
 PRODUCTION_NODES: tuple[str, ...] = (
     "load_context",
+    "route_capability",
+    "direct_product_type_workflow",
     "understand",
     "parse_validate",
     "decide_turn",
@@ -51,6 +56,8 @@ def build_graph() -> StateGraph:
     graph = StateGraph(GraphState, context_schema=TurnRuntime)
     for name, fn in (
         ("load_context", load_context),
+        ("route_capability", route_capability),
+        ("direct_product_type_workflow", direct_product_type_workflow),
         ("understand", understand),
         ("parse_validate", parse_validate),
         ("decide_turn", decide_turn),
@@ -61,8 +68,17 @@ def build_graph() -> StateGraph:
     ):
         graph.add_node(name, fn)
     graph.add_edge(START, "load_context")
-    graph.add_edge("load_context", "understand")
+    graph.add_edge("load_context", "route_capability")
+    graph.add_conditional_edges(
+        "route_capability",
+        route_after_capability,
+        {
+            "understand": "understand",
+            "direct_product_type_workflow": "direct_product_type_workflow",
+        },
+    )
     graph.add_edge("understand", "parse_validate")
+    graph.add_edge("direct_product_type_workflow", "parse_validate")
     graph.add_edge("parse_validate", "decide_turn")
     graph.add_conditional_edges(
         "decide_turn",
