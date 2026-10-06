@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/20261005T234604.284137Z-green-001/stdout.raw",
+  "original_sha256": "8eaf8aebbdd92d6d27a0f578b653e5d0546b46e6850ef1b4d3ff18aeca40d5f1",
+  "original_utf8_bom": false,
+  "utf8_text": "============================= test session starts =============================\r\nplatform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.6.0\r\nrootdir: C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\r\nconfigfile: pyproject.toml\r\nplugins: anyio-4.15.1, langsmith-0.14.1, asyncio-1.4.0\r\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\r\ncollected 15 items\r\n\r\ntests\\test_v3_policy_consultation.py ........                            [ 53%]\r\ntests\\test_v3_core_evaluation.py .......                                 [100%]\r\n\r\n============================= 15 passed in 28.39s =============================\r\n"
+}

@@ -27,6 +27,7 @@ from app.llm.structured_output import extract_json_object
 from app.prompts.semantic import (
     HISTORY_COMPLETE_PROMPT,
     POLICY_COMPLETE_PROMPT,
+    POLICY_SYSTEM_PROMPT,
     PROPOSAL_EXAMPLES,
     RETRIEVAL_COMPLETE_PROMPT,
     SYSTEM_PROMPT,
@@ -117,9 +118,9 @@ class LiveSemanticProvider:
         answer_prompt = HISTORY_COMPLETE_PROMPT if any(
             result.get("kind") == "history" for result in request.get("query_results", [])
         ) else RETRIEVAL_COMPLETE_PROMPT
-        if answering and all(result.get("kind") == "policy" for result in request["query_results"]):
-            answer_prompt = POLICY_COMPLETE_PROMPT
         system = SYSTEM_PROMPT + (answer_prompt if answering else "")
+        if answering and all(result.get("kind") == "policy" for result in request["query_results"]):
+            system = POLICY_SYSTEM_PROMPT + POLICY_COMPLETE_PROMPT
         examples = [] if answering else PROPOSAL_EXAMPLES
         return {
             "model": self.settings.llm_model,

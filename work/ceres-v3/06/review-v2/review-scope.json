@@ -1,0 +1,15 @@
+{
+  "fixed_head": "a2f6dfe1161a43a23704f3ae2513bc7f7622fc17",
+  "fixed_working_zip_sha256": "88b8dd7f7687f1ddc53cb2b76154419aea5cf838e13cd2da67bedcc9944a8b9d",
+  "candidate_zip_sha256": "34ffdc5cfb8179c81efa391240e0ab7834e26e44b774f3f353a7ad5930633a24",
+  "commit_list": [],
+  "scope": {
+    "backend/app/prompts/semantic.py": "51216d409a8f8c93d8430ecfb3b91993cc0958d211d3f9c6bd6ddb84f4455e7b",
+    "backend/app/llm/live_semantic_provider.py": "4bd7ce310988d26b88b04b66af4d632b0aeda6c24941a796d60e2cd1e6401ff2",
+    "backend/tests/test_v3_policy_consultation.py": "7e41b52c0e115562ce1d0cdf334bcaa6f01d54791775f30ed4d12b997186e69e",
+    "work/ceres-v3/06/implementation-seam.md": "1b5d3110f6e9362b5f1a60c8bac5eaea8c2d51727b6a8291d69f346c426d68b5",
+    "work/ceres-v3/06/compare-policy-request.py": "b4ee10a645bb9713bd6f891e18ddce0f51ae73bd17420e5c01b47f80c5719dbf",
+    "work/ceres-v3/06/fixes.md": "0666c9f047086c99b04ad1ad03fc14dc5779c24ea605766dcb5dce10bb55c58f"
+  },
+  "v1_to_v2": "one source-boundary sentence in short policy prompt plus fixes.md; other production/tests unchanged"
+}

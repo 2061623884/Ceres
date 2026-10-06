@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "review/review-scope.json",
+  "original_sha256": "21b6e13b3d17b60fb2e3d3fd23ed5a11d493fc6d04c0f5fdd777982c343c94cb",
+  "original_utf8_bom": false,
+  "utf8_text": "{\r\n  \"fixed_head\": \"a2f6dfe1161a43a23704f3ae2513bc7f7622fc17\",\r\n  \"fixed_working_zip_sha256\": \"88b8dd7f7687f1ddc53cb2b76154419aea5cf838e13cd2da67bedcc9944a8b9d\",\r\n  \"diff_command\": \"git diff a2f6dfe1161a43a23704f3ae2513bc7f7622fc17...HEAD (empty commits; working-source delta compared to baseline ZIP)\",\r\n  \"commit_list\": [],\r\n  \"scope\": {\r\n    \"backend/app/prompts/semantic.py\": \"aa492fb3c5f0d111b9c3664d568f7ef1163df1c878bae6028eefec1361f446e3\",\r\n    \"backend/app/llm/live_semantic_provider.py\": \"4bd7ce310988d26b88b04b66af4d632b0aeda6c24941a796d60e2cd1e6401ff2\",\r\n    \"backend/tests/test_v3_policy_consultation.py\": \"7e41b52c0e115562ce1d0cdf334bcaa6f01d54791775f30ed4d12b997186e69e\",\r\n    \"work/ceres-v3/06/implementation-seam.md\": \"1b5d3110f6e9362b5f1a60c8bac5eaea8c2d51727b6a8291d69f346c426d68b5\",\r\n    \"work/ceres-v3/06/compare-policy-request.py\": \"b4ee10a645bb9713bd6f891e18ddce0f51ae73bd17420e5c01b47f80c5719dbf\"\r\n  },\r\n  \"inherited_V2_excluded\": true\r\n}\r\n"
+}

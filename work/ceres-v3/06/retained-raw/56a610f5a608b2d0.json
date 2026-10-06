@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/20261005T234948.747557Z-core16-rest-001/stdout.raw",
+  "original_sha256": "565022e70b9af5dcb862ec7bd786980d850e8ace27c9a3b224acd4489ab73a69",
+  "original_utf8_bom": false,
+  "utf8_text": "============================= test session starts =============================\r\nplatform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.6.0\r\nrootdir: C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\r\nconfigfile: pyproject.toml\r\nplugins: anyio-4.15.1, langsmith-0.14.1, asyncio-1.4.0\r\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\r\ncollected 9 items\r\n\r\ntests\\test_v3_routing_handoff.py .                                       [ 11%]\r\ntests\\test_v3_routing_context.py .                                       [ 22%]\r\ntests\\test_v3_routing_handoff.py .                                       [ 33%]\r\ntests\\test_v3_routing_context.py .                                       [ 44%]\r\ntests\\test_v3_switch_lifecycle.py ...                                    [ 77%]\r\ntests\\test_v3_routing_handoff.py ..                                      [100%]\r\n\r\n============================= 9 passed in 19.48s ==============================\r\n"
+}

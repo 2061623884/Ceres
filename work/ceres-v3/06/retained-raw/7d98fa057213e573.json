@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "evidence/20261005T235526.865802Z-candidate-v2-pair-001/report-erratum.md",
+  "original_sha256": "0a1d94a58653a959356c0c85b7ea33ad02540de6cf12f2421ab2a077ffa3607c",
+  "original_utf8_bom": false,
+  "utf8_text": "# Candidate-v2 对照报告勘误\n\n日期：2026-10-06\n\n此前发给主 Agent 的报告把“需要以商品/订单页的退货标识为准”误归到 candidate 回答。原始 `comparison.json` 显示，这句话出现在 baseline 回答；candidate 回答没有这句。candidate 的相关原文是“不能代表已提交或已审核通过退货申请”。\n\n此勘误只修正回答归属。原始请求、响应、测量值及日志均保留不变。\n"
+}

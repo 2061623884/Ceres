@@ -1,0 +1,6 @@
+{
+  "original_relative_path": "review-v3/standards.md",
+  "original_sha256": "04ec6cba2745e182b650c31fd9107ccf94157377eecf206f1237fb22e6b89b8f",
+  "original_utf8_bom": false,
+  "utf8_text": "# Ticket 06 Standards Review v3\n\n**结论：0 个发现（0 项硬性违例，0 项值得报告的 Fowler 启发式异味）。**\n\n本次只复审 v2→v3 增量：`backend/app/prompts/semantic.py:236-237` 与 `work/ceres-v3/06/fixes.md:7`。Baseline ZIP SHA-256 `88b8dd7f…9944a8b9d` 和 candidate ZIP SHA-256 `7bd1e2c4…1f52c31` 均匹配；6 项工作源码 SHA 全部匹配审查范围。其余 4 项沿用既有 0 发现结论。\n\n政策 Prompt 将答复限定为检索到的规则、来源与资格信息缺口，并禁止补充来源外页面位置、申请流程或进度状态；这些约束针对 `fixes.md` 记录的两次来源外表述，没有引入无依据的业务逻辑、校验器或抽象。修复记录保留失败事实并注明重发请求不等同确定重放，没有抹去或伪称质量通过，不违反仓库证据维护约定。\n\n只读静态复审；未运行测试、模型请求、typecheck 或索引操作。\n"
+}

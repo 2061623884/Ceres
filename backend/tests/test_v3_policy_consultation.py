@@ -60,14 +60,18 @@ def test_keke_reads_return_policy_before_any_mercury_session(client, semantic_pr
 
 
 def test_keke_policy_answer_uses_conditions_instead_of_product_recommendation(client, monkeypatch):
+    from app.prompts.semantic import SYSTEM_PROMPT
+
     calls = []
 
     def model(request):
         payload = json.loads(request.content)
         calls.append(payload)
         if len(calls) == 1:
+            assert payload["messages"][0]["content"].startswith(SYSTEM_PROMPT + "\nprotocol:\n")
             result = {"reads": [{"kind": "policy", "topic": "一般配送时间"}]}
         else:
+            assert len(payload["messages"][0]["content"]) <= 2000
             assert "reply 只说明这款商品" not in payload["messages"][0]["content"]
             assert "policy_id" in payload["messages"][0]["content"]
             context = json.loads(payload["messages"][-2]["content"])["server_context"]
@@ -89,6 +93,9 @@ def test_keke_policy_answer_uses_conditions_instead_of_product_recommendation(cl
     assert response.status_code == 200
     assert "P-DEL-01" in json.dumps(response.json(), ensure_ascii=False)
     assert len(calls) == 2
+    assert response.json()["task_id"] is None
+    assert client.get("/api/v1/cart").json()["items"] == []
+    assert client.get("/api/v1/orders").json()["items"] == []
 
 
 def test_momo_can_consult_policy_without_selecting_an_order(client, monkeypatch):
