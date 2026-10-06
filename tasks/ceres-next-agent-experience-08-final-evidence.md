@@ -1,6 +1,6 @@
 # 08 同版集成验收与证据整理
 
-状态：待开始。
+状态：进行中（01–07 技术依赖已合入，候选冻结与同版验证准备）。
 负责人：实施 Agent；主会话维护本阶段任务，专职测试 Agent 执行全部测试命令。
 规格：[实施规格](../docs/plans/ceres-next-agent-experience-spec.md)；所属任务：[实施总 TASK](ceres-next-agent-experience.md)。
 依赖：[02 饮品与多候选分类筛选](ceres-next-agent-experience-02-drink-candidate-choice.md)；[05 逐模块精简与固定对照](ceres-next-agent-experience-05-prompt-refinement.md)；[06 售后后继续采购与自然回复](ceres-next-agent-experience-06-after-sales-resume.md)；[07 主页专题到限定成品选购](ceres-next-agent-experience-07-themed-products.md)。需首轮双品类、路由/精简、代表闭环及活动全部交付；01、03、04 已由这些依赖传递覆盖。
@@ -32,6 +32,10 @@
 
 ## 下一步
 
-核对所有技术依赖的原始证据后冻结候选，由项目规定的测试分工完成本批必要验证。
+01–07 已技术交付并合入；06 合并为 `c1fb1403e5367658df1e7d0cfebd0ee9a4ec5931`，对应合并后必要回归 20 项通过。08 使用独立 `work/.ceres-next-08` / `codex/ceres-next-08`，实施者先合最新集成再核对并冻结最小证据 runner；专职 tester 执行全部索引、测试、模型及浏览器命令。
+
+整体有限对照基线为 `45150caefe89607558940c8a39593e0766b59892`，预备 clean checkout `work/.ceres-next-08-before`；不用 04 before 代替整体起点，不核验 V3 历史完成度。对照使用同一最终业务输入，各臂按各自版本重建；实际 hybrid/vector 与模型/Prompt 身份另记。06 的受控 UI 没有证明切回可可后的可见方案恢复，该项必须由本票真实后端页面补齐。
+
+01–05/07 与合并回执必要证据已归档到集成的本阶段 work 目录；187 项工作副本及 Git blob 的字节哈希均与 `archive-before-08.json` 相同，凭据值扫描 0。原始记录仍保留，归档不含 `.env`、DB/index、缓存或 node_modules；本阶段冻结记录使用 `-text` 规则保留 Windows 字节哈希。
 
 新留出已由主会话在实现前冻结：4 条独立对话结构，版本 `ceres-next-unseen-dialogues-20261006-v1`；SHA256 `C099004FC2F510864A182701E72E89E39320B947907F029A6D451C93C3B87AE8`。用例保存在本阶段 `08/private-evals/`，不向 01–07 开发或 Prompt 调整提供内容。当前未执行；仅在 08 冻结候选后交测试 Agent，结果与开发回归分开报告，不能由此宣称统计泛化。
