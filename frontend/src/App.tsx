@@ -22,6 +22,7 @@ import {
   confirmableItems,
   ensureIdentity,
   getCart,
+  getProduct,
   getGuideSession,
   getStoredSessionId,
   listOrders,
@@ -323,7 +324,7 @@ const MOODS: { id: CeresMood; label: string; emoji: string }[] = [
   { id: 'angry', label: '烦躁', emoji: '😡' }, { id: 'sad', label: '低气压', emoji: '😕' }, { id: 'calm', label: '平静', emoji: '😐' }, { id: 'pleased', label: '不错', emoji: '🙂' }, { id: 'happy', label: '超开心', emoji: '😍' },
 ]
 
-function LandingScreen({ onGoShelf, onDietPlan }: { onGoShelf: () => void; onDietPlan: () => void }) {
+function LandingScreen({ onGoShelf, onGreenReset }: { onGoShelf: () => void; onGreenReset: () => void }) {
   const [activeMood, setActiveMood] = useState<CeresMood>('happy')
   const [moodMotion, setMoodMotion] = useState(0)
 
@@ -355,7 +356,7 @@ function LandingScreen({ onGoShelf, onDietPlan }: { onGoShelf: () => void; onDie
       <section className="shrink-0 px-5 pb-4 pt-3">
         <div className="mb-3 flex items-center justify-between"><h2 className="flex items-center gap-2 text-[15px] font-semibold tracking-[-0.02em] text-[#26372c]"><span className="h-2 w-2 rounded-full bg-[#d6bded]"/>为你准备</h2><button className="text-[11px] font-semibold text-[#477950]">查看全部 ↗</button></div>
         <div className="grid grid-cols-2 gap-3">
-          <button onClick={onDietPlan} className="relative h-[178px] overflow-hidden rounded-[25px] border-2 border-white bg-[#f3b18e] p-4 text-left shadow-[0_5px_0_#d7876c] transition-transform active:translate-y-1 active:shadow-none"><div aria-hidden="true" className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-[#f9e58d]"/><div aria-hidden="true" className="absolute -left-8 bottom-4 h-12 w-16 rotate-[-25deg] rounded-full bg-[#cf92e8]/60"/><span className="relative text-[10px] font-semibold text-[#7f3328]">轻盈计划</span><p className="relative mt-1 text-lg font-bold leading-none tracking-[-0.04em] text-[#522d27]">减脂餐</p><p className="relative mt-1 max-w-[95px] text-[10px] font-medium leading-snug text-[#794f45]">健康轻食食材推荐</p><div className="absolute -bottom-5 right-[-3px] scale-[0.86]"><DietBowlSVG /></div></button>
+          <button onClick={onGreenReset} aria-label="GREEN RESET 今天轻一点今日限定活动" className="relative h-[178px] overflow-hidden rounded-[25px] border-2 border-white bg-[#f3b18e] p-4 text-left shadow-[0_5px_0_#d7876c] transition-transform active:translate-y-1 active:shadow-none"><div aria-hidden="true" className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-[#f9e58d]"/><div aria-hidden="true" className="absolute -left-8 bottom-4 h-12 w-16 rotate-[-25deg] rounded-full bg-[#cf92e8]/60"/><span className="relative text-[10px] font-semibold text-[#7f3328]">今日限定</span><p className="relative mt-1 text-[17px] font-bold leading-none tracking-[-0.04em] text-[#522d27]">GREEN RESET</p><p className="relative mt-1 max-w-[95px] text-[10px] font-medium leading-snug text-[#794f45]">今天轻一点 · 成品轻食</p><div className="absolute -bottom-5 right-[-3px] scale-[0.86]"><DietBowlSVG /></div></button>
           <button onClick={onGoShelf} className="relative h-[178px] overflow-hidden rounded-[25px] border-2 border-white bg-[#c3e493] p-4 text-left shadow-[0_5px_0_#90b567] transition-transform active:translate-y-1 active:shadow-none"><div aria-hidden="true" className="absolute -left-5 -top-5 h-20 w-20 rounded-full bg-[#f7e666]"/><div aria-hidden="true" className="absolute right-4 top-12 h-12 w-5 rotate-[35deg] rounded-full bg-[#bca8ec]/70"/><span className="relative text-[10px] font-semibold text-[#356234]">当季鲜选</span><p className="relative mt-1 text-lg font-bold leading-none tracking-[-0.04em] text-[#244c2c]">生鲜采买</p><p className="relative mt-1 max-w-[95px] text-[10px] font-medium leading-snug text-[#527151]">当季食材一键备货</p><div className="absolute -bottom-5 right-[-4px] scale-[0.86]"><BasketSVG /></div></button>
         </div>
       </section>
@@ -700,6 +701,19 @@ function ShelfScreen({
 
 // ── Guide floating sheets ─────────────────────────────────────
 type GuideSheet = 'activity' | 'plan' | 'cart'
+type GuideViewContext = {
+  page: string
+  category_id?: string | null
+  product_id?: string | null
+  activity_id?: string | null
+}
+
+const GREEN_RESET_ACTIVITY_ID = 'green_reset'
+const GREEN_RESET_PRODUCT_IDS = [
+  'demo:green-reset-avocado-salad',
+  'demo:green-reset-fruit-platter',
+  'demo:cn-minute-maid-peach-450ml-bottle',
+]
 
 function SheetCloseButton({ onClose }: { onClose: () => void }) {
   return (
@@ -841,10 +855,54 @@ function PlanRowCheckbox({ checked, disabled, onToggle }: { checked: boolean; di
   )
 }
 
-function ActivitySheetContent() {
+function ActivitySheetContent({
+  disabled,
+  onSelect,
+}: {
+  disabled: boolean
+  onSelect: (product: Product) => void
+}) {
+  const [products, setProducts] = useState<Product[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    Promise.all(GREEN_RESET_PRODUCT_IDS.map((skuId) => getProduct(skuId)))
+      .then(setProducts)
+      .catch(() => setError('活动商品暂时加载失败'))
+      .finally(() => setLoading(false))
+  }, [])
+
   return (
-    <div className="flex min-h-[120px] items-center justify-center px-6 py-10">
-      <p className="text-[12px] font-medium text-black/35">今日暂无活动</p>
+    <div className="flex flex-col pt-4">
+      <h3 className="px-5 text-[14px] font-bold tracking-[-0.03em] text-[#1d1c1a]">GREEN RESET｜今天轻一点</h3>
+      <p className="px-5 pb-3 pt-1 text-[11px] leading-relaxed text-black/48">今天想吃点清爽的？挑一份成品沙拉、鲜果拼盘或桃汁，让可可接着帮你搭配。</p>
+      {loading && <p className="px-5 py-4 text-[11px] text-black/40">正在准备今日限定…</p>}
+      {error && <p className="px-5 py-4 text-[11px] text-red-600">{error}</p>}
+      {!loading && !error && (
+        <GuideSheetItemList itemCount={products.length}>
+          {products.map((product) => {
+            const name = product.name_zh || product.name
+            return (
+              <button
+                key={product.sku_id}
+                type="button"
+                aria-label={`选购${name}`}
+                disabled={disabled || !product.sellable}
+                onClick={() => onSelect(product)}
+                className="flex w-full items-center gap-3 rounded-[18px] bg-white/65 px-2.5 py-2 text-left disabled:opacity-45"
+              >
+                <img src={productImageUrl(product.image_path)} alt="" className="h-11 w-11 shrink-0 rounded-xl bg-black/[0.04] object-cover" />
+                <span className="min-w-0 flex-1">
+                  <span className="block truncate text-[12px] font-medium text-[#1d1c1a]">{name}</span>
+                  <span className="mt-0.5 block text-[10px] text-black/40">{product.sellable ? '限定成品 · 让可可介绍' : '暂不可选'}</span>
+                </span>
+                <span className="shrink-0 text-[12px] font-semibold text-black/65">{yuan(product.price_fen ?? 0)}</span>
+              </button>
+            )
+          })}
+        </GuideSheetItemList>
+      )}
     </div>
   )
 }
@@ -1103,8 +1161,7 @@ function ChatCheckoutSuccess({
 function ChatScreen({
   active,
   viewContext,
-  autoSend,
-  onAutoSendDone,
+  openActivityOnMount,
   onCartRefresh,
   cart,
   onCartChange,
@@ -1117,9 +1174,8 @@ function ChatScreen({
   onHandoffSwitch,
 }: {
   active: boolean
-  viewContext: { page: string; category_id?: string | null }
-  autoSend?: string | null
-  onAutoSendDone?: () => void
+  viewContext: GuideViewContext
+  openActivityOnMount: boolean
   onCartRefresh: () => void
   cart: Cart | null
   onCartChange: (cart: Cart) => void
@@ -1155,6 +1211,7 @@ function ChatScreen({
   const [checkoutError, setCheckoutError] = useState<string | null>(null)
   const [placedOrder, setPlacedOrder] = useState<Order | null>(null)
   const [openSheet, setOpenSheet] = useState<GuideSheet | null>(null)
+  const [selectedProductViewContext, setSelectedProductViewContext] = useState<GuideViewContext | null>(null)
   const [sheetClosing, setSheetClosing] = useState(false)
   const [sheetMorphOrigin, setSheetMorphOrigin] = useState('50% 100%')
   const bottomRef = useRef<HTMLDivElement>(null)
@@ -1163,13 +1220,16 @@ function ChatScreen({
   const guideCapsuleCartRef = useRef<HTMLButtonElement>(null)
   const guideSheetPanelRef = useRef<HTMLDivElement>(null)
   const streamRef = useRef<AbortController | null>(null)
-  const autoSentRef = useRef(false)
   const [pendingHandoff, setPendingHandoff] = useState<{
     handoffId: string
     targetRole: ChatRole
     promptMode: string
   } | null>(null)
   const promptMarkedRef = useRef<string | null>(null)
+
+  useEffect(() => {
+    if (openActivityOnMount) setOpenSheet('activity')
+  }, [openActivityOnMount])
 
   useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: 'smooth' }) }, [msgs, typing, plan, progressText, openSheet])
 
@@ -1310,7 +1370,11 @@ function ChatScreen({
     initSession(openingGuideSessionId)
   }, [active, openingGuideSessionId, initSession])
 
-  const send = useCallback(async (text: string, clarificationAnswer?: ClarificationAnswer) => {
+  const send = useCallback(async (
+    text: string,
+    clarificationAnswer?: ClarificationAnswer,
+    turnViewContext?: GuideViewContext,
+  ) => {
     if (!text.trim() || !sessionId || typing || confirming || restoring || !openingId) return
     const trimmed = text.trim()
     setMsgs(p => [...p.map(m => m.clarificationOptions ? { ...m, clarificationOptions: undefined } : m), { id: `u-${Date.now()}`, role: 'user', text: trimmed }])
@@ -1338,7 +1402,7 @@ function ChatScreen({
         taskId,
         stateVersion,
         sessionVersion,
-        viewContext,
+        turnViewContext ?? selectedProductViewContext ?? viewContext,
         {
           signal: ac.signal,
           onProgress: (event) => {
@@ -1403,13 +1467,22 @@ function ChatScreen({
       setTyping(false)
       setProgressText(null)
     }
-  }, [sessionId, taskId, stateVersion, sessionVersion, typing, confirming, restoring, viewContext, plan, applyTurnTerminalState, openingId])
+  }, [sessionId, taskId, stateVersion, sessionVersion, typing, confirming, restoring, viewContext, selectedProductViewContext, plan, applyTurnTerminalState, openingId])
 
-  useEffect(() => {
-    if (!autoSend || autoSentRef.current || restoring || !sessionId || !openingId) return
-    autoSentRef.current = true
-    send(autoSend).finally(() => onAutoSendDone?.())
-  }, [autoSend, restoring, sessionId, openingId, send, onAutoSendDone])
+  const handleSelectActivityProduct = useCallback((product: Product) => {
+    const productViewContext: GuideViewContext = {
+      page: 'product',
+      category_id: null,
+      product_id: product.sku_id,
+      activity_id: GREEN_RESET_ACTIVITY_ID,
+    }
+    setSelectedProductViewContext(productViewContext)
+    void send(
+      `我想看看 GREEN RESET｜今天轻一点活动里的「${product.name_zh || product.name}」，请可可帮我介绍一下。`,
+      undefined,
+      productViewContext,
+    )
+  }, [send])
 
   useEffect(() => {
     if (!openingId || !pendingHandoff || pendingHandoff.promptMode !== 'automatic') return
@@ -1490,7 +1563,7 @@ function ChatScreen({
     setStateVersion(0)
     setSessionVersion(0)
     setSessionId(null)
-    autoSentRef.current = false
+    setSelectedProductViewContext(null)
     setPendingHandoff(null)
     if (openingGuideSessionId) {
       await initSession(openingGuideSessionId)
@@ -1761,7 +1834,12 @@ function ChatScreen({
             onMorphEnd={handleGuideSheetMorphEnd}
             onClose={closeGuideSheet}
           >
-            {openSheet === 'activity' && <ActivitySheetContent />}
+            {openSheet === 'activity' && (
+              <ActivitySheetContent
+                disabled={typing || restoring || !sessionId || !openingId}
+                onSelect={handleSelectActivityProduct}
+              />
+            )}
             {openSheet === 'plan' && (
               hasPlan
                 ? (
@@ -2044,8 +2122,7 @@ export default function App() {
   const [cart, setCart] = useState<Cart | null>(null)
   const [activeCategoryId, setActiveCategoryId] = useState<string | null>(null)
   const [shelfSearch, setShelfSearch] = useState('')
-  const [guideFromHome, setGuideFromHome] = useState(false)
-  const [autoSendMessage, setAutoSendMessage] = useState<string | null>(null)
+  const [guideActivityId, setGuideActivityId] = useState<string | null>(null)
   const [opening, setOpening] = useState<OpeningView | null>(null)
   const [openingError, setOpeningError] = useState<string | null>(null)
   const [roleSwitchBusy, setRoleSwitchBusy] = useState(false)
@@ -2071,8 +2148,8 @@ export default function App() {
 
   useEffect(() => { refreshCart() }, [refreshCart])
 
-  const guideViewContext = guideFromHome
-    ? { page: 'home', category_id: null as string | null }
+  const guideViewContext: GuideViewContext = guideActivityId
+    ? { page: 'activity', category_id: null, activity_id: guideActivityId }
     : shelfSearch.trim()
       ? { page: 'search', category_id: null as string | null }
       : view === 'shelf' || view === 'keke'
@@ -2096,7 +2173,7 @@ export default function App() {
     return () => {
       cancelled = true
     }
-  }, [chatOverlayOpen, chatRole, guideViewContext.page, guideViewContext.category_id])
+  }, [chatOverlayOpen, chatRole, guideViewContext.page, guideViewContext.category_id, guideViewContext.activity_id])
 
   const handleFixedRoleSwitch = useCallback(async (target: ChatRole) => {
     if (!opening || roleSwitchBusy) return
@@ -2151,10 +2228,9 @@ export default function App() {
     if (id === 'momo')  { setView(v => v === 'momo' ? 'orders' : 'momo') }
   }
 
-  function handleDietPlan() {
-    setGuideFromHome(true)
+  function handleGreenReset() {
+    setGuideActivityId(GREEN_RESET_ACTIVITY_ID)
     setView('keke')
-    setAutoSendMessage('帮我配一份减脂餐')
   }
 
   return (
@@ -2163,8 +2239,8 @@ export default function App() {
         <div className="flex-1 overflow-hidden flex flex-col">
           {view === 'home' && (
             <LandingScreen
-              onGoShelf={() => { setGuideFromHome(false); setView('shelf') }}
-              onDietPlan={handleDietPlan}
+              onGoShelf={() => { setGuideActivityId(null); setView('shelf') }}
+              onGreenReset={handleGreenReset}
             />
           )}
           {(view === 'shelf' || view === 'keke') && (
@@ -2192,8 +2268,7 @@ export default function App() {
             <ChatScreen
               active={chatRole === 'keke'}
               viewContext={guideViewContext}
-              autoSend={autoSendMessage}
-              onAutoSendDone={() => setAutoSendMessage(null)}
+              openActivityOnMount={guideViewContext.page === 'activity'}
               onCartRefresh={refreshCart}
               cart={cart}
               onCartChange={setCart}

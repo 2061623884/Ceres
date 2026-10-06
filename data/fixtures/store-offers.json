@@ -305,6 +305,18 @@
       "price_fen": 450,
       "available_qty": 30,
       "is_demo": true
+    },
+    {
+      "sku_id": "demo:green-reset-avocado-salad",
+      "price_fen": 2380,
+      "available_qty": 20,
+      "is_demo": true
+    },
+    {
+      "sku_id": "demo:green-reset-fruit-platter",
+      "price_fen": 1980,
+      "available_qty": 20,
+      "is_demo": true
     }
   ]
 }
