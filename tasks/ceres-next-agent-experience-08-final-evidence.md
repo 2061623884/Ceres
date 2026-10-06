@@ -1,6 +1,6 @@
 # 08 同版集成验收与证据整理
 
-状态：进行中（01–07 技术依赖已合入，候选冻结与同版验证准备）。
+状态：进行中（01–07 技术依赖已合入；hybrid 外部阻塞，其余同版验证继续）。
 负责人：实施 Agent；主会话维护本阶段任务，专职测试 Agent 执行全部测试命令。
 规格：[实施规格](../docs/plans/ceres-next-agent-experience-spec.md)；所属任务：[实施总 TASK](ceres-next-agent-experience.md)。
 依赖：[02 饮品与多候选分类筛选](ceres-next-agent-experience-02-drink-candidate-choice.md)；[05 逐模块精简与固定对照](ceres-next-agent-experience-05-prompt-refinement.md)；[06 售后后继续采购与自然回复](ceres-next-agent-experience-06-after-sales-resume.md)；[07 主页专题到限定成品选购](ceres-next-agent-experience-07-themed-products.md)。需首轮双品类、路由/精简、代表闭环及活动全部交付；01、03、04 已由这些依赖传递覆盖。
@@ -31,6 +31,8 @@
 沿用现有架构，只改本票必须内容；无需新建无依据校验、异常兜底或抽象。记录本票源码/数据/模型/Prompt/用例版本及命令、实际结果和证据入口。证据置于 work/ceres-next-agent-experience/对应票号目录；测试、真实采样、前端与人工验收分别记录。
 
 ## 下一步
+
+当前运行条件：候选与整体基线均已用同一冻结外部商品/供给初始化独立数据库，实际各为 67 款商品、67 条可售供给；原始供给 JSON 为 58 条。真实向量构建共失败三次，其中候选首轮仅保留退出码 1、异常捕获缺失；候选诊断重试及基线首次构建均记录 `EMBEDDING_HTTP_ERROR` / HTTP 402，尚未发布向量索引。用户明确选择“先保留 hybrid 阻塞，继续其余验证”。后续真实 Kev/主模型/API/页面验证使用两臂各自重建、与投影匹配的 lexical 索引，记录无向量与实际检索模式；hybrid 不记为通过，不修改产品兜底逻辑。
 
 01–07 已技术交付并合入；06 合并为 `c1fb1403e5367658df1e7d0cfebd0ee9a4ec5931`，对应合并后必要回归 20 项通过。08 使用独立 `work/.ceres-next-08` / `codex/ceres-next-08`，实施者先合最新集成再核对并冻结最小证据 runner；专职 tester 执行全部索引、测试、模型及浏览器命令。
 
