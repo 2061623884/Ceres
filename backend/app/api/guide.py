@@ -160,7 +160,12 @@ def create_session(
             entry_context_json=json.dumps(ctx.model_dump()),
             supply_store_id=ctx.store_id,
             supply_zone_id=ctx.delivery_zone_id,
-            view_context_json=json.dumps({"page": ctx.page, "category_id": ctx.category_id}),
+            view_context_json=json.dumps(
+                ctx.model_dump(
+                    include={"page", "category_id", "activity_id"},
+                    exclude_none=True,
+                )
+            ),
             history_status="empty",
         )
     )

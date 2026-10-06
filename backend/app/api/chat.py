@@ -119,7 +119,7 @@ def route_context(db: Session, opening: Opening, body: ChatTurnRequest) -> dict:
     else:
         view = body.view_context.model_dump() if body.view_context else ctx.view
         selected = {"kind": "shopping", "view": view, "purchase_summary": ctx.purchase_summary}
-        if not ctx.purchase_summary and not view.get("product_id"):
+        if not ctx.purchase_summary and not view.get("product_id") and not view.get("activity_id"):
             selected = None
     recent = [{"role": row["role"], "content": row["content"]} for row in ctx.recent_messages]
     if opening.role == "momo":

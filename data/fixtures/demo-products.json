@@ -1585,6 +1585,72 @@
           "inventory": true
         }
       }
+    },
+    {
+      "sku_id": "demo:green-reset-avocado-salad",
+      "name": "Green Reset Avocado Salad",
+      "name_zh": "牛油果成品沙拉",
+      "category_id": "vegetable",
+      "ingredient_ids": [],
+      "brand": "演示品牌",
+      "image_path": null,
+      "image_status": "placeholder",
+      "source": "demo",
+      "review_status": "approved",
+      "spec_quantity": 280,
+      "spec_unit": "g",
+      "product_type": "prepared_salad",
+      "usage_tags": [
+        "GREEN RESET",
+        "专题活动",
+        "成品沙拉",
+        "即食"
+      ],
+      "metadata": {
+        "catalog_batch": "green-reset-v1",
+        "family_id": "green_reset_finished_food",
+        "item_quantity": 280,
+        "item_unit": "g",
+        "pack_count": 1,
+        "packaging": "bowl",
+        "simulation": {
+          "price": true,
+          "inventory": true
+        }
+      }
+    },
+    {
+      "sku_id": "demo:green-reset-fruit-platter",
+      "name": "Green Reset Fruit Platter",
+      "name_zh": "鲜果成品拼盘",
+      "category_id": "fruit",
+      "ingredient_ids": [],
+      "brand": "演示品牌",
+      "image_path": null,
+      "image_status": "placeholder",
+      "source": "demo",
+      "review_status": "approved",
+      "spec_quantity": 250,
+      "spec_unit": "g",
+      "product_type": "fruit_platter",
+      "usage_tags": [
+        "GREEN RESET",
+        "专题活动",
+        "水果拼盘",
+        "即食"
+      ],
+      "metadata": {
+        "catalog_batch": "green-reset-v1",
+        "family_id": "green_reset_finished_food",
+        "item_quantity": 250,
+        "item_unit": "g",
+        "pack_count": 1,
+        "packaging": "tray",
+        "simulation": {
+          "price": true,
+          "inventory": true
+        }
+      }
     }
   ]
 }
