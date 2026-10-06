@@ -344,6 +344,25 @@ export function clarificationChipLabels(clarifications: PendingClarification[]):
   return labels;
 }
 
+export interface PlanSelection {
+  plan_id: string;
+  plan_version: number;
+  selected_items: Array<{ sku_id: string; quantity: number }>;
+}
+
+export interface ProductComparisonCard {
+  ref: string;
+  sku_id: string;
+  name: string;
+  brand: string;
+  packaging: 'can' | 'bottle';
+  pack_count: number;
+  item_volume_ml: number;
+  total_volume_ml: number;
+  price_fen: number;
+  price_per_litre_yuan: number;
+}
+
 export interface TurnResponse {
   request_id: string;
   session_id: string;
@@ -352,6 +371,9 @@ export interface TurnResponse {
   session_version: number;
   status: string;
   message: string;
+  product_cards?: ProductComparisonCard[];
+  route: string | null;
+  committed: boolean;
   plan?: PlanResponse | null;
   plan_effect?: 'keep' | 'replace' | 'clear';
   pending_clarification?: Record<string, unknown> | null;
@@ -364,6 +386,7 @@ export interface TurnResponse {
 }
 
 export interface SessionResponse {
+  product_cards?: ProductComparisonCard[];
   confirmation_result?: {
     items_added?: Array<{ sku_id: string; quantity: number }>;
     cart_version?: number;
@@ -508,6 +531,7 @@ function buildTurnRequestBody(
     category_id?: string | null;
     product_id?: string | null;
   },
+  planSelection?: PlanSelection,
 ) {
   return {
     request_id: requestId,
@@ -516,10 +540,11 @@ function buildTurnRequestBody(
     expected_state_version: expectedStateVersion,
     expected_session_version: expectedSessionVersion ?? undefined,
     view_context: viewContext,
+    plan_selection: planSelection,
   };
 }
 
-function parseSseTurnEvents(buffer: string): { events: TurnStreamEvent[]; remainder: string } {
+export function parseSseTurnEvents(buffer: string): { events: TurnStreamEvent[]; remainder: string } {
   const parts = buffer.split('\n\n');
   const remainder = parts.pop() ?? '';
   const events: TurnStreamEvent[] = [];
@@ -531,7 +556,7 @@ function parseSseTurnEvents(buffer: string): { events: TurnStreamEvent[]; remain
   return { events, remainder };
 }
 
-function dispatchStreamEvent(event: TurnStreamEvent, callbacks?: TurnStreamCallbacks): TurnResponse | null {
+export function dispatchStreamEvent(event: TurnStreamEvent, callbacks?: TurnStreamCallbacks): TurnResponse | null {
   switch (event.type) {
     case 'accepted':
       callbacks?.onAccepted?.(event);
@@ -582,6 +607,7 @@ export async function sendTurnStream(
     product_id?: string | null;
   },
   callbacks?: TurnStreamCallbacks,
+  planSelection?: PlanSelection,
 ): Promise<TurnResponse> {
   await ensureIdentity();
 
@@ -598,6 +624,7 @@ export async function sendTurnStream(
         requestId,
         expectedSessionVersion,
         viewContext,
+        planSelection,
       ),
     ),
   });
