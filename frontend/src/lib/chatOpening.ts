@@ -8,6 +8,7 @@ import {
   getGuideSession,
   getStoredSessionId,
   storeSessionId,
+  type ClarificationAnswer,
   type PlanSelection,
   type TurnResponse,
   type TurnStreamCallbacks,
@@ -250,6 +251,7 @@ function buildOpeningTurnBody(
   viewContext?: { page: string; category_id?: string | null; product_id?: string | null },
   planSelection?: PlanSelection,
   orderId?: string | null,
+  clarificationAnswer?: ClarificationAnswer,
 ) {
   return {
     request_id: requestId,
@@ -260,6 +262,7 @@ function buildOpeningTurnBody(
     view_context: viewContext,
     plan_selection: planSelection,
     order_id: orderId ?? undefined,
+    clarification_answer: clarificationAnswer,
   };
 }
 
@@ -278,7 +281,7 @@ async function readOpeningStream(
 
   const handleBlock = (block: { type: string; payload: Record<string, unknown> }) => {
     if (block.type === 'service.route') {
-      route = block.payload as ServiceRoutePayload;
+      route = block.payload as unknown as ServiceRoutePayload;
       callbacks.onServiceRoute?.(route);
       return;
     }
@@ -339,6 +342,7 @@ export async function sendOpeningTurnStream(
   callbacks: OpeningTurnCallbacks,
   planSelection?: PlanSelection,
   orderId?: string | null,
+  clarificationAnswer?: ClarificationAnswer,
 ): Promise<OpeningTurnResult | OpeningRouteOnlyResult> {
   await ensureIdentity();
   const res = await fetch(
@@ -358,6 +362,7 @@ export async function sendOpeningTurnStream(
           viewContext,
           planSelection,
           orderId,
+          clarificationAnswer,
         ),
       ),
     },
