@@ -32,4 +32,12 @@
 
 ## 下一步
 
-固定一条具备真实模拟订单与售后资格的代表旅程及失败反例，沿现有交接接口实施。
+完成申请提交为 pending 的购买至售后后续购旅程，以及取消、重复接受、旧交接重放和真实写入后模型失败边界；合最新集成版本后运行受影响回归。真实模型与同版页面证据由 08 补齐，本人验收另列。
+
+## 实施证据（尚未技术交付）
+
+- 公共接口的可可→墨墨及订单页直接墨墨两条失败售后路径，均已形成有效 red→green；实际 `create_return` 返回 `NOT_DELIVERED`，先保留结果再提供由用户选择的续购入口。见 [两路径绿测](../work/ceres-next-agent-experience/06/green/two-aftersales-paths-green.txt)。这不代表申请成功路径已通过。
+- 续接 child 的显示确认、带 ID 切换、路由来源及自然 CTA 分别取得有效 red→green。确定性结果来源记录为 `aftersales_tool_result`，`raw_choice` 为空，未冒充 Kev 推断。见 [显示确认](../work/ceres-next-agent-experience/06/green/child-prompt-displayed-green.txt)、[来源](../work/ceres-next-agent-experience/06/green/continuation-route-provenance-green.txt)、[续购文案](../work/ceres-next-agent-experience/06/green/continuation-copy-green.txt)。
+- 单类型商品回复的原内部标签串已沿公共导购接口 red→green 修复，见 [商品回复](../work/ceres-next-agent-experience/06/green/snack-natural-reply-green.txt)。这只是可观察回复边界，自然表达仍需实际对话审读。
+- 前端锁定 pnpm 10.34.3 构建通过，见 [build](../work/ceres-next-agent-experience/06/green/frontend-build.txt)；先前全局 pnpm 11.7 的执行失败属于工具链，不计产品 red。受控页面续接点击尚在准备。
+- 第一条失败售后 red 曾发生源码冻结重叠，早期记录不计有效失败；使用重新冻结的 [有效 red](../work/ceres-next-agent-experience/06/red/failed-aftersales-resume-red-frozen.txt)。递归类型声明缺少 future annotations 的早期 setup 错误也不计产品 red。

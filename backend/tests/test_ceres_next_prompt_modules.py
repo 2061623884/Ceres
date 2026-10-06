@@ -13,16 +13,23 @@ from support import create_session, post_turn, send_turn
 from test_semantic_phase1_purchase import indexed_client  # noqa: F401
 
 
+# Full request-body measurement from the same public fixture at frozen HEAD
+# 481e750; see work/ceres-next-agent-experience/05/controlled-before.
+FROZEN_CATEGORY_TYPE_FIRST_BODY_BYTES = 15385
+
+
 def test_category_exploration_sends_type_first_guidance_to_the_model(
     indexed_client, kev_api, internal_trace_headers, monkeypatch
 ):
     """A broad category prompt must agree with the API's current type choice."""
     kev_api["choices"]["capability"] = "category_exploration"
     sent_requests = []
+    sent_request_bodies = []
 
     def respond(request):
         body = json.loads(request.content)
         sent_requests.append(body)
+        sent_request_bodies.append(request.content)
         if len(sent_requests) == 1:
             content = {
                 "target": {"kind": "category", "name": "零食", "intent": "explore"},
@@ -66,6 +73,10 @@ def test_category_exploration_sends_type_first_guidance_to_the_model(
 
     actual_system_prompt = sent_requests[0]["messages"][0]["content"]
     assert "先推荐一款匹配商品并说明理由" not in actual_system_prompt
+    assert len(sent_request_bodies[0]) < FROZEN_CATEGORY_TYPE_FIRST_BODY_BYTES, (
+        f"full outbound request body did not shrink: {len(sent_request_bodies[0])} "
+        f">= {FROZEN_CATEGORY_TYPE_FIRST_BODY_BYTES}"
+    )
 
 
 def test_guide_and_mercury_send_the_shared_reply_style_through_public_routes(
