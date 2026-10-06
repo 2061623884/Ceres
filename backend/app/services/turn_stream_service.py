@@ -225,6 +225,7 @@ class TurnStreamService:
         view_context: dict[str, Any] | None,
         plan_selection: dict[str, Any] | None,
         handoff_recent_messages: list[dict[str, str]] | None,
+        clarification_answer: dict[str, Any] | None,
         event_queue: queue.Queue,
         seq_holder: dict[str, int],
         task_id_holder: dict[str, str | None],
@@ -259,6 +260,7 @@ class TurnStreamService:
                 expected_session_version=expected_session_version,
                 view_context=view_context,
                 plan_selection=plan_selection,
+                clarification_answer=clarification_answer,
                 handoff_recent_messages=handoff_recent_messages,
                 progress=progress,
                 should_stop=stop_event.is_set,
@@ -303,6 +305,7 @@ class TurnStreamService:
         view_context: dict[str, Any] | None,
         plan_selection: dict[str, Any] | None = None,
         handoff_recent_messages: list[dict[str, str]] | None = None,
+        clarification_answer: dict[str, Any] | None = None,
     ) -> AsyncGenerator[dict[str, Any], None]:
         # Ownership check happens before any work is started; the request-level
         # receipt decides replay/conflict/in-progress inside the worker.
@@ -347,6 +350,7 @@ class TurnStreamService:
                 "expected_session_version": expected_session_version,
                 "view_context": view_context,
                 "plan_selection": plan_selection,
+                "clarification_answer": clarification_answer,
                 "handoff_recent_messages": handoff_recent_messages,
                 "event_queue": event_queue,
                 "seq_holder": seq_holder,

@@ -361,6 +361,9 @@ class ReadTools:
                     "review_status": hit.get("review_status"),
                     "stock_verified": hit.get("stock_verified"),
                     "unknown_constraints": hit.get("unknown_constraints"),
+                    "category_id": hit.get("category_id"),
+                    "product_type": hit.get("product_type"),
+                    "usage_tags": hit.get("usage_tags") or [],
                 }
             )
         return {

@@ -71,6 +71,8 @@ class TurnRuntime:
     handoff_recent_messages: list[dict[str, Any]] | None = None
     #: The displayed plan version and actual UI selection, never model input or context.
     plan_selection: dict[str, Any] | None = None
+    #: The currently pending question and option the shopper selected in this request.
+    clarification_answer: dict[str, Any] | None = None
     store_id: str = "store-demo-01"
     delivery_zone_id: str = "zone-default"
     #: The completed HTTP response for this request. Never persisted state.

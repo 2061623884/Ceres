@@ -663,9 +663,13 @@ def _apply_batch(
 
 
 def _stated_constraints(proposal: Any) -> dict[str, Any]:
-    """The durable user facts this request stated on its read requests."""
+    """The durable user facts this request stated for its goal or reads."""
     excluded: list[str] = []
     budget: int | None = None
+    quantity = getattr(proposal, "stated_quantity", None)
+    goal = proposal.understanding.new_goal
+    if goal is not None and goal.constraints.budget_yuan is not None:
+        budget = round(goal.constraints.budget_yuan * 100)
     specification: dict[str, str] = {}
     for item in [*proposal.lookups, *proposal.queries]:
         excluded.extend(getattr(item, "excluded_ingredients", []) or [])
@@ -679,6 +683,8 @@ def _stated_constraints(proposal: Any) -> dict[str, Any]:
         result["excluded_ingredients"] = unique
     if budget is not None:
         result["budget_fen"] = budget
+    if quantity is not None:
+        result["quantity"] = quantity
     if specification:
         result["specification"] = specification
     return result
@@ -718,6 +724,8 @@ def _persist_session_constraints(
     ]
     if budgets:
         merged["budget_fen"] = min(budgets)
+    if stated.get("quantity") is not None:
+        merged["quantity"] = stated["quantity"]
     specification = {
         **(existing.get("specification") or {}), **(stated.get("specification") or {}),
     }

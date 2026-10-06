@@ -78,6 +78,39 @@ def gate_pending(
     return pending
 
 
+def snack_type_clarification(read_results: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Ask for a snack product type when verified reads span multiple types."""
+    snack_types: dict[str, str] = {}
+    for result in read_results:
+        if result.get("kind") != "lookup" or result.get("lookup_kind") != "product":
+            continue
+        for match in result.get("matches") or []:
+            tags = list(match.get("usage_tags") or [])
+            product_type = match.get("product_type")
+            if (
+                match.get("category_id") == "snack"
+                and match.get("stock_verified") is True
+                and not match.get("unknown_constraints")
+                and product_type
+                and len(tags) > 1
+                and tags[0] == "零食"
+            ):
+                snack_types.setdefault(str(product_type), str(tags[1]))
+    if len(snack_types) <= 1:
+        return []
+    return [
+        PendingClarification(
+            question_id="q-" + uuid4().hex[:12],
+            question="想选哪类零食？",
+            options=[
+                {"id": "product_type:" + product_type, "label": label}
+                for product_type, label in snack_types.items()
+            ],
+            slot="product_type",
+        ).to_dict()
+    ]
+
+
 @dataclass
 class ContextPlan:
     decision: Any = None

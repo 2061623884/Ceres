@@ -33,8 +33,23 @@ def test_snack_selection_requires_confirmation_and_preserves_cart_on_no_match(
     shown = []
 
     def display(request):
-        rows = request["candidates"]["products"]
-        assert {row["target_id"] for row in request["query_results"][0]["matches"]} == {CHIPS, CRACKERS}
+        matches = [
+            row
+            for result in request["query_results"]
+            for row in result["matches"]
+        ]
+        assert {CHIPS, CRACKERS}.issubset(
+            {row["target_id"] for row in matches}
+        )
+        matching_refs = {
+            row["ref"]
+            for row in matches
+            if row["target_id"] in {CHIPS, CRACKERS}
+        }
+        rows = [
+            row for row in request["candidates"]["products"]
+            if row["ref"] in matching_refs
+        ]
         # Display order differs from lookup order, so an ordinal must use refs.
         shown.extend(reversed(rows))
         return {"reply": "可选这两款零食。", "display_refs": [row["ref"] for row in shown]}
@@ -51,8 +66,10 @@ def test_snack_selection_requires_confirmation_and_preserves_cart_on_no_match(
         return {"reply": "没有找到匹配的冰淇淋商品。", "display_refs": []}
 
     provider = semantic_provider([
-        {"target": {"kind": "category", "name": "零食", "intent": "explore"},
-         "lookups": [{"kind": "product", "query": "零食"}]},
+        {"lookups": [
+            {"kind": "product", "query": "原味薯片"},
+            {"kind": "product", "query": "苏打饼干"},
+        ]},
         display, select, {"plan_act": "none", "reply": "清单已准备好，等待确认。"},
         {"target": {"kind": "category", "name": "冰淇淋", "intent": "explore"},
          "lookups": [{"kind": "product", "query": "冰淇淋"}]},
@@ -63,7 +80,7 @@ def test_snack_selection_requires_confirmation_and_preserves_cart_on_no_match(
     ])
     sid = create_session(client)
     baseline = client.get("/api/v1/cart").json()
-    first = send_turn(client, sid, "来点零食")
+    first = send_turn(client, sid, "比较一下原味薯片和苏打饼干")
     assert first["plan"] is None and first["plan_effect"] == "keep"
     assert client.get("/api/v1/cart").json() == baseline
     second = send_turn(client, sid, message, first)
@@ -111,7 +128,7 @@ def test_snack_selection_requires_confirmation_and_preserves_cart_on_no_match(
 @pytest.mark.parametrize(
     "message,category,lookup_query,sku_id,tags,name_tokens",
     [
-        ("来点零食", "零食", "零食", CRACKERS,
+        ("想看看苏打饼干", "饼干", "饼干", CRACKERS,
          ("零食", "即食"), ("苏打饼干", "100克", "盒装")),
         ("喝点甜的", "甜味饮品", "甜味", PEACH_JUICE,
          ("甜味", "甜而不腻"), ("桃汁饮料", "450毫升", "瓶装")),

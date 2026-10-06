@@ -87,6 +87,14 @@ def plan_context(
     if session is None:
         return None
     context = turn_context.load_context(runtime.db, session) or {}
+    if runtime.clarification_answer is not None:
+        proposal = dataclasses.replace(
+            proposal,
+            resolved_questions=list(dict.fromkeys([
+                *proposal.resolved_questions,
+                runtime.clarification_answer["question_id"],
+            ])),
+        )
     if decision is not None and decision.mutation_action == "cancel_task":
         from app.agent.turn_context_plan import ContextPlan
 
