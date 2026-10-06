@@ -33,6 +33,8 @@
 
 实施 `677065ef88403f1f3b8b0b26335ffee5ab6023bb` 已无冲突合入 `090ed10c6bad048ff4d7cb5af24a8cd956c539f2`；[合并回执](../work/ceres-next-agent-experience/merges/07-receipt.md)。08 用重建后的同版供给、索引和真实页面完成其余验证。
 
+文案补提交 `d1e41498dbc9345a34a915b72de54da263999f8f` 已合入 `fcb345c85b3b4193f707456e254cf2d8a8b62953`：卡片使用“专题限定”，无障碍名称使用“专题活动”，保留“今日活动”入口，不暗示没有数据依据的活动期限。[补充回执](../work/ceres-next-agent-experience/merges/07-supplement-receipt.md)。该两处文字修改未单独增测，最终同版页面检查归 08。
+
 ## 实施证据
 
 主页现有卡片进入 GREEN RESET｜今天轻一点，在可可内展示简短介绍及限定成品。仅补 `demo:green-reset-avocado-salad`、`demo:green-reset-fruit-platter` 两个成品和对应模拟 Offer，复用既有桃汁；价格读取商品接口，无虚构期限或折扣。没有食材展开、评论或运营功能。

@@ -1,6 +1,6 @@
 # 05 逐模块精简与固定对照
 
-状态：待开始。
+状态：进行中（04 已技术交付，独立冻结品类模块精简前后版本）。
 负责人：实施 Agent；主会话维护本阶段任务，专职测试 Agent 执行全部测试命令。
 规格：[实施规格](../docs/plans/ceres-next-agent-experience-spec.md)；所属任务：[实施总 TASK](ceres-next-agent-experience.md)。
 依赖：[04 两角色 Prompt 模块化](ceres-next-agent-experience-04-prompt-modules.md)。依赖 04 已验证的模块组织方式与精简前阶段基线。
@@ -25,7 +25,7 @@
 
 ## 修改归属与证据
 
-本票只负责精简与单变量对照；若与 06 触及共用表达或墨墨规则，按已确认顺序串行登记版本，保持比较可解释。
+本票只精简可可 category_exploration 能力规则及确实相关的该能力示例，不改公共表达、Mercury 或其他能力。与 06 按文本归属并行；真实对照在本票独立 before/candidate 完成，采样后再合最新集成并做受影响回归，不把 06 的变化混入对照。
 
 沿用现有架构，只改本票必须内容；无需新建无依据校验、异常兜底或抽象。记录本票源码/数据/模型/Prompt/用例版本及命令、实际结果和证据入口。证据置于 work/ceres-next-agent-experience/对应票号目录；测试、真实采样、前端与人工验收分别记录。
 

@@ -1,6 +1,6 @@
 # 06 售后后继续采购与自然回复
 
-状态：待开始。
+状态：进行中（04 已技术交付；与 05 按明确文本归属并行）。
 负责人：实施 Agent；主会话维护本阶段任务，专职测试 Agent 执行全部测试命令。
 规格：[实施规格](../docs/plans/ceres-next-agent-experience-spec.md)；所属任务：[实施总 TASK](ceres-next-agent-experience.md)。
 依赖：[04 两角色 Prompt 模块化](ceres-next-agent-experience-04-prompt-modules.md)。复用 04 的角色/公共表达组织方式，以及其上游 01 已确定的选项承接契约；05 是推荐先行的精简票，不是该链路的运行前置。
@@ -26,7 +26,7 @@
 
 ## 修改归属与证据
 
-本票负责有界续接数据与继续入口、墨墨及共用表达改进；依照既定顺序协调 05 的 Prompt 修改，避免把新表达混入精简对照。
+本票负责有界续接数据与继续入口、墨墨及共用表达改进，不改可可 category_exploration 模块或其示例。05 在独立 before/candidate 树完成真实精简对照，再合最新集成；本票交付合最新 integration，单独登记源码与实际效果。
 
 沿用现有架构，只改本票必须内容；无需新建无依据校验、异常兜底或抽象。记录本票源码/数据/模型/Prompt/用例版本及命令、实际结果和证据入口。证据置于 work/ceres-next-agent-experience/对应票号目录；测试、真实采样、前端与人工验收分别记录。
 
