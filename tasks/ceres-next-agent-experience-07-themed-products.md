@@ -1,6 +1,6 @@
 # 07 主页专题到限定成品选购
 
-状态：待开始。
+状态：进行中。
 负责人：实施 Agent；主会话维护本阶段任务，专职测试 Agent 执行全部测试命令。
 规格：[实施规格](../docs/plans/ceres-next-agent-experience-spec.md)；所属任务：[实施总 TASK](ceres-next-agent-experience.md)。
 依赖：[01 零食分类气泡到确认加购](ceres-next-agent-experience-01-snack-choice.md)。复用 01 已可用的前端结构化选择与选购确认承接，避免活动建立第二条点选加购路径。
@@ -31,4 +31,4 @@
 
 ## 下一步
 
-依据参考选择一个简单专题及可供给成品清单，接入现有主页入口。
+独立树 `work/.ceres-next-07` 从最新 integration 实施；主题沿 GREEN RESET｜今天轻一点参考，最少补成品沙拉和水果拼盘，复用现有成品饮品。先以公开聊天及真实主页点击形成有效 red，再复用点选和确认流程贯通。
