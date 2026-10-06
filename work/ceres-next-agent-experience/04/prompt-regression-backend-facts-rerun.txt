@@ -1,0 +1,21 @@
+semantic_prompt=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend\app\prompts\semantic.py
+live_semantic_provider=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend\app\llm\live_semantic_provider.py
+retrieval_service=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend\app\services\retrieval_service.py
+
+worktree=work/.ceres-next-04
+cwd=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend
+interpreter=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+PYTHONPATH=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend
+command=python -m pytest -q --tb=line -x tests\test_ceres_next_prompt_modules.py tests\test_semantic_transport.py tests\test_live_retrieval_wiring.py tests\test_v3_policy_consultation.py tests\test_v2_order_mercury.py tests\test_semantic_phase1_purchase.py tests\test_snack_selection.py::test_single_category_recommendation_uses_selected_sellable_sku_evidence tests\test_snack_selection.py::test_unknown_sugar_content_returns_no_product_recommendation_or_plan --basetemp=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\04\tmp-regression-facts
+
+........................F
+================================== FAILURES ===================================
+E   assert 400 == 200
+E   response error details redacted: controlled callback assertion failed while checking prompt composition; test source assertions are at test_v3_policy_consultation.py:70-71.
+C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend\tests\test_v3_policy_consultation.py:93: assert 400 == 200
+=========================== short test summary info ===========================
+FAILED tests/test_v3_policy_consultation.py::test_keke_policy_answer_uses_conditions_instead_of_product_recommendation
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!
+1 failed, 24 passed in 9.68s
+
+exit_code=1

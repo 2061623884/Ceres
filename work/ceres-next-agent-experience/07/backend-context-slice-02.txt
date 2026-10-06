@@ -1,0 +1,18 @@
+cwd=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-07\backend
+python=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+PYTHONPATH=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-07\backend
+PYTHONUTF8=1
+command: python -m pytest -q --tb=line -x tests\test_ceres_next_theme_activity.py --basetemp=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\07\backend-context-slice-02-tmp
+app_source=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-07\backend\app\__init__.py
+retrieval_source=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-07\backend\app\services\retrieval_service.py
+.F
+================================== FAILURES ===================================
+E   assert 404 == 200
+     +  where 404 = <Response [404 Not Found]>.status_code
+C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-07\backend\tests\test_ceres_next_theme_activity.py:116: assert 404 == 200
+=========================== short test summary info ===========================
+FAILED tests/test_ceres_next_theme_activity.py::test_theme_finished_goods_have_simulated_sellable_offers
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!
+1 failed, 1 passed in 5.27s
+
+exit_code=1

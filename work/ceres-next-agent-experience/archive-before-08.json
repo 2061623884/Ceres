@@ -1,0 +1,750 @@
+[
+  {
+    "path": "00-preparation\\testing-environment.md",
+    "sha256": "F2D31F4EDD90C232231C42B6FFA554803A5B4D7706128C69136013095BB98A5C"
+  },
+  {
+    "path": "00-preparation\\source-baseline.json",
+    "sha256": "82C7D1E539526FEE72C45A2FC404A663886E762AD7C063E33A198CE12E82DF7F"
+  },
+  {
+    "path": "00-preparation\\prepare_integration.py",
+    "sha256": "3D83E99BD78B61A0EFF72DBD18D1A369D046DF8E01C5620EE514838F75E359A2"
+  },
+  {
+    "path": "00-preparation\\playwright-install-output.txt",
+    "sha256": "10CEB4826A46563D469983C4DBA7A4B53C28585E6F538EFD914A72437F6C740D"
+  },
+  {
+    "path": "00-preparation\\integration-frontend-pnpm-install.txt",
+    "sha256": "C06A8B0A328B3D5915BB2261FC28D8F24C982F506E4FD180B9AF5FC8B9F5AF7A"
+  },
+  {
+    "path": "00-preparation\\integration-record.json",
+    "sha256": "B54669EA10FB710CCE0E243FCBD37FF9AAB71CA4BB18882D3327178EDB7EDD14"
+  },
+  {
+    "path": "01\\buy-journey-green-04-output.txt",
+    "sha256": "329F2A4D71D7E65B0E3A1EFABFB40628BBA152D3E0AEDABAAC0AAE5B72206E60"
+  },
+  {
+    "path": "01\\text-answer-05-output.txt",
+    "sha256": "F3E3A229395DE9268A29200FB3E15A1C72437C682403728FC57001ED45287275"
+  },
+  {
+    "path": "01\\buy-intent-green-02-output.txt",
+    "sha256": "4BAB39C7B5529D7A1BD249CB842C7B081493CE3648A7FC11904FE3D03E9A4CB6"
+  },
+  {
+    "path": "01\\01-red-test-log.md",
+    "sha256": "2D8DEE0356209969D24DFCEFBA04D6776ECF55071A3DCD0A9C58D54385C29B70"
+  },
+  {
+    "path": "01\\buy-intent-red-01-output.txt",
+    "sha256": "D24CD6895F5A4A2B17405C344D161D46A41B77685FA9C07B26C6C8228A7A624E"
+  },
+  {
+    "path": "01\\buy-journey-red-03-output.txt",
+    "sha256": "E9CD791FDF9F40F7DD1937D8A0A99B72958DB96B81A3CCF4FEEFAFEB6A3E4C3A"
+  },
+  {
+    "path": "merges\\07-supplement-receipt.md",
+    "sha256": "DB852CE3DD1FB60E1E80B6F9746E8D87D6AA6F17A689BAE780F3A10C6AB5A84B"
+  },
+  {
+    "path": "merges\\07-receipt.md",
+    "sha256": "A1EEF5F3DCDB44E43F4EC16F19533AE4E5B52D5CD9E605D7DC097934174FEC9A"
+  },
+  {
+    "path": "merges\\05-receipt.md",
+    "sha256": "D05ECA5A442981893305B044253ACDA727EDCCA706CCB1FEBE72A2A401F1502F"
+  },
+  {
+    "path": "merges\\04-receipt.md",
+    "sha256": "B206733CF53452F5E1B7315DD39086D49224C3D636D7E86A7A783FFDBC403D99"
+  },
+  {
+    "path": "merges\\03-receipt.md",
+    "sha256": "7B0EDC79CAD3FE026220AD1B3AEA94F32E30CE4A5A0F2E468B9B49377237FFAD"
+  },
+  {
+    "path": "merges\\02-receipt.md",
+    "sha256": "6180459BF4475C4454686FA6136AA2CAAF796CC04EA6C7A9C55673EA28FC0BE0"
+  },
+  {
+    "path": "merges\\01-receipt.md",
+    "sha256": "FA576BBF202BAC44C22311063C6BA9361BAD6E8FE2AF83C4EA06A5A01A663599"
+  },
+  {
+    "path": "01\\identity-04-output.txt",
+    "sha256": "2DF8A60A1735DCCA17EB17DC95FA45D81C84DB5E4C471A3DCAFCF978D6F0DFA5"
+  },
+  {
+    "path": "01\\buy-journey-green-05-output.txt",
+    "sha256": "740A250A30A462E1E94C64A0E20220394CD7B52E30FB00AA66AAEF803D1F830F"
+  },
+  {
+    "path": "07\\pnpm-install-output.txt",
+    "sha256": "9B4A844EB662E0450662DF5D439D359EAF213A78239AF01378A39913D5C5CC3E"
+  },
+  {
+    "path": "07\\frontend-tsc.txt",
+    "sha256": "AA4A7C91B00A097E30C8108E4DC2CDB4AB54855A6C7417DBFF5F447F95B20E3A"
+  },
+  {
+    "path": "07\\frontend-tsc-pnpm10.txt",
+    "sha256": "FE3040E17F8BA6EB6D4C962E94B139A8A235C9B7161CF6BBE658F3CBA2BA8088"
+  },
+  {
+    "path": "07\\backend-red-valid-01.txt",
+    "sha256": "1A67AB1F42DADA1E763E1190964187C1058CBAAB87A7DD569DECB02D4DA52A1B"
+  },
+  {
+    "path": "01\\final-01-aggregate-output.txt",
+    "sha256": "26658546372118F67788A8586600AC392F60021B01203DEF9AB253A5A3AA2886"
+  },
+  {
+    "path": "07\\backend-red-initial.txt",
+    "sha256": "030C007D3E9A7A231FE92069421849401145F5624100C0F19FEBED52D64C3DA7"
+  },
+  {
+    "path": "07\\backend-context-slice-02.txt",
+    "sha256": "94E095F7E488848E21F4BD7D00A42A281E7156C1829CCA8F78EFACF5FCCC7046"
+  },
+  {
+    "path": "07\\backend-activity-offers-green-01.txt",
+    "sha256": "6F97ECDE78BA04F0FB2326F57A14A851703794302CA5E803A52D4AA9A73934C9"
+  },
+  {
+    "path": "07\\activity-ui-red-output.txt",
+    "sha256": "06A73E8811FB87F6D51824EB40E547FA2EF5AC9C2BB7EA7DEE98B13DE5EAC7F4"
+  },
+  {
+    "path": "07\\activity-ui-probe.mjs",
+    "sha256": "107547968A377407649868CFEBFC1E170C7343C92E35E0D368878CC26F9667D5"
+  },
+  {
+    "path": "07\\activity-ui-context-red-01.txt",
+    "sha256": "FB13C839BCF67FF2D75B0E6F9999B374AAC8DD5FFEC7D3555E9B2DACCB0DF718"
+  },
+  {
+    "path": "07\\activity-ui-context-green-02.txt",
+    "sha256": "EE1A8072A545EDA209BB6228731E37E3F55CC3062388B5BBFEC95F75540E68B1"
+  },
+  {
+    "path": "01\\snack-regression-09-output.txt",
+    "sha256": "21836118B6B15D1F6F54DA89A50109697D0341486A8FDF0967DD8E633597904A"
+  },
+  {
+    "path": "01\\green-03-output.txt",
+    "sha256": "3F607A09BB8AE9023EF48A53AA65BD168E91E91DD09A86BB340322AA711A3A15"
+  },
+  {
+    "path": "01\\green-suite-06-rerun-output.txt",
+    "sha256": "8BEC4E6C87F1FB178F5F7CA6BFE46068C70E903B120A22B14DAED29146DDB2B7"
+  },
+  {
+    "path": "01\\green-suite-06-output.txt",
+    "sha256": "A5837B65CC3E30E4876C77A3ABAB23751840130E908767DF9478F93C0A674450"
+  },
+  {
+    "path": "01\\green-02-public-output.txt",
+    "sha256": "CB6EE5183DC7359D6E503D07EF660A819110DA942EF7213AAD935A82B92DF5BE"
+  },
+  {
+    "path": "04\\prompt-regression-backend-modules-rerun.txt",
+    "sha256": "8B8EF3778A9C5358199ABC1BEAF6B6A2AD5EF4DA480F21938B167870201EBB97"
+  },
+  {
+    "path": "04\\green-shared-style-output.txt",
+    "sha256": "838122FFAD4B15BC6DAC315B0143DDCCBE88038B68F138A15D2E46D9B986EFAA"
+  },
+  {
+    "path": "01\\green-01-output.txt",
+    "sha256": "171B37D6AF0AFB34127B672A30909B5CA3C229A988EEBB1A0EEA691B68A1C0B4"
+  },
+  {
+    "path": "04\\green-category-types-output.txt",
+    "sha256": "D10F359469FA2487925598221775B5220D7ABEDA981F9E7826DFC44AF8B25FF6"
+  },
+  {
+    "path": "04\\green-category-result-facts.txt",
+    "sha256": "22DB1495FF5C2FA5F233F9DD1D2C30596B0BE73A41A1A934A32F6D183E4DAA05"
+  },
+  {
+    "path": "04\\collect_prompt_sample.py",
+    "sha256": "F5D050CF73A4959B27CB2971D1CADC8B22997542E2B215284996B87E22F07E6F"
+  },
+  {
+    "path": "04\\baseline-freeze.md",
+    "sha256": "1FEDB8D80147A9DE527587607EB9B15FB63D00809017E71346A79A826CCC21DF"
+  },
+  {
+    "path": "04\\green-shared-style-guidance-output.txt",
+    "sha256": "63298FFECA1DE8E1D4847AC8AD3A2604E9F9A3AF272069A0B5058F8DE526068B"
+  },
+  {
+    "path": "01\\snack-regression-08-output.txt",
+    "sha256": "D1150D1AE51D3A268667F3714C11BD20D83A57A8162F94643C954C25F6A944F8"
+  },
+  {
+    "path": "03\\purchase-direct-red-01-output.txt",
+    "sha256": "22E39DEDCB319C376604DA0DF620A965A41BE564E7681A5168D0144FE3F4A15B"
+  },
+  {
+    "path": "04\\prompt-modules-green-01.txt",
+    "sha256": "FC72508A5A913BD1060C93C4C65BFE78BC191B74B795E8FA780B684E4CED17AB"
+  },
+  {
+    "path": "04\\green-shared-style-diagnostic-output.txt",
+    "sha256": "6EDD3C092F84A5E61DDFE1CBE7AD106008AAE29B7F224AC48E2091676CA4B35F"
+  },
+  {
+    "path": "04\\green-purchase-pending-rule.txt",
+    "sha256": "9DFE3CEAAB63C7E23BB1F5714167276903BF1A2AF1103C6520C0B5785DE7B0D9"
+  },
+  {
+    "path": "04\\green-direct-category-prompt.txt",
+    "sha256": "68E42C09C986E93311A9976E687E2C556591098A3C56A75AFB67A86DA9EB979B"
+  },
+  {
+    "path": "03\\purchase-direct-green-02-output.txt",
+    "sha256": "84F673423B38BD258B7FBC7FB9E71C47BEB43E60F7702A34EF1BA88CB0BC2A73"
+  },
+  {
+    "path": "04\\prompt-regression-backend-facts-rerun.txt",
+    "sha256": "365B343FE5466558CEDDD2D5CD414ED1566AEEAB8209AD454D4354163BC25B9B"
+  },
+  {
+    "path": "04\\prompt-regression-backend-facts-rerun-02.txt",
+    "sha256": "5A19AF93ACC3843A453EC98796371C9C14B269E1225F632268A9CA641EA0E601"
+  },
+  {
+    "path": "04\\prompt-modules-green-03.txt",
+    "sha256": "95035D6F2183835324A6428110319C72EA395A8E8F3C59C0DBCEE38EA643F120"
+  },
+  {
+    "path": "04\\integration-prompt-seam-regression.txt",
+    "sha256": "6FDFA98AD7C19E81A7E475AB3A70A22D857C9BBFEE40F8ED42DE826F0090629E"
+  },
+  {
+    "path": "03\\multi-target-public-red-01-output.txt",
+    "sha256": "0952C45587A69C0F546D5679623FC3E0F889C630866858AE50C9D18C4B2AD17B"
+  },
+  {
+    "path": "03\\kev-openapi-summary.txt",
+    "sha256": "1F78BC5CA4ED8B944AD210F14107981173166D76C8F4BD41395C411C094F8D54"
+  },
+  {
+    "path": "03\\kev-live-capability-snack-choice-n1.json",
+    "sha256": "570FB27B0AFAE8E9331F159657D647627FBFCECD33ED6A8536FF92D7187A9ADC"
+  },
+  {
+    "path": "03\\kev-live-capability-snack-choice-n1-output.txt",
+    "sha256": "FD95A74D176CA371A09EAA2F8EC2ECDF081B4A92BC51357ECA0F51F99DC165A1"
+  },
+  {
+    "path": "03\\kev-live-capability-samples-n3.json",
+    "sha256": "2E36A61C38F43F3374446266ACA52CFD73B3279B20EF492547E3CD1CB0C1CB4E"
+  },
+  {
+    "path": "03\\kev-live-capability-samples-n3-output.txt",
+    "sha256": "CEE84D66B80A3226B9491ED63204795F80773F5F2DD67C98DB78B5650AE153FB"
+  },
+  {
+    "path": "04\\mercury-standalone-prompt-regression.txt",
+    "sha256": "EAED23555D45C01E4C2530034BF6960FFBFA0D3B6AB5624DC69500541BC870AD"
+  },
+  {
+    "path": "03\\kev-capability-red-02-rerun-provenance.txt",
+    "sha256": "DDC81FEB9A9A192562021FCA062D9DEED850445B06C9412BD3840555AF64A6EB"
+  },
+  {
+    "path": "03\\kev-capability-red-02-rerun-output.txt",
+    "sha256": "B539970D4CD5FD00B68242F639FD457AB2FCA439315E667EB1E860C139B70EE9"
+  },
+  {
+    "path": "03\\kev-capability-red-02-output.txt",
+    "sha256": "1C3DED9B5975A20629D3597E794A03AD69B949F8A99B819360F8496BD3E7F838"
+  },
+  {
+    "path": "04\\live-before\\snack_type_first\\snack_type_first.json",
+    "sha256": "603A4949EE655467065D9335D3779BC4974BF82E84F82B180ADEBC6BE8794DCB"
+  },
+  {
+    "path": "03\\kev-capability-red-01-output.txt",
+    "sha256": "58904D00A51E8121F1DCA06C75A3179AF9127DE427841345A3C243F6478EE777"
+  },
+  {
+    "path": "04\\prompt-modules-green-02.txt",
+    "sha256": "3AC5C044EB5F156664FEEFFB3A0B29AAF0E77C0C29BD57FA58982F62A4A8D666"
+  },
+  {
+    "path": "03\\kev-capability-green-01-output.txt",
+    "sha256": "06626C53E3AFF64D5157EBCB02F5D434BDC7CD746992493F742E5E4BB2E1DDE6"
+  },
+  {
+    "path": "04\\green-shared-style-rerun-output.txt",
+    "sha256": "844D35F4B6F7CCD40A33DB3E0319318ED5D109EC5A4122BB5674AB88DBA01FA3"
+  },
+  {
+    "path": "04\\live-before\\snack_type_first\\command.txt",
+    "sha256": "3FEB5E2B7EAAA2B9FA931E522A7AE7D70E268040475B0702636B9518CDBAA6DF"
+  },
+  {
+    "path": "04\\live-before\\momo_selected_order_return\\momo_selected_order_return.json",
+    "sha256": "2BC655179526565B8127EFFAA7BF246C5D7C65B9EF7621157FB63B840D1D260B"
+  },
+  {
+    "path": "01\\snack-regression-07-output.txt",
+    "sha256": "AD321A6C0877BD705B52E34559EB4F13B8E558A6AAF1CC596FD582258EC0B208"
+  },
+  {
+    "path": "01\\shared-selection-contract.md",
+    "sha256": "8BFDFBEBFC8C1CB428BF3F5F9BA01CB119C2289C5997B8280BE5D1F2EFB4DACC"
+  },
+  {
+    "path": "04\\live-before\\same_category_cola_filter\\same_category_cola_filter.json",
+    "sha256": "579C519DC1B44D0B82C289DF1021C08EFB1EBF4D6EEE8CDD872EEA4D3C5AC197"
+  },
+  {
+    "path": "04\\live-before\\momo_selected_order_return\\command.txt",
+    "sha256": "268E8E6114F85454156AE51259623C3953C8BBAF79CDA64F1C9029307DA8EF1D"
+  },
+  {
+    "path": "04\\live-before\\same_category_cola_filter\\command.txt",
+    "sha256": "21F6A04976F7B8325412CC42228BA732FFF17C8BBCD2AB0FBF5BCBDC481FBF0C"
+  },
+  {
+    "path": "04\\live-before\\keke_return_policy\\keke_return_policy.json",
+    "sha256": "5242691C0A535487D0EBA45607B1CD0C5C6B3B656B942D2AB0C76760595E748E"
+  },
+  {
+    "path": "01\\red-03-output.txt",
+    "sha256": "6A676BDEC4A8B9A43E193BEF752D233D06F530A0AE06B7BDAE5D4369AAB4150B"
+  },
+  {
+    "path": "01\\red-03-metadata-diagnostic-output.txt",
+    "sha256": "1AA7B2087086E3ABECEFCE5701DF7A0ADA8F16284CA75A3CF1DD030AF244AA7B"
+  },
+  {
+    "path": "04\\live-before\\keke_return_policy\\command.txt",
+    "sha256": "1ACCF7F1889141DADEE9A5DBD598FBBB758C40B03698B186E8CF7A39F08215A5"
+  },
+  {
+    "path": "03\\final-regression-01-output.txt",
+    "sha256": "320DDC37716209F3EBB03FF31157F785EF014B7CE93B8688CFD40C77A52EFF5C"
+  },
+  {
+    "path": "04\\red-shared-style-line-output.txt",
+    "sha256": "FD4206F4DE858667A7D612AB0DDBC2B345D05317F4A147BF134D7DAE71DD31C8"
+  },
+  {
+    "path": "04\\red-purchase-pending-rule.txt",
+    "sha256": "35EF91589C930337018CAA9967CBF914086850E01C5A6E37BD78E157A9BF59C3"
+  },
+  {
+    "path": "04\\red-direct-category-prompt.txt",
+    "sha256": "429EB5262B822EB88E7C3184F2D115DA8C9193EA985498D9CEA8F10ADA4B0417"
+  },
+  {
+    "path": "04\\red-direct-category-prompt-03.txt",
+    "sha256": "47CE61C1C5AC014E96E83E46EB304D548A9650AF33E9C23C1D3E8C1CC9BB40E3"
+  },
+  {
+    "path": "04\\red-direct-category-prompt-02.txt",
+    "sha256": "E6C1964018A3656530D97C9F1A208B50D3B6E79DE934B066C5775BA240518541"
+  },
+  {
+    "path": "04\\live-after-04-alone\\snack_type_first\\snack_type_first.json",
+    "sha256": "B13A1EAAECF107092A8D698748F2C011D8BB7A43D2813A4E2FC92B11DDC7E0AA"
+  },
+  {
+    "path": "04\\live-after-04-alone\\snack_type_first\\run-summary.txt",
+    "sha256": "D7995CA466D96FE27CD341BB0BC93F5E7700DB1B6BBD072052F093F6279E633C"
+  },
+  {
+    "path": "01\\red-03-diagnostic-output.txt",
+    "sha256": "DB01744ABC7C7ABF2A32BFFD731884365F062975A295E27FD397B7A0BF17F96D"
+  },
+  {
+    "path": "04\\red-category-types-output.txt",
+    "sha256": "43D62AD30BBC9F0F2388D160F01DAB08C8B53DAE31AED54CAF79E1E1EC3F3960"
+  },
+  {
+    "path": "04\\live-after-04-alone\\snack_type_first\\command.txt",
+    "sha256": "99A7BBE3C318E2B6E578CC0BB53970AF0769603AB0FF314CF1DC3D02FB42FF2C"
+  },
+  {
+    "path": "04\\live-after-04-alone\\same_category_cola_filter\\same_category_cola_filter.json",
+    "sha256": "58E8E2E767E654104825B41198EC171B6FDBE4E5DC873A7A8FA44CB74718F817"
+  },
+  {
+    "path": "04\\live-after-04-alone\\same_category_cola_filter\\run-summary.txt",
+    "sha256": "1CDA66FE45677F80D1E993235DD005A53CA11466E8AEA488C452C76C5CDA9AC8"
+  },
+  {
+    "path": "04\\live-after-04-alone\\same_category_cola_filter\\command.txt",
+    "sha256": "23E216F67204714FB10B59256E16860D4E9FD8C736C890C2ADFEBDA4E85DD63D"
+  },
+  {
+    "path": "04\\red-category-types-diagnostic-output.txt",
+    "sha256": "EB20820E06C4DA35070067A9AB715730DD06100B96400C86BCB6720DC4507FCA"
+  },
+  {
+    "path": "04\\red-category-result-facts.txt",
+    "sha256": "38B3E43466FC3F48CD27D391553E67229A42CF63D1BD985681F388EAE6919DB3"
+  },
+  {
+    "path": "04\\prompt-regression-backend-modules.txt",
+    "sha256": "AF1860D7289B472FE10234FBBC1CE2DF14A1F6E433B7BD504CD6D602DFA5F894"
+  },
+  {
+    "path": "04\\live-after-04-alone\\momo_selected_order_return\\run-summary.txt",
+    "sha256": "0AC07170C3E834C321A8E322EF87760AA8B2DEFE29AB58FE1A0882661FDF8369"
+  },
+  {
+    "path": "04\\live-after-04-alone\\momo_selected_order_return\\momo_selected_order_return.json",
+    "sha256": "B22E9F9A99DBE077459FCD6D821928A9C07FC694E19E099EC1F0D4DD7F87FC72"
+  },
+  {
+    "path": "01\\red-03-corrected-run.txt",
+    "sha256": "56354C013162968D3D4240172EC0255259C84353BD21669D2E44E0FC04504D41"
+  },
+  {
+    "path": "01\\red-03-corrected-output.txt",
+    "sha256": "0529CEDAC238A1D05B648AD271CD11C862B1D3B9A2A419C96E21CBB4D0902D19"
+  },
+  {
+    "path": "03\\capability-cycle2-red-02-output.txt",
+    "sha256": "6215074E7F8BEFDD7C36C9B58D3B304196D163460ACDE9DDFBDD153F54A28827"
+  },
+  {
+    "path": "04\\live-after-04-alone\\momo_selected_order_return\\command.txt",
+    "sha256": "EA7A3CC9C7711E9D24CDB779A1AAB66B61D1B44A52F4CBB8D4BBAAF53D8B39EE"
+  },
+  {
+    "path": "04\\live-after-04-alone\\momo_selected_order_return\\after-sale-record-check.txt",
+    "sha256": "DC82AD3A9DB7C8639BE4805847E2D3E74A59D85FC51BD67FA3462CA9A48B280E"
+  },
+  {
+    "path": "04\\live-after-04-alone\\keke_return_policy\\run-summary.txt",
+    "sha256": "F8A2D882853A763A1AC600AC783B4EC31F6D4F7016612DAC5D58EE8E8D357B9D"
+  },
+  {
+    "path": "04\\live-after-04-alone\\keke_return_policy\\keke_return_policy.json",
+    "sha256": "BB6E0A9252137000E0F8DB642F53821499031A1FB77AF6EA96CCC916C8C5EA69"
+  },
+  {
+    "path": "03\\capability-cycle2-red-01-output.txt",
+    "sha256": "5DEB060E2FE6FA25D7CBC958F21D0A22C5D51B02E8406839324E106A3BBC7026"
+  },
+  {
+    "path": "04\\live-after-04-alone\\keke_return_policy\\command.txt",
+    "sha256": "9BE13B0DE6CE5E51E4DBECFD3A0B9906A8B870EA6D7EC26069C51F714D1D485B"
+  },
+  {
+    "path": "04\\live-after-04-alone\\ab-summary.md",
+    "sha256": "A88A36F5A0B5C4F6A197E2C1D2F42B067D084AB6A385C0CE7CA52BBAAB190C73"
+  },
+  {
+    "path": "04\\red-shared-style-output.txt",
+    "sha256": "1AD5DFC229D148A1F68B619B95E6FE542277619ABE40D3E93D06C116CE066958"
+  },
+  {
+    "path": "01\\red-02-public-output.txt",
+    "sha256": "6C22EFB4A524AB1A18DD2C3E4DC00169963CE97356CED1B36BF815DA0041D2DE"
+  },
+  {
+    "path": "01\\red-02-output.txt",
+    "sha256": "70EC6ABFEF7823C5CDB8F9914B1ED57E48DE3E3A1A3A85849031C0E3F23CBFAA"
+  },
+  {
+    "path": "01\\red-01-output.txt",
+    "sha256": "A2E536262255CC1593E5C6E24A335120226A12028DD6355CAD371F2EB2A2C106"
+  },
+  {
+    "path": "01\\red-01-diagnostic-output.txt",
+    "sha256": "7DA1B4829C4BB775F4863372A4CCE328E71DD2AB9A9DE46874199DC38218FF08"
+  },
+  {
+    "path": "01\\red-01-diagnostic-output-02.txt",
+    "sha256": "A9B5B19728E9CA190E029BA6AE02A695D1748D7EF91C635AB5795FF5533D735B"
+  },
+  {
+    "path": "03\\capability-cycle2-green-01-output.txt",
+    "sha256": "112C32F1E76FC42A04FBAE36DB599EC8C7CFA06983A148DCB8D37BEF10D404BD"
+  },
+  {
+    "path": "03\\controlled-v3-regression-01-output.txt",
+    "sha256": "E29AE8AB8C9D079CE83139E7B60DC3E6416FBCF41873389B991C14BBEFD33718"
+  },
+  {
+    "path": "01-ui\\ui-test-log.md",
+    "sha256": "EB1A2EA68FDE01D266CF178B750F0EDE83E2574B1DBA656C0921E3C1F68A80C3"
+  },
+  {
+    "path": "01-ui\\ui-clarification-red-run.txt",
+    "sha256": "8266F500331FF4C0164762EF8BA397415B79BE4EF2EA9D33C49EABF5C240A5B6"
+  },
+  {
+    "path": "01-ui\\ui-clarification-red-preserve-symlinks-run.txt",
+    "sha256": "69FB39DE9DBCB9D4A331ABFD35F0FDC732299EB1A3D5CD5231C83D89240C4826"
+  },
+  {
+    "path": "01-ui\\ui-clarification-red-preserve-symlinks-output.txt",
+    "sha256": "716EAA0B0A7A2C378E2D22422E2E79239FDEBEB6DF9616594E52D4DFBC0A6E3B"
+  },
+  {
+    "path": "01-ui\\ui-clarification-red-output.txt",
+    "sha256": "520D6CF9633D289CF31BD28DEA49D0FA91979065F0683978657C26BCD6500782"
+  },
+  {
+    "path": "01-ui\\ui-clarification-red-final-run.txt",
+    "sha256": "7B90774A9A171D7DA1CA86611011D50FDA0BF58DAE04B2506903C57F6FA5EEA1"
+  },
+  {
+    "path": "01-ui\\ui-clarification-red-final-output.txt",
+    "sha256": "134DC3E80B765AA328CD0AF842CE908BFD1AF88FFD554AAFC560386DFF007715"
+  },
+  {
+    "path": "01-ui\\ui-clarification-red-clean-deps-run.txt",
+    "sha256": "F8AFE6AD28AC75705B3B26F2E84671EDDAC37EAF49FBA14F1B6395D3A6D90A07"
+  },
+  {
+    "path": "01-ui\\ui-clarification-red-clean-deps-output.txt",
+    "sha256": "057982A9B68F4156BEB18D1003C0AE687AECA184FE67DA94695EECC41F768E00"
+  },
+  {
+    "path": "01-ui\\ui-clarification-green-rerun-run.txt",
+    "sha256": "F2434362ADFE174651F10151550CAA7BDF0A403C7B8C8592C7F9E4584FC14D00"
+  },
+  {
+    "path": "01-ui\\ui-clarification-green-rerun-output.txt",
+    "sha256": "DA4D65359D7E73DB83B03307D4B515B30613729E7FE2621CED31AF235FEEBCC8"
+  },
+  {
+    "path": "01-ui\\ui-clarification-green-final-run.txt",
+    "sha256": "B93E066384ADE0B6A0718A140BEAAEA0C874AFC81997CF6D799600C7D5DC8053"
+  },
+  {
+    "path": "01-ui\\ui-clarification-green-final-output.txt",
+    "sha256": "587C4E90E6F5B250B7081769ECD65DEF942BDA8C0BFA158CFC41B2A4500D66A6"
+  },
+  {
+    "path": "01-ui\\tsc-rerun-output.txt",
+    "sha256": "D8EBDEBD273CB4E566557C12EBEA2C28B27B398632F5E4E8EF915C48E154771F"
+  },
+  {
+    "path": "01-ui\\tsc-output.txt",
+    "sha256": "6A220A1B4F99CC98692CE2343BF27CD4B38F2267B27F6F280A9C8B55AE184087"
+  },
+  {
+    "path": "01-ui\\pnpm-install-frozen-output.txt",
+    "sha256": "C62A9FFD5453FDD6866D619DFDE5048BB54471A2D9F10C1E394F943082A4202B"
+  },
+  {
+    "path": "01-ui\\build-output.txt",
+    "sha256": "DD4703BA3C4085A616ED0B07B97F29299D67E8A083BB9283DBFD3007CC9E6D6D"
+  },
+  {
+    "path": "02\\drink-filter-confirm-natural-output.txt",
+    "sha256": "3EC3D839702DF4926E7DBB8FFFD108D03CCE6E101F2971E0D3933AA990928F6B"
+  },
+  {
+    "path": "02\\snack-three-after-fixture-migration.txt",
+    "sha256": "C3B7C112174CF92EB18D71240FF2793547B05A059CCC609A62B8FD94FD1FEFDB"
+  },
+  {
+    "path": "02\\cola-filter-red-line-output.txt",
+    "sha256": "7DB88D1ABFB370962791614E784CC1577ABE6F9609D4B9CE9621BAB28486C507"
+  },
+  {
+    "path": "02\\brand-filter-red-01-output.txt",
+    "sha256": "268D765EBD6D8B9B6F324021D39194729F4DCE396F4B9747CDFEA1F2E1284083"
+  },
+  {
+    "path": "02\\cola-filter-red-01-output.txt",
+    "sha256": "1B7E2BE71425F3EA593C743E678B75F8C1C48EC54616B69FF7F60B69D819CD1B"
+  },
+  {
+    "path": "02\\brand-filter-green-01-output.txt",
+    "sha256": "8E9F63764DDB253B8DFC81E094861EAD70AEE728AD15887017C8776D495B3DD6"
+  },
+  {
+    "path": "02\\cola-filter-green-01-output.txt",
+    "sha256": "E653C2EBD6FD9B687E84BBF4980DDAE4A3318EF96855F882C9D50D8319968F19"
+  },
+  {
+    "path": "02\\pytest-green-01-output.txt",
+    "sha256": "F4444B3FDBB8724837B15FC94FBFA06846B570AE095C1289F17AADFCE041DD1A"
+  },
+  {
+    "path": "02\\narrow-regression-snack.txt",
+    "sha256": "36182C06B57E6D20A0EF571AEB12421813B4F0DFB65EF02882F5435A53FF6BDF"
+  },
+  {
+    "path": "02\\snack-selected-tests-after-type-matches.txt",
+    "sha256": "8AE5C2DAB4FE782D8E8E56DE82A442690683C06900BC0D0FC067EE9164D42622"
+  },
+  {
+    "path": "00-preparation\\playwright-smoke-output.txt",
+    "sha256": "A0CE05A94593705CB57B5FDEE46EFDA5F76FB6187D00FF129D4D8524B4809CF5"
+  },
+  {
+    "path": "05\\red\\controlled-prompt-budget-red.txt",
+    "sha256": "FC066447344DC7F40F2D1218C82DA09CA42621CA9711021CA708EEDCC86A6F7E"
+  },
+  {
+    "path": "02\\drink-unaffordable-green-02-provenance.txt",
+    "sha256": "450A9F0A5BF6F090FCFB99E5BF2EF5ABECA964C07838EDE2F1BE1D69384E19E1"
+  },
+  {
+    "path": "02\\drink-unaffordable-green-02-output.txt",
+    "sha256": "CCEAC9AC34AF8E0DD4C12680D7556CF64007AC092618E746B7E278C7C8E5AC17"
+  },
+  {
+    "path": "02\\snack-pending-public-response-diagnostic.txt",
+    "sha256": "810399F3A1D045F62EA5C8C6882FA182B9CC2A48E0F5D503DA290800CDEAF004"
+  },
+  {
+    "path": "02\\snack-module-green-after-answer-guard.txt",
+    "sha256": "A799D65611B5A69BF66F1FEE4950E37C82AB546C24DF03DB28F1528C3E810F48"
+  },
+  {
+    "path": "02\\drink-unaffordable-green-01-provenance.txt",
+    "sha256": "450A9F0A5BF6F090FCFB99E5BF2EF5ABECA964C07838EDE2F1BE1D69384E19E1"
+  },
+  {
+    "path": "02\\drink-unaffordable-green-01-output.txt",
+    "sha256": "EF24A075FC0D7145AB6C2E4078520267048845666FE45E2B95AC8768CC079CB8"
+  },
+  {
+    "path": "02\\drink-schema-version-regression.txt",
+    "sha256": "8A52959251B2E6BA6B5E6393C1B0C777B3F54EA680729D4A62CDAC71D2071757"
+  },
+  {
+    "path": "02\\narrow-regression-drink.txt",
+    "sha256": "DD45A428FDD103A99A37F724C0EA9D8295B5BC8A53FC397A74504530BDEB3BA4"
+  },
+  {
+    "path": "02\\drink-filter-confirm-red-02-output.txt",
+    "sha256": "5F7D81073C36F55C9CDD23F822C8D04AF09970A3121223063C43DB36380859E7"
+  },
+  {
+    "path": "02\\pytest-red-01-rerun-provenance.txt",
+    "sha256": "7130E4969F2367729A0CE7FFF0DC5A49727DAFCC8A950942888D22DA1AB198F6"
+  },
+  {
+    "path": "02\\pytest-red-01-rerun-output.txt",
+    "sha256": "830D47E11E59481587AC9851D15B12F5C0FC878E6796C0C905BEC1254E1295F6"
+  },
+  {
+    "path": "02\\drink-filter-confirm-red-01-output.txt",
+    "sha256": "1BA59F5154E1F4571DD5F29F5341C16C75A79F583404576B04B24305C6067B9D"
+  },
+  {
+    "path": "02\\pytest-green-03-provenance.txt",
+    "sha256": "450A9F0A5BF6F090FCFB99E5BF2EF5ABECA964C07838EDE2F1BE1D69384E19E1"
+  },
+  {
+    "path": "02\\pytest-green-03-output.txt",
+    "sha256": "0C68B5EF6E071DFEAEB2C51D92724107DACB3D00F470809CE7786EA2166E9E18"
+  },
+  {
+    "path": "02\\regression-snack-module.txt",
+    "sha256": "344ED5653377A2BE04FD8B271CC43253358FBF6F3BE874916E36807B62EB4BDC"
+  },
+  {
+    "path": "02\\narrow-regression-capability-product-type.txt",
+    "sha256": "7DC3B492BD3226D2CBB293D9435DE562E474AF16B2728FADAA3A7254BAD184B3"
+  },
+  {
+    "path": "02\\pytest-green-02-provenance.txt",
+    "sha256": "27143412F546B4A6886CFFCE3CDD296A5E3899244A18BC22F74204AC8506B924"
+  },
+  {
+    "path": "02\\pytest-green-02-output.txt",
+    "sha256": "9C5C03A75C9512C65ECB68A476CC1FE7B1358E9161B9E5BCF25C391D890D9BAF"
+  },
+  {
+    "path": "02\\drink-unaffordable-red-01-output.txt",
+    "sha256": "D68B35E3F52AE3E2D50E4E417CEF90E6387C58CCA8F15A389B87A97F475CB3BC"
+  },
+  {
+    "path": "02\\drink-unaffordable-red-02-output.txt",
+    "sha256": "3A131D2794F932BC40516D6773E1E0FF471810C9254B1EEC0FFD7447535313AC"
+  },
+  {
+    "path": "02\\regression-drink-module.txt",
+    "sha256": "F6B09AA09C3D2EBFE271667669D73D807028E181893DA60DEE63E5ECA1633FE5"
+  },
+  {
+    "path": "02\\regression-legacy-snack-selection.txt",
+    "sha256": "706D01E3558E678842E53BD80E7957E544FFA149DEA9F4C87BC2161EA03D5659"
+  },
+  {
+    "path": "05\\green\\prompt-regression-green.txt",
+    "sha256": "2D4E6A1457472A032E89A3E0B0B688F403EF861B75474172A7BE7918196F5902"
+  },
+  {
+    "path": "05\\green\\controlled_final_meter_plugin.py",
+    "sha256": "4A177CF21FE74758FA096995DB774510ABFFF856842D77C94DA9B91307BC206B"
+  },
+  {
+    "path": "05\\green\\controlled-prompt-budget-green.txt",
+    "sha256": "C41F41AD930A94A26A1A5DF25840517F881AB6706D11B7859518D3E1907FB5BC"
+  },
+  {
+    "path": "05\\green\\controlled-final-candidate-meter.txt",
+    "sha256": "3ED090D55BBC676B1AB670FFB5D535DF2196C43554BFA557381BDC353BC13C3C"
+  },
+  {
+    "path": "05\\green\\controlled-final-candidate-meter-pytest-output.txt",
+    "sha256": "F3B3FA7E10BA67C679761B6FE442055E36C890479902D8D146A0EC961374429A"
+  },
+  {
+    "path": "05\\controlled-before\\baseline-capture.txt",
+    "sha256": "6C7EA14693B3889DF4EF19F247ACA130CD38ACFE716831D907CD4F3F3F05EB2F"
+  },
+  {
+    "path": "05\\canonical-capture-metrics.txt",
+    "sha256": "69F052912792DA26A991350937D569F57C67F56729F0FB1B29FD622B3FFFBA54"
+  },
+  {
+    "path": "05\\ab-summary.md",
+    "sha256": "E592FA7DC4BAF3C1F253E303DCA4C0EBC334FDAED124E00D49388378B13324DA"
+  },
+  {
+    "path": "05\\before\\run-summary.txt",
+    "sha256": "A1C93887ECDACC422AC292187EF06C8E6FE8D9CF1B68E62EE9BC98BB12693640"
+  },
+  {
+    "path": "05\\before\\provenance.txt",
+    "sha256": "6E9421BB7A39840FF089C392D94A629229F1D7A4136E7D6A0C72F559FDBB7360"
+  },
+  {
+    "path": "05\\before\\snack_type_first\\snack_type_first.json",
+    "sha256": "E6C40C9CBB38B02F4D4E93F498D38DC1CEBA1D55B1C012A23C23A37E433C3E67"
+  },
+  {
+    "path": "05\\before\\same_category_cola_filter\\same_category_cola_filter.json",
+    "sha256": "5103F8525ED24B2D36F6E07AFFF2E8D3CF11764B72EE1BAFCAEB23A36443A2AC"
+  },
+  {
+    "path": "05\\after-category-only\\run-summary.txt",
+    "sha256": "F4A3192D93371590B887944A207F3DCC3EF48664B48E37F1AFCA0025D02F9F87"
+  },
+  {
+    "path": "05\\after-category-only\\provenance.txt",
+    "sha256": "4825617CA60877A634821E08DCB2656E56F6BFF9077D002711E51B157E5CF5FA"
+  },
+  {
+    "path": "05\\after-category-only\\snack_type_first\\snack_type_first.json",
+    "sha256": "21D5EAF4C03E3752B7225A71C8F4C84D0BEBD6EB099E1BF75A3C16AE8C6AE2EA"
+  },
+  {
+    "path": "05\\after-category-only\\same_category_cola_filter\\same_category_cola_filter.json",
+    "sha256": "4280B0F2FAB639940110052379AC13ACC7084861421591B5467316EDBB308D8A"
+  }
+]

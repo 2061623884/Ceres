@@ -1,0 +1,152 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01\backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.1, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 1 item
+
+backend\tests\test_ceres_next_snack_choice.py::test_snack_choice_carries_budget_and_quantity_through_plan_to_explicit_confirmation FAILED [100%]
+
+================================== FAILURES ===================================
+_ test_snack_choice_carries_budget_and_quantity_through_plan_to_explicit_confirmation _
+
+indexed_client = <starlette.testclient.TestClient object at 0x00000155CB7E5DF0>
+semantic_provider = <function semantic_provider.<locals>._install at 0x00000155CE027920>
+
+    def test_snack_choice_carries_budget_and_quantity_through_plan_to_explicit_confirmation(
+        indexed_client, semantic_provider
+    ):
+        def show_snack_types(request):
+            matches = request["query_results"][0]["matches"]
+            return {
+                "reply": repr([
+                    {
+                        key: row.get(key)
+                        for key in (
+                            "category_id", "product_type", "usage_tags",
+                            "stock_verified", "unknown_constraints",
+                        )
+                    }
+                    for row in matches
+                ]),
+                "display_refs": [row["ref"] for row in matches],
+            }
+    
+        def show_chips(request):
+            chips = next(
+                row
+                for row in request["query_results"][0]["matches"]
+                if row["product_type"] == "potato_chips"
+            )
+            return {"reply": "有原味薯片可选。", "display_refs": [chips["ref"]]}
+    
+        def prepare_plan(request):
+            chips = next(
+                row
+                for row in request["displayed_candidates"]
+                if row["target_id"] == "demo:snack-original-potato-chips-70g-bag"
+            )
+            requirements = request.get("requirements") or {}
+            budget_fen = requirements.get("budget_fen")
+            constraints = (
+                {"budget_yuan": budget_fen / 100} if budget_fen is not None else None
+            )
+            return pick(
+                "product",
+                chips,
+                quantity=requirements.get("quantity"),
+                constraints=constraints,
+            )
+    
+        semantic_provider(
+            [
+                {
+                    "target": {
+                        "kind": "category",
+                        "name": "零食",
+                        "intent": "explore",
+                        "quantity": 2,
+                    },
+                    "constraints": {"budget_yuan": 15},
+                    "lookups": [{"kind": "product", "query": "零食"}],
+                },
+                show_snack_types,
+                {
+                    "target": {"kind": "category", "name": "薯片", "intent": "explore"},
+                    "lookups": [{"kind": "product", "query": "薯片"}],
+                },
+                show_chips,
+                prepare_plan,
+            ]
+        )
+        session_id = create_session(indexed_client)
+        cart_before = indexed_client.get("/api/v1/cart").json()
+    
+        broad = send_turn(indexed_client, session_id, "来点零食，两包，预算15元")
+>       question = broad["pending_clarifications"][0]
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       IndexError: list index out of range
+
+broad      = {'action_results': [{'action_id': 'a1',
+                     'fallback_reason': None,
+                     'index_version': 'phase1',
+                     'kind': 'lookup',
+                     'reply_ok': True,
+                     'retrieval_mode': 'lexical',
+                     'retrieval_status': 'ok',
+                     'saved': False,
+                     'status': 'completed',
+                     'type': 'read_only'}],
+ 'allowed': True,
+ 'answer_status': 'accepted',
+ 'assistant_message_id': 'msg-057daa1161fc',
+ 'available_actions': ['send_message'],
+ 'business_data_mode': 'demo',
+ 'clarification': None,
+ 'committed': False,
+ 'current_editable_task_id': None,
+ 'guard_code': None,
+ 'message': "[{'category_id': None, 'product_type': None, 'usage_tags': None, "
+            "'stock_verified': True, 'unknown_constraints': []}, "
+            "{'category_id': None, 'product_type': None, 'usage_tags': None, "
+            "'stock_verified': True, 'unknown_constraints': []}]\n"
+            '1. 苏打饼干100克盒装\n'
+            '2. 原味薯片70克袋装',
+ 'message_sequence': 2,
+ 'missing_constraints': [],
+ 'missing_slots': [],
+ 'model_mode': 'live',
+ 'pending_clarification': None,
+ 'pending_clarifications': [],
+ 'plan': None,
+ 'plan_effect': 'keep',
+ 'product_cards': [],
+ 'purchase_step': 'none',
+ 'readiness': 'information',
+ 'request_id': '25aa8630-5fd5-4541-9845-39b5411b5f43',
+ 'route': 'answer',
+ 'session_id': 'sess-5b6dacae5d7a',
+ 'session_version': 2,
+ 'state_version': 0,
+ 'status': 'understanding',
+ 'task_id': None,
+ 'trace_id': 'trace-b2e8943ebf87',
+ 'user_message_id': 'msg-22e3e350d92a'}
+cart_before = {'business_data_mode': 'demo',
+ 'items': [],
+ 'store_id': 'store-demo-01',
+ 'total_price_fen': 0,
+ 'version': 1}
+indexed_client = <starlette.testclient.TestClient object at 0x00000155CB7E5DF0>
+prepare_plan = <function test_snack_choice_carries_budget_and_quantity_through_plan_to_explicit_confirmation.<locals>.prepare_plan at 0x00000155CE027BA0>
+semantic_provider = <function semantic_provider.<locals>._install at 0x00000155CE027920>
+session_id = 'sess-5b6dacae5d7a'
+show_chips = <function test_snack_choice_carries_budget_and_quantity_through_plan_to_explicit_confirmation.<locals>.show_chips at 0x00000155CE027B00>
+show_snack_types = <function test_snack_choice_carries_budget_and_quantity_through_plan_to_explicit_confirmation.<locals>.show_snack_types at 0x00000155CE027A60>
+
+backend\tests\test_ceres_next_snack_choice.py:172: IndexError
+=========================== short test summary info ===========================
+FAILED backend\tests\test_ceres_next_snack_choice.py::test_snack_choice_carries_budget_and_quantity_through_plan_to_explicit_confirmation - IndexError: list index out of range
+============================== 1 failed in 3.96s ==============================

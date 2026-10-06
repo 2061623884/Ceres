@@ -1,0 +1,102 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\20616\Desktop\Agent\Agent��Ʒ\Ceres\backend\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\20616\Desktop\Agent\Agent��Ʒ\Ceres\work\.ceres-next-01\backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.1, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 1 item
+
+tests/test_ceres_next_snack_choice.py::test_broad_snack_request_asks_for_available_type_before_showing_products FAILED [100%]
+
+================================== FAILURES ===================================
+__ test_broad_snack_request_asks_for_available_type_before_showing_products ___
+
+indexed_client = <starlette.testclient.TestClient object at 0x0000014383F945F0>
+semantic_provider = <function semantic_provider.<locals>._install at 0x000001438684D1C0>
+
+    def test_broad_snack_request_asks_for_available_type_before_showing_products(
+        indexed_client, semantic_provider
+    ):
+        semantic_provider(
+            [
+                {
+                    "target": {"kind": "category", "name": "��ʳ", "intent": "explore"},
+                    "lookups": [{"kind": "product", "query": "��ʳ"}],
+                },
+                lambda request: {
+                    "reply": "��Ƭ�ͱ��ɶ��У�������ѡ���͡�",
+                    "display_refs": [
+                        row["ref"]
+                        for row in request["query_results"][0]["matches"]
+                    ],
+                },
+            ]
+        )
+        session_id = create_session(indexed_client)
+        cart_before = indexed_client.get("/api/v1/cart").json()
+    
+        response = send_turn(indexed_client, session_id, "������ʳ")
+    
+        questions = response["pending_clarifications"]
+>       assert len(questions) == 1, response
+E       AssertionError: {'session_id': 'sess-5d389992bd21', 'task_id': None, 'state_version': 0, 'status': 'understanding', ...}
+E       assert 0 == 1
+E        +  where 0 = len([])
+
+cart_before = {'business_data_mode': 'demo',
+ 'items': [],
+ 'store_id': 'store-demo-01',
+ 'total_price_fen': 0,
+ 'version': 1}
+indexed_client = <starlette.testclient.TestClient object at 0x0000014383F945F0>
+questions  = []
+response   = {'action_results': [{'action_id': 'a1',
+                     'fallback_reason': None,
+                     'index_version': 'phase1',
+                     'kind': 'lookup',
+                     'reply_ok': True,
+                     'retrieval_mode': 'lexical',
+                     'retrieval_status': 'ok',
+                     'saved': False,
+                     'status': 'completed',
+                     'type': 'read_only'}],
+ 'allowed': True,
+ 'answer_status': 'accepted',
+ 'assistant_message_id': 'msg-5af4918f52eb',
+ 'available_actions': ['send_message'],
+ 'business_data_mode': 'demo',
+ 'clarification': None,
+ 'committed': False,
+ 'current_editable_task_id': None,
+ 'guard_code': None,
+ 'message': '��Ƭ�ͱ��ɶ��У�������ѡ���͡�\n1. �մ����100�˺�װ\n2. ԭζ��Ƭ70�˴�װ',
+ 'message_sequence': 2,
+ 'missing_constraints': [],
+ 'missing_slots': [],
+ 'model_mode': 'live',
+ 'pending_clarification': None,
+ 'pending_clarifications': [],
+ 'plan': None,
+ 'plan_effect': 'keep',
+ 'product_cards': [],
+ 'purchase_step': 'none',
+ 'readiness': 'information',
+ 'request_id': '644c4f74-6692-47ec-b8cc-ec73b563d113',
+ 'route': 'answer',
+ 'session_id': 'sess-5d389992bd21',
+ 'session_version': 1,
+ 'state_version': 0,
+ 'status': 'understanding',
+ 'task_id': None,
+ 'trace_id': 'trace-89bdf249fa8c',
+ 'user_message_id': 'msg-d1e74cd56dc9'}
+semantic_provider = <function semantic_provider.<locals>._install at 0x000001438684D1C0>
+session_id = 'sess-5d389992bd21'
+
+tests\test_ceres_next_snack_choice.py:32: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_ceres_next_snack_choice.py::test_broad_snack_request_asks_for_available_type_before_showing_products - AssertionError: {'session_id': 'sess-5d389992bd21', 'task_id': None, 'state_version': 0, 'status': 'understanding', ...}
+assert 0 == 1
+ +  where 0 = len([])
+============================== 1 failed in 3.56s ==============================

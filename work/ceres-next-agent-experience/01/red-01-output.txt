@@ -1,0 +1,40 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+__ test_broad_snack_request_asks_for_available_type_before_showing_products ___
+
+indexed_client = <starlette.testclient.TestClient object at 0x0000020E57870C20>
+semantic_provider = <function semantic_provider.<locals>._install at 0x0000020E5A3458A0>
+
+    def test_broad_snack_request_asks_for_available_type_before_showing_products(
+        indexed_client, semantic_provider
+    ):
+        semantic_provider(
+            [
+                {
+                    "target": {"kind": "category", "name": "��ʳ", "intent": "explore"},
+                    "lookups": [{"kind": "product", "query": "��ʳ"}],
+                },
+                lambda request: {
+                    "reply": "��Ƭ�ͱ��ɶ��У�������ѡ���͡�",
+                    "display_refs": [
+                        row["ref"]
+                        for row in request["query_results"][0]["matches"]
+                    ],
+                },
+            ]
+        )
+        session_id = create_session(indexed_client)
+        cart_before = indexed_client.get("/api/v1/cart").json()
+    
+        response = send_turn(indexed_client, session_id, "������ʳ")
+    
+        questions = response["pending_clarifications"]
+>       assert len(questions) == 1, response
+E       AssertionError: {'session_id': 'sess-03a24ed6f66c', 'task_id': None, 'state_version': 0, 'status': 'understanding', ...}
+E       assert 0 == 1
+E        +  where 0 = len([])
+
+tests\test_ceres_next_snack_choice.py:32: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_ceres_next_snack_choice.py::test_broad_snack_request_asks_for_available_type_before_showing_products
+1 failed in 4.26s

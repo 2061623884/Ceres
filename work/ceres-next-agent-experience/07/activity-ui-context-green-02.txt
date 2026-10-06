@@ -1,0 +1,9 @@
+cwd=C:\Users\20616\Desktop\Agent\Agent产品\Ceres
+node=C:\Users\20616\.cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin\node.exe
+CERES_PROBE_REPO_ROOT=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-07
+PLAYWRIGHT_BROWSERS_PATH=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\00-preparation\playwright-cache
+port=18443 (verified free immediately before run)
+command: "C:\Users\20616\.cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin\node.exe" "C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\07\activity-ui-probe.mjs"
+Homepage activity → selected finished SKU → plan → explicit confirmation probe passed
+
+exit_code=0

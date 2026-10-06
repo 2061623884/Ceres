@@ -1,0 +1,58 @@
+Command: corepack pnpm@10.34.3 install --frozen-lockfile --store-dir=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\00-preparation\pnpm-store
+Working directory: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01-ui\frontend
+pnpm version: 10.34.3 via Corepack
+Store: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\00-preparation\pnpm-store
+Exit code: 0
+
+SHA256 before:
+C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01-ui\frontend\package.json 0D289C77DF64A5F300A7D54C6BA07A31DA897274864E0ACDC9316753B72740FB
+C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01-ui\frontend\package-lock.json 4AE33AFBACE819010A000982CFE7A9F236C8AF30BAAE0ACC048C89FE3DD1704E
+C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01-ui\frontend\pnpm-lock.yaml A5BA1E81C995CA0A650D5D9A8FF3A0938165D40682782AB43EDCB942C44F1A2A
+SHA256 after:
+C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01-ui\frontend\package.json 0D289C77DF64A5F300A7D54C6BA07A31DA897274864E0ACDC9316753B72740FB
+C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01-ui\frontend\package-lock.json 4AE33AFBACE819010A000982CFE7A9F236C8AF30BAAE0ACC048C89FE3DD1704E
+C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01-ui\frontend\pnpm-lock.yaml A5BA1E81C995CA0A650D5D9A8FF3A0938165D40682782AB43EDCB942C44F1A2A
+
+Install output:
+Lockfile is up to date, resolution step is skipped
+Progress: resolved 1, reused 0, downloaded 0, added 0
+Packages: +43
++++++++++++++++++++++++++++++++++++++++++++
+Progress: resolved 43, reused 0, downloaded 12, added 11
+
+   ╭──────────────────────────────────────────────╮
+   │                                              │
+   │     Update available! 10.34.3 → 12.9.1.      │
+   │     Changelog: https://pnpm.io/v/12.9.1      │
+   │   To update, run: corepack use pnpm@12.9.1   │
+   │                                              │
+   ╰──────────────────────────────────────────────╯
+
+Progress: resolved 43, reused 0, downloaded 34, added 34
+Progress: resolved 43, reused 0, downloaded 35, added 35
+Progress: resolved 43, reused 0, downloaded 39, added 39
+Progress: resolved 43, reused 0, downloaded 40, added 39
+Progress: resolved 43, reused 0, downloaded 40, added 40
+Progress: resolved 43, reused 0, downloaded 41, added 41
+Progress: resolved 43, reused 0, downloaded 42, added 41
+Progress: resolved 43, reused 0, downloaded 42, added 42
+Progress: resolved 43, reused 0, downloaded 43, added 42
+Progress: resolved 43, reused 0, downloaded 43, added 43, done
+
+dependencies:
++ react 19.2.4
++ react-dom 19.2.4
+
+devDependencies:
++ @tailwindcss/vite 4.2.2
++ @types/node 22.19.17
++ @types/react 19.2.14
++ @types/react-dom 19.2.3
++ @vitejs/plugin-react 6.0.1
++ oxfmt 0.2.0
++ tailwindcss 4.2.2
++ typescript 5.9.3
++ vite 8.0.5
+
+Done in 12.1s using pnpm v10.34.3
+Integrity follow-up: pnpm install itself exited 0. The enclosing PowerShell command then returned 1 because its final collection-join comparison expression was malformed; a subsequent per-file SHA256 comparison was run explicitly. All three manifest/lockfile hashes match: True

@@ -1,0 +1,104 @@
+Command: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe -m pytest tests/test_ceres_next_drink_choice.py::test_unaffordable_drink_types_are_not_offered -vv --tb=short --no-showlocals --basetemp=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\02\drink-unaffordable-red-02-tmp
+cwd: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-02\backend
+PYTHONPATH: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-02\backend
+Exit code: 1
+Credential-bearing diagnostic lines filtered: False
+
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-02\backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.1, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 1 item
+
+tests/test_ceres_next_drink_choice.py::test_unaffordable_drink_types_are_not_offered FAILED [100%]
+
+================================== FAILURES ===================================
+________________ test_unaffordable_drink_types_are_not_offered ________________
+tests\test_ceres_next_drink_choice.py:65: in test_unaffordable_drink_types_are_not_offered
+    assert response["pending_clarifications"] == [], response
+E   AssertionError: {'session_id': 'sess-c3f21112b519', 'task_id': None, 'state_version': 0, 'status': 'understanding', ...}
+E   assert [{'question_id': 'q-551e1a38a928', 'question': '目前有饮用水、可乐、桃汁饮料、茶、苏打水等饮品可选，想先看哪类？', 'options': [{'id': 'product_type:water', 'label': '饮用水'}, {'id': 'product_type:cola', 'label': '可乐'}, {'id': 'product_type:juice_drink', 'label': '桃汁饮料'}, {'id': 'product_type:tea', 'label': '茶'}, {'id': 'product_type:苏打水', 'label': '苏打水'}], 'base_session_version': 1, 'base_state_version': 0, 'slot': 'product_type', 'candidates': [], 'people': None}] == []
+E     
+E     Left contains one more item: {'question_id': 'q-551e1a38a928', 'question': '目前有饮用水、可乐、桃汁饮料、茶、苏打水等饮品可选，想先看哪类？', 'options': [{'id': 'product_type:wat... {'id': 'product_type:tea', 'label': '茶'}, {'id': 'product_type:苏打水', 'label': '苏打水'}], 'base_session_version': 1, ...}
+E     
+E     Full diff:
+E     - []
+E     + [
+E     +     {
+E     +         'question_id': 'q-551e1a38a928',
+E     +         'question': '目前有饮用水、可乐、桃汁饮料、茶、苏打水等饮品可选，想先看哪类？',
+E     +         'options': [
+E     +             {
+E     +                 'id': 'product_type:water',
+E     +                 'label': '饮用水',
+E     +             },
+E     +             {
+E     +                 'id': 'product_type:cola',
+E     +                 'label': '可乐',
+E     +             },
+E     +             {
+E     +                 'id': 'product_type:juice_drink',
+E     +                 'label': '桃汁饮料',
+E     +             },
+E     +             {
+E     +                 'id': 'product_type:tea',
+E     +                 'label': '茶',
+E     +             },
+E     +             {
+E     +                 'id': 'product_type:苏打水',
+E     +                 'label': '苏打水',
+E     +             },
+E     +         ],
+E     +         'base_session_version': 1,
+E     +         'base_state_version': 0,
+E     +         'slot': 'product_type',
+E     +         'candidates': [],
+E     +         'people': None,
+E     +     },
+E     + ]
+=========================== short test summary info ===========================
+FAILED tests/test_ceres_next_drink_choice.py::test_unaffordable_drink_types_are_not_offered - AssertionError: {'session_id': 'sess-c3f21112b519', 'task_id': None, 'state_version': 0, 'status': 'understanding', ...}
+assert [{'question_id': 'q-551e1a38a928', 'question': '目前有饮用水、可乐、桃汁饮料、茶、苏打水等饮品可选，想先看哪类？', 'options': [{'id': 'product_type:water', 'label': '饮用水'}, {'id': 'product_type:cola', 'label': '可乐'}, {'id': 'product_type:juice_drink', 'label': '桃汁饮料'}, {'id': 'product_type:tea', 'label': '茶'}, {'id': 'product_type:苏打水', 'label': '苏打水'}], 'base_session_version': 1, 'base_state_version': 0, 'slot': 'product_type', 'candidates': [], 'people': None}] == []
+  
+  Left contains one more item: {'question_id': 'q-551e1a38a928', 'question': '目前有饮用水、可乐、桃汁饮料、茶、苏打水等饮品可选，想先看哪类？', 'options': [{'id': 'product_type:wat... {'id': 'product_type:tea', 'label': '茶'}, {'id': 'product_type:苏打水', 'label': '苏打水'}], 'base_session_version': 1, ...}
+  
+  Full diff:
+  - []
+  + [
+  +     {
+  +         'question_id': 'q-551e1a38a928',
+  +         'question': '目前有饮用水、可乐、桃汁饮料、茶、苏打水等饮品可选，想先看哪类？',
+  +         'options': [
+  +             {
+  +                 'id': 'product_type:water',
+  +                 'label': '饮用水',
+  +             },
+  +             {
+  +                 'id': 'product_type:cola',
+  +                 'label': '可乐',
+  +             },
+  +             {
+  +                 'id': 'product_type:juice_drink',
+  +                 'label': '桃汁饮料',
+  +             },
+  +             {
+  +                 'id': 'product_type:tea',
+  +                 'label': '茶',
+  +             },
+  +             {
+  +                 'id': 'product_type:苏打水',
+  +                 'label': '苏打水',
+  +             },
+  +         ],
+  +         'base_session_version': 1,
+  +         'base_state_version': 0,
+  +         'slot': 'product_type',
+  +         'candidates': [],
+  +         'people': None,
+  +     },
+  + ]
+============================== 1 failed in 4.11s ==============================
+

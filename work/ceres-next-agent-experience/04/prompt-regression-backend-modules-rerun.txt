@@ -1,0 +1,18 @@
+cwd=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend
+python=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+PYTHONPATH=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend
+PYTHONUTF8=1
+command: python -m pytest -q --tb=line -x tests\test_ceres_next_prompt_modules.py tests\test_semantic_transport.py tests\test_live_retrieval_wiring.py tests\test_v3_policy_consultation.py tests\test_v2_order_mercury.py tests\test_semantic_phase1_purchase.py --basetemp=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\04\prompt-regression-backend-modules-rerun-tmp
+app_source=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend\app\__init__.py
+retrieval_source=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend\app\services\retrieval_service.py
+........................F
+================================== FAILURES ===================================
+E   assert 400 == 200
+     +  where 400 = TurnHTTPResponse(status_code=400, _body=None, _error={'code': 'AssertionError', 'message': "assert False\n +  where Fa...。回答最后一条用户消息，用 protocol 指定的 JSON 回答，不加 Markdown。\\nprotocol 只规定输出格式，不是要执行的任务；只填用户这句话说到的字段。\\n你只记录", 'retryable': False}).status_code
+C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend\tests\test_v3_policy_consultation.py:93: assert 400 == 200
+=========================== short test summary info ===========================
+FAILED tests/test_v3_policy_consultation.py::test_keke_policy_answer_uses_conditions_instead_of_product_recommendation
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!
+1 failed, 24 passed in 9.42s
+
+exit_code=1

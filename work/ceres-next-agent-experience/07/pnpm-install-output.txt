@@ -1,0 +1,33 @@
+cwd=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-07\frontend
+command: corepack pnpm@10.34.3 install --frozen-lockfile --store-dir=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\00-preparation\pnpm-store
+package_sha256_before=0D289C77DF64A5F300A7D54C6BA07A31DA897274864E0ACDC9316753B72740FB
+pnpm_lock_sha256_before=A5BA1E81C995CA0A650D5D9A8FF3A0938165D40682782AB43EDCB942C44F1A2A
+Lockfile is up to date, resolution step is skipped
+Progress: resolved 1, reused 0, downloaded 0, added 0
+Packages: +43
++++++++++++++++++++++++++++++++++++++++++++
+Progress: resolved 43, reused 43, downloaded 0, added 43, done
+
+dependencies:
++ react 19.2.4
++ react-dom 19.2.4
+
+devDependencies:
++ @tailwindcss/vite 4.2.2
++ @types/node 22.19.17
++ @types/react 19.2.14
++ @types/react-dom 19.2.3
++ @vitejs/plugin-react 6.0.1
++ oxfmt 0.2.0
++ tailwindcss 4.2.2
++ typescript 5.9.3
++ vite 8.0.5
+
+Done in 1s using pnpm v10.34.3
+
+exit_code=0
+package_sha256_after=0D289C77DF64A5F300A7D54C6BA07A31DA897274864E0ACDC9316753B72740FB
+pnpm_lock_sha256_after=A5BA1E81C995CA0A650D5D9A8FF3A0938165D40682782AB43EDCB942C44F1A2A
+package_hash_equal=True
+lock_hash_equal=True
+vite_present=True

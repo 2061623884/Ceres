@@ -1,0 +1,22 @@
+cwd=C:\Users\20616\Desktop\Agent\Agent产品\Ceres
+node=C:\Users\20616\.cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin\node.exe
+CERES_PROBE_REPO_ROOT=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-07
+PLAYWRIGHT_BROWSERS_PATH=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\00-preparation\playwright-cache
+port=18443 (verified free immediately before run)
+command: "C:\Users\20616\.cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin\node.exe" "C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\07\activity-ui-probe.mjs"
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+locator.waitFor: Timeout 3000ms exceeded.
+Call log:
+  - waiting for getByText('GREEN RESET') to be visible
+
+    at C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\07\activity-ui-probe.mjs:197:57 {
+  log: [ "  - waiting for getByText('GREEN RESET') to be visible" ],
+  name: 'TimeoutError'
+}
+
+Node.js v24.19.0
+
+exit_code=1

@@ -1,0 +1,823 @@
+{
+  "case_id": "momo_selected_order_return",
+  "tree_head": "04f5efde0c66d50213de72df266b7e692d2ca019",
+  "prompt_source_sha256": {
+    "backend/app/prompts/semantic.py": "a2b11881225037be6b8de9b0c28aa0dd3c85ac25536bb91b0bd08220d8689d74",
+    "Mercury/mercury/prompt.py": "9a28080277c0201c41f4259e31b7c4a7b4735198f84fc7b4e3128fa74b14dd94"
+  },
+  "route_mode": "controlled Kev route; actual configured semantic/Mercury model calls",
+  "controlled_keke_capability": "chat",
+  "status": "completed",
+  "semantic_calls": [
+    {
+      "request": {
+        "model": "qwen3.8-27b",
+        "messages": [
+          {
+            "role": "system",
+            "content": "你是墨墨，负责订单、物流、退款、退货和售后政策的售后客服。\n1. 订单、物流、退款、退货的任何事实（是否存在、状态、商品、金额、资格）只能来自本轮 Tool 结果，不要沿用历史回复中的状态。\n2. 需要信息时直接调用 Tool，不要先回复“请稍等”“我来查一下”；Tool 没有返回的信息不要猜测；缺少订单号时先查订单列表或询问用户。\n3. 退款、退货规则和资格以 Tool 结果为准；政策、时效类问题必须先调用 search_after_sales_policy，不要凭常识回答。\n4. 用户明确要求退款或退货时（包括前几轮已提出要求、本轮补充订单号的情况），必须直接调用 create_refund 或 create_return，不要再征求确认（原因可不填，不要为此追问）；check 类 Tool 只判断资格、不会提交，没有调用 create 成功，不能说已提交。order_id、item_id 只能取自用户输入或 Tool 结果，不要编造。\n5. 申请提交成功只代表处理中，按 Tool 返回的状态回答，不能说退款已到账或退货已完成。\n一般政策回答需说明模拟门店、适用条件和检索结果中的 policy_id/标题；一般规则不是某单资格，不主动提交申请。没有政策依据时如实说明。\n用简短自然的中文回复，先说明结果及下一步。\n本会话只咨询已选订单 Ob26c631230cc4691。选单与查询不会申请售后；用户明确要求时才执行对应写工具。"
+          },
+          {
+            "role": "user",
+            "content": "我要求退这件商品"
+          }
+        ],
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "get_order_details",
+              "description": "查询单个订单的详情和商品（含 item_id、是否可退货）。用户问订单状态或商品时调用。",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "order_id": {
+                    "type": "string",
+                    "description": "订单号，如 O1003"
+                  }
+                },
+                "required": [
+                  "order_id"
+                ]
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "get_delivery_status",
+              "description": "查询订单当前的物流进度。用户问订单到哪了、什么时候到、发货没有时调用。",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "order_id": {
+                    "type": "string",
+                    "description": "订单号，如 O1003"
+                  }
+                },
+                "required": [
+                  "order_id"
+                ]
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "check_refund_eligibility",
+              "description": "只判断订单能否申请整单仅退款并返回可退金额，不会提交申请；eligible 为 true 也不代表已提交。仅在用户只是询问能不能退款时调用；用户已要求退款时不要调用本工具，直接调用 create_refund。",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "order_id": {
+                    "type": "string",
+                    "description": "订单号，如 O1003"
+                  }
+                },
+                "required": [
+                  "order_id"
+                ]
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "create_refund",
+              "description": "用户明确要求退款时调用。只适用于未发货订单的整单退款。成功只表示申请已提交。内部会校验资格，无需先调用 check_refund_eligibility；reason 可不填。",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "order_id": {
+                    "type": "string",
+                    "description": "订单号，如 O1003"
+                  },
+                  "reason": {
+                    "type": "string",
+                    "description": "用户说明的原因，可不填"
+                  }
+                },
+                "required": [
+                  "order_id"
+                ]
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "get_refund_status",
+              "description": "查询退款申请记录和状态。不传 order_id 时返回当前用户的全部退款记录。",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "order_id": {
+                    "type": "string",
+                    "description": "订单号，如 O1003"
+                  }
+                },
+                "required": []
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "check_return_eligibility",
+              "description": "只判断订单内每件商品能否退货，返回 item_id 和可退金额，不会提交申请。用户只是询问能不能退货时调用。",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "order_id": {
+                    "type": "string",
+                    "description": "订单号，如 O1003"
+                  }
+                },
+                "required": [
+                  "order_id"
+                ]
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "create_return",
+              "description": "用户明确要求退货时调用，一次提交一件商品。item_id 不清楚时先调用 get_order_details 获取，拿到后立即调用本工具。内部会校验资格；reason 可不填，不要为此追问用户。成功只表示申请已提交，等待审核。",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "order_id": {
+                    "type": "string",
+                    "description": "订单号，如 O1003"
+                  },
+                  "item_id": {
+                    "type": "integer",
+                    "description": "要退货商品的 item_id，必须取自 get_order_details 返回的 items，不要猜测"
+                  },
+                  "reason": {
+                    "type": "string",
+                    "description": "用户说明的原因，可不填"
+                  }
+                },
+                "required": [
+                  "order_id",
+                  "item_id"
+                ]
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "get_return_status",
+              "description": "查询退货申请记录和状态。不传 order_id 时返回当前用户的全部退货记录。",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "order_id": {
+                    "type": "string",
+                    "description": "订单号，如 O1003"
+                  }
+                },
+                "required": []
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "search_after_sales_policy",
+              "description": "检索退款、退货、配送相关的售后政策原文（如退款到账时间、退货期限、配送时间）。用户问规则、时效、哪些商品能退时必须先调用，不要凭常识回答；某个具体订单能否退款或退货，用对应的 check Tool 判断。",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "query": {
+                    "type": "string",
+                    "description": "用户的问题或关键词"
+                  },
+                  "category": {
+                    "type": "string",
+                    "enum": [
+                      "refund",
+                      "return",
+                      "delivery"
+                    ],
+                    "description": "可选：refund 退款 / return 退货 / delivery 配送"
+                  }
+                },
+                "required": [
+                  "query"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "temperature": 0.2,
+        "max_tokens": 3072
+      },
+      "response_status": 200,
+      "response_model": "qwen3.8-27b-fp8",
+      "response_choices": [
+        {
+          "message": {
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "chatcmpl-tool-bc763a3f27a6c713",
+                "type": "function",
+                "function": {
+                  "name": "get_order_details",
+                  "arguments": "{\"order_id\": \"Ob26c631230cc4691\"}"
+                }
+              }
+            ]
+          },
+          "finish_reason": "tool_calls"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 1635,
+        "total_tokens": 1915,
+        "completion_tokens": 280,
+        "prompt_tokens_details": null,
+        "completion_tokens_details": {
+          "reasoning_tokens": 236
+        }
+      },
+      "request_latency_ms": 2257.1
+    },
+    {
+      "request": {
+        "model": "qwen3.8-27b",
+        "messages": [
+          {
+            "role": "system",
+            "content": "你是墨墨，负责订单、物流、退款、退货和售后政策的售后客服。\n1. 订单、物流、退款、退货的任何事实（是否存在、状态、商品、金额、资格）只能来自本轮 Tool 结果，不要沿用历史回复中的状态。\n2. 需要信息时直接调用 Tool，不要先回复“请稍等”“我来查一下”；Tool 没有返回的信息不要猜测；缺少订单号时先查订单列表或询问用户。\n3. 退款、退货规则和资格以 Tool 结果为准；政策、时效类问题必须先调用 search_after_sales_policy，不要凭常识回答。\n4. 用户明确要求退款或退货时（包括前几轮已提出要求、本轮补充订单号的情况），必须直接调用 create_refund 或 create_return，不要再征求确认（原因可不填，不要为此追问）；check 类 Tool 只判断资格、不会提交，没有调用 create 成功，不能说已提交。order_id、item_id 只能取自用户输入或 Tool 结果，不要编造。\n5. 申请提交成功只代表处理中，按 Tool 返回的状态回答，不能说退款已到账或退货已完成。\n一般政策回答需说明模拟门店、适用条件和检索结果中的 policy_id/标题；一般规则不是某单资格，不主动提交申请。没有政策依据时如实说明。\n用简短自然的中文回复，先说明结果及下一步。\n本会话只咨询已选订单 Ob26c631230cc4691。选单与查询不会申请售后；用户明确要求时才执行对应写工具。"
+          },
+          {
+            "role": "user",
+            "content": "我要求退这件商品"
+          },
+          {
+            "role": "assistant",
+            "content": "",
+            "tool_calls": [
+              {
+                "id": "chatcmpl-tool-bc763a3f27a6c713",
+                "type": "function",
+                "function": {
+                  "name": "get_order_details",
+                  "arguments": "{\"order_id\": \"Ob26c631230cc4691\"}"
+                }
+              }
+            ]
+          },
+          {
+            "role": "tool",
+            "tool_call_id": "chatcmpl-tool-bc763a3f27a6c713",
+            "content": "{\"ok\": true, \"data\": {\"order_id\": \"Ob26c631230cc4691\", \"status\": \"paid\", \"status_text\": \"模拟订单，未发货\", \"created_at\": \"2026-10-06T17:56:23.851559\", \"delivered_at\": null, \"total\": \"19.60\", \"items\": [{\"item_id\": 1, \"product_name\": \"鲜鸡蛋 6枚装\", \"quantity\": 2, \"unit_price\": \"9.80\", \"returnable\": true}]}}"
+          }
+        ],
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "get_order_details",
+              "description": "查询单个订单的详情和商品（含 item_id、是否可退货）。用户问订单状态或商品时调用。",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "order_id": {
+                    "type": "string",
+                    "description": "订单号，如 O1003"
+                  }
+                },
+                "required": [
+                  "order_id"
+                ]
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "get_delivery_status",
+              "description": "查询订单当前的物流进度。用户问订单到哪了、什么时候到、发货没有时调用。",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "order_id": {
+                    "type": "string",
+                    "description": "订单号，如 O1003"
+                  }
+                },
+                "required": [
+                  "order_id"
+                ]
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "check_refund_eligibility",
+              "description": "只判断订单能否申请整单仅退款并返回可退金额，不会提交申请；eligible 为 true 也不代表已提交。仅在用户只是询问能不能退款时调用；用户已要求退款时不要调用本工具，直接调用 create_refund。",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "order_id": {
+                    "type": "string",
+                    "description": "订单号，如 O1003"
+                  }
+                },
+                "required": [
+                  "order_id"
+                ]
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "create_refund",
+              "description": "用户明确要求退款时调用。只适用于未发货订单的整单退款。成功只表示申请已提交。内部会校验资格，无需先调用 check_refund_eligibility；reason 可不填。",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "order_id": {
+                    "type": "string",
+                    "description": "订单号，如 O1003"
+                  },
+                  "reason": {
+                    "type": "string",
+                    "description": "用户说明的原因，可不填"
+                  }
+                },
+                "required": [
+                  "order_id"
+                ]
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "get_refund_status",
+              "description": "查询退款申请记录和状态。不传 order_id 时返回当前用户的全部退款记录。",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "order_id": {
+                    "type": "string",
+                    "description": "订单号，如 O1003"
+                  }
+                },
+                "required": []
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "check_return_eligibility",
+              "description": "只判断订单内每件商品能否退货，返回 item_id 和可退金额，不会提交申请。用户只是询问能不能退货时调用。",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "order_id": {
+                    "type": "string",
+                    "description": "订单号，如 O1003"
+                  }
+                },
+                "required": [
+                  "order_id"
+                ]
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "create_return",
+              "description": "用户明确要求退货时调用，一次提交一件商品。item_id 不清楚时先调用 get_order_details 获取，拿到后立即调用本工具。内部会校验资格；reason 可不填，不要为此追问用户。成功只表示申请已提交，等待审核。",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "order_id": {
+                    "type": "string",
+                    "description": "订单号，如 O1003"
+                  },
+                  "item_id": {
+                    "type": "integer",
+                    "description": "要退货商品的 item_id，必须取自 get_order_details 返回的 items，不要猜测"
+                  },
+                  "reason": {
+                    "type": "string",
+                    "description": "用户说明的原因，可不填"
+                  }
+                },
+                "required": [
+                  "order_id",
+                  "item_id"
+                ]
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "get_return_status",
+              "description": "查询退货申请记录和状态。不传 order_id 时返回当前用户的全部退货记录。",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "order_id": {
+                    "type": "string",
+                    "description": "订单号，如 O1003"
+                  }
+                },
+                "required": []
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "search_after_sales_policy",
+              "description": "检索退款、退货、配送相关的售后政策原文（如退款到账时间、退货期限、配送时间）。用户问规则、时效、哪些商品能退时必须先调用，不要凭常识回答；某个具体订单能否退款或退货，用对应的 check Tool 判断。",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "query": {
+                    "type": "string",
+                    "description": "用户的问题或关键词"
+                  },
+                  "category": {
+                    "type": "string",
+                    "enum": [
+                      "refund",
+                      "return",
+                      "delivery"
+                    ],
+                    "description": "可选：refund 退款 / return 退货 / delivery 配送"
+                  }
+                },
+                "required": [
+                  "query"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "temperature": 0.2,
+        "max_tokens": 3072
+      },
+      "response_status": 200,
+      "response_model": "qwen3.8-27b-fp8",
+      "response_choices": [
+        {
+          "message": {
+            "content": null,
+            "tool_calls": [
+              {
+                "id": "chatcmpl-tool-881342c3c1d83221",
+                "type": "function",
+                "function": {
+                  "name": "create_return",
+                  "arguments": "{\"order_id\": \"Ob26c631230cc4691\", \"item_id\": 1}"
+                }
+              }
+            ]
+          },
+          "finish_reason": "tool_calls"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 1834,
+        "total_tokens": 1950,
+        "completion_tokens": 116,
+        "prompt_tokens_details": null,
+        "completion_tokens_details": {
+          "reasoning_tokens": 61
+        }
+      },
+      "request_latency_ms": 1190.4
+    },
+    {
+      "request": {
+        "model": "qwen3.8-27b",
+        "messages": [
+          {
+            "role": "system",
+            "content": "你是墨墨，负责订单、物流、退款、退货和售后政策的售后客服。\n1. 订单、物流、退款、退货的任何事实（是否存在、状态、商品、金额、资格）只能来自本轮 Tool 结果，不要沿用历史回复中的状态。\n2. 需要信息时直接调用 Tool，不要先回复“请稍等”“我来查一下”；Tool 没有返回的信息不要猜测；缺少订单号时先查订单列表或询问用户。\n3. 退款、退货规则和资格以 Tool 结果为准；政策、时效类问题必须先调用 search_after_sales_policy，不要凭常识回答。\n4. 用户明确要求退款或退货时（包括前几轮已提出要求、本轮补充订单号的情况），必须直接调用 create_refund 或 create_return，不要再征求确认（原因可不填，不要为此追问）；check 类 Tool 只判断资格、不会提交，没有调用 create 成功，不能说已提交。order_id、item_id 只能取自用户输入或 Tool 结果，不要编造。\n5. 申请提交成功只代表处理中，按 Tool 返回的状态回答，不能说退款已到账或退货已完成。\n一般政策回答需说明模拟门店、适用条件和检索结果中的 policy_id/标题；一般规则不是某单资格，不主动提交申请。没有政策依据时如实说明。\n用简短自然的中文回复，先说明结果及下一步。\n本会话只咨询已选订单 Ob26c631230cc4691。选单与查询不会申请售后；用户明确要求时才执行对应写工具。"
+          },
+          {
+            "role": "user",
+            "content": "我要求退这件商品"
+          },
+          {
+            "role": "assistant",
+            "content": "",
+            "tool_calls": [
+              {
+                "id": "chatcmpl-tool-bc763a3f27a6c713",
+                "type": "function",
+                "function": {
+                  "name": "get_order_details",
+                  "arguments": "{\"order_id\": \"Ob26c631230cc4691\"}"
+                }
+              }
+            ]
+          },
+          {
+            "role": "tool",
+            "tool_call_id": "chatcmpl-tool-bc763a3f27a6c713",
+            "content": "{\"ok\": true, \"data\": {\"order_id\": \"Ob26c631230cc4691\", \"status\": \"paid\", \"status_text\": \"模拟订单，未发货\", \"created_at\": \"2026-10-06T17:56:23.851559\", \"delivered_at\": null, \"total\": \"19.60\", \"items\": [{\"item_id\": 1, \"product_name\": \"鲜鸡蛋 6枚装\", \"quantity\": 2, \"unit_price\": \"9.80\", \"returnable\": true}]}}"
+          },
+          {
+            "role": "assistant",
+            "content": "",
+            "tool_calls": [
+              {
+                "id": "chatcmpl-tool-881342c3c1d83221",
+                "type": "function",
+                "function": {
+                  "name": "create_return",
+                  "arguments": "{\"order_id\": \"Ob26c631230cc4691\", \"item_id\": 1}"
+                }
+              }
+            ]
+          },
+          {
+            "role": "tool",
+            "tool_call_id": "chatcmpl-tool-881342c3c1d83221",
+            "content": "{\"ok\": false, \"error\": \"NOT_DELIVERED\", \"message\": \"订单还没有签收，签收后才能申请退货\"}"
+          }
+        ],
+        "tools": [
+          {
+            "type": "function",
+            "function": {
+              "name": "get_order_details",
+              "description": "查询单个订单的详情和商品（含 item_id、是否可退货）。用户问订单状态或商品时调用。",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "order_id": {
+                    "type": "string",
+                    "description": "订单号，如 O1003"
+                  }
+                },
+                "required": [
+                  "order_id"
+                ]
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "get_delivery_status",
+              "description": "查询订单当前的物流进度。用户问订单到哪了、什么时候到、发货没有时调用。",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "order_id": {
+                    "type": "string",
+                    "description": "订单号，如 O1003"
+                  }
+                },
+                "required": [
+                  "order_id"
+                ]
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "check_refund_eligibility",
+              "description": "只判断订单能否申请整单仅退款并返回可退金额，不会提交申请；eligible 为 true 也不代表已提交。仅在用户只是询问能不能退款时调用；用户已要求退款时不要调用本工具，直接调用 create_refund。",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "order_id": {
+                    "type": "string",
+                    "description": "订单号，如 O1003"
+                  }
+                },
+                "required": [
+                  "order_id"
+                ]
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "create_refund",
+              "description": "用户明确要求退款时调用。只适用于未发货订单的整单退款。成功只表示申请已提交。内部会校验资格，无需先调用 check_refund_eligibility；reason 可不填。",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "order_id": {
+                    "type": "string",
+                    "description": "订单号，如 O1003"
+                  },
+                  "reason": {
+                    "type": "string",
+                    "description": "用户说明的原因，可不填"
+                  }
+                },
+                "required": [
+                  "order_id"
+                ]
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "get_refund_status",
+              "description": "查询退款申请记录和状态。不传 order_id 时返回当前用户的全部退款记录。",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "order_id": {
+                    "type": "string",
+                    "description": "订单号，如 O1003"
+                  }
+                },
+                "required": []
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "check_return_eligibility",
+              "description": "只判断订单内每件商品能否退货，返回 item_id 和可退金额，不会提交申请。用户只是询问能不能退货时调用。",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "order_id": {
+                    "type": "string",
+                    "description": "订单号，如 O1003"
+                  }
+                },
+                "required": [
+                  "order_id"
+                ]
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "create_return",
+              "description": "用户明确要求退货时调用，一次提交一件商品。item_id 不清楚时先调用 get_order_details 获取，拿到后立即调用本工具。内部会校验资格；reason 可不填，不要为此追问用户。成功只表示申请已提交，等待审核。",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "order_id": {
+                    "type": "string",
+                    "description": "订单号，如 O1003"
+                  },
+                  "item_id": {
+                    "type": "integer",
+                    "description": "要退货商品的 item_id，必须取自 get_order_details 返回的 items，不要猜测"
+                  },
+                  "reason": {
+                    "type": "string",
+                    "description": "用户说明的原因，可不填"
+                  }
+                },
+                "required": [
+                  "order_id",
+                  "item_id"
+                ]
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "get_return_status",
+              "description": "查询退货申请记录和状态。不传 order_id 时返回当前用户的全部退货记录。",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "order_id": {
+                    "type": "string",
+                    "description": "订单号，如 O1003"
+                  }
+                },
+                "required": []
+              }
+            }
+          },
+          {
+            "type": "function",
+            "function": {
+              "name": "search_after_sales_policy",
+              "description": "检索退款、退货、配送相关的售后政策原文（如退款到账时间、退货期限、配送时间）。用户问规则、时效、哪些商品能退时必须先调用，不要凭常识回答；某个具体订单能否退款或退货，用对应的 check Tool 判断。",
+              "parameters": {
+                "type": "object",
+                "properties": {
+                  "query": {
+                    "type": "string",
+                    "description": "用户的问题或关键词"
+                  },
+                  "category": {
+                    "type": "string",
+                    "enum": [
+                      "refund",
+                      "return",
+                      "delivery"
+                    ],
+                    "description": "可选：refund 退款 / return 退货 / delivery 配送"
+                  }
+                },
+                "required": [
+                  "query"
+                ]
+              }
+            }
+          }
+        ],
+        "tool_choice": "auto",
+        "temperature": 0.2,
+        "max_tokens": 3072
+      },
+      "response_status": 200,
+      "response_model": "qwen3.8-27b-fp8",
+      "response_choices": [
+        {
+          "message": {
+            "content": "\n\n这笔订单还没发货签收，暂时不能申请退货，需要签收后才能退。\n\n如果您是想直接退款（未发货订单可整单退款），告诉我一声，我马上帮您提交。",
+            "tool_calls": null
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 1931,
+        "total_tokens": 2112,
+        "completion_tokens": 181,
+        "prompt_tokens_details": null,
+        "completion_tokens_details": {
+          "reasoning_tokens": 140
+        }
+      },
+      "request_latency_ms": 1796.4
+    }
+  ],
+  "turns": [
+    {
+      "label": "selected_order_return",
+      "user_message": "我要求退这件商品",
+      "http_status": 200,
+      "events": [
+        {
+          "event": null,
+          "final_text": null,
+          "code": null
+        },
+        {
+          "event": null,
+          "final_text": null,
+          "code": null
+        },
+        {
+          "event": null,
+          "final_text": "这笔订单还没发货签收，暂时不能申请退货，需要签收后才能退。\n\n如果您是想直接退款（未发货订单可整单退款），告诉我一声，我马上帮您提交。",
+          "code": null
+        }
+      ],
+      "turn_elapsed_ms": 5343.4,
+      "model_call_range": [
+        0,
+        3
+      ],
+      "returns_after": "see_events"
+    }
+  ],
+  "kev_choices": [],
+  "model": "qwen3.8-27b",
+  "endpoint": "https://discovery-api.intern-ai.org.cn/v1",
+  "retrieval": {
+    "mode": "lexical",
+    "index_path_is_case_local": true,
+    "index_method": "existing indexed_client fixture; embedding=None; vectors=None; lexical"
+  },
+  "selected_order_setup": {
+    "selected_order_is_new_and_case_local": true,
+    "competing_order_created": true,
+    "selected_order_status": "paid",
+    "item_count": 1
+  },
+  "sample_elapsed_ms": 8484.2
+}

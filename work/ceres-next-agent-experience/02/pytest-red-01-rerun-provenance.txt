@@ -1,0 +1,7 @@
+Ticket: 02
+Test cwd: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-02\backend
+PYTHONPATH: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-02\backend
+Python: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+Import check: python -c "import app; print(app.__file__)"
+Resolved app source: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-02\backend\app\__init__.py
+No Settings or credential values were printed.

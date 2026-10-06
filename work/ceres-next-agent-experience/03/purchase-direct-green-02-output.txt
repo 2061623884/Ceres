@@ -1,0 +1,9 @@
+Command: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe -m pytest -q tests/test_ceres_next_capability_routing.py::test_verified_product_type_answer_skips_semantic_understanding --tb=short --no-showlocals --basetemp=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\03\purchase-direct-green-02-tmp
+cwd: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-03\backend
+PYTHONPATH: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-03\backend
+Exit code: 0
+Sensitive diagnostic lines filtered: False
+
+.                                                                        [100%]
+1 passed in 3.25s
+

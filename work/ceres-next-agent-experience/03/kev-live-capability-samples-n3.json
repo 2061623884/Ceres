@@ -1,0 +1,239 @@
+{
+  "sample_set": "real Kev capability classification",
+  "sample_count_total": 3,
+  "credential_headers_captured": false,
+  "settings_captured": false,
+  "samples": [
+    {
+      "case": "purchase_modify",
+      "sample_count": 1,
+      "generalization": "single characterization sample; no quality or accuracy claim",
+      "captured_at_utc": "2026-10-06T08:08:22.395562+00:00",
+      "endpoint": "http://127.0.0.1:18009/v1/systemone",
+      "model_alias": "kev-latest",
+      "criteria_version": "ceres-guide-capabilities-v1",
+      "provider_source": "work/.ceres-next-03/backend/app/llm/kev_provider.py",
+      "provider_source_sha256": "e24e708bc31f180d7ce090a129a04c67664dc37e096f3caae79d080ee2965435",
+      "request_payload": {
+        "state": {
+          "current_role": "keke",
+          "selected_object": {
+            "goal": null,
+            "plan": null,
+            "purchase_summary": null
+          },
+          "recent_dialogue": [],
+          "utterance": "我想买两瓶可口可乐零度无糖汽水500ml瓶装，预算20元",
+          "pending_question": null,
+          "clarification_answer": null,
+          "entry_context": {
+            "page": "home"
+          }
+        },
+        "model": "kev-latest",
+        "questions": {
+          "capability": {
+            "type": "choice",
+            "instructions": "Classify the current Keke turn into exactly one capability using\nthe utterance, selected_object and recent dialogue. This is an internal capability choice;\ndo not choose or change the service role. Choose category_exploration when the user is\nbrowsing, narrowing or comparing product/category candidates. Choose purchase_modify when\nthe user wants to prepare, revise, select or confirm a purchase plan. Choose facts_qa when\nthe user asks for product, store or policy facts. Choose chat for greetings and ordinary\nconversation unrelated to shopping. A pending question and its answer are part of the current\nrequest context. Only classify: never provide business parameters, objects or authorization.",
+            "criteria": {
+              "category_exploration": "浏览、了解、缩小或比较品类及商品候选；包括继续回答选购中的类型或筛选问题。",
+              "purchase_modify": "准备或修改购买方案、清单、数量、预算、选择项，或明确确认加购。",
+              "facts_qa": "询问商品、门店或一般政策事实，需要依据业务数据或政策来源回答。",
+              "chat": "问候或与购物无关的普通交流。"
+            }
+          }
+        }
+      },
+      "response_status": 200,
+      "http_latency_ms": 960.031,
+      "service_latency_ms": 345.5,
+      "response_json": {
+        "model": "kev-latest",
+        "answers": {
+          "capability": {
+            "type": "choice",
+            "choice": "purchase_modify",
+            "confidence": 0.2365,
+            "probabilities": {
+              "category_exploration": 0.1654,
+              "purchase_modify": 0.4274,
+              "facts_qa": 0.2185,
+              "chat": 0.1887
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 304,
+          "output_tokens": 81
+        },
+        "latency_ms": 345.5
+      },
+      "raw_choice": "purchase_modify",
+      "confidence": 0.2365,
+      "probabilities": {
+        "category_exploration": 0.1654,
+        "purchase_modify": 0.4274,
+        "facts_qa": 0.2185,
+        "chat": 0.1887
+      },
+      "usage": {
+        "input_tokens": 304,
+        "output_tokens": 81
+      }
+    },
+    {
+      "case": "facts_qa",
+      "sample_count": 1,
+      "generalization": "single characterization sample; no quality or accuracy claim",
+      "captured_at_utc": "2026-10-06T08:08:23.356496+00:00",
+      "endpoint": "http://127.0.0.1:18009/v1/systemone",
+      "model_alias": "kev-latest",
+      "criteria_version": "ceres-guide-capabilities-v1",
+      "provider_source": "work/.ceres-next-03/backend/app/llm/kev_provider.py",
+      "provider_source_sha256": "e24e708bc31f180d7ce090a129a04c67664dc37e096f3caae79d080ee2965435",
+      "request_payload": {
+        "state": {
+          "current_role": "keke",
+          "selected_object": {
+            "goal": null,
+            "plan": null,
+            "purchase_summary": null
+          },
+          "recent_dialogue": [],
+          "utterance": "一般配送时间是多少？",
+          "pending_question": null,
+          "clarification_answer": null,
+          "entry_context": {
+            "page": "home"
+          }
+        },
+        "model": "kev-latest",
+        "questions": {
+          "capability": {
+            "type": "choice",
+            "instructions": "Classify the current Keke turn into exactly one capability using\nthe utterance, selected_object and recent dialogue. This is an internal capability choice;\ndo not choose or change the service role. Choose category_exploration when the user is\nbrowsing, narrowing or comparing product/category candidates. Choose purchase_modify when\nthe user wants to prepare, revise, select or confirm a purchase plan. Choose facts_qa when\nthe user asks for product, store or policy facts. Choose chat for greetings and ordinary\nconversation unrelated to shopping. A pending question and its answer are part of the current\nrequest context. Only classify: never provide business parameters, objects or authorization.",
+            "criteria": {
+              "category_exploration": "浏览、了解、缩小或比较品类及商品候选；包括继续回答选购中的类型或筛选问题。",
+              "purchase_modify": "准备或修改购买方案、清单、数量、预算、选择项，或明确确认加购。",
+              "facts_qa": "询问商品、门店或一般政策事实，需要依据业务数据或政策来源回答。",
+              "chat": "问候或与购物无关的普通交流。"
+            }
+          }
+        }
+      },
+      "response_status": 200,
+      "http_latency_ms": 592.126,
+      "service_latency_ms": 285.3,
+      "response_json": {
+        "model": "kev-latest",
+        "answers": {
+          "capability": {
+            "type": "choice",
+            "choice": "facts_qa",
+            "confidence": 0.7986,
+            "probabilities": {
+              "category_exploration": 0.0316,
+              "purchase_modify": 0.0397,
+              "facts_qa": 0.849,
+              "chat": 0.0797
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 289,
+          "output_tokens": 81
+        },
+        "latency_ms": 285.3
+      },
+      "raw_choice": "facts_qa",
+      "confidence": 0.7986,
+      "probabilities": {
+        "category_exploration": 0.0316,
+        "purchase_modify": 0.0397,
+        "facts_qa": 0.849,
+        "chat": 0.0797
+      },
+      "usage": {
+        "input_tokens": 289,
+        "output_tokens": 81
+      }
+    },
+    {
+      "case": "chat",
+      "sample_count": 1,
+      "generalization": "single characterization sample; no quality or accuracy claim",
+      "captured_at_utc": "2026-10-06T08:08:23.948540+00:00",
+      "endpoint": "http://127.0.0.1:18009/v1/systemone",
+      "model_alias": "kev-latest",
+      "criteria_version": "ceres-guide-capabilities-v1",
+      "provider_source": "work/.ceres-next-03/backend/app/llm/kev_provider.py",
+      "provider_source_sha256": "e24e708bc31f180d7ce090a129a04c67664dc37e096f3caae79d080ee2965435",
+      "request_payload": {
+        "state": {
+          "current_role": "keke",
+          "selected_object": {
+            "goal": null,
+            "plan": null,
+            "purchase_summary": null
+          },
+          "recent_dialogue": [],
+          "utterance": "你好，今天怎么样？",
+          "pending_question": null,
+          "clarification_answer": null,
+          "entry_context": {
+            "page": "home"
+          }
+        },
+        "model": "kev-latest",
+        "questions": {
+          "capability": {
+            "type": "choice",
+            "instructions": "Classify the current Keke turn into exactly one capability using\nthe utterance, selected_object and recent dialogue. This is an internal capability choice;\ndo not choose or change the service role. Choose category_exploration when the user is\nbrowsing, narrowing or comparing product/category candidates. Choose purchase_modify when\nthe user wants to prepare, revise, select or confirm a purchase plan. Choose facts_qa when\nthe user asks for product, store or policy facts. Choose chat for greetings and ordinary\nconversation unrelated to shopping. A pending question and its answer are part of the current\nrequest context. Only classify: never provide business parameters, objects or authorization.",
+            "criteria": {
+              "category_exploration": "浏览、了解、缩小或比较品类及商品候选；包括继续回答选购中的类型或筛选问题。",
+              "purchase_modify": "准备或修改购买方案、清单、数量、预算、选择项，或明确确认加购。",
+              "facts_qa": "询问商品、门店或一般政策事实，需要依据业务数据或政策来源回答。",
+              "chat": "问候或与购物无关的普通交流。"
+            }
+          }
+        }
+      },
+      "response_status": 200,
+      "http_latency_ms": 592.571,
+      "service_latency_ms": 287.3,
+      "response_json": {
+        "model": "kev-latest",
+        "answers": {
+          "capability": {
+            "type": "choice",
+            "choice": "chat",
+            "confidence": 0.8794,
+            "probabilities": {
+              "category_exploration": 0.0234,
+              "purchase_modify": 0.0194,
+              "facts_qa": 0.0477,
+              "chat": 0.9096
+            }
+          }
+        },
+        "usage": {
+          "input_tokens": 289,
+          "output_tokens": 80
+        },
+        "latency_ms": 287.3
+      },
+      "raw_choice": "chat",
+      "confidence": 0.8794,
+      "probabilities": {
+        "category_exploration": 0.0234,
+        "purchase_modify": 0.0194,
+        "facts_qa": 0.0477,
+        "chat": 0.9096
+      },
+      "usage": {
+        "input_tokens": 289,
+        "output_tokens": 80
+      }
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+Sample: real Kev capability classification only; n=1; no business writes.
+HTTP status: 200
+Endpoint latency_ms: 1287.873
+Service response latency_ms: 442.7
+Raw choice: category_exploration
+Confidence: 0.2842
+Probabilities: category_exploration=0.4631; purchase_modify=0.1954; facts_qa=0.1588; chat=0.1827
+Usage: null (the response explicitly included input_tokens/output_tokens, but the evidence filter mistakenly redacted their numeric values; they cannot be recovered without another model call).
+Request payload, criteria/instructions, and response JSON are in the companion sample JSON; response usage values remain marked redacted there.
+Credential fields were not read or recorded.

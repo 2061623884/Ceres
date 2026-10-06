@@ -1,0 +1,10 @@
+Command: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe -m pytest -q [4 public v3 selectors plus tests/test_v3_routing_handoff.py] --tb=short --no-showlocals --basetemp=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\03\controlled-v3-regression-01-tmp
+Selectors: tests/test_ceres_next_capability_routing.py::test_public_v3_category_exploration_returns_current_type_options; tests/test_ceres_next_capability_routing.py::test_public_v3_purchase_modify_prepares_a_plan_without_cart_write; tests/test_ceres_next_capability_routing.py::test_public_v3_facts_qa_answers_from_policy_source; tests/test_ceres_next_capability_routing.py::test_public_v3_chat_does_not_create_a_purchase_task; tests/test_v3_routing_handoff.py
+cwd: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-03\backend
+PYTHONPATH: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-03\backend
+Exit code: 0
+Credential-bearing diagnostic lines filtered: False
+
+...........                                                              [100%]
+11 passed in 22.64s
+

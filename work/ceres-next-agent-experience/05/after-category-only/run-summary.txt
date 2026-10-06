@@ -1,0 +1,41 @@
+case: snack_type_first
+timestamp_completed_utc: 2026-10-06T10:43:42.9830561Z
+status: completed; exit_code: 0
+tree_head: 840bbb632b0516ad9e47e1896b6660bb41545619
+model: qwen3.8-27b; response_models=qwen3.8-27b-fp8
+endpoint: https://discovery-api.intern-ai.org.cn/v1
+route: category_exploration
+retrieval: lexical; existing indexed_client fixture; embedding=None; vectors=None; lexical
+calls: 2; usage_totals prompt=5876 completion=549 total=6425; sample_elapsed_ms=9682.2
+public: cards=0 plan=False task=False pending=product_type options=薯片|饼干 turn_ms=6739.3
+call1: request_model=qwen3.8-27b response_model=qwen3.8-27b-fp8 temp=0.3 max_tokens=3072 response_format=json_object tools= messages=9 message_chars=8349 prompt=3268 completion=259 total=3527 request_ms=2675.5
+call2: request_model=qwen3.8-27b response_model=qwen3.8-27b-fp8 temp=0.3 max_tokens=3072 response_format=json_object tools= messages=3 message_chars=6145 prompt=2608 completion=290 total=2898 request_ms=3823.7
+request messages_chars_total=14494; complete request messages/options/responses/usage are in case JSON
+case_json=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\05\after-category-only\snack_type_first\snack_type_first.json
+case_json_sha256=21D5EAF4C03E3752B7225A71C8F4C84D0BEBD6EB099E1BF75A3C16AE8C6AE2EA
+credential_pattern_matches=0
+case: same_category_cola_filter
+timestamp_completed_utc: 2026-10-06T10:44:21.0116466Z
+status: completed; exit_code: 0
+tree_head: 840bbb632b0516ad9e47e1896b6660bb41545619
+model: qwen3.8-27b; response_models=qwen3.8-27b-fp8
+endpoint: https://discovery-api.intern-ai.org.cn/v1
+route: purchase_modify
+retrieval: lexical; existing indexed_client fixture; embedding=None; vectors=None; lexical
+calls: 6; usage_totals prompt=32408 completion=1454 total=33862; sample_elapsed_ms=26090.6
+turns:
+compare_cola: cards=1 plan=absent task=False pending= options= elapsed_ms=10758
+select_for_plan: cards=0 plan=present,status=,items=1 task=True pending= options= elapsed_ms=2336.9
+ack_plan: cards=0 plan=absent task=True pending= options= elapsed_ms=1739.7
+filter_same_category: cards=0 plan=absent task=True pending= options= elapsed_ms=8313.2
+call1: request_model=qwen3.8-27b response_model=qwen3.8-27b-fp8 temp=0.3 max_tokens=3072 response_format=json_object tools= messages=49 message_chars=15178 prompt=6155 completion=214 total=6369 request_ms=2693
+call2: request_model=qwen3.8-27b response_model=qwen3.8-27b-fp8 temp=0.3 max_tokens=3072 response_format=json_object tools= messages=3 message_chars=6467 prompt=2914 completion=411 total=3325 request_ms=7817.1
+call3: request_model=qwen3.8-27b response_model=qwen3.8-27b-fp8 temp=0.3 max_tokens=3072 response_format=json_object tools= messages=51 message_chars=15628 prompt=6403 completion=159 total=6562 request_ms=2194.1
+call4: request_model=qwen3.8-27b response_model=qwen3.8-27b-fp8 temp=0.3 max_tokens=3072 response_format=json_object tools= messages=53 message_chars=16456 prompt=6761 completion=74 total=6835 request_ms=1632.5
+call5: request_model=qwen3.8-27b response_model=qwen3.8-27b-fp8 temp=0.3 max_tokens=3072 response_format=json_object tools= messages=55 message_chars=16485 prompt=6793 completion=300 total=7093 request_ms=2968.2
+call6: request_model=qwen3.8-27b response_model=qwen3.8-27b-fp8 temp=0.3 max_tokens=3072 response_format=json_object tools= messages=9 message_chars=7430 prompt=3382 completion=296 total=3678 request_ms=5173.4
+request messages_chars_total=77644; complete request messages/options/responses/usage are in case JSON
+cart_items_after_count=0
+case_json=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\05\after-category-only\same_category_cola_filter\same_category_cola_filter.json
+case_json_sha256=4280B0F2FAB639940110052379AC13ACC7084861421591B5467316EDBB308D8A
+credential_pattern_matches=0

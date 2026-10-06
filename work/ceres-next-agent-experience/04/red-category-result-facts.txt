@@ -1,0 +1,16 @@
+cwd=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend
+python=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+PYTHONPATH=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend
+PYTHONUTF8=1
+command: python -m pytest -q --tb=line tests\test_semantic_transport.py::test_category_answer_prompt_keeps_candidates_and_result_fact_boundaries --basetemp=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\04\tmp-red-result-facts
+app_source=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend\app\__init__.py
+retrieval_source=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend\app\services\retrieval_service.py
+F                                                                        [100%]
+================================== FAILURES ===================================
+E   AssertionError: assert 'stock_verified=true 只表示可售核验通过，不代表库存充足或具体数量' in '你是超市导购可可。回答最后一条用户消息，用 protocol 指定的 JSON 回答，不加 Markdown。\nprotocol 只规定输出格式，不是要执行的任务；只填用户这句话说到的字段。\n你只记录用户表达；由服务端决定路由、检...类型后展示该类候选。同类有多个匹配候选时直接展示比较，可按已知属性说明差异，不主推单款或只返回一个商品。仅展示与本轮品类及已选筛选条件匹配的真实候选，display_refs 填所展示商品的真实 ref；无匹配时说明未找到并返回空数组。'
+C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend\tests\test_semantic_transport.py:220: AssertionError: assert 'stock_verified=true 只表示可售核验通过，不代表库存充足或具体数量' in '你是超市导购可可。回答最后一条用户消息，用 protocol 指定的 JSON 回答，不加 Markdown。\nprotocol 只规定输出格式，不是要执行的任务；只填用户这句话说到的字段。\n你只记录用户表达；由服务端决定路由、检...类型后展示该类候选。同类有多个匹配候选时直接展示比较，可按已知属性说明差异，不主推单款或只返回一个商品。仅展示与本轮品类及已选筛选条件匹配的真实候选，display_refs 填所展示商品的真实 ref；无匹配时说明未找到并返回空数组。'
+=========================== short test summary info ===========================
+FAILED tests/test_semantic_transport.py::test_category_answer_prompt_keeps_candidates_and_result_fact_boundaries
+1 failed in 0.18s
+
+exit_code=1

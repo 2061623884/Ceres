@@ -1,0 +1,20 @@
+cwd=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-02\backend
+python=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+PYTHONPATH=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-02\backend
+PYTHONUTF8=1
+command: python -m pytest -q --tb=line tests\test_ceres_next_snack_choice.py::test_broad_snack_purchase_asks_for_type_before_preparing_a_plan --basetemp=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\02\snack-pending-public-response-diagnostic-tmp
+app_source=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-02\backend\app\__init__.py
+retrieval_source=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-02\backend\app\services\retrieval_service.py
+F                                                                        [100%]
+================================== FAILURES ===================================
+E   AssertionError: {'message': '抱歉，这一轮我没能理解清楚（NO_REPLY）：模型没有给出回答 请换个说法，或直接说想吃什么、想买什么。', 'action_results': [{'type': 'understanding_failed', 'status': 'failed', 'saved': False, 'reply_ok': False, ...}]}
+    assert [{'base_sessi... '饼干'}], ...}] == []
+      
+      Left contains one more item: {'base_session_version': 1, 'base_state_version': 0, 'candidates': [], 'options': [{'id': 'product_type:potato_chips', 'label': '薯片'}, {'id': 'product_type:soda_crackers', 'label': '饼干'}], ...}
+      Use -v to get more diff
+C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-02\backend\tests\test_ceres_next_snack_choice.py:137: AssertionError: {'message': '抱歉，这一轮我没能理解清楚（NO_REPLY）：模型没有给出回答 请换个说法，或直接说想吃什么、想买什么。', 'action_results': [{'type': 'understanding_failed', 'status': 'failed', 'saved': False, 'reply_ok': False, ...}]}
+=========================== short test summary info ===========================
+FAILED tests/test_ceres_next_snack_choice.py::test_broad_snack_purchase_asks_for_type_before_preparing_a_plan
+1 failed in 4.11s
+
+exit_code=1

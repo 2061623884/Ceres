@@ -1,0 +1,77 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+_ test_snack_choice_carries_budget_and_quantity_through_plan_to_explicit_confirmation _
+
+indexed_client = <starlette.testclient.TestClient object at 0x000001634A2D16D0>
+semantic_provider = <function semantic_provider.<locals>._install at 0x000001634A3B79C0>
+
+    def test_snack_choice_carries_budget_and_quantity_through_plan_to_explicit_confirmation(
+        indexed_client, semantic_provider
+    ):
+        def show_snack_types(request):
+            return {
+                "reply": "薯片和饼干都有，可以先选类型。",
+                "display_refs": [
+                    row["ref"] for row in request["query_results"][0]["matches"]
+                ],
+            }
+    
+        def show_chips(request):
+            chips = next(
+                row
+                for row in request["query_results"][0]["matches"]
+                if row["product_type"] == "potato_chips"
+            )
+            return {"reply": "有原味薯片可选。", "display_refs": [chips["ref"]]}
+    
+        def prepare_plan(request):
+            chips = next(
+                row
+                for row in request["displayed_candidates"]
+                if row["target_id"] == "demo:snack-original-potato-chips-70g-bag"
+            )
+            requirements = request.get("requirements") or {}
+            budget_fen = requirements.get("budget_fen")
+            constraints = (
+                {"budget_yuan": budget_fen / 100} if budget_fen is not None else None
+            )
+            return pick(
+                "product",
+                chips,
+                quantity=requirements.get("quantity"),
+                constraints=constraints,
+            )
+    
+        semantic_provider(
+            [
+                {
+                    "target": {
+                        "kind": "category",
+                        "name": "零食",
+                        "intent": "explore",
+                        "quantity": 2,
+                    },
+                    "constraints": {"budget_yuan": 15},
+                    "lookups": [{"kind": "product", "query": "零食"}],
+                },
+                show_snack_types,
+                {
+                    "target": {"kind": "category", "name": "薯片", "intent": "explore"},
+                    "lookups": [{"kind": "product", "query": "薯片"}],
+                },
+                show_chips,
+                prepare_plan,
+            ]
+        )
+        session_id = create_session(indexed_client)
+        cart_before = indexed_client.get("/api/v1/cart").json()
+    
+        broad = send_turn(indexed_client, session_id, "来点零食，两包，预算15元")
+>       question = broad["pending_clarifications"][0]
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       IndexError: list index out of range
+
+backend\tests\test_ceres_next_snack_choice.py:164: IndexError
+=========================== short test summary info ===========================
+FAILED backend\tests\test_ceres_next_snack_choice.py::test_snack_choice_carries_budget_and_quantity_through_plan_to_explicit_confirmation
+1 failed in 3.55s

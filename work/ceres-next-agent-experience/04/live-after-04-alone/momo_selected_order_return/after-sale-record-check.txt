@@ -1,0 +1,7 @@
+Read-only follow-up check for the single isolated Momo sample.
+The primary evidence is the public SSE response plus captured get_order_details/create_return tool results in momo_selected_order_return.json.
+The sample runner's returns_after string heuristic is inconclusive for the candidate wording (it searches one literal phrase); it is not used as the result.
+Both before and candidate case-local SQLite files were opened with mode=ro. Query: SELECT COUNT(*) FROM returns; SELECT COUNT(*) FROM refunds.
+before: returns=0; refunds=0
+candidate 04f5efde0c66d50213de72df266b7e692d2ca019: returns=0; refunds=0
+No order/session identifiers copied into this note.

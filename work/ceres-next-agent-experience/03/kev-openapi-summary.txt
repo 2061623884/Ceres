@@ -1,0 +1,19 @@
+Timestamp: 2026-10-06T15:20:52+08:00
+GET http://127.0.0.1:18009/openapi.json
+HTTP: 200
+OpenAPI title: kev
+OpenAPI version: 0.1.0
+Operations:
+- POST /v1/systemone; operationId=systemone_v1_systemone_post; summary=Systemone; requestSchemaRef=#/components/schemas/SystemOneRequest; requestProperties=
+- POST /v1/systemone/permute; operationId=systemone_permute_v1_systemone_permute_post; summary=Systemone Permute; requestSchemaRef=#/components/schemas/PermuteSystemOne; requestProperties=
+- POST /v1/systemone/separate; operationId=systemone_separate_v1_systemone_separate_post; summary=Systemone Separate; requestSchemaRef=#/components/schemas/SystemOneRequest; requestProperties=
+- GET /v1/models; operationId=models_v1_models_get; summary=Models; requestSchemaRef=; requestProperties=
+
+Schema findings from the same public OpenAPI document:
+- `SystemOneRequest` requires `state` and a non-empty `questions` object. Each question can be `Noul`, `Choice`, or `Score`.
+- `Choice.type` is constrained to the literal `choice`; `criteria` is an arbitrary object with arbitrary values. Therefore the public request schema can represent a four-label capability choice in `criteria`.
+- The schema does not define Ceres capability labels or a typed four-way response contract. The HTTP 200 response schema is empty, so the OpenAPI proves request-shape expressibility only; it does not prove Kev's four-way judgment quality. A bounded actual sample is still required for behavior.
+- This was GET-only protocol inspection. No model-judgment request was sent.
+GET http://127.0.0.1:18009/v1/models
+model_count=1
+id=; object=; owned_by=

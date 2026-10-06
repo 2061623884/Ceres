@@ -1,0 +1,76 @@
+05 before samples — actual semantic model, controlled Kev capability route
+Baseline HEAD: 481e7505951204d3d24c9c9a3bb61684e5edc213
+Both cases ran serially from the same clean worktree. Each case has its own SQLite DB and lexical index rebuilt by indexed_client; runtime Settings default is hybrid, but sample retrieval.mode is lexical, embedding=None, vectors=None.
+Full sanitized request messages/protocol/options, responses, usage, public outputs and trace phase records are stored in each case JSON. Headers and Settings objects are not stored.
+
+case: 
+snack_type_first
+status: 
+completed
+controlled_route: 
+category_exploration
+model_alias: 
+qwen3.8-27b
+response_models: 
+qwen3.8-27b-fp8
+retrieval: 
+lexical
+; 
+existing indexed_client fixture; embedding=None; vectors=None; lexical
+semantic_calls: 
+2
+; sample_elapsed_ms=
+14384
+usage_totals: prompt=
+6454
+ completion=
+1275
+ total=
+7729
+controlled_choice_sequence: 
+category_exploration
+turns:
+  type_first: elapsed_ms=10849; cards=0; absent; task=False; pending=product_type; options=薯片|饼干
+requests:
+  call 1: response_model=qwen3.8-27b-fp8; temperature=0.3; max_tokens=3072; response_format=json_object; tools=; message_count=9; message_chars=8970; prompt=3557 completion=1081 total=4638; request_ms=7067.7
+  call 2: response_model=qwen3.8-27b-fp8; temperature=0.3; max_tokens=3072; response_format=json_object; tools=; message_count=3; message_chars=6766; prompt=2897 completion=194 total=3091; request_ms=3526.8
+case_json: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\05\before\snack_type_first\snack_type_first.json case_json_sha256: E6C40C9CBB38B02F4D4E93F498D38DC1CEBA1D55B1C012A23C23A37E433C3E67 credential_pattern_matches: 0
+
+case: 
+same_category_cola_filter
+status: 
+completed
+controlled_route: 
+purchase_modify
+model_alias: 
+qwen3.8-27b
+response_models: 
+qwen3.8-27b-fp8
+retrieval: 
+lexical
+; 
+existing indexed_client fixture; embedding=None; vectors=None; lexical
+semantic_calls: 
+5
+; sample_elapsed_ms=
+22869.4
+usage_totals: prompt=
+29002
+ completion=
+1542
+ total=
+30544
+controlled_choice_sequence: 
+purchase_modify,purchase_modify,purchase_modify,purchase_modify
+turns:
+  compare_cola: elapsed_ms=6340.8; cards=1; absent; task=False; pending=; options=
+  select_for_plan: elapsed_ms=8300.1; cards=0; present,status=,items=1; task=True; pending=; options=
+  ack_plan: elapsed_ms=1761.1; cards=0; absent; task=True; pending=; options=
+  filter_same_category: elapsed_ms=3498.6; cards=0; absent; task=True; pending=; options=
+requests:
+  call 1: response_model=qwen3.8-27b-fp8; temperature=0.3; max_tokens=3072; response_format=json_object; tools=; message_count=49; message_chars=15178; prompt=6155 completion=230 total=6385; request_ms=2537.4
+  call 2: response_model=qwen3.8-27b-fp8; temperature=0.3; max_tokens=3072; response_format=json_object; tools=; message_count=3; message_chars=6467; prompt=2914 completion=385 total=3299; request_ms=3539.1
+  call 3: response_model=qwen3.8-27b-fp8; temperature=0.3; max_tokens=3072; response_format=json_object; tools=; message_count=51; message_chars=15614; prompt=6389 completion=486 total=6875; request_ms=8152
+  call 4: response_model=qwen3.8-27b-fp8; temperature=0.3; max_tokens=3072; response_format=json_object; tools=; message_count=53; message_chars=16442; prompt=6756 completion=94 total=6850; request_ms=1651.5
+  call 5: response_model=qwen3.8-27b-fp8; temperature=0.3; max_tokens=3072; response_format=json_object; tools=; message_count=55; message_chars=16471; prompt=6788 completion=347 total=7135; request_ms=3397.4
+case_json: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\05\before\same_category_cola_filter\same_category_cola_filter.json case_json_sha256: 5103F8525ED24B2D36F6E07AFFF2E8D3CF11764B72EE1BAFCAEB23A36443A2AC credential_pattern_matches: 0

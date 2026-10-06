@@ -1,0 +1,33 @@
+serialization_method: Python json.dumps of captured semantic_calls[].request; ensure_ascii=False, sort_keys=True, separators=(",",":"); UTF-8 bytes; deterministic reserialization of stored BODY_FIELDS object, not raw HTTP wire-byte capture
+case order: both before cases completed before both after cases; serial per arm; no overlap among these four calls, unrelated model traffic unobserved
+CASE snack_type_first status completed head 481e7505951204d3d24c9c9a3bb61684e5edc213
+CALL 1 canonical_captured_request_bytes 15385 sha256 7a2aa9f4d7bc121ba1cf1bad1f3f63b259e0137699284f1958b2f0370ba2e01c keys max_tokens,messages,model,response_format,temperature message_chars 8970 prompt_tokens 3557 completion_tokens 1081 total_tokens 4638
+CALL 2 canonical_captured_request_bytes 12356 sha256 9444ca1b800001de9b3a154ebdf46b4aeba03101b81164e2f681754c08151fe4 keys max_tokens,messages,model,response_format,temperature message_chars 6766 prompt_tokens 2897 completion_tokens 194 total_tokens 3091
+TURN type_first calls [0, 2] elapsed_ms 10849.0 cards 0 plan False task False pending_slots product_type
+CASE same_category_cola_filter status completed head 481e7505951204d3d24c9c9a3bb61684e5edc213
+CALL 1 canonical_captured_request_bytes 25840 sha256 0acbe9feda6b87ceba3865d540539e5370b31fbb8a8136288cd85f04b5c14d45 keys max_tokens,messages,model,response_format,temperature message_chars 15178 prompt_tokens 6155 completion_tokens 230 total_tokens 6385
+CALL 2 canonical_captured_request_bytes 12854 sha256 dc4faffe753162a27d8f776e39a5fea125f0f23767a1928b01f4253a148f59ff keys max_tokens,messages,model,response_format,temperature message_chars 6467 prompt_tokens 2914 completion_tokens 385 total_tokens 3299
+CALL 3 canonical_captured_request_bytes 26616 sha256 59340312ab2762c206b9b749d0f8ca4da53fb6729b59d375dc0ad4b005c64d41 keys max_tokens,messages,model,response_format,temperature message_chars 15614 prompt_tokens 6389 completion_tokens 486 total_tokens 6875
+CALL 4 canonical_captured_request_bytes 27824 sha256 72ea58ae99e23bd942dedb6cdda57dcc5b888cc10908f3c7c327c080930a8600 keys max_tokens,messages,model,response_format,temperature message_chars 16442 prompt_tokens 6756 completion_tokens 94 total_tokens 6850
+CALL 5 canonical_captured_request_bytes 27972 sha256 b78a33bdc8e040918480fe5ff2c325f099351898a8089ea3b23dfda9c65f5388 keys max_tokens,messages,model,response_format,temperature message_chars 16471 prompt_tokens 6788 completion_tokens 347 total_tokens 7135
+TURN compare_cola calls [0, 2] elapsed_ms 6340.8 cards 1 plan False task False pending_slots 
+TURN select_for_plan calls [2, 3] elapsed_ms 8300.1 cards 0 plan True task True pending_slots 
+TURN ack_plan calls [3, 4] elapsed_ms 1761.1 cards 0 plan False task True pending_slots 
+TURN filter_same_category calls [4, 5] elapsed_ms 3498.6 cards 0 plan False task True pending_slots 
+CART_ITEMS_AFTER 0
+CASE snack_type_first status completed head 840bbb632b0516ad9e47e1896b6660bb41545619
+CALL 1 canonical_captured_request_bytes 14034 sha256 f0d004631965faa066ce7d27acfa9488aa1816e23c61bd97e349489a9c985102 keys max_tokens,messages,model,response_format,temperature message_chars 8349 prompt_tokens 3268 completion_tokens 259 total_tokens 3527
+CALL 2 canonical_captured_request_bytes 11005 sha256 d90ff10c6eae5b6b6cf63ebc76646162d4755ba863d655b7efabb9709e808886 keys max_tokens,messages,model,response_format,temperature message_chars 6145 prompt_tokens 2608 completion_tokens 290 total_tokens 2898
+TURN type_first calls [0, 2] elapsed_ms 6739.3 cards 0 plan False task False pending_slots product_type
+CASE same_category_cola_filter status completed head 840bbb632b0516ad9e47e1896b6660bb41545619
+CALL 1 canonical_captured_request_bytes 25840 sha256 0acbe9feda6b87ceba3865d540539e5370b31fbb8a8136288cd85f04b5c14d45 keys max_tokens,messages,model,response_format,temperature message_chars 15178 prompt_tokens 6155 completion_tokens 214 total_tokens 6369
+CALL 2 canonical_captured_request_bytes 12854 sha256 dc4faffe753162a27d8f776e39a5fea125f0f23767a1928b01f4253a148f59ff keys max_tokens,messages,model,response_format,temperature message_chars 6467 prompt_tokens 2914 completion_tokens 411 total_tokens 3325
+CALL 3 canonical_captured_request_bytes 26648 sha256 8c1c8983492cc52ad880ea1343ade0a38faf2353dc8dc1eb11966326ed2fb492 keys max_tokens,messages,model,response_format,temperature message_chars 15628 prompt_tokens 6403 completion_tokens 159 total_tokens 6562
+CALL 4 canonical_captured_request_bytes 27856 sha256 2010adae8215297449d718af932b3ec1b2ac676b626b3d1c317e9bf1535886e6 keys max_tokens,messages,model,response_format,temperature message_chars 16456 prompt_tokens 6761 completion_tokens 74 total_tokens 6835
+CALL 5 canonical_captured_request_bytes 28004 sha256 13a88f152eb8ad8598e332fddb2088882d3a7bca5643f377e714d9935d063a27 keys max_tokens,messages,model,response_format,temperature message_chars 16485 prompt_tokens 6793 completion_tokens 300 total_tokens 7093
+CALL 6 canonical_captured_request_bytes 14576 sha256 c36b935b425d4f4b232fee92fc0895adc542e68552a478b3a6ac0f480b666822 keys max_tokens,messages,model,response_format,temperature message_chars 7430 prompt_tokens 3382 completion_tokens 296 total_tokens 3678
+TURN compare_cola calls [0, 2] elapsed_ms 10758.0 cards 1 plan False task False pending_slots 
+TURN select_for_plan calls [2, 3] elapsed_ms 2336.9 cards 0 plan True task True pending_slots 
+TURN ack_plan calls [3, 4] elapsed_ms 1739.7 cards 0 plan False task True pending_slots 
+TURN filter_same_category calls [4, 6] elapsed_ms 8313.2 cards 0 plan False task True pending_slots 
+CART_ITEMS_AFTER 0

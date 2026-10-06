@@ -1,0 +1,277 @@
+Command: & 'C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe' -m pytest -q tests/test_snack_selection.py --basetemp='C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\01\snack-regression-07-tmp'
+Working directory: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01\backend
+PYTHONPATH: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01\backend
+PYTHONUTF8: 1
+Import check exit code: 0
+app=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01\backend\app\__init__.py
+retrieval=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01\backend\app\services\retrieval_service.py
+Pytest exit code: 1
+
+FFF..                                                                    [100%]
+================================== FAILURES ===================================
+_ test_snack_selection_requires_confirmation_and_preserves_cart_on_no_match[0-\u5c31\u7b2c\u4e00\u4e2a] _
+
+client = <starlette.testclient.TestClient object at 0x000002096E6A3470>
+semantic_provider = <function semantic_provider.<locals>._install at 0x000002097112C5E0>
+tmp_path = WindowsPath('C:/Users/20616/Desktop/Agent/Agent产品/Ceres/work/ceres-next-agent-experience/01/snack-regression-07-tmp/test_snack_selection_requires_0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002096E6A1DF0>
+index = 0, message = '就第一个'
+
+    @pytest.mark.parametrize("index,message", [(0, "就第一个"), (1, "就第二个")])
+    def test_snack_selection_requires_confirmation_and_preserves_cart_on_no_match(
+        client, semantic_provider, tmp_path, monkeypatch, index, message
+    ):
+        settings = get_settings()
+        index_root = tmp_path / "retrieval-index"
+        subprocess.run(
+            [sys.executable, str(ROOT / "scripts/build_retrieval_index.py"),
+             "--index-root", str(index_root), "build", "--candidate-db",
+             str(settings.runtime_db_path), "--no-embed"],
+            check=True, capture_output=True, text=True,
+        )
+        monkeypatch.setattr(settings, "retrieval_index_dir", str(index_root))
+        shown = []
+    
+        def display(request):
+            rows = request["candidates"]["products"]
+            assert {row["target_id"] for row in request["query_results"][0]["matches"]} == {CHIPS, CRACKERS}
+            # Display order differs from lookup order, so an ordinal must use refs.
+            shown.extend(reversed(rows))
+            return {"reply": "可选这两款零食。", "display_refs": [row["ref"] for row in shown]}
+    
+        def select(request):
+            displayed = request["displayed_candidates"]
+            assert [row["ref"] for row in displayed] == [row["ref"] for row in shown]
+            return pick("product", displayed[index], quantity=1)
+    
+        def no_match(request):
+            assert request["query_results"][0]["matches"] == []
+            assert request["query_results"][0]["status"] == "completed"
+            assert request["query_results"][0]["empty"] is True
+            return {"reply": "没有找到匹配的冰淇淋商品。", "display_refs": []}
+    
+        provider = semantic_provider([
+            {"target": {"kind": "category", "name": "零食", "intent": "explore"},
+             "lookups": [{"kind": "product", "query": "零食"}]},
+            display, select, {"plan_act": "none", "reply": "清单已准备好，等待确认。"},
+            {"target": {"kind": "category", "name": "冰淇淋", "intent": "explore"},
+             "lookups": [{"kind": "product", "query": "冰淇淋"}]},
+            no_match,
+            {"target": {"kind": "category", "name": "冰淇淋", "intent": "explore"},
+             "lookups": [{"kind": "product", "query": "冰淇淋"}]},
+            no_match,
+        ])
+        sid = create_session(client)
+        baseline = client.get("/api/v1/cart").json()
+        first = send_turn(client, sid, "来点零食")
+        assert first["plan"] is None and first["plan_effect"] == "keep"
+        assert client.get("/api/v1/cart").json() == baseline
+>       second = send_turn(client, sid, message, first)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_snack_selection.py:69: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+client = <starlette.testclient.TestClient object at 0x000002096E6A3470>
+session_id = 'sess-9e0e6c7425cd', message = '就第一个'
+previous = {'session_id': 'sess-9e0e6c7425cd', 'task_id': None, 'state_version': 0, 'status': 'understanding', ...}
+request_id = None, headers = None, extra = {}
+
+    def send_turn(
+        client,
+        session_id: str,
+        message: str,
+        previous: dict[str, Any] | None = None,
+        *,
+        request_id: str | None = None,
+        headers: dict[str, str] | None = None,
+        **extra: Any,
+    ) -> dict[str, Any]:
+        """One SSE turn; returns turn.completed payload or raises on error/stop."""
+        response = post_turn(
+            client,
+            session_id,
+            message,
+            previous,
+            request_id=request_id,
+            headers=headers,
+            **extra,
+        )
+        if response.status_code >= 400:
+            err = response.json()["error"]
+>           raise AssertionError(
+                f"SSE error {err.get('code')}: {err.get('message')}"
+            )
+E           AssertionError: SSE error AssertionError: assert [] == ['pfdf9e5ee3e...4eb702c5cb7d']
+E             
+E             Right contains 2 more items, first extra item: 'pfdf9e5ee3ecebb0a'
+E             Use -v to get more diff
+
+tests\support\__init__.py:170: AssertionError
+_ test_snack_selection_requires_confirmation_and_preserves_cart_on_no_match[1-\u5c31\u7b2c\u4e8c\u4e2a] _
+
+client = <starlette.testclient.TestClient object at 0x00000209714454C0>
+semantic_provider = <function semantic_provider.<locals>._install at 0x00000209711EBEC0>
+tmp_path = WindowsPath('C:/Users/20616/Desktop/Agent/Agent产品/Ceres/work/ceres-next-agent-experience/01/snack-regression-07-tmp/test_snack_selection_requires_1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002097122DC40>
+index = 1, message = '就第二个'
+
+    @pytest.mark.parametrize("index,message", [(0, "就第一个"), (1, "就第二个")])
+    def test_snack_selection_requires_confirmation_and_preserves_cart_on_no_match(
+        client, semantic_provider, tmp_path, monkeypatch, index, message
+    ):
+        settings = get_settings()
+        index_root = tmp_path / "retrieval-index"
+        subprocess.run(
+            [sys.executable, str(ROOT / "scripts/build_retrieval_index.py"),
+             "--index-root", str(index_root), "build", "--candidate-db",
+             str(settings.runtime_db_path), "--no-embed"],
+            check=True, capture_output=True, text=True,
+        )
+        monkeypatch.setattr(settings, "retrieval_index_dir", str(index_root))
+        shown = []
+    
+        def display(request):
+            rows = request["candidates"]["products"]
+            assert {row["target_id"] for row in request["query_results"][0]["matches"]} == {CHIPS, CRACKERS}
+            # Display order differs from lookup order, so an ordinal must use refs.
+            shown.extend(reversed(rows))
+            return {"reply": "可选这两款零食。", "display_refs": [row["ref"] for row in shown]}
+    
+        def select(request):
+            displayed = request["displayed_candidates"]
+            assert [row["ref"] for row in displayed] == [row["ref"] for row in shown]
+            return pick("product", displayed[index], quantity=1)
+    
+        def no_match(request):
+            assert request["query_results"][0]["matches"] == []
+            assert request["query_results"][0]["status"] == "completed"
+            assert request["query_results"][0]["empty"] is True
+            return {"reply": "没有找到匹配的冰淇淋商品。", "display_refs": []}
+    
+        provider = semantic_provider([
+            {"target": {"kind": "category", "name": "零食", "intent": "explore"},
+             "lookups": [{"kind": "product", "query": "零食"}]},
+            display, select, {"plan_act": "none", "reply": "清单已准备好，等待确认。"},
+            {"target": {"kind": "category", "name": "冰淇淋", "intent": "explore"},
+             "lookups": [{"kind": "product", "query": "冰淇淋"}]},
+            no_match,
+            {"target": {"kind": "category", "name": "冰淇淋", "intent": "explore"},
+             "lookups": [{"kind": "product", "query": "冰淇淋"}]},
+            no_match,
+        ])
+        sid = create_session(client)
+        baseline = client.get("/api/v1/cart").json()
+        first = send_turn(client, sid, "来点零食")
+        assert first["plan"] is None and first["plan_effect"] == "keep"
+        assert client.get("/api/v1/cart").json() == baseline
+>       second = send_turn(client, sid, message, first)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_snack_selection.py:69: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+client = <starlette.testclient.TestClient object at 0x00000209714454C0>
+session_id = 'sess-2084d2b02b74', message = '就第二个'
+previous = {'session_id': 'sess-2084d2b02b74', 'task_id': None, 'state_version': 0, 'status': 'understanding', ...}
+request_id = None, headers = None, extra = {}
+
+    def send_turn(
+        client,
+        session_id: str,
+        message: str,
+        previous: dict[str, Any] | None = None,
+        *,
+        request_id: str | None = None,
+        headers: dict[str, str] | None = None,
+        **extra: Any,
+    ) -> dict[str, Any]:
+        """One SSE turn; returns turn.completed payload or raises on error/stop."""
+        response = post_turn(
+            client,
+            session_id,
+            message,
+            previous,
+            request_id=request_id,
+            headers=headers,
+            **extra,
+        )
+        if response.status_code >= 400:
+            err = response.json()["error"]
+>           raise AssertionError(
+                f"SSE error {err.get('code')}: {err.get('message')}"
+            )
+E           AssertionError: SSE error AssertionError: assert [] == ['pfdf9e5ee3e...4eb702c5cb7d']
+E             
+E             Right contains 2 more items, first extra item: 'pfdf9e5ee3ecebb0a'
+E             Use -v to get more diff
+
+tests\support\__init__.py:170: AssertionError
+_ test_single_category_recommendation_uses_selected_sellable_sku_evidence[\u6765\u70b9\u96f6\u98df-\u96f6\u98df-\u96f6\u98df-demo:snack-soda-crackers-100g-box-tags0-name_tokens0] _
+
+client = <starlette.testclient.TestClient object at 0x0000020971904A10>
+semantic_provider = <function semantic_provider.<locals>._install at 0x0000020971A1B060>
+tmp_path = WindowsPath('C:/Users/20616/Desktop/Agent/Agent产品/Ceres/work/ceres-next-agent-experience/01/snack-regression-07-tmp/test_single_category_recommend0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002097141F080>
+message = '来点零食', category = '零食', lookup_query = '零食'
+sku_id = 'demo:snack-soda-crackers-100g-box', tags = ('零食', '即食')
+name_tokens = ('苏打饼干', '100克', '盒装')
+
+    @pytest.mark.parametrize(
+        "message,category,lookup_query,sku_id,tags,name_tokens",
+        [
+            ("来点零食", "零食", "零食", CRACKERS,
+             ("零食", "即食"), ("苏打饼干", "100克", "盒装")),
+            ("喝点甜的", "甜味饮品", "甜味", PEACH_JUICE,
+             ("甜味", "甜而不腻"), ("桃汁饮料", "450毫升", "瓶装")),
+        ],
+    )
+    def test_single_category_recommendation_uses_selected_sellable_sku_evidence(
+        client, semantic_provider, tmp_path, monkeypatch,
+        message, category, lookup_query, sku_id, tags, name_tokens,
+    ):
+        settings = get_settings()
+        index_root = tmp_path / "retrieval-index"
+        subprocess.run(
+            [sys.executable, str(ROOT / "scripts/build_retrieval_index.py"),
+             "--index-root", str(index_root), "build", "--candidate-db",
+             str(settings.runtime_db_path), "--no-embed"],
+            check=True, capture_output=True, text=True,
+        )
+        monkeypatch.setattr(settings, "retrieval_index_dir", str(index_root))
+    
+        def fabricate(request):
+            result = request["query_results"][0]
+            match = next(row for row in result["matches"] if row["target_id"] == sku_id)
+            assert match["stock_verified"] is True
+            assert match["unknown_constraints"] == []
+            assert all(tag in " ".join(match["evidence"]) for tag in tags)
+            return {
+                "reply": "这款非常受欢迎，销量很好，库存充足。",
+                "display_refs": [match["ref"]],
+            }
+    
+        provider = semantic_provider([
+            {
+                "target": {"kind": "category", "name": category, "intent": "explore"},
+                "lookups": [{"kind": "product", "query": lookup_query}],
+            },
+            fabricate,
+        ])
+        sid = create_session(client)
+        cart_before = client.get("/api/v1/cart").json()
+    
+        response = send_turn(client, sid, message)
+    
+        result = provider.requests[-1]["query_results"][0]
+        selected = next(row for row in result["matches"] if row["target_id"] == sku_id)
+        assert response["plan"] is None and response["plan_effect"] == "keep"
+>       assert selected["name"] in response["message"]
+E       AssertionError: assert '苏打饼干100克盒装' in '想选哪类零食？\n1. 饼干\n2. 薯片'
+
+tests\test_snack_selection.py:160: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_snack_selection.py::test_snack_selection_requires_confirmation_and_preserves_cart_on_no_match[0-\u5c31\u7b2c\u4e00\u4e2a]
+FAILED tests/test_snack_selection.py::test_snack_selection_requires_confirmation_and_preserves_cart_on_no_match[1-\u5c31\u7b2c\u4e8c\u4e2a]
+FAILED tests/test_snack_selection.py::test_single_category_recommendation_uses_selected_sellable_sku_evidence[\u6765\u70b9\u96f6\u98df-\u96f6\u98df-\u96f6\u98df-demo:snack-soda-crackers-100g-box-tags0-name_tokens0]
+3 failed, 2 passed in 12.07s

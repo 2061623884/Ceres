@@ -1,0 +1,16 @@
+case: controlled prompt-budget red; no production prompt changes
+timestamp_utc: 2026-10-06T10:27:55Z
+cwd: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-05\backend
+interpreter: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+PYTHONPATH: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-05\backend
+selector: tests/test_ceres_next_prompt_modules.py::test_category_exploration_sends_type_first_guidance_to_the_model
+HEAD: 481e7505951204d3d24c9c9a3bb61684e5edc213
+worktree status: M tests/test_ceres_next_prompt_modules.py
+semantic.py sha256: 3A4845B0D6B5137BC6CBBF314CB0B6F65431A1A5470FEDF6516B2B9C3A38F822
+frozen baseline body bytes: 15385; frozen body sha256: 61bec9e5c2736898a4b451e4cb212371a877d801aa7ec76785f1b1de1aa69a53
+exit_code: 1
+category_type_first_body_bytes=15385 sha256=61bec9e5c2736898a4b451e4cb212371a877d801aa7ec76785f1b1de1aa69a53
+E   AssertionError: full outbound request body did not shrink: 15385 >= 15385
+FAILED tests/test_ceres_next_prompt_modules.py::test_category_exploration_sends_type_first_guidance_to_the_model
+1 failed in 3.51s
+note: output retained only integer/hash evidence and safe assertion summary; no body copied

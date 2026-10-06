@@ -1,0 +1,43 @@
+Command: & 'C:\Users\20616\.cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin\node.exe' 'C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01-ui\work\ceres-next-agent-experience\01-ui\ui-clarification-probe.mjs'
+Exit code: 1
+PLAYWRIGHT_BROWSERS_PATH: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\00-preparation\playwright-cache
+
+(!) Failed to run dependency scan. Skipping dependency pre-bundling. Error:   Failed to scan for dependencies from entries:
+  C:/Users/20616/Desktop/Agent/Agent产品/Ceres/work/.ceres-next-01-ui/frontend/index.html
+
+  Build failed with 1 error:
+
+[plugin vite:dep-scan:resolve]
+Error: The server is being restarted or closed. Request is outdated
+    at throwClosedServerError (file:///C:/Users/20616/Desktop/Agent/Agent%E4%BA%A7%E5%93%81/Ceres/work/.ceres-next-01-ui/frontend/node_modules/.pnpm/vite@8.0.5_jiti@2.6.1/node_modules/vite/dist/node/chunks/node.js:29885:30)
+    at EnvironmentPluginContainer.resolveId (file:///C:/Users/20616/Desktop/Agent/Agent%E4%BA%A7%E5%93%81/Ceres/work/.ceres-next-01-ui/frontend/node_modules/.pnpm/vite@8.0.5_jiti@2.6.1/node_modules/vite/dist/node/chunks/node.js:30017:65)
+    at resolveId (file:///C:/Users/20616/Desktop/Agent/Agent%E4%BA%A7%E5%93%81/Ceres/work/.ceres-next-01-ui/frontend/node_modules/.pnpm/vite@8.0.5_jiti@2.6.1/node_modules/vite/dist/node/chunks/node.js:30718:38)
+    at resolve (file:///C:/Users/20616/Desktop/Agent/Agent%E4%BA%A7%E5%93%81/Ceres/work/.ceres-next-01-ui/frontend/node_modules/.pnpm/vite@8.0.5_jiti@2.6.1/node_modules/vite/dist/node/chunks/node.js:30730:22)
+    at PluginContextImpl.resolveId (file:///C:/Users/20616/Desktop/Agent/Agent%E4%BA%A7%E5%93%81/Ceres/work/.ceres-next-01-ui/frontend/node_modules/.pnpm/vite@8.0.5_jiti@2.6.1/node_modules/vite/dist/node/chunks/node.js:30851:29)
+    at plugin (file:///C:/Users/20616/Desktop/Agent/Agent%E4%BA%A7%E5%93%81/Ceres/work/.ceres-next-01-ui/frontend/node_modules/.pnpm/rolldown@1.0.0-rc.12/node_modules/rolldown/dist/shared/bindingify-input-options-e7ze4hPR.mjs:1036:30)
+    at plugin.<computed> (file:///C:/Users/20616/Desktop/Agent/Agent%E4%BA%A7%E5%93%81/Ceres/work/.ceres-next-01-ui/frontend/node_modules/.pnpm/rolldown@1.0.0-rc.12/node_modules/rolldown/dist/shared/bindingify-input-options-e7ze4hPR.mjs:1593:18)
+    at aggregateBindingErrorsIntoJsError (file:///C:/Users/20616/Desktop/Agent/Agent%E4%BA%A7%E5%93%81/Ceres/work/.ceres-next-01-ui/frontend/node_modules/.pnpm/rolldown@1.0.0-rc.12/node_modules/rolldown/dist/shared/error-BLhcSyeg.mjs:48:18)
+    at unwrapBindingResult (file:///C:/Users/20616/Desktop/Agent/Agent%E4%BA%A7%E5%93%81/Ceres/work/.ceres-next-01-ui/frontend/node_modules/.pnpm/rolldown@1.0.0-rc.12/node_modules/rolldown/dist/shared/error-BLhcSyeg.mjs:18:128)
+    at scan (file:///C:/Users/20616/Desktop/Agent/Agent%E4%BA%A7%E5%93%81/Ceres/work/.ceres-next-01-ui/frontend/node_modules/.pnpm/rolldown@1.0.0-rc.12/node_modules/rolldown/dist/experimental-index.mjs:176:3)
+    at async Object.build (file:///C:/Users/20616/Desktop/Agent/Agent%E4%BA%A7%E5%93%81/Ceres/work/.ceres-next-01-ui/frontend/node_modules/.pnpm/vite@8.0.5_jiti@2.6.1/node_modules/vite/dist/node/chunks/node.js:30678:3)
+    at async scan (file:///C:/Users/20616/Desktop/Agent/Agent%E4%BA%A7%E5%93%81/Ceres/work/.ceres-next-01-ui/frontend/node_modules/.pnpm/vite@8.0.5_jiti@2.6.1/node_modules/vite/dist/node/chunks/node.js:30623:4)
+    at async file:///C:/Users/20616/Desktop/Agent/Agent%E4%BA%A7%E5%93%81/Ceres/work/.ceres-next-01-ui/frontend/node_modules/.pnpm/vite@8.0.5_jiti@2.6.1/node_modules/vite/dist/node/chunks/node.js:23169:15
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+browserType.launch: Executable doesn't exist at C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01-ui\work\ceres-next-agent-experience\00-preparation\playwright-cache\chromium_headless_shell-1234\chrome-headless-shell-win64\chrome-headless-shell.exe
+╔════════════════════════════════════════════════════════════╗
+║ Looks like Playwright was just installed or updated.       ║
+║ Please run the following command to download new browsers: ║
+║                                                            ║
+║     npx playwright install                                 ║
+║                                                            ║
+║ <3 Playwright Team                                         ║
+╚════════════════════════════════════════════════════════════╝
+    at C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01-ui\work\ceres-next-agent-experience\01-ui\ui-clarification-probe.mjs:52:28 {
+  log: [],
+  name: 'Error'
+}
+
+Node.js v24.19.0

@@ -1,0 +1,18 @@
+candidate_head=840bbb632b0516ad9e47e1896b6660bb41545619
+candidate_head_after=840bbb632b0516ad9e47e1896b6660bb41545619
+worktree_status_before=clean
+worktree_status_after_clean=True
+semantic_sha256=189C346440CC44A2BC36539DDFDCE5F1F40AEEF0D41A80318E1D5CCD9DC2873B
+cwd=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-05\backend
+interpreter=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+pythonpath_backend=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-05\backend
+python_import_sources=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-05\backend\app\__init__.py; C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-05\backend\app\prompts\semantic.py
+previous_attempt=runner_setup_failure_only; plugin filename/module name mismatch; no test collected
+pytest_exit_code=0
+pytest_output=.
+1 passed in 3.45s
+meter=captured_request_bodies=2
+request_body[0] bytes=14034 sha256=0ae5287867969b02049d620ceae446da9df480606b18297a67d67df2524b432d
+request_body[1] bytes=11005 sha256=224c8c8396f942ff3cca6d62e84e51121edca17770b2709624f8aeabd5deea4f
+
+credential_value_pattern_scan_count=0

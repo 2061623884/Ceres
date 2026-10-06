@@ -1,0 +1,228 @@
+Command: & 'C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe' -m pytest -vv --showlocals tests/test_ceres_next_snack_choice.py::test_broad_snack_purchase_asks_for_type_before_preparing_a_plan --basetemp='C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\01\buy-intent-red-01-tmp'
+Working directory: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01\backend
+PYTHONPATH: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01\backend
+PYTHONUTF8: 1
+Import check exit code: 0
+app=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01\backend\app\__init__.py
+retrieval=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01\backend\app\services\retrieval_service.py
+Pytest exit code: 1
+
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01\backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.1, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 1 item
+
+tests/test_ceres_next_snack_choice.py::test_broad_snack_purchase_asks_for_type_before_preparing_a_plan FAILED [100%]
+
+================================== FAILURES ===================================
+_______ test_broad_snack_purchase_asks_for_type_before_preparing_a_plan _______
+
+indexed_client = <starlette.testclient.TestClient object at 0x000001867484CCE0>
+semantic_provider = <function semantic_provider.<locals>._install at 0x0000018677521580>
+
+    def test_broad_snack_purchase_asks_for_type_before_preparing_a_plan(
+        indexed_client, semantic_provider
+    ):
+        semantic_provider(
+            [
+                {
+                    "target": {
+                        "kind": "category",
+                        "name": "零食",
+                        "intent": "buy",
+                        "quantity": 2,
+                    },
+                    "constraints": {"budget_yuan": 15},
+                    "lookups": [{"kind": "product", "query": "零食"}],
+                }
+            ]
+        )
+        session_id = create_session(indexed_client)
+        cart_before = indexed_client.get("/api/v1/cart").json()
+    
+        response = send_turn(indexed_client, session_id, "来点零食，两包，预算15元")
+    
+        questions = response["pending_clarifications"]
+        assert len(questions) == 1, response
+        question = questions[0]
+        assert question["question_id"]
+>       assert {option["label"] for option in question["options"]} == {"薯片", "饼干"}
+E       AssertionError: assert {'苏打饼干100克盒装', '原味薯片70克袋装'} == {'饼干', '薯片'}
+E         
+E         Extra items in the left set:
+E         '苏打饼干100克盒装'
+E         '原味薯片70克袋装'
+E         Extra items in the right set:
+E         '饼干'
+E         '薯片'
+E         
+E         Full diff:
+E           {
+E         -     '薯片',
+E         -     '饼干',
+E         +     '原味薯片70克袋装',
+E         +     '苏打饼干100克盒装',
+E           }
+
+cart_before = {'business_data_mode': 'demo',
+ 'items': [],
+ 'store_id': 'store-demo-01',
+ 'total_price_fen': 0,
+ 'version': 1}
+indexed_client = <starlette.testclient.TestClient object at 0x000001867484CCE0>
+question   = {'base_session_version': 1,
+ 'base_state_version': 0,
+ 'candidate_ref': 'goal-a33634cb425f',
+ 'candidates': [{'group_id': None,
+                 'kind': 'product',
+                 'name': '苏打饼干100克盒装',
+                 'ref': 'p55434eb702c5cb7d',
+                 'scope': '',
+                 'target_id': 'demo:snack-soda-crackers-100g-box',
+                 'target_kind': 'product'},
+                {'group_id': None,
+                 'kind': 'product',
+                 'name': '原味薯片70克袋装',
+                 'ref': 'pfdf9e5ee3ecebb0a',
+                 'scope': '',
+                 'target_id': 'demo:snack-original-potato-chips-70g-bag',
+                 'target_kind': 'product'}],
+ 'options': [{'id': 'p55434eb702c5cb7d', 'label': '苏打饼干100克盒装'},
+             {'id': 'pfdf9e5ee3ecebb0a', 'label': '原味薯片70克袋装'}],
+ 'people': None,
+ 'question': '本次没找到完全同名的“零食”，找到了这些相似候选，你要哪一个？',
+ 'question_id': 'q-8ee04265cad9',
+ 'slot': 'dish'}
+questions  = [{'base_session_version': 1,
+  'base_state_version': 0,
+  'candidate_ref': 'goal-a33634cb425f',
+  'candidates': [{'group_id': None,
+                  'kind': 'product',
+                  'name': '苏打饼干100克盒装',
+                  'ref': 'p55434eb702c5cb7d',
+                  'scope': '',
+                  'target_id': 'demo:snack-soda-crackers-100g-box',
+                  'target_kind': 'product'},
+                 {'group_id': None,
+                  'kind': 'product',
+                  'name': '原味薯片70克袋装',
+                  'ref': 'pfdf9e5ee3ecebb0a',
+                  'scope': '',
+                  'target_id': 'demo:snack-original-potato-chips-70g-bag',
+                  'target_kind': 'product'}],
+  'options': [{'id': 'p55434eb702c5cb7d', 'label': '苏打饼干100克盒装'},
+              {'id': 'pfdf9e5ee3ecebb0a', 'label': '原味薯片70克袋装'}],
+  'people': None,
+  'question': '本次没找到完全同名的“零食”，找到了这些相似候选，你要哪一个？',
+  'question_id': 'q-8ee04265cad9',
+  'slot': 'dish'}]
+response   = {'action_results': [{'action_id': 'a1',
+                     'reply_ok': True,
+                     'saved': True,
+                     'slot': 'dish',
+                     'status': 'needs_clarification',
+                     'type': 'clarification'}],
+ 'allowed': True,
+ 'answer_status': 'accepted',
+ 'assistant_message_id': 'msg-455ae0d20989',
+ 'available_actions': ['send_message'],
+ 'business_data_mode': 'demo',
+ 'clarification': None,
+ 'committed': False,
+ 'current_editable_task_id': None,
+ 'guard_code': None,
+ 'message': '本次没找到完全同名的“零食”，找到了这些相似候选，你要哪一个？\n1. 苏打饼干100克盒装\n2. 原味薯片70克袋装',
+ 'message_sequence': 2,
+ 'missing_constraints': [],
+ 'missing_slots': [],
+ 'model_mode': 'live',
+ 'pending_clarification': {'base_session_version': 1,
+                           'base_state_version': 0,
+                           'candidate_ref': 'goal-a33634cb425f',
+                           'candidates': [{'group_id': None,
+                                           'kind': 'product',
+                                           'name': '苏打饼干100克盒装',
+                                           'ref': 'p55434eb702c5cb7d',
+                                           'scope': '',
+                                           'target_id': 'demo:snack-soda-crackers-100g-box',
+                                           'target_kind': 'product'},
+                                          {'group_id': None,
+                                           'kind': 'product',
+                                           'name': '原味薯片70克袋装',
+                                           'ref': 'pfdf9e5ee3ecebb0a',
+                                           'scope': '',
+                                           'target_id': 'demo:snack-original-potato-chips-70g-bag',
+                                           'target_kind': 'product'}],
+                           'options': [{'id': 'p55434eb702c5cb7d',
+                                        'label': '苏打饼干100克盒装'},
+                                       {'id': 'pfdf9e5ee3ecebb0a',
+                                        'label': '原味薯片70克袋装'}],
+                           'people': None,
+                           'question': '本次没找到完全同名的“零食”，找到了这些相似候选，你要哪一个？',
+                           'question_id': 'q-8ee04265cad9',
+                           'slot': 'dish'},
+ 'pending_clarifications': [{'base_session_version': 1,
+                             'base_state_version': 0,
+                             'candidate_ref': 'goal-a33634cb425f',
+                             'candidates': [{'group_id': None,
+                                             'kind': 'product',
+                                             'name': '苏打饼干100克盒装',
+                                             'ref': 'p55434eb702c5cb7d',
+                                             'scope': '',
+                                             'target_id': 'demo:snack-soda-crackers-100g-box',
+                                             'target_kind': 'product'},
+                                            {'group_id': None,
+                                             'kind': 'product',
+                                             'name': '原味薯片70克袋装',
+                                             'ref': 'pfdf9e5ee3ecebb0a',
+                                             'scope': '',
+                                             'target_id': 'demo:snack-original-potato-chips-70g-bag',
+                                             'target_kind': 'product'}],
+                             'options': [{'id': 'p55434eb702c5cb7d',
+                                          'label': '苏打饼干100克盒装'},
+                                         {'id': 'pfdf9e5ee3ecebb0a',
+                                          'label': '原味薯片70克袋装'}],
+                             'people': None,
+                             'question': '本次没找到完全同名的“零食”，找到了这些相似候选，你要哪一个？',
+                             'question_id': 'q-8ee04265cad9',
+                             'slot': 'dish'}],
+ 'plan': None,
+ 'plan_effect': 'keep',
+ 'product_cards': [],
+ 'purchase_step': 'none',
+ 'readiness': 'ready',
+ 'request_id': '41927ce4-ad59-4cbc-811d-c7221a864da6',
+ 'route': 'prepare',
+ 'session_id': 'sess-3b0e11aa9915',
+ 'session_version': 2,
+ 'state_version': 0,
+ 'status': 'understanding',
+ 'task_id': None,
+ 'trace_id': 'trace-ba97b62fdded',
+ 'user_message_id': 'msg-67abcac23df6'}
+semantic_provider = <function semantic_provider.<locals>._install at 0x0000018677521580>
+session_id = 'sess-3b0e11aa9915'
+
+tests\test_ceres_next_snack_choice.py:78: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_ceres_next_snack_choice.py::test_broad_snack_purchase_asks_for_type_before_preparing_a_plan - AssertionError: assert {'苏打饼干100克盒装', '原味薯片70克袋装'} == {'饼干', '薯片'}
+  
+  Extra items in the left set:
+  '苏打饼干100克盒装'
+  '原味薯片70克袋装'
+  Extra items in the right set:
+  '饼干'
+  '薯片'
+  
+  Full diff:
+    {
+  -     '薯片',
+  -     '饼干',
+  +     '原味薯片70克袋装',
+  +     '苏打饼干100克盒装',
+    }
+============================== 1 failed in 3.75s ==============================

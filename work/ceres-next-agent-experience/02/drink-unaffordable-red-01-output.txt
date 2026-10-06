@@ -1,0 +1,30 @@
+Command: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe -m pytest tests/test_ceres_next_drink_choice.py::test_unaffordable_drink_types_are_not_offered -vv --tb=short --no-showlocals --basetemp=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\02\drink-unaffordable-red-01-tmp
+cwd: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-02\backend
+PYTHONPATH: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-02\backend
+Exit code: 1
+Credential-bearing diagnostic lines filtered: False
+
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-02\backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.1, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 1 item
+
+tests/test_ceres_next_drink_choice.py::test_unaffordable_drink_types_are_not_offered FAILED [100%]
+
+================================== FAILURES ===================================
+________________ test_unaffordable_drink_types_are_not_offered ________________
+tests\test_ceres_next_drink_choice.py:64: in test_unaffordable_drink_types_are_not_offered
+    assert all(
+E   AssertionError: {'session_id': 'sess-894e95d811fa', 'task_id': None, 'state_version': 0, 'status': 'understanding', ...}
+E   assert False
+E    +  where False = all(<generator object test_unaffordable_drink_types_are_not_offered.<locals>.<genexpr> at 0x0000025427ED9FF0>)
+=========================== short test summary info ===========================
+FAILED tests/test_ceres_next_drink_choice.py::test_unaffordable_drink_types_are_not_offered - AssertionError: {'session_id': 'sess-894e95d811fa', 'task_id': None, 'state_version': 0, 'status': 'understanding', ...}
+assert False
+ +  where False = all(<generator object test_unaffordable_drink_types_are_not_offered.<locals>.<genexpr> at 0x0000025427ED9FF0>)
+============================== 1 failed in 3.84s ==============================
+

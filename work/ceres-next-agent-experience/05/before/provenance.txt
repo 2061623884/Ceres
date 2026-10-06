@@ -1,0 +1,32 @@
+sample_batch: 05-before
+timestamp_utc: 2026-10-06T10:21:04Z
+tree: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-05
+HEAD: 481e7505951204d3d24c9c9a3bb61684e5edc213
+git_status: clean
+interpreter: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+PYTHONPATH: 
+C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-05\backend
+config_preflight: config_source=backend/app/core/config.py; model=qwen3.8-27b; endpoint=https://discovery-api.intern-ai.org.cn/v1; settings retrieval_mode=hybrid; case runner forces existing lexical indexed_client fixture per 04 baseline contract
+.env: exists; value not read or emitted
+source_db: data/sale_guide.db absent (empty WAL/SHM only)
+cases: snack_type_first; same_category_cola_filter
+route_mode: controlled Kev capability route; actual configured semantic model
+sha256 backend/app/prompts/semantic.py 3A4845B0D6B5137BC6CBBF314CB0B6F65431A1A5470FEDF6516B2B9C3A38F822
+sha256 backend/app/llm/live_semantic_provider.py C84E34D61CF2CF5E4E06A6D3E1F39FF7EDBB241E65F2C159F3F085C051C6227D
+sha256 backend/app/llm/kev_provider.py C674577CD038C82443E3B064BE58A40504812E65C52AD7F51180D761E55A370D
+sha256 backend/app/agent/graph/nodes/capability.py 8293535CB6CD87D52FB3356D440DAEF1F5218EED295E3EE32009705A7C5E13B7
+sha256 backend/app/agent/graph/nodes/understand.py 97680CFDBA4A6CB509957C8E9D8441470BC5A91B24CEF5AEFD8EC5BFC7196831
+sha256 backend/app/agent/graph/nodes/answer.py 4106AF3111E28ED40BB71B1725370FE16F5F2DFC292C4D6DB08A399613DEFA08
+sha256 backend/tests/conftest.py 673B1E1547AE054D44A852B199086ACF3667C90EE9BDEA1F4FB5185A14486572
+sha256 backend/tests/test_semantic_phase1_purchase.py 2C284383B13D62AC0C42412DEA3C1D036DA8624C259FC2D965398155F54D843B
+sha256 backend/tests/support/semantic_agent.py AB85050744C3ABD05B2CC7EEF9392EC18487644BF61B69BADBF04DC3EEBA075E
+sha256 backend/tests/test_ceres_next_snack_choice.py 5122CBAA207F3959513C75C9057C8ED98CC2E318D6F17E0DA7A950BCFAC561A5
+sha256 backend/tests/test_ceres_next_capability_routing.py 54197FAE900B90A825AA44EEBBF48366BDF9C2B62DED8F8727D18EDC718A7701
+sha256 backend/tests/test_v2_cola_comparison.py AEEEEF7F9E471A7AFCFF1314DC0B951114DCF909FA75F1F5AB48955BD688B103
+sha256 data/fixtures/demo-products.json 2B3F4A98461E4C5EEA7369F426A506B2F36707014D14153AD31FBB27AE6F6361
+sha256 data/fixtures/store-offers.json B29B9491BA34F6F0F8EF8E9FB3ACAE314F092B5ABF242809FEFCE8CFA0CCB16F
+sha256 data/fixtures/catalog-review.json 937EE32E6378622D3163B050CDECFF7520CA1536EAA35BD938CDB13463602C8B
+sha256 data/fixtures/default-offer-prices.json CF694736A5A0EB4A369B7792784D128116E5358A1BD755A72DA2DB32D73844A0
+sha256 data/fixtures/purchase-templates.json 8DB52FAEC481BEFFDDDA8776E5D2940523E91635A90711E61E91EBAE0121DE33
+sha256 data/fixtures/shopping-scenarios.json A223FB587120BCDB36185E1A86EA1E1AEB62826CBE06735FD4866636BF268697
+sha256 collector F5D050CF73A4959B27CB2971D1CADC8B22997542E2B215284996B87E22F07E6F

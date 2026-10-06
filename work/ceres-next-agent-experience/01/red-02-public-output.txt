@@ -1,0 +1,260 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01\backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.1, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 1 item
+
+tests/test_ceres_next_snack_choice.py::test_choosing_snack_type_by_identity_clears_question_and_shows_matching_products FAILED [100%]
+
+================================== FAILURES ===================================
+_ test_choosing_snack_type_by_identity_clears_question_and_shows_matching_products _
+
+indexed_client = <starlette.testclient.TestClient object at 0x000001E14AE471D0>
+semantic_provider = <function semantic_provider.<locals>._install at 0x000001E14E523B00>
+
+    def test_choosing_snack_type_by_identity_clears_question_and_shows_matching_products(
+        indexed_client, semantic_provider
+    ):
+        def choose_type(_request):
+            return {
+                "target": {"kind": "category", "name": "薯片", "intent": "explore"},
+                "lookups": [{"kind": "product", "query": "薯片"}],
+            }
+    
+        def show_selected_type(request):
+            matches = request["query_results"][0]["matches"]
+            assert matches
+            assert all(row["product_type"] == "potato_chips" for row in matches)
+            return {"reply": "有原味薯片可选。", "display_refs": [matches[0]["ref"]]}
+    
+        semantic_provider(
+            [
+                {
+                    "target": {"kind": "category", "name": "零食", "intent": "explore"},
+                    "lookups": [{"kind": "product", "query": "零食"}],
+                },
+                lambda request: {
+                    "reply": "薯片和饼干都有，可以先选类型。",
+                    "display_refs": [row["ref"] for row in request["query_results"][0]["matches"]],
+                },
+                choose_type,
+                show_selected_type,
+            ]
+        )
+        session_id = create_session(indexed_client)
+        cart_before = indexed_client.get("/api/v1/cart").json()
+        before = send_turn(indexed_client, session_id, "来点零食")
+        question = before["pending_clarifications"][0]
+        chips = next(option for option in question["options"] if option["label"] == "薯片")
+    
+        after = send_turn(
+            indexed_client,
+            session_id,
+            "薯片",
+            before,
+            clarification_answer={"question_id": question["question_id"], "option_id": chips["id"]},
+        )
+    
+>       assert after["pending_clarifications"] == []
+E       AssertionError: assert [{'base_session_version': 2, 'base_state_version': 0, 'candidates': [], 'options': [{'id': 'product_type:soda_crackers', 'label': '饼干'}, {'id': 'product_type:potato_chips', 'label': '薯片'}], 'people': None, 'question': '想选哪类零食？', 'question_id': 'q-115299a5983f', 'slot': 'product_type'}] == []
+E         
+E         Left contains one more item: {'base_session_version': 2, 'base_state_version': 0, 'candidates': [], 'options': [{'id': 'product_type:soda_crackers', 'label': '饼干'}, {'id': 'product_type:potato_chips', 'label': '薯片'}], ...}
+E         
+E         Full diff:
+E         - []
+E         + [
+E         +     {
+E         +         'base_session_version': 2,
+E         +         'base_state_version': 0,
+E         +         'candidates': [],
+E         +         'options': [
+E         +             {
+E         +                 'id': 'product_type:soda_crackers',
+E         +                 'label': '饼干',
+E         +             },
+E         +             {
+E         +                 'id': 'product_type:potato_chips',
+E         +                 'label': '薯片',
+E         +             },
+E         +         ],
+E         +         'people': None,
+E         +         'question': '想选哪类零食？',
+E         +         'question_id': 'q-115299a5983f',
+E         +         'slot': 'product_type',
+E         +     },
+E         + ]
+
+after      = {'action_results': [{'action_id': 'a1',
+                     'fallback_reason': None,
+                     'index_version': 'phase1',
+                     'kind': 'lookup',
+                     'reply_ok': True,
+                     'retrieval_mode': 'lexical',
+                     'retrieval_status': 'ok',
+                     'saved': False,
+                     'status': 'completed',
+                     'type': 'read_only'}],
+ 'allowed': True,
+ 'answer_status': 'accepted',
+ 'assistant_message_id': 'msg-5a12378db85c',
+ 'available_actions': ['send_message'],
+ 'business_data_mode': 'demo',
+ 'clarification': None,
+ 'committed': False,
+ 'current_editable_task_id': None,
+ 'guard_code': None,
+ 'message': '主推「原味薯片70克袋装」；推荐理由：用途：零食、薯片、原味、即食、袋装\n1. 原味薯片70克袋装',
+ 'message_sequence': 4,
+ 'missing_constraints': [],
+ 'missing_slots': [],
+ 'model_mode': 'live',
+ 'pending_clarification': {'base_session_version': 2,
+                           'base_state_version': 0,
+                           'candidates': [],
+                           'options': [{'id': 'product_type:soda_crackers',
+                                        'label': '饼干'},
+                                       {'id': 'product_type:potato_chips',
+                                        'label': '薯片'}],
+                           'people': None,
+                           'question': '想选哪类零食？',
+                           'question_id': 'q-115299a5983f',
+                           'slot': 'product_type'},
+ 'pending_clarifications': [{'base_session_version': 2,
+                             'base_state_version': 0,
+                             'candidates': [],
+                             'options': [{'id': 'product_type:soda_crackers',
+                                          'label': '饼干'},
+                                         {'id': 'product_type:potato_chips',
+                                          'label': '薯片'}],
+                             'people': None,
+                             'question': '想选哪类零食？',
+                             'question_id': 'q-115299a5983f',
+                             'slot': 'product_type'}],
+ 'plan': None,
+ 'plan_effect': 'keep',
+ 'product_cards': [],
+ 'purchase_step': 'none',
+ 'readiness': 'information',
+ 'request_id': '445e41f9-fff2-4161-a589-360bb1137f31',
+ 'route': 'answer',
+ 'session_id': 'sess-5f12f84e9aaf',
+ 'session_version': 2,
+ 'state_version': 0,
+ 'status': 'understanding',
+ 'task_id': None,
+ 'trace_id': 'trace-04fe6b24fe92',
+ 'user_message_id': 'msg-c06c18036dac'}
+before     = {'action_results': [{'action_id': 'a1',
+                     'fallback_reason': None,
+                     'index_version': 'phase1',
+                     'kind': 'lookup',
+                     'reply_ok': True,
+                     'retrieval_mode': 'lexical',
+                     'retrieval_status': 'ok',
+                     'saved': False,
+                     'status': 'completed',
+                     'type': 'read_only'}],
+ 'allowed': True,
+ 'answer_status': 'accepted',
+ 'assistant_message_id': 'msg-647c54f680bf',
+ 'available_actions': ['send_message'],
+ 'business_data_mode': 'demo',
+ 'clarification': None,
+ 'committed': False,
+ 'current_editable_task_id': None,
+ 'guard_code': None,
+ 'message': '想选哪类零食？\n1. 饼干\n2. 薯片',
+ 'message_sequence': 2,
+ 'missing_constraints': [],
+ 'missing_slots': [],
+ 'model_mode': 'live',
+ 'pending_clarification': {'base_session_version': 1,
+                           'base_state_version': 0,
+                           'candidates': [],
+                           'options': [{'id': 'product_type:soda_crackers',
+                                        'label': '饼干'},
+                                       {'id': 'product_type:potato_chips',
+                                        'label': '薯片'}],
+                           'people': None,
+                           'question': '想选哪类零食？',
+                           'question_id': 'q-115299a5983f',
+                           'slot': 'product_type'},
+ 'pending_clarifications': [{'base_session_version': 1,
+                             'base_state_version': 0,
+                             'candidates': [],
+                             'options': [{'id': 'product_type:soda_crackers',
+                                          'label': '饼干'},
+                                         {'id': 'product_type:potato_chips',
+                                          'label': '薯片'}],
+                             'people': None,
+                             'question': '想选哪类零食？',
+                             'question_id': 'q-115299a5983f',
+                             'slot': 'product_type'}],
+ 'plan': None,
+ 'plan_effect': 'keep',
+ 'product_cards': [],
+ 'purchase_step': 'none',
+ 'readiness': 'information',
+ 'request_id': '36ede8c2-ba85-4d7d-b1d8-16bec1e49023',
+ 'route': 'answer',
+ 'session_id': 'sess-5f12f84e9aaf',
+ 'session_version': 1,
+ 'state_version': 0,
+ 'status': 'understanding',
+ 'task_id': None,
+ 'trace_id': 'trace-dfa52cbebc4b',
+ 'user_message_id': 'msg-6e1e42ff9a07'}
+cart_before = {'business_data_mode': 'demo',
+ 'items': [],
+ 'store_id': 'store-demo-01',
+ 'total_price_fen': 0,
+ 'version': 1}
+chips      = {'id': 'product_type:potato_chips', 'label': '薯片'}
+choose_type = <function test_choosing_snack_type_by_identity_clears_question_and_shows_matching_products.<locals>.choose_type at 0x000001E14E523CE0>
+indexed_client = <starlette.testclient.TestClient object at 0x000001E14AE471D0>
+question   = {'base_session_version': 1,
+ 'base_state_version': 0,
+ 'candidates': [],
+ 'options': [{'id': 'product_type:soda_crackers', 'label': '饼干'},
+             {'id': 'product_type:potato_chips', 'label': '薯片'}],
+ 'people': None,
+ 'question': '想选哪类零食？',
+ 'question_id': 'q-115299a5983f',
+ 'slot': 'product_type'}
+semantic_provider = <function semantic_provider.<locals>._install at 0x000001E14E523B00>
+session_id = 'sess-5f12f84e9aaf'
+show_selected_type = <function test_choosing_snack_type_by_identity_clears_question_and_shows_matching_products.<locals>.show_selected_type at 0x000001E14E523D80>
+
+tests\test_ceres_next_snack_choice.py:92: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_ceres_next_snack_choice.py::test_choosing_snack_type_by_identity_clears_question_and_shows_matching_products - AssertionError: assert [{'base_session_version': 2, 'base_state_version': 0, 'candidates': [], 'options': [{'id': 'product_type:soda_crackers', 'label': '饼干'}, {'id': 'product_type:potato_chips', 'label': '薯片'}], 'people': None, 'question': '想选哪类零食？', 'question_id': 'q-115299a5983f', 'slot': 'product_type'}] == []
+  
+  Left contains one more item: {'base_session_version': 2, 'base_state_version': 0, 'candidates': [], 'options': [{'id': 'product_type:soda_crackers', 'label': '饼干'}, {'id': 'product_type:potato_chips', 'label': '薯片'}], ...}
+  
+  Full diff:
+  - []
+  + [
+  +     {
+  +         'base_session_version': 2,
+  +         'base_state_version': 0,
+  +         'candidates': [],
+  +         'options': [
+  +             {
+  +                 'id': 'product_type:soda_crackers',
+  +                 'label': '饼干',
+  +             },
+  +             {
+  +                 'id': 'product_type:potato_chips',
+  +                 'label': '薯片',
+  +             },
+  +         ],
+  +         'people': None,
+  +         'question': '想选哪类零食？',
+  +         'question_id': 'q-115299a5983f',
+  +         'slot': 'product_type',
+  +     },
+  + ]
+============================== 1 failed in 4.10s ==============================

@@ -1,0 +1,13 @@
+case: 05 candidate prompt regression
+timestamp_utc: 2026-10-06T10:36:09Z
+cwd: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-05\backend
+interpreter: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+PYTHONPATH: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-05\backend
+selectors: test_ceres_next_prompt_modules.py; test_ceres_next_snack_choice.py; test_ceres_next_capability_routing.py; test_v2_cola_comparison.py; test_semantic_transport.py
+HEAD: 481e7505951204d3d24c9c9a3bb61684e5edc213
+worktree status: M app/prompts/semantic.py M tests/test_ceres_next_prompt_modules.py
+semantic.py sha256: 189C346440CC44A2BC36539DDFDCE5F1F40AEEF0D41A80318E1D5CCD9DC2873B
+import sources: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-05\backend\app\prompts\semantic.py; C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-05\backend\app\agent\graph\nodes\understand.py
+exit_code: 0
+41 passed in 62.90s (0:01:02)
+note: no request messages or prompt text retained in this pytest evidence

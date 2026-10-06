@@ -1,0 +1,308 @@
+[Sensitive Settings fields are masked; behavioral output is preserved.]
+Command: & 'C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe' -m pytest -vv --showlocals tests/test_snack_selection.py --basetemp='C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\01\snack-regression-09-tmp'
+Working directory: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01\backend
+PYTHONPATH: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01\backend
+PYTHONUTF8: 1
+Import check exit code: 0
+app=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01\backend\app\__init__.py
+retrieval=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01\backend\app\services\retrieval_service.py
+Pytest exit code: 1
+
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01\backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.1, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 5 items
+
+tests/test_snack_selection.py::test_snack_selection_requires_confirmation_and_preserves_cart_on_no_match[0-\u5c31\u7b2c\u4e00\u4e2a] FAILED [ 20%]
+tests/test_snack_selection.py::test_snack_selection_requires_confirmation_and_preserves_cart_on_no_match[1-\u5c31\u7b2c\u4e8c\u4e2a] FAILED [ 40%]
+tests/test_snack_selection.py::test_single_category_recommendation_uses_selected_sellable_sku_evidence[\u60f3\u770b\u770b\u82cf\u6253\u997c\u5e72-\u997c\u5e72-\u997c\u5e72-demo:snack-soda-crackers-100g-box-tags0-name_tokens0] PASSED [ 60%]
+tests/test_snack_selection.py::test_single_category_recommendation_uses_selected_sellable_sku_evidence[\u559d\u70b9\u751c\u7684-\u751c\u5473\u996e\u54c1-\u751c\u5473-demo:cn-minute-maid-peach-450ml-bottle-tags1-name_tokens1] PASSED [ 80%]
+tests/test_snack_selection.py::test_unknown_sugar_content_returns_no_product_recommendation_or_plan PASSED [100%]
+
+================================== FAILURES ===================================
+_ test_snack_selection_requires_confirmation_and_preserves_cart_on_no_match[0-\u5c31\u7b2c\u4e00\u4e2a] _
+
+client = <starlette.testclient.TestClient object at 0x0000015BB66C5250>
+semantic_provider = <function semantic_provider.<locals>._install at 0x0000015BB903C5E0>
+tmp_path = WindowsPath('C:/Users/20616/Desktop/Agent/Agent产品/Ceres/work/ceres-next-agent-experience/01/snack-regression-09-tmp/test_snack_selection_requires_0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000015BB65360F0>
+index = 0, message = '就第一个'
+
+    @pytest.mark.parametrize("index,message", [(0, "就第一个"), (1, "就第二个")])
+    def test_snack_selection_requires_confirmation_and_preserves_cart_on_no_match(
+        client, semantic_provider, tmp_path, monkeypatch, index, message
+    ):
+        settings = get_settings()
+        index_root = tmp_path / "retrieval-index"
+        subprocess.run(
+            [sys.executable, str(ROOT / "scripts/build_retrieval_index.py"),
+             "--index-root", str(index_root), "build", "--candidate-db",
+             str(settings.runtime_db_path), "--no-embed"],
+            check=True, capture_output=True, text=True,
+        )
+        monkeypatch.setattr(settings, "retrieval_index_dir", str(index_root))
+        shown = []
+    
+        def display(request):
+            matches = [
+                row
+                for result in request["query_results"]
+                for row in result["matches"]
+            ]
+            assert {CHIPS, CRACKERS}.issubset(
+                {row["target_id"] for row in matches}
+            )
+            rows = [
+                row
+                for row in request["candidates"]["products"]
+                if row["target_id"] in {CHIPS, CRACKERS}
+            ]
+            # Display order differs from lookup order, so an ordinal must use refs.
+            shown.extend(reversed(rows))
+            return {"reply": "可选这两款零食。", "display_refs": [row["ref"] for row in shown]}
+    
+        def select(request):
+            displayed = request["displayed_candidates"]
+            assert [row["ref"] for row in displayed] == [row["ref"] for row in shown]
+            return pick("product", displayed[index], quantity=1)
+    
+        def no_match(request):
+            assert request["query_results"][0]["matches"] == []
+            assert request["query_results"][0]["status"] == "completed"
+            assert request["query_results"][0]["empty"] is True
+            return {"reply": "没有找到匹配的冰淇淋商品。", "display_refs": []}
+    
+        provider = semantic_provider([
+            {"lookups": [
+                {"kind": "product", "query": "原味薯片"},
+                {"kind": "product", "query": "苏打饼干"},
+            ]},
+            display, select, {"plan_act": "none", "reply": "清单已准备好，等待确认。"},
+            {"target": {"kind": "category", "name": "冰淇淋", "intent": "explore"},
+             "lookups": [{"kind": "product", "query": "冰淇淋"}]},
+            no_match,
+            {"target": {"kind": "category", "name": "冰淇淋", "intent": "explore"},
+             "lookups": [{"kind": "product", "query": "冰淇淋"}]},
+            no_match,
+        ])
+        sid = create_session(client)
+        baseline = client.get("/api/v1/cart").json()
+>       first = send_turn(client, sid, "比较一下原味薯片和苏打饼干")
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+baseline   = {'business_data_mode': 'demo',
+ 'items': [],
+ 'store_id': 'store-demo-01',
+ 'total_price_fen': 0,
+ 'version': 1}
+client     = <starlette.testclient.TestClient object at 0x0000015BB66C5250>
+display    = <function test_snack_selection_requires_confirmation_and_preserves_cart_on_no_match.<locals>.display at 0x0000015BB90FFEC0>
+index      = 0
+index_root = WindowsPath('C:/Users/20616/Desktop/Agent/Agent产品/Ceres/work/ceres-next-agent-experience/01/snack-regression-09-tmp/test_snack_selection_requires_0/retrieval-index')
+message    = '就第一个'
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000015BB65360F0>
+no_match   = <function test_snack_selection_requires_confirmation_and_preserves_cart_on_no_match.<locals>.no_match at 0x0000015BB90FF6A0>
+provider   = <support.semantic_agent.ScriptedSemanticProvider object at 0x0000015BB90AE6F0>
+select     = <function test_snack_selection_requires_confirmation_and_preserves_cart_on_no_match.<locals>.select at 0x0000015BB90FF740>
+semantic_provider = <function semantic_provider.<locals>._install at 0x0000015BB903C5E0>
+settings   = Settings(llm_mode='live', business_data_mode='demo', openai_base_url='https://discovery-api.intern-ai.org.cn/v1', openai_api_key='[REDACTED]', llm_model='qwen3.8-27b', memory_model='qwen3.8-27b', kev_base_url='http://127.0.0.1:18009', llm_timeout=45.0, llm_max_output_tokens=3072, semantic_max_steps=2, semantic_lookup_budget=2, semantic_turn_timeout_seconds=90.0, retrieval_mode='hybrid', retrieval_index_dir='C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-next-agent-experience\\01\\snack-regression-09-tmp\\test_snack_selection_requires_0\\retrieval-index', embedding_base_url='https://api.siliconflow.cn/v1', embedding_api_key='[REDACTED]', embedding_model='Qwen/Qwen3-Embedding-0.6B', embedding_revision='', embedding_dimension=1024, embedding_query_instruction='Instruct: Given a shopping request, retrieve relevant Chinese dishes or supermarket products.\nQuery: ', embedding_document_instruction='', embedding_timeout=30.0, source_database_path='C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-01\\data\\sale_guide.db', database_url='sqlite:///C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-next-agent-experience\\01\\snack-regression-09-tmp\\test_snack_selection_requires_0\\test.sqlite3', backend_port=8100, frontend_port=3100, internal_enabled=False, internal_admin_token='[REDACTED]', trace_retention_days=7)
+shown      = []
+sid        = 'sess-fb888f26a081'
+tmp_path   = WindowsPath('C:/Users/20616/Desktop/Agent/Agent产品/Ceres/work/ceres-next-agent-experience/01/snack-regression-09-tmp/test_snack_selection_requires_0')
+
+tests\test_snack_selection.py:79: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+client = <starlette.testclient.TestClient object at 0x0000015BB66C5250>
+session_id = 'sess-fb888f26a081', message = '比较一下原味薯片和苏打饼干', previous = None
+request_id = None, headers = None, extra = {}
+
+    def send_turn(
+        client,
+        session_id: str,
+        message: str,
+        previous: dict[str, Any] | None = None,
+        *,
+        request_id: str | None = None,
+        headers: dict[str, str] | None = None,
+        **extra: Any,
+    ) -> dict[str, Any]:
+        """One SSE turn; returns turn.completed payload or raises on error/stop."""
+        response = post_turn(
+            client,
+            session_id,
+            message,
+            previous,
+            request_id=request_id,
+            headers=headers,
+            **extra,
+        )
+        if response.status_code >= 400:
+            err = response.json()["error"]
+>           raise AssertionError(
+                f"SSE error {err.get('code')}: {err.get('message')}"
+            )
+E           AssertionError: SSE error KeyError: 'target_id'
+
+client     = <starlette.testclient.TestClient object at 0x0000015BB66C5250>
+err        = {'code': 'KeyError', 'message': "'target_id'", 'retryable': False}
+extra      = {}
+headers    = None
+message    = '比较一下原味薯片和苏打饼干'
+previous   = None
+request_id = None
+response   = TurnHTTPResponse(status_code=400,
+                 _body=None,
+                 _error={'code': 'KeyError',
+                         'message': "'target_id'",
+                         'retryable': False})
+session_id = 'sess-fb888f26a081'
+
+tests\support\__init__.py:170: AssertionError
+_ test_snack_selection_requires_confirmation_and_preserves_cart_on_no_match[1-\u5c31\u7b2c\u4e8c\u4e2a] _
+
+client = <starlette.testclient.TestClient object at 0x0000015BB92D2D20>
+semantic_provider = <function semantic_provider.<locals>._install at 0x0000015BB9504EA0>
+tmp_path = WindowsPath('C:/Users/20616/Desktop/Agent/Agent产品/Ceres/work/ceres-next-agent-experience/01/snack-regression-09-tmp/test_snack_selection_requires_1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000015BB910C3E0>
+index = 1, message = '就第二个'
+
+    @pytest.mark.parametrize("index,message", [(0, "就第一个"), (1, "就第二个")])
+    def test_snack_selection_requires_confirmation_and_preserves_cart_on_no_match(
+        client, semantic_provider, tmp_path, monkeypatch, index, message
+    ):
+        settings = get_settings()
+        index_root = tmp_path / "retrieval-index"
+        subprocess.run(
+            [sys.executable, str(ROOT / "scripts/build_retrieval_index.py"),
+             "--index-root", str(index_root), "build", "--candidate-db",
+             str(settings.runtime_db_path), "--no-embed"],
+            check=True, capture_output=True, text=True,
+        )
+        monkeypatch.setattr(settings, "retrieval_index_dir", str(index_root))
+        shown = []
+    
+        def display(request):
+            matches = [
+                row
+                for result in request["query_results"]
+                for row in result["matches"]
+            ]
+            assert {CHIPS, CRACKERS}.issubset(
+                {row["target_id"] for row in matches}
+            )
+            rows = [
+                row
+                for row in request["candidates"]["products"]
+                if row["target_id"] in {CHIPS, CRACKERS}
+            ]
+            # Display order differs from lookup order, so an ordinal must use refs.
+            shown.extend(reversed(rows))
+            return {"reply": "可选这两款零食。", "display_refs": [row["ref"] for row in shown]}
+    
+        def select(request):
+            displayed = request["displayed_candidates"]
+            assert [row["ref"] for row in displayed] == [row["ref"] for row in shown]
+            return pick("product", displayed[index], quantity=1)
+    
+        def no_match(request):
+            assert request["query_results"][0]["matches"] == []
+            assert request["query_results"][0]["status"] == "completed"
+            assert request["query_results"][0]["empty"] is True
+            return {"reply": "没有找到匹配的冰淇淋商品。", "display_refs": []}
+    
+        provider = semantic_provider([
+            {"lookups": [
+                {"kind": "product", "query": "原味薯片"},
+                {"kind": "product", "query": "苏打饼干"},
+            ]},
+            display, select, {"plan_act": "none", "reply": "清单已准备好，等待确认。"},
+            {"target": {"kind": "category", "name": "冰淇淋", "intent": "explore"},
+             "lookups": [{"kind": "product", "query": "冰淇淋"}]},
+            no_match,
+            {"target": {"kind": "category", "name": "冰淇淋", "intent": "explore"},
+             "lookups": [{"kind": "product", "query": "冰淇淋"}]},
+            no_match,
+        ])
+        sid = create_session(client)
+        baseline = client.get("/api/v1/cart").json()
+>       first = send_turn(client, sid, "比较一下原味薯片和苏打饼干")
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+baseline   = {'business_data_mode': 'demo',
+ 'items': [],
+ 'store_id': 'store-demo-01',
+ 'total_price_fen': 0,
+ 'version': 1}
+client     = <starlette.testclient.TestClient object at 0x0000015BB92D2D20>
+display    = <function test_snack_selection_requires_confirmation_and_preserves_cart_on_no_match.<locals>.display at 0x0000015BB9506E80>
+index      = 1
+index_root = WindowsPath('C:/Users/20616/Desktop/Agent/Agent产品/Ceres/work/ceres-next-agent-experience/01/snack-regression-09-tmp/test_snack_selection_requires_1/retrieval-index')
+message    = '就第二个'
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000015BB910C3E0>
+no_match   = <function test_snack_selection_requires_confirmation_and_preserves_cart_on_no_match.<locals>.no_match at 0x0000015BB9506480>
+provider   = <support.semantic_agent.ScriptedSemanticProvider object at 0x0000015BB926F8C0>
+select     = <function test_snack_selection_requires_confirmation_and_preserves_cart_on_no_match.<locals>.select at 0x0000015BB9506340>
+semantic_provider = <function semantic_provider.<locals>._install at 0x0000015BB9504EA0>
+settings   = Settings(llm_mode='live', business_data_mode='demo', openai_base_url='https://discovery-api.intern-ai.org.cn/v1', openai_api_key='[REDACTED]', llm_model='qwen3.8-27b', memory_model='qwen3.8-27b', kev_base_url='http://127.0.0.1:18009', llm_timeout=45.0, llm_max_output_tokens=3072, semantic_max_steps=2, semantic_lookup_budget=2, semantic_turn_timeout_seconds=90.0, retrieval_mode='hybrid', retrieval_index_dir='C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-next-agent-experience\\01\\snack-regression-09-tmp\\test_snack_selection_requires_1\\retrieval-index', embedding_base_url='https://api.siliconflow.cn/v1', embedding_api_key='[REDACTED]', embedding_model='Qwen/Qwen3-Embedding-0.6B', embedding_revision='', embedding_dimension=1024, embedding_query_instruction='Instruct: Given a shopping request, retrieve relevant Chinese dishes or supermarket products.\nQuery: ', embedding_document_instruction='', embedding_timeout=30.0, source_database_path='C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-01\\data\\sale_guide.db', database_url='sqlite:///C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-next-agent-experience\\01\\snack-regression-09-tmp\\test_snack_selection_requires_1\\test.sqlite3', backend_port=8100, frontend_port=3100, internal_enabled=False, internal_admin_token='[REDACTED]', trace_retention_days=7)
+shown      = []
+sid        = 'sess-e6787ed76a3a'
+tmp_path   = WindowsPath('C:/Users/20616/Desktop/Agent/Agent产品/Ceres/work/ceres-next-agent-experience/01/snack-regression-09-tmp/test_snack_selection_requires_1')
+
+tests\test_snack_selection.py:79: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+client = <starlette.testclient.TestClient object at 0x0000015BB92D2D20>
+session_id = 'sess-e6787ed76a3a', message = '比较一下原味薯片和苏打饼干', previous = None
+request_id = None, headers = None, extra = {}
+
+    def send_turn(
+        client,
+        session_id: str,
+        message: str,
+        previous: dict[str, Any] | None = None,
+        *,
+        request_id: str | None = None,
+        headers: dict[str, str] | None = None,
+        **extra: Any,
+    ) -> dict[str, Any]:
+        """One SSE turn; returns turn.completed payload or raises on error/stop."""
+        response = post_turn(
+            client,
+            session_id,
+            message,
+            previous,
+            request_id=request_id,
+            headers=headers,
+            **extra,
+        )
+        if response.status_code >= 400:
+            err = response.json()["error"]
+>           raise AssertionError(
+                f"SSE error {err.get('code')}: {err.get('message')}"
+            )
+E           AssertionError: SSE error KeyError: 'target_id'
+
+client     = <starlette.testclient.TestClient object at 0x0000015BB92D2D20>
+err        = {'code': 'KeyError', 'message': "'target_id'", 'retryable': False}
+extra      = {}
+headers    = None
+message    = '比较一下原味薯片和苏打饼干'
+previous   = None
+request_id = None
+response   = TurnHTTPResponse(status_code=400,
+                 _body=None,
+                 _error={'code': 'KeyError',
+                         'message': "'target_id'",
+                         'retryable': False})
+session_id = 'sess-e6787ed76a3a'
+
+tests\support\__init__.py:170: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_snack_selection.py::test_snack_selection_requires_confirmation_and_preserves_cart_on_no_match[0-\u5c31\u7b2c\u4e00\u4e2a] - AssertionError: SSE error KeyError: 'target_id'
+FAILED tests/test_snack_selection.py::test_snack_selection_requires_confirmation_and_preserves_cart_on_no_match[1-\u5c31\u7b2c\u4e8c\u4e2a] - AssertionError: SSE error KeyError: 'target_id'
+======================== 2 failed, 3 passed in 11.89s =========================

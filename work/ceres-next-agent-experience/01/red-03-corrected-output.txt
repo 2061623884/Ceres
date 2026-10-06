@@ -1,0 +1,487 @@
+[Sensitive Settings fields are masked; behavioral output is preserved.]
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01\backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.1, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 1 item
+
+tests/test_ceres_next_snack_choice.py::test_snack_choice_carries_budget_and_quantity_through_plan_to_explicit_confirmation FAILED [100%]
+
+================================== FAILURES ===================================
+_ test_snack_choice_carries_budget_and_quantity_through_plan_to_explicit_confirmation _
+
+indexed_client = <starlette.testclient.TestClient object at 0x0000028ED2F05BE0>
+semantic_provider = <function semantic_provider.<locals>._install at 0x0000028ED6283D80>
+
+    def test_snack_choice_carries_budget_and_quantity_through_plan_to_explicit_confirmation(
+        indexed_client, semantic_provider
+    ):
+        def show_snack_types(request):
+            matches = request["query_results"][0]["matches"]
+            return {
+                "reply": "薯片和饼干都有，可以先选类型。",
+                "display_refs": [row["ref"] for row in matches],
+            }
+    
+        def show_chips(request):
+            chips = next(
+                row
+                for row in request["query_results"][0]["matches"]
+                if row["product_type"] == "potato_chips"
+            )
+            return {"reply": "有原味薯片可选。", "display_refs": [chips["ref"]]}
+    
+        def prepare_plan(request):
+            chips = next(
+                row
+                for row in request["displayed_candidates"]
+                if row["target_id"] == "demo:snack-original-potato-chips-70g-bag"
+            )
+            requirements = request.get("requirements") or {}
+            budget_fen = requirements.get("budget_fen")
+            constraints = (
+                {"budget_yuan": budget_fen / 100} if budget_fen is not None else None
+            )
+            return pick(
+                "product",
+                chips,
+                quantity=requirements.get("quantity"),
+                constraints=constraints,
+            )
+    
+        semantic_provider(
+            [
+                {
+                    "target": {
+                        "kind": "category",
+                        "name": "零食",
+                        "intent": "explore",
+                        "quantity": 2,
+                    },
+                    "constraints": {"budget_yuan": 15},
+                    "lookups": [{"kind": "product", "query": "零食"}],
+                },
+                show_snack_types,
+                {
+                    "target": {"kind": "category", "name": "薯片", "intent": "explore"},
+                    "lookups": [{"kind": "product", "query": "薯片"}],
+                },
+                show_chips,
+                prepare_plan,
+            ]
+        )
+        session_id = create_session(indexed_client)
+        cart_before = indexed_client.get("/api/v1/cart").json()
+    
+        broad = send_turn(indexed_client, session_id, "来点零食，两包，预算15元")
+        question = broad["pending_clarifications"][0]
+        chips_option = next(
+            option for option in question["options"] if option["label"] == "薯片"
+        )
+        selected = send_turn(
+            indexed_client,
+            session_id,
+            "薯片",
+            broad,
+            clarification_answer={
+                "question_id": question["question_id"],
+                "option_id": chips_option["id"],
+            },
+        )
+        assert selected["pending_clarifications"] == []
+        assert selected["plan"] is None
+        assert "原味薯片70克袋装" in selected["message"]
+        assert "苏打饼干100克盒装" not in selected["message"]
+        assert indexed_client.get("/api/v1/cart").json() == cart_before
+    
+        planned = send_turn(indexed_client, session_id, "生成清单", selected)
+        plan = planned["plan"]
+        assert plan is not None and plan["can_confirm"]
+        assert len(plan["items"]) == 1
+        item = plan["items"][0]
+        assert item["sku_id"] == "demo:snack-original-potato-chips-70g-bag"
+>       assert item["quantity"] == 2
+E       assert 1 == 2
+
+broad      = {'action_results': [{'action_id': 'a1',
+                     'fallback_reason': None,
+                     'index_version': 'phase1',
+                     'kind': 'lookup',
+                     'reply_ok': True,
+                     'retrieval_mode': 'lexical',
+                     'retrieval_status': 'ok',
+                     'saved': False,
+                     'status': 'completed',
+                     'type': 'read_only'}],
+ 'allowed': True,
+ 'answer_status': 'accepted',
+ 'assistant_message_id': 'msg-1077e949f6d7',
+ 'available_actions': ['send_message'],
+ 'business_data_mode': 'demo',
+ 'clarification': None,
+ 'committed': False,
+ 'current_editable_task_id': None,
+ 'guard_code': None,
+ 'message': '想选哪类零食？\n1. 饼干\n2. 薯片',
+ 'message_sequence': 2,
+ 'missing_constraints': [],
+ 'missing_slots': [],
+ 'model_mode': 'live',
+ 'pending_clarification': {'base_session_version': 1,
+                           'base_state_version': 0,
+                           'candidates': [],
+                           'options': [{'id': 'product_type:soda_crackers',
+                                        'label': '饼干'},
+                                       {'id': 'product_type:potato_chips',
+                                        'label': '薯片'}],
+                           'people': None,
+                           'question': '想选哪类零食？',
+                           'question_id': 'q-2d9a0a17a05b',
+                           'slot': 'product_type'},
+ 'pending_clarifications': [{'base_session_version': 1,
+                             'base_state_version': 0,
+                             'candidates': [],
+                             'options': [{'id': 'product_type:soda_crackers',
+                                          'label': '饼干'},
+                                         {'id': 'product_type:potato_chips',
+                                          'label': '薯片'}],
+                             'people': None,
+                             'question': '想选哪类零食？',
+                             'question_id': 'q-2d9a0a17a05b',
+                             'slot': 'product_type'}],
+ 'plan': None,
+ 'plan_effect': 'keep',
+ 'product_cards': [],
+ 'purchase_step': 'none',
+ 'readiness': 'information',
+ 'request_id': '27a9fac1-10bb-4119-805e-d11834f7454f',
+ 'route': 'answer',
+ 'session_id': 'sess-b92551b8e84e',
+ 'session_version': 2,
+ 'state_version': 0,
+ 'status': 'understanding',
+ 'task_id': None,
+ 'trace_id': 'trace-5ee03369cf23',
+ 'user_message_id': 'msg-4784dc1246ea'}
+cart_before = {'business_data_mode': 'demo',
+ 'items': [],
+ 'store_id': 'store-demo-01',
+ 'total_price_fen': 0,
+ 'version': 1}
+chips_option = {'id': 'product_type:potato_chips', 'label': '薯片'}
+indexed_client = <starlette.testclient.TestClient object at 0x0000028ED2F05BE0>
+item       = {'added_quantity': 0,
+ 'availability': 'available',
+ 'contributions': [{'added_quantity': 0,
+                    'group_id': 'product:demo:snack-original-potato-chips-70g-bag',
+                    'quantity': 1,
+                    'required_item_id': 'product:demo:snack-original-potato-chips-70g-bag#demo:snack-original-potato-chips-70g-bag',
+                    'requirement': {'component_id': None,
+                                    'ingredient_id': None,
+                                    'name': '原味薯片70克袋装',
+                                    'quantity': 1,
+                                    'quantity_known': True,
+                                    'required_item_id': 'product:demo:snack-original-potato-chips-70g-bag#demo:snack-original-potato-chips-70g-bag',
+                                    'requiredness': 'core',
+                                    'source': {'kind': 'user',
+                                               'ref': '原味薯片70克袋装'},
+                                    'unit': '件'},
+                    'selected': True}],
+ 'evidence': {'data_mode': 'demo',
+              'quoted_at': '2026-10-06T06:43:59+00:00',
+              'sku_source': 'store_offer',
+              'source_note': '本店 offer 快照（business_data_mode=demo）；不是外部实时库存源',
+              'stock_verified': True,
+              'unknown_constraints': []},
+ 'group_id': 'product:demo:snack-original-potato-chips-70g-bag',
+ 'image_kind': 'placeholder',
+ 'image_kind_legacy': 'placeholder',
+ 'image_path': None,
+ 'ingredient_ids': ['potato'],
+ 'line_total_fen': 590,
+ 'max_addable_quantity': 30,
+ 'name': '原味薯片70克袋装',
+ 'pack_source': 'catalog_spec',
+ 'quantity': 1,
+ 'quantity_source': 'recommended',
+ 'recommended_quantity': 1,
+ 'remaining_quantity': 1,
+ 'required_item_id': 'product:demo:snack-original-potato-chips-70g-bag#demo:snack-original-potato-chips-70g-bag',
+ 'requirement': {'component_id': None,
+                 'ingredient_id': None,
+                 'name': '原味薯片70克袋装',
+                 'quantity': 1,
+                 'quantity_known': True,
+                 'required_item_id': 'product:demo:snack-original-potato-chips-70g-bag#demo:snack-original-potato-chips-70g-bag',
+                 'requiredness': 'core',
+                 'source': {'kind': 'user', 'ref': '原味薯片70克袋装'},
+                 'unit': '件'},
+ 'role': 'required',
+ 'selected': True,
+ 'sell_unit': '件',
+ 'shortfall_quantity': 0,
+ 'sku_id': 'demo:snack-original-potato-chips-70g-bag',
+ 'spec_quantity': 70.0,
+ 'spec_unit': 'g',
+ 'target_id': 'demo:snack-original-potato-chips-70g-bag',
+ 'target_kind': 'product',
+ 'unit_price_fen': 590,
+ 'user_quantity': None}
+plan       = {'can_confirm': True,
+ 'coverage_intent': 'partial_ok',
+ 'coverage_mode': 'full',
+ 'expires_at': '2026-10-06T06:48:59.089855+00:00',
+ 'gaps': [],
+ 'items': [{'added_quantity': 0,
+            'availability': 'available',
+            'contributions': [{'added_quantity': 0,
+                               'group_id': 'product:demo:snack-original-potato-chips-70g-bag',
+                               'quantity': 1,
+                               'required_item_id': 'product:demo:snack-original-potato-chips-70g-bag#demo:snack-original-potato-chips-70g-bag',
+                               'requirement': {'component_id': None,
+                                               'ingredient_id': None,
+                                               'name': '原味薯片70克袋装',
+                                               'quantity': 1,
+                                               'quantity_known': True,
+                                               'required_item_id': 'product:demo:snack-original-potato-chips-70g-bag#demo:snack-original-potato-chips-70g-bag',
+                                               'requiredness': 'core',
+                                               'source': {'kind': 'user',
+                                                          'ref': '原味薯片70克袋装'},
+                                               'unit': '件'},
+                               'selected': True}],
+            'evidence': {'data_mode': 'demo',
+                         'quoted_at': '2026-10-06T06:43:59+00:00',
+                         'sku_source': 'store_offer',
+                         'source_note': '本店 offer '
+                                        '快照（business_data_mode=demo）；不是外部实时库存源',
+                         'stock_verified': True,
+                         'unknown_constraints': []},
+            'group_id': 'product:demo:snack-original-potato-chips-70g-bag',
+            'image_kind': 'placeholder',
+            'image_kind_legacy': 'placeholder',
+            'image_path': None,
+            'ingredient_ids': ['potato'],
+            'line_total_fen': 590,
+            'max_addable_quantity': 30,
+            'name': '原味薯片70克袋装',
+            'pack_source': 'catalog_spec',
+            'quantity': 1,
+            'quantity_source': 'recommended',
+            'recommended_quantity': 1,
+            'remaining_quantity': 1,
+            'required_item_id': 'product:demo:snack-original-potato-chips-70g-bag#demo:snack-original-potato-chips-70g-bag',
+            'requirement': {'component_id': None,
+                            'ingredient_id': None,
+                            'name': '原味薯片70克袋装',
+                            'quantity': 1,
+                            'quantity_known': True,
+                            'required_item_id': 'product:demo:snack-original-potato-chips-70g-bag#demo:snack-original-potato-chips-70g-bag',
+                            'requiredness': 'core',
+                            'source': {'kind': 'user', 'ref': '原味薯片70克袋装'},
+                            'unit': '件'},
+            'role': 'required',
+            'selected': True,
+            'sell_unit': '件',
+            'shortfall_quantity': 0,
+            'sku_id': 'demo:snack-original-potato-chips-70g-bag',
+            'spec_quantity': 70.0,
+            'spec_unit': 'g',
+            'target_id': 'demo:snack-original-potato-chips-70g-bag',
+            'target_kind': 'product',
+            'unit_price_fen': 590,
+            'user_quantity': None}],
+ 'merged_sku_contributions': [],
+ 'mode': 'bundle',
+ 'outstanding_total_fen': 590,
+ 'plan_id': 'plan-5e8164b7d076',
+ 'plan_version': 1,
+ 'selected_total_fen': 590,
+ 'targets': [{'group_id': 'product:demo:snack-original-potato-chips-70g-bag',
+              'kind': 'product',
+              'name': '原味薯片70克袋装',
+              'people': None,
+              'people_source': 'default',
+              'target_id': 'demo:snack-original-potato-chips-70g-bag'}],
+ 'total_price_fen': 590,
+ 'uncovered_items': [],
+ 'validation_status': 'passed'}
+planned    = {'action_results': [{'action_id': 'a1',
+                     'candidate_ref': 'pfdf9e5ee3ecebb0a',
+                     'group_id': 'product:demo:snack-original-potato-chips-70g-bag',
+                     'message': '采购清单已加入「原味薯片70克袋装」',
+                     'plan_effect': 'replace',
+                     'reply_ok': True,
+                     'saved': True,
+                     'status': 'committed',
+                     'type': 'mutation',
+                     'verb': 'add'}],
+ 'allowed': True,
+ 'answer_status': 'awaiting_confirmation',
+ 'assistant_message_id': 'msg-c19c01a6c02d',
+ 'available_actions': ['confirm', 'cancel', 'modify', 'send_message'],
+ 'business_data_mode': 'demo',
+ 'clarification': None,
+ 'committed': True,
+ 'current_editable_task_id': 'ta[REDACTED]',
+ 'guard_code': None,
+ 'message': '采购清单已加入「原味薯片70克袋装」\n已整理 1 件商品，选中合计 ¥5.90（演示价格）。包含：原味薯片70克袋装。',
+ 'message_sequence': 6,
+ 'missing_constraints': [],
+ 'missing_slots': [],
+ 'model_mode': 'live',
+ 'pending_clarification': None,
+ 'pending_clarifications': [],
+ 'plan': {'can_confirm': True,
+          'coverage_intent': 'partial_ok',
+          'coverage_mode': 'full',
+          'expires_at': '2026-10-06T06:48:59.089855+00:00',
+          'gaps': [],
+          'items': [{'added_quantity': 0,
+                     'availability': 'available',
+                     'contributions': [{'added_quantity': 0,
+                                        'group_id': 'product:demo:snack-original-potato-chips-70g-bag',
+                                        'quantity': 1,
+                                        'required_item_id': 'product:demo:snack-original-potato-chips-70g-bag#demo:snack-original-potato-chips-70g-bag',
+                                        'requirement': {'component_id': None,
+                                                        'ingredient_id': None,
+                                                        'name': '原味薯片70克袋装',
+                                                        'quantity': 1,
+                                                        'quantity_known': True,
+                                                        'required_item_id': 'product:demo:snack-original-potato-chips-70g-bag#demo:snack-original-potato-chips-70g-bag',
+                                                        'requiredness': 'core',
+                                                        'source': {'kind': 'user',
+                                                                   'ref': '原味薯片70克袋装'},
+                                                        'unit': '件'},
+                                        'selected': True}],
+                     'evidence': {'data_mode': 'demo',
+                                  'quoted_at': '2026-10-06T06:43:59+00:00',
+                                  'sku_source': 'store_offer',
+                                  'source_note': '本店 offer '
+                                                 '快照（business_data_mode=demo）；不是外部实时库存源',
+                                  'stock_verified': True,
+                                  'unknown_constraints': []},
+                     'group_id': 'product:demo:snack-original-potato-chips-70g-bag',
+                     'image_kind': 'placeholder',
+                     'image_kind_legacy': 'placeholder',
+                     'image_path': None,
+                     'ingredient_ids': ['potato'],
+                     'line_total_fen': 590,
+                     'max_addable_quantity': 30,
+                     'name': '原味薯片70克袋装',
+                     'pack_source': 'catalog_spec',
+                     'quantity': 1,
+                     'quantity_source': 'recommended',
+                     'recommended_quantity': 1,
+                     'remaining_quantity': 1,
+                     'required_item_id': 'product:demo:snack-original-potato-chips-70g-bag#demo:snack-original-potato-chips-70g-bag',
+                     'requirement': {'component_id': None,
+                                     'ingredient_id': None,
+                                     'name': '原味薯片70克袋装',
+                                     'quantity': 1,
+                                     'quantity_known': True,
+                                     'required_item_id': 'product:demo:snack-original-potato-chips-70g-bag#demo:snack-original-potato-chips-70g-bag',
+                                     'requiredness': 'core',
+                                     'source': {'kind': 'user',
+                                                'ref': '原味薯片70克袋装'},
+                                     'unit': '件'},
+                     'role': 'required',
+                     'selected': True,
+                     'sell_unit': '件',
+                     'shortfall_quantity': 0,
+                     'sku_id': 'demo:snack-original-potato-chips-70g-bag',
+                     'spec_quantity': 70.0,
+                     'spec_unit': 'g',
+                     'target_id': 'demo:snack-original-potato-chips-70g-bag',
+                     'target_kind': 'product',
+                     'unit_price_fen': 590,
+                     'user_quantity': None}],
+          'merged_sku_contributions': [],
+          'mode': 'bundle',
+          'outstanding_total_fen': 590,
+          'plan_id': 'plan-5e8164b7d076',
+          'plan_version': 1,
+          'selected_total_fen': 590,
+          'targets': [{'group_id': 'product:demo:snack-original-potato-chips-70g-bag',
+                       'kind': 'product',
+                       'name': '原味薯片70克袋装',
+                       'people': None,
+                       'people_source': 'default',
+                       'target_id': 'demo:snack-original-potato-chips-70g-bag'}],
+          'total_price_fen': 590,
+          'uncovered_items': [],
+          'validation_status': 'passed'},
+ 'plan_effect': 'replace',
+ 'product_cards': [],
+ 'purchase_step': 'awaiting_confirmation',
+ 'readiness': 'ready',
+ 'request_id': 'e1cae7f0-345b-4fc4-98ff-501e3358adae',
+ 'route': 'prepare',
+ 'session_id': 'sess-b92551b8e84e',
+ 'session_version': 5,
+ 'state_version': 2,
+ 'status': 'awaiting_confirmation',
+ 'task_id': 'ta[REDACTED]',
+ 'trace_id': 'trace-95fe9c5516ba',
+ 'user_message_id': 'msg-d555920e239e'}
+prepare_plan = <function test_snack_choice_carries_budget_and_quantity_through_plan_to_explicit_confirmation.<locals>.prepare_plan at 0x0000028ED3AE9E40>
+question   = {'base_session_version': 1,
+ 'base_state_version': 0,
+ 'candidates': [],
+ 'options': [{'id': 'product_type:soda_crackers', 'label': '饼干'},
+             {'id': 'product_type:potato_chips', 'label': '薯片'}],
+ 'people': None,
+ 'question': '想选哪类零食？',
+ 'question_id': 'q-2d9a0a17a05b',
+ 'slot': 'product_type'}
+selected   = {'action_results': [{'action_id': 'a1',
+                     'fallback_reason': None,
+                     'index_version': 'phase1',
+                     'kind': 'lookup',
+                     'reply_ok': True,
+                     'retrieval_mode': 'lexical',
+                     'retrieval_status': 'ok',
+                     'saved': False,
+                     'status': 'completed',
+                     'type': 'read_only'}],
+ 'allowed': True,
+ 'answer_status': 'accepted',
+ 'assistant_message_id': 'msg-847d69ef3e8e',
+ 'available_actions': ['send_message'],
+ 'business_data_mode': 'demo',
+ 'clarification': None,
+ 'committed': False,
+ 'current_editable_task_id': None,
+ 'guard_code': None,
+ 'message': '主推「原味薯片70克袋装」；推荐理由：用途：零食、薯片、原味、即食、袋装\n1. 原味薯片70克袋装',
+ 'message_sequence': 4,
+ 'missing_constraints': [],
+ 'missing_slots': [],
+ 'model_mode': 'live',
+ 'pending_clarification': None,
+ 'pending_clarifications': [],
+ 'plan': None,
+ 'plan_effect': 'keep',
+ 'product_cards': [],
+ 'purchase_step': 'none',
+ 'readiness': 'information',
+ 'request_id': '9d5710ba-1672-4b55-ad9a-bf01d5c6ba9d',
+ 'route': 'answer',
+ 'session_id': 'sess-b92551b8e84e',
+ 'session_version': 3,
+ 'state_version': 0,
+ 'status': 'understanding',
+ 'task_id': None,
+ 'trace_id': 'trace-cb6045d3d6f2',
+ 'user_message_id': 'msg-56976bd31985'}
+semantic_provider = <function semantic_provider.<locals>._install at 0x0000028ED6283D80>
+session_id = 'sess-b92551b8e84e'
+show_chips = <function test_snack_choice_carries_budget_and_quantity_through_plan_to_explicit_confirmation.<locals>.show_chips at 0x0000028ED6283E20>
+show_snack_types = <function test_snack_choice_carries_budget_and_quantity_through_plan_to_explicit_confirmation.<locals>.show_snack_types at 0x0000028ED6283F60>
+
+tests\test_ceres_next_snack_choice.py:189: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_ceres_next_snack_choice.py::test_snack_choice_carries_budget_and_quantity_through_plan_to_explicit_confirmation - assert 1 == 2
+============================== 1 failed in 4.18s ==============================

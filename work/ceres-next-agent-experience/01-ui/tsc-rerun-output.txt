@@ -1,0 +1,5 @@
+Command: corepack pnpm@10.34.3 exec tsc --noEmit
+Working directory: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01-ui\frontend
+pnpm: 10.34.3
+Exit code: 0
+

@@ -1,0 +1,15 @@
+case: controlled prompt-budget green; category exploration body only
+timestamp_utc: 2026-10-06T10:32:30Z
+cwd: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-05\backend
+interpreter: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+PYTHONPATH: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-05\backend
+selector: tests/test_ceres_next_prompt_modules.py::test_category_exploration_sends_type_first_guidance_to_the_model
+HEAD: 481e7505951204d3d24c9c9a3bb61684e5edc213
+worktree status: M app/prompts/semantic.py M tests/test_ceres_next_prompt_modules.py
+semantic.py sha256: 23818039426371ECF002B59885BF7D7EAC7162AF531E36F44A325D7C5AD09E26
+import source: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-05\backend\app\prompts\semantic.py
+frozen baseline body bytes: 15385; sha256: 61bec9e5c2736898a4b451e4cb212371a877d801aa7ec76785f1b1de1aa69a53
+exit_code: 0
+category_type_first_body_bytes=14025 sha256=2be6f589496c2af221f468319ca3ea7b517618fa9da48116ff1d6967e5bcabb3
+1 passed in 3.40s
+note: body not displayed or saved; only byte count/hash and pytest result retained

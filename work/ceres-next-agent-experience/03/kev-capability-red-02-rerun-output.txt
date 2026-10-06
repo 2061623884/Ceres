@@ -1,0 +1,28 @@
+Command: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe -m pytest tests/test_ceres_next_capability_routing.py::test_chat_capability_keeps_chat_out_of_purchase -vv --tb=short --no-showlocals --basetemp=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\03\kev-capability-red-02-rerun-tmp
+cwd: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-03\backend
+PYTHONPATH: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-03\backend
+Exit code: 1
+Sensitive header text remains after filter: False
+
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-03\backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.1, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 1 item
+
+tests/test_ceres_next_capability_routing.py::test_chat_capability_keeps_chat_out_of_purchase FAILED [100%]
+
+================================== FAILURES ===================================
+_______________ test_chat_capability_keeps_chat_out_of_purchase _______________
+tests\test_ceres_next_capability_routing.py:37: in test_chat_capability_keeps_chat_out_of_purchase
+    assert capability_call is not None, events
+E   AssertionError: [{'event_id': 'evt-8b164e64b221', 'phase': 'understanding', 'model_mode': 'live', 'input_summary': None, ...}, {'event_id': 'evt-0687937bc009', 'phase': 'model_call_started', 'model_mode': 'live', 'input_summary': None, ...}, {'event_id': 'evt-b3e08453ac79', 'phase': 'model_call_completed', 'model_mode': 'live', 'input_summary': None, ...}, {'event_id': 'evt-154600c1e831', 'phase': 'turn_result', 'model_mode': 'live', 'input_summary': None, ...}, {'event_id': 'evt-8eef986ff9eb', 'phase': 'memory_extract_started', 'model_mode': 'live', 'input_summary': None, ...}]
+E   assert None is not None
+=========================== short test summary info ===========================
+FAILED tests/test_ceres_next_capability_routing.py::test_chat_capability_keeps_chat_out_of_purchase - AssertionError: [{'event_id': 'evt-8b164e64b221', 'phase': 'understanding', 'model_mode': 'live', 'input_summary': None, ...}, {'event_id': 'evt-0687937bc009', 'phase': 'model_call_started', 'model_mode': 'live', 'input_summary': None, ...}, {'event_id': 'evt-b3e08453ac79', 'phase': 'model_call_completed', 'model_mode': 'live', 'input_summary': None, ...}, {'event_id': 'evt-154600c1e831', 'phase': 'turn_result', 'model_mode': 'live', 'input_summary': None, ...}, {'event_id': 'evt-8eef986ff9eb', 'phase': 'memory_extract_started', 'model_mode': 'live', 'input_summary': None, ...}]
+assert None is not None
+============================== 1 failed in 3.16s ==============================
+

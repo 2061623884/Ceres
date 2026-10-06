@@ -1,0 +1,310 @@
+Command: & 'C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe' -m pytest -vv --showlocals tests/test_ceres_next_snack_choice.py::test_broad_snack_purchase_asks_for_type_before_preparing_a_plan --basetemp='C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\01\buy-journey-red-03-tmp'
+Working directory: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01\backend
+PYTHONPATH: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01\backend
+PYTHONUTF8: 1
+Import check exit code: 0
+app=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01\backend\app\__init__.py
+retrieval=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01\backend\app\services\retrieval_service.py
+Pytest exit code: 1
+
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-01\backend
+configfile: pyproject.toml
+plugins: anyio-4.15.1, langsmith-0.14.1, asyncio-1.4.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 1 item
+
+tests/test_ceres_next_snack_choice.py::test_broad_snack_purchase_asks_for_type_before_preparing_a_plan FAILED [100%]
+
+================================== FAILURES ===================================
+_______ test_broad_snack_purchase_asks_for_type_before_preparing_a_plan _______
+
+indexed_client = <starlette.testclient.TestClient object at 0x0000025D21DDF9E0>
+semantic_provider = <function semantic_provider.<locals>._install at 0x0000025D24BA1620>
+
+    def test_broad_snack_purchase_asks_for_type_before_preparing_a_plan(
+        indexed_client, semantic_provider
+    ):
+        def select_chips(_request):
+            return {
+                "target": {"kind": "category", "name": "薯片", "intent": "explore"},
+                "lookups": [{"kind": "product", "query": "薯片"}],
+            }
+    
+        def show_chips(request):
+            chips = next(
+                row
+                for row in request["query_results"][0]["matches"]
+                if row["product_type"] == "potato_chips"
+            )
+            return {"reply": "有原味薯片可选。", "display_refs": [chips["ref"]]}
+    
+        def prepare_plan(request):
+            chips = next(
+                row
+                for row in request["displayed_candidates"]
+                if row["target_id"] == "demo:snack-original-potato-chips-70g-bag"
+            )
+            requirements = request.get("requirements") or {}
+            budget_fen = requirements.get("budget_fen")
+            constraints = (
+                {"budget_yuan": budget_fen / 100} if budget_fen is not None else None
+            )
+            return pick(
+                "product",
+                chips,
+                quantity=requirements.get("quantity"),
+                constraints=constraints,
+            )
+    
+        semantic_provider(
+            [
+                {
+                    "target": {
+                        "kind": "category",
+                        "name": "零食",
+                        "intent": "buy",
+                        "quantity": 2,
+                    },
+                    "constraints": {"budget_yuan": 15},
+                    "lookups": [{"kind": "product", "query": "零食"}],
+                },
+                select_chips,
+                show_chips,
+                prepare_plan,
+            ]
+        )
+        session_id = create_session(indexed_client)
+        cart_before = indexed_client.get("/api/v1/cart").json()
+    
+        response = send_turn(indexed_client, session_id, "来点零食，两包，预算15元")
+    
+        questions = response["pending_clarifications"]
+        assert len(questions) == 1, response
+        question = questions[0]
+        assert question["question_id"]
+        assert question["slot"] == "product_type"
+        assert {option["label"] for option in question["options"]} == {"薯片", "饼干"}
+        assert {option["id"] for option in question["options"]} == {
+            "product_type:potato_chips",
+            "product_type:soda_crackers",
+        }
+        assert response["plan"] is None
+        assert not response.get("product_cards")
+        assert indexed_client.get("/api/v1/cart").json() == cart_before
+    
+        question = questions[0]
+        chips_option = next(
+            option for option in question["options"] if option["label"] == "薯片"
+        )
+        selected = send_turn(
+            indexed_client,
+            session_id,
+            "薯片",
+            response,
+            clarification_answer={
+                "question_id": question["question_id"],
+                "option_id": chips_option["id"],
+            },
+        )
+        assert selected["pending_clarifications"] == []
+        assert selected["plan"] is None
+        assert "原味薯片70克袋装" in selected["message"]
+        assert "苏打饼干100克盒装" not in selected["message"]
+        assert indexed_client.get("/api/v1/cart").json() == cart_before
+    
+        planned = send_turn(indexed_client, session_id, "生成清单", selected)
+        plan = planned["plan"]
+>       assert plan is not None and plan["can_confirm"]
+E       assert (None is not None)
+
+cart_before = {'business_data_mode': 'demo',
+ 'items': [],
+ 'store_id': 'store-demo-01',
+ 'total_price_fen': 0,
+ 'version': 1}
+chips_option = {'id': 'product_type:potato_chips', 'label': '薯片'}
+indexed_client = <starlette.testclient.TestClient object at 0x0000025D21DDF9E0>
+plan       = None
+planned    = {'action_results': [{'action_id': 'a1',
+                     'reply_ok': True,
+                     'saved': True,
+                     'slot': 'goal_relation',
+                     'status': 'needs_clarification',
+                     'type': 'clarification'}],
+ 'allowed': True,
+ 'answer_status': 'accepted',
+ 'assistant_message_id': 'msg-0c9bb629f0c6',
+ 'available_actions': ['send_message'],
+ 'business_data_mode': 'demo',
+ 'clarification': None,
+ 'committed': False,
+ 'current_editable_task_id': None,
+ 'guard_code': None,
+ 'message': '这是要换掉现在这份清单，还是在它上面加一份？',
+ 'message_sequence': 6,
+ 'missing_constraints': [],
+ 'missing_slots': ['goal_relation'],
+ 'model_mode': 'live',
+ 'pending_clarification': {'base_session_version': 4,
+                           'base_state_version': 0,
+                           'candidate_ref': None,
+                           'candidates': [],
+                           'options': [],
+                           'people': None,
+                           'question': '这是要换掉现在这份清单，还是在它上面加一份？',
+                           'question_id': 'q-5b9179f39cdb',
+                           'slot': 'goal_relation'},
+ 'pending_clarifications': [{'base_session_version': 4,
+                             'base_state_version': 0,
+                             'candidate_ref': None,
+                             'candidates': [],
+                             'options': [],
+                             'people': None,
+                             'question': '这是要换掉现在这份清单，还是在它上面加一份？',
+                             'question_id': 'q-5b9179f39cdb',
+                             'slot': 'goal_relation'}],
+ 'plan': None,
+ 'plan_effect': 'keep',
+ 'product_cards': [],
+ 'purchase_step': 'none',
+ 'readiness': 'needs_clarification',
+ 'request_id': 'd34b0ff2-2ee1-4089-b9b9-63704373c761',
+ 'route': 'clarify',
+ 'session_id': 'sess-d244f38baf13',
+ 'session_version': 4,
+ 'state_version': 0,
+ 'status': 'understanding',
+ 'task_id': None,
+ 'trace_id': 'trace-07c2e0c2bd2f',
+ 'user_message_id': 'msg-3c747fa44006'}
+prepare_plan = <function test_broad_snack_purchase_asks_for_type_before_preparing_a_plan.<locals>.prepare_plan at 0x0000025D24C747C0>
+question   = {'base_session_version': 1,
+ 'base_state_version': 0,
+ 'candidate_ref': 'goal-1b26ca0ee8bd',
+ 'candidates': [],
+ 'options': [{'id': 'product_type:soda_crackers', 'label': '饼干'},
+             {'id': 'product_type:potato_chips', 'label': '薯片'}],
+ 'people': None,
+ 'question': '想选哪类零食？',
+ 'question_id': 'q-7a612a76c96e',
+ 'slot': 'product_type'}
+questions  = [{'base_session_version': 1,
+  'base_state_version': 0,
+  'candidate_ref': 'goal-1b26ca0ee8bd',
+  'candidates': [],
+  'options': [{'id': 'product_type:soda_crackers', 'label': '饼干'},
+              {'id': 'product_type:potato_chips', 'label': '薯片'}],
+  'people': None,
+  'question': '想选哪类零食？',
+  'question_id': 'q-7a612a76c96e',
+  'slot': 'product_type'}]
+response   = {'action_results': [{'action_id': 'a1',
+                     'reply_ok': True,
+                     'saved': True,
+                     'slot': 'product_type',
+                     'status': 'needs_clarification',
+                     'type': 'clarification'}],
+ 'allowed': True,
+ 'answer_status': 'accepted',
+ 'assistant_message_id': 'msg-b3b34c303fa3',
+ 'available_actions': ['send_message'],
+ 'business_data_mode': 'demo',
+ 'clarification': None,
+ 'committed': False,
+ 'current_editable_task_id': None,
+ 'guard_code': None,
+ 'message': '想选哪类零食？\n1. 饼干\n2. 薯片',
+ 'message_sequence': 2,
+ 'missing_constraints': [],
+ 'missing_slots': [],
+ 'model_mode': 'live',
+ 'pending_clarification': {'base_session_version': 1,
+                           'base_state_version': 0,
+                           'candidate_ref': 'goal-1b26ca0ee8bd',
+                           'candidates': [],
+                           'options': [{'id': 'product_type:soda_crackers',
+                                        'label': '饼干'},
+                                       {'id': 'product_type:potato_chips',
+                                        'label': '薯片'}],
+                           'people': None,
+                           'question': '想选哪类零食？',
+                           'question_id': 'q-7a612a76c96e',
+                           'slot': 'product_type'},
+ 'pending_clarifications': [{'base_session_version': 1,
+                             'base_state_version': 0,
+                             'candidate_ref': 'goal-1b26ca0ee8bd',
+                             'candidates': [],
+                             'options': [{'id': 'product_type:soda_crackers',
+                                          'label': '饼干'},
+                                         {'id': 'product_type:potato_chips',
+                                          'label': '薯片'}],
+                             'people': None,
+                             'question': '想选哪类零食？',
+                             'question_id': 'q-7a612a76c96e',
+                             'slot': 'product_type'}],
+ 'plan': None,
+ 'plan_effect': 'keep',
+ 'product_cards': [],
+ 'purchase_step': 'none',
+ 'readiness': 'ready',
+ 'request_id': '96ae0a95-a478-4ceb-adf6-fd387678ef75',
+ 'route': 'prepare',
+ 'session_id': 'sess-d244f38baf13',
+ 'session_version': 2,
+ 'state_version': 0,
+ 'status': 'understanding',
+ 'task_id': None,
+ 'trace_id': 'trace-a625cd7e6207',
+ 'user_message_id': 'msg-26c150378868'}
+select_chips = <function test_broad_snack_purchase_asks_for_type_before_preparing_a_plan.<locals>.select_chips at 0x0000025D2249EF20>
+selected   = {'action_results': [{'action_id': 'a1',
+                     'fallback_reason': None,
+                     'index_version': 'phase1',
+                     'kind': 'lookup',
+                     'reply_ok': True,
+                     'retrieval_mode': 'lexical',
+                     'retrieval_status': 'ok',
+                     'saved': False,
+                     'status': 'completed',
+                     'type': 'read_only'}],
+ 'allowed': True,
+ 'answer_status': 'accepted',
+ 'assistant_message_id': 'msg-b2c73a5f1935',
+ 'available_actions': ['send_message'],
+ 'business_data_mode': 'demo',
+ 'clarification': None,
+ 'committed': False,
+ 'current_editable_task_id': None,
+ 'guard_code': None,
+ 'message': '主推「原味薯片70克袋装」；推荐理由：用途：零食、薯片、原味、即食、袋装\n1. 原味薯片70克袋装',
+ 'message_sequence': 4,
+ 'missing_constraints': [],
+ 'missing_slots': [],
+ 'model_mode': 'live',
+ 'pending_clarification': None,
+ 'pending_clarifications': [],
+ 'plan': None,
+ 'plan_effect': 'keep',
+ 'product_cards': [],
+ 'purchase_step': 'none',
+ 'readiness': 'information',
+ 'request_id': '5fe86567-4ac4-4e9b-a152-856744b45b4b',
+ 'route': 'answer',
+ 'session_id': 'sess-d244f38baf13',
+ 'session_version': 3,
+ 'state_version': 0,
+ 'status': 'understanding',
+ 'task_id': None,
+ 'trace_id': 'trace-00b9986c4ccc',
+ 'user_message_id': 'msg-2108d2c263da'}
+semantic_provider = <function semantic_provider.<locals>._install at 0x0000025D24BA1620>
+session_id = 'sess-d244f38baf13'
+show_chips = <function test_broad_snack_purchase_asks_for_type_before_preparing_a_plan.<locals>.show_chips at 0x0000025D24C74720>
+
+tests\test_ceres_next_snack_choice.py:145: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_ceres_next_snack_choice.py::test_broad_snack_purchase_asks_for_type_before_preparing_a_plan - assert (None is not None)
+============================== 1 failed in 3.83s ==============================

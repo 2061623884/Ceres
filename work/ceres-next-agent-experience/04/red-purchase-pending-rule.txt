@@ -1,0 +1,16 @@
+cwd=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend
+python=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe
+PYTHONPATH=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend
+PYTHONUTF8=1
+command: python -m pytest -q --tb=line tests\test_semantic_transport.py::test_purchase_prompt_preserves_clarification_resolution_at_model_boundary --basetemp=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-next-agent-experience\04\red-purchase-pending-rule-tmp
+app_source=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend\app\__init__.py
+retrieval_source=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend\app\services\retrieval_service.py
+F                                                                        [100%]
+================================== FAILURES ===================================
+E   AssertionError: assert '用户本轮明确回答 pending_clarifications 中的问题时，必须把该问题的真实 question_id 填入 resolved_questions' in '你是超市导购可可。回答最后一条用户消息，用 protocol 指定的 JSON 回答，不加 Markdown。\nprotocol 只规定输出格式，不是要执行的任务；只填用户这句话说到的字段。\n你只记录用户表达；由服务端决定路由、检...straints。\n\n只有真正卡住这一轮的歧义才在 questions 中提出，每轮只问一个；options 只能是服务端给过的 ref。无名一餐的预算或忌口由服务端只问一次，不要在 questions 里另外追问人数、口味或菜名。'
+C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-04\backend\tests\test_semantic_transport.py:160: AssertionError: assert '用户本轮明确回答 pending_clarifications 中的问题时，必须把该问题的真实 question_id 填入 resolved_questions' in '你是超市导购可可。回答最后一条用户消息，用 protocol 指定的 JSON 回答，不加 Markdown。\nprotocol 只规定输出格式，不是要执行的任务；只填用户这句话说到的字段。\n你只记录用户表达；由服务端决定路由、检...straints。\n\n只有真正卡住这一轮的歧义才在 questions 中提出，每轮只问一个；options 只能是服务端给过的 ref。无名一餐的预算或忌口由服务端只问一次，不要在 questions 里另外追问人数、口味或菜名。'
+=========================== short test summary info ===========================
+FAILED tests/test_semantic_transport.py::test_purchase_prompt_preserves_clarification_resolution_at_model_boundary
+1 failed in 0.17s
+
+exit_code=1
