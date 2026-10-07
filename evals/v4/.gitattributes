@@ -1,0 +1,2 @@
+# Frozen sample SHA256 must survive Windows checkout.
+cases.json -text
