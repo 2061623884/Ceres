@@ -1,0 +1,1910 @@
+{
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py": {
+    "bytes": 52993,
+    "sha256": "78d4764db395b0276f813ab94aa6ec232af06c66c1df70a97c029092a419ccd3"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4_record.py": {
+    "bytes": 20576,
+    "sha256": "bdddf19f6037b53fd1285e8607498c07f92f9d4f7792ecf53fbbe157cf4d4d1e"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03\\manifest.json": {
+    "bytes": 15360,
+    "sha256": "2102a52d77afbc75c1eb9e2ded3f9774ec81ba39d547f9691c1a79cd32986204"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03\\R01-r1.json": {
+    "bytes": 42961,
+    "sha256": "38af216f3f856bcf12d018b6c030e5750b2ff85414e172457155acdd4efdb024"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03\\summary.json": {
+    "bytes": 213,
+    "sha256": "70ff963e70d82dffe1a45fa5b47cb063b197afdc8d405a39ba2d97d450328d55"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v2\\manifest.json": {
+    "bytes": 15483,
+    "sha256": "42ab06b708154ac94d53183f89314888dc8abc71e6e01cbbfab7708f3e833845"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v2\\R01-r1.json": {
+    "bytes": 77391,
+    "sha256": "029b25327aacfdbb9a6b942237229090c9cd171f322cb33150dd05720ade0092"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v2\\summary.json": {
+    "bytes": 213,
+    "sha256": "70ff963e70d82dffe1a45fa5b47cb063b197afdc8d405a39ba2d97d450328d55"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\H01-r1.json": {
+    "bytes": 141461,
+    "sha256": "206ade3f6f5e1f62dc47560d2c591cec9682873073a26d6ba5851bf47d3e5d86"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\H02-r1.json": {
+    "bytes": 142448,
+    "sha256": "0a993d4b07ca328cfd0e1d9b7b022cd5c551fa58d09222cda833ca44741568e0"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\H03-r1.json": {
+    "bytes": 88716,
+    "sha256": "504273b50c45c53a5c067b042d4dc668ff339751f3cfe1f0d7ca37f73b7eefd9"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\H04-r1.json": {
+    "bytes": 182967,
+    "sha256": "8a855485a5161fbd78e2be69922b5482f5706bad9b652698e12d4b41d8dbc6f4"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\H05-r1.json": {
+    "bytes": 89450,
+    "sha256": "3f37e10226553bd6087ae56606b07ba62e184458e3e0c57590f48ed1ffe744fd"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\H06-r1.json": {
+    "bytes": 140282,
+    "sha256": "52dd1e71b492bae109a0e85de733205227234e61f1a4024d755dad2c3f62919e"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\H07-r1.json": {
+    "bytes": 140929,
+    "sha256": "546267e57a960f81e0e91a48486830d8bd10a5d714fe8c54d4c2a0961e2f20bc"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\H08-r1.json": {
+    "bytes": 71876,
+    "sha256": "a15b3faba9372d23750e09731485f69347983eb4301e3be4bcb8c056e9b95cad"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\H09-r1.json": {
+    "bytes": 55834,
+    "sha256": "f4e15dd9a88bae08a2486dcd31c5234324f37dabdc2076efa804efe6a0f2e11f"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\H10-r1.json": {
+    "bytes": 147963,
+    "sha256": "559d27b3f1ea56f808df3f37828c6ebca857813f92b7d048b6cd440ded9069a9"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\H11-r1.json": {
+    "bytes": 81774,
+    "sha256": "5d87ca2a22138f52e1cb92504a2e8552846ec58102418ae2f44900e6749f1449"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\H12-r1.json": {
+    "bytes": 63998,
+    "sha256": "6dc1c52ce38f3d494efdad00af294ac10adaa845b4b98a84064a6b9fc5249ef8"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\H13-r1.json": {
+    "bytes": 76181,
+    "sha256": "08195a6c42164986fb91468dd68902ff0538c1d1d7e5f4c6681a925d92bd8771"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\H14-r1.json": {
+    "bytes": 72249,
+    "sha256": "6d3c3e9e457d35111ca574559d51635ae6b26fbe688f55797b0e2243b8a13b50"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\H15-r1.json": {
+    "bytes": 148532,
+    "sha256": "3e7f2cae025c6edbc8de507ae65439b41c209e06b39c7201acf3419005d3371f"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\H16-r1.json": {
+    "bytes": 201185,
+    "sha256": "e8d0fd6d7401fdc0f4d911bf19581faf708ca047d670c9a9f9da1f6746012161"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\H17-r1.json": {
+    "bytes": 91907,
+    "sha256": "e9cc87c7e84f8f6d5990fa860b0be02932d79d94eaf892045a4580a7c97f7b68"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\H18-r1.json": {
+    "bytes": 115146,
+    "sha256": "09d5b3df2d99b3ee13f01c836aff3fb1d0b36c5d9c4f5b7839ab09ff8879e3e0"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\H19-r1.json": {
+    "bytes": 76050,
+    "sha256": "44da66078c173f39c0f1af48382e8e2ad8d0111024a42b4297d29a3ff7572957"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\H20-r1.json": {
+    "bytes": 35981,
+    "sha256": "9f17f10cc24933cc84f6ace475247b0f1b116295e297b986e4a2b5059e195a98"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\manifest.json": {
+    "bytes": 15510,
+    "sha256": "034ae199f7d28148a2e4a3d408ba835f95d0b70fb55bda89d82684fb33f531f6"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R01-r1.json": {
+    "bytes": 86075,
+    "sha256": "5cbe87fc9fbba4345c0fc8db04af447452f347c8605eb8503d81ec9521c6d0b4"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R01-r2.json": {
+    "bytes": 61378,
+    "sha256": "9e79f59201c0dd6b3a93f84387995dc58962963248d8039c2dd9f2efa19e8d1a"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R01-r3.json": {
+    "bytes": 75229,
+    "sha256": "7696a3279045ad5d6b96be1ac65adc371b6f379a050d915be04cae714187e3b9"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R02-r1.json": {
+    "bytes": 131428,
+    "sha256": "a7ce9f9ac27df18c92126d58b5f4776f1bbbc1faf99a1112920b3c3c468c2b20"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R02-r2.json": {
+    "bytes": 130310,
+    "sha256": "c652cafd1fdc0b3c14321d80ee0983a934cc7d61d021a2b35b806e21971015d2"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R02-r3.json": {
+    "bytes": 135597,
+    "sha256": "6c09f05e00342df5744cfc0a225a8ebc83d7acdeaf0a821e2e328a09bd1d42ad"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R03-r1.json": {
+    "bytes": 110447,
+    "sha256": "c3a581be9f92091ee8eda1ce751305169e5ac44841fd9edb6cfc248db6fd87f8"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R03-r2.json": {
+    "bytes": 114492,
+    "sha256": "f391b8a4dc88a06ad2fb9187a0b0699495201fcd0a24b60bbd52b9f32f391b9b"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R03-r3.json": {
+    "bytes": 84197,
+    "sha256": "2a8c2cd824d288bae18aeae4f560f3ce2740fc87d339e765265c66a04d6929c3"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R04-r1.json": {
+    "bytes": 62922,
+    "sha256": "87252165ac091baa33c849fa0f70128defba4f4a13be10271428d8ca87a58d42"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R05-r1.json": {
+    "bytes": 244271,
+    "sha256": "e4c236fa278e04bec9a2e0ff3ccd92b432443051a5b53eac90a00ee8e2b10d78"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R05-r2.json": {
+    "bytes": 244457,
+    "sha256": "9cd70fb60a574b10a5983804655af9ca444245074fade1889cb73285be50bfed"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R05-r3.json": {
+    "bytes": 246692,
+    "sha256": "430507b33be6255e41a925f8c108ec3fdcce277c7c25d2df8b0a46d49bba632f"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R06-r1.json": {
+    "bytes": 192553,
+    "sha256": "fe0d0917045ed61c30c88ba10d2b0e8e1373aece284621c583ec753b948535a4"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R06-r2.json": {
+    "bytes": 189616,
+    "sha256": "7b3c7e490ea6ca6ee861474db9912f92679b84f8d40d2d19c704b2bbb7118326"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R06-r3.json": {
+    "bytes": 158522,
+    "sha256": "501c402f478d295c2d5460bba11bf5df617267a0112155ea01be5c09efbbb2e3"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R07-r1.json": {
+    "bytes": 58673,
+    "sha256": "cb49c0e4d858ed34fa0838ff154db968c48d9387b02d5b1b9d5477ad40007863"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R07-r2.json": {
+    "bytes": 64538,
+    "sha256": "22286ab92dc2276ffc56fa6bd31914b9ba3e2bf5a10dce0a3432beddbee71c79"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R07-r3.json": {
+    "bytes": 105515,
+    "sha256": "7aa773e43a51cc5b520bc8aad3338cd3dfbd896098e064ac586cd5ab931938ba"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R08-r1.json": {
+    "bytes": 190749,
+    "sha256": "d702293882d469d8be2d577fbf7d1346b72915167660cbbe6ad6bc416ca35520"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R08-r2.json": {
+    "bytes": 191402,
+    "sha256": "af3e632428c1c4ef620c0c3ba9298c8112d07868a04555ced08ce966867657cd"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R08-r3.json": {
+    "bytes": 136234,
+    "sha256": "ab86b70f3b0a96aa369a932e8fc7e8d4cc0b4a8b1cb5d29b40198df5f5f56bd3"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R09-r1.json": {
+    "bytes": 211256,
+    "sha256": "21ba12b612ed9aef1f5b26fefde65dfadb764939fb6a0d89ed9634e5d64a71f3"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R09-r2.json": {
+    "bytes": 180071,
+    "sha256": "41edba14f014ccf82784125e7ec6c13048ac7395c5544a1f6821ddc218f0c812"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R09-r3.json": {
+    "bytes": 143941,
+    "sha256": "50590e55addc1e49641e9057e3b9507647f4ab9db6927469d340475bb08da3f0"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R10-r1.json": {
+    "bytes": 246246,
+    "sha256": "ee166a0bb3e3f92d3f89fcbb7a45520f6bfcd95cef862d99d881c145c3700a77"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R10-r2.json": {
+    "bytes": 247600,
+    "sha256": "2fb71fc55ec49c46a89648b8d57f2a63e7e17d36ea7e800cb7e8a7b26baca462"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R10-r3.json": {
+    "bytes": 248624,
+    "sha256": "548f5452acb99a94c597ad88452512a54c834e84b72f156e8427b47fc44a3b4a"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R11-r1.json": {
+    "bytes": 146821,
+    "sha256": "00f431c92aa85097236caad306c048845923023dee9249b44023b0442b048e13"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R11-r2.json": {
+    "bytes": 148260,
+    "sha256": "4133036bf3094c68fbe1c23039b05410f15529e539ba6fc14766ba2924721b25"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R11-r3.json": {
+    "bytes": 150704,
+    "sha256": "7698dc376ff98602ab2f43efe49d0fa22e71ea8c89ba8f6163f48bd36f5c1978"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R12-r1.json": {
+    "bytes": 73300,
+    "sha256": "093a60db33d4b3dc4b6cd445187bfc8e0de10412a9c75915120759d22db94f8d"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R12-r2.json": {
+    "bytes": 69356,
+    "sha256": "49a6c0b4ab29eca2da3c1e32a25509401b50c3e7deefdc5aa2643c065594aae8"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R12-r3.json": {
+    "bytes": 69309,
+    "sha256": "574e005ae1eaa904970a7c992223ce3f48a6ee1ed963e4aaf904e7901e6b06fa"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R13-r1.json": {
+    "bytes": 64236,
+    "sha256": "652aa511b5a79e56183be3776b03bf1d6e0b9e4872ab5a1a1c10aec357d423f4"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R13-r2.json": {
+    "bytes": 65485,
+    "sha256": "7be73f83c74bb0fa2d5d220d9c561e305f41f4cd3f3d062c7de928dfb0cfdbfb"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R13-r3.json": {
+    "bytes": 46394,
+    "sha256": "8abc2581c215893354566dc63f9b88e5773e13cbd627a38754a16719962b96f4"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R14-r1.json": {
+    "bytes": 70176,
+    "sha256": "f0f9f8ed663eafdf555c8b55302527b9e39801c5649549b7c39563a51795efdd"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R14-r2.json": {
+    "bytes": 61576,
+    "sha256": "90099b99fc45269c78e03e3a6efb4abac0f90379e00e94e0121160566dd3541f"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R14-r3.json": {
+    "bytes": 63785,
+    "sha256": "3aa9918e83c7d83c85e82aac286f1098bc663462ba6530b52dd7c06d43137ba4"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R15-r1.json": {
+    "bytes": 65173,
+    "sha256": "53352d3a950e6108579ae4b309e4079b1685d3359e782324d40ac8dc88e7f134"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R15-r2.json": {
+    "bytes": 57699,
+    "sha256": "16027f09b4991ff058c476da0ea73932a5b5a8e48c87d7ac7cfbf9d066cf9cf4"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R15-r3.json": {
+    "bytes": 58416,
+    "sha256": "9ea0f20fa6f0d8eeb30043d8f8d5a06354349204813e0e34f6aa1b5fa5b27922"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R16-r1.json": {
+    "bytes": 141881,
+    "sha256": "83b3ba66485301de5fe8adbd746a0b396d34074e86c63fc5a5a43e027f1285cc"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R16-r2.json": {
+    "bytes": 141009,
+    "sha256": "1884bbadb8adc813660a77d9e6228ff5d71318af59c1c4def815746ec7092b74"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R16-r3.json": {
+    "bytes": 142149,
+    "sha256": "9fb40652dcd04bfd1f2a62f0a381066d28d4400be15752e4ced4a4c7009905a5"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R17-r1.json": {
+    "bytes": 176372,
+    "sha256": "f3f4139271c4970a714f0cc59926a2aaa0be2f0f55500f395015882389429f68"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R17-r2.json": {
+    "bytes": 176277,
+    "sha256": "a9d785cd136acaa18c6a42ebf2d3b384ee390674b6b527d1a8fe5822e3c8fe40"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R17-r3.json": {
+    "bytes": 178966,
+    "sha256": "9b365967ae82346244313afd6578087b06dcb2f4284346439bf090df610734ad"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R18-r1.json": {
+    "bytes": 126993,
+    "sha256": "9a243d57773e616f617eea65b4d65ecc1adc52c5e05d2f7be9265473b99f2c65"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R18-r2.json": {
+    "bytes": 129155,
+    "sha256": "94b0b98aeecb2e4bb82a07e664a86d09dd0b3acea2741f138c2bf1007ef52ec7"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R18-r3.json": {
+    "bytes": 126858,
+    "sha256": "c5e9e9f8546d364d8cff3d2c724cc418895a74e3bc04deb633cad3c025d0f95b"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R19-r1.json": {
+    "bytes": 81093,
+    "sha256": "682a6ac3831c817cfc8ea834edb95a1698815c7a722e1186f65f5afc38332a71"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R19-r2.json": {
+    "bytes": 77962,
+    "sha256": "8f387191ec1e5f127861296a89b647d5be8165d9cf258a9342a6fbd429561bf2"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R19-r3.json": {
+    "bytes": 82969,
+    "sha256": "2de0b052d9a3c69918feec6e68f09878f4cea688b2e7baa3e2d259fe5f943e08"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R20-r1.json": {
+    "bytes": 77927,
+    "sha256": "0506cdacb025dac3f4814f6483ea2442024417d2783c5bafc71f8352f3af2001"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R20-r2.json": {
+    "bytes": 83183,
+    "sha256": "536b45d10720b08ef1450d77d3a0b44528f08c09e9ace181f1a06b6fa1d2706e"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R20-r3.json": {
+    "bytes": 88880,
+    "sha256": "e66a139a94d555affddd825cf30e53b6a57865c317fa4a0de5083f849ce5cb2e"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R21-r1.json": {
+    "bytes": 82751,
+    "sha256": "afe6696f58ddfe123422d13e86528388ca84ca719b6354adfe23ad6a2f4c2a4e"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R22-r1.json": {
+    "bytes": 69221,
+    "sha256": "a17acd664dd19bf54db745e5632f0ae252502a85a1fae2f4498eb66684f775ac"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R23-r1.json": {
+    "bytes": 149015,
+    "sha256": "562281cf28d45544a8261e1640922177ea1f0eba6e2bc1d5c600e242f63a99e1"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R24-r1.json": {
+    "bytes": 125062,
+    "sha256": "3c9fed2c15ace6508df1770df1869996c7435608f4c0d907ee6e2ec78cf25697"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R25-r1.json": {
+    "bytes": 77743,
+    "sha256": "92ed0e4c0c72e25a2a1e603ae520593cd42ff3882ddd6b2a267fa16895047cbc"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R26-r1.json": {
+    "bytes": 66507,
+    "sha256": "82632cd6e6a4078563dad5ff664e2dca78e656a3e4e40acd39f31cc0cb4f8c12"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R27-r1.json": {
+    "bytes": 59261,
+    "sha256": "1e8feefe2366d893aafcc112059f6305ac7bd5bd8559179f89c8d53e61969cea"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R28-r1.json": {
+    "bytes": 56822,
+    "sha256": "c5926a1e91c0c30ad4faaaf41253cc37b03f366bb318c7232839d6e91e780a3f"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R29-r1.json": {
+    "bytes": 38417,
+    "sha256": "9146280875ce83ea75980e3ba90bd27f65ed7977e24e072d90d3c076dcb06d26"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R30-r1.json": {
+    "bytes": 70732,
+    "sha256": "a28c1830cf6688b0b18a6654e5197c2eed721d9445fedadfc4ff2e03bb4c766b"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R31-r1.json": {
+    "bytes": 59769,
+    "sha256": "a5f080214bf830338715d4f1d8f0f80d5b9fbd34aaa2f01e4d0ae0ec6e4f0959"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R32-r1.json": {
+    "bytes": 40157,
+    "sha256": "5b51ddc64c3cfc2f8c26e090139e893f0888b4f67e84836aa335597e1aaf5098"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R33-r1.json": {
+    "bytes": 54456,
+    "sha256": "1d4dfc95b131963c14e83b90978b5c127d68a96a0830a655bb30db12eb8d7bab"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R34-r1.json": {
+    "bytes": 39767,
+    "sha256": "f91661e735ebcd6f16bacf6d8948fbe3457e53775662d42c03945fd181fbbab7"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R35-r1.json": {
+    "bytes": 130699,
+    "sha256": "5500938f67b3c0bc919c85efa32fb170f9ef985129d642f68d38b538d85100b3"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R35-r2.json": {
+    "bytes": 130577,
+    "sha256": "555525e069094fc6a28a8a5597fbb01b38c0aeab09f96c1e10db1e8c1693eca7"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R35-r3.json": {
+    "bytes": 130117,
+    "sha256": "d65bde57ebc33f65725c030dc7ed006a5e20b4af31ad1cea4cd1c157a1a81a6e"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R36-r1.json": {
+    "bytes": 61275,
+    "sha256": "7a30215cda85ae2c1a6078c99c849c02b36effe70f9ffe85e446064471e4acb4"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R37-r1.json": {
+    "bytes": 59452,
+    "sha256": "787c9c6f9b6b23bfff0cf2afbf5204902adb1e70e89182a3f4a3664f2c34a444"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R38-r1.json": {
+    "bytes": 126996,
+    "sha256": "f426482e10a785e065b1e984465b2de26585aff229c6e8dc34f1a934f83d76dc"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R39-r1.json": {
+    "bytes": 55526,
+    "sha256": "1d272c62943e2bd6e5a914215685552e9a48c66cb3945d9ed7dea2b5a0d24207"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\R40-r1.json": {
+    "bytes": 60888,
+    "sha256": "56a204460758ce930dbb409a6eecbb7b12c2c420dda46f010ebc6c80f5e739eb"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3\\summary.json": {
+    "bytes": 219,
+    "sha256": "58427e136a3009d1c1148d0047071d1af31bf82f40c6be817d3e89d8fabb1c66"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H01-r1\\result.json": {
+    "bytes": 329835,
+    "sha256": "4f9bda2f552335f4950cc4d839277dde00f2eda5ea70c203b37c22a533e7db90"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H02-r1\\result.json": {
+    "bytes": 339672,
+    "sha256": "5b2015be89da2e2237ba8c151033d65c5bff96bee4c2c407a5c17f1760a08f1c"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H03-r1\\result.json": {
+    "bytes": 240396,
+    "sha256": "a675d8fd7718dd4e8cbd8e244fb40ea943a971753552486393a8f8fb4d76cf33"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H04-r1\\result.json": {
+    "bytes": 407777,
+    "sha256": "a824b6b75692372c536a1a488b0693c1a76c3c4a533f83c0d10f02e502900c3f"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H05-r1\\result.json": {
+    "bytes": 203260,
+    "sha256": "e9f7f38ee9b8d965c1ed3fee1fee154cc4f6bf1d2b9eca533d01c39f764ceda4"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H06-r1\\result.json": {
+    "bytes": 329113,
+    "sha256": "fe19d03e09961215280661dfae4d6a44b4eb40be20c30f8a74447679e5a0cf4b"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H07-r1\\result.json": {
+    "bytes": 337487,
+    "sha256": "572aa8489621f92363ffaa9b1bead3e86f081da6ee65085764d6b7d4f7de26ea"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H08-r1\\result.json": {
+    "bytes": 130112,
+    "sha256": "b377ea7714debb9571432bce137af81ebd08fc5c0c2e276b5a64874d435703fb"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H09-r1\\result.json": {
+    "bytes": 78736,
+    "sha256": "b7b6276e6e5d905a9892242e0335810721dc9196486b7407354f43b43a9a311b"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H10-r1\\result.json": {
+    "bytes": 277950,
+    "sha256": "ddb844a97380cfff6a924b165d4fe6b41df046223e75c6f6f1ab298fdebc8ffa"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H11-r1\\result.json": {
+    "bytes": 184797,
+    "sha256": "aa4b68a81ff06c801e10897b7d8920b1b86b959b1b24f8b60ffd42f48738b638"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H12-r1\\result.json": {
+    "bytes": 289839,
+    "sha256": "2bfc23b8837a45948123567f8791549346ce53b29e8a140369e2cd699ef7d88e"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H13-r1\\result.json": {
+    "bytes": 169287,
+    "sha256": "76f777f97c80f0bc2a97932178e637f20b5c040e894cfeae04ba7657b24a7c97"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H14-r1\\result.json": {
+    "bytes": 99581,
+    "sha256": "4c1abe740760eff2656d0d6e725366938da35f8b52eeb8a6458aafc751b9fddd"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H15-r1\\result.json": {
+    "bytes": 403474,
+    "sha256": "7f96d7908caf6c516f8c1eeac0951d78b8b912d282710c9223d4bdc143a67e39"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H16-r1\\result.json": {
+    "bytes": 413198,
+    "sha256": "beb0a82fb74fc25016b22f249ab878d44a0a8e535a6948633455fb512068e553"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H17-r1\\result.json": {
+    "bytes": 137927,
+    "sha256": "66dba0d2b0aa0c04d2d83f2a98460e09b84705d3d2ecbc67d0b25b732e57d1b8"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H18-r1\\result.json": {
+    "bytes": 183713,
+    "sha256": "e9008b2b920db039cbe7684a8010dec4fc85d954c30accb9a6d48c8f086f581e"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H19-r1\\result.json": {
+    "bytes": 108849,
+    "sha256": "f74f90ddf18dcb60e955dbe7a1cf68d1b737797a882c80176f5ece9697bca703"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H20-r1\\result.json": {
+    "bytes": 59262,
+    "sha256": "5fb461c76d04b22742514beaa10c605eeb5ddc64172a4245c6d53791e9a4d13d"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\manifest.json": {
+    "bytes": 23878,
+    "sha256": "04274cdbaa38799bac8a3ef40f418a70c8839251a4c08a30d4572ced74b518bb"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R01-r1\\result.json": {
+    "bytes": 204135,
+    "sha256": "19a29fe7683f116d7bf0178d2c744fae8830b4c8f5e0a0099c28bab08cb63c3d"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R01-r2\\result.json": {
+    "bytes": 126561,
+    "sha256": "bad19209981ae58ce892ace158c49200b2bf21ba05656c20041d25c1e1ffe3b7"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R01-r3\\result.json": {
+    "bytes": 100997,
+    "sha256": "8fb32211addaf092801673877985ef03f7f830f82176b0b49b9a56c5ce635453"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R02-r1\\result.json": {
+    "bytes": 221874,
+    "sha256": "e8ddf38a8783a3c130791c6e9c1e5d8fa6a68fc5997b68153f54f9777d741d4d"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R02-r2\\result.json": {
+    "bytes": 220906,
+    "sha256": "95234f2a040ebe0d74cb6e5cd0eb7d140fdf6175e512a1f9ce09b81a1effd490"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R02-r3\\result.json": {
+    "bytes": 220928,
+    "sha256": "dd70e127af61140bea98cfa555082dbe8973a75caf51c5e94c0e8e9c28382063"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R03-r1\\result.json": {
+    "bytes": 184846,
+    "sha256": "c1ff6c9751ac3ea8741de91026840a83ff3e0036a1520c1a7dd98ed6cd1eacf8"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R03-r2\\result.json": {
+    "bytes": 183975,
+    "sha256": "98c4733e93193a29ffeb8777d2c99fe187b4613e73e5e3bb23acc288b5855c80"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R03-r3\\result.json": {
+    "bytes": 183973,
+    "sha256": "5b5a54c31a45d0b3e19ae727f4fb41633940f5bac0351ac31a15a72fc5b5904d"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R04-r1\\result.json": {
+    "bytes": 171637,
+    "sha256": "c9f6a0c20fdf5037512891365dcf6d6ffa569510fa102dcd23eecd549f074f63"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R05-r1\\result.json": {
+    "bytes": 583397,
+    "sha256": "a008643f6c1b4c6e7afc4db4f79e0881bab8367ac725a173f5caf1d4717e1332"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R05-r2\\result.json": {
+    "bytes": 588972,
+    "sha256": "785e207ebfed1cffd30dca938e59d2bb7da0370ab1a54521b10960165709c2b4"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R05-r3\\result.json": {
+    "bytes": 590569,
+    "sha256": "c82028e93fad34f26dffc9182816cf701e99a8a720b9715b2c56fcb982db2d33"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R06-r1\\result.json": {
+    "bytes": 447422,
+    "sha256": "9bf036876cc3d9acc423e213f029152fc89b8042046b227806dec95fe22d4ca1"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R06-r2\\result.json": {
+    "bytes": 447771,
+    "sha256": "2f83aeb42ba3fa07a991f9ecb499d5aa1d834bee5a4fc791cc0277bb299593ea"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R06-r3\\result.json": {
+    "bytes": 447755,
+    "sha256": "a75de700f20175bd625a9a99e82fc4c3f3b1a5ecc0f6a89fcd6477723ba248c3"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R07-r1\\result.json": {
+    "bytes": 128531,
+    "sha256": "28c672f913dbb1366b307a1b5956ef7d5da7118857e0f64cc7fee9c78bcadefa"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R07-r2\\result.json": {
+    "bytes": 127672,
+    "sha256": "ca2bba0c709c1d3e0fda3d4a3d455e69d1b805c802a4b98b5b6deeab93f0b78a"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R07-r3\\result.json": {
+    "bytes": 184567,
+    "sha256": "ec9eeae62bad3fcc4933594acb9541ebdb1e1105ac9aee8065d75d7fafb175ea"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R08-r1\\result.json": {
+    "bytes": 393471,
+    "sha256": "218d85a1f27b5c2378d1ec30462ed76b82849c98afbf6b675f7fb74bd36c324a"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R08-r2\\result.json": {
+    "bytes": 393402,
+    "sha256": "d9df526156c93809a7336542acf06553855c1cef28e395652ff2e62744723ed6"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R08-r3\\result.json": {
+    "bytes": 328094,
+    "sha256": "cd12ba4a9db527ddf692f738250098cf9d488f4b1da34f210c8b6afc4ba3dcc7"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R09-r1\\result.json": {
+    "bytes": 418343,
+    "sha256": "c8ddbaf8e9f5ace6f83ac810b5e431d1e300678bd7dcfe9f29ccbe2bf4cb014b"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R09-r2\\result.json": {
+    "bytes": 418438,
+    "sha256": "84875a7c0ce3d25b3273bbdf61e909896a91be27d37d52d04d310c87b02356da"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R09-r3\\result.json": {
+    "bytes": 327285,
+    "sha256": "cdf42c152785116415c83b38dc2629047fd7fb084c0d9adf3b8bae74556fc10d"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R10-r1\\result.json": {
+    "bytes": 429210,
+    "sha256": "4a3c8a0ffbe1d47f9e7e2d4d89cbca0913796edc54a9bd5de8eddba7ba599562"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R10-r2\\result.json": {
+    "bytes": 428200,
+    "sha256": "44f085d9d91e65017f6852c6841aa39028366cd0e1c34585fcaa38394d0c77cb"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R10-r3\\result.json": {
+    "bytes": 428198,
+    "sha256": "c907b96b233ae55f1164bfc312d6c4f220290f08db8ad0b860caac8e23306680"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R11-r1\\result.json": {
+    "bytes": 340786,
+    "sha256": "92386a50f051ba60b9ad6b8275ca594f3e70727482912b512024a5471cc1f187"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R11-r2\\result.json": {
+    "bytes": 339473,
+    "sha256": "27f41dc49bacd6d88634b198a2c44a2f94485ffa4c0d0f5a4193f03088372702"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R11-r3\\result.json": {
+    "bytes": 339519,
+    "sha256": "bd3d6439afd9cea239818b845f521f87e0117e01985e659133efc009e2df1d8e"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R12-r1\\result.json": {
+    "bytes": 131517,
+    "sha256": "1591943dedc6a7a0272a3e30cd750abd824ea0f3799ed925514566b28b1aacda"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R12-r2\\result.json": {
+    "bytes": 130066,
+    "sha256": "f260d86f0a4191caae90252383d305d500a9344e088fe72d0ddc62386943a482"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R12-r3\\result.json": {
+    "bytes": 130510,
+    "sha256": "5805818ff48862448bc103535bc6db28060f4ae2feb8267d68e192ed35b5485b"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R13-r1\\result.json": {
+    "bytes": 140821,
+    "sha256": "b362b2866ad0724e6b93184bdd51ba21f891f951cb70d8491041a5899133239c"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R13-r2\\result.json": {
+    "bytes": 140462,
+    "sha256": "6179dddd71b5d1b27690b35ed9f00ede687a995ee879eb75110083b4deadbd27"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R13-r3\\result.json": {
+    "bytes": 142171,
+    "sha256": "704278b564425319baee8ae108f3d011f4491ddb0aba89a381fb86bb448e85ff"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R14-r1\\result.json": {
+    "bytes": 88128,
+    "sha256": "6fac9945fb9f44c8842deea8df413bf04af31c6a22e378bb5d4a619dbb4bb8f8"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R14-r2\\result.json": {
+    "bytes": 87514,
+    "sha256": "5ac672eea37c0cef83387d7fd9caace56e50f2b84d5ebfebccadb71710aa5ec6"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R14-r3\\result.json": {
+    "bytes": 87143,
+    "sha256": "f7d7c505edcf5d54b2b7c2732295c9e127d4ae750e5186700a587eed4e0b7416"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R15-r1\\result.json": {
+    "bytes": 80579,
+    "sha256": "bd8864c40350ca7f4ebd067229750d6aab2e605cd48e2233966216d0cf9a540a"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R15-r2\\result.json": {
+    "bytes": 79911,
+    "sha256": "d5c58f9ede448d34015f750cf78f53d03d31cd69abce4e16342d0d697989daf9"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R15-r3\\result.json": {
+    "bytes": 79567,
+    "sha256": "206d5f94a6c9142361ec2c1bad45a5eae22a20f3d8c07d7fd1515b1117bdfc9b"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R16-r1\\result.json": {
+    "bytes": 239668,
+    "sha256": "513bbaafee3e553b2eff95c125ed4aa10f0c16adb366b213b833699e6e5f7646"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R16-r2\\result.json": {
+    "bytes": 238544,
+    "sha256": "ebb3e0f2b3ea77b0d941005c519e3de0bea4c3dc68814da0208f18dd06391d0d"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R16-r3\\result.json": {
+    "bytes": 238525,
+    "sha256": "f988ccd613ab1939c01fe7c088cbda4938493f31c73e4d0cec23e54582a412ed"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R17-r1\\result.json": {
+    "bytes": 318160,
+    "sha256": "cfe871dce18ae25ff43b1c8cf97098ff8e2461e67386c4a9de625e6eeb371f59"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R17-r2\\result.json": {
+    "bytes": 332871,
+    "sha256": "0aeea65a3d18544d43ccbc0e533bfb00657c2b1ce24e94aaf1b24c461b71a471"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R17-r3\\result.json": {
+    "bytes": 335030,
+    "sha256": "3550ec9fe3be49271fd7605aeb6ae757c05ddb3ef51f3a3a170ad6128d477e33"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R18-r1\\result.json": {
+    "bytes": 220192,
+    "sha256": "6be4d1abe2a799ca792651af1c4df848056115b0a49b93e56d737785ba09134e"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R18-r2\\result.json": {
+    "bytes": 219164,
+    "sha256": "6ac50f41d9ffebee998928e4473c759eaa542ec7e3f4da8c10a73e43bdc41f2d"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R18-r3\\result.json": {
+    "bytes": 219185,
+    "sha256": "ad0eeb80efe61299090adc81afb5fe3652baa5e953f04c84566323b4544e5c50"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R19-r1\\result.json": {
+    "bytes": 176534,
+    "sha256": "73146770ee65d23c518564f9577b2c4e2818c858f56d6e5ce17e33f7c3e91552"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R19-r2\\result.json": {
+    "bytes": 175218,
+    "sha256": "e7e4b4add74fc38ab3b83964faf9223fd4a7a73267438290a32e65dbc3886125"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R19-r3\\result.json": {
+    "bytes": 175223,
+    "sha256": "d302c9568ac1eb06c5a400573c57fb8362a0a46327d755c422138879fe14f976"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R20-r1\\result.json": {
+    "bytes": 196816,
+    "sha256": "0c2ab43a51b12f9b69888e65bfa58aaec6b4fa75a844b875f2f27e53b5a2859d"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R20-r2\\result.json": {
+    "bytes": 198170,
+    "sha256": "320e9e184d9816970a2765274a2ddac26cb4e5bcf8ba69274435de2d2ca94d02"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R20-r3\\result.json": {
+    "bytes": 201821,
+    "sha256": "5a4a22a709a49704ac26fc834debad2ec33aebd8b5f78916d083cc67915de1bc"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R21-r1\\result.json": {
+    "bytes": 136433,
+    "sha256": "4b6a48dbcd59bd449056aa1305775de3540a750d19fa415fbbbd1544666ce7a2"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R22-r1\\result.json": {
+    "bytes": 120012,
+    "sha256": "fc65fcf7f1e5a9990fe0c8ab74bac56995c70e9e66ead0ed6f4ff7e72028b988"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R23-r1\\result.json": {
+    "bytes": 263244,
+    "sha256": "49a631722c77a8f4db163156b212cdb56a6aead23d63a9cb7d1aa39dfcf31b64"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R24-r1\\result.json": {
+    "bytes": 297462,
+    "sha256": "0fc837ae1e1efc253f94f668798c822d8991a0bb48e84355b0cfa330ca1b7985"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R25-r1\\result.json": {
+    "bytes": 140056,
+    "sha256": "45310c57ca858608a20435b5cd15e57f9b23f32b023fe4f3a9dab81afaef425e"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R26-r1\\result.json": {
+    "bytes": 141177,
+    "sha256": "56ea7a70c396cb9197985722f40085ba6a11f76d915b22082c5c5886a2571007"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R27-r1\\result.json": {
+    "bytes": 56456,
+    "sha256": "cd850bd896d767584b961ad0bfa066ba0889df1a76c6e7b047acf15c84830220"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R28-r1\\result.json": {
+    "bytes": 95647,
+    "sha256": "942e71d29d0bc3892a05799ea5bdfabc43777944b42097ee2f7503910de56475"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R29-r1\\result.json": {
+    "bytes": 96667,
+    "sha256": "9e850c34c174f35d908d8f9d2b859bddfcac9964905cdef2783a385db234419b"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R30-r1\\result.json": {
+    "bytes": 97277,
+    "sha256": "9d438cbc3fe911f835a933eb2602ed879dba967c85c90b3923604e157a1f349c"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R31-r1\\result.json": {
+    "bytes": 117696,
+    "sha256": "98dace7936bf4489e13b0d92a306cc7f9eb9f4b0761cf8db8231cb64b339940f"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R32-r1\\result.json": {
+    "bytes": 142199,
+    "sha256": "7229d438d929826a274cead28078969dca37c0e6f1ca7b7b4959005556d0b4bc"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R33-r1\\result.json": {
+    "bytes": 97866,
+    "sha256": "9be559c1d70a7538883e0e8c64657465c515a81b70ebb616411a1e3888a3a35d"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R34-r1\\result.json": {
+    "bytes": 73723,
+    "sha256": "a4dc7b041392e1cb3a9671604e24f1e40e6ee142720789110bdae4f5b76b672c"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R35-r1\\result.json": {
+    "bytes": 219707,
+    "sha256": "d8d5a32bea23bb7216507d7929a71fd8a9008731734d6edd6ae23d0afc709940"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R35-r2\\result.json": {
+    "bytes": 218714,
+    "sha256": "a60cc219a19277930eaa331a8095b591d8c236557824dde3180e2d2d9a8de371"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R35-r3\\result.json": {
+    "bytes": 218704,
+    "sha256": "fa6e8c5f904ed3acbc6578bb87a939b35839182a8f16e9262d69cf9c142d952e"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R36-r1\\result.json": {
+    "bytes": 96323,
+    "sha256": "46160d56cb0a9ae7562f60006954d884cb113b3879d62e5433e39cd15a77a708"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R37-r1\\result.json": {
+    "bytes": 118371,
+    "sha256": "a658c71639c60bb7ded20065482f74b9ef9c17b6f2f03b28c2373b82eca1942d"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R38-r1\\result.json": {
+    "bytes": 317427,
+    "sha256": "bd3344c1dc044f4d0d09ff5d2c9c9e1642bbac4dd5492f73de16c2287adb5f71"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R39-r1\\result.json": {
+    "bytes": 90646,
+    "sha256": "2779019060fa3c67b52771c8aa39334c027e5ad794d7f3f9b82ee83bb8acc5fd"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R40-r1\\result.json": {
+    "bytes": 93723,
+    "sha256": "8918fd7b1436fa286effa0506922cd66e605a2c95c4978c00e4297e94a7c9544"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\badcases.json": {
+    "bytes": 79297,
+    "sha256": "45e318dc356cf4edb4f90e4164351a632d14ee622df8a411aaa42a00a980ece9"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\H01.json": {
+    "bytes": 2396,
+    "sha256": "c59eeed014a688d7a34235953f685b7ff640432bf8e1ddbf6f0b0769d67856b7"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\H02.json": {
+    "bytes": 1979,
+    "sha256": "cd1f3c4981b71b4a0c2b364ef0abcef3885d3193c0ed3d3cacb5423daff20f27"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\H03.json": {
+    "bytes": 2370,
+    "sha256": "1bcf1b19e1139c05bde42fedef57ce159cbbaea6ad6e340a2927e3f2bf6ff452"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\H04.json": {
+    "bytes": 2353,
+    "sha256": "08b9b67a3a257e30a29591fd6a75196e62e7a679fba70d2139d0ce8d524b0a29"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\H05.json": {
+    "bytes": 2088,
+    "sha256": "c7b5975c283f64da71b0966645ac57e2373ff2a6ed75fd93993204bd7ddb4b1f"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\H06.json": {
+    "bytes": 2093,
+    "sha256": "15210142fd1f1244d6747198dded278a86684f76460d71dfcf15d2b895831b1b"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\H07.json": {
+    "bytes": 1840,
+    "sha256": "76e501218f818d8880196f34aa83016771455dd627d8e887e8f9f329cd48aa99"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\H08.json": {
+    "bytes": 1538,
+    "sha256": "9efaf98b8d38328cb2286c8e388ac3392652c5e5df69d25d70d7e637c09a902d"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\H09.json": {
+    "bytes": 1418,
+    "sha256": "d7690d86059d47531d7de40835da210d2e6af1347e6690508a94ca5beb5aafcc"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\H10.json": {
+    "bytes": 2510,
+    "sha256": "09fccc4fc08a7fdc027153a965c6b146908d9d3db31b3b10a5b3095eee0534bf"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\H11.json": {
+    "bytes": 2173,
+    "sha256": "1300c0b53d0f10a8a6c71ba98e5c42ff4d3f938940677bde6cde6c9f01c32bf7"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\H12.json": {
+    "bytes": 2805,
+    "sha256": "fc2bbaf618daf198c9877a42b1aeaeeda74a782ea098da7ac3af477e615554a6"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\H13.json": {
+    "bytes": 1493,
+    "sha256": "79b480b4408660b66853efb20a9f4c1f947eea46133aca3aad742b680c50573e"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\H14.json": {
+    "bytes": 1483,
+    "sha256": "0b452c125cadc2225a181e8a268c87953a7bc0cb53e60dce75f95fffa7e9be4e"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\H15.json": {
+    "bytes": 2599,
+    "sha256": "684ffa0b76df5de2adb048f460d79654e307539613183a3c4942cdce78ac21d8"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\H16.json": {
+    "bytes": 2298,
+    "sha256": "c7bd1b431fa88810a86856a6cf657716fd5d3bf013e9e22b254aa24dd8643735"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\H17.json": {
+    "bytes": 1541,
+    "sha256": "de652574fb9882c46385c2a947e54f8b1c5ac6d9b862549ebc8db39367493f7f"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\H18.json": {
+    "bytes": 1514,
+    "sha256": "52bfdb6aa33de9d53a3e769538317a2318554abcbb13f056679ce223b06800d8"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\H19.json": {
+    "bytes": 1635,
+    "sha256": "869aee8ee604ddaec60b586fcb0c2df4724324d50f060278828f9ee7d2cd0383"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\H20.json": {
+    "bytes": 2741,
+    "sha256": "259c16161c833da01b8795ca16110f3ce92580f54d529e0ea6aa3e83c0b6b5ef"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\R01.json": {
+    "bytes": 2355,
+    "sha256": "6872b2034070a3e76eaa641fddaea71cee7c2a711b2464abb1f57ab407143de4"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\R02.json": {
+    "bytes": 1533,
+    "sha256": "50d11a8491e1c64636df749adaa9a2f651ba6e715f96dc479e7d42c31f76082c"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\R03.json": {
+    "bytes": 1369,
+    "sha256": "530a8c07f1f757adf644a4941b89f5b0b210c9920b09ac46bf796e1bf637b802"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\R04.json": {
+    "bytes": 1248,
+    "sha256": "12ac43abb77db79ead226387c8a1108e110426f81e618bd7b60a4aadd4f3751a"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\R05.json": {
+    "bytes": 3144,
+    "sha256": "2bdaa01a6f11022285b8444ce894c6a739d03ac53bbe371352f0e957fc97b0bb"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\R06.json": {
+    "bytes": 2707,
+    "sha256": "b9302ac562f8181db5c2703380791f44f003547f7a68d84fe9d02d822b8b7a59"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\R07.json": {
+    "bytes": 1527,
+    "sha256": "3090b7dde4e2084b94c6c2988dfc915825020844e5f93ae5b7578b1fec4ac41b"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\R08.json": {
+    "bytes": 2121,
+    "sha256": "4530a7fe26abc8dd74028a0fa2a0122a5220eeca8c1a00ef60559ff8cc472796"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\R09.json": {
+    "bytes": 2102,
+    "sha256": "63a3bd2035c554e896184e37ddefba2b5f27882cfe194b3c23bf13893e9e1fdd"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\R10.json": {
+    "bytes": 2358,
+    "sha256": "a170ae8e0837ad09fd68a121c5bf607b5297f8b01637662ddfe71ecd2fc422f6"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\R11.json": {
+    "bytes": 2286,
+    "sha256": "f11ee07cbd234092c3b82ea45d01e16827d5d343ccbd48e6aaca0ef05c01c68f"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\R12.json": {
+    "bytes": 1433,
+    "sha256": "6d8049d84f3c1524c0930df5f798cfec749fefefd21140918ce9aa59534e1add"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\R13.json": {
+    "bytes": 1375,
+    "sha256": "c955fa994328d592443bb93c8f99b6450c2c5e01c53948db5b14d62d78982ad0"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\R14.json": {
+    "bytes": 1392,
+    "sha256": "1e0f82cd6f83612a09eb75d07711da6e67732fd7797c19d2efeefe8368902136"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\R15.json": {
+    "bytes": 1687,
+    "sha256": "05b29cd2477ee97cb803bb89d2b3be65056787196d702825e1c31695c5f76552"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\R16.json": {
+    "bytes": 2383,
+    "sha256": "fd2b4f1a2ec96aa8096445f5749d1a31d1bbb01c01d62ba368ed092ef3fc4453"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\R17.json": {
+    "bytes": 3158,
+    "sha256": "e1102dbb39c2781c64834fd9f88dedeffa5206e9491406e6e5a5e21fe3b4ace8"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\R18.json": {
+    "bytes": 1715,
+    "sha256": "fb13fff24f4b3c34b93ddcf6311b92d7e57e72e18b55cac0dba951e887e79555"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\R19.json": {
+    "bytes": 1863,
+    "sha256": "46df7cad391dea54cfa9d2edba425cbf700e7db35ae3a507d3dc9a3a4dccccde"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\R20.json": {
+    "bytes": 1733,
+    "sha256": "f06918a2a16d62a7ff00cce1e1148a390e86698aec35ffcd4539ced432218c64"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\R21.json": {
+    "bytes": 1202,
+    "sha256": "4e5ba852460c176c13a454637d97e7159136a80a9714d7a0ef23af84bfc6362a"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\R22.json": {
+    "bytes": 1250,
+    "sha256": "cb0eb9090e0e024cf09f50edd2362ba207eff9db546817fceb7c4e4fcc9518ab"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\R23.json": {
+    "bytes": 1970,
+    "sha256": "529c5f3a40e8c766348e1e921a832482f8d06b13a0c8043d16adb8cf6eefb67a"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\R24.json": {
+    "bytes": 1742,
+    "sha256": "2986693b0001bcdf0e30f32e28a89c3447c87b1943255694ed7d01fa4e89b65a"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\R25.json": {
+    "bytes": 1372,
+    "sha256": "c8b15e787f249a16cebfd02ff623afa57ea448b5ab4524365da316bf79b9adbc"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\R26.json": {
+    "bytes": 1377,
+    "sha256": "34d941b36d6c507d3255423fdf48882c5b59292439bac344dd36e9debac3c549"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\R27.json": {
+    "bytes": 1258,
+    "sha256": "01e714dae27000debe8e69f47ef6b379cd2ead467558ba7943d3db3872ae413d"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\R28.json": {
+    "bytes": 1350,
+    "sha256": "ceef208cb9c8506ecbd5797bf4248d40f48525b8d4d8ffe13c562fd4f7035831"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\R29.json": {
+    "bytes": 1267,
+    "sha256": "c516b4e2bafabd683a936a824a7ca058912ce907f168ee5c859cda1a0f74c985"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\R30.json": {
+    "bytes": 1210,
+    "sha256": "a4c586fe722757eb468e9ff8dfb4a53091e18039028c022ec63a131f391a0292"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\R31.json": {
+    "bytes": 1244,
+    "sha256": "122c2c7c29972133cbd551fafd9fd844dcd81b6737d590085a8675dd022ec1de"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\R32.json": {
+    "bytes": 1466,
+    "sha256": "526fb6666e480465e1712a74dfa81e49d381de5a90a7ca8cc2f8306f12193a97"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\R33.json": {
+    "bytes": 1398,
+    "sha256": "6574be927a48170a4018f7f53778f909e1a93adb926a3a2fcd7b02c48773af88"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\R34.json": {
+    "bytes": 1460,
+    "sha256": "f94573fab81dc801e35910f8eef9cc66e47ff21a6c6f9e8211ad2e46321a9ef3"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\R35.json": {
+    "bytes": 1702,
+    "sha256": "e3f59744385233d3df95bb55545243f9d7ba33ae5cfa79b19220c44923f77a27"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\R36.json": {
+    "bytes": 1426,
+    "sha256": "1b99500b6f827da7134d3d4ee0e9135db70ca1121a75f309fa6e8bd44158b582"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\R37.json": {
+    "bytes": 1460,
+    "sha256": "de25ec9b1524bbad43f5c3a6ddf7c3b9c38eae7acd5a7589fc371712c7ebe385"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\R38.json": {
+    "bytes": 1755,
+    "sha256": "73da2b63e2bd3224f0a371102eebdf2be5d1bbcee739d13d31b34fd6e24c5ee4"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\R39.json": {
+    "bytes": 1262,
+    "sha256": "a74b768346db278bffb673d91684e25a1148b1314ae06ff34f5d172c2fbd7159"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\case-definitions\\R40.json": {
+    "bytes": 1146,
+    "sha256": "1b9279798b8ca47ffbdff08d37c2b3e10d96ce27076cd6382991331daf242049"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\cases.json": {
+    "bytes": 119970,
+    "sha256": "18ce0e2395e6b5f99a8424e05bc6092b3c5aa7de664ecc3df7fb3b5855e1d8f0"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\H01-r1\\case.json": {
+    "bytes": 2396,
+    "sha256": "c59eeed014a688d7a34235953f685b7ff640432bf8e1ddbf6f0b0769d67856b7"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\H01-r1\\result.json": {
+    "bytes": 330174,
+    "sha256": "cac5ff88a730102813f4cd8591928f2b024e58a7e6d9d5fe78683ba1ee0f7607"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\H02-r1\\case.json": {
+    "bytes": 1979,
+    "sha256": "cd1f3c4981b71b4a0c2b364ef0abcef3885d3193c0ed3d3cacb5423daff20f27"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\H02-r1\\result.json": {
+    "bytes": 340011,
+    "sha256": "ad73b140443d4d5cfe166816ac5157263f6880a1727c3310a61cd538feae9cf8"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\H03-r1\\case.json": {
+    "bytes": 2370,
+    "sha256": "1bcf1b19e1139c05bde42fedef57ce159cbbaea6ad6e340a2927e3f2bf6ff452"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\H03-r1\\result.json": {
+    "bytes": 242839,
+    "sha256": "aa48836532b94f803bc6265931f5075f7ac294bd3f51e94065c718201bf6bcca"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\H04-r1\\case.json": {
+    "bytes": 2353,
+    "sha256": "08b9b67a3a257e30a29591fd6a75196e62e7a679fba70d2139d0ce8d524b0a29"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\H04-r1\\result.json": {
+    "bytes": 409740,
+    "sha256": "f0113618c0e54e787933b84b4f63f44dbe3e12d538ed525ffce5b222643f1325"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\H05-r1\\case.json": {
+    "bytes": 2088,
+    "sha256": "c7b5975c283f64da71b0966645ac57e2373ff2a6ed75fd93993204bd7ddb4b1f"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\H05-r1\\result.json": {
+    "bytes": 203599,
+    "sha256": "b8ef9e7876a340f3b79595aae88fe489ac4bf1a53bdcb13307fee0988c8d9fce"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\H06-r1\\case.json": {
+    "bytes": 2093,
+    "sha256": "15210142fd1f1244d6747198dded278a86684f76460d71dfcf15d2b895831b1b"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\H06-r1\\result.json": {
+    "bytes": 329452,
+    "sha256": "e338aca15f8e6e7190b702717899a7ed1d6677bea1c40956b80b88f12819d95b"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\H07-r1\\case.json": {
+    "bytes": 1840,
+    "sha256": "76e501218f818d8880196f34aa83016771455dd627d8e887e8f9f329cd48aa99"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\H07-r1\\result.json": {
+    "bytes": 337826,
+    "sha256": "f9e557757f3df1841fd451ba841bf7d4e0fdbb4ceb13e79ab8f7f4217486b04b"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\H08-r1\\case.json": {
+    "bytes": 1538,
+    "sha256": "9efaf98b8d38328cb2286c8e388ac3392652c5e5df69d25d70d7e637c09a902d"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\H08-r1\\result.json": {
+    "bytes": 130451,
+    "sha256": "4aae4085e86d387b9c128fe4d219e7d74e09887fc31589d4b8d0c74b7e66b0d3"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\H09-r1\\case.json": {
+    "bytes": 1418,
+    "sha256": "d7690d86059d47531d7de40835da210d2e6af1347e6690508a94ca5beb5aafcc"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\H09-r1\\result.json": {
+    "bytes": 79075,
+    "sha256": "e7aa44f8badaf51c3fdbda2429a0d2d86fd3e9d37680f1e32f80e8bbe09420c1"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\H10-r1\\case.json": {
+    "bytes": 2510,
+    "sha256": "09fccc4fc08a7fdc027153a965c6b146908d9d3db31b3b10a5b3095eee0534bf"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\H10-r1\\result.json": {
+    "bytes": 278289,
+    "sha256": "75ce0196c7fa2e760c6627ef8cb500f8e4244516956ff3e9cea90c1072bb69f1"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\H11-r1\\case.json": {
+    "bytes": 2173,
+    "sha256": "1300c0b53d0f10a8a6c71ba98e5c42ff4d3f938940677bde6cde6c9f01c32bf7"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\H11-r1\\result.json": {
+    "bytes": 185136,
+    "sha256": "ff5de17f63ae0cd003bb4cd50986561cde73cc6bcd45d78ba32919a869f117d2"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\H12-r1\\case.json": {
+    "bytes": 2805,
+    "sha256": "fc2bbaf618daf198c9877a42b1aeaeeda74a782ea098da7ac3af477e615554a6"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\H12-r1\\result.json": {
+    "bytes": 291950,
+    "sha256": "7673bfd323da1890e76a0a29ca0b3cbd330d40c255673dba48f1a49ef30ae8be"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\H13-r1\\case.json": {
+    "bytes": 1493,
+    "sha256": "79b480b4408660b66853efb20a9f4c1f947eea46133aca3aad742b680c50573e"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\H13-r1\\result.json": {
+    "bytes": 169626,
+    "sha256": "2bd740065e708c31254673de319a81902302e0dc8489885dc90eba9a88b6638d"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\H14-r1\\case.json": {
+    "bytes": 1483,
+    "sha256": "0b452c125cadc2225a181e8a268c87953a7bc0cb53e60dce75f95fffa7e9be4e"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\H14-r1\\result.json": {
+    "bytes": 99920,
+    "sha256": "ac7892294904b0338a9f8910dfd1513d9486d4c7b7dbaae67bdf4f6dc00a7406"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\H15-r1\\case.json": {
+    "bytes": 2599,
+    "sha256": "684ffa0b76df5de2adb048f460d79654e307539613183a3c4942cdce78ac21d8"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\H15-r1\\result.json": {
+    "bytes": 403813,
+    "sha256": "2fb0d73ae849959a08168e307647bd5b53f5db816cb1b8db0fe64f36d34cfbf3"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\H16-r1\\case.json": {
+    "bytes": 2298,
+    "sha256": "c7bd1b431fa88810a86856a6cf657716fd5d3bf013e9e22b254aa24dd8643735"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\H16-r1\\result.json": {
+    "bytes": 413537,
+    "sha256": "87db4c8a4854e7cccae5e94c59e04dd75f17f46c79b2f406fc1f2ab45e2f472a"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\H17-r1\\case.json": {
+    "bytes": 1541,
+    "sha256": "de652574fb9882c46385c2a947e54f8b1c5ac6d9b862549ebc8db39367493f7f"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\H17-r1\\result.json": {
+    "bytes": 138266,
+    "sha256": "da64afa76070a168887057ebf400991f28590aed25ead6a99b8f905169b6cdca"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\H18-r1\\case.json": {
+    "bytes": 1514,
+    "sha256": "52bfdb6aa33de9d53a3e769538317a2318554abcbb13f056679ce223b06800d8"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\H18-r1\\result.json": {
+    "bytes": 184052,
+    "sha256": "4c72ee9c84302c2af3df0d7d92a430c0f8eef3633c4e9eeeff5ad702474054d0"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\H19-r1\\case.json": {
+    "bytes": 1635,
+    "sha256": "869aee8ee604ddaec60b586fcb0c2df4724324d50f060278828f9ee7d2cd0383"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\H19-r1\\result.json": {
+    "bytes": 109188,
+    "sha256": "9dd6e09e2ddd96b0eff6ca54fa0476ae449d5c9fb878d79dca07cf86cfae4139"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\H20-r1\\case.json": {
+    "bytes": 2741,
+    "sha256": "259c16161c833da01b8795ca16110f3ce92580f54d529e0ea6aa3e83c0b6b5ef"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\H20-r1\\result.json": {
+    "bytes": 59601,
+    "sha256": "0dbda9eca1f363f5a169357dfe9d5627eebcad5279e616e9ee944baa2405763f"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\manifest.json": {
+    "bytes": 24108,
+    "sha256": "cd35940992fd167819a35767a1c062aaba2cb09360b1cb1510456fa39b6f14f3"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R01-r1\\case.json": {
+    "bytes": 2355,
+    "sha256": "6872b2034070a3e76eaa641fddaea71cee7c2a711b2464abb1f57ab407143de4"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R01-r1\\result.json": {
+    "bytes": 204378,
+    "sha256": "1537f498b032204d2073ce2e08a689c6d0629be879ff7e9e5c126db3157ac8bb"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R01-r2\\case.json": {
+    "bytes": 2355,
+    "sha256": "6872b2034070a3e76eaa641fddaea71cee7c2a711b2464abb1f57ab407143de4"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R01-r2\\result.json": {
+    "bytes": 126900,
+    "sha256": "9751c9d1424f0bdb006adf2683c1baa43585a1720e67f908ee8bac28025ed7c5"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R01-r3\\case.json": {
+    "bytes": 2355,
+    "sha256": "6872b2034070a3e76eaa641fddaea71cee7c2a711b2464abb1f57ab407143de4"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R01-r3\\result.json": {
+    "bytes": 101336,
+    "sha256": "efe1d4ab689c755c6ec700ae5cd0ad204b009f07597dbb142463c550b237ccad"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R02-r1\\case.json": {
+    "bytes": 1533,
+    "sha256": "50d11a8491e1c64636df749adaa9a2f651ba6e715f96dc479e7d42c31f76082c"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R02-r1\\result.json": {
+    "bytes": 222117,
+    "sha256": "d372b842036a10658ea61910375cb0b93a29385d2ef4729487c47d231c52c550"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R02-r2\\case.json": {
+    "bytes": 1533,
+    "sha256": "50d11a8491e1c64636df749adaa9a2f651ba6e715f96dc479e7d42c31f76082c"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R02-r2\\result.json": {
+    "bytes": 221245,
+    "sha256": "4bb2144657d28c024266825e6cc0938fba07ae36db50620d36fffaa1c9cf3d72"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R02-r3\\case.json": {
+    "bytes": 1533,
+    "sha256": "50d11a8491e1c64636df749adaa9a2f651ba6e715f96dc479e7d42c31f76082c"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R02-r3\\result.json": {
+    "bytes": 221267,
+    "sha256": "66b91736c0940646be0d3590a02a12a7242023b3ba0ee3338d63700e882be7b8"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R03-r1\\case.json": {
+    "bytes": 1369,
+    "sha256": "530a8c07f1f757adf644a4941b89f5b0b210c9920b09ac46bf796e1bf637b802"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R03-r1\\result.json": {
+    "bytes": 185089,
+    "sha256": "4b3331d4b38f8314d935622100f033474f8606e451e6b1cce3f72f6eb854634c"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R03-r2\\case.json": {
+    "bytes": 1369,
+    "sha256": "530a8c07f1f757adf644a4941b89f5b0b210c9920b09ac46bf796e1bf637b802"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R03-r2\\result.json": {
+    "bytes": 184314,
+    "sha256": "feb15ce2fe6740f2d8d8b7beb527b3db6eefaf5c925684ed5407a0518ca38754"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R03-r3\\case.json": {
+    "bytes": 1369,
+    "sha256": "530a8c07f1f757adf644a4941b89f5b0b210c9920b09ac46bf796e1bf637b802"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R03-r3\\result.json": {
+    "bytes": 184312,
+    "sha256": "84416447384a7985d8bf936974cba9128c0eb359cbe0995110cb7ed02b318860"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R04-r1\\case.json": {
+    "bytes": 1248,
+    "sha256": "12ac43abb77db79ead226387c8a1108e110426f81e618bd7b60a4aadd4f3751a"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R04-r1\\result.json": {
+    "bytes": 171976,
+    "sha256": "54a6aeae74784b3aa62f7b3127f728f045886b1c2fb1f49c8c336cabb4df0032"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R05-r1\\case.json": {
+    "bytes": 3144,
+    "sha256": "2bdaa01a6f11022285b8444ce894c6a739d03ac53bbe371352f0e957fc97b0bb"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R05-r1\\result.json": {
+    "bytes": 583640,
+    "sha256": "32204d5d24553dae1cdb4c5efa991aea749500f550cfdeff0b8a06d864bafe69"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R05-r2\\case.json": {
+    "bytes": 3144,
+    "sha256": "2bdaa01a6f11022285b8444ce894c6a739d03ac53bbe371352f0e957fc97b0bb"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R05-r2\\result.json": {
+    "bytes": 589311,
+    "sha256": "0a155c88f62851866971eb809651675aff017ede72aea76c739ffcd8b696e160"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R05-r3\\case.json": {
+    "bytes": 3144,
+    "sha256": "2bdaa01a6f11022285b8444ce894c6a739d03ac53bbe371352f0e957fc97b0bb"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R05-r3\\result.json": {
+    "bytes": 590908,
+    "sha256": "19df833f54f0871c67d640f3bf3b43a18f6d2f6c8d099f7c617d2b67c3de132d"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R06-r1\\case.json": {
+    "bytes": 2707,
+    "sha256": "b9302ac562f8181db5c2703380791f44f003547f7a68d84fe9d02d822b8b7a59"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R06-r1\\result.json": {
+    "bytes": 447665,
+    "sha256": "445ef8446275786d41e6fa926add5ad5f7104464d0c63a5307de9cfb7cedd79f"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R06-r2\\case.json": {
+    "bytes": 2707,
+    "sha256": "b9302ac562f8181db5c2703380791f44f003547f7a68d84fe9d02d822b8b7a59"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R06-r2\\result.json": {
+    "bytes": 448110,
+    "sha256": "84c4e3f15633c2e193f48fee949014dab18d33fa8e0ec4e5b39d74d2f90f075b"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R06-r3\\case.json": {
+    "bytes": 2707,
+    "sha256": "b9302ac562f8181db5c2703380791f44f003547f7a68d84fe9d02d822b8b7a59"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R06-r3\\result.json": {
+    "bytes": 448094,
+    "sha256": "9b9114d4cffed8ed503838bcb94833bc8d7031763c84fcf6ecd14f73cd7f7db0"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R07-r1\\case.json": {
+    "bytes": 1527,
+    "sha256": "3090b7dde4e2084b94c6c2988dfc915825020844e5f93ae5b7578b1fec4ac41b"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R07-r1\\result.json": {
+    "bytes": 128774,
+    "sha256": "16d6d88633bb6a457c070e27f2201c5e60083154e3193b085705646d4532ffe7"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R07-r2\\case.json": {
+    "bytes": 1527,
+    "sha256": "3090b7dde4e2084b94c6c2988dfc915825020844e5f93ae5b7578b1fec4ac41b"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R07-r2\\result.json": {
+    "bytes": 128011,
+    "sha256": "113cc556be98088acfdc9408f04c171b49e4d846f4c46d98734b2b82413fdb8d"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R07-r3\\case.json": {
+    "bytes": 1527,
+    "sha256": "3090b7dde4e2084b94c6c2988dfc915825020844e5f93ae5b7578b1fec4ac41b"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R07-r3\\result.json": {
+    "bytes": 184906,
+    "sha256": "7446e5d522c4453c729b652b26bff2e87edae03c767aebf22411883d0c2ce681"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R08-r1\\case.json": {
+    "bytes": 2121,
+    "sha256": "4530a7fe26abc8dd74028a0fa2a0122a5220eeca8c1a00ef60559ff8cc472796"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R08-r1\\result.json": {
+    "bytes": 393714,
+    "sha256": "e325c26c01fed93c59327840459c5bd6eb1d9eed4b6c908aa9639d23e51d94fa"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R08-r2\\case.json": {
+    "bytes": 2121,
+    "sha256": "4530a7fe26abc8dd74028a0fa2a0122a5220eeca8c1a00ef60559ff8cc472796"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R08-r2\\result.json": {
+    "bytes": 393741,
+    "sha256": "fc7e01f975ade306ba9565d6740caefde2c42dae1f3df4de60598402abcc287a"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R08-r3\\case.json": {
+    "bytes": 2121,
+    "sha256": "4530a7fe26abc8dd74028a0fa2a0122a5220eeca8c1a00ef60559ff8cc472796"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R08-r3\\result.json": {
+    "bytes": 328433,
+    "sha256": "b7ae9bd5c01cd50a906df3fdf9a7622d7295ffcd5a0922ac6b31ef7a2ac856fa"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R09-r1\\case.json": {
+    "bytes": 2102,
+    "sha256": "63a3bd2035c554e896184e37ddefba2b5f27882cfe194b3c23bf13893e9e1fdd"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R09-r1\\result.json": {
+    "bytes": 418586,
+    "sha256": "af64be0ed99db47c45b520c043403e9aab5e362603202b794da0216f70e18815"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R09-r2\\case.json": {
+    "bytes": 2102,
+    "sha256": "63a3bd2035c554e896184e37ddefba2b5f27882cfe194b3c23bf13893e9e1fdd"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R09-r2\\result.json": {
+    "bytes": 418777,
+    "sha256": "50a6a8fd20c2db4efac3bf0e64ccb9f10063347399a9e5c01715e2ca8e7a0639"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R09-r3\\case.json": {
+    "bytes": 2102,
+    "sha256": "63a3bd2035c554e896184e37ddefba2b5f27882cfe194b3c23bf13893e9e1fdd"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R09-r3\\result.json": {
+    "bytes": 327624,
+    "sha256": "f846c2c1fe0875c29ac05bfd2f87985c8d85d047cb338fe97946bd1a53064674"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R10-r1\\case.json": {
+    "bytes": 2358,
+    "sha256": "a170ae8e0837ad09fd68a121c5bf607b5297f8b01637662ddfe71ecd2fc422f6"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R10-r1\\result.json": {
+    "bytes": 429453,
+    "sha256": "58a4a58ee36179f38e60c2d4878730ed5f2be41a8e367ad7767631b95ce10e2a"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R10-r2\\case.json": {
+    "bytes": 2358,
+    "sha256": "a170ae8e0837ad09fd68a121c5bf607b5297f8b01637662ddfe71ecd2fc422f6"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R10-r2\\result.json": {
+    "bytes": 428539,
+    "sha256": "1ffae0e2f53cdb6a11e7c5bd636f0d594bf8e00fb26cb5b0c08d6253ea9bd7bb"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R10-r3\\case.json": {
+    "bytes": 2358,
+    "sha256": "a170ae8e0837ad09fd68a121c5bf607b5297f8b01637662ddfe71ecd2fc422f6"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R10-r3\\result.json": {
+    "bytes": 428537,
+    "sha256": "deba6a79bfa893bf76f3049bc3f9959c70a52b8867bb7b0567ff2a7cf63629f8"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R11-r1\\case.json": {
+    "bytes": 2286,
+    "sha256": "f11ee07cbd234092c3b82ea45d01e16827d5d343ccbd48e6aaca0ef05c01c68f"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R11-r1\\result.json": {
+    "bytes": 341029,
+    "sha256": "902b512f6729366853905893a990873ecce23350896c716efd4f10461244e66e"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R11-r2\\case.json": {
+    "bytes": 2286,
+    "sha256": "f11ee07cbd234092c3b82ea45d01e16827d5d343ccbd48e6aaca0ef05c01c68f"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R11-r2\\result.json": {
+    "bytes": 339812,
+    "sha256": "1b2d228fe32cbd6a19f1fca08bd0840de11d950c0daaff0f6ee749bdbe64b737"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R11-r3\\case.json": {
+    "bytes": 2286,
+    "sha256": "f11ee07cbd234092c3b82ea45d01e16827d5d343ccbd48e6aaca0ef05c01c68f"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R11-r3\\result.json": {
+    "bytes": 339858,
+    "sha256": "074a110562db1d22ebf5a8b09fb5542b343792783d295c5d905c4fb961f3ea82"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R12-r1\\case.json": {
+    "bytes": 1433,
+    "sha256": "6d8049d84f3c1524c0930df5f798cfec749fefefd21140918ce9aa59534e1add"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R12-r1\\result.json": {
+    "bytes": 131760,
+    "sha256": "c045c69fddb6bd864f94710c0d4dd9b61f049a0957787b3a231ae719f07376c0"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R12-r2\\case.json": {
+    "bytes": 1433,
+    "sha256": "6d8049d84f3c1524c0930df5f798cfec749fefefd21140918ce9aa59534e1add"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R12-r2\\result.json": {
+    "bytes": 130405,
+    "sha256": "50fe464c8652ea3189ace69a4092965f0689b7cc63601e380ccf1b85e6cd8e73"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R12-r3\\case.json": {
+    "bytes": 1433,
+    "sha256": "6d8049d84f3c1524c0930df5f798cfec749fefefd21140918ce9aa59534e1add"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R12-r3\\result.json": {
+    "bytes": 130849,
+    "sha256": "1bdd21a4ef62d4c44f20e7f5456bdb425b2488871c09e8cd8f041d1f1f06b0e6"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R13-r1\\case.json": {
+    "bytes": 1375,
+    "sha256": "c955fa994328d592443bb93c8f99b6450c2c5e01c53948db5b14d62d78982ad0"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R13-r1\\result.json": {
+    "bytes": 141064,
+    "sha256": "2236e9816f297d745cccb13bb94661fdd0c6eed31b1ea50c9f6c2bec59e314ad"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R13-r2\\case.json": {
+    "bytes": 1375,
+    "sha256": "c955fa994328d592443bb93c8f99b6450c2c5e01c53948db5b14d62d78982ad0"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R13-r2\\result.json": {
+    "bytes": 140801,
+    "sha256": "aa2043775fa7489a86516d99cde1837b69202a8def23657d6094699fd927078a"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R13-r3\\case.json": {
+    "bytes": 1375,
+    "sha256": "c955fa994328d592443bb93c8f99b6450c2c5e01c53948db5b14d62d78982ad0"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R13-r3\\result.json": {
+    "bytes": 142510,
+    "sha256": "e162735c3a0682c6fb5b7a4f699ecd7902dce61eea3f2c537405d64e27b3d258"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R14-r1\\case.json": {
+    "bytes": 1392,
+    "sha256": "1e0f82cd6f83612a09eb75d07711da6e67732fd7797c19d2efeefe8368902136"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R14-r1\\result.json": {
+    "bytes": 88371,
+    "sha256": "75a49ecb8911684ae2155d2b900deb27d66c5dc416fb0c2c2171c843c1113adc"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R14-r2\\case.json": {
+    "bytes": 1392,
+    "sha256": "1e0f82cd6f83612a09eb75d07711da6e67732fd7797c19d2efeefe8368902136"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R14-r2\\result.json": {
+    "bytes": 87853,
+    "sha256": "3376f6bde19c2b334e5c61b877e6ee4e0fafffc68be426e41375b782c758dc04"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R14-r3\\case.json": {
+    "bytes": 1392,
+    "sha256": "1e0f82cd6f83612a09eb75d07711da6e67732fd7797c19d2efeefe8368902136"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R14-r3\\result.json": {
+    "bytes": 87482,
+    "sha256": "7eeaa2b1ec7b185aef4da4f457189cf32f099224d3561f35887555189623d64a"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R15-r1\\case.json": {
+    "bytes": 1687,
+    "sha256": "05b29cd2477ee97cb803bb89d2b3be65056787196d702825e1c31695c5f76552"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R15-r1\\result.json": {
+    "bytes": 80822,
+    "sha256": "ac36e3d96ac4883219062bc28eceaa298030d31830ec9d51d5cf9fb98e507e87"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R15-r2\\case.json": {
+    "bytes": 1687,
+    "sha256": "05b29cd2477ee97cb803bb89d2b3be65056787196d702825e1c31695c5f76552"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R15-r2\\result.json": {
+    "bytes": 80250,
+    "sha256": "1f7b6985f0c4fab411bd7780efcccff9602b733ee9d2eb9ed5995a22b28a1074"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R15-r3\\case.json": {
+    "bytes": 1687,
+    "sha256": "05b29cd2477ee97cb803bb89d2b3be65056787196d702825e1c31695c5f76552"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R15-r3\\result.json": {
+    "bytes": 79906,
+    "sha256": "bd68a198baf6dc8276ce0f7ed93e346f31dd2d9f92cb47f7139f6813af622c77"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R16-r1\\case.json": {
+    "bytes": 2383,
+    "sha256": "fd2b4f1a2ec96aa8096445f5749d1a31d1bbb01c01d62ba368ed092ef3fc4453"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R16-r1\\result.json": {
+    "bytes": 239911,
+    "sha256": "fbf25929f152818be295f5d6b4fbad8d8d7a6a846c9b70115e8d203b6a8dcd6c"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R16-r2\\case.json": {
+    "bytes": 2383,
+    "sha256": "fd2b4f1a2ec96aa8096445f5749d1a31d1bbb01c01d62ba368ed092ef3fc4453"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R16-r2\\result.json": {
+    "bytes": 238883,
+    "sha256": "6565ad5c6a59dfaab085e9da68cafcbc5b8ad0f18a611919dc3458fa4c58eb4f"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R16-r3\\case.json": {
+    "bytes": 2383,
+    "sha256": "fd2b4f1a2ec96aa8096445f5749d1a31d1bbb01c01d62ba368ed092ef3fc4453"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R16-r3\\result.json": {
+    "bytes": 238864,
+    "sha256": "1d5c2931dd526831f5036f6c3d8f3710fe1ebeed2b520d1bd27da3acb1ad9783"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R17-r1\\case.json": {
+    "bytes": 3158,
+    "sha256": "e1102dbb39c2781c64834fd9f88dedeffa5206e9491406e6e5a5e21fe3b4ace8"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R17-r1\\result.json": {
+    "bytes": 323463,
+    "sha256": "d7a353f170338947fba6f39a4b18e82ef68bae619b32509d82c5ab959803ac8f"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R17-r2\\case.json": {
+    "bytes": 3158,
+    "sha256": "e1102dbb39c2781c64834fd9f88dedeffa5206e9491406e6e5a5e21fe3b4ace8"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R17-r2\\result.json": {
+    "bytes": 338270,
+    "sha256": "8bb448734167063c846c2e7181abde67d5e590f208cb86130e94044cc76ef2d1"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R17-r3\\case.json": {
+    "bytes": 3158,
+    "sha256": "e1102dbb39c2781c64834fd9f88dedeffa5206e9491406e6e5a5e21fe3b4ace8"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R17-r3\\result.json": {
+    "bytes": 340429,
+    "sha256": "d647d83993fe3b29c16b7c984d306f175e24c1ae9d76c637a6a685cbcaa9e74a"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R18-r1\\case.json": {
+    "bytes": 1715,
+    "sha256": "fb13fff24f4b3c34b93ddcf6311b92d7e57e72e18b55cac0dba951e887e79555"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R18-r1\\result.json": {
+    "bytes": 220435,
+    "sha256": "442c6d347ec9b7a84b5acf548da5c7b86d4d5a24565bf95cfc4a4241a9a0c4d4"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R18-r2\\case.json": {
+    "bytes": 1715,
+    "sha256": "fb13fff24f4b3c34b93ddcf6311b92d7e57e72e18b55cac0dba951e887e79555"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R18-r2\\result.json": {
+    "bytes": 219503,
+    "sha256": "9a6acdec26f423cd21cdd7d6c1f1ea7e65d0e368583e0556d2a0841ce6b855d9"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R18-r3\\case.json": {
+    "bytes": 1715,
+    "sha256": "fb13fff24f4b3c34b93ddcf6311b92d7e57e72e18b55cac0dba951e887e79555"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R18-r3\\result.json": {
+    "bytes": 219524,
+    "sha256": "236e9536273a6ac37c99df82e7ab8d8630d019d175a2f26198f62b71dea2c519"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R19-r1\\case.json": {
+    "bytes": 1863,
+    "sha256": "46df7cad391dea54cfa9d2edba425cbf700e7db35ae3a507d3dc9a3a4dccccde"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R19-r1\\result.json": {
+    "bytes": 176777,
+    "sha256": "481b40971934c5cf42b4541968195ec48155fb36845334865ab37b563d676b5d"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R19-r2\\case.json": {
+    "bytes": 1863,
+    "sha256": "46df7cad391dea54cfa9d2edba425cbf700e7db35ae3a507d3dc9a3a4dccccde"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R19-r2\\result.json": {
+    "bytes": 175557,
+    "sha256": "8588b2e5b93b2d1441acebd8b18beee0f73032bd6f83beade35ae27c6a1b181c"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R19-r3\\case.json": {
+    "bytes": 1863,
+    "sha256": "46df7cad391dea54cfa9d2edba425cbf700e7db35ae3a507d3dc9a3a4dccccde"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R19-r3\\result.json": {
+    "bytes": 175562,
+    "sha256": "9298284fb304b906f3c987b9c3787ad0f48ebd6d1aa61a170613e3708ebe6d60"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R20-r1\\case.json": {
+    "bytes": 1733,
+    "sha256": "f06918a2a16d62a7ff00cce1e1148a390e86698aec35ffcd4539ced432218c64"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R20-r1\\result.json": {
+    "bytes": 197059,
+    "sha256": "04328e1a92ffa73b97b417d6c5cdb33fe9d7836810369bc8aa39362fe72411b0"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R20-r2\\case.json": {
+    "bytes": 1733,
+    "sha256": "f06918a2a16d62a7ff00cce1e1148a390e86698aec35ffcd4539ced432218c64"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R20-r2\\result.json": {
+    "bytes": 198509,
+    "sha256": "7b12bfe1c1b5a52f596878db78ddc1cd3c57089032d0e8f2dcf6d73312574425"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R20-r3\\case.json": {
+    "bytes": 1733,
+    "sha256": "f06918a2a16d62a7ff00cce1e1148a390e86698aec35ffcd4539ced432218c64"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R20-r3\\result.json": {
+    "bytes": 202160,
+    "sha256": "62f5ed94dbe9d844366689a59dc94042e460fba23e9fdde05a2ff3f835ba76f2"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R21-r1\\case.json": {
+    "bytes": 1202,
+    "sha256": "4e5ba852460c176c13a454637d97e7159136a80a9714d7a0ef23af84bfc6362a"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R21-r1\\result.json": {
+    "bytes": 136772,
+    "sha256": "45fbbf1e83f6fc51c6ffed7afff7f6f60f544eece787e4eb7277514250d0693f"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R22-r1\\case.json": {
+    "bytes": 1250,
+    "sha256": "cb0eb9090e0e024cf09f50edd2362ba207eff9db546817fceb7c4e4fcc9518ab"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R22-r1\\result.json": {
+    "bytes": 120351,
+    "sha256": "a2707b1c473ace1979126eca732561de765b21b4a298e224f6b7ca530a7c22dc"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R23-r1\\case.json": {
+    "bytes": 1970,
+    "sha256": "529c5f3a40e8c766348e1e921a832482f8d06b13a0c8043d16adb8cf6eefb67a"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R23-r1\\result.json": {
+    "bytes": 263583,
+    "sha256": "047e98bdbaf4c5f17fcca78bcca7a3b12a893df64226689259ac9e57fe949603"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R24-r1\\case.json": {
+    "bytes": 1742,
+    "sha256": "2986693b0001bcdf0e30f32e28a89c3447c87b1943255694ed7d01fa4e89b65a"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R24-r1\\result.json": {
+    "bytes": 297801,
+    "sha256": "59f333cf106f8e56884ea0071f512ae0b6eed594d7ef1d8752ee23b1a8142668"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R25-r1\\case.json": {
+    "bytes": 1372,
+    "sha256": "c8b15e787f249a16cebfd02ff623afa57ea448b5ab4524365da316bf79b9adbc"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R25-r1\\result.json": {
+    "bytes": 140395,
+    "sha256": "1af6dbff16522148539bdec7a84a46bb373544e6a5b3866a7e6000b2b18a5452"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R26-r1\\case.json": {
+    "bytes": 1377,
+    "sha256": "34d941b36d6c507d3255423fdf48882c5b59292439bac344dd36e9debac3c549"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R26-r1\\result.json": {
+    "bytes": 141516,
+    "sha256": "1e49262a93f2f2e2045f0d2fad5f097a7725df3d18b69e085eacc6214fad41b9"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R27-r1\\case.json": {
+    "bytes": 1258,
+    "sha256": "01e714dae27000debe8e69f47ef6b379cd2ead467558ba7943d3db3872ae413d"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R27-r1\\result.json": {
+    "bytes": 56795,
+    "sha256": "2bb775a64a9a8802b894b721395fa295eb4669ab25b79f5e3b79cacc2792ecdc"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R28-r1\\case.json": {
+    "bytes": 1350,
+    "sha256": "ceef208cb9c8506ecbd5797bf4248d40f48525b8d4d8ffe13c562fd4f7035831"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R28-r1\\result.json": {
+    "bytes": 95986,
+    "sha256": "4cc8e94bb80139de4bd50626a1ac5e302ec9a7f22dbdab70bbf4714921f66cb4"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R29-r1\\case.json": {
+    "bytes": 1267,
+    "sha256": "c516b4e2bafabd683a936a824a7ca058912ce907f168ee5c859cda1a0f74c985"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R29-r1\\result.json": {
+    "bytes": 97006,
+    "sha256": "42d6d43b94064bfabc82fb9efcf5d3d3f21908ff448996286aee49296b51a5b2"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R30-r1\\case.json": {
+    "bytes": 1210,
+    "sha256": "a4c586fe722757eb468e9ff8dfb4a53091e18039028c022ec63a131f391a0292"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R30-r1\\result.json": {
+    "bytes": 97616,
+    "sha256": "52287f27dfd8ad6ef3b7e4b1b2069ac97be71b2726d44e1401f0863a242197e2"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R31-r1\\case.json": {
+    "bytes": 1244,
+    "sha256": "122c2c7c29972133cbd551fafd9fd844dcd81b6737d590085a8675dd022ec1de"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R31-r1\\result.json": {
+    "bytes": 118035,
+    "sha256": "43440455bb7fae35a404e6c0bda5c33273ed770c62f8f12fe86a05552275e498"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R32-r1\\case.json": {
+    "bytes": 1466,
+    "sha256": "526fb6666e480465e1712a74dfa81e49d381de5a90a7ca8cc2f8306f12193a97"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R32-r1\\result.json": {
+    "bytes": 142538,
+    "sha256": "a69f9bdfad551c238d993247a15e468778f038a4c2d25eccb7b0027b723de37c"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R33-r1\\case.json": {
+    "bytes": 1398,
+    "sha256": "6574be927a48170a4018f7f53778f909e1a93adb926a3a2fcd7b02c48773af88"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R33-r1\\result.json": {
+    "bytes": 98205,
+    "sha256": "d06748b483b338e778c42a84a1beedd24bda07b0ffaccbe5c4c266cf18a57cbb"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R34-r1\\case.json": {
+    "bytes": 1460,
+    "sha256": "f94573fab81dc801e35910f8eef9cc66e47ff21a6c6f9e8211ad2e46321a9ef3"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R34-r1\\result.json": {
+    "bytes": 74062,
+    "sha256": "c294ae0ead4f6a01fbf8f48eee2172cb4a7d10a62a031b13d84c527600f365b1"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R35-r1\\case.json": {
+    "bytes": 1702,
+    "sha256": "e3f59744385233d3df95bb55545243f9d7ba33ae5cfa79b19220c44923f77a27"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R35-r1\\result.json": {
+    "bytes": 219950,
+    "sha256": "40a09b42dcd687f3ec1936a0a3d92dff64eebd923b1d0a856c3a4b252f9125b1"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R35-r2\\case.json": {
+    "bytes": 1702,
+    "sha256": "e3f59744385233d3df95bb55545243f9d7ba33ae5cfa79b19220c44923f77a27"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R35-r2\\result.json": {
+    "bytes": 219053,
+    "sha256": "94d0a2896250d30f70d6fc280efdc25498a3c19d24d462789d86316899a6ea6c"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R35-r3\\case.json": {
+    "bytes": 1702,
+    "sha256": "e3f59744385233d3df95bb55545243f9d7ba33ae5cfa79b19220c44923f77a27"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R35-r3\\result.json": {
+    "bytes": 219043,
+    "sha256": "41122387dd467f93d6239c8f372e5ed44a9b7cee93de5400f0b93d83e1745dba"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R36-r1\\case.json": {
+    "bytes": 1426,
+    "sha256": "1b99500b6f827da7134d3d4ee0e9135db70ca1121a75f309fa6e8bd44158b582"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R36-r1\\result.json": {
+    "bytes": 96662,
+    "sha256": "c434634fe9e83ec430da1e44231a5a35f7de9dfd32bb9b0542d4bb48dd6f93f6"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R37-r1\\case.json": {
+    "bytes": 1460,
+    "sha256": "de25ec9b1524bbad43f5c3a6ddf7c3b9c38eae7acd5a7589fc371712c7ebe385"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R37-r1\\result.json": {
+    "bytes": 118710,
+    "sha256": "f2e23135109b578454e0aac70d6eb438974dd0871a0d13a6d3ad10b59fabf3c9"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R38-r1\\case.json": {
+    "bytes": 1755,
+    "sha256": "73da2b63e2bd3224f0a371102eebdf2be5d1bbcee739d13d31b34fd6e24c5ee4"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R38-r1\\result.json": {
+    "bytes": 317766,
+    "sha256": "7fcee2af9d5f8499dfdf5dc4e192c4863850f9fb54b1050035c505a5a3f14b12"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R39-r1\\case.json": {
+    "bytes": 1262,
+    "sha256": "a74b768346db278bffb673d91684e25a1148b1314ae06ff34f5d172c2fbd7159"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R39-r1\\result.json": {
+    "bytes": 90985,
+    "sha256": "bf186d47334ac4b1dbc2d4ae15431881c67114235ff6beb90ee86ed82ddb621a"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R40-r1\\case.json": {
+    "bytes": 1146,
+    "sha256": "1b9279798b8ca47ffbdff08d37c2b3e10d96ce27076cd6382991331daf242049"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\R40-r1\\result.json": {
+    "bytes": 94062,
+    "sha256": "446b8c358ab1379be2306a0f0513886a19f52ee5db27c83ed1d642ee5f0442dd"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\report.md": {
+    "bytes": 1118,
+    "sha256": "76534af4ed84eb8b1aeb931c1b07badcb6e23bebb7b2188a4c54821ecba95acb"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\summary.json": {
+    "bytes": 3747,
+    "sha256": "801924ee9d5560284ead45d61d9d026f123b8671f758fc4ec6b26f42c1797f04"
+  },
+  "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\ui\\run-02\\result.json": {
+    "bytes": 90555,
+    "sha256": "3190cb5752e07d5f93856d1a601268fb6c1eca412c5253f672cc3840b8a2bc06"
+  }
+}

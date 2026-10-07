@@ -1,0 +1,1 @@
+C:\Users\20616\AppData\Local\Programs\Python\Python312\python.exe -X utf8 -c "from pathlib import Path; files=['scripts/eval_v4.py','scripts/eval_v4_judge.py','scripts/eval_v4_record.py','scripts/test_eval_v4.py']; [compile(Path(name).read_bytes(), name, 'exec') for name in files]; print('compiled: ' + ', '.join(files))"

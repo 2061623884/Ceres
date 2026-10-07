@@ -1,0 +1,1 @@
+C:\Users\20616\AppData\Local\Programs\Python\Python312\python.exe -X utf8 -m unittest test_eval_v4.ScoringTests.test_incomplete_worker_checkpoint_is_reported_without_overwriting_it -v

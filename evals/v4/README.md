@@ -9,7 +9,7 @@
 在仓库根目录，用已有后端 Python 环境运行。候选源码来自既有 `work/.ceres-next-08`。种子库与 lexical 索引的重建命令/配置/实际退出码保存在任务工作目录；不复用被产品执行污染的数据库。
 
 ```powershell
-backend/.venv/Scripts/python.exe -X utf8 -m unittest discover -s scripts -p test_eval_v4.py -v
+backend/.venv/Scripts/python.exe -X utf8 -m unittest discover -s scripts -p 'test_eval_v4*.py' -v
 backend/.venv/Scripts/python.exe -X utf8 scripts/eval_v4.py run --tree work/.ceres-next-08 --cases evals/v4/cases.json --seed work/ceres-v4-evaluation/runtime.sqlite3 --index work/ceres-v4-evaluation/retrieval-index --output work/ceres-v4-evaluation/run-01 --workers 2
 ```
 
@@ -21,6 +21,8 @@ backend/.venv/Scripts/python.exe -X utf8 scripts/eval_v4.py report --output work
 ```
 
 每个 execution 都有独立子进程、数据库和 owner。恢复时检查评分器、样本、种子、索引、产品源码、配置文件和相关环境覆盖的摘要。已尝试的执行不自动重试，未完成的执行保留失败/未知。需要复现时使用 `badcases.json` 中的 argv 和新的输出目录，不覆写原证据。
+
+中断的 `preparing/running` 检查点在报告中派生为 `runner_failed`，完成状态保持未知；原文件不改写。离线重评分保留准备失败、脚本失败和未执行项，缺失原始文件的摘要为 `null`，有命令回执时另记录其路径和摘要。
 
 项目规定测试由专职测试 Agent 执行；命令列在这里供复核与复跑，不表示主会话绕过该分工。
 
@@ -69,6 +71,10 @@ backend/.venv/Scripts/python.exe -X utf8 scripts/eval_v4_record.py --source work
 ```
 
 汇总记录分别报告主模型、Kev、售后、后台记忆、原裁判和修订裁判的调用与输入/输出 token 覆盖；派生 token 和供应商 reported total 分开，缺失或未核实费用仍未知。
+
+归档前按同一评分公式重算 API 汇总，并核对固定两条 UI 旅程的状态和性能；陈旧或矛盾的汇总直接报错。没有捕获裁判输入的计划项记录为 `unknown`，不调用模型；缺失的独立诊断也保留未知，不能以没有文件当作语义通过。只有实际执行参数探针时才传 `--probe`，历史两探针仍分别留档。性能不适用的组件单列：H20 无用户回合，55/100 是业务及适用性能口径，实际有计时回合的执行中业务与性能达标为54/99。
+
+本次 code-review 的修复只做离线复验，不追加产品任务、真实模型或浏览器。原始100次与旧验收记录保留；最新派生记录及红绿证据见 [review-20261007](../../work/ceres-v4-evaluation/review-20261007/)。修复后的代码摘要与历史冻结版本不同，不能用当前脚本恢复旧批次；重建历史执行须采用对应冻结副本，新执行须用新目录重新冻结。
 
 UI `run-01` 因 parser/accessible-name/waiter 问题属于无效取证批次，仅保留历史证据。最终命令应指向修正后两旅程的 `run-02`，不能将旧 UI 失败误归产品。
 

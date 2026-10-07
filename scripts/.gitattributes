@@ -1,6 +1,7 @@
 # Ceres V4 manifests pin these evaluator source bytes.
 eval_v4.py -text
 test_eval_v4.py -text
+test_eval_v4_record.py -text
 eval_v4_judge.py -text
 eval_v4_ui.mjs -text
 eval_v4_record.py -text

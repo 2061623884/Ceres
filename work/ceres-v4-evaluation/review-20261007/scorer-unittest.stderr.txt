@@ -1,0 +1,15 @@
+test_absent_pantry_role_cannot_pass_default_selection (test_eval_v4.ScoringTests.test_absent_pantry_role_cannot_pass_default_selection) ... ok
+test_declined_switch_and_wrong_offer_price_are_critical (test_eval_v4.ScoringTests.test_declined_switch_and_wrong_offer_price_are_critical) ... ok
+test_empty_candidates_cannot_satisfy_all_fields (test_eval_v4.ScoringTests.test_empty_candidates_cannot_satisfy_all_fields) ... ok
+test_exact_quantity_and_budget_constraints (test_eval_v4.ScoringTests.test_exact_quantity_and_budget_constraints) ... ok
+test_missing_budget_and_total_never_pass_as_zero (test_eval_v4.ScoringTests.test_missing_budget_and_total_never_pass_as_zero) ... ok
+test_nonempty_wrong_dish_and_pantry_selection_fail (test_eval_v4.ScoringTests.test_nonempty_wrong_dish_and_pantry_selection_fail) ... ok
+test_preparation_failures_stay_in_denominator (test_eval_v4.ScoringTests.test_preparation_failures_stay_in_denominator) ... ok
+test_real_suite_schedules_100_without_split_leakage (test_eval_v4.ScoringTests.test_real_suite_schedules_100_without_split_leakage) ... ok
+test_three_successes_require_all_executions_and_latency (test_eval_v4.ScoringTests.test_three_successes_require_all_executions_and_latency) ... ok
+test_unconfirmed_cart_write_and_false_amount_are_violations (test_eval_v4.ScoringTests.test_unconfirmed_cart_write_and_false_amount_are_violations) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.002s
+
+OK

@@ -1,0 +1,57 @@
+{
+  "report_generation_command_exit_code": 0,
+  "report_generation_stdout": "{\"automatic_acceptance\": \"not_passed\", \"actual_executions\": 100, \"failures\": 45}\n",
+  "report_generation_stderr": "",
+  "output": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\review-20261007\\acceptance-final-v2",
+  "reporter_sha256": "b812a5456e217f029787b975979df6f80eaa83cf0618452f50481936276142d3",
+  "same_477_paths_as_prior": true,
+  "input_hashes_unchanged_during_generation": true,
+  "matched_previous_hashes": 476,
+  "expected_changed_hash": {
+    "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4_record.py",
+    "prior": {
+      "bytes": 20703,
+      "sha256": "f47b7fc895a0f12236f9fd6f5c7bbdb375e5fa0c912e08f6d6b7e81bd04a52a4"
+    },
+    "current": {
+      "bytes": 20542,
+      "sha256": "b812a5456e217f029787b975979df6f80eaa83cf0618452f50481936276142d3"
+    }
+  },
+  "raw_data_inputs_unchanged": true,
+  "run04_canonical_api_manifest": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\manifest.json",
+  "diagnostic_parent": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03",
+  "diagnostic_lineages_verified": 100,
+  "markdown_narrative": {
+    "ui_journeys": 2,
+    "offline_checked_success_plans": 1,
+    "original_judge_calls": 100,
+    "failed_probes": 2,
+    "memory_claim": "sample definitions and per-execution captured evidence"
+  },
+  "metrics": {
+    "business_passed": 76,
+    "business_failed": 24,
+    "business_and_applicable_performance_passed": 55,
+    "core_20_passed": 6,
+    "hard_constraints": [
+      39,
+      49
+    ],
+    "turns_within_15s": [
+      134,
+      162
+    ],
+    "failures": 45,
+    "performance_not_applicable": [
+      "H20-r1"
+    ],
+    "performance_measured_executions": 99,
+    "fully_passed_with_timed_turns": 54
+  },
+  "current_code_sha256": {
+    "scripts/eval_v4_record.py": "b812a5456e217f029787b975979df6f80eaa83cf0618452f50481936276142d3",
+    "scripts/eval_v4.py": "78d4764db395b0276f813ab94aa6ec232af06c66c1df70a97c029092a419ccd3"
+  },
+  "prior_generation_audit_assertion_error_preserved": true
+}

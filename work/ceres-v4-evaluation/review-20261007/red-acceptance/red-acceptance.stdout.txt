@@ -1,0 +1,3 @@
+{"automatic_acceptance": "not_passed", "actual_executions": 100, "failures": 45}
+{"automatic_acceptance": "not_passed", "actual_executions": 100, "failures": 45}
+{"automatic_acceptance": "not_passed", "actual_executions": 100, "failures": 45}

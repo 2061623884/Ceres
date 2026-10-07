@@ -499,17 +499,22 @@ def summarize(plan, results):
             "human_acceptance": "not_evaluated", "semantic_judge": "diagnostic_only_uncalibrated", "money_cost": None}
 
 
-def report(output):
-    out = Path(output)
-    manifest = read(out / "manifest.json")
-    results = []
-    for item in manifest["schedule"]:
-        path = out / item["execution_id"] / "result.json"
-        attempted = (out / item["execution_id"] / "command.json").exists()
-        results.append(read(path) if path.exists() else {**item, "status": "runner_failed" if attempted else "not_executed", "performance_passed": False,
-                                                       "error": {"message": "Worker exited without result; see command/stdout/stderr"} if attempted else None})
+def execution_result(directory, item):
+    """Read an attempt without overwriting an absent or incomplete raw result."""
+    folder = Path(directory) / item["execution_id"]
+    path = folder / "result.json"
+    attempted = (folder / "command.json").exists()
+    result = read(path) if path.exists() else {**item, "status": "runner_failed" if attempted else "not_executed", "performance_passed": False,
+                                             "checks": [], "steps": [], "critical_violations": [],
+                                             "error": {"message": "Worker exited without result; see command/stdout/stderr"} if attempted else None}
+    if result["status"] in ("preparing", "running"):
+        result = {**result, "checkpoint_status": result["status"], "status": "runner_failed", "performance_passed": False,
+                  "error": {"message": "Worker checkpoint is incomplete; completion unknown; see command/stdout/stderr"}}
+    return result
+
+
+def batch_summary(manifest, results):
     summary = summarize(manifest["schedule"], results)
-    summary["manifest"] = str(out / "manifest.json")
     usage = {}
     for component in ("role", "mercury", "kev", "background_memory", "judge"):
         calls = [c for r in results for c in (r.get("judge", {}).get("calls", []) if component == "judge" else r.get("model_calls", {}).get(component, []))]
@@ -541,6 +546,15 @@ def report(output):
                 if e["type"] == "error" and e["payload"].get("code") in guard_codes]
     summary["blocked_actions"] = {"observed_guard_rejections": len(observed), "evidence": observed,
                                   "all_proposals_classified": False, "unobserved_count": None}
+    return summary
+
+
+def report(output):
+    out = Path(output)
+    manifest = read(out / "manifest.json")
+    results = [execution_result(out, item) for item in manifest["schedule"]]
+    summary = batch_summary(manifest, results)
+    summary["manifest"] = str(out / "manifest.json")
     write(out / "summary.json", summary)
     failures = [{"execution_id": item["execution_id"], "case_id": r["case_id"], "status": r["status"],
                  "business_failure": r.get("error"), "failed_checks": [c for c in r.get("checks", []) if not c["passed"]],
@@ -745,7 +759,7 @@ def rescore(args):
         write(out / "case-definitions" / (case["case_id"] + ".json"), case)
     for item in old["schedule"]:
         original = source / item["execution_id"] / "result.json"
-        result = read(original)
+        result = execution_result(source, item)
         case = cases[item["case_id"]]
         for step, row in zip(case["steps"], result["steps"]):
             retained = [check for check in row.get("checks", []) if check.get("kind") in ("no_error_event", "terminal_required", "switch_rejection_receipt")]
@@ -753,8 +767,12 @@ def rescore(args):
             if row["status"] in ("passed", "failed"):
                 row["status"] = "passed" if all(check["passed"] for check in row["checks"]) and not row["critical_violations"] else "failed"
         result["checks"] = [check for row in result["steps"] for check in row["checks"]]
-        result["status"] = "passed" if not result["unexecuted_steps"] and all(row["status"] == "passed" for row in result["steps"]) else "failed"
-        result["source_scoring_result"] = {"path": str(original), "sha256": digest(original)}
+        if result["status"] in ("passed", "failed"):
+            result["status"] = "passed" if not result["unexecuted_steps"] and all(row["status"] == "passed" for row in result["steps"]) else "failed"
+        result["source_scoring_result"] = {"path": str(original), "sha256": digest(original) if original.exists() else None}
+        if not original.exists():
+            command = original.parent / "command.json"
+            result["source_command"] = {"path": str(command), "sha256": digest(command) if command.exists() else None}
         result["scoring_runner_sha256"] = digest(__file__)
         folder = out / item["execution_id"]
         write(folder / "result.json", result)

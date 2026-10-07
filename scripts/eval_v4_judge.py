@@ -81,10 +81,7 @@ def main():
         schedule = []
         for item in batch["schedule"]:
             path = source / item["execution_id"] / "result.json"
-            original = evaluation.read(path)
-            if not original.get("judge", {}).get("calls"):
-                raise ValueError(f"Missing captured judge input: {item['execution_id']}")
-            schedule.append({"execution_id": item["execution_id"], "source_result_sha256": evaluation.digest(path)})
+            schedule.append({"execution_id": item["execution_id"], "source_result_sha256": evaluation.digest(path) if path.exists() else None})
         manifest = {"source": str(source), "source_manifest_sha256": evaluation.digest(source / "manifest.json"),
                     "runner_sha256": evaluation.digest(__file__), "tree": batch["tree"],
                     "config_identity": batch["config_identity"], "environment_identity": batch["environment_identity"], "schedule": schedule,
@@ -93,19 +90,32 @@ def main():
                     "product_tasks_reexecuted": 0, "calibrated": False, "hard_gate": False}
         evaluation.write(output / "manifest.json", manifest)
     for item in manifest["schedule"]:
-        if evaluation.digest(source / item["execution_id"] / "result.json") != item["source_result_sha256"]:
+        path = source / item["execution_id"] / "result.json"
+        if (evaluation.digest(path) if path.exists() else None) != item["source_result_sha256"]:
             raise ValueError("Source result changed")
     tree = Path(manifest["tree"])
     if evaluation.config_identity(tree) != manifest["config_identity"] or evaluation.environment_identity() != manifest["environment_identity"]:
         raise ValueError("Model configuration changed")
-    os.chdir(tree)
-    sys.path[:0] = [str(tree / "backend"), str(tree)]
-    from app.core.config import get_settings
-    settings = get_settings()
-    helper = evaluation.load(tree / "work/ceres-next-agent-experience/04/collect_prompt_sample.py", "diagnostic_capture")
     pending = [item for item in manifest["schedule"] if not (output / (item["execution_id"] + ".json")).exists()]
-    with ThreadPoolExecutor(max_workers=2) as pool:
-        list(pool.map(lambda item: diagnose(item, source, output, settings, helper), pending[:args.limit]))
+    selected = pending[:args.limit]
+    captured = []
+    for item in selected:
+        original = evaluation.execution_result(source, item)
+        if original.get("judge", {}).get("calls"):
+            captured.append(item)
+        else:
+            evaluation.write(output / (item["execution_id"] + ".json"), {
+                **item, "source_status": original["status"], "calibrated": False, "hard_gate": False,
+                "result": {"verdict": "unknown", "findings": []}, "calls": [],
+                "error": {"type": "MissingCapturedJudgeInput", "message": "No captured judge request; no model call performed"}})
+    if captured:
+        os.chdir(tree)
+        sys.path[:0] = [str(tree / "backend"), str(tree)]
+        from app.core.config import get_settings
+        settings = get_settings()
+        helper = evaluation.load(tree / "work/ceres-next-agent-experience/04/collect_prompt_sample.py", "diagnostic_capture")
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            list(pool.map(lambda item: diagnose(item, source, output, settings, helper), captured))
     results = [evaluation.read(output / (item["execution_id"] + ".json")) for item in manifest["schedule"]
                if (output / (item["execution_id"] + ".json")).exists()]
     summary = {"planned": len(manifest["schedule"]), "completed": len(results),

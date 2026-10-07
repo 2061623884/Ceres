@@ -1,0 +1,36 @@
+test_stale_api_or_ui_summary_cannot_be_archived (test_eval_v4_record.AcceptanceTests.test_stale_api_or_ui_summary_cannot_be_archived) ... 
+  test_stale_api_or_ui_summary_cannot_be_archived (test_eval_v4_record.AcceptanceTests.test_stale_api_or_ui_summary_cannot_be_archived) (mismatch='api_gate') ... FAIL
+  test_stale_api_or_ui_summary_cannot_be_archived (test_eval_v4_record.AcceptanceTests.test_stale_api_or_ui_summary_cannot_be_archived) (mismatch='api_count') ... FAIL
+  test_stale_api_or_ui_summary_cannot_be_archived (test_eval_v4_record.AcceptanceTests.test_stale_api_or_ui_summary_cannot_be_archived) (mismatch='ui_gate') ... FAIL
+
+======================================================================
+FAIL: test_stale_api_or_ui_summary_cannot_be_archived (test_eval_v4_record.AcceptanceTests.test_stale_api_or_ui_summary_cannot_be_archived) (mismatch='api_gate')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\20616\Desktop\Agent\Agent产品\Ceres\scripts\test_eval_v4_record.py", line 39, in test_stale_api_or_ui_summary_cannot_be_archived
+    with patch.object(sys, "argv", argv), self.assertRaisesRegex(ValueError, message):
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_stale_api_or_ui_summary_cannot_be_archived (test_eval_v4_record.AcceptanceTests.test_stale_api_or_ui_summary_cannot_be_archived) (mismatch='api_count')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\20616\Desktop\Agent\Agent产品\Ceres\scripts\test_eval_v4_record.py", line 39, in test_stale_api_or_ui_summary_cannot_be_archived
+    with patch.object(sys, "argv", argv), self.assertRaisesRegex(ValueError, message):
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_stale_api_or_ui_summary_cannot_be_archived (test_eval_v4_record.AcceptanceTests.test_stale_api_or_ui_summary_cannot_be_archived) (mismatch='ui_gate')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\20616\Desktop\Agent\Agent产品\Ceres\scripts\test_eval_v4_record.py", line 39, in test_stale_api_or_ui_summary_cannot_be_archived
+    with patch.object(sys, "argv", argv), self.assertRaisesRegex(ValueError, message):
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 1 test in 1.821s
+
+FAILED (failures=3)

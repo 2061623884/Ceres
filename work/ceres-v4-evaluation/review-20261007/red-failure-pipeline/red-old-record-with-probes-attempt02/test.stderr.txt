@@ -1,0 +1,30 @@
+test_incomplete_batch_reaches_acceptance_without_model_calls (failure_pipeline_test_module.AcceptanceTests.test_incomplete_batch_reaches_acceptance_without_model_calls) ... ERROR
+
+======================================================================
+ERROR: test_incomplete_batch_reaches_acceptance_without_model_calls (failure_pipeline_test_module.AcceptanceTests.test_incomplete_batch_reaches_acceptance_without_model_calls)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\20616\Desktop\Agent\Agent产品\Ceres\scripts\test_eval_v4_record.py", line 51, in test_incomplete_batch_reaches_acceptance_without_model_calls
+    self.assertEqual(recorder.main(), 0)
+                     ^^^^^^^^^^^^^^^
+  File "C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-v4-evaluation\review-20261007\red-failure-pipeline\red-old-record-with-probes-attempt02\run-red-test-with-probes.py", line 22, in main_with_legacy_probe_arguments
+    return original_main()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-v4-evaluation\review-20261007\red-failure-pipeline\frozen-old\eval_v4_record.py", line 42, in main
+    records = [(item, evaluation.read(source / item["execution_id"] / "result.json")) for item in manifest["schedule"]]
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\20616\Desktop\Agent\Agent产品\Ceres\scripts\eval_v4.py", line 35, in read
+    return json.loads(Path(path).read_text(encoding="utf-8"))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\20616\AppData\Local\Programs\Python\Python312\Lib\pathlib.py", line 1027, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\20616\AppData\Local\Programs\Python\Python312\Lib\pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\20616\\AppData\\Local\\Temp\\tmpezw0g3p0\\source\\R03-r1\\result.json'
+
+----------------------------------------------------------------------
+Ran 1 test in 0.220s
+
+FAILED (errors=1)

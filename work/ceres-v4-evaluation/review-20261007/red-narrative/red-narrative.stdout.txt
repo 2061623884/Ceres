@@ -1,0 +1,2 @@
+{"planned": 100, "completed": 100, "verdicts": {"pass": 0, "fail": 0, "unknown": 100}, "errors": 100, "calibrated": false, "hard_gate": false, "product_tasks_reexecuted": 0}
+{"automatic_acceptance": "not_passed", "actual_executions": 2, "failures": 100}

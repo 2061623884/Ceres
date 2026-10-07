@@ -1,0 +1,18 @@
+test_incomplete_worker_checkpoint_is_reported_without_overwriting_it (test_eval_v4.ScoringTests.test_incomplete_worker_checkpoint_is_reported_without_overwriting_it) ... ERROR
+
+======================================================================
+ERROR: test_incomplete_worker_checkpoint_is_reported_without_overwriting_it (test_eval_v4.ScoringTests.test_incomplete_worker_checkpoint_is_reported_without_overwriting_it)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\20616\Desktop\Agent\Agent产品\Ceres\scripts\test_eval_v4.py", line 29, in test_incomplete_worker_checkpoint_is_reported_without_overwriting_it
+    summary = ev.report(root)
+              ^^^^^^^^^^^^^^^
+  File "C:\Users\20616\Desktop\Agent\Agent产品\Ceres\scripts\eval_v4.py", line 547, in report
+    "critical_violations": r.get("critical_violations", []), "performance_passed": r["performance_passed"],
+                                                                                   ~^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'performance_passed'
+
+----------------------------------------------------------------------
+Ran 1 test in 0.016s
+
+FAILED (errors=1)

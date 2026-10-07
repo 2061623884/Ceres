@@ -1,0 +1,11 @@
+{
+  "python_executable": "C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+  "python_version": "Python 3.12.10",
+  "python_runtime_executable": "C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+  "node_executable": "C:\\Users\\20616\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+  "node_version": "v24.19.0",
+  "head_expected": "abd61394437f21c1b474d39c56559a245dc21e97",
+  "base_expected": "ee7ce104885f731bc48bc8c6338c00d802ba0619",
+  "test_bytecode_writes_disabled": true,
+  "compile_check_writes_no_bytecode": true
+}

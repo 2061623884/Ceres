@@ -1,0 +1,4 @@
+# Preserve the captured unittest progress line's trailing space before subtest errors.
+red-acceptance/red-acceptance.stderr.txt whitespace=-blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+red-narrative/red-narrative.stderr.txt whitespace=-blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+red-rescore/red-rescore.stderr.txt whitespace=-blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

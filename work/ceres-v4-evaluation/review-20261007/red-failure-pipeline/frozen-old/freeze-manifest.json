@@ -1,0 +1,32 @@
+{
+  "old_commit": "abd61394437f21c1b474d39c56559a245dc21e97",
+  "resolved_commit": "abd61394437f21c1b474d39c56559a245dc21e97",
+  "modules": [
+    {
+      "path": "scripts/eval_v4_judge.py",
+      "commit": "abd61394437f21c1b474d39c56559a245dc21e97",
+      "command": [
+        "git",
+        "show",
+        "abd61394437f21c1b474d39c56559a245dc21e97:scripts/eval_v4_judge.py"
+      ],
+      "exit_code": 0,
+      "bytes": 7463,
+      "sha256": "57cbd92120e18696273e29044b11dc271d842f4054b8a699dfcfe33947f70f88",
+      "frozen_copy": "work/ceres-v4-evaluation/review-20261007/red-failure-pipeline/frozen-old/eval_v4_judge.py"
+    },
+    {
+      "path": "scripts/eval_v4_record.py",
+      "commit": "abd61394437f21c1b474d39c56559a245dc21e97",
+      "command": [
+        "git",
+        "show",
+        "abd61394437f21c1b474d39c56559a245dc21e97:scripts/eval_v4_record.py"
+      ],
+      "exit_code": 0,
+      "bytes": 17871,
+      "sha256": "db5ab37fb2439bdd64d6c9165068b3c4b7c790ac37e98df4c7b4b73413a57ad4",
+      "frozen_copy": "work/ceres-v4-evaluation/review-20261007/red-failure-pipeline/frozen-old/eval_v4_record.py"
+    }
+  ]
+}

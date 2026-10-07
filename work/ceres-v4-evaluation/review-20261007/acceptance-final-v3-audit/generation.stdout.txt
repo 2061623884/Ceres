@@ -1,0 +1,55 @@
+{
+  "record_command_exit_code": 0,
+  "record_command_stdout": "{\"automatic_acceptance\": \"not_passed\", \"actual_executions\": 100, \"failures\": 45}\r\n",
+  "record_command_stderr": "",
+  "output": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\review-20261007\\acceptance-final-v3",
+  "reporter_sha256": "bdddf19f6037b53fd1285e8607498c07f92f9d4f7792ecf53fbbe157cf4d4d1e",
+  "477_input_paths_unchanged_during_generation": true,
+  "same_477_paths_as_v2": true,
+  "hashes_matching_v2": 476,
+  "expected_reporter_hash_change": {
+    "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4_record.py",
+    "prior": {
+      "bytes": 20542,
+      "sha256": "b812a5456e217f029787b975979df6f80eaa83cf0618452f50481936276142d3"
+    },
+    "current": {
+      "bytes": 20576,
+      "sha256": "bdddf19f6037b53fd1285e8607498c07f92f9d4f7792ecf53fbbe157cf4d4d1e"
+    }
+  },
+  "raw_data_inputs_unchanged": true,
+  "run04_canonical_api_manifest": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\manifest.json",
+  "diagnostic_parent_source": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03",
+  "diagnostic_lineages_verified": 100,
+  "timeout_without_response_count": 9,
+  "markdown_counts": {
+    "ui_journeys": 2,
+    "offline_success_plan_reviews": 1,
+    "original_judge_calls": 100,
+    "probe_calls": 2,
+    "timeout_calls_without_response": 9
+  },
+  "metrics": {
+    "passed_failed": [
+      76,
+      24
+    ],
+    "business_and_applicable_performance_passed": 55,
+    "core_passed": 6,
+    "hard_constraints": [
+      39,
+      49
+    ],
+    "turns_within_15s": [
+      134,
+      162
+    ],
+    "failures": 45,
+    "performance_not_applicable": [
+      "H20-r1"
+    ],
+    "performance_measured": 99,
+    "fully_passed_with_timed_turns": 54
+  }
+}

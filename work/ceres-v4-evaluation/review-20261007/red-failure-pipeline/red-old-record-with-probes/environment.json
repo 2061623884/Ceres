@@ -1,0 +1,14 @@
+{
+  "python_executable": "C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+  "python_version": "Python 3.12.10",
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres",
+  "binding": "old recorder from frozen HEAD; current judge remains bound",
+  "adapter_only_change": "wrapper appends two existing required --probe paths to old recorder argv",
+  "probe_paths": [
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v2"
+  ],
+  "old_recorder_sha256": "db5ab37fb2439bdd64d6c9165068b3c4b7c790ac37e98df4c7b4b73413a57ad4",
+  "test_sha256": "9271d25b4eb6638f412141490648fd3ee5b1395d6e337be94b80951f000115be",
+  "exit_code": 1
+}

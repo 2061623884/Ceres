@@ -33,18 +33,24 @@ def main():
     parser.add_argument("--source", required=True)
     parser.add_argument("--ui", required=True)
     parser.add_argument("--diagnostics", required=True)
-    parser.add_argument("--probe", required=True, action="append", help="Preserved failed one-call diagnostic probe directory; repeat for both probes")
+    parser.add_argument("--probe", action="append", default=[], help="Preserved failed one-call diagnostic probes, when performed; repeat for both probes")
     parser.add_argument("--output", required=True)
     args = parser.parse_args()
     source, ui_path, diagnostics, output = map(lambda value: Path(value).resolve(), (args.source, args.ui, args.diagnostics, args.output))
     manifest = evaluation.read(source / "manifest.json")
     summary = evaluation.read(source / "summary.json")
-    records = [(item, evaluation.read(source / item["execution_id"] / "result.json")) for item in manifest["schedule"]]
-    if any(record["status"] in ("preparing", "running") for _, record in records):
-        raise ValueError("API batch is still running")
+    records = [(item, evaluation.execution_result(source, item)) for item in manifest["schedule"]]
+    computed_summary = evaluation.batch_summary(manifest, [record for _, record in records])
+    for key, value in computed_summary.items():
+        if summary[key] != value:
+            raise ValueError(f"API summary does not match execution records: {key}")
     ui = evaluation.read(ui_path)
     if ui["product_head"] != manifest["product_head"] or ui["runtime_identity"]["product_head"] != manifest["product_head"]:
         raise ValueError("UI candidate differs from API candidate")
+    ui_passed = sorted(row["name"] for row in ui["journeys"]) == ["activity-salad", "snack-bubble"] and all(
+        row["status"] == "passed" and row["performance_passed"] for row in ui["journeys"])
+    if ui["automatic_browser_acceptance"] != ("passed" if ui_passed else "not_passed"):
+        raise ValueError("UI summary does not match the two required journeys")
     ui_assertions = []
     for journey in ui["journeys"]:
         if journey["status"] != "passed":
@@ -59,11 +65,22 @@ def main():
         if not all(checks.values()):
             raise ValueError("Recorded UI pass contradicts completed plan assertions")
         ui_assertions.append({"name": journey["name"], "additional_plan_assertions": checks, "basis": "offline retained state, no browser rerun"})
-    diagnosed = [evaluation.read(diagnostics / (item["execution_id"] + ".json")) for item, _ in records]
+    parents = {}
+    current_sources = {}
+    diagnosed = []
+    for item, api_row in records:
+        path = source / item["execution_id"] / "result.json"
+        current_sources[item["execution_id"]] = {"path": str(path), "sha256": evaluation.digest(path) if path.exists() else None}
+        parent = api_row["source_scoring_result"] if "source_scoring_result" in api_row else current_sources[item["execution_id"]]
+        parents[item["execution_id"]] = parent
+        diagnostic_path = diagnostics / (item["execution_id"] + ".json")
+        diagnosed.append(evaluation.read(diagnostic_path) if diagnostic_path.exists() else {
+            "source_result_sha256": parent["sha256"], "result": {"verdict": "unknown", "findings": []}, "calls": [],
+            "error": {"type": "DiagnosticNotExecuted", "message": "No independent diagnostic artifact; usage unknown"}})
     probes = [(Path(value).resolve(), evaluation.read(Path(value).resolve() / "R01-r1.json")) for value in args.probe]
     probe_modes = []
     for probe_path, probe in probes:
-        if probe["source_result_sha256"] != evaluation.read(source / "R01-r1" / "result.json")["source_scoring_result"]["sha256"]:
+        if probe["source_result_sha256"] != parents["R01-r1"]["sha256"]:
             raise ValueError("Failed probe belongs to a different source result")
         request = probe["request"]
         if request.get("enable_thinking") is False:
@@ -77,20 +94,27 @@ def main():
         probe_call = probe["calls"][0]
         if probe_call["response_choices"][0]["finish_reason"] != "length" or probe_call["usage"]["completion_tokens_details"]["reasoning_tokens"] != request["max_tokens"]:
             raise ValueError("Probe does not substantiate the reported exhausted reasoning budget")
-    if sorted(probe_modes) != sorted(["enable_thinking=false", "chat_template_kwargs.enable_thinking=false"]):
+    if probes and sorted(probe_modes) != sorted(["enable_thinking=false", "chat_template_kwargs.enable_thinking=false"]):
         raise ValueError("Both distinct failed parameter probes are required")
+    diagnostic_sources = {}
     for (item, api_row), row in zip(records, diagnosed):
-        parent = api_row["source_scoring_result"]
-        if row["source_result_sha256"] != parent["sha256"] or evaluation.digest(parent["path"]) != parent["sha256"]:
+        current = current_sources[item["execution_id"]]
+        parent = current if row["source_result_sha256"] == current["sha256"] else parents[item["execution_id"]]
+        parent_path = Path(parent["path"])
+        if row["source_result_sha256"] != parent["sha256"] or (evaluation.digest(parent_path) if parent_path.exists() else None) != parent["sha256"]:
             raise ValueError("Diagnostic source hash mismatch")
+        diagnostic_sources[item["execution_id"]] = parent
     output.mkdir()  # New derived record; original reports/results are immutable.
-    components = {name: usage([call for _, row in records for call in row["model_calls"].get(name, [])])
+    components = {name: usage([call for _, row in records for call in row.get("model_calls", {}).get(name, [])])
                   for name in ("role", "mercury", "kev", "background_memory")}
-    components["original_judge"] = usage([call for _, row in records for call in row["judge"]["calls"]])
+    components["original_judge"] = usage([call for _, row in records for call in row.get("judge", {}).get("calls", [])])
     components["diagnostic_judge"] = usage([call for row in diagnosed for call in row["calls"]])
     components["failed_probe_judge"] = usage([call for _, probe in probes for call in probe["calls"]])
     timed = [(item["execution_id"], step) for item, row in records for step in row.get("steps", [])
              if step["op"] in ("turn", "select_pending_option", "switch")]
+    not_applicable = [{"execution_id": item["execution_id"], "business_status": row["status"]}
+                      for item, row in records if row.get("performance_applicable") is False]
+    measured = [row for _, row in records if row.get("performance_applicable") is True]
     failed = [{"execution_id": item["execution_id"], "case_id": item["case_id"], "group": item["group"],
                "business_status": row["status"], "performance_passed": row["performance_passed"],
                "failure_stages": [{"label": step["label"], "status": step["status"],
@@ -107,10 +131,10 @@ def main():
               "failed_probes": [{"directory": str(probe_path), "result_sha256": evaluation.digest(probe_path / "R01-r1.json"),
                                  "manifest_sha256": evaluation.digest(probe_path / "manifest.json"), "verdict": probe["result"]["verdict"],
                                  "parameter": mode} for (probe_path, probe), mode in zip(probes, probe_modes)],
-              "execution_sha256": {item["execution_id"]: {"api": evaluation.digest(source / item["execution_id"] / "result.json"),
-                                                         "diagnostic_source_api": api_row["source_scoring_result"],
-                                                         "diagnostic": evaluation.digest(diagnostics / (item["execution_id"] + ".json"))} for item, api_row in records},
-              "source": str(source), "ui": str(ui_path), "diagnostics": str(diagnostics), "api": summary,
+              "execution_sha256": {item["execution_id"]: {"api": current_sources[item["execution_id"]]["sha256"],
+                                                         "diagnostic_source_api": diagnostic_sources[item["execution_id"]],
+                                                         "diagnostic": evaluation.digest(diagnostics / (item["execution_id"] + ".json")) if (diagnostics / (item["execution_id"] + ".json")).exists() else None} for item, api_row in records},
+              "source": str(source), "ui": str(ui_path), "diagnostics": str(diagnostics), "api": {**summary, "manifest": str(source / "manifest.json")},
               "ui_acceptance": ui["automatic_browser_acceptance"], "ui_journeys": [
                   {**{key: row[key] for key in ("name", "status", "stage", "performance_passed")}, "error": row.get("error"),
                    "slow_steps": [{"label": step["label"], "final_reply_ms": step["final_reply_ms"]} for step in row["steps"] if step["final_reply_ms"] > 15000],
@@ -121,6 +145,8 @@ def main():
               "automatic_acceptance": "passed" if summary["automatic_acceptance"] == "passed" and ui["automatic_browser_acceptance"] == "passed" else "not_passed",
               "observed_critical_violations": summary["critical_violation_count"], "free_text_factual_error_count": None,
               "turns_within_15s": sum(step["elapsed_ms"] <= 15000 for _, step in timed), "timed_turns": len(timed),
+              "performance_not_applicable": not_applicable, "performance_measured_executions": len(measured),
+              "fully_passed_with_timed_turns": sum(row["status"] == "passed" and row["performance_passed"] for row in measured),
               "diagnostic_verdicts": verdicts, "diagnostic_errors": sum("error" in row for row in diagnosed),
               "usage": components, "failures": failed, "money_cost": None, "human_evaluation": "not_evaluated",
               "limitations": ["lexical only; hybrid not evaluated", "API first useful result time unknown (TestClient buffers SSE)",
@@ -130,24 +156,28 @@ def main():
                               "Diagnostic replay uses run-03 inputs; R14/R17 pilot hints predate correction and R17/H03/H12 hints predate completed assertions",
                               "Judge inputs include business state/catalog facts but omit captured policy/retrieval requests; grounding findings are incomplete diagnostics",
                               "Token sums have explicit coverage; no verified price and no UI provider usage capture",
+                              "For incomplete executions, call counts describe retained captures; uncaptured activity and usage remain unknown",
                               "Observable deterministic critical violations do not establish zero free-text factual errors",
                               "Original failed HTTP status may lack response body; see available state/trace, do not invent error code"]}
     evaluation.write(output / "acceptance.json", record)
     evaluation.write(output / "failures.json", failed)
     lines = ["# Ceres1 V4 自动验收记录", "", f"**结论：{'通过' if record['automatic_acceptance'] == 'passed' else '未通过'}。** 产品候选 `{manifest['product_head']}`；人工评测未执行。", "",
-             f"60 场景、100 次计划执行；实际 {summary['actual_executions']} 次。业务达标 {summary['counts']['passed']}/100，同时满足业务与性能 {summary['fully_passed']}/100；核心三次均达标 {summary['core_pass3']['passed']}/20。",
+             f"60 场景、100 次计划执行；实际 {summary['actual_executions']} 次。业务达标 {summary['counts']['passed']}/100，业务及适用性能达标 {summary['fully_passed']}/100；核心三次均达标 {summary['core_pass3']['passed']}/20。",
+             f"有计时回合的执行 {len(measured)} 次，其中业务与性能同时达标 {record['fully_passed_with_timed_turns']}/{len(measured)}。性能不适用 {len(not_applicable)} 项（{', '.join(row['execution_id'] for row in not_applicable) or '无'}）仅记录组件业务结果，不作为时延通过证据。",
              f"确定性检查发现关键违规 {summary['critical_violation_count']}；自由文本事实错误总数未知，不据此宣称全部事实正确。准备失败 {summary['counts']['preparation_failed']}、脚本失败 {summary['counts']['runner_failed']}、未执行 {summary['counts']['not_executed']}。",
              f"最终回复 ≤15 秒：{record['turns_within_15s']}/{len(timed)} 回合。P50 {summary['reply_latency_ms']['p50']}ms、P95 {summary['reply_latency_ms']['p95']}ms、最大 {summary['reply_latency_ms']['max']}ms。", "",
-             "| 分组 | 执行 | 业务达标 | 业务与性能达标 |", "|---|---:|---:|---:|"]
+             "| 分组 | 执行 | 业务达标 | 业务及适用性能达标 |", "|---|---:|---:|---:|"]
     lines += [f"| {group} | {counts['planned']} | {counts['business_passed']} | {counts['fully_passed']} |" for group, counts in summary["groups"].items()]
     lines += ["", f"正常完成 {summary['normal_completion']['business_passed']}/{summary['normal_completion']['planned']}；合规拒绝 {summary['compliant_refusal']['business_passed']}/{summary['compliant_refusal']['planned']}。",
               f"生成可确认清单的执行 {summary['hard_constraints']['produced_plan_executions']} 次，其中硬约束全部满足 {summary['hard_constraints']['all_satisfied']} 次；该分母只包含已生成清单的执行，未生成清单仍在总执行分母内。", "",
-              "## 浏览器与组件", "", "API 100 次与下列两条浏览器旅程分别统计；浏览器使用候选真实前后端、独立数据库和真实模型。", ""]
+              "## 浏览器与组件", "", f"API计划100次与已记录的{len(ui['journeys'])}条浏览器旅程分别统计；UI输入文件路径和摘要见机器记录。", ""]
     lines += [f"- {row['name']}：业务 {row['status']}；性能 {row['performance_passed']}；阶段 {row['stage']}；失败动作码 {', '.join(row['failed_action_codes']) or '无'}；超时 {json.dumps(row['slow_steps'], ensure_ascii=False)}。" for row in record["ui_journeys"]]
-    lines += ["", "最终审查补足确认前清单小计/选中总额和零食预算断言；专题成功清单用已捕获状态离线核对，零食未到清单阶段仍保留失败，不冒称新脚本已重跑浏览器。检查见 acceptance.json 的 ui_assertion_review。"]
-    lines += ["", "记忆场景包含显式写入/更正/删除/跨会话、owner 隔离、当前需求覆盖记忆、临时预算提取与 Dream。Dream 的初始记忆和内部触发属于组件验证；逐步前后状态、后台调用与 trace 在 API 结果中保留。", "",
-              "## 裁判与调用", "", f"原裁判多次输出 content=null/finish_reason=length，全部记录保留。顶层 enable_thinking=false 与 chat_template_kwargs.enable_thinking=false 的两个单条探针均耗尽 1200 推理 token、无可见 JSON，单列失败探针调用。最终诊断仅重放已捕获请求，将 max_tokens 调整为候选有效配置的 3072，保持推理配置不变，保存实际序列化请求与响应，不执行产品任务。诊断分布 {json.dumps(verdicts, ensure_ascii=False)}，调用/解析错误 {record['diagnostic_errors']}；未人工校准、同模型，均不作硬门槛。", "",
-              "历史参数探针参考 [Qwen 官方部署文档](https://github.com/QwenLM/Qwen3/blob/main/docs/source/deployment/vllm.md)；该端点框架未独立确认，本次探针未证明关闭推理生效。重放保留 run-03 原始评分提示，R14/R17 首批提示早于离线纠正，R17/H03/H12 提示早于补足 SKU/数量/金额断言，语义发现须结合最终业务记录复核。裁判输入有业务状态和商品事实，但未包含已捕获的政策/检索调用请求，不能用 grounding 判分证明这些回答已经与实际来源逐项核对；原始调用另在执行批次保留。", "",
+    lines += ["", f"离线核对已记录的成功清单{sum(isinstance(row['additional_plan_assertions'], dict) for row in ui_assertions)}份，覆盖小计/选中总额和适用预算；补充断言未重跑浏览器。检查见 acceptance.json 的 ui_assertion_review。"]
+    probe_description = "顶层 enable_thinking=false 与 chat_template_kwargs.enable_thinking=false 的两个单条探针均耗尽推理预算、无可见 JSON，单列失败探针调用。" if probes else "本次未提供参数探针，未计入调用。"
+    diagnostic_description = "最终诊断仅重放已捕获请求，采用源候选有效输出预算，保持推理配置不变，逐条保留可取得的请求、响应或错误，不执行产品任务。" if components["diagnostic_judge"]["calls"] else "独立诊断未取得模型响应；缺失裁判输入或诊断记录保持 unknown。"
+    lines += ["", "记忆样本定义覆盖显式写入/更正/删除/跨会话、owner 隔离、当前需求优先、临时预算与 Dream。Dream 的准备和内部触发属于组件验证；实际完成状态与已采集证据见逐执行记录。", "",
+              "## 裁判与调用", "", f"原始裁判捕获调用{components['original_judge']['calls']}次。{probe_description}{diagnostic_description}诊断分布 {json.dumps(verdicts, ensure_ascii=False)}，调用/解析错误 {record['diagnostic_errors']}；未人工校准、同模型，均不作硬门槛。", "",
+              "历史参数方案参考 [Qwen 官方部署文档](https://github.com/QwenLM/Qwen3/blob/main/docs/source/deployment/vllm.md)；端点框架未独立确认，参数是否生效以已记录响应为准。存在可重放输入时使用原始捕获提示；发生离线评分更正时，旧提示不代表最新判分。语义发现须结合来源版本和最终业务记录复核，grounding 意见不替代对政策/检索实际来源的逐项核对。", "",
               "| 组件 | 调用 | 有 usage | 输入 token / 覆盖调用 | 输出 token / 覆盖调用 |", "|---|---:|---:|---:|---:|"]
     lines += [f"| {name} | {value['calls']} | {value['calls_with_usage']} | {value['input_tokens']['reported_sum']} / {value['input_tokens']['coverage']} | {value['output_tokens']['reported_sum']} / {value['output_tokens']['coverage']} |" for name, value in components.items()]
     lines += ["", "金额成本未知；不同供应商的原始 total_tokens 与 input+output 派生和分别保留，缺失不能按零估算。", "",

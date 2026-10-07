@@ -1,0 +1,1552 @@
+[
+  {
+    "execution_id": "R01-r1",
+    "case_id": "R01",
+    "group": "snack",
+    "business_status": "failed",
+    "performance_passed": true,
+    "failure_stages": [
+      {
+        "label": "choose-type",
+        "status": "failed",
+        "failed_checks": [
+          {
+            "kind": "present",
+            "path": "after.guide.product_cards",
+            "value": true,
+            "passed": false,
+            "actual": []
+          }
+        ],
+        "error": null
+      }
+    ],
+    "slow_turns": [],
+    "critical_violations": [],
+    "error": null
+  },
+  {
+    "execution_id": "R03-r1",
+    "case_id": "R03",
+    "group": "snack",
+    "business_status": "passed",
+    "performance_passed": false,
+    "failure_stages": [],
+    "slow_turns": [
+      {
+        "label": "request",
+        "elapsed_ms": 23671.1
+      }
+    ],
+    "critical_violations": [],
+    "error": null
+  },
+  {
+    "execution_id": "R06-r1",
+    "case_id": "R06",
+    "group": "drink",
+    "business_status": "passed",
+    "performance_passed": false,
+    "failure_stages": [],
+    "slow_turns": [
+      {
+        "label": "request",
+        "elapsed_ms": 19217.3
+      }
+    ],
+    "critical_violations": [],
+    "error": null
+  },
+  {
+    "execution_id": "R07-r1",
+    "case_id": "R07",
+    "group": "drink",
+    "business_status": "failed",
+    "performance_passed": true,
+    "failure_stages": [
+      {
+        "label": "request",
+        "status": "failed",
+        "failed_checks": [
+          {
+            "kind": "present",
+            "path": "after.guide.plan",
+            "value": true,
+            "passed": false,
+            "actual": null
+          },
+          {
+            "kind": "quantities",
+            "path": "after.guide.plan.items",
+            "value": {
+              "demo:cn-coke-zero-500ml-bottle": 2
+            },
+            "passed": false,
+            "actual": null,
+            "missing_evidence": "'NoneType' object is not subscriptable"
+          },
+          {
+            "kind": "eq",
+            "path": "after.guide.plan.selected_total_fen",
+            "value": 800,
+            "passed": false,
+            "actual": null,
+            "missing_evidence": "'NoneType' object is not subscriptable"
+          }
+        ],
+        "error": null
+      }
+    ],
+    "slow_turns": [],
+    "critical_violations": [],
+    "error": null
+  },
+  {
+    "execution_id": "R11-r1",
+    "case_id": "R11",
+    "group": "purchase",
+    "business_status": "failed",
+    "performance_passed": true,
+    "failure_stages": [
+      {
+        "label": "new-budget",
+        "status": "failed",
+        "failed_checks": [
+          {
+            "kind": "eq",
+            "path": "after.guide.constraints_summary.budget_fen",
+            "value": 1000,
+            "passed": false,
+            "actual": 2000
+          }
+        ],
+        "error": null
+      }
+    ],
+    "slow_turns": [],
+    "critical_violations": [],
+    "error": null
+  },
+  {
+    "execution_id": "R12-r1",
+    "case_id": "R12",
+    "group": "drink",
+    "business_status": "passed",
+    "performance_passed": false,
+    "failure_stages": [],
+    "slow_turns": [
+      {
+        "label": "request",
+        "elapsed_ms": 28239.4
+      }
+    ],
+    "critical_violations": [],
+    "error": null
+  },
+  {
+    "execution_id": "R17-r1",
+    "case_id": "R17",
+    "group": "aftersales",
+    "business_status": "passed",
+    "performance_passed": false,
+    "failure_stages": [],
+    "slow_turns": [
+      {
+        "label": "consent-keke",
+        "elapsed_ms": 17210.256000049412
+      }
+    ],
+    "critical_violations": [],
+    "error": null
+  },
+  {
+    "execution_id": "R19-r1",
+    "case_id": "R19",
+    "group": "memory",
+    "business_status": "failed",
+    "performance_passed": true,
+    "failure_stages": [
+      {
+        "label": "list",
+        "status": "failed",
+        "failed_checks": [
+          {
+            "kind": "contains",
+            "path": "reply",
+            "value": "百事",
+            "passed": false,
+            "actual": "你指的是正在选购的商品或采购清单项，还是已下单订单？"
+          }
+        ],
+        "error": null
+      }
+    ],
+    "slow_turns": [],
+    "critical_violations": [],
+    "error": null
+  },
+  {
+    "execution_id": "H01-r1",
+    "case_id": "H01",
+    "group": "purchase",
+    "business_status": "failed",
+    "performance_passed": true,
+    "failure_stages": [
+      {
+        "label": "independent-snack",
+        "status": "failed",
+        "failed_checks": [
+          {
+            "kind": "quantities",
+            "path": "after.guide.plan.items",
+            "value": {
+              "demo:snack-original-potato-chips-70g-bag": 2
+            },
+            "passed": false,
+            "actual": [
+              {
+                "sku_id": "demo:cn-coke-original-500ml-bottle",
+                "name": "可口可乐经典原味汽水500ml瓶装",
+                "quantity": 1,
+                "unit_price_fen": 400,
+                "line_total_fen": 400,
+                "image_path": null,
+                "image_kind": "placeholder",
+                "image_kind_legacy": "placeholder",
+                "role": "required",
+                "selected": true,
+                "recommended_quantity": 1,
+                "max_addable_quantity": 36,
+                "spec_quantity": 500,
+                "spec_unit": "ml",
+                "sell_unit": "件",
+                "quantity_source": "recommended",
+                "group_id": "product:demo:cn-coke-original-500ml-bottle",
+                "target_kind": "product",
+                "target_id": "demo:cn-coke-original-500ml-bottle",
+                "component_name": null,
+                "contributions": [
+                  {
+                    "group_id": "product:demo:cn-coke-original-500ml-bottle",
+                    "quantity": 1,
+                    "selected": true,
+                    "added_quantity": 0,
+                    "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                    "requirement": {
+                      "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                      "name": "可口可乐经典原味汽水500ml瓶装",
+                      "ingredient_id": null,
+                      "component_id": null,
+                      "quantity": 1,
+                      "unit": "件",
+                      "quantity_known": true,
+                      "requiredness": "core",
+                      "source": {
+                        "kind": "user",
+                        "ref": "可口可乐经典原味汽水500ml瓶装"
+                      }
+                    }
+                  }
+                ],
+                "added_quantity": 0,
+                "remaining_quantity": 1,
+                "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                "requirement": {
+                  "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                  "name": "可口可乐经典原味汽水500ml瓶装",
+                  "ingredient_id": null,
+                  "component_id": null,
+                  "quantity": 1,
+                  "unit": "件",
+                  "quantity_known": true,
+                  "requiredness": "core",
+                  "source": {
+                    "kind": "user",
+                    "ref": "可口可乐经典原味汽水500ml瓶装"
+                  }
+                },
+                "availability": "available",
+                "evidence": {
+                  "sku_source": "store_offer",
+                  "quoted_at": "2026-10-07T07:36:08+00:00",
+                  "stock_verified": true,
+                  "data_mode": "demo",
+                  "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                  "unknown_constraints": []
+                },
+                "pack_source": "catalog_spec",
+                "shortfall_quantity": 0
+              }
+            ]
+          },
+          {
+            "kind": "eq",
+            "path": "after.guide.plan.selected_total_fen",
+            "value": 1180,
+            "passed": false,
+            "actual": 400
+          },
+          {
+            "kind": "eq",
+            "path": "after.guide.constraints_summary.budget_fen",
+            "value": null,
+            "passed": false,
+            "actual": 500
+          }
+        ],
+        "error": null
+      }
+    ],
+    "slow_turns": [],
+    "critical_violations": [],
+    "error": null
+  },
+  {
+    "execution_id": "H02-r1",
+    "case_id": "H02",
+    "group": "purchase",
+    "business_status": "failed",
+    "performance_passed": true,
+    "failure_stages": [
+      {
+        "label": "clear-budget",
+        "status": "failed",
+        "failed_checks": [
+          {
+            "kind": "eq",
+            "path": "after.guide.constraints_summary.budget_fen",
+            "value": null,
+            "passed": false,
+            "actual": 1000
+          }
+        ],
+        "error": null
+      }
+    ],
+    "slow_turns": [],
+    "critical_violations": [],
+    "error": null
+  },
+  {
+    "execution_id": "H03-r1",
+    "case_id": "H03",
+    "group": "purchase",
+    "business_status": "failed",
+    "performance_passed": true,
+    "failure_stages": [
+      {
+        "label": "accept-budget",
+        "status": "failed",
+        "failed_checks": [
+          {
+            "kind": "present",
+            "path": "after.guide.plan",
+            "value": true,
+            "passed": false,
+            "actual": null
+          },
+          {
+            "kind": "eq",
+            "path": "after.guide.constraints_summary.budget_fen",
+            "value": 1180,
+            "passed": false,
+            "actual": null,
+            "missing_evidence": "'budget_fen'"
+          },
+          {
+            "kind": "eq",
+            "path": "after.guide.plan.can_confirm",
+            "value": true,
+            "passed": false,
+            "actual": null,
+            "missing_evidence": "'NoneType' object is not subscriptable"
+          },
+          {
+            "kind": "quantities",
+            "path": "after.guide.plan.items",
+            "value": {
+              "demo:snack-original-potato-chips-70g-bag": 2
+            },
+            "passed": false,
+            "actual": null,
+            "missing_evidence": "'NoneType' object is not subscriptable"
+          },
+          {
+            "kind": "fields",
+            "path": "after.guide.plan.items",
+            "value": {
+              "selected": true
+            },
+            "passed": false,
+            "actual": null,
+            "missing_evidence": "'NoneType' object is not subscriptable"
+          },
+          {
+            "kind": "eq",
+            "path": "after.guide.plan.selected_total_fen",
+            "value": 1180,
+            "passed": false,
+            "actual": null,
+            "missing_evidence": "'NoneType' object is not subscriptable"
+          }
+        ],
+        "error": null
+      }
+    ],
+    "slow_turns": [],
+    "critical_violations": [],
+    "error": null
+  },
+  {
+    "execution_id": "H04-r1",
+    "case_id": "H04",
+    "group": "purchase",
+    "business_status": "failed",
+    "performance_passed": true,
+    "failure_stages": [
+      {
+        "label": "confirm-added-quantity",
+        "status": "execution_failed",
+        "failed_checks": [
+          {
+            "kind": "quantities",
+            "path": "after.cart.items",
+            "value": {
+              "demo:cn-pepsi-original-330ml-can": 2
+            },
+            "passed": false,
+            "actual": [
+              {
+                "sku_id": "demo:cn-pepsi-original-330ml-can",
+                "name": "百事可乐原味汽水330ml罐装",
+                "quantity": 1,
+                "unit_price_fen": 300,
+                "line_total_fen": 300,
+                "image_path": null,
+                "sellable": true
+              }
+            ]
+          }
+        ],
+        "error": {
+          "type": "HTTPStatusError",
+          "message": "Client error '409 Conflict' for url 'http://testserver/api/v1/guide/tasks/task-1944bf6087f1/confirm'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/409"
+        }
+      }
+    ],
+    "slow_turns": [],
+    "critical_violations": [],
+    "error": null
+  },
+  {
+    "execution_id": "H05-r1",
+    "case_id": "H05",
+    "group": "snack",
+    "business_status": "failed",
+    "performance_passed": true,
+    "failure_stages": [
+      {
+        "label": "choose-type",
+        "status": "failed",
+        "failed_checks": [
+          {
+            "kind": "present",
+            "path": "after.guide.product_cards",
+            "value": true,
+            "passed": false,
+            "actual": []
+          }
+        ],
+        "error": null
+      }
+    ],
+    "slow_turns": [],
+    "critical_violations": [],
+    "error": null
+  },
+  {
+    "execution_id": "H06-r1",
+    "case_id": "H06",
+    "group": "drink",
+    "business_status": "failed",
+    "performance_passed": false,
+    "failure_stages": [
+      {
+        "label": "replace",
+        "status": "failed",
+        "failed_checks": [
+          {
+            "kind": "quantities",
+            "path": "after.guide.plan.items",
+            "value": {
+              "demo:cn-nongfu-water-550ml-bottle": 2
+            },
+            "passed": false,
+            "actual": [
+              {
+                "sku_id": "demo:cn-coke-original-500ml-bottle",
+                "name": "可口可乐经典原味汽水500ml瓶装",
+                "quantity": 2,
+                "unit_price_fen": 400,
+                "line_total_fen": 800,
+                "image_path": null,
+                "image_kind": "placeholder",
+                "image_kind_legacy": "placeholder",
+                "role": "required",
+                "selected": true,
+                "recommended_quantity": 2,
+                "max_addable_quantity": 36,
+                "spec_quantity": 500,
+                "spec_unit": "ml",
+                "sell_unit": "件",
+                "quantity_source": "recommended",
+                "group_id": "product:demo:cn-coke-original-500ml-bottle",
+                "target_kind": "product",
+                "target_id": "demo:cn-coke-original-500ml-bottle",
+                "component_name": null,
+                "contributions": [
+                  {
+                    "group_id": "product:demo:cn-coke-original-500ml-bottle",
+                    "quantity": 2,
+                    "selected": true,
+                    "added_quantity": 0,
+                    "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                    "requirement": {
+                      "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                      "name": "可口可乐经典原味汽水500ml瓶装",
+                      "ingredient_id": null,
+                      "component_id": null,
+                      "quantity": 2,
+                      "unit": "件",
+                      "quantity_known": true,
+                      "requiredness": "core",
+                      "source": {
+                        "kind": "user",
+                        "ref": "可口可乐经典原味汽水500ml瓶装"
+                      }
+                    }
+                  }
+                ],
+                "added_quantity": 0,
+                "remaining_quantity": 2,
+                "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                "requirement": {
+                  "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                  "name": "可口可乐经典原味汽水500ml瓶装",
+                  "ingredient_id": null,
+                  "component_id": null,
+                  "quantity": 2,
+                  "unit": "件",
+                  "quantity_known": true,
+                  "requiredness": "core",
+                  "source": {
+                    "kind": "user",
+                    "ref": "可口可乐经典原味汽水500ml瓶装"
+                  }
+                },
+                "availability": "available",
+                "evidence": {
+                  "sku_source": "store_offer",
+                  "quoted_at": "2026-10-07T07:37:59+00:00",
+                  "stock_verified": true,
+                  "data_mode": "demo",
+                  "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                  "unknown_constraints": []
+                },
+                "pack_source": "catalog_spec",
+                "shortfall_quantity": 0
+              }
+            ]
+          },
+          {
+            "kind": "eq",
+            "path": "after.guide.plan.selected_total_fen",
+            "value": 400,
+            "passed": false,
+            "actual": 800
+          }
+        ],
+        "error": null
+      }
+    ],
+    "slow_turns": [
+      {
+        "label": "request",
+        "elapsed_ms": 23086.0
+      }
+    ],
+    "critical_violations": [],
+    "error": null
+  },
+  {
+    "execution_id": "H07-r1",
+    "case_id": "H07",
+    "group": "policy",
+    "business_status": "passed",
+    "performance_passed": false,
+    "failure_stages": [],
+    "slow_turns": [
+      {
+        "label": "policy-interruption",
+        "elapsed_ms": 29109.5
+      }
+    ],
+    "critical_violations": [],
+    "error": null
+  },
+  {
+    "execution_id": "H11-r1",
+    "case_id": "H11",
+    "group": "aftersales",
+    "business_status": "passed",
+    "performance_passed": false,
+    "failure_stages": [],
+    "slow_turns": [
+      {
+        "label": "consent-momo",
+        "elapsed_ms": 40228.99729991332
+      }
+    ],
+    "critical_violations": [],
+    "error": null
+  },
+  {
+    "execution_id": "H12-r1",
+    "case_id": "H12",
+    "group": "aftersales",
+    "business_status": "failed",
+    "performance_passed": false,
+    "failure_stages": [
+      {
+        "label": "consent-keke",
+        "status": "failed",
+        "failed_checks": [
+          {
+            "kind": "eq",
+            "path": "after.guide.plan.can_confirm",
+            "value": true,
+            "passed": false,
+            "actual": null,
+            "missing_evidence": "'NoneType' object is not subscriptable"
+          },
+          {
+            "kind": "quantities",
+            "path": "after.guide.plan.items",
+            "value": {
+              "demo:cn-nongfu-water-550ml-bottle": 1
+            },
+            "passed": false,
+            "actual": null,
+            "missing_evidence": "'NoneType' object is not subscriptable"
+          },
+          {
+            "kind": "fields",
+            "path": "after.guide.plan.items",
+            "value": {
+              "selected": true
+            },
+            "passed": false,
+            "actual": null,
+            "missing_evidence": "'NoneType' object is not subscriptable"
+          },
+          {
+            "kind": "eq",
+            "path": "after.guide.plan.selected_total_fen",
+            "value": 200,
+            "passed": false,
+            "actual": null,
+            "missing_evidence": "'NoneType' object is not subscriptable"
+          }
+        ],
+        "error": null
+      }
+    ],
+    "slow_turns": [
+      {
+        "label": "consent-keke",
+        "elapsed_ms": 46971.62700002082
+      }
+    ],
+    "critical_violations": [],
+    "error": null
+  },
+  {
+    "execution_id": "H15-r1",
+    "case_id": "H15",
+    "group": "theme",
+    "business_status": "passed",
+    "performance_passed": false,
+    "failure_stages": [],
+    "slow_turns": [
+      {
+        "label": "price",
+        "elapsed_ms": 15214.8
+      },
+      {
+        "label": "policy",
+        "elapsed_ms": 21058.2
+      }
+    ],
+    "critical_violations": [],
+    "error": null
+  },
+  {
+    "execution_id": "H16-r1",
+    "case_id": "H16",
+    "group": "theme",
+    "business_status": "passed",
+    "performance_passed": false,
+    "failure_stages": [],
+    "slow_turns": [
+      {
+        "label": "request",
+        "elapsed_ms": 17540.1
+      }
+    ],
+    "critical_violations": [],
+    "error": null
+  },
+  {
+    "execution_id": "H18-r1",
+    "case_id": "H18",
+    "group": "memory",
+    "business_status": "failed",
+    "performance_passed": true,
+    "failure_stages": [
+      {
+        "label": "request",
+        "status": "failed",
+        "failed_checks": [
+          {
+            "kind": "eq",
+            "path": "after.memory_events.-1.phase",
+            "value": "memory_extract_completed",
+            "passed": false,
+            "actual": null,
+            "missing_evidence": "list index out of range"
+          }
+        ],
+        "error": null
+      }
+    ],
+    "slow_turns": [],
+    "critical_violations": [],
+    "error": null
+  },
+  {
+    "execution_id": "R21-r1",
+    "case_id": "R21",
+    "group": "drink",
+    "business_status": "passed",
+    "performance_passed": false,
+    "failure_stages": [],
+    "slow_turns": [
+      {
+        "label": "request",
+        "elapsed_ms": 39735.9
+      }
+    ],
+    "critical_violations": [],
+    "error": null
+  },
+  {
+    "execution_id": "R22-r1",
+    "case_id": "R22",
+    "group": "drink",
+    "business_status": "passed",
+    "performance_passed": false,
+    "failure_stages": [],
+    "slow_turns": [
+      {
+        "label": "request",
+        "elapsed_ms": 39973.9
+      }
+    ],
+    "critical_violations": [],
+    "error": null
+  },
+  {
+    "execution_id": "R23-r1",
+    "case_id": "R23",
+    "group": "purchase",
+    "business_status": "passed",
+    "performance_passed": false,
+    "failure_stages": [],
+    "slow_turns": [
+      {
+        "label": "request",
+        "elapsed_ms": 27251.2
+      }
+    ],
+    "critical_violations": [],
+    "error": null
+  },
+  {
+    "execution_id": "R24-r1",
+    "case_id": "R24",
+    "group": "purchase",
+    "business_status": "passed",
+    "performance_passed": false,
+    "failure_stages": [],
+    "slow_turns": [
+      {
+        "label": "stop",
+        "elapsed_ms": 17562.4
+      }
+    ],
+    "critical_violations": [],
+    "error": null
+  },
+  {
+    "execution_id": "R25-r1",
+    "case_id": "R25",
+    "group": "policy",
+    "business_status": "passed",
+    "performance_passed": false,
+    "failure_stages": [],
+    "slow_turns": [
+      {
+        "label": "request",
+        "elapsed_ms": 17259.9
+      }
+    ],
+    "critical_violations": [],
+    "error": null
+  },
+  {
+    "execution_id": "R31-r1",
+    "case_id": "R31",
+    "group": "aftersales",
+    "business_status": "failed",
+    "performance_passed": true,
+    "failure_stages": [
+      {
+        "label": "request",
+        "status": "failed",
+        "failed_checks": [
+          {
+            "kind": "length",
+            "path": "after.returns",
+            "value": 1,
+            "passed": false,
+            "actual": []
+          },
+          {
+            "kind": "eq",
+            "path": "after.returns.0.status",
+            "value": "pending",
+            "passed": false,
+            "actual": null,
+            "missing_evidence": "list index out of range"
+          }
+        ],
+        "error": null
+      }
+    ],
+    "slow_turns": [],
+    "critical_violations": [],
+    "error": null
+  },
+  {
+    "execution_id": "R32-r1",
+    "case_id": "R32",
+    "group": "aftersales",
+    "business_status": "passed",
+    "performance_passed": false,
+    "failure_stages": [],
+    "slow_turns": [
+      {
+        "label": "request",
+        "elapsed_ms": 15177.0
+      }
+    ],
+    "critical_violations": [],
+    "error": null
+  },
+  {
+    "execution_id": "R01-r2",
+    "case_id": "R01",
+    "group": "snack",
+    "business_status": "failed",
+    "performance_passed": false,
+    "failure_stages": [
+      {
+        "label": "request",
+        "status": "failed",
+        "failed_checks": [
+          {
+            "kind": "present",
+            "path": "after.guide.pending_clarifications",
+            "value": true,
+            "passed": false,
+            "actual": []
+          }
+        ],
+        "error": null
+      }
+    ],
+    "slow_turns": [
+      {
+        "label": "request",
+        "elapsed_ms": 71565.7
+      }
+    ],
+    "critical_violations": [],
+    "error": null
+  },
+  {
+    "execution_id": "R02-r2",
+    "case_id": "R02",
+    "group": "snack",
+    "business_status": "passed",
+    "performance_passed": false,
+    "failure_stages": [],
+    "slow_turns": [
+      {
+        "label": "request",
+        "elapsed_ms": 20734.3
+      }
+    ],
+    "critical_violations": [],
+    "error": null
+  },
+  {
+    "execution_id": "R03-r2",
+    "case_id": "R03",
+    "group": "snack",
+    "business_status": "passed",
+    "performance_passed": false,
+    "failure_stages": [],
+    "slow_turns": [
+      {
+        "label": "request",
+        "elapsed_ms": 18871.5
+      }
+    ],
+    "critical_violations": [],
+    "error": null
+  },
+  {
+    "execution_id": "R05-r2",
+    "case_id": "R05",
+    "group": "drink",
+    "business_status": "passed",
+    "performance_passed": false,
+    "failure_stages": [],
+    "slow_turns": [
+      {
+        "label": "choose-type",
+        "elapsed_ms": 30337.8
+      }
+    ],
+    "critical_violations": [],
+    "error": null
+  },
+  {
+    "execution_id": "R06-r2",
+    "case_id": "R06",
+    "group": "drink",
+    "business_status": "passed",
+    "performance_passed": false,
+    "failure_stages": [],
+    "slow_turns": [
+      {
+        "label": "selected-purchase",
+        "elapsed_ms": 36457.1
+      }
+    ],
+    "critical_violations": [],
+    "error": null
+  },
+  {
+    "execution_id": "R07-r2",
+    "case_id": "R07",
+    "group": "drink",
+    "business_status": "failed",
+    "performance_passed": true,
+    "failure_stages": [
+      {
+        "label": "request",
+        "status": "failed",
+        "failed_checks": [
+          {
+            "kind": "present",
+            "path": "after.guide.plan",
+            "value": true,
+            "passed": false,
+            "actual": null
+          },
+          {
+            "kind": "quantities",
+            "path": "after.guide.plan.items",
+            "value": {
+              "demo:cn-coke-zero-500ml-bottle": 2
+            },
+            "passed": false,
+            "actual": null,
+            "missing_evidence": "'NoneType' object is not subscriptable"
+          },
+          {
+            "kind": "eq",
+            "path": "after.guide.plan.selected_total_fen",
+            "value": 800,
+            "passed": false,
+            "actual": null,
+            "missing_evidence": "'NoneType' object is not subscriptable"
+          }
+        ],
+        "error": null
+      }
+    ],
+    "slow_turns": [],
+    "critical_violations": [],
+    "error": null
+  },
+  {
+    "execution_id": "R11-r2",
+    "case_id": "R11",
+    "group": "purchase",
+    "business_status": "failed",
+    "performance_passed": true,
+    "failure_stages": [
+      {
+        "label": "new-budget",
+        "status": "failed",
+        "failed_checks": [
+          {
+            "kind": "eq",
+            "path": "after.guide.constraints_summary.budget_fen",
+            "value": 1000,
+            "passed": false,
+            "actual": 2000
+          }
+        ],
+        "error": null
+      }
+    ],
+    "slow_turns": [],
+    "critical_violations": [],
+    "error": null
+  },
+  {
+    "execution_id": "R17-r2",
+    "case_id": "R17",
+    "group": "aftersales",
+    "business_status": "passed",
+    "performance_passed": false,
+    "failure_stages": [],
+    "slow_turns": [
+      {
+        "label": "consent-momo",
+        "elapsed_ms": 37292.919100029394
+      },
+      {
+        "label": "consent-keke",
+        "elapsed_ms": 18364.12880010903
+      }
+    ],
+    "critical_violations": [],
+    "error": null
+  },
+  {
+    "execution_id": "R19-r2",
+    "case_id": "R19",
+    "group": "memory",
+    "business_status": "failed",
+    "performance_passed": true,
+    "failure_stages": [
+      {
+        "label": "list",
+        "status": "failed",
+        "failed_checks": [
+          {
+            "kind": "contains",
+            "path": "reply",
+            "value": "百事",
+            "passed": false,
+            "actual": "你指的是正在选购的商品或采购清单项，还是已下单订单？"
+          }
+        ],
+        "error": null
+      }
+    ],
+    "slow_turns": [],
+    "critical_violations": [],
+    "error": null
+  },
+  {
+    "execution_id": "R01-r3",
+    "case_id": "R01",
+    "group": "snack",
+    "business_status": "failed",
+    "performance_passed": false,
+    "failure_stages": [
+      {
+        "label": "request",
+        "status": "failed",
+        "failed_checks": [
+          {
+            "kind": "present",
+            "path": "after.guide.pending_clarifications",
+            "value": true,
+            "passed": false,
+            "actual": []
+          }
+        ],
+        "error": null
+      }
+    ],
+    "slow_turns": [
+      {
+        "label": "request",
+        "elapsed_ms": 23397.7
+      }
+    ],
+    "critical_violations": [],
+    "error": null
+  },
+  {
+    "execution_id": "R05-r3",
+    "case_id": "R05",
+    "group": "drink",
+    "business_status": "passed",
+    "performance_passed": false,
+    "failure_stages": [],
+    "slow_turns": [
+      {
+        "label": "selected-purchase",
+        "elapsed_ms": 17420.4
+      }
+    ],
+    "critical_violations": [],
+    "error": null
+  },
+  {
+    "execution_id": "R07-r3",
+    "case_id": "R07",
+    "group": "drink",
+    "business_status": "failed",
+    "performance_passed": true,
+    "failure_stages": [
+      {
+        "label": "request",
+        "status": "failed",
+        "failed_checks": [
+          {
+            "kind": "quantities",
+            "path": "after.guide.plan.items",
+            "value": {
+              "demo:cn-coke-zero-500ml-bottle": 2
+            },
+            "passed": false,
+            "actual": [
+              {
+                "sku_id": "demo:cn-coke-original-500ml-bottle",
+                "name": "可口可乐经典原味汽水500ml瓶装",
+                "quantity": 2,
+                "unit_price_fen": 400,
+                "line_total_fen": 800,
+                "image_path": null,
+                "image_kind": "placeholder",
+                "image_kind_legacy": "placeholder",
+                "role": "required",
+                "selected": true,
+                "recommended_quantity": 2,
+                "max_addable_quantity": 36,
+                "spec_quantity": 500,
+                "spec_unit": "ml",
+                "sell_unit": "件",
+                "quantity_source": "recommended",
+                "group_id": "product:demo:cn-coke-original-500ml-bottle",
+                "target_kind": "product",
+                "target_id": "demo:cn-coke-original-500ml-bottle",
+                "component_name": null,
+                "contributions": [
+                  {
+                    "group_id": "product:demo:cn-coke-original-500ml-bottle",
+                    "quantity": 2,
+                    "selected": true,
+                    "added_quantity": 0,
+                    "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                    "requirement": {
+                      "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                      "name": "可口可乐经典原味汽水500ml瓶装",
+                      "ingredient_id": null,
+                      "component_id": null,
+                      "quantity": 2,
+                      "unit": "件",
+                      "quantity_known": true,
+                      "requiredness": "core",
+                      "source": {
+                        "kind": "user",
+                        "ref": "可口可乐经典原味汽水500ml瓶装"
+                      }
+                    }
+                  }
+                ],
+                "added_quantity": 0,
+                "remaining_quantity": 2,
+                "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                "requirement": {
+                  "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                  "name": "可口可乐经典原味汽水500ml瓶装",
+                  "ingredient_id": null,
+                  "component_id": null,
+                  "quantity": 2,
+                  "unit": "件",
+                  "quantity_known": true,
+                  "requiredness": "core",
+                  "source": {
+                    "kind": "user",
+                    "ref": "可口可乐经典原味汽水500ml瓶装"
+                  }
+                },
+                "availability": "available",
+                "evidence": {
+                  "sku_source": "store_offer",
+                  "quoted_at": "2026-10-07T07:57:35+00:00",
+                  "stock_verified": true,
+                  "data_mode": "demo",
+                  "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                  "unknown_constraints": []
+                },
+                "pack_source": "catalog_spec",
+                "shortfall_quantity": 0
+              }
+            ]
+          }
+        ],
+        "error": null
+      }
+    ],
+    "slow_turns": [],
+    "critical_violations": [],
+    "error": null
+  },
+  {
+    "execution_id": "R08-r3",
+    "case_id": "R08",
+    "group": "purchase",
+    "business_status": "failed",
+    "performance_passed": false,
+    "failure_stages": [
+      {
+        "label": "increase",
+        "status": "failed",
+        "failed_checks": [
+          {
+            "kind": "quantities",
+            "path": "after.guide.plan.items",
+            "value": {
+              "demo:cn-nongfu-water-550ml-bottle": 3
+            },
+            "passed": false,
+            "actual": [
+              {
+                "sku_id": "demo:cn-nongfu-water-550ml-bottle",
+                "name": "农夫山泉饮用天然水550ml瓶装",
+                "quantity": 1,
+                "unit_price_fen": 200,
+                "line_total_fen": 200,
+                "image_path": null,
+                "image_kind": "placeholder",
+                "image_kind_legacy": "placeholder",
+                "role": "required",
+                "selected": true,
+                "recommended_quantity": 1,
+                "max_addable_quantity": 72,
+                "spec_quantity": 550,
+                "spec_unit": "ml",
+                "sell_unit": "件",
+                "quantity_source": "recommended",
+                "group_id": "product:demo:cn-nongfu-water-550ml-bottle",
+                "target_kind": "product",
+                "target_id": "demo:cn-nongfu-water-550ml-bottle",
+                "component_name": null,
+                "contributions": [
+                  {
+                    "group_id": "product:demo:cn-nongfu-water-550ml-bottle",
+                    "quantity": 1,
+                    "selected": true,
+                    "added_quantity": 0,
+                    "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+                    "requirement": {
+                      "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+                      "name": "农夫山泉饮用天然水550ml瓶装",
+                      "ingredient_id": null,
+                      "component_id": null,
+                      "quantity": 1,
+                      "unit": "件",
+                      "quantity_known": true,
+                      "requiredness": "core",
+                      "source": {
+                        "kind": "user",
+                        "ref": "农夫山泉饮用天然水550ml瓶装"
+                      }
+                    }
+                  }
+                ],
+                "added_quantity": 0,
+                "remaining_quantity": 1,
+                "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+                "requirement": {
+                  "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+                  "name": "农夫山泉饮用天然水550ml瓶装",
+                  "ingredient_id": null,
+                  "component_id": null,
+                  "quantity": 1,
+                  "unit": "件",
+                  "quantity_known": true,
+                  "requiredness": "core",
+                  "source": {
+                    "kind": "user",
+                    "ref": "农夫山泉饮用天然水550ml瓶装"
+                  }
+                },
+                "availability": "available",
+                "evidence": {
+                  "sku_source": "store_offer",
+                  "quoted_at": "2026-10-07T07:57:28+00:00",
+                  "stock_verified": true,
+                  "data_mode": "demo",
+                  "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                  "unknown_constraints": []
+                },
+                "pack_source": "catalog_spec",
+                "shortfall_quantity": 0
+              }
+            ]
+          },
+          {
+            "kind": "eq",
+            "path": "after.guide.plan.selected_total_fen",
+            "value": 600,
+            "passed": false,
+            "actual": 200
+          }
+        ],
+        "error": null
+      }
+    ],
+    "slow_turns": [
+      {
+        "label": "increase",
+        "elapsed_ms": 40680.9
+      }
+    ],
+    "critical_violations": [],
+    "error": null
+  },
+  {
+    "execution_id": "R09-r3",
+    "case_id": "R09",
+    "group": "purchase",
+    "business_status": "failed",
+    "performance_passed": true,
+    "failure_stages": [
+      {
+        "label": "decrease",
+        "status": "failed",
+        "failed_checks": [
+          {
+            "kind": "quantities",
+            "path": "after.guide.plan.items",
+            "value": {
+              "demo:cn-pepsi-original-330ml-can": 1
+            },
+            "passed": false,
+            "actual": [
+              {
+                "sku_id": "demo:cn-pepsi-original-330ml-can",
+                "name": "百事可乐原味汽水330ml罐装",
+                "quantity": 3,
+                "unit_price_fen": 300,
+                "line_total_fen": 900,
+                "image_path": null,
+                "image_kind": "placeholder",
+                "image_kind_legacy": "placeholder",
+                "role": "required",
+                "selected": true,
+                "recommended_quantity": 3,
+                "max_addable_quantity": 36,
+                "spec_quantity": 330,
+                "spec_unit": "ml",
+                "sell_unit": "件",
+                "quantity_source": "recommended",
+                "group_id": "product:demo:cn-pepsi-original-330ml-can",
+                "target_kind": "product",
+                "target_id": "demo:cn-pepsi-original-330ml-can",
+                "component_name": null,
+                "contributions": [
+                  {
+                    "group_id": "product:demo:cn-pepsi-original-330ml-can",
+                    "quantity": 3,
+                    "selected": true,
+                    "added_quantity": 0,
+                    "required_item_id": "product:demo:cn-pepsi-original-330ml-can#demo:cn-pepsi-original-330ml-can",
+                    "requirement": {
+                      "required_item_id": "product:demo:cn-pepsi-original-330ml-can#demo:cn-pepsi-original-330ml-can",
+                      "name": "百事可乐原味汽水330ml罐装",
+                      "ingredient_id": null,
+                      "component_id": null,
+                      "quantity": 3,
+                      "unit": "件",
+                      "quantity_known": true,
+                      "requiredness": "core",
+                      "source": {
+                        "kind": "user",
+                        "ref": "百事可乐原味汽水330ml罐装"
+                      }
+                    }
+                  }
+                ],
+                "added_quantity": 0,
+                "remaining_quantity": 3,
+                "required_item_id": "product:demo:cn-pepsi-original-330ml-can#demo:cn-pepsi-original-330ml-can",
+                "requirement": {
+                  "required_item_id": "product:demo:cn-pepsi-original-330ml-can#demo:cn-pepsi-original-330ml-can",
+                  "name": "百事可乐原味汽水330ml罐装",
+                  "ingredient_id": null,
+                  "component_id": null,
+                  "quantity": 3,
+                  "unit": "件",
+                  "quantity_known": true,
+                  "requiredness": "core",
+                  "source": {
+                    "kind": "user",
+                    "ref": "百事可乐原味汽水330ml罐装"
+                  }
+                },
+                "availability": "available",
+                "evidence": {
+                  "sku_source": "store_offer",
+                  "quoted_at": "2026-10-07T07:58:23+00:00",
+                  "stock_verified": true,
+                  "data_mode": "demo",
+                  "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                  "unknown_constraints": []
+                },
+                "pack_source": "catalog_spec",
+                "shortfall_quantity": 0
+              }
+            ]
+          },
+          {
+            "kind": "eq",
+            "path": "after.guide.plan.selected_total_fen",
+            "value": 300,
+            "passed": false,
+            "actual": 900
+          }
+        ],
+        "error": null
+      }
+    ],
+    "slow_turns": [],
+    "critical_violations": [],
+    "error": null
+  },
+  {
+    "execution_id": "R11-r3",
+    "case_id": "R11",
+    "group": "purchase",
+    "business_status": "failed",
+    "performance_passed": true,
+    "failure_stages": [
+      {
+        "label": "new-budget",
+        "status": "failed",
+        "failed_checks": [
+          {
+            "kind": "eq",
+            "path": "after.guide.constraints_summary.budget_fen",
+            "value": 1000,
+            "passed": false,
+            "actual": 2000
+          }
+        ],
+        "error": null
+      }
+    ],
+    "slow_turns": [],
+    "critical_violations": [],
+    "error": null
+  },
+  {
+    "execution_id": "R13-r3",
+    "case_id": "R13",
+    "group": "policy",
+    "business_status": "passed",
+    "performance_passed": false,
+    "failure_stages": [],
+    "slow_turns": [
+      {
+        "label": "request",
+        "elapsed_ms": 19556.6
+      }
+    ],
+    "critical_violations": [],
+    "error": null
+  },
+  {
+    "execution_id": "R19-r3",
+    "case_id": "R19",
+    "group": "memory",
+    "business_status": "failed",
+    "performance_passed": true,
+    "failure_stages": [
+      {
+        "label": "list",
+        "status": "failed",
+        "failed_checks": [
+          {
+            "kind": "contains",
+            "path": "reply",
+            "value": "百事",
+            "passed": false,
+            "actual": "你指的是正在选购的商品或采购清单项，还是已下单订单？"
+          }
+        ],
+        "error": null
+      }
+    ],
+    "slow_turns": [],
+    "critical_violations": [],
+    "error": null
+  },
+  {
+    "execution_id": "R20-r3",
+    "case_id": "R20",
+    "group": "memory",
+    "business_status": "failed",
+    "performance_passed": true,
+    "failure_stages": [
+      {
+        "label": "delete",
+        "status": "failed",
+        "failed_checks": [
+          {
+            "kind": "length",
+            "path": "after.memories",
+            "value": 0,
+            "passed": false,
+            "actual": [
+              {
+                "memory_id": "eval-memory-0",
+                "owner_id": "owner-e8c8ed2e158d4478",
+                "category": "user",
+                "source": "explicit",
+                "content": "平时喜欢可口可乐",
+                "expires_at": null
+              }
+            ]
+          }
+        ],
+        "error": null
+      }
+    ],
+    "slow_turns": [],
+    "critical_violations": [],
+    "error": null
+  }
+]

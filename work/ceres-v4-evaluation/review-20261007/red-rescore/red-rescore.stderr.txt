@@ -1,0 +1,51 @@
+test_rescore_preserves_preparation_and_runner_failures (test_eval_v4.ScoringTests.test_rescore_preserves_preparation_and_runner_failures) ... 
+  test_rescore_preserves_preparation_and_runner_failures (test_eval_v4.ScoringTests.test_rescore_preserves_preparation_and_runner_failures) (status='preparation_failed') ... ERROR
+  test_rescore_preserves_preparation_and_runner_failures (test_eval_v4.ScoringTests.test_rescore_preserves_preparation_and_runner_failures) (status='runner_failed') ... ERROR
+test_rescore_keeps_missing_attempts_and_unexecuted_tasks_in_denominator (test_eval_v4.ScoringTests.test_rescore_keeps_missing_attempts_and_unexecuted_tasks_in_denominator) ... ERROR
+
+======================================================================
+ERROR: test_rescore_preserves_preparation_and_runner_failures (test_eval_v4.ScoringTests.test_rescore_preserves_preparation_and_runner_failures) (status='preparation_failed')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\20616\Desktop\Agent\Agent产品\Ceres\scripts\test_eval_v4.py", line 35, in test_rescore_preserves_preparation_and_runner_failures
+    ev.rescore(SimpleNamespace(source=source, cases=source / "cases.json", output=output))
+  File "C:\Users\20616\Desktop\Agent\Agent产品\Ceres\scripts\eval_v4.py", line 760, in rescore
+    result["status"] = "passed" if not result["unexecuted_steps"] and all(row["status"] == "passed" for row in result["steps"]) else "failed"
+                                       ~~~~~~^^^^^^^^^^^^^^^^^^^^
+KeyError: 'unexecuted_steps'
+
+======================================================================
+ERROR: test_rescore_preserves_preparation_and_runner_failures (test_eval_v4.ScoringTests.test_rescore_preserves_preparation_and_runner_failures) (status='runner_failed')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\20616\Desktop\Agent\Agent产品\Ceres\scripts\test_eval_v4.py", line 35, in test_rescore_preserves_preparation_and_runner_failures
+    ev.rescore(SimpleNamespace(source=source, cases=source / "cases.json", output=output))
+  File "C:\Users\20616\Desktop\Agent\Agent产品\Ceres\scripts\eval_v4.py", line 760, in rescore
+    result["status"] = "passed" if not result["unexecuted_steps"] and all(row["status"] == "passed" for row in result["steps"]) else "failed"
+                                       ~~~~~~^^^^^^^^^^^^^^^^^^^^
+KeyError: 'unexecuted_steps'
+
+======================================================================
+ERROR: test_rescore_keeps_missing_attempts_and_unexecuted_tasks_in_denominator (test_eval_v4.ScoringTests.test_rescore_keeps_missing_attempts_and_unexecuted_tasks_in_denominator)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\20616\Desktop\Agent\Agent产品\Ceres\scripts\test_eval_v4.py", line 57, in test_rescore_keeps_missing_attempts_and_unexecuted_tasks_in_denominator
+    ev.rescore(SimpleNamespace(source=source, cases=source / "cases.json", output=output))
+  File "C:\Users\20616\Desktop\Agent\Agent产品\Ceres\scripts\eval_v4.py", line 752, in rescore
+    result = read(original)
+             ^^^^^^^^^^^^^^
+  File "C:\Users\20616\Desktop\Agent\Agent产品\Ceres\scripts\eval_v4.py", line 35, in read
+    return json.loads(Path(path).read_text(encoding="utf-8"))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\20616\AppData\Local\Programs\Python\Python312\Lib\pathlib.py", line 1027, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\20616\AppData\Local\Programs\Python\Python312\Lib\pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\20616\\AppData\\Local\\Temp\\tmppsxz4pl2\\source\\R01-r1\\result.json'
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.292s
+
+FAILED (errors=3)

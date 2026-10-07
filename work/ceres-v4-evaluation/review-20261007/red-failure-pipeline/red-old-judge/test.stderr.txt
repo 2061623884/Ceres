@@ -1,0 +1,17 @@
+test_incomplete_batch_reaches_acceptance_without_model_calls (failure_pipeline_test_module.AcceptanceTests.test_incomplete_batch_reaches_acceptance_without_model_calls) ... ERROR
+
+======================================================================
+ERROR: test_incomplete_batch_reaches_acceptance_without_model_calls (failure_pipeline_test_module.AcceptanceTests.test_incomplete_batch_reaches_acceptance_without_model_calls)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\20616\Desktop\Agent\Agent产品\Ceres\scripts\test_eval_v4_record.py", line 40, in test_incomplete_batch_reaches_acceptance_without_model_calls
+    self.assertEqual(judge.main(), 1)  # Unknown diagnostics are recorded, not a model success.
+                     ^^^^^^^^^^^^
+  File "C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-v4-evaluation\review-20261007\red-failure-pipeline\frozen-old\eval_v4_judge.py", line 86, in main
+    raise ValueError(f"Missing captured judge input: {item['execution_id']}")
+ValueError: Missing captured judge input: R01-r1
+
+----------------------------------------------------------------------
+Ran 1 test in 0.059s
+
+FAILED (errors=1)

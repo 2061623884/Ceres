@@ -2,6 +2,8 @@
 import importlib.util
 from pathlib import Path
 import sys
+import tempfile
+from types import SimpleNamespace
 import unittest
 
 spec = importlib.util.spec_from_file_location("eval_v4", Path(__file__).with_name("eval_v4.py"))
@@ -11,6 +13,77 @@ spec.loader.exec_module(ev)
 
 
 class ScoringTests(unittest.TestCase):
+    def test_rescore_preserves_preparation_and_runner_failures(self):
+        suite = ev.read(Path(__file__).parents[1] / "evals/v4/cases.json")
+        for status in ("preparation_failed", "runner_failed"):
+            with self.subTest(status=status), tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                source = root / "source"
+                index = root / "index"
+                index.mkdir()
+                ev.write(source / "cases.json", suite)
+                entry = {"execution_id": "R01-r1", "case_id": "R01", "core": True,
+                         "group": "snack", "repeat": 1, "expected_outcome": "normal_completion"}
+                ev.write(source / "manifest.json", {"schedule": [entry], "index": str(index), "index_identity": {},
+                         "tree": "frozen-tree", "seed": "frozen-seed", "runner_sha256": "original-runner",
+                         "cases_sha256": ev.digest(source / "cases.json")})
+                failure = {**entry, "status": status, "performance_passed": False, "checks": [], "steps": [],
+                           "critical_violations": [], "error": {"type": "RuntimeError", "message": "setup failed"}}
+                ev.write(source / "R01-r1/result.json", failure)
+                original = (source / "R01-r1/result.json").read_bytes()
+                output = root / "rescored"
+                ev.rescore(SimpleNamespace(source=source, cases=source / "cases.json", output=output))
+                result = ev.read(output / "R01-r1/result.json")
+                self.assertEqual(result["status"], status)
+                self.assertEqual(result["error"], failure["error"])
+                self.assertEqual(ev.read(output / "summary.json")["counts"][status], 1)
+                self.assertEqual((source / "R01-r1/result.json").read_bytes(), original)
+
+    def test_rescore_keeps_missing_attempts_and_unexecuted_tasks_in_denominator(self):
+        suite = ev.read(Path(__file__).parents[1] / "evals/v4/cases.json")
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            source = root / "source"
+            index = root / "index"
+            index.mkdir()
+            ev.write(source / "cases.json", suite)
+            entries = [{"execution_id": f"R0{n}-r1", "case_id": f"R0{n}", "core": True,
+                        "group": "snack", "repeat": 1} for n in (1, 2)]
+            ev.write(source / "manifest.json", {"schedule": entries, "index": str(index), "index_identity": {},
+                     "tree": "frozen-tree", "seed": "frozen-seed", "runner_sha256": "original-runner",
+                     "cases_sha256": ev.digest(source / "cases.json")})
+            ev.write(source / "R01-r1/command.json", {"exit_code": 1})
+            output = root / "rescored"
+            ev.rescore(SimpleNamespace(source=source, cases=source / "cases.json", output=output))
+            summary = ev.read(output / "summary.json")
+            self.assertEqual(summary["planned_executions"], 2)
+            self.assertEqual(summary["actual_executions"], 1)
+            self.assertEqual(summary["counts"]["runner_failed"], 1)
+            self.assertEqual(summary["counts"]["not_executed"], 1)
+            self.assertEqual(summary["automatic_acceptance"], "not_passed")
+
+    def test_incomplete_worker_checkpoint_is_reported_without_overwriting_it(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            index = root / "index"
+            index.mkdir()
+            entry = {"execution_id": "one-r1", "case_id": "one", "core": False,
+                     "group": "shopping", "repeat": 1, "expected_outcome": "normal_completion"}
+            ev.write(root / "manifest.json", {"schedule": [entry], "index": str(index),
+                     "index_identity": {}, "tree": "frozen-tree", "seed": "frozen-seed"})
+            checkpoint = {**entry, "status": "running", "checks": [], "steps": [],
+                          "critical_violations": [], "effective_configuration": {},
+                          "runtime": {"index_manifest_id": "test-index"}}
+            ev.write(root / "one-r1/result.json", checkpoint)
+            original = (root / "one-r1/result.json").read_bytes()
+            summary = ev.report(root)
+            self.assertEqual(summary["counts"]["runner_failed"], 1)
+            self.assertEqual(summary["actual_executions"], 1)
+            self.assertEqual(summary["automatic_acceptance"], "not_passed")
+            failure = ev.read(root / "badcases.json")[0]
+            self.assertFalse(failure["performance_passed"])
+            self.assertEqual((root / "one-r1/result.json").read_bytes(), original)
+
     def test_missing_budget_and_total_never_pass_as_zero(self):
         checks = ev.check([
             {"kind": "max", "path": "after.plan.selected_total_fen", "value": 1000},

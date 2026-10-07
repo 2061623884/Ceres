@@ -1,0 +1,11 @@
+{
+  "python_executable": "C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+  "python_version": "Python 3.12.10",
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts",
+  "test": "test_eval_v4_record.AcceptanceTests.test_incomplete_batch_reaches_acceptance_without_model_calls",
+  "reporter_snapshot": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\review-20261007\\red-narrative\\eval_v4_record.py",
+  "reporter_sha256": "f47b7fc895a0f12236f9fd6f5c7bbdb375e5fa0c912e08f6d6b7e81bd04a52a4",
+  "test_module_sha256": "6e7876af63a8857bfa8dd5f68549f937d8445fd3a2d38982f004897262a2a32e",
+  "exit_code": 1,
+  "network_and_product_load_are_mocked_by_test": true
+}

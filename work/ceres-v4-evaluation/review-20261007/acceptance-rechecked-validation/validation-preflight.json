@@ -1,0 +1,80 @@
+{
+  "python_executable": "C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+  "python_version": "Python 3.12.10",
+  "node_executable": "C:\\Users\\20616\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+  "node_version": "v24.19.0",
+  "code_hashes_before": {
+    "scripts\\eval_v4.py": "78d4764db395b0276f813ab94aa6ec232af06c66c1df70a97c029092a419ccd3",
+    "scripts\\eval_v4_judge.py": "57cbd92120e18696273e29044b11dc271d842f4054b8a699dfcfe33947f70f88",
+    "scripts\\eval_v4_record.py": "58d6c9817105c8df2cc911ca30d4546f9bcdbeb40359dd64157715987cf70401",
+    "scripts\\test_eval_v4.py": "ecb19ce8ad074b2db55994ff3fbee72cd35726d641c49d246f906d6cbd67ce64",
+    "scripts\\test_eval_v4_record.py": "ecb4aaaa8a20881e262efc66d24ea2f146207b89b9465d5a8d7288307e3170d4"
+  },
+  "code_hashes_after": {
+    "scripts\\eval_v4.py": "78d4764db395b0276f813ab94aa6ec232af06c66c1df70a97c029092a419ccd3",
+    "scripts\\eval_v4_judge.py": "57cbd92120e18696273e29044b11dc271d842f4054b8a699dfcfe33947f70f88",
+    "scripts\\eval_v4_record.py": "58d6c9817105c8df2cc911ca30d4546f9bcdbeb40359dd64157715987cf70401",
+    "scripts\\test_eval_v4.py": "ecb19ce8ad074b2db55994ff3fbee72cd35726d641c49d246f906d6cbd67ce64",
+    "scripts\\test_eval_v4_record.py": "ecb4aaaa8a20881e262efc66d24ea2f146207b89b9465d5a8d7288307e3170d4"
+  },
+  "code_hashes_unchanged": true,
+  "index_paths_before": {
+    "command": [
+      "git",
+      "diff",
+      "--cached",
+      "--name-only",
+      "-z"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "index_paths_after": {
+    "command": [
+      "git",
+      "diff",
+      "--cached",
+      "--name-only",
+      "-z"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "tests": {
+    "command": [
+      "C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+      "-X",
+      "utf8",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "scripts",
+      "-p",
+      "test_eval_v4*.py",
+      "-v"
+    ],
+    "exit_code": 0,
+    "stdout_bytes": 6116,
+    "stderr_bytes": 2136,
+    "stdout_sha256": "01df91d769e31d82d3f35a2be9487554942743562321a82b9982f509825b5357",
+    "stderr_sha256": "6af96fab1986e80d0fcb4921518a63a5f72402dc4583ba85cc3fdcd9102f3e48"
+  },
+  "compile": {
+    "command": [
+      "C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+      "-X",
+      "utf8",
+      "-c",
+      "from pathlib import Path; files=['scripts\\\\eval_v4.py', 'scripts\\\\eval_v4_judge.py', 'scripts\\\\eval_v4_record.py', 'scripts\\\\test_eval_v4.py', 'scripts\\\\test_eval_v4_record.py']; [compile(Path(name).read_bytes(), name, 'exec') for name in files]; print('compiled: ' + ', '.join(files))"
+    ],
+    "exit_code": 0,
+    "stdout_bytes": 140,
+    "stderr_bytes": 0,
+    "stdout_sha256": "8cc001fcfe92240e0f50fbcc5d789753870693712cd61a1b62aec07ed8547905",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "all_checks_passed": true
+}

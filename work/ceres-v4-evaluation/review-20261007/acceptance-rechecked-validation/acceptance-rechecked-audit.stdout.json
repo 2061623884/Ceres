@@ -1,0 +1,72 @@
+{
+  "new_report_directory": "work/ceres-v4-evaluation/review-20261007/acceptance-rechecked",
+  "old_acceptance_directory": "work/ceres-v4-evaluation/acceptance",
+  "reporter_sha256": "58d6c9817105c8df2cc911ca30d4546f9bcdbeb40359dd64157715987cf70401",
+  "reporter_command_exit_code": 0,
+  "reporter_stdout_sha256": "ebe5657c01d2ef330e63b58d57e0214baec78ebe0f3e4de0b6c72e6df02a8752",
+  "reporter_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "input_hashes_before_after_equal": true,
+  "source_hashes_before_after_equal": true,
+  "original_failure_records_unchanged": true,
+  "old_summary_fields": {
+    "counts": {
+      "passed": 76,
+      "failed": 24,
+      "preparation_failed": 0,
+      "runner_failed": 0,
+      "not_executed": 0
+    },
+    "fully_passed": 55,
+    "core_pass3": 6,
+    "core_total": 20,
+    "hard_constraints": {
+      "produced_plan_executions": 49,
+      "all_satisfied": 39,
+      "rate": 0.7959183673469388
+    }
+  },
+  "new_metrics": {
+    "business_passed": 76,
+    "actual_executions": 100,
+    "fully_passed": 55,
+    "core_pass3": 6,
+    "core_total": 20,
+    "hard_constraints_satisfied": 39,
+    "hard_constraint_executions": 49,
+    "within_15s": 134,
+    "timed_turns": 162,
+    "failures": 45,
+    "performance_not_applicable": [
+      {
+        "execution_id": "H20-r1",
+        "business_status": "passed"
+      }
+    ],
+    "performance_measured_executions": 99,
+    "fully_passed_with_timed_turns": 54
+  },
+  "checks": {
+    "api_business_passed_76_of_100": true,
+    "fully_passed_55_of_100": true,
+    "core_pass3_6_of_20": true,
+    "hard_constraints_39_of_49": true,
+    "under_15s_134_of_162": true,
+    "failures_45_and_unchanged_count": true,
+    "api_summary_matches_prior_exactly": true,
+    "api_counts_match_source_summary": true,
+    "performance_n_a_only_h20_r1": true,
+    "performance_measured_99": true,
+    "fully_passed_with_timed_turns_54": true,
+    "markdown_discloses_134_162_54_99_and_h20_na": true,
+    "new_reporter_sha_matches_script": true,
+    "unit_tests_14_passed": true,
+    "python_compile_passed": true,
+    "source_code_hashes_unchanged": true,
+    "original_input_hashes_unchanged": true,
+    "index_unchanged_by_reporter": true,
+    "reporter_command_succeeded": true,
+    "old_acceptance_files_unchanged": true,
+    "run04_old_summary_hash_unchanged": true
+  },
+  "passed": true
+}

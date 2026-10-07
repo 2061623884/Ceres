@@ -1,0 +1,41 @@
+{
+  "generation_exit_code": 0,
+  "output": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\review-20261007\\acceptance-final",
+  "reporter_sha256": "f47b7fc895a0f12236f9fd6f5c7bbdb375e5fa0c912e08f6d6b7e81bd04a52a4",
+  "source_hash_map_unchanged": true,
+  "source_file_count_hashed": 477,
+  "previous_reviewed_input_hashes_unchanged": true,
+  "api_manifest_points_to_run04": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\manifest.json",
+  "diagnostics_parent_points_to_run03": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03",
+  "metrics": {
+    "passed_failed": [
+      76,
+      24
+    ],
+    "business_and_applicable_performance_passed": 55,
+    "core_20_passed": 6,
+    "hard_constraints": [
+      39,
+      49
+    ],
+    "turns_within_15s": [
+      134,
+      162
+    ],
+    "failures": 45,
+    "performance_not_applicable": [
+      {
+        "execution_id": "H20-r1",
+        "business_status": "passed"
+      }
+    ],
+    "performance_measured_executions": 99,
+    "fully_passed_with_timed_turns": 54,
+    "failed_probe_calls": 2
+  },
+  "current_sources": {
+    "scripts/eval_v4_record.py": "f47b7fc895a0f12236f9fd6f5c7bbdb375e5fa0c912e08f6d6b7e81bd04a52a4",
+    "scripts/eval_v4.py": "78d4764db395b0276f813ab94aa6ec232af06c66c1df70a97c029092a419ccd3"
+  },
+  "prior_reporter_sha256": "58d6c9817105c8df2cc911ca30d4546f9bcdbeb40359dd64157715987cf70401"
+}

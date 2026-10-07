@@ -1,0 +1,35 @@
+{
+  "python_executable": "C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+  "python_version": "Python 3.12.10",
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres",
+  "test_bytecode_writes_disabled": true,
+  "test_discovery_pattern": "test_eval_v4*.py",
+  "compile_method": "compile(file_bytes, path, \"exec\"), no bytecode files written",
+  "source_files": [
+    {
+      "path": "scripts/eval_v4.py",
+      "bytes": 52993,
+      "sha256": "78d4764db395b0276f813ab94aa6ec232af06c66c1df70a97c029092a419ccd3"
+    },
+    {
+      "path": "scripts/eval_v4_judge.py",
+      "bytes": 8003,
+      "sha256": "94c21409971d79adcf5e56b8923ee5fe8669afa881bb3dca5c090567a6ff28f7"
+    },
+    {
+      "path": "scripts/eval_v4_record.py",
+      "bytes": 20576,
+      "sha256": "bdddf19f6037b53fd1285e8607498c07f92f9d4f7792ecf53fbbe157cf4d4d1e"
+    },
+    {
+      "path": "scripts/test_eval_v4.py",
+      "bytes": 10529,
+      "sha256": "ecb19ce8ad074b2db55994ff3fbee72cd35726d641c49d246f906d6cbd67ce64"
+    },
+    {
+      "path": "scripts/test_eval_v4_record.py",
+      "bytes": 6421,
+      "sha256": "55158c337f4dbe9703d047945bcf25b42c5b81f6c2ba4c4759a2c74ab72ac2a1"
+    }
+  ]
+}

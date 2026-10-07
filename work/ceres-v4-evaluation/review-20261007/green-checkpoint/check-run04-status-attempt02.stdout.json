@@ -1,0 +1,24 @@
+{
+  "run_directory": "work/ceres-v4-evaluation/run-04",
+  "result_json_count": 100,
+  "result_status_counts": {
+    "failed": 24,
+    "passed": 76
+  },
+  "preparing_or_running_results": [],
+  "missing_status_results": [],
+  "summary_actual_executions": 100,
+  "summary_counts": {
+    "passed": 76,
+    "failed": 24,
+    "preparation_failed": 0,
+    "runner_failed": 0,
+    "not_executed": 0
+  },
+  "summary_file_sha256_before": "801924ee9d5560284ead45d61d9d026f123b8671f758fc4ec6b26f42c1797f04",
+  "summary_file_sha256_after_read": "801924ee9d5560284ead45d61d9d026f123b8671f758fc4ec6b26f42c1797f04",
+  "summary_unchanged_by_hash": true,
+  "all_results_terminal_and_expected_distribution": true,
+  "matches_existing_summary": true,
+  "passed": true
+}

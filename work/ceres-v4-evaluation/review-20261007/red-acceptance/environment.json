@@ -1,0 +1,7 @@
+{
+  "python_executable": "C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+  "python_version": "Python 3.12.10",
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts",
+  "test_bytecode_writes_disabled": true,
+  "target_test": "test_eval_v4_record.AcceptanceTests.test_stale_api_or_ui_summary_cannot_be_archived"
+}

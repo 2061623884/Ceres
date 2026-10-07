@@ -1,6 +1,6 @@
 # Ceres1 V4 非人工评测与验收
 
-- 状态：待验收（自动评测实施、记录与双轴审查完成；严格产品验收未通过，用户尚未确认本次交付）。
+- 状态：待验收（自动评测实施、记录及code-review修复/复验完成；严格产品验收未通过，用户尚未确认本次交付）。
 - 日期：2026-10-07。
 - 负责人：本会话主 Agent；执行测试沿用项目专职测试 Agent 的分工。
 - 授权：用户要求专注 Ceres1 V4 开发后的评测/验收，落地人工评测之外的自动评测与记录；引用 grill-with-docs。
@@ -43,9 +43,11 @@ root/main `ee7ce10` 不等同 next 集成 `17d77b8`，08 当前 HEAD 为 `ac895f
 
 正式评分器、60 场景与版本清单已冻结；评分器离线 10 项与最终补断言 18 项负例通过。新种子为 67 商品/67 Offer、172 lexical 文档；源码快照已保存。首批 20 次真实模型/API 执行已完成，用已捕获证据修正两项评分器错误，业务 16/20、同时满足功能与性能 12/20。[run-03](../work/ceres-v4-evaluation/run-03/manifest.json) 保存全部实际执行，[run-04](../work/ceres-v4-evaluation/run-04/manifest.json) 是最终补足商品/数量/金额后的离线评分批次；[run-01](../work/ceres-v4-evaluation/run-01/report.md) 原始首批保留，不增加产品执行。
 
-正式汇总见 [自动验收报告](../work/ceres-v4-evaluation/acceptance/acceptance.md) 和 [机器记录](../work/ceres-v4-evaluation/acceptance/acceptance.json)：业务 76/100、业务与性能 55/100、核心三次均达标 6/20；28/162 回合超过 15 秒。有效 UI 两旅程业务 1/2、性能 1/2、两者同时达标 0/2。裁判 36 pass/23 fail/41 unknown，仅作未校准诊断；来源输入缺口、旧评分提示和 usage 缺失已披露。严格自动验收未通过，人工未评测，产品未修改。
+最新派生汇总见 [自动验收报告](../work/ceres-v4-evaluation/review-20261007/acceptance-final-v3/acceptance.md) 和 [机器记录](../work/ceres-v4-evaluation/review-20261007/acceptance-final-v3/acceptance.json)；[原正式记录](../work/ceres-v4-evaluation/acceptance/acceptance.md) 保留。业务76/100、业务及适用性能55/100、核心三次均达标6/20；55含H20无用户回合的1项组件业务达标，有计时回合的执行中业务与性能同时达标54/99，H20不作为时延通过证据。28/162回合超过15秒。有效UI两旅程业务1/2、性能1/2、两者同时达标0/2。裁判36 pass/23 fail/41 unknown，仅作未校准诊断；来源输入缺口、旧评分提示和usage缺失已披露。严格自动验收未通过，人工未评测，产品未修改。
 
 双轴审查及修复闭环见 [最终审查记录](../work/ceres-v4-evaluation/final-review.md)。下一步为用户审阅本次自动评测交付，产品问题按下列独立修复票推进；本批不追加真实模型/UI采样。
+
+用户追加code-review与修复后，审查基线仍为ee7ce10，修复基线为abd6139；修复中断/失败批次归档、重评分分类、汇总一致性及来源指针和无证据模板，见 [本轮双轴记录](../work/ceres-v4-evaluation/review-20261007/code-review.md)。所有修复只做离线负例、原轨迹派生记录与摘要核验，当前15项单测通过；历史100次原始输入不改写。
 
 正式证据统一放在 `work/ceres-v4-evaluation/`。本 TASK 只维护本次评测状态，不改写 next-08 或历史任务状态。
 

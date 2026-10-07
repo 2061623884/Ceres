@@ -1,0 +1,10 @@
+{
+  "python_executable": "C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+  "python_version": "Python 3.12.10",
+  "cwd": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts",
+  "test_bytecode_writes_disabled": true,
+  "target_tests": [
+    "test_eval_v4.ScoringTests.test_rescore_preserves_preparation_and_runner_failures",
+    "test_eval_v4.ScoringTests.test_rescore_keeps_missing_attempts_and_unexecuted_tasks_in_denominator"
+  ]
+}
