@@ -375,3 +375,240 @@ def test_drink_type_and_filter_keep_budget_quantity_until_explicit_confirmation(
     assert [(row["sku_id"], row["quantity"]) for row in cart["items"]] == [
         ("demo:cn-coke-original-500ml-bottle", 2)
     ]
+
+
+def _browse_to_one_displayed_pepsi(indexed_client, semantic_provider, kev_api, final_step):
+    """Browse drinks, choose cola, then the Pepsi brand card. ``final_step`` is the next model call."""
+    kev_api["choices"]["capability"] = "purchase_modify"
+
+    def show_cola_products(request):
+        matches = request["query_results"][0]["matches"]
+        return {
+            "reply": "有多款可乐可选，也可以按品牌或规格筛选。",
+            "display_refs": [
+                row["ref"] for row in matches if row.get("family_id") == "cola"
+            ],
+        }
+
+    def apply_pepsi_filter(request):
+        if not request.get("query_results"):
+            answer = request["clarification_answer"]
+            return {
+                "target": {"kind": "category", "name": "可乐", "intent": "explore"},
+                "constraints": {"specification": {"brand": "百事可乐"}},
+                "lookups": [{"kind": "product", "query": "可乐"}],
+                "resolved_questions": [answer["question_id"]],
+            }
+        matches = request["query_results"][0]["matches"]
+        return {
+            "reply": "筛选结果如下。",
+            "display_refs": [
+                row["ref"] for row in matches if row.get("brand") == "百事可乐"
+            ],
+        }
+
+    provider = semantic_provider(
+        [
+            {
+                "target": {
+                    "kind": "category",
+                    "name": "饮料",
+                    "intent": "buy",
+                    "quantity": 2,
+                },
+                "constraints": {"budget_yuan": 20},
+                "lookups": [{"kind": "product", "query": "饮料"}],
+            },
+            Continuation(show_cola_products),
+            apply_pepsi_filter,
+            final_step,
+        ]
+    )
+    session_id = create_session(indexed_client)
+    cart_before = indexed_client.get("/api/v1/cart").json()
+
+    broad = send_turn(indexed_client, session_id, "买点饮料，两瓶，预算20元")
+    type_question = next(
+        question for question in broad["pending_clarifications"]
+        if question["slot"] == "product_type"
+    )
+    cola = next(option for option in type_question["options"] if option["label"] == "可乐")
+    selected_type = send_turn(
+        indexed_client,
+        session_id,
+        "可乐",
+        broad,
+        clarification_answer={
+            "question_id": type_question["question_id"],
+            "option_id": cola["id"],
+        },
+    )
+    filter_question = next(
+        question for question in selected_type["pending_clarifications"]
+        if question["slot"] == "product_filter"
+    )
+    pepsi = next(
+        option for option in filter_question["options"]
+        if option["label"] == "品牌：百事可乐"
+    )
+    filtered = send_turn(
+        indexed_client,
+        session_id,
+        pepsi["label"],
+        selected_type,
+        clarification_answer={
+            "question_id": filter_question["question_id"],
+            "option_id": pepsi["id"],
+        },
+    )
+    assert len(filtered["product_cards"]) == 1
+    assert filtered["product_cards"][0]["sku_id"] == "demo:cn-pepsi-original-330ml-can"
+    assert filtered["plan"] is None
+    assert indexed_client.get("/api/v1/cart").json() == cart_before
+    return provider, session_id, cart_before, filtered
+
+
+def _displayed_pepsi(request):
+    return next(
+        row
+        for row in request["displayed_candidates"]
+        if row["target_id"] == "demo:cn-pepsi-original-330ml-can"
+    )
+
+
+def test_selecting_a_displayed_drink_keeps_the_active_budget_on_its_new_plan(
+    indexed_client, semantic_provider, kev_api
+):
+    def select_displayed_pepsi(request):
+        return pick("product", _displayed_pepsi(request), quantity=2)
+
+    provider, session_id, cart_before, filtered = _browse_to_one_displayed_pepsi(
+        indexed_client, semantic_provider, kev_api, select_displayed_pepsi
+    )
+    selected = send_turn(indexed_client, session_id, "就选这罐百事可乐", filtered)
+
+    assert selected["plan"] is not None and selected["plan"]["can_confirm"]
+    assert selected["plan"]["items"][0]["quantity"] == 2
+    assert selected["plan"]["items"][0]["unit_price_fen"] == 300
+    session = indexed_client.get(f"/api/v1/guide/sessions/{session_id}").json()
+    assert session["constraints_summary"]["budget_fen"] == 2000
+    assert indexed_client.get("/api/v1/cart").json() == cart_before
+    assert provider.requests[-1]["requirements"]["budget_fen"] == 2000
+
+
+def test_explicit_budget_on_a_displayed_drink_replaces_the_active_budget(
+    indexed_client, semantic_provider, kev_api
+):
+    def select_with_explicit_budget(request):
+        return pick(
+            "product",
+            _displayed_pepsi(request),
+            quantity=2,
+            constraints={"budget_yuan": 10},
+        )
+
+    _provider, session_id, cart_before, filtered = _browse_to_one_displayed_pepsi(
+        indexed_client, semantic_provider, kev_api, select_with_explicit_budget
+    )
+    selected = send_turn(indexed_client, session_id, "就选这罐，预算10元", filtered)
+
+    assert selected["plan"]["items"][0]["quantity"] == 2
+    session = indexed_client.get(f"/api/v1/guide/sessions/{session_id}").json()
+    assert session["constraints_summary"]["budget_fen"] == 1000
+    assert indexed_client.get("/api/v1/cart").json() == cart_before
+
+
+def test_clearing_budget_on_a_displayed_drink_does_not_keep_the_active_budget(
+    indexed_client, semantic_provider, kev_api
+):
+    def select_and_clear_budget(request):
+        return pick(
+            "product",
+            _displayed_pepsi(request),
+            quantity=2,
+            constraints={"clear": ["budget_yuan"]},
+        )
+
+    _provider, session_id, cart_before, filtered = _browse_to_one_displayed_pepsi(
+        indexed_client, semantic_provider, kev_api, select_and_clear_budget
+    )
+    selected = send_turn(indexed_client, session_id, "就选这罐，不限预算", filtered)
+
+    assert selected["plan"] is not None and selected["plan"]["can_confirm"], selected["message"]
+    assert selected["plan"]["items"][0]["sku_id"] == "demo:cn-pepsi-original-330ml-can"
+    session = indexed_client.get(f"/api/v1/guide/sessions/{session_id}").json()
+    assert session["constraints_summary"]["budget_fen"] is None
+    assert indexed_client.get("/api/v1/cart").json() == cart_before
+
+
+def test_a_separate_snack_purchase_does_not_inherit_the_drink_budget(
+    indexed_client, semantic_provider, kev_api
+):
+    kev_api["choices"]["capability"] = "purchase_modify"
+
+    def show_cola_products(request):
+        matches = request["query_results"][0]["matches"]
+        return {
+            "reply": "有多款可乐可选。",
+            "display_refs": [
+                row["ref"] for row in matches if row.get("family_id") == "cola"
+            ],
+        }
+
+    def buy_potato_chips(request):
+        del request
+        return {
+            "target": {
+                "kind": "product",
+                "name": "原味薯片",
+                "intent": "buy",
+                "quantity": 1,
+            },
+            "lookups": [{"kind": "product", "query": "原味薯片"}],
+        }
+
+    semantic_provider(
+        [
+            {
+                "target": {
+                    "kind": "category",
+                    "name": "饮料",
+                    "intent": "buy",
+                    "quantity": 2,
+                },
+                "constraints": {"budget_yuan": 20},
+                "lookups": [{"kind": "product", "query": "饮料"}],
+            },
+            Continuation(show_cola_products),
+            buy_potato_chips,
+        ]
+    )
+    session_id = create_session(indexed_client)
+    cart_before = indexed_client.get("/api/v1/cart").json()
+    broad = send_turn(indexed_client, session_id, "买点饮料，两瓶，预算20元")
+    type_question = next(
+        question for question in broad["pending_clarifications"]
+        if question["slot"] == "product_type"
+    )
+    cola = next(option for option in type_question["options"] if option["label"] == "可乐")
+    shown = send_turn(
+        indexed_client,
+        session_id,
+        "可乐",
+        broad,
+        clarification_answer={
+            "question_id": type_question["question_id"],
+            "option_id": cola["id"],
+        },
+    )
+    assert shown["plan"] is None
+    assert shown["product_cards"]
+    assert indexed_client.get("/api/v1/cart").json() == cart_before
+
+    selected = send_turn(indexed_client, session_id, "改买原味薯片", shown)
+
+    assert selected["plan"] is not None and selected["plan"]["can_confirm"], selected["message"]
+    assert selected["plan"]["items"][0]["sku_id"] == "demo:snack-original-potato-chips-70g-bag"
+    session = indexed_client.get(f"/api/v1/guide/sessions/{session_id}").json()
+    assert session["constraints_summary"]["budget_fen"] is None
+    assert indexed_client.get("/api/v1/cart").json() == cart_before

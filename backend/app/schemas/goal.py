@@ -337,7 +337,8 @@ class Understanding(BaseModel):
     Built by ``app.agent.protocol.parse_proposal`` from the model's independent
     dimensions. It carries no route, readiness, version, price or stock — the
     gate computes those from this object plus the server's own snapshot. A new
-    goal and a field patch are mutually exclusive.
+    goal and a set-patch are mutually exclusive; a clear list may travel with
+    the new goal so a revoked field is not filled back in.
     """
 
     model_config = ConfigDict(extra="forbid")
@@ -359,7 +360,13 @@ class Understanding(BaseModel):
 
     @model_validator(mode="after")
     def _new_goal_xor_patch(self) -> "Understanding":
-        if self.new_goal is not None and self.changes is not None:
+        # A new goal can carry a clear list for fields it refuses to inherit.
+        # A set-patch still cannot accompany a new goal.
+        if (
+            self.new_goal is not None
+            and self.changes is not None
+            and (self.changes.set.stated() or self.goal_relation == "amend")
+        ):
             raise ValueError("new_goal 与 changes 只能二选一")
         if self.goal_relation in ("new", "append", "switch") and self.new_goal is None:
             raise ValueError(f"goal_relation={self.goal_relation} 必须给出 new_goal")

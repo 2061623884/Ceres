@@ -514,6 +514,12 @@ def _attach_understanding(proposal: SemanticProposal, top: dict[str, Any]) -> No
         # A broad category purchase is still deciding which live supply fits
         # this goal. Its current constraints must filter the type overview too.
         _filter_reads(proposal, stated)
+    if goal is not None and clear:
+        # The buy goal itself does not restate a revoked field. Keep the clear
+        # list so the existing add inherit can see it on this same turn.
+        revoked = [name for name in clear if name not in stated]
+        if revoked:
+            changes = GoalChanges(clear=revoked)
 
     if goal is not None:
         goal_relation = _RELATION[relation]

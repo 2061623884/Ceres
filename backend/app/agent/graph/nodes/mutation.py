@@ -548,11 +548,27 @@ def _prepare(
     saved = dict(context.get("session_constraints") or {})
     changes = proposal.understanding.changes
     clear = changes.clear if changes is not None else []
+    displayed_refs = {
+        str(row["ref"])
+        for row in (
+            runtime.snapshot.displayed_candidates if runtime.snapshot is not None else []
+        )
+        if row.get("ref")
+    }
     for item in authorized:
         authorization.inherit_candidate_constraints(item, decision)
         if item.verb == "add":
             if not item.specification and "specification" not in clear:
                 item.specification = dict(saved.get("specification") or {})
+            # Only a continuation of a candidate on screen inherits the active
+            # budget. This turn's explicit budget and changes.clear stay as stated.
+            if (
+                item.budget_fen is None
+                and "budget_yuan" not in clear
+                and item.candidate_ref in displayed_refs
+                and saved.get("budget_fen") is not None
+            ):
+                item.budget_fen = int(saved["budget_fen"])
         item.excluded_ingredients = sorted(expand_ingredient_terms(item.excluded_ingredients))
 
     if not authorized:
