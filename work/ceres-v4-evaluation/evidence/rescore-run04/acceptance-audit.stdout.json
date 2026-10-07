@@ -1,0 +1,281 @@
+{
+  "acceptance_json_sha256": "f7fe004a750b9b6706faee5b0ed66736dd8b56b2b7545889daa655557e3b0cd9",
+  "acceptance_md_sha256": "ee798097ed72936656125dcf345283689d512615178f39d895d8551cf90b9a0d",
+  "failures_json_sha256": "7b5df117047c58f1aea10245b3ff61aa8510f3d8cfe14f02169648425c14ff24",
+  "source_hashes_verified": {
+    "source_manifest_sha256": "cd35940992fd167819a35767a1c062aaba2cb09360b1cb1510456fa39b6f14f3",
+    "source_summary_sha256": "801924ee9d5560284ead45d61d9d026f123b8671f758fc4ec6b26f42c1797f04",
+    "ui_result_sha256": "3190cb5752e07d5f93856d1a601268fb6c1eca412c5253f672cc3840b8a2bc06",
+    "diagnostic_manifest_sha256": "034ae199f7d28148a2e4a3d408ba835f95d0b70fb55bda89d82684fb33f531f6",
+    "reporter_sha256": "db5ab37fb2439bdd64d6c9165068b3c4b7c790ac37e98df4c7b4b73413a57ad4"
+  },
+  "candidate_head": "ac895fd620af617fa31f4e0006841a4d6a89cd53",
+  "case_version_parent": "ceres1-v4-tasks-20261007-v1",
+  "case_version_final": "ceres1-v4-tasks-20261007-v2",
+  "api": {
+    "cases": 60,
+    "executions": 100,
+    "passed": 76,
+    "failed": 24,
+    "fully_passed": 55,
+    "core_pass3": 6
+  },
+  "diagnostics": {
+    "calls": 100,
+    "verdicts": {
+      "fail": 23,
+      "pass": 36,
+      "unknown": 41
+    },
+    "errors": 38
+  },
+  "ui": [
+    {
+      "name": "activity-salad",
+      "status": "passed",
+      "performance_passed": false
+    },
+    {
+      "name": "snack-bubble",
+      "status": "failed",
+      "performance_passed": true
+    }
+  ],
+  "failure_records": 45,
+  "probe_verification": [
+    {
+      "directory": "diagnostics-run03",
+      "calls": 1,
+      "verdict": "unknown",
+      "parameter": "enable_thinking=false",
+      "result_sha256": "38af216f3f856bcf12d018b6c030e5750b2ff85414e172457155acdd4efdb024",
+      "manifest_sha256": "2102a52d77afbc75c1eb9e2ded3f9774ec81ba39d547f9691c1a79cd32986204"
+    },
+    {
+      "directory": "diagnostics-run03-v2",
+      "calls": 1,
+      "verdict": "unknown",
+      "parameter": "chat_template_kwargs.enable_thinking=false",
+      "result_sha256": "029b25327aacfdbb9a6b942237229090c9cd171f322cb33150dd05720ade0092",
+      "manifest_sha256": "42ab06b708154ac94d53183f89314888dc8abc71e6e01cbbfab7708f3e833845"
+    }
+  ],
+  "token_usage_recomputed_from_raw_calls": {
+    "role": {
+      "calls": 140,
+      "calls_with_usage": 138,
+      "input_tokens": {
+        "coverage": 138,
+        "reported_sum": 676540
+      },
+      "output_tokens": {
+        "coverage": 138,
+        "reported_sum": 50925
+      },
+      "total_tokens": {
+        "coverage": 138,
+        "reported_sum": 727465
+      },
+      "input_plus_output": {
+        "coverage": 138,
+        "derived_sum": 727465
+      },
+      "request_latency_ms": {
+        "coverage": 140,
+        "p50": 3950.3,
+        "p95": 25211.7,
+        "max": 45380.5
+      },
+      "reasoning_tokens": {
+        "coverage": 138,
+        "reported_sum": 41431
+      }
+    },
+    "mercury": {
+      "calls": 43,
+      "calls_with_usage": 43,
+      "input_tokens": {
+        "coverage": 43,
+        "reported_sum": 76177
+      },
+      "output_tokens": {
+        "coverage": 43,
+        "reported_sum": 6702
+      },
+      "total_tokens": {
+        "coverage": 43,
+        "reported_sum": 82879
+      },
+      "input_plus_output": {
+        "coverage": 43,
+        "derived_sum": 82879
+      },
+      "request_latency_ms": {
+        "coverage": 43,
+        "p50": 1852.7,
+        "p95": 11015.8,
+        "max": 31097.4
+      },
+      "reasoning_tokens": {
+        "coverage": 43,
+        "reported_sum": 4285
+      }
+    },
+    "kev": {
+      "calls": 265,
+      "calls_with_usage": 265,
+      "input_tokens": {
+        "coverage": 265,
+        "reported_sum": 137292
+      },
+      "output_tokens": {
+        "coverage": 265,
+        "reported_sum": 19341
+      },
+      "total_tokens": {
+        "coverage": 0,
+        "reported_sum": null
+      },
+      "input_plus_output": {
+        "coverage": 265,
+        "derived_sum": 156633
+      },
+      "request_latency_ms": {
+        "coverage": 265,
+        "p50": 985.9,
+        "p95": 1429.9,
+        "max": 1766.8
+      },
+      "reasoning_tokens": {
+        "coverage": 0,
+        "reported_sum": null
+      }
+    },
+    "background_memory": {
+      "calls": 44,
+      "calls_with_usage": 44,
+      "input_tokens": {
+        "coverage": 44,
+        "reported_sum": 13893
+      },
+      "output_tokens": {
+        "coverage": 44,
+        "reported_sum": 20629
+      },
+      "total_tokens": {
+        "coverage": 44,
+        "reported_sum": 34522
+      },
+      "input_plus_output": {
+        "coverage": 44,
+        "derived_sum": 34522
+      },
+      "request_latency_ms": {
+        "coverage": 44,
+        "p50": 4623.1,
+        "p95": 27144.0,
+        "max": 36326.9
+      },
+      "reasoning_tokens": {
+        "coverage": 44,
+        "reported_sum": 19773
+      }
+    },
+    "original_judge": {
+      "calls": 100,
+      "calls_with_usage": 99,
+      "input_tokens": {
+        "coverage": 99,
+        "reported_sum": 916378
+      },
+      "output_tokens": {
+        "coverage": 99,
+        "reported_sum": 118550
+      },
+      "total_tokens": {
+        "coverage": 99,
+        "reported_sum": 1034928
+      },
+      "input_plus_output": {
+        "coverage": 99,
+        "derived_sum": 1034928
+      },
+      "request_latency_ms": {
+        "coverage": 100,
+        "p50": 11506.6,
+        "p95": 36935.6,
+        "max": 45360.6
+      },
+      "reasoning_tokens": {
+        "coverage": 99,
+        "reported_sum": 114297
+      }
+    },
+    "diagnostic_judge": {
+      "calls": 100,
+      "calls_with_usage": 91,
+      "input_tokens": {
+        "coverage": 91,
+        "reported_sum": 858945
+      },
+      "output_tokens": {
+        "coverage": 91,
+        "reported_sum": 215907
+      },
+      "total_tokens": {
+        "coverage": 91,
+        "reported_sum": 1074852
+      },
+      "input_plus_output": {
+        "coverage": 91,
+        "derived_sum": 1074852
+      },
+      "request_latency_ms": {
+        "coverage": 100,
+        "p50": 21633.2,
+        "p95": 45332.5,
+        "max": 45363.0
+      },
+      "reasoning_tokens": {
+        "coverage": 91,
+        "reported_sum": 185092
+      }
+    },
+    "failed_probe_judge": {
+      "calls": 2,
+      "calls_with_usage": 2,
+      "input_tokens": {
+        "coverage": 2,
+        "reported_sum": 13704
+      },
+      "output_tokens": {
+        "coverage": 2,
+        "reported_sum": 2400
+      },
+      "total_tokens": {
+        "coverage": 2,
+        "reported_sum": 16104
+      },
+      "input_plus_output": {
+        "coverage": 2,
+        "derived_sum": 16104
+      },
+      "request_latency_ms": {
+        "coverage": 2,
+        "p50": 10208.7,
+        "p95": 10719.0,
+        "max": 10719.0
+      },
+      "reasoning_tokens": {
+        "coverage": 2,
+        "reported_sum": 2400
+      }
+    }
+  },
+  "automatic_acceptance": "not_passed",
+  "report_md_claims_verified": [
+    "100 API executions",
+    "normal completion 74/98",
+    "compliant refusal 2/2"
+  ]
+}

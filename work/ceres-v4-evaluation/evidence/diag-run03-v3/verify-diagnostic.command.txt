@@ -1,0 +1,1 @@
+& "C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe" -X utf8 "C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-v4-evaluation\evidence\diag-run03-v3\verify-diagnostic.py"

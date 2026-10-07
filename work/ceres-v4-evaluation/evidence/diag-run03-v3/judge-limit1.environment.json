@@ -1,0 +1,13 @@
+{
+  "product_head": "ac895fd620af617fa31f4e0006841a4d6a89cd53",
+  "llm_mode": "live",
+  "retrieval_mode": "lexical",
+  "candidate_llm_model": "qwen3.8-27b",
+  "source_llm_max_output_tokens": 3072,
+  "original_request_max_tokens": 1200,
+  "runner_sha256": "57cbd92120e18696273e29044b11dc271d842f4054b8a699dfcfe33947f70f88",
+  "source_manifest_sha256": "04274cdbaa38799bac8a3ef40f418a70c8839251a4c08a30d4572ced74b518bb",
+  "source_R01_r1_result_sha256": "19a29fe7683f116d7bf0178d2c744fae8830b4c8f5e0a0099c28bab08cb63c3d",
+  "limit": 1,
+  "product_tasks_reexecuted": 0
+}

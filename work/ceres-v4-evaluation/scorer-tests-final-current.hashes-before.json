@@ -1,0 +1,14 @@
+[
+  {
+    "path": "scripts\\eval_v4.py",
+    "sha256": "04582eac4e9195e6a0687898bbc14c4b2baa95398b70f6c076dc184d4fcd6c8b"
+  },
+  {
+    "path": "scripts\\test_eval_v4.py",
+    "sha256": "d9c0b87a15888fb23e148708294b9a5e160d9df1fdc6f7b97670c2fdbbbe73c1"
+  },
+  {
+    "path": "evals\\v4\\cases.json",
+    "sha256": "aeca61c561830db361e88251499241fa5a7742926d5b94fdc382e6bbfbf349b8"
+  }
+]

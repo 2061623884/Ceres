@@ -1,0 +1,12 @@
+{
+  "source": "scripts/eval_v4_record.py",
+  "snapshot": "eval_v4_record.py.final-frozen.py",
+  "source_sha256": "db5ab37fb2439bdd64d6c9165068b3c4b7c790ac37e98df4c7b4b73413a57ad4",
+  "snapshot_sha256": "db5ab37fb2439bdd64d6c9165068b3c4b7c790ac37e98df4c7b4b73413a57ad4",
+  "source03_manifest_sha256": "04274cdbaa38799bac8a3ef40f418a70c8839251a4c08a30d4572ced74b518bb",
+  "source04_manifest_sha256": "cd35940992fd167819a35767a1c062aaba2cb09360b1cb1510456fa39b6f14f3",
+  "source04_cases_sha256": "18ce0e2395e6b5f99a8424e05bc6092b3c5aa7de664ecc3df7fb3b5855e1d8f0",
+  "diagnostics_v3_manifest_sha256": "034ae199f7d28148a2e4a3d408ba835f95d0b70fb55bda89d82684fb33f531f6",
+  "ui_run02_result_sha256": "3190cb5752e07d5f93856d1a601268fb6c1eca412c5253f672cc3840b8a2bc06",
+  "acceptance_absent": true
+}

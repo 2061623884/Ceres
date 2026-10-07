@@ -1,0 +1,59 @@
+{
+  "captured_at_utc": "2026-10-07T07:54:33.6889934+00:00",
+  "receipt_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\ui\\runtime-receipt.json",
+  "runtime_receipt_sha256": "fe587c61b8dc800f761bf651b85fc72b7336c407fcfe7d47e3b0359008d5ab79",
+  "vite_config_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\ui-vite.config.mjs",
+  "vite_config_sha256": "b51c44b0fc9f187a8497e46d2e585782ad4836a243e154ec9b1cc13bb5b74ffe",
+  "proxy_api_target": "http://127.0.0.1:18012",
+  "backend": {
+    "receipt_pid": 68440,
+    "listener": {
+      "local_port": 18012,
+      "local_address": "127.0.0.1",
+      "listener_pid": 68440,
+      "process_name": "python.exe",
+      "executable_path": "C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+      "command_line": "\"C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\python.exe\" -X utf8 -m uvicorn app.main:app --host 127.0.0.1 --port 18012",
+      "process_start_time": "2026-10-07T15:47:09.8088990+08:00"
+    },
+    "working_directory_from_exec_command": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08\\backend",
+    "working_directory_independently_verified": false,
+    "command": "python.exe -X utf8 -m uvicorn app.main:app --host 127.0.0.1 --port 18012",
+    "effective_mode_probe": {
+      "llm_mode": "live",
+      "business_data_mode": "demo",
+      "retrieval_mode": "lexical",
+      "database_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\ui\\runtime.sqlite3"
+    }
+  },
+  "frontend": {
+    "receipt_pid": 26128,
+    "listener": {
+      "local_port": 18443,
+      "local_address": "127.0.0.1",
+      "listener_pid": 26128,
+      "process_name": "node.exe",
+      "executable_path": "C:\\Users\\20616\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+      "command_line": "\"C:\\Users\\20616\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe\" C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08\\frontend\\node_modules\\vite\\bin\\vite.js --config C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\ui-vite.config.mjs",
+      "process_start_time": "2026-10-07T15:47:49.0458688+08:00"
+    },
+    "working_directory_from_exec_command": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08\\frontend",
+    "working_directory_independently_verified": false,
+    "vite_config_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\ui-vite.config.mjs",
+    "vite_config_sha256": "b51c44b0fc9f187a8497e46d2e585782ad4836a243e154ec9b1cc13bb5b74ffe",
+    "proxy_api_target": "http://127.0.0.1:18012"
+  },
+  "unrelated_8012": {
+    "listener": {
+      "local_port": 8012,
+      "local_address": "127.0.0.1",
+      "listener_pid": 24512,
+      "process_name": "python.exe",
+      "executable_path": "C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+      "command_line": "\"C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\python.exe\" -X utf8 -m uvicorn app.main:app --host 127.0.0.1 --port 8012",
+      "process_start_time": "2026-10-06T11:41:26.2784171+08:00"
+    },
+    "left_untouched": true
+  },
+  "cwd_note": "Working directory values are the exec_command workdir arguments used at process launch; Windows live process current directories were not independently queried."
+}

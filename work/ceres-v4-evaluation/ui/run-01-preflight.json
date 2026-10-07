@@ -1,0 +1,29 @@
+{
+  "checked_at_utc": "2026-10-07T07:55:11.5889449+00:00",
+  "output_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\ui\\run-01",
+  "output_was_absent": true,
+  "frontend_url": "http://127.0.0.1:18443/",
+  "app_url": "http://127.0.0.1:18443/",
+  "product_head": "ac895fd620af617fa31f4e0006841a4d6a89cd53",
+  "llm_mode": "live",
+  "business_data_mode": "demo",
+  "retrieval_mode": "lexical",
+  "index_version": "idx-81e9fa689baef6b5",
+  "backend_listener_pids": [
+    68440
+  ],
+  "receipt_backend_pid": 68440,
+  "frontend_listener_pids": [
+    26128
+  ],
+  "receipt_frontend_pid": 26128,
+  "untouched_8012_listener_pids": [
+    24512
+  ],
+  "module_http_status": 200,
+  "served_app_module_sha256": "c563850e51a65fbffbdf1ff8e261f8a3d3aa47f57b725e7dcb8fa1e0177ec3ad",
+  "vite_config_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\ui-vite.config.mjs",
+  "vite_config_sha256": "b51c44b0fc9f187a8497e46d2e585782ad4836a243e154ec9b1cc13bb5b74ffe",
+  "proxy_api_target": "http://127.0.0.1:18012",
+  "runtime_receipt_sha256": "fe587c61b8dc800f761bf651b85fc72b7336c407fcfe7d47e3b0359008d5ab79"
+}

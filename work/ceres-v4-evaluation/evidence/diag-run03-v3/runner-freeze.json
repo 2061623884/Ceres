@@ -1,0 +1,14 @@
+{
+  "source_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4_judge.py",
+  "frozen_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\evidence\\diag-run03-v3\\eval_v4_judge.frozen.py",
+  "source_sha256": "57cbd92120e18696273e29044b11dc271d842f4054b8a699dfcfe33947f70f88",
+  "frozen_sha256": "57cbd92120e18696273e29044b11dc271d842f4054b8a699dfcfe33947f70f88",
+  "source_manifest_sha256": "04274cdbaa38799bac8a3ef40f418a70c8839251a4c08a30d4572ced74b518bb",
+  "source_R01_r1_result_sha256": "19a29fe7683f116d7bf0178d2c744fae8830b4c8f5e0a0099c28bab08cb63c3d",
+  "source_output_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03",
+  "diagnostic_output_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3",
+  "change": "max_tokens set to source effective_configuration.llm_max_output_tokens; all other request fields unchanged",
+  "thinking_override": "none",
+  "product_tasks_reexecuted": 0,
+  "frozen_at_utc": "2026-10-07T08:24:32.4716096Z"
+}

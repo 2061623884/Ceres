@@ -1,0 +1,1 @@
+$hash = Get-FileHash frozen.mjs; if ($hash -ne $manifest.runner_sha256) { throw "hash mismatch" }

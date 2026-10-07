@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "C:\Users\20616\Desktop\Agent\Agent��Ʒ\Ceres\work\ceres-v4-evaluation\ui\run-02-audit.py", line 55, in <module>
+    print(json.dumps({
+UnicodeEncodeError: 'gbk' codec can't encode character '\u2304' in position 7295: illegal multibyte sequence

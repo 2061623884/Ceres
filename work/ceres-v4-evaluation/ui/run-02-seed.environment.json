@@ -1,0 +1,10 @@
+{
+  "DATABASE_URL": "sqlite:///C:/Users/20616/Desktop/Agent/Agent产品/Ceres/work/ceres-v4-evaluation/ui/runtime-run02.sqlite3",
+  "RETRIEVAL_MODE": "lexical",
+  "RETRIEVAL_INDEX_DIR": "C:/Users/20616/Desktop/Agent/Agent产品/Ceres/work/ceres-v4-evaluation/retrieval-index",
+  "BUSINESS_DATA_MODE": "demo",
+  "LLM_MODE": "live",
+  "BACKEND_PORT": "18012",
+  "FRONTEND_PORT": "18443",
+  "product_head": "ac895fd620af617fa31f4e0006841a4d6a89cd53"
+}

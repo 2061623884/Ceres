@@ -1,0 +1,9 @@
+{
+  "method": "GET",
+  "endpoint": "http://127.0.0.1:18009/openapi.json",
+  "status_code": 200,
+  "title": "kev",
+  "version": "0.1.0",
+  "model_endpoint_called": false,
+  "tunnel_pid": 68048
+}

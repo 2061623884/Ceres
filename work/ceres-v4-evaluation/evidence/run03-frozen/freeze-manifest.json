@@ -1,0 +1,21 @@
+{
+  "candidate_head": "ac895fd620af617fa31f4e0006841a4d6a89cd53",
+  "files": [
+    {
+      "source": "scripts\\eval_v4.py",
+      "frozen_file": "eval_v4.py",
+      "sha256": "e732ef2360685dae0b214b5251b3fd8a0db1e81213ed30d033ac1b526f2bfa34"
+    },
+    {
+      "source": "scripts\\test_eval_v4.py",
+      "frozen_file": "test_eval_v4.py",
+      "sha256": "7471221c6ddd1d23ed2a6f1317fa35da5928502e6e73b7d486e3d07b76b4a0ea"
+    },
+    {
+      "source": "evals\\v4\\cases.json",
+      "frozen_file": "cases.json",
+      "sha256": "aeca61c561830db361e88251499241fa5a7742926d5b94fdc382e6bbfbf349b8"
+    }
+  ],
+  "frozen_at": "2026-10-07T07:34:00.6534622Z"
+}

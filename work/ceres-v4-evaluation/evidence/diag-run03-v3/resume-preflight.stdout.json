@@ -1,0 +1,25 @@
+{
+  "checks": {
+    "frozen_runner_hash_matches_current": true,
+    "source_manifest_hash_matches": true,
+    "schedule_is_100": true,
+    "all_source_results_match_manifest_hashes": true,
+    "only_R01_r1_is_already_completed": true,
+    "R01_r1_source_hash_preserved": true,
+    "output_manifest_requests_resume_mode": true,
+    "candidate_config_identity_matches": true,
+    "environment_identity_matches": true,
+    "output_directory_is_v3": true
+  },
+  "all_checks_passed": true,
+  "runner_sha256": "57cbd92120e18696273e29044b11dc271d842f4054b8a699dfcfe33947f70f88",
+  "source_manifest_sha256": "04274cdbaa38799bac8a3ef40f418a70c8839251a4c08a30d4572ced74b518bb",
+  "source_result_count": 100,
+  "diagnostic_completed_before_resume": 1,
+  "pending_count": 99,
+  "completed_ids": [
+    "R01-r1"
+  ],
+  "R01_r1_diagnostic_result_sha256": "5cbe87fc9fbba4345c0fc8db04af447452f347c8605eb8503d81ec9521c6d0b4",
+  "product_tasks_reexecuted": 0
+}

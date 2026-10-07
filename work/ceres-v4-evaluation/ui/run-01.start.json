@@ -1,0 +1,19 @@
+{
+  "started_at_local": "2026-10-07T15:55:39.6821486+08:00",
+  "execution_session_id": 66316,
+  "process_id": 44192,
+  "executable_path": "C:\\Users\\20616\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+  "command_line": "\"C:\\Users\\20616\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe\" C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\ui\\eval_v4_ui.frozen.mjs",
+  "working_directory_from_exec_command": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres",
+  "working_directory_independently_verified": false,
+  "runner_sha256": "fc294305380fbd0a32a43894bae042f1308d352b21455e45cc142c202a49bb0a",
+  "runtime_receipt_sha256": "fe587c61b8dc800f761bf651b85fc72b7336c407fcfe7d47e3b0359008d5ab79",
+  "command_file": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\ui\\run-01.command.txt",
+  "environment_file": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\ui\\run-01.environment.json",
+  "stdout_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\ui\\run-01.stdout.txt",
+  "stderr_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\ui\\run-01.stderr.txt",
+  "exit_code": 1,
+  "process_still_running": false,
+  "ui_journeys_recorded": 1,
+  "note": "One journey began; runner ended before second journey after uncaught Playwright response timeout. No rerun."
+}

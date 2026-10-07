@@ -1,0 +1,156 @@
+{
+  "planned_cases": 60,
+  "planned_executions": 100,
+  "actual_executions": 20,
+  "counts": {
+    "passed": 16,
+    "failed": 4,
+    "preparation_failed": 0,
+    "runner_failed": 0,
+    "not_executed": 80
+  },
+  "business_pass_rate": 0.16,
+  "fully_passed": 12,
+  "full_pass_rate": 0.12,
+  "denominator": "all scheduled executions, including preparation/runner failures and not executed",
+  "critical_violation_count": 0,
+  "critical_violations": [],
+  "core_pass3": {
+    "passed": 0,
+    "total": 20,
+    "cases": {
+      "R20": false,
+      "R05": false,
+      "R16": false,
+      "R14": false,
+      "R13": false,
+      "R01": false,
+      "R08": false,
+      "R09": false,
+      "R03": false,
+      "R07": false,
+      "R06": false,
+      "R19": false,
+      "R35": false,
+      "R18": false,
+      "R17": false,
+      "R15": false,
+      "R11": false,
+      "R02": false,
+      "R10": false,
+      "R12": false
+    }
+  },
+  "reply_latency_ms": {
+    "samples": 35,
+    "p50": 5752.0,
+    "p95": 23671.1,
+    "max": 28239.4
+  },
+  "groups": {
+    "aftersales": {
+      "planned": 12,
+      "business_passed": 1,
+      "fully_passed": 0
+    },
+    "drink": {
+      "planned": 15,
+      "business_passed": 3,
+      "fully_passed": 1
+    },
+    "memory": {
+      "planned": 12,
+      "business_passed": 1,
+      "fully_passed": 1
+    },
+    "policy": {
+      "planned": 10,
+      "business_passed": 2,
+      "fully_passed": 2
+    },
+    "purchase": {
+      "planned": 19,
+      "business_passed": 3,
+      "fully_passed": 3
+    },
+    "routing": {
+      "planned": 11,
+      "business_passed": 2,
+      "fully_passed": 2
+    },
+    "snack": {
+      "planned": 11,
+      "business_passed": 2,
+      "fully_passed": 1
+    },
+    "theme": {
+      "planned": 10,
+      "business_passed": 2,
+      "fully_passed": 2
+    }
+  },
+  "automatic_acceptance": "not_passed",
+  "human_acceptance": "not_evaluated",
+  "semantic_judge": "diagnostic_only_uncalibrated",
+  "money_cost": null,
+  "manifest": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-02\\manifest.json",
+  "usage": {
+    "role": {
+      "calls": 31,
+      "calls_with_usage": 31,
+      "calls_with_total_tokens": 31,
+      "reported_total_tokens": 172002
+    },
+    "mercury": {
+      "calls": 4,
+      "calls_with_usage": 4,
+      "calls_with_total_tokens": 4,
+      "reported_total_tokens": 6262
+    },
+    "kev": {
+      "calls": 59,
+      "calls_with_usage": 59,
+      "calls_with_total_tokens": 0,
+      "reported_total_tokens": null
+    },
+    "background_memory": {
+      "calls": 9,
+      "calls_with_usage": 9,
+      "calls_with_total_tokens": 9,
+      "reported_total_tokens": 6730
+    },
+    "judge": {
+      "calls": 20,
+      "calls_with_usage": 19,
+      "calls_with_total_tokens": 19,
+      "reported_total_tokens": 227150
+    }
+  },
+  "configuration_consistent": true,
+  "index_consistent": true,
+  "normal_completion": {
+    "planned": 98,
+    "business_passed": 16
+  },
+  "compliant_refusal": {
+    "planned": 2,
+    "business_passed": 0
+  },
+  "hard_constraints": {
+    "produced_plan_executions": 12,
+    "all_satisfied": 11,
+    "rate": 0.9166666666666666
+  },
+  "semantic_judge_counts": {
+    "pass": 0,
+    "fail": 0,
+    "unknown": 100
+  },
+  "blocked_action_observation": "actual model tool proposals and errors retained in model_calls and steps; not all guards have an explicit blocked-action trace",
+  "blocked_actions": {
+    "observed_guard_rejections": 0,
+    "evidence": [],
+    "all_proposals_classified": false,
+    "unobserved_count": null
+  }
+}

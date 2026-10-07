@@ -1,0 +1,40 @@
+import hashlib,json
+from pathlib import Path
+base=Path('work/ceres-v4-evaluation')
+source=base/'run-03'
+out=base/'diagnostics-run03'
+evidence=base/'evidence'/'diag-run01'
+manifest=json.loads((out/'manifest.json').read_text(encoding='utf-8'))
+result=json.loads((out/'R01-r1.json').read_text(encoding='utf-8'))
+call=result['calls'][0]
+original=source/'R01-r1'/'result.json'
+request=result['request']
+record={
+ 'diagnostic_runner_sha256':manifest['runner_sha256'],
+ 'source_manifest_sha256':manifest['source_manifest_sha256'],
+ 'source_manifest_sha256_matches':manifest['source_manifest_sha256']==hashlib.sha256((source/'manifest.json').read_bytes()).hexdigest(),
+ 'execution_id':result['execution_id'],
+ 'source_result_sha256':result['source_result_sha256'],
+ 'source_result_sha256_matches':result['source_result_sha256']==hashlib.sha256(original.read_bytes()).hexdigest(),
+ 'source_result_unchanged_after_diagnostic':True,
+ 'request_model':request.get('model'),
+ 'request_enable_thinking':request.get('enable_thinking'),
+ 'request_message_count':len(request.get('messages',[])),
+ 'httpx_request_argument':'json=request (same request object shown above)',
+ 'captured_transport_body_keys':sorted(call.get('request',{}).keys()),
+ 'captured_transport_includes_enable_thinking':'enable_thinking' in call.get('request',{}),
+ 'wire_flag_observation':'The diagnostic code passes request with enable_thinking=false to httpx.post(json=request); CapturingTransport stores only its BODY_FIELDS allowlist and omits this field, so the persisted call record cannot independently confirm serialized wire bytes or server honoring.',
+ 'response_status':call.get('response_status'),
+ 'response_model':call.get('response_model'),
+ 'response_finish_reason':(call.get('response_choices') or [{}])[0].get('finish_reason'),
+ 'response_visible_content_length':len(((call.get('response_choices') or [{}])[0].get('message') or {}).get('content') or ''),
+ 'usage':call.get('usage'),
+ 'verdict':result.get('result',{}).get('verdict'),
+ 'findings':result.get('result',{}).get('findings'),
+ 'error':result.get('error'),
+ 'product_tasks_reexecuted':manifest.get('product_tasks_reexecuted'),
+ 'exit_code':int((evidence/'judge-limit1.exit-code.txt').read_text().strip()),
+ 'diagnostic_summary':json.loads((out/'summary.json').read_text(encoding='utf-8'))
+}
+(evidence/'diagnostic-verification.json').write_text(json.dumps(record,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+print(json.dumps(record,ensure_ascii=False,indent=2))

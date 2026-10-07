@@ -1,0 +1,162 @@
+{
+  "steps": [
+    {
+      "case_id": "R14",
+      "op": "turn",
+      "label": "request",
+      "before": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-1cfefd801b5f",
+          "product_cards": [],
+          "task_id": null,
+          "state_version": 0,
+          "session_version": 0,
+          "current_step": null,
+          "task_status": null,
+          "entry_context": {
+            "page": "home",
+            "category_id": null,
+            "activity_id": null,
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": null,
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": null,
+          "available_actions": [
+            "send_message"
+          ],
+          "constraints_summary": {},
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "empty",
+          "messages": null
+        },
+        "opening": {
+          "role": "momo",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "active_role_before": "momo",
+      "request": {
+        "request_id": "08-R14-82c9ea1af5",
+        "message": "一般配送时间是多久？",
+        "expected_task_id": null,
+        "expected_state_version": 0,
+        "expected_session_version": 0
+      },
+      "http_status": 200,
+      "elapsed_ms": 9750.3,
+      "latency_target_ms": 15000,
+      "latency_target_exceeded": false,
+      "events": [
+        {
+          "type": "service.route",
+          "payload": {
+            "status": "completed",
+            "decision": "stay_current",
+            "raw_choice": "stay_current",
+            "current_role": "momo",
+            "prompt_mode": "none",
+            "request_id": "08-R14-82c9ea1af5",
+            "route_ms": 872.2071999218315,
+            "criteria_version": "ceres-service-v3.2"
+          }
+        },
+        {
+          "type": "accepted",
+          "payload": {
+            "request_id": "08-R14-82c9ea1af5"
+          }
+        },
+        {
+          "type": "orders",
+          "payload": {
+            "items": []
+          }
+        },
+        {
+          "type": "answer.delta",
+          "payload": {
+            "text": "根据模拟门店的配送政策（P-DEL-01《配送时间》）：下单当天配送，预计送达时间以物流信息为准。具体订单的物流进度需要选中对应订单后查询。"
+          }
+        },
+        {
+          "type": "turn.completed",
+          "payload": {
+            "final_text": "根据模拟门店的配送政策（P-DEL-01《配送时间》）：下单当天配送，预计送达时间以物流信息为准。具体订单的物流进度需要选中对应订单后查询。"
+          }
+        }
+      ],
+      "role_model_call_range": [
+        0,
+        0
+      ],
+      "kev_call_range": [
+        0,
+        1
+      ],
+      "terminal": {
+        "final_text": "根据模拟门店的配送政策（P-DEL-01《配送时间》）：下单当天配送，预计送达时间以物流信息为准。具体订单的物流进度需要选中对应订单后查询。"
+      },
+      "trace": [],
+      "snapshot_after": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-1cfefd801b5f",
+          "product_cards": [],
+          "task_id": null,
+          "state_version": 0,
+          "session_version": 0,
+          "current_step": null,
+          "task_status": null,
+          "entry_context": {
+            "page": "home",
+            "category_id": null,
+            "activity_id": null,
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": null,
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": null,
+          "available_actions": [
+            "send_message"
+          ],
+          "constraints_summary": {},
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "empty",
+          "messages": []
+        },
+        "opening": {
+          "role": "momo",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "status": "captured"
+    }
+  ],
+  "timing_failures": []
+}

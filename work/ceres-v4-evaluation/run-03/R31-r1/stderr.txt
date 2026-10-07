@@ -1,0 +1,12 @@
+Tool create_return 执行失败
+Traceback (most recent call last):
+  File "C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-08\Mercury\mercury\tools.py", line 119, in execute_tool
+    result = tool["func"](user_id, **args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-08\Mercury\mercury\services.py", line 289, in create_return
+    result = _return_check(conn, user_id, order_id)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-08\Mercury\mercury\services.py", line 229, in _return_check
+    elif datetime.now() - datetime.fromisoformat(o["delivered_at"]) > timedelta(days=RETURN_WINDOW_DAYS):
+         ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+TypeError: can't subtract offset-naive and offset-aware datetimes

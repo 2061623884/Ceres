@@ -1,0 +1,73 @@
+{
+  "database_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent²úÆ·\\Ceres\\work\\ceres-v4-evaluation\\ui\\runtime.sqlite3",
+  "read_only": true,
+  "bootstrap_owner_id": "owner-31f494e0445f4c77",
+  "owner_id_tables": [
+    {
+      "table": "business_events",
+      "rows": 0
+    },
+    {
+      "table": "cart_operations",
+      "rows": 0
+    },
+    {
+      "table": "carts",
+      "rows": 0
+    },
+    {
+      "table": "guide_operations",
+      "rows": 0
+    },
+    {
+      "table": "guide_semantic_contexts",
+      "rows": 1
+    },
+    {
+      "table": "guide_sessions",
+      "rows": 1
+    },
+    {
+      "table": "guide_tasks",
+      "rows": 0
+    },
+    {
+      "table": "mercury_sessions",
+      "rows": 1
+    },
+    {
+      "table": "shopping_memories",
+      "rows": 0
+    },
+    {
+      "table": "trace_events",
+      "rows": 11
+    },
+    {
+      "table": "turn_request_records",
+      "rows": 1
+    }
+  ],
+  "matches": [
+    {
+      "table": "guide_semantic_contexts",
+      "rows": 1
+    },
+    {
+      "table": "guide_sessions",
+      "rows": 1
+    },
+    {
+      "table": "mercury_sessions",
+      "rows": 1
+    },
+    {
+      "table": "trace_events",
+      "rows": 11
+    },
+    {
+      "table": "turn_request_records",
+      "rows": 1
+    }
+  ]
+}

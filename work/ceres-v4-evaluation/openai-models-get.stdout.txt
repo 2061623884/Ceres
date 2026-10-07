@@ -1,0 +1,1 @@
+{"method": "GET", "endpoint": "https://discovery-api.intern-ai.org.cn/v1/models", "status_code": 200, "configured_model": "qwen3.8-27b", "model_list_count": 10, "configured_model_listed": true, "api_key_value_recorded": false, "inference_endpoint_called": false}

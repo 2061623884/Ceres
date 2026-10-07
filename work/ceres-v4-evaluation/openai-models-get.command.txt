@@ -1,0 +1,1 @@
+python -X utf8 -c <GET configured OPENAI_BASE_URL/v1/models; bearer value read in memory, omitted from output>

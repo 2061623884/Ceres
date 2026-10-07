@@ -1,0 +1,8 @@
+{
+  "command": "& 'C:\\Users\\20616\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe' --check 'C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4_ui.mjs'",
+  "exit_code": 0,
+  "source_sha256": "fc294305380fbd0a32a43894bae042f1308d352b21455e45cc142c202a49bb0a",
+  "frozen_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\ui\\eval_v4_ui.frozen.mjs",
+  "frozen_sha256": "fc294305380fbd0a32a43894bae042f1308d352b21455e45cc142c202a49bb0a",
+  "checked_at_utc": "2026-10-07T07:54:53.8098056+00:00"
+}

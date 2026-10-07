@@ -1,0 +1,603 @@
+{
+  "steps": [
+    {
+      "case_id": "R20",
+      "op": "turn",
+      "label": "request",
+      "before": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-4ab9f1e47e7e",
+          "product_cards": [],
+          "task_id": null,
+          "state_version": 0,
+          "session_version": 0,
+          "current_step": null,
+          "task_status": null,
+          "entry_context": {
+            "page": "home",
+            "category_id": null,
+            "activity_id": null,
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": null,
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": null,
+          "available_actions": [
+            "send_message"
+          ],
+          "constraints_summary": {},
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "empty",
+          "messages": null
+        },
+        "opening": {
+          "role": "keke",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "active_role_before": "keke",
+      "request": {
+        "request_id": "08-R20-90631f7eb9",
+        "message": "把已保存的可乐偏好更正成可口可乐",
+        "expected_task_id": null,
+        "expected_state_version": 0,
+        "expected_session_version": 0
+      },
+      "http_status": 200,
+      "elapsed_ms": 4823.1,
+      "latency_target_ms": 15000,
+      "latency_target_exceeded": false,
+      "events": [
+        {
+          "type": "service.route",
+          "payload": {
+            "status": "completed",
+            "decision": "stay_current",
+            "raw_choice": "stay_current",
+            "current_role": "keke",
+            "prompt_mode": "none",
+            "request_id": "08-R20-90631f7eb9",
+            "route_ms": 1022.0085999462754,
+            "criteria_version": "ceres-service-v3.2"
+          }
+        },
+        {
+          "type": "accepted",
+          "payload": {}
+        },
+        {
+          "type": "progress",
+          "payload": {
+            "phase": "understanding"
+          }
+        },
+        {
+          "type": "answer.delta",
+          "payload": {
+            "delta": "已更正记忆：平时喜欢可口可乐",
+            "final": true,
+            "replace": false
+          }
+        },
+        {
+          "type": "turn.completed",
+          "payload": {
+            "message": "已更正记忆：平时喜欢可口可乐",
+            "status": "understanding",
+            "task_id": null,
+            "state_version": 0,
+            "session_version": 0,
+            "plan": null,
+            "pending_clarifications": [],
+            "product_cards": [],
+            "plan_effect": "keep",
+            "action_results": [
+              {
+                "type": "memory",
+                "status": "committed",
+                "saved": true,
+                "reply_ok": true,
+                "records": [
+                  {
+                    "ref": "eval-memory-0",
+                    "category": "user",
+                    "source": "explicit",
+                    "content": "平时喜欢可口可乐",
+                    "expires_at": null
+                  }
+                ],
+                "action_id": "a1"
+              }
+            ],
+            "answer_status": "accepted",
+            "route": "chat",
+            "trace_id": "trace-8a2db06be30b"
+          }
+        }
+      ],
+      "role_model_call_range": [
+        0,
+        1
+      ],
+      "kev_call_range": [
+        0,
+        2
+      ],
+      "terminal": {
+        "message": "已更正记忆：平时喜欢可口可乐",
+        "status": "understanding",
+        "task_id": null,
+        "state_version": 0,
+        "session_version": 0,
+        "plan": null,
+        "pending_clarifications": [],
+        "product_cards": [],
+        "plan_effect": "keep",
+        "action_results": [
+          {
+            "type": "memory",
+            "status": "committed",
+            "saved": true,
+            "reply_ok": true,
+            "records": [
+              {
+                "ref": "eval-memory-0",
+                "category": "user",
+                "source": "explicit",
+                "content": "平时喜欢可口可乐",
+                "expires_at": null
+              }
+            ],
+            "action_id": "a1"
+          }
+        ],
+        "answer_status": "accepted",
+        "route": "chat",
+        "trace_id": "trace-8a2db06be30b"
+      },
+      "trace": [
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "capability",
+          "status": "started",
+          "criteria_version": "ceres-guide-capabilities-v2",
+          "call_number": 1,
+          "model": "kev-latest"
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 875,
+          "stage": "capability",
+          "status": "completed",
+          "capability": "purchase_modify",
+          "branch": "semantic_understanding",
+          "criteria_version": "ceres-guide-capabilities-v2",
+          "call_number": 1,
+          "model": "kev-latest"
+        },
+        {
+          "phase": "understanding",
+          "duration_ms": null
+        },
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "understanding",
+          "status": "started",
+          "call_number": 1
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 2843,
+          "stage": "understanding",
+          "status": "completed",
+          "call_number": 1
+        },
+        {
+          "phase": "turn_result",
+          "duration_ms": null,
+          "status": "understanding"
+        }
+      ],
+      "snapshot_after": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-4ab9f1e47e7e",
+          "product_cards": [],
+          "task_id": null,
+          "state_version": 0,
+          "session_version": 0,
+          "current_step": null,
+          "task_status": null,
+          "entry_context": {
+            "page": "home",
+            "category_id": null,
+            "activity_id": null,
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": null,
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": null,
+          "available_actions": [
+            "send_message"
+          ],
+          "constraints_summary": {},
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "complete",
+          "messages": [
+            {
+              "message_id": "msg-d9987c2b503f",
+              "session_id": "sess-4ab9f1e47e7e",
+              "task_id": null,
+              "sequence": 1,
+              "role": "user",
+              "kind": "text",
+              "content": "把已保存的可乐偏好更正成可口可乐",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-R20-90631f7eb9",
+              "status": "completed",
+              "created_at": "2026-10-07T08:00:50.720908"
+            },
+            {
+              "message_id": "msg-182f6368fbaa",
+              "session_id": "sess-4ab9f1e47e7e",
+              "task_id": null,
+              "sequence": 2,
+              "role": "assistant",
+              "kind": "text",
+              "content": "已更正记忆：平时喜欢可口可乐",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-R20-90631f7eb9",
+              "status": "completed",
+              "created_at": "2026-10-07T08:00:50.722959"
+            }
+          ]
+        },
+        "opening": {
+          "role": "keke",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "status": "captured"
+    },
+    {
+      "case_id": "R20",
+      "op": "turn",
+      "label": "delete",
+      "before": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-4ab9f1e47e7e",
+          "product_cards": [],
+          "task_id": null,
+          "state_version": 0,
+          "session_version": 0,
+          "current_step": null,
+          "task_status": null,
+          "entry_context": {
+            "page": "home",
+            "category_id": null,
+            "activity_id": null,
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": null,
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": null,
+          "available_actions": [
+            "send_message"
+          ],
+          "constraints_summary": {},
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "complete",
+          "messages": null
+        },
+        "opening": {
+          "role": "keke",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "active_role_before": "keke",
+      "request": {
+        "request_id": "08-R20-2666b53836",
+        "message": "删除已保存的可乐偏好",
+        "expected_task_id": null,
+        "expected_state_version": 0,
+        "expected_session_version": 0
+      },
+      "http_status": 200,
+      "elapsed_ms": 5697.5,
+      "latency_target_ms": 15000,
+      "latency_target_exceeded": false,
+      "events": [
+        {
+          "type": "service.route",
+          "payload": {
+            "status": "completed",
+            "decision": "stay_current",
+            "raw_choice": "stay_current",
+            "current_role": "keke",
+            "prompt_mode": "none",
+            "request_id": "08-R20-2666b53836",
+            "route_ms": 926.9369000103325,
+            "criteria_version": "ceres-service-v3.2"
+          }
+        },
+        {
+          "type": "accepted",
+          "payload": {}
+        },
+        {
+          "type": "progress",
+          "payload": {
+            "phase": "understanding"
+          }
+        },
+        {
+          "type": "answer.delta",
+          "payload": {
+            "delta": "抱歉，这一轮我没能理解清楚（EMPTY_MODEL_RESPONSE）：模型返回了空响应 请换个说法，或直接说想吃什么、想买什么。",
+            "final": true,
+            "replace": false
+          }
+        },
+        {
+          "type": "turn.completed",
+          "payload": {
+            "message": "抱歉，这一轮我没能理解清楚（EMPTY_MODEL_RESPONSE）：模型返回了空响应 请换个说法，或直接说想吃什么、想买什么。",
+            "status": "understanding",
+            "task_id": null,
+            "state_version": 0,
+            "session_version": 0,
+            "plan": null,
+            "pending_clarifications": [],
+            "product_cards": [],
+            "plan_effect": "keep",
+            "action_results": [
+              {
+                "type": "understanding_failed",
+                "status": "failed",
+                "saved": false,
+                "reply_ok": false,
+                "code": "EMPTY_MODEL_RESPONSE",
+                "message": "模型返回了空响应",
+                "retryable": true,
+                "action_id": "a1"
+              }
+            ],
+            "answer_status": "accepted",
+            "route": "refuse",
+            "trace_id": "trace-e19923cf226b"
+          }
+        }
+      ],
+      "role_model_call_range": [
+        1,
+        2
+      ],
+      "kev_call_range": [
+        2,
+        4
+      ],
+      "terminal": {
+        "message": "抱歉，这一轮我没能理解清楚（EMPTY_MODEL_RESPONSE）：模型返回了空响应 请换个说法，或直接说想吃什么、想买什么。",
+        "status": "understanding",
+        "task_id": null,
+        "state_version": 0,
+        "session_version": 0,
+        "plan": null,
+        "pending_clarifications": [],
+        "product_cards": [],
+        "plan_effect": "keep",
+        "action_results": [
+          {
+            "type": "understanding_failed",
+            "status": "failed",
+            "saved": false,
+            "reply_ok": false,
+            "code": "EMPTY_MODEL_RESPONSE",
+            "message": "模型返回了空响应",
+            "retryable": true,
+            "action_id": "a1"
+          }
+        ],
+        "answer_status": "accepted",
+        "route": "refuse",
+        "trace_id": "trace-e19923cf226b"
+      },
+      "trace": [
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "capability",
+          "status": "started",
+          "criteria_version": "ceres-guide-capabilities-v2",
+          "call_number": 1,
+          "model": "kev-latest"
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 1046,
+          "stage": "capability",
+          "status": "completed",
+          "capability": "chat",
+          "branch": "semantic_understanding",
+          "criteria_version": "ceres-guide-capabilities-v2",
+          "call_number": 1,
+          "model": "kev-latest"
+        },
+        {
+          "phase": "understanding",
+          "duration_ms": null
+        },
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "understanding",
+          "status": "started",
+          "call_number": 1
+        },
+        {
+          "phase": "model_call_failed",
+          "duration_ms": 3672,
+          "stage": "understanding",
+          "status": "failed",
+          "call_number": 1,
+          "code": "EMPTY_MODEL_RESPONSE"
+        },
+        {
+          "phase": "turn_result",
+          "duration_ms": null,
+          "status": "understanding"
+        },
+        {
+          "phase": "memory_extract_started",
+          "duration_ms": null,
+          "model": "qwen3.8-27b"
+        }
+      ],
+      "snapshot_after": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-4ab9f1e47e7e",
+          "product_cards": [],
+          "task_id": null,
+          "state_version": 0,
+          "session_version": 0,
+          "current_step": null,
+          "task_status": null,
+          "entry_context": {
+            "page": "home",
+            "category_id": null,
+            "activity_id": null,
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": null,
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": null,
+          "available_actions": [
+            "send_message"
+          ],
+          "constraints_summary": {},
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "complete",
+          "messages": [
+            {
+              "message_id": "msg-d9987c2b503f",
+              "session_id": "sess-4ab9f1e47e7e",
+              "task_id": null,
+              "sequence": 1,
+              "role": "user",
+              "kind": "text",
+              "content": "把已保存的可乐偏好更正成可口可乐",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-R20-90631f7eb9",
+              "status": "completed",
+              "created_at": "2026-10-07T08:00:50.720908"
+            },
+            {
+              "message_id": "msg-182f6368fbaa",
+              "session_id": "sess-4ab9f1e47e7e",
+              "task_id": null,
+              "sequence": 2,
+              "role": "assistant",
+              "kind": "text",
+              "content": "已更正记忆：平时喜欢可口可乐",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-R20-90631f7eb9",
+              "status": "completed",
+              "created_at": "2026-10-07T08:00:50.722959"
+            },
+            {
+              "message_id": "msg-f191c0500326",
+              "session_id": "sess-4ab9f1e47e7e",
+              "task_id": null,
+              "sequence": 3,
+              "role": "user",
+              "kind": "text",
+              "content": "删除已保存的可乐偏好",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-R20-2666b53836",
+              "status": "completed",
+              "created_at": "2026-10-07T08:00:56.514560"
+            },
+            {
+              "message_id": "msg-2e7a9e830ba7",
+              "session_id": "sess-4ab9f1e47e7e",
+              "task_id": null,
+              "sequence": 4,
+              "role": "assistant",
+              "kind": "text",
+              "content": "抱歉，这一轮我没能理解清楚（EMPTY_MODEL_RESPONSE）：模型返回了空响应 请换个说法，或直接说想吃什么、想买什么。",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-R20-2666b53836",
+              "status": "completed",
+              "created_at": "2026-10-07T08:00:56.515068"
+            }
+          ]
+        },
+        "opening": {
+          "role": "keke",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "status": "captured"
+    }
+  ],
+  "timing_failures": []
+}

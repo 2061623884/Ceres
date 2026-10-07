@@ -1,0 +1,931 @@
+{
+  "product_head": "ac895fd620af617fa31f4e0006841a4d6a89cd53",
+  "tree": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+  "cases_sha256": "aeca61c561830db361e88251499241fa5a7742926d5b94fdc382e6bbfbf349b8",
+  "runner_sha256": "1cbf2952b804bdf500aaead16e53b4a3e2ba809a286861c532b23ebf1419fbde",
+  "source_freeze_sha256": "6a9f4d2b86e5359ee2a67e4d113831a935804827d793081d5f33cd5a9c0ec3a2",
+  "judge_prompt_sha256": "452c1fb92d49b05dc5419de1b4c21d0df5a942b41e7a6915203973b54fd896cf",
+  "seed_sha256": "f107fb2bfdd76152f6cd425388c9e84458ebe605655b12ff2be65e54823126bd",
+  "seed": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+  "index": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+  "index_identity": {
+    "current.json": "f315b2f63ba5264f82ed1efcc4000cbcb273a88fbfed1ff4afce8ae4c6e6cd8d",
+    "idx-81e9fa689baef6b5/index.sqlite3": "26d9038ae1aee7dd505a53fe26b8a08d6dc2ee3308bb3f9bf420694c20935dac",
+    "idx-81e9fa689baef6b5/manifest.json": "db58d93b6965876dc8ddf1b1633559f3a8229fca00b3e7452e53113590152933"
+  },
+  "config_identity": {
+    ".env": "dc42447f42984e7033aca1bc634c3084ac4b4f07379b7c0832e79f8433fb13dd"
+  },
+  "environment_identity": {},
+  "created_utc": "2026-10-07T07:08:51.127965+00:00",
+  "schedule": [
+    {
+      "execution_id": "R01-r1",
+      "case_id": "R01",
+      "repeat": 1,
+      "group": "snack",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R02-r1",
+      "case_id": "R02",
+      "repeat": 1,
+      "group": "snack",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R03-r1",
+      "case_id": "R03",
+      "repeat": 1,
+      "group": "snack",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R05-r1",
+      "case_id": "R05",
+      "repeat": 1,
+      "group": "drink",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R06-r1",
+      "case_id": "R06",
+      "repeat": 1,
+      "group": "drink",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R07-r1",
+      "case_id": "R07",
+      "repeat": 1,
+      "group": "drink",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R08-r1",
+      "case_id": "R08",
+      "repeat": 1,
+      "group": "purchase",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R09-r1",
+      "case_id": "R09",
+      "repeat": 1,
+      "group": "purchase",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R10-r1",
+      "case_id": "R10",
+      "repeat": 1,
+      "group": "purchase",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R11-r1",
+      "case_id": "R11",
+      "repeat": 1,
+      "group": "purchase",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R12-r1",
+      "case_id": "R12",
+      "repeat": 1,
+      "group": "drink",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R13-r1",
+      "case_id": "R13",
+      "repeat": 1,
+      "group": "policy",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R14-r1",
+      "case_id": "R14",
+      "repeat": 1,
+      "group": "policy",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R15-r1",
+      "case_id": "R15",
+      "repeat": 1,
+      "group": "routing",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R16-r1",
+      "case_id": "R16",
+      "repeat": 1,
+      "group": "routing",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R17-r1",
+      "case_id": "R17",
+      "repeat": 1,
+      "group": "aftersales",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R18-r1",
+      "case_id": "R18",
+      "repeat": 1,
+      "group": "theme",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R19-r1",
+      "case_id": "R19",
+      "repeat": 1,
+      "group": "memory",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R20-r1",
+      "case_id": "R20",
+      "repeat": 1,
+      "group": "memory",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R35-r1",
+      "case_id": "R35",
+      "repeat": 1,
+      "group": "theme",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "H01-r1",
+      "case_id": "H01",
+      "repeat": 1,
+      "group": "purchase",
+      "core": false,
+      "split": "acceptance",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "H02-r1",
+      "case_id": "H02",
+      "repeat": 1,
+      "group": "purchase",
+      "core": false,
+      "split": "acceptance",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "H03-r1",
+      "case_id": "H03",
+      "repeat": 1,
+      "group": "purchase",
+      "core": false,
+      "split": "acceptance",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "H04-r1",
+      "case_id": "H04",
+      "repeat": 1,
+      "group": "purchase",
+      "core": false,
+      "split": "acceptance",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "H05-r1",
+      "case_id": "H05",
+      "repeat": 1,
+      "group": "snack",
+      "core": false,
+      "split": "acceptance",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "H06-r1",
+      "case_id": "H06",
+      "repeat": 1,
+      "group": "drink",
+      "core": false,
+      "split": "acceptance",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "H07-r1",
+      "case_id": "H07",
+      "repeat": 1,
+      "group": "policy",
+      "core": false,
+      "split": "acceptance",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "H08-r1",
+      "case_id": "H08",
+      "repeat": 1,
+      "group": "policy",
+      "core": false,
+      "split": "acceptance",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "H09-r1",
+      "case_id": "H09",
+      "repeat": 1,
+      "group": "routing",
+      "core": false,
+      "split": "acceptance",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "H10-r1",
+      "case_id": "H10",
+      "repeat": 1,
+      "group": "routing",
+      "core": false,
+      "split": "acceptance",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "H11-r1",
+      "case_id": "H11",
+      "repeat": 1,
+      "group": "aftersales",
+      "core": false,
+      "split": "acceptance",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "H12-r1",
+      "case_id": "H12",
+      "repeat": 1,
+      "group": "aftersales",
+      "core": false,
+      "split": "acceptance",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "H13-r1",
+      "case_id": "H13",
+      "repeat": 1,
+      "group": "aftersales",
+      "core": false,
+      "split": "acceptance",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "H14-r1",
+      "case_id": "H14",
+      "repeat": 1,
+      "group": "aftersales",
+      "core": false,
+      "split": "acceptance",
+      "expected_outcome": "compliant_refusal"
+    },
+    {
+      "execution_id": "H15-r1",
+      "case_id": "H15",
+      "repeat": 1,
+      "group": "theme",
+      "core": false,
+      "split": "acceptance",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "H16-r1",
+      "case_id": "H16",
+      "repeat": 1,
+      "group": "theme",
+      "core": false,
+      "split": "acceptance",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "H17-r1",
+      "case_id": "H17",
+      "repeat": 1,
+      "group": "memory",
+      "core": false,
+      "split": "acceptance",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "H18-r1",
+      "case_id": "H18",
+      "repeat": 1,
+      "group": "memory",
+      "core": false,
+      "split": "acceptance",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "H19-r1",
+      "case_id": "H19",
+      "repeat": 1,
+      "group": "memory",
+      "core": false,
+      "split": "acceptance",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "H20-r1",
+      "case_id": "H20",
+      "repeat": 1,
+      "group": "memory",
+      "core": false,
+      "split": "acceptance",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R04-r1",
+      "case_id": "R04",
+      "repeat": 1,
+      "group": "snack",
+      "core": false,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R21-r1",
+      "case_id": "R21",
+      "repeat": 1,
+      "group": "drink",
+      "core": false,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R22-r1",
+      "case_id": "R22",
+      "repeat": 1,
+      "group": "drink",
+      "core": false,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R23-r1",
+      "case_id": "R23",
+      "repeat": 1,
+      "group": "purchase",
+      "core": false,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R24-r1",
+      "case_id": "R24",
+      "repeat": 1,
+      "group": "purchase",
+      "core": false,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R25-r1",
+      "case_id": "R25",
+      "repeat": 1,
+      "group": "policy",
+      "core": false,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R26-r1",
+      "case_id": "R26",
+      "repeat": 1,
+      "group": "policy",
+      "core": false,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R27-r1",
+      "case_id": "R27",
+      "repeat": 1,
+      "group": "routing",
+      "core": false,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R28-r1",
+      "case_id": "R28",
+      "repeat": 1,
+      "group": "routing",
+      "core": false,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R29-r1",
+      "case_id": "R29",
+      "repeat": 1,
+      "group": "aftersales",
+      "core": false,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R30-r1",
+      "case_id": "R30",
+      "repeat": 1,
+      "group": "aftersales",
+      "core": false,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R31-r1",
+      "case_id": "R31",
+      "repeat": 1,
+      "group": "aftersales",
+      "core": false,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R32-r1",
+      "case_id": "R32",
+      "repeat": 1,
+      "group": "aftersales",
+      "core": false,
+      "split": "regression",
+      "expected_outcome": "compliant_refusal"
+    },
+    {
+      "execution_id": "R33-r1",
+      "case_id": "R33",
+      "repeat": 1,
+      "group": "aftersales",
+      "core": false,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R34-r1",
+      "case_id": "R34",
+      "repeat": 1,
+      "group": "routing",
+      "core": false,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R36-r1",
+      "case_id": "R36",
+      "repeat": 1,
+      "group": "theme",
+      "core": false,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R37-r1",
+      "case_id": "R37",
+      "repeat": 1,
+      "group": "theme",
+      "core": false,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R38-r1",
+      "case_id": "R38",
+      "repeat": 1,
+      "group": "purchase",
+      "core": false,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R39-r1",
+      "case_id": "R39",
+      "repeat": 1,
+      "group": "memory",
+      "core": false,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R40-r1",
+      "case_id": "R40",
+      "repeat": 1,
+      "group": "memory",
+      "core": false,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R01-r2",
+      "case_id": "R01",
+      "repeat": 2,
+      "group": "snack",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R02-r2",
+      "case_id": "R02",
+      "repeat": 2,
+      "group": "snack",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R03-r2",
+      "case_id": "R03",
+      "repeat": 2,
+      "group": "snack",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R05-r2",
+      "case_id": "R05",
+      "repeat": 2,
+      "group": "drink",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R06-r2",
+      "case_id": "R06",
+      "repeat": 2,
+      "group": "drink",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R07-r2",
+      "case_id": "R07",
+      "repeat": 2,
+      "group": "drink",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R08-r2",
+      "case_id": "R08",
+      "repeat": 2,
+      "group": "purchase",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R09-r2",
+      "case_id": "R09",
+      "repeat": 2,
+      "group": "purchase",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R10-r2",
+      "case_id": "R10",
+      "repeat": 2,
+      "group": "purchase",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R11-r2",
+      "case_id": "R11",
+      "repeat": 2,
+      "group": "purchase",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R12-r2",
+      "case_id": "R12",
+      "repeat": 2,
+      "group": "drink",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R13-r2",
+      "case_id": "R13",
+      "repeat": 2,
+      "group": "policy",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R14-r2",
+      "case_id": "R14",
+      "repeat": 2,
+      "group": "policy",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R15-r2",
+      "case_id": "R15",
+      "repeat": 2,
+      "group": "routing",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R16-r2",
+      "case_id": "R16",
+      "repeat": 2,
+      "group": "routing",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R17-r2",
+      "case_id": "R17",
+      "repeat": 2,
+      "group": "aftersales",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R18-r2",
+      "case_id": "R18",
+      "repeat": 2,
+      "group": "theme",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R19-r2",
+      "case_id": "R19",
+      "repeat": 2,
+      "group": "memory",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R20-r2",
+      "case_id": "R20",
+      "repeat": 2,
+      "group": "memory",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R35-r2",
+      "case_id": "R35",
+      "repeat": 2,
+      "group": "theme",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R01-r3",
+      "case_id": "R01",
+      "repeat": 3,
+      "group": "snack",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R02-r3",
+      "case_id": "R02",
+      "repeat": 3,
+      "group": "snack",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R03-r3",
+      "case_id": "R03",
+      "repeat": 3,
+      "group": "snack",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R05-r3",
+      "case_id": "R05",
+      "repeat": 3,
+      "group": "drink",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R06-r3",
+      "case_id": "R06",
+      "repeat": 3,
+      "group": "drink",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R07-r3",
+      "case_id": "R07",
+      "repeat": 3,
+      "group": "drink",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R08-r3",
+      "case_id": "R08",
+      "repeat": 3,
+      "group": "purchase",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R09-r3",
+      "case_id": "R09",
+      "repeat": 3,
+      "group": "purchase",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R10-r3",
+      "case_id": "R10",
+      "repeat": 3,
+      "group": "purchase",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R11-r3",
+      "case_id": "R11",
+      "repeat": 3,
+      "group": "purchase",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R12-r3",
+      "case_id": "R12",
+      "repeat": 3,
+      "group": "drink",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R13-r3",
+      "case_id": "R13",
+      "repeat": 3,
+      "group": "policy",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R14-r3",
+      "case_id": "R14",
+      "repeat": 3,
+      "group": "policy",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R15-r3",
+      "case_id": "R15",
+      "repeat": 3,
+      "group": "routing",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R16-r3",
+      "case_id": "R16",
+      "repeat": 3,
+      "group": "routing",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R17-r3",
+      "case_id": "R17",
+      "repeat": 3,
+      "group": "aftersales",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R18-r3",
+      "case_id": "R18",
+      "repeat": 3,
+      "group": "theme",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R19-r3",
+      "case_id": "R19",
+      "repeat": 3,
+      "group": "memory",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R20-r3",
+      "case_id": "R20",
+      "repeat": 3,
+      "group": "memory",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    },
+    {
+      "execution_id": "R35-r3",
+      "case_id": "R35",
+      "repeat": 3,
+      "group": "theme",
+      "core": true,
+      "split": "regression",
+      "expected_outcome": "normal_completion"
+    }
+  ],
+  "workers": 2,
+  "independent_initial_state": "first 20 execution databases retained in parent batch; subsequent executions use fresh copies",
+  "case_version": "ceres1-v4-tasks-20261007-v1",
+  "parent_manifest": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-01\\manifest.json",
+  "parent_manifest_sha256": "c8b394a9d5e90bfdfe5beab5314cbfe22b87ba89d3fb72dba41b2a300887c1a7",
+  "prior_execution_runner_sha256": "04582eac4e9195e6a0687898bbc14c4b2baa95398b70f6c076dc184d4fcd6c8b",
+  "correction": "before SQL snapshot recovery; current-question Mercury grounding; required role presence",
+  "correction_utc": "2026-10-07T07:22:44.751432+00:00"
+}

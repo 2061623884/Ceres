@@ -1,0 +1,8 @@
+{
+  "count": 3,
+  "lines": [
+    "work/ceres-v4-evaluation/evidence/rescore-run04/acceptance_audit.py:144: new blank line at EOF.",
+    "work/ceres-v4-evaluation/evidence/rescore-run04/acceptance_audit.v2.py:143: new blank line at EOF.",
+    "work/ceres-v4-evaluation/ui/run-02-service-verify-attempt01.stderr.txt:9: new blank line at EOF."
+  ]
+}

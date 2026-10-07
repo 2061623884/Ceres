@@ -1,0 +1,63 @@
+{
+  "checks": {
+    "runner_frozen_hash_match": true,
+    "runner_source_hash_match": true,
+    "source_manifest_hash_match": true,
+    "source_R01_result_hash_match": true,
+    "original_request_fields_unchanged": true,
+    "serialized_request_matches_request": true,
+    "serialized_wire_flag_false": true,
+    "serialized_request_sha256_recorded": true,
+    "raw_response_hash_matches_text": true,
+    "one_diagnostic_call": true,
+    "source_batch_unchanged": true,
+    "no_product_tasks_reexecuted": true
+  },
+  "all_checks_passed": true,
+  "runner_sha256": "d8b31a1f2ac331d103c66c023700f6a028e094e01cd8cc132ad1343ba584e9aa",
+  "source_manifest_sha256": "04274cdbaa38799bac8a3ef40f418a70c8839251a4c08a30d4572ced74b518bb",
+  "source_R01_result_sha256": "19a29fe7683f116d7bf0178d2c744fae8830b4c8f5e0a0099c28bab08cb63c3d",
+  "diagnostic_output_sha256": "029b25327aacfdbb9a6b942237229090c9cd171f322cb33150dd05720ade0092",
+  "execution_id": "R01-r1",
+  "request_model": "qwen3.8-27b",
+  "request_max_tokens": 1200,
+  "chat_template_kwargs": {
+    "enable_thinking": false
+  },
+  "serialized_request_sha256": "5b3538e3d1cd78a02db65c6343fa6b1fb88d99ecca8903cbdf6ce7c54a395130",
+  "response_status": 200,
+  "response_body_sha256": "e729d251f92292041a111f7fa05bc8db4ff188a99a5eddcd3aa4899f2a9ea81e",
+  "response_body_json_saved": true,
+  "response_model": "qwen3.8-27b-fp8",
+  "finish_reason": "length",
+  "visible_content": null,
+  "visible_content_length": 0,
+  "reasoning_content_length": 4525,
+  "usage": {
+    "prompt_tokens": 6852,
+    "total_tokens": 8052,
+    "completion_tokens": 1200,
+    "prompt_tokens_details": null,
+    "completion_tokens_details": {
+      "reasoning_tokens": 1200
+    }
+  },
+  "verdict": "unknown",
+  "error": {
+    "type": "ValueError",
+    "message": "Judge returned no visible JSON content"
+  },
+  "summary": {
+    "planned": 100,
+    "completed": 1,
+    "verdicts": {
+      "pass": 0,
+      "fail": 0,
+      "unknown": 1
+    },
+    "errors": 1,
+    "calibrated": false,
+    "hard_gate": false,
+    "product_tasks_reexecuted": 0
+  }
+}

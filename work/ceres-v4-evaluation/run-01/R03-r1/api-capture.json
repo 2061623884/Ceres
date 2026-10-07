@@ -1,0 +1,769 @@
+{
+  "steps": [
+    {
+      "case_id": "R03",
+      "op": "turn",
+      "label": "request",
+      "before": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-d8597d33e79b",
+          "product_cards": [],
+          "task_id": null,
+          "state_version": 0,
+          "session_version": 0,
+          "current_step": null,
+          "task_status": null,
+          "entry_context": {
+            "page": "home",
+            "category_id": null,
+            "activity_id": null,
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": null,
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": null,
+          "available_actions": [
+            "send_message"
+          ],
+          "constraints_summary": {},
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "empty",
+          "messages": null
+        },
+        "opening": {
+          "role": "keke",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "active_role_before": "keke",
+      "request": {
+        "request_id": "08-R03-3f9373221b",
+        "message": "买两包原味薯片70克袋装，预算20元",
+        "expected_task_id": null,
+        "expected_state_version": 0,
+        "expected_session_version": 0
+      },
+      "http_status": 200,
+      "elapsed_ms": 23671.1,
+      "latency_target_ms": 15000,
+      "latency_target_exceeded": true,
+      "events": [
+        {
+          "type": "service.route",
+          "payload": {
+            "status": "completed",
+            "decision": "stay_current",
+            "raw_choice": "stay_current",
+            "current_role": "keke",
+            "prompt_mode": "none",
+            "request_id": "08-R03-3f9373221b",
+            "route_ms": 1068.69009998627,
+            "criteria_version": "ceres-service-v3.2"
+          }
+        },
+        {
+          "type": "accepted",
+          "payload": {}
+        },
+        {
+          "type": "progress",
+          "payload": {
+            "phase": "understanding"
+          }
+        },
+        {
+          "type": "progress",
+          "payload": {
+            "phase": "retrieve"
+          }
+        },
+        {
+          "type": "progress",
+          "payload": {
+            "phase": "validate"
+          }
+        },
+        {
+          "type": "plan.ready",
+          "payload": {
+            "plan": {
+              "plan_effect": "replace",
+              "plan_id": "plan-d41ebb084bbb",
+              "plan_version": 1,
+              "task_id": "task-a0ab69d8c42f",
+              "state_version": 2,
+              "session_version": 3,
+              "mode": "bundle",
+              "items": [
+                {
+                  "sku_id": "demo:snack-original-potato-chips-70g-bag",
+                  "name": "原味薯片70克袋装",
+                  "quantity": 2,
+                  "recommended_quantity": 2,
+                  "quantity_source": "recommended",
+                  "unit_price_fen": 590,
+                  "line_total_fen": 1180,
+                  "image_path": null,
+                  "image_kind": "placeholder",
+                  "image_kind_legacy": "placeholder",
+                  "role": "required",
+                  "selected": true,
+                  "ingredient_ids": [
+                    "potato"
+                  ],
+                  "spec_quantity": 70.0,
+                  "spec_unit": "g",
+                  "sell_unit": "件",
+                  "max_addable_quantity": 30,
+                  "group_id": "product:demo:snack-original-potato-chips-70g-bag",
+                  "target_kind": "product",
+                  "target_id": "demo:snack-original-potato-chips-70g-bag",
+                  "required_item_id": "product:demo:snack-original-potato-chips-70g-bag#demo:snack-original-potato-chips-70g-bag",
+                  "requirement": {
+                    "required_item_id": "product:demo:snack-original-potato-chips-70g-bag#demo:snack-original-potato-chips-70g-bag",
+                    "name": "原味薯片70克袋装",
+                    "ingredient_id": null,
+                    "component_id": null,
+                    "quantity": 2,
+                    "unit": "件",
+                    "quantity_known": true,
+                    "requiredness": "core",
+                    "source": {
+                      "kind": "user",
+                      "ref": "原味薯片70克袋装"
+                    }
+                  },
+                  "availability": "available",
+                  "evidence": {
+                    "sku_source": "store_offer",
+                    "quoted_at": "2026-10-07T07:09:45+00:00",
+                    "stock_verified": true,
+                    "data_mode": "demo",
+                    "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                    "unknown_constraints": []
+                  },
+                  "pack_source": "catalog_spec",
+                  "shortfall_quantity": 0,
+                  "user_quantity": null,
+                  "added_quantity": 0,
+                  "remaining_quantity": 2,
+                  "contributions": [
+                    {
+                      "group_id": "product:demo:snack-original-potato-chips-70g-bag",
+                      "quantity": 2,
+                      "selected": true,
+                      "added_quantity": 0,
+                      "required_item_id": "product:demo:snack-original-potato-chips-70g-bag#demo:snack-original-potato-chips-70g-bag",
+                      "requirement": {
+                        "required_item_id": "product:demo:snack-original-potato-chips-70g-bag#demo:snack-original-potato-chips-70g-bag",
+                        "name": "原味薯片70克袋装",
+                        "ingredient_id": null,
+                        "component_id": null,
+                        "quantity": 2,
+                        "unit": "件",
+                        "quantity_known": true,
+                        "requiredness": "core",
+                        "source": {
+                          "kind": "user",
+                          "ref": "原味薯片70克袋装"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "total_price_fen": 1180,
+              "selected_total_fen": 1180,
+              "outstanding_total_fen": 1180,
+              "expires_at": "2026-10-07T07:14:45.661672+00:00",
+              "validation_status": "passed",
+              "coverage_mode": "full",
+              "coverage_intent": "partial_ok",
+              "uncovered_items": [],
+              "gaps": [],
+              "can_confirm": true,
+              "targets": [
+                {
+                  "group_id": "product:demo:snack-original-potato-chips-70g-bag",
+                  "kind": "product",
+                  "target_id": "demo:snack-original-potato-chips-70g-bag",
+                  "name": "原味薯片70克袋装",
+                  "people": null,
+                  "people_source": "default"
+                }
+              ],
+              "merged_sku_contributions": []
+            },
+            "plan_effect": "replace"
+          }
+        },
+        {
+          "type": "answer.delta",
+          "payload": {
+            "delta": "采购清单已加入「原味薯片70克袋装」\n说明：「70克袋装」暂时没法按条件筛选，这次没有用上。\n已整理 1 件商品，选中合计 ¥11.80（演示价格）。包含：原味薯片70克袋装。",
+            "final": true,
+            "replace": false
+          }
+        },
+        {
+          "type": "turn.completed",
+          "payload": {
+            "message": "采购清单已加入「原味薯片70克袋装」\n说明：「70克袋装」暂时没法按条件筛选，这次没有用上。\n已整理 1 件商品，选中合计 ¥11.80（演示价格）。包含：原味薯片70克袋装。",
+            "status": "awaiting_confirmation",
+            "task_id": "task-a0ab69d8c42f",
+            "state_version": 2,
+            "session_version": 3,
+            "plan": {
+              "plan_id": "plan-d41ebb084bbb",
+              "plan_version": 1,
+              "mode": "bundle",
+              "items": [
+                {
+                  "sku_id": "demo:snack-original-potato-chips-70g-bag",
+                  "name": "原味薯片70克袋装",
+                  "quantity": 2,
+                  "recommended_quantity": 2,
+                  "quantity_source": "recommended",
+                  "unit_price_fen": 590,
+                  "line_total_fen": 1180,
+                  "image_path": null,
+                  "image_kind": "placeholder",
+                  "image_kind_legacy": "placeholder",
+                  "role": "required",
+                  "selected": true,
+                  "ingredient_ids": [
+                    "potato"
+                  ],
+                  "spec_quantity": 70.0,
+                  "spec_unit": "g",
+                  "sell_unit": "件",
+                  "max_addable_quantity": 30,
+                  "group_id": "product:demo:snack-original-potato-chips-70g-bag",
+                  "target_kind": "product",
+                  "target_id": "demo:snack-original-potato-chips-70g-bag",
+                  "required_item_id": "product:demo:snack-original-potato-chips-70g-bag#demo:snack-original-potato-chips-70g-bag",
+                  "requirement": {
+                    "required_item_id": "product:demo:snack-original-potato-chips-70g-bag#demo:snack-original-potato-chips-70g-bag",
+                    "name": "原味薯片70克袋装",
+                    "ingredient_id": null,
+                    "component_id": null,
+                    "quantity": 2,
+                    "unit": "件",
+                    "quantity_known": true,
+                    "requiredness": "core",
+                    "source": {
+                      "kind": "user",
+                      "ref": "原味薯片70克袋装"
+                    }
+                  },
+                  "availability": "available",
+                  "evidence": {
+                    "sku_source": "store_offer",
+                    "quoted_at": "2026-10-07T07:09:45+00:00",
+                    "stock_verified": true,
+                    "data_mode": "demo",
+                    "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                    "unknown_constraints": []
+                  },
+                  "pack_source": "catalog_spec",
+                  "shortfall_quantity": 0,
+                  "user_quantity": null,
+                  "added_quantity": 0,
+                  "remaining_quantity": 2,
+                  "contributions": [
+                    {
+                      "group_id": "product:demo:snack-original-potato-chips-70g-bag",
+                      "quantity": 2,
+                      "selected": true,
+                      "added_quantity": 0,
+                      "required_item_id": "product:demo:snack-original-potato-chips-70g-bag#demo:snack-original-potato-chips-70g-bag",
+                      "requirement": {
+                        "required_item_id": "product:demo:snack-original-potato-chips-70g-bag#demo:snack-original-potato-chips-70g-bag",
+                        "name": "原味薯片70克袋装",
+                        "ingredient_id": null,
+                        "component_id": null,
+                        "quantity": 2,
+                        "unit": "件",
+                        "quantity_known": true,
+                        "requiredness": "core",
+                        "source": {
+                          "kind": "user",
+                          "ref": "原味薯片70克袋装"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "total_price_fen": 1180,
+              "selected_total_fen": 1180,
+              "outstanding_total_fen": 1180,
+              "expires_at": "2026-10-07T07:14:45.661672+00:00",
+              "validation_status": "passed",
+              "coverage_mode": "full",
+              "coverage_intent": "partial_ok",
+              "uncovered_items": [],
+              "gaps": [],
+              "can_confirm": true,
+              "targets": [
+                {
+                  "group_id": "product:demo:snack-original-potato-chips-70g-bag",
+                  "kind": "product",
+                  "target_id": "demo:snack-original-potato-chips-70g-bag",
+                  "name": "原味薯片70克袋装",
+                  "people": null,
+                  "people_source": "default"
+                }
+              ],
+              "merged_sku_contributions": []
+            },
+            "pending_clarifications": [],
+            "product_cards": [],
+            "plan_effect": "replace",
+            "action_results": [
+              {
+                "type": "read_only",
+                "kind": "lookup",
+                "status": "completed",
+                "saved": false,
+                "reply_ok": true,
+                "retrieval_status": "ok",
+                "retrieval_mode": "lexical",
+                "fallback_reason": null,
+                "index_version": "idx-81e9fa689baef6b5",
+                "action_id": "a1"
+              },
+              {
+                "type": "mutation",
+                "verb": "add",
+                "group_id": "product:demo:snack-original-potato-chips-70g-bag",
+                "status": "committed",
+                "saved": true,
+                "reply_ok": true,
+                "plan_effect": "replace",
+                "message": "采购清单已加入「原味薯片70克袋装」",
+                "candidate_ref": "pfdf9e5ee3ecebb0a",
+                "action_id": "a2"
+              }
+            ],
+            "answer_status": "awaiting_confirmation",
+            "route": "prepare",
+            "trace_id": "trace-432524b5dee3"
+          }
+        }
+      ],
+      "role_model_call_range": [
+        0,
+        1
+      ],
+      "kev_call_range": [
+        0,
+        2
+      ],
+      "terminal": {
+        "message": "采购清单已加入「原味薯片70克袋装」\n说明：「70克袋装」暂时没法按条件筛选，这次没有用上。\n已整理 1 件商品，选中合计 ¥11.80（演示价格）。包含：原味薯片70克袋装。",
+        "status": "awaiting_confirmation",
+        "task_id": "task-a0ab69d8c42f",
+        "state_version": 2,
+        "session_version": 3,
+        "plan": {
+          "plan_id": "plan-d41ebb084bbb",
+          "plan_version": 1,
+          "mode": "bundle",
+          "items": [
+            {
+              "sku_id": "demo:snack-original-potato-chips-70g-bag",
+              "name": "原味薯片70克袋装",
+              "quantity": 2,
+              "recommended_quantity": 2,
+              "quantity_source": "recommended",
+              "unit_price_fen": 590,
+              "line_total_fen": 1180,
+              "image_path": null,
+              "image_kind": "placeholder",
+              "image_kind_legacy": "placeholder",
+              "role": "required",
+              "selected": true,
+              "ingredient_ids": [
+                "potato"
+              ],
+              "spec_quantity": 70.0,
+              "spec_unit": "g",
+              "sell_unit": "件",
+              "max_addable_quantity": 30,
+              "group_id": "product:demo:snack-original-potato-chips-70g-bag",
+              "target_kind": "product",
+              "target_id": "demo:snack-original-potato-chips-70g-bag",
+              "required_item_id": "product:demo:snack-original-potato-chips-70g-bag#demo:snack-original-potato-chips-70g-bag",
+              "requirement": {
+                "required_item_id": "product:demo:snack-original-potato-chips-70g-bag#demo:snack-original-potato-chips-70g-bag",
+                "name": "原味薯片70克袋装",
+                "ingredient_id": null,
+                "component_id": null,
+                "quantity": 2,
+                "unit": "件",
+                "quantity_known": true,
+                "requiredness": "core",
+                "source": {
+                  "kind": "user",
+                  "ref": "原味薯片70克袋装"
+                }
+              },
+              "availability": "available",
+              "evidence": {
+                "sku_source": "store_offer",
+                "quoted_at": "2026-10-07T07:09:45+00:00",
+                "stock_verified": true,
+                "data_mode": "demo",
+                "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                "unknown_constraints": []
+              },
+              "pack_source": "catalog_spec",
+              "shortfall_quantity": 0,
+              "user_quantity": null,
+              "added_quantity": 0,
+              "remaining_quantity": 2,
+              "contributions": [
+                {
+                  "group_id": "product:demo:snack-original-potato-chips-70g-bag",
+                  "quantity": 2,
+                  "selected": true,
+                  "added_quantity": 0,
+                  "required_item_id": "product:demo:snack-original-potato-chips-70g-bag#demo:snack-original-potato-chips-70g-bag",
+                  "requirement": {
+                    "required_item_id": "product:demo:snack-original-potato-chips-70g-bag#demo:snack-original-potato-chips-70g-bag",
+                    "name": "原味薯片70克袋装",
+                    "ingredient_id": null,
+                    "component_id": null,
+                    "quantity": 2,
+                    "unit": "件",
+                    "quantity_known": true,
+                    "requiredness": "core",
+                    "source": {
+                      "kind": "user",
+                      "ref": "原味薯片70克袋装"
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "total_price_fen": 1180,
+          "selected_total_fen": 1180,
+          "outstanding_total_fen": 1180,
+          "expires_at": "2026-10-07T07:14:45.661672+00:00",
+          "validation_status": "passed",
+          "coverage_mode": "full",
+          "coverage_intent": "partial_ok",
+          "uncovered_items": [],
+          "gaps": [],
+          "can_confirm": true,
+          "targets": [
+            {
+              "group_id": "product:demo:snack-original-potato-chips-70g-bag",
+              "kind": "product",
+              "target_id": "demo:snack-original-potato-chips-70g-bag",
+              "name": "原味薯片70克袋装",
+              "people": null,
+              "people_source": "default"
+            }
+          ],
+          "merged_sku_contributions": []
+        },
+        "pending_clarifications": [],
+        "product_cards": [],
+        "plan_effect": "replace",
+        "action_results": [
+          {
+            "type": "read_only",
+            "kind": "lookup",
+            "status": "completed",
+            "saved": false,
+            "reply_ok": true,
+            "retrieval_status": "ok",
+            "retrieval_mode": "lexical",
+            "fallback_reason": null,
+            "index_version": "idx-81e9fa689baef6b5",
+            "action_id": "a1"
+          },
+          {
+            "type": "mutation",
+            "verb": "add",
+            "group_id": "product:demo:snack-original-potato-chips-70g-bag",
+            "status": "committed",
+            "saved": true,
+            "reply_ok": true,
+            "plan_effect": "replace",
+            "message": "采购清单已加入「原味薯片70克袋装」",
+            "candidate_ref": "pfdf9e5ee3ecebb0a",
+            "action_id": "a2"
+          }
+        ],
+        "answer_status": "awaiting_confirmation",
+        "route": "prepare",
+        "trace_id": "trace-432524b5dee3"
+      },
+      "trace": [
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "capability",
+          "status": "started",
+          "criteria_version": "ceres-guide-capabilities-v2",
+          "call_number": 1,
+          "model": "kev-latest"
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 1108,
+          "stage": "capability",
+          "status": "completed",
+          "capability": "purchase_modify",
+          "branch": "semantic_understanding",
+          "criteria_version": "ceres-guide-capabilities-v2",
+          "call_number": 1,
+          "model": "kev-latest"
+        },
+        {
+          "phase": "understanding",
+          "duration_ms": null
+        },
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "understanding",
+          "status": "started",
+          "call_number": 1
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 21313,
+          "stage": "understanding",
+          "status": "completed",
+          "call_number": 1
+        },
+        {
+          "phase": "retrieve",
+          "duration_ms": null
+        },
+        {
+          "phase": "validate",
+          "duration_ms": null
+        },
+        {
+          "phase": "turn_result",
+          "duration_ms": null,
+          "status": "awaiting_confirmation"
+        }
+      ],
+      "snapshot_after": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-d8597d33e79b",
+          "product_cards": [],
+          "task_id": "task-a0ab69d8c42f",
+          "state_version": 2,
+          "session_version": 3,
+          "current_step": "awaiting_confirmation",
+          "task_status": "active",
+          "entry_context": {
+            "page": "home",
+            "category_id": null,
+            "activity_id": null,
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": {
+            "plan_id": "plan-d41ebb084bbb",
+            "plan_version": 1,
+            "mode": "bundle",
+            "items": [
+              {
+                "sku_id": "demo:snack-original-potato-chips-70g-bag",
+                "name": "原味薯片70克袋装",
+                "quantity": 2,
+                "unit_price_fen": 590,
+                "line_total_fen": 1180,
+                "image_path": null,
+                "image_kind": "placeholder",
+                "image_kind_legacy": "placeholder",
+                "role": "required",
+                "selected": true,
+                "recommended_quantity": 2,
+                "max_addable_quantity": 30,
+                "spec_quantity": 70,
+                "spec_unit": "g",
+                "sell_unit": "件",
+                "quantity_source": "recommended",
+                "group_id": "product:demo:snack-original-potato-chips-70g-bag",
+                "target_kind": "product",
+                "target_id": "demo:snack-original-potato-chips-70g-bag",
+                "component_name": null,
+                "contributions": [
+                  {
+                    "group_id": "product:demo:snack-original-potato-chips-70g-bag",
+                    "quantity": 2,
+                    "selected": true,
+                    "added_quantity": 0,
+                    "required_item_id": "product:demo:snack-original-potato-chips-70g-bag#demo:snack-original-potato-chips-70g-bag",
+                    "requirement": {
+                      "required_item_id": "product:demo:snack-original-potato-chips-70g-bag#demo:snack-original-potato-chips-70g-bag",
+                      "name": "原味薯片70克袋装",
+                      "ingredient_id": null,
+                      "component_id": null,
+                      "quantity": 2,
+                      "unit": "件",
+                      "quantity_known": true,
+                      "requiredness": "core",
+                      "source": {
+                        "kind": "user",
+                        "ref": "原味薯片70克袋装"
+                      }
+                    }
+                  }
+                ],
+                "added_quantity": 0,
+                "remaining_quantity": 2,
+                "required_item_id": "product:demo:snack-original-potato-chips-70g-bag#demo:snack-original-potato-chips-70g-bag",
+                "requirement": {
+                  "required_item_id": "product:demo:snack-original-potato-chips-70g-bag#demo:snack-original-potato-chips-70g-bag",
+                  "name": "原味薯片70克袋装",
+                  "ingredient_id": null,
+                  "component_id": null,
+                  "quantity": 2,
+                  "unit": "件",
+                  "quantity_known": true,
+                  "requiredness": "core",
+                  "source": {
+                    "kind": "user",
+                    "ref": "原味薯片70克袋装"
+                  }
+                },
+                "availability": "available",
+                "evidence": {
+                  "sku_source": "store_offer",
+                  "quoted_at": "2026-10-07T07:09:45+00:00",
+                  "stock_verified": true,
+                  "data_mode": "demo",
+                  "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                  "unknown_constraints": []
+                },
+                "pack_source": "catalog_spec",
+                "shortfall_quantity": 0
+              }
+            ],
+            "total_price_fen": 1180,
+            "selected_total_fen": 1180,
+            "expires_at": "2026-10-07T07:14:45.661672+00:00",
+            "validation_status": "passed",
+            "coverage_mode": "full",
+            "coverage_intent": "partial_ok",
+            "uncovered_items": [],
+            "gaps": [],
+            "can_confirm": true,
+            "gap_fill": null,
+            "targets": [
+              {
+                "group_id": "product:demo:snack-original-potato-chips-70g-bag",
+                "kind": "product",
+                "target_id": "demo:snack-original-potato-chips-70g-bag",
+                "name": "原味薯片70克袋装",
+                "meal_name": null,
+                "fulfillment_mode": null,
+                "people": null,
+                "people_source": "default",
+                "notes": []
+              }
+            ],
+            "merged_sku_contributions": [],
+            "outstanding_total_fen": 1180
+          },
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": "已恢复待确认方案",
+          "available_actions": [
+            "confirm",
+            "cancel",
+            "modify",
+            "send_message"
+          ],
+          "constraints_summary": {
+            "goal": "原味薯片70克袋装",
+            "people": null,
+            "budget_fen": 2000,
+            "excluded_ingredients": []
+          },
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "complete",
+          "messages": [
+            {
+              "message_id": "msg-c2775f5528cf",
+              "session_id": "sess-d8597d33e79b",
+              "task_id": null,
+              "sequence": 1,
+              "role": "user",
+              "kind": "text",
+              "content": "买两包原味薯片70克袋装，预算20元",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-R03-3f9373221b",
+              "status": "completed",
+              "created_at": "2026-10-07T07:09:45.665247"
+            },
+            {
+              "message_id": "msg-edd66530bd66",
+              "session_id": "sess-d8597d33e79b",
+              "task_id": "task-a0ab69d8c42f",
+              "sequence": 2,
+              "role": "assistant",
+              "kind": "plan_ref",
+              "content": "采购清单已加入「原味薯片70克袋装」\n说明：「70克袋装」暂时没法按条件筛选，这次没有用上。\n已整理 1 件商品，选中合计 ¥11.80（演示价格）。包含：原味薯片70克袋装。",
+              "plan_id": "plan-d41ebb084bbb",
+              "plan_version": 1,
+              "request_id": "08-R03-3f9373221b",
+              "status": "completed",
+              "created_at": "2026-10-07T07:09:45.673522"
+            }
+          ]
+        },
+        "opening": {
+          "role": "keke",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "status": "captured"
+    }
+  ],
+  "timing_failures": [
+    {
+      "case_id": "R03",
+      "op": "turn",
+      "label": "request",
+      "elapsed_ms": 23671.1,
+      "target_ms": 15000
+    }
+  ]
+}

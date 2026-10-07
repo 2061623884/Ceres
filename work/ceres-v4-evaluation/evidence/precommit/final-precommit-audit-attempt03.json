@@ -1,0 +1,378 @@
+{
+  "repo_root": "C:/Users/20616/Desktop/Agent/Agent产品/Ceres",
+  "staged_count": 1731,
+  "task_count": 9,
+  "allowed_scope": {
+    "unexpected": [],
+    "missing_required_exact": [],
+    "forbidden_secret_db_cache": []
+  },
+  "git_diff_cached_check": {
+    "command": [
+      "git",
+      "diff",
+      "--cached",
+      "--check"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "",
+    "stdout_bytes": 0,
+    "stderr_bytes": 0,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "README": {
+    "cached_numstat": {
+      "command": [
+        "git",
+        "diff",
+        "--cached",
+        "--numstat",
+        "--",
+        "README.md"
+      ],
+      "exit_code": 0,
+      "stdout": "1\t0\tREADME.md\n",
+      "stderr": "",
+      "stdout_bytes": 14,
+      "stderr_bytes": 0,
+      "stdout_sha256": "6197499d98e0e1af09dd7ffe6c00c8dd74dae8dd86b9316f91b06dcfbcfcd370",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "parsed": {
+        "added": 1,
+        "deleted": 0,
+        "path": "README.md"
+      }
+    },
+    "unstaged_numstat": {
+      "command": [
+        "git",
+        "diff",
+        "--numstat",
+        "--",
+        "README.md"
+      ],
+      "exit_code": 0,
+      "stdout": "7\t0\tREADME.md\n",
+      "stderr": "warning: in the working copy of 'README.md', LF will be replaced by CRLF the next time Git touches it\n",
+      "stdout_bytes": 14,
+      "stderr_bytes": 102,
+      "stdout_sha256": "5bd19152b618a45e6ec53a527c14074dd8b59ab55b91072a464b75721ac479e6",
+      "stderr_sha256": "d2cb6ffb663a2b94bca7a186494ceb020deacbc8ff6c9af0ce2e8eba2120ca08",
+      "parsed": {
+        "added": 7,
+        "deleted": 0,
+        "path": "README.md"
+      }
+    },
+    "cached_added_lines": [
+      "- [Ceres1 V4 自动评测 TASK](tasks/ceres-v4-evaluation.md) / [评测与复跑入口](evals/v4/README.md)：60 场景、100 次执行及自动浏览器证据；严格验收结果与人工未评测单列。"
+    ],
+    "unstaged_added_lines": [
+      "- [PROJECT.md](PROJECT.md)：基于 PRD 的阶段目标、当前工作、依赖和待决定事项。",
+      "- [prd.md](prd.md)：产品问题、目标、需求与边界。",
+      "- [商品库扩充](tasks/catalog-expansion.md)、[语义协议改造](tasks/semantic-contract.md)、[Mercury 集成](tasks/mercury-integration.md)：各任务的状态、范围、验收及证据入口。",
+      "- [logs/](logs/README.md)：较大任务的关键执行变化。",
+      "- [设计与历史方案](docs/plans/) / [导购架构](docs/graph.md) / [Mercury 当前启动指南](docs/mercury/mercury-quickstart.md)：项目级技术文档；方案及历史报告不代表当前版本已经验收。",
+      "",
+      "当前阶段是形成可反复演示、能用评测解释能力和局限的导购 MVP。价格、库存及配送为模拟数据；导购 V1 止于用户确认加购，Mercury 售后集成单独验收。"
+    ],
+    "partial_stage_ok": true
+  },
+  "candidate": {
+    "head": "ac895fd620af617fa31f4e0006841a4d6a89cd53",
+    "expected_head": "ac895fd620af617fa31f4e0006841a4d6a89cd53",
+    "status_tracked": {
+      "command": [
+        "git",
+        "-C",
+        "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+        "status",
+        "--short",
+        "--untracked-files=no"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stderr_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "diff_HEAD_quiet": {
+      "command": [
+        "git",
+        "-C",
+        "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+        "diff",
+        "HEAD",
+        "--quiet"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "stdout_bytes": 0,
+      "stderr_bytes": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "clean": true
+  },
+  "source_hashes": [
+    {
+      "path": "scripts/eval_v4.py",
+      "current_sha256": "c6a357fc97bda7ea0501e52b4f14b0c23a4802d4ae9497dd5a1cb5c6bd84f294",
+      "frozen_sha256": "c6a357fc97bda7ea0501e52b4f14b0c23a4802d4ae9497dd5a1cb5c6bd84f294",
+      "staged_sha256": "c6a357fc97bda7ea0501e52b4f14b0c23a4802d4ae9497dd5a1cb5c6bd84f294",
+      "current_matches_frozen": true,
+      "staged_matches_frozen": true
+    },
+    {
+      "path": "scripts/test_eval_v4.py",
+      "current_sha256": "7471221c6ddd1d23ed2a6f1317fa35da5928502e6e73b7d486e3d07b76b4a0ea",
+      "frozen_sha256": "7471221c6ddd1d23ed2a6f1317fa35da5928502e6e73b7d486e3d07b76b4a0ea",
+      "staged_sha256": "7471221c6ddd1d23ed2a6f1317fa35da5928502e6e73b7d486e3d07b76b4a0ea",
+      "current_matches_frozen": true,
+      "staged_matches_frozen": true
+    },
+    {
+      "path": "scripts/eval_v4_judge.py",
+      "current_sha256": "57cbd92120e18696273e29044b11dc271d842f4054b8a699dfcfe33947f70f88",
+      "frozen_sha256": "57cbd92120e18696273e29044b11dc271d842f4054b8a699dfcfe33947f70f88",
+      "staged_sha256": "57cbd92120e18696273e29044b11dc271d842f4054b8a699dfcfe33947f70f88",
+      "current_matches_frozen": true,
+      "staged_matches_frozen": true
+    },
+    {
+      "path": "scripts/eval_v4_record.py",
+      "current_sha256": "db5ab37fb2439bdd64d6c9165068b3c4b7c790ac37e98df4c7b4b73413a57ad4",
+      "frozen_sha256": "db5ab37fb2439bdd64d6c9165068b3c4b7c790ac37e98df4c7b4b73413a57ad4",
+      "staged_sha256": "db5ab37fb2439bdd64d6c9165068b3c4b7c790ac37e98df4c7b4b73413a57ad4",
+      "current_matches_frozen": true,
+      "staged_matches_frozen": true
+    },
+    {
+      "path": "scripts/eval_v4_ui.mjs",
+      "current_sha256": "5aa033fedf164bb1c1438afbb3bb74c02100ab2a3950769b431756db3026f5f4",
+      "frozen_sha256": "5aa033fedf164bb1c1438afbb3bb74c02100ab2a3950769b431756db3026f5f4",
+      "staged_sha256": "5aa033fedf164bb1c1438afbb3bb74c02100ab2a3950769b431756db3026f5f4",
+      "current_matches_frozen": true,
+      "staged_matches_frozen": true
+    },
+    {
+      "path": "evals/v4/cases.json",
+      "current_sha256": "18ce0e2395e6b5f99a8424e05bc6092b3c5aa7de664ecc3df7fb3b5855e1d8f0",
+      "frozen_sha256": "18ce0e2395e6b5f99a8424e05bc6092b3c5aa7de664ecc3df7fb3b5855e1d8f0",
+      "staged_sha256": "18ce0e2395e6b5f99a8424e05bc6092b3c5aa7de664ecc3df7fb3b5855e1d8f0",
+      "current_matches_frozen": true,
+      "staged_matches_frozen": true
+    }
+  ],
+  "acceptance_manifest_hashes": {
+    "acceptance_reporter_sha256": "db5ab37fb2439bdd64d6c9165068b3c4b7c790ac37e98df4c7b4b73413a57ad4",
+    "current_record_sha256": "db5ab37fb2439bdd64d6c9165068b3c4b7c790ac37e98df4c7b4b73413a57ad4",
+    "staged_record_sha256": "db5ab37fb2439bdd64d6c9165068b3c4b7c790ac37e98df4c7b4b73413a57ad4",
+    "run04_runner_sha256": "c6a357fc97bda7ea0501e52b4f14b0c23a4802d4ae9497dd5a1cb5c6bd84f294",
+    "staged_runner_sha256": "c6a357fc97bda7ea0501e52b4f14b0c23a4802d4ae9497dd5a1cb5c6bd84f294",
+    "run04_cases_sha256": "18ce0e2395e6b5f99a8424e05bc6092b3c5aa7de664ecc3df7fb3b5855e1d8f0",
+    "staged_cases_sha256": "18ce0e2395e6b5f99a8424e05bc6092b3c5aa7de664ecc3df7fb3b5855e1d8f0"
+  },
+  "hash_gates": {
+    "source_cases_match_frozen": true,
+    "acceptance_reporter_matches_current_staged": true,
+    "run04_runner_cases_match_staged": true
+  },
+  "lfs_assets": [
+    {
+      "path": "work/ceres-v4-evaluation/ceres-v4-ac895fd-source.zip",
+      "staged_blob_bytes": 133,
+      "lfs_pointer": true,
+      "lfs_filter": true,
+      "oid": "fcdfd8a55885c56b1b06c2058c57c5e3d1aafe42450e64410dc94488e16ef0c1",
+      "payload_size": 33929670
+    },
+    {
+      "path": "work/ceres-v4-evaluation/ui/run-01/activity-salad-entry.png",
+      "staged_blob_bytes": 131,
+      "lfs_pointer": true,
+      "lfs_filter": true,
+      "oid": "003c48a2aad32e2ae9426e50194fcc6a5786713ef6131c1fdd5648ebc09faf69",
+      "payload_size": 122553
+    },
+    {
+      "path": "work/ceres-v4-evaluation/ui/run-01/activity-salad-final.png",
+      "staged_blob_bytes": 131,
+      "lfs_pointer": true,
+      "lfs_filter": true,
+      "oid": "767a9d7f54803f34bbf009f6341243034051f26768703ac471ebde01280f1fb8",
+      "payload_size": 133107
+    },
+    {
+      "path": "work/ceres-v4-evaluation/ui/run-01/activity-salad-home.png",
+      "staged_blob_bytes": 131,
+      "lfs_pointer": true,
+      "lfs_filter": true,
+      "oid": "b57da10d9c9ef3be4f0859354f24d0275390679f67e5e0c6fa31f0aed56e72db",
+      "payload_size": 108099
+    },
+    {
+      "path": "work/ceres-v4-evaluation/ui/run-01/snack-bubble-home.png",
+      "staged_blob_bytes": 131,
+      "lfs_pointer": true,
+      "lfs_filter": true,
+      "oid": "793a32ae8613b035711ca49208d2296ef52c3129f1d7e43f43521cd542aed005",
+      "payload_size": 105882
+    },
+    {
+      "path": "work/ceres-v4-evaluation/ui/run-02/activity-salad-entry.png",
+      "staged_blob_bytes": 131,
+      "lfs_pointer": true,
+      "lfs_filter": true,
+      "oid": "dfea314644725e9360e6a07955e24e07558d4a6e6a7a47710cdd7e91227c0491",
+      "payload_size": 119909
+    },
+    {
+      "path": "work/ceres-v4-evaluation/ui/run-02/activity-salad-final.png",
+      "staged_blob_bytes": 131,
+      "lfs_pointer": true,
+      "lfs_filter": true,
+      "oid": "818d6e74395f0335759ceadf552d2aeefa7832e36f573591e701b741bab4982e",
+      "payload_size": 168141
+    },
+    {
+      "path": "work/ceres-v4-evaluation/ui/run-02/activity-salad-home.png",
+      "staged_blob_bytes": 131,
+      "lfs_pointer": true,
+      "lfs_filter": true,
+      "oid": "b324d6541ed53d71192d1ad75d548b5ee2d9cfb8d079dd877cc6024ebf1d30ba",
+      "payload_size": 108119
+    },
+    {
+      "path": "work/ceres-v4-evaluation/ui/run-02/activity-salad-plan.png",
+      "staged_blob_bytes": 131,
+      "lfs_pointer": true,
+      "lfs_filter": true,
+      "oid": "c030a2c0885abb042ca386cd0314b9c70c29db21e1721381f030e9cea1f4e40d",
+      "payload_size": 163644
+    },
+    {
+      "path": "work/ceres-v4-evaluation/ui/run-02/snack-bubble-final.png",
+      "staged_blob_bytes": 131,
+      "lfs_pointer": true,
+      "lfs_filter": true,
+      "oid": "f6b37609a54bb0b0bebb3be6341dd5112136af76520324b9efdbd07bd2b8992e",
+      "payload_size": 136925
+    },
+    {
+      "path": "work/ceres-v4-evaluation/ui/run-02/snack-bubble-home.png",
+      "staged_blob_bytes": 131,
+      "lfs_pointer": true,
+      "lfs_filter": true,
+      "oid": "a07851dea0945f96bb030274daa1b84d4805c368f3f98cc54c12161a552d284b",
+      "payload_size": 106007
+    }
+  ],
+  "lfs_assets_all_pointer_with_lfs_filter": true,
+  "work_attributes": {
+    "staged_path": "work/ceres-v4-evaluation/.gitattributes",
+    "sha256": "a39bea9c7da966140b23fadbf9effc5081978a800ba021755488c4991855dd65",
+    "content": "# Frozen receipts, requests and source snapshots are hashed as exact bytes.\n* -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol\n# Preserve the original PowerShell error renderer's trailing padding.\nui/run-02-service-verify-attempt01.stderr.txt -whitespace\n# Frozen audit attempts retain their captured terminal blank line.\nevidence/rescore-run04/acceptance_audit.py whitespace=blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol\nevidence/rescore-run04/acceptance_audit.v2.py whitespace=blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol\n",
+    "effective_probes": {
+      "work/ceres-v4-evaluation/run-03/R01-r1/result.json": {
+        "command": [
+          "git",
+          "check-attr",
+          "--cached",
+          "text",
+          "whitespace",
+          "--",
+          "work/ceres-v4-evaluation/run-03/R01-r1/result.json"
+        ],
+        "exit_code": 0,
+        "stdout": "work/ceres-v4-evaluation/run-03/R01-r1/result.json: text: unset\nwork/ceres-v4-evaluation/run-03/R01-r1/result.json: whitespace: blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol\n",
+        "stderr": "",
+        "stdout_bytes": 181,
+        "stderr_bytes": 0,
+        "stdout_sha256": "cb34f9d89cc3744ae183b92291791080bfa855ab4cae12048b685932ab253f43",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "work/ceres-v4-evaluation/evidence/rescore-run04/acceptance_audit.py": {
+        "command": [
+          "git",
+          "check-attr",
+          "--cached",
+          "text",
+          "whitespace",
+          "--",
+          "work/ceres-v4-evaluation/evidence/rescore-run04/acceptance_audit.py"
+        ],
+        "exit_code": 0,
+        "stdout": "work/ceres-v4-evaluation/evidence/rescore-run04/acceptance_audit.py: text: unset\nwork/ceres-v4-evaluation/evidence/rescore-run04/acceptance_audit.py: whitespace: blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol\n",
+        "stderr": "",
+        "stdout_bytes": 216,
+        "stderr_bytes": 0,
+        "stdout_sha256": "74fb15b3d302e327709a953643da66c33f2502b5319264df023b9dd938ceb9f7",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "work/ceres-v4-evaluation/evidence/rescore-run04/acceptance_audit.v2.py": {
+        "command": [
+          "git",
+          "check-attr",
+          "--cached",
+          "text",
+          "whitespace",
+          "--",
+          "work/ceres-v4-evaluation/evidence/rescore-run04/acceptance_audit.v2.py"
+        ],
+        "exit_code": 0,
+        "stdout": "work/ceres-v4-evaluation/evidence/rescore-run04/acceptance_audit.v2.py: text: unset\nwork/ceres-v4-evaluation/evidence/rescore-run04/acceptance_audit.v2.py: whitespace: blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol\n",
+        "stderr": "",
+        "stdout_bytes": 222,
+        "stderr_bytes": 0,
+        "stdout_sha256": "f2f5f9f498ba404d373763e94bcff9f7cfda75dededb646293ac0a9c0aa15056",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "work/ceres-v4-evaluation/ui/run-02-service-verify-attempt01.stderr.txt": {
+        "command": [
+          "git",
+          "check-attr",
+          "--cached",
+          "text",
+          "whitespace",
+          "--",
+          "work/ceres-v4-evaluation/ui/run-02-service-verify-attempt01.stderr.txt"
+        ],
+        "exit_code": 0,
+        "stdout": "work/ceres-v4-evaluation/ui/run-02-service-verify-attempt01.stderr.txt: text: unset\nwork/ceres-v4-evaluation/ui/run-02-service-verify-attempt01.stderr.txt: whitespace: unset\n",
+        "stderr": "",
+        "stdout_bytes": 174,
+        "stderr_bytes": 0,
+        "stdout_sha256": "41e5da88ec5d172d187ea382d37e440ad31e9cb24c62289db27893928c3652de",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "prior_full_audit_receipt": {
+    "path": "work/ceres-v4-evaluation/evidence/precommit/precommit-audit.stdout.json",
+    "bytes": 174694880,
+    "sha256": "ff4075334332d868c92220d46a46bac7273a543a43b0d8f281b1f6f506c101e2",
+    "status": {
+      "command": [
+        "git",
+        "status",
+        "--short",
+        "--",
+        "work/ceres-v4-evaluation/evidence/precommit"
+      ],
+      "exit_code": 0,
+      "stdout": "?? work/ceres-v4-evaluation/evidence/precommit/\n",
+      "stderr": "",
+      "stdout_bytes": 48,
+      "stderr_bytes": 0,
+      "stdout_sha256": "31042f2eaa17d5e3e099724a8cfa73e9faa04be6758cdb2c95c1b27f9e986091",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "final_pass": true
+}

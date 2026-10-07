@@ -1,0 +1,148 @@
+{
+  "steps": [
+    {
+      "case_id": "R16",
+      "op": "turn",
+      "label": "request",
+      "before": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-ca9c683a5af9",
+          "product_cards": [],
+          "task_id": null,
+          "state_version": 0,
+          "session_version": 0,
+          "current_step": null,
+          "task_status": null,
+          "entry_context": {
+            "page": "home",
+            "category_id": null,
+            "activity_id": null,
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": null,
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": null,
+          "available_actions": [
+            "send_message"
+          ],
+          "constraints_summary": {},
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "empty",
+          "messages": null
+        },
+        "opening": {
+          "role": "momo",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "active_role_before": "momo",
+      "request": {
+        "request_id": "08-R16-1d99162f1e",
+        "message": "帮我买一瓶农夫山泉饮用水550ml瓶装",
+        "expected_task_id": null,
+        "expected_state_version": 0,
+        "expected_session_version": 0
+      },
+      "http_status": 200,
+      "elapsed_ms": 1032.5,
+      "latency_target_ms": 15000,
+      "latency_target_exceeded": false,
+      "events": [
+        {
+          "type": "service.route",
+          "payload": {
+            "status": "completed",
+            "decision": "suggest_switch",
+            "raw_choice": "suggest_switch",
+            "current_role": "momo",
+            "target_role": "keke",
+            "handoff_id": "handoff_2e82936536bc4d54b62e758e72a79a89",
+            "prompt_mode": "automatic",
+            "request_id": "08-R16-1d99162f1e",
+            "route_ms": 1028.8706999272108,
+            "criteria_version": "ceres-service-v3.2"
+          }
+        },
+        {
+          "type": "turn.completed",
+          "payload": {
+            "message": "选购业务由可可处理，是否切换？",
+            "business_not_run": true
+          }
+        }
+      ],
+      "role_model_call_range": [
+        0,
+        0
+      ],
+      "kev_call_range": [
+        0,
+        1
+      ],
+      "terminal": {
+        "message": "选购业务由可可处理，是否切换？",
+        "business_not_run": true
+      },
+      "trace": [],
+      "snapshot_after": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-ca9c683a5af9",
+          "product_cards": [],
+          "task_id": null,
+          "state_version": 0,
+          "session_version": 0,
+          "current_step": null,
+          "task_status": null,
+          "entry_context": {
+            "page": "home",
+            "category_id": null,
+            "activity_id": null,
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": null,
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": null,
+          "available_actions": [
+            "send_message"
+          ],
+          "constraints_summary": {},
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "empty",
+          "messages": []
+        },
+        "opening": {
+          "role": "momo",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "status": "captured"
+    }
+  ],
+  "timing_failures": []
+}

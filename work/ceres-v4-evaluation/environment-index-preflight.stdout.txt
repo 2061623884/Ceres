@@ -1,0 +1,63 @@
+{
+  "scope": "read-only config and runtime identity preflight; no model/API calls",
+  "product_tree": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+  "settings_root": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+  "settings_env_file": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08\\.env",
+  "mercury_project_root": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08\\Mercury",
+  "mercury_env_file": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08\\Mercury\\.env",
+  "settings_env_file_exists": true,
+  "mercury_env_file_exists": false,
+  "config_identity_sha256": {
+    ".env": "dc42447f42984e7033aca1bc634c3084ac4b4f07379b7c0832e79f8433fb13dd"
+  },
+  "environment_override_identity_sha256": {},
+  "effective_nonsecret_configuration": {
+    "llm_mode": "live",
+    "business_data_mode": "demo",
+    "llm_model": "qwen3.8-27b",
+    "memory_model": "qwen3.8-27b",
+    "openai_endpoint": "https://discovery-api.intern-ai.org.cn/v1",
+    "kev_endpoint": "http://127.0.0.1:18009",
+    "llm_timeout": 45.0,
+    "llm_max_output_tokens": 3072,
+    "semantic_max_steps": 2,
+    "semantic_lookup_budget": 2,
+    "semantic_turn_timeout_seconds": 90.0,
+    "retrieval_mode": "hybrid",
+    "retrieval_index_dir": "data/retrieval_index-langgraph",
+    "source_database_path": "data/sale_guide.db",
+    "database_backend": "sqlite",
+    "embedding_endpoint": "https://api.siliconflow.cn/v1",
+    "embedding_model": "Qwen/Qwen3-Embedding-0.6B",
+    "embedding_dimension": 1024,
+    "internal_enabled": false
+  },
+  "secret_presence_only": {
+    "OPENAI_API_KEY": {
+      "present": false,
+      "sha256": null
+    },
+    "EMBEDDING_API_KEY": {
+      "present": false,
+      "sha256": null
+    },
+    "INTERNAL_ADMIN_TOKEN": {
+      "present": false,
+      "sha256": null
+    }
+  },
+  "nonsecret_process_overrides": {},
+  "mercury_standalone_environment_settings": {
+    "model": null,
+    "endpoint": null,
+    "api_key_present": false
+  },
+  "retrieval_index_files_sha256": {
+    "current.json": "f315b2f63ba5264f82ed1efcc4000cbcb273a88fbfed1ff4afce8ae4c6e6cd8d",
+    "idx-81e9fa689baef6b5/index.sqlite3": "26d9038ae1aee7dd505a53fe26b8a08d6dc2ee3308bb3f9bf420694c20935dac",
+    "idx-81e9fa689baef6b5/manifest.json": "db58d93b6965876dc8ddf1b1633559f3a8229fca00b3e7452e53113590152933"
+  },
+  "retrieval_index_identity_json_sha256": "7b06d5903e2bab3a054e71702e13fc945b0fcdabf5bdcd33508ffd3a95c7e754",
+  "python_executable": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+  "python_version": "3.12.10"
+}

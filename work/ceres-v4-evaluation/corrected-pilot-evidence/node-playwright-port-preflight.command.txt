@@ -1,0 +1,6 @@
+node --version
+npm --version
+node -e require.resolve(playwright,@playwright/test,playwright-core) from repo root and frontend
+Get-NetTCPConnection -State Listen -LocalPort 8012,8443
+TcpListener loopback bind/release checks for 127.0.0.1:8012 and 127.0.0.1:8443
+No app or business model started

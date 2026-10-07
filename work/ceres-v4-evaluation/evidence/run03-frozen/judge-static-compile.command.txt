@@ -1,0 +1,1 @@
+"C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe" -X utf8 -c "from pathlib import Path; compile(Path(\"C:\Users\20616\Desktop\Agent\Agent产品\Ceres\scripts\eval_v4_judge.py\").read_text(encoding=\"utf-8\"), \"eval_v4_judge.py\", \"exec\")"

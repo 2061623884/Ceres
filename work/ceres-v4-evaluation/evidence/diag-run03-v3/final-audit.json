@@ -1,0 +1,509 @@
+{
+  "checks": {
+    "runner_sha_matches_freeze_and_manifest": true,
+    "source_manifest_sha_matches_freeze_and_output": true,
+    "100_scheduled_and_100_outputs": true,
+    "all_source_result_hashes_match": true,
+    "all_requests_only_change_max_tokens": true,
+    "all_serialized_requests_saved": true,
+    "all_source_calls_count_one": true,
+    "summary_matches_result_verdicts": true,
+    "summary_error_count_matches": true,
+    "product_tasks_not_reexecuted": true,
+    "R01_diagnostic_preserved": true,
+    "dimension_issues_recorded_without_retry": true
+  },
+  "all_integrity_checks_passed": true,
+  "runner_sha256": "57cbd92120e18696273e29044b11dc271d842f4054b8a699dfcfe33947f70f88",
+  "source_manifest_sha256": "04274cdbaa38799bac8a3ef40f418a70c8839251a4c08a30d4572ced74b518bb",
+  "source_result_count": 100,
+  "diagnostic_result_count": 100,
+  "verdict_counts": {
+    "pass": 36,
+    "fail": 23,
+    "unknown": 41
+  },
+  "error_count": 38,
+  "error_types": {
+    "ValueError": 24,
+    "ReadTimeout": 9,
+    "JSONDecodeError": 5
+  },
+  "error_messages": {
+    "Judge returned no visible JSON content": 22,
+    "no JSON object found in model output": 2,
+    "The read operation timed out": 9,
+    "Expecting ',' delimiter: line 9 column 6 (char 451)": 1,
+    "Expecting ',' delimiter: line 15 column 6 (char 902)": 1,
+    "Expecting ',' delimiter: line 21 column 6 (char 1112)": 1,
+    "Expecting ',' delimiter: line 9 column 6 (char 369)": 1,
+    "Expecting ',' delimiter: line 15 column 6 (char 721)": 1
+  },
+  "response_status_counts": {
+    "200": 91,
+    "None": 9
+  },
+  "capture_call_count_distribution": {
+    "1": 100
+  },
+  "serialized_request_count": 100,
+  "request_only_max_tokens_changed_count": 100,
+  "response_body_hash_verified_count": 91,
+  "usage_object_count": 91,
+  "usage_coverage": 0.91,
+  "usage_complete_count": 91,
+  "usage_complete_coverage": 0.91,
+  "usage_sums_where_present": {
+    "prompt_tokens": 858945,
+    "completion_tokens": 215907,
+    "total_tokens": 1074852,
+    "reasoning_tokens": 185092
+  },
+  "parsed_content_count": 69,
+  "content_schema_valid_count": 62,
+  "parsed_findings_exactly_four_dimensions_once": 62,
+  "dimension_issue_count": 0,
+  "dimension_issues": [],
+  "schema_issues": [
+    {
+      "execution_id": "H06-r1",
+      "kind": "content_not_json",
+      "error": "Unterminated string starting at: line 7 column 7 (char 111)",
+      "response": "{\n  \"verdict\": \"fail\",\n  \"findings\": [\n    {\n      \"dimension\": \"completeness\",\n      \"verdict\": \"fail\",\n      \""
+    },
+    {
+      "execution_id": "R03-r2",
+      "kind": "content_not_json",
+      "error": "Unterminated string starting at: line 13 column 19 (char 534)",
+      "response": "{\n  \"verdict\": \"pass\",\n  \"findings\": [\n    {\n      \"dimension\": \"completeness\",\n      \"verdict\": \"pass\",\n      \"evidence\": \"request.response.plan.items[0].quantity=2；request.response.plan.items[0].line_total_fen=1180；request.response.status=awaiting_confirmation；facts_after.guide.current_step=awaiting_confirmation；facts_after.guide.confirmation_result=null\",\n      \"reason\": \"已形成包含2件原味薯片70克袋装的待确认方案，总价11.80元低于20元预算，且未进入确认或下单状态，符合“形成未确认清单”的目标。\"\n    },\n    {\n      \"dimension\": \"grounding\",\n      \"verdict\": \"pass\",\n      \"evidence\": \"product_prices_fen['demo:snack-original-potato-chips-70g-bag'].price_fen=590；request.response.plan.items[0].unit_price_fen="
+    },
+    {
+      "execution_id": "R05-r2",
+      "kind": "content_not_json",
+      "error": "Expecting value: line 15 column 7 (char 903)",
+      "response": "{\n  \"verdict\": \"pass\",\n  \"findings\": [\n    {\n      \"dimension\": \"completeness\",\n      \"verdict\": \"pass\",\n      \"evidence\": \"choose-type 展示可乐商品与品牌/规格筛选；choose-brand 展示百事可乐原味汽水330ml罐装；selected-purchase 用户输入“那就买两罐百事可乐原味汽水330ml罐装”，plan.items 中 sku_id=demo:cn-pepsi-original-330ml-can、quantity=2、line_total_fen=600；explicit-confirm facts_after cart.items 中 quantity=2、total_price_fen=600，task_status=completed。\",\n      \"reason\": \"轨迹覆盖了饮料分类、品牌筛选、指定两罐百事以及最终加购完成，目标闭环完整。\"\n    },\n    {\n      \"dimension\": \"grounding\",\n      \"verdict\": \"pass\",\n      \"evidence\": \"choose-type product_cards 中百事可乐原味汽水330ml罐装 price_fen=300；product_prices_fen 中 demo:cn-pepsi-original-330ml-can price_fen=300、available_qty=36、sellable=true；selected-purchase plan.evidence 显示 sku_source=store_offer、data_mode=demo、stock_verified=true；constraints_summary 保留 budget_fen=2000。\",\n      \"reason\": \"商品、价格、库存/可售性和预算约束均有可见业务事实来源，未凭空生成。\"\n    },"
+    },
+    {
+      "execution_id": "R06-r1",
+      "kind": "content_not_json",
+      "error": "Unterminated string starting at: line 25 column 19 (char 1192)",
+      "response": "{\n  \"verdict\": \"pass\",\n  \"findings\": [\n    {\n      \"dimension\": \"completeness\",\n      \"verdict\": \"pass\",\n      \"evidence\": \"selected-purchase response 显示“采购清单已加入「可口可乐经典原味汽水500ml瓶装」…选中合计 ¥8.00”，plan.items 中 quantity=2、packaging=bottle；explicit-confirm facts_after 中 cart.items 为同一 sku quantity=2，confirmation_result.status=completed。\",\n      \"reason\": \"目标要求宽泛饮料两瓶、保持包装与数量并确认。轨迹最终选择瓶装可乐，数量保持为 2，并完成确认，购物车事实也显示 2 件，目标完成。\"\n    },\n    {\n      \"dimension\": \"grounding\",\n      \"verdict\": \"pass\",\n      \"evidence\": \"choose-type product_cards 显示 demo:cn-coke-original-500ml-bottle price_fen=400、packaging=bottle；product_prices_fen 中该 sku price_fen=400、sellable=true；selected-purchase plan.evidence 显示 sku_source=store_offer、stock_verified=true；constraints_summary.budget_fen=2000。\",\n      \"reason\": \"商品、包装、单价、库存可用性和预算均有可见业务事实来源，未凭空生成价格或政策。\"\n    },\n    {\n      \"dimension\": \"clarification\",\n      \"verdict\": \"pass\",\n      \"evidence\": \"request 步骤 pending_clarifications 询问 product_type；choose-type 步骤在用户选择“可乐”后询问“原味还是零度”；后续未再追问数量或预算。\",\n      \"reason\": \"初始请求较宽泛，询问饮料类别是必要澄清；选择可乐后询问具体口味也是必要澄清。已知约束“两瓶、预算20元”被保留，没有重复追问。\"\n    },\n    {\n      \"dimension\": \"status\",\n      \"verdict\": \"pass\",\n      \"evidence\": \"choose-type action_results 为 read_only，facts_after cart.items 为空；selected-purchase status=awaiting_confirmation，cart.items 仍为空；explicit-confirm facts_after cart.version=2、"
+    },
+    {
+      "execution_id": "R09-r1",
+      "kind": "content_not_json",
+      "error": "Expecting value: line 14 column 16 (char 628)",
+      "response": "{\n  \"verdict\": \"fail\",\n  \"findings\": [\n    {\n      \"dimension\": \"completeness\",\n      \"verdict\": \"pass\",\n      \"evidence\": \"decrease: response “已把「百事可乐原味汽水330ml罐装」改为 1 件”；explicit-confirm facts_after cart.items quantity=1，confirmation_result.items_added quantity=1\",\n      \"reason\": \"数量从 request 阶段的 3 件变为 1 件，并最终进入购物车；decrease 的 action_results verb=change，不是加购。\"\n    },\n    {\n      \"dimension\": \"grounding\",\n      \"verdict\": \"pass\",\n      \"evidence\": \"product_prices_fen demo:cn-pepsi-original-330ml-can price_fen=300 available_qty=36；decrease plan unit_price_fen=300 line_total_fen=300，response “¥3.00（演示价格）”\",\n      \"reason\":"
+    },
+    {
+      "execution_id": "R11-r3",
+      "kind": "content_not_json",
+      "error": "Unterminated string starting at: line 20 column 7 (char 1015)",
+      "response": "{\n  \"verdict\": \"fail\",\n  \"findings\": [\n    {\n      \"dimension\": \"completeness\",\n      \"verdict\": \"fail\",\n      \"evidence\": \"new-budget input='预算改成10元，还是两罐'；facts_after.constraints_summary.budget_fen=2000；facts_after.plan.items[0].quantity=2；unexecuted_steps=['explicit-confirm']\",\n      \"reason\": \"目标要求修改预算后保留两罐百事数量，但预算仍为2000分（20元），未变为1000分（10元）；数量虽为2，预算修改未执行，不能判通过。\"\n    },\n    {\n      \"dimension\": \"grounding\",\n      \"verdict\": \"pass\",\n      \"evidence\": \"request plan item sku_id='demo:cn-pepsi-original-330ml-can', unit_price_fen=300, line_total_fen=600；product_prices_fen['demo:cn-pepsi-original-330ml-can'].price_fen=300；evidence.sku_source='store_offer'\",\n      \"reason\": \"已表达的商品、数量和价格有可见来源；未执行的预算修改不作为已通过事实。\"\n    },\n    {\n      \"dimension\": \"clarification\",\n      \"verdict\": \"fail\",\n      \"evidence\": \"new-budget response='你是在说清单里的哪一项？可以说一下目标或商品名。1. 百事可乐原味汽水330ml罐装 2. 百事可乐原味汽水330ml罐装 3. 百事可乐原味汽水330ml罐装'；facts_after.plan.items 仅包含 sku_id='demo:cn-pepsi-original-330ml-can'；user input='预算改成10元，还是两罐'\",\n      \"reason"
+    },
+    {
+      "execution_id": "R14-r1",
+      "kind": "content_not_json",
+      "error": "Unterminated string starting at: line 7 column 7 (char 111)",
+      "response": "{\n  \"verdict\": \"fail\",\n  \"findings\": [\n    {\n      \"dimension\": \"completeness\",\n      \"verdict\": \"pass\",\n      \""
+    }
+  ],
+  "error_records": [
+    {
+      "execution_id": "H03-r1",
+      "error": {
+        "type": "ValueError",
+        "message": "Judge returned no visible JSON content"
+      },
+      "response_status": 200,
+      "usage_present": true,
+      "finish_reason": "length"
+    },
+    {
+      "execution_id": "H06-r1",
+      "error": {
+        "type": "ValueError",
+        "message": "no JSON object found in model output"
+      },
+      "response_status": 200,
+      "usage_present": true,
+      "finish_reason": "length"
+    },
+    {
+      "execution_id": "H07-r1",
+      "error": {
+        "type": "ValueError",
+        "message": "Judge returned no visible JSON content"
+      },
+      "response_status": 200,
+      "usage_present": true,
+      "finish_reason": "length"
+    },
+    {
+      "execution_id": "H11-r1",
+      "error": {
+        "type": "ValueError",
+        "message": "Judge returned no visible JSON content"
+      },
+      "response_status": 200,
+      "usage_present": true,
+      "finish_reason": "length"
+    },
+    {
+      "execution_id": "H12-r1",
+      "error": {
+        "type": "ReadTimeout",
+        "message": "The read operation timed out"
+      },
+      "response_status": null,
+      "usage_present": false,
+      "finish_reason": null
+    },
+    {
+      "execution_id": "H14-r1",
+      "error": {
+        "type": "ValueError",
+        "message": "Judge returned no visible JSON content"
+      },
+      "response_status": 200,
+      "usage_present": true,
+      "finish_reason": "length"
+    },
+    {
+      "execution_id": "H15-r1",
+      "error": {
+        "type": "ValueError",
+        "message": "Judge returned no visible JSON content"
+      },
+      "response_status": 200,
+      "usage_present": true,
+      "finish_reason": "length"
+    },
+    {
+      "execution_id": "H18-r1",
+      "error": {
+        "type": "ValueError",
+        "message": "Judge returned no visible JSON content"
+      },
+      "response_status": 200,
+      "usage_present": true,
+      "finish_reason": "length"
+    },
+    {
+      "execution_id": "H20-r1",
+      "error": {
+        "type": "ReadTimeout",
+        "message": "The read operation timed out"
+      },
+      "response_status": null,
+      "usage_present": false,
+      "finish_reason": null
+    },
+    {
+      "execution_id": "R03-r2",
+      "error": {
+        "type": "JSONDecodeError",
+        "message": "Expecting ',' delimiter: line 9 column 6 (char 451)"
+      },
+      "response_status": 200,
+      "usage_present": true,
+      "finish_reason": "length"
+    },
+    {
+      "execution_id": "R03-r3",
+      "error": {
+        "type": "ReadTimeout",
+        "message": "The read operation timed out"
+      },
+      "response_status": null,
+      "usage_present": false,
+      "finish_reason": null
+    },
+    {
+      "execution_id": "R05-r1",
+      "error": {
+        "type": "ValueError",
+        "message": "Judge returned no visible JSON content"
+      },
+      "response_status": 200,
+      "usage_present": true,
+      "finish_reason": "length"
+    },
+    {
+      "execution_id": "R05-r2",
+      "error": {
+        "type": "JSONDecodeError",
+        "message": "Expecting ',' delimiter: line 15 column 6 (char 902)"
+      },
+      "response_status": 200,
+      "usage_present": true,
+      "finish_reason": "length"
+    },
+    {
+      "execution_id": "R05-r3",
+      "error": {
+        "type": "ValueError",
+        "message": "Judge returned no visible JSON content"
+      },
+      "response_status": 200,
+      "usage_present": true,
+      "finish_reason": "length"
+    },
+    {
+      "execution_id": "R06-r1",
+      "error": {
+        "type": "JSONDecodeError",
+        "message": "Expecting ',' delimiter: line 21 column 6 (char 1112)"
+      },
+      "response_status": 200,
+      "usage_present": true,
+      "finish_reason": "length"
+    },
+    {
+      "execution_id": "R06-r2",
+      "error": {
+        "type": "ValueError",
+        "message": "Judge returned no visible JSON content"
+      },
+      "response_status": 200,
+      "usage_present": true,
+      "finish_reason": "length"
+    },
+    {
+      "execution_id": "R06-r3",
+      "error": {
+        "type": "ReadTimeout",
+        "message": "The read operation timed out"
+      },
+      "response_status": null,
+      "usage_present": false,
+      "finish_reason": null
+    },
+    {
+      "execution_id": "R09-r1",
+      "error": {
+        "type": "JSONDecodeError",
+        "message": "Expecting ',' delimiter: line 9 column 6 (char 369)"
+      },
+      "response_status": 200,
+      "usage_present": true,
+      "finish_reason": "length"
+    },
+    {
+      "execution_id": "R09-r2",
+      "error": {
+        "type": "ReadTimeout",
+        "message": "The read operation timed out"
+      },
+      "response_status": null,
+      "usage_present": false,
+      "finish_reason": null
+    },
+    {
+      "execution_id": "R10-r1",
+      "error": {
+        "type": "ValueError",
+        "message": "Judge returned no visible JSON content"
+      },
+      "response_status": 200,
+      "usage_present": true,
+      "finish_reason": "length"
+    },
+    {
+      "execution_id": "R11-r3",
+      "error": {
+        "type": "JSONDecodeError",
+        "message": "Expecting ',' delimiter: line 15 column 6 (char 721)"
+      },
+      "response_status": 200,
+      "usage_present": true,
+      "finish_reason": "length"
+    },
+    {
+      "execution_id": "R13-r3",
+      "error": {
+        "type": "ReadTimeout",
+        "message": "The read operation timed out"
+      },
+      "response_status": null,
+      "usage_present": false,
+      "finish_reason": null
+    },
+    {
+      "execution_id": "R14-r1",
+      "error": {
+        "type": "ValueError",
+        "message": "no JSON object found in model output"
+      },
+      "response_status": 200,
+      "usage_present": true,
+      "finish_reason": "length"
+    },
+    {
+      "execution_id": "R16-r1",
+      "error": {
+        "type": "ValueError",
+        "message": "Judge returned no visible JSON content"
+      },
+      "response_status": 200,
+      "usage_present": true,
+      "finish_reason": "length"
+    },
+    {
+      "execution_id": "R16-r2",
+      "error": {
+        "type": "ValueError",
+        "message": "Judge returned no visible JSON content"
+      },
+      "response_status": 200,
+      "usage_present": true,
+      "finish_reason": "length"
+    },
+    {
+      "execution_id": "R16-r3",
+      "error": {
+        "type": "ValueError",
+        "message": "Judge returned no visible JSON content"
+      },
+      "response_status": 200,
+      "usage_present": true,
+      "finish_reason": "length"
+    },
+    {
+      "execution_id": "R17-r1",
+      "error": {
+        "type": "ValueError",
+        "message": "Judge returned no visible JSON content"
+      },
+      "response_status": 200,
+      "usage_present": true,
+      "finish_reason": "length"
+    },
+    {
+      "execution_id": "R17-r2",
+      "error": {
+        "type": "ValueError",
+        "message": "Judge returned no visible JSON content"
+      },
+      "response_status": 200,
+      "usage_present": true,
+      "finish_reason": "length"
+    },
+    {
+      "execution_id": "R17-r3",
+      "error": {
+        "type": "ValueError",
+        "message": "Judge returned no visible JSON content"
+      },
+      "response_status": 200,
+      "usage_present": true,
+      "finish_reason": "length"
+    },
+    {
+      "execution_id": "R21-r1",
+      "error": {
+        "type": "ValueError",
+        "message": "Judge returned no visible JSON content"
+      },
+      "response_status": 200,
+      "usage_present": true,
+      "finish_reason": "length"
+    },
+    {
+      "execution_id": "R25-r1",
+      "error": {
+        "type": "ValueError",
+        "message": "Judge returned no visible JSON content"
+      },
+      "response_status": 200,
+      "usage_present": true,
+      "finish_reason": "length"
+    },
+    {
+      "execution_id": "R29-r1",
+      "error": {
+        "type": "ReadTimeout",
+        "message": "The read operation timed out"
+      },
+      "response_status": null,
+      "usage_present": false,
+      "finish_reason": null
+    },
+    {
+      "execution_id": "R30-r1",
+      "error": {
+        "type": "ValueError",
+        "message": "Judge returned no visible JSON content"
+      },
+      "response_status": 200,
+      "usage_present": true,
+      "finish_reason": "length"
+    },
+    {
+      "execution_id": "R32-r1",
+      "error": {
+        "type": "ReadTimeout",
+        "message": "The read operation timed out"
+      },
+      "response_status": null,
+      "usage_present": false,
+      "finish_reason": null
+    },
+    {
+      "execution_id": "R34-r1",
+      "error": {
+        "type": "ReadTimeout",
+        "message": "The read operation timed out"
+      },
+      "response_status": null,
+      "usage_present": false,
+      "finish_reason": null
+    },
+    {
+      "execution_id": "R35-r1",
+      "error": {
+        "type": "ValueError",
+        "message": "Judge returned no visible JSON content"
+      },
+      "response_status": 200,
+      "usage_present": true,
+      "finish_reason": "length"
+    },
+    {
+      "execution_id": "R35-r2",
+      "error": {
+        "type": "ValueError",
+        "message": "Judge returned no visible JSON content"
+      },
+      "response_status": 200,
+      "usage_present": true,
+      "finish_reason": "length"
+    },
+    {
+      "execution_id": "R35-r3",
+      "error": {
+        "type": "ValueError",
+        "message": "Judge returned no visible JSON content"
+      },
+      "response_status": 200,
+      "usage_present": true,
+      "finish_reason": "length"
+    }
+  ],
+  "source_hash_mismatches": [],
+  "request_mismatches": [],
+  "response_hash_mismatches": [],
+  "runner_summary": {
+    "planned": 100,
+    "completed": 100,
+    "verdicts": {
+      "pass": 36,
+      "fail": 23,
+      "unknown": 41
+    },
+    "errors": 38,
+    "calibrated": false,
+    "hard_gate": false,
+    "product_tasks_reexecuted": 0
+  }
+}

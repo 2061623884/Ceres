@@ -1,0 +1,215 @@
+{
+  "product_head": "ac895fd620af617fa31f4e0006841a4d6a89cd53",
+  "started_utc": "2026-10-07T07:55:40.205Z",
+  "app_url": "http://127.0.0.1:18443/",
+  "runtime_receipt_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\ui\\runtime-receipt.json",
+  "runtime_identity": {
+    "product_head": "ac895fd620af617fa31f4e0006841a4d6a89cd53",
+    "llm_mode": "live",
+    "retrieval_mode": "lexical",
+    "database_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\ui\\runtime.sqlite3",
+    "backend_pid": 68440,
+    "frontend_pid": 26128,
+    "browser_channel": "msedge",
+    "frontend_url": "http://127.0.0.1:18443/",
+    "app_url": "http://127.0.0.1:18443/",
+    "served_app_module_sha256": "c563850e51a65fbffbdf1ff8e261f8a3d3aa47f57b725e7dcb8fa1e0177ec3ad",
+    "api_base_url": "http://127.0.0.1:18012/",
+    "retrieval_index_dir": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+    "retrieval_index_version": "idx-81e9fa689baef6b5",
+    "database_exists": true,
+    "vite_config_sha256": "b51c44b0fc9f187a8497e46d2e585782ad4836a243e154ec9b1cc13bb5b74ffe",
+    "playwright_module": "C:\\Users\\20616\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\node_modules\\playwright",
+    "playwright_version": "1.62.1",
+    "node_path": "C:\\Users\\20616\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+    "node_version": "v24.19.0",
+    "created_utc": "2026-10-07T07:49:03.2177396Z",
+    "vite_config_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\ui-vite.config.mjs",
+    "proxy_api_target": "http://127.0.0.1:18012/"
+  },
+  "runtime_receipt_sha256": "fe587c61b8dc800f761bf651b85fc72b7336c407fcfe7d47e3b0359008d5ab79",
+  "runner_sha256": "fc294305380fbd0a32a43894bae042f1308d352b21455e45cc142c202a49bb0a",
+  "journeys": [
+    {
+      "name": "activity-salad",
+      "status": "failed",
+      "stage": "select-activity-product",
+      "steps": [
+        {
+          "label": "select-activity-product",
+          "request": {
+            "request_id": "req-1791359741925-2aqhhim",
+            "message": "我想看看 GREEN RESET｜今天轻一点活动里的「牛油果成品沙拉」，请可可帮我介绍一下。",
+            "expected_task_id": null,
+            "expected_state_version": 0,
+            "expected_session_version": 0,
+            "view_context": {
+              "page": "product",
+              "category_id": null,
+              "product_id": "demo:green-reset-avocado-salad",
+              "activity_id": "green_reset"
+            }
+          },
+          "http_status": 200,
+          "events": [],
+          "final_reply_ms": 8658.960500000001,
+          "first_useful_result_ms": null,
+          "timing_basis": "UI action start to fully received turn.completed SSE; final reply rendering not sampled",
+          "first_useful_result_note": "No DOM marker sampled for this step",
+          "performance_passed": true
+        }
+      ],
+      "requests": [
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/bootstrap",
+          "body": null
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/cart",
+          "body": null
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/cart",
+          "body": null
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/cart",
+          "body": null
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/categories",
+          "body": null
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/products?page_size=40",
+          "body": null
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/categories",
+          "body": null
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/products?page_size=40",
+          "body": null
+        },
+        {
+          "method": "POST",
+          "url": "http://127.0.0.1:18443/api/v1/guide/sessions",
+          "body": {
+            "entry_context": {
+              "page": "activity",
+              "category_id": null,
+              "activity_id": "green_reset",
+              "store_id": "store-demo-01",
+              "delivery_zone_id": "zone-default"
+            }
+          }
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/products/demo%3Agreen-reset-avocado-salad",
+          "body": null
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/products/demo%3Agreen-reset-fruit-platter",
+          "body": null
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/products/demo%3Acn-minute-maid-peach-450ml-bottle",
+          "body": null
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/products/demo%3Agreen-reset-avocado-salad",
+          "body": null
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/products/demo%3Agreen-reset-fruit-platter",
+          "body": null
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/products/demo%3Acn-minute-maid-peach-450ml-bottle",
+          "body": null
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/products?category_id=baking&page_size=40",
+          "body": null
+        },
+        {
+          "method": "POST",
+          "url": "http://127.0.0.1:18443/api/v1/mercury/sessions",
+          "body": null
+        },
+        {
+          "method": "POST",
+          "url": "http://127.0.0.1:18443/api/v1/chat/openings",
+          "body": {
+            "guide_session_id": "sess-80969cc8eb90",
+            "mercury_session_id": "ms_a5eb7e9e5cfd",
+            "role": "keke"
+          }
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/guide/sessions/sess-80969cc8eb90?include_messages=1",
+          "body": null
+        },
+        {
+          "method": "POST",
+          "url": "http://127.0.0.1:18443/api/v1/chat/openings/open_70dc7106732d4a2e84a9e2d8d2d1bf0d/turns/stream",
+          "body": {
+            "request_id": "req-1791359741925-2aqhhim",
+            "message": "我想看看 GREEN RESET｜今天轻一点活动里的「牛油果成品沙拉」，请可可帮我介绍一下。",
+            "expected_task_id": null,
+            "expected_state_version": 0,
+            "expected_session_version": 0,
+            "view_context": {
+              "page": "product",
+              "category_id": null,
+              "product_id": "demo:green-reset-avocado-salad",
+              "activity_id": "green_reset"
+            }
+          }
+        }
+      ],
+      "console_errors": [],
+      "bootstrap": {
+        "owner_id": "owner-31f494e0445f4c77",
+        "store_id": "store-demo-01",
+        "delivery_zone_id": "zone-default",
+        "llm_mode": "live",
+        "business_data_mode": "demo",
+        "demo_notice": "演示门店，价格、库存及配送为模拟数据"
+      },
+      "initial_cart": {
+        "store_id": "store-demo-01",
+        "version": 1,
+        "items": [],
+        "total_price_fen": 0,
+        "business_data_mode": "demo"
+      },
+      "error": {
+        "type": "AssertionError",
+        "message": "The expression evaluated to a falsy value:\n\n  assert.ok(events.some(event => event.type === 'turn.completed'))\n"
+      },
+      "performance_passed": true,
+      "visible_text": "静安区\n⌄\n🧁\n烘焙原料\n📦\n饮料\n🧂\n调味品\n🥛\n乳品\n📦\n水果\n🥩\n肉类\n📦\n水产\n📦\n零食\n📦\n粮油米面\n🥬\n蔬菜\n今日精选\n演示\n\n绿色餐桌计划\n\n有机蔬菜\n全场 88 折\n\n限时会员价\n\n牧场鲜肉\n买二减一\n\n人气鲜品\n\n最快 30 分钟送达\n\n综合排序⌄\n演示\n产地可溯源\n♡\n演示\n\n泡打粉 100克\n\n★\n4.9\n·\n今日采摘\n4.80 元\n产地可溯源\n♡\n演示\n\n无盐黄油 200克\n\n★\n4.9\n·\n今日采摘\n15.80 元\n产地可溯源\n♡\n演示\n\n低筋面粉 250克（小包装）\n\n★\n4.9\n·\n今日采摘\n6.80 元\n产地可溯源\n♡\n演示\n\n奶油奶酪 200克\n\n★\n4.9\n·\n今日采摘\n16.80 元\n产地可溯源\n♡\n演示\n\n鲜鸡蛋 10枚装\n\n★\n4.9\n·\n今日采摘\n12.80 元\n产地可溯源\n♡\n演示\n\n中筋面粉 500克\n\n★\n4.9\n·\n今日采摘\n8.90 元\n产地可溯源\n♡\n演示\n\n白砂糖 500克\n\n★\n4.9\n·\n今日采摘\n6.50 元\n产地可溯源\n♡\n演示\n\n香草精 30毫升\n\n★\n4.9\n·\n今日采摘\n12.80 元\n产地可溯源\n♡\n演示\n\n干酵母 7克\n\n★\n4.9\n·\n今日采摘\n3.50 元\n主页\n自己逛逛\n订单\n个人中心\n嗨！我是可可 🌿\n你的专属导购小助手！告诉我今天想吃什么，我来帮你搞定～\n✦今晚做红烧肉\n✦减脂餐计划\n✦家里有小孩\n✦来点零食\n我想看看 GREEN RESET｜今天轻一点活动里的「牛油果成品沙拉」，请可可帮我介绍一下。\n已找到 GREEN RESET｜今天轻一点活动里的牛油果成品沙拉：规格为 280g/碗，属于成品沙拉、即食，当前可售核验通过。价格、口味、营养和具体库存数量本轮未提供，无法确认。\n1. 牛油果成品沙拉\n\n可可\n\nGREEN RESET｜今天轻一点\n\n今天想吃点清爽的？挑一份成品沙拉、鲜果拼盘或桃汁，让可可接着帮你搭配。\n\n牛油果成品沙拉\n限定成品 · 让可可介绍\n23.80 元\n鲜果成品拼盘\n限定成品 · 让可可介绍\n19.80 元\n美汁源汁汁桃桃桃汁饮料450毫升瓶装\n限定成品 · 让可可介绍\n4.50 元\n今日活动\n采购清单\n购物车\n售后找我"
+    }
+  ],
+  "usage": null,
+  "usage_reason": "Browser server has no provider transport capture; API batch usage is separate",
+  "human_evaluation": "not_evaluated"
+}

@@ -1,0 +1,18 @@
+import json, sqlite3
+from pathlib import Path
+
+db = Path('work/ceres-v4-evaluation/ui/runtime.sqlite3').resolve()
+report = json.loads(Path('work/ceres-v4-evaluation/ui/run-01/result.json').read_text(encoding='utf-8'))
+owner = report['journeys'][0]['bootstrap']['owner_id']
+uri = db.as_uri() + '?mode=ro'
+con = sqlite3.connect(uri, uri=True)
+tables = con.execute("select name from sqlite_master where type='table' order by name").fetchall()
+schemas = []
+for (name,) in tables:
+    quoted = '"' + name.replace('"', '""') + '"'
+    cols = [row[1] for row in con.execute('pragma table_info(' + quoted + ')').fetchall()]
+    if 'owner_id' in cols:
+        count = con.execute('select count(*) from ' + quoted + ' where owner_id=?', (owner,)).fetchone()[0]
+        schemas.append({'table': name, 'rows': count})
+print(json.dumps({'database_path': str(db), 'read_only': True, 'bootstrap_owner_id': owner, 'owner_id_tables': schemas, 'matches': [row for row in schemas if row['rows']]}, ensure_ascii=False, indent=2))
+con.close()

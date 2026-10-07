@@ -1,0 +1,314 @@
+{
+  "steps": [
+    {
+      "case_id": "R13",
+      "op": "turn",
+      "label": "request",
+      "before": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-e481d8c1e02a",
+          "product_cards": [],
+          "task_id": null,
+          "state_version": 0,
+          "session_version": 0,
+          "current_step": null,
+          "task_status": null,
+          "entry_context": {
+            "page": "home",
+            "category_id": null,
+            "activity_id": null,
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": null,
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": null,
+          "available_actions": [
+            "send_message"
+          ],
+          "constraints_summary": {},
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "empty",
+          "messages": null
+        },
+        "opening": {
+          "role": "keke",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "active_role_before": "keke",
+      "request": {
+        "request_id": "08-R13-60e34bed4e",
+        "message": "一般签收后几天内能退？",
+        "expected_task_id": null,
+        "expected_state_version": 0,
+        "expected_session_version": 0
+      },
+      "http_status": 200,
+      "elapsed_ms": 19556.6,
+      "latency_target_ms": 15000,
+      "latency_target_exceeded": true,
+      "events": [
+        {
+          "type": "service.route",
+          "payload": {
+            "status": "completed",
+            "decision": "stay_current",
+            "raw_choice": "stay_current",
+            "current_role": "keke",
+            "prompt_mode": "none",
+            "request_id": "08-R13-60e34bed4e",
+            "route_ms": 1244.443800067529,
+            "criteria_version": "ceres-service-v3.2"
+          }
+        },
+        {
+          "type": "accepted",
+          "payload": {}
+        },
+        {
+          "type": "progress",
+          "payload": {
+            "phase": "understanding"
+          }
+        },
+        {
+          "type": "progress",
+          "payload": {
+            "phase": "retrieve"
+          }
+        },
+        {
+          "type": "answer.delta",
+          "payload": {
+            "delta": "模拟门店的一般规则是：签收后 7 天内，可退货商品可按件申请退货退款（P-RET-01《签收后退货》）。生鲜等标注“不可退货”的商品不支持退货（P-RET-02《不支持退货的商品》）。这只是通用政策，不代表具体订单已可退或已提交申请；具体要看订单商品是否标注可退。",
+            "final": true,
+            "replace": false
+          }
+        },
+        {
+          "type": "turn.completed",
+          "payload": {
+            "message": "模拟门店的一般规则是：签收后 7 天内，可退货商品可按件申请退货退款（P-RET-01《签收后退货》）。生鲜等标注“不可退货”的商品不支持退货（P-RET-02《不支持退货的商品》）。这只是通用政策，不代表具体订单已可退或已提交申请；具体要看订单商品是否标注可退。",
+            "status": "understanding",
+            "task_id": null,
+            "state_version": 0,
+            "session_version": 0,
+            "plan": null,
+            "pending_clarifications": [],
+            "product_cards": [],
+            "plan_effect": "keep",
+            "action_results": [
+              {
+                "type": "read_only",
+                "kind": "policy",
+                "status": "completed",
+                "saved": false,
+                "reply_ok": true,
+                "action_id": "a1"
+              }
+            ],
+            "answer_status": "accepted",
+            "route": "answer",
+            "trace_id": "trace-073b1a744e48"
+          }
+        }
+      ],
+      "role_model_call_range": [
+        0,
+        2
+      ],
+      "kev_call_range": [
+        0,
+        2
+      ],
+      "terminal": {
+        "message": "模拟门店的一般规则是：签收后 7 天内，可退货商品可按件申请退货退款（P-RET-01《签收后退货》）。生鲜等标注“不可退货”的商品不支持退货（P-RET-02《不支持退货的商品》）。这只是通用政策，不代表具体订单已可退或已提交申请；具体要看订单商品是否标注可退。",
+        "status": "understanding",
+        "task_id": null,
+        "state_version": 0,
+        "session_version": 0,
+        "plan": null,
+        "pending_clarifications": [],
+        "product_cards": [],
+        "plan_effect": "keep",
+        "action_results": [
+          {
+            "type": "read_only",
+            "kind": "policy",
+            "status": "completed",
+            "saved": false,
+            "reply_ok": true,
+            "action_id": "a1"
+          }
+        ],
+        "answer_status": "accepted",
+        "route": "answer",
+        "trace_id": "trace-073b1a744e48"
+      },
+      "trace": [
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "capability",
+          "status": "started",
+          "criteria_version": "ceres-guide-capabilities-v2",
+          "call_number": 1,
+          "model": "kev-latest"
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 1047,
+          "stage": "capability",
+          "status": "completed",
+          "capability": "facts_qa",
+          "branch": "semantic_understanding",
+          "criteria_version": "ceres-guide-capabilities-v2",
+          "call_number": 1,
+          "model": "kev-latest"
+        },
+        {
+          "phase": "understanding",
+          "duration_ms": null
+        },
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "understanding",
+          "status": "started",
+          "call_number": 1
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 13608,
+          "stage": "understanding",
+          "status": "completed",
+          "call_number": 1
+        },
+        {
+          "phase": "retrieve",
+          "duration_ms": null
+        },
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "answer",
+          "status": "started",
+          "call_number": 2
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 3593,
+          "stage": "answer",
+          "status": "completed",
+          "call_number": 2
+        },
+        {
+          "phase": "turn_result",
+          "duration_ms": null,
+          "status": "understanding"
+        },
+        {
+          "phase": "memory_extract_started",
+          "duration_ms": null,
+          "model": "qwen3.8-27b"
+        }
+      ],
+      "snapshot_after": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-e481d8c1e02a",
+          "product_cards": [],
+          "task_id": null,
+          "state_version": 0,
+          "session_version": 0,
+          "current_step": null,
+          "task_status": null,
+          "entry_context": {
+            "page": "home",
+            "category_id": null,
+            "activity_id": null,
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": null,
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": null,
+          "available_actions": [
+            "send_message"
+          ],
+          "constraints_summary": {},
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "complete",
+          "messages": [
+            {
+              "message_id": "msg-142af7d95fe0",
+              "session_id": "sess-e481d8c1e02a",
+              "task_id": null,
+              "sequence": 1,
+              "role": "user",
+              "kind": "text",
+              "content": "一般签收后几天内能退？",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-R13-60e34bed4e",
+              "status": "completed",
+              "created_at": "2026-10-07T07:59:33.624644"
+            },
+            {
+              "message_id": "msg-0f5bf034b309",
+              "session_id": "sess-e481d8c1e02a",
+              "task_id": null,
+              "sequence": 2,
+              "role": "assistant",
+              "kind": "text",
+              "content": "模拟门店的一般规则是：签收后 7 天内，可退货商品可按件申请退货退款（P-RET-01《签收后退货》）。生鲜等标注“不可退货”的商品不支持退货（P-RET-02《不支持退货的商品》）。这只是通用政策，不代表具体订单已可退或已提交申请；具体要看订单商品是否标注可退。",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-R13-60e34bed4e",
+              "status": "completed",
+              "created_at": "2026-10-07T07:59:33.625666"
+            }
+          ]
+        },
+        "opening": {
+          "role": "keke",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "status": "captured"
+    }
+  ],
+  "timing_failures": [
+    {
+      "case_id": "R13",
+      "op": "turn",
+      "label": "request",
+      "elapsed_ms": 19556.6,
+      "target_ms": 15000
+    }
+  ]
+}

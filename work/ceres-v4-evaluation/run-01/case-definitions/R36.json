@@ -1,0 +1,45 @@
+{
+  "case_id": "R36",
+  "group": "theme",
+  "scenario_family": "theme-introduction-only",
+  "split": "regression",
+  "core": false,
+  "goal": "专题介绍不创建采购清单",
+  "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+  "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+  "steps": [
+    {
+      "op": "turn",
+      "label": "request",
+      "message": "GREEN RESET专题是什么，先介绍一下，不要买",
+      "expect": [
+        {
+          "kind": "present",
+          "path": "after.guide.plan",
+          "value": false
+        },
+        {
+          "kind": "present",
+          "path": "reply",
+          "value": true
+        },
+        {
+          "kind": "unchanged",
+          "path": "after.cart",
+          "before_path": "before.cart"
+        },
+        {
+          "kind": "unchanged",
+          "path": "after.orders",
+          "before_path": "before.orders"
+        }
+      ]
+    }
+  ],
+  "entry_context": {
+    "page": "activity",
+    "activity_id": "green_reset",
+    "store_id": "store-demo-01",
+    "delivery_zone_id": "zone-default"
+  }
+}

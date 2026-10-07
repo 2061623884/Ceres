@@ -1,0 +1,27 @@
+[
+  {
+    "name": "activity-salad-entry.png",
+    "length": 122553,
+    "sha256": "003c48a2aad32e2ae9426e50194fcc6a5786713ef6131c1fdd5648ebc09faf69"
+  },
+  {
+    "name": "activity-salad-final.png",
+    "length": 133107,
+    "sha256": "767a9d7f54803f34bbf009f6341243034051f26768703ac471ebde01280f1fb8"
+  },
+  {
+    "name": "activity-salad-home.png",
+    "length": 108099,
+    "sha256": "b57da10d9c9ef3be4f0859354f24d0275390679f67e5e0c6fa31f0aed56e72db"
+  },
+  {
+    "name": "result.json",
+    "length": 10217,
+    "sha256": "ce2501c3a72ddef3c11871be4178f2f76ea3b8020d50c120da648bbc8503e001"
+  },
+  {
+    "name": "snack-bubble-home.png",
+    "length": 105882,
+    "sha256": "793a32ae8613b035711ca49208d2296ef52c3129f1d7e43f43521cd542aed005"
+  }
+]

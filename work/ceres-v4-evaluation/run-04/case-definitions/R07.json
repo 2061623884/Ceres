@@ -1,0 +1,52 @@
+{
+  "case_id": "R07",
+  "group": "drink",
+  "scenario_family": "drink-direct-zero",
+  "split": "regression",
+  "core": true,
+  "goal": "指定零度500ml两瓶并确认",
+  "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+  "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+  "steps": [
+    {
+      "op": "turn",
+      "label": "request",
+      "message": "买两瓶可口可乐零度汽水500ml瓶装",
+      "expect": [
+        {
+          "kind": "present",
+          "path": "after.guide.plan",
+          "value": true
+        },
+        {
+          "kind": "quantities",
+          "path": "after.guide.plan.items",
+          "value": {
+            "demo:cn-coke-zero-500ml-bottle": 2
+          }
+        },
+        {
+          "kind": "eq",
+          "path": "after.guide.plan.selected_total_fen",
+          "value": 800
+        }
+      ]
+    },
+    {
+      "op": "confirm_plan",
+      "label": "explicit-confirm",
+      "authorized": [
+        "cart"
+      ],
+      "expect": [
+        {
+          "kind": "quantities",
+          "path": "after.cart.items",
+          "value": {
+            "demo:cn-coke-zero-500ml-bottle": 2
+          }
+        }
+      ]
+    }
+  ]
+}

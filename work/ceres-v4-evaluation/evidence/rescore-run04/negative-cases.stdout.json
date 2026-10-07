@@ -1,0 +1,225 @@
+{
+  "old_case_version": "ceres1-v4-tasks-20261007-v1",
+  "new_case_version": "ceres1-v4-tasks-20261007-v2",
+  "changed_cases": [
+    "H03",
+    "H12",
+    "R17"
+  ],
+  "negative_case_count": 18,
+  "audit": [
+    {
+      "case_id": "H03",
+      "step_index": 1,
+      "added_expectations": [
+        {
+          "kind": "eq",
+          "path": "after.guide.plan.can_confirm",
+          "value": true
+        },
+        {
+          "kind": "quantities",
+          "path": "after.guide.plan.items",
+          "value": {
+            "demo:snack-original-potato-chips-70g-bag": 2
+          }
+        },
+        {
+          "kind": "fields",
+          "path": "after.guide.plan.items",
+          "value": {
+            "selected": true
+          }
+        },
+        {
+          "kind": "eq",
+          "path": "after.guide.plan.selected_total_fen",
+          "value": 1180
+        }
+      ],
+      "removed_expectations": [],
+      "positive_control": "passed",
+      "negative_mutations": {
+        "empty": {
+          "failed_paths": [
+            "after.guide.plan.can_confirm",
+            "after.guide.plan.items",
+            "after.guide.plan.items",
+            "after.guide.plan.selected_total_fen"
+          ]
+        },
+        "wrong_sku": {
+          "failed_paths": [
+            "after.guide.plan.items"
+          ]
+        },
+        "wrong_quantity": {
+          "failed_paths": [
+            "after.guide.plan.items"
+          ]
+        },
+        "not_selected": {
+          "failed_paths": [
+            "after.guide.plan.items"
+          ]
+        },
+        "wrong_selected_amount": {
+          "failed_paths": [
+            "after.guide.plan.selected_total_fen"
+          ]
+        },
+        "not_confirmable": {
+          "failed_paths": [
+            "after.guide.plan.can_confirm"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "H12",
+      "step_index": 2,
+      "added_expectations": [
+        {
+          "kind": "eq",
+          "path": "after.guide.plan.can_confirm",
+          "value": true
+        },
+        {
+          "kind": "quantities",
+          "path": "after.guide.plan.items",
+          "value": {
+            "demo:cn-nongfu-water-550ml-bottle": 1
+          }
+        },
+        {
+          "kind": "fields",
+          "path": "after.guide.plan.items",
+          "value": {
+            "selected": true
+          }
+        },
+        {
+          "kind": "eq",
+          "path": "after.guide.plan.selected_total_fen",
+          "value": 200
+        }
+      ],
+      "removed_expectations": [
+        {
+          "kind": "present",
+          "path": "after.guide.plan",
+          "value": true
+        }
+      ],
+      "positive_control": "passed",
+      "negative_mutations": {
+        "empty": {
+          "failed_paths": [
+            "after.guide.plan.can_confirm",
+            "after.guide.plan.items",
+            "after.guide.plan.items",
+            "after.guide.plan.selected_total_fen"
+          ]
+        },
+        "wrong_sku": {
+          "failed_paths": [
+            "after.guide.plan.items"
+          ]
+        },
+        "wrong_quantity": {
+          "failed_paths": [
+            "after.guide.plan.items"
+          ]
+        },
+        "not_selected": {
+          "failed_paths": [
+            "after.guide.plan.items"
+          ]
+        },
+        "wrong_selected_amount": {
+          "failed_paths": [
+            "after.guide.plan.selected_total_fen"
+          ]
+        },
+        "not_confirmable": {
+          "failed_paths": [
+            "after.guide.plan.can_confirm"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "R17",
+      "step_index": 2,
+      "added_expectations": [
+        {
+          "kind": "eq",
+          "path": "after.guide.plan.can_confirm",
+          "value": true
+        },
+        {
+          "kind": "quantities",
+          "path": "after.guide.plan.items",
+          "value": {
+            "demo:cn-nongfu-water-550ml-bottle": 1
+          }
+        },
+        {
+          "kind": "fields",
+          "path": "after.guide.plan.items",
+          "value": {
+            "selected": true
+          }
+        },
+        {
+          "kind": "eq",
+          "path": "after.guide.plan.selected_total_fen",
+          "value": 200
+        }
+      ],
+      "removed_expectations": [
+        {
+          "kind": "present",
+          "path": "after.guide.plan",
+          "value": true
+        }
+      ],
+      "positive_control": "passed",
+      "negative_mutations": {
+        "empty": {
+          "failed_paths": [
+            "after.guide.plan.can_confirm",
+            "after.guide.plan.items",
+            "after.guide.plan.items",
+            "after.guide.plan.selected_total_fen"
+          ]
+        },
+        "wrong_sku": {
+          "failed_paths": [
+            "after.guide.plan.items"
+          ]
+        },
+        "wrong_quantity": {
+          "failed_paths": [
+            "after.guide.plan.items"
+          ]
+        },
+        "not_selected": {
+          "failed_paths": [
+            "after.guide.plan.items"
+          ]
+        },
+        "wrong_selected_amount": {
+          "failed_paths": [
+            "after.guide.plan.selected_total_fen"
+          ]
+        },
+        "not_confirmable": {
+          "failed_paths": [
+            "after.guide.plan.can_confirm"
+          ]
+        }
+      }
+    }
+  ]
+}

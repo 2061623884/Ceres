@@ -1,0 +1,1769 @@
+{
+  "steps": [
+    {
+      "case_id": "H16",
+      "op": "turn",
+      "label": "request",
+      "before": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-053f53938c40",
+          "product_cards": [],
+          "task_id": null,
+          "state_version": 0,
+          "session_version": 0,
+          "current_step": null,
+          "task_status": null,
+          "entry_context": {
+            "page": "activity",
+            "category_id": null,
+            "activity_id": "green_reset",
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": null,
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": null,
+          "available_actions": [
+            "send_message"
+          ],
+          "constraints_summary": {},
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "empty",
+          "messages": null
+        },
+        "opening": {
+          "role": "keke",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "active_role_before": "keke",
+      "request": {
+        "request_id": "08-H16-24f988ef73",
+        "message": "买两份GREEN RESET牛油果成品沙拉",
+        "expected_task_id": null,
+        "expected_state_version": 0,
+        "expected_session_version": 0
+      },
+      "http_status": 200,
+      "elapsed_ms": 17540.1,
+      "latency_target_ms": 15000,
+      "latency_target_exceeded": true,
+      "events": [
+        {
+          "type": "service.route",
+          "payload": {
+            "status": "completed",
+            "decision": "stay_current",
+            "raw_choice": "stay_current",
+            "current_role": "keke",
+            "prompt_mode": "none",
+            "request_id": "08-H16-24f988ef73",
+            "route_ms": 909.1458998154849,
+            "criteria_version": "ceres-service-v3.2"
+          }
+        },
+        {
+          "type": "accepted",
+          "payload": {}
+        },
+        {
+          "type": "progress",
+          "payload": {
+            "phase": "understanding"
+          }
+        },
+        {
+          "type": "progress",
+          "payload": {
+            "phase": "retrieve"
+          }
+        },
+        {
+          "type": "progress",
+          "payload": {
+            "phase": "validate"
+          }
+        },
+        {
+          "type": "plan.ready",
+          "payload": {
+            "plan": {
+              "plan_effect": "replace",
+              "plan_id": "plan-b7df3f5292a2",
+              "plan_version": 1,
+              "task_id": "task-abe45afb20aa",
+              "state_version": 2,
+              "session_version": 2,
+              "mode": "bundle",
+              "items": [
+                {
+                  "sku_id": "demo:green-reset-avocado-salad",
+                  "name": "牛油果成品沙拉",
+                  "quantity": 2,
+                  "recommended_quantity": 2,
+                  "quantity_source": "recommended",
+                  "unit_price_fen": 2380,
+                  "line_total_fen": 4760,
+                  "image_path": null,
+                  "image_kind": "placeholder",
+                  "image_kind_legacy": "placeholder",
+                  "role": "required",
+                  "selected": true,
+                  "ingredient_ids": [],
+                  "spec_quantity": 280.0,
+                  "spec_unit": "g",
+                  "sell_unit": "件",
+                  "max_addable_quantity": 20,
+                  "group_id": "product:demo:green-reset-avocado-salad",
+                  "target_kind": "product",
+                  "target_id": "demo:green-reset-avocado-salad",
+                  "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                  "requirement": {
+                    "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                    "name": "牛油果成品沙拉",
+                    "ingredient_id": null,
+                    "component_id": null,
+                    "quantity": 2,
+                    "unit": "件",
+                    "quantity_known": true,
+                    "requiredness": "core",
+                    "source": {
+                      "kind": "user",
+                      "ref": "牛油果成品沙拉"
+                    }
+                  },
+                  "availability": "available",
+                  "evidence": {
+                    "sku_source": "store_offer",
+                    "quoted_at": "2026-10-07T07:41:36+00:00",
+                    "stock_verified": true,
+                    "data_mode": "demo",
+                    "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                    "unknown_constraints": []
+                  },
+                  "pack_source": "catalog_spec",
+                  "shortfall_quantity": 0,
+                  "user_quantity": null,
+                  "added_quantity": 0,
+                  "remaining_quantity": 2,
+                  "contributions": [
+                    {
+                      "group_id": "product:demo:green-reset-avocado-salad",
+                      "quantity": 2,
+                      "selected": true,
+                      "added_quantity": 0,
+                      "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                      "requirement": {
+                        "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                        "name": "牛油果成品沙拉",
+                        "ingredient_id": null,
+                        "component_id": null,
+                        "quantity": 2,
+                        "unit": "件",
+                        "quantity_known": true,
+                        "requiredness": "core",
+                        "source": {
+                          "kind": "user",
+                          "ref": "牛油果成品沙拉"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "total_price_fen": 4760,
+              "selected_total_fen": 4760,
+              "outstanding_total_fen": 4760,
+              "expires_at": "2026-10-07T07:46:36.638271+00:00",
+              "validation_status": "passed",
+              "coverage_mode": "full",
+              "coverage_intent": "partial_ok",
+              "uncovered_items": [],
+              "gaps": [],
+              "can_confirm": true,
+              "targets": [
+                {
+                  "group_id": "product:demo:green-reset-avocado-salad",
+                  "kind": "product",
+                  "target_id": "demo:green-reset-avocado-salad",
+                  "name": "牛油果成品沙拉",
+                  "people": null,
+                  "people_source": "default"
+                }
+              ],
+              "merged_sku_contributions": []
+            },
+            "plan_effect": "replace"
+          }
+        },
+        {
+          "type": "answer.delta",
+          "payload": {
+            "delta": "采购清单已加入「牛油果成品沙拉」\n已整理 1 件商品，选中合计 ¥47.60（演示价格）。包含：牛油果成品沙拉。",
+            "final": true,
+            "replace": false
+          }
+        },
+        {
+          "type": "turn.completed",
+          "payload": {
+            "message": "采购清单已加入「牛油果成品沙拉」\n已整理 1 件商品，选中合计 ¥47.60（演示价格）。包含：牛油果成品沙拉。",
+            "status": "awaiting_confirmation",
+            "task_id": "task-abe45afb20aa",
+            "state_version": 2,
+            "session_version": 2,
+            "plan": {
+              "plan_id": "plan-b7df3f5292a2",
+              "plan_version": 1,
+              "mode": "bundle",
+              "items": [
+                {
+                  "sku_id": "demo:green-reset-avocado-salad",
+                  "name": "牛油果成品沙拉",
+                  "quantity": 2,
+                  "recommended_quantity": 2,
+                  "quantity_source": "recommended",
+                  "unit_price_fen": 2380,
+                  "line_total_fen": 4760,
+                  "image_path": null,
+                  "image_kind": "placeholder",
+                  "image_kind_legacy": "placeholder",
+                  "role": "required",
+                  "selected": true,
+                  "ingredient_ids": [],
+                  "spec_quantity": 280.0,
+                  "spec_unit": "g",
+                  "sell_unit": "件",
+                  "max_addable_quantity": 20,
+                  "group_id": "product:demo:green-reset-avocado-salad",
+                  "target_kind": "product",
+                  "target_id": "demo:green-reset-avocado-salad",
+                  "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                  "requirement": {
+                    "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                    "name": "牛油果成品沙拉",
+                    "ingredient_id": null,
+                    "component_id": null,
+                    "quantity": 2,
+                    "unit": "件",
+                    "quantity_known": true,
+                    "requiredness": "core",
+                    "source": {
+                      "kind": "user",
+                      "ref": "牛油果成品沙拉"
+                    }
+                  },
+                  "availability": "available",
+                  "evidence": {
+                    "sku_source": "store_offer",
+                    "quoted_at": "2026-10-07T07:41:36+00:00",
+                    "stock_verified": true,
+                    "data_mode": "demo",
+                    "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                    "unknown_constraints": []
+                  },
+                  "pack_source": "catalog_spec",
+                  "shortfall_quantity": 0,
+                  "user_quantity": null,
+                  "added_quantity": 0,
+                  "remaining_quantity": 2,
+                  "contributions": [
+                    {
+                      "group_id": "product:demo:green-reset-avocado-salad",
+                      "quantity": 2,
+                      "selected": true,
+                      "added_quantity": 0,
+                      "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                      "requirement": {
+                        "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                        "name": "牛油果成品沙拉",
+                        "ingredient_id": null,
+                        "component_id": null,
+                        "quantity": 2,
+                        "unit": "件",
+                        "quantity_known": true,
+                        "requiredness": "core",
+                        "source": {
+                          "kind": "user",
+                          "ref": "牛油果成品沙拉"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "total_price_fen": 4760,
+              "selected_total_fen": 4760,
+              "outstanding_total_fen": 4760,
+              "expires_at": "2026-10-07T07:46:36.638271+00:00",
+              "validation_status": "passed",
+              "coverage_mode": "full",
+              "coverage_intent": "partial_ok",
+              "uncovered_items": [],
+              "gaps": [],
+              "can_confirm": true,
+              "targets": [
+                {
+                  "group_id": "product:demo:green-reset-avocado-salad",
+                  "kind": "product",
+                  "target_id": "demo:green-reset-avocado-salad",
+                  "name": "牛油果成品沙拉",
+                  "people": null,
+                  "people_source": "default"
+                }
+              ],
+              "merged_sku_contributions": []
+            },
+            "pending_clarifications": [],
+            "product_cards": [],
+            "plan_effect": "replace",
+            "action_results": [
+              {
+                "type": "read_only",
+                "kind": "lookup",
+                "status": "completed",
+                "saved": false,
+                "reply_ok": true,
+                "retrieval_status": "ok",
+                "retrieval_mode": "lexical",
+                "fallback_reason": null,
+                "index_version": "idx-81e9fa689baef6b5",
+                "action_id": "a1"
+              },
+              {
+                "type": "mutation",
+                "verb": "add",
+                "group_id": "product:demo:green-reset-avocado-salad",
+                "status": "committed",
+                "saved": true,
+                "reply_ok": true,
+                "plan_effect": "replace",
+                "message": "采购清单已加入「牛油果成品沙拉」",
+                "candidate_ref": "p78fa904ba8c6b696",
+                "action_id": "a2"
+              }
+            ],
+            "answer_status": "awaiting_confirmation",
+            "route": "prepare",
+            "trace_id": "trace-d5b5250ae50d"
+          }
+        }
+      ],
+      "role_model_call_range": [
+        0,
+        1
+      ],
+      "kev_call_range": [
+        0,
+        2
+      ],
+      "terminal": {
+        "message": "采购清单已加入「牛油果成品沙拉」\n已整理 1 件商品，选中合计 ¥47.60（演示价格）。包含：牛油果成品沙拉。",
+        "status": "awaiting_confirmation",
+        "task_id": "task-abe45afb20aa",
+        "state_version": 2,
+        "session_version": 2,
+        "plan": {
+          "plan_id": "plan-b7df3f5292a2",
+          "plan_version": 1,
+          "mode": "bundle",
+          "items": [
+            {
+              "sku_id": "demo:green-reset-avocado-salad",
+              "name": "牛油果成品沙拉",
+              "quantity": 2,
+              "recommended_quantity": 2,
+              "quantity_source": "recommended",
+              "unit_price_fen": 2380,
+              "line_total_fen": 4760,
+              "image_path": null,
+              "image_kind": "placeholder",
+              "image_kind_legacy": "placeholder",
+              "role": "required",
+              "selected": true,
+              "ingredient_ids": [],
+              "spec_quantity": 280.0,
+              "spec_unit": "g",
+              "sell_unit": "件",
+              "max_addable_quantity": 20,
+              "group_id": "product:demo:green-reset-avocado-salad",
+              "target_kind": "product",
+              "target_id": "demo:green-reset-avocado-salad",
+              "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+              "requirement": {
+                "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                "name": "牛油果成品沙拉",
+                "ingredient_id": null,
+                "component_id": null,
+                "quantity": 2,
+                "unit": "件",
+                "quantity_known": true,
+                "requiredness": "core",
+                "source": {
+                  "kind": "user",
+                  "ref": "牛油果成品沙拉"
+                }
+              },
+              "availability": "available",
+              "evidence": {
+                "sku_source": "store_offer",
+                "quoted_at": "2026-10-07T07:41:36+00:00",
+                "stock_verified": true,
+                "data_mode": "demo",
+                "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                "unknown_constraints": []
+              },
+              "pack_source": "catalog_spec",
+              "shortfall_quantity": 0,
+              "user_quantity": null,
+              "added_quantity": 0,
+              "remaining_quantity": 2,
+              "contributions": [
+                {
+                  "group_id": "product:demo:green-reset-avocado-salad",
+                  "quantity": 2,
+                  "selected": true,
+                  "added_quantity": 0,
+                  "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                  "requirement": {
+                    "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                    "name": "牛油果成品沙拉",
+                    "ingredient_id": null,
+                    "component_id": null,
+                    "quantity": 2,
+                    "unit": "件",
+                    "quantity_known": true,
+                    "requiredness": "core",
+                    "source": {
+                      "kind": "user",
+                      "ref": "牛油果成品沙拉"
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "total_price_fen": 4760,
+          "selected_total_fen": 4760,
+          "outstanding_total_fen": 4760,
+          "expires_at": "2026-10-07T07:46:36.638271+00:00",
+          "validation_status": "passed",
+          "coverage_mode": "full",
+          "coverage_intent": "partial_ok",
+          "uncovered_items": [],
+          "gaps": [],
+          "can_confirm": true,
+          "targets": [
+            {
+              "group_id": "product:demo:green-reset-avocado-salad",
+              "kind": "product",
+              "target_id": "demo:green-reset-avocado-salad",
+              "name": "牛油果成品沙拉",
+              "people": null,
+              "people_source": "default"
+            }
+          ],
+          "merged_sku_contributions": []
+        },
+        "pending_clarifications": [],
+        "product_cards": [],
+        "plan_effect": "replace",
+        "action_results": [
+          {
+            "type": "read_only",
+            "kind": "lookup",
+            "status": "completed",
+            "saved": false,
+            "reply_ok": true,
+            "retrieval_status": "ok",
+            "retrieval_mode": "lexical",
+            "fallback_reason": null,
+            "index_version": "idx-81e9fa689baef6b5",
+            "action_id": "a1"
+          },
+          {
+            "type": "mutation",
+            "verb": "add",
+            "group_id": "product:demo:green-reset-avocado-salad",
+            "status": "committed",
+            "saved": true,
+            "reply_ok": true,
+            "plan_effect": "replace",
+            "message": "采购清单已加入「牛油果成品沙拉」",
+            "candidate_ref": "p78fa904ba8c6b696",
+            "action_id": "a2"
+          }
+        ],
+        "answer_status": "awaiting_confirmation",
+        "route": "prepare",
+        "trace_id": "trace-d5b5250ae50d"
+      },
+      "trace": [
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "capability",
+          "status": "started",
+          "criteria_version": "ceres-guide-capabilities-v2",
+          "call_number": 1,
+          "model": "kev-latest"
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 1110,
+          "stage": "capability",
+          "status": "completed",
+          "capability": "purchase_modify",
+          "branch": "semantic_understanding",
+          "criteria_version": "ceres-guide-capabilities-v2",
+          "call_number": 1,
+          "model": "kev-latest"
+        },
+        {
+          "phase": "understanding",
+          "duration_ms": null
+        },
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "understanding",
+          "status": "started",
+          "call_number": 1
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 15344,
+          "stage": "understanding",
+          "status": "completed",
+          "call_number": 1
+        },
+        {
+          "phase": "retrieve",
+          "duration_ms": null
+        },
+        {
+          "phase": "validate",
+          "duration_ms": null
+        },
+        {
+          "phase": "turn_result",
+          "duration_ms": null,
+          "status": "awaiting_confirmation"
+        }
+      ],
+      "snapshot_after": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-053f53938c40",
+          "product_cards": [],
+          "task_id": "task-abe45afb20aa",
+          "state_version": 2,
+          "session_version": 2,
+          "current_step": "awaiting_confirmation",
+          "task_status": "active",
+          "entry_context": {
+            "page": "activity",
+            "category_id": null,
+            "activity_id": "green_reset",
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": {
+            "plan_id": "plan-b7df3f5292a2",
+            "plan_version": 1,
+            "mode": "bundle",
+            "items": [
+              {
+                "sku_id": "demo:green-reset-avocado-salad",
+                "name": "牛油果成品沙拉",
+                "quantity": 2,
+                "unit_price_fen": 2380,
+                "line_total_fen": 4760,
+                "image_path": null,
+                "image_kind": "placeholder",
+                "image_kind_legacy": "placeholder",
+                "role": "required",
+                "selected": true,
+                "recommended_quantity": 2,
+                "max_addable_quantity": 20,
+                "spec_quantity": 280,
+                "spec_unit": "g",
+                "sell_unit": "件",
+                "quantity_source": "recommended",
+                "group_id": "product:demo:green-reset-avocado-salad",
+                "target_kind": "product",
+                "target_id": "demo:green-reset-avocado-salad",
+                "component_name": null,
+                "contributions": [
+                  {
+                    "group_id": "product:demo:green-reset-avocado-salad",
+                    "quantity": 2,
+                    "selected": true,
+                    "added_quantity": 0,
+                    "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                    "requirement": {
+                      "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                      "name": "牛油果成品沙拉",
+                      "ingredient_id": null,
+                      "component_id": null,
+                      "quantity": 2,
+                      "unit": "件",
+                      "quantity_known": true,
+                      "requiredness": "core",
+                      "source": {
+                        "kind": "user",
+                        "ref": "牛油果成品沙拉"
+                      }
+                    }
+                  }
+                ],
+                "added_quantity": 0,
+                "remaining_quantity": 2,
+                "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                "requirement": {
+                  "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                  "name": "牛油果成品沙拉",
+                  "ingredient_id": null,
+                  "component_id": null,
+                  "quantity": 2,
+                  "unit": "件",
+                  "quantity_known": true,
+                  "requiredness": "core",
+                  "source": {
+                    "kind": "user",
+                    "ref": "牛油果成品沙拉"
+                  }
+                },
+                "availability": "available",
+                "evidence": {
+                  "sku_source": "store_offer",
+                  "quoted_at": "2026-10-07T07:41:36+00:00",
+                  "stock_verified": true,
+                  "data_mode": "demo",
+                  "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                  "unknown_constraints": []
+                },
+                "pack_source": "catalog_spec",
+                "shortfall_quantity": 0
+              }
+            ],
+            "total_price_fen": 4760,
+            "selected_total_fen": 4760,
+            "expires_at": "2026-10-07T07:46:36.638271+00:00",
+            "validation_status": "passed",
+            "coverage_mode": "full",
+            "coverage_intent": "partial_ok",
+            "uncovered_items": [],
+            "gaps": [],
+            "can_confirm": true,
+            "gap_fill": null,
+            "targets": [
+              {
+                "group_id": "product:demo:green-reset-avocado-salad",
+                "kind": "product",
+                "target_id": "demo:green-reset-avocado-salad",
+                "name": "牛油果成品沙拉",
+                "meal_name": null,
+                "fulfillment_mode": null,
+                "people": null,
+                "people_source": "default",
+                "notes": []
+              }
+            ],
+            "merged_sku_contributions": [],
+            "outstanding_total_fen": 4760
+          },
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": "已恢复待确认方案",
+          "available_actions": [
+            "confirm",
+            "cancel",
+            "modify",
+            "send_message"
+          ],
+          "constraints_summary": {
+            "goal": "牛油果成品沙拉",
+            "people": null,
+            "budget_fen": null,
+            "excluded_ingredients": []
+          },
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "complete",
+          "messages": [
+            {
+              "message_id": "msg-22ace8217e75",
+              "session_id": "sess-053f53938c40",
+              "task_id": null,
+              "sequence": 1,
+              "role": "user",
+              "kind": "text",
+              "content": "买两份GREEN RESET牛油果成品沙拉",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-H16-24f988ef73",
+              "status": "completed",
+              "created_at": "2026-10-07T07:41:36.642834"
+            },
+            {
+              "message_id": "msg-9857b11325fe",
+              "session_id": "sess-053f53938c40",
+              "task_id": "task-abe45afb20aa",
+              "sequence": 2,
+              "role": "assistant",
+              "kind": "plan_ref",
+              "content": "采购清单已加入「牛油果成品沙拉」\n已整理 1 件商品，选中合计 ¥47.60（演示价格）。包含：牛油果成品沙拉。",
+              "plan_id": "plan-b7df3f5292a2",
+              "plan_version": 1,
+              "request_id": "08-H16-24f988ef73",
+              "status": "completed",
+              "created_at": "2026-10-07T07:41:36.650337"
+            }
+          ]
+        },
+        "opening": {
+          "role": "keke",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "status": "captured"
+    },
+    {
+      "case_id": "H16",
+      "op": "turn",
+      "label": "reduce",
+      "before": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-053f53938c40",
+          "product_cards": [],
+          "task_id": "task-abe45afb20aa",
+          "state_version": 2,
+          "session_version": 2,
+          "current_step": "awaiting_confirmation",
+          "task_status": "active",
+          "entry_context": {
+            "page": "activity",
+            "category_id": null,
+            "activity_id": "green_reset",
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": {
+            "plan_id": "plan-b7df3f5292a2",
+            "plan_version": 1,
+            "mode": "bundle",
+            "items": [
+              {
+                "sku_id": "demo:green-reset-avocado-salad",
+                "name": "牛油果成品沙拉",
+                "quantity": 2,
+                "unit_price_fen": 2380,
+                "line_total_fen": 4760,
+                "image_path": null,
+                "image_kind": "placeholder",
+                "image_kind_legacy": "placeholder",
+                "role": "required",
+                "selected": true,
+                "recommended_quantity": 2,
+                "max_addable_quantity": 20,
+                "spec_quantity": 280,
+                "spec_unit": "g",
+                "sell_unit": "件",
+                "quantity_source": "recommended",
+                "group_id": "product:demo:green-reset-avocado-salad",
+                "target_kind": "product",
+                "target_id": "demo:green-reset-avocado-salad",
+                "component_name": null,
+                "contributions": [
+                  {
+                    "group_id": "product:demo:green-reset-avocado-salad",
+                    "quantity": 2,
+                    "selected": true,
+                    "added_quantity": 0,
+                    "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                    "requirement": {
+                      "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                      "name": "牛油果成品沙拉",
+                      "ingredient_id": null,
+                      "component_id": null,
+                      "quantity": 2,
+                      "unit": "件",
+                      "quantity_known": true,
+                      "requiredness": "core",
+                      "source": {
+                        "kind": "user",
+                        "ref": "牛油果成品沙拉"
+                      }
+                    }
+                  }
+                ],
+                "added_quantity": 0,
+                "remaining_quantity": 2,
+                "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                "requirement": {
+                  "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                  "name": "牛油果成品沙拉",
+                  "ingredient_id": null,
+                  "component_id": null,
+                  "quantity": 2,
+                  "unit": "件",
+                  "quantity_known": true,
+                  "requiredness": "core",
+                  "source": {
+                    "kind": "user",
+                    "ref": "牛油果成品沙拉"
+                  }
+                },
+                "availability": "available",
+                "evidence": {
+                  "sku_source": "store_offer",
+                  "quoted_at": "2026-10-07T07:41:36+00:00",
+                  "stock_verified": true,
+                  "data_mode": "demo",
+                  "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                  "unknown_constraints": []
+                },
+                "pack_source": "catalog_spec",
+                "shortfall_quantity": 0
+              }
+            ],
+            "total_price_fen": 4760,
+            "selected_total_fen": 4760,
+            "expires_at": "2026-10-07T07:46:36.638271+00:00",
+            "validation_status": "passed",
+            "coverage_mode": "full",
+            "coverage_intent": "partial_ok",
+            "uncovered_items": [],
+            "gaps": [],
+            "can_confirm": true,
+            "gap_fill": null,
+            "targets": [
+              {
+                "group_id": "product:demo:green-reset-avocado-salad",
+                "kind": "product",
+                "target_id": "demo:green-reset-avocado-salad",
+                "name": "牛油果成品沙拉",
+                "meal_name": null,
+                "fulfillment_mode": null,
+                "people": null,
+                "people_source": "default",
+                "notes": []
+              }
+            ],
+            "merged_sku_contributions": [],
+            "outstanding_total_fen": 4760
+          },
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": "已恢复待确认方案",
+          "available_actions": [
+            "confirm",
+            "cancel",
+            "modify",
+            "send_message"
+          ],
+          "constraints_summary": {
+            "goal": "牛油果成品沙拉",
+            "people": null,
+            "budget_fen": null,
+            "excluded_ingredients": []
+          },
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "complete",
+          "messages": null
+        },
+        "opening": {
+          "role": "keke",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "active_role_before": "keke",
+      "request": {
+        "request_id": "08-H16-39590873da",
+        "message": "只要一份成品，不要拆成食材",
+        "expected_task_id": "task-abe45afb20aa",
+        "expected_state_version": 2,
+        "expected_session_version": 2
+      },
+      "http_status": 200,
+      "elapsed_ms": 5466.4,
+      "latency_target_ms": 15000,
+      "latency_target_exceeded": false,
+      "events": [
+        {
+          "type": "service.route",
+          "payload": {
+            "status": "completed",
+            "decision": "stay_current",
+            "raw_choice": "stay_current",
+            "current_role": "keke",
+            "prompt_mode": "none",
+            "request_id": "08-H16-39590873da",
+            "route_ms": 988.4136999025941,
+            "criteria_version": "ceres-service-v3.2"
+          }
+        },
+        {
+          "type": "accepted",
+          "payload": {}
+        },
+        {
+          "type": "progress",
+          "payload": {
+            "phase": "understanding"
+          }
+        },
+        {
+          "type": "progress",
+          "payload": {
+            "phase": "validate"
+          }
+        },
+        {
+          "type": "plan.ready",
+          "payload": {
+            "plan": {
+              "plan_effect": "replace",
+              "plan_id": "plan-b7df3f5292a2",
+              "plan_version": 2,
+              "task_id": "task-abe45afb20aa",
+              "state_version": 3,
+              "session_version": 2,
+              "mode": "bundle",
+              "items": [
+                {
+                  "sku_id": "demo:green-reset-avocado-salad",
+                  "name": "牛油果成品沙拉",
+                  "quantity": 1,
+                  "recommended_quantity": 2,
+                  "quantity_source": "user",
+                  "unit_price_fen": 2380,
+                  "line_total_fen": 2380,
+                  "image_path": null,
+                  "image_kind": "placeholder",
+                  "image_kind_legacy": "placeholder",
+                  "role": "required",
+                  "selected": true,
+                  "ingredient_ids": [],
+                  "spec_quantity": 280.0,
+                  "spec_unit": "g",
+                  "sell_unit": "件",
+                  "max_addable_quantity": 20,
+                  "group_id": "product:demo:green-reset-avocado-salad",
+                  "target_kind": "product",
+                  "target_id": "demo:green-reset-avocado-salad",
+                  "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                  "requirement": {
+                    "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                    "name": "牛油果成品沙拉",
+                    "ingredient_id": null,
+                    "component_id": null,
+                    "quantity": 2,
+                    "unit": "件",
+                    "quantity_known": true,
+                    "requiredness": "core",
+                    "source": {
+                      "kind": "user",
+                      "ref": "牛油果成品沙拉"
+                    }
+                  },
+                  "availability": "insufficient_stock",
+                  "evidence": {
+                    "sku_source": "store_offer",
+                    "quoted_at": "2026-10-07T07:41:36+00:00",
+                    "stock_verified": true,
+                    "data_mode": "demo",
+                    "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                    "unknown_constraints": []
+                  },
+                  "pack_source": "catalog_spec",
+                  "shortfall_quantity": 1,
+                  "user_quantity": 1,
+                  "added_quantity": 0,
+                  "remaining_quantity": 1,
+                  "contributions": [
+                    {
+                      "group_id": "product:demo:green-reset-avocado-salad",
+                      "quantity": 2,
+                      "selected": true,
+                      "added_quantity": 0,
+                      "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                      "requirement": {
+                        "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                        "name": "牛油果成品沙拉",
+                        "ingredient_id": null,
+                        "component_id": null,
+                        "quantity": 2,
+                        "unit": "件",
+                        "quantity_known": true,
+                        "requiredness": "core",
+                        "source": {
+                          "kind": "user",
+                          "ref": "牛油果成品沙拉"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "total_price_fen": 2380,
+              "selected_total_fen": 2380,
+              "outstanding_total_fen": 2380,
+              "expires_at": "2026-10-07T07:46:36.638271+00:00",
+              "validation_status": "passed",
+              "coverage_mode": "partial",
+              "coverage_intent": "partial_ok",
+              "uncovered_items": [],
+              "gaps": [
+                {
+                  "gap_id": "product:demo:green-reset-avocado-salad|insufficient_stock|product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                  "group_id": "product:demo:green-reset-avocado-salad",
+                  "target_kind": "product",
+                  "target_id": "demo:green-reset-avocado-salad",
+                  "kind": "insufficient_stock",
+                  "unknown_of": null,
+                  "requiredness": "core",
+                  "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                  "required_item_ids": [
+                    "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad"
+                  ],
+                  "ingredient_id": null,
+                  "component_id": null,
+                  "name": "牛油果成品沙拉",
+                  "sku_id": "demo:green-reset-avocado-salad",
+                  "required_quantity": 2,
+                  "unit": "件",
+                  "quantity_known": true,
+                  "requested_pack_count": 2,
+                  "available_quantity": 20,
+                  "shortfall_quantity": 1,
+                  "source": {
+                    "kind": "user",
+                    "ref": "牛油果成品沙拉"
+                  },
+                  "evidence": {
+                    "sku_source": "store_offer",
+                    "quoted_at": "2026-10-07T07:41:36+00:00",
+                    "stock_verified": true,
+                    "data_mode": "demo",
+                    "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                    "unknown_constraints": []
+                  },
+                  "message": "牛油果成品沙拉 库存不足，本次只准备了可售的 20 件，不足的部分保留为缺口。"
+                }
+              ],
+              "can_confirm": true,
+              "targets": [
+                {
+                  "group_id": "product:demo:green-reset-avocado-salad",
+                  "kind": "product",
+                  "target_id": "demo:green-reset-avocado-salad",
+                  "name": "牛油果成品沙拉",
+                  "people": null,
+                  "people_source": "default"
+                }
+              ],
+              "merged_sku_contributions": []
+            },
+            "plan_effect": "replace"
+          }
+        },
+        {
+          "type": "answer.delta",
+          "payload": {
+            "delta": "已把「牛油果成品沙拉」改为 1 件\n已整理 1 件商品，选中合计 ¥23.80（演示价格）。包含：牛油果成品沙拉。牛油果成品沙拉 库存不足，本次只准备了可售的 20 件，不足的部分保留为缺口。",
+            "final": true,
+            "replace": false
+          }
+        },
+        {
+          "type": "turn.completed",
+          "payload": {
+            "message": "已把「牛油果成品沙拉」改为 1 件\n已整理 1 件商品，选中合计 ¥23.80（演示价格）。包含：牛油果成品沙拉。牛油果成品沙拉 库存不足，本次只准备了可售的 20 件，不足的部分保留为缺口。",
+            "status": "awaiting_confirmation",
+            "task_id": "task-abe45afb20aa",
+            "state_version": 3,
+            "session_version": 2,
+            "plan": {
+              "plan_id": "plan-b7df3f5292a2",
+              "plan_version": 2,
+              "mode": "bundle",
+              "items": [
+                {
+                  "sku_id": "demo:green-reset-avocado-salad",
+                  "name": "牛油果成品沙拉",
+                  "quantity": 1,
+                  "recommended_quantity": 2,
+                  "quantity_source": "user",
+                  "unit_price_fen": 2380,
+                  "line_total_fen": 2380,
+                  "image_path": null,
+                  "image_kind": "placeholder",
+                  "image_kind_legacy": "placeholder",
+                  "role": "required",
+                  "selected": true,
+                  "ingredient_ids": [],
+                  "spec_quantity": 280.0,
+                  "spec_unit": "g",
+                  "sell_unit": "件",
+                  "max_addable_quantity": 20,
+                  "group_id": "product:demo:green-reset-avocado-salad",
+                  "target_kind": "product",
+                  "target_id": "demo:green-reset-avocado-salad",
+                  "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                  "requirement": {
+                    "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                    "name": "牛油果成品沙拉",
+                    "ingredient_id": null,
+                    "component_id": null,
+                    "quantity": 2,
+                    "unit": "件",
+                    "quantity_known": true,
+                    "requiredness": "core",
+                    "source": {
+                      "kind": "user",
+                      "ref": "牛油果成品沙拉"
+                    }
+                  },
+                  "availability": "insufficient_stock",
+                  "evidence": {
+                    "sku_source": "store_offer",
+                    "quoted_at": "2026-10-07T07:41:36+00:00",
+                    "stock_verified": true,
+                    "data_mode": "demo",
+                    "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                    "unknown_constraints": []
+                  },
+                  "pack_source": "catalog_spec",
+                  "shortfall_quantity": 1,
+                  "user_quantity": 1,
+                  "added_quantity": 0,
+                  "remaining_quantity": 1,
+                  "contributions": [
+                    {
+                      "group_id": "product:demo:green-reset-avocado-salad",
+                      "quantity": 2,
+                      "selected": true,
+                      "added_quantity": 0,
+                      "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                      "requirement": {
+                        "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                        "name": "牛油果成品沙拉",
+                        "ingredient_id": null,
+                        "component_id": null,
+                        "quantity": 2,
+                        "unit": "件",
+                        "quantity_known": true,
+                        "requiredness": "core",
+                        "source": {
+                          "kind": "user",
+                          "ref": "牛油果成品沙拉"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "total_price_fen": 2380,
+              "selected_total_fen": 2380,
+              "outstanding_total_fen": 2380,
+              "expires_at": "2026-10-07T07:46:36.638271+00:00",
+              "validation_status": "passed",
+              "coverage_mode": "partial",
+              "coverage_intent": "partial_ok",
+              "uncovered_items": [],
+              "gaps": [
+                {
+                  "gap_id": "product:demo:green-reset-avocado-salad|insufficient_stock|product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                  "group_id": "product:demo:green-reset-avocado-salad",
+                  "target_kind": "product",
+                  "target_id": "demo:green-reset-avocado-salad",
+                  "kind": "insufficient_stock",
+                  "unknown_of": null,
+                  "requiredness": "core",
+                  "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                  "required_item_ids": [
+                    "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad"
+                  ],
+                  "ingredient_id": null,
+                  "component_id": null,
+                  "name": "牛油果成品沙拉",
+                  "sku_id": "demo:green-reset-avocado-salad",
+                  "required_quantity": 2,
+                  "unit": "件",
+                  "quantity_known": true,
+                  "requested_pack_count": 2,
+                  "available_quantity": 20,
+                  "shortfall_quantity": 1,
+                  "source": {
+                    "kind": "user",
+                    "ref": "牛油果成品沙拉"
+                  },
+                  "evidence": {
+                    "sku_source": "store_offer",
+                    "quoted_at": "2026-10-07T07:41:36+00:00",
+                    "stock_verified": true,
+                    "data_mode": "demo",
+                    "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                    "unknown_constraints": []
+                  },
+                  "message": "牛油果成品沙拉 库存不足，本次只准备了可售的 20 件，不足的部分保留为缺口。"
+                }
+              ],
+              "can_confirm": true,
+              "targets": [
+                {
+                  "group_id": "product:demo:green-reset-avocado-salad",
+                  "kind": "product",
+                  "target_id": "demo:green-reset-avocado-salad",
+                  "name": "牛油果成品沙拉",
+                  "people": null,
+                  "people_source": "default"
+                }
+              ],
+              "merged_sku_contributions": []
+            },
+            "pending_clarifications": [],
+            "product_cards": [],
+            "plan_effect": "replace",
+            "action_results": [
+              {
+                "type": "mutation",
+                "verb": "change",
+                "group_id": null,
+                "status": "committed",
+                "saved": true,
+                "reply_ok": true,
+                "plan_effect": "replace",
+                "message": "已把「牛油果成品沙拉」改为 1 件",
+                "sku_id": "demo:green-reset-avocado-salad",
+                "quantity": 1,
+                "action_id": "a1"
+              }
+            ],
+            "answer_status": "awaiting_confirmation",
+            "route": "apply_mutation",
+            "trace_id": "trace-11ce8a53e793"
+          }
+        }
+      ],
+      "role_model_call_range": [
+        1,
+        2
+      ],
+      "kev_call_range": [
+        2,
+        4
+      ],
+      "terminal": {
+        "message": "已把「牛油果成品沙拉」改为 1 件\n已整理 1 件商品，选中合计 ¥23.80（演示价格）。包含：牛油果成品沙拉。牛油果成品沙拉 库存不足，本次只准备了可售的 20 件，不足的部分保留为缺口。",
+        "status": "awaiting_confirmation",
+        "task_id": "task-abe45afb20aa",
+        "state_version": 3,
+        "session_version": 2,
+        "plan": {
+          "plan_id": "plan-b7df3f5292a2",
+          "plan_version": 2,
+          "mode": "bundle",
+          "items": [
+            {
+              "sku_id": "demo:green-reset-avocado-salad",
+              "name": "牛油果成品沙拉",
+              "quantity": 1,
+              "recommended_quantity": 2,
+              "quantity_source": "user",
+              "unit_price_fen": 2380,
+              "line_total_fen": 2380,
+              "image_path": null,
+              "image_kind": "placeholder",
+              "image_kind_legacy": "placeholder",
+              "role": "required",
+              "selected": true,
+              "ingredient_ids": [],
+              "spec_quantity": 280.0,
+              "spec_unit": "g",
+              "sell_unit": "件",
+              "max_addable_quantity": 20,
+              "group_id": "product:demo:green-reset-avocado-salad",
+              "target_kind": "product",
+              "target_id": "demo:green-reset-avocado-salad",
+              "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+              "requirement": {
+                "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                "name": "牛油果成品沙拉",
+                "ingredient_id": null,
+                "component_id": null,
+                "quantity": 2,
+                "unit": "件",
+                "quantity_known": true,
+                "requiredness": "core",
+                "source": {
+                  "kind": "user",
+                  "ref": "牛油果成品沙拉"
+                }
+              },
+              "availability": "insufficient_stock",
+              "evidence": {
+                "sku_source": "store_offer",
+                "quoted_at": "2026-10-07T07:41:36+00:00",
+                "stock_verified": true,
+                "data_mode": "demo",
+                "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                "unknown_constraints": []
+              },
+              "pack_source": "catalog_spec",
+              "shortfall_quantity": 1,
+              "user_quantity": 1,
+              "added_quantity": 0,
+              "remaining_quantity": 1,
+              "contributions": [
+                {
+                  "group_id": "product:demo:green-reset-avocado-salad",
+                  "quantity": 2,
+                  "selected": true,
+                  "added_quantity": 0,
+                  "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                  "requirement": {
+                    "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                    "name": "牛油果成品沙拉",
+                    "ingredient_id": null,
+                    "component_id": null,
+                    "quantity": 2,
+                    "unit": "件",
+                    "quantity_known": true,
+                    "requiredness": "core",
+                    "source": {
+                      "kind": "user",
+                      "ref": "牛油果成品沙拉"
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "total_price_fen": 2380,
+          "selected_total_fen": 2380,
+          "outstanding_total_fen": 2380,
+          "expires_at": "2026-10-07T07:46:36.638271+00:00",
+          "validation_status": "passed",
+          "coverage_mode": "partial",
+          "coverage_intent": "partial_ok",
+          "uncovered_items": [],
+          "gaps": [
+            {
+              "gap_id": "product:demo:green-reset-avocado-salad|insufficient_stock|product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+              "group_id": "product:demo:green-reset-avocado-salad",
+              "target_kind": "product",
+              "target_id": "demo:green-reset-avocado-salad",
+              "kind": "insufficient_stock",
+              "unknown_of": null,
+              "requiredness": "core",
+              "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+              "required_item_ids": [
+                "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad"
+              ],
+              "ingredient_id": null,
+              "component_id": null,
+              "name": "牛油果成品沙拉",
+              "sku_id": "demo:green-reset-avocado-salad",
+              "required_quantity": 2,
+              "unit": "件",
+              "quantity_known": true,
+              "requested_pack_count": 2,
+              "available_quantity": 20,
+              "shortfall_quantity": 1,
+              "source": {
+                "kind": "user",
+                "ref": "牛油果成品沙拉"
+              },
+              "evidence": {
+                "sku_source": "store_offer",
+                "quoted_at": "2026-10-07T07:41:36+00:00",
+                "stock_verified": true,
+                "data_mode": "demo",
+                "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                "unknown_constraints": []
+              },
+              "message": "牛油果成品沙拉 库存不足，本次只准备了可售的 20 件，不足的部分保留为缺口。"
+            }
+          ],
+          "can_confirm": true,
+          "targets": [
+            {
+              "group_id": "product:demo:green-reset-avocado-salad",
+              "kind": "product",
+              "target_id": "demo:green-reset-avocado-salad",
+              "name": "牛油果成品沙拉",
+              "people": null,
+              "people_source": "default"
+            }
+          ],
+          "merged_sku_contributions": []
+        },
+        "pending_clarifications": [],
+        "product_cards": [],
+        "plan_effect": "replace",
+        "action_results": [
+          {
+            "type": "mutation",
+            "verb": "change",
+            "group_id": null,
+            "status": "committed",
+            "saved": true,
+            "reply_ok": true,
+            "plan_effect": "replace",
+            "message": "已把「牛油果成品沙拉」改为 1 件",
+            "sku_id": "demo:green-reset-avocado-salad",
+            "quantity": 1,
+            "action_id": "a1"
+          }
+        ],
+        "answer_status": "awaiting_confirmation",
+        "route": "apply_mutation",
+        "trace_id": "trace-11ce8a53e793"
+      },
+      "trace": [
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "capability",
+          "status": "started",
+          "criteria_version": "ceres-guide-capabilities-v2",
+          "call_number": 1,
+          "model": "kev-latest"
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 1437,
+          "stage": "capability",
+          "status": "completed",
+          "capability": "purchase_modify",
+          "branch": "semantic_understanding",
+          "criteria_version": "ceres-guide-capabilities-v2",
+          "call_number": 1,
+          "model": "kev-latest"
+        },
+        {
+          "phase": "understanding",
+          "duration_ms": null
+        },
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "understanding",
+          "status": "started",
+          "call_number": 1
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 2984,
+          "stage": "understanding",
+          "status": "completed",
+          "call_number": 1
+        },
+        {
+          "phase": "validate",
+          "duration_ms": null
+        },
+        {
+          "phase": "turn_result",
+          "duration_ms": null,
+          "status": "awaiting_confirmation"
+        }
+      ],
+      "snapshot_after": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-053f53938c40",
+          "product_cards": [],
+          "task_id": "task-abe45afb20aa",
+          "state_version": 3,
+          "session_version": 2,
+          "current_step": "awaiting_confirmation",
+          "task_status": "active",
+          "entry_context": {
+            "page": "activity",
+            "category_id": null,
+            "activity_id": "green_reset",
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": {
+            "plan_id": "plan-b7df3f5292a2",
+            "plan_version": 2,
+            "mode": "bundle",
+            "items": [
+              {
+                "sku_id": "demo:green-reset-avocado-salad",
+                "name": "牛油果成品沙拉",
+                "quantity": 1,
+                "unit_price_fen": 2380,
+                "line_total_fen": 2380,
+                "image_path": null,
+                "image_kind": "placeholder",
+                "image_kind_legacy": "placeholder",
+                "role": "required",
+                "selected": true,
+                "recommended_quantity": 2,
+                "max_addable_quantity": 20,
+                "spec_quantity": 280,
+                "spec_unit": "g",
+                "sell_unit": "件",
+                "quantity_source": "user",
+                "group_id": "product:demo:green-reset-avocado-salad",
+                "target_kind": "product",
+                "target_id": "demo:green-reset-avocado-salad",
+                "component_name": null,
+                "contributions": [
+                  {
+                    "group_id": "product:demo:green-reset-avocado-salad",
+                    "quantity": 2,
+                    "selected": true,
+                    "added_quantity": 0,
+                    "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                    "requirement": {
+                      "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                      "name": "牛油果成品沙拉",
+                      "ingredient_id": null,
+                      "component_id": null,
+                      "quantity": 2,
+                      "unit": "件",
+                      "quantity_known": true,
+                      "requiredness": "core",
+                      "source": {
+                        "kind": "user",
+                        "ref": "牛油果成品沙拉"
+                      }
+                    }
+                  }
+                ],
+                "added_quantity": 0,
+                "remaining_quantity": 1,
+                "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                "requirement": {
+                  "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                  "name": "牛油果成品沙拉",
+                  "ingredient_id": null,
+                  "component_id": null,
+                  "quantity": 2,
+                  "unit": "件",
+                  "quantity_known": true,
+                  "requiredness": "core",
+                  "source": {
+                    "kind": "user",
+                    "ref": "牛油果成品沙拉"
+                  }
+                },
+                "availability": "insufficient_stock",
+                "evidence": {
+                  "sku_source": "store_offer",
+                  "quoted_at": "2026-10-07T07:41:36+00:00",
+                  "stock_verified": true,
+                  "data_mode": "demo",
+                  "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                  "unknown_constraints": []
+                },
+                "pack_source": "catalog_spec",
+                "shortfall_quantity": 1
+              }
+            ],
+            "total_price_fen": 2380,
+            "selected_total_fen": 2380,
+            "expires_at": "2026-10-07T07:46:36.638271+00:00",
+            "validation_status": "passed",
+            "coverage_mode": "partial",
+            "coverage_intent": "partial_ok",
+            "uncovered_items": [],
+            "gaps": [
+              {
+                "gap_id": "product:demo:green-reset-avocado-salad|insufficient_stock|product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                "group_id": "product:demo:green-reset-avocado-salad",
+                "target_kind": "product",
+                "target_id": "demo:green-reset-avocado-salad",
+                "kind": "insufficient_stock",
+                "unknown_of": null,
+                "requiredness": "core",
+                "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                "required_item_ids": [
+                  "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad"
+                ],
+                "ingredient_id": null,
+                "component_id": null,
+                "name": "牛油果成品沙拉",
+                "sku_id": "demo:green-reset-avocado-salad",
+                "required_quantity": 2.0,
+                "unit": "件",
+                "quantity_known": true,
+                "requested_pack_count": 2,
+                "available_quantity": 20,
+                "shortfall_quantity": 1,
+                "source": {
+                  "kind": "user",
+                  "ref": "牛油果成品沙拉"
+                },
+                "evidence": {
+                  "sku_source": "store_offer",
+                  "quoted_at": "2026-10-07T07:41:36+00:00",
+                  "stock_verified": true,
+                  "data_mode": "demo",
+                  "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                  "unknown_constraints": []
+                },
+                "message": "牛油果成品沙拉 库存不足，本次只准备了可售的 20 件，不足的部分保留为缺口。"
+              }
+            ],
+            "can_confirm": true,
+            "gap_fill": null,
+            "targets": [
+              {
+                "group_id": "product:demo:green-reset-avocado-salad",
+                "kind": "product",
+                "target_id": "demo:green-reset-avocado-salad",
+                "name": "牛油果成品沙拉",
+                "meal_name": null,
+                "fulfillment_mode": null,
+                "people": null,
+                "people_source": "default",
+                "notes": []
+              }
+            ],
+            "merged_sku_contributions": [],
+            "outstanding_total_fen": 2380
+          },
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": "已恢复待确认方案",
+          "available_actions": [
+            "confirm",
+            "cancel",
+            "modify",
+            "send_message"
+          ],
+          "constraints_summary": {
+            "goal": "牛油果成品沙拉",
+            "people": null,
+            "budget_fen": null,
+            "excluded_ingredients": []
+          },
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "complete",
+          "messages": [
+            {
+              "message_id": "msg-22ace8217e75",
+              "session_id": "sess-053f53938c40",
+              "task_id": null,
+              "sequence": 1,
+              "role": "user",
+              "kind": "text",
+              "content": "买两份GREEN RESET牛油果成品沙拉",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-H16-24f988ef73",
+              "status": "completed",
+              "created_at": "2026-10-07T07:41:36.642834"
+            },
+            {
+              "message_id": "msg-9857b11325fe",
+              "session_id": "sess-053f53938c40",
+              "task_id": "task-abe45afb20aa",
+              "sequence": 2,
+              "role": "assistant",
+              "kind": "plan_ref",
+              "content": "采购清单已加入「牛油果成品沙拉」\n已整理 1 件商品，选中合计 ¥47.60（演示价格）。包含：牛油果成品沙拉。",
+              "plan_id": "plan-b7df3f5292a2",
+              "plan_version": 1,
+              "request_id": "08-H16-24f988ef73",
+              "status": "completed",
+              "created_at": "2026-10-07T07:41:36.650337"
+            },
+            {
+              "message_id": "msg-3103120be112",
+              "session_id": "sess-053f53938c40",
+              "task_id": "task-abe45afb20aa",
+              "sequence": 3,
+              "role": "user",
+              "kind": "text",
+              "content": "只要一份成品，不要拆成食材",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-H16-39590873da",
+              "status": "completed",
+              "created_at": "2026-10-07T07:41:42.241060"
+            },
+            {
+              "message_id": "msg-fecacd938864",
+              "session_id": "sess-053f53938c40",
+              "task_id": "task-abe45afb20aa",
+              "sequence": 4,
+              "role": "assistant",
+              "kind": "plan_ref",
+              "content": "已把「牛油果成品沙拉」改为 1 件\n已整理 1 件商品，选中合计 ¥23.80（演示价格）。包含：牛油果成品沙拉。牛油果成品沙拉 库存不足，本次只准备了可售的 20 件，不足的部分保留为缺口。",
+              "plan_id": "plan-b7df3f5292a2",
+              "plan_version": 2,
+              "request_id": "08-H16-39590873da",
+              "status": "completed",
+              "created_at": "2026-10-07T07:41:42.244188"
+            }
+          ]
+        },
+        "opening": {
+          "role": "keke",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "status": "captured"
+    }
+  ],
+  "timing_failures": [
+    {
+      "case_id": "H16",
+      "op": "turn",
+      "label": "request",
+      "elapsed_ms": 17540.1,
+      "target_ms": 15000
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+[build] projection: 105 dishes, 67 skus, snapshot_hash=sha256:a4a1aadcbccbc2c459183fbd3243711e7df65db2aba63fda705cf2918b598c3f
+[build] staged manifest_id=sha256:51eac0ec550d8cc5ed169ecb4618f1a805dc4e6e94c8ffcce9dc5779ccc30dd0
+[build] committed immutable version idx-81e9fa689baef6b5
+[build] published idx-81e9fa689baef6b5 in 0.1s
+{
+  "version": "idx-81e9fa689baef6b5",
+  "verify": {
+    "version": ".staging-7366c6b0e5e8",
+    "passed": true,
+    "problems": []
+  },
+  "audit_only": {
+    "candidate_db_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+    "handoff_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08\\verification\\data-completion\\handoff.json",
+    "handoff_fixture_projection_hash": null,
+    "handoff_projection_hash_match": false,
+    "handoff_projection_hash_algorithm": "not documented in the repo; reported as unverified provenance",
+    "built_at": "2026-10-07T06:33:59.518738+00:00",
+    "vectors_reused": 0,
+    "vectors_embedded": 0,
+    "index_root": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index"
+  }
+}

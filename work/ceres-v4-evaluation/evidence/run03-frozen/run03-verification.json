@@ -1,0 +1,48 @@
+{
+  "candidate_head": "ac895fd620af617fa31f4e0006841a4d6a89cd53",
+  "runner_sha256": "e732ef2360685dae0b214b5251b3fd8a0db1e81213ed30d033ac1b526f2bfa34",
+  "current_files": [
+    {
+      "path": "scripts\\eval_v4.py",
+      "sha256": "e732ef2360685dae0b214b5251b3fd8a0db1e81213ed30d033ac1b526f2bfa34"
+    },
+    {
+      "path": "scripts\\test_eval_v4.py",
+      "sha256": "7471221c6ddd1d23ed2a6f1317fa35da5928502e6e73b7d486e3d07b76b4a0ea"
+    },
+    {
+      "path": "evals\\v4\\cases.json",
+      "sha256": "aeca61c561830db361e88251499241fa5a7742926d5b94fdc382e6bbfbf349b8"
+    }
+  ],
+  "execution_count": 20,
+  "source_run01_hashes_unchanged": true,
+  "model_calls_counts_content_unchanged": true,
+  "judge_calls_counts_content_unchanged": true,
+  "actual_executions": 20,
+  "business_passed": 16,
+  "business_failed": 4,
+  "not_executed": 80,
+  "fully_passed": 12,
+  "automatic_acceptance": "not_passed",
+  "configuration_consistent": true,
+  "index_consistent": true,
+  "remaining_failure_cases": [
+    {
+      "execution": "R01-r1",
+      "failed_checks": "present:after.guide.product_cards"
+    },
+    {
+      "execution": "R07-r1",
+      "failed_checks": "present:after.guide.plan,quantities:after.guide.plan.items,eq:after.guide.plan.selected_total_fen"
+    },
+    {
+      "execution": "R11-r1",
+      "failed_checks": "eq:after.guide.constraints_summary.budget_fen"
+    },
+    {
+      "execution": "R19-r1",
+      "failed_checks": "contains:reply"
+    }
+  ]
+}

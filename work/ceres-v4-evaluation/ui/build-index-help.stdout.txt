@@ -1,0 +1,17 @@
+usage: build_retrieval_index.py [-h] [--index-root INDEX_ROOT]
+                                {build,verify,list,rollback} ...
+
+Build, verify, list and roll back the offline retrieval index. Reads only the
+S1 candidate snapshot; never writes to a business database.
+
+positional arguments:
+  {build,verify,list,rollback}
+    build               build one new index version and publish it
+    verify              structurally verify one index version
+    list                list index versions and the current pointer
+    rollback            point current back at an existing healthy version
+
+options:
+  -h, --help            show this help message and exit
+  --index-root INDEX_ROOT
+                        index root directory (default: data/retrieval_index)

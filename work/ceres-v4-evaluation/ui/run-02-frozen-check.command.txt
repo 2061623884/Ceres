@@ -1,0 +1,1 @@
+powershell: compare Get-FileHash(ui/eval_v4_ui.run02.frozen.mjs).Hash to manifest.frozen_sha256, ensure ui/run-02 absent, then invoke bundled node --check

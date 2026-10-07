@@ -1,0 +1,76 @@
+{
+  "case_id": "R09",
+  "group": "purchase",
+  "scenario_family": "cola-quantity-decrease",
+  "split": "regression",
+  "core": true,
+  "goal": "可乐数量从三罐减少到一罐",
+  "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+  "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+  "steps": [
+    {
+      "op": "turn",
+      "label": "request",
+      "message": "买三罐百事可乐原味汽水330ml罐装",
+      "expect": [
+        {
+          "kind": "present",
+          "path": "after.guide.plan",
+          "value": true
+        },
+        {
+          "kind": "quantities",
+          "path": "after.guide.plan.items",
+          "value": {
+            "demo:cn-pepsi-original-330ml-can": 3
+          }
+        },
+        {
+          "kind": "eq",
+          "path": "after.guide.plan.selected_total_fen",
+          "value": 900
+        }
+      ]
+    },
+    {
+      "op": "turn",
+      "label": "decrease",
+      "message": "只要一罐",
+      "expect": [
+        {
+          "kind": "present",
+          "path": "after.guide.plan",
+          "value": true
+        },
+        {
+          "kind": "quantities",
+          "path": "after.guide.plan.items",
+          "value": {
+            "demo:cn-pepsi-original-330ml-can": 1
+          }
+        },
+        {
+          "kind": "eq",
+          "path": "after.guide.plan.selected_total_fen",
+          "value": 300
+        }
+      ]
+    },
+    {
+      "op": "confirm_plan",
+      "label": "explicit-confirm",
+      "authorized": [
+        "cart"
+      ],
+      "expect": [
+        {
+          "kind": "quantities",
+          "path": "after.cart.items",
+          "value": {
+            "demo:cn-pepsi-original-330ml-can": 1
+          }
+        }
+      ]
+    }
+  ]
+}

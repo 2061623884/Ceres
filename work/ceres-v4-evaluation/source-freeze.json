@@ -1,0 +1,56 @@
+{
+  "archive_length": 33929670,
+  "archive_sha256": "fcdfd8a55885c56b1b06c2058c57c5e3d1aafe42450e64410dc94488e16ef0c1",
+  "candidate_head": "ac895fd620af617fa31f4e0006841a4d6a89cd53",
+  "selected_source_hashes": [
+    {
+      "sha256": "f7db38fedec43978b0cc9d15366d848444e031e52cd56e1159d950ce0ec86f30",
+      "path": "work/ceres-next-agent-experience/08/live_public_api_multiturn.py"
+    },
+    {
+      "sha256": "f5d050cf73a4959b27cb2971d1cadc8b22997542e2b215284996b87e22f07e6f",
+      "path": "work/ceres-next-agent-experience/04/collect_prompt_sample.py"
+    },
+    {
+      "sha256": "ba4efabe4287a6a9a7534cc303ef4e4a80878574b9156f6951bd9ff0993436b4",
+      "path": "scripts/seed_runtime.py"
+    },
+    {
+      "sha256": "0d91df4046dca1f656cd707e0ac1a34b91bd2fba64d6c079882529dfd665646a",
+      "path": "scripts/build_retrieval_index.py"
+    },
+    {
+      "sha256": "2780abc1bb944cd5ae046778d272aa6b5c5245d01edaa99cff0fe8f86419a225",
+      "path": "backend/app/core/config.py"
+    },
+    {
+      "sha256": "fe1693ca44d67acad456ab673837592a1a3ab08dac539820370371e4ef2c8a22",
+      "path": "backend/app/llm/kev_provider.py"
+    },
+    {
+      "sha256": "2b3f4a98461e4c5eea7369f426a506b2f36707014d14153ad31fbb27ae6f6361",
+      "path": "data/fixtures/demo-products.json"
+    },
+    {
+      "sha256": "b29b9491ba34f6f0f8ef8e9fb3acae314f092b5abf242809fefce8cfa0ccb16f",
+      "path": "data/fixtures/store-offers.json"
+    },
+    {
+      "sha256": "a246f4af6dc0f6b4156887bfb359c59c1e8613eb51a3ab20c81811d2eb7a9005",
+      "path": ".env.example"
+    }
+  ],
+  "staged_diff_clean": true,
+  "excluded_from_archive": [
+    ".env",
+    "__pycache__",
+    "node_modules",
+    ".venv",
+    "pytest-of-20616/"
+  ],
+  "archive_name": "ceres-v4-ac895fd-source.zip",
+  "tracked_diff_clean": true,
+  "preexisting_untracked": [
+    "pytest-of-20616/"
+  ]
+}

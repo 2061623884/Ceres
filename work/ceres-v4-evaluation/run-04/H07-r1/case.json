@@ -1,0 +1,60 @@
+{
+  "case_id": "H07",
+  "group": "policy",
+  "scenario_family": "policy-interruption-retains-plan",
+  "split": "acceptance",
+  "core": false,
+  "goal": "采购中插入一般退货咨询后清单保持",
+  "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+  "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+  "steps": [
+    {
+      "op": "turn",
+      "label": "request",
+      "message": "买两罐百事可乐原味汽水330ml罐装",
+      "expect": [
+        {
+          "kind": "present",
+          "path": "after.guide.plan",
+          "value": true
+        },
+        {
+          "kind": "quantities",
+          "path": "after.guide.plan.items",
+          "value": {
+            "demo:cn-pepsi-original-330ml-can": 2
+          }
+        },
+        {
+          "kind": "eq",
+          "path": "after.guide.plan.selected_total_fen",
+          "value": 600
+        }
+      ]
+    },
+    {
+      "op": "turn",
+      "label": "policy-interruption",
+      "message": "先问一句，一般签收几天内能退货？",
+      "expect": [
+        {
+          "kind": "quantities",
+          "path": "after.guide.plan.items",
+          "value": {
+            "demo:cn-pepsi-original-330ml-can": 2
+          }
+        },
+        {
+          "kind": "unchanged",
+          "path": "after.cart",
+          "before_path": "before.cart"
+        },
+        {
+          "kind": "contains",
+          "path": "grounding_evidence",
+          "value": "P-RET-01"
+        }
+      ]
+    }
+  ]
+}

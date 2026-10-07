@@ -1,0 +1,5 @@
+usage: eval_v4.py resume [-h] --output OUTPUT
+
+options:
+  -h, --help       show this help message and exit
+  --output OUTPUT

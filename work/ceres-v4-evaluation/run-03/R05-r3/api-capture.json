@@ -1,0 +1,2388 @@
+{
+  "steps": [
+    {
+      "case_id": "R05",
+      "op": "turn",
+      "label": "request",
+      "before": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-44f18e47f44b",
+          "product_cards": [],
+          "task_id": null,
+          "state_version": 0,
+          "session_version": 0,
+          "current_step": null,
+          "task_status": null,
+          "entry_context": {
+            "page": "home",
+            "category_id": null,
+            "activity_id": null,
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": null,
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": null,
+          "available_actions": [
+            "send_message"
+          ],
+          "constraints_summary": {},
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "empty",
+          "messages": null
+        },
+        "opening": {
+          "role": "keke",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "active_role_before": "keke",
+      "request": {
+        "request_id": "08-R05-40fab7260a",
+        "message": "买点饮料，两件，预算20元",
+        "expected_task_id": null,
+        "expected_state_version": 0,
+        "expected_session_version": 0
+      },
+      "http_status": 200,
+      "elapsed_ms": 3342.6,
+      "latency_target_ms": 15000,
+      "latency_target_exceeded": false,
+      "events": [
+        {
+          "type": "service.route",
+          "payload": {
+            "status": "completed",
+            "decision": "stay_current",
+            "raw_choice": "stay_current",
+            "current_role": "keke",
+            "prompt_mode": "none",
+            "request_id": "08-R05-40fab7260a",
+            "route_ms": 846.8357999809086,
+            "criteria_version": "ceres-service-v3.2"
+          }
+        },
+        {
+          "type": "accepted",
+          "payload": {}
+        },
+        {
+          "type": "progress",
+          "payload": {
+            "phase": "understanding"
+          }
+        },
+        {
+          "type": "progress",
+          "payload": {
+            "phase": "retrieve"
+          }
+        },
+        {
+          "type": "clarification",
+          "payload": {
+            "question_id": "q-94ea49317357",
+            "question": "目前有饮用水、可乐、桃汁饮料、茶、苏打水等饮品可选，想先看哪类？",
+            "options": [
+              {
+                "id": "product_type:water",
+                "label": "饮用水"
+              },
+              {
+                "id": "product_type:cola",
+                "label": "可乐"
+              },
+              {
+                "id": "product_type:juice_drink",
+                "label": "桃汁饮料"
+              },
+              {
+                "id": "product_type:tea",
+                "label": "茶"
+              },
+              {
+                "id": "product_type:苏打水",
+                "label": "苏打水"
+              }
+            ],
+            "base_session_version": 0,
+            "base_state_version": 0,
+            "slot": "product_type",
+            "candidates": [],
+            "people": null
+          }
+        },
+        {
+          "type": "answer.delta",
+          "payload": {
+            "delta": "目前有饮用水、可乐、桃汁饮料、茶、苏打水等饮品可选，想先看哪类？\n1. 饮用水\n2. 可乐\n3. 桃汁饮料\n4. 茶\n5. 苏打水",
+            "final": true,
+            "replace": false
+          }
+        },
+        {
+          "type": "turn.completed",
+          "payload": {
+            "message": "目前有饮用水、可乐、桃汁饮料、茶、苏打水等饮品可选，想先看哪类？\n1. 饮用水\n2. 可乐\n3. 桃汁饮料\n4. 茶\n5. 苏打水",
+            "status": "understanding",
+            "task_id": null,
+            "state_version": 0,
+            "session_version": 2,
+            "plan": null,
+            "pending_clarifications": [
+              {
+                "question_id": "q-94ea49317357",
+                "question": "目前有饮用水、可乐、桃汁饮料、茶、苏打水等饮品可选，想先看哪类？",
+                "options": [
+                  {
+                    "id": "product_type:water",
+                    "label": "饮用水"
+                  },
+                  {
+                    "id": "product_type:cola",
+                    "label": "可乐"
+                  },
+                  {
+                    "id": "product_type:juice_drink",
+                    "label": "桃汁饮料"
+                  },
+                  {
+                    "id": "product_type:tea",
+                    "label": "茶"
+                  },
+                  {
+                    "id": "product_type:苏打水",
+                    "label": "苏打水"
+                  }
+                ],
+                "base_session_version": 1,
+                "base_state_version": 0,
+                "slot": "product_type",
+                "candidates": [],
+                "people": null
+              }
+            ],
+            "product_cards": [],
+            "plan_effect": "keep",
+            "action_results": [
+              {
+                "type": "clarification",
+                "slot": "product_type",
+                "status": "needs_clarification",
+                "saved": true,
+                "reply_ok": true,
+                "action_id": "a1"
+              }
+            ],
+            "answer_status": "accepted",
+            "route": "prepare",
+            "trace_id": "trace-7ab16e632649"
+          }
+        }
+      ],
+      "role_model_call_range": [
+        0,
+        1
+      ],
+      "kev_call_range": [
+        0,
+        2
+      ],
+      "terminal": {
+        "message": "目前有饮用水、可乐、桃汁饮料、茶、苏打水等饮品可选，想先看哪类？\n1. 饮用水\n2. 可乐\n3. 桃汁饮料\n4. 茶\n5. 苏打水",
+        "status": "understanding",
+        "task_id": null,
+        "state_version": 0,
+        "session_version": 2,
+        "plan": null,
+        "pending_clarifications": [
+          {
+            "question_id": "q-94ea49317357",
+            "question": "目前有饮用水、可乐、桃汁饮料、茶、苏打水等饮品可选，想先看哪类？",
+            "options": [
+              {
+                "id": "product_type:water",
+                "label": "饮用水"
+              },
+              {
+                "id": "product_type:cola",
+                "label": "可乐"
+              },
+              {
+                "id": "product_type:juice_drink",
+                "label": "桃汁饮料"
+              },
+              {
+                "id": "product_type:tea",
+                "label": "茶"
+              },
+              {
+                "id": "product_type:苏打水",
+                "label": "苏打水"
+              }
+            ],
+            "base_session_version": 1,
+            "base_state_version": 0,
+            "slot": "product_type",
+            "candidates": [],
+            "people": null
+          }
+        ],
+        "product_cards": [],
+        "plan_effect": "keep",
+        "action_results": [
+          {
+            "type": "clarification",
+            "slot": "product_type",
+            "status": "needs_clarification",
+            "saved": true,
+            "reply_ok": true,
+            "action_id": "a1"
+          }
+        ],
+        "answer_status": "accepted",
+        "route": "prepare",
+        "trace_id": "trace-7ab16e632649"
+      },
+      "trace": [
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "capability",
+          "status": "started",
+          "criteria_version": "ceres-guide-capabilities-v2",
+          "call_number": 1,
+          "model": "kev-latest"
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 843,
+          "stage": "capability",
+          "status": "completed",
+          "capability": "purchase_modify",
+          "branch": "semantic_understanding",
+          "criteria_version": "ceres-guide-capabilities-v2",
+          "call_number": 1,
+          "model": "kev-latest"
+        },
+        {
+          "phase": "understanding",
+          "duration_ms": null
+        },
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "understanding",
+          "status": "started",
+          "call_number": 1
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 1500,
+          "stage": "understanding",
+          "status": "completed",
+          "call_number": 1
+        },
+        {
+          "phase": "retrieve",
+          "duration_ms": null
+        },
+        {
+          "phase": "turn_result",
+          "duration_ms": null,
+          "status": "understanding"
+        },
+        {
+          "phase": "memory_extract_started",
+          "duration_ms": null,
+          "model": "qwen3.8-27b"
+        }
+      ],
+      "snapshot_after": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-44f18e47f44b",
+          "product_cards": [],
+          "task_id": null,
+          "state_version": 0,
+          "session_version": 2,
+          "current_step": null,
+          "task_status": null,
+          "entry_context": {
+            "page": "home",
+            "category_id": null,
+            "activity_id": null,
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": null,
+          "plan_read_only": false,
+          "pending_clarifications": [
+            {
+              "base_session_version": 1,
+              "base_state_version": 0,
+              "candidates": [],
+              "options": [
+                {
+                  "id": "product_type:water",
+                  "label": "饮用水"
+                },
+                {
+                  "id": "product_type:cola",
+                  "label": "可乐"
+                },
+                {
+                  "id": "product_type:juice_drink",
+                  "label": "桃汁饮料"
+                },
+                {
+                  "id": "product_type:tea",
+                  "label": "茶"
+                },
+                {
+                  "id": "product_type:苏打水",
+                  "label": "苏打水"
+                }
+              ],
+              "people": null,
+              "question": "目前有饮用水、可乐、桃汁饮料、茶、苏打水等饮品可选，想先看哪类？",
+              "question_id": "q-94ea49317357",
+              "slot": "product_type"
+            }
+          ],
+          "confirmation_result": null,
+          "message": null,
+          "available_actions": [
+            "send_message"
+          ],
+          "constraints_summary": {},
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "complete",
+          "messages": [
+            {
+              "message_id": "msg-b677c6652fbb",
+              "session_id": "sess-44f18e47f44b",
+              "task_id": null,
+              "sequence": 1,
+              "role": "user",
+              "kind": "text",
+              "content": "买点饮料，两件，预算20元",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-R05-40fab7260a",
+              "status": "completed",
+              "created_at": "2026-10-07T07:55:56.466835"
+            },
+            {
+              "message_id": "msg-2d57eb6a712f",
+              "session_id": "sess-44f18e47f44b",
+              "task_id": null,
+              "sequence": 2,
+              "role": "assistant",
+              "kind": "text",
+              "content": "目前有饮用水、可乐、桃汁饮料、茶、苏打水等饮品可选，想先看哪类？\n1. 饮用水\n2. 可乐\n3. 桃汁饮料\n4. 茶\n5. 苏打水",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-R05-40fab7260a",
+              "status": "completed",
+              "created_at": "2026-10-07T07:55:56.469369"
+            }
+          ]
+        },
+        "opening": {
+          "role": "keke",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "status": "captured"
+    },
+    {
+      "case_id": "R05",
+      "op": "select_pending_option",
+      "label": "choose-type",
+      "before": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-44f18e47f44b",
+          "product_cards": [],
+          "task_id": null,
+          "state_version": 0,
+          "session_version": 2,
+          "current_step": null,
+          "task_status": null,
+          "entry_context": {
+            "page": "home",
+            "category_id": null,
+            "activity_id": null,
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": null,
+          "plan_read_only": false,
+          "pending_clarifications": [
+            {
+              "base_session_version": 1,
+              "base_state_version": 0,
+              "candidates": [],
+              "options": [
+                {
+                  "id": "product_type:water",
+                  "label": "饮用水"
+                },
+                {
+                  "id": "product_type:cola",
+                  "label": "可乐"
+                },
+                {
+                  "id": "product_type:juice_drink",
+                  "label": "桃汁饮料"
+                },
+                {
+                  "id": "product_type:tea",
+                  "label": "茶"
+                },
+                {
+                  "id": "product_type:苏打水",
+                  "label": "苏打水"
+                }
+              ],
+              "people": null,
+              "question": "目前有饮用水、可乐、桃汁饮料、茶、苏打水等饮品可选，想先看哪类？",
+              "question_id": "q-94ea49317357",
+              "slot": "product_type"
+            }
+          ],
+          "confirmation_result": null,
+          "message": null,
+          "available_actions": [
+            "send_message"
+          ],
+          "constraints_summary": {},
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "complete",
+          "messages": null
+        },
+        "opening": {
+          "role": "keke",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "selected_option": {
+        "question_id": "q-94ea49317357",
+        "option_id": "product_type:cola",
+        "slot": "product_type",
+        "label": "可乐"
+      },
+      "active_role_before": "keke",
+      "request": {
+        "request_id": "08-R05-d062c05154",
+        "message": "可乐",
+        "expected_task_id": null,
+        "expected_state_version": 0,
+        "expected_session_version": 2,
+        "clarification_answer": {
+          "question_id": "q-94ea49317357",
+          "option_id": "product_type:cola"
+        }
+      },
+      "http_status": 200,
+      "elapsed_ms": 4991.9,
+      "latency_target_ms": 15000,
+      "latency_target_exceeded": false,
+      "events": [
+        {
+          "type": "service.route",
+          "payload": {
+            "status": "completed",
+            "decision": "stay_current",
+            "raw_choice": "stay_current",
+            "current_role": "keke",
+            "prompt_mode": "none",
+            "request_id": "08-R05-d062c05154",
+            "route_ms": 974.5706999674439,
+            "criteria_version": "ceres-service-v3.2"
+          }
+        },
+        {
+          "type": "accepted",
+          "payload": {}
+        },
+        {
+          "type": "progress",
+          "payload": {
+            "phase": "retrieve"
+          }
+        },
+        {
+          "type": "answer.delta",
+          "payload": {
+            "delta": "可直接查看这些商品，也可以按品牌或规格筛选。\n1. 品牌：百事可乐\n2. 品牌：可口可乐\n3. 单件容量：330毫升\n4. 单件容量：500毫升\n5. 罐装\n6. 瓶装\n1. 百事可乐原味汽水330ml罐装\n2. 可口可乐经典原味汽水330ml罐装\n3. 可口可乐经典原味汽水500ml瓶装\n4. 可口可乐零度无糖汽水500ml瓶装",
+            "final": true,
+            "replace": false
+          }
+        },
+        {
+          "type": "turn.completed",
+          "payload": {
+            "message": "可直接查看这些商品，也可以按品牌或规格筛选。\n1. 品牌：百事可乐\n2. 品牌：可口可乐\n3. 单件容量：330毫升\n4. 单件容量：500毫升\n5. 罐装\n6. 瓶装\n1. 百事可乐原味汽水330ml罐装\n2. 可口可乐经典原味汽水330ml罐装\n3. 可口可乐经典原味汽水500ml瓶装\n4. 可口可乐零度无糖汽水500ml瓶装",
+            "status": "understanding",
+            "task_id": null,
+            "state_version": 0,
+            "session_version": 3,
+            "plan": null,
+            "pending_clarifications": [
+              {
+                "question_id": "q-55e2480fbac1",
+                "question": "可直接查看这些商品，也可以按品牌或规格筛选。",
+                "options": [
+                  {
+                    "id": "product_filter:{\"query\":\"可乐\",\"field\":\"brand\",\"value\":\"百事可乐\"}",
+                    "label": "品牌：百事可乐"
+                  },
+                  {
+                    "id": "product_filter:{\"query\":\"可乐\",\"field\":\"brand\",\"value\":\"可口可乐\"}",
+                    "label": "品牌：可口可乐"
+                  },
+                  {
+                    "id": "product_filter:{\"query\":\"可乐\",\"field\":\"item_volume_ml\",\"value\":330}",
+                    "label": "单件容量：330毫升"
+                  },
+                  {
+                    "id": "product_filter:{\"query\":\"可乐\",\"field\":\"item_volume_ml\",\"value\":500}",
+                    "label": "单件容量：500毫升"
+                  },
+                  {
+                    "id": "product_filter:{\"query\":\"可乐\",\"field\":\"packaging\",\"value\":\"can\"}",
+                    "label": "罐装"
+                  },
+                  {
+                    "id": "product_filter:{\"query\":\"可乐\",\"field\":\"packaging\",\"value\":\"bottle\"}",
+                    "label": "瓶装"
+                  }
+                ],
+                "base_session_version": 3,
+                "base_state_version": 0,
+                "slot": "product_filter",
+                "candidates": [],
+                "people": null
+              }
+            ],
+            "product_cards": [
+              {
+                "sku_id": "demo:cn-pepsi-original-330ml-can",
+                "name": "百事可乐原味汽水330ml罐装",
+                "brand": "百事可乐",
+                "image_path": null,
+                "packaging": "can",
+                "pack_count": 1,
+                "item_volume_ml": 330,
+                "total_volume_ml": 330.0,
+                "price_fen": 300,
+                "price_per_litre_yuan": 9.09,
+                "ref": "p4c70503423bc537a"
+              },
+              {
+                "sku_id": "demo:cn-coke-original-330ml-can",
+                "name": "可口可乐经典原味汽水330ml罐装",
+                "brand": "可口可乐",
+                "image_path": null,
+                "packaging": "can",
+                "pack_count": 1,
+                "item_volume_ml": 330,
+                "total_volume_ml": 330.0,
+                "price_fen": 350,
+                "price_per_litre_yuan": 10.61,
+                "ref": "p4e2ad9fb8fb4224f"
+              },
+              {
+                "sku_id": "demo:cn-coke-original-500ml-bottle",
+                "name": "可口可乐经典原味汽水500ml瓶装",
+                "brand": "可口可乐",
+                "image_path": null,
+                "packaging": "bottle",
+                "pack_count": 1,
+                "item_volume_ml": 500,
+                "total_volume_ml": 500.0,
+                "price_fen": 400,
+                "price_per_litre_yuan": 8.0,
+                "ref": "p514113b08ed0e060"
+              },
+              {
+                "sku_id": "demo:cn-coke-zero-500ml-bottle",
+                "name": "可口可乐零度无糖汽水500ml瓶装",
+                "brand": "可口可乐",
+                "image_path": null,
+                "packaging": "bottle",
+                "pack_count": 1,
+                "item_volume_ml": 500,
+                "total_volume_ml": 500.0,
+                "price_fen": 400,
+                "price_per_litre_yuan": 8.0,
+                "ref": "pde214f2da645e0d5"
+              }
+            ],
+            "plan_effect": "keep",
+            "action_results": [
+              {
+                "type": "read_only",
+                "kind": "lookup",
+                "status": "completed",
+                "saved": false,
+                "reply_ok": true,
+                "retrieval_status": "ok",
+                "retrieval_mode": "lexical",
+                "fallback_reason": null,
+                "index_version": "idx-81e9fa689baef6b5",
+                "action_id": "a1"
+              }
+            ],
+            "answer_status": "accepted",
+            "route": "answer",
+            "trace_id": "trace-ab0b6002fece"
+          }
+        }
+      ],
+      "role_model_call_range": [
+        1,
+        2
+      ],
+      "kev_call_range": [
+        2,
+        4
+      ],
+      "terminal": {
+        "message": "可直接查看这些商品，也可以按品牌或规格筛选。\n1. 品牌：百事可乐\n2. 品牌：可口可乐\n3. 单件容量：330毫升\n4. 单件容量：500毫升\n5. 罐装\n6. 瓶装\n1. 百事可乐原味汽水330ml罐装\n2. 可口可乐经典原味汽水330ml罐装\n3. 可口可乐经典原味汽水500ml瓶装\n4. 可口可乐零度无糖汽水500ml瓶装",
+        "status": "understanding",
+        "task_id": null,
+        "state_version": 0,
+        "session_version": 3,
+        "plan": null,
+        "pending_clarifications": [
+          {
+            "question_id": "q-55e2480fbac1",
+            "question": "可直接查看这些商品，也可以按品牌或规格筛选。",
+            "options": [
+              {
+                "id": "product_filter:{\"query\":\"可乐\",\"field\":\"brand\",\"value\":\"百事可乐\"}",
+                "label": "品牌：百事可乐"
+              },
+              {
+                "id": "product_filter:{\"query\":\"可乐\",\"field\":\"brand\",\"value\":\"可口可乐\"}",
+                "label": "品牌：可口可乐"
+              },
+              {
+                "id": "product_filter:{\"query\":\"可乐\",\"field\":\"item_volume_ml\",\"value\":330}",
+                "label": "单件容量：330毫升"
+              },
+              {
+                "id": "product_filter:{\"query\":\"可乐\",\"field\":\"item_volume_ml\",\"value\":500}",
+                "label": "单件容量：500毫升"
+              },
+              {
+                "id": "product_filter:{\"query\":\"可乐\",\"field\":\"packaging\",\"value\":\"can\"}",
+                "label": "罐装"
+              },
+              {
+                "id": "product_filter:{\"query\":\"可乐\",\"field\":\"packaging\",\"value\":\"bottle\"}",
+                "label": "瓶装"
+              }
+            ],
+            "base_session_version": 3,
+            "base_state_version": 0,
+            "slot": "product_filter",
+            "candidates": [],
+            "people": null
+          }
+        ],
+        "product_cards": [
+          {
+            "sku_id": "demo:cn-pepsi-original-330ml-can",
+            "name": "百事可乐原味汽水330ml罐装",
+            "brand": "百事可乐",
+            "image_path": null,
+            "packaging": "can",
+            "pack_count": 1,
+            "item_volume_ml": 330,
+            "total_volume_ml": 330.0,
+            "price_fen": 300,
+            "price_per_litre_yuan": 9.09,
+            "ref": "p4c70503423bc537a"
+          },
+          {
+            "sku_id": "demo:cn-coke-original-330ml-can",
+            "name": "可口可乐经典原味汽水330ml罐装",
+            "brand": "可口可乐",
+            "image_path": null,
+            "packaging": "can",
+            "pack_count": 1,
+            "item_volume_ml": 330,
+            "total_volume_ml": 330.0,
+            "price_fen": 350,
+            "price_per_litre_yuan": 10.61,
+            "ref": "p4e2ad9fb8fb4224f"
+          },
+          {
+            "sku_id": "demo:cn-coke-original-500ml-bottle",
+            "name": "可口可乐经典原味汽水500ml瓶装",
+            "brand": "可口可乐",
+            "image_path": null,
+            "packaging": "bottle",
+            "pack_count": 1,
+            "item_volume_ml": 500,
+            "total_volume_ml": 500.0,
+            "price_fen": 400,
+            "price_per_litre_yuan": 8.0,
+            "ref": "p514113b08ed0e060"
+          },
+          {
+            "sku_id": "demo:cn-coke-zero-500ml-bottle",
+            "name": "可口可乐零度无糖汽水500ml瓶装",
+            "brand": "可口可乐",
+            "image_path": null,
+            "packaging": "bottle",
+            "pack_count": 1,
+            "item_volume_ml": 500,
+            "total_volume_ml": 500.0,
+            "price_fen": 400,
+            "price_per_litre_yuan": 8.0,
+            "ref": "pde214f2da645e0d5"
+          }
+        ],
+        "plan_effect": "keep",
+        "action_results": [
+          {
+            "type": "read_only",
+            "kind": "lookup",
+            "status": "completed",
+            "saved": false,
+            "reply_ok": true,
+            "retrieval_status": "ok",
+            "retrieval_mode": "lexical",
+            "fallback_reason": null,
+            "index_version": "idx-81e9fa689baef6b5",
+            "action_id": "a1"
+          }
+        ],
+        "answer_status": "accepted",
+        "route": "answer",
+        "trace_id": "trace-ab0b6002fece"
+      },
+      "trace": [
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "capability",
+          "status": "started",
+          "criteria_version": "ceres-guide-capabilities-v2",
+          "call_number": 1,
+          "model": "kev-latest"
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 1297,
+          "stage": "capability",
+          "status": "completed",
+          "capability": "purchase_modify",
+          "branch": "direct_product_type_workflow",
+          "criteria_version": "ceres-guide-capabilities-v2",
+          "call_number": 1,
+          "model": "kev-latest"
+        },
+        {
+          "phase": "retrieve",
+          "duration_ms": null
+        },
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "answer",
+          "status": "started",
+          "call_number": 1
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 2625,
+          "stage": "answer",
+          "status": "completed",
+          "call_number": 1
+        },
+        {
+          "phase": "turn_result",
+          "duration_ms": null,
+          "status": "understanding"
+        },
+        {
+          "phase": "memory_extract_started",
+          "duration_ms": null,
+          "model": "qwen3.8-27b"
+        }
+      ],
+      "snapshot_after": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-44f18e47f44b",
+          "product_cards": [
+            {
+              "sku_id": "demo:cn-pepsi-original-330ml-can",
+              "name": "百事可乐原味汽水330ml罐装",
+              "brand": "百事可乐",
+              "image_path": null,
+              "packaging": "can",
+              "pack_count": 1,
+              "item_volume_ml": 330,
+              "total_volume_ml": 330.0,
+              "price_fen": 300,
+              "price_per_litre_yuan": 9.09,
+              "ref": "p4c70503423bc537a"
+            },
+            {
+              "sku_id": "demo:cn-coke-original-330ml-can",
+              "name": "可口可乐经典原味汽水330ml罐装",
+              "brand": "可口可乐",
+              "image_path": null,
+              "packaging": "can",
+              "pack_count": 1,
+              "item_volume_ml": 330,
+              "total_volume_ml": 330.0,
+              "price_fen": 350,
+              "price_per_litre_yuan": 10.61,
+              "ref": "p4e2ad9fb8fb4224f"
+            },
+            {
+              "sku_id": "demo:cn-coke-original-500ml-bottle",
+              "name": "可口可乐经典原味汽水500ml瓶装",
+              "brand": "可口可乐",
+              "image_path": null,
+              "packaging": "bottle",
+              "pack_count": 1,
+              "item_volume_ml": 500,
+              "total_volume_ml": 500.0,
+              "price_fen": 400,
+              "price_per_litre_yuan": 8.0,
+              "ref": "p514113b08ed0e060"
+            },
+            {
+              "sku_id": "demo:cn-coke-zero-500ml-bottle",
+              "name": "可口可乐零度无糖汽水500ml瓶装",
+              "brand": "可口可乐",
+              "image_path": null,
+              "packaging": "bottle",
+              "pack_count": 1,
+              "item_volume_ml": 500,
+              "total_volume_ml": 500.0,
+              "price_fen": 400,
+              "price_per_litre_yuan": 8.0,
+              "ref": "pde214f2da645e0d5"
+            }
+          ],
+          "task_id": null,
+          "state_version": 0,
+          "session_version": 3,
+          "current_step": null,
+          "task_status": null,
+          "entry_context": {
+            "page": "home",
+            "category_id": null,
+            "activity_id": null,
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": null,
+          "plan_read_only": false,
+          "pending_clarifications": [
+            {
+              "base_session_version": 3,
+              "base_state_version": 0,
+              "candidates": [],
+              "options": [
+                {
+                  "id": "product_filter:{\"query\":\"可乐\",\"field\":\"brand\",\"value\":\"百事可乐\"}",
+                  "label": "品牌：百事可乐"
+                },
+                {
+                  "id": "product_filter:{\"query\":\"可乐\",\"field\":\"brand\",\"value\":\"可口可乐\"}",
+                  "label": "品牌：可口可乐"
+                },
+                {
+                  "id": "product_filter:{\"query\":\"可乐\",\"field\":\"item_volume_ml\",\"value\":330}",
+                  "label": "单件容量：330毫升"
+                },
+                {
+                  "id": "product_filter:{\"query\":\"可乐\",\"field\":\"item_volume_ml\",\"value\":500}",
+                  "label": "单件容量：500毫升"
+                },
+                {
+                  "id": "product_filter:{\"query\":\"可乐\",\"field\":\"packaging\",\"value\":\"can\"}",
+                  "label": "罐装"
+                },
+                {
+                  "id": "product_filter:{\"query\":\"可乐\",\"field\":\"packaging\",\"value\":\"bottle\"}",
+                  "label": "瓶装"
+                }
+              ],
+              "people": null,
+              "question": "可直接查看这些商品，也可以按品牌或规格筛选。",
+              "question_id": "q-55e2480fbac1",
+              "slot": "product_filter"
+            }
+          ],
+          "confirmation_result": null,
+          "message": null,
+          "available_actions": [
+            "send_message"
+          ],
+          "constraints_summary": {},
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "complete",
+          "messages": [
+            {
+              "message_id": "msg-b677c6652fbb",
+              "session_id": "sess-44f18e47f44b",
+              "task_id": null,
+              "sequence": 1,
+              "role": "user",
+              "kind": "text",
+              "content": "买点饮料，两件，预算20元",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-R05-40fab7260a",
+              "status": "completed",
+              "created_at": "2026-10-07T07:55:56.466835"
+            },
+            {
+              "message_id": "msg-2d57eb6a712f",
+              "session_id": "sess-44f18e47f44b",
+              "task_id": null,
+              "sequence": 2,
+              "role": "assistant",
+              "kind": "text",
+              "content": "目前有饮用水、可乐、桃汁饮料、茶、苏打水等饮品可选，想先看哪类？\n1. 饮用水\n2. 可乐\n3. 桃汁饮料\n4. 茶\n5. 苏打水",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-R05-40fab7260a",
+              "status": "completed",
+              "created_at": "2026-10-07T07:55:56.469369"
+            },
+            {
+              "message_id": "msg-8556f65b23f1",
+              "session_id": "sess-44f18e47f44b",
+              "task_id": null,
+              "sequence": 3,
+              "role": "user",
+              "kind": "text",
+              "content": "可乐",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-R05-d062c05154",
+              "status": "completed",
+              "created_at": "2026-10-07T07:56:05.176066"
+            },
+            {
+              "message_id": "msg-8551c6c1a188",
+              "session_id": "sess-44f18e47f44b",
+              "task_id": null,
+              "sequence": 4,
+              "role": "assistant",
+              "kind": "text",
+              "content": "可直接查看这些商品，也可以按品牌或规格筛选。\n1. 品牌：百事可乐\n2. 品牌：可口可乐\n3. 单件容量：330毫升\n4. 单件容量：500毫升\n5. 罐装\n6. 瓶装\n1. 百事可乐原味汽水330ml罐装\n2. 可口可乐经典原味汽水330ml罐装\n3. 可口可乐经典原味汽水500ml瓶装\n4. 可口可乐零度无糖汽水500ml瓶装",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-R05-d062c05154",
+              "status": "completed",
+              "created_at": "2026-10-07T07:56:05.178616"
+            }
+          ]
+        },
+        "opening": {
+          "role": "keke",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "status": "captured"
+    },
+    {
+      "case_id": "R05",
+      "op": "select_pending_option",
+      "label": "choose-brand",
+      "before": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-44f18e47f44b",
+          "product_cards": [
+            {
+              "sku_id": "demo:cn-pepsi-original-330ml-can",
+              "name": "百事可乐原味汽水330ml罐装",
+              "brand": "百事可乐",
+              "image_path": null,
+              "packaging": "can",
+              "pack_count": 1,
+              "item_volume_ml": 330,
+              "total_volume_ml": 330.0,
+              "price_fen": 300,
+              "price_per_litre_yuan": 9.09,
+              "ref": "p4c70503423bc537a"
+            },
+            {
+              "sku_id": "demo:cn-coke-original-330ml-can",
+              "name": "可口可乐经典原味汽水330ml罐装",
+              "brand": "可口可乐",
+              "image_path": null,
+              "packaging": "can",
+              "pack_count": 1,
+              "item_volume_ml": 330,
+              "total_volume_ml": 330.0,
+              "price_fen": 350,
+              "price_per_litre_yuan": 10.61,
+              "ref": "p4e2ad9fb8fb4224f"
+            },
+            {
+              "sku_id": "demo:cn-coke-original-500ml-bottle",
+              "name": "可口可乐经典原味汽水500ml瓶装",
+              "brand": "可口可乐",
+              "image_path": null,
+              "packaging": "bottle",
+              "pack_count": 1,
+              "item_volume_ml": 500,
+              "total_volume_ml": 500.0,
+              "price_fen": 400,
+              "price_per_litre_yuan": 8.0,
+              "ref": "p514113b08ed0e060"
+            },
+            {
+              "sku_id": "demo:cn-coke-zero-500ml-bottle",
+              "name": "可口可乐零度无糖汽水500ml瓶装",
+              "brand": "可口可乐",
+              "image_path": null,
+              "packaging": "bottle",
+              "pack_count": 1,
+              "item_volume_ml": 500,
+              "total_volume_ml": 500.0,
+              "price_fen": 400,
+              "price_per_litre_yuan": 8.0,
+              "ref": "pde214f2da645e0d5"
+            }
+          ],
+          "task_id": null,
+          "state_version": 0,
+          "session_version": 3,
+          "current_step": null,
+          "task_status": null,
+          "entry_context": {
+            "page": "home",
+            "category_id": null,
+            "activity_id": null,
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": null,
+          "plan_read_only": false,
+          "pending_clarifications": [
+            {
+              "base_session_version": 3,
+              "base_state_version": 0,
+              "candidates": [],
+              "options": [
+                {
+                  "id": "product_filter:{\"query\":\"可乐\",\"field\":\"brand\",\"value\":\"百事可乐\"}",
+                  "label": "品牌：百事可乐"
+                },
+                {
+                  "id": "product_filter:{\"query\":\"可乐\",\"field\":\"brand\",\"value\":\"可口可乐\"}",
+                  "label": "品牌：可口可乐"
+                },
+                {
+                  "id": "product_filter:{\"query\":\"可乐\",\"field\":\"item_volume_ml\",\"value\":330}",
+                  "label": "单件容量：330毫升"
+                },
+                {
+                  "id": "product_filter:{\"query\":\"可乐\",\"field\":\"item_volume_ml\",\"value\":500}",
+                  "label": "单件容量：500毫升"
+                },
+                {
+                  "id": "product_filter:{\"query\":\"可乐\",\"field\":\"packaging\",\"value\":\"can\"}",
+                  "label": "罐装"
+                },
+                {
+                  "id": "product_filter:{\"query\":\"可乐\",\"field\":\"packaging\",\"value\":\"bottle\"}",
+                  "label": "瓶装"
+                }
+              ],
+              "people": null,
+              "question": "可直接查看这些商品，也可以按品牌或规格筛选。",
+              "question_id": "q-55e2480fbac1",
+              "slot": "product_filter"
+            }
+          ],
+          "confirmation_result": null,
+          "message": null,
+          "available_actions": [
+            "send_message"
+          ],
+          "constraints_summary": {},
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "complete",
+          "messages": null
+        },
+        "opening": {
+          "role": "keke",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "selected_option": {
+        "question_id": "q-55e2480fbac1",
+        "option_id": "product_filter:{\"query\":\"可乐\",\"field\":\"brand\",\"value\":\"百事可乐\"}",
+        "slot": "product_filter",
+        "label": "品牌：百事可乐"
+      },
+      "active_role_before": "keke",
+      "request": {
+        "request_id": "08-R05-0b502d7160",
+        "message": "品牌：百事可乐",
+        "expected_task_id": null,
+        "expected_state_version": 0,
+        "expected_session_version": 3,
+        "clarification_answer": {
+          "question_id": "q-55e2480fbac1",
+          "option_id": "product_filter:{\"query\":\"可乐\",\"field\":\"brand\",\"value\":\"百事可乐\"}"
+        }
+      },
+      "http_status": 200,
+      "elapsed_ms": 7308.8,
+      "latency_target_ms": 15000,
+      "latency_target_exceeded": false,
+      "events": [
+        {
+          "type": "service.route",
+          "payload": {
+            "status": "completed",
+            "decision": "stay_current",
+            "raw_choice": "stay_current",
+            "current_role": "keke",
+            "prompt_mode": "none",
+            "request_id": "08-R05-0b502d7160",
+            "route_ms": 1055.651000002399,
+            "criteria_version": "ceres-service-v3.2"
+          }
+        },
+        {
+          "type": "accepted",
+          "payload": {}
+        },
+        {
+          "type": "progress",
+          "payload": {
+            "phase": "retrieve"
+          }
+        },
+        {
+          "type": "answer.delta",
+          "payload": {
+            "delta": "我找到「百事可乐原味汽水330ml罐装」了，你可以先看看卡片里的商品信息。\n1. 百事可乐原味汽水330ml罐装",
+            "final": true,
+            "replace": false
+          }
+        },
+        {
+          "type": "turn.completed",
+          "payload": {
+            "message": "我找到「百事可乐原味汽水330ml罐装」了，你可以先看看卡片里的商品信息。\n1. 百事可乐原味汽水330ml罐装",
+            "status": "understanding",
+            "task_id": null,
+            "state_version": 0,
+            "session_version": 5,
+            "plan": null,
+            "pending_clarifications": [],
+            "product_cards": [
+              {
+                "sku_id": "demo:cn-pepsi-original-330ml-can",
+                "name": "百事可乐原味汽水330ml罐装",
+                "brand": "百事可乐",
+                "image_path": null,
+                "packaging": "can",
+                "pack_count": 1,
+                "item_volume_ml": 330,
+                "total_volume_ml": 330.0,
+                "price_fen": 300,
+                "price_per_litre_yuan": 9.09,
+                "ref": "p4c70503423bc537a"
+              }
+            ],
+            "plan_effect": "keep",
+            "action_results": [
+              {
+                "type": "read_only",
+                "kind": "lookup",
+                "status": "completed",
+                "saved": false,
+                "reply_ok": true,
+                "retrieval_status": "ok",
+                "retrieval_mode": "lexical",
+                "fallback_reason": null,
+                "index_version": "idx-81e9fa689baef6b5",
+                "action_id": "a1"
+              }
+            ],
+            "answer_status": "accepted",
+            "route": "answer",
+            "trace_id": "trace-d5832f1364f1"
+          }
+        }
+      ],
+      "role_model_call_range": [
+        2,
+        3
+      ],
+      "kev_call_range": [
+        4,
+        6
+      ],
+      "terminal": {
+        "message": "我找到「百事可乐原味汽水330ml罐装」了，你可以先看看卡片里的商品信息。\n1. 百事可乐原味汽水330ml罐装",
+        "status": "understanding",
+        "task_id": null,
+        "state_version": 0,
+        "session_version": 5,
+        "plan": null,
+        "pending_clarifications": [],
+        "product_cards": [
+          {
+            "sku_id": "demo:cn-pepsi-original-330ml-can",
+            "name": "百事可乐原味汽水330ml罐装",
+            "brand": "百事可乐",
+            "image_path": null,
+            "packaging": "can",
+            "pack_count": 1,
+            "item_volume_ml": 330,
+            "total_volume_ml": 330.0,
+            "price_fen": 300,
+            "price_per_litre_yuan": 9.09,
+            "ref": "p4c70503423bc537a"
+          }
+        ],
+        "plan_effect": "keep",
+        "action_results": [
+          {
+            "type": "read_only",
+            "kind": "lookup",
+            "status": "completed",
+            "saved": false,
+            "reply_ok": true,
+            "retrieval_status": "ok",
+            "retrieval_mode": "lexical",
+            "fallback_reason": null,
+            "index_version": "idx-81e9fa689baef6b5",
+            "action_id": "a1"
+          }
+        ],
+        "answer_status": "accepted",
+        "route": "answer",
+        "trace_id": "trace-d5832f1364f1"
+      },
+      "trace": [
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "capability",
+          "status": "started",
+          "criteria_version": "ceres-guide-capabilities-v2",
+          "call_number": 1,
+          "model": "kev-latest"
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 1686,
+          "stage": "capability",
+          "status": "completed",
+          "capability": "purchase_modify",
+          "branch": "direct_product_filter_workflow",
+          "criteria_version": "ceres-guide-capabilities-v2",
+          "call_number": 1,
+          "model": "kev-latest"
+        },
+        {
+          "phase": "retrieve",
+          "duration_ms": null
+        },
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "answer",
+          "status": "started",
+          "call_number": 1
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 4515,
+          "stage": "answer",
+          "status": "completed",
+          "call_number": 1
+        },
+        {
+          "phase": "turn_result",
+          "duration_ms": null,
+          "status": "understanding"
+        },
+        {
+          "phase": "memory_extract_started",
+          "duration_ms": null,
+          "model": "qwen3.8-27b"
+        }
+      ],
+      "snapshot_after": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-44f18e47f44b",
+          "product_cards": [
+            {
+              "sku_id": "demo:cn-pepsi-original-330ml-can",
+              "name": "百事可乐原味汽水330ml罐装",
+              "brand": "百事可乐",
+              "image_path": null,
+              "packaging": "can",
+              "pack_count": 1,
+              "item_volume_ml": 330,
+              "total_volume_ml": 330.0,
+              "price_fen": 300,
+              "price_per_litre_yuan": 9.09,
+              "ref": "p4c70503423bc537a"
+            }
+          ],
+          "task_id": null,
+          "state_version": 0,
+          "session_version": 5,
+          "current_step": null,
+          "task_status": null,
+          "entry_context": {
+            "page": "home",
+            "category_id": null,
+            "activity_id": null,
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": null,
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": null,
+          "available_actions": [
+            "send_message"
+          ],
+          "constraints_summary": {},
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "complete",
+          "messages": [
+            {
+              "message_id": "msg-b677c6652fbb",
+              "session_id": "sess-44f18e47f44b",
+              "task_id": null,
+              "sequence": 1,
+              "role": "user",
+              "kind": "text",
+              "content": "买点饮料，两件，预算20元",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-R05-40fab7260a",
+              "status": "completed",
+              "created_at": "2026-10-07T07:55:56.466835"
+            },
+            {
+              "message_id": "msg-2d57eb6a712f",
+              "session_id": "sess-44f18e47f44b",
+              "task_id": null,
+              "sequence": 2,
+              "role": "assistant",
+              "kind": "text",
+              "content": "目前有饮用水、可乐、桃汁饮料、茶、苏打水等饮品可选，想先看哪类？\n1. 饮用水\n2. 可乐\n3. 桃汁饮料\n4. 茶\n5. 苏打水",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-R05-40fab7260a",
+              "status": "completed",
+              "created_at": "2026-10-07T07:55:56.469369"
+            },
+            {
+              "message_id": "msg-8556f65b23f1",
+              "session_id": "sess-44f18e47f44b",
+              "task_id": null,
+              "sequence": 3,
+              "role": "user",
+              "kind": "text",
+              "content": "可乐",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-R05-d062c05154",
+              "status": "completed",
+              "created_at": "2026-10-07T07:56:05.176066"
+            },
+            {
+              "message_id": "msg-8551c6c1a188",
+              "session_id": "sess-44f18e47f44b",
+              "task_id": null,
+              "sequence": 4,
+              "role": "assistant",
+              "kind": "text",
+              "content": "可直接查看这些商品，也可以按品牌或规格筛选。\n1. 品牌：百事可乐\n2. 品牌：可口可乐\n3. 单件容量：330毫升\n4. 单件容量：500毫升\n5. 罐装\n6. 瓶装\n1. 百事可乐原味汽水330ml罐装\n2. 可口可乐经典原味汽水330ml罐装\n3. 可口可乐经典原味汽水500ml瓶装\n4. 可口可乐零度无糖汽水500ml瓶装",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-R05-d062c05154",
+              "status": "completed",
+              "created_at": "2026-10-07T07:56:05.178616"
+            },
+            {
+              "message_id": "msg-7ba9b2ffce86",
+              "session_id": "sess-44f18e47f44b",
+              "task_id": null,
+              "sequence": 5,
+              "role": "user",
+              "kind": "text",
+              "content": "品牌：百事可乐",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-R05-0b502d7160",
+              "status": "completed",
+              "created_at": "2026-10-07T07:56:39.493825"
+            },
+            {
+              "message_id": "msg-f2b20f333757",
+              "session_id": "sess-44f18e47f44b",
+              "task_id": null,
+              "sequence": 6,
+              "role": "assistant",
+              "kind": "text",
+              "content": "我找到「百事可乐原味汽水330ml罐装」了，你可以先看看卡片里的商品信息。\n1. 百事可乐原味汽水330ml罐装",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-R05-0b502d7160",
+              "status": "completed",
+              "created_at": "2026-10-07T07:56:39.495580"
+            }
+          ]
+        },
+        "opening": {
+          "role": "keke",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "status": "captured"
+    },
+    {
+      "case_id": "R05",
+      "op": "turn",
+      "label": "selected-purchase",
+      "before": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-44f18e47f44b",
+          "product_cards": [
+            {
+              "sku_id": "demo:cn-pepsi-original-330ml-can",
+              "name": "百事可乐原味汽水330ml罐装",
+              "brand": "百事可乐",
+              "image_path": null,
+              "packaging": "can",
+              "pack_count": 1,
+              "item_volume_ml": 330,
+              "total_volume_ml": 330.0,
+              "price_fen": 300,
+              "price_per_litre_yuan": 9.09,
+              "ref": "p4c70503423bc537a"
+            }
+          ],
+          "task_id": null,
+          "state_version": 0,
+          "session_version": 5,
+          "current_step": null,
+          "task_status": null,
+          "entry_context": {
+            "page": "home",
+            "category_id": null,
+            "activity_id": null,
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": null,
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": null,
+          "available_actions": [
+            "send_message"
+          ],
+          "constraints_summary": {},
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "complete",
+          "messages": null
+        },
+        "opening": {
+          "role": "keke",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "active_role_before": "keke",
+      "request": {
+        "request_id": "08-R05-7c3f42a972",
+        "message": "那就买两罐百事可乐原味汽水330ml罐装",
+        "expected_task_id": null,
+        "expected_state_version": 0,
+        "expected_session_version": 5
+      },
+      "http_status": 200,
+      "elapsed_ms": 17420.4,
+      "latency_target_ms": 15000,
+      "latency_target_exceeded": true,
+      "events": [
+        {
+          "type": "service.route",
+          "payload": {
+            "status": "completed",
+            "decision": "stay_current",
+            "raw_choice": "stay_current",
+            "current_role": "keke",
+            "prompt_mode": "none",
+            "request_id": "08-R05-7c3f42a972",
+            "route_ms": 1031.4249000512064,
+            "criteria_version": "ceres-service-v3.2"
+          }
+        },
+        {
+          "type": "accepted",
+          "payload": {}
+        },
+        {
+          "type": "progress",
+          "payload": {
+            "phase": "understanding"
+          }
+        },
+        {
+          "type": "progress",
+          "payload": {
+            "phase": "retrieve"
+          }
+        },
+        {
+          "type": "progress",
+          "payload": {
+            "phase": "validate"
+          }
+        },
+        {
+          "type": "plan.ready",
+          "payload": {
+            "plan": {
+              "plan_effect": "replace",
+              "plan_id": "plan-115242a491b6",
+              "plan_version": 1,
+              "task_id": "task-aa82fad17d6a",
+              "state_version": 2,
+              "session_version": 7,
+              "mode": "bundle",
+              "items": [
+                {
+                  "sku_id": "demo:cn-pepsi-original-330ml-can",
+                  "name": "百事可乐原味汽水330ml罐装",
+                  "quantity": 2,
+                  "recommended_quantity": 2,
+                  "quantity_source": "recommended",
+                  "unit_price_fen": 300,
+                  "line_total_fen": 600,
+                  "image_path": null,
+                  "image_kind": "placeholder",
+                  "image_kind_legacy": "placeholder",
+                  "role": "required",
+                  "selected": true,
+                  "ingredient_ids": [
+                    "cola"
+                  ],
+                  "spec_quantity": 330.0,
+                  "spec_unit": "ml",
+                  "sell_unit": "件",
+                  "max_addable_quantity": 36,
+                  "group_id": "product:demo:cn-pepsi-original-330ml-can",
+                  "target_kind": "product",
+                  "target_id": "demo:cn-pepsi-original-330ml-can",
+                  "required_item_id": "product:demo:cn-pepsi-original-330ml-can#demo:cn-pepsi-original-330ml-can",
+                  "requirement": {
+                    "required_item_id": "product:demo:cn-pepsi-original-330ml-can#demo:cn-pepsi-original-330ml-can",
+                    "name": "百事可乐原味汽水330ml罐装",
+                    "ingredient_id": null,
+                    "component_id": null,
+                    "quantity": 2,
+                    "unit": "件",
+                    "quantity_known": true,
+                    "requiredness": "core",
+                    "source": {
+                      "kind": "user",
+                      "ref": "百事可乐原味汽水330ml罐装"
+                    }
+                  },
+                  "availability": "available",
+                  "evidence": {
+                    "sku_source": "store_offer",
+                    "quoted_at": "2026-10-07T07:57:11+00:00",
+                    "stock_verified": true,
+                    "data_mode": "demo",
+                    "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                    "unknown_constraints": []
+                  },
+                  "pack_source": "catalog_spec",
+                  "shortfall_quantity": 0,
+                  "user_quantity": null,
+                  "added_quantity": 0,
+                  "remaining_quantity": 2,
+                  "contributions": [
+                    {
+                      "group_id": "product:demo:cn-pepsi-original-330ml-can",
+                      "quantity": 2,
+                      "selected": true,
+                      "added_quantity": 0,
+                      "required_item_id": "product:demo:cn-pepsi-original-330ml-can#demo:cn-pepsi-original-330ml-can",
+                      "requirement": {
+                        "required_item_id": "product:demo:cn-pepsi-original-330ml-can#demo:cn-pepsi-original-330ml-can",
+                        "name": "百事可乐原味汽水330ml罐装",
+                        "ingredient_id": null,
+                        "component_id": null,
+                        "quantity": 2,
+                        "unit": "件",
+                        "quantity_known": true,
+                        "requiredness": "core",
+                        "source": {
+                          "kind": "user",
+                          "ref": "百事可乐原味汽水330ml罐装"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "total_price_fen": 600,
+              "selected_total_fen": 600,
+              "outstanding_total_fen": 600,
+              "expires_at": "2026-10-07T08:02:11.399337+00:00",
+              "validation_status": "passed",
+              "coverage_mode": "full",
+              "coverage_intent": "partial_ok",
+              "uncovered_items": [],
+              "gaps": [],
+              "can_confirm": true,
+              "targets": [
+                {
+                  "group_id": "product:demo:cn-pepsi-original-330ml-can",
+                  "kind": "product",
+                  "target_id": "demo:cn-pepsi-original-330ml-can",
+                  "name": "百事可乐原味汽水330ml罐装",
+                  "people": null,
+                  "people_source": "default"
+                }
+              ],
+              "merged_sku_contributions": []
+            },
+            "plan_effect": "replace"
+          }
+        },
+        {
+          "type": "answer.delta",
+          "payload": {
+            "delta": "采购清单已加入「百事可乐原味汽水330ml罐装」\n已整理 1 件商品，选中合计 ¥6.00（演示价格）。包含：百事可乐原味汽水330ml罐装。",
+            "final": true,
+            "replace": false
+          }
+        },
+        {
+          "type": "turn.completed",
+          "payload": {
+            "message": "采购清单已加入「百事可乐原味汽水330ml罐装」\n已整理 1 件商品，选中合计 ¥6.00（演示价格）。包含：百事可乐原味汽水330ml罐装。",
+            "status": "awaiting_confirmation",
+            "task_id": "task-aa82fad17d6a",
+            "state_version": 2,
+            "session_version": 7,
+            "plan": {
+              "plan_id": "plan-115242a491b6",
+              "plan_version": 1,
+              "mode": "bundle",
+              "items": [
+                {
+                  "sku_id": "demo:cn-pepsi-original-330ml-can",
+                  "name": "百事可乐原味汽水330ml罐装",
+                  "quantity": 2,
+                  "recommended_quantity": 2,
+                  "quantity_source": "recommended",
+                  "unit_price_fen": 300,
+                  "line_total_fen": 600,
+                  "image_path": null,
+                  "image_kind": "placeholder",
+                  "image_kind_legacy": "placeholder",
+                  "role": "required",
+                  "selected": true,
+                  "ingredient_ids": [
+                    "cola"
+                  ],
+                  "spec_quantity": 330.0,
+                  "spec_unit": "ml",
+                  "sell_unit": "件",
+                  "max_addable_quantity": 36,
+                  "group_id": "product:demo:cn-pepsi-original-330ml-can",
+                  "target_kind": "product",
+                  "target_id": "demo:cn-pepsi-original-330ml-can",
+                  "required_item_id": "product:demo:cn-pepsi-original-330ml-can#demo:cn-pepsi-original-330ml-can",
+                  "requirement": {
+                    "required_item_id": "product:demo:cn-pepsi-original-330ml-can#demo:cn-pepsi-original-330ml-can",
+                    "name": "百事可乐原味汽水330ml罐装",
+                    "ingredient_id": null,
+                    "component_id": null,
+                    "quantity": 2,
+                    "unit": "件",
+                    "quantity_known": true,
+                    "requiredness": "core",
+                    "source": {
+                      "kind": "user",
+                      "ref": "百事可乐原味汽水330ml罐装"
+                    }
+                  },
+                  "availability": "available",
+                  "evidence": {
+                    "sku_source": "store_offer",
+                    "quoted_at": "2026-10-07T07:57:11+00:00",
+                    "stock_verified": true,
+                    "data_mode": "demo",
+                    "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                    "unknown_constraints": []
+                  },
+                  "pack_source": "catalog_spec",
+                  "shortfall_quantity": 0,
+                  "user_quantity": null,
+                  "added_quantity": 0,
+                  "remaining_quantity": 2,
+                  "contributions": [
+                    {
+                      "group_id": "product:demo:cn-pepsi-original-330ml-can",
+                      "quantity": 2,
+                      "selected": true,
+                      "added_quantity": 0,
+                      "required_item_id": "product:demo:cn-pepsi-original-330ml-can#demo:cn-pepsi-original-330ml-can",
+                      "requirement": {
+                        "required_item_id": "product:demo:cn-pepsi-original-330ml-can#demo:cn-pepsi-original-330ml-can",
+                        "name": "百事可乐原味汽水330ml罐装",
+                        "ingredient_id": null,
+                        "component_id": null,
+                        "quantity": 2,
+                        "unit": "件",
+                        "quantity_known": true,
+                        "requiredness": "core",
+                        "source": {
+                          "kind": "user",
+                          "ref": "百事可乐原味汽水330ml罐装"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "total_price_fen": 600,
+              "selected_total_fen": 600,
+              "outstanding_total_fen": 600,
+              "expires_at": "2026-10-07T08:02:11.399337+00:00",
+              "validation_status": "passed",
+              "coverage_mode": "full",
+              "coverage_intent": "partial_ok",
+              "uncovered_items": [],
+              "gaps": [],
+              "can_confirm": true,
+              "targets": [
+                {
+                  "group_id": "product:demo:cn-pepsi-original-330ml-can",
+                  "kind": "product",
+                  "target_id": "demo:cn-pepsi-original-330ml-can",
+                  "name": "百事可乐原味汽水330ml罐装",
+                  "people": null,
+                  "people_source": "default"
+                }
+              ],
+              "merged_sku_contributions": []
+            },
+            "pending_clarifications": [],
+            "product_cards": [],
+            "plan_effect": "replace",
+            "action_results": [
+              {
+                "type": "read_only",
+                "kind": "lookup",
+                "status": "completed",
+                "saved": false,
+                "reply_ok": true,
+                "retrieval_status": "ok",
+                "retrieval_mode": "lexical",
+                "fallback_reason": null,
+                "index_version": "idx-81e9fa689baef6b5",
+                "action_id": "a1"
+              },
+              {
+                "type": "mutation",
+                "verb": "add",
+                "group_id": "product:demo:cn-pepsi-original-330ml-can",
+                "status": "committed",
+                "saved": true,
+                "reply_ok": true,
+                "plan_effect": "replace",
+                "message": "采购清单已加入「百事可乐原味汽水330ml罐装」",
+                "candidate_ref": "p4c70503423bc537a",
+                "action_id": "a2"
+              }
+            ],
+            "answer_status": "awaiting_confirmation",
+            "route": "prepare",
+            "trace_id": "trace-3e4c2340eb9a"
+          }
+        }
+      ],
+      "role_model_call_range": [
+        3,
+        4
+      ],
+      "kev_call_range": [
+        6,
+        8
+      ],
+      "terminal": {
+        "message": "采购清单已加入「百事可乐原味汽水330ml罐装」\n已整理 1 件商品，选中合计 ¥6.00（演示价格）。包含：百事可乐原味汽水330ml罐装。",
+        "status": "awaiting_confirmation",
+        "task_id": "task-aa82fad17d6a",
+        "state_version": 2,
+        "session_version": 7,
+        "plan": {
+          "plan_id": "plan-115242a491b6",
+          "plan_version": 1,
+          "mode": "bundle",
+          "items": [
+            {
+              "sku_id": "demo:cn-pepsi-original-330ml-can",
+              "name": "百事可乐原味汽水330ml罐装",
+              "quantity": 2,
+              "recommended_quantity": 2,
+              "quantity_source": "recommended",
+              "unit_price_fen": 300,
+              "line_total_fen": 600,
+              "image_path": null,
+              "image_kind": "placeholder",
+              "image_kind_legacy": "placeholder",
+              "role": "required",
+              "selected": true,
+              "ingredient_ids": [
+                "cola"
+              ],
+              "spec_quantity": 330.0,
+              "spec_unit": "ml",
+              "sell_unit": "件",
+              "max_addable_quantity": 36,
+              "group_id": "product:demo:cn-pepsi-original-330ml-can",
+              "target_kind": "product",
+              "target_id": "demo:cn-pepsi-original-330ml-can",
+              "required_item_id": "product:demo:cn-pepsi-original-330ml-can#demo:cn-pepsi-original-330ml-can",
+              "requirement": {
+                "required_item_id": "product:demo:cn-pepsi-original-330ml-can#demo:cn-pepsi-original-330ml-can",
+                "name": "百事可乐原味汽水330ml罐装",
+                "ingredient_id": null,
+                "component_id": null,
+                "quantity": 2,
+                "unit": "件",
+                "quantity_known": true,
+                "requiredness": "core",
+                "source": {
+                  "kind": "user",
+                  "ref": "百事可乐原味汽水330ml罐装"
+                }
+              },
+              "availability": "available",
+              "evidence": {
+                "sku_source": "store_offer",
+                "quoted_at": "2026-10-07T07:57:11+00:00",
+                "stock_verified": true,
+                "data_mode": "demo",
+                "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                "unknown_constraints": []
+              },
+              "pack_source": "catalog_spec",
+              "shortfall_quantity": 0,
+              "user_quantity": null,
+              "added_quantity": 0,
+              "remaining_quantity": 2,
+              "contributions": [
+                {
+                  "group_id": "product:demo:cn-pepsi-original-330ml-can",
+                  "quantity": 2,
+                  "selected": true,
+                  "added_quantity": 0,
+                  "required_item_id": "product:demo:cn-pepsi-original-330ml-can#demo:cn-pepsi-original-330ml-can",
+                  "requirement": {
+                    "required_item_id": "product:demo:cn-pepsi-original-330ml-can#demo:cn-pepsi-original-330ml-can",
+                    "name": "百事可乐原味汽水330ml罐装",
+                    "ingredient_id": null,
+                    "component_id": null,
+                    "quantity": 2,
+                    "unit": "件",
+                    "quantity_known": true,
+                    "requiredness": "core",
+                    "source": {
+                      "kind": "user",
+                      "ref": "百事可乐原味汽水330ml罐装"
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "total_price_fen": 600,
+          "selected_total_fen": 600,
+          "outstanding_total_fen": 600,
+          "expires_at": "2026-10-07T08:02:11.399337+00:00",
+          "validation_status": "passed",
+          "coverage_mode": "full",
+          "coverage_intent": "partial_ok",
+          "uncovered_items": [],
+          "gaps": [],
+          "can_confirm": true,
+          "targets": [
+            {
+              "group_id": "product:demo:cn-pepsi-original-330ml-can",
+              "kind": "product",
+              "target_id": "demo:cn-pepsi-original-330ml-can",
+              "name": "百事可乐原味汽水330ml罐装",
+              "people": null,
+              "people_source": "default"
+            }
+          ],
+          "merged_sku_contributions": []
+        },
+        "pending_clarifications": [],
+        "product_cards": [],
+        "plan_effect": "replace",
+        "action_results": [
+          {
+            "type": "read_only",
+            "kind": "lookup",
+            "status": "completed",
+            "saved": false,
+            "reply_ok": true,
+            "retrieval_status": "ok",
+            "retrieval_mode": "lexical",
+            "fallback_reason": null,
+            "index_version": "idx-81e9fa689baef6b5",
+            "action_id": "a1"
+          },
+          {
+            "type": "mutation",
+            "verb": "add",
+            "group_id": "product:demo:cn-pepsi-original-330ml-can",
+            "status": "committed",
+            "saved": true,
+            "reply_ok": true,
+            "plan_effect": "replace",
+            "message": "采购清单已加入「百事可乐原味汽水330ml罐装」",
+            "candidate_ref": "p4c70503423bc537a",
+            "action_id": "a2"
+          }
+        ],
+        "answer_status": "awaiting_confirmation",
+        "route": "prepare",
+        "trace_id": "trace-3e4c2340eb9a"
+      },
+      "trace": [
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "capability",
+          "status": "started",
+          "criteria_version": "ceres-guide-capabilities-v2",
+          "call_number": 1,
+          "model": "kev-latest"
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 1750,
+          "stage": "capability",
+          "status": "completed",
+          "capability": "purchase_modify",
+          "branch": "semantic_understanding",
+          "criteria_version": "ceres-guide-capabilities-v2",
+          "call_number": 1,
+          "model": "kev-latest"
+        },
+        {
+          "phase": "understanding",
+          "duration_ms": null
+        },
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "understanding",
+          "status": "started",
+          "call_number": 1
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 14561,
+          "stage": "understanding",
+          "status": "completed",
+          "call_number": 1
+        },
+        {
+          "phase": "retrieve",
+          "duration_ms": null
+        },
+        {
+          "phase": "validate",
+          "duration_ms": null
+        },
+        {
+          "phase": "turn_result",
+          "duration_ms": null,
+          "status": "awaiting_confirmation"
+        }
+      ],
+      "snapshot_after": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-44f18e47f44b",
+          "product_cards": [],
+          "task_id": "task-aa82fad17d6a",
+          "state_version": 2,
+          "session_version": 7,
+          "current_step": "awaiting_confirmation",
+          "task_status": "active",
+          "entry_context": {
+            "page": "home",
+            "category_id": null,
+            "activity_id": null,
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": {
+            "plan_id": "plan-115242a491b6",
+            "plan_version": 1,
+            "mode": "bundle",
+            "items": [
+              {
+                "sku_id": "demo:cn-pepsi-original-330ml-can",
+                "name": "百事可乐原味汽水330ml罐装",
+                "quantity": 2,
+                "unit_price_fen": 300,
+                "line_total_fen": 600,
+                "image_path": null,
+                "image_kind": "placeholder",
+                "image_kind_legacy": "placeholder",
+                "role": "required",
+                "selected": true,
+                "recommended_quantity": 2,
+                "max_addable_quantity": 36,
+                "spec_quantity": 330,
+                "spec_unit": "ml",
+                "sell_unit": "件",
+                "quantity_source": "recommended",
+                "group_id": "product:demo:cn-pepsi-original-330ml-can",
+                "target_kind": "product",
+                "target_id": "demo:cn-pepsi-original-330ml-can",
+                "component_name": null,
+                "contributions": [
+                  {
+                    "group_id": "product:demo:cn-pepsi-original-330ml-can",
+                    "quantity": 2,
+                    "selected": true,
+                    "added_quantity": 0,
+                    "required_item_id": "product:demo:cn-pepsi-original-330ml-can#demo:cn-pepsi-original-330ml-can",
+                    "requirement": {
+                      "required_item_id": "product:demo:cn-pepsi-original-330ml-can#demo:cn-pepsi-original-330ml-can",
+                      "name": "百事可乐原味汽水330ml罐装",
+                      "ingredient_id": null,
+                      "component_id": null,
+                      "quantity": 2,
+                      "unit": "件",
+                      "quantity_known": true,
+                      "requiredness": "core",
+                      "source": {
+                        "kind": "user",
+                        "ref": "百事可乐原味汽水330ml罐装"
+                      }
+                    }
+                  }
+                ],
+                "added_quantity": 0,
+                "remaining_quantity": 2,
+                "required_item_id": "product:demo:cn-pepsi-original-330ml-can#demo:cn-pepsi-original-330ml-can",
+                "requirement": {
+                  "required_item_id": "product:demo:cn-pepsi-original-330ml-can#demo:cn-pepsi-original-330ml-can",
+                  "name": "百事可乐原味汽水330ml罐装",
+                  "ingredient_id": null,
+                  "component_id": null,
+                  "quantity": 2,
+                  "unit": "件",
+                  "quantity_known": true,
+                  "requiredness": "core",
+                  "source": {
+                    "kind": "user",
+                    "ref": "百事可乐原味汽水330ml罐装"
+                  }
+                },
+                "availability": "available",
+                "evidence": {
+                  "sku_source": "store_offer",
+                  "quoted_at": "2026-10-07T07:57:11+00:00",
+                  "stock_verified": true,
+                  "data_mode": "demo",
+                  "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                  "unknown_constraints": []
+                },
+                "pack_source": "catalog_spec",
+                "shortfall_quantity": 0
+              }
+            ],
+            "total_price_fen": 600,
+            "selected_total_fen": 600,
+            "expires_at": "2026-10-07T08:02:11.399337+00:00",
+            "validation_status": "passed",
+            "coverage_mode": "full",
+            "coverage_intent": "partial_ok",
+            "uncovered_items": [],
+            "gaps": [],
+            "can_confirm": true,
+            "gap_fill": null,
+            "targets": [
+              {
+                "group_id": "product:demo:cn-pepsi-original-330ml-can",
+                "kind": "product",
+                "target_id": "demo:cn-pepsi-original-330ml-can",
+                "name": "百事可乐原味汽水330ml罐装",
+                "meal_name": null,
+                "fulfillment_mode": null,
+                "people": null,
+                "people_source": "default",
+                "notes": []
+              }
+            ],
+            "merged_sku_contributions": [],
+            "outstanding_total_fen": 600
+          },
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": "已恢复待确认方案",
+          "available_actions": [
+            "confirm",
+            "cancel",
+            "modify",
+            "send_message"
+          ],
+          "constraints_summary": {
+            "goal": "百事可乐原味汽水330ml罐装",
+            "people": null,
+            "budget_fen": 2000,
+            "excluded_ingredients": []
+          },
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "complete",
+          "messages": [
+            {
+              "message_id": "msg-b677c6652fbb",
+              "session_id": "sess-44f18e47f44b",
+              "task_id": null,
+              "sequence": 1,
+              "role": "user",
+              "kind": "text",
+              "content": "买点饮料，两件，预算20元",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-R05-40fab7260a",
+              "status": "completed",
+              "created_at": "2026-10-07T07:55:56.466835"
+            },
+            {
+              "message_id": "msg-2d57eb6a712f",
+              "session_id": "sess-44f18e47f44b",
+              "task_id": null,
+              "sequence": 2,
+              "role": "assistant",
+              "kind": "text",
+              "content": "目前有饮用水、可乐、桃汁饮料、茶、苏打水等饮品可选，想先看哪类？\n1. 饮用水\n2. 可乐\n3. 桃汁饮料\n4. 茶\n5. 苏打水",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-R05-40fab7260a",
+              "status": "completed",
+              "created_at": "2026-10-07T07:55:56.469369"
+            },
+            {
+              "message_id": "msg-8556f65b23f1",
+              "session_id": "sess-44f18e47f44b",
+              "task_id": null,
+              "sequence": 3,
+              "role": "user",
+              "kind": "text",
+              "content": "可乐",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-R05-d062c05154",
+              "status": "completed",
+              "created_at": "2026-10-07T07:56:05.176066"
+            },
+            {
+              "message_id": "msg-8551c6c1a188",
+              "session_id": "sess-44f18e47f44b",
+              "task_id": null,
+              "sequence": 4,
+              "role": "assistant",
+              "kind": "text",
+              "content": "可直接查看这些商品，也可以按品牌或规格筛选。\n1. 品牌：百事可乐\n2. 品牌：可口可乐\n3. 单件容量：330毫升\n4. 单件容量：500毫升\n5. 罐装\n6. 瓶装\n1. 百事可乐原味汽水330ml罐装\n2. 可口可乐经典原味汽水330ml罐装\n3. 可口可乐经典原味汽水500ml瓶装\n4. 可口可乐零度无糖汽水500ml瓶装",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-R05-d062c05154",
+              "status": "completed",
+              "created_at": "2026-10-07T07:56:05.178616"
+            },
+            {
+              "message_id": "msg-7ba9b2ffce86",
+              "session_id": "sess-44f18e47f44b",
+              "task_id": null,
+              "sequence": 5,
+              "role": "user",
+              "kind": "text",
+              "content": "品牌：百事可乐",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-R05-0b502d7160",
+              "status": "completed",
+              "created_at": "2026-10-07T07:56:39.493825"
+            },
+            {
+              "message_id": "msg-f2b20f333757",
+              "session_id": "sess-44f18e47f44b",
+              "task_id": null,
+              "sequence": 6,
+              "role": "assistant",
+              "kind": "text",
+              "content": "我找到「百事可乐原味汽水330ml罐装」了，你可以先看看卡片里的商品信息。\n1. 百事可乐原味汽水330ml罐装",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-R05-0b502d7160",
+              "status": "completed",
+              "created_at": "2026-10-07T07:56:39.495580"
+            },
+            {
+              "message_id": "msg-f1ff9be62739",
+              "session_id": "sess-44f18e47f44b",
+              "task_id": null,
+              "sequence": 7,
+              "role": "user",
+              "kind": "text",
+              "content": "那就买两罐百事可乐原味汽水330ml罐装",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-R05-7c3f42a972",
+              "status": "completed",
+              "created_at": "2026-10-07T07:57:11.402342"
+            },
+            {
+              "message_id": "msg-8eaba9825477",
+              "session_id": "sess-44f18e47f44b",
+              "task_id": "task-aa82fad17d6a",
+              "sequence": 8,
+              "role": "assistant",
+              "kind": "plan_ref",
+              "content": "采购清单已加入「百事可乐原味汽水330ml罐装」\n已整理 1 件商品，选中合计 ¥6.00（演示价格）。包含：百事可乐原味汽水330ml罐装。",
+              "plan_id": "plan-115242a491b6",
+              "plan_version": 1,
+              "request_id": "08-R05-7c3f42a972",
+              "status": "completed",
+              "created_at": "2026-10-07T07:57:11.408853"
+            }
+          ]
+        },
+        "opening": {
+          "role": "keke",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "status": "captured"
+    }
+  ],
+  "timing_failures": [
+    {
+      "case_id": "R05",
+      "op": "turn",
+      "label": "selected-purchase",
+      "elapsed_ms": 17420.4,
+      "target_ms": 15000
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "node_path": "C:\\Program Files\\nodejs\\node.exe",
+  "node_version": "v24.14.0",
+  "npm_path": "C:\\Program Files\\nodejs\\npm.ps1",
+  "npm_version": "11.9.0",
+  "playwright_command": null,
+  "module_resolution": [
+    {
+      "cwd": "repo-root",
+      "output": "playwright=not_found\r\n@playwright/test=not_found\r\nplaywright-core=not_found"
+    },
+    {
+      "cwd": "frontend",
+      "output": "playwright=not_found\r\n@playwright/test=not_found\r\nplaywright-core=not_found"
+    }
+  ],
+  "package_jsons_declaring_playwright": [],
+  "browser_cache_path": "C:\\Users\\20616\\AppData\\Local\\ms-playwright",
+  "browser_cache_present": false,
+  "browser_cache_entries": [],
+  "ports": [
+    {
+      "port": 8012,
+      "existing_listeners": [
+        {
+          "local_address": "127.0.0.1",
+          "local_port": 8012,
+          "pid": 24512,
+          "process_name": "python",
+          "process_path": "C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+          "process_started": "2026-10-06T11:41:26.2784171+08:00"
+        }
+      ],
+      "loopback_bindable": false,
+      "bind_error": "System.Management.Automation.MethodInvocationException"
+    },
+    {
+      "port": 8443,
+      "existing_listeners": [],
+      "loopback_bindable": true,
+      "bind_error": null
+    }
+  ],
+  "business_model_started": false
+}

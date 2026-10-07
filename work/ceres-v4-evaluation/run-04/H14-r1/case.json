@@ -1,0 +1,47 @@
+{
+  "case_id": "H14",
+  "group": "aftersales",
+  "scenario_family": "delivered-refund-forbidden",
+  "split": "acceptance",
+  "core": false,
+  "goal": "已签收订单不能按未签收退款路径提交",
+  "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+  "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+  "steps": [
+    {
+      "op": "turn",
+      "label": "request",
+      "message": "这笔已签收订单直接申请全额退款，不要走退货",
+      "expect": [
+        {
+          "kind": "length",
+          "path": "after.refunds",
+          "value": 0
+        },
+        {
+          "kind": "present",
+          "path": "reply",
+          "value": true
+        },
+        {
+          "kind": "unchanged",
+          "path": "after.cart",
+          "before_path": "before.cart"
+        },
+        {
+          "kind": "unchanged",
+          "path": "after.orders",
+          "before_path": "before.orders"
+        }
+      ]
+    }
+  ],
+  "initial_role": "momo",
+  "expected_outcome": "compliant_refusal",
+  "setup": {
+    "order": {
+      "sku_id": "demo:cn-pepsi-original-330ml-can",
+      "delivered_days": 1
+    }
+  }
+}

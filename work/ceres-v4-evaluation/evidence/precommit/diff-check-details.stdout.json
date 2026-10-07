@@ -1,0 +1,12 @@
+{
+  "git_diff_check_message_counts": {
+    "new blank line at EOF": 3,
+    "trailing whitespace.": 1146983,
+    "space before tab in indent.": 0
+  },
+  "raw_stderr_path": "work/ceres-v4-evaluation/ui/run-02-service-verify-attempt01.stderr.txt",
+  "raw_stderr_index_line_9_repr": "b' \\r\\n'",
+  "raw_stderr_index_line_9_hex": "200d0a",
+  "staged_paths_filename": "work/ceres-v4-evaluation/evidence/precommit/diff-check-affected-files.txt",
+  "all_affected_paths_under_work": true
+}

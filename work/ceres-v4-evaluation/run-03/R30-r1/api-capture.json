@@ -1,0 +1,214 @@
+{
+  "steps": [
+    {
+      "case_id": "R30",
+      "op": "turn",
+      "label": "request",
+      "before": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 3,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [
+          {
+            "order_id": "Od84f63a8fd4b4fb9",
+            "status": "paid",
+            "created_at": "2026-10-07T15:46:14.306474",
+            "delivered_at": null,
+            "total_fen": 300,
+            "items": [
+              {
+                "item_id": 1,
+                "sku_id": "demo:cn-pepsi-original-330ml-can",
+                "product_name": "百事可乐原味汽水330ml罐装",
+                "quantity": 1,
+                "unit_price_fen": 300,
+                "returnable": true
+              }
+            ]
+          }
+        ],
+        "guide": {
+          "session_id": "sess-402c74c3101c",
+          "product_cards": [],
+          "task_id": null,
+          "state_version": 0,
+          "session_version": 0,
+          "current_step": null,
+          "task_status": null,
+          "entry_context": {
+            "page": "home",
+            "category_id": null,
+            "activity_id": null,
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": null,
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": null,
+          "available_actions": [
+            "send_message"
+          ],
+          "constraints_summary": {},
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "empty",
+          "messages": null
+        },
+        "opening": {
+          "role": "momo",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "active_role_before": "momo",
+      "request": {
+        "request_id": "08-R30-6ba6832eb0",
+        "message": "请为当前订单申请退款，原因是暂时不需要了",
+        "expected_task_id": null,
+        "expected_state_version": 0,
+        "expected_session_version": 0
+      },
+      "http_status": 200,
+      "elapsed_ms": 4314.4,
+      "latency_target_ms": 15000,
+      "latency_target_exceeded": false,
+      "events": [
+        {
+          "type": "service.route",
+          "payload": {
+            "status": "completed",
+            "decision": "stay_current",
+            "raw_choice": "stay_current",
+            "current_role": "momo",
+            "prompt_mode": "none",
+            "request_id": "08-R30-6ba6832eb0",
+            "route_ms": 949.462000047788,
+            "criteria_version": "ceres-service-v3.2"
+          }
+        },
+        {
+          "type": "accepted",
+          "payload": {
+            "request_id": "08-R30-6ba6832eb0"
+          }
+        },
+        {
+          "type": "answer.delta",
+          "payload": {
+            "text": "退款申请已提交成功（退款单号 Re37dec95），金额 3.00 元，目前状态为“退款处理中”，尚未到账，请耐心等待处理结果。"
+          }
+        },
+        {
+          "type": "turn.completed",
+          "payload": {
+            "final_text": "退款申请已提交成功（退款单号 Re37dec95），金额 3.00 元，目前状态为“退款处理中”，尚未到账，请耐心等待处理结果。"
+          }
+        },
+        {
+          "type": "service.route",
+          "payload": {
+            "status": "completed",
+            "decision": "suggest_switch",
+            "raw_choice": null,
+            "current_role": "momo",
+            "target_role": "keke",
+            "decision_source": "aftersales_tool_result",
+            "handoff_id": "handoff_876de3cf368a45199fda33d9d33a17c6",
+            "prompt_mode": "automatic",
+            "request_id": "08-R30-6ba6832eb0"
+          }
+        },
+        {
+          "type": "turn.completed",
+          "payload": {
+            "message": "退款申请已提交，正在处理，还没有到账\n\n如需继续选购，请点“继续选购”。",
+            "business_not_run": true
+          }
+        }
+      ],
+      "role_model_call_range": [
+        0,
+        0
+      ],
+      "kev_call_range": [
+        0,
+        1
+      ],
+      "terminal": {
+        "message": "退款申请已提交，正在处理，还没有到账\n\n如需继续选购，请点“继续选购”。",
+        "business_not_run": true
+      },
+      "trace": [],
+      "snapshot_after": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 3,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [
+          {
+            "order_id": "Od84f63a8fd4b4fb9",
+            "status": "paid",
+            "created_at": "2026-10-07T15:46:14.306474",
+            "delivered_at": null,
+            "total_fen": 300,
+            "items": [
+              {
+                "item_id": 1,
+                "sku_id": "demo:cn-pepsi-original-330ml-can",
+                "product_name": "百事可乐原味汽水330ml罐装",
+                "quantity": 1,
+                "unit_price_fen": 300,
+                "returnable": true
+              }
+            ]
+          }
+        ],
+        "guide": {
+          "session_id": "sess-402c74c3101c",
+          "product_cards": [],
+          "task_id": null,
+          "state_version": 0,
+          "session_version": 0,
+          "current_step": null,
+          "task_status": null,
+          "entry_context": {
+            "page": "home",
+            "category_id": null,
+            "activity_id": null,
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": null,
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": null,
+          "available_actions": [
+            "send_message"
+          ],
+          "constraints_summary": {},
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "empty",
+          "messages": []
+        },
+        "opening": {
+          "role": "momo",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "status": "captured"
+    }
+  ],
+  "timing_failures": []
+}

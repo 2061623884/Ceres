@@ -1,0 +1,1625 @@
+{
+  "product_head": "ac895fd620af617fa31f4e0006841a4d6a89cd53",
+  "started_utc": "2026-10-07T08:16:22.730Z",
+  "app_url": "http://127.0.0.1:18443/",
+  "runtime_receipt_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\ui\\runtime-receipt-run02.json",
+  "runtime_identity": {
+    "product_head": "ac895fd620af617fa31f4e0006841a4d6a89cd53",
+    "llm_mode": "live",
+    "retrieval_mode": "lexical",
+    "database_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\ui\\runtime-run02.sqlite3",
+    "backend_pid": 93984,
+    "frontend_pid": 26128,
+    "browser_channel": "msedge",
+    "frontend_url": "http://127.0.0.1:18443/",
+    "app_url": "http://127.0.0.1:18443/",
+    "served_app_module_sha256": "c563850e51a65fbffbdf1ff8e261f8a3d3aa47f57b725e7dcb8fa1e0177ec3ad",
+    "api_base_url": "http://127.0.0.1:18012/",
+    "retrieval_index_dir": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+    "retrieval_index_version": "idx-81e9fa689baef6b5",
+    "database_exists": true,
+    "vite_config_sha256": "b51c44b0fc9f187a8497e46d2e585782ad4836a243e154ec9b1cc13bb5b74ffe",
+    "playwright_module": "C:\\Users\\20616\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\node_modules\\playwright",
+    "playwright_version": "1.62.1",
+    "node_path": "C:\\Users\\20616\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+    "node_version": "v24.19.0",
+    "created_utc": "2026-10-07T07:49:03.2177396Z",
+    "vite_config_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\ui-vite.config.mjs",
+    "proxy_api_target": "http://127.0.0.1:18012/",
+    "backend_app_module_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08\\backend\\app\\main.py",
+    "backend_app_module_sha256": "67c41ccdb5821f3d2c330eb3529cec20b8374c9c5fa7921134c7207e5eb3bb9a",
+    "backend_startup_pid": 93984,
+    "backend_working_directory": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08\\backend",
+    "backend_command_line": "\"C:\\Users\\20616\\AppData\\Local\\Programs\\Python\\Python312\\python.exe\" -X utf8 -u -c \"import os,hashlib,json;os.environ['DATABASE_URL']=r'sqlite:///C:/Users/20616/Desktop/Agent/Agent产品/Ceres/work/ceres-v4-evaluation/ui/runtime-run02.sqlite3';os.environ['RETRIEVAL_MODE']='lexical';os.environ['RETRIEVAL_INDEX_DIR']=r'C:/Users/20616/Desktop/Agent/Agent产品/Ceres/work/ceres-v4-evaluation/retrieval-index';os.environ['BUSINESS_DATA_MODE']='demo';os.environ['LLM_MODE']='live';import app.main as app_module;from app.core.config import get_settings;from pathlib import Path;settings=get_settings();module_path=Path(app_module.__file__).resolve();print(json.dumps({'startup_pid':os.getpid(),'app_module_path':str(module_path),'app_module_sha256':hashlib.sha256(module_path.read_bytes()).hexdigest(),'llm_mode':settings.llm_mode,'business_data_mode':settings.business_data_mode,'retrieval_mode':settings.retrieval_mode,'database_url':settings.database_url,'retrieval_index_dir':settings.retrieval_index_dir},ensure_ascii=False),flush=True);import uvicorn;uvicorn.run(app_module.app,host='127.0.0.1',port=18012)\"",
+    "frontend_command_line": "\"C:\\Users\\20616\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe\" C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08\\frontend\\node_modules\\vite\\bin\\vite.js --config C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\ui-vite.config.mjs",
+    "backend_startup_evidence_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\ui\\run-02-backend.stdout.txt",
+    "backend_startup_code_sha256": "0bcf5b27b34bf1ba580d791b8f1350abb097b597a568cbd7185fc39a60502e0d",
+    "captured_utc": "2026-10-07T08:14:46.6633044Z"
+  },
+  "runtime_receipt_sha256": "d5dda1d758d687c245916582dacb1a54144ec03938f2db1bc9bbcf9ffc07e9cb",
+  "runner_sha256": "0ab56978d89651620242cb6616670cfae894d283a576dbe47499b33cf6b0f8cd",
+  "journeys": [
+    {
+      "name": "activity-salad",
+      "status": "passed",
+      "stage": "explicit-confirm",
+      "steps": [
+        {
+          "label": "select-activity-product",
+          "request": {
+            "request_id": "req-1791360984170-aaj6gyv",
+            "message": "我想看看 GREEN RESET｜今天轻一点活动里的「牛油果成品沙拉」，请可可帮我介绍一下。",
+            "expected_task_id": null,
+            "expected_state_version": 0,
+            "expected_session_version": 0,
+            "view_context": {
+              "page": "product",
+              "category_id": null,
+              "product_id": "demo:green-reset-avocado-salad",
+              "activity_id": "green_reset"
+            }
+          },
+          "http_status": 200,
+          "events": [
+            {
+              "type": "service.route",
+              "payload": {
+                "status": "completed",
+                "decision": "stay_current",
+                "raw_choice": "stay_current",
+                "probabilities": {
+                  "stay_current": 0.6306,
+                  "suggest_switch": 0.2394,
+                  "clarify": 0.13
+                },
+                "raw_response": {
+                  "model": "kev-latest",
+                  "answers": {
+                    "service": {
+                      "type": "choice",
+                      "choice": "stay_current",
+                      "confidence": 0.4459,
+                      "probabilities": {
+                        "stay_current": 0.6306,
+                        "suggest_switch": 0.2394,
+                        "clarify": 0.13
+                      }
+                    }
+                  },
+                  "usage": {
+                    "input_tokens": 451,
+                    "output_tokens": 65
+                  },
+                  "latency_ms": 430.5
+                },
+                "request_id": "req-1791360984170-aaj6gyv",
+                "current_role": "keke",
+                "criteria_version": "ceres-service-v3.2",
+                "route_ms": 735.9341999981552,
+                "manual_switch_available": true,
+                "prompt_mode": "none"
+              }
+            },
+            {
+              "type": "accepted",
+              "payload": {}
+            },
+            {
+              "type": "progress",
+              "payload": {
+                "phase": "understanding"
+              }
+            },
+            {
+              "type": "progress",
+              "payload": {
+                "phase": "retrieve"
+              }
+            },
+            {
+              "type": "answer.delta",
+              "payload": {
+                "delta": "找到了，这款是 GREEN RESET 活动里的牛油果成品沙拉，规格 280g，碗装，属于成品沙拉/即食，品牌为演示品牌，目前可售核验通过。它适合想今天吃得轻一点时直接食用；具体价格、库存数量和配送信息本轮未提供，我可以继续帮你只读查询。\n1. 牛油果成品沙拉",
+                "final": true,
+                "replace": false
+              }
+            },
+            {
+              "type": "turn.completed",
+              "payload": {
+                "session_id": "sess-65b46445585b",
+                "task_id": null,
+                "state_version": 0,
+                "status": "understanding",
+                "answer_status": "accepted",
+                "purchase_step": "none",
+                "message": "找到了，这款是 GREEN RESET 活动里的牛油果成品沙拉，规格 280g，碗装，属于成品沙拉/即食，品牌为演示品牌，目前可售核验通过。它适合想今天吃得轻一点时直接食用；具体价格、库存数量和配送信息本轮未提供，我可以继续帮你只读查询。\n1. 牛油果成品沙拉",
+                "clarification": null,
+                "plan": null,
+                "plan_effect": "keep",
+                "pending_clarification": null,
+                "missing_constraints": [],
+                "route": "answer",
+                "readiness": "information",
+                "missing_slots": [],
+                "request_id": "req-1791360984170-aaj6gyv",
+                "session_version": 1,
+                "committed": false,
+                "allowed": true,
+                "guard_code": null,
+                "pending_clarifications": [],
+                "action_results": [
+                  {
+                    "type": "read_only",
+                    "kind": "lookup",
+                    "status": "completed",
+                    "saved": false,
+                    "reply_ok": true,
+                    "retrieval_status": "ok",
+                    "retrieval_mode": "lexical",
+                    "fallback_reason": null,
+                    "index_version": "idx-81e9fa689baef6b5",
+                    "action_id": "a1"
+                  }
+                ],
+                "available_actions": [
+                  "send_message"
+                ],
+                "user_message_id": "msg-fdbfe7300f1c",
+                "assistant_message_id": "msg-09297ce43f40",
+                "message_sequence": 2,
+                "trace_id": "trace-710e80475084",
+                "model_mode": "live",
+                "business_data_mode": "demo",
+                "current_editable_task_id": null,
+                "product_cards": []
+              }
+            }
+          ],
+          "raw_sse": "data: {\"type\": \"service.route\", \"payload\": {\"status\": \"completed\", \"decision\": \"stay_current\", \"raw_choice\": \"stay_current\", \"probabilities\": {\"stay_current\": 0.6306, \"suggest_switch\": 0.2394, \"clarify\": 0.13}, \"raw_response\": {\"model\": \"kev-latest\", \"answers\": {\"service\": {\"type\": \"choice\", \"choice\": \"stay_current\", \"confidence\": 0.4459, \"probabilities\": {\"stay_current\": 0.6306, \"suggest_switch\": 0.2394, \"clarify\": 0.13}}}, \"usage\": {\"input_tokens\": 451, \"output_tokens\": 65}, \"latency_ms\": 430.5}, \"request_id\": \"req-1791360984170-aaj6gyv\", \"current_role\": \"keke\", \"criteria_version\": \"ceres-service-v3.2\", \"route_ms\": 735.9341999981552, \"manual_switch_available\": true, \"prompt_mode\": \"none\"}}\n\ndata: {\"protocol_version\": 1, \"run_id\": \"run-75861ff05908\", \"sequence\": 0, \"type\": \"accepted\", \"session_id\": \"sess-65b46445585b\", \"target_task_id\": null, \"message_id\": null, \"payload\": {}}\n\ndata: {\"protocol_version\": 1, \"run_id\": \"run-75861ff05908\", \"sequence\": 1, \"type\": \"progress\", \"session_id\": \"sess-65b46445585b\", \"target_task_id\": null, \"message_id\": null, \"payload\": {\"phase\": \"understanding\"}}\n\ndata: {\"protocol_version\": 1, \"run_id\": \"run-75861ff05908\", \"sequence\": 2, \"type\": \"progress\", \"session_id\": \"sess-65b46445585b\", \"target_task_id\": null, \"message_id\": null, \"payload\": {\"phase\": \"retrieve\"}}\n\ndata: {\"protocol_version\": 1, \"run_id\": \"run-75861ff05908\", \"sequence\": 3, \"type\": \"answer.delta\", \"session_id\": \"sess-65b46445585b\", \"target_task_id\": null, \"message_id\": null, \"payload\": {\"delta\": \"找到了，这款是 GREEN RESET 活动里的牛油果成品沙拉，规格 280g，碗装，属于成品沙拉/即食，品牌为演示品牌，目前可售核验通过。它适合想今天吃得轻一点时直接食用；具体价格、库存数量和配送信息本轮未提供，我可以继续帮你只读查询。\\n1. 牛油果成品沙拉\", \"final\": true, \"replace\": false}}\n\ndata: {\"protocol_version\": 1, \"run_id\": \"run-75861ff05908\", \"sequence\": 4, \"type\": \"turn.completed\", \"session_id\": \"sess-65b46445585b\", \"target_task_id\": null, \"message_id\": \"msg-09297ce43f40\", \"payload\": {\"session_id\": \"sess-65b46445585b\", \"task_id\": null, \"state_version\": 0, \"status\": \"understanding\", \"answer_status\": \"accepted\", \"purchase_step\": \"none\", \"message\": \"找到了，这款是 GREEN RESET 活动里的牛油果成品沙拉，规格 280g，碗装，属于成品沙拉/即食，品牌为演示品牌，目前可售核验通过。它适合想今天吃得轻一点时直接食用；具体价格、库存数量和配送信息本轮未提供，我可以继续帮你只读查询。\\n1. 牛油果成品沙拉\", \"clarification\": null, \"plan\": null, \"plan_effect\": \"keep\", \"pending_clarification\": null, \"missing_constraints\": [], \"route\": \"answer\", \"readiness\": \"information\", \"missing_slots\": [], \"request_id\": \"req-1791360984170-aaj6gyv\", \"session_version\": 1, \"committed\": false, \"allowed\": true, \"guard_code\": null, \"pending_clarifications\": [], \"action_results\": [{\"type\": \"read_only\", \"kind\": \"lookup\", \"status\": \"completed\", \"saved\": false, \"reply_ok\": true, \"retrieval_status\": \"ok\", \"retrieval_mode\": \"lexical\", \"fallback_reason\": null, \"index_version\": \"idx-81e9fa689baef6b5\", \"action_id\": \"a1\"}], \"available_actions\": [\"send_message\"], \"user_message_id\": \"msg-fdbfe7300f1c\", \"assistant_message_id\": \"msg-09297ce43f40\", \"message_sequence\": 2, \"trace_id\": \"trace-710e80475084\", \"model_mode\": \"live\", \"business_data_mode\": \"demo\", \"current_editable_task_id\": null, \"product_cards\": []}}\n\n",
+          "final_reply_ms": 15576.3064,
+          "first_useful_result_ms": null,
+          "timing_basis": "UI action start to fully received turn.completed SSE; final reply rendering not sampled",
+          "first_useful_result_note": "No DOM marker sampled for this step",
+          "performance_passed": false,
+          "cart_after_reply": {
+            "store_id": "store-demo-01",
+            "version": 1,
+            "items": [],
+            "total_price_fen": 0,
+            "business_data_mode": "demo"
+          }
+        },
+        {
+          "label": "request-plan",
+          "request": {
+            "request_id": "req-1791360999576-5ualoc4",
+            "message": "请把 GREEN RESET 里的牛油果成品沙拉一份作为唯一商品整理成采购清单，先让我确认，暂不加购。",
+            "expected_task_id": null,
+            "expected_state_version": 0,
+            "expected_session_version": 1,
+            "view_context": {
+              "page": "product",
+              "category_id": null,
+              "product_id": "demo:green-reset-avocado-salad",
+              "activity_id": "green_reset"
+            }
+          },
+          "http_status": 200,
+          "events": [
+            {
+              "type": "service.route",
+              "payload": {
+                "status": "completed",
+                "decision": "stay_current",
+                "raw_choice": "stay_current",
+                "probabilities": {
+                  "stay_current": 0.5817,
+                  "suggest_switch": 0.2093,
+                  "clarify": 0.209
+                },
+                "raw_response": {
+                  "model": "kev-latest",
+                  "answers": {
+                    "service": {
+                      "type": "choice",
+                      "choice": "stay_current",
+                      "confidence": 0.3725,
+                      "probabilities": {
+                        "stay_current": 0.5817,
+                        "suggest_switch": 0.2093,
+                        "clarify": 0.209
+                      }
+                    }
+                  },
+                  "usage": {
+                    "input_tokens": 610,
+                    "output_tokens": 66
+                  },
+                  "latency_ms": 513.4
+                },
+                "request_id": "req-1791360999576-5ualoc4",
+                "current_role": "keke",
+                "criteria_version": "ceres-service-v3.2",
+                "route_ms": 960.701699834317,
+                "manual_switch_available": true,
+                "prompt_mode": "none"
+              }
+            },
+            {
+              "type": "accepted",
+              "payload": {}
+            },
+            {
+              "type": "progress",
+              "payload": {
+                "phase": "understanding"
+              }
+            },
+            {
+              "type": "progress",
+              "payload": {
+                "phase": "validate"
+              }
+            },
+            {
+              "type": "plan.ready",
+              "payload": {
+                "plan": {
+                  "plan_effect": "replace",
+                  "plan_id": "plan-6d54ad6c1653",
+                  "plan_version": 1,
+                  "task_id": "task-194e7f2b67df",
+                  "state_version": 2,
+                  "session_version": 3,
+                  "mode": "bundle",
+                  "items": [
+                    {
+                      "sku_id": "demo:green-reset-avocado-salad",
+                      "name": "牛油果成品沙拉",
+                      "quantity": 1,
+                      "recommended_quantity": 1,
+                      "quantity_source": "recommended",
+                      "unit_price_fen": 2380,
+                      "line_total_fen": 2380,
+                      "image_path": null,
+                      "image_kind": "placeholder",
+                      "image_kind_legacy": "placeholder",
+                      "role": "required",
+                      "selected": true,
+                      "ingredient_ids": [],
+                      "spec_quantity": 280,
+                      "spec_unit": "g",
+                      "sell_unit": "件",
+                      "max_addable_quantity": 20,
+                      "group_id": "product:demo:green-reset-avocado-salad",
+                      "target_kind": "product",
+                      "target_id": "demo:green-reset-avocado-salad",
+                      "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                      "requirement": {
+                        "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                        "name": "牛油果成品沙拉",
+                        "ingredient_id": null,
+                        "component_id": null,
+                        "quantity": 1,
+                        "unit": "件",
+                        "quantity_known": true,
+                        "requiredness": "core",
+                        "source": {
+                          "kind": "user",
+                          "ref": "牛油果成品沙拉"
+                        }
+                      },
+                      "availability": "available",
+                      "evidence": {
+                        "sku_source": "store_offer",
+                        "quoted_at": "2026-10-07T08:16:44+00:00",
+                        "stock_verified": true,
+                        "data_mode": "demo",
+                        "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                        "unknown_constraints": []
+                      },
+                      "pack_source": "catalog_spec",
+                      "shortfall_quantity": 0,
+                      "user_quantity": null,
+                      "added_quantity": 0,
+                      "remaining_quantity": 1,
+                      "contributions": [
+                        {
+                          "group_id": "product:demo:green-reset-avocado-salad",
+                          "quantity": 1,
+                          "selected": true,
+                          "added_quantity": 0,
+                          "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                          "requirement": {
+                            "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                            "name": "牛油果成品沙拉",
+                            "ingredient_id": null,
+                            "component_id": null,
+                            "quantity": 1,
+                            "unit": "件",
+                            "quantity_known": true,
+                            "requiredness": "core",
+                            "source": {
+                              "kind": "user",
+                              "ref": "牛油果成品沙拉"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "total_price_fen": 2380,
+                  "selected_total_fen": 2380,
+                  "outstanding_total_fen": 2380,
+                  "expires_at": "2026-10-07T08:21:44.090737+00:00",
+                  "validation_status": "passed",
+                  "coverage_mode": "full",
+                  "coverage_intent": "partial_ok",
+                  "uncovered_items": [],
+                  "gaps": [],
+                  "can_confirm": true,
+                  "targets": [
+                    {
+                      "group_id": "product:demo:green-reset-avocado-salad",
+                      "kind": "product",
+                      "target_id": "demo:green-reset-avocado-salad",
+                      "name": "牛油果成品沙拉",
+                      "people": null,
+                      "people_source": "default"
+                    }
+                  ],
+                  "merged_sku_contributions": []
+                },
+                "plan_effect": "replace"
+              }
+            },
+            {
+              "type": "answer.delta",
+              "payload": {
+                "delta": "采购清单已加入「牛油果成品沙拉」\n已整理 1 件商品，选中合计 ¥23.80（演示价格）。包含：牛油果成品沙拉。",
+                "final": true,
+                "replace": false
+              }
+            },
+            {
+              "type": "turn.completed",
+              "payload": {
+                "session_id": "sess-65b46445585b",
+                "task_id": "task-194e7f2b67df",
+                "state_version": 2,
+                "status": "awaiting_confirmation",
+                "answer_status": "awaiting_confirmation",
+                "purchase_step": "awaiting_confirmation",
+                "message": "采购清单已加入「牛油果成品沙拉」\n已整理 1 件商品，选中合计 ¥23.80（演示价格）。包含：牛油果成品沙拉。",
+                "clarification": null,
+                "plan": {
+                  "plan_id": "plan-6d54ad6c1653",
+                  "plan_version": 1,
+                  "mode": "bundle",
+                  "items": [
+                    {
+                      "sku_id": "demo:green-reset-avocado-salad",
+                      "name": "牛油果成品沙拉",
+                      "quantity": 1,
+                      "recommended_quantity": 1,
+                      "quantity_source": "recommended",
+                      "unit_price_fen": 2380,
+                      "line_total_fen": 2380,
+                      "image_path": null,
+                      "image_kind": "placeholder",
+                      "image_kind_legacy": "placeholder",
+                      "role": "required",
+                      "selected": true,
+                      "ingredient_ids": [],
+                      "spec_quantity": 280,
+                      "spec_unit": "g",
+                      "sell_unit": "件",
+                      "max_addable_quantity": 20,
+                      "group_id": "product:demo:green-reset-avocado-salad",
+                      "target_kind": "product",
+                      "target_id": "demo:green-reset-avocado-salad",
+                      "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                      "requirement": {
+                        "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                        "name": "牛油果成品沙拉",
+                        "ingredient_id": null,
+                        "component_id": null,
+                        "quantity": 1,
+                        "unit": "件",
+                        "quantity_known": true,
+                        "requiredness": "core",
+                        "source": {
+                          "kind": "user",
+                          "ref": "牛油果成品沙拉"
+                        }
+                      },
+                      "availability": "available",
+                      "evidence": {
+                        "sku_source": "store_offer",
+                        "quoted_at": "2026-10-07T08:16:44+00:00",
+                        "stock_verified": true,
+                        "data_mode": "demo",
+                        "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                        "unknown_constraints": []
+                      },
+                      "pack_source": "catalog_spec",
+                      "shortfall_quantity": 0,
+                      "user_quantity": null,
+                      "added_quantity": 0,
+                      "remaining_quantity": 1,
+                      "contributions": [
+                        {
+                          "group_id": "product:demo:green-reset-avocado-salad",
+                          "quantity": 1,
+                          "selected": true,
+                          "added_quantity": 0,
+                          "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                          "requirement": {
+                            "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                            "name": "牛油果成品沙拉",
+                            "ingredient_id": null,
+                            "component_id": null,
+                            "quantity": 1,
+                            "unit": "件",
+                            "quantity_known": true,
+                            "requiredness": "core",
+                            "source": {
+                              "kind": "user",
+                              "ref": "牛油果成品沙拉"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "total_price_fen": 2380,
+                  "selected_total_fen": 2380,
+                  "outstanding_total_fen": 2380,
+                  "expires_at": "2026-10-07T08:21:44.090737+00:00",
+                  "validation_status": "passed",
+                  "coverage_mode": "full",
+                  "coverage_intent": "partial_ok",
+                  "uncovered_items": [],
+                  "gaps": [],
+                  "can_confirm": true,
+                  "targets": [
+                    {
+                      "group_id": "product:demo:green-reset-avocado-salad",
+                      "kind": "product",
+                      "target_id": "demo:green-reset-avocado-salad",
+                      "name": "牛油果成品沙拉",
+                      "people": null,
+                      "people_source": "default"
+                    }
+                  ],
+                  "merged_sku_contributions": []
+                },
+                "plan_effect": "replace",
+                "pending_clarification": null,
+                "missing_constraints": [],
+                "route": "prepare",
+                "readiness": "ready",
+                "missing_slots": [],
+                "request_id": "req-1791360999576-5ualoc4",
+                "session_version": 3,
+                "committed": true,
+                "allowed": true,
+                "guard_code": null,
+                "pending_clarifications": [],
+                "action_results": [
+                  {
+                    "type": "mutation",
+                    "verb": "add",
+                    "group_id": "product:demo:green-reset-avocado-salad",
+                    "status": "committed",
+                    "saved": true,
+                    "reply_ok": true,
+                    "plan_effect": "replace",
+                    "message": "采购清单已加入「牛油果成品沙拉」",
+                    "candidate_ref": "p78fa904ba8c6b696",
+                    "action_id": "a1"
+                  }
+                ],
+                "available_actions": [
+                  "confirm",
+                  "cancel",
+                  "modify",
+                  "send_message"
+                ],
+                "user_message_id": "msg-cb1dbee18823",
+                "assistant_message_id": "msg-142b9ec2a721",
+                "message_sequence": 4,
+                "trace_id": "trace-f1cdb5c98cb6",
+                "model_mode": "live",
+                "business_data_mode": "demo",
+                "current_editable_task_id": "task-194e7f2b67df",
+                "product_cards": []
+              }
+            }
+          ],
+          "raw_sse": "data: {\"type\": \"service.route\", \"payload\": {\"status\": \"completed\", \"decision\": \"stay_current\", \"raw_choice\": \"stay_current\", \"probabilities\": {\"stay_current\": 0.5817, \"suggest_switch\": 0.2093, \"clarify\": 0.209}, \"raw_response\": {\"model\": \"kev-latest\", \"answers\": {\"service\": {\"type\": \"choice\", \"choice\": \"stay_current\", \"confidence\": 0.3725, \"probabilities\": {\"stay_current\": 0.5817, \"suggest_switch\": 0.2093, \"clarify\": 0.209}}}, \"usage\": {\"input_tokens\": 610, \"output_tokens\": 66}, \"latency_ms\": 513.4}, \"request_id\": \"req-1791360999576-5ualoc4\", \"current_role\": \"keke\", \"criteria_version\": \"ceres-service-v3.2\", \"route_ms\": 960.701699834317, \"manual_switch_available\": true, \"prompt_mode\": \"none\"}}\n\ndata: {\"protocol_version\": 1, \"run_id\": \"run-983b3619b415\", \"sequence\": 0, \"type\": \"accepted\", \"session_id\": \"sess-65b46445585b\", \"target_task_id\": null, \"message_id\": null, \"payload\": {}}\n\ndata: {\"protocol_version\": 1, \"run_id\": \"run-983b3619b415\", \"sequence\": 1, \"type\": \"progress\", \"session_id\": \"sess-65b46445585b\", \"target_task_id\": null, \"message_id\": null, \"payload\": {\"phase\": \"understanding\"}}\n\ndata: {\"protocol_version\": 1, \"run_id\": \"run-983b3619b415\", \"sequence\": 2, \"type\": \"progress\", \"session_id\": \"sess-65b46445585b\", \"target_task_id\": null, \"message_id\": null, \"payload\": {\"phase\": \"validate\"}}\n\ndata: {\"protocol_version\": 1, \"run_id\": \"run-983b3619b415\", \"sequence\": 3, \"type\": \"plan.ready\", \"session_id\": \"sess-65b46445585b\", \"target_task_id\": null, \"message_id\": null, \"payload\": {\"plan\": {\"plan_effect\": \"replace\", \"plan_id\": \"plan-6d54ad6c1653\", \"plan_version\": 1, \"task_id\": \"task-194e7f2b67df\", \"state_version\": 2, \"session_version\": 3, \"mode\": \"bundle\", \"items\": [{\"sku_id\": \"demo:green-reset-avocado-salad\", \"name\": \"牛油果成品沙拉\", \"quantity\": 1, \"recommended_quantity\": 1, \"quantity_source\": \"recommended\", \"unit_price_fen\": 2380, \"line_total_fen\": 2380, \"image_path\": null, \"image_kind\": \"placeholder\", \"image_kind_legacy\": \"placeholder\", \"role\": \"required\", \"selected\": true, \"ingredient_ids\": [], \"spec_quantity\": 280.0, \"spec_unit\": \"g\", \"sell_unit\": \"件\", \"max_addable_quantity\": 20, \"group_id\": \"product:demo:green-reset-avocado-salad\", \"target_kind\": \"product\", \"target_id\": \"demo:green-reset-avocado-salad\", \"required_item_id\": \"product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad\", \"requirement\": {\"required_item_id\": \"product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad\", \"name\": \"牛油果成品沙拉\", \"ingredient_id\": null, \"component_id\": null, \"quantity\": 1, \"unit\": \"件\", \"quantity_known\": true, \"requiredness\": \"core\", \"source\": {\"kind\": \"user\", \"ref\": \"牛油果成品沙拉\"}}, \"availability\": \"available\", \"evidence\": {\"sku_source\": \"store_offer\", \"quoted_at\": \"2026-10-07T08:16:44+00:00\", \"stock_verified\": true, \"data_mode\": \"demo\", \"source_note\": \"本店 offer 快照（business_data_mode=demo）；不是外部实时库存源\", \"unknown_constraints\": []}, \"pack_source\": \"catalog_spec\", \"shortfall_quantity\": 0, \"user_quantity\": null, \"added_quantity\": 0, \"remaining_quantity\": 1, \"contributions\": [{\"group_id\": \"product:demo:green-reset-avocado-salad\", \"quantity\": 1, \"selected\": true, \"added_quantity\": 0, \"required_item_id\": \"product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad\", \"requirement\": {\"required_item_id\": \"product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad\", \"name\": \"牛油果成品沙拉\", \"ingredient_id\": null, \"component_id\": null, \"quantity\": 1, \"unit\": \"件\", \"quantity_known\": true, \"requiredness\": \"core\", \"source\": {\"kind\": \"user\", \"ref\": \"牛油果成品沙拉\"}}}]}], \"total_price_fen\": 2380, \"selected_total_fen\": 2380, \"outstanding_total_fen\": 2380, \"expires_at\": \"2026-10-07T08:21:44.090737+00:00\", \"validation_status\": \"passed\", \"coverage_mode\": \"full\", \"coverage_intent\": \"partial_ok\", \"uncovered_items\": [], \"gaps\": [], \"can_confirm\": true, \"targets\": [{\"group_id\": \"product:demo:green-reset-avocado-salad\", \"kind\": \"product\", \"target_id\": \"demo:green-reset-avocado-salad\", \"name\": \"牛油果成品沙拉\", \"people\": null, \"people_source\": \"default\"}], \"merged_sku_contributions\": []}, \"plan_effect\": \"replace\"}}\n\ndata: {\"protocol_version\": 1, \"run_id\": \"run-983b3619b415\", \"sequence\": 4, \"type\": \"answer.delta\", \"session_id\": \"sess-65b46445585b\", \"target_task_id\": null, \"message_id\": null, \"payload\": {\"delta\": \"采购清单已加入「牛油果成品沙拉」\\n已整理 1 件商品，选中合计 ¥23.80（演示价格）。包含：牛油果成品沙拉。\", \"final\": true, \"replace\": false}}\n\ndata: {\"protocol_version\": 1, \"run_id\": \"run-983b3619b415\", \"sequence\": 5, \"type\": \"turn.completed\", \"session_id\": \"sess-65b46445585b\", \"target_task_id\": \"task-194e7f2b67df\", \"message_id\": \"msg-142b9ec2a721\", \"payload\": {\"session_id\": \"sess-65b46445585b\", \"task_id\": \"task-194e7f2b67df\", \"state_version\": 2, \"status\": \"awaiting_confirmation\", \"answer_status\": \"awaiting_confirmation\", \"purchase_step\": \"awaiting_confirmation\", \"message\": \"采购清单已加入「牛油果成品沙拉」\\n已整理 1 件商品，选中合计 ¥23.80（演示价格）。包含：牛油果成品沙拉。\", \"clarification\": null, \"plan\": {\"plan_id\": \"plan-6d54ad6c1653\", \"plan_version\": 1, \"mode\": \"bundle\", \"items\": [{\"sku_id\": \"demo:green-reset-avocado-salad\", \"name\": \"牛油果成品沙拉\", \"quantity\": 1, \"recommended_quantity\": 1, \"quantity_source\": \"recommended\", \"unit_price_fen\": 2380, \"line_total_fen\": 2380, \"image_path\": null, \"image_kind\": \"placeholder\", \"image_kind_legacy\": \"placeholder\", \"role\": \"required\", \"selected\": true, \"ingredient_ids\": [], \"spec_quantity\": 280.0, \"spec_unit\": \"g\", \"sell_unit\": \"件\", \"max_addable_quantity\": 20, \"group_id\": \"product:demo:green-reset-avocado-salad\", \"target_kind\": \"product\", \"target_id\": \"demo:green-reset-avocado-salad\", \"required_item_id\": \"product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad\", \"requirement\": {\"required_item_id\": \"product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad\", \"name\": \"牛油果成品沙拉\", \"ingredient_id\": null, \"component_id\": null, \"quantity\": 1, \"unit\": \"件\", \"quantity_known\": true, \"requiredness\": \"core\", \"source\": {\"kind\": \"user\", \"ref\": \"牛油果成品沙拉\"}}, \"availability\": \"available\", \"evidence\": {\"sku_source\": \"store_offer\", \"quoted_at\": \"2026-10-07T08:16:44+00:00\", \"stock_verified\": true, \"data_mode\": \"demo\", \"source_note\": \"本店 offer 快照（business_data_mode=demo）；不是外部实时库存源\", \"unknown_constraints\": []}, \"pack_source\": \"catalog_spec\", \"shortfall_quantity\": 0, \"user_quantity\": null, \"added_quantity\": 0, \"remaining_quantity\": 1, \"contributions\": [{\"group_id\": \"product:demo:green-reset-avocado-salad\", \"quantity\": 1, \"selected\": true, \"added_quantity\": 0, \"required_item_id\": \"product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad\", \"requirement\": {\"required_item_id\": \"product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad\", \"name\": \"牛油果成品沙拉\", \"ingredient_id\": null, \"component_id\": null, \"quantity\": 1, \"unit\": \"件\", \"quantity_known\": true, \"requiredness\": \"core\", \"source\": {\"kind\": \"user\", \"ref\": \"牛油果成品沙拉\"}}}]}], \"total_price_fen\": 2380, \"selected_total_fen\": 2380, \"outstanding_total_fen\": 2380, \"expires_at\": \"2026-10-07T08:21:44.090737+00:00\", \"validation_status\": \"passed\", \"coverage_mode\": \"full\", \"coverage_intent\": \"partial_ok\", \"uncovered_items\": [], \"gaps\": [], \"can_confirm\": true, \"targets\": [{\"group_id\": \"product:demo:green-reset-avocado-salad\", \"kind\": \"product\", \"target_id\": \"demo:green-reset-avocado-salad\", \"name\": \"牛油果成品沙拉\", \"people\": null, \"people_source\": \"default\"}], \"merged_sku_contributions\": []}, \"plan_effect\": \"replace\", \"pending_clarification\": null, \"missing_constraints\": [], \"route\": \"prepare\", \"readiness\": \"ready\", \"missing_slots\": [], \"request_id\": \"req-1791360999576-5ualoc4\", \"session_version\": 3, \"committed\": true, \"allowed\": true, \"guard_code\": null, \"pending_clarifications\": [], \"action_results\": [{\"type\": \"mutation\", \"verb\": \"add\", \"group_id\": \"product:demo:green-reset-avocado-salad\", \"status\": \"committed\", \"saved\": true, \"reply_ok\": true, \"plan_effect\": \"replace\", \"message\": \"采购清单已加入「牛油果成品沙拉」\", \"candidate_ref\": \"p78fa904ba8c6b696\", \"action_id\": \"a1\"}], \"available_actions\": [\"confirm\", \"cancel\", \"modify\", \"send_message\"], \"user_message_id\": \"msg-cb1dbee18823\", \"assistant_message_id\": \"msg-142b9ec2a721\", \"message_sequence\": 4, \"trace_id\": \"trace-f1cdb5c98cb6\", \"model_mode\": \"live\", \"business_data_mode\": \"demo\", \"current_editable_task_id\": \"task-194e7f2b67df\", \"product_cards\": []}}\n\n",
+          "final_reply_ms": 4566.553,
+          "first_useful_result_ms": null,
+          "timing_basis": "UI action start to fully received turn.completed SSE; final reply rendering not sampled",
+          "first_useful_result_note": "No DOM marker sampled for this step",
+          "performance_passed": true,
+          "cart_after_reply": {
+            "store_id": "store-demo-01",
+            "version": 1,
+            "items": [],
+            "total_price_fen": 0,
+            "business_data_mode": "demo"
+          }
+        }
+      ],
+      "requests": [
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/bootstrap",
+          "body": null
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/cart",
+          "body": null
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/cart",
+          "body": null
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/cart",
+          "body": null
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/categories",
+          "body": null
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/products?page_size=40",
+          "body": null
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/categories",
+          "body": null
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/products?page_size=40",
+          "body": null
+        },
+        {
+          "method": "POST",
+          "url": "http://127.0.0.1:18443/api/v1/guide/sessions",
+          "body": {
+            "entry_context": {
+              "page": "activity",
+              "category_id": null,
+              "activity_id": "green_reset",
+              "store_id": "store-demo-01",
+              "delivery_zone_id": "zone-default"
+            }
+          }
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/products/demo%3Agreen-reset-avocado-salad",
+          "body": null
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/products/demo%3Agreen-reset-fruit-platter",
+          "body": null
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/products/demo%3Acn-minute-maid-peach-450ml-bottle",
+          "body": null
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/products/demo%3Agreen-reset-avocado-salad",
+          "body": null
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/products/demo%3Agreen-reset-fruit-platter",
+          "body": null
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/products/demo%3Acn-minute-maid-peach-450ml-bottle",
+          "body": null
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/products?category_id=baking&page_size=40",
+          "body": null
+        },
+        {
+          "method": "POST",
+          "url": "http://127.0.0.1:18443/api/v1/mercury/sessions",
+          "body": null
+        },
+        {
+          "method": "POST",
+          "url": "http://127.0.0.1:18443/api/v1/chat/openings",
+          "body": {
+            "guide_session_id": "sess-65b46445585b",
+            "mercury_session_id": "ms_2dc653cafcf6",
+            "role": "keke"
+          }
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/guide/sessions/sess-65b46445585b?include_messages=1",
+          "body": null
+        },
+        {
+          "method": "POST",
+          "url": "http://127.0.0.1:18443/api/v1/chat/openings/open_69fc842d750b4cefb111b9b346100076/turns/stream",
+          "body": {
+            "request_id": "req-1791360984170-aaj6gyv",
+            "message": "我想看看 GREEN RESET｜今天轻一点活动里的「牛油果成品沙拉」，请可可帮我介绍一下。",
+            "expected_task_id": null,
+            "expected_state_version": 0,
+            "expected_session_version": 0,
+            "view_context": {
+              "page": "product",
+              "category_id": null,
+              "product_id": "demo:green-reset-avocado-salad",
+              "activity_id": "green_reset"
+            }
+          }
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/cart",
+          "body": null
+        },
+        {
+          "method": "POST",
+          "url": "http://127.0.0.1:18443/api/v1/chat/openings/open_69fc842d750b4cefb111b9b346100076/turns/stream",
+          "body": {
+            "request_id": "req-1791360999576-5ualoc4",
+            "message": "请把 GREEN RESET 里的牛油果成品沙拉一份作为唯一商品整理成采购清单，先让我确认，暂不加购。",
+            "expected_task_id": null,
+            "expected_state_version": 0,
+            "expected_session_version": 1,
+            "view_context": {
+              "page": "product",
+              "category_id": null,
+              "product_id": "demo:green-reset-avocado-salad",
+              "activity_id": "green_reset"
+            }
+          }
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/cart",
+          "body": null
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/guide/sessions/sess-65b46445585b",
+          "body": null
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/cart",
+          "body": null
+        },
+        {
+          "method": "POST",
+          "url": "http://127.0.0.1:18443/api/v1/guide/tasks/task-194e7f2b67df/confirm",
+          "body": {
+            "plan_id": "plan-6d54ad6c1653",
+            "plan_version": 1,
+            "expected_state_version": 2,
+            "expected_session_version": 3,
+            "selected_items": [
+              {
+                "sku_id": "demo:green-reset-avocado-salad",
+                "quantity": 1
+              }
+            ]
+          }
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/cart",
+          "body": null
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/cart",
+          "body": null
+        }
+      ],
+      "console_errors": [],
+      "bootstrap": {
+        "owner_id": "owner-45ba1325e9224492",
+        "store_id": "store-demo-01",
+        "delivery_zone_id": "zone-default",
+        "llm_mode": "live",
+        "business_data_mode": "demo",
+        "demo_notice": "演示门店，价格、库存及配送为模拟数据"
+      },
+      "initial_cart": {
+        "store_id": "store-demo-01",
+        "version": 1,
+        "items": [],
+        "total_price_fen": 0,
+        "business_data_mode": "demo"
+      },
+      "plan_before_confirm": {
+        "session_id": "sess-65b46445585b",
+        "product_cards": [],
+        "task_id": "task-194e7f2b67df",
+        "state_version": 2,
+        "session_version": 3,
+        "current_step": "awaiting_confirmation",
+        "task_status": "active",
+        "entry_context": {
+          "page": "activity",
+          "category_id": null,
+          "activity_id": "green_reset",
+          "store_id": "store-demo-01",
+          "delivery_zone_id": "zone-default"
+        },
+        "plan": {
+          "plan_id": "plan-6d54ad6c1653",
+          "plan_version": 1,
+          "mode": "bundle",
+          "items": [
+            {
+              "sku_id": "demo:green-reset-avocado-salad",
+              "name": "牛油果成品沙拉",
+              "quantity": 1,
+              "unit_price_fen": 2380,
+              "line_total_fen": 2380,
+              "image_path": null,
+              "image_kind": "placeholder",
+              "image_kind_legacy": "placeholder",
+              "role": "required",
+              "selected": true,
+              "recommended_quantity": 1,
+              "max_addable_quantity": 20,
+              "spec_quantity": 280,
+              "spec_unit": "g",
+              "sell_unit": "件",
+              "quantity_source": "recommended",
+              "group_id": "product:demo:green-reset-avocado-salad",
+              "target_kind": "product",
+              "target_id": "demo:green-reset-avocado-salad",
+              "component_name": null,
+              "contributions": [
+                {
+                  "group_id": "product:demo:green-reset-avocado-salad",
+                  "quantity": 1,
+                  "selected": true,
+                  "added_quantity": 0,
+                  "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                  "requirement": {
+                    "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                    "name": "牛油果成品沙拉",
+                    "ingredient_id": null,
+                    "component_id": null,
+                    "quantity": 1,
+                    "unit": "件",
+                    "quantity_known": true,
+                    "requiredness": "core",
+                    "source": {
+                      "kind": "user",
+                      "ref": "牛油果成品沙拉"
+                    }
+                  }
+                }
+              ],
+              "added_quantity": 0,
+              "remaining_quantity": 1,
+              "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+              "requirement": {
+                "required_item_id": "product:demo:green-reset-avocado-salad#demo:green-reset-avocado-salad",
+                "name": "牛油果成品沙拉",
+                "ingredient_id": null,
+                "component_id": null,
+                "quantity": 1,
+                "unit": "件",
+                "quantity_known": true,
+                "requiredness": "core",
+                "source": {
+                  "kind": "user",
+                  "ref": "牛油果成品沙拉"
+                }
+              },
+              "availability": "available",
+              "evidence": {
+                "sku_source": "store_offer",
+                "quoted_at": "2026-10-07T08:16:44+00:00",
+                "stock_verified": true,
+                "data_mode": "demo",
+                "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                "unknown_constraints": []
+              },
+              "pack_source": "catalog_spec",
+              "shortfall_quantity": 0
+            }
+          ],
+          "total_price_fen": 2380,
+          "selected_total_fen": 2380,
+          "expires_at": "2026-10-07T08:21:44.090737+00:00",
+          "validation_status": "passed",
+          "coverage_mode": "full",
+          "coverage_intent": "partial_ok",
+          "uncovered_items": [],
+          "gaps": [],
+          "can_confirm": true,
+          "gap_fill": null,
+          "targets": [
+            {
+              "group_id": "product:demo:green-reset-avocado-salad",
+              "kind": "product",
+              "target_id": "demo:green-reset-avocado-salad",
+              "name": "牛油果成品沙拉",
+              "meal_name": null,
+              "fulfillment_mode": null,
+              "people": null,
+              "people_source": "default",
+              "notes": []
+            }
+          ],
+          "merged_sku_contributions": [],
+          "outstanding_total_fen": 2380
+        },
+        "plan_read_only": false,
+        "pending_clarifications": [],
+        "confirmation_result": null,
+        "message": "已恢复待确认方案",
+        "available_actions": [
+          "confirm",
+          "cancel",
+          "modify",
+          "send_message"
+        ],
+        "constraints_summary": {
+          "goal": "牛油果成品沙拉",
+          "people": null,
+          "budget_fen": null,
+          "excluded_ingredients": []
+        },
+        "cart_version": null,
+        "confirmation_id": null,
+        "history_status": "complete",
+        "messages": null
+      },
+      "cart_before_confirm": {
+        "store_id": "store-demo-01",
+        "version": 1,
+        "items": [],
+        "total_price_fen": 0,
+        "business_data_mode": "demo"
+      },
+      "writes_before_confirm": [],
+      "confirmation": {
+        "status": 200,
+        "body": {
+          "operation_id": "op-205c817cac25",
+          "status": "completed",
+          "cart_version": 2,
+          "items_added": [
+            {
+              "sku_id": "demo:green-reset-avocado-salad",
+              "quantity": 1
+            }
+          ],
+          "errors": [],
+          "task_id": "task-194e7f2b67df",
+          "state_version": 3,
+          "session_version": 4,
+          "confirmation_id": "conf-214b12f1"
+        }
+      },
+      "final_cart": {
+        "store_id": "store-demo-01",
+        "version": 2,
+        "items": [
+          {
+            "sku_id": "demo:green-reset-avocado-salad",
+            "name": "牛油果成品沙拉",
+            "quantity": 1,
+            "unit_price_fen": 2380,
+            "line_total_fen": 2380,
+            "image_path": null,
+            "sellable": true
+          }
+        ],
+        "total_price_fen": 2380,
+        "business_data_mode": "demo"
+      },
+      "performance_passed": false,
+      "visible_text": "静安区\n⌄\n1\n🧁\n烘焙原料\n📦\n饮料\n🧂\n调味品\n🥛\n乳品\n📦\n水果\n🥩\n肉类\n📦\n水产\n📦\n零食\n📦\n粮油米面\n🥬\n蔬菜\n今日精选\n演示\n\n绿色餐桌计划\n\n有机蔬菜\n全场 88 折\n\n限时会员价\n\n牧场鲜肉\n买二减一\n\n人气鲜品\n\n最快 30 分钟送达\n\n综合排序⌄\n演示\n产地可溯源\n♡\n演示\n\n泡打粉 100克\n\n★\n4.9\n·\n今日采摘\n4.80 元\n产地可溯源\n♡\n演示\n\n无盐黄油 200克\n\n★\n4.9\n·\n今日采摘\n15.80 元\n产地可溯源\n♡\n演示\n\n低筋面粉 250克（小包装）\n\n★\n4.9\n·\n今日采摘\n6.80 元\n产地可溯源\n♡\n演示\n\n奶油奶酪 200克\n\n★\n4.9\n·\n今日采摘\n16.80 元\n产地可溯源\n♡\n演示\n\n鲜鸡蛋 10枚装\n\n★\n4.9\n·\n今日采摘\n12.80 元\n产地可溯源\n♡\n演示\n\n中筋面粉 500克\n\n★\n4.9\n·\n今日采摘\n8.90 元\n产地可溯源\n♡\n演示\n\n白砂糖 500克\n\n★\n4.9\n·\n今日采摘\n6.50 元\n产地可溯源\n♡\n演示\n\n香草精 30毫升\n\n★\n4.9\n·\n今日采摘\n12.80 元\n产地可溯源\n♡\n演示\n\n干酵母 7克\n\n★\n4.9\n·\n今日采摘\n3.50 元\n主页\n自己逛逛\n订单\n个人中心\n嗨！我是可可 🌿\n你的专属导购小助手！告诉我今天想吃什么，我来帮你搞定～\n✦今晚做红烧肉\n✦减脂餐计划\n✦家里有小孩\n✦来点零食\n我想看看 GREEN RESET｜今天轻一点活动里的「牛油果成品沙拉」，请可可帮我介绍一下。\n找到了，这款是 GREEN RESET 活动里的牛油果成品沙拉，规格 280g，碗装，属于成品沙拉/即食，品牌为演示品牌，目前可售核验通过。它适合想今天吃得轻一点时直接食用；具体价格、库存数量和配送信息本轮未提供，我可以继续帮你只读查询。\n1. 牛油果成品沙拉\n请把 GREEN RESET 里的牛油果成品沙拉一份作为唯一商品整理成采购清单，先让我确认，暂不加购。\n采购清单已加入「牛油果成品沙拉」\n已整理 1 件商品，选中合计 ¥23.80（演示价格）。包含：牛油果成品沙拉。\n\n可可\n\n今日活动\n采购清单\n购物车\n1\n售后找我"
+    },
+    {
+      "name": "snack-bubble",
+      "status": "failed",
+      "stage": "request-plan",
+      "steps": [
+        {
+          "label": "request-snack",
+          "request": {
+            "request_id": "req-1791361005563-wms3zh6",
+            "message": "来点零食",
+            "expected_task_id": null,
+            "expected_state_version": 0,
+            "expected_session_version": 0,
+            "view_context": {
+              "page": "category",
+              "category_id": "baking"
+            }
+          },
+          "http_status": 200,
+          "events": [
+            {
+              "type": "service.route",
+              "payload": {
+                "status": "completed",
+                "decision": "stay_current",
+                "raw_choice": "stay_current",
+                "probabilities": {
+                  "stay_current": 0.5313,
+                  "suggest_switch": 0.2263,
+                  "clarify": 0.2425
+                },
+                "raw_response": {
+                  "model": "kev-latest",
+                  "answers": {
+                    "service": {
+                      "type": "choice",
+                      "choice": "stay_current",
+                      "confidence": 0.2969,
+                      "probabilities": {
+                        "stay_current": 0.5313,
+                        "suggest_switch": 0.2263,
+                        "clarify": 0.2425
+                      }
+                    }
+                  },
+                  "usage": {
+                    "input_tokens": 387,
+                    "output_tokens": 67
+                  },
+                  "latency_ms": 402.8
+                },
+                "request_id": "req-1791361005563-wms3zh6",
+                "current_role": "keke",
+                "criteria_version": "ceres-service-v3.2",
+                "route_ms": 696.3382000103593,
+                "manual_switch_available": true,
+                "prompt_mode": "none"
+              }
+            },
+            {
+              "type": "accepted",
+              "payload": {}
+            },
+            {
+              "type": "progress",
+              "payload": {
+                "phase": "understanding"
+              }
+            },
+            {
+              "type": "progress",
+              "payload": {
+                "phase": "retrieve"
+              }
+            },
+            {
+              "type": "answer.delta",
+              "payload": {
+                "delta": "想选哪类零食？\n1. 薯片\n2. 饼干",
+                "final": true,
+                "replace": false
+              }
+            },
+            {
+              "type": "turn.completed",
+              "payload": {
+                "session_id": "sess-fdd2a03df0a3",
+                "task_id": null,
+                "state_version": 0,
+                "status": "understanding",
+                "answer_status": "accepted",
+                "purchase_step": "none",
+                "message": "想选哪类零食？\n1. 薯片\n2. 饼干",
+                "clarification": null,
+                "plan": null,
+                "plan_effect": "keep",
+                "pending_clarification": {
+                  "question_id": "q-354b36250eb7",
+                  "question": "想选哪类零食？",
+                  "options": [
+                    {
+                      "id": "product_type:potato_chips",
+                      "label": "薯片"
+                    },
+                    {
+                      "id": "product_type:soda_crackers",
+                      "label": "饼干"
+                    }
+                  ],
+                  "base_session_version": 1,
+                  "base_state_version": 0,
+                  "slot": "product_type",
+                  "candidates": [],
+                  "people": null
+                },
+                "missing_constraints": [],
+                "route": "answer",
+                "readiness": "information",
+                "missing_slots": [],
+                "request_id": "req-1791361005563-wms3zh6",
+                "session_version": 1,
+                "committed": false,
+                "allowed": true,
+                "guard_code": null,
+                "pending_clarifications": [
+                  {
+                    "question_id": "q-354b36250eb7",
+                    "question": "想选哪类零食？",
+                    "options": [
+                      {
+                        "id": "product_type:potato_chips",
+                        "label": "薯片"
+                      },
+                      {
+                        "id": "product_type:soda_crackers",
+                        "label": "饼干"
+                      }
+                    ],
+                    "base_session_version": 1,
+                    "base_state_version": 0,
+                    "slot": "product_type",
+                    "candidates": [],
+                    "people": null
+                  }
+                ],
+                "action_results": [
+                  {
+                    "type": "read_only",
+                    "kind": "lookup",
+                    "status": "completed",
+                    "saved": false,
+                    "reply_ok": true,
+                    "retrieval_status": "ok",
+                    "retrieval_mode": "lexical",
+                    "fallback_reason": null,
+                    "index_version": "idx-81e9fa689baef6b5",
+                    "action_id": "a1"
+                  }
+                ],
+                "available_actions": [
+                  "send_message"
+                ],
+                "user_message_id": "msg-a63aefce3f11",
+                "assistant_message_id": "msg-321dc8444b65",
+                "message_sequence": 2,
+                "trace_id": "trace-135574119ce0",
+                "model_mode": "live",
+                "business_data_mode": "demo",
+                "current_editable_task_id": null,
+                "product_cards": []
+              }
+            }
+          ],
+          "raw_sse": "data: {\"type\": \"service.route\", \"payload\": {\"status\": \"completed\", \"decision\": \"stay_current\", \"raw_choice\": \"stay_current\", \"probabilities\": {\"stay_current\": 0.5313, \"suggest_switch\": 0.2263, \"clarify\": 0.2425}, \"raw_response\": {\"model\": \"kev-latest\", \"answers\": {\"service\": {\"type\": \"choice\", \"choice\": \"stay_current\", \"confidence\": 0.2969, \"probabilities\": {\"stay_current\": 0.5313, \"suggest_switch\": 0.2263, \"clarify\": 0.2425}}}, \"usage\": {\"input_tokens\": 387, \"output_tokens\": 67}, \"latency_ms\": 402.8}, \"request_id\": \"req-1791361005563-wms3zh6\", \"current_role\": \"keke\", \"criteria_version\": \"ceres-service-v3.2\", \"route_ms\": 696.3382000103593, \"manual_switch_available\": true, \"prompt_mode\": \"none\"}}\n\ndata: {\"protocol_version\": 1, \"run_id\": \"run-1b6a1a54baa3\", \"sequence\": 0, \"type\": \"accepted\", \"session_id\": \"sess-fdd2a03df0a3\", \"target_task_id\": null, \"message_id\": null, \"payload\": {}}\n\ndata: {\"protocol_version\": 1, \"run_id\": \"run-1b6a1a54baa3\", \"sequence\": 1, \"type\": \"progress\", \"session_id\": \"sess-fdd2a03df0a3\", \"target_task_id\": null, \"message_id\": null, \"payload\": {\"phase\": \"understanding\"}}\n\ndata: {\"protocol_version\": 1, \"run_id\": \"run-1b6a1a54baa3\", \"sequence\": 2, \"type\": \"progress\", \"session_id\": \"sess-fdd2a03df0a3\", \"target_task_id\": null, \"message_id\": null, \"payload\": {\"phase\": \"retrieve\"}}\n\ndata: {\"protocol_version\": 1, \"run_id\": \"run-1b6a1a54baa3\", \"sequence\": 3, \"type\": \"answer.delta\", \"session_id\": \"sess-fdd2a03df0a3\", \"target_task_id\": null, \"message_id\": null, \"payload\": {\"delta\": \"想选哪类零食？\\n1. 薯片\\n2. 饼干\", \"final\": true, \"replace\": false}}\n\ndata: {\"protocol_version\": 1, \"run_id\": \"run-1b6a1a54baa3\", \"sequence\": 4, \"type\": \"turn.completed\", \"session_id\": \"sess-fdd2a03df0a3\", \"target_task_id\": null, \"message_id\": \"msg-321dc8444b65\", \"payload\": {\"session_id\": \"sess-fdd2a03df0a3\", \"task_id\": null, \"state_version\": 0, \"status\": \"understanding\", \"answer_status\": \"accepted\", \"purchase_step\": \"none\", \"message\": \"想选哪类零食？\\n1. 薯片\\n2. 饼干\", \"clarification\": null, \"plan\": null, \"plan_effect\": \"keep\", \"pending_clarification\": {\"question_id\": \"q-354b36250eb7\", \"question\": \"想选哪类零食？\", \"options\": [{\"id\": \"product_type:potato_chips\", \"label\": \"薯片\"}, {\"id\": \"product_type:soda_crackers\", \"label\": \"饼干\"}], \"base_session_version\": 1, \"base_state_version\": 0, \"slot\": \"product_type\", \"candidates\": [], \"people\": null}, \"missing_constraints\": [], \"route\": \"answer\", \"readiness\": \"information\", \"missing_slots\": [], \"request_id\": \"req-1791361005563-wms3zh6\", \"session_version\": 1, \"committed\": false, \"allowed\": true, \"guard_code\": null, \"pending_clarifications\": [{\"question_id\": \"q-354b36250eb7\", \"question\": \"想选哪类零食？\", \"options\": [{\"id\": \"product_type:potato_chips\", \"label\": \"薯片\"}, {\"id\": \"product_type:soda_crackers\", \"label\": \"饼干\"}], \"base_session_version\": 1, \"base_state_version\": 0, \"slot\": \"product_type\", \"candidates\": [], \"people\": null}], \"action_results\": [{\"type\": \"read_only\", \"kind\": \"lookup\", \"status\": \"completed\", \"saved\": false, \"reply_ok\": true, \"retrieval_status\": \"ok\", \"retrieval_mode\": \"lexical\", \"fallback_reason\": null, \"index_version\": \"idx-81e9fa689baef6b5\", \"action_id\": \"a1\"}], \"available_actions\": [\"send_message\"], \"user_message_id\": \"msg-a63aefce3f11\", \"assistant_message_id\": \"msg-321dc8444b65\", \"message_sequence\": 2, \"trace_id\": \"trace-135574119ce0\", \"model_mode\": \"live\", \"business_data_mode\": \"demo\", \"current_editable_task_id\": null, \"product_cards\": []}}\n\n",
+          "final_reply_ms": 6894.043399999999,
+          "first_useful_result_ms": 6971.4072000000015,
+          "timing_basis": "UI action start to fully received turn.completed SSE; final reply rendering not sampled",
+          "first_useful_result_note": 6971.4072000000015,
+          "performance_passed": true,
+          "cart_after_reply": {
+            "store_id": "store-demo-01",
+            "version": 1,
+            "items": [],
+            "total_price_fen": 0,
+            "business_data_mode": "demo"
+          }
+        },
+        {
+          "label": "select-type-bubble",
+          "request": {
+            "request_id": "req-1791361012794-yndyiy1",
+            "message": "薯片",
+            "expected_task_id": null,
+            "expected_state_version": 0,
+            "expected_session_version": 1,
+            "view_context": {
+              "page": "category",
+              "category_id": "baking"
+            },
+            "clarification_answer": {
+              "question_id": "q-354b36250eb7",
+              "option_id": "product_type:potato_chips"
+            }
+          },
+          "http_status": 200,
+          "events": [
+            {
+              "type": "service.route",
+              "payload": {
+                "status": "completed",
+                "decision": "stay_current",
+                "raw_choice": "stay_current",
+                "probabilities": {
+                  "stay_current": 0.4886,
+                  "suggest_switch": 0.261,
+                  "clarify": 0.2504
+                },
+                "raw_response": {
+                  "model": "kev-latest",
+                  "answers": {
+                    "service": {
+                      "type": "choice",
+                      "choice": "stay_current",
+                      "confidence": 0.2329,
+                      "probabilities": {
+                        "stay_current": 0.4886,
+                        "suggest_switch": 0.261,
+                        "clarify": 0.2504
+                      }
+                    }
+                  },
+                  "usage": {
+                    "input_tokens": 442,
+                    "output_tokens": 66
+                  },
+                  "latency_ms": 402.4
+                },
+                "request_id": "req-1791361012794-yndyiy1",
+                "current_role": "keke",
+                "criteria_version": "ceres-service-v3.2",
+                "route_ms": 837.4566999264061,
+                "manual_switch_available": true,
+                "prompt_mode": "none"
+              }
+            },
+            {
+              "type": "accepted",
+              "payload": {}
+            },
+            {
+              "type": "progress",
+              "payload": {
+                "phase": "retrieve"
+              }
+            },
+            {
+              "type": "answer.delta",
+              "payload": {
+                "delta": "我找到「原味薯片70克袋装」了，你可以先看看卡片里的商品信息。\n1. 原味薯片70克袋装",
+                "final": true,
+                "replace": false
+              }
+            },
+            {
+              "type": "turn.completed",
+              "payload": {
+                "session_id": "sess-fdd2a03df0a3",
+                "task_id": null,
+                "state_version": 0,
+                "status": "understanding",
+                "answer_status": "accepted",
+                "purchase_step": "none",
+                "message": "我找到「原味薯片70克袋装」了，你可以先看看卡片里的商品信息。\n1. 原味薯片70克袋装",
+                "clarification": null,
+                "plan": null,
+                "plan_effect": "keep",
+                "pending_clarification": null,
+                "missing_constraints": [],
+                "route": "answer",
+                "readiness": "information",
+                "missing_slots": [],
+                "request_id": "req-1791361012794-yndyiy1",
+                "session_version": 2,
+                "committed": false,
+                "allowed": true,
+                "guard_code": null,
+                "pending_clarifications": [],
+                "action_results": [
+                  {
+                    "type": "read_only",
+                    "kind": "lookup",
+                    "status": "completed",
+                    "saved": false,
+                    "reply_ok": true,
+                    "retrieval_status": "ok",
+                    "retrieval_mode": "lexical",
+                    "fallback_reason": null,
+                    "index_version": "idx-81e9fa689baef6b5",
+                    "action_id": "a1"
+                  }
+                ],
+                "available_actions": [
+                  "send_message"
+                ],
+                "user_message_id": "msg-2b6d2771f13b",
+                "assistant_message_id": "msg-0f72fc0aa319",
+                "message_sequence": 4,
+                "trace_id": "trace-ab7866a8376e",
+                "model_mode": "live",
+                "business_data_mode": "demo",
+                "current_editable_task_id": null,
+                "product_cards": []
+              }
+            }
+          ],
+          "raw_sse": "data: {\"type\": \"service.route\", \"payload\": {\"status\": \"completed\", \"decision\": \"stay_current\", \"raw_choice\": \"stay_current\", \"probabilities\": {\"stay_current\": 0.4886, \"suggest_switch\": 0.261, \"clarify\": 0.2504}, \"raw_response\": {\"model\": \"kev-latest\", \"answers\": {\"service\": {\"type\": \"choice\", \"choice\": \"stay_current\", \"confidence\": 0.2329, \"probabilities\": {\"stay_current\": 0.4886, \"suggest_switch\": 0.261, \"clarify\": 0.2504}}}, \"usage\": {\"input_tokens\": 442, \"output_tokens\": 66}, \"latency_ms\": 402.4}, \"request_id\": \"req-1791361012794-yndyiy1\", \"current_role\": \"keke\", \"criteria_version\": \"ceres-service-v3.2\", \"route_ms\": 837.4566999264061, \"manual_switch_available\": true, \"prompt_mode\": \"none\"}}\n\ndata: {\"protocol_version\": 1, \"run_id\": \"run-f1a15932902f\", \"sequence\": 0, \"type\": \"accepted\", \"session_id\": \"sess-fdd2a03df0a3\", \"target_task_id\": null, \"message_id\": null, \"payload\": {}}\n\ndata: {\"protocol_version\": 1, \"run_id\": \"run-f1a15932902f\", \"sequence\": 1, \"type\": \"progress\", \"session_id\": \"sess-fdd2a03df0a3\", \"target_task_id\": null, \"message_id\": null, \"payload\": {\"phase\": \"retrieve\"}}\n\ndata: {\"protocol_version\": 1, \"run_id\": \"run-f1a15932902f\", \"sequence\": 2, \"type\": \"answer.delta\", \"session_id\": \"sess-fdd2a03df0a3\", \"target_task_id\": null, \"message_id\": null, \"payload\": {\"delta\": \"我找到「原味薯片70克袋装」了，你可以先看看卡片里的商品信息。\\n1. 原味薯片70克袋装\", \"final\": true, \"replace\": false}}\n\ndata: {\"protocol_version\": 1, \"run_id\": \"run-f1a15932902f\", \"sequence\": 3, \"type\": \"turn.completed\", \"session_id\": \"sess-fdd2a03df0a3\", \"target_task_id\": null, \"message_id\": \"msg-0f72fc0aa319\", \"payload\": {\"session_id\": \"sess-fdd2a03df0a3\", \"task_id\": null, \"state_version\": 0, \"status\": \"understanding\", \"answer_status\": \"accepted\", \"purchase_step\": \"none\", \"message\": \"我找到「原味薯片70克袋装」了，你可以先看看卡片里的商品信息。\\n1. 原味薯片70克袋装\", \"clarification\": null, \"plan\": null, \"plan_effect\": \"keep\", \"pending_clarification\": null, \"missing_constraints\": [], \"route\": \"answer\", \"readiness\": \"information\", \"missing_slots\": [], \"request_id\": \"req-1791361012794-yndyiy1\", \"session_version\": 2, \"committed\": false, \"allowed\": true, \"guard_code\": null, \"pending_clarifications\": [], \"action_results\": [{\"type\": \"read_only\", \"kind\": \"lookup\", \"status\": \"completed\", \"saved\": false, \"reply_ok\": true, \"retrieval_status\": \"ok\", \"retrieval_mode\": \"lexical\", \"fallback_reason\": null, \"index_version\": \"idx-81e9fa689baef6b5\", \"action_id\": \"a1\"}], \"available_actions\": [\"send_message\"], \"user_message_id\": \"msg-2b6d2771f13b\", \"assistant_message_id\": \"msg-0f72fc0aa319\", \"message_sequence\": 4, \"trace_id\": \"trace-ab7866a8376e\", \"model_mode\": \"live\", \"business_data_mode\": \"demo\", \"current_editable_task_id\": null, \"product_cards\": []}}\n\n",
+          "final_reply_ms": 5440.5300000000025,
+          "first_useful_result_ms": null,
+          "timing_basis": "UI action start to fully received turn.completed SSE; final reply rendering not sampled",
+          "first_useful_result_note": "No DOM marker sampled for this step",
+          "performance_passed": true,
+          "cart_after_reply": {
+            "store_id": "store-demo-01",
+            "version": 1,
+            "items": [],
+            "total_price_fen": 0,
+            "business_data_mode": "demo"
+          }
+        },
+        {
+          "label": "request-plan",
+          "request": {
+            "request_id": "req-1791361018015-6ivuk8r",
+            "message": "原味薯片70克两包，预算20元，整理成清单让我确认，暂不加购。",
+            "expected_task_id": null,
+            "expected_state_version": 0,
+            "expected_session_version": 2,
+            "view_context": {
+              "page": "category",
+              "category_id": "baking"
+            }
+          },
+          "http_status": 200,
+          "events": [
+            {
+              "type": "service.route",
+              "payload": {
+                "status": "completed",
+                "decision": "stay_current",
+                "raw_choice": "stay_current",
+                "probabilities": {
+                  "stay_current": 0.5487,
+                  "suggest_switch": 0.2084,
+                  "clarify": 0.2429
+                },
+                "raw_response": {
+                  "model": "kev-latest",
+                  "answers": {
+                    "service": {
+                      "type": "choice",
+                      "choice": "stay_current",
+                      "confidence": 0.323,
+                      "probabilities": {
+                        "stay_current": 0.5487,
+                        "suggest_switch": 0.2084,
+                        "clarify": 0.2429
+                      }
+                    }
+                  },
+                  "usage": {
+                    "input_tokens": 534,
+                    "output_tokens": 66
+                  },
+                  "latency_ms": 476
+                },
+                "request_id": "req-1791361018015-6ivuk8r",
+                "current_role": "keke",
+                "criteria_version": "ceres-service-v3.2",
+                "route_ms": 630.3536999039352,
+                "manual_switch_available": true,
+                "prompt_mode": "none"
+              }
+            },
+            {
+              "type": "accepted",
+              "payload": {}
+            },
+            {
+              "type": "progress",
+              "payload": {
+                "phase": "understanding"
+              }
+            },
+            {
+              "type": "progress",
+              "payload": {
+                "phase": "validate"
+              }
+            },
+            {
+              "type": "answer.delta",
+              "payload": {
+                "delta": "目标名称「原味薯片70克」与引用对应的「原味薯片70克袋装」不一致；本次未执行。",
+                "final": true,
+                "replace": false
+              }
+            },
+            {
+              "type": "turn.completed",
+              "payload": {
+                "session_id": "sess-fdd2a03df0a3",
+                "task_id": null,
+                "state_version": 0,
+                "status": "understanding",
+                "answer_status": "accepted",
+                "purchase_step": "none",
+                "message": "目标名称「原味薯片70克」与引用对应的「原味薯片70克袋装」不一致；本次未执行。",
+                "clarification": null,
+                "plan": null,
+                "plan_effect": "keep",
+                "pending_clarification": null,
+                "missing_constraints": [],
+                "route": "prepare",
+                "readiness": "ready",
+                "missing_slots": [],
+                "request_id": "req-1791361018015-6ivuk8r",
+                "session_version": 3,
+                "committed": false,
+                "allowed": true,
+                "guard_code": null,
+                "pending_clarifications": [],
+                "action_results": [
+                  {
+                    "type": "mutation",
+                    "status": "failed",
+                    "saved": false,
+                    "reply_ok": false,
+                    "code": "TARGET_NAME_MISMATCH",
+                    "message": "这一步没有完成：目标名称「原味薯片70克」与引用对应的「原味薯片70克袋装」不一致；本次未执行。 原来的清单没有变化。",
+                    "action_id": "a1"
+                  }
+                ],
+                "available_actions": [
+                  "send_message"
+                ],
+                "user_message_id": "msg-12408b7e1309",
+                "assistant_message_id": "msg-7e511fcde9a2",
+                "message_sequence": 6,
+                "trace_id": "trace-a1dbff919885",
+                "model_mode": "live",
+                "business_data_mode": "demo",
+                "current_editable_task_id": null,
+                "product_cards": []
+              }
+            }
+          ],
+          "raw_sse": "data: {\"type\": \"service.route\", \"payload\": {\"status\": \"completed\", \"decision\": \"stay_current\", \"raw_choice\": \"stay_current\", \"probabilities\": {\"stay_current\": 0.5487, \"suggest_switch\": 0.2084, \"clarify\": 0.2429}, \"raw_response\": {\"model\": \"kev-latest\", \"answers\": {\"service\": {\"type\": \"choice\", \"choice\": \"stay_current\", \"confidence\": 0.323, \"probabilities\": {\"stay_current\": 0.5487, \"suggest_switch\": 0.2084, \"clarify\": 0.2429}}}, \"usage\": {\"input_tokens\": 534, \"output_tokens\": 66}, \"latency_ms\": 476.0}, \"request_id\": \"req-1791361018015-6ivuk8r\", \"current_role\": \"keke\", \"criteria_version\": \"ceres-service-v3.2\", \"route_ms\": 630.3536999039352, \"manual_switch_available\": true, \"prompt_mode\": \"none\"}}\n\ndata: {\"protocol_version\": 1, \"run_id\": \"run-f601145b66d3\", \"sequence\": 0, \"type\": \"accepted\", \"session_id\": \"sess-fdd2a03df0a3\", \"target_task_id\": null, \"message_id\": null, \"payload\": {}}\n\ndata: {\"protocol_version\": 1, \"run_id\": \"run-f601145b66d3\", \"sequence\": 1, \"type\": \"progress\", \"session_id\": \"sess-fdd2a03df0a3\", \"target_task_id\": null, \"message_id\": null, \"payload\": {\"phase\": \"understanding\"}}\n\ndata: {\"protocol_version\": 1, \"run_id\": \"run-f601145b66d3\", \"sequence\": 2, \"type\": \"progress\", \"session_id\": \"sess-fdd2a03df0a3\", \"target_task_id\": null, \"message_id\": null, \"payload\": {\"phase\": \"validate\"}}\n\ndata: {\"protocol_version\": 1, \"run_id\": \"run-f601145b66d3\", \"sequence\": 3, \"type\": \"answer.delta\", \"session_id\": \"sess-fdd2a03df0a3\", \"target_task_id\": null, \"message_id\": null, \"payload\": {\"delta\": \"目标名称「原味薯片70克」与引用对应的「原味薯片70克袋装」不一致；本次未执行。\", \"final\": true, \"replace\": false}}\n\ndata: {\"protocol_version\": 1, \"run_id\": \"run-f601145b66d3\", \"sequence\": 4, \"type\": \"turn.completed\", \"session_id\": \"sess-fdd2a03df0a3\", \"target_task_id\": null, \"message_id\": \"msg-7e511fcde9a2\", \"payload\": {\"session_id\": \"sess-fdd2a03df0a3\", \"task_id\": null, \"state_version\": 0, \"status\": \"understanding\", \"answer_status\": \"accepted\", \"purchase_step\": \"none\", \"message\": \"目标名称「原味薯片70克」与引用对应的「原味薯片70克袋装」不一致；本次未执行。\", \"clarification\": null, \"plan\": null, \"plan_effect\": \"keep\", \"pending_clarification\": null, \"missing_constraints\": [], \"route\": \"prepare\", \"readiness\": \"ready\", \"missing_slots\": [], \"request_id\": \"req-1791361018015-6ivuk8r\", \"session_version\": 3, \"committed\": false, \"allowed\": true, \"guard_code\": null, \"pending_clarifications\": [], \"action_results\": [{\"type\": \"mutation\", \"status\": \"failed\", \"saved\": false, \"reply_ok\": false, \"code\": \"TARGET_NAME_MISMATCH\", \"message\": \"这一步没有完成：目标名称「原味薯片70克」与引用对应的「原味薯片70克袋装」不一致；本次未执行。 原来的清单没有变化。\", \"action_id\": \"a1\"}], \"available_actions\": [\"send_message\"], \"user_message_id\": \"msg-12408b7e1309\", \"assistant_message_id\": \"msg-7e511fcde9a2\", \"message_sequence\": 6, \"trace_id\": \"trace-a1dbff919885\", \"model_mode\": \"live\", \"business_data_mode\": \"demo\", \"current_editable_task_id\": null, \"product_cards\": []}}\n\n",
+          "final_reply_ms": 10634.329899999997,
+          "first_useful_result_ms": null,
+          "timing_basis": "UI action start to fully received turn.completed SSE; final reply rendering not sampled",
+          "first_useful_result_note": "No DOM marker sampled for this step",
+          "performance_passed": true,
+          "cart_after_reply": {
+            "store_id": "store-demo-01",
+            "version": 1,
+            "items": [],
+            "total_price_fen": 0,
+            "business_data_mode": "demo"
+          }
+        }
+      ],
+      "requests": [
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/bootstrap",
+          "body": null
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/cart",
+          "body": null
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/cart",
+          "body": null
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/cart",
+          "body": null
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/categories",
+          "body": null
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/products?page_size=40",
+          "body": null
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/categories",
+          "body": null
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/products?page_size=40",
+          "body": null
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/products?category_id=baking&page_size=40",
+          "body": null
+        },
+        {
+          "method": "POST",
+          "url": "http://127.0.0.1:18443/api/v1/guide/sessions",
+          "body": {
+            "entry_context": {
+              "page": "category",
+              "category_id": "baking",
+              "store_id": "store-demo-01",
+              "delivery_zone_id": "zone-default"
+            }
+          }
+        },
+        {
+          "method": "POST",
+          "url": "http://127.0.0.1:18443/api/v1/mercury/sessions",
+          "body": null
+        },
+        {
+          "method": "POST",
+          "url": "http://127.0.0.1:18443/api/v1/chat/openings",
+          "body": {
+            "guide_session_id": "sess-fdd2a03df0a3",
+            "mercury_session_id": "ms_2b96ef7647ef",
+            "role": "keke"
+          }
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/guide/sessions/sess-fdd2a03df0a3?include_messages=1",
+          "body": null
+        },
+        {
+          "method": "POST",
+          "url": "http://127.0.0.1:18443/api/v1/chat/openings/open_c04fda84326c4f4da22a5be10243664b/turns/stream",
+          "body": {
+            "request_id": "req-1791361005563-wms3zh6",
+            "message": "来点零食",
+            "expected_task_id": null,
+            "expected_state_version": 0,
+            "expected_session_version": 0,
+            "view_context": {
+              "page": "category",
+              "category_id": "baking"
+            }
+          }
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/cart",
+          "body": null
+        },
+        {
+          "method": "POST",
+          "url": "http://127.0.0.1:18443/api/v1/chat/openings/open_c04fda84326c4f4da22a5be10243664b/turns/stream",
+          "body": {
+            "request_id": "req-1791361012794-yndyiy1",
+            "message": "薯片",
+            "expected_task_id": null,
+            "expected_state_version": 0,
+            "expected_session_version": 1,
+            "view_context": {
+              "page": "category",
+              "category_id": "baking"
+            },
+            "clarification_answer": {
+              "question_id": "q-354b36250eb7",
+              "option_id": "product_type:potato_chips"
+            }
+          }
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/cart",
+          "body": null
+        },
+        {
+          "method": "POST",
+          "url": "http://127.0.0.1:18443/api/v1/chat/openings/open_c04fda84326c4f4da22a5be10243664b/turns/stream",
+          "body": {
+            "request_id": "req-1791361018015-6ivuk8r",
+            "message": "原味薯片70克两包，预算20元，整理成清单让我确认，暂不加购。",
+            "expected_task_id": null,
+            "expected_state_version": 0,
+            "expected_session_version": 2,
+            "view_context": {
+              "page": "category",
+              "category_id": "baking"
+            }
+          }
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/cart",
+          "body": null
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:18443/api/v1/guide/sessions/sess-fdd2a03df0a3",
+          "body": null
+        }
+      ],
+      "console_errors": [],
+      "bootstrap": {
+        "owner_id": "owner-53948d9b29344b1b",
+        "store_id": "store-demo-01",
+        "delivery_zone_id": "zone-default",
+        "llm_mode": "live",
+        "business_data_mode": "demo",
+        "demo_notice": "演示门店，价格、库存及配送为模拟数据"
+      },
+      "initial_cart": {
+        "store_id": "store-demo-01",
+        "version": 1,
+        "items": [],
+        "total_price_fen": 0,
+        "business_data_mode": "demo"
+      },
+      "plan_before_confirm": {
+        "session_id": "sess-fdd2a03df0a3",
+        "product_cards": [],
+        "task_id": null,
+        "state_version": 0,
+        "session_version": 3,
+        "current_step": null,
+        "task_status": null,
+        "entry_context": {
+          "page": "category",
+          "category_id": "baking",
+          "activity_id": null,
+          "store_id": "store-demo-01",
+          "delivery_zone_id": "zone-default"
+        },
+        "plan": null,
+        "plan_read_only": false,
+        "pending_clarifications": [],
+        "confirmation_result": null,
+        "message": null,
+        "available_actions": [
+          "send_message"
+        ],
+        "constraints_summary": {},
+        "cart_version": null,
+        "confirmation_id": null,
+        "history_status": "complete",
+        "messages": null
+      },
+      "error": {
+        "type": "AssertionError",
+        "message": "The expression evaluated to a falsy value:\n\n  assert.ok(guide.plan?.can_confirm)\n"
+      },
+      "performance_passed": true,
+      "visible_text": "静安区\n⌄\n🧁\n烘焙原料\n📦\n饮料\n🧂\n调味品\n🥛\n乳品\n📦\n水果\n🥩\n肉类\n📦\n水产\n📦\n零食\n📦\n粮油米面\n🥬\n蔬菜\n今日精选\n演示\n\n绿色餐桌计划\n\n有机蔬菜\n全场 88 折\n\n限时会员价\n\n牧场鲜肉\n买二减一\n\n人气鲜品\n\n最快 30 分钟送达\n\n综合排序⌄\n演示\n产地可溯源\n♡\n演示\n\n泡打粉 100克\n\n★\n4.9\n·\n今日采摘\n4.80 元\n产地可溯源\n♡\n演示\n\n无盐黄油 200克\n\n★\n4.9\n·\n今日采摘\n15.80 元\n产地可溯源\n♡\n演示\n\n低筋面粉 250克（小包装）\n\n★\n4.9\n·\n今日采摘\n6.80 元\n产地可溯源\n♡\n演示\n\n奶油奶酪 200克\n\n★\n4.9\n·\n今日采摘\n16.80 元\n产地可溯源\n♡\n演示\n\n鲜鸡蛋 10枚装\n\n★\n4.9\n·\n今日采摘\n12.80 元\n产地可溯源\n♡\n演示\n\n中筋面粉 500克\n\n★\n4.9\n·\n今日采摘\n8.90 元\n产地可溯源\n♡\n演示\n\n白砂糖 500克\n\n★\n4.9\n·\n今日采摘\n6.50 元\n产地可溯源\n♡\n演示\n\n香草精 30毫升\n\n★\n4.9\n·\n今日采摘\n12.80 元\n产地可溯源\n♡\n演示\n\n干酵母 7克\n\n★\n4.9\n·\n今日采摘\n3.50 元\n主页\n自己逛逛\n订单\n个人中心\n嗨！我是可可 🌿\n你的专属导购小助手！告诉我今天想吃什么，我来帮你搞定～\n✦今晚做红烧肉\n✦减脂餐计划\n✦家里有小孩\n✦来点零食\n来点零食\n想选哪类零食？\n1. 薯片\n2. 饼干\n薯片\n我找到「原味薯片70克袋装」了，你可以先看看卡片里的商品信息。\n1. 原味薯片70克袋装\n原味薯片70克两包，预算20元，整理成清单让我确认，暂不加购。\n目标名称「原味薯片70克」与引用对应的「原味薯片70克袋装」不一致；本次未执行。\n\n可可\n\n今日活动\n采购清单\n购物车\n售后找我"
+    }
+  ],
+  "usage": null,
+  "usage_reason": "Browser server has no provider transport capture; API batch usage is separate",
+  "human_evaluation": "not_evaluated",
+  "finished_utc": "2026-10-07T08:17:09.009Z",
+  "automatic_browser_acceptance": "not_passed"
+}

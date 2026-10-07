@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-v4-evaluation\evidence\rescore-run04\negative_case_audit.py", line 27, in <module>
+    raise AssertionError(f"{cid} step {i}: old expectation removed")
+AssertionError: H12 step 2: old expectation removed

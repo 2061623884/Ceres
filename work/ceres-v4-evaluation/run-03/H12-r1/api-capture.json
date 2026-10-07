@@ -1,0 +1,184 @@
+{
+  "steps": [
+    {
+      "case_id": "H12",
+      "op": "turn",
+      "label": "request",
+      "before": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 3,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [
+          {
+            "order_id": "O299e8a65e3874409",
+            "status": "delivered",
+            "created_at": "2026-10-07T15:39:30.018629",
+            "delivered_at": "2026-09-27T07:39:30.025239+00:00",
+            "total_fen": 300,
+            "items": [
+              {
+                "item_id": 1,
+                "sku_id": "demo:cn-pepsi-original-330ml-can",
+                "product_name": "百事可乐原味汽水330ml罐装",
+                "quantity": 1,
+                "unit_price_fen": 300,
+                "returnable": true
+              }
+            ]
+          }
+        ],
+        "guide": {
+          "session_id": "sess-7dbc4d679191",
+          "product_cards": [],
+          "task_id": null,
+          "state_version": 0,
+          "session_version": 0,
+          "current_step": null,
+          "task_status": null,
+          "entry_context": {
+            "page": "home",
+            "category_id": null,
+            "activity_id": null,
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": null,
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": null,
+          "available_actions": [
+            "send_message"
+          ],
+          "constraints_summary": {},
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "empty",
+          "messages": null
+        },
+        "opening": {
+          "role": "keke",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "active_role_before": "keke",
+      "request": {
+        "request_id": "08-H12-9a695663e2",
+        "message": "订单 O299e8a65e3874409 的百事可乐退货，处理后买一瓶农夫山泉饮用水550ml瓶装",
+        "expected_task_id": null,
+        "expected_state_version": 0,
+        "expected_session_version": 0
+      },
+      "http_status": 200,
+      "elapsed_ms": 1075.2,
+      "latency_target_ms": 15000,
+      "latency_target_exceeded": false,
+      "events": [
+        {
+          "type": "service.route",
+          "payload": {
+            "status": "completed",
+            "decision": "suggest_switch",
+            "raw_choice": "suggest_switch",
+            "current_role": "keke",
+            "target_role": "momo",
+            "handoff_id": "handoff_63f105724a484c85b64c0920b7bd732c",
+            "prompt_mode": "automatic",
+            "request_id": "08-H12-9a695663e2",
+            "route_ms": 1072.3317998927087,
+            "criteria_version": "ceres-service-v3.2"
+          }
+        },
+        {
+          "type": "turn.completed",
+          "payload": {
+            "message": "订单业务由墨墨处理，是否切换？",
+            "business_not_run": true
+          }
+        }
+      ],
+      "role_model_call_range": [
+        0,
+        0
+      ],
+      "kev_call_range": [
+        0,
+        1
+      ],
+      "terminal": {
+        "message": "订单业务由墨墨处理，是否切换？",
+        "business_not_run": true
+      },
+      "trace": [],
+      "snapshot_after": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 3,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [
+          {
+            "order_id": "O299e8a65e3874409",
+            "status": "delivered",
+            "created_at": "2026-10-07T15:39:30.018629",
+            "delivered_at": "2026-09-27T07:39:30.025239+00:00",
+            "total_fen": 300,
+            "items": [
+              {
+                "item_id": 1,
+                "sku_id": "demo:cn-pepsi-original-330ml-can",
+                "product_name": "百事可乐原味汽水330ml罐装",
+                "quantity": 1,
+                "unit_price_fen": 300,
+                "returnable": true
+              }
+            ]
+          }
+        ],
+        "guide": {
+          "session_id": "sess-7dbc4d679191",
+          "product_cards": [],
+          "task_id": null,
+          "state_version": 0,
+          "session_version": 0,
+          "current_step": null,
+          "task_status": null,
+          "entry_context": {
+            "page": "home",
+            "category_id": null,
+            "activity_id": null,
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": null,
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": null,
+          "available_actions": [
+            "send_message"
+          ],
+          "constraints_summary": {},
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "empty",
+          "messages": []
+        },
+        "opening": {
+          "role": "keke",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "status": "captured"
+    }
+  ],
+  "timing_failures": []
+}

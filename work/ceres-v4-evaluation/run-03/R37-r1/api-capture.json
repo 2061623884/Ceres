@@ -1,0 +1,319 @@
+{
+  "steps": [
+    {
+      "case_id": "R37",
+      "op": "turn",
+      "label": "price",
+      "before": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-b5c8576705f4",
+          "product_cards": [],
+          "task_id": null,
+          "state_version": 0,
+          "session_version": 0,
+          "current_step": null,
+          "task_status": null,
+          "entry_context": {
+            "page": "activity",
+            "category_id": null,
+            "activity_id": "green_reset",
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": null,
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": null,
+          "available_actions": [
+            "send_message"
+          ],
+          "constraints_summary": {},
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "empty",
+          "messages": null
+        },
+        "opening": {
+          "role": "keke",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "active_role_before": "keke",
+      "request": {
+        "request_id": "08-R37-51e7610dab",
+        "message": "这份牛油果成品沙拉多少钱？",
+        "expected_task_id": null,
+        "expected_state_version": 0,
+        "expected_session_version": 0,
+        "view_context": {
+          "page": "product",
+          "product_id": "demo:green-reset-avocado-salad",
+          "activity_id": "green_reset"
+        }
+      },
+      "http_status": 200,
+      "elapsed_ms": 7530.6,
+      "latency_target_ms": 15000,
+      "latency_target_exceeded": false,
+      "events": [
+        {
+          "type": "service.route",
+          "payload": {
+            "status": "completed",
+            "decision": "stay_current",
+            "raw_choice": "stay_current",
+            "current_role": "keke",
+            "prompt_mode": "none",
+            "request_id": "08-R37-51e7610dab",
+            "route_ms": 988.7586000841111,
+            "criteria_version": "ceres-service-v3.2"
+          }
+        },
+        {
+          "type": "accepted",
+          "payload": {}
+        },
+        {
+          "type": "progress",
+          "payload": {
+            "phase": "understanding"
+          }
+        },
+        {
+          "type": "progress",
+          "payload": {
+            "phase": "retrieve"
+          }
+        },
+        {
+          "type": "answer.delta",
+          "payload": {
+            "delta": "我查到的牛油果成品沙拉资料里没有价格信息，暂时无法确认多少钱；规格是280g。\n1. 牛油果成品沙拉",
+            "final": true,
+            "replace": false
+          }
+        },
+        {
+          "type": "turn.completed",
+          "payload": {
+            "message": "我查到的牛油果成品沙拉资料里没有价格信息，暂时无法确认多少钱；规格是280g。\n1. 牛油果成品沙拉",
+            "status": "understanding",
+            "task_id": null,
+            "state_version": 0,
+            "session_version": 1,
+            "plan": null,
+            "pending_clarifications": [],
+            "product_cards": [],
+            "plan_effect": "keep",
+            "action_results": [
+              {
+                "type": "read_only",
+                "kind": "lookup",
+                "status": "completed",
+                "saved": false,
+                "reply_ok": true,
+                "retrieval_status": "ok",
+                "retrieval_mode": "lexical",
+                "fallback_reason": null,
+                "index_version": "idx-81e9fa689baef6b5",
+                "action_id": "a1"
+              }
+            ],
+            "answer_status": "accepted",
+            "route": "answer",
+            "trace_id": "trace-c9d76863992b"
+          }
+        }
+      ],
+      "role_model_call_range": [
+        0,
+        2
+      ],
+      "kev_call_range": [
+        0,
+        2
+      ],
+      "terminal": {
+        "message": "我查到的牛油果成品沙拉资料里没有价格信息，暂时无法确认多少钱；规格是280g。\n1. 牛油果成品沙拉",
+        "status": "understanding",
+        "task_id": null,
+        "state_version": 0,
+        "session_version": 1,
+        "plan": null,
+        "pending_clarifications": [],
+        "product_cards": [],
+        "plan_effect": "keep",
+        "action_results": [
+          {
+            "type": "read_only",
+            "kind": "lookup",
+            "status": "completed",
+            "saved": false,
+            "reply_ok": true,
+            "retrieval_status": "ok",
+            "retrieval_mode": "lexical",
+            "fallback_reason": null,
+            "index_version": "idx-81e9fa689baef6b5",
+            "action_id": "a1"
+          }
+        ],
+        "answer_status": "accepted",
+        "route": "answer",
+        "trace_id": "trace-c9d76863992b"
+      },
+      "trace": [
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "capability",
+          "status": "started",
+          "criteria_version": "ceres-guide-capabilities-v2",
+          "call_number": 1,
+          "model": "kev-latest"
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 921,
+          "stage": "capability",
+          "status": "completed",
+          "capability": "facts_qa",
+          "branch": "semantic_understanding",
+          "criteria_version": "ceres-guide-capabilities-v2",
+          "call_number": 1,
+          "model": "kev-latest"
+        },
+        {
+          "phase": "understanding",
+          "duration_ms": null
+        },
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "understanding",
+          "status": "started",
+          "call_number": 1
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 2093,
+          "stage": "understanding",
+          "status": "completed",
+          "call_number": 1
+        },
+        {
+          "phase": "retrieve",
+          "duration_ms": null
+        },
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "answer",
+          "status": "started",
+          "call_number": 2
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 3437,
+          "stage": "answer",
+          "status": "completed",
+          "call_number": 2
+        },
+        {
+          "phase": "turn_result",
+          "duration_ms": null,
+          "status": "understanding"
+        },
+        {
+          "phase": "memory_extract_started",
+          "duration_ms": null,
+          "model": "qwen3.8-27b"
+        }
+      ],
+      "snapshot_after": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-b5c8576705f4",
+          "product_cards": [],
+          "task_id": null,
+          "state_version": 0,
+          "session_version": 1,
+          "current_step": null,
+          "task_status": null,
+          "entry_context": {
+            "page": "activity",
+            "category_id": null,
+            "activity_id": "green_reset",
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": null,
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": null,
+          "available_actions": [
+            "send_message"
+          ],
+          "constraints_summary": {},
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "complete",
+          "messages": [
+            {
+              "message_id": "msg-4aa7a770efde",
+              "session_id": "sess-b5c8576705f4",
+              "task_id": null,
+              "sequence": 1,
+              "role": "user",
+              "kind": "text",
+              "content": "这份牛油果成品沙拉多少钱？",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-R37-51e7610dab",
+              "status": "completed",
+              "created_at": "2026-10-07T07:47:28.560928"
+            },
+            {
+              "message_id": "msg-4955c6cedab5",
+              "session_id": "sess-b5c8576705f4",
+              "task_id": null,
+              "sequence": 2,
+              "role": "assistant",
+              "kind": "text",
+              "content": "我查到的牛油果成品沙拉资料里没有价格信息，暂时无法确认多少钱；规格是280g。\n1. 牛油果成品沙拉",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-R37-51e7610dab",
+              "status": "completed",
+              "created_at": "2026-10-07T07:47:28.564000"
+            }
+          ]
+        },
+        "opening": {
+          "role": "keke",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "status": "captured"
+    }
+  ],
+  "timing_failures": []
+}

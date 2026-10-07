@@ -1,0 +1,1 @@
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File "C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-v4-evaluation\ui\run-02-backend-stop.ps1"

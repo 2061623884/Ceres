@@ -1,0 +1,3693 @@
+{
+  "version": "ceres1-v4-tasks-20261007-v2",
+  "candidate": "ac895fd620af617fa31f4e0006841a4d6a89cd53",
+  "scenario_count": 60,
+  "planned_executions": 100,
+  "split_policy": "scenario_family never crosses splits; all regression scenarios public; acceptance newly authored for this candidate, not statistically blind. Original v3/08 holdouts not reused.",
+  "usage": "Automated task conditions plus uncalibrated semantic diagnostics; no human acceptance or conversion inference.",
+  "cases": [
+    {
+      "case_id": "R01",
+      "group": "snack",
+      "scenario_family": "snack-type-to-confirm",
+      "split": "regression",
+      "core": true,
+      "goal": "零食先分类，再选两包薯片并明确加购",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "来点零食",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": false
+            },
+            {
+              "kind": "present",
+              "path": "after.guide.pending_clarifications",
+              "value": true
+            }
+          ]
+        },
+        {
+          "op": "select_pending_option",
+          "label": "choose-type",
+          "slot": "product_type",
+          "label_equals": "薯片",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.product_cards",
+              "value": true
+            },
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": false
+            }
+          ]
+        },
+        {
+          "op": "turn",
+          "label": "prepare",
+          "message": "买两包原味薯片70克袋装",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": true
+            },
+            {
+              "kind": "quantities",
+              "path": "after.guide.plan.items",
+              "value": {
+                "demo:snack-original-potato-chips-70g-bag": 2
+              }
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.plan.selected_total_fen",
+              "value": 1180
+            }
+          ]
+        },
+        {
+          "op": "confirm_plan",
+          "label": "explicit-confirm",
+          "authorized": [
+            "cart"
+          ],
+          "expect": [
+            {
+              "kind": "quantities",
+              "path": "after.cart.items",
+              "value": {
+                "demo:snack-original-potato-chips-70g-bag": 2
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "R02",
+      "group": "snack",
+      "scenario_family": "snack-direct-crackers",
+      "split": "regression",
+      "core": true,
+      "goal": "点名一盒苏打饼干到确认加购",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "买一盒苏打饼干100克盒装",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": true
+            },
+            {
+              "kind": "quantities",
+              "path": "after.guide.plan.items",
+              "value": {
+                "demo:snack-soda-crackers-100g-box": 1
+              }
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.plan.selected_total_fen",
+              "value": 690
+            }
+          ]
+        },
+        {
+          "op": "confirm_plan",
+          "label": "explicit-confirm",
+          "authorized": [
+            "cart"
+          ],
+          "expect": [
+            {
+              "kind": "quantities",
+              "path": "after.cart.items",
+              "value": {
+                "demo:snack-soda-crackers-100g-box": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "R03",
+      "group": "snack",
+      "scenario_family": "snack-budget-quantity-retain",
+      "split": "regression",
+      "core": true,
+      "goal": "两包薯片预算20元，形成未确认清单",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "买两包原味薯片70克袋装，预算20元",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": true
+            },
+            {
+              "kind": "quantities",
+              "path": "after.guide.plan.items",
+              "value": {
+                "demo:snack-original-potato-chips-70g-bag": 2
+              }
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.plan.selected_total_fen",
+              "value": 1180
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.constraints_summary.budget_fen",
+              "value": 2000
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "R04",
+      "group": "snack",
+      "scenario_family": "snack-browse-before-confirm",
+      "split": "regression",
+      "core": false,
+      "goal": "只浏览薯片不创建采购方案",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "看看原味薯片，不要采购",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": false
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.cart",
+              "before_path": "before.cart"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.orders",
+              "before_path": "before.orders"
+            },
+            {
+              "kind": "present",
+              "path": "reply",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "R05",
+      "group": "drink",
+      "scenario_family": "drink-classify-filter-to-confirm",
+      "split": "regression",
+      "core": true,
+      "goal": "饮料分类和品牌筛选后购买两罐百事",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "买点饮料，两件，预算20元",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": false
+            },
+            {
+              "kind": "present",
+              "path": "after.guide.pending_clarifications",
+              "value": true
+            }
+          ]
+        },
+        {
+          "op": "select_pending_option",
+          "label": "choose-type",
+          "slot": "product_type",
+          "label_equals": "可乐",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.product_cards",
+              "value": true
+            },
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": false
+            }
+          ]
+        },
+        {
+          "op": "select_pending_option",
+          "label": "choose-brand",
+          "slot": "product_filter",
+          "label_equals": "品牌：百事可乐",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.product_cards",
+              "value": true
+            },
+            {
+              "kind": "fields",
+              "path": "after.guide.product_cards",
+              "value": {
+                "brand": "百事可乐"
+              }
+            },
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": false
+            }
+          ]
+        },
+        {
+          "op": "turn",
+          "label": "selected-purchase",
+          "message": "那就买两罐百事可乐原味汽水330ml罐装",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": true
+            },
+            {
+              "kind": "quantities",
+              "path": "after.guide.plan.items",
+              "value": {
+                "demo:cn-pepsi-original-330ml-can": 2
+              }
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.plan.selected_total_fen",
+              "value": 600
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.constraints_summary.budget_fen",
+              "value": 2000
+            }
+          ]
+        },
+        {
+          "op": "confirm_plan",
+          "label": "explicit-confirm",
+          "authorized": [
+            "cart"
+          ],
+          "expect": [
+            {
+              "kind": "quantities",
+              "path": "after.cart.items",
+              "value": {
+                "demo:cn-pepsi-original-330ml-can": 2
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "R06",
+      "group": "drink",
+      "scenario_family": "drink-bottle-unit-retain",
+      "split": "regression",
+      "core": true,
+      "goal": "宽泛饮料两瓶保持包装与数量并确认",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "买点饮料，两瓶，预算20元",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": false
+            },
+            {
+              "kind": "present",
+              "path": "after.guide.pending_clarifications",
+              "value": true
+            }
+          ]
+        },
+        {
+          "op": "select_pending_option",
+          "label": "choose-type",
+          "slot": "product_type",
+          "label_equals": "可乐",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.product_cards",
+              "value": true
+            },
+            {
+              "kind": "fields",
+              "path": "after.guide.product_cards",
+              "value": {
+                "packaging": "bottle"
+              }
+            },
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": false
+            }
+          ]
+        },
+        {
+          "op": "turn",
+          "label": "selected-purchase",
+          "message": "那就买两瓶可口可乐经典原味汽水500ml瓶装",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": true
+            },
+            {
+              "kind": "quantities",
+              "path": "after.guide.plan.items",
+              "value": {
+                "demo:cn-coke-original-500ml-bottle": 2
+              }
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.plan.selected_total_fen",
+              "value": 800
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.constraints_summary.budget_fen",
+              "value": 2000
+            }
+          ]
+        },
+        {
+          "op": "confirm_plan",
+          "label": "explicit-confirm",
+          "authorized": [
+            "cart"
+          ],
+          "expect": [
+            {
+              "kind": "quantities",
+              "path": "after.cart.items",
+              "value": {
+                "demo:cn-coke-original-500ml-bottle": 2
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "R07",
+      "group": "drink",
+      "scenario_family": "drink-direct-zero",
+      "split": "regression",
+      "core": true,
+      "goal": "指定零度500ml两瓶并确认",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "买两瓶可口可乐零度汽水500ml瓶装",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": true
+            },
+            {
+              "kind": "quantities",
+              "path": "after.guide.plan.items",
+              "value": {
+                "demo:cn-coke-zero-500ml-bottle": 2
+              }
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.plan.selected_total_fen",
+              "value": 800
+            }
+          ]
+        },
+        {
+          "op": "confirm_plan",
+          "label": "explicit-confirm",
+          "authorized": [
+            "cart"
+          ],
+          "expect": [
+            {
+              "kind": "quantities",
+              "path": "after.cart.items",
+              "value": {
+                "demo:cn-coke-zero-500ml-bottle": 2
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "R08",
+      "group": "purchase",
+      "scenario_family": "water-quantity-increase",
+      "split": "regression",
+      "core": true,
+      "goal": "明确水商品后数量从一瓶增加到三瓶",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "买一瓶农夫山泉饮用水550ml瓶装",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": true
+            },
+            {
+              "kind": "quantities",
+              "path": "after.guide.plan.items",
+              "value": {
+                "demo:cn-nongfu-water-550ml-bottle": 1
+              }
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.plan.selected_total_fen",
+              "value": 200
+            }
+          ]
+        },
+        {
+          "op": "turn",
+          "label": "increase",
+          "message": "数量改成三瓶",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": true
+            },
+            {
+              "kind": "quantities",
+              "path": "after.guide.plan.items",
+              "value": {
+                "demo:cn-nongfu-water-550ml-bottle": 3
+              }
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.plan.selected_total_fen",
+              "value": 600
+            }
+          ]
+        },
+        {
+          "op": "confirm_plan",
+          "label": "explicit-confirm",
+          "authorized": [
+            "cart"
+          ],
+          "expect": [
+            {
+              "kind": "quantities",
+              "path": "after.cart.items",
+              "value": {
+                "demo:cn-nongfu-water-550ml-bottle": 3
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "R09",
+      "group": "purchase",
+      "scenario_family": "cola-quantity-decrease",
+      "split": "regression",
+      "core": true,
+      "goal": "可乐数量从三罐减少到一罐",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "买三罐百事可乐原味汽水330ml罐装",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": true
+            },
+            {
+              "kind": "quantities",
+              "path": "after.guide.plan.items",
+              "value": {
+                "demo:cn-pepsi-original-330ml-can": 3
+              }
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.plan.selected_total_fen",
+              "value": 900
+            }
+          ]
+        },
+        {
+          "op": "turn",
+          "label": "decrease",
+          "message": "只要一罐",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": true
+            },
+            {
+              "kind": "quantities",
+              "path": "after.guide.plan.items",
+              "value": {
+                "demo:cn-pepsi-original-330ml-can": 1
+              }
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.plan.selected_total_fen",
+              "value": 300
+            }
+          ]
+        },
+        {
+          "op": "confirm_plan",
+          "label": "explicit-confirm",
+          "authorized": [
+            "cart"
+          ],
+          "expect": [
+            {
+              "kind": "quantities",
+              "path": "after.cart.items",
+              "value": {
+                "demo:cn-pepsi-original-330ml-can": 1
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "R10",
+      "group": "purchase",
+      "scenario_family": "dish-required-selection",
+      "split": "regression",
+      "core": true,
+      "goal": "番茄炒蛋清单到明确确认，不把调料未选说成家中已有",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "买番茄炒蛋的食材，预算50元",
+          "expect": [
+            {
+              "kind": "ingredient_ids",
+              "path": "after.guide.plan.items",
+              "value": ["tomato", "egg", "oil", "salt", "sugar"]
+            },
+            {
+              "kind": "role_selection",
+              "path": "after.guide.plan.items",
+              "value": {"required": true, "pantry": false}
+            },
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": true
+            },
+            {
+              "kind": "max",
+              "path": "after.guide.plan.selected_total_fen",
+              "value": 5000
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.cart",
+              "before_path": "before.cart"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.orders",
+              "before_path": "before.orders"
+            }
+          ]
+        },
+        {
+          "op": "confirm_plan",
+          "label": "confirm-dish",
+          "authorized": [
+            "cart"
+          ],
+          "expect": [
+            {
+              "kind": "ingredient_ids",
+              "path": "after.cart.items",
+              "value": ["tomato", "egg"]
+            },
+            {
+              "kind": "confirmed_selection",
+              "path": "after.cart.items",
+              "before_path": "before.guide.plan.items"
+            },
+            {
+              "kind": "present",
+              "path": "after.cart.items",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "R11",
+      "group": "purchase",
+      "scenario_family": "budget-revision-cola",
+      "split": "regression",
+      "core": true,
+      "goal": "清单修改预算后保留两罐百事的数量",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "买两罐百事可乐原味汽水330ml罐装，预算20元",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": true
+            },
+            {
+              "kind": "quantities",
+              "path": "after.guide.plan.items",
+              "value": {
+                "demo:cn-pepsi-original-330ml-can": 2
+              }
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.plan.selected_total_fen",
+              "value": 600
+            }
+          ]
+        },
+        {
+          "op": "turn",
+          "label": "new-budget",
+          "message": "预算改成10元，还是两罐",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": true
+            },
+            {
+              "kind": "quantities",
+              "path": "after.guide.plan.items",
+              "value": {
+                "demo:cn-pepsi-original-330ml-can": 2
+              }
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.plan.selected_total_fen",
+              "value": 600
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.constraints_summary.budget_fen",
+              "value": 1000
+            }
+          ]
+        },
+        {
+          "op": "confirm_plan",
+          "label": "explicit-confirm",
+          "authorized": [
+            "cart"
+          ],
+          "expect": [
+            {
+              "kind": "quantities",
+              "path": "after.cart.items",
+              "value": {
+                "demo:cn-pepsi-original-330ml-can": 2
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "R12",
+      "group": "drink",
+      "scenario_family": "comparison-brand-read",
+      "split": "regression",
+      "core": true,
+      "goal": "仅比较百事可乐，不加购",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "只比较百事可乐，先不要买",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.product_cards",
+              "value": true
+            },
+            {
+              "kind": "fields",
+              "path": "after.guide.product_cards",
+              "value": {
+                "brand": "百事可乐"
+              }
+            },
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": false
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.cart",
+              "before_path": "before.cart"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.orders",
+              "before_path": "before.orders"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "R13",
+      "group": "policy",
+      "scenario_family": "general-return-keke",
+      "split": "regression",
+      "core": true,
+      "goal": "可可一般退货政策有必要规则依据",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "一般签收后几天内能退？",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": false
+            },
+            {
+              "kind": "present",
+              "path": "reply",
+              "value": true
+            },
+            {
+              "kind": "contains",
+              "path": "grounding_evidence",
+              "value": "P-RET-01"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.cart",
+              "before_path": "before.cart"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.orders",
+              "before_path": "before.orders"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "R14",
+      "group": "policy",
+      "scenario_family": "general-delivery-momo",
+      "split": "regression",
+      "core": true,
+      "goal": "墨墨无订单的一般配送咨询",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "一般配送时间是多久？",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": false
+            },
+            {
+              "kind": "present",
+              "path": "reply",
+              "value": true
+            },
+            {
+              "kind": "contains",
+              "path": "grounding_evidence",
+              "value": "P-DEL-01"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.cart",
+              "before_path": "before.cart"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.orders",
+              "before_path": "before.orders"
+            }
+          ]
+        }
+      ],
+      "initial_role": "momo"
+    },
+    {
+      "case_id": "R15",
+      "group": "routing",
+      "scenario_family": "placed-order-decline-switch",
+      "split": "regression",
+      "core": true,
+      "goal": "可可收到具体订单查询仅建议切换，拒绝后角色不变",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "我的订单 {{order_id}} 到哪了？",
+          "expect": [
+            {
+              "kind": "eq",
+              "path": "route.decision",
+              "value": "suggest_switch"
+            },
+            {
+              "kind": "eq",
+              "path": "route.target_role",
+              "value": "momo"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.cart",
+              "before_path": "before.cart"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.orders",
+              "before_path": "before.orders"
+            }
+          ]
+        },
+        {
+          "op": "switch",
+          "label": "decline-momo",
+          "target_role": "momo",
+          "accept": false,
+          "authorized": [],
+          "expect": [
+            {
+              "kind": "eq",
+              "path": "after.opening.role",
+              "value": "keke"
+            }
+          ]
+        }
+      ],
+      "setup": {
+        "order": {
+          "sku_id": "demo:cn-pepsi-original-330ml-can"
+        }
+      }
+    },
+    {
+      "case_id": "R16",
+      "group": "routing",
+      "scenario_family": "momo-new-shopping-consent",
+      "split": "regression",
+      "core": true,
+      "goal": "墨墨新购物需求经同意切到可可准备清单",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "帮我买一瓶农夫山泉饮用水550ml瓶装",
+          "expect": [
+            {
+              "kind": "eq",
+              "path": "route.decision",
+              "value": "suggest_switch"
+            },
+            {
+              "kind": "eq",
+              "path": "route.target_role",
+              "value": "keke"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.cart",
+              "before_path": "before.cart"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.orders",
+              "before_path": "before.orders"
+            }
+          ]
+        },
+        {
+          "op": "switch",
+          "label": "consent-keke",
+          "target_role": "keke",
+          "accept": true,
+          "authorized": [],
+          "expect": [
+            {
+              "kind": "eq",
+              "path": "after.opening.role",
+              "value": "keke"
+            },
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": true
+            },
+            {
+              "kind": "quantities",
+              "path": "after.guide.plan.items",
+              "value": {
+                "demo:cn-nongfu-water-550ml-bottle": 1
+              }
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.plan.selected_total_fen",
+              "value": 200
+            }
+          ]
+        },
+        {
+          "op": "confirm_plan",
+          "label": "explicit-confirm",
+          "authorized": [
+            "cart"
+          ],
+          "expect": [
+            {
+              "kind": "quantities",
+              "path": "after.cart.items",
+              "value": {
+                "demo:cn-nongfu-water-550ml-bottle": 1
+              }
+            }
+          ]
+        }
+      ],
+      "initial_role": "momo"
+    },
+    {
+      "case_id": "R17",
+      "group": "aftersales",
+      "scenario_family": "refund-then-buy-consented",
+      "split": "regression",
+      "core": true,
+      "goal": "同一独立订单退款申请后同意继续采购，步骤不重放",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "订单 {{order_id}} 想申请退款，办好后再帮我买一瓶农夫山泉饮用水550ml瓶装。",
+          "expect": [
+            {
+              "kind": "eq",
+              "path": "route.decision",
+              "value": "suggest_switch"
+            },
+            {
+              "kind": "eq",
+              "path": "route.target_role",
+              "value": "momo"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.cart",
+              "before_path": "before.cart"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.orders",
+              "before_path": "before.orders"
+            }
+          ]
+        },
+        {
+          "op": "switch",
+          "label": "consent-momo",
+          "target_role": "momo",
+          "accept": true,
+          "authorized": [
+            "refunds"
+          ],
+          "expect": [
+            {
+              "kind": "eq",
+              "path": "after.opening.role",
+              "value": "momo"
+            },
+            {
+              "kind": "length",
+              "path": "after.refunds",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "op": "switch",
+          "label": "consent-keke",
+          "target_role": "keke",
+          "accept": true,
+          "authorized": [],
+          "expect": [
+            {
+              "kind": "eq",
+              "path": "after.opening.role",
+              "value": "keke"
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.plan.can_confirm",
+              "value": true
+            },
+            {
+              "kind": "quantities",
+              "path": "after.guide.plan.items",
+              "value": {"demo:cn-nongfu-water-550ml-bottle": 1}
+            },
+            {
+              "kind": "fields",
+              "path": "after.guide.plan.items",
+              "value": {"selected": true}
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.plan.selected_total_fen",
+              "value": 200
+            }
+          ]
+        },
+        {
+          "op": "replay_switch",
+          "label": "replay-completed-switch",
+          "expect": [
+            {
+              "kind": "unchanged",
+              "path": "after.refunds",
+              "before_path": "before.refunds"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.cart",
+              "before_path": "before.cart"
+            }
+          ]
+        }
+      ],
+      "setup": {
+        "order": {
+          "sku_id": "demo:cn-pepsi-original-330ml-can"
+        }
+      }
+    },
+    {
+      "case_id": "R18",
+      "group": "theme",
+      "scenario_family": "theme-salad-direct-confirm",
+      "split": "regression",
+      "core": true,
+      "goal": "专题限定成品沙拉作为成品到确认加购",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "买一份GREEN RESET牛油果成品沙拉",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": true
+            },
+            {
+              "kind": "quantities",
+              "path": "after.guide.plan.items",
+              "value": {
+                "demo:green-reset-avocado-salad": 1
+              }
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.plan.selected_total_fen",
+              "value": 2380
+            }
+          ]
+        },
+        {
+          "op": "confirm_plan",
+          "label": "explicit-confirm",
+          "authorized": [
+            "cart"
+          ],
+          "expect": [
+            {
+              "kind": "quantities",
+              "path": "after.cart.items",
+              "value": {
+                "demo:green-reset-avocado-salad": 1
+              }
+            }
+          ]
+        }
+      ],
+      "entry_context": {
+        "page": "activity",
+        "activity_id": "green_reset",
+        "store_id": "store-demo-01",
+        "delivery_zone_id": "zone-default"
+      }
+    },
+    {
+      "case_id": "R19",
+      "group": "memory",
+      "scenario_family": "explicit-save-new-session-list",
+      "split": "regression",
+      "core": true,
+      "goal": "显式保存偏好后新会话查询仍有记录",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "请长期记住我平时喜欢百事可乐",
+          "expect": [
+            {
+              "kind": "contains",
+              "path": "after.memories.0.content",
+              "value": "百事"
+            },
+            {
+              "kind": "eq",
+              "path": "after.memories.0.source",
+              "value": "explicit"
+            },
+            {
+              "kind": "eq",
+              "path": "after.memories.0.expires_at",
+              "value": null
+            },
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": false
+            }
+          ]
+        },
+        {
+          "op": "new_session",
+          "label": "reopen",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.memories",
+              "value": true
+            }
+          ]
+        },
+        {
+          "op": "turn",
+          "label": "list",
+          "message": "查询你保存的全部记忆",
+          "expect": [
+            {
+              "kind": "contains",
+              "path": "reply",
+              "value": "百事"
+            },
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "R20",
+      "group": "memory",
+      "scenario_family": "explicit-update-delete",
+      "split": "regression",
+      "core": true,
+      "goal": "更正并删除已有明确偏好，不改购物车",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "把已保存的可乐偏好更正成可口可乐",
+          "expect": [
+            {
+              "kind": "contains",
+              "path": "after.memories.0.content",
+              "value": "可口可乐"
+            },
+            {
+              "kind": "eq",
+              "path": "after.memories.0.source",
+              "value": "explicit"
+            }
+          ]
+        },
+        {
+          "op": "turn",
+          "label": "delete",
+          "message": "删除已保存的可乐偏好",
+          "expect": [
+            {
+              "kind": "length",
+              "path": "after.memories",
+              "value": 0
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.cart",
+              "before_path": "before.cart"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.orders",
+              "before_path": "before.orders"
+            }
+          ]
+        }
+      ],
+      "setup": {
+        "memories": [
+          {
+            "category": "user",
+            "source": "explicit",
+            "content": "平时喜欢百事可乐"
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "R21",
+      "group": "drink",
+      "scenario_family": "capacity-filter-read",
+      "split": "regression",
+      "core": false,
+      "goal": "只比较500ml瓶装可乐",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "比较500ml瓶装可乐，先不要买",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.product_cards",
+              "value": true
+            },
+            {
+              "kind": "fields",
+              "path": "after.guide.product_cards",
+              "value": {
+                "packaging": "bottle",
+                "item_volume_ml": 500
+              }
+            },
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "R22",
+      "group": "drink",
+      "scenario_family": "zero-filter-read",
+      "split": "regression",
+      "core": false,
+      "goal": "只看可口可乐零度500ml报价",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "可口可乐零度汽水500ml瓶装多少钱？",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "reply",
+              "value": true
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.cart",
+              "before_path": "before.cart"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.orders",
+              "before_path": "before.orders"
+            },
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "R23",
+      "group": "purchase",
+      "scenario_family": "confirmed-idempotency-key",
+      "split": "regression",
+      "core": false,
+      "goal": "同一确认幂等键重放不重复加购",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "买两罐百事可乐原味汽水330ml罐装",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": true
+            },
+            {
+              "kind": "quantities",
+              "path": "after.guide.plan.items",
+              "value": {
+                "demo:cn-pepsi-original-330ml-can": 2
+              }
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.plan.selected_total_fen",
+              "value": 600
+            }
+          ]
+        },
+        {
+          "op": "confirm_plan",
+          "label": "explicit-confirm",
+          "authorized": [
+            "cart"
+          ],
+          "expect": [
+            {
+              "kind": "quantities",
+              "path": "after.cart.items",
+              "value": {
+                "demo:cn-pepsi-original-330ml-can": 2
+              }
+            }
+          ]
+        },
+        {
+          "op": "replay_confirm",
+          "label": "same-key-replay",
+          "expect": [
+            {
+              "kind": "quantities",
+              "path": "after.cart.items",
+              "value": {
+                "demo:cn-pepsi-original-330ml-can": 2
+              }
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.cart",
+              "before_path": "before.cart"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "R24",
+      "group": "purchase",
+      "scenario_family": "stop-before-confirm",
+      "split": "regression",
+      "core": false,
+      "goal": "清单提出后用户停止采购不写购物车",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "买一瓶农夫山泉饮用水550ml瓶装",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": true
+            },
+            {
+              "kind": "quantities",
+              "path": "after.guide.plan.items",
+              "value": {
+                "demo:cn-nongfu-water-550ml-bottle": 1
+              }
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.plan.selected_total_fen",
+              "value": 200
+            }
+          ]
+        },
+        {
+          "op": "turn",
+          "label": "stop",
+          "message": "取消这次采购，不要加购",
+          "expect": [
+            {
+              "kind": "unchanged",
+              "path": "after.cart",
+              "before_path": "before.cart"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.orders",
+              "before_path": "before.orders"
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.task_status",
+              "value": "cancelled"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "R25",
+      "group": "policy",
+      "scenario_family": "general-refund-before-delivery",
+      "split": "regression",
+      "core": false,
+      "goal": "可可查询未签收退款规则",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "没签收能申请退款吗？",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": false
+            },
+            {
+              "kind": "present",
+              "path": "reply",
+              "value": true
+            },
+            {
+              "kind": "contains",
+              "path": "grounding_evidence",
+              "value": "P-REF-01"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.cart",
+              "before_path": "before.cart"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.orders",
+              "before_path": "before.orders"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "R26",
+      "group": "policy",
+      "scenario_family": "general-fresh-return",
+      "split": "regression",
+      "core": false,
+      "goal": "生鲜不可退政策不触发具体订单申请",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "生鲜商品可以退货吗？",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": false
+            },
+            {
+              "kind": "present",
+              "path": "reply",
+              "value": true
+            },
+            {
+              "kind": "contains",
+              "path": "grounding_evidence",
+              "value": "P-RET-02"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.cart",
+              "before_path": "before.cart"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.orders",
+              "before_path": "before.orders"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "R27",
+      "group": "routing",
+      "scenario_family": "ambiguous-cancel-no-object",
+      "split": "regression",
+      "core": false,
+      "goal": "无明确对象的取消请求澄清服务，不写业务",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "取消一下",
+          "expect": [
+            {
+              "kind": "eq",
+              "path": "route.decision",
+              "value": "clarify"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.cart",
+              "before_path": "before.cart"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.orders",
+              "before_path": "before.orders"
+            },
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "R28",
+      "group": "routing",
+      "scenario_family": "greeting-no-task",
+      "split": "regression",
+      "core": false,
+      "goal": "普通问候不创建任务",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "你好，今天有点累",
+          "expect": [
+            {
+              "kind": "eq",
+              "path": "route.decision",
+              "value": "stay_current"
+            },
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": false
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.task_id",
+              "value": null
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.cart",
+              "before_path": "before.cart"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.orders",
+              "before_path": "before.orders"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "R29",
+      "group": "aftersales",
+      "scenario_family": "order-query-momo",
+      "split": "regression",
+      "core": false,
+      "goal": "墨墨已选定订单查询物流，不申请退款",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "我选的这笔订单配送到哪了？",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "reply",
+              "value": true
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.cart",
+              "before_path": "before.cart"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.orders",
+              "before_path": "before.orders"
+            }
+          ]
+        }
+      ],
+      "initial_role": "momo",
+      "setup": {
+        "order": {
+          "sku_id": "demo:cn-pepsi-original-330ml-can"
+        }
+      }
+    },
+    {
+      "case_id": "R30",
+      "group": "aftersales",
+      "scenario_family": "refund-standalone-paid",
+      "split": "regression",
+      "core": false,
+      "goal": "墨墨对未签收订单提交一次退款申请",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "请为当前订单申请退款，原因是暂时不需要了",
+          "expect": [
+            {
+              "kind": "length",
+              "path": "after.refunds",
+              "value": 1
+            },
+            {
+              "kind": "eq",
+              "path": "after.refunds.0.status",
+              "value": "pending"
+            }
+          ],
+          "authorized": [
+            "refunds"
+          ]
+        }
+      ],
+      "initial_role": "momo",
+      "setup": {
+        "order": {
+          "sku_id": "demo:cn-pepsi-original-330ml-can"
+        }
+      }
+    },
+    {
+      "case_id": "R31",
+      "group": "aftersales",
+      "scenario_family": "return-delivered-eligible",
+      "split": "regression",
+      "core": false,
+      "goal": "签收一天的可退商品提交一次退货申请",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "当前订单的百事可乐我要退货，原因是买错了",
+          "expect": [
+            {
+              "kind": "length",
+              "path": "after.returns",
+              "value": 1
+            },
+            {
+              "kind": "eq",
+              "path": "after.returns.0.status",
+              "value": "pending"
+            }
+          ],
+          "authorized": [
+            "returns"
+          ]
+        }
+      ],
+      "initial_role": "momo",
+      "setup": {
+        "order": {
+          "sku_id": "demo:cn-pepsi-original-330ml-can",
+          "delivered_days": 1
+        }
+      }
+    },
+    {
+      "case_id": "R32",
+      "group": "aftersales",
+      "scenario_family": "return-expired-ineligible",
+      "split": "regression",
+      "core": false,
+      "goal": "签收超7天不能创建退货申请",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "当前订单的百事可乐我要退货，原因是买错了",
+          "expect": [
+            {
+              "kind": "length",
+              "path": "after.returns",
+              "value": 0
+            },
+            {
+              "kind": "present",
+              "path": "reply",
+              "value": true
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.cart",
+              "before_path": "before.cart"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.orders",
+              "before_path": "before.orders"
+            }
+          ]
+        }
+      ],
+      "initial_role": "momo",
+      "expected_outcome": "compliant_refusal",
+      "setup": {
+        "order": {
+          "sku_id": "demo:cn-pepsi-original-330ml-can",
+          "delivered_days": 10
+        }
+      }
+    },
+    {
+      "case_id": "R33",
+      "group": "aftersales",
+      "scenario_family": "refund-eligibility-read-only",
+      "split": "regression",
+      "core": false,
+      "goal": "只询问退款资格，不自动申请",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "当前订单还能申请退款吗？先问问，不要提交",
+          "expect": [
+            {
+              "kind": "length",
+              "path": "after.refunds",
+              "value": 0
+            },
+            {
+              "kind": "present",
+              "path": "reply",
+              "value": true
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.cart",
+              "before_path": "before.cart"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.orders",
+              "before_path": "before.orders"
+            }
+          ]
+        }
+      ],
+      "initial_role": "momo",
+      "setup": {
+        "order": {
+          "sku_id": "demo:cn-pepsi-original-330ml-can"
+        }
+      }
+    },
+    {
+      "case_id": "R34",
+      "group": "routing",
+      "scenario_family": "momo-shopping-switch-declined",
+      "split": "regression",
+      "core": false,
+      "goal": "墨墨购物建议被拒绝后不切换",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "我想买一瓶可乐",
+          "expect": [
+            {
+              "kind": "eq",
+              "path": "route.decision",
+              "value": "suggest_switch"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.cart",
+              "before_path": "before.cart"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.orders",
+              "before_path": "before.orders"
+            }
+          ]
+        },
+        {
+          "op": "switch",
+          "label": "decline-keke",
+          "target_role": "keke",
+          "accept": false,
+          "authorized": [],
+          "expect": [
+            {
+              "kind": "eq",
+              "path": "after.opening.role",
+              "value": "momo"
+            }
+          ]
+        }
+      ],
+      "initial_role": "momo"
+    },
+    {
+      "case_id": "R35",
+      "group": "theme",
+      "scenario_family": "theme-finished-fruit-confirm",
+      "split": "regression",
+      "core": true,
+      "goal": "专题成品水果拼盘到确认加购",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "买一份GREEN RESET鲜果成品拼盘",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": true
+            },
+            {
+              "kind": "quantities",
+              "path": "after.guide.plan.items",
+              "value": {
+                "demo:green-reset-fruit-platter": 1
+              }
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.plan.selected_total_fen",
+              "value": 1980
+            }
+          ]
+        },
+        {
+          "op": "confirm_plan",
+          "label": "explicit-confirm",
+          "authorized": [
+            "cart"
+          ],
+          "expect": [
+            {
+              "kind": "quantities",
+              "path": "after.cart.items",
+              "value": {
+                "demo:green-reset-fruit-platter": 1
+              }
+            }
+          ]
+        }
+      ],
+      "entry_context": {
+        "page": "activity",
+        "activity_id": "green_reset",
+        "store_id": "store-demo-01",
+        "delivery_zone_id": "zone-default"
+      }
+    },
+    {
+      "case_id": "R36",
+      "group": "theme",
+      "scenario_family": "theme-introduction-only",
+      "split": "regression",
+      "core": false,
+      "goal": "专题介绍不创建采购清单",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "GREEN RESET专题是什么，先介绍一下，不要买",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": false
+            },
+            {
+              "kind": "present",
+              "path": "reply",
+              "value": true
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.cart",
+              "before_path": "before.cart"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.orders",
+              "before_path": "before.orders"
+            }
+          ]
+        }
+      ],
+      "entry_context": {
+        "page": "activity",
+        "activity_id": "green_reset",
+        "store_id": "store-demo-01",
+        "delivery_zone_id": "zone-default"
+      }
+    },
+    {
+      "case_id": "R37",
+      "group": "theme",
+      "scenario_family": "theme-product-context-followup",
+      "split": "regression",
+      "core": false,
+      "goal": "专题产品上下文查询成品报价",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "price",
+          "message": "这份牛油果成品沙拉多少钱？",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "reply",
+              "value": true
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.cart",
+              "before_path": "before.cart"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.orders",
+              "before_path": "before.orders"
+            }
+          ],
+          "view_context": {
+            "page": "product",
+            "product_id": "demo:green-reset-avocado-salad",
+            "activity_id": "green_reset"
+          }
+        }
+      ],
+      "entry_context": {
+        "page": "activity",
+        "activity_id": "green_reset",
+        "store_id": "store-demo-01",
+        "delivery_zone_id": "zone-default"
+      }
+    },
+    {
+      "case_id": "R38",
+      "group": "purchase",
+      "scenario_family": "price-discussion-no-authorization",
+      "split": "regression",
+      "core": false,
+      "goal": "只接受报价不能自动加购",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "买一盒苏打饼干100克盒装",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": true
+            },
+            {
+              "kind": "quantities",
+              "path": "after.guide.plan.items",
+              "value": {
+                "demo:snack-soda-crackers-100g-box": 1
+              }
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.plan.selected_total_fen",
+              "value": 690
+            }
+          ]
+        },
+        {
+          "op": "turn",
+          "label": "accept-price-only",
+          "message": "这个价格可以，先放清单里，不要加购",
+          "expect": [
+            {
+              "kind": "unchanged",
+              "path": "after.cart",
+              "before_path": "before.cart"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.orders",
+              "before_path": "before.orders"
+            },
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "R39",
+      "group": "memory",
+      "scenario_family": "empty-memory-list",
+      "split": "regression",
+      "core": false,
+      "goal": "没有已有记忆时查询不创建购买任务",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "查询我所有已保存的购物记忆",
+          "expect": [
+            {
+              "kind": "length",
+              "path": "after.memories",
+              "value": 0
+            },
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": false
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.cart",
+              "before_path": "before.cart"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.orders",
+              "before_path": "before.orders"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "R40",
+      "group": "memory",
+      "scenario_family": "feedback-explicit-persistence",
+      "split": "regression",
+      "core": false,
+      "goal": "显式保存长期交互反馈",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "请长期保存我的反馈：每次先告诉我推荐理由",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.memories",
+              "value": true
+            },
+            {
+              "kind": "eq",
+              "path": "after.memories.0.source",
+              "value": "explicit"
+            },
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "H01",
+      "group": "purchase",
+      "scenario_family": "independent-purchase-does-not-inherit-budget",
+      "split": "acceptance",
+      "core": false,
+      "goal": "饮品预算后开始独立零食任务不继承旧预算",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "买一瓶可口可乐经典原味汽水500ml瓶装，预算5元",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": true
+            },
+            {
+              "kind": "quantities",
+              "path": "after.guide.plan.items",
+              "value": {
+                "demo:cn-coke-original-500ml-bottle": 1
+              }
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.plan.selected_total_fen",
+              "value": 400
+            }
+          ]
+        },
+        {
+          "op": "turn",
+          "label": "independent-snack",
+          "message": "另开一项独立采购：买两包原味薯片70克袋装，不限制预算",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": true
+            },
+            {
+              "kind": "quantities",
+              "path": "after.guide.plan.items",
+              "value": {
+                "demo:snack-original-potato-chips-70g-bag": 2
+              }
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.plan.selected_total_fen",
+              "value": 1180
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.constraints_summary.budget_fen",
+              "value": null
+            }
+          ]
+        },
+        {
+          "op": "confirm_plan",
+          "label": "explicit-confirm",
+          "authorized": [
+            "cart"
+          ],
+          "expect": [
+            {
+              "kind": "quantities",
+              "path": "after.cart.items",
+              "value": {
+                "demo:snack-original-potato-chips-70g-bag": 2
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "H02",
+      "group": "purchase",
+      "scenario_family": "explicit-budget-clear-same-goal",
+      "split": "acceptance",
+      "core": false,
+      "goal": "明确取消当前预算后保留当前商品数量",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "买两罐百事可乐原味汽水330ml罐装，预算10元",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": true
+            },
+            {
+              "kind": "quantities",
+              "path": "after.guide.plan.items",
+              "value": {
+                "demo:cn-pepsi-original-330ml-can": 2
+              }
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.plan.selected_total_fen",
+              "value": 600
+            }
+          ]
+        },
+        {
+          "op": "turn",
+          "label": "clear-budget",
+          "message": "取消预算限制，商品和数量都不变",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": true
+            },
+            {
+              "kind": "quantities",
+              "path": "after.guide.plan.items",
+              "value": {
+                "demo:cn-pepsi-original-330ml-can": 2
+              }
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.plan.selected_total_fen",
+              "value": 600
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.constraints_summary.budget_fen",
+              "value": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "H03",
+      "group": "purchase",
+      "scenario_family": "budget-negotiation-not-cart-authorization",
+      "split": "acceptance",
+      "core": false,
+      "goal": "超预算薯片报价协商得到同意后仍不加购",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "买两包原味薯片70克袋装，预算10元",
+          "expect": [
+            {
+              "kind": "unchanged",
+              "path": "after.cart",
+              "before_path": "before.cart"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.orders",
+              "before_path": "before.orders"
+            }
+          ]
+        },
+        {
+          "op": "turn",
+          "label": "accept-budget",
+          "message": "接受这两包的11.80元报价，但先不要加购",
+          "expect": [
+            {
+              "kind": "unchanged",
+              "path": "after.cart",
+              "before_path": "before.cart"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.orders",
+              "before_path": "before.orders"
+            },
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": true
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.constraints_summary.budget_fen",
+              "value": 1180
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.plan.can_confirm",
+              "value": true
+            },
+            {
+              "kind": "quantities",
+              "path": "after.guide.plan.items",
+              "value": {"demo:snack-original-potato-chips-70g-bag": 2}
+            },
+            {
+              "kind": "fields",
+              "path": "after.guide.plan.items",
+              "value": {"selected": true}
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.plan.selected_total_fen",
+              "value": 1180
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "H04",
+      "group": "purchase",
+      "scenario_family": "post-confirm-new-quantity-delta",
+      "split": "acceptance",
+      "core": false,
+      "goal": "已购一罐后追加一罐仅新增差量",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "买一罐百事可乐原味汽水330ml罐装",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": true
+            },
+            {
+              "kind": "quantities",
+              "path": "after.guide.plan.items",
+              "value": {
+                "demo:cn-pepsi-original-330ml-can": 1
+              }
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.plan.selected_total_fen",
+              "value": 300
+            }
+          ]
+        },
+        {
+          "op": "confirm_plan",
+          "label": "explicit-confirm",
+          "authorized": [
+            "cart"
+          ],
+          "expect": [
+            {
+              "kind": "quantities",
+              "path": "after.cart.items",
+              "value": {
+                "demo:cn-pepsi-original-330ml-can": 1
+              }
+            }
+          ]
+        },
+        {
+          "op": "turn",
+          "label": "append",
+          "message": "同样商品再追加一罐，先列清单",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": true
+            },
+            {
+              "kind": "quantities",
+              "path": "after.cart.items",
+              "value": {
+                "demo:cn-pepsi-original-330ml-can": 1
+              }
+            }
+          ]
+        },
+        {
+          "op": "confirm_plan",
+          "label": "confirm-added-quantity",
+          "authorized": [
+            "cart"
+          ],
+          "expect": [
+            {
+              "kind": "quantities",
+              "path": "after.cart.items",
+              "value": {
+                "demo:cn-pepsi-original-330ml-can": 2
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "H05",
+      "group": "snack",
+      "scenario_family": "change-type-before-product",
+      "split": "acceptance",
+      "core": false,
+      "goal": "尚未选品时由薯片改为饼干保留未授权状态",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "来点零食",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": false
+            },
+            {
+              "kind": "present",
+              "path": "after.guide.pending_clarifications",
+              "value": true
+            }
+          ]
+        },
+        {
+          "op": "select_pending_option",
+          "label": "choose-type",
+          "slot": "product_type",
+          "label_equals": "薯片",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.product_cards",
+              "value": true
+            },
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": false
+            }
+          ]
+        },
+        {
+          "op": "turn",
+          "label": "change-type",
+          "message": "还是换成饼干，只看候选",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.product_cards",
+              "value": true
+            },
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": false
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.cart",
+              "before_path": "before.cart"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.orders",
+              "before_path": "before.orders"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "H06",
+      "group": "drink",
+      "scenario_family": "brand-change-with-kept-quantity",
+      "split": "acceptance",
+      "core": false,
+      "goal": "两瓶数量保持，指定品牌从可口改为农夫水",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "买两瓶可口可乐经典原味汽水500ml瓶装",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": true
+            },
+            {
+              "kind": "quantities",
+              "path": "after.guide.plan.items",
+              "value": {
+                "demo:cn-coke-original-500ml-bottle": 2
+              }
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.plan.selected_total_fen",
+              "value": 800
+            }
+          ]
+        },
+        {
+          "op": "turn",
+          "label": "replace",
+          "message": "改成两瓶农夫山泉饮用水550ml瓶装",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": true
+            },
+            {
+              "kind": "quantities",
+              "path": "after.guide.plan.items",
+              "value": {
+                "demo:cn-nongfu-water-550ml-bottle": 2
+              }
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.plan.selected_total_fen",
+              "value": 400
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.cart",
+              "before_path": "before.cart"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.orders",
+              "before_path": "before.orders"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "H07",
+      "group": "policy",
+      "scenario_family": "policy-interruption-retains-plan",
+      "split": "acceptance",
+      "core": false,
+      "goal": "采购中插入一般退货咨询后清单保持",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "买两罐百事可乐原味汽水330ml罐装",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": true
+            },
+            {
+              "kind": "quantities",
+              "path": "after.guide.plan.items",
+              "value": {
+                "demo:cn-pepsi-original-330ml-can": 2
+              }
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.plan.selected_total_fen",
+              "value": 600
+            }
+          ]
+        },
+        {
+          "op": "turn",
+          "label": "policy-interruption",
+          "message": "先问一句，一般签收几天内能退货？",
+          "expect": [
+            {
+              "kind": "quantities",
+              "path": "after.guide.plan.items",
+              "value": {
+                "demo:cn-pepsi-original-330ml-can": 2
+              }
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.cart",
+              "before_path": "before.cart"
+            },
+            {
+              "kind": "contains",
+              "path": "grounding_evidence",
+              "value": "P-RET-01"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "H08",
+      "group": "policy",
+      "scenario_family": "general-policy-with-selected-order",
+      "split": "acceptance",
+      "core": false,
+      "goal": "已有订单选择时一般政策仍不自动执行售后",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "不是问这单，我想了解门店一般退款政策",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "reply",
+              "value": true
+            },
+            {
+              "kind": "length",
+              "path": "after.refunds",
+              "value": 0
+            },
+            {
+              "kind": "contains",
+              "path": "grounding_evidence",
+              "value": "P-REF-01"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.cart",
+              "before_path": "before.cart"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.orders",
+              "before_path": "before.orders"
+            }
+          ]
+        }
+      ],
+      "initial_role": "momo",
+      "setup": {
+        "order": {
+          "sku_id": "demo:cn-pepsi-original-330ml-can"
+        }
+      }
+    },
+    {
+      "case_id": "H09",
+      "group": "routing",
+      "scenario_family": "momo-life-comment-after-order",
+      "split": "acceptance",
+      "core": false,
+      "goal": "售后订单上下文中的普通生活感叹不改订单",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "今天有点累，先聊聊就好，不要处理订单",
+          "expect": [
+            {
+              "kind": "eq",
+              "path": "route.decision",
+              "value": "stay_current"
+            },
+            {
+              "kind": "present",
+              "path": "reply",
+              "value": true
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.cart",
+              "before_path": "before.cart"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.orders",
+              "before_path": "before.orders"
+            }
+          ]
+        }
+      ],
+      "initial_role": "momo",
+      "setup": {
+        "order": {
+          "sku_id": "demo:cn-pepsi-original-330ml-can"
+        }
+      }
+    },
+    {
+      "case_id": "H10",
+      "group": "routing",
+      "scenario_family": "refused-switch-then-current-shopping",
+      "split": "acceptance",
+      "core": false,
+      "goal": "拒绝具体订单切换后仍可在可可购买水",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "订单 {{order_id}} 物流呢？",
+          "expect": [
+            {
+              "kind": "eq",
+              "path": "route.decision",
+              "value": "suggest_switch"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.cart",
+              "before_path": "before.cart"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.orders",
+              "before_path": "before.orders"
+            }
+          ]
+        },
+        {
+          "op": "switch",
+          "label": "decline-momo",
+          "target_role": "momo",
+          "accept": false,
+          "authorized": [],
+          "expect": [
+            {
+              "kind": "eq",
+              "path": "after.opening.role",
+              "value": "keke"
+            }
+          ]
+        },
+        {
+          "op": "turn",
+          "label": "new-shopping",
+          "message": "先不查订单了，买一瓶农夫山泉饮用水550ml瓶装",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": true
+            },
+            {
+              "kind": "quantities",
+              "path": "after.guide.plan.items",
+              "value": {
+                "demo:cn-nongfu-water-550ml-bottle": 1
+              }
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.plan.selected_total_fen",
+              "value": 200
+            }
+          ]
+        },
+        {
+          "op": "confirm_plan",
+          "label": "explicit-confirm",
+          "authorized": [
+            "cart"
+          ],
+          "expect": [
+            {
+              "kind": "quantities",
+              "path": "after.cart.items",
+              "value": {
+                "demo:cn-nongfu-water-550ml-bottle": 1
+              }
+            }
+          ]
+        }
+      ],
+      "setup": {
+        "order": {
+          "sku_id": "demo:cn-pepsi-original-330ml-can"
+        }
+      }
+    },
+    {
+      "case_id": "H11",
+      "group": "aftersales",
+      "scenario_family": "return-failure-then-decline-shopping",
+      "split": "acceptance",
+      "core": false,
+      "goal": "超期退货申请失败后拒绝继续采购，保持无申请",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "订单 {{order_id}} 的百事可乐退货，处理后买一瓶水",
+          "expect": [
+            {
+              "kind": "eq",
+              "path": "route.decision",
+              "value": "suggest_switch"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.cart",
+              "before_path": "before.cart"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.orders",
+              "before_path": "before.orders"
+            }
+          ]
+        },
+        {
+          "op": "switch",
+          "label": "consent-momo",
+          "target_role": "momo",
+          "accept": true,
+          "authorized": [
+            "returns"
+          ],
+          "expect": [
+            {
+              "kind": "eq",
+              "path": "after.opening.role",
+              "value": "momo"
+            },
+            {
+              "kind": "length",
+              "path": "after.returns",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "op": "switch",
+          "label": "decline-keke",
+          "target_role": "keke",
+          "accept": false,
+          "authorized": [],
+          "expect": [
+            {
+              "kind": "eq",
+              "path": "after.opening.role",
+              "value": "momo"
+            },
+            {
+              "kind": "length",
+              "path": "after.returns",
+              "value": 0
+            }
+          ]
+        }
+      ],
+      "setup": {
+        "order": {
+          "sku_id": "demo:cn-pepsi-original-330ml-can",
+          "delivered_days": 10
+        }
+      }
+    },
+    {
+      "case_id": "H12",
+      "group": "aftersales",
+      "scenario_family": "return-failure-then-consent-shopping",
+      "split": "acceptance",
+      "core": false,
+      "goal": "超期退货失败后同意继续采购，不虚报退货成功",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "订单 {{order_id}} 的百事可乐退货，处理后买一瓶农夫山泉饮用水550ml瓶装",
+          "expect": [
+            {
+              "kind": "eq",
+              "path": "route.decision",
+              "value": "suggest_switch"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.cart",
+              "before_path": "before.cart"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.orders",
+              "before_path": "before.orders"
+            }
+          ]
+        },
+        {
+          "op": "switch",
+          "label": "consent-momo",
+          "target_role": "momo",
+          "accept": true,
+          "authorized": [
+            "returns"
+          ],
+          "expect": [
+            {
+              "kind": "eq",
+              "path": "after.opening.role",
+              "value": "momo"
+            },
+            {
+              "kind": "length",
+              "path": "after.returns",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "op": "switch",
+          "label": "consent-keke",
+          "target_role": "keke",
+          "accept": true,
+          "authorized": [],
+          "expect": [
+            {
+              "kind": "eq",
+              "path": "after.opening.role",
+              "value": "keke"
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.plan.can_confirm",
+              "value": true
+            },
+            {
+              "kind": "quantities",
+              "path": "after.guide.plan.items",
+              "value": {"demo:cn-nongfu-water-550ml-bottle": 1}
+            },
+            {
+              "kind": "fields",
+              "path": "after.guide.plan.items",
+              "value": {"selected": true}
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.plan.selected_total_fen",
+              "value": 200
+            },
+            {
+              "kind": "length",
+              "path": "after.returns",
+              "value": 0
+            }
+          ]
+        }
+      ],
+      "setup": {
+        "order": {
+          "sku_id": "demo:cn-pepsi-original-330ml-can",
+          "delivered_days": 10
+        }
+      }
+    },
+    {
+      "case_id": "H13",
+      "group": "aftersales",
+      "scenario_family": "refund-repeat-utterance-one-application",
+      "split": "acceptance",
+      "core": false,
+      "goal": "已提交退款后再次同样申请不产生重复记录",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "first",
+          "message": "当前订单申请退款，原因是买错了",
+          "expect": [
+            {
+              "kind": "length",
+              "path": "after.refunds",
+              "value": 1
+            }
+          ],
+          "authorized": [
+            "refunds"
+          ]
+        },
+        {
+          "op": "turn",
+          "label": "repeat",
+          "message": "这笔订单再申请一次同样的退款",
+          "expect": [
+            {
+              "kind": "length",
+              "path": "after.refunds",
+              "value": 1
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.refunds",
+              "before_path": "before.refunds"
+            }
+          ]
+        }
+      ],
+      "initial_role": "momo",
+      "setup": {
+        "order": {
+          "sku_id": "demo:cn-pepsi-original-330ml-can"
+        }
+      }
+    },
+    {
+      "case_id": "H14",
+      "group": "aftersales",
+      "scenario_family": "delivered-refund-forbidden",
+      "split": "acceptance",
+      "core": false,
+      "goal": "已签收订单不能按未签收退款路径提交",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "这笔已签收订单直接申请全额退款，不要走退货",
+          "expect": [
+            {
+              "kind": "length",
+              "path": "after.refunds",
+              "value": 0
+            },
+            {
+              "kind": "present",
+              "path": "reply",
+              "value": true
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.cart",
+              "before_path": "before.cart"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.orders",
+              "before_path": "before.orders"
+            }
+          ]
+        }
+      ],
+      "initial_role": "momo",
+      "expected_outcome": "compliant_refusal",
+      "setup": {
+        "order": {
+          "sku_id": "demo:cn-pepsi-original-330ml-can",
+          "delivered_days": 1
+        }
+      }
+    },
+    {
+      "case_id": "H15",
+      "group": "theme",
+      "scenario_family": "theme-policy-interruption-product-identity",
+      "split": "acceptance",
+      "core": false,
+      "goal": "成品活动商品查询后插话政策仍保留商品对象",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "price",
+          "message": "这份鲜果成品拼盘多少钱？",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "reply",
+              "value": true
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.cart",
+              "before_path": "before.cart"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.orders",
+              "before_path": "before.orders"
+            }
+          ],
+          "view_context": {
+            "page": "product",
+            "product_id": "demo:green-reset-fruit-platter",
+            "activity_id": "green_reset"
+          }
+        },
+        {
+          "op": "turn",
+          "label": "policy",
+          "message": "先问一般配送时间？",
+          "expect": [
+            {
+              "kind": "contains",
+              "path": "grounding_evidence",
+              "value": "P-DEL-01"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.cart",
+              "before_path": "before.cart"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.orders",
+              "before_path": "before.orders"
+            }
+          ]
+        },
+        {
+          "op": "turn",
+          "label": "purchase",
+          "message": "那就买刚才那份鲜果成品拼盘",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": true
+            },
+            {
+              "kind": "quantities",
+              "path": "after.guide.plan.items",
+              "value": {
+                "demo:green-reset-fruit-platter": 1
+              }
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.plan.selected_total_fen",
+              "value": 1980
+            }
+          ]
+        }
+      ],
+      "entry_context": {
+        "page": "activity",
+        "activity_id": "green_reset",
+        "store_id": "store-demo-01",
+        "delivery_zone_id": "zone-default"
+      }
+    },
+    {
+      "case_id": "H16",
+      "group": "theme",
+      "scenario_family": "theme-quantity-edit-not-dish",
+      "split": "acceptance",
+      "core": false,
+      "goal": "两份成品沙拉改成一份，保持成品SKU",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "买两份GREEN RESET牛油果成品沙拉",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": true
+            },
+            {
+              "kind": "quantities",
+              "path": "after.guide.plan.items",
+              "value": {
+                "demo:green-reset-avocado-salad": 2
+              }
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.plan.selected_total_fen",
+              "value": 4760
+            }
+          ]
+        },
+        {
+          "op": "turn",
+          "label": "reduce",
+          "message": "只要一份成品，不要拆成食材",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": true
+            },
+            {
+              "kind": "quantities",
+              "path": "after.guide.plan.items",
+              "value": {
+                "demo:green-reset-avocado-salad": 1
+              }
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.plan.selected_total_fen",
+              "value": 2380
+            }
+          ]
+        },
+        {
+          "op": "confirm_plan",
+          "label": "explicit-confirm",
+          "authorized": [
+            "cart"
+          ],
+          "expect": [
+            {
+              "kind": "quantities",
+              "path": "after.cart.items",
+              "value": {
+                "demo:green-reset-avocado-salad": 1
+              }
+            }
+          ]
+        }
+      ],
+      "entry_context": {
+        "page": "activity",
+        "activity_id": "green_reset",
+        "store_id": "store-demo-01",
+        "delivery_zone_id": "zone-default"
+      }
+    },
+    {
+      "case_id": "H17",
+      "group": "memory",
+      "scenario_family": "current-condition-overrides-preference",
+      "split": "acceptance",
+      "core": false,
+      "goal": "明确当前可口品牌覆盖已存百事偏好且不改长期记忆",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "今天例外，只比较可口可乐，不购买",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.product_cards",
+              "value": true
+            },
+            {
+              "kind": "fields",
+              "path": "after.guide.product_cards",
+              "value": {
+                "brand": "可口可乐"
+              }
+            },
+            {
+              "kind": "contains",
+              "path": "after.memories.0.content",
+              "value": "百事"
+            },
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": false
+            }
+          ]
+        }
+      ],
+      "setup": {
+        "memories": [
+          {
+            "category": "user",
+            "source": "explicit",
+            "content": "平时喜欢百事可乐"
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "H18",
+      "group": "memory",
+      "scenario_family": "temporary-budget-not-longterm",
+      "split": "acceptance",
+      "core": false,
+      "goal": "一次性购物预算不被保存成长期偏好",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "turn",
+          "label": "request",
+          "message": "只是今天临时买两罐百事可乐，预算10元，并不是长期偏好",
+          "expect": [
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": true
+            },
+            {
+              "kind": "quantities",
+              "path": "after.guide.plan.items",
+              "value": {
+                "demo:cn-pepsi-original-330ml-can": 2
+              }
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.plan.selected_total_fen",
+              "value": 600
+            },
+            {
+              "kind": "length",
+              "path": "after.memories",
+              "value": 0
+            },
+            {
+              "kind": "eq",
+              "path": "after.memory_events.-1.phase",
+              "value": "memory_extract_completed"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "H19",
+      "group": "memory",
+      "scenario_family": "owner-isolation-explicit-memory",
+      "split": "acceptance",
+      "core": false,
+      "goal": "新匿名owner不能查询前owner的记忆",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "new_owner",
+          "label": "change-owner",
+          "expect": [
+            {
+              "kind": "length",
+              "path": "after.memories",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "op": "turn",
+          "label": "list",
+          "message": "查询我的所有记忆",
+          "expect": [
+            {
+              "kind": "length",
+              "path": "after.memories",
+              "value": 0
+            },
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": false
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.cart",
+              "before_path": "before.cart"
+            },
+            {
+              "kind": "unchanged",
+              "path": "after.orders",
+              "before_path": "before.orders"
+            }
+          ]
+        }
+      ],
+      "setup": {
+        "memories": [
+          {
+            "category": "user",
+            "source": "explicit",
+            "content": "平时喜欢百事可乐"
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "H20",
+      "group": "memory",
+      "scenario_family": "dream-protects-explicit",
+      "split": "acceptance",
+      "core": false,
+      "goal": "达到自动记忆整理阈值时Dream保护显式内容并完成记录",
+      "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+      "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+      "steps": [
+        {
+          "op": "dream",
+          "label": "dream",
+          "expect": [
+            {
+              "kind": "eq",
+              "path": "dream_processed",
+              "value": true
+            },
+            {
+              "kind": "contains",
+              "path": "after.memories.0.content",
+              "value": "百事"
+            },
+            {
+              "kind": "eq",
+              "path": "after.memory_events.-1.phase",
+              "value": "memory_dream_completed"
+            }
+          ]
+        }
+      ],
+      "setup": {
+        "memories": [
+          {
+            "category": "user",
+            "source": "explicit",
+            "content": "平时喜欢百事可乐"
+          },
+          {
+            "category": "feedback",
+            "source": "automatic",
+            "content": "回答要先说明商品推荐理由"
+          },
+          {
+            "category": "feedback",
+            "source": "automatic",
+            "content": "回答要先说明商品推荐理由。"
+          },
+          {
+            "category": "feedback",
+            "source": "automatic",
+            "content": "回答要先说明商品推荐理由"
+          },
+          {
+            "category": "feedback",
+            "source": "automatic",
+            "content": "回答要先说明商品推荐理由。"
+          },
+          {
+            "category": "feedback",
+            "source": "automatic",
+            "content": "回答要先说明商品推荐理由"
+          },
+          {
+            "category": "feedback",
+            "source": "automatic",
+            "content": "回答要先说明商品推荐理由。"
+          },
+          {
+            "category": "feedback",
+            "source": "automatic",
+            "content": "回答要先说明商品推荐理由"
+          },
+          {
+            "category": "feedback",
+            "source": "automatic",
+            "content": "回答要先说明商品推荐理由。"
+          },
+          {
+            "category": "feedback",
+            "source": "automatic",
+            "content": "回答要先说明商品推荐理由"
+          },
+          {
+            "category": "feedback",
+            "source": "automatic",
+            "content": "回答要先说明商品推荐理由。"
+          }
+        ]
+      }
+    }
+  ]
+}

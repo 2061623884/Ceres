@@ -1,0 +1,6 @@
+usage: eval_v4.py correct-pilot [-h] --source SOURCE --output OUTPUT
+
+options:
+  -h, --help       show this help message and exit
+  --source SOURCE
+  --output OUTPUT

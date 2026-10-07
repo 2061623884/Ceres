@@ -1,0 +1,9 @@
+C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-v4-evaluation\ui\run-02-service-verify.ps1 : Cannot find path 'C:
+\Users\20616\Desktop\Agent\Agent浜у搧\Ceres\work\ceres-v4-evaluation\ui\run-02-backend.start.json' because it does not ex
+ist.
+At C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-v4-evaluation\ui\run-02-service-verify.ps1:77 char:3
++   Write-Error $_
++   ~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,run-02-service-verify.ps1
+ 

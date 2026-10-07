@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-v4-evaluation\evidence\rescore-run04\acceptance_audit.py", line 53, in <module>
+    raise AssertionError(f"{eid} execution hash mismatch")
+AssertionError: R01-r1 execution hash mismatch

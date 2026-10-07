@@ -1,0 +1,473 @@
+{
+  "steps": [
+    {
+      "case_id": "H17",
+      "op": "turn",
+      "label": "request",
+      "before": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-0c8cdc529716",
+          "product_cards": [],
+          "task_id": null,
+          "state_version": 0,
+          "session_version": 0,
+          "current_step": null,
+          "task_status": null,
+          "entry_context": {
+            "page": "home",
+            "category_id": null,
+            "activity_id": null,
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": null,
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": null,
+          "available_actions": [
+            "send_message"
+          ],
+          "constraints_summary": {},
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "empty",
+          "messages": null
+        },
+        "opening": {
+          "role": "keke",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "active_role_before": "keke",
+      "request": {
+        "request_id": "08-H17-39ab32b1bd",
+        "message": "今天例外，只比较可口可乐，不购买",
+        "expected_task_id": null,
+        "expected_state_version": 0,
+        "expected_session_version": 0
+      },
+      "http_status": 200,
+      "elapsed_ms": 9488.5,
+      "latency_target_ms": 15000,
+      "latency_target_exceeded": false,
+      "events": [
+        {
+          "type": "service.route",
+          "payload": {
+            "status": "completed",
+            "decision": "stay_current",
+            "raw_choice": "stay_current",
+            "current_role": "keke",
+            "prompt_mode": "none",
+            "request_id": "08-H17-39ab32b1bd",
+            "route_ms": 975.9678000118583,
+            "criteria_version": "ceres-service-v3.2"
+          }
+        },
+        {
+          "type": "accepted",
+          "payload": {}
+        },
+        {
+          "type": "progress",
+          "payload": {
+            "phase": "understanding"
+          }
+        },
+        {
+          "type": "progress",
+          "payload": {
+            "phase": "retrieve"
+          }
+        },
+        {
+          "type": "answer.delta",
+          "payload": {
+            "delta": "好的，今天只比较、不购买。本轮找到这些可口可乐：330ml罐装3.5元，500ml瓶装4元，零度500ml瓶装4元，330ml×6罐18元；按容量折算，500ml瓶装和零度500ml瓶装最划算，约8元/升。\n1. 可口可乐经典原味汽水330ml罐装\n2. 可口可乐经典原味汽水500ml瓶装\n3. 可口可乐零度无糖汽水500ml瓶装\n4. 可口可乐经典原味汽水330ml×6罐",
+            "final": true,
+            "replace": false
+          }
+        },
+        {
+          "type": "turn.completed",
+          "payload": {
+            "message": "好的，今天只比较、不购买。本轮找到这些可口可乐：330ml罐装3.5元，500ml瓶装4元，零度500ml瓶装4元，330ml×6罐18元；按容量折算，500ml瓶装和零度500ml瓶装最划算，约8元/升。\n1. 可口可乐经典原味汽水330ml罐装\n2. 可口可乐经典原味汽水500ml瓶装\n3. 可口可乐零度无糖汽水500ml瓶装\n4. 可口可乐经典原味汽水330ml×6罐",
+            "status": "understanding",
+            "task_id": null,
+            "state_version": 0,
+            "session_version": 1,
+            "plan": null,
+            "pending_clarifications": [],
+            "product_cards": [
+              {
+                "sku_id": "demo:cn-coke-original-330ml-can",
+                "name": "可口可乐经典原味汽水330ml罐装",
+                "brand": "可口可乐",
+                "image_path": null,
+                "packaging": "can",
+                "pack_count": 1,
+                "item_volume_ml": 330,
+                "total_volume_ml": 330.0,
+                "price_fen": 350,
+                "price_per_litre_yuan": 10.61,
+                "ref": "p4e2ad9fb8fb4224f"
+              },
+              {
+                "sku_id": "demo:cn-coke-original-500ml-bottle",
+                "name": "可口可乐经典原味汽水500ml瓶装",
+                "brand": "可口可乐",
+                "image_path": null,
+                "packaging": "bottle",
+                "pack_count": 1,
+                "item_volume_ml": 500,
+                "total_volume_ml": 500.0,
+                "price_fen": 400,
+                "price_per_litre_yuan": 8.0,
+                "ref": "p514113b08ed0e060"
+              },
+              {
+                "sku_id": "demo:cn-coke-zero-500ml-bottle",
+                "name": "可口可乐零度无糖汽水500ml瓶装",
+                "brand": "可口可乐",
+                "image_path": null,
+                "packaging": "bottle",
+                "pack_count": 1,
+                "item_volume_ml": 500,
+                "total_volume_ml": 500.0,
+                "price_fen": 400,
+                "price_per_litre_yuan": 8.0,
+                "ref": "pde214f2da645e0d5"
+              },
+              {
+                "sku_id": "demo:cn-coke-original-330ml-6can",
+                "name": "可口可乐经典原味汽水330ml×6罐",
+                "brand": "可口可乐",
+                "image_path": null,
+                "packaging": "can",
+                "pack_count": 6,
+                "item_volume_ml": 330,
+                "total_volume_ml": 1980.0,
+                "price_fen": 1800,
+                "price_per_litre_yuan": 9.09,
+                "ref": "p433fd43a2d9d9862"
+              }
+            ],
+            "plan_effect": "keep",
+            "action_results": [
+              {
+                "type": "read_only",
+                "kind": "compare",
+                "status": "completed",
+                "saved": false,
+                "reply_ok": true,
+                "retrieval_status": "ok",
+                "retrieval_mode": "lexical",
+                "fallback_reason": null,
+                "index_version": "idx-81e9fa689baef6b5",
+                "action_id": "a1"
+              }
+            ],
+            "answer_status": "accepted",
+            "route": "answer",
+            "trace_id": "trace-4a8381798bc9"
+          }
+        }
+      ],
+      "role_model_call_range": [
+        0,
+        2
+      ],
+      "kev_call_range": [
+        0,
+        2
+      ],
+      "terminal": {
+        "message": "好的，今天只比较、不购买。本轮找到这些可口可乐：330ml罐装3.5元，500ml瓶装4元，零度500ml瓶装4元，330ml×6罐18元；按容量折算，500ml瓶装和零度500ml瓶装最划算，约8元/升。\n1. 可口可乐经典原味汽水330ml罐装\n2. 可口可乐经典原味汽水500ml瓶装\n3. 可口可乐零度无糖汽水500ml瓶装\n4. 可口可乐经典原味汽水330ml×6罐",
+        "status": "understanding",
+        "task_id": null,
+        "state_version": 0,
+        "session_version": 1,
+        "plan": null,
+        "pending_clarifications": [],
+        "product_cards": [
+          {
+            "sku_id": "demo:cn-coke-original-330ml-can",
+            "name": "可口可乐经典原味汽水330ml罐装",
+            "brand": "可口可乐",
+            "image_path": null,
+            "packaging": "can",
+            "pack_count": 1,
+            "item_volume_ml": 330,
+            "total_volume_ml": 330.0,
+            "price_fen": 350,
+            "price_per_litre_yuan": 10.61,
+            "ref": "p4e2ad9fb8fb4224f"
+          },
+          {
+            "sku_id": "demo:cn-coke-original-500ml-bottle",
+            "name": "可口可乐经典原味汽水500ml瓶装",
+            "brand": "可口可乐",
+            "image_path": null,
+            "packaging": "bottle",
+            "pack_count": 1,
+            "item_volume_ml": 500,
+            "total_volume_ml": 500.0,
+            "price_fen": 400,
+            "price_per_litre_yuan": 8.0,
+            "ref": "p514113b08ed0e060"
+          },
+          {
+            "sku_id": "demo:cn-coke-zero-500ml-bottle",
+            "name": "可口可乐零度无糖汽水500ml瓶装",
+            "brand": "可口可乐",
+            "image_path": null,
+            "packaging": "bottle",
+            "pack_count": 1,
+            "item_volume_ml": 500,
+            "total_volume_ml": 500.0,
+            "price_fen": 400,
+            "price_per_litre_yuan": 8.0,
+            "ref": "pde214f2da645e0d5"
+          },
+          {
+            "sku_id": "demo:cn-coke-original-330ml-6can",
+            "name": "可口可乐经典原味汽水330ml×6罐",
+            "brand": "可口可乐",
+            "image_path": null,
+            "packaging": "can",
+            "pack_count": 6,
+            "item_volume_ml": 330,
+            "total_volume_ml": 1980.0,
+            "price_fen": 1800,
+            "price_per_litre_yuan": 9.09,
+            "ref": "p433fd43a2d9d9862"
+          }
+        ],
+        "plan_effect": "keep",
+        "action_results": [
+          {
+            "type": "read_only",
+            "kind": "compare",
+            "status": "completed",
+            "saved": false,
+            "reply_ok": true,
+            "retrieval_status": "ok",
+            "retrieval_mode": "lexical",
+            "fallback_reason": null,
+            "index_version": "idx-81e9fa689baef6b5",
+            "action_id": "a1"
+          }
+        ],
+        "answer_status": "accepted",
+        "route": "answer",
+        "trace_id": "trace-4a8381798bc9"
+      },
+      "trace": [
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "capability",
+          "status": "started",
+          "criteria_version": "ceres-guide-capabilities-v2",
+          "call_number": 1,
+          "model": "kev-latest"
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 1000,
+          "stage": "capability",
+          "status": "completed",
+          "capability": "chat",
+          "branch": "semantic_understanding",
+          "criteria_version": "ceres-guide-capabilities-v2",
+          "call_number": 1,
+          "model": "kev-latest"
+        },
+        {
+          "phase": "understanding",
+          "duration_ms": null
+        },
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "understanding",
+          "status": "started",
+          "call_number": 1
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 3780,
+          "stage": "understanding",
+          "status": "completed",
+          "call_number": 1
+        },
+        {
+          "phase": "retrieve",
+          "duration_ms": null
+        },
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "answer",
+          "status": "started",
+          "call_number": 2
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 3547,
+          "stage": "answer",
+          "status": "completed",
+          "call_number": 2
+        },
+        {
+          "phase": "turn_result",
+          "duration_ms": null,
+          "status": "understanding"
+        },
+        {
+          "phase": "memory_extract_started",
+          "duration_ms": null,
+          "model": "qwen3.8-27b"
+        }
+      ],
+      "snapshot_after": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-0c8cdc529716",
+          "product_cards": [
+            {
+              "sku_id": "demo:cn-coke-original-330ml-can",
+              "name": "可口可乐经典原味汽水330ml罐装",
+              "brand": "可口可乐",
+              "image_path": null,
+              "packaging": "can",
+              "pack_count": 1,
+              "item_volume_ml": 330,
+              "total_volume_ml": 330.0,
+              "price_fen": 350,
+              "price_per_litre_yuan": 10.61,
+              "ref": "p4e2ad9fb8fb4224f"
+            },
+            {
+              "sku_id": "demo:cn-coke-original-500ml-bottle",
+              "name": "可口可乐经典原味汽水500ml瓶装",
+              "brand": "可口可乐",
+              "image_path": null,
+              "packaging": "bottle",
+              "pack_count": 1,
+              "item_volume_ml": 500,
+              "total_volume_ml": 500.0,
+              "price_fen": 400,
+              "price_per_litre_yuan": 8.0,
+              "ref": "p514113b08ed0e060"
+            },
+            {
+              "sku_id": "demo:cn-coke-zero-500ml-bottle",
+              "name": "可口可乐零度无糖汽水500ml瓶装",
+              "brand": "可口可乐",
+              "image_path": null,
+              "packaging": "bottle",
+              "pack_count": 1,
+              "item_volume_ml": 500,
+              "total_volume_ml": 500.0,
+              "price_fen": 400,
+              "price_per_litre_yuan": 8.0,
+              "ref": "pde214f2da645e0d5"
+            },
+            {
+              "sku_id": "demo:cn-coke-original-330ml-6can",
+              "name": "可口可乐经典原味汽水330ml×6罐",
+              "brand": "可口可乐",
+              "image_path": null,
+              "packaging": "can",
+              "pack_count": 6,
+              "item_volume_ml": 330,
+              "total_volume_ml": 1980.0,
+              "price_fen": 1800,
+              "price_per_litre_yuan": 9.09,
+              "ref": "p433fd43a2d9d9862"
+            }
+          ],
+          "task_id": null,
+          "state_version": 0,
+          "session_version": 1,
+          "current_step": null,
+          "task_status": null,
+          "entry_context": {
+            "page": "home",
+            "category_id": null,
+            "activity_id": null,
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": null,
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": null,
+          "available_actions": [
+            "send_message"
+          ],
+          "constraints_summary": {},
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "complete",
+          "messages": [
+            {
+              "message_id": "msg-c1dc61b36649",
+              "session_id": "sess-0c8cdc529716",
+              "task_id": null,
+              "sequence": 1,
+              "role": "user",
+              "kind": "text",
+              "content": "今天例外，只比较可口可乐，不购买",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-H17-39ab32b1bd",
+              "status": "completed",
+              "created_at": "2026-10-07T07:42:07.325772"
+            },
+            {
+              "message_id": "msg-8fcf8c68d229",
+              "session_id": "sess-0c8cdc529716",
+              "task_id": null,
+              "sequence": 2,
+              "role": "assistant",
+              "kind": "text",
+              "content": "好的，今天只比较、不购买。本轮找到这些可口可乐：330ml罐装3.5元，500ml瓶装4元，零度500ml瓶装4元，330ml×6罐18元；按容量折算，500ml瓶装和零度500ml瓶装最划算，约8元/升。\n1. 可口可乐经典原味汽水330ml罐装\n2. 可口可乐经典原味汽水500ml瓶装\n3. 可口可乐零度无糖汽水500ml瓶装\n4. 可口可乐经典原味汽水330ml×6罐",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-H17-39ab32b1bd",
+              "status": "completed",
+              "created_at": "2026-10-07T07:42:07.327815"
+            }
+          ]
+        },
+        "opening": {
+          "role": "keke",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "status": "captured"
+    }
+  ],
+  "timing_failures": []
+}

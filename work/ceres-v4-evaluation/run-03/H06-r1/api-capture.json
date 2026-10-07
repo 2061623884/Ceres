@@ -1,0 +1,1315 @@
+{
+  "steps": [
+    {
+      "case_id": "H06",
+      "op": "turn",
+      "label": "request",
+      "before": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-afe324431229",
+          "product_cards": [],
+          "task_id": null,
+          "state_version": 0,
+          "session_version": 0,
+          "current_step": null,
+          "task_status": null,
+          "entry_context": {
+            "page": "home",
+            "category_id": null,
+            "activity_id": null,
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": null,
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": null,
+          "available_actions": [
+            "send_message"
+          ],
+          "constraints_summary": {},
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "empty",
+          "messages": null
+        },
+        "opening": {
+          "role": "keke",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "active_role_before": "keke",
+      "request": {
+        "request_id": "08-H06-5ee7211a37",
+        "message": "买两瓶可口可乐经典原味汽水500ml瓶装",
+        "expected_task_id": null,
+        "expected_state_version": 0,
+        "expected_session_version": 0
+      },
+      "http_status": 200,
+      "elapsed_ms": 23086.0,
+      "latency_target_ms": 15000,
+      "latency_target_exceeded": true,
+      "events": [
+        {
+          "type": "service.route",
+          "payload": {
+            "status": "completed",
+            "decision": "stay_current",
+            "raw_choice": "stay_current",
+            "current_role": "keke",
+            "prompt_mode": "none",
+            "request_id": "08-H06-5ee7211a37",
+            "route_ms": 1302.5020000059158,
+            "criteria_version": "ceres-service-v3.2"
+          }
+        },
+        {
+          "type": "accepted",
+          "payload": {}
+        },
+        {
+          "type": "progress",
+          "payload": {
+            "phase": "understanding"
+          }
+        },
+        {
+          "type": "progress",
+          "payload": {
+            "phase": "retrieve"
+          }
+        },
+        {
+          "type": "progress",
+          "payload": {
+            "phase": "validate"
+          }
+        },
+        {
+          "type": "plan.ready",
+          "payload": {
+            "plan": {
+              "plan_effect": "replace",
+              "plan_id": "plan-f10715cde5f6",
+              "plan_version": 1,
+              "task_id": "task-cc95a50c6039",
+              "state_version": 2,
+              "session_version": 2,
+              "mode": "bundle",
+              "items": [
+                {
+                  "sku_id": "demo:cn-coke-original-500ml-bottle",
+                  "name": "可口可乐经典原味汽水500ml瓶装",
+                  "quantity": 2,
+                  "recommended_quantity": 2,
+                  "quantity_source": "recommended",
+                  "unit_price_fen": 400,
+                  "line_total_fen": 800,
+                  "image_path": null,
+                  "image_kind": "placeholder",
+                  "image_kind_legacy": "placeholder",
+                  "role": "required",
+                  "selected": true,
+                  "ingredient_ids": [
+                    "cola"
+                  ],
+                  "spec_quantity": 500.0,
+                  "spec_unit": "ml",
+                  "sell_unit": "件",
+                  "max_addable_quantity": 36,
+                  "group_id": "product:demo:cn-coke-original-500ml-bottle",
+                  "target_kind": "product",
+                  "target_id": "demo:cn-coke-original-500ml-bottle",
+                  "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                  "requirement": {
+                    "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                    "name": "可口可乐经典原味汽水500ml瓶装",
+                    "ingredient_id": null,
+                    "component_id": null,
+                    "quantity": 2,
+                    "unit": "件",
+                    "quantity_known": true,
+                    "requiredness": "core",
+                    "source": {
+                      "kind": "user",
+                      "ref": "可口可乐经典原味汽水500ml瓶装"
+                    }
+                  },
+                  "availability": "available",
+                  "evidence": {
+                    "sku_source": "store_offer",
+                    "quoted_at": "2026-10-07T07:37:59+00:00",
+                    "stock_verified": true,
+                    "data_mode": "demo",
+                    "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                    "unknown_constraints": []
+                  },
+                  "pack_source": "catalog_spec",
+                  "shortfall_quantity": 0,
+                  "user_quantity": null,
+                  "added_quantity": 0,
+                  "remaining_quantity": 2,
+                  "contributions": [
+                    {
+                      "group_id": "product:demo:cn-coke-original-500ml-bottle",
+                      "quantity": 2,
+                      "selected": true,
+                      "added_quantity": 0,
+                      "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                      "requirement": {
+                        "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                        "name": "可口可乐经典原味汽水500ml瓶装",
+                        "ingredient_id": null,
+                        "component_id": null,
+                        "quantity": 2,
+                        "unit": "件",
+                        "quantity_known": true,
+                        "requiredness": "core",
+                        "source": {
+                          "kind": "user",
+                          "ref": "可口可乐经典原味汽水500ml瓶装"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "total_price_fen": 800,
+              "selected_total_fen": 800,
+              "outstanding_total_fen": 800,
+              "expires_at": "2026-10-07T07:42:59.705327+00:00",
+              "validation_status": "passed",
+              "coverage_mode": "full",
+              "coverage_intent": "partial_ok",
+              "uncovered_items": [],
+              "gaps": [],
+              "can_confirm": true,
+              "targets": [
+                {
+                  "group_id": "product:demo:cn-coke-original-500ml-bottle",
+                  "kind": "product",
+                  "target_id": "demo:cn-coke-original-500ml-bottle",
+                  "name": "可口可乐经典原味汽水500ml瓶装",
+                  "people": null,
+                  "people_source": "default"
+                }
+              ],
+              "merged_sku_contributions": []
+            },
+            "plan_effect": "replace"
+          }
+        },
+        {
+          "type": "answer.delta",
+          "payload": {
+            "delta": "采购清单已加入「可口可乐经典原味汽水500ml瓶装」\n已整理 1 件商品，选中合计 ¥8.00（演示价格）。包含：可口可乐经典原味汽水500ml瓶装。",
+            "final": true,
+            "replace": false
+          }
+        },
+        {
+          "type": "turn.completed",
+          "payload": {
+            "message": "采购清单已加入「可口可乐经典原味汽水500ml瓶装」\n已整理 1 件商品，选中合计 ¥8.00（演示价格）。包含：可口可乐经典原味汽水500ml瓶装。",
+            "status": "awaiting_confirmation",
+            "task_id": "task-cc95a50c6039",
+            "state_version": 2,
+            "session_version": 2,
+            "plan": {
+              "plan_id": "plan-f10715cde5f6",
+              "plan_version": 1,
+              "mode": "bundle",
+              "items": [
+                {
+                  "sku_id": "demo:cn-coke-original-500ml-bottle",
+                  "name": "可口可乐经典原味汽水500ml瓶装",
+                  "quantity": 2,
+                  "recommended_quantity": 2,
+                  "quantity_source": "recommended",
+                  "unit_price_fen": 400,
+                  "line_total_fen": 800,
+                  "image_path": null,
+                  "image_kind": "placeholder",
+                  "image_kind_legacy": "placeholder",
+                  "role": "required",
+                  "selected": true,
+                  "ingredient_ids": [
+                    "cola"
+                  ],
+                  "spec_quantity": 500.0,
+                  "spec_unit": "ml",
+                  "sell_unit": "件",
+                  "max_addable_quantity": 36,
+                  "group_id": "product:demo:cn-coke-original-500ml-bottle",
+                  "target_kind": "product",
+                  "target_id": "demo:cn-coke-original-500ml-bottle",
+                  "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                  "requirement": {
+                    "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                    "name": "可口可乐经典原味汽水500ml瓶装",
+                    "ingredient_id": null,
+                    "component_id": null,
+                    "quantity": 2,
+                    "unit": "件",
+                    "quantity_known": true,
+                    "requiredness": "core",
+                    "source": {
+                      "kind": "user",
+                      "ref": "可口可乐经典原味汽水500ml瓶装"
+                    }
+                  },
+                  "availability": "available",
+                  "evidence": {
+                    "sku_source": "store_offer",
+                    "quoted_at": "2026-10-07T07:37:59+00:00",
+                    "stock_verified": true,
+                    "data_mode": "demo",
+                    "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                    "unknown_constraints": []
+                  },
+                  "pack_source": "catalog_spec",
+                  "shortfall_quantity": 0,
+                  "user_quantity": null,
+                  "added_quantity": 0,
+                  "remaining_quantity": 2,
+                  "contributions": [
+                    {
+                      "group_id": "product:demo:cn-coke-original-500ml-bottle",
+                      "quantity": 2,
+                      "selected": true,
+                      "added_quantity": 0,
+                      "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                      "requirement": {
+                        "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                        "name": "可口可乐经典原味汽水500ml瓶装",
+                        "ingredient_id": null,
+                        "component_id": null,
+                        "quantity": 2,
+                        "unit": "件",
+                        "quantity_known": true,
+                        "requiredness": "core",
+                        "source": {
+                          "kind": "user",
+                          "ref": "可口可乐经典原味汽水500ml瓶装"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "total_price_fen": 800,
+              "selected_total_fen": 800,
+              "outstanding_total_fen": 800,
+              "expires_at": "2026-10-07T07:42:59.705327+00:00",
+              "validation_status": "passed",
+              "coverage_mode": "full",
+              "coverage_intent": "partial_ok",
+              "uncovered_items": [],
+              "gaps": [],
+              "can_confirm": true,
+              "targets": [
+                {
+                  "group_id": "product:demo:cn-coke-original-500ml-bottle",
+                  "kind": "product",
+                  "target_id": "demo:cn-coke-original-500ml-bottle",
+                  "name": "可口可乐经典原味汽水500ml瓶装",
+                  "people": null,
+                  "people_source": "default"
+                }
+              ],
+              "merged_sku_contributions": []
+            },
+            "pending_clarifications": [],
+            "product_cards": [],
+            "plan_effect": "replace",
+            "action_results": [
+              {
+                "type": "read_only",
+                "kind": "lookup",
+                "status": "completed",
+                "saved": false,
+                "reply_ok": true,
+                "retrieval_status": "ok",
+                "retrieval_mode": "lexical",
+                "fallback_reason": null,
+                "index_version": "idx-81e9fa689baef6b5",
+                "action_id": "a1"
+              },
+              {
+                "type": "mutation",
+                "verb": "add",
+                "group_id": "product:demo:cn-coke-original-500ml-bottle",
+                "status": "committed",
+                "saved": true,
+                "reply_ok": true,
+                "plan_effect": "replace",
+                "message": "采购清单已加入「可口可乐经典原味汽水500ml瓶装」",
+                "candidate_ref": "p514113b08ed0e060",
+                "action_id": "a2"
+              }
+            ],
+            "answer_status": "awaiting_confirmation",
+            "route": "prepare",
+            "trace_id": "trace-93fe28e9303d"
+          }
+        }
+      ],
+      "role_model_call_range": [
+        0,
+        1
+      ],
+      "kev_call_range": [
+        0,
+        2
+      ],
+      "terminal": {
+        "message": "采购清单已加入「可口可乐经典原味汽水500ml瓶装」\n已整理 1 件商品，选中合计 ¥8.00（演示价格）。包含：可口可乐经典原味汽水500ml瓶装。",
+        "status": "awaiting_confirmation",
+        "task_id": "task-cc95a50c6039",
+        "state_version": 2,
+        "session_version": 2,
+        "plan": {
+          "plan_id": "plan-f10715cde5f6",
+          "plan_version": 1,
+          "mode": "bundle",
+          "items": [
+            {
+              "sku_id": "demo:cn-coke-original-500ml-bottle",
+              "name": "可口可乐经典原味汽水500ml瓶装",
+              "quantity": 2,
+              "recommended_quantity": 2,
+              "quantity_source": "recommended",
+              "unit_price_fen": 400,
+              "line_total_fen": 800,
+              "image_path": null,
+              "image_kind": "placeholder",
+              "image_kind_legacy": "placeholder",
+              "role": "required",
+              "selected": true,
+              "ingredient_ids": [
+                "cola"
+              ],
+              "spec_quantity": 500.0,
+              "spec_unit": "ml",
+              "sell_unit": "件",
+              "max_addable_quantity": 36,
+              "group_id": "product:demo:cn-coke-original-500ml-bottle",
+              "target_kind": "product",
+              "target_id": "demo:cn-coke-original-500ml-bottle",
+              "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+              "requirement": {
+                "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                "name": "可口可乐经典原味汽水500ml瓶装",
+                "ingredient_id": null,
+                "component_id": null,
+                "quantity": 2,
+                "unit": "件",
+                "quantity_known": true,
+                "requiredness": "core",
+                "source": {
+                  "kind": "user",
+                  "ref": "可口可乐经典原味汽水500ml瓶装"
+                }
+              },
+              "availability": "available",
+              "evidence": {
+                "sku_source": "store_offer",
+                "quoted_at": "2026-10-07T07:37:59+00:00",
+                "stock_verified": true,
+                "data_mode": "demo",
+                "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                "unknown_constraints": []
+              },
+              "pack_source": "catalog_spec",
+              "shortfall_quantity": 0,
+              "user_quantity": null,
+              "added_quantity": 0,
+              "remaining_quantity": 2,
+              "contributions": [
+                {
+                  "group_id": "product:demo:cn-coke-original-500ml-bottle",
+                  "quantity": 2,
+                  "selected": true,
+                  "added_quantity": 0,
+                  "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                  "requirement": {
+                    "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                    "name": "可口可乐经典原味汽水500ml瓶装",
+                    "ingredient_id": null,
+                    "component_id": null,
+                    "quantity": 2,
+                    "unit": "件",
+                    "quantity_known": true,
+                    "requiredness": "core",
+                    "source": {
+                      "kind": "user",
+                      "ref": "可口可乐经典原味汽水500ml瓶装"
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "total_price_fen": 800,
+          "selected_total_fen": 800,
+          "outstanding_total_fen": 800,
+          "expires_at": "2026-10-07T07:42:59.705327+00:00",
+          "validation_status": "passed",
+          "coverage_mode": "full",
+          "coverage_intent": "partial_ok",
+          "uncovered_items": [],
+          "gaps": [],
+          "can_confirm": true,
+          "targets": [
+            {
+              "group_id": "product:demo:cn-coke-original-500ml-bottle",
+              "kind": "product",
+              "target_id": "demo:cn-coke-original-500ml-bottle",
+              "name": "可口可乐经典原味汽水500ml瓶装",
+              "people": null,
+              "people_source": "default"
+            }
+          ],
+          "merged_sku_contributions": []
+        },
+        "pending_clarifications": [],
+        "product_cards": [],
+        "plan_effect": "replace",
+        "action_results": [
+          {
+            "type": "read_only",
+            "kind": "lookup",
+            "status": "completed",
+            "saved": false,
+            "reply_ok": true,
+            "retrieval_status": "ok",
+            "retrieval_mode": "lexical",
+            "fallback_reason": null,
+            "index_version": "idx-81e9fa689baef6b5",
+            "action_id": "a1"
+          },
+          {
+            "type": "mutation",
+            "verb": "add",
+            "group_id": "product:demo:cn-coke-original-500ml-bottle",
+            "status": "committed",
+            "saved": true,
+            "reply_ok": true,
+            "plan_effect": "replace",
+            "message": "采购清单已加入「可口可乐经典原味汽水500ml瓶装」",
+            "candidate_ref": "p514113b08ed0e060",
+            "action_id": "a2"
+          }
+        ],
+        "answer_status": "awaiting_confirmation",
+        "route": "prepare",
+        "trace_id": "trace-93fe28e9303d"
+      },
+      "trace": [
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "capability",
+          "status": "started",
+          "criteria_version": "ceres-guide-capabilities-v2",
+          "call_number": 1,
+          "model": "kev-latest"
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 984,
+          "stage": "capability",
+          "status": "completed",
+          "capability": "purchase_modify",
+          "branch": "semantic_understanding",
+          "criteria_version": "ceres-guide-capabilities-v2",
+          "call_number": 1,
+          "model": "kev-latest"
+        },
+        {
+          "phase": "understanding",
+          "duration_ms": null
+        },
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "understanding",
+          "status": "started",
+          "call_number": 1
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 20702,
+          "stage": "understanding",
+          "status": "completed",
+          "call_number": 1
+        },
+        {
+          "phase": "retrieve",
+          "duration_ms": null
+        },
+        {
+          "phase": "validate",
+          "duration_ms": null
+        },
+        {
+          "phase": "turn_result",
+          "duration_ms": null,
+          "status": "awaiting_confirmation"
+        }
+      ],
+      "snapshot_after": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-afe324431229",
+          "product_cards": [],
+          "task_id": "task-cc95a50c6039",
+          "state_version": 2,
+          "session_version": 2,
+          "current_step": "awaiting_confirmation",
+          "task_status": "active",
+          "entry_context": {
+            "page": "home",
+            "category_id": null,
+            "activity_id": null,
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": {
+            "plan_id": "plan-f10715cde5f6",
+            "plan_version": 1,
+            "mode": "bundle",
+            "items": [
+              {
+                "sku_id": "demo:cn-coke-original-500ml-bottle",
+                "name": "可口可乐经典原味汽水500ml瓶装",
+                "quantity": 2,
+                "unit_price_fen": 400,
+                "line_total_fen": 800,
+                "image_path": null,
+                "image_kind": "placeholder",
+                "image_kind_legacy": "placeholder",
+                "role": "required",
+                "selected": true,
+                "recommended_quantity": 2,
+                "max_addable_quantity": 36,
+                "spec_quantity": 500,
+                "spec_unit": "ml",
+                "sell_unit": "件",
+                "quantity_source": "recommended",
+                "group_id": "product:demo:cn-coke-original-500ml-bottle",
+                "target_kind": "product",
+                "target_id": "demo:cn-coke-original-500ml-bottle",
+                "component_name": null,
+                "contributions": [
+                  {
+                    "group_id": "product:demo:cn-coke-original-500ml-bottle",
+                    "quantity": 2,
+                    "selected": true,
+                    "added_quantity": 0,
+                    "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                    "requirement": {
+                      "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                      "name": "可口可乐经典原味汽水500ml瓶装",
+                      "ingredient_id": null,
+                      "component_id": null,
+                      "quantity": 2,
+                      "unit": "件",
+                      "quantity_known": true,
+                      "requiredness": "core",
+                      "source": {
+                        "kind": "user",
+                        "ref": "可口可乐经典原味汽水500ml瓶装"
+                      }
+                    }
+                  }
+                ],
+                "added_quantity": 0,
+                "remaining_quantity": 2,
+                "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                "requirement": {
+                  "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                  "name": "可口可乐经典原味汽水500ml瓶装",
+                  "ingredient_id": null,
+                  "component_id": null,
+                  "quantity": 2,
+                  "unit": "件",
+                  "quantity_known": true,
+                  "requiredness": "core",
+                  "source": {
+                    "kind": "user",
+                    "ref": "可口可乐经典原味汽水500ml瓶装"
+                  }
+                },
+                "availability": "available",
+                "evidence": {
+                  "sku_source": "store_offer",
+                  "quoted_at": "2026-10-07T07:37:59+00:00",
+                  "stock_verified": true,
+                  "data_mode": "demo",
+                  "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                  "unknown_constraints": []
+                },
+                "pack_source": "catalog_spec",
+                "shortfall_quantity": 0
+              }
+            ],
+            "total_price_fen": 800,
+            "selected_total_fen": 800,
+            "expires_at": "2026-10-07T07:42:59.705327+00:00",
+            "validation_status": "passed",
+            "coverage_mode": "full",
+            "coverage_intent": "partial_ok",
+            "uncovered_items": [],
+            "gaps": [],
+            "can_confirm": true,
+            "gap_fill": null,
+            "targets": [
+              {
+                "group_id": "product:demo:cn-coke-original-500ml-bottle",
+                "kind": "product",
+                "target_id": "demo:cn-coke-original-500ml-bottle",
+                "name": "可口可乐经典原味汽水500ml瓶装",
+                "meal_name": null,
+                "fulfillment_mode": null,
+                "people": null,
+                "people_source": "default",
+                "notes": []
+              }
+            ],
+            "merged_sku_contributions": [],
+            "outstanding_total_fen": 800
+          },
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": "已恢复待确认方案",
+          "available_actions": [
+            "confirm",
+            "cancel",
+            "modify",
+            "send_message"
+          ],
+          "constraints_summary": {
+            "goal": "可口可乐经典原味汽水500ml瓶装",
+            "people": null,
+            "budget_fen": null,
+            "excluded_ingredients": []
+          },
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "complete",
+          "messages": [
+            {
+              "message_id": "msg-5d1fcc44c70e",
+              "session_id": "sess-afe324431229",
+              "task_id": null,
+              "sequence": 1,
+              "role": "user",
+              "kind": "text",
+              "content": "买两瓶可口可乐经典原味汽水500ml瓶装",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-H06-5ee7211a37",
+              "status": "completed",
+              "created_at": "2026-10-07T07:37:59.710479"
+            },
+            {
+              "message_id": "msg-1f74af45002e",
+              "session_id": "sess-afe324431229",
+              "task_id": "task-cc95a50c6039",
+              "sequence": 2,
+              "role": "assistant",
+              "kind": "plan_ref",
+              "content": "采购清单已加入「可口可乐经典原味汽水500ml瓶装」\n已整理 1 件商品，选中合计 ¥8.00（演示价格）。包含：可口可乐经典原味汽水500ml瓶装。",
+              "plan_id": "plan-f10715cde5f6",
+              "plan_version": 1,
+              "request_id": "08-H06-5ee7211a37",
+              "status": "completed",
+              "created_at": "2026-10-07T07:37:59.717344"
+            }
+          ]
+        },
+        "opening": {
+          "role": "keke",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "status": "captured"
+    },
+    {
+      "case_id": "H06",
+      "op": "turn",
+      "label": "replace",
+      "before": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-afe324431229",
+          "product_cards": [],
+          "task_id": "task-cc95a50c6039",
+          "state_version": 2,
+          "session_version": 2,
+          "current_step": "awaiting_confirmation",
+          "task_status": "active",
+          "entry_context": {
+            "page": "home",
+            "category_id": null,
+            "activity_id": null,
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": {
+            "plan_id": "plan-f10715cde5f6",
+            "plan_version": 1,
+            "mode": "bundle",
+            "items": [
+              {
+                "sku_id": "demo:cn-coke-original-500ml-bottle",
+                "name": "可口可乐经典原味汽水500ml瓶装",
+                "quantity": 2,
+                "unit_price_fen": 400,
+                "line_total_fen": 800,
+                "image_path": null,
+                "image_kind": "placeholder",
+                "image_kind_legacy": "placeholder",
+                "role": "required",
+                "selected": true,
+                "recommended_quantity": 2,
+                "max_addable_quantity": 36,
+                "spec_quantity": 500,
+                "spec_unit": "ml",
+                "sell_unit": "件",
+                "quantity_source": "recommended",
+                "group_id": "product:demo:cn-coke-original-500ml-bottle",
+                "target_kind": "product",
+                "target_id": "demo:cn-coke-original-500ml-bottle",
+                "component_name": null,
+                "contributions": [
+                  {
+                    "group_id": "product:demo:cn-coke-original-500ml-bottle",
+                    "quantity": 2,
+                    "selected": true,
+                    "added_quantity": 0,
+                    "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                    "requirement": {
+                      "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                      "name": "可口可乐经典原味汽水500ml瓶装",
+                      "ingredient_id": null,
+                      "component_id": null,
+                      "quantity": 2,
+                      "unit": "件",
+                      "quantity_known": true,
+                      "requiredness": "core",
+                      "source": {
+                        "kind": "user",
+                        "ref": "可口可乐经典原味汽水500ml瓶装"
+                      }
+                    }
+                  }
+                ],
+                "added_quantity": 0,
+                "remaining_quantity": 2,
+                "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                "requirement": {
+                  "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                  "name": "可口可乐经典原味汽水500ml瓶装",
+                  "ingredient_id": null,
+                  "component_id": null,
+                  "quantity": 2,
+                  "unit": "件",
+                  "quantity_known": true,
+                  "requiredness": "core",
+                  "source": {
+                    "kind": "user",
+                    "ref": "可口可乐经典原味汽水500ml瓶装"
+                  }
+                },
+                "availability": "available",
+                "evidence": {
+                  "sku_source": "store_offer",
+                  "quoted_at": "2026-10-07T07:37:59+00:00",
+                  "stock_verified": true,
+                  "data_mode": "demo",
+                  "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                  "unknown_constraints": []
+                },
+                "pack_source": "catalog_spec",
+                "shortfall_quantity": 0
+              }
+            ],
+            "total_price_fen": 800,
+            "selected_total_fen": 800,
+            "expires_at": "2026-10-07T07:42:59.705327+00:00",
+            "validation_status": "passed",
+            "coverage_mode": "full",
+            "coverage_intent": "partial_ok",
+            "uncovered_items": [],
+            "gaps": [],
+            "can_confirm": true,
+            "gap_fill": null,
+            "targets": [
+              {
+                "group_id": "product:demo:cn-coke-original-500ml-bottle",
+                "kind": "product",
+                "target_id": "demo:cn-coke-original-500ml-bottle",
+                "name": "可口可乐经典原味汽水500ml瓶装",
+                "meal_name": null,
+                "fulfillment_mode": null,
+                "people": null,
+                "people_source": "default",
+                "notes": []
+              }
+            ],
+            "merged_sku_contributions": [],
+            "outstanding_total_fen": 800
+          },
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": "已恢复待确认方案",
+          "available_actions": [
+            "confirm",
+            "cancel",
+            "modify",
+            "send_message"
+          ],
+          "constraints_summary": {
+            "goal": "可口可乐经典原味汽水500ml瓶装",
+            "people": null,
+            "budget_fen": null,
+            "excluded_ingredients": []
+          },
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "complete",
+          "messages": null
+        },
+        "opening": {
+          "role": "keke",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "active_role_before": "keke",
+      "request": {
+        "request_id": "08-H06-3d10211e80",
+        "message": "改成两瓶农夫山泉饮用水550ml瓶装",
+        "expected_task_id": "task-cc95a50c6039",
+        "expected_state_version": 2,
+        "expected_session_version": 2
+      },
+      "http_status": 200,
+      "elapsed_ms": 9322.9,
+      "latency_target_ms": 15000,
+      "latency_target_exceeded": false,
+      "events": [
+        {
+          "type": "service.route",
+          "payload": {
+            "status": "completed",
+            "decision": "stay_current",
+            "raw_choice": "stay_current",
+            "current_role": "keke",
+            "prompt_mode": "none",
+            "request_id": "08-H06-3d10211e80",
+            "route_ms": 972.4367000162601,
+            "criteria_version": "ceres-service-v3.2"
+          }
+        },
+        {
+          "type": "accepted",
+          "payload": {}
+        },
+        {
+          "type": "progress",
+          "payload": {
+            "phase": "understanding"
+          }
+        },
+        {
+          "type": "progress",
+          "payload": {
+            "phase": "retrieve"
+          }
+        },
+        {
+          "type": "progress",
+          "payload": {
+            "phase": "validate"
+          }
+        },
+        {
+          "type": "answer.delta",
+          "payload": {
+            "delta": "SKU demo:cn-coke-original-500ml-bottle violates constraints",
+            "final": true,
+            "replace": false
+          }
+        },
+        {
+          "type": "turn.completed",
+          "payload": {
+            "message": "SKU demo:cn-coke-original-500ml-bottle violates constraints",
+            "status": "degraded",
+            "task_id": "task-cc95a50c6039",
+            "state_version": 2,
+            "session_version": 2,
+            "plan": null,
+            "pending_clarifications": [],
+            "product_cards": [],
+            "plan_effect": "keep",
+            "action_results": [
+              {
+                "type": "mutation",
+                "status": "failed",
+                "saved": false,
+                "reply_ok": false,
+                "code": "VALIDATION_FAILED",
+                "message": "这一步没有完成：SKU demo:cn-coke-original-500ml-bottle violates constraints 原来的清单没有变化。",
+                "action_id": "a1"
+              }
+            ],
+            "answer_status": "degraded",
+            "route": "prepare",
+            "trace_id": "trace-a87e159068f7"
+          }
+        }
+      ],
+      "role_model_call_range": [
+        1,
+        2
+      ],
+      "kev_call_range": [
+        2,
+        4
+      ],
+      "terminal": {
+        "message": "SKU demo:cn-coke-original-500ml-bottle violates constraints",
+        "status": "degraded",
+        "task_id": "task-cc95a50c6039",
+        "state_version": 2,
+        "session_version": 2,
+        "plan": null,
+        "pending_clarifications": [],
+        "product_cards": [],
+        "plan_effect": "keep",
+        "action_results": [
+          {
+            "type": "mutation",
+            "status": "failed",
+            "saved": false,
+            "reply_ok": false,
+            "code": "VALIDATION_FAILED",
+            "message": "这一步没有完成：SKU demo:cn-coke-original-500ml-bottle violates constraints 原来的清单没有变化。",
+            "action_id": "a1"
+          }
+        ],
+        "answer_status": "degraded",
+        "route": "prepare",
+        "trace_id": "trace-a87e159068f7"
+      },
+      "trace": [
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "capability",
+          "status": "started",
+          "criteria_version": "ceres-guide-capabilities-v2",
+          "call_number": 1,
+          "model": "kev-latest"
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 1422,
+          "stage": "capability",
+          "status": "completed",
+          "capability": "purchase_modify",
+          "branch": "semantic_understanding",
+          "criteria_version": "ceres-guide-capabilities-v2",
+          "call_number": 1,
+          "model": "kev-latest"
+        },
+        {
+          "phase": "understanding",
+          "duration_ms": null
+        },
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "understanding",
+          "status": "started",
+          "call_number": 1
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 6765,
+          "stage": "understanding",
+          "status": "completed",
+          "call_number": 1
+        },
+        {
+          "phase": "retrieve",
+          "duration_ms": null
+        },
+        {
+          "phase": "validate",
+          "duration_ms": null
+        },
+        {
+          "phase": "turn_result",
+          "duration_ms": null,
+          "status": "degraded"
+        }
+      ],
+      "snapshot_after": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-afe324431229",
+          "product_cards": [],
+          "task_id": "task-cc95a50c6039",
+          "state_version": 2,
+          "session_version": 2,
+          "current_step": "awaiting_confirmation",
+          "task_status": "active",
+          "entry_context": {
+            "page": "home",
+            "category_id": null,
+            "activity_id": null,
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": {
+            "plan_id": "plan-f10715cde5f6",
+            "plan_version": 1,
+            "mode": "bundle",
+            "items": [
+              {
+                "sku_id": "demo:cn-coke-original-500ml-bottle",
+                "name": "可口可乐经典原味汽水500ml瓶装",
+                "quantity": 2,
+                "unit_price_fen": 400,
+                "line_total_fen": 800,
+                "image_path": null,
+                "image_kind": "placeholder",
+                "image_kind_legacy": "placeholder",
+                "role": "required",
+                "selected": true,
+                "recommended_quantity": 2,
+                "max_addable_quantity": 36,
+                "spec_quantity": 500,
+                "spec_unit": "ml",
+                "sell_unit": "件",
+                "quantity_source": "recommended",
+                "group_id": "product:demo:cn-coke-original-500ml-bottle",
+                "target_kind": "product",
+                "target_id": "demo:cn-coke-original-500ml-bottle",
+                "component_name": null,
+                "contributions": [
+                  {
+                    "group_id": "product:demo:cn-coke-original-500ml-bottle",
+                    "quantity": 2,
+                    "selected": true,
+                    "added_quantity": 0,
+                    "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                    "requirement": {
+                      "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                      "name": "可口可乐经典原味汽水500ml瓶装",
+                      "ingredient_id": null,
+                      "component_id": null,
+                      "quantity": 2,
+                      "unit": "件",
+                      "quantity_known": true,
+                      "requiredness": "core",
+                      "source": {
+                        "kind": "user",
+                        "ref": "可口可乐经典原味汽水500ml瓶装"
+                      }
+                    }
+                  }
+                ],
+                "added_quantity": 0,
+                "remaining_quantity": 2,
+                "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                "requirement": {
+                  "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                  "name": "可口可乐经典原味汽水500ml瓶装",
+                  "ingredient_id": null,
+                  "component_id": null,
+                  "quantity": 2,
+                  "unit": "件",
+                  "quantity_known": true,
+                  "requiredness": "core",
+                  "source": {
+                    "kind": "user",
+                    "ref": "可口可乐经典原味汽水500ml瓶装"
+                  }
+                },
+                "availability": "available",
+                "evidence": {
+                  "sku_source": "store_offer",
+                  "quoted_at": "2026-10-07T07:37:59+00:00",
+                  "stock_verified": true,
+                  "data_mode": "demo",
+                  "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                  "unknown_constraints": []
+                },
+                "pack_source": "catalog_spec",
+                "shortfall_quantity": 0
+              }
+            ],
+            "total_price_fen": 800,
+            "selected_total_fen": 800,
+            "expires_at": "2026-10-07T07:42:59.705327+00:00",
+            "validation_status": "passed",
+            "coverage_mode": "full",
+            "coverage_intent": "partial_ok",
+            "uncovered_items": [],
+            "gaps": [],
+            "can_confirm": true,
+            "gap_fill": null,
+            "targets": [
+              {
+                "group_id": "product:demo:cn-coke-original-500ml-bottle",
+                "kind": "product",
+                "target_id": "demo:cn-coke-original-500ml-bottle",
+                "name": "可口可乐经典原味汽水500ml瓶装",
+                "meal_name": null,
+                "fulfillment_mode": null,
+                "people": null,
+                "people_source": "default",
+                "notes": []
+              }
+            ],
+            "merged_sku_contributions": [],
+            "outstanding_total_fen": 800
+          },
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": "已恢复待确认方案",
+          "available_actions": [
+            "confirm",
+            "cancel",
+            "modify",
+            "send_message"
+          ],
+          "constraints_summary": {
+            "goal": "可口可乐经典原味汽水500ml瓶装",
+            "people": null,
+            "budget_fen": null,
+            "excluded_ingredients": []
+          },
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "complete",
+          "messages": [
+            {
+              "message_id": "msg-5d1fcc44c70e",
+              "session_id": "sess-afe324431229",
+              "task_id": null,
+              "sequence": 1,
+              "role": "user",
+              "kind": "text",
+              "content": "买两瓶可口可乐经典原味汽水500ml瓶装",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-H06-5ee7211a37",
+              "status": "completed",
+              "created_at": "2026-10-07T07:37:59.710479"
+            },
+            {
+              "message_id": "msg-1f74af45002e",
+              "session_id": "sess-afe324431229",
+              "task_id": "task-cc95a50c6039",
+              "sequence": 2,
+              "role": "assistant",
+              "kind": "plan_ref",
+              "content": "采购清单已加入「可口可乐经典原味汽水500ml瓶装」\n已整理 1 件商品，选中合计 ¥8.00（演示价格）。包含：可口可乐经典原味汽水500ml瓶装。",
+              "plan_id": "plan-f10715cde5f6",
+              "plan_version": 1,
+              "request_id": "08-H06-5ee7211a37",
+              "status": "completed",
+              "created_at": "2026-10-07T07:37:59.717344"
+            },
+            {
+              "message_id": "msg-456c9bb8dea4",
+              "session_id": "sess-afe324431229",
+              "task_id": "task-cc95a50c6039",
+              "sequence": 3,
+              "role": "user",
+              "kind": "text",
+              "content": "改成两瓶农夫山泉饮用水550ml瓶装",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-H06-3d10211e80",
+              "status": "completed",
+              "created_at": "2026-10-07T07:38:09.151801"
+            },
+            {
+              "message_id": "msg-8c334eeb088d",
+              "session_id": "sess-afe324431229",
+              "task_id": "task-cc95a50c6039",
+              "sequence": 4,
+              "role": "assistant",
+              "kind": "text",
+              "content": "SKU demo:cn-coke-original-500ml-bottle violates constraints",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-H06-3d10211e80",
+              "status": "completed",
+              "created_at": "2026-10-07T07:38:09.152823"
+            }
+          ]
+        },
+        "opening": {
+          "role": "keke",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "status": "captured"
+    }
+  ],
+  "timing_failures": [
+    {
+      "case_id": "H06",
+      "op": "turn",
+      "label": "request",
+      "elapsed_ms": 23086.0,
+      "target_ms": 15000
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "case_id": "H11",
+  "group": "aftersales",
+  "scenario_family": "return-failure-then-decline-shopping",
+  "split": "acceptance",
+  "core": false,
+  "goal": "超期退货申请失败后拒绝继续采购，保持无申请",
+  "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+  "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+  "steps": [
+    {
+      "op": "turn",
+      "label": "request",
+      "message": "订单 {{order_id}} 的百事可乐退货，处理后买一瓶水",
+      "expect": [
+        {
+          "kind": "eq",
+          "path": "route.decision",
+          "value": "suggest_switch"
+        },
+        {
+          "kind": "unchanged",
+          "path": "after.cart",
+          "before_path": "before.cart"
+        },
+        {
+          "kind": "unchanged",
+          "path": "after.orders",
+          "before_path": "before.orders"
+        }
+      ]
+    },
+    {
+      "op": "switch",
+      "label": "consent-momo",
+      "target_role": "momo",
+      "accept": true,
+      "authorized": [
+        "returns"
+      ],
+      "expect": [
+        {
+          "kind": "eq",
+          "path": "after.opening.role",
+          "value": "momo"
+        },
+        {
+          "kind": "length",
+          "path": "after.returns",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "op": "switch",
+      "label": "decline-keke",
+      "target_role": "keke",
+      "accept": false,
+      "authorized": [],
+      "expect": [
+        {
+          "kind": "eq",
+          "path": "after.opening.role",
+          "value": "momo"
+        },
+        {
+          "kind": "length",
+          "path": "after.returns",
+          "value": 0
+        }
+      ]
+    }
+  ],
+  "setup": {
+    "order": {
+      "sku_id": "demo:cn-pepsi-original-330ml-can",
+      "delivered_days": 10
+    }
+  }
+}

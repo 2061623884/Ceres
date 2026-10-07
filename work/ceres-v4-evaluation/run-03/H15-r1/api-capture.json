@@ -1,0 +1,1435 @@
+{
+  "steps": [
+    {
+      "case_id": "H15",
+      "op": "turn",
+      "label": "price",
+      "before": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-874756624f93",
+          "product_cards": [],
+          "task_id": null,
+          "state_version": 0,
+          "session_version": 0,
+          "current_step": null,
+          "task_status": null,
+          "entry_context": {
+            "page": "activity",
+            "category_id": null,
+            "activity_id": "green_reset",
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": null,
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": null,
+          "available_actions": [
+            "send_message"
+          ],
+          "constraints_summary": {},
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "empty",
+          "messages": null
+        },
+        "opening": {
+          "role": "keke",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "active_role_before": "keke",
+      "request": {
+        "request_id": "08-H15-e41c95cf06",
+        "message": "这份鲜果成品拼盘多少钱？",
+        "expected_task_id": null,
+        "expected_state_version": 0,
+        "expected_session_version": 0,
+        "view_context": {
+          "page": "product",
+          "product_id": "demo:green-reset-fruit-platter",
+          "activity_id": "green_reset"
+        }
+      },
+      "http_status": 200,
+      "elapsed_ms": 15214.8,
+      "latency_target_ms": 15000,
+      "latency_target_exceeded": true,
+      "events": [
+        {
+          "type": "service.route",
+          "payload": {
+            "status": "completed",
+            "decision": "stay_current",
+            "raw_choice": "stay_current",
+            "current_role": "keke",
+            "prompt_mode": "none",
+            "request_id": "08-H15-e41c95cf06",
+            "route_ms": 949.7144999913871,
+            "criteria_version": "ceres-service-v3.2"
+          }
+        },
+        {
+          "type": "accepted",
+          "payload": {}
+        },
+        {
+          "type": "progress",
+          "payload": {
+            "phase": "understanding"
+          }
+        },
+        {
+          "type": "progress",
+          "payload": {
+            "phase": "retrieve"
+          }
+        },
+        {
+          "type": "answer.delta",
+          "payload": {
+            "delta": "这份鲜果成品拼盘本轮资料里没有价格信息，无法确认多少钱。\n1. 鲜果成品拼盘",
+            "final": true,
+            "replace": false
+          }
+        },
+        {
+          "type": "turn.completed",
+          "payload": {
+            "message": "这份鲜果成品拼盘本轮资料里没有价格信息，无法确认多少钱。\n1. 鲜果成品拼盘",
+            "status": "understanding",
+            "task_id": null,
+            "state_version": 0,
+            "session_version": 1,
+            "plan": null,
+            "pending_clarifications": [],
+            "product_cards": [],
+            "plan_effect": "keep",
+            "action_results": [
+              {
+                "type": "read_only",
+                "kind": "lookup",
+                "status": "completed",
+                "saved": false,
+                "reply_ok": true,
+                "retrieval_status": "ok",
+                "retrieval_mode": "lexical",
+                "fallback_reason": null,
+                "index_version": "idx-81e9fa689baef6b5",
+                "action_id": "a1"
+              }
+            ],
+            "answer_status": "accepted",
+            "route": "answer",
+            "trace_id": "trace-45e7d210634f"
+          }
+        }
+      ],
+      "role_model_call_range": [
+        0,
+        2
+      ],
+      "kev_call_range": [
+        0,
+        2
+      ],
+      "terminal": {
+        "message": "这份鲜果成品拼盘本轮资料里没有价格信息，无法确认多少钱。\n1. 鲜果成品拼盘",
+        "status": "understanding",
+        "task_id": null,
+        "state_version": 0,
+        "session_version": 1,
+        "plan": null,
+        "pending_clarifications": [],
+        "product_cards": [],
+        "plan_effect": "keep",
+        "action_results": [
+          {
+            "type": "read_only",
+            "kind": "lookup",
+            "status": "completed",
+            "saved": false,
+            "reply_ok": true,
+            "retrieval_status": "ok",
+            "retrieval_mode": "lexical",
+            "fallback_reason": null,
+            "index_version": "idx-81e9fa689baef6b5",
+            "action_id": "a1"
+          }
+        ],
+        "answer_status": "accepted",
+        "route": "answer",
+        "trace_id": "trace-45e7d210634f"
+      },
+      "trace": [
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "capability",
+          "status": "started",
+          "criteria_version": "ceres-guide-capabilities-v2",
+          "call_number": 1,
+          "model": "kev-latest"
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 921,
+          "stage": "capability",
+          "status": "completed",
+          "capability": "facts_qa",
+          "branch": "semantic_understanding",
+          "criteria_version": "ceres-guide-capabilities-v2",
+          "call_number": 1,
+          "model": "kev-latest"
+        },
+        {
+          "phase": "understanding",
+          "duration_ms": null
+        },
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "understanding",
+          "status": "started",
+          "call_number": 1
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 10422,
+          "stage": "understanding",
+          "status": "completed",
+          "call_number": 1
+        },
+        {
+          "phase": "retrieve",
+          "duration_ms": null
+        },
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "answer",
+          "status": "started",
+          "call_number": 2
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 2812,
+          "stage": "answer",
+          "status": "completed",
+          "call_number": 2
+        },
+        {
+          "phase": "turn_result",
+          "duration_ms": null,
+          "status": "understanding"
+        },
+        {
+          "phase": "memory_extract_started",
+          "duration_ms": null,
+          "model": "qwen3.8-27b"
+        }
+      ],
+      "snapshot_after": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-874756624f93",
+          "product_cards": [],
+          "task_id": null,
+          "state_version": 0,
+          "session_version": 1,
+          "current_step": null,
+          "task_status": null,
+          "entry_context": {
+            "page": "activity",
+            "category_id": null,
+            "activity_id": "green_reset",
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": null,
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": null,
+          "available_actions": [
+            "send_message"
+          ],
+          "constraints_summary": {},
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "complete",
+          "messages": [
+            {
+              "message_id": "msg-7d3b9dbdfba4",
+              "session_id": "sess-874756624f93",
+              "task_id": null,
+              "sequence": 1,
+              "role": "user",
+              "kind": "text",
+              "content": "这份鲜果成品拼盘多少钱？",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-H15-e41c95cf06",
+              "status": "completed",
+              "created_at": "2026-10-07T07:41:13.106056"
+            },
+            {
+              "message_id": "msg-2c3e586ec8a7",
+              "session_id": "sess-874756624f93",
+              "task_id": null,
+              "sequence": 2,
+              "role": "assistant",
+              "kind": "text",
+              "content": "这份鲜果成品拼盘本轮资料里没有价格信息，无法确认多少钱。\n1. 鲜果成品拼盘",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-H15-e41c95cf06",
+              "status": "completed",
+              "created_at": "2026-10-07T07:41:13.109100"
+            }
+          ]
+        },
+        "opening": {
+          "role": "keke",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "status": "captured"
+    },
+    {
+      "case_id": "H15",
+      "op": "turn",
+      "label": "policy",
+      "before": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-874756624f93",
+          "product_cards": [],
+          "task_id": null,
+          "state_version": 0,
+          "session_version": 1,
+          "current_step": null,
+          "task_status": null,
+          "entry_context": {
+            "page": "activity",
+            "category_id": null,
+            "activity_id": "green_reset",
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": null,
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": null,
+          "available_actions": [
+            "send_message"
+          ],
+          "constraints_summary": {},
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "complete",
+          "messages": null
+        },
+        "opening": {
+          "role": "keke",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "active_role_before": "keke",
+      "request": {
+        "request_id": "08-H15-8f05849703",
+        "message": "先问一般配送时间？",
+        "expected_task_id": null,
+        "expected_state_version": 0,
+        "expected_session_version": 1
+      },
+      "http_status": 200,
+      "elapsed_ms": 21058.2,
+      "latency_target_ms": 15000,
+      "latency_target_exceeded": true,
+      "events": [
+        {
+          "type": "service.route",
+          "payload": {
+            "status": "completed",
+            "decision": "stay_current",
+            "raw_choice": "stay_current",
+            "current_role": "keke",
+            "prompt_mode": "none",
+            "request_id": "08-H15-8f05849703",
+            "route_ms": 1035.3812000248581,
+            "criteria_version": "ceres-service-v3.2"
+          }
+        },
+        {
+          "type": "accepted",
+          "payload": {}
+        },
+        {
+          "type": "progress",
+          "payload": {
+            "phase": "understanding"
+          }
+        },
+        {
+          "type": "progress",
+          "payload": {
+            "phase": "retrieve"
+          }
+        },
+        {
+          "type": "answer.delta",
+          "payload": {
+            "delta": "一般配送时间是：下单当天配送，预计送达时间以物流信息为准。依据模拟门店 store-demo-01 的政策 P-DEL-01《配送时间》。这只是通用规则，不代表具体订单已安排配送。",
+            "final": true,
+            "replace": false
+          }
+        },
+        {
+          "type": "turn.completed",
+          "payload": {
+            "message": "一般配送时间是：下单当天配送，预计送达时间以物流信息为准。依据模拟门店 store-demo-01 的政策 P-DEL-01《配送时间》。这只是通用规则，不代表具体订单已安排配送。",
+            "status": "understanding",
+            "task_id": null,
+            "state_version": 0,
+            "session_version": 1,
+            "plan": null,
+            "pending_clarifications": [],
+            "product_cards": [],
+            "plan_effect": "keep",
+            "action_results": [
+              {
+                "type": "read_only",
+                "kind": "policy",
+                "status": "completed",
+                "saved": false,
+                "reply_ok": true,
+                "action_id": "a1"
+              }
+            ],
+            "answer_status": "accepted",
+            "route": "answer",
+            "trace_id": "trace-68a940e77151"
+          }
+        }
+      ],
+      "role_model_call_range": [
+        2,
+        4
+      ],
+      "kev_call_range": [
+        2,
+        4
+      ],
+      "terminal": {
+        "message": "一般配送时间是：下单当天配送，预计送达时间以物流信息为准。依据模拟门店 store-demo-01 的政策 P-DEL-01《配送时间》。这只是通用规则，不代表具体订单已安排配送。",
+        "status": "understanding",
+        "task_id": null,
+        "state_version": 0,
+        "session_version": 1,
+        "plan": null,
+        "pending_clarifications": [],
+        "product_cards": [],
+        "plan_effect": "keep",
+        "action_results": [
+          {
+            "type": "read_only",
+            "kind": "policy",
+            "status": "completed",
+            "saved": false,
+            "reply_ok": true,
+            "action_id": "a1"
+          }
+        ],
+        "answer_status": "accepted",
+        "route": "answer",
+        "trace_id": "trace-68a940e77151"
+      },
+      "trace": [
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "capability",
+          "status": "started",
+          "criteria_version": "ceres-guide-capabilities-v2",
+          "call_number": 1,
+          "model": "kev-latest"
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 1280,
+          "stage": "capability",
+          "status": "completed",
+          "capability": "facts_qa",
+          "branch": "semantic_understanding",
+          "criteria_version": "ceres-guide-capabilities-v2",
+          "call_number": 1,
+          "model": "kev-latest"
+        },
+        {
+          "phase": "understanding",
+          "duration_ms": null
+        },
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "understanding",
+          "status": "started",
+          "call_number": 1
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 4625,
+          "stage": "understanding",
+          "status": "completed",
+          "call_number": 1
+        },
+        {
+          "phase": "retrieve",
+          "duration_ms": null
+        },
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "answer",
+          "status": "started",
+          "call_number": 2
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 14046,
+          "stage": "answer",
+          "status": "completed",
+          "call_number": 2
+        },
+        {
+          "phase": "turn_result",
+          "duration_ms": null,
+          "status": "understanding"
+        },
+        {
+          "phase": "memory_extract_started",
+          "duration_ms": null,
+          "model": "qwen3.8-27b"
+        }
+      ],
+      "snapshot_after": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-874756624f93",
+          "product_cards": [],
+          "task_id": null,
+          "state_version": 0,
+          "session_version": 1,
+          "current_step": null,
+          "task_status": null,
+          "entry_context": {
+            "page": "activity",
+            "category_id": null,
+            "activity_id": "green_reset",
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": null,
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": null,
+          "available_actions": [
+            "send_message"
+          ],
+          "constraints_summary": {},
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "complete",
+          "messages": [
+            {
+              "message_id": "msg-7d3b9dbdfba4",
+              "session_id": "sess-874756624f93",
+              "task_id": null,
+              "sequence": 1,
+              "role": "user",
+              "kind": "text",
+              "content": "这份鲜果成品拼盘多少钱？",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-H15-e41c95cf06",
+              "status": "completed",
+              "created_at": "2026-10-07T07:41:13.106056"
+            },
+            {
+              "message_id": "msg-2c3e586ec8a7",
+              "session_id": "sess-874756624f93",
+              "task_id": null,
+              "sequence": 2,
+              "role": "assistant",
+              "kind": "text",
+              "content": "这份鲜果成品拼盘本轮资料里没有价格信息，无法确认多少钱。\n1. 鲜果成品拼盘",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-H15-e41c95cf06",
+              "status": "completed",
+              "created_at": "2026-10-07T07:41:13.109100"
+            },
+            {
+              "message_id": "msg-7994c737f1e0",
+              "session_id": "sess-874756624f93",
+              "task_id": null,
+              "sequence": 3,
+              "role": "user",
+              "kind": "text",
+              "content": "先问一般配送时间？",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-H15-8f05849703",
+              "status": "completed",
+              "created_at": "2026-10-07T07:41:37.089696"
+            },
+            {
+              "message_id": "msg-c8a0c5094ea2",
+              "session_id": "sess-874756624f93",
+              "task_id": null,
+              "sequence": 4,
+              "role": "assistant",
+              "kind": "text",
+              "content": "一般配送时间是：下单当天配送，预计送达时间以物流信息为准。依据模拟门店 store-demo-01 的政策 P-DEL-01《配送时间》。这只是通用规则，不代表具体订单已安排配送。",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-H15-8f05849703",
+              "status": "completed",
+              "created_at": "2026-10-07T07:41:37.090715"
+            }
+          ]
+        },
+        "opening": {
+          "role": "keke",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "status": "captured"
+    },
+    {
+      "case_id": "H15",
+      "op": "turn",
+      "label": "purchase",
+      "before": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-874756624f93",
+          "product_cards": [],
+          "task_id": null,
+          "state_version": 0,
+          "session_version": 1,
+          "current_step": null,
+          "task_status": null,
+          "entry_context": {
+            "page": "activity",
+            "category_id": null,
+            "activity_id": "green_reset",
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": null,
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": null,
+          "available_actions": [
+            "send_message"
+          ],
+          "constraints_summary": {},
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "complete",
+          "messages": null
+        },
+        "opening": {
+          "role": "keke",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "active_role_before": "keke",
+      "request": {
+        "request_id": "08-H15-157449c2f6",
+        "message": "那就买刚才那份鲜果成品拼盘",
+        "expected_task_id": null,
+        "expected_state_version": 0,
+        "expected_session_version": 1
+      },
+      "http_status": 200,
+      "elapsed_ms": 4523.3,
+      "latency_target_ms": 15000,
+      "latency_target_exceeded": false,
+      "events": [
+        {
+          "type": "service.route",
+          "payload": {
+            "status": "completed",
+            "decision": "stay_current",
+            "raw_choice": "stay_current",
+            "current_role": "keke",
+            "prompt_mode": "none",
+            "request_id": "08-H15-157449c2f6",
+            "route_ms": 984.5477000344545,
+            "criteria_version": "ceres-service-v3.2"
+          }
+        },
+        {
+          "type": "accepted",
+          "payload": {}
+        },
+        {
+          "type": "progress",
+          "payload": {
+            "phase": "understanding"
+          }
+        },
+        {
+          "type": "progress",
+          "payload": {
+            "phase": "validate"
+          }
+        },
+        {
+          "type": "plan.ready",
+          "payload": {
+            "plan": {
+              "plan_effect": "replace",
+              "plan_id": "plan-6633bcee83bc",
+              "plan_version": 1,
+              "task_id": "task-9602ed4e8436",
+              "state_version": 2,
+              "session_version": 3,
+              "mode": "bundle",
+              "items": [
+                {
+                  "sku_id": "demo:green-reset-fruit-platter",
+                  "name": "鲜果成品拼盘",
+                  "quantity": 1,
+                  "recommended_quantity": 1,
+                  "quantity_source": "recommended",
+                  "unit_price_fen": 1980,
+                  "line_total_fen": 1980,
+                  "image_path": null,
+                  "image_kind": "placeholder",
+                  "image_kind_legacy": "placeholder",
+                  "role": "required",
+                  "selected": true,
+                  "ingredient_ids": [],
+                  "spec_quantity": 250.0,
+                  "spec_unit": "g",
+                  "sell_unit": "件",
+                  "max_addable_quantity": 20,
+                  "group_id": "product:demo:green-reset-fruit-platter",
+                  "target_kind": "product",
+                  "target_id": "demo:green-reset-fruit-platter",
+                  "required_item_id": "product:demo:green-reset-fruit-platter#demo:green-reset-fruit-platter",
+                  "requirement": {
+                    "required_item_id": "product:demo:green-reset-fruit-platter#demo:green-reset-fruit-platter",
+                    "name": "鲜果成品拼盘",
+                    "ingredient_id": null,
+                    "component_id": null,
+                    "quantity": 1,
+                    "unit": "件",
+                    "quantity_known": true,
+                    "requiredness": "core",
+                    "source": {
+                      "kind": "user",
+                      "ref": "鲜果成品拼盘"
+                    }
+                  },
+                  "availability": "available",
+                  "evidence": {
+                    "sku_source": "store_offer",
+                    "quoted_at": "2026-10-07T07:41:44+00:00",
+                    "stock_verified": true,
+                    "data_mode": "demo",
+                    "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                    "unknown_constraints": []
+                  },
+                  "pack_source": "catalog_spec",
+                  "shortfall_quantity": 0,
+                  "user_quantity": null,
+                  "added_quantity": 0,
+                  "remaining_quantity": 1,
+                  "contributions": [
+                    {
+                      "group_id": "product:demo:green-reset-fruit-platter",
+                      "quantity": 1,
+                      "selected": true,
+                      "added_quantity": 0,
+                      "required_item_id": "product:demo:green-reset-fruit-platter#demo:green-reset-fruit-platter",
+                      "requirement": {
+                        "required_item_id": "product:demo:green-reset-fruit-platter#demo:green-reset-fruit-platter",
+                        "name": "鲜果成品拼盘",
+                        "ingredient_id": null,
+                        "component_id": null,
+                        "quantity": 1,
+                        "unit": "件",
+                        "quantity_known": true,
+                        "requiredness": "core",
+                        "source": {
+                          "kind": "user",
+                          "ref": "鲜果成品拼盘"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "total_price_fen": 1980,
+              "selected_total_fen": 1980,
+              "outstanding_total_fen": 1980,
+              "expires_at": "2026-10-07T07:46:44.019165+00:00",
+              "validation_status": "passed",
+              "coverage_mode": "full",
+              "coverage_intent": "partial_ok",
+              "uncovered_items": [],
+              "gaps": [],
+              "can_confirm": true,
+              "targets": [
+                {
+                  "group_id": "product:demo:green-reset-fruit-platter",
+                  "kind": "product",
+                  "target_id": "demo:green-reset-fruit-platter",
+                  "name": "鲜果成品拼盘",
+                  "people": null,
+                  "people_source": "default"
+                }
+              ],
+              "merged_sku_contributions": []
+            },
+            "plan_effect": "replace"
+          }
+        },
+        {
+          "type": "answer.delta",
+          "payload": {
+            "delta": "采购清单已加入「鲜果成品拼盘」\n已整理 1 件商品，选中合计 ¥19.80（演示价格）。包含：鲜果成品拼盘。",
+            "final": true,
+            "replace": false
+          }
+        },
+        {
+          "type": "turn.completed",
+          "payload": {
+            "message": "采购清单已加入「鲜果成品拼盘」\n已整理 1 件商品，选中合计 ¥19.80（演示价格）。包含：鲜果成品拼盘。",
+            "status": "awaiting_confirmation",
+            "task_id": "task-9602ed4e8436",
+            "state_version": 2,
+            "session_version": 3,
+            "plan": {
+              "plan_id": "plan-6633bcee83bc",
+              "plan_version": 1,
+              "mode": "bundle",
+              "items": [
+                {
+                  "sku_id": "demo:green-reset-fruit-platter",
+                  "name": "鲜果成品拼盘",
+                  "quantity": 1,
+                  "recommended_quantity": 1,
+                  "quantity_source": "recommended",
+                  "unit_price_fen": 1980,
+                  "line_total_fen": 1980,
+                  "image_path": null,
+                  "image_kind": "placeholder",
+                  "image_kind_legacy": "placeholder",
+                  "role": "required",
+                  "selected": true,
+                  "ingredient_ids": [],
+                  "spec_quantity": 250.0,
+                  "spec_unit": "g",
+                  "sell_unit": "件",
+                  "max_addable_quantity": 20,
+                  "group_id": "product:demo:green-reset-fruit-platter",
+                  "target_kind": "product",
+                  "target_id": "demo:green-reset-fruit-platter",
+                  "required_item_id": "product:demo:green-reset-fruit-platter#demo:green-reset-fruit-platter",
+                  "requirement": {
+                    "required_item_id": "product:demo:green-reset-fruit-platter#demo:green-reset-fruit-platter",
+                    "name": "鲜果成品拼盘",
+                    "ingredient_id": null,
+                    "component_id": null,
+                    "quantity": 1,
+                    "unit": "件",
+                    "quantity_known": true,
+                    "requiredness": "core",
+                    "source": {
+                      "kind": "user",
+                      "ref": "鲜果成品拼盘"
+                    }
+                  },
+                  "availability": "available",
+                  "evidence": {
+                    "sku_source": "store_offer",
+                    "quoted_at": "2026-10-07T07:41:44+00:00",
+                    "stock_verified": true,
+                    "data_mode": "demo",
+                    "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                    "unknown_constraints": []
+                  },
+                  "pack_source": "catalog_spec",
+                  "shortfall_quantity": 0,
+                  "user_quantity": null,
+                  "added_quantity": 0,
+                  "remaining_quantity": 1,
+                  "contributions": [
+                    {
+                      "group_id": "product:demo:green-reset-fruit-platter",
+                      "quantity": 1,
+                      "selected": true,
+                      "added_quantity": 0,
+                      "required_item_id": "product:demo:green-reset-fruit-platter#demo:green-reset-fruit-platter",
+                      "requirement": {
+                        "required_item_id": "product:demo:green-reset-fruit-platter#demo:green-reset-fruit-platter",
+                        "name": "鲜果成品拼盘",
+                        "ingredient_id": null,
+                        "component_id": null,
+                        "quantity": 1,
+                        "unit": "件",
+                        "quantity_known": true,
+                        "requiredness": "core",
+                        "source": {
+                          "kind": "user",
+                          "ref": "鲜果成品拼盘"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "total_price_fen": 1980,
+              "selected_total_fen": 1980,
+              "outstanding_total_fen": 1980,
+              "expires_at": "2026-10-07T07:46:44.019165+00:00",
+              "validation_status": "passed",
+              "coverage_mode": "full",
+              "coverage_intent": "partial_ok",
+              "uncovered_items": [],
+              "gaps": [],
+              "can_confirm": true,
+              "targets": [
+                {
+                  "group_id": "product:demo:green-reset-fruit-platter",
+                  "kind": "product",
+                  "target_id": "demo:green-reset-fruit-platter",
+                  "name": "鲜果成品拼盘",
+                  "people": null,
+                  "people_source": "default"
+                }
+              ],
+              "merged_sku_contributions": []
+            },
+            "pending_clarifications": [],
+            "product_cards": [],
+            "plan_effect": "replace",
+            "action_results": [
+              {
+                "type": "mutation",
+                "verb": "add",
+                "group_id": "product:demo:green-reset-fruit-platter",
+                "status": "committed",
+                "saved": true,
+                "reply_ok": true,
+                "plan_effect": "replace",
+                "message": "采购清单已加入「鲜果成品拼盘」",
+                "candidate_ref": "p33444e5c9a6555bc",
+                "action_id": "a1"
+              }
+            ],
+            "answer_status": "awaiting_confirmation",
+            "route": "prepare",
+            "trace_id": "trace-29531cb9ca91"
+          }
+        }
+      ],
+      "role_model_call_range": [
+        4,
+        5
+      ],
+      "kev_call_range": [
+        4,
+        6
+      ],
+      "terminal": {
+        "message": "采购清单已加入「鲜果成品拼盘」\n已整理 1 件商品，选中合计 ¥19.80（演示价格）。包含：鲜果成品拼盘。",
+        "status": "awaiting_confirmation",
+        "task_id": "task-9602ed4e8436",
+        "state_version": 2,
+        "session_version": 3,
+        "plan": {
+          "plan_id": "plan-6633bcee83bc",
+          "plan_version": 1,
+          "mode": "bundle",
+          "items": [
+            {
+              "sku_id": "demo:green-reset-fruit-platter",
+              "name": "鲜果成品拼盘",
+              "quantity": 1,
+              "recommended_quantity": 1,
+              "quantity_source": "recommended",
+              "unit_price_fen": 1980,
+              "line_total_fen": 1980,
+              "image_path": null,
+              "image_kind": "placeholder",
+              "image_kind_legacy": "placeholder",
+              "role": "required",
+              "selected": true,
+              "ingredient_ids": [],
+              "spec_quantity": 250.0,
+              "spec_unit": "g",
+              "sell_unit": "件",
+              "max_addable_quantity": 20,
+              "group_id": "product:demo:green-reset-fruit-platter",
+              "target_kind": "product",
+              "target_id": "demo:green-reset-fruit-platter",
+              "required_item_id": "product:demo:green-reset-fruit-platter#demo:green-reset-fruit-platter",
+              "requirement": {
+                "required_item_id": "product:demo:green-reset-fruit-platter#demo:green-reset-fruit-platter",
+                "name": "鲜果成品拼盘",
+                "ingredient_id": null,
+                "component_id": null,
+                "quantity": 1,
+                "unit": "件",
+                "quantity_known": true,
+                "requiredness": "core",
+                "source": {
+                  "kind": "user",
+                  "ref": "鲜果成品拼盘"
+                }
+              },
+              "availability": "available",
+              "evidence": {
+                "sku_source": "store_offer",
+                "quoted_at": "2026-10-07T07:41:44+00:00",
+                "stock_verified": true,
+                "data_mode": "demo",
+                "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                "unknown_constraints": []
+              },
+              "pack_source": "catalog_spec",
+              "shortfall_quantity": 0,
+              "user_quantity": null,
+              "added_quantity": 0,
+              "remaining_quantity": 1,
+              "contributions": [
+                {
+                  "group_id": "product:demo:green-reset-fruit-platter",
+                  "quantity": 1,
+                  "selected": true,
+                  "added_quantity": 0,
+                  "required_item_id": "product:demo:green-reset-fruit-platter#demo:green-reset-fruit-platter",
+                  "requirement": {
+                    "required_item_id": "product:demo:green-reset-fruit-platter#demo:green-reset-fruit-platter",
+                    "name": "鲜果成品拼盘",
+                    "ingredient_id": null,
+                    "component_id": null,
+                    "quantity": 1,
+                    "unit": "件",
+                    "quantity_known": true,
+                    "requiredness": "core",
+                    "source": {
+                      "kind": "user",
+                      "ref": "鲜果成品拼盘"
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "total_price_fen": 1980,
+          "selected_total_fen": 1980,
+          "outstanding_total_fen": 1980,
+          "expires_at": "2026-10-07T07:46:44.019165+00:00",
+          "validation_status": "passed",
+          "coverage_mode": "full",
+          "coverage_intent": "partial_ok",
+          "uncovered_items": [],
+          "gaps": [],
+          "can_confirm": true,
+          "targets": [
+            {
+              "group_id": "product:demo:green-reset-fruit-platter",
+              "kind": "product",
+              "target_id": "demo:green-reset-fruit-platter",
+              "name": "鲜果成品拼盘",
+              "people": null,
+              "people_source": "default"
+            }
+          ],
+          "merged_sku_contributions": []
+        },
+        "pending_clarifications": [],
+        "product_cards": [],
+        "plan_effect": "replace",
+        "action_results": [
+          {
+            "type": "mutation",
+            "verb": "add",
+            "group_id": "product:demo:green-reset-fruit-platter",
+            "status": "committed",
+            "saved": true,
+            "reply_ok": true,
+            "plan_effect": "replace",
+            "message": "采购清单已加入「鲜果成品拼盘」",
+            "candidate_ref": "p33444e5c9a6555bc",
+            "action_id": "a1"
+          }
+        ],
+        "answer_status": "awaiting_confirmation",
+        "route": "prepare",
+        "trace_id": "trace-29531cb9ca91"
+      },
+      "trace": [
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "capability",
+          "status": "started",
+          "criteria_version": "ceres-guide-capabilities-v2",
+          "call_number": 1,
+          "model": "kev-latest"
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 1327,
+          "stage": "capability",
+          "status": "completed",
+          "capability": "purchase_modify",
+          "branch": "semantic_understanding",
+          "criteria_version": "ceres-guide-capabilities-v2",
+          "call_number": 1,
+          "model": "kev-latest"
+        },
+        {
+          "phase": "understanding",
+          "duration_ms": null
+        },
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "understanding",
+          "status": "started",
+          "call_number": 1
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 2125,
+          "stage": "understanding",
+          "status": "completed",
+          "call_number": 1
+        },
+        {
+          "phase": "validate",
+          "duration_ms": null
+        },
+        {
+          "phase": "turn_result",
+          "duration_ms": null,
+          "status": "awaiting_confirmation"
+        }
+      ],
+      "snapshot_after": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-874756624f93",
+          "product_cards": [],
+          "task_id": "task-9602ed4e8436",
+          "state_version": 2,
+          "session_version": 3,
+          "current_step": "awaiting_confirmation",
+          "task_status": "active",
+          "entry_context": {
+            "page": "activity",
+            "category_id": null,
+            "activity_id": "green_reset",
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": {
+            "plan_id": "plan-6633bcee83bc",
+            "plan_version": 1,
+            "mode": "bundle",
+            "items": [
+              {
+                "sku_id": "demo:green-reset-fruit-platter",
+                "name": "鲜果成品拼盘",
+                "quantity": 1,
+                "unit_price_fen": 1980,
+                "line_total_fen": 1980,
+                "image_path": null,
+                "image_kind": "placeholder",
+                "image_kind_legacy": "placeholder",
+                "role": "required",
+                "selected": true,
+                "recommended_quantity": 1,
+                "max_addable_quantity": 20,
+                "spec_quantity": 250,
+                "spec_unit": "g",
+                "sell_unit": "件",
+                "quantity_source": "recommended",
+                "group_id": "product:demo:green-reset-fruit-platter",
+                "target_kind": "product",
+                "target_id": "demo:green-reset-fruit-platter",
+                "component_name": null,
+                "contributions": [
+                  {
+                    "group_id": "product:demo:green-reset-fruit-platter",
+                    "quantity": 1,
+                    "selected": true,
+                    "added_quantity": 0,
+                    "required_item_id": "product:demo:green-reset-fruit-platter#demo:green-reset-fruit-platter",
+                    "requirement": {
+                      "required_item_id": "product:demo:green-reset-fruit-platter#demo:green-reset-fruit-platter",
+                      "name": "鲜果成品拼盘",
+                      "ingredient_id": null,
+                      "component_id": null,
+                      "quantity": 1,
+                      "unit": "件",
+                      "quantity_known": true,
+                      "requiredness": "core",
+                      "source": {
+                        "kind": "user",
+                        "ref": "鲜果成品拼盘"
+                      }
+                    }
+                  }
+                ],
+                "added_quantity": 0,
+                "remaining_quantity": 1,
+                "required_item_id": "product:demo:green-reset-fruit-platter#demo:green-reset-fruit-platter",
+                "requirement": {
+                  "required_item_id": "product:demo:green-reset-fruit-platter#demo:green-reset-fruit-platter",
+                  "name": "鲜果成品拼盘",
+                  "ingredient_id": null,
+                  "component_id": null,
+                  "quantity": 1,
+                  "unit": "件",
+                  "quantity_known": true,
+                  "requiredness": "core",
+                  "source": {
+                    "kind": "user",
+                    "ref": "鲜果成品拼盘"
+                  }
+                },
+                "availability": "available",
+                "evidence": {
+                  "sku_source": "store_offer",
+                  "quoted_at": "2026-10-07T07:41:44+00:00",
+                  "stock_verified": true,
+                  "data_mode": "demo",
+                  "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                  "unknown_constraints": []
+                },
+                "pack_source": "catalog_spec",
+                "shortfall_quantity": 0
+              }
+            ],
+            "total_price_fen": 1980,
+            "selected_total_fen": 1980,
+            "expires_at": "2026-10-07T07:46:44.019165+00:00",
+            "validation_status": "passed",
+            "coverage_mode": "full",
+            "coverage_intent": "partial_ok",
+            "uncovered_items": [],
+            "gaps": [],
+            "can_confirm": true,
+            "gap_fill": null,
+            "targets": [
+              {
+                "group_id": "product:demo:green-reset-fruit-platter",
+                "kind": "product",
+                "target_id": "demo:green-reset-fruit-platter",
+                "name": "鲜果成品拼盘",
+                "meal_name": null,
+                "fulfillment_mode": null,
+                "people": null,
+                "people_source": "default",
+                "notes": []
+              }
+            ],
+            "merged_sku_contributions": [],
+            "outstanding_total_fen": 1980
+          },
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": "已恢复待确认方案",
+          "available_actions": [
+            "confirm",
+            "cancel",
+            "modify",
+            "send_message"
+          ],
+          "constraints_summary": {
+            "goal": "鲜果成品拼盘",
+            "people": null,
+            "budget_fen": null,
+            "excluded_ingredients": []
+          },
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "complete",
+          "messages": [
+            {
+              "message_id": "msg-7d3b9dbdfba4",
+              "session_id": "sess-874756624f93",
+              "task_id": null,
+              "sequence": 1,
+              "role": "user",
+              "kind": "text",
+              "content": "这份鲜果成品拼盘多少钱？",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-H15-e41c95cf06",
+              "status": "completed",
+              "created_at": "2026-10-07T07:41:13.106056"
+            },
+            {
+              "message_id": "msg-2c3e586ec8a7",
+              "session_id": "sess-874756624f93",
+              "task_id": null,
+              "sequence": 2,
+              "role": "assistant",
+              "kind": "text",
+              "content": "这份鲜果成品拼盘本轮资料里没有价格信息，无法确认多少钱。\n1. 鲜果成品拼盘",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-H15-e41c95cf06",
+              "status": "completed",
+              "created_at": "2026-10-07T07:41:13.109100"
+            },
+            {
+              "message_id": "msg-7994c737f1e0",
+              "session_id": "sess-874756624f93",
+              "task_id": null,
+              "sequence": 3,
+              "role": "user",
+              "kind": "text",
+              "content": "先问一般配送时间？",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-H15-8f05849703",
+              "status": "completed",
+              "created_at": "2026-10-07T07:41:37.089696"
+            },
+            {
+              "message_id": "msg-c8a0c5094ea2",
+              "session_id": "sess-874756624f93",
+              "task_id": null,
+              "sequence": 4,
+              "role": "assistant",
+              "kind": "text",
+              "content": "一般配送时间是：下单当天配送，预计送达时间以物流信息为准。依据模拟门店 store-demo-01 的政策 P-DEL-01《配送时间》。这只是通用规则，不代表具体订单已安排配送。",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-H15-8f05849703",
+              "status": "completed",
+              "created_at": "2026-10-07T07:41:37.090715"
+            },
+            {
+              "message_id": "msg-2681060eaf96",
+              "session_id": "sess-874756624f93",
+              "task_id": null,
+              "sequence": 5,
+              "role": "user",
+              "kind": "text",
+              "content": "那就买刚才那份鲜果成品拼盘",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-H15-157449c2f6",
+              "status": "completed",
+              "created_at": "2026-10-07T07:41:44.023484"
+            },
+            {
+              "message_id": "msg-bd4f0ae63be1",
+              "session_id": "sess-874756624f93",
+              "task_id": "task-9602ed4e8436",
+              "sequence": 6,
+              "role": "assistant",
+              "kind": "plan_ref",
+              "content": "采购清单已加入「鲜果成品拼盘」\n已整理 1 件商品，选中合计 ¥19.80（演示价格）。包含：鲜果成品拼盘。",
+              "plan_id": "plan-6633bcee83bc",
+              "plan_version": 1,
+              "request_id": "08-H15-157449c2f6",
+              "status": "completed",
+              "created_at": "2026-10-07T07:41:44.031981"
+            }
+          ]
+        },
+        "opening": {
+          "role": "keke",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "status": "captured"
+    }
+  ],
+  "timing_failures": [
+    {
+      "case_id": "H15",
+      "op": "turn",
+      "label": "price",
+      "elapsed_ms": 15214.8,
+      "target_ms": 15000
+    },
+    {
+      "case_id": "H15",
+      "op": "turn",
+      "label": "policy",
+      "elapsed_ms": 21058.2,
+      "target_ms": 15000
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+"C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe" -c <inline-config-index-preflight> "C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-08" "C:\Users\20616\Desktop\Agent\Agent产品\Ceres" (cwd=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-08)

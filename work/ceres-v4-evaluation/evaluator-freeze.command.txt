@@ -1,0 +1,1 @@
+Copy-Item scripts/eval_v4.py, scripts/test_eval_v4.py, evals/v4/cases.json -> work/ceres-v4-evaluation/evidence/evaluator-freeze; compute SHA-256; verify against scorer-tests-final-current.hashes.json; write freeze-manifest.json.

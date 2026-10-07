@@ -1,0 +1,78 @@
+{
+  "run03_hard_constraints": {
+    "produced_plan_executions": 49,
+    "all_satisfied": 40,
+    "rate": 0.8163265306122449
+  },
+  "run04_hard_constraints": {
+    "produced_plan_executions": 49,
+    "all_satisfied": 39,
+    "rate": 0.7959183673469388
+  },
+  "satisfaction_deltas": [
+    {
+      "execution_id": "H04-r1",
+      "old_satisfied": true,
+      "new_satisfied": false,
+      "old_hard_pass": true,
+      "new_hard_pass": true,
+      "old_secondary_pass": true,
+      "new_secondary_pass": false,
+      "new_failed_secondary": [
+        {
+          "kind": "quantities",
+          "path": "after.cart.items",
+          "value": {
+            "demo:cn-pepsi-original-330ml-can": 2
+          },
+          "passed": false,
+          "actual": [
+            {
+              "sku_id": "demo:cn-pepsi-original-330ml-can",
+              "name": "百事可乐原味汽水330ml罐装",
+              "quantity": 1,
+              "unit_price_fen": 300,
+              "line_total_fen": 300,
+              "image_path": null,
+              "sellable": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "stale_step_count": 1,
+  "stale_steps": [
+    {
+      "execution_id": "H04-r1",
+      "step_index": 3,
+      "stored_hard_constraint_checks": [],
+      "recomputed_from_after": [
+        {
+          "kind": "quoted_selected_amount",
+          "passed": true
+        },
+        {
+          "kind": "stock",
+          "passed": true,
+          "sku_id": "demo:cn-pepsi-original-330ml-can",
+          "quantity": 1,
+          "available_qty": 36
+        }
+      ],
+      "row_checks_plan_constraint_subset": [
+        {
+          "kind": "quoted_selected_amount",
+          "passed": true
+        },
+        {
+          "kind": "stock",
+          "passed": true,
+          "sku_id": "demo:cn-pepsi-original-330ml-can",
+          "quantity": 1,
+          "available_qty": 36
+        }
+      ]
+    }
+  ]
+}

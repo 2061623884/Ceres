@@ -1,0 +1,582 @@
+[
+  {
+    "sku_id": "demo:baking-powder-100g",
+    "name_zh": "泡打粉 100克",
+    "ingredient_ids": [
+      "baking_powder"
+    ],
+    "price_fen": 480,
+    "available_qty": 45,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:beef-neck-300g",
+    "name_zh": "吊龙牛肉 300克",
+    "ingredient_ids": [
+      "beef_neck"
+    ],
+    "price_fen": 3880,
+    "available_qty": 20,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:beef-roll-300g",
+    "name_zh": "肥牛卷 300克",
+    "ingredient_ids": [
+      "hotpot_beef_roll"
+    ],
+    "price_fen": 2980,
+    "available_qty": 20,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:beef-slice-300g",
+    "name_zh": "牛肉片 300克",
+    "ingredient_ids": [
+      "beef_slice"
+    ],
+    "price_fen": 2880,
+    "available_qty": 25,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:bell-pepper-300g",
+    "name_zh": "青椒 300克",
+    "ingredient_ids": [
+      "bell_pepper"
+    ],
+    "price_fen": 580,
+    "available_qty": 40,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:butter-200g",
+    "name_zh": "无盐黄油 200克",
+    "ingredient_ids": [
+      "butter"
+    ],
+    "price_fen": 1580,
+    "available_qty": 40,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:cabbage-500g",
+    "name_zh": "卷心菜 500克",
+    "ingredient_ids": [
+      "cabbage"
+    ],
+    "price_fen": 580,
+    "available_qty": 40,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:cake-flour-250g",
+    "name_zh": "低筋面粉 250克（小包装）",
+    "ingredient_ids": [
+      "flour"
+    ],
+    "price_fen": 680,
+    "available_qty": 30,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:carrot-500g",
+    "name_zh": "胡萝卜 500克",
+    "ingredient_ids": [
+      "carrot"
+    ],
+    "price_fen": 580,
+    "available_qty": 45,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:chicken-breast-500g",
+    "name_zh": "鸡胸肉 500克",
+    "ingredient_ids": [
+      "chicken_breast"
+    ],
+    "price_fen": 1800,
+    "available_qty": 30,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:chicken-wing-500g",
+    "name_zh": "鸡翅 500克",
+    "ingredient_ids": [
+      "chicken_wing"
+    ],
+    "price_fen": 2280,
+    "available_qty": 30,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:clear-soup-base-200g",
+    "name_zh": "清汤火锅底料 200克",
+    "ingredient_ids": [
+      "clear_soup_base"
+    ],
+    "price_fen": 1748,
+    "available_qty": 20,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:cn-coke-original-330ml-6can",
+    "name_zh": "可口可乐经典原味汽水330ml×6罐",
+    "ingredient_ids": [
+      "cola"
+    ],
+    "price_fen": 1800,
+    "available_qty": 18,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:cn-coke-original-330ml-can",
+    "name_zh": "可口可乐经典原味汽水330ml罐装",
+    "ingredient_ids": [
+      "cola"
+    ],
+    "price_fen": 350,
+    "available_qty": 48,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:cn-coke-original-500ml-bottle",
+    "name_zh": "可口可乐经典原味汽水500ml瓶装",
+    "ingredient_ids": [
+      "cola"
+    ],
+    "price_fen": 400,
+    "available_qty": 36,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:cn-coke-zero-500ml-bottle",
+    "name_zh": "可口可乐零度无糖汽水500ml瓶装",
+    "ingredient_ids": [
+      "cola"
+    ],
+    "price_fen": 400,
+    "available_qty": 30,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:cn-mengniu-lowfat-250ml-carton",
+    "name_zh": "蒙牛低脂牛奶250ml盒装",
+    "ingredient_ids": [
+      "milk"
+    ],
+    "price_fen": 400,
+    "available_qty": 30,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:cn-pepsi-original-330ml-can",
+    "name_zh": "百事可乐原味汽水330ml罐装",
+    "ingredient_ids": [
+      "cola"
+    ],
+    "price_fen": 300,
+    "available_qty": 36,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:cn-yili-whole-250ml-12carton",
+    "name_zh": "伊利全脂纯牛奶250ml×12盒",
+    "ingredient_ids": [
+      "milk"
+    ],
+    "price_fen": 3780,
+    "available_qty": 16,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:cn-yili-whole-250ml-carton",
+    "name_zh": "伊利全脂纯牛奶250ml盒装",
+    "ingredient_ids": [
+      "milk"
+    ],
+    "price_fen": 350,
+    "available_qty": 48,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:cola-330ml",
+    "name_zh": "可乐 330毫升",
+    "ingredient_ids": [
+      "cola"
+    ],
+    "price_fen": 450,
+    "available_qty": 60,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:cooking-oil-500ml",
+    "name_zh": "食用油 500毫升",
+    "ingredient_ids": [
+      "oil"
+    ],
+    "price_fen": 1280,
+    "available_qty": 40,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:cream-cheese-200g",
+    "name_zh": "奶油奶酪 200克",
+    "ingredient_ids": [
+      "cream_cheese"
+    ],
+    "price_fen": 1680,
+    "available_qty": 20,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:eggs-10pack",
+    "name_zh": "鲜鸡蛋 10枚装",
+    "ingredient_ids": [
+      "egg"
+    ],
+    "price_fen": 1280,
+    "available_qty": 25,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:eggs-fresh-6pack",
+    "name_zh": "鲜鸡蛋 6枚装",
+    "ingredient_ids": [
+      "egg"
+    ],
+    "price_fen": 980,
+    "available_qty": 40,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:flour-all-purpose-500g",
+    "name_zh": "中筋面粉 500克",
+    "ingredient_ids": [
+      "flour"
+    ],
+    "price_fen": 890,
+    "available_qty": 50,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:garlic-200g",
+    "name_zh": "大蒜 200克",
+    "ingredient_ids": [
+      "garlic"
+    ],
+    "price_fen": 480,
+    "available_qty": 50,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:ginger-200g",
+    "name_zh": "新鲜姜 200克",
+    "ingredient_ids": [
+      "ginger"
+    ],
+    "price_fen": 480,
+    "available_qty": 50,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:green-pea-300g",
+    "name_zh": "青豌豆 300克",
+    "ingredient_ids": [
+      "green_pea"
+    ],
+    "price_fen": 680,
+    "available_qty": 40,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:hotpot-base-200g",
+    "name_zh": "川渝火锅底料 200克",
+    "ingredient_ids": [
+      "hotpot_base"
+    ],
+    "price_fen": 1280,
+    "available_qty": 20,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:lamb-roll-300g",
+    "name_zh": "羊肉卷 300克",
+    "ingredient_ids": [
+      "lamb_slice"
+    ],
+    "price_fen": 3280,
+    "available_qty": 20,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:milk-1l",
+    "name_zh": "全脂牛奶 1升",
+    "ingredient_ids": [
+      "milk"
+    ],
+    "price_fen": 980,
+    "available_qty": 35,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:mushroom-white-200g",
+    "name_zh": "白蘑菇 200克",
+    "ingredient_ids": [
+      "mushroom"
+    ],
+    "price_fen": 880,
+    "available_qty": 40,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:noodles-500g",
+    "name_zh": "挂面 500克",
+    "ingredient_ids": [
+      "noodle"
+    ],
+    "price_fen": 680,
+    "available_qty": 50,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:oyster-sauce-500g",
+    "name_zh": "蚝油 500克",
+    "ingredient_ids": [
+      "oyster_sauce"
+    ],
+    "price_fen": 980,
+    "available_qty": 35,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:peanut-200g",
+    "name_zh": "花生米 200克",
+    "ingredient_ids": [
+      "peanut"
+    ],
+    "price_fen": 680,
+    "available_qty": 50,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:pork-500g",
+    "name_zh": "猪肩肉 500克",
+    "ingredient_ids": [
+      "pork"
+    ],
+    "price_fen": 1980,
+    "available_qty": 35,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:pork-ribs-500g",
+    "name_zh": "猪排骨 500克",
+    "ingredient_ids": [
+      "pork_ribs"
+    ],
+    "price_fen": 2680,
+    "available_qty": 30,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:potato-500g",
+    "name_zh": "土豆 500克",
+    "ingredient_ids": [
+      "potato"
+    ],
+    "price_fen": 580,
+    "available_qty": 60,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:rice-2kg",
+    "name_zh": "大米 2公斤",
+    "ingredient_ids": [
+      "rice"
+    ],
+    "price_fen": 2280,
+    "available_qty": 35,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:salt-500g",
+    "name_zh": "食用盐 500克",
+    "ingredient_ids": [
+      "salt"
+    ],
+    "price_fen": 320,
+    "available_qty": 80,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:scallion-200g",
+    "name_zh": "小葱 200克",
+    "ingredient_ids": [
+      "scallion"
+    ],
+    "price_fen": 380,
+    "available_qty": 50,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:sesame-oil-200ml",
+    "name_zh": "芝麻香油 200毫升",
+    "ingredient_ids": [
+      "sesame_oil"
+    ],
+    "price_fen": 1280,
+    "available_qty": 30,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:shiitake-200g",
+    "name_zh": "鲜香菇 200克",
+    "ingredient_ids": [
+      "shiitake"
+    ],
+    "price_fen": 980,
+    "available_qty": 35,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:shrimp-paste-200g",
+    "name_zh": "虾滑 200克",
+    "ingredient_ids": [
+      "shrimp_paste"
+    ],
+    "price_fen": 1980,
+    "available_qty": 20,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:snack-original-potato-chips-70g-bag",
+    "name_zh": "原味薯片70克袋装",
+    "ingredient_ids": [
+      "potato"
+    ],
+    "price_fen": 590,
+    "available_qty": 30,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:snack-soda-crackers-100g-box",
+    "name_zh": "苏打饼干100克盒装",
+    "ingredient_ids": [
+      "flour"
+    ],
+    "price_fen": 690,
+    "available_qty": 20,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:sour-soup-base-200g",
+    "name_zh": "贵州酸汤火锅底料 200克",
+    "ingredient_ids": [
+      "sour_soup_base"
+    ],
+    "price_fen": 1480,
+    "available_qty": 20,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:soy-milk-1l",
+    "name_zh": "豆浆 1升",
+    "ingredient_ids": [
+      "soy_milk"
+    ],
+    "price_fen": 880,
+    "available_qty": 30,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:soy-sauce-500ml",
+    "name_zh": "生抽酱油 500毫升",
+    "ingredient_ids": [
+      "soy_sauce"
+    ],
+    "price_fen": 890,
+    "available_qty": 50,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:sugar-white-500g",
+    "name_zh": "白砂糖 500克",
+    "ingredient_ids": [
+      "sugar"
+    ],
+    "price_fen": 650,
+    "available_qty": 60,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:tofu-firm-400g",
+    "name_zh": "老豆腐 400克",
+    "ingredient_ids": [
+      "tofu"
+    ],
+    "price_fen": 680,
+    "available_qty": 40,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:tomato-fresh-500g",
+    "name_zh": "新鲜番茄 500克",
+    "ingredient_ids": [
+      "tomato"
+    ],
+    "price_fen": 680,
+    "available_qty": 45,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:tripe-250g",
+    "name_zh": "毛肚 250克",
+    "ingredient_ids": [
+      "tripe"
+    ],
+    "price_fen": 2680,
+    "available_qty": 20,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:vanilla-extract-30ml",
+    "name_zh": "香草精 30毫升",
+    "ingredient_ids": [
+      "vanilla"
+    ],
+    "price_fen": 1280,
+    "available_qty": 15,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:vinegar-500ml",
+    "name_zh": "米醋 500毫升",
+    "ingredient_ids": [
+      "vinegar"
+    ],
+    "price_fen": 680,
+    "available_qty": 40,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:wood-ear-150g",
+    "name_zh": "干木耳 150克",
+    "ingredient_ids": [
+      "wood_ear"
+    ],
+    "price_fen": 880,
+    "available_qty": 40,
+    "sellable": true
+  },
+  {
+    "sku_id": "demo:yeast-dry-7g",
+    "name_zh": "干酵母 7克",
+    "ingredient_ids": [
+      "yeast"
+    ],
+    "price_fen": 350,
+    "available_qty": 80,
+    "sellable": true
+  }
+]

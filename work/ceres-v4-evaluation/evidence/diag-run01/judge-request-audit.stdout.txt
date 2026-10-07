@@ -1,0 +1,12 @@
+{
+  "planned": 100,
+  "result_files": 100,
+  "valid_captured_requests": 100,
+  "single_judge_call_results": 100,
+  "invalid_execution_ids": [],
+  "config_identity_match": true,
+  "config_mismatch_paths": [],
+  "environment_identity_match": true,
+  "environment_mismatch_keys": [],
+  "source_manifest_sha256": "04274cdbaa38799bac8a3ef40f418a70c8839251a4c08a30d4572ced74b518bb"
+}

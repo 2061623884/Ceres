@@ -1,0 +1,32 @@
+{
+  "current_runner_sha256": "5aa033fedf164bb1c1438afbb3bb74c02100ab2a3950769b431756db3026f5f4",
+  "run02_frozen_runner_sha256": "0ab56978d89651620242cb6616670cfae894d283a576dbe47499b33cf6b0f8cd",
+  "runner_diff_added_only": [
+    "    assert.equal(selected[0].line_total_fen, quantity * unitPrice);",
+    "    assert.equal(guide.plan.selected_total_fen, quantity * unitPrice);",
+    "    if (name === 'snack-bubble') assert.equal(guide.constraints_summary.budget_fen, 2000);"
+  ],
+  "activity": {
+    "status": "passed",
+    "stage": "explicit-confirm",
+    "sku_id": "demo:green-reset-avocado-salad",
+    "quantity": 1,
+    "unit_price_fen": 2380,
+    "line_total_fen": 2380,
+    "selected_total_fen": 2380,
+    "selected_sum_fen": 2380,
+    "checks_passed": true
+  },
+  "snack": {
+    "status": "failed",
+    "stage": "request-plan",
+    "plan_reached": false,
+    "error": {
+      "type": "AssertionError",
+      "message": "The expression evaluated to a falsy value:\n\n  assert.ok(guide.plan?.can_confirm)\n"
+    },
+    "visible_text": "静安区\n⌄\n🧁\n烘焙原料\n📦\n饮料\n🧂\n调味品\n🥛\n乳品\n📦\n水果\n🥩\n肉类\n📦\n水产\n📦\n零食\n📦\n粮油米面\n🥬\n蔬菜\n今日精选\n演示\n\n绿色餐桌计划\n\n有机蔬菜\n全场 88 折\n\n限时会员价\n\n牧场鲜肉\n买二减一\n\n人气鲜品\n\n最快 30 分钟送达\n\n综合排序⌄\n演示\n产地可溯源\n♡\n演示\n\n泡打粉 100克\n\n★\n4.9\n·\n今日采摘\n4.80 元\n产地可溯源\n♡\n演示\n\n无盐黄油 200克\n\n★\n4.9\n·\n今日采摘\n15.80 元\n产地可溯源\n♡\n演示\n\n低筋面粉 250克（小包装）\n\n★\n4.9\n·\n今日采摘\n6.80 元\n产地可溯源\n♡\n演示\n\n奶油奶酪 200克\n\n★\n4.9\n·\n今日采摘\n16.80 元\n产地可溯源\n♡\n演示\n\n鲜鸡蛋 10枚装\n\n★\n4.9\n·\n今日采摘\n12.80 元\n产地可溯源\n♡\n演示\n\n中筋面粉 500克\n\n★\n4.9\n·\n今日采摘\n8.90 元\n产地可溯源\n♡\n演示\n\n白砂糖 500克\n\n★\n4.9\n·\n今日采摘\n6.50 元\n产地可溯源\n♡\n演示\n\n香草精 30毫升\n\n★\n4.9\n·\n今日采摘\n12.80 元\n产地可溯源\n♡\n演示\n\n干酵母 7克\n\n★\n4.9\n·\n今日采摘\n3.50 元\n主页\n自己逛逛\n订单\n个人中心\n嗨！我是可可 🌿\n你的专属导购小助手！告诉我今天想吃什么，我来帮你搞定～\n✦今晚做红烧肉\n✦减脂餐计划\n✦家里有小孩\n✦来点零食\n来点零食\n想选哪类零食？\n1. 薯片\n2. 饼干\n薯片\n我找到「原味薯片70克袋装」了，你可以先看看卡片里的商品信息。\n1. 原味薯片70克袋装\n原味薯片70克两包，预算20元，整理成清单让我确认，暂不加购。\n目标名称「原味薯片70克」与引用对应的「原味薯片70克袋装」不一致；本次未执行。\n\n可可\n\n今日活动\n采购清单\n购物车\n售后找我",
+    "new_budget_assertion_evaluated": false,
+    "failure_preserved": true
+  }
+}

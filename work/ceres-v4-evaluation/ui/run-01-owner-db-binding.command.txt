@@ -1,0 +1,1 @@
+Get-Content 'C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-v4-evaluation\ui\run-01-owner-db-binding.py.txt' -Raw | & 'C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe' -

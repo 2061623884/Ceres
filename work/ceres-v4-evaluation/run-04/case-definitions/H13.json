@@ -1,0 +1,50 @@
+{
+  "case_id": "H13",
+  "group": "aftersales",
+  "scenario_family": "refund-repeat-utterance-one-application",
+  "split": "acceptance",
+  "core": false,
+  "goal": "已提交退款后再次同样申请不产生重复记录",
+  "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+  "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+  "steps": [
+    {
+      "op": "turn",
+      "label": "first",
+      "message": "当前订单申请退款，原因是买错了",
+      "expect": [
+        {
+          "kind": "length",
+          "path": "after.refunds",
+          "value": 1
+        }
+      ],
+      "authorized": [
+        "refunds"
+      ]
+    },
+    {
+      "op": "turn",
+      "label": "repeat",
+      "message": "这笔订单再申请一次同样的退款",
+      "expect": [
+        {
+          "kind": "length",
+          "path": "after.refunds",
+          "value": 1
+        },
+        {
+          "kind": "unchanged",
+          "path": "after.refunds",
+          "before_path": "before.refunds"
+        }
+      ]
+    }
+  ],
+  "initial_role": "momo",
+  "setup": {
+    "order": {
+      "sku_id": "demo:cn-pepsi-original-330ml-can"
+    }
+  }
+}

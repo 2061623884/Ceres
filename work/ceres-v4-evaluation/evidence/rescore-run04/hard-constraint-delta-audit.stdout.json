@@ -1,0 +1,91 @@
+{
+  "run03_hard_constraints": {
+    "produced_plan_executions": 49,
+    "all_satisfied": 40,
+    "rate": 0.8163265306122449
+  },
+  "run04_hard_constraints": {
+    "produced_plan_executions": 49,
+    "all_satisfied": 39,
+    "rate": 0.7959183673469388
+  },
+  "all_satisfied_delta": -1,
+  "only_execution_that_changed_hard_constraint_satisfaction": {
+    "case_id": "H04",
+    "case_step_index": 3,
+    "label": "confirm-added-quantity",
+    "operation": "confirm_plan",
+    "captured_status_before_rescore": "execution_failed",
+    "captured_status_after_rescore": "execution_failed",
+    "expected_cart_quantities": {
+      "demo:cn-pepsi-original-330ml-can": 2
+    },
+    "actual_cart_quantities": {
+      "demo:cn-pepsi-original-330ml-can": 1
+    },
+    "can_confirm_plan_after_failed_step": true,
+    "run03_step_checks_key_present": false,
+    "run03_step_hard_constraint_checks_key_present": false,
+    "run04_step_hard_constraint_checks_key_present": false,
+    "run04_step_checks": [
+      {
+        "kind": "quantities",
+        "path": "after.cart.items",
+        "value": {
+          "demo:cn-pepsi-original-330ml-can": 2
+        },
+        "passed": false,
+        "actual": [
+          {
+            "sku_id": "demo:cn-pepsi-original-330ml-can",
+            "name": "百事可乐原味汽水330ml罐装",
+            "quantity": 1,
+            "unit_price_fen": 300,
+            "line_total_fen": 300,
+            "image_path": null,
+            "sellable": true
+          }
+        ]
+      },
+      {
+        "kind": "quoted_selected_amount",
+        "passed": true
+      },
+      {
+        "kind": "stock",
+        "passed": true,
+        "sku_id": "demo:cn-pepsi-original-330ml-can",
+        "quantity": 1,
+        "available_qty": 36
+      }
+    ],
+    "source_result_sha256": "a824b6b75692372c536a1a488b0693c1a76c3c4a533f83c0d10f02e502900c3f",
+    "rescore_result_sha256": "f0113618c0e54e787933b84b4f63f44dbe3e12d538ed525ffce5b222643f1325"
+  },
+  "missing_hard_constraint_checks_rows": [
+    {
+      "execution_id": "H04-r1",
+      "step_index": 3,
+      "hard_constraint_checks_key_present": false,
+      "stored_value": [],
+      "recomputed_from_after": [
+        {
+          "kind": "quoted_selected_amount",
+          "passed": true
+        },
+        {
+          "kind": "stock",
+          "passed": true,
+          "sku_id": "demo:cn-pepsi-original-330ml-can",
+          "quantity": 1,
+          "available_qty": 36
+        }
+      ],
+      "all_recomputed_checks_pass": true
+    }
+  ],
+  "current_report_method_satisfied_count": 39,
+  "if_recomputed_hard_constraint_checks_were_populated_satisfied_count": 39,
+  "effect_on_reported_39_of_49": "none; H04 quoted amount and stock pass, and the failing quantity assertion makes H04 unsatisfied in either calculation",
+  "interpretation": "H04-r1 confirm step was execution_failed in run-03, so its after-state had no checks array. Offline rescore applies the existing expected quantities assertion to the retained after-state; requested 2 Pepsi cans but captured cart contains 1. It does not replay or alter the product execution."
+}

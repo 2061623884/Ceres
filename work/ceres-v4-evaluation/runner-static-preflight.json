@@ -1,0 +1,82 @@
+{
+  "checked_utc": "2026-10-07T06:48:06.7071763Z",
+  "scope": "static preflight only; no evaluator worker and no model calls",
+  "product_head": "ac895fd620af617fa31f4e0006841a4d6a89cd53",
+  "case_version": "ceres1-v4-tasks-20261007-v1",
+  "case_count": 60,
+  "unique_case_count": 60,
+  "core_case_count": 20,
+  "split_counts": {
+    "acceptance": 20,
+    "regression": 40
+  },
+  "expected_outcome_counts": {
+    "compliant_refusal": 2,
+    "normal_completion": 58
+  },
+  "operation_counts": {
+    "turn": 81,
+    "confirm_plan": 18,
+    "replay_confirm": 1,
+    "new_session": 1,
+    "select_pending_option": 5,
+    "switch": 10,
+    "replay_switch": 1,
+    "dream": 1,
+    "new_owner": 1
+  },
+  "unsupported_operations": [],
+  "planned_executions": 100,
+  "pilot_executions": 20,
+  "candidate_live_api_helper_exists": true,
+  "candidate_capture_helper_exists": true,
+  "r21_item_volume_ml": {
+    "rubric_path": "after.guide.product_cards",
+    "rubric_value": {
+      "packaging": "bottle",
+      "item_volume_ml": 500
+    },
+    "candidate_prompt_or_schema_reference": true
+  },
+  "r24_task_status": {
+    "rubric_path": "after.guide.task_status",
+    "expected_value": "cancelled",
+    "candidate_guide_schema_field": true
+  },
+  "scoring_tests": {
+    "command": "\"C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe\" -X utf8 -m unittest discover -s scripts -p test_eval_v4.py -v",
+    "exit_code": "0",
+    "test_summary": "Ran 7 tests; OK",
+    "source_hash_at_run": "6e1a3ac651df2e055c92337e53e1363c992ae5c92402545496cad39495fce42",
+    "note": "Runner changed after this test run; current runner hash 689bfc543eb8467f96e6d374398c52c6577b8d7d173f6d8b2eec899bb07acc73, so rerun after runner freeze is required."
+  },
+  "evaluator_test_case_hashes_sha256": {
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py": "689bfc543eb8467f96e6d374398c52c6577b8d7d173f6d8b2eec899bb07acc73",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\evals\\v4\\cases.json": "ef76915e3bf1917e9360f13adc0e74ed3971b3e00233dc5884da3e50994fd813",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\test_eval_v4.py": "e9dba0d1b14df2d42237f2f1bc8958fe28de2e3868c22a8daea624b8964d0959"
+  },
+  "seed_sha256": "f107fb2bfdd76152f6cd425388c9e84458ebe605655b12ff2be65e54823126bd",
+  "retrieval_identity": {
+    "database_path_fingerprint": "86d14a380b7577edaff691648ddaa9607c2907e04fced82775348879891597e3",
+    "projection_snapshot_hash": "sha256:a4a1aadcbccbc2c459183fbd3243711e7df65db2aba63fda705cf2918b598c3f",
+    "index_root_fingerprint": "3f39552704844ece46ba31a14e1d5b3be357647876827d7216cd9f6878ee7eb7",
+    "index_version": "idx-81e9fa689baef6b5",
+    "index_manifest_id": "sha256:51eac0ec550d8cc5ed169ecb4618f1a805dc4e6e94c8ffcce9dc5779ccc30dd0",
+    "retrieval_mode": "lexical",
+    "has_vectors": false,
+    "embedding_contract": null,
+    "semantic_turn_timeout_seconds": 90.0,
+    "hybrid_gate": "not_passed_lexical_execution",
+    "database_counts": {
+      "catalog_products": 67,
+      "offers": 67,
+      "sellable_offers": 67
+    }
+  },
+  "runner_static_findings": [
+    "resume validates runner, cases, seed and product HEAD/working tree, but does not validate the frozen retrieval-index identity before continuing."
+  ],
+  "model_calls": 0,
+  "product_source_modified": false,
+  "outcome_denominator_review": "Resolved in current runner: manifest schedule entries include expected_outcome, so not_executed pilot rows retain the planned normal/refusal denominator."
+}

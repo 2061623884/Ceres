@@ -1,0 +1,1 @@
+{"acceptance":"not_passed","journeys":[{"name":"activity-salad","status":"passed","performance_passed":false},{"name":"snack-bubble","status":"failed","performance_passed":true}]}

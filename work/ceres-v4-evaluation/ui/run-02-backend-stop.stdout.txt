@@ -1,0 +1,2 @@
+verified owned backend pid=68440 port=18012; protected pid=24512 port=8012
+stopped owned backend; port 18012 clear; protected pid=24512 still owns 8012

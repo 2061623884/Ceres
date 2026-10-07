@@ -1,0 +1,34 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const source = fs.readFileSync('scripts/eval_v4_ui.mjs', 'utf8');
+const parseMatch = source.match(/function parseSse\(text\) \{[\s\S]*?\n\}/);
+assert.ok(parseMatch, 'parseSse function found');
+const parseSse = new Function(parseMatch[0] + '; return parseSse;')();
+assert.deepEqual(parseSse('event: turn.completed\ndata: {"ok":true}\n\n'), [{ type: 'turn.completed', payload: { ok: true } }]);
+assert.deepEqual(parseSse('data: {"type":"turn.completed","payload":{"finish_reason":"complete"}}\n\n'), [{ type: 'turn.completed', payload: { finish_reason: 'complete' } }]);
+const blocks = [...source.matchAll(/const \[[\w]+\] = await Promise\.all\(\[[\s\S]*?\n\s*\]\);/g)].map(match => match[0]);
+assert.equal(blocks.length, 4, 'Bootstrap, turn, opening and confirmation waiters use Promise.all');
+const pushIndex = source.indexOf('item.steps.push(row)');
+const saveIndex = source.indexOf('save();', pushIndex);
+const parseIndex = source.indexOf('const events = parseSse(text)', pushIndex);
+assert.ok(pushIndex >= 0 && pushIndex < saveIndex && saveIndex < parseIndex, 'Raw SSE step is saved before parsing');
+assert.ok(source.includes("item.status = 'failed'"));
+assert.ok(source.includes('item.error = { type: error.name, message: error.message }'));
+const unhandled = [];
+const onUnhandled = reason => unhandled.push(String(reason));
+process.on('unhandledRejection', onUnhandled);
+for (const expression of blocks) {
+  const run = new Function('page', 'action', 'confirm', 'appUrl', `return (async () => { try { ${expression}; return { caught: false }; } catch (error) { return { caught: true, message: error.message }; } })();`);
+  const waiterPage = { waitForResponse: () => Promise.reject(new Error('waiter failed')), goto: () => Promise.resolve(), getByRole: () => ({ click: () => Promise.resolve() }) };
+  const waiterResult = await run(waiterPage, () => Promise.resolve(), { click: () => Promise.resolve() }, 'http://127.0.0.1/');
+  assert.equal(waiterResult.caught, true);
+  assert.match(waiterResult.message, /waiter failed/);
+  const actionPage = { waitForResponse: () => new Promise((_, reject) => setTimeout(() => reject(new Error('late waiter failed')), 5)), goto: () => Promise.reject(new Error('action failed')), getByRole: () => ({ click: () => Promise.reject(new Error('action failed')) }) };
+  const actionResult = await run(actionPage, () => Promise.reject(new Error('action failed')), { click: () => Promise.reject(new Error('action failed')) }, 'http://127.0.0.1/');
+  assert.equal(actionResult.caught, true);
+  assert.match(actionResult.message, /action failed/);
+  await new Promise(resolve => setTimeout(resolve, 10));
+}
+process.off('unhandledRejection', onUnhandled);
+assert.deepEqual(unhandled, []);
+console.log(JSON.stringify({ parser_named_event: 'passed', parser_candidate_payload_event: 'passed', response_waiter_blocks: blocks.length, waiter_and_action_failures_recorded: blocks.length * 2, raw_step_saved_before_parse: true, source_error_recording_present: true, unhandled_rejections: unhandled.length, network_or_browser: 'none' }, null, 2));

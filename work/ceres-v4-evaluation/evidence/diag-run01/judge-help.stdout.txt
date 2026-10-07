@@ -1,0 +1,14 @@
+usage: eval_v4_judge.py [-h] --source SOURCE --output OUTPUT [--limit LIMIT]
+                        [--resume]
+
+Replay the frozen judge inputs, without executing any product task. The
+original Qwen calls exhausted 1200 tokens on reasoning (null content,
+finish_reason=length). This diagnostic revision disables thinking, as the
+candidate's MemoryProvider already does. Original calls/results stay intact.
+
+options:
+  -h, --help       show this help message and exit
+  --source SOURCE
+  --output OUTPUT
+  --limit LIMIT
+  --resume

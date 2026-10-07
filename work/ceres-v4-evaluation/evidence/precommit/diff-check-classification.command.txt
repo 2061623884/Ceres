@@ -1,0 +1,1 @@
+"C:\Users\20616\AppData\Local\Programs\Python\Python312\python.exe" -X utf8 "C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-v4-evaluation\evidence\precommit\classify-diff-check.py"

@@ -1,0 +1,1 @@
+& 'C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe' -c "from pathlib import Path; import hashlib; p=Path(r'C:\Users\20616\Desktop\Agent\Agent产品\Ceres\scripts\eval_v4_record.py'); s=p.read_text(encoding='utf-8'); compile(s,str(p),'exec'); print('compile_exit=0'); print('sha256='+hashlib.sha256(p.read_bytes()).hexdigest())"

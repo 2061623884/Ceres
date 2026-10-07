@@ -1,0 +1,66 @@
+{
+  "R10": {
+    "status": "passed",
+    "role_selection_passed": true,
+    "roles_present": [
+      "pantry",
+      "required"
+    ],
+    "required_and_pantry_present": true
+  },
+  "R14": {
+    "status": "passed",
+    "grounding_evidence_passed": true,
+    "grounding_evidence_contains_P_DEL_01": true,
+    "mercury_calls": 2
+  },
+  "R17": {
+    "status": "passed",
+    "refunds_before_matches_immediately_previous_after": true,
+    "pairs": [
+      {
+        "step": "consent-momo",
+        "previous_after_equals_before": true,
+        "before_refunds_present": true,
+        "before_refund_count": 0
+      },
+      {
+        "step": "consent-keke",
+        "previous_after_equals_before": true,
+        "before_refunds_present": true,
+        "before_refund_count": 1
+      },
+      {
+        "step": "replay-completed-switch",
+        "previous_after_equals_before": true,
+        "before_refunds_present": true,
+        "before_refund_count": 1
+      }
+    ]
+  },
+  "summary": {
+    "planned_executions": 100,
+    "actual_executions": 20,
+    "passed": 16,
+    "failed": 4,
+    "not_executed": 80,
+    "fully_passed": 12,
+    "automatic_acceptance": "not_passed",
+    "old_business_passed": 14,
+    "new_business_passed": 16,
+    "business_pass_delta": 2,
+    "old_fully_passed": 11,
+    "new_fully_passed": 12,
+    "full_pass_delta": 1,
+    "old_failed": 6,
+    "new_failed": 4
+  },
+  "provenance": {
+    "candidate_head": "ac895fd620af617fa31f4e0006841a4d6a89cd53",
+    "current_runner_sha256": "1cbf2952b804bdf500aaead16e53b4a3e2ba809a286861c532b23ebf1419fbde",
+    "run02_manifest_runner_sha256": "1cbf2952b804bdf500aaead16e53b4a3e2ba809a286861c532b23ebf1419fbde",
+    "cases_sha256": "aeca61c561830db361e88251499241fa5a7742926d5b94fdc382e6bbfbf349b8",
+    "index_consistent": true,
+    "configuration_consistent": true
+  }
+}

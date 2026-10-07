@@ -1,0 +1,40 @@
+{
+  "created_utc": "2026-10-07T08:57:06.4289714Z",
+  "evidence_dir": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\evidence\\rescore-run04",
+  "candidate_head": "ac895fd620af617fa31f4e0006841a4d6a89cd53",
+  "rescore_source_manifest_sha256": "04274cdbaa38799bac8a3ef40f418a70c8839251a4c08a30d4572ced74b518bb",
+  "rescore_source_cases_sha256": "aeca61c561830db361e88251499241fa5a7742926d5b94fdc382e6bbfbf349b8",
+  "source_run04_absent": true,
+  "files": [
+    {
+      "source": "scripts/eval_v4.py",
+      "snapshot": "eval_v4.py.frozen.py",
+      "sha256": "c6a357fc97bda7ea0501e52b4f14b0c23a4802d4ae9497dd5a1cb5c6bd84f294",
+      "source_sha256": "c6a357fc97bda7ea0501e52b4f14b0c23a4802d4ae9497dd5a1cb5c6bd84f294"
+    },
+    {
+      "source": "scripts/test_eval_v4.py",
+      "snapshot": "test_eval_v4.py.frozen.py",
+      "sha256": "7471221c6ddd1d23ed2a6f1317fa35da5928502e6e73b7d486e3d07b76b4a0ea",
+      "source_sha256": "7471221c6ddd1d23ed2a6f1317fa35da5928502e6e73b7d486e3d07b76b4a0ea"
+    },
+    {
+      "source": "evals/v4/cases.json",
+      "snapshot": "cases.v2.frozen.json",
+      "sha256": "18ce0e2395e6b5f99a8424e05bc6092b3c5aa7de664ecc3df7fb3b5855e1d8f0",
+      "source_sha256": "18ce0e2395e6b5f99a8424e05bc6092b3c5aa7de664ecc3df7fb3b5855e1d8f0"
+    },
+    {
+      "source": "scripts/eval_v4_ui.mjs",
+      "snapshot": "eval_v4_ui.current.frozen.mjs",
+      "sha256": "5aa033fedf164bb1c1438afbb3bb74c02100ab2a3950769b431756db3026f5f4",
+      "source_sha256": "5aa033fedf164bb1c1438afbb3bb74c02100ab2a3950769b431756db3026f5f4"
+    },
+    {
+      "source": "work/ceres-v4-evaluation/ui/eval_v4_ui.run02.frozen.mjs",
+      "snapshot": "eval_v4_ui.run02.frozen.mjs",
+      "sha256": "0ab56978d89651620242cb6616670cfae894d283a576dbe47499b33cf6b0f8cd",
+      "source_sha256": "0ab56978d89651620242cb6616670cfae894d283a576dbe47499b33cf6b0f8cd"
+    }
+  ]
+}

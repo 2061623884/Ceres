@@ -1,0 +1,57 @@
+{
+  "diagnostic_runner_sha256": "b631dda7bcf0c2082f0ddbb761adc7d8a53aac58bc15d7a0fe60b0f15ce02d93",
+  "source_manifest_sha256": "04274cdbaa38799bac8a3ef40f418a70c8839251a4c08a30d4572ced74b518bb",
+  "source_manifest_sha256_matches": true,
+  "execution_id": "R01-r1",
+  "source_result_sha256": "19a29fe7683f116d7bf0178d2c744fae8830b4c8f5e0a0099c28bab08cb63c3d",
+  "source_result_sha256_matches": true,
+  "source_result_unchanged_after_diagnostic": true,
+  "request_model": "qwen3.8-27b",
+  "request_enable_thinking": false,
+  "request_message_count": 2,
+  "httpx_request_argument": "json=request (same request object shown above)",
+  "captured_transport_body_keys": [
+    "max_tokens",
+    "messages",
+    "model",
+    "response_format",
+    "stream",
+    "temperature"
+  ],
+  "captured_transport_includes_enable_thinking": false,
+  "wire_flag_observation": "The diagnostic code passes request with enable_thinking=false to httpx.post(json=request); CapturingTransport stores only its BODY_FIELDS allowlist and omits this field, so the persisted call record cannot independently confirm serialized wire bytes or server honoring.",
+  "response_status": 200,
+  "response_model": "qwen3.8-27b-fp8",
+  "response_finish_reason": "length",
+  "response_visible_content_length": 0,
+  "usage": {
+    "prompt_tokens": 6852,
+    "total_tokens": 8052,
+    "completion_tokens": 1200,
+    "prompt_tokens_details": null,
+    "completion_tokens_details": {
+      "reasoning_tokens": 1200
+    }
+  },
+  "verdict": "unknown",
+  "findings": [],
+  "error": {
+    "type": "ValueError",
+    "message": "Judge returned no visible JSON content"
+  },
+  "product_tasks_reexecuted": 0,
+  "exit_code": 1,
+  "diagnostic_summary": {
+    "planned": 100,
+    "completed": 1,
+    "verdicts": {
+      "pass": 0,
+      "fail": 0,
+      "unknown": 1
+    },
+    "errors": 1,
+    "calibrated": false,
+    "hard_gate": false,
+    "product_tasks_reexecuted": 0
+  }
+}

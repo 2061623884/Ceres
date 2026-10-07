@@ -1,0 +1,12 @@
+usage: eval_v4.py [-h] {run,worker,report,resume,correct-pilot} ...
+
+Ceres1 V4 task evaluation; product code is loaded from a frozen checkout. Each
+execution is a subprocess with its own copy of the seeded database. Existing
+08 API operations and real provider capture are reused; no fake provider or
+automatic retry is installed. Semantic judging is diagnostic only.
+
+positional arguments:
+  {run,worker,report,resume,correct-pilot}
+
+options:
+  -h, --help            show this help message and exit

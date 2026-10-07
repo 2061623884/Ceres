@@ -1,0 +1,11 @@
+{
+  "runner_sha256": "57cbd92120e18696273e29044b11dc271d842f4054b8a699dfcfe33947f70f88",
+  "source_manifest_sha256": "04274cdbaa38799bac8a3ef40f418a70c8839251a4c08a30d4572ced74b518bb",
+  "product_head": "ac895fd620af617fa31f4e0006841a4d6a89cd53",
+  "llm_mode": "live",
+  "retrieval_mode": "lexical",
+  "pending_before_resume": 99,
+  "resume": true,
+  "limit": "omitted - process all pending",
+  "product_tasks_reexecuted": 0
+}

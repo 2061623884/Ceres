@@ -1,0 +1,58 @@
+{
+  "case_id": "R15",
+  "group": "routing",
+  "scenario_family": "placed-order-decline-switch",
+  "split": "regression",
+  "core": true,
+  "goal": "可可收到具体订单查询仅建议切换，拒绝后角色不变",
+  "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+  "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+  "steps": [
+    {
+      "op": "turn",
+      "label": "request",
+      "message": "我的订单 {{order_id}} 到哪了？",
+      "expect": [
+        {
+          "kind": "eq",
+          "path": "route.decision",
+          "value": "suggest_switch"
+        },
+        {
+          "kind": "eq",
+          "path": "route.target_role",
+          "value": "momo"
+        },
+        {
+          "kind": "unchanged",
+          "path": "after.cart",
+          "before_path": "before.cart"
+        },
+        {
+          "kind": "unchanged",
+          "path": "after.orders",
+          "before_path": "before.orders"
+        }
+      ]
+    },
+    {
+      "op": "switch",
+      "label": "decline-momo",
+      "target_role": "momo",
+      "accept": false,
+      "authorized": [],
+      "expect": [
+        {
+          "kind": "eq",
+          "path": "after.opening.role",
+          "value": "keke"
+        }
+      ]
+    }
+  ],
+  "setup": {
+    "order": {
+      "sku_id": "demo:cn-pepsi-original-330ml-can"
+    }
+  }
+}

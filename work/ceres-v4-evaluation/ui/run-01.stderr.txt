@@ -1,0 +1,11 @@
+node:internal/process/promises:394
+    triggerUncaughtException(err, true /* fromPromise */);
+    ^
+
+page.waitForResponse: Timeout 12000ms exceeded while waiting for event "response"
+    at C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-v4-evaluation\ui\eval_v4_ui.frozen.mjs:135:33 {
+  log: [],
+  name: 'TimeoutError'
+}
+
+Node.js v24.19.0

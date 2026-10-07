@@ -1,0 +1,1 @@
+Start-Process -FilePath $pythonExe -ArgumentList $argumentText -WorkingDirectory $backendDir -WindowStyle Hidden -RedirectStandardOutput $stdoutPath -RedirectStandardError $stderrPath -PassThru

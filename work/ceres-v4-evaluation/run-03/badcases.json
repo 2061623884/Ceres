@@ -1,0 +1,1968 @@
+[
+  {
+    "execution_id": "R01-r1",
+    "case_id": "R01",
+    "status": "failed",
+    "business_failure": null,
+    "failed_checks": [
+      {
+        "kind": "present",
+        "path": "after.guide.product_cards",
+        "value": true,
+        "passed": false,
+        "actual": []
+      }
+    ],
+    "critical_violations": [],
+    "performance_passed": true,
+    "evidence": "R01-r1/result.json",
+    "repair_status": "待开始",
+    "product_changed": false,
+    "reproduce_argv": [
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py",
+      "worker",
+      "--tree",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+      "--case",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\case-definitions\\R01.json",
+      "--seed",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+      "--index",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+      "--output",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R01-r1-reproduction",
+      "--repeat",
+      "1"
+    ]
+  },
+  {
+    "execution_id": "R03-r1",
+    "case_id": "R03",
+    "status": "passed",
+    "business_failure": null,
+    "failed_checks": [],
+    "critical_violations": [],
+    "performance_passed": false,
+    "evidence": "R03-r1/result.json",
+    "repair_status": "待开始",
+    "product_changed": false,
+    "reproduce_argv": [
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py",
+      "worker",
+      "--tree",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+      "--case",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\case-definitions\\R03.json",
+      "--seed",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+      "--index",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+      "--output",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R03-r1-reproduction",
+      "--repeat",
+      "1"
+    ]
+  },
+  {
+    "execution_id": "R06-r1",
+    "case_id": "R06",
+    "status": "passed",
+    "business_failure": null,
+    "failed_checks": [],
+    "critical_violations": [],
+    "performance_passed": false,
+    "evidence": "R06-r1/result.json",
+    "repair_status": "待开始",
+    "product_changed": false,
+    "reproduce_argv": [
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py",
+      "worker",
+      "--tree",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+      "--case",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\case-definitions\\R06.json",
+      "--seed",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+      "--index",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+      "--output",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R06-r1-reproduction",
+      "--repeat",
+      "1"
+    ]
+  },
+  {
+    "execution_id": "R07-r1",
+    "case_id": "R07",
+    "status": "failed",
+    "business_failure": null,
+    "failed_checks": [
+      {
+        "kind": "present",
+        "path": "after.guide.plan",
+        "value": true,
+        "passed": false,
+        "actual": null
+      },
+      {
+        "kind": "quantities",
+        "path": "after.guide.plan.items",
+        "value": {
+          "demo:cn-coke-zero-500ml-bottle": 2
+        },
+        "passed": false,
+        "actual": null,
+        "missing_evidence": "'NoneType' object is not subscriptable"
+      },
+      {
+        "kind": "eq",
+        "path": "after.guide.plan.selected_total_fen",
+        "value": 800,
+        "passed": false,
+        "actual": null,
+        "missing_evidence": "'NoneType' object is not subscriptable"
+      }
+    ],
+    "critical_violations": [],
+    "performance_passed": true,
+    "evidence": "R07-r1/result.json",
+    "repair_status": "待开始",
+    "product_changed": false,
+    "reproduce_argv": [
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py",
+      "worker",
+      "--tree",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+      "--case",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\case-definitions\\R07.json",
+      "--seed",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+      "--index",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+      "--output",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R07-r1-reproduction",
+      "--repeat",
+      "1"
+    ]
+  },
+  {
+    "execution_id": "R11-r1",
+    "case_id": "R11",
+    "status": "failed",
+    "business_failure": null,
+    "failed_checks": [
+      {
+        "kind": "eq",
+        "path": "after.guide.constraints_summary.budget_fen",
+        "value": 1000,
+        "passed": false,
+        "actual": 2000
+      }
+    ],
+    "critical_violations": [],
+    "performance_passed": true,
+    "evidence": "R11-r1/result.json",
+    "repair_status": "待开始",
+    "product_changed": false,
+    "reproduce_argv": [
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py",
+      "worker",
+      "--tree",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+      "--case",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\case-definitions\\R11.json",
+      "--seed",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+      "--index",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+      "--output",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R11-r1-reproduction",
+      "--repeat",
+      "1"
+    ]
+  },
+  {
+    "execution_id": "R12-r1",
+    "case_id": "R12",
+    "status": "passed",
+    "business_failure": null,
+    "failed_checks": [],
+    "critical_violations": [],
+    "performance_passed": false,
+    "evidence": "R12-r1/result.json",
+    "repair_status": "待开始",
+    "product_changed": false,
+    "reproduce_argv": [
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py",
+      "worker",
+      "--tree",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+      "--case",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\case-definitions\\R12.json",
+      "--seed",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+      "--index",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+      "--output",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R12-r1-reproduction",
+      "--repeat",
+      "1"
+    ]
+  },
+  {
+    "execution_id": "R17-r1",
+    "case_id": "R17",
+    "status": "passed",
+    "business_failure": null,
+    "failed_checks": [],
+    "critical_violations": [],
+    "performance_passed": false,
+    "evidence": "R17-r1/result.json",
+    "repair_status": "待开始",
+    "product_changed": false,
+    "reproduce_argv": [
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py",
+      "worker",
+      "--tree",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+      "--case",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\case-definitions\\R17.json",
+      "--seed",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+      "--index",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+      "--output",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R17-r1-reproduction",
+      "--repeat",
+      "1"
+    ]
+  },
+  {
+    "execution_id": "R19-r1",
+    "case_id": "R19",
+    "status": "failed",
+    "business_failure": null,
+    "failed_checks": [
+      {
+        "kind": "contains",
+        "path": "reply",
+        "value": "百事",
+        "passed": false,
+        "actual": "你指的是正在选购的商品或采购清单项，还是已下单订单？"
+      }
+    ],
+    "critical_violations": [],
+    "performance_passed": true,
+    "evidence": "R19-r1/result.json",
+    "repair_status": "待开始",
+    "product_changed": false,
+    "reproduce_argv": [
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py",
+      "worker",
+      "--tree",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+      "--case",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\case-definitions\\R19.json",
+      "--seed",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+      "--index",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+      "--output",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R19-r1-reproduction",
+      "--repeat",
+      "1"
+    ]
+  },
+  {
+    "execution_id": "H01-r1",
+    "case_id": "H01",
+    "status": "failed",
+    "business_failure": null,
+    "failed_checks": [
+      {
+        "kind": "quantities",
+        "path": "after.guide.plan.items",
+        "value": {
+          "demo:snack-original-potato-chips-70g-bag": 2
+        },
+        "passed": false,
+        "actual": [
+          {
+            "sku_id": "demo:cn-coke-original-500ml-bottle",
+            "name": "可口可乐经典原味汽水500ml瓶装",
+            "quantity": 1,
+            "unit_price_fen": 400,
+            "line_total_fen": 400,
+            "image_path": null,
+            "image_kind": "placeholder",
+            "image_kind_legacy": "placeholder",
+            "role": "required",
+            "selected": true,
+            "recommended_quantity": 1,
+            "max_addable_quantity": 36,
+            "spec_quantity": 500,
+            "spec_unit": "ml",
+            "sell_unit": "件",
+            "quantity_source": "recommended",
+            "group_id": "product:demo:cn-coke-original-500ml-bottle",
+            "target_kind": "product",
+            "target_id": "demo:cn-coke-original-500ml-bottle",
+            "component_name": null,
+            "contributions": [
+              {
+                "group_id": "product:demo:cn-coke-original-500ml-bottle",
+                "quantity": 1,
+                "selected": true,
+                "added_quantity": 0,
+                "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                "requirement": {
+                  "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                  "name": "可口可乐经典原味汽水500ml瓶装",
+                  "ingredient_id": null,
+                  "component_id": null,
+                  "quantity": 1,
+                  "unit": "件",
+                  "quantity_known": true,
+                  "requiredness": "core",
+                  "source": {
+                    "kind": "user",
+                    "ref": "可口可乐经典原味汽水500ml瓶装"
+                  }
+                }
+              }
+            ],
+            "added_quantity": 0,
+            "remaining_quantity": 1,
+            "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+            "requirement": {
+              "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+              "name": "可口可乐经典原味汽水500ml瓶装",
+              "ingredient_id": null,
+              "component_id": null,
+              "quantity": 1,
+              "unit": "件",
+              "quantity_known": true,
+              "requiredness": "core",
+              "source": {
+                "kind": "user",
+                "ref": "可口可乐经典原味汽水500ml瓶装"
+              }
+            },
+            "availability": "available",
+            "evidence": {
+              "sku_source": "store_offer",
+              "quoted_at": "2026-10-07T07:36:08+00:00",
+              "stock_verified": true,
+              "data_mode": "demo",
+              "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+              "unknown_constraints": []
+            },
+            "pack_source": "catalog_spec",
+            "shortfall_quantity": 0
+          }
+        ]
+      },
+      {
+        "kind": "eq",
+        "path": "after.guide.plan.selected_total_fen",
+        "value": 1180,
+        "passed": false,
+        "actual": 400
+      },
+      {
+        "kind": "eq",
+        "path": "after.guide.constraints_summary.budget_fen",
+        "value": null,
+        "passed": false,
+        "actual": 500
+      }
+    ],
+    "critical_violations": [],
+    "performance_passed": true,
+    "evidence": "H01-r1/result.json",
+    "repair_status": "待开始",
+    "product_changed": false,
+    "reproduce_argv": [
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py",
+      "worker",
+      "--tree",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+      "--case",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\case-definitions\\H01.json",
+      "--seed",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+      "--index",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+      "--output",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H01-r1-reproduction",
+      "--repeat",
+      "1"
+    ]
+  },
+  {
+    "execution_id": "H02-r1",
+    "case_id": "H02",
+    "status": "failed",
+    "business_failure": null,
+    "failed_checks": [
+      {
+        "kind": "eq",
+        "path": "after.guide.constraints_summary.budget_fen",
+        "value": null,
+        "passed": false,
+        "actual": 1000
+      }
+    ],
+    "critical_violations": [],
+    "performance_passed": true,
+    "evidence": "H02-r1/result.json",
+    "repair_status": "待开始",
+    "product_changed": false,
+    "reproduce_argv": [
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py",
+      "worker",
+      "--tree",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+      "--case",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\case-definitions\\H02.json",
+      "--seed",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+      "--index",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+      "--output",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H02-r1-reproduction",
+      "--repeat",
+      "1"
+    ]
+  },
+  {
+    "execution_id": "H03-r1",
+    "case_id": "H03",
+    "status": "failed",
+    "business_failure": null,
+    "failed_checks": [
+      {
+        "kind": "present",
+        "path": "after.guide.plan",
+        "value": true,
+        "passed": false,
+        "actual": null
+      },
+      {
+        "kind": "eq",
+        "path": "after.guide.constraints_summary.budget_fen",
+        "value": 1180,
+        "passed": false,
+        "actual": null,
+        "missing_evidence": "'budget_fen'"
+      }
+    ],
+    "critical_violations": [],
+    "performance_passed": true,
+    "evidence": "H03-r1/result.json",
+    "repair_status": "待开始",
+    "product_changed": false,
+    "reproduce_argv": [
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py",
+      "worker",
+      "--tree",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+      "--case",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\case-definitions\\H03.json",
+      "--seed",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+      "--index",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+      "--output",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H03-r1-reproduction",
+      "--repeat",
+      "1"
+    ]
+  },
+  {
+    "execution_id": "H04-r1",
+    "case_id": "H04",
+    "status": "failed",
+    "business_failure": null,
+    "failed_checks": [],
+    "critical_violations": [],
+    "performance_passed": true,
+    "evidence": "H04-r1/result.json",
+    "repair_status": "待开始",
+    "product_changed": false,
+    "reproduce_argv": [
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py",
+      "worker",
+      "--tree",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+      "--case",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\case-definitions\\H04.json",
+      "--seed",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+      "--index",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+      "--output",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H04-r1-reproduction",
+      "--repeat",
+      "1"
+    ]
+  },
+  {
+    "execution_id": "H05-r1",
+    "case_id": "H05",
+    "status": "failed",
+    "business_failure": null,
+    "failed_checks": [
+      {
+        "kind": "present",
+        "path": "after.guide.product_cards",
+        "value": true,
+        "passed": false,
+        "actual": []
+      }
+    ],
+    "critical_violations": [],
+    "performance_passed": true,
+    "evidence": "H05-r1/result.json",
+    "repair_status": "待开始",
+    "product_changed": false,
+    "reproduce_argv": [
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py",
+      "worker",
+      "--tree",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+      "--case",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\case-definitions\\H05.json",
+      "--seed",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+      "--index",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+      "--output",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H05-r1-reproduction",
+      "--repeat",
+      "1"
+    ]
+  },
+  {
+    "execution_id": "H06-r1",
+    "case_id": "H06",
+    "status": "failed",
+    "business_failure": null,
+    "failed_checks": [
+      {
+        "kind": "quantities",
+        "path": "after.guide.plan.items",
+        "value": {
+          "demo:cn-nongfu-water-550ml-bottle": 2
+        },
+        "passed": false,
+        "actual": [
+          {
+            "sku_id": "demo:cn-coke-original-500ml-bottle",
+            "name": "可口可乐经典原味汽水500ml瓶装",
+            "quantity": 2,
+            "unit_price_fen": 400,
+            "line_total_fen": 800,
+            "image_path": null,
+            "image_kind": "placeholder",
+            "image_kind_legacy": "placeholder",
+            "role": "required",
+            "selected": true,
+            "recommended_quantity": 2,
+            "max_addable_quantity": 36,
+            "spec_quantity": 500,
+            "spec_unit": "ml",
+            "sell_unit": "件",
+            "quantity_source": "recommended",
+            "group_id": "product:demo:cn-coke-original-500ml-bottle",
+            "target_kind": "product",
+            "target_id": "demo:cn-coke-original-500ml-bottle",
+            "component_name": null,
+            "contributions": [
+              {
+                "group_id": "product:demo:cn-coke-original-500ml-bottle",
+                "quantity": 2,
+                "selected": true,
+                "added_quantity": 0,
+                "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                "requirement": {
+                  "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                  "name": "可口可乐经典原味汽水500ml瓶装",
+                  "ingredient_id": null,
+                  "component_id": null,
+                  "quantity": 2,
+                  "unit": "件",
+                  "quantity_known": true,
+                  "requiredness": "core",
+                  "source": {
+                    "kind": "user",
+                    "ref": "可口可乐经典原味汽水500ml瓶装"
+                  }
+                }
+              }
+            ],
+            "added_quantity": 0,
+            "remaining_quantity": 2,
+            "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+            "requirement": {
+              "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+              "name": "可口可乐经典原味汽水500ml瓶装",
+              "ingredient_id": null,
+              "component_id": null,
+              "quantity": 2,
+              "unit": "件",
+              "quantity_known": true,
+              "requiredness": "core",
+              "source": {
+                "kind": "user",
+                "ref": "可口可乐经典原味汽水500ml瓶装"
+              }
+            },
+            "availability": "available",
+            "evidence": {
+              "sku_source": "store_offer",
+              "quoted_at": "2026-10-07T07:37:59+00:00",
+              "stock_verified": true,
+              "data_mode": "demo",
+              "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+              "unknown_constraints": []
+            },
+            "pack_source": "catalog_spec",
+            "shortfall_quantity": 0
+          }
+        ]
+      },
+      {
+        "kind": "eq",
+        "path": "after.guide.plan.selected_total_fen",
+        "value": 400,
+        "passed": false,
+        "actual": 800
+      }
+    ],
+    "critical_violations": [],
+    "performance_passed": false,
+    "evidence": "H06-r1/result.json",
+    "repair_status": "待开始",
+    "product_changed": false,
+    "reproduce_argv": [
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py",
+      "worker",
+      "--tree",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+      "--case",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\case-definitions\\H06.json",
+      "--seed",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+      "--index",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+      "--output",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H06-r1-reproduction",
+      "--repeat",
+      "1"
+    ]
+  },
+  {
+    "execution_id": "H07-r1",
+    "case_id": "H07",
+    "status": "passed",
+    "business_failure": null,
+    "failed_checks": [],
+    "critical_violations": [],
+    "performance_passed": false,
+    "evidence": "H07-r1/result.json",
+    "repair_status": "待开始",
+    "product_changed": false,
+    "reproduce_argv": [
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py",
+      "worker",
+      "--tree",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+      "--case",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\case-definitions\\H07.json",
+      "--seed",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+      "--index",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+      "--output",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H07-r1-reproduction",
+      "--repeat",
+      "1"
+    ]
+  },
+  {
+    "execution_id": "H11-r1",
+    "case_id": "H11",
+    "status": "passed",
+    "business_failure": null,
+    "failed_checks": [],
+    "critical_violations": [],
+    "performance_passed": false,
+    "evidence": "H11-r1/result.json",
+    "repair_status": "待开始",
+    "product_changed": false,
+    "reproduce_argv": [
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py",
+      "worker",
+      "--tree",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+      "--case",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\case-definitions\\H11.json",
+      "--seed",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+      "--index",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+      "--output",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H11-r1-reproduction",
+      "--repeat",
+      "1"
+    ]
+  },
+  {
+    "execution_id": "H12-r1",
+    "case_id": "H12",
+    "status": "failed",
+    "business_failure": null,
+    "failed_checks": [
+      {
+        "kind": "present",
+        "path": "after.guide.plan",
+        "value": true,
+        "passed": false,
+        "actual": null
+      }
+    ],
+    "critical_violations": [],
+    "performance_passed": false,
+    "evidence": "H12-r1/result.json",
+    "repair_status": "待开始",
+    "product_changed": false,
+    "reproduce_argv": [
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py",
+      "worker",
+      "--tree",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+      "--case",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\case-definitions\\H12.json",
+      "--seed",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+      "--index",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+      "--output",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H12-r1-reproduction",
+      "--repeat",
+      "1"
+    ]
+  },
+  {
+    "execution_id": "H15-r1",
+    "case_id": "H15",
+    "status": "passed",
+    "business_failure": null,
+    "failed_checks": [],
+    "critical_violations": [],
+    "performance_passed": false,
+    "evidence": "H15-r1/result.json",
+    "repair_status": "待开始",
+    "product_changed": false,
+    "reproduce_argv": [
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py",
+      "worker",
+      "--tree",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+      "--case",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\case-definitions\\H15.json",
+      "--seed",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+      "--index",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+      "--output",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H15-r1-reproduction",
+      "--repeat",
+      "1"
+    ]
+  },
+  {
+    "execution_id": "H16-r1",
+    "case_id": "H16",
+    "status": "passed",
+    "business_failure": null,
+    "failed_checks": [],
+    "critical_violations": [],
+    "performance_passed": false,
+    "evidence": "H16-r1/result.json",
+    "repair_status": "待开始",
+    "product_changed": false,
+    "reproduce_argv": [
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py",
+      "worker",
+      "--tree",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+      "--case",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\case-definitions\\H16.json",
+      "--seed",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+      "--index",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+      "--output",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H16-r1-reproduction",
+      "--repeat",
+      "1"
+    ]
+  },
+  {
+    "execution_id": "H18-r1",
+    "case_id": "H18",
+    "status": "failed",
+    "business_failure": null,
+    "failed_checks": [
+      {
+        "kind": "eq",
+        "path": "after.memory_events.-1.phase",
+        "value": "memory_extract_completed",
+        "passed": false,
+        "actual": null,
+        "missing_evidence": "list index out of range"
+      }
+    ],
+    "critical_violations": [],
+    "performance_passed": true,
+    "evidence": "H18-r1/result.json",
+    "repair_status": "待开始",
+    "product_changed": false,
+    "reproduce_argv": [
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py",
+      "worker",
+      "--tree",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+      "--case",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\case-definitions\\H18.json",
+      "--seed",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+      "--index",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+      "--output",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H18-r1-reproduction",
+      "--repeat",
+      "1"
+    ]
+  },
+  {
+    "execution_id": "R21-r1",
+    "case_id": "R21",
+    "status": "passed",
+    "business_failure": null,
+    "failed_checks": [],
+    "critical_violations": [],
+    "performance_passed": false,
+    "evidence": "R21-r1/result.json",
+    "repair_status": "待开始",
+    "product_changed": false,
+    "reproduce_argv": [
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py",
+      "worker",
+      "--tree",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+      "--case",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\case-definitions\\R21.json",
+      "--seed",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+      "--index",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+      "--output",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R21-r1-reproduction",
+      "--repeat",
+      "1"
+    ]
+  },
+  {
+    "execution_id": "R22-r1",
+    "case_id": "R22",
+    "status": "passed",
+    "business_failure": null,
+    "failed_checks": [],
+    "critical_violations": [],
+    "performance_passed": false,
+    "evidence": "R22-r1/result.json",
+    "repair_status": "待开始",
+    "product_changed": false,
+    "reproduce_argv": [
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py",
+      "worker",
+      "--tree",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+      "--case",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\case-definitions\\R22.json",
+      "--seed",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+      "--index",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+      "--output",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R22-r1-reproduction",
+      "--repeat",
+      "1"
+    ]
+  },
+  {
+    "execution_id": "R23-r1",
+    "case_id": "R23",
+    "status": "passed",
+    "business_failure": null,
+    "failed_checks": [],
+    "critical_violations": [],
+    "performance_passed": false,
+    "evidence": "R23-r1/result.json",
+    "repair_status": "待开始",
+    "product_changed": false,
+    "reproduce_argv": [
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py",
+      "worker",
+      "--tree",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+      "--case",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\case-definitions\\R23.json",
+      "--seed",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+      "--index",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+      "--output",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R23-r1-reproduction",
+      "--repeat",
+      "1"
+    ]
+  },
+  {
+    "execution_id": "R24-r1",
+    "case_id": "R24",
+    "status": "passed",
+    "business_failure": null,
+    "failed_checks": [],
+    "critical_violations": [],
+    "performance_passed": false,
+    "evidence": "R24-r1/result.json",
+    "repair_status": "待开始",
+    "product_changed": false,
+    "reproduce_argv": [
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py",
+      "worker",
+      "--tree",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+      "--case",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\case-definitions\\R24.json",
+      "--seed",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+      "--index",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+      "--output",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R24-r1-reproduction",
+      "--repeat",
+      "1"
+    ]
+  },
+  {
+    "execution_id": "R25-r1",
+    "case_id": "R25",
+    "status": "passed",
+    "business_failure": null,
+    "failed_checks": [],
+    "critical_violations": [],
+    "performance_passed": false,
+    "evidence": "R25-r1/result.json",
+    "repair_status": "待开始",
+    "product_changed": false,
+    "reproduce_argv": [
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py",
+      "worker",
+      "--tree",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+      "--case",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\case-definitions\\R25.json",
+      "--seed",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+      "--index",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+      "--output",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R25-r1-reproduction",
+      "--repeat",
+      "1"
+    ]
+  },
+  {
+    "execution_id": "R31-r1",
+    "case_id": "R31",
+    "status": "failed",
+    "business_failure": null,
+    "failed_checks": [
+      {
+        "kind": "length",
+        "path": "after.returns",
+        "value": 1,
+        "passed": false,
+        "actual": []
+      },
+      {
+        "kind": "eq",
+        "path": "after.returns.0.status",
+        "value": "pending",
+        "passed": false,
+        "actual": null,
+        "missing_evidence": "list index out of range"
+      }
+    ],
+    "critical_violations": [],
+    "performance_passed": true,
+    "evidence": "R31-r1/result.json",
+    "repair_status": "待开始",
+    "product_changed": false,
+    "reproduce_argv": [
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py",
+      "worker",
+      "--tree",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+      "--case",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\case-definitions\\R31.json",
+      "--seed",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+      "--index",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+      "--output",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R31-r1-reproduction",
+      "--repeat",
+      "1"
+    ]
+  },
+  {
+    "execution_id": "R32-r1",
+    "case_id": "R32",
+    "status": "passed",
+    "business_failure": null,
+    "failed_checks": [],
+    "critical_violations": [],
+    "performance_passed": false,
+    "evidence": "R32-r1/result.json",
+    "repair_status": "待开始",
+    "product_changed": false,
+    "reproduce_argv": [
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py",
+      "worker",
+      "--tree",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+      "--case",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\case-definitions\\R32.json",
+      "--seed",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+      "--index",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+      "--output",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R32-r1-reproduction",
+      "--repeat",
+      "1"
+    ]
+  },
+  {
+    "execution_id": "R01-r2",
+    "case_id": "R01",
+    "status": "failed",
+    "business_failure": null,
+    "failed_checks": [
+      {
+        "kind": "present",
+        "path": "after.guide.pending_clarifications",
+        "value": true,
+        "passed": false,
+        "actual": []
+      }
+    ],
+    "critical_violations": [],
+    "performance_passed": false,
+    "evidence": "R01-r2/result.json",
+    "repair_status": "待开始",
+    "product_changed": false,
+    "reproduce_argv": [
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py",
+      "worker",
+      "--tree",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+      "--case",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\case-definitions\\R01.json",
+      "--seed",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+      "--index",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+      "--output",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R01-r2-reproduction",
+      "--repeat",
+      "2"
+    ]
+  },
+  {
+    "execution_id": "R02-r2",
+    "case_id": "R02",
+    "status": "passed",
+    "business_failure": null,
+    "failed_checks": [],
+    "critical_violations": [],
+    "performance_passed": false,
+    "evidence": "R02-r2/result.json",
+    "repair_status": "待开始",
+    "product_changed": false,
+    "reproduce_argv": [
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py",
+      "worker",
+      "--tree",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+      "--case",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\case-definitions\\R02.json",
+      "--seed",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+      "--index",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+      "--output",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R02-r2-reproduction",
+      "--repeat",
+      "2"
+    ]
+  },
+  {
+    "execution_id": "R03-r2",
+    "case_id": "R03",
+    "status": "passed",
+    "business_failure": null,
+    "failed_checks": [],
+    "critical_violations": [],
+    "performance_passed": false,
+    "evidence": "R03-r2/result.json",
+    "repair_status": "待开始",
+    "product_changed": false,
+    "reproduce_argv": [
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py",
+      "worker",
+      "--tree",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+      "--case",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\case-definitions\\R03.json",
+      "--seed",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+      "--index",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+      "--output",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R03-r2-reproduction",
+      "--repeat",
+      "2"
+    ]
+  },
+  {
+    "execution_id": "R05-r2",
+    "case_id": "R05",
+    "status": "passed",
+    "business_failure": null,
+    "failed_checks": [],
+    "critical_violations": [],
+    "performance_passed": false,
+    "evidence": "R05-r2/result.json",
+    "repair_status": "待开始",
+    "product_changed": false,
+    "reproduce_argv": [
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py",
+      "worker",
+      "--tree",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+      "--case",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\case-definitions\\R05.json",
+      "--seed",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+      "--index",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+      "--output",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R05-r2-reproduction",
+      "--repeat",
+      "2"
+    ]
+  },
+  {
+    "execution_id": "R06-r2",
+    "case_id": "R06",
+    "status": "passed",
+    "business_failure": null,
+    "failed_checks": [],
+    "critical_violations": [],
+    "performance_passed": false,
+    "evidence": "R06-r2/result.json",
+    "repair_status": "待开始",
+    "product_changed": false,
+    "reproduce_argv": [
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py",
+      "worker",
+      "--tree",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+      "--case",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\case-definitions\\R06.json",
+      "--seed",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+      "--index",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+      "--output",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R06-r2-reproduction",
+      "--repeat",
+      "2"
+    ]
+  },
+  {
+    "execution_id": "R07-r2",
+    "case_id": "R07",
+    "status": "failed",
+    "business_failure": null,
+    "failed_checks": [
+      {
+        "kind": "present",
+        "path": "after.guide.plan",
+        "value": true,
+        "passed": false,
+        "actual": null
+      },
+      {
+        "kind": "quantities",
+        "path": "after.guide.plan.items",
+        "value": {
+          "demo:cn-coke-zero-500ml-bottle": 2
+        },
+        "passed": false,
+        "actual": null,
+        "missing_evidence": "'NoneType' object is not subscriptable"
+      },
+      {
+        "kind": "eq",
+        "path": "after.guide.plan.selected_total_fen",
+        "value": 800,
+        "passed": false,
+        "actual": null,
+        "missing_evidence": "'NoneType' object is not subscriptable"
+      }
+    ],
+    "critical_violations": [],
+    "performance_passed": true,
+    "evidence": "R07-r2/result.json",
+    "repair_status": "待开始",
+    "product_changed": false,
+    "reproduce_argv": [
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py",
+      "worker",
+      "--tree",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+      "--case",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\case-definitions\\R07.json",
+      "--seed",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+      "--index",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+      "--output",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R07-r2-reproduction",
+      "--repeat",
+      "2"
+    ]
+  },
+  {
+    "execution_id": "R11-r2",
+    "case_id": "R11",
+    "status": "failed",
+    "business_failure": null,
+    "failed_checks": [
+      {
+        "kind": "eq",
+        "path": "after.guide.constraints_summary.budget_fen",
+        "value": 1000,
+        "passed": false,
+        "actual": 2000
+      }
+    ],
+    "critical_violations": [],
+    "performance_passed": true,
+    "evidence": "R11-r2/result.json",
+    "repair_status": "待开始",
+    "product_changed": false,
+    "reproduce_argv": [
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py",
+      "worker",
+      "--tree",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+      "--case",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\case-definitions\\R11.json",
+      "--seed",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+      "--index",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+      "--output",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R11-r2-reproduction",
+      "--repeat",
+      "2"
+    ]
+  },
+  {
+    "execution_id": "R17-r2",
+    "case_id": "R17",
+    "status": "passed",
+    "business_failure": null,
+    "failed_checks": [],
+    "critical_violations": [],
+    "performance_passed": false,
+    "evidence": "R17-r2/result.json",
+    "repair_status": "待开始",
+    "product_changed": false,
+    "reproduce_argv": [
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py",
+      "worker",
+      "--tree",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+      "--case",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\case-definitions\\R17.json",
+      "--seed",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+      "--index",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+      "--output",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R17-r2-reproduction",
+      "--repeat",
+      "2"
+    ]
+  },
+  {
+    "execution_id": "R19-r2",
+    "case_id": "R19",
+    "status": "failed",
+    "business_failure": null,
+    "failed_checks": [
+      {
+        "kind": "contains",
+        "path": "reply",
+        "value": "百事",
+        "passed": false,
+        "actual": "你指的是正在选购的商品或采购清单项，还是已下单订单？"
+      }
+    ],
+    "critical_violations": [],
+    "performance_passed": true,
+    "evidence": "R19-r2/result.json",
+    "repair_status": "待开始",
+    "product_changed": false,
+    "reproduce_argv": [
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py",
+      "worker",
+      "--tree",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+      "--case",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\case-definitions\\R19.json",
+      "--seed",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+      "--index",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+      "--output",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R19-r2-reproduction",
+      "--repeat",
+      "2"
+    ]
+  },
+  {
+    "execution_id": "R01-r3",
+    "case_id": "R01",
+    "status": "failed",
+    "business_failure": null,
+    "failed_checks": [
+      {
+        "kind": "present",
+        "path": "after.guide.pending_clarifications",
+        "value": true,
+        "passed": false,
+        "actual": []
+      }
+    ],
+    "critical_violations": [],
+    "performance_passed": false,
+    "evidence": "R01-r3/result.json",
+    "repair_status": "待开始",
+    "product_changed": false,
+    "reproduce_argv": [
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py",
+      "worker",
+      "--tree",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+      "--case",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\case-definitions\\R01.json",
+      "--seed",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+      "--index",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+      "--output",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R01-r3-reproduction",
+      "--repeat",
+      "3"
+    ]
+  },
+  {
+    "execution_id": "R05-r3",
+    "case_id": "R05",
+    "status": "passed",
+    "business_failure": null,
+    "failed_checks": [],
+    "critical_violations": [],
+    "performance_passed": false,
+    "evidence": "R05-r3/result.json",
+    "repair_status": "待开始",
+    "product_changed": false,
+    "reproduce_argv": [
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py",
+      "worker",
+      "--tree",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+      "--case",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\case-definitions\\R05.json",
+      "--seed",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+      "--index",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+      "--output",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R05-r3-reproduction",
+      "--repeat",
+      "3"
+    ]
+  },
+  {
+    "execution_id": "R07-r3",
+    "case_id": "R07",
+    "status": "failed",
+    "business_failure": null,
+    "failed_checks": [
+      {
+        "kind": "quantities",
+        "path": "after.guide.plan.items",
+        "value": {
+          "demo:cn-coke-zero-500ml-bottle": 2
+        },
+        "passed": false,
+        "actual": [
+          {
+            "sku_id": "demo:cn-coke-original-500ml-bottle",
+            "name": "可口可乐经典原味汽水500ml瓶装",
+            "quantity": 2,
+            "unit_price_fen": 400,
+            "line_total_fen": 800,
+            "image_path": null,
+            "image_kind": "placeholder",
+            "image_kind_legacy": "placeholder",
+            "role": "required",
+            "selected": true,
+            "recommended_quantity": 2,
+            "max_addable_quantity": 36,
+            "spec_quantity": 500,
+            "spec_unit": "ml",
+            "sell_unit": "件",
+            "quantity_source": "recommended",
+            "group_id": "product:demo:cn-coke-original-500ml-bottle",
+            "target_kind": "product",
+            "target_id": "demo:cn-coke-original-500ml-bottle",
+            "component_name": null,
+            "contributions": [
+              {
+                "group_id": "product:demo:cn-coke-original-500ml-bottle",
+                "quantity": 2,
+                "selected": true,
+                "added_quantity": 0,
+                "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                "requirement": {
+                  "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                  "name": "可口可乐经典原味汽水500ml瓶装",
+                  "ingredient_id": null,
+                  "component_id": null,
+                  "quantity": 2,
+                  "unit": "件",
+                  "quantity_known": true,
+                  "requiredness": "core",
+                  "source": {
+                    "kind": "user",
+                    "ref": "可口可乐经典原味汽水500ml瓶装"
+                  }
+                }
+              }
+            ],
+            "added_quantity": 0,
+            "remaining_quantity": 2,
+            "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+            "requirement": {
+              "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+              "name": "可口可乐经典原味汽水500ml瓶装",
+              "ingredient_id": null,
+              "component_id": null,
+              "quantity": 2,
+              "unit": "件",
+              "quantity_known": true,
+              "requiredness": "core",
+              "source": {
+                "kind": "user",
+                "ref": "可口可乐经典原味汽水500ml瓶装"
+              }
+            },
+            "availability": "available",
+            "evidence": {
+              "sku_source": "store_offer",
+              "quoted_at": "2026-10-07T07:57:35+00:00",
+              "stock_verified": true,
+              "data_mode": "demo",
+              "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+              "unknown_constraints": []
+            },
+            "pack_source": "catalog_spec",
+            "shortfall_quantity": 0
+          }
+        ]
+      }
+    ],
+    "critical_violations": [],
+    "performance_passed": true,
+    "evidence": "R07-r3/result.json",
+    "repair_status": "待开始",
+    "product_changed": false,
+    "reproduce_argv": [
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py",
+      "worker",
+      "--tree",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+      "--case",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\case-definitions\\R07.json",
+      "--seed",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+      "--index",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+      "--output",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R07-r3-reproduction",
+      "--repeat",
+      "3"
+    ]
+  },
+  {
+    "execution_id": "R08-r3",
+    "case_id": "R08",
+    "status": "failed",
+    "business_failure": null,
+    "failed_checks": [
+      {
+        "kind": "quantities",
+        "path": "after.guide.plan.items",
+        "value": {
+          "demo:cn-nongfu-water-550ml-bottle": 3
+        },
+        "passed": false,
+        "actual": [
+          {
+            "sku_id": "demo:cn-nongfu-water-550ml-bottle",
+            "name": "农夫山泉饮用天然水550ml瓶装",
+            "quantity": 1,
+            "unit_price_fen": 200,
+            "line_total_fen": 200,
+            "image_path": null,
+            "image_kind": "placeholder",
+            "image_kind_legacy": "placeholder",
+            "role": "required",
+            "selected": true,
+            "recommended_quantity": 1,
+            "max_addable_quantity": 72,
+            "spec_quantity": 550,
+            "spec_unit": "ml",
+            "sell_unit": "件",
+            "quantity_source": "recommended",
+            "group_id": "product:demo:cn-nongfu-water-550ml-bottle",
+            "target_kind": "product",
+            "target_id": "demo:cn-nongfu-water-550ml-bottle",
+            "component_name": null,
+            "contributions": [
+              {
+                "group_id": "product:demo:cn-nongfu-water-550ml-bottle",
+                "quantity": 1,
+                "selected": true,
+                "added_quantity": 0,
+                "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+                "requirement": {
+                  "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+                  "name": "农夫山泉饮用天然水550ml瓶装",
+                  "ingredient_id": null,
+                  "component_id": null,
+                  "quantity": 1,
+                  "unit": "件",
+                  "quantity_known": true,
+                  "requiredness": "core",
+                  "source": {
+                    "kind": "user",
+                    "ref": "农夫山泉饮用天然水550ml瓶装"
+                  }
+                }
+              }
+            ],
+            "added_quantity": 0,
+            "remaining_quantity": 1,
+            "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+            "requirement": {
+              "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+              "name": "农夫山泉饮用天然水550ml瓶装",
+              "ingredient_id": null,
+              "component_id": null,
+              "quantity": 1,
+              "unit": "件",
+              "quantity_known": true,
+              "requiredness": "core",
+              "source": {
+                "kind": "user",
+                "ref": "农夫山泉饮用天然水550ml瓶装"
+              }
+            },
+            "availability": "available",
+            "evidence": {
+              "sku_source": "store_offer",
+              "quoted_at": "2026-10-07T07:57:28+00:00",
+              "stock_verified": true,
+              "data_mode": "demo",
+              "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+              "unknown_constraints": []
+            },
+            "pack_source": "catalog_spec",
+            "shortfall_quantity": 0
+          }
+        ]
+      },
+      {
+        "kind": "eq",
+        "path": "after.guide.plan.selected_total_fen",
+        "value": 600,
+        "passed": false,
+        "actual": 200
+      }
+    ],
+    "critical_violations": [],
+    "performance_passed": false,
+    "evidence": "R08-r3/result.json",
+    "repair_status": "待开始",
+    "product_changed": false,
+    "reproduce_argv": [
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py",
+      "worker",
+      "--tree",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+      "--case",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\case-definitions\\R08.json",
+      "--seed",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+      "--index",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+      "--output",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R08-r3-reproduction",
+      "--repeat",
+      "3"
+    ]
+  },
+  {
+    "execution_id": "R09-r3",
+    "case_id": "R09",
+    "status": "failed",
+    "business_failure": null,
+    "failed_checks": [
+      {
+        "kind": "quantities",
+        "path": "after.guide.plan.items",
+        "value": {
+          "demo:cn-pepsi-original-330ml-can": 1
+        },
+        "passed": false,
+        "actual": [
+          {
+            "sku_id": "demo:cn-pepsi-original-330ml-can",
+            "name": "百事可乐原味汽水330ml罐装",
+            "quantity": 3,
+            "unit_price_fen": 300,
+            "line_total_fen": 900,
+            "image_path": null,
+            "image_kind": "placeholder",
+            "image_kind_legacy": "placeholder",
+            "role": "required",
+            "selected": true,
+            "recommended_quantity": 3,
+            "max_addable_quantity": 36,
+            "spec_quantity": 330,
+            "spec_unit": "ml",
+            "sell_unit": "件",
+            "quantity_source": "recommended",
+            "group_id": "product:demo:cn-pepsi-original-330ml-can",
+            "target_kind": "product",
+            "target_id": "demo:cn-pepsi-original-330ml-can",
+            "component_name": null,
+            "contributions": [
+              {
+                "group_id": "product:demo:cn-pepsi-original-330ml-can",
+                "quantity": 3,
+                "selected": true,
+                "added_quantity": 0,
+                "required_item_id": "product:demo:cn-pepsi-original-330ml-can#demo:cn-pepsi-original-330ml-can",
+                "requirement": {
+                  "required_item_id": "product:demo:cn-pepsi-original-330ml-can#demo:cn-pepsi-original-330ml-can",
+                  "name": "百事可乐原味汽水330ml罐装",
+                  "ingredient_id": null,
+                  "component_id": null,
+                  "quantity": 3,
+                  "unit": "件",
+                  "quantity_known": true,
+                  "requiredness": "core",
+                  "source": {
+                    "kind": "user",
+                    "ref": "百事可乐原味汽水330ml罐装"
+                  }
+                }
+              }
+            ],
+            "added_quantity": 0,
+            "remaining_quantity": 3,
+            "required_item_id": "product:demo:cn-pepsi-original-330ml-can#demo:cn-pepsi-original-330ml-can",
+            "requirement": {
+              "required_item_id": "product:demo:cn-pepsi-original-330ml-can#demo:cn-pepsi-original-330ml-can",
+              "name": "百事可乐原味汽水330ml罐装",
+              "ingredient_id": null,
+              "component_id": null,
+              "quantity": 3,
+              "unit": "件",
+              "quantity_known": true,
+              "requiredness": "core",
+              "source": {
+                "kind": "user",
+                "ref": "百事可乐原味汽水330ml罐装"
+              }
+            },
+            "availability": "available",
+            "evidence": {
+              "sku_source": "store_offer",
+              "quoted_at": "2026-10-07T07:58:23+00:00",
+              "stock_verified": true,
+              "data_mode": "demo",
+              "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+              "unknown_constraints": []
+            },
+            "pack_source": "catalog_spec",
+            "shortfall_quantity": 0
+          }
+        ]
+      },
+      {
+        "kind": "eq",
+        "path": "after.guide.plan.selected_total_fen",
+        "value": 300,
+        "passed": false,
+        "actual": 900
+      }
+    ],
+    "critical_violations": [],
+    "performance_passed": true,
+    "evidence": "R09-r3/result.json",
+    "repair_status": "待开始",
+    "product_changed": false,
+    "reproduce_argv": [
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py",
+      "worker",
+      "--tree",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+      "--case",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\case-definitions\\R09.json",
+      "--seed",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+      "--index",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+      "--output",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R09-r3-reproduction",
+      "--repeat",
+      "3"
+    ]
+  },
+  {
+    "execution_id": "R11-r3",
+    "case_id": "R11",
+    "status": "failed",
+    "business_failure": null,
+    "failed_checks": [
+      {
+        "kind": "eq",
+        "path": "after.guide.constraints_summary.budget_fen",
+        "value": 1000,
+        "passed": false,
+        "actual": 2000
+      }
+    ],
+    "critical_violations": [],
+    "performance_passed": true,
+    "evidence": "R11-r3/result.json",
+    "repair_status": "待开始",
+    "product_changed": false,
+    "reproduce_argv": [
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py",
+      "worker",
+      "--tree",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+      "--case",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\case-definitions\\R11.json",
+      "--seed",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+      "--index",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+      "--output",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R11-r3-reproduction",
+      "--repeat",
+      "3"
+    ]
+  },
+  {
+    "execution_id": "R13-r3",
+    "case_id": "R13",
+    "status": "passed",
+    "business_failure": null,
+    "failed_checks": [],
+    "critical_violations": [],
+    "performance_passed": false,
+    "evidence": "R13-r3/result.json",
+    "repair_status": "待开始",
+    "product_changed": false,
+    "reproduce_argv": [
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py",
+      "worker",
+      "--tree",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+      "--case",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\case-definitions\\R13.json",
+      "--seed",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+      "--index",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+      "--output",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R13-r3-reproduction",
+      "--repeat",
+      "3"
+    ]
+  },
+  {
+    "execution_id": "R19-r3",
+    "case_id": "R19",
+    "status": "failed",
+    "business_failure": null,
+    "failed_checks": [
+      {
+        "kind": "contains",
+        "path": "reply",
+        "value": "百事",
+        "passed": false,
+        "actual": "你指的是正在选购的商品或采购清单项，还是已下单订单？"
+      }
+    ],
+    "critical_violations": [],
+    "performance_passed": true,
+    "evidence": "R19-r3/result.json",
+    "repair_status": "待开始",
+    "product_changed": false,
+    "reproduce_argv": [
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py",
+      "worker",
+      "--tree",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+      "--case",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\case-definitions\\R19.json",
+      "--seed",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+      "--index",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+      "--output",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R19-r3-reproduction",
+      "--repeat",
+      "3"
+    ]
+  },
+  {
+    "execution_id": "R20-r3",
+    "case_id": "R20",
+    "status": "failed",
+    "business_failure": null,
+    "failed_checks": [
+      {
+        "kind": "length",
+        "path": "after.memories",
+        "value": 0,
+        "passed": false,
+        "actual": [
+          {
+            "memory_id": "eval-memory-0",
+            "owner_id": "owner-e8c8ed2e158d4478",
+            "category": "user",
+            "source": "explicit",
+            "content": "平时喜欢可口可乐",
+            "expires_at": null
+          }
+        ]
+      }
+    ],
+    "critical_violations": [],
+    "performance_passed": true,
+    "evidence": "R20-r3/result.json",
+    "repair_status": "待开始",
+    "product_changed": false,
+    "reproduce_argv": [
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py",
+      "worker",
+      "--tree",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+      "--case",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\case-definitions\\R20.json",
+      "--seed",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+      "--index",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+      "--output",
+      "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R20-r3-reproduction",
+      "--repeat",
+      "3"
+    ]
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "product_head": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+  "llm_mode": "live",
+  "retrieval_mode": "lexical",
+  "candidate_llm_model": "qwen3.8-27b-fp8",
+  "source_manifest_sha256": "04274cdbaa38799bac8a3ef40f418a70c8839251a4c08a30d4572ced74b518bb",
+  "source_R01_r1_result_sha256": "19a29fe7683f116d7bf0178d2c744fae8830b4c8f5e0a0099c28bab08cb63c3d",
+  "runner_sha256": "d8b31a1f2ac331d103c66c023700f6a028e094e01cd8cc132ad1343ba584e9aa",
+  "limit": 1,
+  "product_tasks_reexecuted": 0
+}

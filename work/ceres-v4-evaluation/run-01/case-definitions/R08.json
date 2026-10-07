@@ -1,0 +1,76 @@
+{
+  "case_id": "R08",
+  "group": "purchase",
+  "scenario_family": "water-quantity-increase",
+  "split": "regression",
+  "core": true,
+  "goal": "明确水商品后数量从一瓶增加到三瓶",
+  "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+  "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+  "steps": [
+    {
+      "op": "turn",
+      "label": "request",
+      "message": "买一瓶农夫山泉饮用水550ml瓶装",
+      "expect": [
+        {
+          "kind": "present",
+          "path": "after.guide.plan",
+          "value": true
+        },
+        {
+          "kind": "quantities",
+          "path": "after.guide.plan.items",
+          "value": {
+            "demo:cn-nongfu-water-550ml-bottle": 1
+          }
+        },
+        {
+          "kind": "eq",
+          "path": "after.guide.plan.selected_total_fen",
+          "value": 200
+        }
+      ]
+    },
+    {
+      "op": "turn",
+      "label": "increase",
+      "message": "数量改成三瓶",
+      "expect": [
+        {
+          "kind": "present",
+          "path": "after.guide.plan",
+          "value": true
+        },
+        {
+          "kind": "quantities",
+          "path": "after.guide.plan.items",
+          "value": {
+            "demo:cn-nongfu-water-550ml-bottle": 3
+          }
+        },
+        {
+          "kind": "eq",
+          "path": "after.guide.plan.selected_total_fen",
+          "value": 600
+        }
+      ]
+    },
+    {
+      "op": "confirm_plan",
+      "label": "explicit-confirm",
+      "authorized": [
+        "cart"
+      ],
+      "expect": [
+        {
+          "kind": "quantities",
+          "path": "after.cart.items",
+          "value": {
+            "demo:cn-nongfu-water-550ml-bottle": 3
+          }
+        }
+      ]
+    }
+  ]
+}

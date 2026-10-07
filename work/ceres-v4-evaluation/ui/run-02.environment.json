@@ -1,0 +1,16 @@
+{
+  "CERES_UI_OUTPUT": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\ui\\run-02",
+  "CERES_APP_URL": "http://127.0.0.1:18443/",
+  "CERES_UI_RUNTIME_RECEIPT": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\ui\\runtime-receipt-run02.json",
+  "CERES_PLAYWRIGHT_MODULE": "C:\\Users\\20616\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\node_modules\\playwright",
+  "node_path": "C:\\Users\\20616\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+  "node_version": "v24.19.0",
+  "browser_channel": "msedge",
+  "product_head": "ac895fd620af617fa31f4e0006841a4d6a89cd53",
+  "llm_mode": "live",
+  "business_data_mode": "demo",
+  "retrieval_mode": "lexical",
+  "database_path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\ui\\runtime-run02.sqlite3",
+  "runtime_receipt_sha256": "d5dda1d758d687c245916582dacb1a54144ec03938f2db1bc9bbcf9ffc07e9cb",
+  "runner_sha256": "0ab56978d89651620242cb6616670cfae894d283a576dbe47499b33cf6b0f8cd"
+}

@@ -1,0 +1,18 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: The input did not match the regular expression /waiter failed/. Input:
+
+'page.getByRole is not a function'
+
+    at file:///C:/Users/20616/Desktop/Agent/Agent%E4%BA%A7%E5%93%81/Ceres/work/ceres-v4-evaluation/ui/ui-runner-offline-check.mjs:22:10 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: 'page.getByRole is not a function',
+  expected: /waiter failed/,
+  operator: 'match',
+  diff: 'simple'
+}
+
+Node.js v24.19.0

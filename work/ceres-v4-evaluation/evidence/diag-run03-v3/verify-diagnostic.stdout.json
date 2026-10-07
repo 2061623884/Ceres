@@ -1,0 +1,88 @@
+{
+  "checks": {
+    "runner_frozen_hash_match": true,
+    "runner_source_hash_match": true,
+    "source_manifest_hash_match": true,
+    "source_R01_result_hash_match": true,
+    "only_max_tokens_changed": true,
+    "max_tokens_uses_effective_config": true,
+    "thinking_parameters_unchanged": true,
+    "serialized_request_matches_request": true,
+    "serialized_request_sha256_recorded": true,
+    "response_status_ok": true,
+    "raw_response_hash_matches_text": true,
+    "response_content_schema_valid": true,
+    "parsed_result_matches_response": true,
+    "one_call_and_one_result": true,
+    "source_batch_unchanged": true,
+    "no_product_tasks_reexecuted": true
+  },
+  "all_checks_passed": true,
+  "runner_sha256": "57cbd92120e18696273e29044b11dc271d842f4054b8a699dfcfe33947f70f88",
+  "source_manifest_sha256": "04274cdbaa38799bac8a3ef40f418a70c8839251a4c08a30d4572ced74b518bb",
+  "source_R01_result_sha256": "19a29fe7683f116d7bf0178d2c744fae8830b4c8f5e0a0099c28bab08cb63c3d",
+  "diagnostic_output_sha256": "5cbe87fc9fbba4345c0fc8db04af447452f347c8605eb8503d81ec9521c6d0b4",
+  "execution_id": "R01-r1",
+  "original_request_model": "qwen3.8-27b",
+  "original_max_tokens": 1200,
+  "effective_llm_max_output_tokens": 3072,
+  "request_max_tokens": 3072,
+  "changed_request_fields": [
+    "max_tokens"
+  ],
+  "serialized_request_sha256": "ba6eccde39b79cc276476d2568ff3dd2b40d5c544ba8d1b0baee18f343aed874",
+  "response_status": 200,
+  "response_model": "qwen3.8-27b-fp8",
+  "finish_reason": "stop",
+  "content_length": 1117,
+  "content_schema_valid": true,
+  "verdict": "fail",
+  "findings": [
+    {
+      "dimension": "completeness",
+      "verdict": "fail",
+      "evidence": "choose-type response: “我找到「原味薯片70克袋装」了，你可以先看看卡片里的商品信息。1. 原味薯片70克袋装”；facts_after.cart.items=[]；unexecuted_steps=[\"prepare\", \"explicit-confirm\"]",
+      "reason": "目标要求先分类、再选两包薯片并明确加购；轨迹只完成分类并找到一包薯片，未选择两包，也未发生加购，目标未完成。"
+    },
+    {
+      "dimension": "grounding",
+      "verdict": "fail",
+      "evidence": "choose-type response 称“看看卡片里的商品信息”，但 facts_after.guide.product_cards=[] 且 response.product_cards=[]；商品名与 product_prices_fen 中 demo:snack-original-potato-chips-70g-bag 对应",
+      "reason": "商品名称有价格表来源，但回答声称可查看卡片商品信息，可见事实中没有对应卡片或价格信息，依据不完整。"
+    },
+    {
+      "dimension": "clarification",
+      "verdict": "pass",
+      "evidence": "request pending_clarifications 问“想选哪类零食？”；choose-type 后 facts_after.guide.pending_clarifications=[]",
+      "reason": "首轮分类追问是必要澄清，后续未重复已知信息。"
+    },
+    {
+      "dimension": "status",
+      "verdict": "pass",
+      "evidence": "choose-type 仅表述“找到”，facts_after.cart.items=[]，未出现加购成功或库存扣减表述",
+      "reason": "业务状态表述与实际购物车一致，未把选择商品说成已加购。"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 6852,
+    "total_tokens": 8735,
+    "completion_tokens": 1883,
+    "prompt_tokens_details": null,
+    "completion_tokens_details": {
+      "reasoning_tokens": 1446
+    }
+  },
+  "summary": {
+    "planned": 100,
+    "completed": 1,
+    "verdicts": {
+      "pass": 0,
+      "fail": 1,
+      "unknown": 0
+    },
+    "errors": 0,
+    "calibrated": false,
+    "hard_gate": false,
+    "product_tasks_reexecuted": 0
+  }
+}

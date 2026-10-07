@@ -1,0 +1,34 @@
+{
+  "case_id": "R40",
+  "group": "memory",
+  "scenario_family": "feedback-explicit-persistence",
+  "split": "regression",
+  "core": false,
+  "goal": "显式保存长期交互反馈",
+  "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+  "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+  "steps": [
+    {
+      "op": "turn",
+      "label": "request",
+      "message": "请长期保存我的反馈：每次先告诉我推荐理由",
+      "expect": [
+        {
+          "kind": "present",
+          "path": "after.memories",
+          "value": true
+        },
+        {
+          "kind": "eq",
+          "path": "after.memories.0.source",
+          "value": "explicit"
+        },
+        {
+          "kind": "present",
+          "path": "after.guide.plan",
+          "value": false
+        }
+      ]
+    }
+  ]
+}

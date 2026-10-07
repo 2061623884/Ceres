@@ -1,0 +1,13 @@
+{
+  "created_pid": 68048,
+  "ssh_path": "C:\\WINDOWS\\System32\\OpenSSH\\ssh.exe",
+  "command": "C:\\WINDOWS\\System32\\OpenSSH\\ssh.exe -N -L 127.0.0.1:18009:127.0.0.1:8009 -o BatchMode=yes -o ExitOnForwardFailure=yes -o ConnectTimeout=8 amax",
+  "window_style": "Hidden",
+  "process_running": true,
+  "listener_address": null,
+  "listener_port": null,
+  "listener_pid": null,
+  "stdout_file": "kev-tunnel.stdout.txt",
+  "stderr_file": "kev-tunnel.stderr.txt",
+  "created_at": "2026-10-07T06:36:43.4989518Z"
+}

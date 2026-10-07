@@ -1,0 +1,7 @@
+cwd=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-08
+PYTHONPATH=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-08\backend
+PYTHONDONTWRITEBYTECODE=1
+PYTHONUTF8=1
+RETRIEVAL_MODE=lexical
+RETRIEVAL_INDEX_DIR=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-v4-evaluation\retrieval-index
+command="C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe" -X utf8 "C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-08\scripts\build_retrieval_index.py" --index-root "C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-v4-evaluation\retrieval-index" build --candidate-db "C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-v4-evaluation\runtime.sqlite3" --no-embed --no-reuse --label ceres-v4-ac895fd-lexical --report "C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-v4-evaluation\index-build-report.json"

@@ -1,0 +1,314 @@
+{
+  "steps": [
+    {
+      "case_id": "R25",
+      "op": "turn",
+      "label": "request",
+      "before": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-4b3124c09c94",
+          "product_cards": [],
+          "task_id": null,
+          "state_version": 0,
+          "session_version": 0,
+          "current_step": null,
+          "task_status": null,
+          "entry_context": {
+            "page": "home",
+            "category_id": null,
+            "activity_id": null,
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": null,
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": null,
+          "available_actions": [
+            "send_message"
+          ],
+          "constraints_summary": {},
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "empty",
+          "messages": null
+        },
+        "opening": {
+          "role": "keke",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "active_role_before": "keke",
+      "request": {
+        "request_id": "08-R25-d6592aca6c",
+        "message": "没签收能申请退款吗？",
+        "expected_task_id": null,
+        "expected_state_version": 0,
+        "expected_session_version": 0
+      },
+      "http_status": 200,
+      "elapsed_ms": 17259.9,
+      "latency_target_ms": 15000,
+      "latency_target_exceeded": true,
+      "events": [
+        {
+          "type": "service.route",
+          "payload": {
+            "status": "completed",
+            "decision": "stay_current",
+            "raw_choice": "stay_current",
+            "current_role": "keke",
+            "prompt_mode": "none",
+            "request_id": "08-R25-d6592aca6c",
+            "route_ms": 934.3415999319404,
+            "criteria_version": "ceres-service-v3.2"
+          }
+        },
+        {
+          "type": "accepted",
+          "payload": {}
+        },
+        {
+          "type": "progress",
+          "payload": {
+            "phase": "understanding"
+          }
+        },
+        {
+          "type": "progress",
+          "payload": {
+            "phase": "retrieve"
+          }
+        },
+        {
+          "type": "answer.delta",
+          "payload": {
+            "delta": "在模拟门店 store-demo-01，没签收要分情况：如果订单还没发货，可按 P-REF-01《未发货订单退款》申请整单退款；如果已经发货但还没签收，按该政策不支持仅退款。具体要看订单是否已发货，我这里不能确认某笔订单的退款资格。下一步建议先查看订单发货状态。",
+            "final": true,
+            "replace": false
+          }
+        },
+        {
+          "type": "turn.completed",
+          "payload": {
+            "message": "在模拟门店 store-demo-01，没签收要分情况：如果订单还没发货，可按 P-REF-01《未发货订单退款》申请整单退款；如果已经发货但还没签收，按该政策不支持仅退款。具体要看订单是否已发货，我这里不能确认某笔订单的退款资格。下一步建议先查看订单发货状态。",
+            "status": "understanding",
+            "task_id": null,
+            "state_version": 0,
+            "session_version": 0,
+            "plan": null,
+            "pending_clarifications": [],
+            "product_cards": [],
+            "plan_effect": "keep",
+            "action_results": [
+              {
+                "type": "read_only",
+                "kind": "policy",
+                "status": "completed",
+                "saved": false,
+                "reply_ok": true,
+                "action_id": "a1"
+              }
+            ],
+            "answer_status": "accepted",
+            "route": "answer",
+            "trace_id": "trace-918c4ff85c86"
+          }
+        }
+      ],
+      "role_model_call_range": [
+        0,
+        2
+      ],
+      "kev_call_range": [
+        0,
+        2
+      ],
+      "terminal": {
+        "message": "在模拟门店 store-demo-01，没签收要分情况：如果订单还没发货，可按 P-REF-01《未发货订单退款》申请整单退款；如果已经发货但还没签收，按该政策不支持仅退款。具体要看订单是否已发货，我这里不能确认某笔订单的退款资格。下一步建议先查看订单发货状态。",
+        "status": "understanding",
+        "task_id": null,
+        "state_version": 0,
+        "session_version": 0,
+        "plan": null,
+        "pending_clarifications": [],
+        "product_cards": [],
+        "plan_effect": "keep",
+        "action_results": [
+          {
+            "type": "read_only",
+            "kind": "policy",
+            "status": "completed",
+            "saved": false,
+            "reply_ok": true,
+            "action_id": "a1"
+          }
+        ],
+        "answer_status": "accepted",
+        "route": "answer",
+        "trace_id": "trace-918c4ff85c86"
+      },
+      "trace": [
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "capability",
+          "status": "started",
+          "criteria_version": "ceres-guide-capabilities-v2",
+          "call_number": 1,
+          "model": "kev-latest"
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 1109,
+          "stage": "capability",
+          "status": "completed",
+          "capability": "facts_qa",
+          "branch": "semantic_understanding",
+          "criteria_version": "ceres-guide-capabilities-v2",
+          "call_number": 1,
+          "model": "kev-latest"
+        },
+        {
+          "phase": "understanding",
+          "duration_ms": null
+        },
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "understanding",
+          "status": "started",
+          "call_number": 1
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 11093,
+          "stage": "understanding",
+          "status": "completed",
+          "call_number": 1
+        },
+        {
+          "phase": "retrieve",
+          "duration_ms": null
+        },
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "answer",
+          "status": "started",
+          "call_number": 2
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 4015,
+          "stage": "answer",
+          "status": "completed",
+          "call_number": 2
+        },
+        {
+          "phase": "turn_result",
+          "duration_ms": null,
+          "status": "understanding"
+        },
+        {
+          "phase": "memory_extract_started",
+          "duration_ms": null,
+          "model": "qwen3.8-27b"
+        }
+      ],
+      "snapshot_after": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-4b3124c09c94",
+          "product_cards": [],
+          "task_id": null,
+          "state_version": 0,
+          "session_version": 0,
+          "current_step": null,
+          "task_status": null,
+          "entry_context": {
+            "page": "home",
+            "category_id": null,
+            "activity_id": null,
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": null,
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": null,
+          "available_actions": [
+            "send_message"
+          ],
+          "constraints_summary": {},
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "complete",
+          "messages": [
+            {
+              "message_id": "msg-ee136d324d75",
+              "session_id": "sess-4b3124c09c94",
+              "task_id": null,
+              "sequence": 1,
+              "role": "user",
+              "kind": "text",
+              "content": "没签收能申请退款吗？",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-R25-d6592aca6c",
+              "status": "completed",
+              "created_at": "2026-10-07T07:45:02.131095"
+            },
+            {
+              "message_id": "msg-dbaaad0239fe",
+              "session_id": "sess-4b3124c09c94",
+              "task_id": null,
+              "sequence": 2,
+              "role": "assistant",
+              "kind": "text",
+              "content": "在模拟门店 store-demo-01，没签收要分情况：如果订单还没发货，可按 P-REF-01《未发货订单退款》申请整单退款；如果已经发货但还没签收，按该政策不支持仅退款。具体要看订单是否已发货，我这里不能确认某笔订单的退款资格。下一步建议先查看订单发货状态。",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-R25-d6592aca6c",
+              "status": "completed",
+              "created_at": "2026-10-07T07:45:02.132112"
+            }
+          ]
+        },
+        "opening": {
+          "role": "keke",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "status": "captured"
+    }
+  ],
+  "timing_failures": [
+    {
+      "case_id": "R25",
+      "op": "turn",
+      "label": "request",
+      "elapsed_ms": 17259.9,
+      "target_ms": 15000
+    }
+  ]
+}

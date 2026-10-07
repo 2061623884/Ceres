@@ -1,0 +1,10 @@
+{
+  "parser_named_event": "passed",
+  "parser_candidate_payload_event": "passed",
+  "response_waiter_blocks": 4,
+  "waiter_and_action_failures_recorded": 8,
+  "raw_step_saved_before_parse": true,
+  "source_error_recording_present": true,
+  "unhandled_rejections": 0,
+  "network_or_browser": "none"
+}

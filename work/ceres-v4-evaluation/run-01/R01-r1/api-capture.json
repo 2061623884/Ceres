@@ -1,0 +1,717 @@
+{
+  "steps": [
+    {
+      "case_id": "R01",
+      "op": "turn",
+      "label": "request",
+      "before": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-3348216c936a",
+          "product_cards": [],
+          "task_id": null,
+          "state_version": 0,
+          "session_version": 0,
+          "current_step": null,
+          "task_status": null,
+          "entry_context": {
+            "page": "home",
+            "category_id": null,
+            "activity_id": null,
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": null,
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": null,
+          "available_actions": [
+            "send_message"
+          ],
+          "constraints_summary": {},
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "empty",
+          "messages": null
+        },
+        "opening": {
+          "role": "keke",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "active_role_before": "keke",
+      "request": {
+        "request_id": "08-R01-7c3085965f",
+        "message": "来点零食",
+        "expected_task_id": null,
+        "expected_state_version": 0,
+        "expected_session_version": 0
+      },
+      "http_status": 200,
+      "elapsed_ms": 14494.2,
+      "latency_target_ms": 15000,
+      "latency_target_exceeded": false,
+      "events": [
+        {
+          "type": "service.route",
+          "payload": {
+            "status": "completed",
+            "decision": "stay_current",
+            "raw_choice": "stay_current",
+            "current_role": "keke",
+            "prompt_mode": "none",
+            "request_id": "08-R01-7c3085965f",
+            "route_ms": 1066.4222999475896,
+            "criteria_version": "ceres-service-v3.2"
+          }
+        },
+        {
+          "type": "accepted",
+          "payload": {}
+        },
+        {
+          "type": "progress",
+          "payload": {
+            "phase": "understanding"
+          }
+        },
+        {
+          "type": "progress",
+          "payload": {
+            "phase": "retrieve"
+          }
+        },
+        {
+          "type": "answer.delta",
+          "payload": {
+            "delta": "好的，我帮你看看零食候选。\n想选哪类零食？\n1. 薯片\n2. 饼干",
+            "final": true,
+            "replace": false
+          }
+        },
+        {
+          "type": "turn.completed",
+          "payload": {
+            "message": "好的，我帮你看看零食候选。\n想选哪类零食？\n1. 薯片\n2. 饼干",
+            "status": "understanding",
+            "task_id": null,
+            "state_version": 0,
+            "session_version": 1,
+            "plan": null,
+            "pending_clarifications": [
+              {
+                "question_id": "q-4f5e59a2ab06",
+                "question": "想选哪类零食？",
+                "options": [
+                  {
+                    "id": "product_type:potato_chips",
+                    "label": "薯片"
+                  },
+                  {
+                    "id": "product_type:soda_crackers",
+                    "label": "饼干"
+                  }
+                ],
+                "base_session_version": 1,
+                "base_state_version": 0,
+                "slot": "product_type",
+                "candidates": [],
+                "people": null
+              }
+            ],
+            "product_cards": [],
+            "plan_effect": "keep",
+            "action_results": [
+              {
+                "type": "read_only",
+                "kind": "lookup",
+                "status": "completed",
+                "saved": false,
+                "reply_ok": true,
+                "retrieval_status": "ok",
+                "retrieval_mode": "lexical",
+                "fallback_reason": null,
+                "index_version": "idx-81e9fa689baef6b5",
+                "action_id": "a1"
+              }
+            ],
+            "answer_status": "accepted",
+            "route": "answer",
+            "trace_id": "trace-89c3d762fcc8"
+          }
+        }
+      ],
+      "role_model_call_range": [
+        0,
+        2
+      ],
+      "kev_call_range": [
+        0,
+        2
+      ],
+      "terminal": {
+        "message": "好的，我帮你看看零食候选。\n想选哪类零食？\n1. 薯片\n2. 饼干",
+        "status": "understanding",
+        "task_id": null,
+        "state_version": 0,
+        "session_version": 1,
+        "plan": null,
+        "pending_clarifications": [
+          {
+            "question_id": "q-4f5e59a2ab06",
+            "question": "想选哪类零食？",
+            "options": [
+              {
+                "id": "product_type:potato_chips",
+                "label": "薯片"
+              },
+              {
+                "id": "product_type:soda_crackers",
+                "label": "饼干"
+              }
+            ],
+            "base_session_version": 1,
+            "base_state_version": 0,
+            "slot": "product_type",
+            "candidates": [],
+            "people": null
+          }
+        ],
+        "product_cards": [],
+        "plan_effect": "keep",
+        "action_results": [
+          {
+            "type": "read_only",
+            "kind": "lookup",
+            "status": "completed",
+            "saved": false,
+            "reply_ok": true,
+            "retrieval_status": "ok",
+            "retrieval_mode": "lexical",
+            "fallback_reason": null,
+            "index_version": "idx-81e9fa689baef6b5",
+            "action_id": "a1"
+          }
+        ],
+        "answer_status": "accepted",
+        "route": "answer",
+        "trace_id": "trace-89c3d762fcc8"
+      },
+      "trace": [
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "capability",
+          "status": "started",
+          "criteria_version": "ceres-guide-capabilities-v2",
+          "call_number": 1,
+          "model": "kev-latest"
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 1062,
+          "stage": "capability",
+          "status": "completed",
+          "capability": "category_exploration",
+          "branch": "semantic_understanding",
+          "criteria_version": "ceres-guide-capabilities-v2",
+          "call_number": 1,
+          "model": "kev-latest"
+        },
+        {
+          "phase": "understanding",
+          "duration_ms": null
+        },
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "understanding",
+          "status": "started",
+          "call_number": 1
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 4437,
+          "stage": "understanding",
+          "status": "completed",
+          "call_number": 1
+        },
+        {
+          "phase": "retrieve",
+          "duration_ms": null
+        },
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "answer",
+          "status": "started",
+          "call_number": 2
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 7515,
+          "stage": "answer",
+          "status": "completed",
+          "call_number": 2
+        },
+        {
+          "phase": "turn_result",
+          "duration_ms": null,
+          "status": "understanding"
+        },
+        {
+          "phase": "memory_extract_started",
+          "duration_ms": null,
+          "model": "qwen3.8-27b"
+        }
+      ],
+      "snapshot_after": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-3348216c936a",
+          "product_cards": [],
+          "task_id": null,
+          "state_version": 0,
+          "session_version": 1,
+          "current_step": null,
+          "task_status": null,
+          "entry_context": {
+            "page": "home",
+            "category_id": null,
+            "activity_id": null,
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": null,
+          "plan_read_only": false,
+          "pending_clarifications": [
+            {
+              "base_session_version": 1,
+              "base_state_version": 0,
+              "candidates": [],
+              "options": [
+                {
+                  "id": "product_type:potato_chips",
+                  "label": "薯片"
+                },
+                {
+                  "id": "product_type:soda_crackers",
+                  "label": "饼干"
+                }
+              ],
+              "people": null,
+              "question": "想选哪类零食？",
+              "question_id": "q-4f5e59a2ab06",
+              "slot": "product_type"
+            }
+          ],
+          "confirmation_result": null,
+          "message": null,
+          "available_actions": [
+            "send_message"
+          ],
+          "constraints_summary": {},
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "complete",
+          "messages": [
+            {
+              "message_id": "msg-69c1ffe33247",
+              "session_id": "sess-3348216c936a",
+              "task_id": null,
+              "sequence": 1,
+              "role": "user",
+              "kind": "text",
+              "content": "来点零食",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-R01-7c3085965f",
+              "status": "completed",
+              "created_at": "2026-10-07T07:09:11.383114"
+            },
+            {
+              "message_id": "msg-fb2cd0273a7a",
+              "session_id": "sess-3348216c936a",
+              "task_id": null,
+              "sequence": 2,
+              "role": "assistant",
+              "kind": "text",
+              "content": "好的，我帮你看看零食候选。\n想选哪类零食？\n1. 薯片\n2. 饼干",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-R01-7c3085965f",
+              "status": "completed",
+              "created_at": "2026-10-07T07:09:11.385697"
+            }
+          ]
+        },
+        "opening": {
+          "role": "keke",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "status": "captured"
+    },
+    {
+      "case_id": "R01",
+      "op": "select_pending_option",
+      "label": "choose-type",
+      "before": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-3348216c936a",
+          "product_cards": [],
+          "task_id": null,
+          "state_version": 0,
+          "session_version": 1,
+          "current_step": null,
+          "task_status": null,
+          "entry_context": {
+            "page": "home",
+            "category_id": null,
+            "activity_id": null,
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": null,
+          "plan_read_only": false,
+          "pending_clarifications": [
+            {
+              "base_session_version": 1,
+              "base_state_version": 0,
+              "candidates": [],
+              "options": [
+                {
+                  "id": "product_type:potato_chips",
+                  "label": "薯片"
+                },
+                {
+                  "id": "product_type:soda_crackers",
+                  "label": "饼干"
+                }
+              ],
+              "people": null,
+              "question": "想选哪类零食？",
+              "question_id": "q-4f5e59a2ab06",
+              "slot": "product_type"
+            }
+          ],
+          "confirmation_result": null,
+          "message": null,
+          "available_actions": [
+            "send_message"
+          ],
+          "constraints_summary": {},
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "complete",
+          "messages": null
+        },
+        "opening": {
+          "role": "keke",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "selected_option": {
+        "question_id": "q-4f5e59a2ab06",
+        "option_id": "product_type:potato_chips",
+        "slot": "product_type",
+        "label": "薯片"
+      },
+      "active_role_before": "keke",
+      "request": {
+        "request_id": "08-R01-95cc56ca0f",
+        "message": "薯片",
+        "expected_task_id": null,
+        "expected_state_version": 0,
+        "expected_session_version": 1,
+        "clarification_answer": {
+          "question_id": "q-4f5e59a2ab06",
+          "option_id": "product_type:potato_chips"
+        }
+      },
+      "http_status": 200,
+      "elapsed_ms": 4965.7,
+      "latency_target_ms": 15000,
+      "latency_target_exceeded": false,
+      "events": [
+        {
+          "type": "service.route",
+          "payload": {
+            "status": "completed",
+            "decision": "stay_current",
+            "raw_choice": "stay_current",
+            "current_role": "keke",
+            "prompt_mode": "none",
+            "request_id": "08-R01-95cc56ca0f",
+            "route_ms": 935.7655998319387,
+            "criteria_version": "ceres-service-v3.2"
+          }
+        },
+        {
+          "type": "accepted",
+          "payload": {}
+        },
+        {
+          "type": "progress",
+          "payload": {
+            "phase": "retrieve"
+          }
+        },
+        {
+          "type": "answer.delta",
+          "payload": {
+            "delta": "我找到「原味薯片70克袋装」了，你可以先看看卡片里的商品信息。\n1. 原味薯片70克袋装",
+            "final": true,
+            "replace": false
+          }
+        },
+        {
+          "type": "turn.completed",
+          "payload": {
+            "message": "我找到「原味薯片70克袋装」了，你可以先看看卡片里的商品信息。\n1. 原味薯片70克袋装",
+            "status": "understanding",
+            "task_id": null,
+            "state_version": 0,
+            "session_version": 2,
+            "plan": null,
+            "pending_clarifications": [],
+            "product_cards": [],
+            "plan_effect": "keep",
+            "action_results": [
+              {
+                "type": "read_only",
+                "kind": "lookup",
+                "status": "completed",
+                "saved": false,
+                "reply_ok": true,
+                "retrieval_status": "ok",
+                "retrieval_mode": "lexical",
+                "fallback_reason": null,
+                "index_version": "idx-81e9fa689baef6b5",
+                "action_id": "a1"
+              }
+            ],
+            "answer_status": "accepted",
+            "route": "answer",
+            "trace_id": "trace-1c5df0c2d718"
+          }
+        }
+      ],
+      "role_model_call_range": [
+        2,
+        3
+      ],
+      "kev_call_range": [
+        2,
+        4
+      ],
+      "terminal": {
+        "message": "我找到「原味薯片70克袋装」了，你可以先看看卡片里的商品信息。\n1. 原味薯片70克袋装",
+        "status": "understanding",
+        "task_id": null,
+        "state_version": 0,
+        "session_version": 2,
+        "plan": null,
+        "pending_clarifications": [],
+        "product_cards": [],
+        "plan_effect": "keep",
+        "action_results": [
+          {
+            "type": "read_only",
+            "kind": "lookup",
+            "status": "completed",
+            "saved": false,
+            "reply_ok": true,
+            "retrieval_status": "ok",
+            "retrieval_mode": "lexical",
+            "fallback_reason": null,
+            "index_version": "idx-81e9fa689baef6b5",
+            "action_id": "a1"
+          }
+        ],
+        "answer_status": "accepted",
+        "route": "answer",
+        "trace_id": "trace-1c5df0c2d718"
+      },
+      "trace": [
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "capability",
+          "status": "started",
+          "criteria_version": "ceres-guide-capabilities-v2",
+          "call_number": 1,
+          "model": "kev-latest"
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 1235,
+          "stage": "capability",
+          "status": "completed",
+          "capability": "category_exploration",
+          "branch": "direct_product_type_workflow",
+          "criteria_version": "ceres-guide-capabilities-v2",
+          "call_number": 1,
+          "model": "kev-latest"
+        },
+        {
+          "phase": "retrieve",
+          "duration_ms": null
+        },
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "answer",
+          "status": "started",
+          "call_number": 1
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 2702,
+          "stage": "answer",
+          "status": "completed",
+          "call_number": 1
+        },
+        {
+          "phase": "turn_result",
+          "duration_ms": null,
+          "status": "understanding"
+        },
+        {
+          "phase": "memory_extract_started",
+          "duration_ms": null,
+          "model": "qwen3.8-27b"
+        }
+      ],
+      "snapshot_after": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-3348216c936a",
+          "product_cards": [],
+          "task_id": null,
+          "state_version": 0,
+          "session_version": 2,
+          "current_step": null,
+          "task_status": null,
+          "entry_context": {
+            "page": "home",
+            "category_id": null,
+            "activity_id": null,
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": null,
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": null,
+          "available_actions": [
+            "send_message"
+          ],
+          "constraints_summary": {},
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "complete",
+          "messages": [
+            {
+              "message_id": "msg-69c1ffe33247",
+              "session_id": "sess-3348216c936a",
+              "task_id": null,
+              "sequence": 1,
+              "role": "user",
+              "kind": "text",
+              "content": "来点零食",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-R01-7c3085965f",
+              "status": "completed",
+              "created_at": "2026-10-07T07:09:11.383114"
+            },
+            {
+              "message_id": "msg-fb2cd0273a7a",
+              "session_id": "sess-3348216c936a",
+              "task_id": null,
+              "sequence": 2,
+              "role": "assistant",
+              "kind": "text",
+              "content": "好的，我帮你看看零食候选。\n想选哪类零食？\n1. 薯片\n2. 饼干",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-R01-7c3085965f",
+              "status": "completed",
+              "created_at": "2026-10-07T07:09:11.385697"
+            },
+            {
+              "message_id": "msg-6e49307605f5",
+              "session_id": "sess-3348216c936a",
+              "task_id": null,
+              "sequence": 3,
+              "role": "user",
+              "kind": "text",
+              "content": "薯片",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-R01-95cc56ca0f",
+              "status": "completed",
+              "created_at": "2026-10-07T07:09:18.816012"
+            },
+            {
+              "message_id": "msg-6ba2d263e2cf",
+              "session_id": "sess-3348216c936a",
+              "task_id": null,
+              "sequence": 4,
+              "role": "assistant",
+              "kind": "text",
+              "content": "我找到「原味薯片70克袋装」了，你可以先看看卡片里的商品信息。\n1. 原味薯片70克袋装",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-R01-95cc56ca0f",
+              "status": "completed",
+              "created_at": "2026-10-07T07:09:18.817547"
+            }
+          ]
+        },
+        "opening": {
+          "role": "keke",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "status": "captured"
+    }
+  ],
+  "timing_failures": []
+}

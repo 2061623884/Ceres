@@ -1,0 +1,1 @@
+& $scriptPath 1> $stdoutPath 2> $stderrPath

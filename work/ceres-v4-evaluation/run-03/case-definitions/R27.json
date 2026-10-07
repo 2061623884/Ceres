@@ -1,0 +1,39 @@
+{
+  "case_id": "R27",
+  "group": "routing",
+  "scenario_family": "ambiguous-cancel-no-object",
+  "split": "regression",
+  "core": false,
+  "goal": "无明确对象的取消请求澄清服务，不写业务",
+  "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+  "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+  "steps": [
+    {
+      "op": "turn",
+      "label": "request",
+      "message": "取消一下",
+      "expect": [
+        {
+          "kind": "eq",
+          "path": "route.decision",
+          "value": "clarify"
+        },
+        {
+          "kind": "unchanged",
+          "path": "after.cart",
+          "before_path": "before.cart"
+        },
+        {
+          "kind": "unchanged",
+          "path": "after.orders",
+          "before_path": "before.orders"
+        },
+        {
+          "kind": "present",
+          "path": "after.guide.plan",
+          "value": false
+        }
+      ]
+    }
+  ]
+}

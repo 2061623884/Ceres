@@ -1,0 +1,6 @@
+cwd=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-08
+PYTHONPATH=C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-08\backend
+PYTHONDONTWRITEBYTECODE=1
+PYTHONUTF8=1
+DATABASE_URL=sqlite:///C:/Users/20616/Desktop/Agent/Agent产品/Ceres/work/ceres-v4-evaluation/runtime.sqlite3
+command="C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe" -X utf8 "C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\.ceres-next-08\scripts\seed_runtime.py" --fixture-only

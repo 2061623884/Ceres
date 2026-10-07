@@ -1,0 +1,2 @@
+& "C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe" -X utf8 -m py_compile scripts/eval_v4_judge.py
+& "C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe" -X utf8 scripts/eval_v4_judge.py --help

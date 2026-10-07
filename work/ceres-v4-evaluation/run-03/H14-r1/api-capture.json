@@ -1,0 +1,214 @@
+{
+  "steps": [
+    {
+      "case_id": "H14",
+      "op": "turn",
+      "label": "request",
+      "before": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 3,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [
+          {
+            "order_id": "Oeb693251e2ff4830",
+            "status": "delivered",
+            "created_at": "2026-10-07T15:40:38.634813",
+            "delivered_at": "2026-10-06T07:40:38.640969+00:00",
+            "total_fen": 300,
+            "items": [
+              {
+                "item_id": 1,
+                "sku_id": "demo:cn-pepsi-original-330ml-can",
+                "product_name": "百事可乐原味汽水330ml罐装",
+                "quantity": 1,
+                "unit_price_fen": 300,
+                "returnable": true
+              }
+            ]
+          }
+        ],
+        "guide": {
+          "session_id": "sess-0db7926e8683",
+          "product_cards": [],
+          "task_id": null,
+          "state_version": 0,
+          "session_version": 0,
+          "current_step": null,
+          "task_status": null,
+          "entry_context": {
+            "page": "home",
+            "category_id": null,
+            "activity_id": null,
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": null,
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": null,
+          "available_actions": [
+            "send_message"
+          ],
+          "constraints_summary": {},
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "empty",
+          "messages": null
+        },
+        "opening": {
+          "role": "momo",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "active_role_before": "momo",
+      "request": {
+        "request_id": "08-H14-a6450bfbab",
+        "message": "这笔已签收订单直接申请全额退款，不要走退货",
+        "expected_task_id": null,
+        "expected_state_version": 0,
+        "expected_session_version": 0
+      },
+      "http_status": 200,
+      "elapsed_ms": 6053.9,
+      "latency_target_ms": 15000,
+      "latency_target_exceeded": false,
+      "events": [
+        {
+          "type": "service.route",
+          "payload": {
+            "status": "completed",
+            "decision": "stay_current",
+            "raw_choice": "stay_current",
+            "current_role": "momo",
+            "prompt_mode": "none",
+            "request_id": "08-H14-a6450bfbab",
+            "route_ms": 1018.8536001369357,
+            "criteria_version": "ceres-service-v3.2"
+          }
+        },
+        {
+          "type": "accepted",
+          "payload": {
+            "request_id": "08-H14-a6450bfbab"
+          }
+        },
+        {
+          "type": "answer.delta",
+          "payload": {
+            "text": "这笔订单已发货并签收，系统不支持仅退款，所以全额退款申请没有提交成功。已签收的订单只能走退货流程（退货后退款）。\n\n你刚才明确说不要退货，所以我没有提交退货申请。如果考虑改走退货，告诉我一声，我可以直接帮你提交。"
+          }
+        },
+        {
+          "type": "turn.completed",
+          "payload": {
+            "final_text": "这笔订单已发货并签收，系统不支持仅退款，所以全额退款申请没有提交成功。已签收的订单只能走退货流程（退货后退款）。\n\n你刚才明确说不要退货，所以我没有提交退货申请。如果考虑改走退货，告诉我一声，我可以直接帮你提交。"
+          }
+        },
+        {
+          "type": "service.route",
+          "payload": {
+            "status": "completed",
+            "decision": "suggest_switch",
+            "raw_choice": null,
+            "current_role": "momo",
+            "target_role": "keke",
+            "decision_source": "aftersales_tool_result",
+            "handoff_id": "handoff_a2abd4e79ae84ee59c826337c2b6cca6",
+            "prompt_mode": "automatic",
+            "request_id": "08-H14-a6450bfbab"
+          }
+        },
+        {
+          "type": "turn.completed",
+          "payload": {
+            "message": "订单已发货，不支持仅退款；签收后可申请退货\n\n如需继续选购，请点“继续选购”。",
+            "business_not_run": true
+          }
+        }
+      ],
+      "role_model_call_range": [
+        0,
+        0
+      ],
+      "kev_call_range": [
+        0,
+        1
+      ],
+      "terminal": {
+        "message": "订单已发货，不支持仅退款；签收后可申请退货\n\n如需继续选购，请点“继续选购”。",
+        "business_not_run": true
+      },
+      "trace": [],
+      "snapshot_after": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 3,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [
+          {
+            "order_id": "Oeb693251e2ff4830",
+            "status": "delivered",
+            "created_at": "2026-10-07T15:40:38.634813",
+            "delivered_at": "2026-10-06T07:40:38.640969+00:00",
+            "total_fen": 300,
+            "items": [
+              {
+                "item_id": 1,
+                "sku_id": "demo:cn-pepsi-original-330ml-can",
+                "product_name": "百事可乐原味汽水330ml罐装",
+                "quantity": 1,
+                "unit_price_fen": 300,
+                "returnable": true
+              }
+            ]
+          }
+        ],
+        "guide": {
+          "session_id": "sess-0db7926e8683",
+          "product_cards": [],
+          "task_id": null,
+          "state_version": 0,
+          "session_version": 0,
+          "current_step": null,
+          "task_status": null,
+          "entry_context": {
+            "page": "home",
+            "category_id": null,
+            "activity_id": null,
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": null,
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": null,
+          "available_actions": [
+            "send_message"
+          ],
+          "constraints_summary": {},
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "empty",
+          "messages": []
+        },
+        "opening": {
+          "role": "momo",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "status": "captured"
+    }
+  ],
+  "timing_failures": []
+}

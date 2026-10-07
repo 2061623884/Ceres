@@ -1,0 +1,1 @@
+"C:\Users\20616\Desktop\Agent\Agent产品\Ceres\backend\.venv\Scripts\python.exe" -c <read-only R10 catalog facts query> "C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-v4-evaluation\runtime.sqlite3"

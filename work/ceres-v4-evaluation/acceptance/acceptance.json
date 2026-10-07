@@ -1,0 +1,2819 @@
+{
+  "product_head": "ac895fd620af617fa31f4e0006841a4d6a89cd53",
+  "source_manifest_sha256": "cd35940992fd167819a35767a1c062aaba2cb09360b1cb1510456fa39b6f14f3",
+  "source_summary_sha256": "801924ee9d5560284ead45d61d9d026f123b8671f758fc4ec6b26f42c1797f04",
+  "ui_result_sha256": "3190cb5752e07d5f93856d1a601268fb6c1eca412c5253f672cc3840b8a2bc06",
+  "diagnostic_manifest_sha256": "034ae199f7d28148a2e4a3d408ba835f95d0b70fb55bda89d82684fb33f531f6",
+  "reporter_sha256": "db5ab37fb2439bdd64d6c9165068b3c4b7c790ac37e98df4c7b4b73413a57ad4",
+  "failed_probes": [
+    {
+      "directory": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03",
+      "result_sha256": "38af216f3f856bcf12d018b6c030e5750b2ff85414e172457155acdd4efdb024",
+      "manifest_sha256": "2102a52d77afbc75c1eb9e2ded3f9774ec81ba39d547f9691c1a79cd32986204",
+      "verdict": "unknown",
+      "parameter": "enable_thinking=false"
+    },
+    {
+      "directory": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v2",
+      "result_sha256": "029b25327aacfdbb9a6b942237229090c9cd171f322cb33150dd05720ade0092",
+      "manifest_sha256": "42ab06b708154ac94d53183f89314888dc8abc71e6e01cbbfab7708f3e833845",
+      "verdict": "unknown",
+      "parameter": "chat_template_kwargs.enable_thinking=false"
+    }
+  ],
+  "execution_sha256": {
+    "R01-r1": {
+      "api": "1537f498b032204d2073ce2e08a689c6d0629be879ff7e9e5c126db3157ac8bb",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R01-r1\\result.json",
+        "sha256": "19a29fe7683f116d7bf0178d2c744fae8830b4c8f5e0a0099c28bab08cb63c3d"
+      },
+      "diagnostic": "5cbe87fc9fbba4345c0fc8db04af447452f347c8605eb8503d81ec9521c6d0b4"
+    },
+    "R02-r1": {
+      "api": "d372b842036a10658ea61910375cb0b93a29385d2ef4729487c47d231c52c550",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R02-r1\\result.json",
+        "sha256": "e8ddf38a8783a3c130791c6e9c1e5d8fa6a68fc5997b68153f54f9777d741d4d"
+      },
+      "diagnostic": "a7ce9f9ac27df18c92126d58b5f4776f1bbbc1faf99a1112920b3c3c468c2b20"
+    },
+    "R03-r1": {
+      "api": "4b3331d4b38f8314d935622100f033474f8606e451e6b1cce3f72f6eb854634c",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R03-r1\\result.json",
+        "sha256": "c1ff6c9751ac3ea8741de91026840a83ff3e0036a1520c1a7dd98ed6cd1eacf8"
+      },
+      "diagnostic": "c3a581be9f92091ee8eda1ce751305169e5ac44841fd9edb6cfc248db6fd87f8"
+    },
+    "R05-r1": {
+      "api": "32204d5d24553dae1cdb4c5efa991aea749500f550cfdeff0b8a06d864bafe69",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R05-r1\\result.json",
+        "sha256": "a008643f6c1b4c6e7afc4db4f79e0881bab8367ac725a173f5caf1d4717e1332"
+      },
+      "diagnostic": "e4c236fa278e04bec9a2e0ff3ccd92b432443051a5b53eac90a00ee8e2b10d78"
+    },
+    "R06-r1": {
+      "api": "445ef8446275786d41e6fa926add5ad5f7104464d0c63a5307de9cfb7cedd79f",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R06-r1\\result.json",
+        "sha256": "9bf036876cc3d9acc423e213f029152fc89b8042046b227806dec95fe22d4ca1"
+      },
+      "diagnostic": "fe0d0917045ed61c30c88ba10d2b0e8e1373aece284621c583ec753b948535a4"
+    },
+    "R07-r1": {
+      "api": "16d6d88633bb6a457c070e27f2201c5e60083154e3193b085705646d4532ffe7",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R07-r1\\result.json",
+        "sha256": "28c672f913dbb1366b307a1b5956ef7d5da7118857e0f64cc7fee9c78bcadefa"
+      },
+      "diagnostic": "cb49c0e4d858ed34fa0838ff154db968c48d9387b02d5b1b9d5477ad40007863"
+    },
+    "R08-r1": {
+      "api": "e325c26c01fed93c59327840459c5bd6eb1d9eed4b6c908aa9639d23e51d94fa",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R08-r1\\result.json",
+        "sha256": "218d85a1f27b5c2378d1ec30462ed76b82849c98afbf6b675f7fb74bd36c324a"
+      },
+      "diagnostic": "d702293882d469d8be2d577fbf7d1346b72915167660cbbe6ad6bc416ca35520"
+    },
+    "R09-r1": {
+      "api": "af64be0ed99db47c45b520c043403e9aab5e362603202b794da0216f70e18815",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R09-r1\\result.json",
+        "sha256": "c8ddbaf8e9f5ace6f83ac810b5e431d1e300678bd7dcfe9f29ccbe2bf4cb014b"
+      },
+      "diagnostic": "21ba12b612ed9aef1f5b26fefde65dfadb764939fb6a0d89ed9634e5d64a71f3"
+    },
+    "R10-r1": {
+      "api": "58a4a58ee36179f38e60c2d4878730ed5f2be41a8e367ad7767631b95ce10e2a",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R10-r1\\result.json",
+        "sha256": "4a3c8a0ffbe1d47f9e7e2d4d89cbca0913796edc54a9bd5de8eddba7ba599562"
+      },
+      "diagnostic": "ee166a0bb3e3f92d3f89fcbb7a45520f6bfcd95cef862d99d881c145c3700a77"
+    },
+    "R11-r1": {
+      "api": "902b512f6729366853905893a990873ecce23350896c716efd4f10461244e66e",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R11-r1\\result.json",
+        "sha256": "92386a50f051ba60b9ad6b8275ca594f3e70727482912b512024a5471cc1f187"
+      },
+      "diagnostic": "00f431c92aa85097236caad306c048845923023dee9249b44023b0442b048e13"
+    },
+    "R12-r1": {
+      "api": "c045c69fddb6bd864f94710c0d4dd9b61f049a0957787b3a231ae719f07376c0",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R12-r1\\result.json",
+        "sha256": "1591943dedc6a7a0272a3e30cd750abd824ea0f3799ed925514566b28b1aacda"
+      },
+      "diagnostic": "093a60db33d4b3dc4b6cd445187bfc8e0de10412a9c75915120759d22db94f8d"
+    },
+    "R13-r1": {
+      "api": "2236e9816f297d745cccb13bb94661fdd0c6eed31b1ea50c9f6c2bec59e314ad",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R13-r1\\result.json",
+        "sha256": "b362b2866ad0724e6b93184bdd51ba21f891f951cb70d8491041a5899133239c"
+      },
+      "diagnostic": "652aa511b5a79e56183be3776b03bf1d6e0b9e4872ab5a1a1c10aec357d423f4"
+    },
+    "R14-r1": {
+      "api": "75a49ecb8911684ae2155d2b900deb27d66c5dc416fb0c2c2171c843c1113adc",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R14-r1\\result.json",
+        "sha256": "6fac9945fb9f44c8842deea8df413bf04af31c6a22e378bb5d4a619dbb4bb8f8"
+      },
+      "diagnostic": "f0f9f8ed663eafdf555c8b55302527b9e39801c5649549b7c39563a51795efdd"
+    },
+    "R15-r1": {
+      "api": "ac36e3d96ac4883219062bc28eceaa298030d31830ec9d51d5cf9fb98e507e87",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R15-r1\\result.json",
+        "sha256": "bd8864c40350ca7f4ebd067229750d6aab2e605cd48e2233966216d0cf9a540a"
+      },
+      "diagnostic": "53352d3a950e6108579ae4b309e4079b1685d3359e782324d40ac8dc88e7f134"
+    },
+    "R16-r1": {
+      "api": "fbf25929f152818be295f5d6b4fbad8d8d7a6a846c9b70115e8d203b6a8dcd6c",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R16-r1\\result.json",
+        "sha256": "513bbaafee3e553b2eff95c125ed4aa10f0c16adb366b213b833699e6e5f7646"
+      },
+      "diagnostic": "83b3ba66485301de5fe8adbd746a0b396d34074e86c63fc5a5a43e027f1285cc"
+    },
+    "R17-r1": {
+      "api": "d7a353f170338947fba6f39a4b18e82ef68bae619b32509d82c5ab959803ac8f",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R17-r1\\result.json",
+        "sha256": "cfe871dce18ae25ff43b1c8cf97098ff8e2461e67386c4a9de625e6eeb371f59"
+      },
+      "diagnostic": "f3f4139271c4970a714f0cc59926a2aaa0be2f0f55500f395015882389429f68"
+    },
+    "R18-r1": {
+      "api": "442c6d347ec9b7a84b5acf548da5c7b86d4d5a24565bf95cfc4a4241a9a0c4d4",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R18-r1\\result.json",
+        "sha256": "6be4d1abe2a799ca792651af1c4df848056115b0a49b93e56d737785ba09134e"
+      },
+      "diagnostic": "9a243d57773e616f617eea65b4d65ecc1adc52c5e05d2f7be9265473b99f2c65"
+    },
+    "R19-r1": {
+      "api": "481b40971934c5cf42b4541968195ec48155fb36845334865ab37b563d676b5d",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R19-r1\\result.json",
+        "sha256": "73146770ee65d23c518564f9577b2c4e2818c858f56d6e5ce17e33f7c3e91552"
+      },
+      "diagnostic": "682a6ac3831c817cfc8ea834edb95a1698815c7a722e1186f65f5afc38332a71"
+    },
+    "R20-r1": {
+      "api": "04328e1a92ffa73b97b417d6c5cdb33fe9d7836810369bc8aa39362fe72411b0",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R20-r1\\result.json",
+        "sha256": "0c2ab43a51b12f9b69888e65bfa58aaec6b4fa75a844b875f2f27e53b5a2859d"
+      },
+      "diagnostic": "0506cdacb025dac3f4814f6483ea2442024417d2783c5bafc71f8352f3af2001"
+    },
+    "R35-r1": {
+      "api": "40a09b42dcd687f3ec1936a0a3d92dff64eebd923b1d0a856c3a4b252f9125b1",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R35-r1\\result.json",
+        "sha256": "d8d5a32bea23bb7216507d7929a71fd8a9008731734d6edd6ae23d0afc709940"
+      },
+      "diagnostic": "5500938f67b3c0bc919c85efa32fb170f9ef985129d642f68d38b538d85100b3"
+    },
+    "H01-r1": {
+      "api": "cac5ff88a730102813f4cd8591928f2b024e58a7e6d9d5fe78683ba1ee0f7607",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H01-r1\\result.json",
+        "sha256": "4f9bda2f552335f4950cc4d839277dde00f2eda5ea70c203b37c22a533e7db90"
+      },
+      "diagnostic": "206ade3f6f5e1f62dc47560d2c591cec9682873073a26d6ba5851bf47d3e5d86"
+    },
+    "H02-r1": {
+      "api": "ad73b140443d4d5cfe166816ac5157263f6880a1727c3310a61cd538feae9cf8",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H02-r1\\result.json",
+        "sha256": "5b2015be89da2e2237ba8c151033d65c5bff96bee4c2c407a5c17f1760a08f1c"
+      },
+      "diagnostic": "0a993d4b07ca328cfd0e1d9b7b022cd5c551fa58d09222cda833ca44741568e0"
+    },
+    "H03-r1": {
+      "api": "aa48836532b94f803bc6265931f5075f7ac294bd3f51e94065c718201bf6bcca",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H03-r1\\result.json",
+        "sha256": "a675d8fd7718dd4e8cbd8e244fb40ea943a971753552486393a8f8fb4d76cf33"
+      },
+      "diagnostic": "504273b50c45c53a5c067b042d4dc668ff339751f3cfe1f0d7ca37f73b7eefd9"
+    },
+    "H04-r1": {
+      "api": "f0113618c0e54e787933b84b4f63f44dbe3e12d538ed525ffce5b222643f1325",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H04-r1\\result.json",
+        "sha256": "a824b6b75692372c536a1a488b0693c1a76c3c4a533f83c0d10f02e502900c3f"
+      },
+      "diagnostic": "8a855485a5161fbd78e2be69922b5482f5706bad9b652698e12d4b41d8dbc6f4"
+    },
+    "H05-r1": {
+      "api": "b8ef9e7876a340f3b79595aae88fe489ac4bf1a53bdcb13307fee0988c8d9fce",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H05-r1\\result.json",
+        "sha256": "e9f7f38ee9b8d965c1ed3fee1fee154cc4f6bf1d2b9eca533d01c39f764ceda4"
+      },
+      "diagnostic": "3f37e10226553bd6087ae56606b07ba62e184458e3e0c57590f48ed1ffe744fd"
+    },
+    "H06-r1": {
+      "api": "e338aca15f8e6e7190b702717899a7ed1d6677bea1c40956b80b88f12819d95b",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H06-r1\\result.json",
+        "sha256": "fe19d03e09961215280661dfae4d6a44b4eb40be20c30f8a74447679e5a0cf4b"
+      },
+      "diagnostic": "52dd1e71b492bae109a0e85de733205227234e61f1a4024d755dad2c3f62919e"
+    },
+    "H07-r1": {
+      "api": "f9e557757f3df1841fd451ba841bf7d4e0fdbb4ceb13e79ab8f7f4217486b04b",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H07-r1\\result.json",
+        "sha256": "572aa8489621f92363ffaa9b1bead3e86f081da6ee65085764d6b7d4f7de26ea"
+      },
+      "diagnostic": "546267e57a960f81e0e91a48486830d8bd10a5d714fe8c54d4c2a0961e2f20bc"
+    },
+    "H08-r1": {
+      "api": "4aae4085e86d387b9c128fe4d219e7d74e09887fc31589d4b8d0c74b7e66b0d3",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H08-r1\\result.json",
+        "sha256": "b377ea7714debb9571432bce137af81ebd08fc5c0c2e276b5a64874d435703fb"
+      },
+      "diagnostic": "a15b3faba9372d23750e09731485f69347983eb4301e3be4bcb8c056e9b95cad"
+    },
+    "H09-r1": {
+      "api": "e7aa44f8badaf51c3fdbda2429a0d2d86fd3e9d37680f1e32f80e8bbe09420c1",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H09-r1\\result.json",
+        "sha256": "b7b6276e6e5d905a9892242e0335810721dc9196486b7407354f43b43a9a311b"
+      },
+      "diagnostic": "f4e15dd9a88bae08a2486dcd31c5234324f37dabdc2076efa804efe6a0f2e11f"
+    },
+    "H10-r1": {
+      "api": "75ce0196c7fa2e760c6627ef8cb500f8e4244516956ff3e9cea90c1072bb69f1",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H10-r1\\result.json",
+        "sha256": "ddb844a97380cfff6a924b165d4fe6b41df046223e75c6f6f1ab298fdebc8ffa"
+      },
+      "diagnostic": "559d27b3f1ea56f808df3f37828c6ebca857813f92b7d048b6cd440ded9069a9"
+    },
+    "H11-r1": {
+      "api": "ff5de17f63ae0cd003bb4cd50986561cde73cc6bcd45d78ba32919a869f117d2",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H11-r1\\result.json",
+        "sha256": "aa4b68a81ff06c801e10897b7d8920b1b86b959b1b24f8b60ffd42f48738b638"
+      },
+      "diagnostic": "5d87ca2a22138f52e1cb92504a2e8552846ec58102418ae2f44900e6749f1449"
+    },
+    "H12-r1": {
+      "api": "7673bfd323da1890e76a0a29ca0b3cbd330d40c255673dba48f1a49ef30ae8be",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H12-r1\\result.json",
+        "sha256": "2bfc23b8837a45948123567f8791549346ce53b29e8a140369e2cd699ef7d88e"
+      },
+      "diagnostic": "6dc1c52ce38f3d494efdad00af294ac10adaa845b4b98a84064a6b9fc5249ef8"
+    },
+    "H13-r1": {
+      "api": "2bd740065e708c31254673de319a81902302e0dc8489885dc90eba9a88b6638d",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H13-r1\\result.json",
+        "sha256": "76f777f97c80f0bc2a97932178e637f20b5c040e894cfeae04ba7657b24a7c97"
+      },
+      "diagnostic": "08195a6c42164986fb91468dd68902ff0538c1d1d7e5f4c6681a925d92bd8771"
+    },
+    "H14-r1": {
+      "api": "ac7892294904b0338a9f8910dfd1513d9486d4c7b7dbaae67bdf4f6dc00a7406",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H14-r1\\result.json",
+        "sha256": "4c1abe740760eff2656d0d6e725366938da35f8b52eeb8a6458aafc751b9fddd"
+      },
+      "diagnostic": "6d3c3e9e457d35111ca574559d51635ae6b26fbe688f55797b0e2243b8a13b50"
+    },
+    "H15-r1": {
+      "api": "2fb0d73ae849959a08168e307647bd5b53f5db816cb1b8db0fe64f36d34cfbf3",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H15-r1\\result.json",
+        "sha256": "7f96d7908caf6c516f8c1eeac0951d78b8b912d282710c9223d4bdc143a67e39"
+      },
+      "diagnostic": "3e7f2cae025c6edbc8de507ae65439b41c209e06b39c7201acf3419005d3371f"
+    },
+    "H16-r1": {
+      "api": "87db4c8a4854e7cccae5e94c59e04dd75f17f46c79b2f406fc1f2ab45e2f472a",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H16-r1\\result.json",
+        "sha256": "beb0a82fb74fc25016b22f249ab878d44a0a8e535a6948633455fb512068e553"
+      },
+      "diagnostic": "e8d0fd6d7401fdc0f4d911bf19581faf708ca047d670c9a9f9da1f6746012161"
+    },
+    "H17-r1": {
+      "api": "da64afa76070a168887057ebf400991f28590aed25ead6a99b8f905169b6cdca",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H17-r1\\result.json",
+        "sha256": "66dba0d2b0aa0c04d2d83f2a98460e09b84705d3d2ecbc67d0b25b732e57d1b8"
+      },
+      "diagnostic": "e9cc87c7e84f8f6d5990fa860b0be02932d79d94eaf892045a4580a7c97f7b68"
+    },
+    "H18-r1": {
+      "api": "4c72ee9c84302c2af3df0d7d92a430c0f8eef3633c4e9eeeff5ad702474054d0",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H18-r1\\result.json",
+        "sha256": "e9008b2b920db039cbe7684a8010dec4fc85d954c30accb9a6d48c8f086f581e"
+      },
+      "diagnostic": "09d5b3df2d99b3ee13f01c836aff3fb1d0b36c5d9c4f5b7839ab09ff8879e3e0"
+    },
+    "H19-r1": {
+      "api": "9dd6e09e2ddd96b0eff6ca54fa0476ae449d5c9fb878d79dca07cf86cfae4139",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H19-r1\\result.json",
+        "sha256": "f74f90ddf18dcb60e955dbe7a1cf68d1b737797a882c80176f5ece9697bca703"
+      },
+      "diagnostic": "44da66078c173f39c0f1af48382e8e2ad8d0111024a42b4297d29a3ff7572957"
+    },
+    "H20-r1": {
+      "api": "0dbda9eca1f363f5a169357dfe9d5627eebcad5279e616e9ee944baa2405763f",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\H20-r1\\result.json",
+        "sha256": "5fb461c76d04b22742514beaa10c605eeb5ddc64172a4245c6d53791e9a4d13d"
+      },
+      "diagnostic": "9f17f10cc24933cc84f6ace475247b0f1b116295e297b986e4a2b5059e195a98"
+    },
+    "R04-r1": {
+      "api": "54a6aeae74784b3aa62f7b3127f728f045886b1c2fb1f49c8c336cabb4df0032",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R04-r1\\result.json",
+        "sha256": "c9f6a0c20fdf5037512891365dcf6d6ffa569510fa102dcd23eecd549f074f63"
+      },
+      "diagnostic": "87252165ac091baa33c849fa0f70128defba4f4a13be10271428d8ca87a58d42"
+    },
+    "R21-r1": {
+      "api": "45fbbf1e83f6fc51c6ffed7afff7f6f60f544eece787e4eb7277514250d0693f",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R21-r1\\result.json",
+        "sha256": "4b6a48dbcd59bd449056aa1305775de3540a750d19fa415fbbbd1544666ce7a2"
+      },
+      "diagnostic": "afe6696f58ddfe123422d13e86528388ca84ca719b6354adfe23ad6a2f4c2a4e"
+    },
+    "R22-r1": {
+      "api": "a2707b1c473ace1979126eca732561de765b21b4a298e224f6b7ca530a7c22dc",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R22-r1\\result.json",
+        "sha256": "fc65fcf7f1e5a9990fe0c8ab74bac56995c70e9e66ead0ed6f4ff7e72028b988"
+      },
+      "diagnostic": "a17acd664dd19bf54db745e5632f0ae252502a85a1fae2f4498eb66684f775ac"
+    },
+    "R23-r1": {
+      "api": "047e98bdbaf4c5f17fcca78bcca7a3b12a893df64226689259ac9e57fe949603",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R23-r1\\result.json",
+        "sha256": "49a631722c77a8f4db163156b212cdb56a6aead23d63a9cb7d1aa39dfcf31b64"
+      },
+      "diagnostic": "562281cf28d45544a8261e1640922177ea1f0eba6e2bc1d5c600e242f63a99e1"
+    },
+    "R24-r1": {
+      "api": "59f333cf106f8e56884ea0071f512ae0b6eed594d7ef1d8752ee23b1a8142668",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R24-r1\\result.json",
+        "sha256": "0fc837ae1e1efc253f94f668798c822d8991a0bb48e84355b0cfa330ca1b7985"
+      },
+      "diagnostic": "3c9fed2c15ace6508df1770df1869996c7435608f4c0d907ee6e2ec78cf25697"
+    },
+    "R25-r1": {
+      "api": "1af6dbff16522148539bdec7a84a46bb373544e6a5b3866a7e6000b2b18a5452",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R25-r1\\result.json",
+        "sha256": "45310c57ca858608a20435b5cd15e57f9b23f32b023fe4f3a9dab81afaef425e"
+      },
+      "diagnostic": "92ed0e4c0c72e25a2a1e603ae520593cd42ff3882ddd6b2a267fa16895047cbc"
+    },
+    "R26-r1": {
+      "api": "1e49262a93f2f2e2045f0d2fad5f097a7725df3d18b69e085eacc6214fad41b9",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R26-r1\\result.json",
+        "sha256": "56ea7a70c396cb9197985722f40085ba6a11f76d915b22082c5c5886a2571007"
+      },
+      "diagnostic": "82632cd6e6a4078563dad5ff664e2dca78e656a3e4e40acd39f31cc0cb4f8c12"
+    },
+    "R27-r1": {
+      "api": "2bb775a64a9a8802b894b721395fa295eb4669ab25b79f5e3b79cacc2792ecdc",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R27-r1\\result.json",
+        "sha256": "cd850bd896d767584b961ad0bfa066ba0889df1a76c6e7b047acf15c84830220"
+      },
+      "diagnostic": "1e8feefe2366d893aafcc112059f6305ac7bd5bd8559179f89c8d53e61969cea"
+    },
+    "R28-r1": {
+      "api": "4cc8e94bb80139de4bd50626a1ac5e302ec9a7f22dbdab70bbf4714921f66cb4",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R28-r1\\result.json",
+        "sha256": "942e71d29d0bc3892a05799ea5bdfabc43777944b42097ee2f7503910de56475"
+      },
+      "diagnostic": "c5926a1e91c0c30ad4faaaf41253cc37b03f366bb318c7232839d6e91e780a3f"
+    },
+    "R29-r1": {
+      "api": "42d6d43b94064bfabc82fb9efcf5d3d3f21908ff448996286aee49296b51a5b2",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R29-r1\\result.json",
+        "sha256": "9e850c34c174f35d908d8f9d2b859bddfcac9964905cdef2783a385db234419b"
+      },
+      "diagnostic": "9146280875ce83ea75980e3ba90bd27f65ed7977e24e072d90d3c076dcb06d26"
+    },
+    "R30-r1": {
+      "api": "52287f27dfd8ad6ef3b7e4b1b2069ac97be71b2726d44e1401f0863a242197e2",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R30-r1\\result.json",
+        "sha256": "9d438cbc3fe911f835a933eb2602ed879dba967c85c90b3923604e157a1f349c"
+      },
+      "diagnostic": "a28c1830cf6688b0b18a6654e5197c2eed721d9445fedadfc4ff2e03bb4c766b"
+    },
+    "R31-r1": {
+      "api": "43440455bb7fae35a404e6c0bda5c33273ed770c62f8f12fe86a05552275e498",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R31-r1\\result.json",
+        "sha256": "98dace7936bf4489e13b0d92a306cc7f9eb9f4b0761cf8db8231cb64b339940f"
+      },
+      "diagnostic": "a5f080214bf830338715d4f1d8f0f80d5b9fbd34aaa2f01e4d0ae0ec6e4f0959"
+    },
+    "R32-r1": {
+      "api": "a69f9bdfad551c238d993247a15e468778f038a4c2d25eccb7b0027b723de37c",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R32-r1\\result.json",
+        "sha256": "7229d438d929826a274cead28078969dca37c0e6f1ca7b7b4959005556d0b4bc"
+      },
+      "diagnostic": "5b51ddc64c3cfc2f8c26e090139e893f0888b4f67e84836aa335597e1aaf5098"
+    },
+    "R33-r1": {
+      "api": "d06748b483b338e778c42a84a1beedd24bda07b0ffaccbe5c4c266cf18a57cbb",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R33-r1\\result.json",
+        "sha256": "9be559c1d70a7538883e0e8c64657465c515a81b70ebb616411a1e3888a3a35d"
+      },
+      "diagnostic": "1d4dfc95b131963c14e83b90978b5c127d68a96a0830a655bb30db12eb8d7bab"
+    },
+    "R34-r1": {
+      "api": "c294ae0ead4f6a01fbf8f48eee2172cb4a7d10a62a031b13d84c527600f365b1",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R34-r1\\result.json",
+        "sha256": "a4dc7b041392e1cb3a9671604e24f1e40e6ee142720789110bdae4f5b76b672c"
+      },
+      "diagnostic": "f91661e735ebcd6f16bacf6d8948fbe3457e53775662d42c03945fd181fbbab7"
+    },
+    "R36-r1": {
+      "api": "c434634fe9e83ec430da1e44231a5a35f7de9dfd32bb9b0542d4bb48dd6f93f6",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R36-r1\\result.json",
+        "sha256": "46160d56cb0a9ae7562f60006954d884cb113b3879d62e5433e39cd15a77a708"
+      },
+      "diagnostic": "7a30215cda85ae2c1a6078c99c849c02b36effe70f9ffe85e446064471e4acb4"
+    },
+    "R37-r1": {
+      "api": "f2e23135109b578454e0aac70d6eb438974dd0871a0d13a6d3ad10b59fabf3c9",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R37-r1\\result.json",
+        "sha256": "a658c71639c60bb7ded20065482f74b9ef9c17b6f2f03b28c2373b82eca1942d"
+      },
+      "diagnostic": "787c9c6f9b6b23bfff0cf2afbf5204902adb1e70e89182a3f4a3664f2c34a444"
+    },
+    "R38-r1": {
+      "api": "7fcee2af9d5f8499dfdf5dc4e192c4863850f9fb54b1050035c505a5a3f14b12",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R38-r1\\result.json",
+        "sha256": "bd3344c1dc044f4d0d09ff5d2c9c9e1642bbac4dd5492f73de16c2287adb5f71"
+      },
+      "diagnostic": "f426482e10a785e065b1e984465b2de26585aff229c6e8dc34f1a934f83d76dc"
+    },
+    "R39-r1": {
+      "api": "bf186d47334ac4b1dbc2d4ae15431881c67114235ff6beb90ee86ed82ddb621a",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R39-r1\\result.json",
+        "sha256": "2779019060fa3c67b52771c8aa39334c027e5ad794d7f3f9b82ee83bb8acc5fd"
+      },
+      "diagnostic": "1d272c62943e2bd6e5a914215685552e9a48c66cb3945d9ed7dea2b5a0d24207"
+    },
+    "R40-r1": {
+      "api": "446b8c358ab1379be2306a0f0513886a19f52ee5db27c83ed1d642ee5f0442dd",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R40-r1\\result.json",
+        "sha256": "8918fd7b1436fa286effa0506922cd66e605a2c95c4978c00e4297e94a7c9544"
+      },
+      "diagnostic": "56a204460758ce930dbb409a6eecbb7b12c2c420dda46f010ebc6c80f5e739eb"
+    },
+    "R01-r2": {
+      "api": "9751c9d1424f0bdb006adf2683c1baa43585a1720e67f908ee8bac28025ed7c5",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R01-r2\\result.json",
+        "sha256": "bad19209981ae58ce892ace158c49200b2bf21ba05656c20041d25c1e1ffe3b7"
+      },
+      "diagnostic": "9e79f59201c0dd6b3a93f84387995dc58962963248d8039c2dd9f2efa19e8d1a"
+    },
+    "R02-r2": {
+      "api": "4bb2144657d28c024266825e6cc0938fba07ae36db50620d36fffaa1c9cf3d72",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R02-r2\\result.json",
+        "sha256": "95234f2a040ebe0d74cb6e5cd0eb7d140fdf6175e512a1f9ce09b81a1effd490"
+      },
+      "diagnostic": "c652cafd1fdc0b3c14321d80ee0983a934cc7d61d021a2b35b806e21971015d2"
+    },
+    "R03-r2": {
+      "api": "feb15ce2fe6740f2d8d8b7beb527b3db6eefaf5c925684ed5407a0518ca38754",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R03-r2\\result.json",
+        "sha256": "98c4733e93193a29ffeb8777d2c99fe187b4613e73e5e3bb23acc288b5855c80"
+      },
+      "diagnostic": "f391b8a4dc88a06ad2fb9187a0b0699495201fcd0a24b60bbd52b9f32f391b9b"
+    },
+    "R05-r2": {
+      "api": "0a155c88f62851866971eb809651675aff017ede72aea76c739ffcd8b696e160",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R05-r2\\result.json",
+        "sha256": "785e207ebfed1cffd30dca938e59d2bb7da0370ab1a54521b10960165709c2b4"
+      },
+      "diagnostic": "9cd70fb60a574b10a5983804655af9ca444245074fade1889cb73285be50bfed"
+    },
+    "R06-r2": {
+      "api": "84c4e3f15633c2e193f48fee949014dab18d33fa8e0ec4e5b39d74d2f90f075b",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R06-r2\\result.json",
+        "sha256": "2f83aeb42ba3fa07a991f9ecb499d5aa1d834bee5a4fc791cc0277bb299593ea"
+      },
+      "diagnostic": "7b3c7e490ea6ca6ee861474db9912f92679b84f8d40d2d19c704b2bbb7118326"
+    },
+    "R07-r2": {
+      "api": "113cc556be98088acfdc9408f04c171b49e4d846f4c46d98734b2b82413fdb8d",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R07-r2\\result.json",
+        "sha256": "ca2bba0c709c1d3e0fda3d4a3d455e69d1b805c802a4b98b5b6deeab93f0b78a"
+      },
+      "diagnostic": "22286ab92dc2276ffc56fa6bd31914b9ba3e2bf5a10dce0a3432beddbee71c79"
+    },
+    "R08-r2": {
+      "api": "fc7e01f975ade306ba9565d6740caefde2c42dae1f3df4de60598402abcc287a",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R08-r2\\result.json",
+        "sha256": "d9df526156c93809a7336542acf06553855c1cef28e395652ff2e62744723ed6"
+      },
+      "diagnostic": "af3e632428c1c4ef620c0c3ba9298c8112d07868a04555ced08ce966867657cd"
+    },
+    "R09-r2": {
+      "api": "50a6a8fd20c2db4efac3bf0e64ccb9f10063347399a9e5c01715e2ca8e7a0639",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R09-r2\\result.json",
+        "sha256": "84875a7c0ce3d25b3273bbdf61e909896a91be27d37d52d04d310c87b02356da"
+      },
+      "diagnostic": "41edba14f014ccf82784125e7ec6c13048ac7395c5544a1f6821ddc218f0c812"
+    },
+    "R10-r2": {
+      "api": "1ffae0e2f53cdb6a11e7c5bd636f0d594bf8e00fb26cb5b0c08d6253ea9bd7bb",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R10-r2\\result.json",
+        "sha256": "44f085d9d91e65017f6852c6841aa39028366cd0e1c34585fcaa38394d0c77cb"
+      },
+      "diagnostic": "2fb71fc55ec49c46a89648b8d57f2a63e7e17d36ea7e800cb7e8a7b26baca462"
+    },
+    "R11-r2": {
+      "api": "1b2d228fe32cbd6a19f1fca08bd0840de11d950c0daaff0f6ee749bdbe64b737",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R11-r2\\result.json",
+        "sha256": "27f41dc49bacd6d88634b198a2c44a2f94485ffa4c0d0f5a4193f03088372702"
+      },
+      "diagnostic": "4133036bf3094c68fbe1c23039b05410f15529e539ba6fc14766ba2924721b25"
+    },
+    "R12-r2": {
+      "api": "50fe464c8652ea3189ace69a4092965f0689b7cc63601e380ccf1b85e6cd8e73",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R12-r2\\result.json",
+        "sha256": "f260d86f0a4191caae90252383d305d500a9344e088fe72d0ddc62386943a482"
+      },
+      "diagnostic": "49a6c0b4ab29eca2da3c1e32a25509401b50c3e7deefdc5aa2643c065594aae8"
+    },
+    "R13-r2": {
+      "api": "aa2043775fa7489a86516d99cde1837b69202a8def23657d6094699fd927078a",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R13-r2\\result.json",
+        "sha256": "6179dddd71b5d1b27690b35ed9f00ede687a995ee879eb75110083b4deadbd27"
+      },
+      "diagnostic": "7be73f83c74bb0fa2d5d220d9c561e305f41f4cd3f3d062c7de928dfb0cfdbfb"
+    },
+    "R14-r2": {
+      "api": "3376f6bde19c2b334e5c61b877e6ee4e0fafffc68be426e41375b782c758dc04",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R14-r2\\result.json",
+        "sha256": "5ac672eea37c0cef83387d7fd9caace56e50f2b84d5ebfebccadb71710aa5ec6"
+      },
+      "diagnostic": "90099b99fc45269c78e03e3a6efb4abac0f90379e00e94e0121160566dd3541f"
+    },
+    "R15-r2": {
+      "api": "1f7b6985f0c4fab411bd7780efcccff9602b733ee9d2eb9ed5995a22b28a1074",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R15-r2\\result.json",
+        "sha256": "d5c58f9ede448d34015f750cf78f53d03d31cd69abce4e16342d0d697989daf9"
+      },
+      "diagnostic": "16027f09b4991ff058c476da0ea73932a5b5a8e48c87d7ac7cfbf9d066cf9cf4"
+    },
+    "R16-r2": {
+      "api": "6565ad5c6a59dfaab085e9da68cafcbc5b8ad0f18a611919dc3458fa4c58eb4f",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R16-r2\\result.json",
+        "sha256": "ebb3e0f2b3ea77b0d941005c519e3de0bea4c3dc68814da0208f18dd06391d0d"
+      },
+      "diagnostic": "1884bbadb8adc813660a77d9e6228ff5d71318af59c1c4def815746ec7092b74"
+    },
+    "R17-r2": {
+      "api": "8bb448734167063c846c2e7181abde67d5e590f208cb86130e94044cc76ef2d1",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R17-r2\\result.json",
+        "sha256": "0aeea65a3d18544d43ccbc0e533bfb00657c2b1ce24e94aaf1b24c461b71a471"
+      },
+      "diagnostic": "a9d785cd136acaa18c6a42ebf2d3b384ee390674b6b527d1a8fe5822e3c8fe40"
+    },
+    "R18-r2": {
+      "api": "9a6acdec26f423cd21cdd7d6c1f1ea7e65d0e368583e0556d2a0841ce6b855d9",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R18-r2\\result.json",
+        "sha256": "6ac50f41d9ffebee998928e4473c759eaa542ec7e3f4da8c10a73e43bdc41f2d"
+      },
+      "diagnostic": "94b0b98aeecb2e4bb82a07e664a86d09dd0b3acea2741f138c2bf1007ef52ec7"
+    },
+    "R19-r2": {
+      "api": "8588b2e5b93b2d1441acebd8b18beee0f73032bd6f83beade35ae27c6a1b181c",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R19-r2\\result.json",
+        "sha256": "e7e4b4add74fc38ab3b83964faf9223fd4a7a73267438290a32e65dbc3886125"
+      },
+      "diagnostic": "8f387191ec1e5f127861296a89b647d5be8165d9cf258a9342a6fbd429561bf2"
+    },
+    "R20-r2": {
+      "api": "7b12bfe1c1b5a52f596878db78ddc1cd3c57089032d0e8f2dcf6d73312574425",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R20-r2\\result.json",
+        "sha256": "320e9e184d9816970a2765274a2ddac26cb4e5bcf8ba69274435de2d2ca94d02"
+      },
+      "diagnostic": "536b45d10720b08ef1450d77d3a0b44528f08c09e9ace181f1a06b6fa1d2706e"
+    },
+    "R35-r2": {
+      "api": "94d0a2896250d30f70d6fc280efdc25498a3c19d24d462789d86316899a6ea6c",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R35-r2\\result.json",
+        "sha256": "a60cc219a19277930eaa331a8095b591d8c236557824dde3180e2d2d9a8de371"
+      },
+      "diagnostic": "555525e069094fc6a28a8a5597fbb01b38c0aeab09f96c1e10db1e8c1693eca7"
+    },
+    "R01-r3": {
+      "api": "efe1d4ab689c755c6ec700ae5cd0ad204b009f07597dbb142463c550b237ccad",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R01-r3\\result.json",
+        "sha256": "8fb32211addaf092801673877985ef03f7f830f82176b0b49b9a56c5ce635453"
+      },
+      "diagnostic": "7696a3279045ad5d6b96be1ac65adc371b6f379a050d915be04cae714187e3b9"
+    },
+    "R02-r3": {
+      "api": "66b91736c0940646be0d3590a02a12a7242023b3ba0ee3338d63700e882be7b8",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R02-r3\\result.json",
+        "sha256": "dd70e127af61140bea98cfa555082dbe8973a75caf51c5e94c0e8e9c28382063"
+      },
+      "diagnostic": "6c09f05e00342df5744cfc0a225a8ebc83d7acdeaf0a821e2e328a09bd1d42ad"
+    },
+    "R03-r3": {
+      "api": "84416447384a7985d8bf936974cba9128c0eb359cbe0995110cb7ed02b318860",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R03-r3\\result.json",
+        "sha256": "5b5a54c31a45d0b3e19ae727f4fb41633940f5bac0351ac31a15a72fc5b5904d"
+      },
+      "diagnostic": "2a8c2cd824d288bae18aeae4f560f3ce2740fc87d339e765265c66a04d6929c3"
+    },
+    "R05-r3": {
+      "api": "19df833f54f0871c67d640f3bf3b43a18f6d2f6c8d099f7c617d2b67c3de132d",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R05-r3\\result.json",
+        "sha256": "c82028e93fad34f26dffc9182816cf701e99a8a720b9715b2c56fcb982db2d33"
+      },
+      "diagnostic": "430507b33be6255e41a925f8c108ec3fdcce277c7c25d2df8b0a46d49bba632f"
+    },
+    "R06-r3": {
+      "api": "9b9114d4cffed8ed503838bcb94833bc8d7031763c84fcf6ecd14f73cd7f7db0",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R06-r3\\result.json",
+        "sha256": "a75de700f20175bd625a9a99e82fc4c3f3b1a5ecc0f6a89fcd6477723ba248c3"
+      },
+      "diagnostic": "501c402f478d295c2d5460bba11bf5df617267a0112155ea01be5c09efbbb2e3"
+    },
+    "R07-r3": {
+      "api": "7446e5d522c4453c729b652b26bff2e87edae03c767aebf22411883d0c2ce681",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R07-r3\\result.json",
+        "sha256": "ec9eeae62bad3fcc4933594acb9541ebdb1e1105ac9aee8065d75d7fafb175ea"
+      },
+      "diagnostic": "7aa773e43a51cc5b520bc8aad3338cd3dfbd896098e064ac586cd5ab931938ba"
+    },
+    "R08-r3": {
+      "api": "b7ae9bd5c01cd50a906df3fdf9a7622d7295ffcd5a0922ac6b31ef7a2ac856fa",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R08-r3\\result.json",
+        "sha256": "cd12ba4a9db527ddf692f738250098cf9d488f4b1da34f210c8b6afc4ba3dcc7"
+      },
+      "diagnostic": "ab86b70f3b0a96aa369a932e8fc7e8d4cc0b4a8b1cb5d29b40198df5f5f56bd3"
+    },
+    "R09-r3": {
+      "api": "f846c2c1fe0875c29ac05bfd2f87985c8d85d047cb338fe97946bd1a53064674",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R09-r3\\result.json",
+        "sha256": "cdf42c152785116415c83b38dc2629047fd7fb084c0d9adf3b8bae74556fc10d"
+      },
+      "diagnostic": "50590e55addc1e49641e9057e3b9507647f4ab9db6927469d340475bb08da3f0"
+    },
+    "R10-r3": {
+      "api": "deba6a79bfa893bf76f3049bc3f9959c70a52b8867bb7b0567ff2a7cf63629f8",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R10-r3\\result.json",
+        "sha256": "c907b96b233ae55f1164bfc312d6c4f220290f08db8ad0b860caac8e23306680"
+      },
+      "diagnostic": "548f5452acb99a94c597ad88452512a54c834e84b72f156e8427b47fc44a3b4a"
+    },
+    "R11-r3": {
+      "api": "074a110562db1d22ebf5a8b09fb5542b343792783d295c5d905c4fb961f3ea82",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R11-r3\\result.json",
+        "sha256": "bd3d6439afd9cea239818b845f521f87e0117e01985e659133efc009e2df1d8e"
+      },
+      "diagnostic": "7698dc376ff98602ab2f43efe49d0fa22e71ea8c89ba8f6163f48bd36f5c1978"
+    },
+    "R12-r3": {
+      "api": "1bdd21a4ef62d4c44f20e7f5456bdb425b2488871c09e8cd8f041d1f1f06b0e6",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R12-r3\\result.json",
+        "sha256": "5805818ff48862448bc103535bc6db28060f4ae2feb8267d68e192ed35b5485b"
+      },
+      "diagnostic": "574e005ae1eaa904970a7c992223ce3f48a6ee1ed963e4aaf904e7901e6b06fa"
+    },
+    "R13-r3": {
+      "api": "e162735c3a0682c6fb5b7a4f699ecd7902dce61eea3f2c537405d64e27b3d258",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R13-r3\\result.json",
+        "sha256": "704278b564425319baee8ae108f3d011f4491ddb0aba89a381fb86bb448e85ff"
+      },
+      "diagnostic": "8abc2581c215893354566dc63f9b88e5773e13cbd627a38754a16719962b96f4"
+    },
+    "R14-r3": {
+      "api": "7eeaa2b1ec7b185aef4da4f457189cf32f099224d3561f35887555189623d64a",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R14-r3\\result.json",
+        "sha256": "f7d7c505edcf5d54b2b7c2732295c9e127d4ae750e5186700a587eed4e0b7416"
+      },
+      "diagnostic": "3aa9918e83c7d83c85e82aac286f1098bc663462ba6530b52dd7c06d43137ba4"
+    },
+    "R15-r3": {
+      "api": "bd68a198baf6dc8276ce0f7ed93e346f31dd2d9f92cb47f7139f6813af622c77",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R15-r3\\result.json",
+        "sha256": "206d5f94a6c9142361ec2c1bad45a5eae22a20f3d8c07d7fd1515b1117bdfc9b"
+      },
+      "diagnostic": "9ea0f20fa6f0d8eeb30043d8f8d5a06354349204813e0e34f6aa1b5fa5b27922"
+    },
+    "R16-r3": {
+      "api": "1d5c2931dd526831f5036f6c3d8f3710fe1ebeed2b520d1bd27da3acb1ad9783",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R16-r3\\result.json",
+        "sha256": "f988ccd613ab1939c01fe7c088cbda4938493f31c73e4d0cec23e54582a412ed"
+      },
+      "diagnostic": "9fb40652dcd04bfd1f2a62f0a381066d28d4400be15752e4ced4a4c7009905a5"
+    },
+    "R17-r3": {
+      "api": "d647d83993fe3b29c16b7c984d306f175e24c1ae9d76c637a6a685cbcaa9e74a",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R17-r3\\result.json",
+        "sha256": "3550ec9fe3be49271fd7605aeb6ae757c05ddb3ef51f3a3a170ad6128d477e33"
+      },
+      "diagnostic": "9b365967ae82346244313afd6578087b06dcb2f4284346439bf090df610734ad"
+    },
+    "R18-r3": {
+      "api": "236e9536273a6ac37c99df82e7ab8d8630d019d175a2f26198f62b71dea2c519",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R18-r3\\result.json",
+        "sha256": "ad0eeb80efe61299090adc81afb5fe3652baa5e953f04c84566323b4544e5c50"
+      },
+      "diagnostic": "c5e9e9f8546d364d8cff3d2c724cc418895a74e3bc04deb633cad3c025d0f95b"
+    },
+    "R19-r3": {
+      "api": "9298284fb304b906f3c987b9c3787ad0f48ebd6d1aa61a170613e3708ebe6d60",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R19-r3\\result.json",
+        "sha256": "d302c9568ac1eb06c5a400573c57fb8362a0a46327d755c422138879fe14f976"
+      },
+      "diagnostic": "2de0b052d9a3c69918feec6e68f09878f4cea688b2e7baa3e2d259fe5f943e08"
+    },
+    "R20-r3": {
+      "api": "62f5ed94dbe9d844366689a59dc94042e460fba23e9fdde05a2ff3f835ba76f2",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R20-r3\\result.json",
+        "sha256": "5a4a22a709a49704ac26fc834debad2ec33aebd8b5f78916d083cc67915de1bc"
+      },
+      "diagnostic": "e66a139a94d555affddd825cf30e53b6a57865c317fa4a0de5083f849ce5cb2e"
+    },
+    "R35-r3": {
+      "api": "41122387dd467f93d6239c8f372e5ed44a9b7cee93de5400f0b93d83e1745dba",
+      "diagnostic_source_api": {
+        "path": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R35-r3\\result.json",
+        "sha256": "fa6e8c5f904ed3acbc6578bb87a939b35839182a8f16e9262d69cf9c142d952e"
+      },
+      "diagnostic": "d65bde57ebc33f65725c030dc7ed006a5e20b4af31ad1cea4cd1c157a1a81a6e"
+    }
+  },
+  "source": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04",
+  "ui": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\ui\\run-02\\result.json",
+  "diagnostics": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\diagnostics-run03-v3",
+  "api": {
+    "planned_cases": 60,
+    "planned_executions": 100,
+    "actual_executions": 100,
+    "counts": {
+      "passed": 76,
+      "failed": 24,
+      "preparation_failed": 0,
+      "runner_failed": 0,
+      "not_executed": 0
+    },
+    "business_pass_rate": 0.76,
+    "fully_passed": 55,
+    "full_pass_rate": 0.55,
+    "denominator": "all scheduled executions, including preparation/runner failures and not executed",
+    "critical_violation_count": 0,
+    "critical_violations": [],
+    "core_pass3": {
+      "passed": 6,
+      "total": 20,
+      "cases": {
+        "R13": false,
+        "R12": false,
+        "R08": false,
+        "R09": false,
+        "R19": false,
+        "R18": true,
+        "R16": true,
+        "R35": true,
+        "R15": true,
+        "R17": false,
+        "R10": true,
+        "R11": false,
+        "R02": false,
+        "R20": false,
+        "R07": false,
+        "R14": true,
+        "R03": false,
+        "R06": false,
+        "R05": false,
+        "R01": false
+      }
+    },
+    "reply_latency_ms": {
+      "samples": 162,
+      "p50": 5807.7,
+      "p95": 30337.8,
+      "max": 71565.7
+    },
+    "groups": {
+      "aftersales": {
+        "planned": 12,
+        "business_passed": 10,
+        "fully_passed": 6
+      },
+      "drink": {
+        "planned": 15,
+        "business_passed": 11,
+        "fully_passed": 4
+      },
+      "memory": {
+        "planned": 12,
+        "business_passed": 7,
+        "fully_passed": 7
+      },
+      "policy": {
+        "planned": 10,
+        "business_passed": 10,
+        "fully_passed": 7
+      },
+      "purchase": {
+        "planned": 19,
+        "business_passed": 10,
+        "fully_passed": 8
+      },
+      "routing": {
+        "planned": 11,
+        "business_passed": 11,
+        "fully_passed": 11
+      },
+      "snack": {
+        "planned": 11,
+        "business_passed": 7,
+        "fully_passed": 4
+      },
+      "theme": {
+        "planned": 10,
+        "business_passed": 10,
+        "fully_passed": 8
+      }
+    },
+    "automatic_acceptance": "not_passed",
+    "human_acceptance": "not_evaluated",
+    "semantic_judge": "diagnostic_only_uncalibrated",
+    "money_cost": null,
+    "manifest": "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-04\\manifest.json",
+    "usage": {
+      "role": {
+        "calls": 140,
+        "calls_with_usage": 138,
+        "calls_with_total_tokens": 138,
+        "reported_total_tokens": 727465
+      },
+      "mercury": {
+        "calls": 43,
+        "calls_with_usage": 43,
+        "calls_with_total_tokens": 43,
+        "reported_total_tokens": 82879
+      },
+      "kev": {
+        "calls": 265,
+        "calls_with_usage": 265,
+        "calls_with_total_tokens": 0,
+        "reported_total_tokens": null
+      },
+      "background_memory": {
+        "calls": 44,
+        "calls_with_usage": 44,
+        "calls_with_total_tokens": 44,
+        "reported_total_tokens": 34522
+      },
+      "judge": {
+        "calls": 100,
+        "calls_with_usage": 99,
+        "calls_with_total_tokens": 99,
+        "reported_total_tokens": 1034928
+      }
+    },
+    "configuration_consistent": true,
+    "index_consistent": true,
+    "normal_completion": {
+      "planned": 98,
+      "business_passed": 74
+    },
+    "compliant_refusal": {
+      "planned": 2,
+      "business_passed": 2
+    },
+    "hard_constraints": {
+      "produced_plan_executions": 49,
+      "all_satisfied": 39,
+      "rate": 0.7959183673469388
+    },
+    "semantic_judge_counts": {
+      "pass": 2,
+      "fail": 1,
+      "unknown": 97
+    },
+    "blocked_action_observation": "actual model tool proposals and errors retained in model_calls and steps; not all guards have an explicit blocked-action trace",
+    "blocked_actions": {
+      "observed_guard_rejections": 0,
+      "evidence": [],
+      "all_proposals_classified": false,
+      "unobserved_count": null
+    }
+  },
+  "ui_acceptance": "not_passed",
+  "ui_journeys": [
+    {
+      "name": "activity-salad",
+      "status": "passed",
+      "stage": "explicit-confirm",
+      "performance_passed": false,
+      "error": null,
+      "slow_steps": [
+        {
+          "label": "select-activity-product",
+          "final_reply_ms": 15576.3064
+        }
+      ],
+      "failed_action_codes": []
+    },
+    {
+      "name": "snack-bubble",
+      "status": "failed",
+      "stage": "request-plan",
+      "performance_passed": true,
+      "error": {
+        "type": "AssertionError",
+        "message": "The expression evaluated to a falsy value:\n\n  assert.ok(guide.plan?.can_confirm)\n"
+      },
+      "slow_steps": [],
+      "failed_action_codes": [
+        "TARGET_NAME_MISMATCH"
+      ]
+    }
+  ],
+  "ui_assertion_review": [
+    {
+      "name": "activity-salad",
+      "additional_plan_assertions": {
+        "line_totals": true,
+        "selected_total": true
+      },
+      "basis": "offline retained state, no browser rerun"
+    },
+    {
+      "name": "snack-bubble",
+      "additional_plan_assertions": "not_reached"
+    }
+  ],
+  "automatic_acceptance": "not_passed",
+  "observed_critical_violations": 0,
+  "free_text_factual_error_count": null,
+  "turns_within_15s": 134,
+  "timed_turns": 162,
+  "diagnostic_verdicts": {
+    "fail": 23,
+    "pass": 36,
+    "unknown": 41
+  },
+  "diagnostic_errors": 38,
+  "usage": {
+    "role": {
+      "calls": 140,
+      "calls_with_usage": 138,
+      "input_tokens": {
+        "coverage": 138,
+        "reported_sum": 676540
+      },
+      "output_tokens": {
+        "coverage": 138,
+        "reported_sum": 50925
+      },
+      "total_tokens": {
+        "coverage": 138,
+        "reported_sum": 727465
+      },
+      "input_plus_output": {
+        "coverage": 138,
+        "derived_sum": 727465
+      },
+      "request_latency_ms": {
+        "coverage": 140,
+        "p50": 3950.3,
+        "p95": 25211.7,
+        "max": 45380.5
+      },
+      "reasoning_tokens": {
+        "coverage": 138,
+        "reported_sum": 41431
+      }
+    },
+    "mercury": {
+      "calls": 43,
+      "calls_with_usage": 43,
+      "input_tokens": {
+        "coverage": 43,
+        "reported_sum": 76177
+      },
+      "output_tokens": {
+        "coverage": 43,
+        "reported_sum": 6702
+      },
+      "total_tokens": {
+        "coverage": 43,
+        "reported_sum": 82879
+      },
+      "input_plus_output": {
+        "coverage": 43,
+        "derived_sum": 82879
+      },
+      "request_latency_ms": {
+        "coverage": 43,
+        "p50": 1852.7,
+        "p95": 11015.8,
+        "max": 31097.4
+      },
+      "reasoning_tokens": {
+        "coverage": 43,
+        "reported_sum": 4285
+      }
+    },
+    "kev": {
+      "calls": 265,
+      "calls_with_usage": 265,
+      "input_tokens": {
+        "coverage": 265,
+        "reported_sum": 137292
+      },
+      "output_tokens": {
+        "coverage": 265,
+        "reported_sum": 19341
+      },
+      "total_tokens": {
+        "coverage": 0,
+        "reported_sum": null
+      },
+      "input_plus_output": {
+        "coverage": 265,
+        "derived_sum": 156633
+      },
+      "request_latency_ms": {
+        "coverage": 265,
+        "p50": 985.9,
+        "p95": 1429.9,
+        "max": 1766.8
+      },
+      "reasoning_tokens": {
+        "coverage": 0,
+        "reported_sum": null
+      }
+    },
+    "background_memory": {
+      "calls": 44,
+      "calls_with_usage": 44,
+      "input_tokens": {
+        "coverage": 44,
+        "reported_sum": 13893
+      },
+      "output_tokens": {
+        "coverage": 44,
+        "reported_sum": 20629
+      },
+      "total_tokens": {
+        "coverage": 44,
+        "reported_sum": 34522
+      },
+      "input_plus_output": {
+        "coverage": 44,
+        "derived_sum": 34522
+      },
+      "request_latency_ms": {
+        "coverage": 44,
+        "p50": 4623.1,
+        "p95": 27144.0,
+        "max": 36326.9
+      },
+      "reasoning_tokens": {
+        "coverage": 44,
+        "reported_sum": 19773
+      }
+    },
+    "original_judge": {
+      "calls": 100,
+      "calls_with_usage": 99,
+      "input_tokens": {
+        "coverage": 99,
+        "reported_sum": 916378
+      },
+      "output_tokens": {
+        "coverage": 99,
+        "reported_sum": 118550
+      },
+      "total_tokens": {
+        "coverage": 99,
+        "reported_sum": 1034928
+      },
+      "input_plus_output": {
+        "coverage": 99,
+        "derived_sum": 1034928
+      },
+      "request_latency_ms": {
+        "coverage": 100,
+        "p50": 11506.6,
+        "p95": 36935.6,
+        "max": 45360.6
+      },
+      "reasoning_tokens": {
+        "coverage": 99,
+        "reported_sum": 114297
+      }
+    },
+    "diagnostic_judge": {
+      "calls": 100,
+      "calls_with_usage": 91,
+      "input_tokens": {
+        "coverage": 91,
+        "reported_sum": 858945
+      },
+      "output_tokens": {
+        "coverage": 91,
+        "reported_sum": 215907
+      },
+      "total_tokens": {
+        "coverage": 91,
+        "reported_sum": 1074852
+      },
+      "input_plus_output": {
+        "coverage": 91,
+        "derived_sum": 1074852
+      },
+      "request_latency_ms": {
+        "coverage": 100,
+        "p50": 21633.2,
+        "p95": 45332.5,
+        "max": 45363.0
+      },
+      "reasoning_tokens": {
+        "coverage": 91,
+        "reported_sum": 185092
+      }
+    },
+    "failed_probe_judge": {
+      "calls": 2,
+      "calls_with_usage": 2,
+      "input_tokens": {
+        "coverage": 2,
+        "reported_sum": 13704
+      },
+      "output_tokens": {
+        "coverage": 2,
+        "reported_sum": 2400
+      },
+      "total_tokens": {
+        "coverage": 2,
+        "reported_sum": 16104
+      },
+      "input_plus_output": {
+        "coverage": 2,
+        "derived_sum": 16104
+      },
+      "request_latency_ms": {
+        "coverage": 2,
+        "p50": 10208.7,
+        "p95": 10719.0,
+        "max": 10719.0
+      },
+      "reasoning_tokens": {
+        "coverage": 2,
+        "reported_sum": 2400
+      }
+    }
+  },
+  "failures": [
+    {
+      "execution_id": "R01-r1",
+      "case_id": "R01",
+      "group": "snack",
+      "business_status": "failed",
+      "performance_passed": true,
+      "failure_stages": [
+        {
+          "label": "choose-type",
+          "status": "failed",
+          "failed_checks": [
+            {
+              "kind": "present",
+              "path": "after.guide.product_cards",
+              "value": true,
+              "passed": false,
+              "actual": []
+            }
+          ],
+          "error": null
+        }
+      ],
+      "slow_turns": [],
+      "critical_violations": [],
+      "error": null
+    },
+    {
+      "execution_id": "R03-r1",
+      "case_id": "R03",
+      "group": "snack",
+      "business_status": "passed",
+      "performance_passed": false,
+      "failure_stages": [],
+      "slow_turns": [
+        {
+          "label": "request",
+          "elapsed_ms": 23671.1
+        }
+      ],
+      "critical_violations": [],
+      "error": null
+    },
+    {
+      "execution_id": "R06-r1",
+      "case_id": "R06",
+      "group": "drink",
+      "business_status": "passed",
+      "performance_passed": false,
+      "failure_stages": [],
+      "slow_turns": [
+        {
+          "label": "request",
+          "elapsed_ms": 19217.3
+        }
+      ],
+      "critical_violations": [],
+      "error": null
+    },
+    {
+      "execution_id": "R07-r1",
+      "case_id": "R07",
+      "group": "drink",
+      "business_status": "failed",
+      "performance_passed": true,
+      "failure_stages": [
+        {
+          "label": "request",
+          "status": "failed",
+          "failed_checks": [
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": true,
+              "passed": false,
+              "actual": null
+            },
+            {
+              "kind": "quantities",
+              "path": "after.guide.plan.items",
+              "value": {
+                "demo:cn-coke-zero-500ml-bottle": 2
+              },
+              "passed": false,
+              "actual": null,
+              "missing_evidence": "'NoneType' object is not subscriptable"
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.plan.selected_total_fen",
+              "value": 800,
+              "passed": false,
+              "actual": null,
+              "missing_evidence": "'NoneType' object is not subscriptable"
+            }
+          ],
+          "error": null
+        }
+      ],
+      "slow_turns": [],
+      "critical_violations": [],
+      "error": null
+    },
+    {
+      "execution_id": "R11-r1",
+      "case_id": "R11",
+      "group": "purchase",
+      "business_status": "failed",
+      "performance_passed": true,
+      "failure_stages": [
+        {
+          "label": "new-budget",
+          "status": "failed",
+          "failed_checks": [
+            {
+              "kind": "eq",
+              "path": "after.guide.constraints_summary.budget_fen",
+              "value": 1000,
+              "passed": false,
+              "actual": 2000
+            }
+          ],
+          "error": null
+        }
+      ],
+      "slow_turns": [],
+      "critical_violations": [],
+      "error": null
+    },
+    {
+      "execution_id": "R12-r1",
+      "case_id": "R12",
+      "group": "drink",
+      "business_status": "passed",
+      "performance_passed": false,
+      "failure_stages": [],
+      "slow_turns": [
+        {
+          "label": "request",
+          "elapsed_ms": 28239.4
+        }
+      ],
+      "critical_violations": [],
+      "error": null
+    },
+    {
+      "execution_id": "R17-r1",
+      "case_id": "R17",
+      "group": "aftersales",
+      "business_status": "passed",
+      "performance_passed": false,
+      "failure_stages": [],
+      "slow_turns": [
+        {
+          "label": "consent-keke",
+          "elapsed_ms": 17210.256000049412
+        }
+      ],
+      "critical_violations": [],
+      "error": null
+    },
+    {
+      "execution_id": "R19-r1",
+      "case_id": "R19",
+      "group": "memory",
+      "business_status": "failed",
+      "performance_passed": true,
+      "failure_stages": [
+        {
+          "label": "list",
+          "status": "failed",
+          "failed_checks": [
+            {
+              "kind": "contains",
+              "path": "reply",
+              "value": "百事",
+              "passed": false,
+              "actual": "你指的是正在选购的商品或采购清单项，还是已下单订单？"
+            }
+          ],
+          "error": null
+        }
+      ],
+      "slow_turns": [],
+      "critical_violations": [],
+      "error": null
+    },
+    {
+      "execution_id": "H01-r1",
+      "case_id": "H01",
+      "group": "purchase",
+      "business_status": "failed",
+      "performance_passed": true,
+      "failure_stages": [
+        {
+          "label": "independent-snack",
+          "status": "failed",
+          "failed_checks": [
+            {
+              "kind": "quantities",
+              "path": "after.guide.plan.items",
+              "value": {
+                "demo:snack-original-potato-chips-70g-bag": 2
+              },
+              "passed": false,
+              "actual": [
+                {
+                  "sku_id": "demo:cn-coke-original-500ml-bottle",
+                  "name": "可口可乐经典原味汽水500ml瓶装",
+                  "quantity": 1,
+                  "unit_price_fen": 400,
+                  "line_total_fen": 400,
+                  "image_path": null,
+                  "image_kind": "placeholder",
+                  "image_kind_legacy": "placeholder",
+                  "role": "required",
+                  "selected": true,
+                  "recommended_quantity": 1,
+                  "max_addable_quantity": 36,
+                  "spec_quantity": 500,
+                  "spec_unit": "ml",
+                  "sell_unit": "件",
+                  "quantity_source": "recommended",
+                  "group_id": "product:demo:cn-coke-original-500ml-bottle",
+                  "target_kind": "product",
+                  "target_id": "demo:cn-coke-original-500ml-bottle",
+                  "component_name": null,
+                  "contributions": [
+                    {
+                      "group_id": "product:demo:cn-coke-original-500ml-bottle",
+                      "quantity": 1,
+                      "selected": true,
+                      "added_quantity": 0,
+                      "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                      "requirement": {
+                        "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                        "name": "可口可乐经典原味汽水500ml瓶装",
+                        "ingredient_id": null,
+                        "component_id": null,
+                        "quantity": 1,
+                        "unit": "件",
+                        "quantity_known": true,
+                        "requiredness": "core",
+                        "source": {
+                          "kind": "user",
+                          "ref": "可口可乐经典原味汽水500ml瓶装"
+                        }
+                      }
+                    }
+                  ],
+                  "added_quantity": 0,
+                  "remaining_quantity": 1,
+                  "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                  "requirement": {
+                    "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                    "name": "可口可乐经典原味汽水500ml瓶装",
+                    "ingredient_id": null,
+                    "component_id": null,
+                    "quantity": 1,
+                    "unit": "件",
+                    "quantity_known": true,
+                    "requiredness": "core",
+                    "source": {
+                      "kind": "user",
+                      "ref": "可口可乐经典原味汽水500ml瓶装"
+                    }
+                  },
+                  "availability": "available",
+                  "evidence": {
+                    "sku_source": "store_offer",
+                    "quoted_at": "2026-10-07T07:36:08+00:00",
+                    "stock_verified": true,
+                    "data_mode": "demo",
+                    "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                    "unknown_constraints": []
+                  },
+                  "pack_source": "catalog_spec",
+                  "shortfall_quantity": 0
+                }
+              ]
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.plan.selected_total_fen",
+              "value": 1180,
+              "passed": false,
+              "actual": 400
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.constraints_summary.budget_fen",
+              "value": null,
+              "passed": false,
+              "actual": 500
+            }
+          ],
+          "error": null
+        }
+      ],
+      "slow_turns": [],
+      "critical_violations": [],
+      "error": null
+    },
+    {
+      "execution_id": "H02-r1",
+      "case_id": "H02",
+      "group": "purchase",
+      "business_status": "failed",
+      "performance_passed": true,
+      "failure_stages": [
+        {
+          "label": "clear-budget",
+          "status": "failed",
+          "failed_checks": [
+            {
+              "kind": "eq",
+              "path": "after.guide.constraints_summary.budget_fen",
+              "value": null,
+              "passed": false,
+              "actual": 1000
+            }
+          ],
+          "error": null
+        }
+      ],
+      "slow_turns": [],
+      "critical_violations": [],
+      "error": null
+    },
+    {
+      "execution_id": "H03-r1",
+      "case_id": "H03",
+      "group": "purchase",
+      "business_status": "failed",
+      "performance_passed": true,
+      "failure_stages": [
+        {
+          "label": "accept-budget",
+          "status": "failed",
+          "failed_checks": [
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": true,
+              "passed": false,
+              "actual": null
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.constraints_summary.budget_fen",
+              "value": 1180,
+              "passed": false,
+              "actual": null,
+              "missing_evidence": "'budget_fen'"
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.plan.can_confirm",
+              "value": true,
+              "passed": false,
+              "actual": null,
+              "missing_evidence": "'NoneType' object is not subscriptable"
+            },
+            {
+              "kind": "quantities",
+              "path": "after.guide.plan.items",
+              "value": {
+                "demo:snack-original-potato-chips-70g-bag": 2
+              },
+              "passed": false,
+              "actual": null,
+              "missing_evidence": "'NoneType' object is not subscriptable"
+            },
+            {
+              "kind": "fields",
+              "path": "after.guide.plan.items",
+              "value": {
+                "selected": true
+              },
+              "passed": false,
+              "actual": null,
+              "missing_evidence": "'NoneType' object is not subscriptable"
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.plan.selected_total_fen",
+              "value": 1180,
+              "passed": false,
+              "actual": null,
+              "missing_evidence": "'NoneType' object is not subscriptable"
+            }
+          ],
+          "error": null
+        }
+      ],
+      "slow_turns": [],
+      "critical_violations": [],
+      "error": null
+    },
+    {
+      "execution_id": "H04-r1",
+      "case_id": "H04",
+      "group": "purchase",
+      "business_status": "failed",
+      "performance_passed": true,
+      "failure_stages": [
+        {
+          "label": "confirm-added-quantity",
+          "status": "execution_failed",
+          "failed_checks": [
+            {
+              "kind": "quantities",
+              "path": "after.cart.items",
+              "value": {
+                "demo:cn-pepsi-original-330ml-can": 2
+              },
+              "passed": false,
+              "actual": [
+                {
+                  "sku_id": "demo:cn-pepsi-original-330ml-can",
+                  "name": "百事可乐原味汽水330ml罐装",
+                  "quantity": 1,
+                  "unit_price_fen": 300,
+                  "line_total_fen": 300,
+                  "image_path": null,
+                  "sellable": true
+                }
+              ]
+            }
+          ],
+          "error": {
+            "type": "HTTPStatusError",
+            "message": "Client error '409 Conflict' for url 'http://testserver/api/v1/guide/tasks/task-1944bf6087f1/confirm'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/409"
+          }
+        }
+      ],
+      "slow_turns": [],
+      "critical_violations": [],
+      "error": null
+    },
+    {
+      "execution_id": "H05-r1",
+      "case_id": "H05",
+      "group": "snack",
+      "business_status": "failed",
+      "performance_passed": true,
+      "failure_stages": [
+        {
+          "label": "choose-type",
+          "status": "failed",
+          "failed_checks": [
+            {
+              "kind": "present",
+              "path": "after.guide.product_cards",
+              "value": true,
+              "passed": false,
+              "actual": []
+            }
+          ],
+          "error": null
+        }
+      ],
+      "slow_turns": [],
+      "critical_violations": [],
+      "error": null
+    },
+    {
+      "execution_id": "H06-r1",
+      "case_id": "H06",
+      "group": "drink",
+      "business_status": "failed",
+      "performance_passed": false,
+      "failure_stages": [
+        {
+          "label": "replace",
+          "status": "failed",
+          "failed_checks": [
+            {
+              "kind": "quantities",
+              "path": "after.guide.plan.items",
+              "value": {
+                "demo:cn-nongfu-water-550ml-bottle": 2
+              },
+              "passed": false,
+              "actual": [
+                {
+                  "sku_id": "demo:cn-coke-original-500ml-bottle",
+                  "name": "可口可乐经典原味汽水500ml瓶装",
+                  "quantity": 2,
+                  "unit_price_fen": 400,
+                  "line_total_fen": 800,
+                  "image_path": null,
+                  "image_kind": "placeholder",
+                  "image_kind_legacy": "placeholder",
+                  "role": "required",
+                  "selected": true,
+                  "recommended_quantity": 2,
+                  "max_addable_quantity": 36,
+                  "spec_quantity": 500,
+                  "spec_unit": "ml",
+                  "sell_unit": "件",
+                  "quantity_source": "recommended",
+                  "group_id": "product:demo:cn-coke-original-500ml-bottle",
+                  "target_kind": "product",
+                  "target_id": "demo:cn-coke-original-500ml-bottle",
+                  "component_name": null,
+                  "contributions": [
+                    {
+                      "group_id": "product:demo:cn-coke-original-500ml-bottle",
+                      "quantity": 2,
+                      "selected": true,
+                      "added_quantity": 0,
+                      "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                      "requirement": {
+                        "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                        "name": "可口可乐经典原味汽水500ml瓶装",
+                        "ingredient_id": null,
+                        "component_id": null,
+                        "quantity": 2,
+                        "unit": "件",
+                        "quantity_known": true,
+                        "requiredness": "core",
+                        "source": {
+                          "kind": "user",
+                          "ref": "可口可乐经典原味汽水500ml瓶装"
+                        }
+                      }
+                    }
+                  ],
+                  "added_quantity": 0,
+                  "remaining_quantity": 2,
+                  "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                  "requirement": {
+                    "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                    "name": "可口可乐经典原味汽水500ml瓶装",
+                    "ingredient_id": null,
+                    "component_id": null,
+                    "quantity": 2,
+                    "unit": "件",
+                    "quantity_known": true,
+                    "requiredness": "core",
+                    "source": {
+                      "kind": "user",
+                      "ref": "可口可乐经典原味汽水500ml瓶装"
+                    }
+                  },
+                  "availability": "available",
+                  "evidence": {
+                    "sku_source": "store_offer",
+                    "quoted_at": "2026-10-07T07:37:59+00:00",
+                    "stock_verified": true,
+                    "data_mode": "demo",
+                    "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                    "unknown_constraints": []
+                  },
+                  "pack_source": "catalog_spec",
+                  "shortfall_quantity": 0
+                }
+              ]
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.plan.selected_total_fen",
+              "value": 400,
+              "passed": false,
+              "actual": 800
+            }
+          ],
+          "error": null
+        }
+      ],
+      "slow_turns": [
+        {
+          "label": "request",
+          "elapsed_ms": 23086.0
+        }
+      ],
+      "critical_violations": [],
+      "error": null
+    },
+    {
+      "execution_id": "H07-r1",
+      "case_id": "H07",
+      "group": "policy",
+      "business_status": "passed",
+      "performance_passed": false,
+      "failure_stages": [],
+      "slow_turns": [
+        {
+          "label": "policy-interruption",
+          "elapsed_ms": 29109.5
+        }
+      ],
+      "critical_violations": [],
+      "error": null
+    },
+    {
+      "execution_id": "H11-r1",
+      "case_id": "H11",
+      "group": "aftersales",
+      "business_status": "passed",
+      "performance_passed": false,
+      "failure_stages": [],
+      "slow_turns": [
+        {
+          "label": "consent-momo",
+          "elapsed_ms": 40228.99729991332
+        }
+      ],
+      "critical_violations": [],
+      "error": null
+    },
+    {
+      "execution_id": "H12-r1",
+      "case_id": "H12",
+      "group": "aftersales",
+      "business_status": "failed",
+      "performance_passed": false,
+      "failure_stages": [
+        {
+          "label": "consent-keke",
+          "status": "failed",
+          "failed_checks": [
+            {
+              "kind": "eq",
+              "path": "after.guide.plan.can_confirm",
+              "value": true,
+              "passed": false,
+              "actual": null,
+              "missing_evidence": "'NoneType' object is not subscriptable"
+            },
+            {
+              "kind": "quantities",
+              "path": "after.guide.plan.items",
+              "value": {
+                "demo:cn-nongfu-water-550ml-bottle": 1
+              },
+              "passed": false,
+              "actual": null,
+              "missing_evidence": "'NoneType' object is not subscriptable"
+            },
+            {
+              "kind": "fields",
+              "path": "after.guide.plan.items",
+              "value": {
+                "selected": true
+              },
+              "passed": false,
+              "actual": null,
+              "missing_evidence": "'NoneType' object is not subscriptable"
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.plan.selected_total_fen",
+              "value": 200,
+              "passed": false,
+              "actual": null,
+              "missing_evidence": "'NoneType' object is not subscriptable"
+            }
+          ],
+          "error": null
+        }
+      ],
+      "slow_turns": [
+        {
+          "label": "consent-keke",
+          "elapsed_ms": 46971.62700002082
+        }
+      ],
+      "critical_violations": [],
+      "error": null
+    },
+    {
+      "execution_id": "H15-r1",
+      "case_id": "H15",
+      "group": "theme",
+      "business_status": "passed",
+      "performance_passed": false,
+      "failure_stages": [],
+      "slow_turns": [
+        {
+          "label": "price",
+          "elapsed_ms": 15214.8
+        },
+        {
+          "label": "policy",
+          "elapsed_ms": 21058.2
+        }
+      ],
+      "critical_violations": [],
+      "error": null
+    },
+    {
+      "execution_id": "H16-r1",
+      "case_id": "H16",
+      "group": "theme",
+      "business_status": "passed",
+      "performance_passed": false,
+      "failure_stages": [],
+      "slow_turns": [
+        {
+          "label": "request",
+          "elapsed_ms": 17540.1
+        }
+      ],
+      "critical_violations": [],
+      "error": null
+    },
+    {
+      "execution_id": "H18-r1",
+      "case_id": "H18",
+      "group": "memory",
+      "business_status": "failed",
+      "performance_passed": true,
+      "failure_stages": [
+        {
+          "label": "request",
+          "status": "failed",
+          "failed_checks": [
+            {
+              "kind": "eq",
+              "path": "after.memory_events.-1.phase",
+              "value": "memory_extract_completed",
+              "passed": false,
+              "actual": null,
+              "missing_evidence": "list index out of range"
+            }
+          ],
+          "error": null
+        }
+      ],
+      "slow_turns": [],
+      "critical_violations": [],
+      "error": null
+    },
+    {
+      "execution_id": "R21-r1",
+      "case_id": "R21",
+      "group": "drink",
+      "business_status": "passed",
+      "performance_passed": false,
+      "failure_stages": [],
+      "slow_turns": [
+        {
+          "label": "request",
+          "elapsed_ms": 39735.9
+        }
+      ],
+      "critical_violations": [],
+      "error": null
+    },
+    {
+      "execution_id": "R22-r1",
+      "case_id": "R22",
+      "group": "drink",
+      "business_status": "passed",
+      "performance_passed": false,
+      "failure_stages": [],
+      "slow_turns": [
+        {
+          "label": "request",
+          "elapsed_ms": 39973.9
+        }
+      ],
+      "critical_violations": [],
+      "error": null
+    },
+    {
+      "execution_id": "R23-r1",
+      "case_id": "R23",
+      "group": "purchase",
+      "business_status": "passed",
+      "performance_passed": false,
+      "failure_stages": [],
+      "slow_turns": [
+        {
+          "label": "request",
+          "elapsed_ms": 27251.2
+        }
+      ],
+      "critical_violations": [],
+      "error": null
+    },
+    {
+      "execution_id": "R24-r1",
+      "case_id": "R24",
+      "group": "purchase",
+      "business_status": "passed",
+      "performance_passed": false,
+      "failure_stages": [],
+      "slow_turns": [
+        {
+          "label": "stop",
+          "elapsed_ms": 17562.4
+        }
+      ],
+      "critical_violations": [],
+      "error": null
+    },
+    {
+      "execution_id": "R25-r1",
+      "case_id": "R25",
+      "group": "policy",
+      "business_status": "passed",
+      "performance_passed": false,
+      "failure_stages": [],
+      "slow_turns": [
+        {
+          "label": "request",
+          "elapsed_ms": 17259.9
+        }
+      ],
+      "critical_violations": [],
+      "error": null
+    },
+    {
+      "execution_id": "R31-r1",
+      "case_id": "R31",
+      "group": "aftersales",
+      "business_status": "failed",
+      "performance_passed": true,
+      "failure_stages": [
+        {
+          "label": "request",
+          "status": "failed",
+          "failed_checks": [
+            {
+              "kind": "length",
+              "path": "after.returns",
+              "value": 1,
+              "passed": false,
+              "actual": []
+            },
+            {
+              "kind": "eq",
+              "path": "after.returns.0.status",
+              "value": "pending",
+              "passed": false,
+              "actual": null,
+              "missing_evidence": "list index out of range"
+            }
+          ],
+          "error": null
+        }
+      ],
+      "slow_turns": [],
+      "critical_violations": [],
+      "error": null
+    },
+    {
+      "execution_id": "R32-r1",
+      "case_id": "R32",
+      "group": "aftersales",
+      "business_status": "passed",
+      "performance_passed": false,
+      "failure_stages": [],
+      "slow_turns": [
+        {
+          "label": "request",
+          "elapsed_ms": 15177.0
+        }
+      ],
+      "critical_violations": [],
+      "error": null
+    },
+    {
+      "execution_id": "R01-r2",
+      "case_id": "R01",
+      "group": "snack",
+      "business_status": "failed",
+      "performance_passed": false,
+      "failure_stages": [
+        {
+          "label": "request",
+          "status": "failed",
+          "failed_checks": [
+            {
+              "kind": "present",
+              "path": "after.guide.pending_clarifications",
+              "value": true,
+              "passed": false,
+              "actual": []
+            }
+          ],
+          "error": null
+        }
+      ],
+      "slow_turns": [
+        {
+          "label": "request",
+          "elapsed_ms": 71565.7
+        }
+      ],
+      "critical_violations": [],
+      "error": null
+    },
+    {
+      "execution_id": "R02-r2",
+      "case_id": "R02",
+      "group": "snack",
+      "business_status": "passed",
+      "performance_passed": false,
+      "failure_stages": [],
+      "slow_turns": [
+        {
+          "label": "request",
+          "elapsed_ms": 20734.3
+        }
+      ],
+      "critical_violations": [],
+      "error": null
+    },
+    {
+      "execution_id": "R03-r2",
+      "case_id": "R03",
+      "group": "snack",
+      "business_status": "passed",
+      "performance_passed": false,
+      "failure_stages": [],
+      "slow_turns": [
+        {
+          "label": "request",
+          "elapsed_ms": 18871.5
+        }
+      ],
+      "critical_violations": [],
+      "error": null
+    },
+    {
+      "execution_id": "R05-r2",
+      "case_id": "R05",
+      "group": "drink",
+      "business_status": "passed",
+      "performance_passed": false,
+      "failure_stages": [],
+      "slow_turns": [
+        {
+          "label": "choose-type",
+          "elapsed_ms": 30337.8
+        }
+      ],
+      "critical_violations": [],
+      "error": null
+    },
+    {
+      "execution_id": "R06-r2",
+      "case_id": "R06",
+      "group": "drink",
+      "business_status": "passed",
+      "performance_passed": false,
+      "failure_stages": [],
+      "slow_turns": [
+        {
+          "label": "selected-purchase",
+          "elapsed_ms": 36457.1
+        }
+      ],
+      "critical_violations": [],
+      "error": null
+    },
+    {
+      "execution_id": "R07-r2",
+      "case_id": "R07",
+      "group": "drink",
+      "business_status": "failed",
+      "performance_passed": true,
+      "failure_stages": [
+        {
+          "label": "request",
+          "status": "failed",
+          "failed_checks": [
+            {
+              "kind": "present",
+              "path": "after.guide.plan",
+              "value": true,
+              "passed": false,
+              "actual": null
+            },
+            {
+              "kind": "quantities",
+              "path": "after.guide.plan.items",
+              "value": {
+                "demo:cn-coke-zero-500ml-bottle": 2
+              },
+              "passed": false,
+              "actual": null,
+              "missing_evidence": "'NoneType' object is not subscriptable"
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.plan.selected_total_fen",
+              "value": 800,
+              "passed": false,
+              "actual": null,
+              "missing_evidence": "'NoneType' object is not subscriptable"
+            }
+          ],
+          "error": null
+        }
+      ],
+      "slow_turns": [],
+      "critical_violations": [],
+      "error": null
+    },
+    {
+      "execution_id": "R11-r2",
+      "case_id": "R11",
+      "group": "purchase",
+      "business_status": "failed",
+      "performance_passed": true,
+      "failure_stages": [
+        {
+          "label": "new-budget",
+          "status": "failed",
+          "failed_checks": [
+            {
+              "kind": "eq",
+              "path": "after.guide.constraints_summary.budget_fen",
+              "value": 1000,
+              "passed": false,
+              "actual": 2000
+            }
+          ],
+          "error": null
+        }
+      ],
+      "slow_turns": [],
+      "critical_violations": [],
+      "error": null
+    },
+    {
+      "execution_id": "R17-r2",
+      "case_id": "R17",
+      "group": "aftersales",
+      "business_status": "passed",
+      "performance_passed": false,
+      "failure_stages": [],
+      "slow_turns": [
+        {
+          "label": "consent-momo",
+          "elapsed_ms": 37292.919100029394
+        },
+        {
+          "label": "consent-keke",
+          "elapsed_ms": 18364.12880010903
+        }
+      ],
+      "critical_violations": [],
+      "error": null
+    },
+    {
+      "execution_id": "R19-r2",
+      "case_id": "R19",
+      "group": "memory",
+      "business_status": "failed",
+      "performance_passed": true,
+      "failure_stages": [
+        {
+          "label": "list",
+          "status": "failed",
+          "failed_checks": [
+            {
+              "kind": "contains",
+              "path": "reply",
+              "value": "百事",
+              "passed": false,
+              "actual": "你指的是正在选购的商品或采购清单项，还是已下单订单？"
+            }
+          ],
+          "error": null
+        }
+      ],
+      "slow_turns": [],
+      "critical_violations": [],
+      "error": null
+    },
+    {
+      "execution_id": "R01-r3",
+      "case_id": "R01",
+      "group": "snack",
+      "business_status": "failed",
+      "performance_passed": false,
+      "failure_stages": [
+        {
+          "label": "request",
+          "status": "failed",
+          "failed_checks": [
+            {
+              "kind": "present",
+              "path": "after.guide.pending_clarifications",
+              "value": true,
+              "passed": false,
+              "actual": []
+            }
+          ],
+          "error": null
+        }
+      ],
+      "slow_turns": [
+        {
+          "label": "request",
+          "elapsed_ms": 23397.7
+        }
+      ],
+      "critical_violations": [],
+      "error": null
+    },
+    {
+      "execution_id": "R05-r3",
+      "case_id": "R05",
+      "group": "drink",
+      "business_status": "passed",
+      "performance_passed": false,
+      "failure_stages": [],
+      "slow_turns": [
+        {
+          "label": "selected-purchase",
+          "elapsed_ms": 17420.4
+        }
+      ],
+      "critical_violations": [],
+      "error": null
+    },
+    {
+      "execution_id": "R07-r3",
+      "case_id": "R07",
+      "group": "drink",
+      "business_status": "failed",
+      "performance_passed": true,
+      "failure_stages": [
+        {
+          "label": "request",
+          "status": "failed",
+          "failed_checks": [
+            {
+              "kind": "quantities",
+              "path": "after.guide.plan.items",
+              "value": {
+                "demo:cn-coke-zero-500ml-bottle": 2
+              },
+              "passed": false,
+              "actual": [
+                {
+                  "sku_id": "demo:cn-coke-original-500ml-bottle",
+                  "name": "可口可乐经典原味汽水500ml瓶装",
+                  "quantity": 2,
+                  "unit_price_fen": 400,
+                  "line_total_fen": 800,
+                  "image_path": null,
+                  "image_kind": "placeholder",
+                  "image_kind_legacy": "placeholder",
+                  "role": "required",
+                  "selected": true,
+                  "recommended_quantity": 2,
+                  "max_addable_quantity": 36,
+                  "spec_quantity": 500,
+                  "spec_unit": "ml",
+                  "sell_unit": "件",
+                  "quantity_source": "recommended",
+                  "group_id": "product:demo:cn-coke-original-500ml-bottle",
+                  "target_kind": "product",
+                  "target_id": "demo:cn-coke-original-500ml-bottle",
+                  "component_name": null,
+                  "contributions": [
+                    {
+                      "group_id": "product:demo:cn-coke-original-500ml-bottle",
+                      "quantity": 2,
+                      "selected": true,
+                      "added_quantity": 0,
+                      "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                      "requirement": {
+                        "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                        "name": "可口可乐经典原味汽水500ml瓶装",
+                        "ingredient_id": null,
+                        "component_id": null,
+                        "quantity": 2,
+                        "unit": "件",
+                        "quantity_known": true,
+                        "requiredness": "core",
+                        "source": {
+                          "kind": "user",
+                          "ref": "可口可乐经典原味汽水500ml瓶装"
+                        }
+                      }
+                    }
+                  ],
+                  "added_quantity": 0,
+                  "remaining_quantity": 2,
+                  "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                  "requirement": {
+                    "required_item_id": "product:demo:cn-coke-original-500ml-bottle#demo:cn-coke-original-500ml-bottle",
+                    "name": "可口可乐经典原味汽水500ml瓶装",
+                    "ingredient_id": null,
+                    "component_id": null,
+                    "quantity": 2,
+                    "unit": "件",
+                    "quantity_known": true,
+                    "requiredness": "core",
+                    "source": {
+                      "kind": "user",
+                      "ref": "可口可乐经典原味汽水500ml瓶装"
+                    }
+                  },
+                  "availability": "available",
+                  "evidence": {
+                    "sku_source": "store_offer",
+                    "quoted_at": "2026-10-07T07:57:35+00:00",
+                    "stock_verified": true,
+                    "data_mode": "demo",
+                    "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                    "unknown_constraints": []
+                  },
+                  "pack_source": "catalog_spec",
+                  "shortfall_quantity": 0
+                }
+              ]
+            }
+          ],
+          "error": null
+        }
+      ],
+      "slow_turns": [],
+      "critical_violations": [],
+      "error": null
+    },
+    {
+      "execution_id": "R08-r3",
+      "case_id": "R08",
+      "group": "purchase",
+      "business_status": "failed",
+      "performance_passed": false,
+      "failure_stages": [
+        {
+          "label": "increase",
+          "status": "failed",
+          "failed_checks": [
+            {
+              "kind": "quantities",
+              "path": "after.guide.plan.items",
+              "value": {
+                "demo:cn-nongfu-water-550ml-bottle": 3
+              },
+              "passed": false,
+              "actual": [
+                {
+                  "sku_id": "demo:cn-nongfu-water-550ml-bottle",
+                  "name": "农夫山泉饮用天然水550ml瓶装",
+                  "quantity": 1,
+                  "unit_price_fen": 200,
+                  "line_total_fen": 200,
+                  "image_path": null,
+                  "image_kind": "placeholder",
+                  "image_kind_legacy": "placeholder",
+                  "role": "required",
+                  "selected": true,
+                  "recommended_quantity": 1,
+                  "max_addable_quantity": 72,
+                  "spec_quantity": 550,
+                  "spec_unit": "ml",
+                  "sell_unit": "件",
+                  "quantity_source": "recommended",
+                  "group_id": "product:demo:cn-nongfu-water-550ml-bottle",
+                  "target_kind": "product",
+                  "target_id": "demo:cn-nongfu-water-550ml-bottle",
+                  "component_name": null,
+                  "contributions": [
+                    {
+                      "group_id": "product:demo:cn-nongfu-water-550ml-bottle",
+                      "quantity": 1,
+                      "selected": true,
+                      "added_quantity": 0,
+                      "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+                      "requirement": {
+                        "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+                        "name": "农夫山泉饮用天然水550ml瓶装",
+                        "ingredient_id": null,
+                        "component_id": null,
+                        "quantity": 1,
+                        "unit": "件",
+                        "quantity_known": true,
+                        "requiredness": "core",
+                        "source": {
+                          "kind": "user",
+                          "ref": "农夫山泉饮用天然水550ml瓶装"
+                        }
+                      }
+                    }
+                  ],
+                  "added_quantity": 0,
+                  "remaining_quantity": 1,
+                  "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+                  "requirement": {
+                    "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+                    "name": "农夫山泉饮用天然水550ml瓶装",
+                    "ingredient_id": null,
+                    "component_id": null,
+                    "quantity": 1,
+                    "unit": "件",
+                    "quantity_known": true,
+                    "requiredness": "core",
+                    "source": {
+                      "kind": "user",
+                      "ref": "农夫山泉饮用天然水550ml瓶装"
+                    }
+                  },
+                  "availability": "available",
+                  "evidence": {
+                    "sku_source": "store_offer",
+                    "quoted_at": "2026-10-07T07:57:28+00:00",
+                    "stock_verified": true,
+                    "data_mode": "demo",
+                    "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                    "unknown_constraints": []
+                  },
+                  "pack_source": "catalog_spec",
+                  "shortfall_quantity": 0
+                }
+              ]
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.plan.selected_total_fen",
+              "value": 600,
+              "passed": false,
+              "actual": 200
+            }
+          ],
+          "error": null
+        }
+      ],
+      "slow_turns": [
+        {
+          "label": "increase",
+          "elapsed_ms": 40680.9
+        }
+      ],
+      "critical_violations": [],
+      "error": null
+    },
+    {
+      "execution_id": "R09-r3",
+      "case_id": "R09",
+      "group": "purchase",
+      "business_status": "failed",
+      "performance_passed": true,
+      "failure_stages": [
+        {
+          "label": "decrease",
+          "status": "failed",
+          "failed_checks": [
+            {
+              "kind": "quantities",
+              "path": "after.guide.plan.items",
+              "value": {
+                "demo:cn-pepsi-original-330ml-can": 1
+              },
+              "passed": false,
+              "actual": [
+                {
+                  "sku_id": "demo:cn-pepsi-original-330ml-can",
+                  "name": "百事可乐原味汽水330ml罐装",
+                  "quantity": 3,
+                  "unit_price_fen": 300,
+                  "line_total_fen": 900,
+                  "image_path": null,
+                  "image_kind": "placeholder",
+                  "image_kind_legacy": "placeholder",
+                  "role": "required",
+                  "selected": true,
+                  "recommended_quantity": 3,
+                  "max_addable_quantity": 36,
+                  "spec_quantity": 330,
+                  "spec_unit": "ml",
+                  "sell_unit": "件",
+                  "quantity_source": "recommended",
+                  "group_id": "product:demo:cn-pepsi-original-330ml-can",
+                  "target_kind": "product",
+                  "target_id": "demo:cn-pepsi-original-330ml-can",
+                  "component_name": null,
+                  "contributions": [
+                    {
+                      "group_id": "product:demo:cn-pepsi-original-330ml-can",
+                      "quantity": 3,
+                      "selected": true,
+                      "added_quantity": 0,
+                      "required_item_id": "product:demo:cn-pepsi-original-330ml-can#demo:cn-pepsi-original-330ml-can",
+                      "requirement": {
+                        "required_item_id": "product:demo:cn-pepsi-original-330ml-can#demo:cn-pepsi-original-330ml-can",
+                        "name": "百事可乐原味汽水330ml罐装",
+                        "ingredient_id": null,
+                        "component_id": null,
+                        "quantity": 3,
+                        "unit": "件",
+                        "quantity_known": true,
+                        "requiredness": "core",
+                        "source": {
+                          "kind": "user",
+                          "ref": "百事可乐原味汽水330ml罐装"
+                        }
+                      }
+                    }
+                  ],
+                  "added_quantity": 0,
+                  "remaining_quantity": 3,
+                  "required_item_id": "product:demo:cn-pepsi-original-330ml-can#demo:cn-pepsi-original-330ml-can",
+                  "requirement": {
+                    "required_item_id": "product:demo:cn-pepsi-original-330ml-can#demo:cn-pepsi-original-330ml-can",
+                    "name": "百事可乐原味汽水330ml罐装",
+                    "ingredient_id": null,
+                    "component_id": null,
+                    "quantity": 3,
+                    "unit": "件",
+                    "quantity_known": true,
+                    "requiredness": "core",
+                    "source": {
+                      "kind": "user",
+                      "ref": "百事可乐原味汽水330ml罐装"
+                    }
+                  },
+                  "availability": "available",
+                  "evidence": {
+                    "sku_source": "store_offer",
+                    "quoted_at": "2026-10-07T07:58:23+00:00",
+                    "stock_verified": true,
+                    "data_mode": "demo",
+                    "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                    "unknown_constraints": []
+                  },
+                  "pack_source": "catalog_spec",
+                  "shortfall_quantity": 0
+                }
+              ]
+            },
+            {
+              "kind": "eq",
+              "path": "after.guide.plan.selected_total_fen",
+              "value": 300,
+              "passed": false,
+              "actual": 900
+            }
+          ],
+          "error": null
+        }
+      ],
+      "slow_turns": [],
+      "critical_violations": [],
+      "error": null
+    },
+    {
+      "execution_id": "R11-r3",
+      "case_id": "R11",
+      "group": "purchase",
+      "business_status": "failed",
+      "performance_passed": true,
+      "failure_stages": [
+        {
+          "label": "new-budget",
+          "status": "failed",
+          "failed_checks": [
+            {
+              "kind": "eq",
+              "path": "after.guide.constraints_summary.budget_fen",
+              "value": 1000,
+              "passed": false,
+              "actual": 2000
+            }
+          ],
+          "error": null
+        }
+      ],
+      "slow_turns": [],
+      "critical_violations": [],
+      "error": null
+    },
+    {
+      "execution_id": "R13-r3",
+      "case_id": "R13",
+      "group": "policy",
+      "business_status": "passed",
+      "performance_passed": false,
+      "failure_stages": [],
+      "slow_turns": [
+        {
+          "label": "request",
+          "elapsed_ms": 19556.6
+        }
+      ],
+      "critical_violations": [],
+      "error": null
+    },
+    {
+      "execution_id": "R19-r3",
+      "case_id": "R19",
+      "group": "memory",
+      "business_status": "failed",
+      "performance_passed": true,
+      "failure_stages": [
+        {
+          "label": "list",
+          "status": "failed",
+          "failed_checks": [
+            {
+              "kind": "contains",
+              "path": "reply",
+              "value": "百事",
+              "passed": false,
+              "actual": "你指的是正在选购的商品或采购清单项，还是已下单订单？"
+            }
+          ],
+          "error": null
+        }
+      ],
+      "slow_turns": [],
+      "critical_violations": [],
+      "error": null
+    },
+    {
+      "execution_id": "R20-r3",
+      "case_id": "R20",
+      "group": "memory",
+      "business_status": "failed",
+      "performance_passed": true,
+      "failure_stages": [
+        {
+          "label": "delete",
+          "status": "failed",
+          "failed_checks": [
+            {
+              "kind": "length",
+              "path": "after.memories",
+              "value": 0,
+              "passed": false,
+              "actual": [
+                {
+                  "memory_id": "eval-memory-0",
+                  "owner_id": "owner-e8c8ed2e158d4478",
+                  "category": "user",
+                  "source": "explicit",
+                  "content": "平时喜欢可口可乐",
+                  "expires_at": null
+                }
+              ]
+            }
+          ],
+          "error": null
+        }
+      ],
+      "slow_turns": [],
+      "critical_violations": [],
+      "error": null
+    }
+  ],
+  "money_cost": null,
+  "human_evaluation": "not_evaluated",
+  "limitations": [
+    "lexical only; hybrid not evaluated",
+    "API first useful result time unknown (TestClient buffers SSE)",
+    "UI timing is action start to fully received completed SSE; final text render latency not sampled",
+    "Final UI subtotal/budget assertions added after run-02; passed plan checked offline, failed snack plan not reached",
+    "Same-model semantic judge uncalibrated; diagnostics do not alter business/latency scores",
+    "Diagnostic replay uses run-03 inputs; R14/R17 pilot hints predate correction and R17/H03/H12 hints predate completed assertions",
+    "Judge inputs include business state/catalog facts but omit captured policy/retrieval requests; grounding findings are incomplete diagnostics",
+    "Token sums have explicit coverage; no verified price and no UI provider usage capture",
+    "Observable deterministic critical violations do not establish zero free-text factual errors",
+    "Original failed HTTP status may lack response body; see available state/trace, do not invent error code"
+  ]
+}

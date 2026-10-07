@@ -1,0 +1,7 @@
+# Frozen receipts, requests and source snapshots are hashed as exact bytes.
+* -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+# Preserve the original PowerShell error renderer's trailing padding.
+ui/run-02-service-verify-attempt01.stderr.txt -whitespace
+# Frozen audit attempts retain their captured terminal blank line.
+evidence/rescore-run04/acceptance_audit.py whitespace=blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol
+evidence/rescore-run04/acceptance_audit.v2.py whitespace=blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol

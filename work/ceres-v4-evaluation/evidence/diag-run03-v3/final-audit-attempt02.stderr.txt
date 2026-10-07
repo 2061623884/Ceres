@@ -1,0 +1,4 @@
+  File "C:\Users\20616\Desktop\Agent\Agent产品\Ceres\work\ceres-v4-evaluation\evidence\diag-run03-v3\final-audit.py", line 208
+    (evidence / "final-audit.json").write_text(json.dumps(audit, ensure_ascii=False, indent=2) + "
+                                                                                                 ^
+SyntaxError: unterminated string literal (detected at line 208)

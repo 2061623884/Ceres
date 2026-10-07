@@ -1,0 +1,60 @@
+{
+  "case_id": "R20",
+  "group": "memory",
+  "scenario_family": "explicit-update-delete",
+  "split": "regression",
+  "core": true,
+  "goal": "更正并删除已有明确偏好，不改购物车",
+  "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+  "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+  "steps": [
+    {
+      "op": "turn",
+      "label": "request",
+      "message": "把已保存的可乐偏好更正成可口可乐",
+      "expect": [
+        {
+          "kind": "contains",
+          "path": "after.memories.0.content",
+          "value": "可口可乐"
+        },
+        {
+          "kind": "eq",
+          "path": "after.memories.0.source",
+          "value": "explicit"
+        }
+      ]
+    },
+    {
+      "op": "turn",
+      "label": "delete",
+      "message": "删除已保存的可乐偏好",
+      "expect": [
+        {
+          "kind": "length",
+          "path": "after.memories",
+          "value": 0
+        },
+        {
+          "kind": "unchanged",
+          "path": "after.cart",
+          "before_path": "before.cart"
+        },
+        {
+          "kind": "unchanged",
+          "path": "after.orders",
+          "before_path": "before.orders"
+        }
+      ]
+    }
+  ],
+  "setup": {
+    "memories": [
+      {
+        "category": "user",
+        "source": "explicit",
+        "content": "平时喜欢百事可乐"
+      }
+    ]
+  }
+}

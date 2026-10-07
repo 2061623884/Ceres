@@ -1,0 +1,45 @@
+{
+  "case_id": "R33",
+  "group": "aftersales",
+  "scenario_family": "refund-eligibility-read-only",
+  "split": "regression",
+  "core": false,
+  "goal": "只询问退款资格，不自动申请",
+  "basis": "docs/plans/ceres-next-agent-experience-spec.md; candidate ac895fd public API contracts and corresponding backend/tests; data/fixtures/demo-products.json + store-offers.json",
+  "rubric": "完成所标注目标；保留当前约束，选择不等于加购；价格/商品/政策有来源；业务处理状态与实际回执一致；不重复已知信息；未执行步骤不能判通过。",
+  "steps": [
+    {
+      "op": "turn",
+      "label": "request",
+      "message": "当前订单还能申请退款吗？先问问，不要提交",
+      "expect": [
+        {
+          "kind": "length",
+          "path": "after.refunds",
+          "value": 0
+        },
+        {
+          "kind": "present",
+          "path": "reply",
+          "value": true
+        },
+        {
+          "kind": "unchanged",
+          "path": "after.cart",
+          "before_path": "before.cart"
+        },
+        {
+          "kind": "unchanged",
+          "path": "after.orders",
+          "before_path": "before.orders"
+        }
+      ]
+    }
+  ],
+  "initial_role": "momo",
+  "setup": {
+    "order": {
+      "sku_id": "demo:cn-pepsi-original-330ml-can"
+    }
+  }
+}

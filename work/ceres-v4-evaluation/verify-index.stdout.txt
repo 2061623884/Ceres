@@ -1,0 +1,11 @@
+{
+  "version": "idx-81e9fa689baef6b5",
+  "passed": true,
+  "problems": [],
+  "counts": {
+    "docs": 172,
+    "fts": 172,
+    "vectors": 0
+  },
+  "manifest_id": "sha256:51eac0ec550d8cc5ed169ecb4618f1a805dc4e6e94c8ffcce9dc5779ccc30dd0"
+}

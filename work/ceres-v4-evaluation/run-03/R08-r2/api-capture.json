@@ -1,0 +1,1613 @@
+{
+  "steps": [
+    {
+      "case_id": "R08",
+      "op": "turn",
+      "label": "request",
+      "before": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-34d684ef7864",
+          "product_cards": [],
+          "task_id": null,
+          "state_version": 0,
+          "session_version": 0,
+          "current_step": null,
+          "task_status": null,
+          "entry_context": {
+            "page": "home",
+            "category_id": null,
+            "activity_id": null,
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": null,
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": null,
+          "available_actions": [
+            "send_message"
+          ],
+          "constraints_summary": {},
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "empty",
+          "messages": null
+        },
+        "opening": {
+          "role": "keke",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "active_role_before": "keke",
+      "request": {
+        "request_id": "08-R08-668f933f0a",
+        "message": "买一瓶农夫山泉饮用水550ml瓶装",
+        "expected_task_id": null,
+        "expected_state_version": 0,
+        "expected_session_version": 0
+      },
+      "http_status": 200,
+      "elapsed_ms": 4775.2,
+      "latency_target_ms": 15000,
+      "latency_target_exceeded": false,
+      "events": [
+        {
+          "type": "service.route",
+          "payload": {
+            "status": "completed",
+            "decision": "stay_current",
+            "raw_choice": "stay_current",
+            "current_role": "keke",
+            "prompt_mode": "none",
+            "request_id": "08-R08-668f933f0a",
+            "route_ms": 936.3530999980867,
+            "criteria_version": "ceres-service-v3.2"
+          }
+        },
+        {
+          "type": "accepted",
+          "payload": {}
+        },
+        {
+          "type": "progress",
+          "payload": {
+            "phase": "understanding"
+          }
+        },
+        {
+          "type": "progress",
+          "payload": {
+            "phase": "retrieve"
+          }
+        },
+        {
+          "type": "progress",
+          "payload": {
+            "phase": "validate"
+          }
+        },
+        {
+          "type": "plan.ready",
+          "payload": {
+            "plan": {
+              "plan_effect": "replace",
+              "plan_id": "plan-c9062fa15aef",
+              "plan_version": 1,
+              "task_id": "task-a8c355275b30",
+              "state_version": 2,
+              "session_version": 2,
+              "mode": "bundle",
+              "items": [
+                {
+                  "sku_id": "demo:cn-nongfu-water-550ml-bottle",
+                  "name": "农夫山泉饮用天然水550ml瓶装",
+                  "quantity": 1,
+                  "recommended_quantity": 1,
+                  "quantity_source": "recommended",
+                  "unit_price_fen": 200,
+                  "line_total_fen": 200,
+                  "image_path": null,
+                  "image_kind": "placeholder",
+                  "image_kind_legacy": "placeholder",
+                  "role": "required",
+                  "selected": true,
+                  "ingredient_ids": [],
+                  "spec_quantity": 550.0,
+                  "spec_unit": "ml",
+                  "sell_unit": "件",
+                  "max_addable_quantity": 72,
+                  "group_id": "product:demo:cn-nongfu-water-550ml-bottle",
+                  "target_kind": "product",
+                  "target_id": "demo:cn-nongfu-water-550ml-bottle",
+                  "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+                  "requirement": {
+                    "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+                    "name": "农夫山泉饮用天然水550ml瓶装",
+                    "ingredient_id": null,
+                    "component_id": null,
+                    "quantity": 1,
+                    "unit": "件",
+                    "quantity_known": true,
+                    "requiredness": "core",
+                    "source": {
+                      "kind": "user",
+                      "ref": "农夫山泉饮用天然水550ml瓶装"
+                    }
+                  },
+                  "availability": "available",
+                  "evidence": {
+                    "sku_source": "store_offer",
+                    "quoted_at": "2026-10-07T07:51:46+00:00",
+                    "stock_verified": true,
+                    "data_mode": "demo",
+                    "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                    "unknown_constraints": []
+                  },
+                  "pack_source": "catalog_spec",
+                  "shortfall_quantity": 0,
+                  "user_quantity": null,
+                  "added_quantity": 0,
+                  "remaining_quantity": 1,
+                  "contributions": [
+                    {
+                      "group_id": "product:demo:cn-nongfu-water-550ml-bottle",
+                      "quantity": 1,
+                      "selected": true,
+                      "added_quantity": 0,
+                      "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+                      "requirement": {
+                        "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+                        "name": "农夫山泉饮用天然水550ml瓶装",
+                        "ingredient_id": null,
+                        "component_id": null,
+                        "quantity": 1,
+                        "unit": "件",
+                        "quantity_known": true,
+                        "requiredness": "core",
+                        "source": {
+                          "kind": "user",
+                          "ref": "农夫山泉饮用天然水550ml瓶装"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "total_price_fen": 200,
+              "selected_total_fen": 200,
+              "outstanding_total_fen": 200,
+              "expires_at": "2026-10-07T07:56:46.807653+00:00",
+              "validation_status": "passed",
+              "coverage_mode": "full",
+              "coverage_intent": "partial_ok",
+              "uncovered_items": [],
+              "gaps": [],
+              "can_confirm": true,
+              "targets": [
+                {
+                  "group_id": "product:demo:cn-nongfu-water-550ml-bottle",
+                  "kind": "product",
+                  "target_id": "demo:cn-nongfu-water-550ml-bottle",
+                  "name": "农夫山泉饮用天然水550ml瓶装",
+                  "people": null,
+                  "people_source": "default"
+                }
+              ],
+              "merged_sku_contributions": []
+            },
+            "plan_effect": "replace"
+          }
+        },
+        {
+          "type": "answer.delta",
+          "payload": {
+            "delta": "采购清单已加入「农夫山泉饮用天然水550ml瓶装」\n已整理 1 件商品，选中合计 ¥2.00（演示价格）。包含：农夫山泉饮用天然水550ml瓶装。",
+            "final": true,
+            "replace": false
+          }
+        },
+        {
+          "type": "turn.completed",
+          "payload": {
+            "message": "采购清单已加入「农夫山泉饮用天然水550ml瓶装」\n已整理 1 件商品，选中合计 ¥2.00（演示价格）。包含：农夫山泉饮用天然水550ml瓶装。",
+            "status": "awaiting_confirmation",
+            "task_id": "task-a8c355275b30",
+            "state_version": 2,
+            "session_version": 2,
+            "plan": {
+              "plan_id": "plan-c9062fa15aef",
+              "plan_version": 1,
+              "mode": "bundle",
+              "items": [
+                {
+                  "sku_id": "demo:cn-nongfu-water-550ml-bottle",
+                  "name": "农夫山泉饮用天然水550ml瓶装",
+                  "quantity": 1,
+                  "recommended_quantity": 1,
+                  "quantity_source": "recommended",
+                  "unit_price_fen": 200,
+                  "line_total_fen": 200,
+                  "image_path": null,
+                  "image_kind": "placeholder",
+                  "image_kind_legacy": "placeholder",
+                  "role": "required",
+                  "selected": true,
+                  "ingredient_ids": [],
+                  "spec_quantity": 550.0,
+                  "spec_unit": "ml",
+                  "sell_unit": "件",
+                  "max_addable_quantity": 72,
+                  "group_id": "product:demo:cn-nongfu-water-550ml-bottle",
+                  "target_kind": "product",
+                  "target_id": "demo:cn-nongfu-water-550ml-bottle",
+                  "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+                  "requirement": {
+                    "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+                    "name": "农夫山泉饮用天然水550ml瓶装",
+                    "ingredient_id": null,
+                    "component_id": null,
+                    "quantity": 1,
+                    "unit": "件",
+                    "quantity_known": true,
+                    "requiredness": "core",
+                    "source": {
+                      "kind": "user",
+                      "ref": "农夫山泉饮用天然水550ml瓶装"
+                    }
+                  },
+                  "availability": "available",
+                  "evidence": {
+                    "sku_source": "store_offer",
+                    "quoted_at": "2026-10-07T07:51:46+00:00",
+                    "stock_verified": true,
+                    "data_mode": "demo",
+                    "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                    "unknown_constraints": []
+                  },
+                  "pack_source": "catalog_spec",
+                  "shortfall_quantity": 0,
+                  "user_quantity": null,
+                  "added_quantity": 0,
+                  "remaining_quantity": 1,
+                  "contributions": [
+                    {
+                      "group_id": "product:demo:cn-nongfu-water-550ml-bottle",
+                      "quantity": 1,
+                      "selected": true,
+                      "added_quantity": 0,
+                      "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+                      "requirement": {
+                        "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+                        "name": "农夫山泉饮用天然水550ml瓶装",
+                        "ingredient_id": null,
+                        "component_id": null,
+                        "quantity": 1,
+                        "unit": "件",
+                        "quantity_known": true,
+                        "requiredness": "core",
+                        "source": {
+                          "kind": "user",
+                          "ref": "农夫山泉饮用天然水550ml瓶装"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "total_price_fen": 200,
+              "selected_total_fen": 200,
+              "outstanding_total_fen": 200,
+              "expires_at": "2026-10-07T07:56:46.807653+00:00",
+              "validation_status": "passed",
+              "coverage_mode": "full",
+              "coverage_intent": "partial_ok",
+              "uncovered_items": [],
+              "gaps": [],
+              "can_confirm": true,
+              "targets": [
+                {
+                  "group_id": "product:demo:cn-nongfu-water-550ml-bottle",
+                  "kind": "product",
+                  "target_id": "demo:cn-nongfu-water-550ml-bottle",
+                  "name": "农夫山泉饮用天然水550ml瓶装",
+                  "people": null,
+                  "people_source": "default"
+                }
+              ],
+              "merged_sku_contributions": []
+            },
+            "pending_clarifications": [],
+            "product_cards": [],
+            "plan_effect": "replace",
+            "action_results": [
+              {
+                "type": "read_only",
+                "kind": "lookup",
+                "status": "completed",
+                "saved": false,
+                "reply_ok": true,
+                "retrieval_status": "ok",
+                "retrieval_mode": "lexical",
+                "fallback_reason": null,
+                "index_version": "idx-81e9fa689baef6b5",
+                "action_id": "a1"
+              },
+              {
+                "type": "mutation",
+                "verb": "add",
+                "group_id": "product:demo:cn-nongfu-water-550ml-bottle",
+                "status": "committed",
+                "saved": true,
+                "reply_ok": true,
+                "plan_effect": "replace",
+                "message": "采购清单已加入「农夫山泉饮用天然水550ml瓶装」",
+                "candidate_ref": "p52827d7999a086a4",
+                "action_id": "a2"
+              }
+            ],
+            "answer_status": "awaiting_confirmation",
+            "route": "prepare",
+            "trace_id": "trace-d84f1f40f06d"
+          }
+        }
+      ],
+      "role_model_call_range": [
+        0,
+        1
+      ],
+      "kev_call_range": [
+        0,
+        2
+      ],
+      "terminal": {
+        "message": "采购清单已加入「农夫山泉饮用天然水550ml瓶装」\n已整理 1 件商品，选中合计 ¥2.00（演示价格）。包含：农夫山泉饮用天然水550ml瓶装。",
+        "status": "awaiting_confirmation",
+        "task_id": "task-a8c355275b30",
+        "state_version": 2,
+        "session_version": 2,
+        "plan": {
+          "plan_id": "plan-c9062fa15aef",
+          "plan_version": 1,
+          "mode": "bundle",
+          "items": [
+            {
+              "sku_id": "demo:cn-nongfu-water-550ml-bottle",
+              "name": "农夫山泉饮用天然水550ml瓶装",
+              "quantity": 1,
+              "recommended_quantity": 1,
+              "quantity_source": "recommended",
+              "unit_price_fen": 200,
+              "line_total_fen": 200,
+              "image_path": null,
+              "image_kind": "placeholder",
+              "image_kind_legacy": "placeholder",
+              "role": "required",
+              "selected": true,
+              "ingredient_ids": [],
+              "spec_quantity": 550.0,
+              "spec_unit": "ml",
+              "sell_unit": "件",
+              "max_addable_quantity": 72,
+              "group_id": "product:demo:cn-nongfu-water-550ml-bottle",
+              "target_kind": "product",
+              "target_id": "demo:cn-nongfu-water-550ml-bottle",
+              "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+              "requirement": {
+                "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+                "name": "农夫山泉饮用天然水550ml瓶装",
+                "ingredient_id": null,
+                "component_id": null,
+                "quantity": 1,
+                "unit": "件",
+                "quantity_known": true,
+                "requiredness": "core",
+                "source": {
+                  "kind": "user",
+                  "ref": "农夫山泉饮用天然水550ml瓶装"
+                }
+              },
+              "availability": "available",
+              "evidence": {
+                "sku_source": "store_offer",
+                "quoted_at": "2026-10-07T07:51:46+00:00",
+                "stock_verified": true,
+                "data_mode": "demo",
+                "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                "unknown_constraints": []
+              },
+              "pack_source": "catalog_spec",
+              "shortfall_quantity": 0,
+              "user_quantity": null,
+              "added_quantity": 0,
+              "remaining_quantity": 1,
+              "contributions": [
+                {
+                  "group_id": "product:demo:cn-nongfu-water-550ml-bottle",
+                  "quantity": 1,
+                  "selected": true,
+                  "added_quantity": 0,
+                  "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+                  "requirement": {
+                    "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+                    "name": "农夫山泉饮用天然水550ml瓶装",
+                    "ingredient_id": null,
+                    "component_id": null,
+                    "quantity": 1,
+                    "unit": "件",
+                    "quantity_known": true,
+                    "requiredness": "core",
+                    "source": {
+                      "kind": "user",
+                      "ref": "农夫山泉饮用天然水550ml瓶装"
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "total_price_fen": 200,
+          "selected_total_fen": 200,
+          "outstanding_total_fen": 200,
+          "expires_at": "2026-10-07T07:56:46.807653+00:00",
+          "validation_status": "passed",
+          "coverage_mode": "full",
+          "coverage_intent": "partial_ok",
+          "uncovered_items": [],
+          "gaps": [],
+          "can_confirm": true,
+          "targets": [
+            {
+              "group_id": "product:demo:cn-nongfu-water-550ml-bottle",
+              "kind": "product",
+              "target_id": "demo:cn-nongfu-water-550ml-bottle",
+              "name": "农夫山泉饮用天然水550ml瓶装",
+              "people": null,
+              "people_source": "default"
+            }
+          ],
+          "merged_sku_contributions": []
+        },
+        "pending_clarifications": [],
+        "product_cards": [],
+        "plan_effect": "replace",
+        "action_results": [
+          {
+            "type": "read_only",
+            "kind": "lookup",
+            "status": "completed",
+            "saved": false,
+            "reply_ok": true,
+            "retrieval_status": "ok",
+            "retrieval_mode": "lexical",
+            "fallback_reason": null,
+            "index_version": "idx-81e9fa689baef6b5",
+            "action_id": "a1"
+          },
+          {
+            "type": "mutation",
+            "verb": "add",
+            "group_id": "product:demo:cn-nongfu-water-550ml-bottle",
+            "status": "committed",
+            "saved": true,
+            "reply_ok": true,
+            "plan_effect": "replace",
+            "message": "采购清单已加入「农夫山泉饮用天然水550ml瓶装」",
+            "candidate_ref": "p52827d7999a086a4",
+            "action_id": "a2"
+          }
+        ],
+        "answer_status": "awaiting_confirmation",
+        "route": "prepare",
+        "trace_id": "trace-d84f1f40f06d"
+      },
+      "trace": [
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "capability",
+          "status": "started",
+          "criteria_version": "ceres-guide-capabilities-v2",
+          "call_number": 1,
+          "model": "kev-latest"
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 859,
+          "stage": "capability",
+          "status": "completed",
+          "capability": "purchase_modify",
+          "branch": "semantic_understanding",
+          "criteria_version": "ceres-guide-capabilities-v2",
+          "call_number": 1,
+          "model": "kev-latest"
+        },
+        {
+          "phase": "understanding",
+          "duration_ms": null
+        },
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "understanding",
+          "status": "started",
+          "call_number": 1
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 2812,
+          "stage": "understanding",
+          "status": "completed",
+          "call_number": 1
+        },
+        {
+          "phase": "retrieve",
+          "duration_ms": null
+        },
+        {
+          "phase": "validate",
+          "duration_ms": null
+        },
+        {
+          "phase": "turn_result",
+          "duration_ms": null,
+          "status": "awaiting_confirmation"
+        }
+      ],
+      "snapshot_after": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-34d684ef7864",
+          "product_cards": [],
+          "task_id": "task-a8c355275b30",
+          "state_version": 2,
+          "session_version": 2,
+          "current_step": "awaiting_confirmation",
+          "task_status": "active",
+          "entry_context": {
+            "page": "home",
+            "category_id": null,
+            "activity_id": null,
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": {
+            "plan_id": "plan-c9062fa15aef",
+            "plan_version": 1,
+            "mode": "bundle",
+            "items": [
+              {
+                "sku_id": "demo:cn-nongfu-water-550ml-bottle",
+                "name": "农夫山泉饮用天然水550ml瓶装",
+                "quantity": 1,
+                "unit_price_fen": 200,
+                "line_total_fen": 200,
+                "image_path": null,
+                "image_kind": "placeholder",
+                "image_kind_legacy": "placeholder",
+                "role": "required",
+                "selected": true,
+                "recommended_quantity": 1,
+                "max_addable_quantity": 72,
+                "spec_quantity": 550,
+                "spec_unit": "ml",
+                "sell_unit": "件",
+                "quantity_source": "recommended",
+                "group_id": "product:demo:cn-nongfu-water-550ml-bottle",
+                "target_kind": "product",
+                "target_id": "demo:cn-nongfu-water-550ml-bottle",
+                "component_name": null,
+                "contributions": [
+                  {
+                    "group_id": "product:demo:cn-nongfu-water-550ml-bottle",
+                    "quantity": 1,
+                    "selected": true,
+                    "added_quantity": 0,
+                    "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+                    "requirement": {
+                      "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+                      "name": "农夫山泉饮用天然水550ml瓶装",
+                      "ingredient_id": null,
+                      "component_id": null,
+                      "quantity": 1,
+                      "unit": "件",
+                      "quantity_known": true,
+                      "requiredness": "core",
+                      "source": {
+                        "kind": "user",
+                        "ref": "农夫山泉饮用天然水550ml瓶装"
+                      }
+                    }
+                  }
+                ],
+                "added_quantity": 0,
+                "remaining_quantity": 1,
+                "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+                "requirement": {
+                  "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+                  "name": "农夫山泉饮用天然水550ml瓶装",
+                  "ingredient_id": null,
+                  "component_id": null,
+                  "quantity": 1,
+                  "unit": "件",
+                  "quantity_known": true,
+                  "requiredness": "core",
+                  "source": {
+                    "kind": "user",
+                    "ref": "农夫山泉饮用天然水550ml瓶装"
+                  }
+                },
+                "availability": "available",
+                "evidence": {
+                  "sku_source": "store_offer",
+                  "quoted_at": "2026-10-07T07:51:46+00:00",
+                  "stock_verified": true,
+                  "data_mode": "demo",
+                  "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                  "unknown_constraints": []
+                },
+                "pack_source": "catalog_spec",
+                "shortfall_quantity": 0
+              }
+            ],
+            "total_price_fen": 200,
+            "selected_total_fen": 200,
+            "expires_at": "2026-10-07T07:56:46.807653+00:00",
+            "validation_status": "passed",
+            "coverage_mode": "full",
+            "coverage_intent": "partial_ok",
+            "uncovered_items": [],
+            "gaps": [],
+            "can_confirm": true,
+            "gap_fill": null,
+            "targets": [
+              {
+                "group_id": "product:demo:cn-nongfu-water-550ml-bottle",
+                "kind": "product",
+                "target_id": "demo:cn-nongfu-water-550ml-bottle",
+                "name": "农夫山泉饮用天然水550ml瓶装",
+                "meal_name": null,
+                "fulfillment_mode": null,
+                "people": null,
+                "people_source": "default",
+                "notes": []
+              }
+            ],
+            "merged_sku_contributions": [],
+            "outstanding_total_fen": 200
+          },
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": "已恢复待确认方案",
+          "available_actions": [
+            "confirm",
+            "cancel",
+            "modify",
+            "send_message"
+          ],
+          "constraints_summary": {
+            "goal": "农夫山泉饮用天然水550ml瓶装",
+            "people": null,
+            "budget_fen": null,
+            "excluded_ingredients": []
+          },
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "complete",
+          "messages": [
+            {
+              "message_id": "msg-08b5883c75dd",
+              "session_id": "sess-34d684ef7864",
+              "task_id": null,
+              "sequence": 1,
+              "role": "user",
+              "kind": "text",
+              "content": "买一瓶农夫山泉饮用水550ml瓶装",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-R08-668f933f0a",
+              "status": "completed",
+              "created_at": "2026-10-07T07:51:46.812180"
+            },
+            {
+              "message_id": "msg-1149b3d5408e",
+              "session_id": "sess-34d684ef7864",
+              "task_id": "task-a8c355275b30",
+              "sequence": 2,
+              "role": "assistant",
+              "kind": "plan_ref",
+              "content": "采购清单已加入「农夫山泉饮用天然水550ml瓶装」\n已整理 1 件商品，选中合计 ¥2.00（演示价格）。包含：农夫山泉饮用天然水550ml瓶装。",
+              "plan_id": "plan-c9062fa15aef",
+              "plan_version": 1,
+              "request_id": "08-R08-668f933f0a",
+              "status": "completed",
+              "created_at": "2026-10-07T07:51:46.818993"
+            }
+          ]
+        },
+        "opening": {
+          "role": "keke",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "status": "captured"
+    },
+    {
+      "case_id": "R08",
+      "op": "turn",
+      "label": "increase",
+      "before": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-34d684ef7864",
+          "product_cards": [],
+          "task_id": "task-a8c355275b30",
+          "state_version": 2,
+          "session_version": 2,
+          "current_step": "awaiting_confirmation",
+          "task_status": "active",
+          "entry_context": {
+            "page": "home",
+            "category_id": null,
+            "activity_id": null,
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": {
+            "plan_id": "plan-c9062fa15aef",
+            "plan_version": 1,
+            "mode": "bundle",
+            "items": [
+              {
+                "sku_id": "demo:cn-nongfu-water-550ml-bottle",
+                "name": "农夫山泉饮用天然水550ml瓶装",
+                "quantity": 1,
+                "unit_price_fen": 200,
+                "line_total_fen": 200,
+                "image_path": null,
+                "image_kind": "placeholder",
+                "image_kind_legacy": "placeholder",
+                "role": "required",
+                "selected": true,
+                "recommended_quantity": 1,
+                "max_addable_quantity": 72,
+                "spec_quantity": 550,
+                "spec_unit": "ml",
+                "sell_unit": "件",
+                "quantity_source": "recommended",
+                "group_id": "product:demo:cn-nongfu-water-550ml-bottle",
+                "target_kind": "product",
+                "target_id": "demo:cn-nongfu-water-550ml-bottle",
+                "component_name": null,
+                "contributions": [
+                  {
+                    "group_id": "product:demo:cn-nongfu-water-550ml-bottle",
+                    "quantity": 1,
+                    "selected": true,
+                    "added_quantity": 0,
+                    "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+                    "requirement": {
+                      "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+                      "name": "农夫山泉饮用天然水550ml瓶装",
+                      "ingredient_id": null,
+                      "component_id": null,
+                      "quantity": 1,
+                      "unit": "件",
+                      "quantity_known": true,
+                      "requiredness": "core",
+                      "source": {
+                        "kind": "user",
+                        "ref": "农夫山泉饮用天然水550ml瓶装"
+                      }
+                    }
+                  }
+                ],
+                "added_quantity": 0,
+                "remaining_quantity": 1,
+                "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+                "requirement": {
+                  "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+                  "name": "农夫山泉饮用天然水550ml瓶装",
+                  "ingredient_id": null,
+                  "component_id": null,
+                  "quantity": 1,
+                  "unit": "件",
+                  "quantity_known": true,
+                  "requiredness": "core",
+                  "source": {
+                    "kind": "user",
+                    "ref": "农夫山泉饮用天然水550ml瓶装"
+                  }
+                },
+                "availability": "available",
+                "evidence": {
+                  "sku_source": "store_offer",
+                  "quoted_at": "2026-10-07T07:51:46+00:00",
+                  "stock_verified": true,
+                  "data_mode": "demo",
+                  "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                  "unknown_constraints": []
+                },
+                "pack_source": "catalog_spec",
+                "shortfall_quantity": 0
+              }
+            ],
+            "total_price_fen": 200,
+            "selected_total_fen": 200,
+            "expires_at": "2026-10-07T07:56:46.807653+00:00",
+            "validation_status": "passed",
+            "coverage_mode": "full",
+            "coverage_intent": "partial_ok",
+            "uncovered_items": [],
+            "gaps": [],
+            "can_confirm": true,
+            "gap_fill": null,
+            "targets": [
+              {
+                "group_id": "product:demo:cn-nongfu-water-550ml-bottle",
+                "kind": "product",
+                "target_id": "demo:cn-nongfu-water-550ml-bottle",
+                "name": "农夫山泉饮用天然水550ml瓶装",
+                "meal_name": null,
+                "fulfillment_mode": null,
+                "people": null,
+                "people_source": "default",
+                "notes": []
+              }
+            ],
+            "merged_sku_contributions": [],
+            "outstanding_total_fen": 200
+          },
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": "已恢复待确认方案",
+          "available_actions": [
+            "confirm",
+            "cancel",
+            "modify",
+            "send_message"
+          ],
+          "constraints_summary": {
+            "goal": "农夫山泉饮用天然水550ml瓶装",
+            "people": null,
+            "budget_fen": null,
+            "excluded_ingredients": []
+          },
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "complete",
+          "messages": null
+        },
+        "opening": {
+          "role": "keke",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "active_role_before": "keke",
+      "request": {
+        "request_id": "08-R08-b4c71aa4e6",
+        "message": "数量改成三瓶",
+        "expected_task_id": "task-a8c355275b30",
+        "expected_state_version": 2,
+        "expected_session_version": 2
+      },
+      "http_status": 200,
+      "elapsed_ms": 5599.7,
+      "latency_target_ms": 15000,
+      "latency_target_exceeded": false,
+      "events": [
+        {
+          "type": "service.route",
+          "payload": {
+            "status": "completed",
+            "decision": "stay_current",
+            "raw_choice": "stay_current",
+            "current_role": "keke",
+            "prompt_mode": "none",
+            "request_id": "08-R08-b4c71aa4e6",
+            "route_ms": 1205.9132000431418,
+            "criteria_version": "ceres-service-v3.2"
+          }
+        },
+        {
+          "type": "accepted",
+          "payload": {}
+        },
+        {
+          "type": "progress",
+          "payload": {
+            "phase": "understanding"
+          }
+        },
+        {
+          "type": "progress",
+          "payload": {
+            "phase": "validate"
+          }
+        },
+        {
+          "type": "plan.ready",
+          "payload": {
+            "plan": {
+              "plan_effect": "replace",
+              "plan_id": "plan-c9062fa15aef",
+              "plan_version": 2,
+              "task_id": "task-a8c355275b30",
+              "state_version": 3,
+              "session_version": 2,
+              "mode": "bundle",
+              "items": [
+                {
+                  "sku_id": "demo:cn-nongfu-water-550ml-bottle",
+                  "name": "农夫山泉饮用天然水550ml瓶装",
+                  "quantity": 3,
+                  "recommended_quantity": 1,
+                  "quantity_source": "user",
+                  "unit_price_fen": 200,
+                  "line_total_fen": 600,
+                  "image_path": null,
+                  "image_kind": "placeholder",
+                  "image_kind_legacy": "placeholder",
+                  "role": "required",
+                  "selected": true,
+                  "ingredient_ids": [],
+                  "spec_quantity": 550.0,
+                  "spec_unit": "ml",
+                  "sell_unit": "件",
+                  "max_addable_quantity": 72,
+                  "group_id": "product:demo:cn-nongfu-water-550ml-bottle",
+                  "target_kind": "product",
+                  "target_id": "demo:cn-nongfu-water-550ml-bottle",
+                  "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+                  "requirement": {
+                    "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+                    "name": "农夫山泉饮用天然水550ml瓶装",
+                    "ingredient_id": null,
+                    "component_id": null,
+                    "quantity": 1,
+                    "unit": "件",
+                    "quantity_known": true,
+                    "requiredness": "core",
+                    "source": {
+                      "kind": "user",
+                      "ref": "农夫山泉饮用天然水550ml瓶装"
+                    }
+                  },
+                  "availability": "available",
+                  "evidence": {
+                    "sku_source": "store_offer",
+                    "quoted_at": "2026-10-07T07:51:46+00:00",
+                    "stock_verified": true,
+                    "data_mode": "demo",
+                    "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                    "unknown_constraints": []
+                  },
+                  "pack_source": "catalog_spec",
+                  "shortfall_quantity": 0,
+                  "user_quantity": 3,
+                  "added_quantity": 0,
+                  "remaining_quantity": 3,
+                  "contributions": [
+                    {
+                      "group_id": "product:demo:cn-nongfu-water-550ml-bottle",
+                      "quantity": 1,
+                      "selected": true,
+                      "added_quantity": 0,
+                      "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+                      "requirement": {
+                        "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+                        "name": "农夫山泉饮用天然水550ml瓶装",
+                        "ingredient_id": null,
+                        "component_id": null,
+                        "quantity": 1,
+                        "unit": "件",
+                        "quantity_known": true,
+                        "requiredness": "core",
+                        "source": {
+                          "kind": "user",
+                          "ref": "农夫山泉饮用天然水550ml瓶装"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "total_price_fen": 600,
+              "selected_total_fen": 600,
+              "outstanding_total_fen": 600,
+              "expires_at": "2026-10-07T07:56:46.807653+00:00",
+              "validation_status": "passed",
+              "coverage_mode": "full",
+              "coverage_intent": "partial_ok",
+              "uncovered_items": [],
+              "gaps": [],
+              "can_confirm": true,
+              "targets": [
+                {
+                  "group_id": "product:demo:cn-nongfu-water-550ml-bottle",
+                  "kind": "product",
+                  "target_id": "demo:cn-nongfu-water-550ml-bottle",
+                  "name": "农夫山泉饮用天然水550ml瓶装",
+                  "people": null,
+                  "people_source": "default"
+                }
+              ],
+              "merged_sku_contributions": []
+            },
+            "plan_effect": "replace"
+          }
+        },
+        {
+          "type": "answer.delta",
+          "payload": {
+            "delta": "已把「农夫山泉饮用天然水550ml瓶装」改为 3 件\n已整理 1 件商品，选中合计 ¥6.00（演示价格）。包含：农夫山泉饮用天然水550ml瓶装。",
+            "final": true,
+            "replace": false
+          }
+        },
+        {
+          "type": "turn.completed",
+          "payload": {
+            "message": "已把「农夫山泉饮用天然水550ml瓶装」改为 3 件\n已整理 1 件商品，选中合计 ¥6.00（演示价格）。包含：农夫山泉饮用天然水550ml瓶装。",
+            "status": "awaiting_confirmation",
+            "task_id": "task-a8c355275b30",
+            "state_version": 3,
+            "session_version": 2,
+            "plan": {
+              "plan_id": "plan-c9062fa15aef",
+              "plan_version": 2,
+              "mode": "bundle",
+              "items": [
+                {
+                  "sku_id": "demo:cn-nongfu-water-550ml-bottle",
+                  "name": "农夫山泉饮用天然水550ml瓶装",
+                  "quantity": 3,
+                  "recommended_quantity": 1,
+                  "quantity_source": "user",
+                  "unit_price_fen": 200,
+                  "line_total_fen": 600,
+                  "image_path": null,
+                  "image_kind": "placeholder",
+                  "image_kind_legacy": "placeholder",
+                  "role": "required",
+                  "selected": true,
+                  "ingredient_ids": [],
+                  "spec_quantity": 550.0,
+                  "spec_unit": "ml",
+                  "sell_unit": "件",
+                  "max_addable_quantity": 72,
+                  "group_id": "product:demo:cn-nongfu-water-550ml-bottle",
+                  "target_kind": "product",
+                  "target_id": "demo:cn-nongfu-water-550ml-bottle",
+                  "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+                  "requirement": {
+                    "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+                    "name": "农夫山泉饮用天然水550ml瓶装",
+                    "ingredient_id": null,
+                    "component_id": null,
+                    "quantity": 1,
+                    "unit": "件",
+                    "quantity_known": true,
+                    "requiredness": "core",
+                    "source": {
+                      "kind": "user",
+                      "ref": "农夫山泉饮用天然水550ml瓶装"
+                    }
+                  },
+                  "availability": "available",
+                  "evidence": {
+                    "sku_source": "store_offer",
+                    "quoted_at": "2026-10-07T07:51:46+00:00",
+                    "stock_verified": true,
+                    "data_mode": "demo",
+                    "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                    "unknown_constraints": []
+                  },
+                  "pack_source": "catalog_spec",
+                  "shortfall_quantity": 0,
+                  "user_quantity": 3,
+                  "added_quantity": 0,
+                  "remaining_quantity": 3,
+                  "contributions": [
+                    {
+                      "group_id": "product:demo:cn-nongfu-water-550ml-bottle",
+                      "quantity": 1,
+                      "selected": true,
+                      "added_quantity": 0,
+                      "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+                      "requirement": {
+                        "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+                        "name": "农夫山泉饮用天然水550ml瓶装",
+                        "ingredient_id": null,
+                        "component_id": null,
+                        "quantity": 1,
+                        "unit": "件",
+                        "quantity_known": true,
+                        "requiredness": "core",
+                        "source": {
+                          "kind": "user",
+                          "ref": "农夫山泉饮用天然水550ml瓶装"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ],
+              "total_price_fen": 600,
+              "selected_total_fen": 600,
+              "outstanding_total_fen": 600,
+              "expires_at": "2026-10-07T07:56:46.807653+00:00",
+              "validation_status": "passed",
+              "coverage_mode": "full",
+              "coverage_intent": "partial_ok",
+              "uncovered_items": [],
+              "gaps": [],
+              "can_confirm": true,
+              "targets": [
+                {
+                  "group_id": "product:demo:cn-nongfu-water-550ml-bottle",
+                  "kind": "product",
+                  "target_id": "demo:cn-nongfu-water-550ml-bottle",
+                  "name": "农夫山泉饮用天然水550ml瓶装",
+                  "people": null,
+                  "people_source": "default"
+                }
+              ],
+              "merged_sku_contributions": []
+            },
+            "pending_clarifications": [],
+            "product_cards": [],
+            "plan_effect": "replace",
+            "action_results": [
+              {
+                "type": "mutation",
+                "verb": "change",
+                "group_id": null,
+                "status": "committed",
+                "saved": true,
+                "reply_ok": true,
+                "plan_effect": "replace",
+                "message": "已把「农夫山泉饮用天然水550ml瓶装」改为 3 件",
+                "sku_id": "demo:cn-nongfu-water-550ml-bottle",
+                "quantity": 3,
+                "action_id": "a1"
+              }
+            ],
+            "answer_status": "awaiting_confirmation",
+            "route": "apply_mutation",
+            "trace_id": "trace-e0db36069fed"
+          }
+        }
+      ],
+      "role_model_call_range": [
+        1,
+        2
+      ],
+      "kev_call_range": [
+        2,
+        4
+      ],
+      "terminal": {
+        "message": "已把「农夫山泉饮用天然水550ml瓶装」改为 3 件\n已整理 1 件商品，选中合计 ¥6.00（演示价格）。包含：农夫山泉饮用天然水550ml瓶装。",
+        "status": "awaiting_confirmation",
+        "task_id": "task-a8c355275b30",
+        "state_version": 3,
+        "session_version": 2,
+        "plan": {
+          "plan_id": "plan-c9062fa15aef",
+          "plan_version": 2,
+          "mode": "bundle",
+          "items": [
+            {
+              "sku_id": "demo:cn-nongfu-water-550ml-bottle",
+              "name": "农夫山泉饮用天然水550ml瓶装",
+              "quantity": 3,
+              "recommended_quantity": 1,
+              "quantity_source": "user",
+              "unit_price_fen": 200,
+              "line_total_fen": 600,
+              "image_path": null,
+              "image_kind": "placeholder",
+              "image_kind_legacy": "placeholder",
+              "role": "required",
+              "selected": true,
+              "ingredient_ids": [],
+              "spec_quantity": 550.0,
+              "spec_unit": "ml",
+              "sell_unit": "件",
+              "max_addable_quantity": 72,
+              "group_id": "product:demo:cn-nongfu-water-550ml-bottle",
+              "target_kind": "product",
+              "target_id": "demo:cn-nongfu-water-550ml-bottle",
+              "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+              "requirement": {
+                "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+                "name": "农夫山泉饮用天然水550ml瓶装",
+                "ingredient_id": null,
+                "component_id": null,
+                "quantity": 1,
+                "unit": "件",
+                "quantity_known": true,
+                "requiredness": "core",
+                "source": {
+                  "kind": "user",
+                  "ref": "农夫山泉饮用天然水550ml瓶装"
+                }
+              },
+              "availability": "available",
+              "evidence": {
+                "sku_source": "store_offer",
+                "quoted_at": "2026-10-07T07:51:46+00:00",
+                "stock_verified": true,
+                "data_mode": "demo",
+                "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                "unknown_constraints": []
+              },
+              "pack_source": "catalog_spec",
+              "shortfall_quantity": 0,
+              "user_quantity": 3,
+              "added_quantity": 0,
+              "remaining_quantity": 3,
+              "contributions": [
+                {
+                  "group_id": "product:demo:cn-nongfu-water-550ml-bottle",
+                  "quantity": 1,
+                  "selected": true,
+                  "added_quantity": 0,
+                  "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+                  "requirement": {
+                    "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+                    "name": "农夫山泉饮用天然水550ml瓶装",
+                    "ingredient_id": null,
+                    "component_id": null,
+                    "quantity": 1,
+                    "unit": "件",
+                    "quantity_known": true,
+                    "requiredness": "core",
+                    "source": {
+                      "kind": "user",
+                      "ref": "农夫山泉饮用天然水550ml瓶装"
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "total_price_fen": 600,
+          "selected_total_fen": 600,
+          "outstanding_total_fen": 600,
+          "expires_at": "2026-10-07T07:56:46.807653+00:00",
+          "validation_status": "passed",
+          "coverage_mode": "full",
+          "coverage_intent": "partial_ok",
+          "uncovered_items": [],
+          "gaps": [],
+          "can_confirm": true,
+          "targets": [
+            {
+              "group_id": "product:demo:cn-nongfu-water-550ml-bottle",
+              "kind": "product",
+              "target_id": "demo:cn-nongfu-water-550ml-bottle",
+              "name": "农夫山泉饮用天然水550ml瓶装",
+              "people": null,
+              "people_source": "default"
+            }
+          ],
+          "merged_sku_contributions": []
+        },
+        "pending_clarifications": [],
+        "product_cards": [],
+        "plan_effect": "replace",
+        "action_results": [
+          {
+            "type": "mutation",
+            "verb": "change",
+            "group_id": null,
+            "status": "committed",
+            "saved": true,
+            "reply_ok": true,
+            "plan_effect": "replace",
+            "message": "已把「农夫山泉饮用天然水550ml瓶装」改为 3 件",
+            "sku_id": "demo:cn-nongfu-water-550ml-bottle",
+            "quantity": 3,
+            "action_id": "a1"
+          }
+        ],
+        "answer_status": "awaiting_confirmation",
+        "route": "apply_mutation",
+        "trace_id": "trace-e0db36069fed"
+      },
+      "trace": [
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "capability",
+          "status": "started",
+          "criteria_version": "ceres-guide-capabilities-v2",
+          "call_number": 1,
+          "model": "kev-latest"
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 1422,
+          "stage": "capability",
+          "status": "completed",
+          "capability": "purchase_modify",
+          "branch": "semantic_understanding",
+          "criteria_version": "ceres-guide-capabilities-v2",
+          "call_number": 1,
+          "model": "kev-latest"
+        },
+        {
+          "phase": "understanding",
+          "duration_ms": null
+        },
+        {
+          "phase": "model_call_started",
+          "duration_ms": null,
+          "stage": "understanding",
+          "status": "started",
+          "call_number": 1
+        },
+        {
+          "phase": "model_call_completed",
+          "duration_ms": 2905,
+          "stage": "understanding",
+          "status": "completed",
+          "call_number": 1
+        },
+        {
+          "phase": "validate",
+          "duration_ms": null
+        },
+        {
+          "phase": "turn_result",
+          "duration_ms": null,
+          "status": "awaiting_confirmation"
+        }
+      ],
+      "snapshot_after": {
+        "cart": {
+          "store_id": "store-demo-01",
+          "version": 1,
+          "items": [],
+          "total_price_fen": 0,
+          "business_data_mode": "demo"
+        },
+        "orders": [],
+        "guide": {
+          "session_id": "sess-34d684ef7864",
+          "product_cards": [],
+          "task_id": "task-a8c355275b30",
+          "state_version": 3,
+          "session_version": 2,
+          "current_step": "awaiting_confirmation",
+          "task_status": "active",
+          "entry_context": {
+            "page": "home",
+            "category_id": null,
+            "activity_id": null,
+            "store_id": "store-demo-01",
+            "delivery_zone_id": "zone-default"
+          },
+          "plan": {
+            "plan_id": "plan-c9062fa15aef",
+            "plan_version": 2,
+            "mode": "bundle",
+            "items": [
+              {
+                "sku_id": "demo:cn-nongfu-water-550ml-bottle",
+                "name": "农夫山泉饮用天然水550ml瓶装",
+                "quantity": 3,
+                "unit_price_fen": 200,
+                "line_total_fen": 600,
+                "image_path": null,
+                "image_kind": "placeholder",
+                "image_kind_legacy": "placeholder",
+                "role": "required",
+                "selected": true,
+                "recommended_quantity": 1,
+                "max_addable_quantity": 72,
+                "spec_quantity": 550,
+                "spec_unit": "ml",
+                "sell_unit": "件",
+                "quantity_source": "user",
+                "group_id": "product:demo:cn-nongfu-water-550ml-bottle",
+                "target_kind": "product",
+                "target_id": "demo:cn-nongfu-water-550ml-bottle",
+                "component_name": null,
+                "contributions": [
+                  {
+                    "group_id": "product:demo:cn-nongfu-water-550ml-bottle",
+                    "quantity": 1,
+                    "selected": true,
+                    "added_quantity": 0,
+                    "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+                    "requirement": {
+                      "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+                      "name": "农夫山泉饮用天然水550ml瓶装",
+                      "ingredient_id": null,
+                      "component_id": null,
+                      "quantity": 1,
+                      "unit": "件",
+                      "quantity_known": true,
+                      "requiredness": "core",
+                      "source": {
+                        "kind": "user",
+                        "ref": "农夫山泉饮用天然水550ml瓶装"
+                      }
+                    }
+                  }
+                ],
+                "added_quantity": 0,
+                "remaining_quantity": 3,
+                "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+                "requirement": {
+                  "required_item_id": "product:demo:cn-nongfu-water-550ml-bottle#demo:cn-nongfu-water-550ml-bottle",
+                  "name": "农夫山泉饮用天然水550ml瓶装",
+                  "ingredient_id": null,
+                  "component_id": null,
+                  "quantity": 1,
+                  "unit": "件",
+                  "quantity_known": true,
+                  "requiredness": "core",
+                  "source": {
+                    "kind": "user",
+                    "ref": "农夫山泉饮用天然水550ml瓶装"
+                  }
+                },
+                "availability": "available",
+                "evidence": {
+                  "sku_source": "store_offer",
+                  "quoted_at": "2026-10-07T07:51:46+00:00",
+                  "stock_verified": true,
+                  "data_mode": "demo",
+                  "source_note": "本店 offer 快照（business_data_mode=demo）；不是外部实时库存源",
+                  "unknown_constraints": []
+                },
+                "pack_source": "catalog_spec",
+                "shortfall_quantity": 0
+              }
+            ],
+            "total_price_fen": 600,
+            "selected_total_fen": 600,
+            "expires_at": "2026-10-07T07:56:46.807653+00:00",
+            "validation_status": "passed",
+            "coverage_mode": "full",
+            "coverage_intent": "partial_ok",
+            "uncovered_items": [],
+            "gaps": [],
+            "can_confirm": true,
+            "gap_fill": null,
+            "targets": [
+              {
+                "group_id": "product:demo:cn-nongfu-water-550ml-bottle",
+                "kind": "product",
+                "target_id": "demo:cn-nongfu-water-550ml-bottle",
+                "name": "农夫山泉饮用天然水550ml瓶装",
+                "meal_name": null,
+                "fulfillment_mode": null,
+                "people": null,
+                "people_source": "default",
+                "notes": []
+              }
+            ],
+            "merged_sku_contributions": [],
+            "outstanding_total_fen": 600
+          },
+          "plan_read_only": false,
+          "pending_clarifications": [],
+          "confirmation_result": null,
+          "message": "已恢复待确认方案",
+          "available_actions": [
+            "confirm",
+            "cancel",
+            "modify",
+            "send_message"
+          ],
+          "constraints_summary": {
+            "goal": "农夫山泉饮用天然水550ml瓶装",
+            "people": null,
+            "budget_fen": null,
+            "excluded_ingredients": []
+          },
+          "cart_version": null,
+          "confirmation_id": null,
+          "history_status": "complete",
+          "messages": [
+            {
+              "message_id": "msg-08b5883c75dd",
+              "session_id": "sess-34d684ef7864",
+              "task_id": null,
+              "sequence": 1,
+              "role": "user",
+              "kind": "text",
+              "content": "买一瓶农夫山泉饮用水550ml瓶装",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-R08-668f933f0a",
+              "status": "completed",
+              "created_at": "2026-10-07T07:51:46.812180"
+            },
+            {
+              "message_id": "msg-1149b3d5408e",
+              "session_id": "sess-34d684ef7864",
+              "task_id": "task-a8c355275b30",
+              "sequence": 2,
+              "role": "assistant",
+              "kind": "plan_ref",
+              "content": "采购清单已加入「农夫山泉饮用天然水550ml瓶装」\n已整理 1 件商品，选中合计 ¥2.00（演示价格）。包含：农夫山泉饮用天然水550ml瓶装。",
+              "plan_id": "plan-c9062fa15aef",
+              "plan_version": 1,
+              "request_id": "08-R08-668f933f0a",
+              "status": "completed",
+              "created_at": "2026-10-07T07:51:46.818993"
+            },
+            {
+              "message_id": "msg-7646d899a6d0",
+              "session_id": "sess-34d684ef7864",
+              "task_id": "task-a8c355275b30",
+              "sequence": 3,
+              "role": "user",
+              "kind": "text",
+              "content": "数量改成三瓶",
+              "plan_id": null,
+              "plan_version": null,
+              "request_id": "08-R08-b4c71aa4e6",
+              "status": "completed",
+              "created_at": "2026-10-07T07:51:52.515610"
+            },
+            {
+              "message_id": "msg-c05bfe915dd8",
+              "session_id": "sess-34d684ef7864",
+              "task_id": "task-a8c355275b30",
+              "sequence": 4,
+              "role": "assistant",
+              "kind": "plan_ref",
+              "content": "已把「农夫山泉饮用天然水550ml瓶装」改为 3 件\n已整理 1 件商品，选中合计 ¥6.00（演示价格）。包含：农夫山泉饮用天然水550ml瓶装。",
+              "plan_id": "plan-c9062fa15aef",
+              "plan_version": 2,
+              "request_id": "08-R08-b4c71aa4e6",
+              "status": "completed",
+              "created_at": "2026-10-07T07:51:52.517708"
+            }
+          ]
+        },
+        "opening": {
+          "role": "keke",
+          "pending_question": null,
+          "prompt_displayed": false
+        }
+      },
+      "status": "captured"
+    }
+  ],
+  "timing_failures": []
+}

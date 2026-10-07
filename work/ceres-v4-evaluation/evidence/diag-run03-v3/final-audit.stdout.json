@@ -1,0 +1,41 @@
+{
+  "all_integrity_checks_passed": true,
+  "checks": {
+    "runner_sha_matches_freeze_and_manifest": true,
+    "source_manifest_sha_matches_freeze_and_output": true,
+    "100_scheduled_and_100_outputs": true,
+    "all_source_result_hashes_match": true,
+    "all_requests_only_change_max_tokens": true,
+    "all_serialized_requests_saved": true,
+    "all_source_calls_count_one": true,
+    "summary_matches_result_verdicts": true,
+    "summary_error_count_matches": true,
+    "product_tasks_not_reexecuted": true,
+    "R01_diagnostic_preserved": true,
+    "dimension_issues_recorded_without_retry": true
+  },
+  "verdict_counts": {
+    "pass": 36,
+    "fail": 23,
+    "unknown": 41
+  },
+  "error_count": 38,
+  "error_types": {
+    "ValueError": 24,
+    "ReadTimeout": 9,
+    "JSONDecodeError": 5
+  },
+  "usage_object_count": 91,
+  "usage_coverage": 0.91,
+  "usage_sums": {
+    "prompt_tokens": 858945,
+    "completion_tokens": 215907,
+    "total_tokens": 1074852,
+    "reasoning_tokens": 185092
+  },
+  "parsed_content_count": 69,
+  "schema_valid_count": 62,
+  "dimension_clean_count": 62,
+  "dimension_issue_count": 0,
+  "schema_issue_count": 7
+}

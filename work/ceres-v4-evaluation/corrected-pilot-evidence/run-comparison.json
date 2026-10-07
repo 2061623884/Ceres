@@ -1,0 +1,23 @@
+{
+  "executions": 20,
+  "run01_result_hashes_unchanged": true,
+  "model_calls_counts_content_unchanged": true,
+  "judge_calls_counts_content_unchanged": true,
+  "mismatches": [],
+  "status_changes": [
+    {
+      "execution": "R14-r1",
+      "run01_status": "failed",
+      "run02_status": "passed",
+      "run01_failed_checks": "contains:grounding_evidence",
+      "run02_failed_checks": ""
+    },
+    {
+      "execution": "R17-r1",
+      "run01_status": "failed",
+      "run02_status": "passed",
+      "run01_failed_checks": "unchanged:after.refunds",
+      "run02_failed_checks": ""
+    }
+  ]
+}

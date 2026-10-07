@@ -1,0 +1,22 @@
+{
+  "argv": [
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\backend\\.venv\\Scripts\\python.exe",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\scripts\\eval_v4.py",
+    "worker",
+    "--tree",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\.ceres-next-08",
+    "--case",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R11-r2\\case.json",
+    "--seed",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\runtime.sqlite3",
+    "--index",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\retrieval-index",
+    "--output",
+    "C:\\Users\\20616\\Desktop\\Agent\\Agent产品\\Ceres\\work\\ceres-v4-evaluation\\run-03\\R11-r2",
+    "--repeat",
+    "2"
+  ],
+  "started_utc": "2026-10-07T07:52:21.485032+00:00",
+  "finished_utc": "2026-10-07T07:52:47.691618+00:00",
+  "exit_code": 1
+}

@@ -1,0 +1,12 @@
+usage: eval_v4_record.py [-h] --source SOURCE --ui UI --diagnostics
+                         DIAGNOSTICS --probe PROBE --output OUTPUT
+
+Create an acceptance record from completed API, UI and diagnostic artifacts.
+
+options:
+  -h, --help            show this help message and exit
+  --source SOURCE
+  --ui UI
+  --diagnostics DIAGNOSTICS
+  --probe PROBE         Preserved failed one-call diagnostic probe directory
+  --output OUTPUT
